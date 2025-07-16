@@ -1,13 +1,23 @@
+import { useState } from "react";
 import { TrendingUp, TrendingDown, Activity } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { SentimentSource } from "@/data/mockData";
+import { SourceNewsModal } from "./SourceNewsModal";
 
 interface SourceBreakdownProps {
   sources: SentimentSource[];
 }
 
 export const SourceBreakdown = ({ sources }: SourceBreakdownProps) => {
+  const [selectedSource, setSelectedSource] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleSourceClick = (sourceName: string) => {
+    setSelectedSource(sourceName);
+    setIsModalOpen(true);
+  };
+
   const getScoreColor = (score: number) => {
     if (score >= 70) return "border-l-positive bg-positive/5";
     if (score >= 50) return "border-l-neutral bg-neutral/5";
@@ -30,12 +40,16 @@ export const SourceBreakdown = ({ sources }: SourceBreakdownProps) => {
       </CardHeader>
       <CardContent className="space-y-4">
         {sources.map((source, index) => (
-          <div key={index} className={`p-4 rounded-lg border-l-4 ${getScoreColor(source.score)}`}>
+          <div 
+            key={index} 
+            onClick={() => handleSourceClick(source.name)}
+            className={`p-4 rounded-lg border-l-4 cursor-pointer transition-all duration-200 hover:shadow-md hover:scale-[1.02] hover:border-primary/50 ${getScoreColor(source.score)}`}
+          >
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-3">
                 <span className="text-2xl">{source.icon}</span>
                 <div>
-                  <h3 className="font-semibold text-lg">{source.name}</h3>
+                  <h3 className="font-semibold text-lg hover:text-primary transition-colors">{source.name}</h3>
                   <p className="text-sm text-muted-foreground">
                     {source.samples.toLocaleString()} samples
                   </p>
@@ -54,7 +68,7 @@ export const SourceBreakdown = ({ sources }: SourceBreakdownProps) => {
               </div>
             </div>
             
-            <div className="w-full bg-muted rounded-full h-2">
+            <div className="w-full bg-muted rounded-full h-2 mb-2">
               <div 
                 className={`h-full rounded-full ${
                   source.score >= 70 ? 'bg-positive' :
@@ -63,6 +77,10 @@ export const SourceBreakdown = ({ sources }: SourceBreakdownProps) => {
                 }`}
                 style={{ width: `${source.score}%` }}
               />
+            </div>
+            
+            <div className="text-xs text-muted-foreground text-center">
+              Click to view detailed analysis
             </div>
           </div>
         ))}
@@ -77,6 +95,12 @@ export const SourceBreakdown = ({ sources }: SourceBreakdownProps) => {
           </div>
         </div>
       </CardContent>
+      
+      <SourceNewsModal
+        sourceName={selectedSource}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </Card>
   );
 };

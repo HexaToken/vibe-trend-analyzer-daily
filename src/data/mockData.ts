@@ -189,6 +189,130 @@ export const newsArticles: NewsArticle[] = [
   }
 ];
 
+// Source-specific news articles
+export const newsArticlesBySource = {
+  "News": [
+    {
+      id: "news1",
+      headline: "Economic Recovery Shows Steady Progress in Manufacturing Sector",
+      summary: "New data reveals manufacturing output has increased for the third consecutive month, signaling economic resilience despite global challenges.",
+      sentimentScore: 72,
+      keyPhrases: ["economic recovery", "steady progress", "manufacturing growth", "resilience", "positive outlook"],
+      source: {
+        name: "Wall Street Journal",
+        publishedAt: "2024-01-15T16:20:00Z"
+      },
+      originalUrl: "https://example.com/manufacturing-recovery",
+      whyItMatters: "Manufacturing growth indicates economic stability and job creation, directly boosting consumer confidence and sentiment.",
+      relatedTrends: ["Job market recovery", "Industrial growth"]
+    },
+    {
+      id: "news2",
+      headline: "Inflation Concerns Rise as Consumer Prices Edge Higher",
+      summary: "Latest consumer price index shows a modest increase, raising questions about future monetary policy and economic stability.",
+      sentimentScore: 42,
+      keyPhrases: ["inflation concerns", "consumer prices", "monetary policy", "economic uncertainty", "price increases"],
+      source: {
+        name: "CNN Business",
+        publishedAt: "2024-01-15T13:15:00Z"
+      },
+      originalUrl: "https://example.com/inflation-concerns",
+      whyItMatters: "Rising inflation affects purchasing power and consumer spending, contributing to cautious economic sentiment.",
+      relatedTrends: ["Federal Reserve decisions", "Consumer spending patterns"]
+    }
+  ],
+  "Social Media": [
+    {
+      id: "social1",
+      headline: "Viral Sustainability Movement Gains Momentum Across Platforms",
+      summary: "Social media users are rallying around environmental initiatives, creating viral content that promotes sustainable living and climate action.",
+      sentimentScore: 81,
+      keyPhrases: ["viral movement", "sustainability", "environmental initiatives", "climate action", "positive change"],
+      source: {
+        name: "Twitter Trends",
+        publishedAt: "2024-01-15T18:45:00Z"
+      },
+      originalUrl: "https://example.com/sustainability-movement",
+      whyItMatters: "Grassroots environmental movements on social media reflect growing public awareness and optimism about climate action.",
+      relatedTrends: ["Environmental activism", "Youth engagement"]
+    },
+    {
+      id: "social2",
+      headline: "Online Communities Rally Support for Local Businesses",
+      summary: "Social media campaigns are driving increased support for small businesses, with users sharing positive experiences and encouraging local shopping.",
+      sentimentScore: 76,
+      keyPhrases: ["community support", "local businesses", "positive experiences", "encouraging", "solidarity"],
+      source: {
+        name: "Instagram Stories",
+        publishedAt: "2024-01-15T15:30:00Z"
+      },
+      originalUrl: "https://example.com/local-business-support",
+      whyItMatters: "Community-driven business support demonstrates social cohesion and economic optimism at the local level.",
+      relatedTrends: ["Community engagement", "Small business growth"]
+    }
+  ],
+  "Forums": [
+    {
+      id: "forum1",
+      headline: "Tech Community Debates Future of AI Development Ethics",
+      summary: "Developer forums are buzzing with discussions about responsible AI development, highlighting both opportunities and concerns for the technology sector.",
+      sentimentScore: 68,
+      keyPhrases: ["AI ethics", "responsible development", "technology debate", "opportunities", "thoughtful discussion"],
+      source: {
+        name: "Stack Overflow",
+        publishedAt: "2024-01-15T12:10:00Z"
+      },
+      originalUrl: "https://example.com/ai-ethics-debate",
+      whyItMatters: "Thoughtful discussions about AI ethics show the tech community's commitment to responsible innovation.",
+      relatedTrends: ["AI governance", "Tech responsibility"]
+    },
+    {
+      id: "forum2",
+      headline: "Gaming Communities Express Mixed Feelings About Industry Changes",
+      summary: "Popular gaming forums show divided opinions on recent industry developments, with concerns about monetization balanced by excitement for new technologies.",
+      sentimentScore: 55,
+      keyPhrases: ["mixed feelings", "industry changes", "monetization concerns", "new technologies", "divided opinions"],
+      source: {
+        name: "Reddit Gaming",
+        publishedAt: "2024-01-15T14:25:00Z"
+      },
+      originalUrl: "https://example.com/gaming-industry-sentiment",
+      whyItMatters: "Gaming industry sentiment reflects broader consumer attitudes toward technology and entertainment value.",
+      relatedTrends: ["Gaming innovation", "Consumer expectations"]
+    }
+  ],
+  "Stock Market": [
+    {
+      id: "market1",
+      headline: "Green Energy Stocks Surge on Government Investment Announcement",
+      summary: "Renewable energy stocks experienced significant gains following news of increased government funding for clean energy infrastructure projects.",
+      sentimentScore: 84,
+      keyPhrases: ["green energy surge", "government investment", "significant gains", "clean energy", "infrastructure funding"],
+      source: {
+        name: "Bloomberg Markets",
+        publishedAt: "2024-01-15T09:30:00Z"
+      },
+      originalUrl: "https://example.com/green-energy-surge",
+      whyItMatters: "Strong performance in green energy stocks indicates investor confidence in sustainable technologies and government policy support.",
+      relatedTrends: ["Renewable energy investment", "ESG investing"]
+    },
+    {
+      id: "market2",
+      headline: "Banking Sector Faces Headwinds Amid Regulatory Scrutiny",
+      summary: "Financial stocks declined as investors react to potential new regulations and increased oversight from federal banking authorities.",
+      sentimentScore: 35,
+      keyPhrases: ["banking headwinds", "regulatory scrutiny", "financial decline", "oversight concerns", "investor uncertainty"],
+      source: {
+        name: "MarketWatch",
+        publishedAt: "2024-01-15T11:00:00Z"
+      },
+      originalUrl: "https://example.com/banking-regulatory-concerns",
+      whyItMatters: "Banking sector uncertainty affects broader financial market confidence and lending conditions for businesses and consumers.",
+      relatedTrends: ["Financial regulation", "Banking stability"]
+    }
+  ]
+};
+
 export const regions = [
   { name: "Global", code: "GLOBAL" },
   { name: "North America", code: "NA" },
