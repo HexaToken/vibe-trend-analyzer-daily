@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import {
   CheckCircle,
   XCircle,
@@ -16,67 +16,29 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { stockDataFallback } from "@/services/stockDataFallback";
-import { useQuote } from "@/hooks/useTwelveData";
-import { useCryptoQuotes } from "@/hooks/useCoinMarketCap";
 
 export const ApiStatusOverview = () => {
-  const [refreshCounter, setRefreshCounter] = useState(0);
+  const [lastUpdate, setLastUpdate] = useState(Date.now());
 
-  // Force a refresh every 5 seconds by incrementing a counter
+  // Simple timer to force re-renders
   useEffect(() => {
     const interval = setInterval(() => {
-      setRefreshCounter((prev) => prev + 1);
-    }, 5000);
+      setLastUpdate(Date.now());
+    }, 10000); // Update every 10 seconds
     return () => clearInterval(interval);
   }, []);
 
-  // Get status fresh each render, but don't store in state to avoid loops
+  // Get status directly without storing in state
   const fallbackStatus = stockDataFallback.getStatus();
 
-  // Test stock API with a simple quote
-  const {
-    ticker: stockTest,
-    loading: stockLoading,
-    error: stockError,
-  } = useQuote("AAPL", {
-    refreshInterval: 0,
-    enabled: true,
-  });
-
-  // Test crypto API with a simple quote
-  const {
-    tickers: cryptoTest,
-    loading: cryptoLoading,
-    error: cryptoError,
-  } = useCryptoQuotes(["BTC"], {
-    refreshInterval: 0,
-    enabled: true,
-  });
-
-  const getStatusIcon = (loading: boolean, error: string | null, data: any) => {
-    if (loading)
-      return <RefreshCw className="h-4 w-4 animate-spin text-blue-600" />;
-    if (error) return <XCircle className="h-4 w-4 text-red-600" />;
-    if (data) return <CheckCircle className="h-4 w-4 text-green-600" />;
-    return <AlertCircle className="h-4 w-4 text-yellow-600" />;
+  const handleClearCache = () => {
+    stockDataFallback.clearCache();
+    setLastUpdate(Date.now()); // Force refresh
   };
 
-  const getStatusText = (loading: boolean, error: string | null, data: any) => {
-    if (loading) return "Testing...";
-    if (error) return "Failed";
-    if (data) return "Working";
-    return "Unknown";
-  };
-
-  const getStatusColor = (
-    loading: boolean,
-    error: string | null,
-    data: any,
-  ) => {
-    if (loading) return "secondary";
-    if (error) return "destructive";
-    if (data) return "default";
-    return "outline";
+  const handleEnableApi = () => {
+    stockDataFallback.enableApi();
+    setLastUpdate(Date.now()); // Force refresh
   };
 
   return (
@@ -86,9 +48,7 @@ export const ApiStatusOverview = () => {
           <Activity className="h-5 w-5" />
           API Status Overview
         </CardTitle>
-        <CardDescription>
-          Real-time status of all financial data APIs
-        </CardDescription>
+        <CardDescription>Current status of financial data APIs</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         {/* Overall Status */}
@@ -117,34 +77,24 @@ export const ApiStatusOverview = () => {
           </div>
         </div>
 
-        {/* Individual API Status */}
+        {/* API Information */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Twelve Data API (Stocks) */}
           <div className="p-4 border rounded-lg">
             <div className="flex items-center justify-between mb-2">
               <h4 className="font-medium">Twelve Data API</h4>
-              <div className="flex items-center gap-2">
-                {getStatusIcon(stockLoading, stockError, stockTest)}
-                <Badge
-                  variant={
-                    getStatusColor(stockLoading, stockError, stockTest) as any
-                  }
-                >
-                  {getStatusText(stockLoading, stockError, stockTest)}
-                </Badge>
-              </div>
+              <Badge
+                variant={fallbackStatus.apiDisabled ? "destructive" : "default"}
+              >
+                {fallbackStatus.apiDisabled ? "Disabled" : "Active"}
+              </Badge>
             </div>
             <p className="text-sm text-muted-foreground mb-2">
               Stock market data
             </p>
             <div className="text-xs space-y-1">
               <div>Rate Limit: 800 requests/day</div>
-              {stockTest && (
-                <div className="text-green-600">
-                  ✓ AAPL: ${stockTest.price.toFixed(2)}
-                </div>
-              )}
-              {stockError && <div className="text-red-600">✗ {stockError}</div>}
+              <div>Status: {fallbackStatus.message}</div>
             </div>
           </div>
 
@@ -152,34 +102,18 @@ export const ApiStatusOverview = () => {
           <div className="p-4 border rounded-lg">
             <div className="flex items-center justify-between mb-2">
               <h4 className="font-medium">CoinMarketCap API</h4>
-              <div className="flex items-center gap-2">
-                {getStatusIcon(cryptoLoading, cryptoError, cryptoTest[0])}
-                <Badge
-                  variant={
-                    getStatusColor(
-                      cryptoLoading,
-                      cryptoError,
-                      cryptoTest[0],
-                    ) as any
-                  }
-                >
-                  {getStatusText(cryptoLoading, cryptoError, cryptoTest[0])}
-                </Badge>
-              </div>
+              <Badge
+                variant={fallbackStatus.apiDisabled ? "destructive" : "default"}
+              >
+                {fallbackStatus.apiDisabled ? "Disabled" : "Active"}
+              </Badge>
             </div>
             <p className="text-sm text-muted-foreground mb-2">
               Cryptocurrency data
             </p>
             <div className="text-xs space-y-1">
               <div>Rate Limit: 333 requests/minute</div>
-              {cryptoTest[0] && (
-                <div className="text-green-600">
-                  ✓ BTC: ${cryptoTest[0].price.toLocaleString()}
-                </div>
-              )}
-              {cryptoError && (
-                <div className="text-red-600">✗ {cryptoError}</div>
-              )}
+              <div>Status: Shared with stock API</div>
             </div>
           </div>
         </div>
@@ -194,22 +128,11 @@ export const ApiStatusOverview = () => {
             Cached data helps reduce API calls and provides faster responses
           </p>
           <div className="flex gap-2 mt-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => stockDataFallback.clearCache()}
-            >
+            <Button variant="outline" size="sm" onClick={handleClearCache}>
               Clear Cache
             </Button>
             {fallbackStatus.apiDisabled && (
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => {
-                  stockDataFallback.enableApi();
-                  setRefreshCounter((prev) => prev + 1);
-                }}
-              >
+              <Button variant="outline" size="sm" onClick={handleEnableApi}>
                 Force Enable APIs
               </Button>
             )}
@@ -229,6 +152,11 @@ export const ApiStatusOverview = () => {
             </p>
           </div>
         )}
+
+        {/* Last Update Time */}
+        <div className="text-center text-xs text-muted-foreground">
+          Last updated: {new Date(lastUpdate).toLocaleTimeString()}
+        </div>
       </CardContent>
     </Card>
   );
