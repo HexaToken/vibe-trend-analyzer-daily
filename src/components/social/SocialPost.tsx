@@ -31,6 +31,7 @@ import {
 import { formatDistanceToNow } from "date-fns";
 import type { SocialPost } from "@/types/social";
 import { InlinePrice } from "./RealTimePrice";
+import { InlineCryptoPrice } from "../crypto/CryptoPrice";
 
 interface SocialPostProps {
   post: SocialPost;
