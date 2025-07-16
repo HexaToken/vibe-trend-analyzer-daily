@@ -49,7 +49,7 @@ import type {
   SentimentType,
   CreatePostData,
 } from "@/types/social";
-import { useQuote } from "@/hooks/useTwelveData";
+import { useQuote } from "@/hooks/useAlphaVantage";
 import { Skeleton } from "@/components/ui/skeleton";
 
 interface TickerPageProps {
