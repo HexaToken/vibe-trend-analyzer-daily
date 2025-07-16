@@ -51,6 +51,12 @@ export const Navigation = ({
       icon: Brain,
       badge: "NEW",
     },
+    {
+      id: "social",
+      label: "FinTwits Social",
+      icon: MessageSquare,
+      badge: "HOT",
+    },
     { id: "analytics", label: "Analytics", icon: TrendingUp },
     { id: "history", label: "Historical Data", icon: Calendar },
     { id: "community", label: "Community", icon: Users },
