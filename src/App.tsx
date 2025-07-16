@@ -12,6 +12,7 @@ import { HistoricalData } from "@/components/HistoricalData";
 import { Community } from "@/components/Community";
 import { Settings } from "@/components/Settings";
 import { UserProfile } from "@/components/profile/UserProfile";
+import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
