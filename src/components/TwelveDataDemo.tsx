@@ -551,7 +551,7 @@ export const TwelveDataDemo = () => {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <h4 className="font-medium">Stock Features (Twelve Data API):</h4>
+            <h4 className="font-medium">Stock Features (Alpha Vantage API):</h4>
             <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
               <li>Real-time stock quotes with auto-refresh</li>
               <li>Multiple stock data fetching with rate limiting</li>
