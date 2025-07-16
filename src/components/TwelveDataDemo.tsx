@@ -31,6 +31,7 @@ import {
   CryptoMarketOverview,
 } from "@/components/crypto/CryptoPrice";
 import { ApiStatusOverview } from "@/components/ApiStatusOverview";
+import { NewsDemo } from "@/components/NewsDemo";
 
 export const TwelveDataDemo = () => {
   const [testSymbol, setTestSymbol] = useState("AAPL");
