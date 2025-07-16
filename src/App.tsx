@@ -69,6 +69,7 @@ const App = () => {
               onSectionChange={setActiveSection}
             />
             <main>{renderContent()}</main>
+            <ApiStatusIndicator />
           </div>
         </TooltipProvider>
       </AuthProvider>
