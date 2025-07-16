@@ -38,6 +38,7 @@ export const CryptoDashboard = () => {
     tickers: topCryptos,
     loading: cryptoLoading,
     error: cryptoError,
+    isRealData: cryptoIsRealData,
     refetch,
   } = useCryptoListings(50);
 
