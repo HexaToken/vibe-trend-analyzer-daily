@@ -328,34 +328,7 @@ export const SocialPlatform = () => {
         );
 
       case "rooms":
-        return (
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <h2 className="text-2xl font-bold">Community Rooms</h2>
-                <p className="text-muted-foreground">
-                  Join real-time discussions with other traders and investors
-                </p>
-              </div>
-              <Button variant="outline" onClick={() => setCurrentView("feed")}>
-                Back to Feed
-              </Button>
-            </div>
-
-            <Card>
-              <CardContent className="p-8 text-center">
-                <MessageSquare className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                <h3 className="text-lg font-semibold mb-2">
-                  Community Rooms Coming Soon
-                </h3>
-                <p className="text-muted-foreground mb-4">
-                  Discord-style real-time chat rooms are under development
-                </p>
-                <Badge variant="secondary">Feature in Development</Badge>
-              </CardContent>
-            </Card>
-          </div>
-        );
+        return <CommunityRooms />;
 
       default:
         return (
