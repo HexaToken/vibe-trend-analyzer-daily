@@ -75,7 +75,7 @@ export const Navigation = ({
       { id: "analytics", label: "Analytics", icon: TrendingUp },
       {
         id: "twelvedata",
-        label: "Stock API Demo",
+        label: "Financial APIs Demo",
         icon: Analytics,
         badge: "API",
       },
