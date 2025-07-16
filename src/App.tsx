@@ -53,6 +53,8 @@ const App = () => {
         return <SocialPlatform />;
       case "twelvedata":
         return <TwelveDataDemo />;
+      case "crypto":
+        return <CryptoDashboard />;
       default:
         return <Dashboard />;
     }
