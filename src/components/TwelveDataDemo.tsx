@@ -609,14 +609,18 @@ export const TwelveDataDemo = () => {
             <div className="flex flex-wrap gap-2">
               <Badge variant="outline">AlphaVantageService</Badge>
               <Badge variant="outline">CoinMarketCapService</Badge>
+              <Badge variant="outline">NewsAPIService</Badge>
               <Badge variant="outline">useAlphaVantage hooks</Badge>
               <Badge variant="outline">useCoinMarketCap hooks</Badge>
+              <Badge variant="outline">useNewsApi hooks</Badge>
               <Badge variant="outline">RealTimePrice</Badge>
               <Badge variant="outline">CryptoPrice</Badge>
               <Badge variant="outline">InlinePrice</Badge>
               <Badge variant="outline">InlineCryptoPrice</Badge>
               <Badge variant="outline">StockGrid</Badge>
               <Badge variant="outline">CryptoGrid</Badge>
+              <Badge variant="outline">TopNews</Badge>
+              <Badge variant="outline">NewsDemo</Badge>
             </div>
           </div>
 
