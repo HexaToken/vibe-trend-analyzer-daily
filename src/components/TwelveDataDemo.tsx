@@ -541,12 +541,13 @@ export const TwelveDataDemo = () => {
         <CardHeader>
           <CardTitle>Integration Details</CardTitle>
           <CardDescription>
-            How the Twelve Data API is integrated into your app
+            How both Twelve Data API (stocks) and CoinMarketCap API (crypto) are
+            integrated
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <h4 className="font-medium">Features Implemented:</h4>
+            <h4 className="font-medium">Stock Features (Twelve Data API):</h4>
             <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
               <li>Real-time stock quotes with auto-refresh</li>
               <li>Multiple stock data fetching with rate limiting</li>
@@ -559,13 +560,33 @@ export const TwelveDataDemo = () => {
           </div>
 
           <div className="space-y-2">
+            <h4 className="font-medium">
+              Crypto Features (CoinMarketCap API):
+            </h4>
+            <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
+              <li>Real-time cryptocurrency quotes and rankings</li>
+              <li>Top cryptocurrency listings by market cap</li>
+              <li>Global cryptocurrency market metrics</li>
+              <li>Bitcoin and Ethereum dominance tracking</li>
+              <li>Smart detection of crypto vs stock symbols in posts</li>
+              <li>Comprehensive error handling and fallback to mock data</li>
+              <li>Rate limiting and caching for optimal performance</li>
+            </ul>
+          </div>
+
+          <div className="space-y-2">
             <h4 className="font-medium">Components Created:</h4>
             <div className="flex flex-wrap gap-2">
               <Badge variant="outline">TwelveDataService</Badge>
+              <Badge variant="outline">CoinMarketCapService</Badge>
               <Badge variant="outline">useTwelveData hooks</Badge>
+              <Badge variant="outline">useCoinMarketCap hooks</Badge>
               <Badge variant="outline">RealTimePrice</Badge>
+              <Badge variant="outline">CryptoPrice</Badge>
               <Badge variant="outline">InlinePrice</Badge>
+              <Badge variant="outline">InlineCryptoPrice</Badge>
               <Badge variant="outline">StockGrid</Badge>
+              <Badge variant="outline">CryptoGrid</Badge>
             </div>
           </div>
 
