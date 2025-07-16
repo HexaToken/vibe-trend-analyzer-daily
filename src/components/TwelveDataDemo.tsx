@@ -102,9 +102,12 @@ export const TwelveDataDemo = () => {
   return (
     <div className="max-w-6xl mx-auto p-6 space-y-6">
       <div className="text-center space-y-2">
-        <h1 className="text-3xl font-bold">Twelve Data API Integration Demo</h1>
+        <h1 className="text-3xl font-bold">
+          Financial Data API Integration Demo
+        </h1>
         <p className="text-muted-foreground">
-          Real-time stock market data powered by Twelve Data API
+          Real-time stock market data powered by Twelve Data API +
+          cryptocurrency data from CoinMarketCap API
         </p>
       </div>
 
