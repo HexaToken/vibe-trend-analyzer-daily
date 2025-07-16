@@ -26,7 +26,13 @@ export const Navigation = ({
 
   const menuItems = [
     { id: "dashboard", label: "Dashboard", icon: BarChart3 },
-    { id: "analytics", label: "Analytics", icon: BarChart3 },
+    {
+      id: "sentiment",
+      label: "Sentiment Dashboard",
+      icon: Brain,
+      badge: "NEW",
+    },
+    { id: "analytics", label: "Analytics", icon: TrendingUp },
     { id: "history", label: "Historical Data", icon: Calendar },
     { id: "community", label: "Community", icon: Users },
     { id: "settings", label: "Settings", icon: Settings },
