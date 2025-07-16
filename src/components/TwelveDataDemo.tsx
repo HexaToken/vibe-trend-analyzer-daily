@@ -95,11 +95,52 @@ export const TwelveDataDemo = () => {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <Alert>
+          <Alert variant={apiStatus.apiDisabled ? "destructive" : "default"}>
             <AlertCircle className="h-4 w-4" />
             <AlertDescription>
-              <strong>API Key:</strong> Configured and ready to use. Rate limit:
-              800 requests/minute for free tier.
+              <div className="space-y-2">
+                <div>
+                  <strong>API Status:</strong> {apiStatus.message}
+                </div>
+                {apiStatus.apiDisabled ? (
+                  <div className="space-y-1">
+                    {apiStatus.apiDisabledUntil && (
+                      <div className="text-sm">
+                        <strong>Retry at:</strong>{" "}
+                        {apiStatus.apiDisabledUntil.toLocaleString()}
+                      </div>
+                    )}
+                    <div className="text-sm">
+                      Currently using mock data for demonstrations. Cache size:{" "}
+                      {apiStatus.cacheSize} items.
+                    </div>
+                    <div className="flex gap-2 mt-2">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => {
+                          stockDataFallback.enableApi();
+                          setApiStatus(stockDataFallback.getStatus());
+                        }}
+                      >
+                        Force Enable API
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => stockDataFallback.clearCache()}
+                      >
+                        Clear Cache
+                      </Button>
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <strong>Rate Limit:</strong> 800 requests/day for free tier.
+                    Cache size: {apiStatus.cacheSize} items.
+                  </div>
+                )}
+              </div>
             </AlertDescription>
           </Alert>
 
