@@ -60,6 +60,7 @@ export const Navigation = ({
         icon: Brain,
         badge: "NEW",
       },
+      { id: "crypto", label: "Crypto Dashboard", icon: Coins, badge: "NEW" },
       { id: "history", label: "Historical Data", icon: Calendar },
       { id: "database", label: "Database Demo", icon: Database, badge: "DEMO" },
     ],
