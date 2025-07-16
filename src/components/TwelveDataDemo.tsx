@@ -37,15 +37,8 @@ export const TwelveDataDemo = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [isSearching, setIsSearching] = useState(false);
-  const [apiStatus, setApiStatus] = useState(stockDataFallback.getStatus());
-
-  // Update API status periodically
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setApiStatus(stockDataFallback.getStatus());
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+  // Get API status directly without storing in state to avoid infinite loops
+  const apiStatus = stockDataFallback.getStatus();
 
   // Test popular stocks
   const popularStocks = ["AAPL", "GOOGL", "MSFT", "TSLA", "NVDA", "AMZN"];
