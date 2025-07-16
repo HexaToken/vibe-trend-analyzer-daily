@@ -3,6 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { AuthProvider } from "@/contexts/AuthContext";
 import { Navigation } from "@/components/Navigation";
 import { Dashboard } from "@/components/Dashboard";
 import { SentimentDashboard } from "@/components/SentimentDashboard";
@@ -10,6 +11,7 @@ import { Analytics } from "@/components/Analytics";
 import { HistoricalData } from "@/components/HistoricalData";
 import { Community } from "@/components/Community";
 import { Settings } from "@/components/Settings";
+import { UserProfile } from "@/components/profile/UserProfile";
 
 const queryClient = new QueryClient();
 
