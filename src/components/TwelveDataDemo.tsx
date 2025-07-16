@@ -434,6 +434,24 @@ export const TwelveDataDemo = () => {
         </CardContent>
       </Card>
 
+      {/* News Demo Section */}
+      <Card>
+        <CardHeader>
+          <CardTitle>NewsAPI Integration</CardTitle>
+          <CardDescription>
+            Business and technology news integration with sentiment analysis
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="text-center py-4">
+            <p className="text-muted-foreground mb-4">
+              View the complete news integration demo below
+            </p>
+            <NewsDemo />
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Symbol Search */}
       <Card>
         <CardHeader>
