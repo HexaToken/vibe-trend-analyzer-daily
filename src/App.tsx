@@ -49,6 +49,8 @@ const App = () => {
         return <DatabaseDemo />;
       case "social":
         return <SocialPlatform />;
+      case "twelvedata":
+        return <TwelveDataDemo />;
       default:
         return <Dashboard />;
     }
