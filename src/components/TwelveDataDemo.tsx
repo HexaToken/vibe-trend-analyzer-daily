@@ -112,8 +112,8 @@ export const TwelveDataDemo = () => {
         </p>
       </div>
 
-      {/* API Status Overview - Temporarily disabled due to infinite loop */}
-      {/* <ApiStatusOverview /> */}
+      {/* API Status Overview */}
+      <ApiStatusOverview />
 
       {/* API Status */}
       <Card>
