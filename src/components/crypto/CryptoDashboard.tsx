@@ -53,11 +53,18 @@ export const CryptoDashboard = () => {
     "DOT",
     "DOGE",
   ];
-  const { tickers: popularCryptos, loading: popularLoading } =
-    useCryptoQuotes(popularSymbols);
+  const {
+    tickers: popularCryptos,
+    loading: popularLoading,
+    isRealData: popularIsRealData,
+  } = useCryptoQuotes(popularSymbols);
 
   // Get global metrics
-  const { data: globalMetrics, loading: metricsLoading } = useGlobalMetrics();
+  const {
+    data: globalMetrics,
+    loading: metricsLoading,
+    isRealData: metricsIsRealData,
+  } = useGlobalMetrics();
 
   // Filter cryptocurrencies based on search
   const filteredCryptos = topCryptos.filter(
