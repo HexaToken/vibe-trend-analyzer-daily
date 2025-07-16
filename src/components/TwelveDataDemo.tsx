@@ -90,8 +90,8 @@ export const TwelveDataDemo = () => {
 
     setIsSearching(true);
     try {
-      const results = await twelveDataApi.symbolSearch(searchQuery);
-      setSearchResults(results.slice(0, 10)); // Limit to 10 results
+      const results = await alphaVantageApi.symbolSearch(searchQuery);
+      setSearchResults(results.bestMatches?.slice(0, 10) || []); // Limit to 10 results
     } catch (error) {
       console.error("Search error:", error);
       setSearchResults([]);
