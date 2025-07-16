@@ -52,6 +52,18 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				positive: {
+					DEFAULT: 'hsl(var(--positive))',
+					light: 'hsl(var(--positive-light))'
+				},
+				negative: {
+					DEFAULT: 'hsl(var(--negative))',
+					light: 'hsl(var(--negative-light))'
+				},
+				neutral: {
+					DEFAULT: 'hsl(var(--neutral))',
+					light: 'hsl(var(--neutral-light))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
