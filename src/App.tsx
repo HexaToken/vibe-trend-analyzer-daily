@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Navigation } from "@/components/Navigation";
 import { Dashboard } from "@/components/Dashboard";
+import { SentimentDashboard } from "@/components/SentimentDashboard";
 import { Analytics } from "@/components/Analytics";
 import { HistoricalData } from "@/components/HistoricalData";
 import { Community } from "@/components/Community";
@@ -38,10 +39,11 @@ const App = () => {
         <Toaster />
         <Sonner />
         <div className="min-h-screen bg-background">
-          <Navigation activeSection={activeSection} onSectionChange={setActiveSection} />
-          <main>
-            {renderContent()}
-          </main>
+          <Navigation
+            activeSection={activeSection}
+            onSectionChange={setActiveSection}
+          />
+          <main>{renderContent()}</main>
         </div>
       </TooltipProvider>
     </QueryClientProvider>
