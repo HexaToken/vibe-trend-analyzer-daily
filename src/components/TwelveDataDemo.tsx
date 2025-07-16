@@ -20,6 +20,16 @@ import {
 } from "@/hooks/useTwelveData";
 import { twelveDataApi } from "@/services/twelveDataApi";
 import { stockDataFallback } from "@/services/stockDataFallback";
+import {
+  useCryptoListings,
+  useCryptoQuotes,
+  useGlobalMetrics,
+} from "@/hooks/useCoinMarketCap";
+import { coinMarketCapApi } from "@/services/coinMarketCapApi";
+import {
+  CryptoGrid,
+  CryptoMarketOverview,
+} from "@/components/crypto/CryptoPrice";
 
 export const TwelveDataDemo = () => {
   const [testSymbol, setTestSymbol] = useState("AAPL");
