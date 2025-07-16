@@ -19,8 +19,9 @@ class DatabaseService {
 
   constructor() {
     // These will be configured with your MCP database connection
-    this.baseUrl = process.env.VITE_DATABASE_URL || "http://localhost:3001/api";
-    this.apiKey = process.env.VITE_API_KEY;
+    this.baseUrl =
+      import.meta.env.VITE_DATABASE_URL || "http://localhost:3001/api";
+    this.apiKey = import.meta.env.VITE_API_KEY;
   }
 
   private async request<T>(
