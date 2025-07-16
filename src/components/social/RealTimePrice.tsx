@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { TrendingUp, TrendingDown, Loader2, RefreshCw } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { useQuote } from "@/hooks/useTwelveData";
+import { useQuote } from "@/hooks/useAlphaVantage";
 import { cn } from "@/lib/utils";
 
 interface RealTimePriceProps {
