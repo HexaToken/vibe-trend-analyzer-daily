@@ -207,7 +207,7 @@ export const ApiStatusOverview = () => {
                 size="sm"
                 onClick={() => {
                   stockDataFallback.enableApi();
-                  updateStatus();
+                  setRefreshCounter((prev) => prev + 1);
                 }}
               >
                 Force Enable APIs
