@@ -79,10 +79,10 @@ export const ApiStatusOverview = () => {
 
         {/* API Information */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Twelve Data API (Stocks) */}
+          {/* Alpha Vantage API (Stocks) */}
           <div className="p-4 border rounded-lg">
             <div className="flex items-center justify-between mb-2">
-              <h4 className="font-medium">Twelve Data API</h4>
+              <h4 className="font-medium">Alpha Vantage API</h4>
               <Badge
                 variant={fallbackStatus.apiDisabled ? "destructive" : "default"}
               >
@@ -93,7 +93,7 @@ export const ApiStatusOverview = () => {
               Stock market data
             </p>
             <div className="text-xs space-y-1">
-              <div>Rate Limit: 800 requests/day</div>
+              <div>Rate Limit: 5 requests/minute</div>
               <div>Status: {fallbackStatus.message}</div>
             </div>
           </div>
