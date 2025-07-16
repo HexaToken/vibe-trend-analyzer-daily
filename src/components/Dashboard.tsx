@@ -9,6 +9,7 @@ import { MoodScore } from "./MoodScore";
 import { SourceBreakdown } from "./SourceBreakdown";
 import { TrendChart } from "./TrendChart";
 import { VibeSummary } from "./VibeSummary";
+import { TopNews } from "./TopNews";
 import { currentMoodScore, sentimentSources, weeklyTrend, vibePhrases, regions, topics } from "@/data/mockData";
 
 export const Dashboard = () => {
@@ -129,8 +130,14 @@ export const Dashboard = () => {
       {/* Trend Chart */}
       <TrendChart data={weeklyTrend} />
 
-      {/* Vibe Summary */}
-      <VibeSummary phrases={vibePhrases} />
+      {/* News & Vibe Summary Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Top News */}
+        <TopNews />
+        
+        {/* Vibe Summary */}
+        <VibeSummary phrases={vibePhrases} />
+      </div>
 
       {/* Real-time Status */}
       <Card>

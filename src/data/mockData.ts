@@ -129,6 +129,66 @@ export const vibePhrases: VibePhrase[] = [
   }
 ];
 
+export interface NewsArticle {
+  id: string;
+  headline: string;
+  summary: string;
+  sentimentScore: number;
+  keyPhrases: string[];
+  source: {
+    name: string;
+    publishedAt: string;
+  };
+  originalUrl: string;
+  whyItMatters: string;
+  relatedTrends?: string[];
+}
+
+export const newsArticles: NewsArticle[] = [
+  {
+    id: "1",
+    headline: "Tech Giants Report Record Quarterly Earnings Amid AI Boom",
+    summary: "Major technology companies exceeded analyst expectations this quarter, driven by unprecedented demand for AI-powered services and cloud computing solutions.",
+    sentimentScore: 78,
+    keyPhrases: ["record earnings", "AI boom", "exceeded expectations", "strong demand", "innovation"],
+    source: {
+      name: "Financial Times",
+      publishedAt: "2024-01-15T14:30:00Z"
+    },
+    originalUrl: "https://example.com/tech-earnings",
+    whyItMatters: "Strong tech earnings indicate market confidence in AI investments, boosting overall economic optimism and driving today's positive sentiment score.",
+    relatedTrends: ["AI investment surge", "Cloud computing growth"]
+  },
+  {
+    id: "2", 
+    headline: "Global Markets Show Signs of Volatility Amid Interest Rate Uncertainty",
+    summary: "Financial markets experienced significant fluctuations as investors await central bank decisions on interest rates, creating uncertainty across major indices.",
+    sentimentScore: 32,
+    keyPhrases: ["market volatility", "uncertainty", "interest rates", "fluctuations", "investor concern"],
+    source: {
+      name: "Reuters",
+      publishedAt: "2024-01-15T11:45:00Z"
+    },
+    originalUrl: "https://example.com/market-volatility",
+    whyItMatters: "Market uncertainty directly impacts investor confidence and consumer sentiment, contributing to today's mixed mood score readings.",
+    relatedTrends: ["Federal Reserve policy", "Global inflation concerns"]
+  },
+  {
+    id: "3",
+    headline: "Breakthrough in Renewable Energy Storage Could Transform Climate Goals",
+    summary: "Scientists announce a major advancement in battery technology that could solve renewable energy storage challenges, accelerating the transition to clean power.",
+    sentimentScore: 85,
+    keyPhrases: ["breakthrough", "renewable energy", "climate goals", "battery technology", "clean power"],
+    source: {
+      name: "Nature",
+      publishedAt: "2024-01-15T09:20:00Z"
+    },
+    originalUrl: "https://example.com/energy-breakthrough",
+    whyItMatters: "This technological breakthrough offers hope for addressing climate change, significantly contributing to positive environmental sentiment trends.",
+    relatedTrends: ["Green technology investment", "Climate action progress"]
+  }
+];
+
 export const regions = [
   { name: "Global", code: "GLOBAL" },
   { name: "North America", code: "NA" },
