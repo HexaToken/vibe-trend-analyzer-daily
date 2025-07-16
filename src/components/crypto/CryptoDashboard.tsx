@@ -89,9 +89,14 @@ export const CryptoDashboard = () => {
             <Coins className="h-8 w-8" />
             Cryptocurrency Dashboard
           </h1>
-          <p className="text-muted-foreground">
-            Real-time cryptocurrency data powered by CoinMarketCap API
-          </p>
+          <div className="flex items-center gap-2">
+            <p className="text-muted-foreground">
+              Real-time cryptocurrency data powered by CoinMarketCap API
+            </p>
+            <Badge variant={cryptoIsRealData ? "default" : "secondary"}>
+              {cryptoIsRealData ? "Live Data" : "Mock Data"}
+            </Badge>
+          </div>
         </div>
         <Button onClick={refetch} disabled={cryptoLoading}>
           <RefreshCw
