@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { RefreshCw, TrendingUp, AlertCircle } from "lucide-react";
 import {
   Card,
