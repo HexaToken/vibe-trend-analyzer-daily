@@ -20,6 +20,7 @@ interface UseCryptoQuotesResult {
   tickers: Ticker[];
   loading: boolean;
   error: string | null;
+  isRealData: boolean;
   refetch: () => Promise<void>;
 }
 
@@ -28,6 +29,7 @@ interface UseCryptoListingsResult {
   tickers: Ticker[];
   loading: boolean;
   error: string | null;
+  isRealData: boolean;
   refetch: () => Promise<void>;
 }
 
@@ -35,6 +37,7 @@ interface UseGlobalMetricsResult {
   data: any | null;
   loading: boolean;
   error: string | null;
+  isRealData: boolean;
   refetch: () => Promise<void>;
 }
 
