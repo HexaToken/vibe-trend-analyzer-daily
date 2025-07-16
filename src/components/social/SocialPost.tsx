@@ -67,13 +67,42 @@ export const SocialPost = ({
       .map((part, index) => {
         if (part.startsWith("$")) {
           const symbol = part.slice(1);
+          // Common crypto symbols that should use crypto API
+          const cryptoSymbols = [
+            "BTC",
+            "ETH",
+            "BNB",
+            "XRP",
+            "ADA",
+            "SOL",
+            "DOT",
+            "DOGE",
+            "AVAX",
+            "SHIB",
+            "MATIC",
+            "LINK",
+            "UNI",
+            "LTC",
+            "BCH",
+            "ATOM",
+            "ICP",
+            "NEAR",
+            "ALGO",
+            "FTM",
+          ];
+          const isCrypto = cryptoSymbols.includes(symbol);
+
           return (
             <button
               key={index}
               onClick={() => onTickerClick?.(symbol)}
               className="text-blue-600 hover:text-blue-800 hover:underline inline-block"
             >
-              <InlinePrice symbol={symbol} className="font-semibold" />
+              {isCrypto ? (
+                <InlineCryptoPrice symbol={symbol} className="font-semibold" />
+              ) : (
+                <InlinePrice symbol={symbol} className="font-semibold" />
+              )}
             </button>
           );
         } else if (part.startsWith("#")) {
