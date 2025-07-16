@@ -1,6 +1,6 @@
 import { Ticker } from "../types/social";
 import { mockTickers, getMockTickerBySymbol } from "../data/socialMockData";
-import { TwelveDataApiError } from "./twelveDataApi";
+import { AlphaVantageApiError } from "./alphaVantageApi";
 import { CoinMarketCapApiError } from "./coinMarketCapApi";
 
 // Service to manage API fallbacks and caching
