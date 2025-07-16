@@ -102,7 +102,8 @@ export const TwelveDataDemo = () => {
         </h1>
         <p className="text-muted-foreground">
           Real-time stock market data powered by Alpha Vantage API +
-          cryptocurrency data from CoinMarketCap API
+          cryptocurrency data from CoinMarketCap API + business news from
+          NewsAPI
         </p>
       </div>
 
