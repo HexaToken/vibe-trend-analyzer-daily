@@ -1,12 +1,21 @@
 import { useState } from "react";
-import { Newspaper, TrendingUp, TrendingDown, Clock } from "lucide-react";
+import {
+  Newspaper,
+  TrendingUp,
+  TrendingDown,
+  Clock,
+  RefreshCw,
+} from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { NewsArticle, newsArticles } from "@/data/mockData";
+import { Button } from "@/components/ui/button";
 import { NewsDetailModal } from "./NewsDetailModal";
+import { useBusinessNews } from "@/hooks/useNewsApi";
 
 export const TopNews = () => {
-  const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(null);
+  const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(
+    null,
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleArticleClick = (article: NewsArticle) => {
@@ -28,11 +37,11 @@ export const TopNews = () => {
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
+    return date.toLocaleString("en-US", {
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
@@ -60,11 +69,11 @@ export const TopNews = () => {
                   <p className="text-xs text-muted-foreground line-clamp-2 mb-3">
                     {article.summary}
                   </p>
-                  
+
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <Badge 
-                        variant="outline" 
+                      <Badge
+                        variant="outline"
                         className={`text-xs ${getSentimentColor(article.sentimentScore)}`}
                       >
                         <div className="flex items-center gap-1">
@@ -73,16 +82,17 @@ export const TopNews = () => {
                           ) : (
                             <TrendingDown className="h-3 w-3" />
                           )}
-                          {getSentimentLabel(article.sentimentScore)} {article.sentimentScore}
+                          {getSentimentLabel(article.sentimentScore)}{" "}
+                          {article.sentimentScore}
                         </div>
                       </Badge>
-                      
+
                       <div className="flex items-center gap-1 text-xs text-muted-foreground">
                         <Clock className="h-3 w-3" />
                         {formatDate(article.source.publishedAt)}
                       </div>
                     </div>
-                    
+
                     <span className="text-xs font-medium text-muted-foreground">
                       {article.source.name}
                     </span>
@@ -91,7 +101,7 @@ export const TopNews = () => {
               </div>
             </div>
           ))}
-          
+
           <div className="mt-4 p-3 bg-muted/30 rounded-lg text-center">
             <p className="text-xs text-muted-foreground">
               Click any article to see detailed sentiment analysis and insights
