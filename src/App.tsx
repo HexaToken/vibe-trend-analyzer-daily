@@ -41,17 +41,19 @@ const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <div className="min-h-screen bg-background">
-          <Navigation
-            activeSection={activeSection}
-            onSectionChange={setActiveSection}
-          />
-          <main>{renderContent()}</main>
-        </div>
-      </TooltipProvider>
+      <AuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <div className="min-h-screen bg-background">
+            <Navigation
+              activeSection={activeSection}
+              onSectionChange={setActiveSection}
+            />
+            <main>{renderContent()}</main>
+          </div>
+        </TooltipProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 };
