@@ -20,9 +20,18 @@ import { useQuote } from "@/hooks/useTwelveData";
 import { useCryptoQuotes } from "@/hooks/useCoinMarketCap";
 
 export const ApiStatusOverview = () => {
-  const [fallbackStatus, setFallbackStatus] = useState(() =>
-    stockDataFallback.getStatus(),
-  );
+  const [refreshCounter, setRefreshCounter] = useState(0);
+
+  // Force a refresh every 5 seconds by incrementing a counter
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRefreshCounter((prev) => prev + 1);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Get status fresh each render, but don't store in state to avoid loops
+  const fallbackStatus = stockDataFallback.getStatus();
 
   // Test stock API with a simple quote
   const {
@@ -31,7 +40,7 @@ export const ApiStatusOverview = () => {
     error: stockError,
   } = useQuote("AAPL", {
     refreshInterval: 0,
-    enabled: false, // Temporarily disabled to debug infinite loop
+    enabled: true,
   });
 
   // Test crypto API with a simple quote
@@ -41,24 +50,8 @@ export const ApiStatusOverview = () => {
     error: cryptoError,
   } = useCryptoQuotes(["BTC"], {
     refreshInterval: 0,
-    enabled: false, // Temporarily disabled to debug infinite loop
+    enabled: true,
   });
-
-  const updateStatus = useCallback(() => {
-    const newStatus = stockDataFallback.getStatus();
-    setFallbackStatus((prevStatus) => {
-      // Only update if something actually changed
-      if (JSON.stringify(prevStatus) !== JSON.stringify(newStatus)) {
-        return newStatus;
-      }
-      return prevStatus;
-    });
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(updateStatus, 5000);
-    return () => clearInterval(interval);
-  }, [updateStatus]);
 
   const getStatusIcon = (loading: boolean, error: string | null, data: any) => {
     if (loading)
