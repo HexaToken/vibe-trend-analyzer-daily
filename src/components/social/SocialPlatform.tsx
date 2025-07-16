@@ -31,6 +31,16 @@ type ViewType = "feed" | "watchlist" | "ticker" | "trending" | "rooms";
 export const SocialPlatform = () => {
   const { isAuthenticated, user } = useAuth();
   const [currentView, setCurrentView] = useState<ViewType>("feed");
+
+  // Get real-time data for trending tickers
+  const trendingSymbols = mockTrendingData.tickers
+    .slice(0, 5)
+    .map((t) => t.symbol);
+  const { tickers: realTimeTickers, loading: tickersLoading } =
+    useMultipleQuotes(trendingSymbols, {
+      refreshInterval: 30000, // Refresh every 30 seconds
+      enabled: true,
+    });
   const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
