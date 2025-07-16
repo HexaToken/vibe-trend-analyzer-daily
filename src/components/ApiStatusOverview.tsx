@@ -20,7 +20,7 @@ import { useQuote } from "@/hooks/useTwelveData";
 import { useCryptoQuotes } from "@/hooks/useCoinMarketCap";
 
 export const ApiStatusOverview = () => {
-  const [fallbackStatus, setFallbackStatus] = useState(
+  const [fallbackStatus, setFallbackStatus] = useState(() =>
     stockDataFallback.getStatus(),
   );
 
@@ -44,12 +44,21 @@ export const ApiStatusOverview = () => {
     enabled: true,
   });
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setFallbackStatus(stockDataFallback.getStatus());
-    }, 5000);
-    return () => clearInterval(interval);
+  const updateStatus = useCallback(() => {
+    const newStatus = stockDataFallback.getStatus();
+    setFallbackStatus((prevStatus) => {
+      // Only update if something actually changed
+      if (JSON.stringify(prevStatus) !== JSON.stringify(newStatus)) {
+        return newStatus;
+      }
+      return prevStatus;
+    });
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(updateStatus, 5000);
+    return () => clearInterval(interval);
+  }, [updateStatus]);
 
   const getStatusIcon = (loading: boolean, error: string | null, data: any) => {
     if (loading)
