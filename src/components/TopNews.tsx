@@ -13,12 +13,16 @@ import { NewsDetailModal } from "./NewsDetailModal";
 import { useBusinessNews } from "@/hooks/useNewsApi";
 
 export const TopNews = () => {
-  const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(
-    null,
-  );
+  const [selectedArticle, setSelectedArticle] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleArticleClick = (article: NewsArticle) => {
+  // Get real business news from NewsAPI
+  const { articles, loading, error, refetch } = useBusinessNews({
+    refreshInterval: 300000, // Refresh every 5 minutes
+    enabled: true,
+  });
+
+  const handleArticleClick = (article: any) => {
     setSelectedArticle(article);
     setIsModalOpen(true);
   };
