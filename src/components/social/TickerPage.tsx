@@ -156,7 +156,7 @@ export const TickerPage = ({ symbol, onBack }: TickerPageProps) => {
   };
 
   const formatPrice = (price: number) => {
-    if (ticker.type === "crypto") {
+    if (ticker?.type === "crypto") {
       return price.toLocaleString("en-US", {
         style: "currency",
         currency: "USD",
