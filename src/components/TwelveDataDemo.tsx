@@ -631,6 +631,8 @@ export const TwelveDataDemo = () => {
               <Badge variant="secondary">Ticker Pages</Badge>
               <Badge variant="secondary">Trending Sidebar</Badge>
               <Badge variant="secondary">Post Cashtags</Badge>
+              <Badge variant="secondary">Dashboard News</Badge>
+              <Badge variant="secondary">Sentiment Dashboard</Badge>
             </div>
           </div>
         </CardContent>
