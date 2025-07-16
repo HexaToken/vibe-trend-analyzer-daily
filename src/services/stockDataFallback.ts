@@ -84,7 +84,7 @@ class StockDataFallbackService {
   // Handle API errors and determine if we should disable the API
   handleApiError(error: any): boolean {
     if (
-      error instanceof TwelveDataApiError ||
+      error instanceof AlphaVantageApiError ||
       error instanceof CoinMarketCapApiError
     ) {
       const message = error.message.toLowerCase();
