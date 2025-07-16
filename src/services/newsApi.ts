@@ -3,6 +3,7 @@
 
 const API_KEY = "9a45d08310a946bab8d2738f74b69fc5";
 const BASE_URL = "https://newsapi.org/v2";
+const PROXY_BASE_URL = "http://localhost:3001/api/proxy/newsapi";
 
 // NewsAPI Response Types
 export interface NewsAPIArticle {
@@ -46,12 +47,19 @@ export class NewsApiError extends Error {
 // API Service Class
 class NewsService {
   private baseURL = BASE_URL;
+  private proxyURL = PROXY_BASE_URL;
   private apiKey = API_KEY;
+  private useProxy = true; // Toggle to use proxy or direct API
 
   private async fetchFromApi<T>(
     endpoint: string,
     params: Record<string, string> = {},
   ): Promise<T> {
+    // Use proxy if available, fallback to direct API
+    if (this.useProxy) {
+      return this.fetchViaProxy<T>(endpoint, params);
+    }
+
     const url = new URL(`${this.baseURL}${endpoint}`);
 
     // Add API key and parameters
@@ -88,6 +96,56 @@ class NewsService {
       throw new NewsApiError(
         `Network error: ${error instanceof Error ? error.message : "Unknown error"}`,
       );
+    }
+  }
+
+  private async fetchViaProxy<T>(
+    endpoint: string,
+    params: Record<string, string> = {},
+  ): Promise<T> {
+    try {
+      let proxyEndpoint = "";
+
+      // Map API endpoints to proxy endpoints
+      if (endpoint === "/top-headlines") {
+        proxyEndpoint = "/top-headlines";
+      } else if (endpoint === "/everything") {
+        proxyEndpoint = "/everything";
+      } else {
+        // Fallback to direct API for unsupported endpoints
+        this.useProxy = false;
+        return this.fetchFromApi<T>(endpoint, params);
+      }
+
+      const url = new URL(`${this.proxyURL}${proxyEndpoint}`);
+
+      // Add parameters
+      Object.entries(params).forEach(([key, value]) => {
+        url.searchParams.append(key, value);
+      });
+
+      const response = await fetch(url.toString());
+
+      if (!response.ok) {
+        // If proxy fails, try direct API as fallback
+        console.warn("News proxy failed, falling back to direct API");
+        this.useProxy = false;
+        return this.fetchFromApi<T>(endpoint, params);
+      }
+
+      const data = await response.json();
+
+      // Check for API errors
+      if (data.error) {
+        throw new NewsApiError(data.error);
+      }
+
+      return data;
+    } catch (error) {
+      // If proxy fails, try direct API as fallback
+      console.warn("News proxy error, falling back to direct API:", error);
+      this.useProxy = false;
+      return this.fetchFromApi<T>(endpoint, params);
     }
   }
 
