@@ -20,6 +20,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SocialFeed } from "./SocialFeed";
 import { TickerPage } from "./TickerPage";
 import { WatchlistManager } from "./WatchlistManager";
+import { CommunityRooms } from "./CommunityRooms";
 import { mockTrendingData, mockTickers } from "@/data/socialMockData";
 import { useAuth } from "@/contexts/AuthContext";
 
