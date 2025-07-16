@@ -70,9 +70,9 @@ export const SocialPost = ({
             <button
               key={index}
               onClick={() => onTickerClick?.(symbol)}
-              className="text-blue-600 hover:text-blue-800 font-semibold hover:underline"
+              className="text-blue-600 hover:text-blue-800 hover:underline inline-block"
             >
-              {part}
+              <InlinePrice symbol={symbol} className="font-semibold" />
             </button>
           );
         } else if (part.startsWith("#")) {
