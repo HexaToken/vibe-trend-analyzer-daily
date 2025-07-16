@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RefreshCw, TrendingUp, AlertCircle } from "lucide-react";
 import {
   Card,
@@ -69,9 +69,9 @@ export const TwelveDataDemo = () => {
   };
 
   // Check proxy status on mount
-  useState(() => {
+  useEffect(() => {
     checkProxyStatus();
-  });
+  }, []);
 
   // Test popular cryptocurrencies
   const popularCryptos = ["BTC", "ETH", "BNB", "XRP", "ADA", "SOL"];
