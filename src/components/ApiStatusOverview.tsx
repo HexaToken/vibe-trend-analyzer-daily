@@ -31,7 +31,7 @@ export const ApiStatusOverview = () => {
     error: stockError,
   } = useQuote("AAPL", {
     refreshInterval: 0,
-    enabled: true,
+    enabled: false, // Temporarily disabled to debug infinite loop
   });
 
   // Test crypto API with a simple quote
@@ -41,7 +41,7 @@ export const ApiStatusOverview = () => {
     error: cryptoError,
   } = useCryptoQuotes(["BTC"], {
     refreshInterval: 0,
-    enabled: true,
+    enabled: false, // Temporarily disabled to debug infinite loop
   });
 
   const updateStatus = useCallback(() => {
