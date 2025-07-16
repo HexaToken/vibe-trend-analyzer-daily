@@ -17,8 +17,8 @@ import {
   useQuote,
   useMultipleQuotes,
   useTimeSeries,
-} from "@/hooks/useTwelveData";
-import { twelveDataApi } from "@/services/twelveDataApi";
+} from "@/hooks/useAlphaVantage";
+import { alphaVantageApi } from "@/services/alphaVantageApi";
 import { stockDataFallback } from "@/services/stockDataFallback";
 import {
   useCryptoListings,
