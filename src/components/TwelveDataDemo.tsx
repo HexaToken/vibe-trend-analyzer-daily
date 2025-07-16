@@ -284,6 +284,157 @@ export const TwelveDataDemo = () => {
         </CardContent>
       </Card>
 
+      {/* Popular Cryptocurrencies */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Popular Cryptocurrencies</CardTitle>
+          <CardDescription>
+            Real-time cryptocurrency data from CoinMarketCap API
+            (auto-refreshing every 60 seconds)
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          {cryptoLoading && cryptoTickers.length === 0 ? (
+            <div className="text-center py-8">
+              <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-2" />
+              <p>Loading cryptocurrency data...</p>
+            </div>
+          ) : cryptoError ? (
+            <Alert variant="destructive">
+              <AlertDescription>
+                Error loading cryptocurrencies: {cryptoError}
+              </AlertDescription>
+            </Alert>
+          ) : (
+            <CryptoGrid symbols={popularCryptos} />
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Top Crypto Listings */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Top Cryptocurrency Rankings</CardTitle>
+          <CardDescription>
+            Top 10 cryptocurrencies by market cap from CoinMarketCap
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          {cryptoListingsLoading ? (
+            <div className="text-center py-8">
+              <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-2" />
+              <p>Loading crypto rankings...</p>
+            </div>
+          ) : topCryptos.length > 0 ? (
+            <div className="space-y-3">
+              {topCryptos.slice(0, 10).map((crypto, index) => (
+                <div
+                  key={crypto.symbol}
+                  className="flex items-center justify-between p-3 border rounded"
+                >
+                  <div className="flex items-center gap-3">
+                    <Badge variant="outline" className="w-8 text-center">
+                      #{index + 1}
+                    </Badge>
+                    <div>
+                      <div className="font-medium">{crypto.symbol}</div>
+                      <div className="text-sm text-muted-foreground">
+                        {crypto.name}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="font-medium">
+                      {crypto.price < 1
+                        ? `$${crypto.price.toFixed(6)}`
+                        : `$${crypto.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
+                    </div>
+                    <div
+                      className={`text-sm ${crypto.changePercent >= 0 ? "text-green-600" : "text-red-600"}`}
+                    >
+                      {crypto.changePercent >= 0 ? "+" : ""}
+                      {crypto.changePercent.toFixed(2)}%
+                    </div>
+                    {crypto.marketCap && (
+                      <div className="text-xs text-muted-foreground">
+                        ${(crypto.marketCap / 1e9).toFixed(1)}B
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-muted-foreground py-4">
+              No cryptocurrency data available
+            </p>
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Global Crypto Metrics */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Global Cryptocurrency Market</CardTitle>
+          <CardDescription>
+            Global market statistics and dominance data
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          {metricsLoading ? (
+            <div className="text-center py-4">
+              <RefreshCw className="h-6 w-6 animate-spin mx-auto mb-2" />
+              <p>Loading global metrics...</p>
+            </div>
+          ) : globalMetrics ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="text-center p-4 border rounded-lg">
+                <div className="text-2xl font-bold text-blue-600">
+                  {globalMetrics.data.active_cryptocurrencies?.toLocaleString() ||
+                    "N/A"}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  Active Cryptos
+                </div>
+              </div>
+              <div className="text-center p-4 border rounded-lg">
+                <div className="text-2xl font-bold text-orange-600">
+                  {globalMetrics.data.btc_dominance?.toFixed(1) || "N/A"}%
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  BTC Dominance
+                </div>
+              </div>
+              <div className="text-center p-4 border rounded-lg">
+                <div className="text-2xl font-bold text-purple-600">
+                  {globalMetrics.data.eth_dominance?.toFixed(1) || "N/A"}%
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  ETH Dominance
+                </div>
+              </div>
+              <div className="text-center p-4 border rounded-lg">
+                <div className="text-2xl font-bold text-green-600">
+                  $
+                  {globalMetrics.data.quote?.USD?.total_market_cap
+                    ? (
+                        globalMetrics.data.quote.USD.total_market_cap / 1e12
+                      ).toFixed(2) + "T"
+                    : "N/A"}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  Total Market Cap
+                </div>
+              </div>
+            </div>
+          ) : (
+            <p className="text-center text-muted-foreground py-4">
+              No global metrics available
+            </p>
+          )}
+        </CardContent>
+      </Card>
+
       {/* Symbol Search */}
       <Card>
         <CardHeader>
