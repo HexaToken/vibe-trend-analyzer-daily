@@ -20,6 +20,8 @@ const App = () => {
     switch (activeSection) {
       case "dashboard":
         return <Dashboard />;
+      case "sentiment":
+        return <SentimentDashboard />;
       case "analytics":
         return <Analytics />;
       case "history":
