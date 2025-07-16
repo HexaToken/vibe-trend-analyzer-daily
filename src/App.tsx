@@ -46,6 +46,8 @@ const App = () => {
         return <Settings />;
       case "database":
         return <DatabaseDemo />;
+      case "social":
+        return <SocialPlatform />;
       default:
         return <Dashboard />;
     }
