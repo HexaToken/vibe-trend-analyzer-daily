@@ -49,6 +49,8 @@ import type {
   SentimentType,
   CreatePostData,
 } from "@/types/social";
+import { useQuote } from "@/hooks/useTwelveData";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface TickerPageProps {
   symbol: string;
