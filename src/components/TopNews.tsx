@@ -1,11 +1,5 @@
 import { useState } from "react";
-import {
-  Newspaper,
-  TrendingUp,
-  TrendingDown,
-  Clock,
-  RefreshCw,
-} from "lucide-react";
+import { Newspaper, TrendingUp, TrendingDown, Clock, RefreshCw } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -41,25 +35,51 @@ export const TopNews = () => {
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleString("en-US", {
-      month: "short",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
+    return date.toLocaleString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
     });
   };
 
   return (
     <>
       <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Newspaper className="h-5 w-5" />
-            Top News Impacting Sentiment
+                <CardHeader>
+          <CardTitle className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Newspaper className="h-5 w-5" />
+              Top Business News
+            </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={refetch}
+              disabled={loading}
+              className="h-8 w-8 p-0"
+            >
+              <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
+            </Button>
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          {newsArticles.map((article) => (
+          {loading && articles.length === 0 ? (
+            <div className="text-center py-8">
+              <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-2 text-muted-foreground" />
+              <p className="text-muted-foreground">Loading latest news...</p>
+            </div>
+          ) : error && articles.length === 0 ? (
+            <div className="text-center py-8">
+              <p className="text-red-600 mb-2">Error loading news</p>
+              <p className="text-sm text-muted-foreground mb-4">{error}</p>
+              <Button variant="outline" onClick={refetch} size="sm">
+                Try Again
+              </Button>
+            </div>
+          ) : (
+            <>
+              {articles.slice(0, 5).map((article) => (
             <div
               key={article.id}
               onClick={() => handleArticleClick(article)}
@@ -73,11 +93,11 @@ export const TopNews = () => {
                   <p className="text-xs text-muted-foreground line-clamp-2 mb-3">
                     {article.summary}
                   </p>
-
+                  
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <Badge
-                        variant="outline"
+                      <Badge 
+                        variant="outline" 
                         className={`text-xs ${getSentimentColor(article.sentimentScore)}`}
                       >
                         <div className="flex items-center gap-1">
@@ -86,17 +106,16 @@ export const TopNews = () => {
                           ) : (
                             <TrendingDown className="h-3 w-3" />
                           )}
-                          {getSentimentLabel(article.sentimentScore)}{" "}
-                          {article.sentimentScore}
+                          {getSentimentLabel(article.sentimentScore)} {article.sentimentScore}
                         </div>
                       </Badge>
-
+                      
                       <div className="flex items-center gap-1 text-xs text-muted-foreground">
                         <Clock className="h-3 w-3" />
                         {formatDate(article.source.publishedAt)}
                       </div>
                     </div>
-
+                    
                     <span className="text-xs font-medium text-muted-foreground">
                       {article.source.name}
                     </span>
@@ -105,7 +124,7 @@ export const TopNews = () => {
               </div>
             </div>
           ))}
-
+          
           <div className="mt-4 p-3 bg-muted/30 rounded-lg text-center">
             <p className="text-xs text-muted-foreground">
               Click any article to see detailed sentiment analysis and insights
