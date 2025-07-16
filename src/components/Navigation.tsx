@@ -53,6 +53,7 @@ export const Navigation = ({
     { id: "analytics", label: "Analytics", icon: TrendingUp },
     { id: "history", label: "Historical Data", icon: Calendar },
     { id: "community", label: "Community", icon: Users },
+    { id: "database", label: "Database Demo", icon: Users, badge: "DEMO" },
     { id: "settings", label: "Settings", icon: Settings },
   ];
 
