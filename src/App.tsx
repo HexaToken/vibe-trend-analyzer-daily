@@ -32,7 +32,14 @@ const App = () => {
       case "community":
         return <Community />;
       case "profile":
-        return <UserProfile />;
+        return (
+          <ProtectedRoute
+            fallbackTitle="Profile Access Required"
+            fallbackDescription="Please sign in to view and manage your profile."
+          >
+            <UserProfile />
+          </ProtectedRoute>
+        );
       case "settings":
         return <Settings />;
       default:
