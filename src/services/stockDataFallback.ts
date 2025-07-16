@@ -86,7 +86,8 @@ class StockDataFallbackService {
   handleApiError(error: any): boolean {
     if (
       error instanceof AlphaVantageApiError ||
-      error instanceof CoinMarketCapApiError
+      error instanceof CoinMarketCapApiError ||
+      error instanceof NewsApiError
     ) {
       const message = error.message.toLowerCase();
 
