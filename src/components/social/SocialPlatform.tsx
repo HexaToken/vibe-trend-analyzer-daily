@@ -43,6 +43,16 @@ export const SocialPlatform = () => {
       refreshInterval: 30000, // Refresh every 30 seconds
       enabled: true,
     });
+
+  // Get crypto data for trending crypto
+  const trendingCryptos = ["BTC", "ETH", "BNB"];
+  const { tickers: cryptoTickers, loading: cryptoLoading } = useCryptoQuotes(
+    trendingCryptos,
+    {
+      refreshInterval: 60000, // Refresh every minute
+      enabled: true,
+    },
+  );
   const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
