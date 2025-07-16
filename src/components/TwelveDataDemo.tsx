@@ -57,7 +57,7 @@ export const TwelveDataDemo = () => {
   const checkProxyStatus = async () => {
     setProxyStatus("checking");
     try {
-      const response = await fetch("http://localhost:3001/api/health");
+      const response = await fetch("/api/proxy/health");
       if (response.ok) {
         setProxyStatus("online");
       } else {
