@@ -15,6 +15,7 @@ import { UserProfile } from "@/components/profile/UserProfile";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { DatabaseDemo } from "@/components/DatabaseDemo";
 import { SocialPlatform } from "@/components/social/SocialPlatform";
+import { TwelveDataDemo } from "@/components/TwelveDataDemo";
 
 const queryClient = new QueryClient();
 
