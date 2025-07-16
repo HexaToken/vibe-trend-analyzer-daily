@@ -59,7 +59,10 @@ export function useTopHeadlines(
       setData(response);
       setIsRealData(true);
       setError(null);
-      console.log("✅ NewsAPI: Using real data via proxy");
+      console.log("✅ NewsAPI: Successfully fetched real data via proxy", {
+        totalResults: response.totalResults,
+        articlesCount: response.articles.length,
+      });
     } catch (err) {
       console.warn("⚠️ NewsAPI failed, using mock data:", err);
 
@@ -171,7 +174,10 @@ export function useNewsSearch(
       setData(response);
       setIsRealData(true);
       setError(null);
-      console.log("✅ NewsAPI: Using real data via proxy");
+      console.log("✅ NewsAPI: Successfully fetched real data via proxy", {
+        totalResults: response.totalResults,
+        articlesCount: response.articles.length,
+      });
     } catch (err) {
       console.warn("⚠️ NewsAPI search failed, using mock data:", err);
 
