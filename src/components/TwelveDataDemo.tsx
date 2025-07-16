@@ -19,6 +19,7 @@ import {
   useTimeSeries,
 } from "@/hooks/useTwelveData";
 import { twelveDataApi } from "@/services/twelveDataApi";
+import { stockDataFallback } from "@/services/stockDataFallback";
 
 export const TwelveDataDemo = () => {
   const [testSymbol, setTestSymbol] = useState("AAPL");
