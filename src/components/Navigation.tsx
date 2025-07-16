@@ -26,6 +26,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  ChevronDown,
+  Database,
+  BarChart3 as Analytics,
+  Users2,
+  UserPlus,
+} from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { AuthModal } from "@/components/auth/AuthModal";
 
@@ -43,26 +50,31 @@ export const Navigation = ({
   const [authMode, setAuthMode] = useState<"login" | "signup">("login");
   const { user, isAuthenticated, logout } = useAuth();
 
-  const menuItems = [
-    { id: "dashboard", label: "Dashboard", icon: BarChart3 },
-    {
-      id: "sentiment",
-      label: "Sentiment Dashboard",
-      icon: Brain,
-      badge: "NEW",
-    },
-    {
-      id: "social",
-      label: "FinTwits Social",
-      icon: MessageSquare,
-      badge: "HOT",
-    },
-    { id: "analytics", label: "Analytics", icon: TrendingUp },
-    { id: "history", label: "Historical Data", icon: Calendar },
-    { id: "community", label: "Community", icon: Users },
-    { id: "database", label: "Database Demo", icon: Users, badge: "DEMO" },
-    { id: "settings", label: "Settings", icon: Settings },
-  ];
+  const navigationGroups = {
+    data: [
+      {
+        id: "sentiment",
+        label: "Sentiment Dashboard",
+        icon: Brain,
+        badge: "NEW",
+      },
+      { id: "history", label: "Historical Data", icon: Calendar },
+      { id: "database", label: "Database Demo", icon: Database, badge: "DEMO" },
+    ],
+    social: [
+      {
+        id: "social",
+        label: "FinTwits Social",
+        icon: MessageSquare,
+        badge: "HOT",
+      },
+      { id: "community", label: "Community", icon: Users },
+    ],
+    tools: [
+      { id: "analytics", label: "Analytics", icon: TrendingUp },
+      { id: "settings", label: "Settings", icon: Settings },
+    ],
+  };
 
   const openAuthModal = (mode: "login" | "signup") => {
     setAuthMode(mode);
@@ -99,25 +111,114 @@ export const Navigation = ({
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-1">
-              {menuItems.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <Button
-                    key={item.id}
-                    variant={activeSection === item.id ? "default" : "ghost"}
-                    onClick={() => onSectionChange(item.id)}
-                    className="flex items-center gap-2 relative"
-                  >
-                    <Icon className="h-4 w-4" />
-                    {item.label}
-                    {item.badge && (
-                      <Badge variant="secondary" className="ml-1 text-xs">
-                        {item.badge}
-                      </Badge>
-                    )}
+              {/* Dashboard */}
+              <Button
+                variant={activeSection === "dashboard" ? "default" : "ghost"}
+                onClick={() => onSectionChange("dashboard")}
+                className="flex items-center gap-2"
+              >
+                <BarChart3 className="h-4 w-4" />
+                Dashboard
+              </Button>
+
+              {/* Data Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="flex items-center gap-1">
+                    Data
+                    <ChevronDown className="h-3 w-3" />
                   </Button>
-                );
-              })}
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start">
+                  {navigationGroups.data.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <DropdownMenuItem
+                        key={item.id}
+                        onClick={() => onSectionChange(item.id)}
+                        className="flex items-center gap-2"
+                      >
+                        <Icon className="h-4 w-4" />
+                        {item.label}
+                        {item.badge && (
+                          <Badge
+                            variant="secondary"
+                            className="ml-auto text-xs"
+                          >
+                            {item.badge}
+                          </Badge>
+                        )}
+                      </DropdownMenuItem>
+                    );
+                  })}
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              {/* Social Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="flex items-center gap-1">
+                    Social
+                    <ChevronDown className="h-3 w-3" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start">
+                  {navigationGroups.social.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <DropdownMenuItem
+                        key={item.id}
+                        onClick={() => onSectionChange(item.id)}
+                        className="flex items-center gap-2"
+                      >
+                        <Icon className="h-4 w-4" />
+                        {item.label}
+                        {item.badge && (
+                          <Badge
+                            variant="secondary"
+                            className="ml-auto text-xs"
+                          >
+                            {item.badge}
+                          </Badge>
+                        )}
+                      </DropdownMenuItem>
+                    );
+                  })}
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              {/* Tools Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="flex items-center gap-1">
+                    Tools
+                    <ChevronDown className="h-3 w-3" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start">
+                  {navigationGroups.tools.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <DropdownMenuItem
+                        key={item.id}
+                        onClick={() => onSectionChange(item.id)}
+                        className="flex items-center gap-2"
+                      >
+                        <Icon className="h-4 w-4" />
+                        {item.label}
+                        {item.badge && (
+                          <Badge
+                            variant="secondary"
+                            className="ml-auto text-xs"
+                          >
+                            {item.badge}
+                          </Badge>
+                        )}
+                      </DropdownMenuItem>
+                    );
+                  })}
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
 
             {/* User Section */}
@@ -207,18 +308,10 @@ export const Navigation = ({
                     variant="ghost"
                     size="sm"
                     onClick={() => openAuthModal("login")}
-                    className="hidden sm:flex"
+                    className="hidden sm:flex items-center gap-2"
                   >
-                    <LogIn className="h-4 w-4 mr-2" />
-                    Sign In
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => openAuthModal("signup")}
-                    className="hidden sm:flex"
-                  >
-                    Sign Up
+                    <UserCircle className="h-4 w-4" />
+                    Sign In / Sign Up
                   </Button>
                 </>
               )}
@@ -228,7 +321,7 @@ export const Navigation = ({
                 <Button
                   variant="outline"
                   size="sm"
-                  className="hidden sm:flex items-center gap-2"
+                  className="hidden sm:flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white border-yellow-500 hover:from-yellow-600 hover:to-yellow-700"
                 >
                   <Crown className="h-4 w-4" />
                   Upgrade to Pro
@@ -255,8 +348,24 @@ export const Navigation = ({
           {isMenuOpen && (
             <div className="md:hidden py-4 border-t">
               <div className="flex flex-col space-y-2">
-                {/* Mobile Navigation Items */}
-                {menuItems.map((item) => {
+                {/* Dashboard */}
+                <Button
+                  variant={activeSection === "dashboard" ? "default" : "ghost"}
+                  onClick={() => {
+                    onSectionChange("dashboard");
+                    setIsMenuOpen(false);
+                  }}
+                  className="justify-start gap-2"
+                >
+                  <BarChart3 className="h-4 w-4" />
+                  Dashboard
+                </Button>
+
+                {/* Data Section */}
+                <div className="text-sm font-medium text-muted-foreground px-3 py-1">
+                  Data
+                </div>
+                {navigationGroups.data.map((item) => {
                   const Icon = item.icon;
                   return (
                     <Button
@@ -266,7 +375,61 @@ export const Navigation = ({
                         onSectionChange(item.id);
                         setIsMenuOpen(false);
                       }}
-                      className="justify-start gap-2"
+                      className="justify-start gap-2 ml-4"
+                    >
+                      <Icon className="h-4 w-4" />
+                      {item.label}
+                      {item.badge && (
+                        <Badge variant="secondary" className="ml-auto text-xs">
+                          {item.badge}
+                        </Badge>
+                      )}
+                    </Button>
+                  );
+                })}
+
+                {/* Social Section */}
+                <div className="text-sm font-medium text-muted-foreground px-3 py-1">
+                  Social
+                </div>
+                {navigationGroups.social.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <Button
+                      key={item.id}
+                      variant={activeSection === item.id ? "default" : "ghost"}
+                      onClick={() => {
+                        onSectionChange(item.id);
+                        setIsMenuOpen(false);
+                      }}
+                      className="justify-start gap-2 ml-4"
+                    >
+                      <Icon className="h-4 w-4" />
+                      {item.label}
+                      {item.badge && (
+                        <Badge variant="secondary" className="ml-auto text-xs">
+                          {item.badge}
+                        </Badge>
+                      )}
+                    </Button>
+                  );
+                })}
+
+                {/* Tools Section */}
+                <div className="text-sm font-medium text-muted-foreground px-3 py-1">
+                  Tools
+                </div>
+                {navigationGroups.tools.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <Button
+                      key={item.id}
+                      variant={activeSection === item.id ? "default" : "ghost"}
+                      onClick={() => {
+                        onSectionChange(item.id);
+                        setIsMenuOpen(false);
+                      }}
+                      className="justify-start gap-2 ml-4"
                     >
                       <Icon className="h-4 w-4" />
                       {item.label}
@@ -310,18 +473,8 @@ export const Navigation = ({
                           setIsMenuOpen(false);
                         }}
                       >
-                        <LogIn className="h-4 w-4" />
-                        Sign In
-                      </Button>
-                      <Button
-                        variant="outline"
-                        className="justify-start gap-2 w-full mt-2"
-                        onClick={() => {
-                          openAuthModal("signup");
-                          setIsMenuOpen(false);
-                        }}
-                      >
-                        Sign Up
+                        <UserCircle className="h-4 w-4" />
+                        Sign In / Sign Up
                       </Button>
                       <Button
                         variant="outline"
