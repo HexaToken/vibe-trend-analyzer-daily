@@ -202,19 +202,111 @@ export function useMultipleQuotes(
   const fetchQuotes = useCallback(async () => {
     if (!enabled || symbols.length === 0) return;
 
+    // Check if API is disabled due to rate limits
+    if (stockDataFallback.isApiDisabled()) {
+      const mockTickers = stockDataFallback.getMockTickers(symbols);
+      const mockQuotes: Record<string, TwelveDataQuote> = {};
+
+      mockTickers.forEach((ticker) => {
+        mockQuotes[ticker.symbol] = {
+          symbol: ticker.symbol,
+          name: ticker.name,
+          exchange: ticker.exchange || "MOCK",
+          mic_code: "MOCK",
+          currency: "USD",
+          datetime: new Date().toISOString(),
+          timestamp: Date.now(),
+          open: ticker.price.toString(),
+          high: (ticker.price * 1.02).toString(),
+          low: (ticker.price * 0.98).toString(),
+          close: ticker.price.toString(),
+          volume: ticker.volume.toString(),
+          previous_close: (ticker.price - ticker.change).toString(),
+          change: ticker.change.toString(),
+          percent_change: ticker.changePercent.toString(),
+          average_volume: ticker.volume.toString(),
+          is_market_open: true,
+          fifty_two_week: {
+            low: (ticker.price * 0.8).toString(),
+            high: (ticker.price * 1.2).toString(),
+            low_change: "",
+            high_change: "",
+            low_change_percent: "",
+            high_change_percent: "",
+            range: "",
+          },
+        };
+      });
+
+      setData(mockQuotes);
+      setError("Using mock data - API rate limit reached");
+      return;
+    }
+
+    // Check cache first
+    const cacheKey = `quotes_${symbols.join(",")}`;
+    const cachedData = stockDataFallback.getCachedData(cacheKey);
+    if (cachedData) {
+      setData(cachedData);
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
     try {
       const quotes = await rateLimitedTwelveDataApi.getQuotes(symbols);
       setData(quotes);
+      stockDataFallback.setCachedData(cacheKey, quotes);
     } catch (err) {
-      const errorMessage =
-        err instanceof TwelveDataApiError
-          ? err.message
-          : "Failed to fetch quotes";
-      setError(errorMessage);
-      console.error("Multiple quotes fetch error:", err);
+      const shouldDisableApi = stockDataFallback.handleApiError(err);
+
+      if (shouldDisableApi) {
+        // Use mock data when API is disabled
+        const mockTickers = stockDataFallback.getMockTickers(symbols);
+        const mockQuotes: Record<string, TwelveDataQuote> = {};
+
+        mockTickers.forEach((ticker) => {
+          mockQuotes[ticker.symbol] = {
+            symbol: ticker.symbol,
+            name: ticker.name,
+            exchange: ticker.exchange || "MOCK",
+            mic_code: "MOCK",
+            currency: "USD",
+            datetime: new Date().toISOString(),
+            timestamp: Date.now(),
+            open: ticker.price.toString(),
+            high: (ticker.price * 1.02).toString(),
+            low: (ticker.price * 0.98).toString(),
+            close: ticker.price.toString(),
+            volume: ticker.volume.toString(),
+            previous_close: (ticker.price - ticker.change).toString(),
+            change: ticker.change.toString(),
+            percent_change: ticker.changePercent.toString(),
+            average_volume: ticker.volume.toString(),
+            is_market_open: true,
+            fifty_two_week: {
+              low: (ticker.price * 0.8).toString(),
+              high: (ticker.price * 1.2).toString(),
+              low_change: "",
+              high_change: "",
+              low_change_percent: "",
+              high_change_percent: "",
+              range: "",
+            },
+          };
+        });
+
+        setData(mockQuotes);
+        setError("Using mock data - API rate limit reached");
+      } else {
+        const errorMessage =
+          err instanceof TwelveDataApiError
+            ? err.message
+            : "Failed to fetch quotes";
+        setError(errorMessage);
+        console.error("Multiple quotes fetch error:", err);
+      }
     } finally {
       setLoading(false);
     }
