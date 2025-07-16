@@ -114,6 +114,9 @@ export const Navigation = ({
               <Badge variant="secondary" className="hidden sm:inline-flex">
                 v2.0
               </Badge>
+              <div className="hidden sm:inline-flex">
+                <ApiStatusBadge />
+              </div>
             </div>
 
             {/* Desktop Navigation */}
