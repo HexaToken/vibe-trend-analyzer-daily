@@ -102,18 +102,16 @@ export const ApiStatusOverview = () => {
           <div className="p-4 border rounded-lg">
             <div className="flex items-center justify-between mb-2">
               <h4 className="font-medium">CoinMarketCap API</h4>
-              <Badge
-                variant={fallbackStatus.apiDisabled ? "destructive" : "default"}
-              >
-                {fallbackStatus.apiDisabled ? "Disabled" : "Active"}
-              </Badge>
+              <Badge variant="destructive">Mock Data</Badge>
             </div>
             <p className="text-sm text-muted-foreground mb-2">
               Cryptocurrency data
             </p>
             <div className="text-xs space-y-1">
-              <div>Rate Limit: 333 requests/minute</div>
-              <div>Status: Shared with stock API</div>
+              <div>
+                Status: CORS restriction - requires server-side implementation
+              </div>
+              <div>Using mock data for demonstration</div>
             </div>
           </div>
         </div>
