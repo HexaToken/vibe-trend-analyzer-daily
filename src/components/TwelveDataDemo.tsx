@@ -146,6 +146,41 @@ export const TwelveDataDemo = () => {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
+          {/* Proxy Server Status */}
+          <div className="flex items-center justify-between p-4 border rounded-lg">
+            <div className="flex items-center gap-2">
+              <div
+                className={`w-3 h-3 rounded-full ${
+                  proxyStatus === "online"
+                    ? "bg-green-500"
+                    : proxyStatus === "offline"
+                      ? "bg-red-500"
+                      : "bg-yellow-500"
+                }`}
+              />
+              <span className="font-medium">Proxy Server</span>
+              <Badge
+                variant={proxyStatus === "online" ? "default" : "secondary"}
+              >
+                {proxyStatus === "checking"
+                  ? "Checking..."
+                  : proxyStatus === "online"
+                    ? "Online"
+                    : "Offline"}
+              </Badge>
+            </div>
+            <Button
+              size="sm"
+              onClick={checkProxyStatus}
+              disabled={proxyStatus === "checking"}
+            >
+              <RefreshCw
+                className={`h-3 w-3 mr-1 ${proxyStatus === "checking" ? "animate-spin" : ""}`}
+              />
+              Check
+            </Button>
+          </div>
+
           <Alert variant={apiStatus.apiDisabled ? "destructive" : "default"}>
             <AlertCircle className="h-4 w-4" />
             <AlertDescription>
