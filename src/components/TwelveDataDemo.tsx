@@ -112,6 +112,9 @@ export const TwelveDataDemo = () => {
         </p>
       </div>
 
+      {/* API Status Overview */}
+      <ApiStatusOverview />
+
       {/* API Status */}
       <Card>
         <CardHeader>
