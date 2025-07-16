@@ -8,6 +8,7 @@ import {
   convertToTicker,
   convertMultipleToTickers,
 } from "../services/twelveDataApi";
+import { stockDataFallback } from "../services/stockDataFallback";
 import { Ticker } from "../types/social";
 
 interface UseQuoteOptions {
