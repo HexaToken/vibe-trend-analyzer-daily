@@ -146,6 +146,68 @@ export const SocialPlatform = () => {
         </CardContent>
       </Card>
 
+      {/* Trending Cryptocurrencies */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg flex items-center gap-2">
+            <TrendingUp className="h-5 w-5" />
+            Trending Crypto
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-3">
+          {cryptoTickers.slice(0, 3).map((crypto, index) => (
+            <div
+              key={crypto.symbol}
+              className="flex items-center justify-between p-2 hover:bg-muted/50 rounded cursor-pointer transition-colors"
+              onClick={() => handleTickerClick(crypto.symbol)}
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-medium text-muted-foreground">
+                  #{index + 1}
+                </span>
+                <div>
+                  <div className="font-semibold">{crypto.symbol}</div>
+                  <div className="text-xs text-muted-foreground">
+                    {crypto.name}
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-right">
+                {cryptoLoading ? (
+                  <div className="text-sm font-semibold text-muted-foreground">
+                    Loading...
+                  </div>
+                ) : (
+                  <div className="text-right">
+                    <div className="text-sm font-semibold">
+                      {crypto.price < 1
+                        ? `$${crypto.price.toFixed(6)}`
+                        : `$${crypto.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
+                    </div>
+                    <div
+                      className={`text-xs ${crypto.changePercent >= 0 ? "text-green-600" : "text-red-600"}`}
+                    >
+                      {crypto.changePercent >= 0 ? "+" : ""}
+                      {crypto.changePercent.toFixed(2)}%
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+
+          <Button
+            variant="outline"
+            size="sm"
+            className="w-full"
+            onClick={() => setCurrentView("trending")}
+          >
+            View All Crypto
+          </Button>
+        </CardContent>
+      </Card>
+
       {/* Trending Hashtags */}
       <Card>
         <CardHeader>
