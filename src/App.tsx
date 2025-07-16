@@ -30,6 +30,8 @@ const App = () => {
         return <HistoricalData />;
       case "community":
         return <Community />;
+      case "profile":
+        return <UserProfile />;
       case "settings":
         return <Settings />;
       default:
