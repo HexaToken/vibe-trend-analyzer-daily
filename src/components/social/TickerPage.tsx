@@ -204,6 +204,77 @@ export const TickerPage = ({ symbol, onBack }: TickerPageProps) => {
     return "bg-gradient-to-r from-red-500 to-red-400";
   };
 
+  // Show loading or error states
+  if (tickerLoading) {
+    return (
+      <div className="max-w-6xl mx-auto p-6 space-y-6">
+        <div className="flex items-center gap-4">
+          {onBack && (
+            <Button variant="outline" onClick={onBack}>
+              ← Back
+            </Button>
+          )}
+          <div className="space-y-2">
+            <Skeleton className="h-8 w-32" />
+            <Skeleton className="h-6 w-48" />
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <Skeleton className="h-32" />
+          <Skeleton className="h-32" />
+          <Skeleton className="h-32" />
+          <Skeleton className="h-32" />
+        </div>
+      </div>
+    );
+  }
+
+  if (tickerError) {
+    return (
+      <div className="max-w-6xl mx-auto p-6 space-y-6">
+        <div className="flex items-center gap-4">
+          {onBack && (
+            <Button variant="outline" onClick={onBack}>
+              ← Back
+            </Button>
+          )}
+          <div>
+            <h1 className="text-3xl font-bold">${symbol}</h1>
+            <p className="text-muted-foreground">Failed to load ticker data</p>
+          </div>
+        </div>
+        <Card>
+          <CardContent className="p-6 text-center">
+            <p className="text-red-600 mb-4">
+              Error loading stock data: {tickerError}
+            </p>
+            <Button onClick={refetch} variant="outline">
+              Try Again
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  if (!ticker) {
+    return (
+      <div className="max-w-6xl mx-auto p-6 space-y-6">
+        <div className="flex items-center gap-4">
+          {onBack && (
+            <Button variant="outline" onClick={onBack}>
+              ← Back
+            </Button>
+          )}
+          <div>
+            <h1 className="text-3xl font-bold">${symbol}</h1>
+            <p className="text-muted-foreground">Ticker not found</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-6xl mx-auto p-6 space-y-6">
       {/* Header */}
@@ -220,6 +291,7 @@ export const TickerPage = ({ symbol, onBack }: TickerPageProps) => {
               <Badge variant="outline" className="text-xs">
                 {ticker.type.toUpperCase()}
               </Badge>
+              {tickerLoading && <Skeleton className="h-4 w-4 rounded-full" />}
             </h1>
             <p className="text-xl text-muted-foreground">{ticker.name}</p>
           </div>
