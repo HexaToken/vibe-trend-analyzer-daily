@@ -3,7 +3,7 @@
 
 const API_KEY = "9a45d08310a946bab8d2738f74b69fc5";
 const BASE_URL = "https://newsapi.org/v2";
-const PROXY_BASE_URL = "http://localhost:3001/api/proxy/newsapi";
+const PROXY_BASE_URL = "/api/proxy/newsapi";
 
 // NewsAPI Response Types
 export interface NewsAPIArticle {
