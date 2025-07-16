@@ -14,6 +14,7 @@ import { Settings } from "@/components/Settings";
 import { UserProfile } from "@/components/profile/UserProfile";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { DatabaseDemo } from "@/components/DatabaseDemo";
+import { SocialPlatform } from "@/components/social/SocialPlatform";
 
 const queryClient = new QueryClient();
 
