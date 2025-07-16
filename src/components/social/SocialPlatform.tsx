@@ -23,6 +23,8 @@ import { WatchlistManager } from "./WatchlistManager";
 import { CommunityRooms } from "./CommunityRooms";
 import { mockTrendingData, mockTickers } from "@/data/socialMockData";
 import { useAuth } from "@/contexts/AuthContext";
+import { RealTimePrice, StockGrid } from "./RealTimePrice";
+import { useMultipleQuotes } from "@/hooks/useTwelveData";
 
 type ViewType = "feed" | "watchlist" | "ticker" | "trending" | "rooms";
 
