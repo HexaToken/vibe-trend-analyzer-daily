@@ -581,9 +581,9 @@ export const TwelveDataDemo = () => {
           <div className="space-y-2">
             <h4 className="font-medium">Components Created:</h4>
             <div className="flex flex-wrap gap-2">
-              <Badge variant="outline">TwelveDataService</Badge>
+              <Badge variant="outline">AlphaVantageService</Badge>
               <Badge variant="outline">CoinMarketCapService</Badge>
-              <Badge variant="outline">useTwelveData hooks</Badge>
+              <Badge variant="outline">useAlphaVantage hooks</Badge>
               <Badge variant="outline">useCoinMarketCap hooks</Badge>
               <Badge variant="outline">RealTimePrice</Badge>
               <Badge variant="outline">CryptoPrice</Badge>
