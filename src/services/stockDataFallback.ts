@@ -83,14 +83,20 @@ class StockDataFallbackService {
 
   // Handle API errors and determine if we should disable the API
   handleApiError(error: any): boolean {
-    if (error instanceof TwelveDataApiError) {
+    if (
+      error instanceof TwelveDataApiError ||
+      error instanceof CoinMarketCapApiError
+    ) {
       const message = error.message.toLowerCase();
 
       // Check for rate limit errors
       if (
         message.includes("run out of api credits") ||
         message.includes("rate limit") ||
-        message.includes("daily limit")
+        message.includes("daily limit") ||
+        message.includes("api call limit") ||
+        message.includes("credit limit") ||
+        message.includes("quota exceeded")
       ) {
         this.disableApi();
         return true;
@@ -99,7 +105,9 @@ class StockDataFallbackService {
       // Check for other errors that should temporarily disable the API
       if (
         message.includes("server error") ||
-        message.includes("service unavailable")
+        message.includes("service unavailable") ||
+        message.includes("internal server error") ||
+        message.includes("bad gateway")
       ) {
         this.disableApi(60 * 60 * 1000); // 1 hour cooldown for server errors
         return true;
