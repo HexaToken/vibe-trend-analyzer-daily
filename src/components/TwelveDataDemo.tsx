@@ -592,6 +592,19 @@ export const TwelveDataDemo = () => {
           </div>
 
           <div className="space-y-2">
+            <h4 className="font-medium">News Features (NewsAPI):</h4>
+            <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
+              <li>Business and technology news headlines</li>
+              <li>News search functionality with keyword matching</li>
+              <li>Automated sentiment analysis for articles</li>
+              <li>Real-time news updates and refresh capabilities</li>
+              <li>Multiple news source aggregation</li>
+              <li>Article metadata and publication tracking</li>
+              <li>Integration with sentiment scoring system</li>
+            </ul>
+          </div>
+
+          <div className="space-y-2">
             <h4 className="font-medium">Components Created:</h4>
             <div className="flex flex-wrap gap-2">
               <Badge variant="outline">AlphaVantageService</Badge>
