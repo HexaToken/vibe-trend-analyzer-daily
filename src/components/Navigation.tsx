@@ -35,6 +35,7 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { AuthModal } from "@/components/auth/AuthModal";
+import { ApiStatusBadge } from "@/components/ApiStatusIndicator";
 
 interface NavigationProps {
   activeSection: string;
