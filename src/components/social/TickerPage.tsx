@@ -76,7 +76,7 @@ export const TickerPage = ({ symbol, onBack }: TickerPageProps) => {
     error: tickerError,
     refetch,
   } = useQuote(symbol, {
-    refreshInterval: 30000, // Refresh every 30 seconds
+    refreshInterval: 120000, // Refresh every 2 minutes (Alpha Vantage has stricter rate limits)
     enabled: true,
   });
 
