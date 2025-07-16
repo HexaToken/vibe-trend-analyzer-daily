@@ -30,6 +30,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { formatDistanceToNow } from "date-fns";
 import type { SocialPost } from "@/types/social";
+import { InlinePrice } from "./RealTimePrice";
 
 interface SocialPostProps {
   post: SocialPost;
