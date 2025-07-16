@@ -169,7 +169,7 @@ export const InlinePrice = ({
   className?: string;
 }) => {
   const { ticker, loading, error } = useQuote(symbol, {
-    refreshInterval: 60000, // Refresh every minute for inline prices
+    refreshInterval: 120000, // Refresh every 2 minutes for inline prices (Alpha Vantage has lower rate limits)
     enabled: true,
   });
 
