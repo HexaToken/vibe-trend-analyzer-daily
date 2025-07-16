@@ -55,19 +55,103 @@ export function useQuote(
   const fetchQuote = useCallback(async () => {
     if (!enabled || !symbol) return;
 
+    // Check if API is disabled due to rate limits
+    if (stockDataFallback.isApiDisabled()) {
+      const mockTicker = stockDataFallback.getMockTicker(symbol);
+      if (mockTicker) {
+        setData({
+          symbol: mockTicker.symbol,
+          name: mockTicker.name,
+          exchange: mockTicker.exchange || "MOCK",
+          mic_code: "MOCK",
+          currency: "USD",
+          datetime: new Date().toISOString(),
+          timestamp: Date.now(),
+          open: mockTicker.price.toString(),
+          high: (mockTicker.price * 1.02).toString(),
+          low: (mockTicker.price * 0.98).toString(),
+          close: mockTicker.price.toString(),
+          volume: mockTicker.volume.toString(),
+          previous_close: (mockTicker.price - mockTicker.change).toString(),
+          change: mockTicker.change.toString(),
+          percent_change: mockTicker.changePercent.toString(),
+          average_volume: mockTicker.volume.toString(),
+          is_market_open: true,
+          fifty_two_week: {
+            low: (mockTicker.price * 0.8).toString(),
+            high: (mockTicker.price * 1.2).toString(),
+            low_change: "",
+            high_change: "",
+            low_change_percent: "",
+            high_change_percent: "",
+            range: "",
+          },
+        });
+        setError("Using mock data - API rate limit reached");
+      }
+      return;
+    }
+
+    // Check cache first
+    const cacheKey = `quote_${symbol}`;
+    const cachedData = stockDataFallback.getCachedData(cacheKey);
+    if (cachedData) {
+      setData(cachedData);
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
     try {
       const quote = await rateLimitedTwelveDataApi.getQuote(symbol);
       setData(quote);
+      stockDataFallback.setCachedData(cacheKey, quote);
     } catch (err) {
-      const errorMessage =
-        err instanceof TwelveDataApiError
-          ? err.message
-          : "Failed to fetch quote";
-      setError(errorMessage);
-      console.error("Quote fetch error:", err);
+      const shouldDisableApi = stockDataFallback.handleApiError(err);
+
+      if (shouldDisableApi) {
+        // Use mock data when API is disabled
+        const mockTicker = stockDataFallback.getMockTicker(symbol);
+        if (mockTicker) {
+          setData({
+            symbol: mockTicker.symbol,
+            name: mockTicker.name,
+            exchange: mockTicker.exchange || "MOCK",
+            mic_code: "MOCK",
+            currency: "USD",
+            datetime: new Date().toISOString(),
+            timestamp: Date.now(),
+            open: mockTicker.price.toString(),
+            high: (mockTicker.price * 1.02).toString(),
+            low: (mockTicker.price * 0.98).toString(),
+            close: mockTicker.price.toString(),
+            volume: mockTicker.volume.toString(),
+            previous_close: (mockTicker.price - mockTicker.change).toString(),
+            change: mockTicker.change.toString(),
+            percent_change: mockTicker.changePercent.toString(),
+            average_volume: mockTicker.volume.toString(),
+            is_market_open: true,
+            fifty_two_week: {
+              low: (mockTicker.price * 0.8).toString(),
+              high: (mockTicker.price * 1.2).toString(),
+              low_change: "",
+              high_change: "",
+              low_change_percent: "",
+              high_change_percent: "",
+              range: "",
+            },
+          });
+          setError("Using mock data - API rate limit reached");
+        }
+      } else {
+        const errorMessage =
+          err instanceof TwelveDataApiError
+            ? err.message
+            : "Failed to fetch quote";
+        setError(errorMessage);
+        console.error("Quote fetch error:", err);
+      }
     } finally {
       setLoading(false);
     }
