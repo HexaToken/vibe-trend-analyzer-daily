@@ -61,10 +61,15 @@ export const Navigation = ({
                   key={item.id}
                   variant={activeSection === item.id ? "default" : "ghost"}
                   onClick={() => onSectionChange(item.id)}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 relative"
                 >
                   <Icon className="h-4 w-4" />
                   {item.label}
+                  {item.badge && (
+                    <Badge variant="secondary" className="ml-1 text-xs">
+                      {item.badge}
+                    </Badge>
+                  )}
                 </Button>
               );
             })}
