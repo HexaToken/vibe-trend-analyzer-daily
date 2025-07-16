@@ -475,19 +475,19 @@ export const TwelveDataDemo = () => {
                     className="flex items-center justify-between p-3 border rounded"
                   >
                     <div>
-                      <div className="font-medium">{result.symbol}</div>
+                      <div className="font-medium">{result["1. symbol"]}</div>
                       <div className="text-sm text-muted-foreground">
-                        {result.instrument_name}
+                        {result["2. name"]}
                       </div>
                       <div className="text-xs text-muted-foreground">
-                        {result.exchange} • {result.country} •{" "}
-                        {result.instrument_type}
+                        {result["4. region"]} • {result["3. type"]} • Score:{" "}
+                        {result["9. matchScore"]}
                       </div>
                     </div>
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => setTestSymbol(result.symbol)}
+                      onClick={() => setTestSymbol(result["1. symbol"])}
                     >
                       Test
                     </Button>
