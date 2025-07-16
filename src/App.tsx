@@ -43,6 +43,8 @@ const App = () => {
         );
       case "settings":
         return <Settings />;
+      case "database":
+        return <DatabaseDemo />;
       default:
         return <Dashboard />;
     }
