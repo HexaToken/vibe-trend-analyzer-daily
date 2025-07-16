@@ -13,6 +13,7 @@ import { Community } from "@/components/Community";
 import { Settings } from "@/components/Settings";
 import { UserProfile } from "@/components/profile/UserProfile";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
+import { DatabaseDemo } from "@/components/DatabaseDemo";
 
 const queryClient = new QueryClient();
 
