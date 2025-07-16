@@ -16,6 +16,7 @@ import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { DatabaseDemo } from "@/components/DatabaseDemo";
 import { SocialPlatform } from "@/components/social/SocialPlatform";
 import { TwelveDataDemo } from "@/components/TwelveDataDemo";
+import { ApiStatusIndicator } from "@/components/ApiStatusIndicator";
 
 const queryClient = new QueryClient();
 
