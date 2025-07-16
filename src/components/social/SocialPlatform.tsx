@@ -68,43 +68,60 @@ export const SocialPlatform = () => {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
-          {mockTrendingData.tickers.slice(0, 5).map((ticker, index) => (
-            <div
-              key={ticker.symbol}
-              className="flex items-center justify-between p-2 hover:bg-muted/50 rounded cursor-pointer transition-colors"
-              onClick={() => handleTickerClick(ticker.symbol)}
-            >
-              <div className="flex items-center gap-2">
-                <span className="text-sm font-medium text-muted-foreground">
-                  #{ticker.rank}
-                </span>
-                <div>
-                  <div className="font-semibold">${ticker.symbol}</div>
-                  <div className="text-xs text-muted-foreground">
-                    {ticker.name}
+          {mockTrendingData.tickers.slice(0, 5).map((mockTicker, index) => {
+            const realTicker = realTimeTickers.find(
+              (t) => t.symbol === mockTicker.symbol,
+            );
+            const isPositive = realTicker ? realTicker.change >= 0 : false;
+
+            return (
+              <div
+                key={mockTicker.symbol}
+                className="flex items-center justify-between p-2 hover:bg-muted/50 rounded cursor-pointer transition-colors"
+                onClick={() => handleTickerClick(mockTicker.symbol)}
+              >
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-muted-foreground">
+                    #{mockTicker.rank}
+                  </span>
+                  <div>
+                    <div className="font-semibold">${mockTicker.symbol}</div>
+                    <div className="text-xs text-muted-foreground">
+                      {realTicker?.name || mockTicker.name}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="text-right">
-                <div
-                  className={`text-sm font-semibold ${
-                    ticker.sentimentScore > 50
-                      ? "text-green-600"
-                      : ticker.sentimentScore < -50
-                        ? "text-red-600"
-                        : "text-yellow-600"
-                  }`}
-                >
-                  {ticker.sentimentScore > 0 ? "+" : ""}
-                  {ticker.sentimentScore}
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  {ticker.postCount} posts
+                <div className="text-right">
+                  {tickersLoading || !realTicker ? (
+                    <div className="text-right">
+                      <div className="text-sm font-semibold text-muted-foreground">
+                        Loading...
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        {mockTicker.postCount} posts
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="text-right">
+                      <div className="text-sm font-semibold">
+                        ${realTicker.price.toFixed(2)}
+                      </div>
+                      <div
+                        className={`text-xs ${isPositive ? "text-green-600" : "text-red-600"}`}
+                      >
+                        {isPositive ? "+" : ""}
+                        {realTicker.changePercent.toFixed(2)}%
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        {mockTicker.postCount} posts
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
 
           <Button
             variant="outline"
