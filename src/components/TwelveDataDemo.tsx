@@ -54,6 +54,21 @@ export const TwelveDataDemo = () => {
     error: popularError,
   } = useMultipleQuotes(popularStocks);
 
+  // Test popular cryptocurrencies
+  const popularCryptos = ["BTC", "ETH", "BNB", "XRP", "ADA", "SOL"];
+  const {
+    tickers: cryptoTickers,
+    loading: cryptoLoading,
+    error: cryptoError,
+  } = useCryptoQuotes(popularCryptos);
+
+  // Test crypto listings
+  const { tickers: topCryptos, loading: cryptoListingsLoading } =
+    useCryptoListings(10);
+
+  // Test global metrics
+  const { data: globalMetrics, loading: metricsLoading } = useGlobalMetrics();
+
   // Test single quote
   const {
     ticker: singleTicker,
