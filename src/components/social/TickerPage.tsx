@@ -59,7 +59,6 @@ interface TickerPageProps {
 
 export const TickerPage = ({ symbol, onBack }: TickerPageProps) => {
   const { isAuthenticated } = useAuth();
-  const [ticker, setTicker] = useState<Ticker | null>(null);
   const [posts, setPosts] = useState<SocialPostType[]>([]);
   const [isWatching, setIsWatching] = useState(false);
   const [sentimentFilter, setSentimentFilter] = useState<"all" | SentimentType>(
@@ -70,14 +69,27 @@ export const TickerPage = ({ symbol, onBack }: TickerPageProps) => {
   );
   const [sortBy, setSortBy] = useState<"recent" | "popular">("recent");
 
-  // Load ticker data
+  // Load real ticker data from Twelve Data API
+  const {
+    ticker,
+    loading: tickerLoading,
+    error: tickerError,
+    refetch,
+  } = useQuote(symbol, {
+    refreshInterval: 30000, // Refresh every 30 seconds
+    enabled: true,
+  });
+
+  // Load mock social sentiment data and merge with real price data
   useEffect(() => {
-    const tickerData = getMockTickerBySymbol(symbol);
-    if (tickerData) {
-      setTicker(tickerData);
-      setIsWatching(tickerData.isWatched || false);
+    if (ticker) {
+      const mockTicker = getMockTickerBySymbol(symbol);
+      if (mockTicker) {
+        // Merge real price data with mock sentiment data
+        setIsWatching(mockTicker.isWatched || false);
+      }
     }
-  }, [symbol]);
+  }, [symbol, ticker]);
 
   // Load posts
   useEffect(() => {
