@@ -79,7 +79,15 @@ export const MoodTrendChart = ({ data }: MoodTrendChartProps) => {
     return "text-red-600";
   };
 
-  const CustomTooltip = ({ active, payload, label }: any) => {
+  const CustomTooltip = ({
+    active,
+    payload,
+    label,
+  }: {
+    active?: boolean;
+    payload?: any[];
+    label?: string;
+  }) => {
     if (active && payload && payload.length) {
       const mainScore =
         payload.find((p: any) => p.dataKey === "overall")?.value || 0;
@@ -92,22 +100,27 @@ export const MoodTrendChart = ({ data }: MoodTrendChartProps) => {
             {getMoodLabel(mainScore)} ({mainScore}/100)
           </div>
           <div className="space-y-1">
-            {payload.map((entry: any, index: number) => (
-              <div key={index} className="flex justify-between items-center">
-                <span
-                  style={{ color: entry.color }}
-                  className="text-sm font-medium"
-                >
-                  {entry.name}:
-                </span>
-                <span
-                  style={{ color: entry.color }}
-                  className="text-sm font-bold"
-                >
-                  {entry.value}
-                </span>
-              </div>
-            ))}
+            {payload.map(
+              (
+                entry: { color: string; name: string; value: number },
+                index: number,
+              ) => (
+                <div key={index} className="flex justify-between items-center">
+                  <span
+                    style={{ color: entry.color }}
+                    className="text-sm font-medium"
+                  >
+                    {entry.name}:
+                  </span>
+                  <span
+                    style={{ color: entry.color }}
+                    className="text-sm font-bold"
+                  >
+                    {entry.value}
+                  </span>
+                </div>
+              ),
+            )}
           </div>
         </div>
       );
@@ -123,7 +136,9 @@ export const MoodTrendChart = ({ data }: MoodTrendChartProps) => {
   };
 
   const calculateAverage = (key: string) => {
-    const values = chartData.map((item: any) => item[key]);
+    const values = chartData.map(
+      (item: { [key: string]: number }) => item[key],
+    );
     return (values.reduce((sum, val) => sum + val, 0) / values.length).toFixed(
       1,
     );
