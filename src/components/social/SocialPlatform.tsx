@@ -25,7 +25,7 @@ import { mockTrendingData, mockTickers } from "@/data/socialMockData";
 import { useAuth } from "@/contexts/AuthContext";
 import { RealTimePrice, StockGrid } from "./RealTimePrice";
 import { CryptoPrice } from "../crypto/CryptoPrice";
-import { useMultipleQuotes } from "@/hooks/useTwelveData";
+import { useMultipleQuotes } from "@/hooks/useAlphaVantage";
 import { useCryptoQuotes } from "@/hooks/useCoinMarketCap";
 
 type ViewType = "feed" | "watchlist" | "ticker" | "trending" | "rooms";
