@@ -1,5 +1,15 @@
 import { useState } from "react";
-import { Menu, X, BarChart3, Users, Calendar, Settings, Crown } from "lucide-react";
+import {
+  Menu,
+  X,
+  BarChart3,
+  Users,
+  Calendar,
+  Settings,
+  Crown,
+  Brain,
+  TrendingUp,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -8,15 +18,18 @@ interface NavigationProps {
   onSectionChange: (section: string) => void;
 }
 
-export const Navigation = ({ activeSection, onSectionChange }: NavigationProps) => {
+export const Navigation = ({
+  activeSection,
+  onSectionChange,
+}: NavigationProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
-    { id: 'analytics', label: 'Analytics', icon: BarChart3 },
-    { id: 'history', label: 'Historical Data', icon: Calendar },
-    { id: 'community', label: 'Community', icon: Users },
-    { id: 'settings', label: 'Settings', icon: Settings },
+    { id: "dashboard", label: "Dashboard", icon: BarChart3 },
+    { id: "analytics", label: "Analytics", icon: BarChart3 },
+    { id: "history", label: "Historical Data", icon: Calendar },
+    { id: "community", label: "Community", icon: Users },
+    { id: "settings", label: "Settings", icon: Settings },
   ];
 
   return (
@@ -53,18 +66,26 @@ export const Navigation = ({ activeSection, onSectionChange }: NavigationProps) 
 
           {/* Premium Badge & Mobile Menu Button */}
           <div className="flex items-center gap-3">
-            <Button variant="outline" size="sm" className="hidden sm:flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              className="hidden sm:flex items-center gap-2"
+            >
               <Crown className="h-4 w-4" />
               Upgrade to Pro
             </Button>
-            
+
             <Button
               variant="ghost"
               size="sm"
               className="md:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
             </Button>
           </div>
         </div>
@@ -90,7 +111,11 @@ export const Navigation = ({ activeSection, onSectionChange }: NavigationProps) 
                   </Button>
                 );
               })}
-              <Button variant="outline" size="sm" className="justify-start gap-2 mt-4">
+              <Button
+                variant="outline"
+                size="sm"
+                className="justify-start gap-2 mt-4"
+              >
                 <Crown className="h-4 w-4" />
                 Upgrade to Pro
               </Button>
