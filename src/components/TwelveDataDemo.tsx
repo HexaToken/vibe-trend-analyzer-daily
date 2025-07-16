@@ -30,6 +30,7 @@ import {
   CryptoGrid,
   CryptoMarketOverview,
 } from "@/components/crypto/CryptoPrice";
+import { ApiStatusOverview } from "@/components/ApiStatusOverview";
 
 export const TwelveDataDemo = () => {
   const [testSymbol, setTestSymbol] = useState("AAPL");
