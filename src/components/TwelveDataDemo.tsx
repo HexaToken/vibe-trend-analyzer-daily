@@ -49,6 +49,30 @@ export const TwelveDataDemo = () => {
     error: popularError,
   } = useMultipleQuotes(popularStocks);
 
+  // Test proxy server status
+  const [proxyStatus, setProxyStatus] = useState<
+    "checking" | "online" | "offline"
+  >("checking");
+
+  const checkProxyStatus = async () => {
+    setProxyStatus("checking");
+    try {
+      const response = await fetch("http://localhost:3001/api/health");
+      if (response.ok) {
+        setProxyStatus("online");
+      } else {
+        setProxyStatus("offline");
+      }
+    } catch (error) {
+      setProxyStatus("offline");
+    }
+  };
+
+  // Check proxy status on mount
+  useState(() => {
+    checkProxyStatus();
+  });
+
   // Test popular cryptocurrencies
   const popularCryptos = ["BTC", "ETH", "BNB", "XRP", "ADA", "SOL"];
   const {
