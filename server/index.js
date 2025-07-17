@@ -412,15 +412,112 @@ function getSentimentInsights(sentiment, sentimentScore, priceChange) {
 }
 
 async function summarizePosts(ticker, limit = 10) {
+  // Mock posts data - in production, this would come from a database
+  const mockPosts = {
+    AAPL: [
+      "$AAPL breaking above resistance at $195. This AI integration in iOS 18 is a game changer. Expecting $210 by earnings. 🚀",
+      "Apple's services revenue continues to impress. The ecosystem is getting stronger every quarter.",
+      "Technical analysis shows $AAPL forming a bull flag. Momentum is building for the next leg up.",
+    ],
+    TSLA: [
+      "$TSLA delivery numbers were disappointing. Competition in EV space is heating up. May see a retest of $230 support.",
+      "Despite delivery concerns, Tesla's energy business is growing rapidly. Diversification paying off.",
+      "Waiting for Elon's next announcement. $TSLA always has surprises up its sleeve.",
+    ],
+    NVDA: [
+      "$NVDA just announced new AI chips. This is huge for the data center market. Revenue guidance raised by 15%.",
+      "AI revolution is just getting started and NVIDIA is at the center of it all. Long term bullish.",
+      "Data center demand showing no signs of slowing. $NVDA earnings should be massive.",
+    ],
+    BTC: [
+      "$BTC consolidating nicely above $66k support. Bull flag pattern forming on the 4H chart.",
+      "Institutional adoption continues. Another major corporation added Bitcoin to treasury.",
+      "Halving effects starting to show. Supply shock should drive prices higher in 2024.",
+    ],
+    ETH: [
+      "$ETH gas fees dropping significantly. This L2 adoption is finally paying off.",
+      "Ethereum's staking rewards making it attractive for institutional investors.",
+      "DeFi summer 2.0 might be starting. Activity picking up across all protocols.",
+    ],
+  };
+
   const tickerText = ticker ? ` about $${ticker}` : "";
+  let posts = [];
+  let keyThemes = [];
+  let overallSentiment = "";
+
+  if (ticker && mockPosts[ticker.toUpperCase()]) {
+    posts = mockPosts[ticker.toUpperCase()];
+    const tickerName =
+      {
+        AAPL: "Apple",
+        TSLA: "Tesla",
+        NVDA: "NVIDIA",
+        BTC: "Bitcoin",
+        ETH: "Ethereum",
+      }[ticker.toUpperCase()] || ticker;
+
+    keyThemes = {
+      AAPL: [
+        "AI integration and iOS 18",
+        "Services revenue growth",
+        "Technical breakout patterns",
+      ],
+      TSLA: [
+        "Delivery challenges and competition",
+        "Energy business diversification",
+        "Leadership and innovation",
+      ],
+      NVDA: [
+        "AI chip announcements",
+        "Data center demand",
+        "Revenue guidance updates",
+      ],
+      BTC: [
+        "Technical consolidation patterns",
+        "Institutional adoption",
+        "Halving cycle effects",
+      ],
+      ETH: [
+        "Layer 2 scaling solutions",
+        "Staking rewards",
+        "DeFi ecosystem growth",
+      ],
+    }[ticker.toUpperCase()] || ["General market discussion"];
+
+    overallSentiment =
+      {
+        AAPL: "Optimistic with strong technical momentum",
+        TSLA: "Mixed with some delivery concerns but long-term bullish",
+        NVDA: "Highly bullish on AI revolution",
+        BTC: "Cautiously optimistic with institutional support",
+        ETH: "Bullish on scaling improvements and DeFi growth",
+      }[ticker.toUpperCase()] || "Mixed sentiment";
+  } else {
+    // General posts across all tickers
+    posts = [
+      "Market showing resilience despite macro headwinds. Quality names holding up well.",
+      "Options flow suggests institutions are positioning for volatility. Interesting times ahead.",
+      "Earnings season starting strong. Tech names leading the way with AI narrative.",
+    ];
+    keyThemes = [
+      "Market resilience",
+      "Options activity",
+      "Earnings expectations",
+      "AI sector focus",
+    ];
+    overallSentiment = "Cautiously optimistic with selective positioning";
+  }
+
+  const recentPosts = posts.slice(0, Math.min(limit, posts.length));
 
   return {
-    content: `📊 **Post Summary${tickerText}**\n\nHere's a summary of the ${limit} most recent posts${tickerText} from FinTwits:\n\n**Key Themes:**\n• Market volatility discussions\n• Earnings expectations and analysis\n• Technical analysis insights\n• Community sentiment shifts\n\n**Trending Topics:**\n• Options trading strategies\n• Institutional movements\n• Sector rotation discussions\n\n**Overall Sentiment:** Mixed to optimistic with active engagement from the community.`,
+    content: `📊 **Post Summary${tickerText}**\n\nHere's what the community is saying${tickerText}:\n\n**Recent Highlights:**\n${recentPosts.map((post, i) => `${i + 1}. "${post.substring(0, 100)}${post.length > 100 ? "..." : ""}"`).join("\n")}\n\n**Key Themes:**\n${keyThemes.map((theme) => `• ${theme}`).join("\n")}\n\n**Overall Sentiment:** ${overallSentiment}\n\n**Community Engagement:** ${ticker ? "High" : "Moderate"} with active discussions and diverse perspectives.`,
     suggestions: [
-      ticker ? `View all $${ticker} posts` : "View all recent posts",
-      "Get detailed sentiment analysis",
-      "Check trending discussions",
-      "Summarize different ticker",
+      ticker ? `View all $${ticker} posts` : "View trending posts",
+      ticker ? `Analyze $${ticker} sentiment` : "Check sentiment analysis",
+      "Get watchlist recommendations",
+      ticker ? "Summarize different ticker" : "Summarize specific ticker",
     ],
   };
 }
