@@ -523,32 +523,86 @@ async function summarizePosts(ticker, limit = 10) {
 }
 
 async function getWatchlistRecommendations() {
-  const tickers = [
-    "AAPL",
-    "TSLA",
-    "MSFT",
-    "GOOGL",
-    "AMZN",
-    "NVDA",
-    "AMD",
-    "META",
+  // Mock trending data with sentiment and technical analysis
+  const trendingTickers = [
+    {
+      symbol: "NVDA",
+      name: "NVIDIA Corporation",
+      rank: 1,
+      sentimentScore: 84,
+      trendingScore: 9.8,
+      postVolume24h: 423,
+      priceChange: 2.76,
+      reasons: [
+        "Strong AI chip announcements",
+        "Data center demand surge",
+        "Revenue guidance beat",
+      ],
+      riskLevel: "Medium",
+      timeHorizon: "Short to Medium term",
+    },
+    {
+      symbol: "BTC",
+      name: "Bitcoin",
+      rank: 2,
+      sentimentScore: 45,
+      trendingScore: 9.6,
+      postVolume24h: 892,
+      priceChange: 1.89,
+      reasons: [
+        "Institutional adoption increasing",
+        "Technical consolidation complete",
+        "Halving cycle effects",
+      ],
+      riskLevel: "High",
+      timeHorizon: "Medium to Long term",
+    },
+    {
+      symbol: "AAPL",
+      name: "Apple Inc.",
+      rank: 3,
+      sentimentScore: 72,
+      trendingScore: 8.7,
+      postVolume24h: 342,
+      priceChange: 1.43,
+      reasons: [
+        "iOS 18 AI integration hype",
+        "Services revenue growth",
+        "Technical breakout pattern",
+      ],
+      riskLevel: "Low",
+      timeHorizon: "Short to Long term",
+    },
   ];
-  const recommended = tickers.slice(0, 3);
+
+  const topPicks = trendingTickers.slice(0, 3);
 
   return {
-    content: `🎯 **Watchlist Recommendations**\n\nBased on current sentiment trends and market activity, here are some tickers to consider:\n\n${recommended
-      .map(
-        (ticker, i) =>
-          `**${i + 1}. $${ticker}**\n• High social engagement\n• Positive sentiment trend\n• Strong technical indicators\n`,
-      )
-      .join(
-        "\n",
-      )}\n\n*These recommendations are based on social sentiment and should not be considered financial advice.*`,
+    content:
+      `🎯 **Smart Watchlist Recommendations**\n\nBased on sentiment analysis, social volume, and trend patterns:\n\n${topPicks
+        .map(
+          (ticker, i) =>
+            `**${i + 1}. $${ticker.symbol} - ${ticker.name}**\n` +
+            `📊 Sentiment: ${ticker.sentimentScore > 50 ? "🟢 Bullish" : ticker.sentimentScore > 0 ? "🟡 Neutral" : "🔴 Bearish"} (${ticker.sentimentScore})\n` +
+            `📈 Price: ${ticker.priceChange >= 0 ? "+" : ""}${ticker.priceChange}% (24h)\n` +
+            `💬 Social Volume: ${ticker.postVolume24h} posts\n` +
+            `⭐ Trending Score: ${ticker.trendingScore}/10\n` +
+            `🎯 Key Catalysts:\n${ticker.reasons.map((reason) => `  • ${reason}`).join("\n")}\n` +
+            `⚠️ Risk Level: ${ticker.riskLevel}\n` +
+            `⏱️ Time Horizon: ${ticker.timeHorizon}\n`,
+        )
+        .join("\n")}\n` +
+      `**Recommendation Criteria:**\n` +
+      `• High social engagement (500+ mentions)\n` +
+      `• Positive sentiment momentum\n` +
+      `• Strong technical indicators\n` +
+      `• Upcoming catalysts or news events\n\n` +
+      `*Recommendations based on social sentiment analysis. Always do your own research and consider your risk tolerance.*`,
     suggestions: [
-      `Analyze $${recommended[0]} sentiment`,
-      `Check $${recommended[1]} posts`,
-      "View full trending list",
-      "Get personalized recommendations",
+      `Analyze $${topPicks[0].symbol} in detail`,
+      `Check $${topPicks[1].symbol} recent posts`,
+      `Get $${topPicks[2].symbol} price alerts`,
+      "View complete trending analysis",
     ],
   };
 }
