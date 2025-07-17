@@ -131,7 +131,7 @@ export function useNewsSearch(
     try {
       // Use the proxy server to search for real news data
       const response = await fetch(
-        `http://localhost:3001/api/proxy/newsapi/everything?q=${encodeURIComponent(query)}&pageSize=20&sortBy=publishedAt`,
+        `/api/proxy/newsapi/everything?q=${encodeURIComponent(query)}&pageSize=20&sortBy=publishedAt`,
       );
 
       if (!response.ok) {
