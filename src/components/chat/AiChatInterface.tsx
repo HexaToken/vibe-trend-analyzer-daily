@@ -83,12 +83,19 @@ export const AiChatInterface = () => {
 
       setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
+      console.error("Chat error:", error);
       const errorMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
         type: "assistant",
         content:
-          "I'm sorry, I encountered an error while processing your request. Please try again.",
+          "I'm sorry, I encountered an error while processing your request. This might be a temporary issue with the AI service. Please try again in a moment.",
         timestamp: new Date(),
+        suggestions: [
+          "Try asking again",
+          "Check connection",
+          "Get help with MoodMeter",
+          "What can you help me with?",
+        ],
       };
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
