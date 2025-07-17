@@ -269,7 +269,7 @@ class CoinMarketCapService {
       }>;
     };
   }> {
-    return this.fetchFromApi("/cryptocurrency/map", {
+    return this.fetchFromApi("/map", {
       listing_status: "active",
       symbol: query,
     });
