@@ -80,6 +80,7 @@ const App = () => {
             />
             <main>{renderContent()}</main>
             <ApiStatusIndicator />
+            <AiChatBubble />
           </div>
         </TooltipProvider>
       </AuthProvider>
