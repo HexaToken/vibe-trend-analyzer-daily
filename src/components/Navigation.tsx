@@ -87,6 +87,12 @@ export const Navigation = ({
         icon: Brain,
         badge: "NEW",
       },
+      {
+        id: "nlp",
+        label: "NLP Sentiment Analysis",
+        icon: Brain,
+        badge: "AI",
+      },
       { id: "settings", label: "Settings", icon: Settings },
     ],
   };
