@@ -20,6 +20,8 @@ app.use(express.json());
 const COINMARKETCAP_API_KEY = "a23f6083-9fcc-44d9-b03f-7cee769e3b91";
 const NEWSAPI_KEY = "9a45d08310a946bab8d2738f74b69fc5";
 const SERPAPI_KEY = process.env.SERPAPI_KEY || "demo_api_key";
+const DEEPSEEK_API_KEY = "sk-136ffb5ff6594c4fa91560157ec9a3e7";
+const DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions";
 
 // CoinMarketCap Proxy Endpoints
 app.get("/api/proxy/coinmarketcap/quotes", async (req, res) => {
@@ -665,7 +667,7 @@ async function provideHelp(message) {
   if (lowerMessage.includes("sentiment") || lowerMessage.includes("mood")) {
     return {
       content:
-        "🌡️ **Sentiment Analysis Guide**\n\nUnderstand market psychology:\n\n📊 **Sentiment Scores:**\n• **+100 to +50**: Strong Bullish (🟢)\n• **+49 to +10**: Mild Bullish (🟢)\n• **+9 to -9**: Neutral (🟡)\n• **-10 to -49**: Mild Bearish (🔴)\n• **-50 to -100**: Strong Bearish (🔴)\n\n🧠 **How It Works:**\n• AI analyzes every post mentioning a ticker\n• Natural language processing detects emotional tone\n• Weighted by user credibility and engagement\n• Updated in real-time as new posts arrive\n• Historical tracking shows sentiment trends\n\n💡 **Trading Insights:**\n• Extreme sentiment often signals reversals\n• Sentiment shifts can precede price moves\n• Compare sentiment vs actual price action\n• Use as one factor in trading decisions\n• Community sentiment ≠ guaranteed outcomes",
+        "🌡️ **Sentiment Analysis Guide**\n\nUnderstand market psychology:\n\n📊 **Sentiment Scores:**\n• **+100 to +50**: Strong Bullish (🟢)\n• **+49 to +10**: Mild Bullish (🟢)\n• **+9 to -9**: Neutral (🟡)\n• **-10 to -49**: Mild Bearish (🔴)\n• **-50 to -100**: Strong Bearish (🔴)\n\n�� **How It Works:**\n• AI analyzes every post mentioning a ticker\n• Natural language processing detects emotional tone\n• Weighted by user credibility and engagement\n• Updated in real-time as new posts arrive\n• Historical tracking shows sentiment trends\n\n💡 **Trading Insights:**\n• Extreme sentiment often signals reversals\n• Sentiment shifts can precede price moves\n• Compare sentiment vs actual price action\n• Use as one factor in trading decisions\n• Community sentiment ≠ guaranteed outcomes",
       suggestions: [
         "How accurate is sentiment?",
         "Best times to check sentiment?",
