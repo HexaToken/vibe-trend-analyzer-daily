@@ -144,27 +144,20 @@ export class CoinMarketCapApiError extends Error {
 // API Service Class
 class CoinMarketCapService {
   private baseURL = BASE_URL;
-  private apiKey = API_KEY;
 
   private async fetchFromApi<T>(
     endpoint: string,
     params: Record<string, string> = {},
   ): Promise<T> {
-    const url = new URL(`${this.baseURL}${endpoint}`);
+    const url = new URL(`${this.baseURL}${endpoint}`, window.location.origin);
 
     // Add parameters
     Object.entries(params).forEach(([key, value]) => {
       url.searchParams.append(key, value);
     });
 
-    const headers = {
-      "X-CMC_PRO_API_KEY": this.apiKey,
-      Accept: "application/json",
-      "Accept-Encoding": "deflate, gzip",
-    };
-
     try {
-      const response = await fetch(url.toString(), { headers });
+      const response = await fetch(url.toString());
       const data = await response.json();
 
       // Check for API errors
