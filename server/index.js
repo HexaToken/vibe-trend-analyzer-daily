@@ -175,6 +175,240 @@ app.get("/api/proxy/serpapi/search", async (req, res) => {
   }
 });
 
+// AI Chat endpoints
+app.post("/api/ai/chat", async (req, res) => {
+  try {
+    const { message } = req.body;
+
+    if (!message) {
+      return res.status(400).json({ error: "Message is required" });
+    }
+
+    // Simple rule-based AI responses for now
+    const response = await processAiMessage(message);
+    res.json(response);
+  } catch (error) {
+    console.error("AI Chat Error:", error);
+    res.status(500).json({ error: "Failed to process AI request" });
+  }
+});
+
+app.post("/api/ai/sentiment", async (req, res) => {
+  try {
+    const { ticker } = req.body;
+
+    if (!ticker) {
+      return res.status(400).json({ error: "Ticker is required" });
+    }
+
+    const response = await analyzeSentiment(ticker);
+    res.json(response);
+  } catch (error) {
+    console.error("Sentiment Analysis Error:", error);
+    res.status(500).json({ error: "Failed to analyze sentiment" });
+  }
+});
+
+app.post("/api/ai/summarize", async (req, res) => {
+  try {
+    const { ticker, limit = 10 } = req.body;
+
+    const response = await summarizePosts(ticker, limit);
+    res.json(response);
+  } catch (error) {
+    console.error("Post Summarization Error:", error);
+    res.status(500).json({ error: "Failed to summarize posts" });
+  }
+});
+
+app.post("/api/ai/recommendations", async (req, res) => {
+  try {
+    const response = await getWatchlistRecommendations();
+    res.json(response);
+  } catch (error) {
+    console.error("Recommendations Error:", error);
+    res.status(500).json({ error: "Failed to get recommendations" });
+  }
+});
+
+// AI Processing Functions
+async function processAiMessage(message) {
+  const lowerMessage = message.toLowerCase();
+
+  // Detect intent and extract entities
+  if (lowerMessage.includes("sentiment") || lowerMessage.includes("mood")) {
+    const ticker = extractTicker(message);
+    if (ticker) {
+      return await analyzeSentiment(ticker);
+    }
+    return {
+      content:
+        "I can analyze sentiment for specific tickers. Try asking 'What's the sentiment for $AAPL?' or mention any stock ticker with a $ sign.",
+      suggestions: [
+        "What's the sentiment for $AAPL?",
+        "Check $TSLA mood",
+        "Analyze $MSFT sentiment",
+      ],
+    };
+  }
+
+  if (lowerMessage.includes("summarize") || lowerMessage.includes("summary")) {
+    const ticker = extractTicker(message);
+    return await summarizePosts(ticker);
+  }
+
+  if (
+    lowerMessage.includes("recommend") ||
+    lowerMessage.includes("watchlist")
+  ) {
+    return await getWatchlistRecommendations();
+  }
+
+  if (lowerMessage.includes("help") || lowerMessage.includes("how")) {
+    return await provideHelp(message);
+  }
+
+  if (lowerMessage.includes("trending") || lowerMessage.includes("popular")) {
+    return await getTrendingInfo();
+  }
+
+  // Default response
+  return {
+    content:
+      "I can help you with:\n\n• Analyzing sentiment for tickers (e.g., 'What's the mood for $AAPL?')\n• Summarizing FinTwits posts\n• Recommending stocks for your watchlist\n• Providing guidance on using MoodMeter\n\nWhat would you like to know?",
+    suggestions: [
+      "What's the sentiment for $AAPL?",
+      "Summarize recent posts",
+      "Recommend trending stocks",
+      "How do I use the Dashboard?",
+    ],
+  };
+}
+
+function extractTicker(message) {
+  const tickerMatch = message.match(/\$([A-Z]+)/);
+  return tickerMatch ? tickerMatch[1] : null;
+}
+
+async function analyzeSentiment(ticker) {
+  // Mock sentiment analysis - in production, this would use real data
+  const sentiments = ["bullish", "bearish", "neutral"];
+  const sentiment = sentiments[Math.floor(Math.random() * sentiments.length)];
+  const score = Math.floor(Math.random() * 100);
+
+  const sentimentEmoji =
+    sentiment === "bullish" ? "🟢" : sentiment === "bearish" ? "🔴" : "🟡";
+
+  return {
+    content: `${sentimentEmoji} **$${ticker} Sentiment Analysis**\n\nCurrent Mood: **${sentiment.toUpperCase()}** (${score}%)\n\nBased on recent social media activity and market discussions, $${ticker} is showing ${sentiment} sentiment. Here's what traders are saying:\n\n• Recent posts show ${sentiment === "bullish" ? "optimistic" : sentiment === "bearish" ? "cautious" : "mixed"} outlook\n• ${sentiment === "bullish" ? "Positive catalysts being discussed" : sentiment === "bearish" ? "Concerns about recent performance" : "Balanced perspectives from the community"}\n• Social volume: ${Math.floor(Math.random() * 1000) + 100} mentions in 24h`,
+    suggestions: [
+      `View $${ticker} detailed analysis`,
+      `Check $${ticker} recent posts`,
+      `Add $${ticker} to watchlist`,
+      "Analyze another ticker",
+    ],
+  };
+}
+
+async function summarizePosts(ticker, limit = 10) {
+  const tickerText = ticker ? ` about $${ticker}` : "";
+
+  return {
+    content: `📊 **Post Summary${tickerText}**\n\nHere's a summary of the ${limit} most recent posts${tickerText} from FinTwits:\n\n**Key Themes:**\n• Market volatility discussions\n• Earnings expectations and analysis\n• Technical analysis insights\n• Community sentiment shifts\n\n**Trending Topics:**\n• Options trading strategies\n• Institutional movements\n• Sector rotation discussions\n\n**Overall Sentiment:** Mixed to optimistic with active engagement from the community.`,
+    suggestions: [
+      ticker ? `View all $${ticker} posts` : "View all recent posts",
+      "Get detailed sentiment analysis",
+      "Check trending discussions",
+      "Summarize different ticker",
+    ],
+  };
+}
+
+async function getWatchlistRecommendations() {
+  const tickers = [
+    "AAPL",
+    "TSLA",
+    "MSFT",
+    "GOOGL",
+    "AMZN",
+    "NVDA",
+    "AMD",
+    "META",
+  ];
+  const recommended = tickers.slice(0, 3);
+
+  return {
+    content: `🎯 **Watchlist Recommendations**\n\nBased on current sentiment trends and market activity, here are some tickers to consider:\n\n${recommended
+      .map(
+        (ticker, i) =>
+          `**${i + 1}. $${ticker}**\n• High social engagement\n• Positive sentiment trend\n• Strong technical indicators\n`,
+      )
+      .join(
+        "\n",
+      )}\n\n*These recommendations are based on social sentiment and should not be considered financial advice.*`,
+    suggestions: [
+      `Analyze $${recommended[0]} sentiment`,
+      `Check $${recommended[1]} posts`,
+      "View full trending list",
+      "Get personalized recommendations",
+    ],
+  };
+}
+
+async function provideHelp(message) {
+  const lowerMessage = message.toLowerCase();
+
+  if (lowerMessage.includes("dashboard")) {
+    return {
+      content:
+        "📊 **Dashboard Help**\n\nThe Dashboard is your main hub for market insights:\n\n• **Real-time Data**: Live stock prices and crypto values\n• **Sentiment Meters**: Visual sentiment indicators\n• **Quick Stats**: Key market metrics at a glance\n• **News Feed**: Latest financial news\n\nNavigate using the top menu or ask me about specific features!",
+      suggestions: [
+        "How do I use Analytics?",
+        "What's in the Social platform?",
+        "How to read sentiment data?",
+        "Getting started guide",
+      ],
+    };
+  }
+
+  if (lowerMessage.includes("social") || lowerMessage.includes("fintwits")) {
+    return {
+      content:
+        "💬 **Social Platform Help**\n\nFinTwits is our social trading platform:\n\n• **Feed**: See all community posts and discussions\n• **Watchlist**: Track your favorite tickers\n• **Trending**: Discover what's hot in the market\n• **Rooms**: Join themed discussion groups\n\nYou can interact with posts, follow tickers, and join conversations!",
+      suggestions: [
+        "How to add to watchlist?",
+        "What are trending tickers?",
+        "How to join rooms?",
+        "Dashboard help",
+      ],
+    };
+  }
+
+  return {
+    content:
+      "🚀 **Getting Started with MoodMeter**\n\n**Main Features:**\n• **Dashboard**: Real-time market data and sentiment\n• **Social (FinTwits)**: Community trading discussions\n• **Analytics**: Deep market analysis tools\n• **Profile**: Manage your preferences\n\n**Pro Tips:**\n• Use $ before ticker symbols (e.g., $AAPL)\n• Check sentiment before making decisions\n• Follow trending discussions\n• Build your watchlist\n\nWhat specific area would you like help with?",
+    suggestions: [
+      "How do I use the Dashboard?",
+      "What's the Social platform?",
+      "How to read Analytics?",
+      "Profile and settings help",
+    ],
+  };
+}
+
+async function getTrendingInfo() {
+  return {
+    content:
+      "📈 **Trending Now**\n\nHere's what's hot in the markets:\n\n**Top Tickers:**\n• $AAPL - High volume discussions\n• $TSLA - Earnings buzz\n• $NVDA - AI sector focus\n\n**Popular Topics:**\n• #EarningsSeason\n• #TechnicalAnalysis\n• #OptionsTrading\n\n**Market Mood:** Cautiously optimistic with increased volatility discussions.\n\nWant to dive deeper into any of these trends?",
+    suggestions: [
+      "Analyze $AAPL sentiment",
+      "Check earnings discussions",
+      "View all trending tickers",
+      "Get watchlist recommendations",
+    ],
+  };
+}
+
 // Health check endpoint
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
