@@ -187,14 +187,44 @@ export function useNewsSearch(
       setData(data);
       stockDataFallback.setCachedData(`news_search_${query}`, data);
     } catch (err) {
-      const shouldDisableApi = stockDataFallback.handleApiError(err);
+      console.warn("News search proxy failed, falling back to mock data:", err);
 
-      if (!shouldDisableApi) {
-        const errorMessage =
-          err instanceof Error ? err.message : "Failed to search news";
-        setError(errorMessage);
-        console.error("News search error:", err);
-      }
+      // Fallback to mock search results
+      const mockArticles = [
+        {
+          source: { id: "reuters", name: "Reuters" },
+          author: "News Reporter",
+          title: `Latest developments in ${query}: Market Analysis`,
+          description: `Comprehensive analysis of recent ${query} trends and their market impact.`,
+          url: `https://example.com/${query.replace(/\s+/g, "-").toLowerCase()}`,
+          urlToImage: null,
+          publishedAt: new Date(
+            Date.now() - Math.random() * 12 * 60 * 60 * 1000,
+          ).toISOString(),
+          content: `Recent developments in ${query}...`,
+        },
+        {
+          source: { id: "bloomberg", name: "Bloomberg" },
+          author: "Market Analyst",
+          title: `${query} Outlook: Expert Predictions and Analysis`,
+          description: `Industry experts weigh in on the future prospects of ${query} in current market conditions.`,
+          url: `https://example.com/${query.replace(/\s+/g, "-").toLowerCase()}-outlook`,
+          urlToImage: null,
+          publishedAt: new Date(
+            Date.now() - Math.random() * 18 * 60 * 60 * 1000,
+          ).toISOString(),
+          content: `Experts predict that ${query}...`,
+        },
+      ];
+
+      const mockResponse = {
+        status: "ok",
+        totalResults: mockArticles.length,
+        articles: mockArticles,
+      };
+
+      setData(mockResponse);
+      setError("Using mock data - API proxy unavailable");
     } finally {
       setLoading(false);
     }
