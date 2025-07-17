@@ -20,6 +20,10 @@ import {
 export const YCNBCDemo = () => {
   const [selectedTab, setSelectedTab] = useState("overview");
   const { latestNews, trendingNews, sentiment, isLoading, isError } = useYCNBCData(300000); // 5 minutes
+  
+  // Check if any of the individual queries have errors
+  const hasActualError = (latestNews.error || trendingNews.error || sentiment.error) && 
+                        !(latestNews.data || trendingNews.data || sentiment.data);
 
   const formatSentimentScore = (score: number): { label: string; color: string } => {
     if (score >= 75) return { label: "Very Positive", color: "text-green-600" };
@@ -57,7 +61,7 @@ export const YCNBCDemo = () => {
               <CardTitle className="text-sm">YCNBC Service</CardTitle>
               {isLoading ? (
                 <RefreshCw className="h-4 w-4 animate-spin text-blue-500" />
-              ) : isError ? (
+              ) : hasActualError ? (
                 <AlertCircle className="h-4 w-4 text-red-500" />
               ) : (
                 <CheckCircle className="h-4 w-4 text-green-500" />
@@ -65,8 +69,8 @@ export const YCNBCDemo = () => {
             </div>
           </CardHeader>
           <CardContent>
-            <Badge variant={isError ? "destructive" : isLoading ? "secondary" : "default"}>
-              {isError ? "Error" : isLoading ? "Loading" : "Active"}
+            <Badge variant={hasActualError ? "destructive" : isLoading ? "secondary" : "default"}>
+              {hasActualError ? "Error" : isLoading ? "Loading" : "Active"}
             </Badge>
           </CardContent>
         </Card>
@@ -103,11 +107,14 @@ export const YCNBCDemo = () => {
       </div>
 
       {/* Error Display */}
-      {isError && (
+      {hasActualError && (
         <Alert>
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>
             Unable to connect to YCNBC service. This may be due to network issues or service configuration.
+            {latestNews.error && <div className="mt-1">Latest News: {latestNews.error.message}</div>}
+            {trendingNews.error && <div className="mt-1">Trending News: {trendingNews.error.message}</div>}
+            {sentiment.error && <div className="mt-1">Sentiment: {sentiment.error.message}</div>}
           </AlertDescription>
         </Alert>
       )}

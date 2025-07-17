@@ -124,6 +124,39 @@ print(json.dumps(result))
     }
   });
 
+  app.get("/api/proxy/ycnbc/news/trending", async (req, res) => {
+    try {
+      const { spawn } = await import('child_process');
+      const python = spawn('python3', ['-c', `
+import sys
+import os
+sys.path.insert(0, os.path.join(os.getcwd(), '.pythonlibs', 'lib', 'python3.11', 'site-packages'))
+sys.path.insert(0, os.getcwd())
+from server.ycnbc_service import ycnbc_service
+import json
+result = ycnbc_service.get_trending_news()
+print(json.dumps(result))
+      `]);
+      
+      let output = '';
+      python.stdout.on('data', (data: any) => {
+        output += data.toString();
+      });
+      
+      python.on('close', (code: number) => {
+        try {
+          const result = JSON.parse(output.trim().split('\n').pop() || '{}');
+          res.json(result);
+        } catch (e) {
+          res.status(500).json({ error: "Failed to parse YCNBC trending data" });
+        }
+      });
+    } catch (error) {
+      console.error("YCNBC trending news proxy error:", error);
+      res.status(500).json({ error: "Failed to fetch YCNBC trending news" });
+    }
+  });
+
   app.get("/api/proxy/ycnbc/sentiment", async (req, res) => {
     try {
       const { spawn } = await import('child_process');

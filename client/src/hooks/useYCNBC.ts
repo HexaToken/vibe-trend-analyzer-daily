@@ -96,7 +96,8 @@ export function useYCNBCData(refreshInterval: number = 300000) {
     trendingNews,
     sentiment,
     isLoading: latestNews.isLoading || trendingNews.isLoading || sentiment.isLoading,
-    isError: latestNews.isError || trendingNews.isError || sentiment.isError,
+    isError: (latestNews.isError || trendingNews.isError || sentiment.isError) && 
+             !(latestNews.data || trendingNews.data || sentiment.data), // Only error if no data
     hasData: latestNews.data || trendingNews.data || sentiment.data,
   };
 }
