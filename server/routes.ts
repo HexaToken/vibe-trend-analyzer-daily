@@ -43,7 +43,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/proxy/coinmarketcap/listings", async (req, res) => {
     try {
       const apiKey = process.env.COINMARKETCAP_API_KEY || "demo_api_key";
-      const response = await fetch(`https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=100&convert=USD`, {
+      const limit = req.query.limit || 10; // Default to 10 for rate limiting
+      const response = await fetch(`https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=${limit}&convert=USD`, {
         headers: {
           'X-CMC_PRO_API_KEY': apiKey,
         }

@@ -91,6 +91,11 @@ The application integrates with multiple external services:
   - Removed SerpAPI server proxy endpoints
   - Updated Navigation.tsx to remove Google Finance and SerpAPI menu items
   - Focus back on NewsAPI and CoinMarketCap integrations which are working correctly
+- **2025-01-17**: Limited cryptocurrency display to top 10 only
+  - Updated CryptoDashboard to fetch and display only top 10 cryptocurrencies by market cap
+  - Changed default limit from 100 to 10 in CoinMarketCap API service
+  - Updated server proxy endpoint to accept limit parameter for rate limiting
+  - Reduced excessive API calls to improve performance and stay within API limits
 
 ## User Preferences
 - Language: English

@@ -33,27 +33,29 @@ export const CryptoDashboard = () => {
   >("24h");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Get top cryptocurrencies
+  // Get top 10 cryptocurrencies
   const {
     tickers: topCryptos,
     loading: cryptoLoading,
     error: cryptoError,
     refetch,
-  } = useCryptoListings(50);
+  } = useCryptoListings(10);
 
-  // Get popular crypto quotes
+  // Get top 10 popular crypto quotes (reduced from 8 to limit API calls)
   const popularSymbols = [
     "BTC",
-    "ETH",
+    "ETH", 
     "BNB",
     "XRP",
     "ADA",
     "SOL",
     "DOT",
     "DOGE",
+    "MATIC",
+    "AVAX"
   ];
   const { tickers: popularCryptos, loading: popularLoading } =
-    useCryptoQuotes(popularSymbols);
+    useCryptoQuotes(popularSymbols.slice(0, 10));
 
   // Get global metrics
   const { data: globalMetrics, loading: metricsLoading } = useGlobalMetrics();
@@ -258,9 +260,9 @@ export const CryptoDashboard = () => {
               </Button>
             </div>
           ) : (
-            /* Cryptocurrency List */
+            /* Top 10 Cryptocurrency List */
             <div className="space-y-2">
-              {filteredCryptos.slice(0, 50).map((crypto, index) => {
+              {filteredCryptos.slice(0, 10).map((crypto, index) => {
                 const isPositive = crypto.changePercent >= 0;
                 const actualRank =
                   topCryptos.findIndex((c) => c.symbol === crypto.symbol) + 1;

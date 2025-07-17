@@ -252,7 +252,7 @@ class CoinMarketCapService {
    */
   async getListingsLatest(
     start: number = 1,
-    limit: number = 100,
+    limit: number = 10,
     convert: string = "USD",
     sort: string = "market_cap",
   ): Promise<CoinMarketCapListingsResponse> {
