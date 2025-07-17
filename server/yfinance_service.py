@@ -49,14 +49,22 @@ class YFinanceService:
             processed_articles = []
             for idx, article in enumerate(news[:15]):  # Get top 15 news articles
                 if isinstance(article, dict):
-                    processed_articles.append({
-                        "id": f"yf_{symbol}_{idx}_{hash(article.get('link', '')) % 1000000}",
-                        "headline": article.get('title', ''),
-                        "url": article.get('link', ''),
-                        "time": self._format_timestamp(article.get('providerPublishTime')),
-                        "source": article.get('publisher', 'YFinance'),
-                        "sentiment_score": self._calculate_basic_sentiment(article.get('title', ''))
-                    })
+                    # YFinance now nests data under 'content' key
+                    content = article.get('content', article)
+                    title = content.get('title', '')
+                    url = content.get('clickThroughUrl', {}).get('url', '') or content.get('canonicalUrl', {}).get('url', '')
+                    provider = content.get('provider', {}).get('displayName', 'YFinance')
+                    pub_date = content.get('pubDate', '') or content.get('displayTime', '')
+                    
+                    if title and url:  # Only include articles with valid title and URL
+                        processed_articles.append({
+                            "id": f"yf_{symbol}_{idx}_{hash(url) % 1000000}",
+                            "headline": title,
+                            "url": url,
+                            "time": self._format_timestamp(pub_date),
+                            "source": provider,
+                            "sentiment_score": self._calculate_basic_sentiment(title)
+                        })
             
             return {
                 "status": "success",
@@ -85,15 +93,23 @@ class YFinanceService:
                     
                     for article_idx, article in enumerate(news[:5]):  # Top 5 from each
                         if isinstance(article, dict):
-                            all_articles.append({
-                                "id": f"yf_market_{ticker_idx}_{article_idx}_{hash(article.get('link', '')) % 1000000}",
-                                "headline": article.get('title', ''),
-                                "url": article.get('link', ''),
-                                "time": self._format_timestamp(article.get('providerPublishTime')),
-                                "source": article.get('publisher', 'YFinance'),
-                                "sentiment_score": self._calculate_basic_sentiment(article.get('title', '')),
-                                "symbol": symbol
-                            })
+                            # YFinance now nests data under 'content' key
+                            content = article.get('content', article)
+                            title = content.get('title', '')
+                            url = content.get('clickThroughUrl', {}).get('url', '') or content.get('canonicalUrl', {}).get('url', '')
+                            provider = content.get('provider', {}).get('displayName', 'YFinance')
+                            pub_date = content.get('pubDate', '') or content.get('displayTime', '')
+                            
+                            if title and url:  # Only include articles with valid title and URL
+                                all_articles.append({
+                                    "id": f"yf_market_{ticker_idx}_{article_idx}_{hash(url) % 1000000}",
+                                    "headline": title,
+                                    "url": url,
+                                    "time": self._format_timestamp(pub_date),
+                                    "source": provider,
+                                    "sentiment_score": self._calculate_basic_sentiment(title),
+                                    "symbol": symbol
+                                })
                 except:
                     continue
             
@@ -193,7 +209,23 @@ class YFinanceService:
             return "Recently"
         
         try:
-            if isinstance(timestamp, (int, float)):
+            # Handle both ISO string format and Unix timestamp
+            if isinstance(timestamp, str):
+                # Parse ISO format (e.g., "2025-07-17T15:54:56Z")
+                from datetime import timezone
+                dt = datetime.fromisoformat(timestamp.replace('Z', '+00:00'))
+                now = datetime.now(timezone.utc)
+                diff = now - dt
+                
+                if diff.days > 0:
+                    return f"{diff.days} days ago"
+                elif diff.seconds > 3600:
+                    hours = diff.seconds // 3600
+                    return f"{hours} hours ago"
+                else:
+                    minutes = diff.seconds // 60
+                    return f"{minutes} minutes ago"
+            elif isinstance(timestamp, (int, float)):
                 dt = datetime.fromtimestamp(timestamp)
                 now = datetime.now()
                 diff = now - dt

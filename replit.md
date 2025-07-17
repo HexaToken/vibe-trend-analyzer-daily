@@ -47,6 +47,13 @@ The application integrates with multiple external services:
 **Note**: API keys need to be configured for live data integration.
 
 ## Recent Changes
+- **2025-01-17**: Fixed YFinance integration and server stability issues
+  - Resolved server crash due to race condition in response handling
+  - Fixed duplicate React keys in YFinance data by improving ID generation
+  - Updated YFinance service to handle new nested data structure from API
+  - Fixed timestamp handling to properly parse ISO format timestamps
+  - Added proper timeout handling for Python processes to prevent hanging
+  - YFinance now properly pulls real market news with correct headlines, URLs, and timestamps
 - **2025-01-17**: Complete migration from Lovable to Replit
   - Fixed dependency issues (sonner, nanoid)
   - Verified application startup and functionality
