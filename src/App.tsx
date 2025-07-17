@@ -20,6 +20,7 @@ import { ApiStatusIndicator } from "@/components/ApiStatusIndicator";
 import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
 import { SerpApiDemo } from "@/components/SerpApiDemo";
 import { NLPSentimentDemo } from "@/components/NLPSentimentDemo";
+import { AiChatBubble } from "@/components/chat/AiChatBubble";
 
 const queryClient = new QueryClient();
 
