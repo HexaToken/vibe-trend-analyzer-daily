@@ -251,6 +251,57 @@ print(json.dumps(result))
     }
   });
 
+  app.get("/api/proxy/yfinance/ticker", async (req, res) => {
+    try {
+      const symbol = req.query.symbol as string || "AAPL";
+      const { spawn } = await import('child_process');
+      const python = spawn('python3', ['-c', `
+import sys
+import os
+sys.path.insert(0, os.path.join(os.getcwd(), '.pythonlibs', 'lib', 'python3.11', 'site-packages'))
+sys.path.insert(0, os.getcwd())
+from server.yfinance_service import yfinance_service
+import json
+result = yfinance_service.get_stock_ticker_info("${symbol}")
+print(json.dumps(result))
+      `]);
+      
+      let output = '';
+      let responseHandled = false;
+      
+      python.stdout.on('data', (data: any) => {
+        output += data.toString();
+      });
+      
+      python.on('close', (code: number) => {
+        if (responseHandled) return;
+        responseHandled = true;
+        
+        try {
+          const result = JSON.parse(output.trim().split('\n').pop() || '{}');
+          res.json(result);
+        } catch (e) {
+          res.status(500).json({ error: "Failed to parse YFinance ticker data" });
+        }
+      });
+      
+      const timeoutId = setTimeout(() => {
+        if (responseHandled) return;
+        responseHandled = true;
+        python.kill();
+        res.status(408).json({ error: "Request timeout" });
+      }, 30000);
+      
+      // Clear timeout if process completes normally
+      python.on('close', () => {
+        clearTimeout(timeoutId);
+      });
+    } catch (error) {
+      console.error("YFinance ticker proxy error:", error);
+      res.status(500).json({ error: "Failed to fetch YFinance ticker data" });
+    }
+  });
+
   // Finnhub API endpoints
   app.get("/api/proxy/finnhub/symbol-lookup", async (req, res) => {
     try {
