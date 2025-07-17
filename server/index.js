@@ -98,6 +98,101 @@ app.get("/api/proxy/coinmarketcap/global-metrics", async (req, res) => {
   }
 });
 
+app.get("/api/proxy/coinmarketcap/info", async (req, res) => {
+  try {
+    const { symbol, id } = req.query;
+    let queryParams = "";
+
+    if (symbol) {
+      queryParams = `symbol=${symbol}`;
+    } else if (id) {
+      queryParams = `id=${id}`;
+    } else {
+      return res
+        .status(400)
+        .json({ error: "Either 'symbol' or 'id' parameter is required" });
+    }
+
+    const response = await fetch(
+      `https://pro-api.coinmarketcap.com/v1/cryptocurrency/info?${queryParams}`,
+      {
+        headers: {
+          "X-CMC_PRO_API_KEY": COINMARKETCAP_API_KEY,
+          Accept: "application/json",
+        },
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error("CoinMarketCap API Error:", error);
+    res.status(500).json({ error: "Failed to fetch cryptocurrency info" });
+  }
+});
+
+app.get("/api/proxy/coinmarketcap/map", async (req, res) => {
+  try {
+    const { symbol, listing_status = "active" } = req.query;
+    let queryParams = `listing_status=${listing_status}`;
+
+    if (symbol) {
+      queryParams += `&symbol=${symbol}`;
+    }
+
+    const response = await fetch(
+      `https://pro-api.coinmarketcap.com/v1/cryptocurrency/map?${queryParams}`,
+      {
+        headers: {
+          "X-CMC_PRO_API_KEY": COINMARKETCAP_API_KEY,
+          Accept: "application/json",
+        },
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error("CoinMarketCap API Error:", error);
+    res.status(500).json({ error: "Failed to search cryptocurrencies" });
+  }
+});
+
+app.get("/api/proxy/coinmarketcap/trending", async (req, res) => {
+  try {
+    const { limit = 10, time_period = "24h" } = req.query;
+    const response = await fetch(
+      `https://pro-api.coinmarketcap.com/v1/cryptocurrency/trending/latest?limit=${limit}&time_period=${time_period}`,
+      {
+        headers: {
+          "X-CMC_PRO_API_KEY": COINMARKETCAP_API_KEY,
+          Accept: "application/json",
+        },
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error("CoinMarketCap API Error:", error);
+    res
+      .status(500)
+      .json({ error: "Failed to fetch trending cryptocurrencies" });
+  }
+});
+
 // NewsAPI Proxy Endpoints
 app.get("/api/proxy/newsapi/top-headlines", async (req, res) => {
   try {
