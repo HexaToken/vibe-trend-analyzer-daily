@@ -33,6 +33,9 @@ export const TopNews = () => {
     error,
   );
 
+  // Use mock articles if no articles from API
+  const displayArticles = articles.length > 0 ? articles : newsArticles;
+
   const handleArticleClick = (article: any) => {
     setSelectedArticle(article);
     setIsModalOpen(true);
