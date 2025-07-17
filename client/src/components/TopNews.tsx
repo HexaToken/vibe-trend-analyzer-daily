@@ -91,7 +91,7 @@ export const TopNews = () => {
               <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-2 text-muted-foreground" />
               <p className="text-muted-foreground">Loading latest news...</p>
             </div>
-          ) : error && articles.length === 0 ? (
+          ) : error && displayArticles.length === 0 ? (
             <div className="text-center py-8">
               <p className="text-red-600 mb-2">Error loading news</p>
               <p className="text-sm text-muted-foreground mb-4">{error}</p>
