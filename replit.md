@@ -108,6 +108,8 @@ The application integrates with multiple external services:
   - Added usePolygon hooks with proper rate limiting and circuit breaker patterns
   - Added new navigation menu item for "Polygon Stock Data"
   - API endpoint: /api/proxy/polygon/tickers with full query parameter support
+  - Note: Real-time quotes require premium subscription; current implementation uses basic (free) tier
+  - Available endpoints: /tickers, /dividends. Premium required for: /quotes
 
 ## User Preferences
 - Language: English
