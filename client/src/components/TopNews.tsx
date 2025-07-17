@@ -188,6 +188,15 @@ export const TopNews = () => {
               <p className="text-xs text-orange-600">{error}</p>
             </div>
           )}
+
+          {sources.yfinance.error?.includes("service not available") && (
+            <div className="mt-2 p-2 bg-blue-50 border border-blue-200 rounded text-center">
+              <p className="text-xs text-blue-600">
+                📊 Enhanced financial news from YFinance requires Python setup.
+                Currently showing NewsAPI business news.
+              </p>
+            </div>
+          )}
         </CardContent>
       </Card>
 
