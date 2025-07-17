@@ -3,6 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { SourceNewsModal } from "./SourceNewsModal";
 import { 
   Brain, 
   TrendingUp, 
@@ -13,7 +15,8 @@ import {
   Zap,
   Target,
   RefreshCw,
-  Activity
+  Activity,
+  ExternalLink
 } from "lucide-react";
 
 export const AiSentimentExplainer = () => {
@@ -108,10 +111,10 @@ export const AiSentimentExplainer = () => {
           "Source credibility weighting"
         ],
         sources: [
+          "NewsAPI.org (80,000+ sources)",
           "Reuters, Bloomberg, CNBC",
           "Company earnings calls",
-          "SEC filings and announcements",
-          "Industry analyst reports"
+          "SEC filings and announcements"
         ]
       }
     }
@@ -214,6 +217,21 @@ export const AiSentimentExplainer = () => {
                             <li key={index} className="flex items-start gap-2">
                               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0" />
                               {feature}
+                              {feature === "NewsAPI.org (80,000+ sources)" && (
+                                <Dialog>
+                                  <DialogTrigger asChild>
+                                    <Button variant="ghost" size="sm" className="ml-2 h-auto p-1">
+                                      <ExternalLink className="h-3 w-3" />
+                                    </Button>
+                                  </DialogTrigger>
+                                  <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
+                                    <DialogHeader>
+                                      <DialogTitle>News Data Sources & Integration</DialogTitle>
+                                    </DialogHeader>
+                                    <SourceNewsModal />
+                                  </DialogContent>
+                                </Dialog>
+                              )}
                             </li>
                           ))}
                         </ul>
