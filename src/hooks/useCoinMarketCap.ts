@@ -179,91 +179,100 @@ export function useCryptoListings(
   const fetchListings = useCallback(async () => {
     if (!enabled) return;
 
-    // CoinMarketCap API doesn't support CORS for browser requests
-    // Always use mock data in browser environment
-    console.warn(
-      "CoinMarketCap API requires server-side implementation due to CORS restrictions. Using mock data.",
-    );
-
     setLoading(true);
     setError(null);
 
-    const cryptoSymbols = [
-      "BTC",
-      "ETH",
-      "BNB",
-      "XRP",
-      "ADA",
-      "SOL",
-      "DOT",
-      "DOGE",
-      "AVAX",
-      "SHIB",
-      "MATIC",
-      "LINK",
-      "UNI",
-      "LTC",
-      "BCH",
-      "ATOM",
-      "ICP",
-      "NEAR",
-      "ALGO",
-      "FTM",
-    ];
-    const mockTickers = stockDataFallback.getMockTickers(
-      cryptoSymbols.slice(0, limit),
-    );
-    const mockData: CoinMarketCapListingsResponse = {
-      status: {
-        timestamp: new Date().toISOString(),
-        error_code: 0,
-        error_message: null,
-        elapsed: 0,
-        credit_count: 0,
-        notice: null,
-      },
-      data: mockTickers.map((ticker, index) => ({
-        id: index + 1,
-        name: ticker.name,
-        symbol: ticker.symbol,
-        slug: ticker.symbol.toLowerCase(),
-        num_market_pairs: Math.floor(Math.random() * 1000),
-        date_added: "2021-01-01T00:00:00.000Z",
-        tags: ["cryptocurrency"],
-        max_supply: 0,
-        circulating_supply: Math.floor(Math.random() * 1000000000),
-        total_supply: Math.floor(Math.random() * 1000000000),
-        is_active: 1,
-        is_fiat: 0,
-        cmc_rank: index + 1,
-        last_updated: new Date().toISOString(),
-        quote: {
-          USD: {
-            price: ticker.price,
-            volume_24h: ticker.volume,
-            volume_change_24h: (Math.random() - 0.5) * 20,
-            percent_change_1h: (Math.random() - 0.5) * 5,
-            percent_change_24h: ticker.changePercent,
-            percent_change_7d: (Math.random() - 0.5) * 30,
-            percent_change_30d: (Math.random() - 0.5) * 50,
-            percent_change_60d: (Math.random() - 0.5) * 80,
-            percent_change_90d: (Math.random() - 0.5) * 100,
-            market_cap: ticker.marketCap || ticker.price * 1000000,
-            market_cap_dominance: Math.random() * 50,
-            fully_diluted_market_cap:
-              (ticker.marketCap || ticker.price * 1000000) * 1.1,
-            tvl: 0,
-            last_updated: new Date().toISOString(),
-          },
-        },
-      })),
-    };
+    try {
+      // Use the CoinMarketCap service which now proxies through our server
+      const { coinMarketCapApi } = await import("../services/coinMarketCapApi");
+      const response = await coinMarketCapApi.getListingsLatest(1, limit);
 
-    setData(mockData);
-    setError(
-      "Using mock data - CoinMarketCap API requires server-side implementation (CORS restriction)",
-    );
-    setLoading(false);
+      setData(response);
+      setError(null);
+    } catch (error) {
+      console.error("Failed to fetch crypto listings:", error);
+
+      // Fallback to mock data if API fails
+      const cryptoSymbols = [
+        "BTC",
+        "ETH",
+        "BNB",
+        "XRP",
+        "ADA",
+        "SOL",
+        "DOT",
+        "DOGE",
+        "AVAX",
+        "SHIB",
+        "MATIC",
+        "LINK",
+        "UNI",
+        "LTC",
+        "BCH",
+        "ATOM",
+        "ICP",
+        "NEAR",
+        "ALGO",
+        "FTM",
+      ];
+      const mockTickers = stockDataFallback.getMockTickers(
+        cryptoSymbols.slice(0, limit),
+      );
+      const mockData: CoinMarketCapListingsResponse = {
+        status: {
+          timestamp: new Date().toISOString(),
+          error_code: 0,
+          error_message: null,
+          elapsed: 0,
+          credit_count: 0,
+          notice: null,
+        },
+        data: mockTickers.map((ticker, index) => ({
+          id: index + 1,
+          name: ticker.name,
+          symbol: ticker.symbol,
+          slug: ticker.symbol.toLowerCase(),
+          num_market_pairs: Math.floor(Math.random() * 1000),
+          date_added: "2021-01-01T00:00:00.000Z",
+          tags: ["cryptocurrency"],
+          max_supply: 0,
+          circulating_supply: Math.floor(Math.random() * 1000000000),
+          total_supply: Math.floor(Math.random() * 1000000000),
+          is_active: 1,
+          is_fiat: 0,
+          cmc_rank: index + 1,
+          last_updated: new Date().toISOString(),
+          quote: {
+            USD: {
+              price: ticker.price,
+              volume_24h: ticker.volume,
+              volume_change_24h: (Math.random() - 0.5) * 20,
+              percent_change_1h: (Math.random() - 0.5) * 5,
+              percent_change_24h: ticker.changePercent,
+              percent_change_7d: (Math.random() - 0.5) * 30,
+              percent_change_30d: (Math.random() - 0.5) * 50,
+              percent_change_60d: (Math.random() - 0.5) * 80,
+              percent_change_90d: (Math.random() - 0.5) * 100,
+              market_cap: ticker.marketCap || ticker.price * 1000000,
+              market_cap_dominance: Math.random() * 50,
+              fully_diluted_market_cap:
+                (ticker.marketCap || ticker.price * 1000000) * 1.1,
+              tvl: 0,
+              last_updated: new Date().toISOString(),
+            },
+          },
+        })),
+      };
+
+      setData(mockData);
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Failed to fetch cryptocurrency listings - using fallback data",
+      );
+    } finally {
+      setLoading(false);
+    }
   }, [limit, enabled]);
 
   useEffect(() => {
