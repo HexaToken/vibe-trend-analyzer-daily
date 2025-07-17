@@ -157,7 +157,7 @@ export const TopNews = () => {
             </>
           )}
 
-          {error && articles.length > 0 && (
+          {error && displayArticles.length > 0 && (
             <div className="mt-2 p-2 bg-orange-50 border border-orange-200 rounded text-center">
               <p className="text-xs text-orange-600">{error}</p>
             </div>
