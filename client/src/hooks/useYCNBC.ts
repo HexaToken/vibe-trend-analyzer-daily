@@ -54,7 +54,12 @@ export function useYCNBCTrendingNews(refreshInterval: number = 300000): UseQuery
   return useQuery({
     queryKey: ["ycnbc", "news", "trending"],
     queryFn: async (): Promise<YCNBCNewsResponse> => {
-      const response = await fetch("/api/proxy/ycnbc/news/trending");
+      const response = await fetch("/api/proxy/ycnbc/news/trending", {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -64,6 +69,7 @@ export function useYCNBCTrendingNews(refreshInterval: number = 300000): UseQuery
     staleTime: 240000, // 4 minutes
     retry: 2,
     retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
+    enabled: true, // Always enable this query
   });
 }
 

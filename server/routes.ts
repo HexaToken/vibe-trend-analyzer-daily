@@ -139,18 +139,35 @@ print(json.dumps(result))
       `]);
       
       let output = '';
+      let error = '';
+      
       python.stdout.on('data', (data: any) => {
         output += data.toString();
       });
       
+      python.stderr.on('data', (data: any) => {
+        error += data.toString();
+      });
+      
       python.on('close', (code: number) => {
         try {
-          const result = JSON.parse(output.trim().split('\n').pop() || '{}');
+          // Get the last line which should be JSON
+          const lines = output.trim().split('\n');
+          const jsonLine = lines[lines.length - 1];
+          const result = JSON.parse(jsonLine);
+          res.setHeader('Content-Type', 'application/json');
           res.json(result);
         } catch (e) {
-          res.status(500).json({ error: "Failed to parse YCNBC trending data" });
+          console.error("YCNBC trending parse error:", e, "Output:", output, "Error:", error);
+          res.status(500).json({ error: "Failed to parse YCNBC trending data", debug: { output, error } });
         }
       });
+      
+      // Set timeout
+      setTimeout(() => {
+        python.kill();
+        res.status(408).json({ error: "Request timeout" });
+      }, 30000);
     } catch (error) {
       console.error("YCNBC trending news proxy error:", error);
       res.status(500).json({ error: "Failed to fetch YCNBC trending news" });
