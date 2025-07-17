@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { polygonApi, type PolygonTickersResponse, type PolygonDividendsResponse } from "../services/polygonApi";
+import { polygonApi, type PolygonTickersResponse, type PolygonDividendsResponse, type PolygonQuotesResponse } from "../services/polygonApi";
 
 interface UsePolygonOptions {
   refreshInterval?: number;
@@ -15,6 +15,13 @@ interface UseTickersResult {
 
 interface UseDividendsResult {
   data: PolygonDividendsResponse | null;
+  loading: boolean;
+  error: string | null;
+  refetch: () => Promise<void>;
+}
+
+interface UseQuotesResult {
+  data: PolygonQuotesResponse | null;
   loading: boolean;
   error: string | null;
   refetch: () => Promise<void>;
@@ -138,6 +145,66 @@ export function usePolygonDividends(
     loading,
     error,
     refetch: fetchDividends,
+  };
+}
+
+/**
+ * Hook to fetch real-time quotes for a specific ticker
+ */
+export function usePolygonQuotes(
+  ticker: string,
+  options: UsePolygonOptions = {},
+): UseQuotesResult {
+  const { refreshInterval = 0, enabled = true } = options;
+  const [data, setData] = useState<PolygonQuotesResponse | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const intervalRef = useRef<NodeJS.Timeout>();
+
+  const fetchQuotes = useCallback(async () => {
+    if (!enabled || !ticker) return;
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await polygonApi.getQuotes(ticker);
+      setData(response);
+      setError(null);
+    } catch (error) {
+      console.error("Failed to fetch quotes:", error);
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Failed to fetch stock quotes",
+      );
+      setData(null);
+    } finally {
+      setLoading(false);
+    }
+  }, [ticker, enabled]);
+
+  useEffect(() => {
+    if (enabled && ticker) {
+      fetchQuotes();
+
+      if (refreshInterval > 0) {
+        intervalRef.current = setInterval(fetchQuotes, refreshInterval);
+      }
+    }
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [fetchQuotes, refreshInterval, enabled]);
+
+  return {
+    data,
+    loading,
+    error,
+    refetch: fetchQuotes,
   };
 }
 

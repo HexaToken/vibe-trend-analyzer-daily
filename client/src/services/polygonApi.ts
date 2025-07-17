@@ -45,6 +45,31 @@ export interface PolygonDividendsResponse {
   next_url?: string;
 }
 
+export interface PolygonQuote {
+  ask: number;
+  ask_size: number;
+  bid: number;
+  bid_size: number;
+  exchange: number;
+  last_quote: {
+    timeframe: string;
+    timestamp: number;
+  };
+  participant_timestamp: number;
+  sequence_number: number;
+  sip_timestamp: number;
+  timeframe: string;
+  timestamp: number;
+}
+
+export interface PolygonQuotesResponse {
+  results: PolygonQuote[];
+  status: string;
+  request_id: string;
+  count: number;
+  next_url?: string;
+}
+
 class PolygonApiError extends Error {
   constructor(message: string) {
     super(message);
@@ -153,6 +178,22 @@ class PolygonApiService {
   async getDividends(ticker: string): Promise<PolygonDividendsResponse> {
     return this.fetchFromApi<PolygonDividendsResponse>("/dividends", {
       ticker,
+    });
+  }
+
+  /**
+   * Get real-time quotes for a specific ticker
+   */
+  async getQuotes(
+    ticker: string,
+    order: string = "asc",
+    limit: number = 10,
+    sort: string = "timestamp",
+  ): Promise<PolygonQuotesResponse> {
+    return this.fetchFromApi<PolygonQuotesResponse>(`/quotes/${ticker}`, {
+      order,
+      limit: limit.toString(),
+      sort,
     });
   }
 

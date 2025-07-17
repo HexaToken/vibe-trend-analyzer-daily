@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { usePolygonTickers, usePolygonDividends } from "@/hooks/usePolygon";
+import { usePolygonTickers, usePolygonDividends, usePolygonQuotes } from "@/hooks/usePolygon";
 
 export const PolygonDemo = () => {
   const [selectedTicker, setSelectedTicker] = useState<string>("AAPL");
@@ -31,9 +31,21 @@ export const PolygonDemo = () => {
     enabled: true 
   });
 
+  // Get real-time quotes for selected ticker
+  const { 
+    data: quotesData, 
+    loading: quotesLoading, 
+    error: quotesError,
+    refetch: refetchQuotes 
+  } = usePolygonQuotes(selectedTicker, { 
+    refreshInterval: 300000, // 5 minutes
+    enabled: true 
+  });
+
   const handleRefresh = () => {
     refetchTickers();
     refetchDividends();
+    refetchQuotes();
   };
 
   const formatDate = (dateString: string) => {
@@ -60,13 +72,13 @@ export const PolygonDemo = () => {
             Real-time stock ticker and dividend data from Polygon.io API
           </p>
         </div>
-        <Button onClick={handleRefresh} disabled={tickersLoading || dividendsLoading}>
-          <RefreshCw className={`h-4 w-4 mr-2 ${tickersLoading || dividendsLoading ? "animate-spin" : ""}`} />
+        <Button onClick={handleRefresh} disabled={tickersLoading || dividendsLoading || quotesLoading}>
+          <RefreshCw className={`h-4 w-4 mr-2 ${tickersLoading || dividendsLoading || quotesLoading ? "animate-spin" : ""}`} />
           Refresh Data
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         {/* Stock Tickers */}
         <Card>
           <CardHeader>
@@ -213,6 +225,80 @@ export const PolygonDemo = () => {
             )}
           </CardContent>
         </Card>
+
+        {/* Real-time Quotes */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <TrendingUp className="h-5 w-5" />
+              Real-time Quotes for {selectedTicker}
+            </CardTitle>
+            <CardDescription>
+              Latest bid/ask quotes from Polygon.io
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            {quotesLoading ? (
+              <div className="flex items-center justify-center py-8">
+                <RefreshCw className="h-8 w-8 animate-spin mr-2" />
+                <span>Loading quotes...</span>
+              </div>
+            ) : quotesError ? (
+              <div className="text-center py-8 text-red-600">
+                <p>Error: {quotesError}</p>
+                <Button variant="outline" onClick={refetchQuotes} className="mt-2">
+                  Try Again
+                </Button>
+              </div>
+            ) : quotesData?.results && quotesData.results.length > 0 ? (
+              <div className="space-y-4 max-h-96 overflow-y-auto">
+                {quotesData.results.slice(0, 5).map((quote, index) => (
+                  <div key={index} className="p-3 border rounded-lg">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <div className="text-sm text-muted-foreground">Bid Price</div>
+                        <div className="font-semibold text-lg text-red-600">
+                          ${quote.bid.toFixed(2)}
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          Size: {quote.bid_size.toLocaleString()}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-sm text-muted-foreground">Ask Price</div>
+                        <div className="font-semibold text-lg text-green-600">
+                          ${quote.ask.toFixed(2)}
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          Size: {quote.ask_size.toLocaleString()}
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <Separator className="my-3" />
+                    
+                    <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div>
+                        <div className="text-muted-foreground">Exchange</div>
+                        <div>{quote.exchange}</div>
+                      </div>
+                      <div>
+                        <div className="text-muted-foreground">Timestamp</div>
+                        <div>{new Date(quote.timestamp / 1000000).toLocaleTimeString()}</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-8 text-muted-foreground">
+                <TrendingUp className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                <p>No quote data available for {selectedTicker}</p>
+                <p className="text-sm">Try selecting a different stock ticker</p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
       </div>
 
       {/* API Status */}
@@ -224,7 +310,7 @@ export const PolygonDemo = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="text-center p-4 border rounded-lg">
               <div className="text-2xl font-bold text-green-600">
                 {tickersData?.count || 0}
@@ -236,6 +322,12 @@ export const PolygonDemo = () => {
                 {dividendsData?.count || 0}
               </div>
               <div className="text-sm text-muted-foreground">Dividends for {selectedTicker}</div>
+            </div>
+            <div className="text-center p-4 border rounded-lg">
+              <div className="text-2xl font-bold text-orange-600">
+                {quotesData?.count || 0}
+              </div>
+              <div className="text-sm text-muted-foreground">Real-time Quotes</div>
             </div>
             <div className="text-center p-4 border rounded-lg">
               <div className="text-2xl font-bold text-purple-600">5min</div>

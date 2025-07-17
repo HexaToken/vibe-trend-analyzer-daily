@@ -155,7 +155,40 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Polygon.io quotes endpoint
+  app.get("/api/proxy/polygon/quotes/:ticker", async (req, res) => {
+    try {
+      const { ticker } = req.params;
+      const { 
+        order = "asc", 
+        limit = "10", 
+        sort = "timestamp" 
+      } = req.query;
+      const apiKey = "ABeiglsv3LqhpieYSQiAYW9c0IhcpzaX";
+      
+      const response = await fetch(
+        `https://api.polygon.io/v3/quotes/${ticker}?order=${order}&limit=${limit}&sort=${sort}&apiKey=${apiKey}`,
+        {
+          headers: {
+            "Accept": "application/json",
+          },
+        }
+      );
 
+      if (!response.ok) {
+        throw new Error(`Polygon API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      res.json(data);
+    } catch (error) {
+      console.error("Polygon quotes API error:", error);
+      res.status(500).json({ 
+        error: "Failed to fetch stock quotes",
+        message: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
 
   const httpServer = createServer(app);
 
