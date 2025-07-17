@@ -58,12 +58,40 @@ export function useFinnhubSymbolLookup(
       setError(null);
     } catch (error) {
       console.error("Failed to fetch symbol lookup:", error);
+
+      // Fallback to mock data if API fails
+      const mockSymbols = [
+        "AAPL",
+        "MSFT",
+        "GOOGL",
+        "AMZN",
+        "TSLA",
+        "META",
+        "NVDA",
+        "NFLX",
+        "V",
+        "JPM",
+      ];
+      const filteredSymbols = mockSymbols.filter((symbol) =>
+        symbol.toLowerCase().includes(query.toLowerCase()),
+      );
+
+      const mockResponse: FinnhubSymbolLookupResponse = {
+        count: filteredSymbols.length,
+        result: filteredSymbols.map((symbol) => ({
+          description: `${symbol} - Mock Company`,
+          displaySymbol: symbol,
+          symbol: symbol,
+          type: "Common Stock",
+        })),
+      };
+
+      setData(mockResponse);
       setError(
         error instanceof Error
-          ? error.message
-          : "Failed to fetch symbol lookup",
+          ? error.message + " - using fallback data"
+          : "Failed to fetch symbol lookup - using fallback data",
       );
-      setData(null);
     } finally {
       setLoading(false);
     }
