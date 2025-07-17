@@ -79,6 +79,18 @@ export const TopNews = () => {
             <div className="flex items-center gap-2">
               <Newspaper className="h-5 w-5" />
               Top Business News
+              <div className="flex gap-1 ml-2">
+                {sources.newsApi.articles.length > 0 && (
+                  <Badge variant="outline" className="text-xs">
+                    NewsAPI: {sources.newsApi.articles.length}
+                  </Badge>
+                )}
+                {sources.yfinance.articles.length > 0 && (
+                  <Badge variant="outline" className="text-xs">
+                    YFinance: {sources.yfinance.articles.length}
+                  </Badge>
+                )}
+              </div>
             </div>
             <Button
               variant="ghost"
