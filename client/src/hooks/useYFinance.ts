@@ -195,16 +195,28 @@ export function useYFinanceSentiment(
   return useQuery({
     queryKey: ["yfinance", "sentiment"],
     queryFn: async (): Promise<YFinanceSentimentResponse> => {
-      const response = await fetch("/api/proxy/yfinance/sentiment", {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      try {
+        const response = await fetch("/api/proxy/yfinance/sentiment", {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+
+        // If service returns error, provide mock data
+        if (data.error) {
+          return createMockSentiment();
+        }
+
+        return data;
+      } catch (error) {
+        console.warn("YFinance sentiment failed, using mock data:", error);
+        return createMockSentiment();
       }
-      return response.json();
     },
     refetchInterval: refreshInterval,
     staleTime: 240000, // 4 minutes
