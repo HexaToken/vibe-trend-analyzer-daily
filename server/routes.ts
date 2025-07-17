@@ -90,20 +90,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Polygon.io proxy endpoints
-  app.get("/api/proxy/polygon/tickers", async (req, res) => {
+  // Alpha Vantage API endpoint
+  app.get("/api/proxy/alphavantage/timeseries", async (req, res) => {
     try {
       const { 
-        market = "stocks", 
-        active = "true", 
-        order = "asc", 
-        limit = "100", 
-        sort = "ticker" 
+        function: func = "TIME_SERIES_DAILY", 
+        symbol = "IBM" 
       } = req.query;
-      const apiKey = "ABeiglsv3LqhpieYSQiAYW9c0IhcpzaX";
+      const apiKey = "YXENKKV17LXG1NL7";
       
       const response = await fetch(
-        `https://api.polygon.io/v3/reference/tickers?market=${market}&active=${active}&order=${order}&limit=${limit}&sort=${sort}&apiKey=${apiKey}`,
+        `https://www.alphavantage.co/query?function=${func}&symbol=${symbol}&apikey=${apiKey}`,
         {
           headers: {
             "Accept": "application/json",
@@ -112,79 +109,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
       );
 
       if (!response.ok) {
-        throw new Error(`Polygon API error: ${response.status}`);
+        throw new Error(`Alpha Vantage API error: ${response.status}`);
       }
 
       const data = await response.json();
       res.json(data);
     } catch (error) {
-      console.error("Polygon API error:", error);
+      console.error("Alpha Vantage API error:", error);
       res.status(500).json({ 
-        error: "Failed to fetch stock tickers",
-        message: error instanceof Error ? error.message : "Unknown error"
-      });
-    }
-  });
-
-  app.get("/api/proxy/polygon/dividends", async (req, res) => {
-    try {
-      const { ticker = "AAPL" } = req.query;
-      const apiKey = "ABeiglsv3LqhpieYSQiAYW9c0IhcpzaX";
-      
-      const response = await fetch(
-        `https://api.polygon.io/v3/reference/dividends?ticker=${ticker}&apikey=${apiKey}`,
-        {
-          headers: {
-            "Accept": "application/json",
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`Polygon API error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      res.json(data);
-    } catch (error) {
-      console.error("Polygon API error:", error);
-      res.status(500).json({ 
-        error: "Failed to fetch dividend data",
-        message: error instanceof Error ? error.message : "Unknown error"
-      });
-    }
-  });
-
-  // Polygon.io quotes endpoint
-  app.get("/api/proxy/polygon/quotes/:ticker", async (req, res) => {
-    try {
-      const { ticker } = req.params;
-      const { 
-        order = "asc", 
-        limit = "10", 
-        sort = "timestamp" 
-      } = req.query;
-      const apiKey = "ABeiglsv3LqhpieYSQiAYW9c0IhcpzaX";
-      
-      const response = await fetch(
-        `https://api.polygon.io/v3/quotes/${ticker}?order=${order}&limit=${limit}&sort=${sort}&apikey=${apiKey}`,
-        {
-          headers: {
-            "Accept": "application/json",
-          },
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`Polygon API error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      res.json(data);
-    } catch (error) {
-      console.error("Polygon quotes API error:", error);
-      res.status(500).json({ 
-        error: "Failed to fetch stock quotes",
+        error: "Failed to fetch stock data",
         message: error instanceof Error ? error.message : "Unknown error"
       });
     }
