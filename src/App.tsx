@@ -56,6 +56,8 @@ const App = () => {
         return <TwelveDataDemo />;
       case "crypto":
         return <CryptoDashboard />;
+      case "serpapi":
+        return <SerpApiDemo />;
       default:
         return <Dashboard />;
     }
