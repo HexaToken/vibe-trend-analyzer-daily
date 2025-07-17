@@ -12,6 +12,7 @@ import { VibeSummary } from "./VibeSummary";
 import { TopNews } from "./TopNews";
 import { currentMoodScore, sentimentSources, weeklyTrend, vibePhrases, regions, topics } from "@/data/mockData";
 import { useStockSentiment } from "@/hooks/useStockSentiment";
+import { useYCNBCSentiment } from "@/hooks/useYCNBC";
 
 export const Dashboard = () => {
   const [selectedRegion, setSelectedRegion] = useState("GLOBAL");
@@ -21,8 +22,11 @@ export const Dashboard = () => {
   
   // Get real-time stock sentiment data
   const { data: stockSentimentData, loading: stockLoading } = useStockSentiment(300000); // 5 minutes
+  
+  // Get YCNBC sentiment data
+  const { data: ycnbcSentimentData, isLoading: ycnbcLoading } = useYCNBCSentiment(300000); // 5 minutes
 
-  // Update sentiment sources with real stock market data
+  // Update sentiment sources with real stock market and YCNBC data
   const updatedSentimentSources = sentimentSources.map(source => {
     if (source.name === "Stock Market" && stockSentimentData) {
       return {
@@ -30,6 +34,14 @@ export const Dashboard = () => {
         score: stockSentimentData.score,
         change: stockSentimentData.change,
         samples: stockSentimentData.samples
+      };
+    }
+    if (source.name === "News" && ycnbcSentimentData && !ycnbcSentimentData.error && ycnbcSentimentData.sentiment_score !== undefined) {
+      return {
+        ...source,
+        score: ycnbcSentimentData.sentiment_score,
+        change: ycnbcSentimentData.raw_sentiment * 100, // Convert to percentage
+        samples: ycnbcSentimentData.article_count
       };
     }
     return source;

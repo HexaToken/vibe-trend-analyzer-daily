@@ -33,6 +33,7 @@ import {
   Users2,
   UserPlus,
   Coins,
+  Globe,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { AuthModal } from "@/components/auth/AuthModal";
@@ -64,6 +65,7 @@ export const Navigation = ({
       { id: "finnhub", label: "Finnhub Stock Data", icon: TrendingUp, badge: "NEW" },
       { id: "sentiment-scoring", label: "Stock Sentiment Scoring", icon: BarChart3, badge: "NEW" },
       { id: "ai-analysis", label: "AI Sentiment Analysis", icon: Brain, badge: "NEW" },
+      { id: "ycnbc", label: "YCNBC Integration", icon: Globe, badge: "NEW" },
       { id: "history", label: "Historical Data", icon: Calendar },
       { id: "database", label: "Database Demo", icon: Database, badge: "DEMO" },
     ],

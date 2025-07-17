@@ -118,6 +118,15 @@ The application integrates with multiple external services:
   - Sentiment labels: Bullish (+30 to +50), Cautiously Optimistic (+10 to +29), Neutral (-9 to +9), Cautiously Bearish (-10 to -29), Bearish (-30 to -50)
   - Uses real-time Finnhub API data for AAPL, MSFT, GOOGL, AMZN, NVDA, TSLA, META, BRK.B, AVGO, JPM
   - Added menu item "Stock Sentiment Scoring" with comprehensive methodology documentation
+- **2025-01-17**: Successfully installed and integrated ycnbc package (v1.0.9) for enhanced CNBC data access
+  - Installed ycnbc Python package providing CNBC news, market data, and quotes
+  - Created YCNBCService with comprehensive news sentiment analysis and market data integration
+  - Implemented server proxy endpoints: /api/proxy/ycnbc/news/latest, /api/proxy/ycnbc/sentiment
+  - Added YCNBCDemo component with tabs for latest news, trending stories, and sentiment analysis
+  - Integrated YCNBC sentiment data into main dashboard sentiment sources
+  - Created useYCNBC hooks for data fetching with proper error handling and caching
+  - Enhanced news sentiment data sources documentation showing NewsAPI.org integration with 80,000+ sources
+  - Added detailed news source modal with API endpoints, processing pipeline, and integration details
 
 ## User Preferences
 - Language: English

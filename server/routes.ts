@@ -90,6 +90,73 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // YCNBC proxy endpoints
+  app.get("/api/proxy/ycnbc/news/latest", async (req, res) => {
+    try {
+      const { spawn } = await import('child_process');
+      const python = spawn('python3', ['-c', `
+import sys
+import os
+sys.path.insert(0, os.path.join(os.getcwd(), '.pythonlibs', 'lib', 'python3.11', 'site-packages'))
+sys.path.insert(0, os.getcwd())
+from server.ycnbc_service import ycnbc_service
+import json
+result = ycnbc_service.get_latest_news()
+print(json.dumps(result))
+      `]);
+      
+      let output = '';
+      python.stdout.on('data', (data: any) => {
+        output += data.toString();
+      });
+      
+      python.on('close', (code: number) => {
+        try {
+          const result = JSON.parse(output.trim().split('\n').pop() || '{}');
+          res.json(result);
+        } catch (e) {
+          res.status(500).json({ error: "Failed to parse YCNBC news data" });
+        }
+      });
+    } catch (error) {
+      console.error("YCNBC latest news proxy error:", error);
+      res.status(500).json({ error: "Failed to fetch YCNBC latest news" });
+    }
+  });
+
+  app.get("/api/proxy/ycnbc/sentiment", async (req, res) => {
+    try {
+      const { spawn } = await import('child_process');
+      const python = spawn('python3', ['-c', `
+import sys
+import os
+sys.path.insert(0, os.path.join(os.getcwd(), '.pythonlibs', 'lib', 'python3.11', 'site-packages'))
+sys.path.insert(0, os.getcwd())
+from server.ycnbc_service import ycnbc_service
+import json
+result = ycnbc_service.get_enhanced_sentiment_data()
+print(json.dumps(result))
+      `]);
+      
+      let output = '';
+      python.stdout.on('data', (data: any) => {
+        output += data.toString();
+      });
+      
+      python.on('close', (code: number) => {
+        try {
+          const result = JSON.parse(output.trim().split('\n').pop() || '{}');
+          res.json(result);
+        } catch (e) {
+          res.status(500).json({ error: "Failed to parse YCNBC sentiment data" });
+        }
+      });
+    } catch (error) {
+      console.error("YCNBC sentiment proxy error:", error);
+      res.status(500).json({ error: "Failed to fetch YCNBC sentiment data" });
+    }
+  });
+
   // Finnhub API endpoints
   app.get("/api/proxy/finnhub/symbol-lookup", async (req, res) => {
     try {
