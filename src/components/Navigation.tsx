@@ -81,6 +81,12 @@ export const Navigation = ({
         icon: Analytics,
         badge: "API",
       },
+      {
+        id: "serpapi",
+        label: "SerpAPI News Demo",
+        icon: Brain,
+        badge: "NEW",
+      },
       { id: "settings", label: "Settings", icon: Settings },
     ],
   };
