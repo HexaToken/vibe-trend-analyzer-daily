@@ -67,6 +67,10 @@ The application integrates with multiple external services:
   - Updated stock price components: RealTimePrice, InlinePrice, InlineCryptoPrice
   - Updated NewsAPI components: TopNews, NewsDemo with explicit 3-minute intervals
   - Improved API rate limiting and reduced server load
+- **2025-01-17**: Updated popular stocks display to show top 10 only
+  - Modified popularStocks array in TwelveDataDemo to include top 10 stocks
+  - Updated PostComposer popularTickers to match top 10 stocks
+  - Ensured consistent display of exactly 10 popular stocks across all components
 
 ## User Preferences
 - Language: English

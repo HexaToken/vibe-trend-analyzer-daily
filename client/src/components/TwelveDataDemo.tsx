@@ -41,8 +41,8 @@ export const TwelveDataDemo = () => {
   // Get API status directly without storing in state to avoid infinite loops
   const apiStatus = stockDataFallback.getStatus();
 
-  // Test popular stocks
-  const popularStocks = ["AAPL", "GOOGL", "MSFT", "TSLA", "NVDA", "AMZN"];
+  // Test popular stocks - Top 10 only
+  const popularStocks = ["AAPL", "GOOGL", "MSFT", "TSLA", "NVDA", "AMZN", "META", "NFLX", "SPY", "QQQ"];
   const {
     tickers: popularTickers,
     loading: popularLoading,
@@ -260,9 +260,9 @@ export const TwelveDataDemo = () => {
       {/* Popular Stocks Grid */}
       <Card>
         <CardHeader>
-          <CardTitle>Popular Stocks</CardTitle>
+          <CardTitle>Popular Stocks - Top 10</CardTitle>
           <CardDescription>
-            Real-time data for popular stocks (auto-refreshing every 30 seconds)
+            Real-time data for the top 10 most popular stocks (auto-refreshing every 3 minutes)
           </CardDescription>
         </CardHeader>
         <CardContent>

@@ -154,8 +154,8 @@ export const PostComposer = ({
     }, 0);
   };
 
-  // Popular tickers for quick insertion
-  const popularTickers = ["AAPL", "TSLA", "NVDA", "BTC", "ETH", "SPY", "QQQ"];
+  // Popular tickers for quick insertion - Top 10 only
+  const popularTickers = ["AAPL", "GOOGL", "MSFT", "TSLA", "NVDA", "AMZN", "META", "NFLX", "SPY", "QQQ"];
 
   // Emoji shortcodes
   const quickEmojis = ["🚀", "📈", "📉", "💎", "🔥", "💰", "⚡", "🌙"];
