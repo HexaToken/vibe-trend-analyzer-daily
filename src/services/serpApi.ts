@@ -1,6 +1,8 @@
 // SerpAPI Google News Service
 // Documentation: https://serpapi.com/search?engine=google_news
 
+import { nlpSentimentAnalyzer } from "./nlpSentimentAnalysis";
+
 const API_KEY = import.meta.env.VITE_SERPAPI_KEY || "demo_api_key";
 const BASE_URL = "https://serpapi.com/search";
 
