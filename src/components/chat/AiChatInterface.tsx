@@ -38,7 +38,7 @@ export const AiChatInterface = () => {
       id: "welcome",
       type: "assistant",
       content:
-        "Hi! I'm your MoodMeter AI assistant. I can help you with:\n\n• Analyzing sentiment for specific tickers (e.g., \"What's the mood for $AAPL?\")\n• Summarizing FinTwits Social posts\n• Recommending watchlist additions\n• Providing app guidance and onboarding help\n\nWhat would you like to know?",
+        "Hi! I'm your MoodMeter AI assistant, powered by DeepSeek. I can help you with:\n\n• Analyzing sentiment for specific tickers (e.g., \"What's the mood for $AAPL?\")\n• Summarizing FinTwits Social posts\n• Recommending watchlist additions based on trends\n• Providing detailed app guidance and market insights\n• Answering general financial questions\n\nWhat would you like to know?",
       timestamp: new Date(),
       suggestions: [
         "What's the sentiment for $AAPL?",
