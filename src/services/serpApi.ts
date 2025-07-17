@@ -1,7 +1,7 @@
 // SerpAPI Google News Service
 // Documentation: https://serpapi.com/search?engine=google_news
 
-const API_KEY = process.env.VITE_SERPAPI_KEY || "demo_api_key";
+const API_KEY = import.meta.env.VITE_SERPAPI_KEY || "demo_api_key";
 const BASE_URL = "https://serpapi.com/search";
 
 // SerpAPI Response Types
