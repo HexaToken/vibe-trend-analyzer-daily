@@ -17,7 +17,7 @@ export const RealTimePrice = ({
   symbol,
   size = "md",
   showRefresh = false,
-  refreshInterval = 30000,
+  refreshInterval = 180000, // 3 minutes
   className,
 }: RealTimePriceProps) => {
   const { ticker, loading, error, refetch } = useQuote(symbol, {
@@ -169,7 +169,7 @@ export const InlinePrice = ({
   className?: string;
 }) => {
   const { ticker, loading, error } = useQuote(symbol, {
-    refreshInterval: 120000, // Refresh every 2 minutes for inline prices (Alpha Vantage has lower rate limits)
+    refreshInterval: 180000, // Refresh every 3 minutes for inline prices (Alpha Vantage has lower rate limits)
     enabled: true,
   });
 

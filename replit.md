@@ -60,6 +60,13 @@ The application integrates with multiple external services:
   - Added proper error handling with fallback mechanisms
   - Created new PolygonDividendsDemo component for dividend data
   - Added component to navigation menu
+- **2025-01-17**: Updated API polling intervals to 3 minutes
+  - Changed all API refresh intervals from various shorter intervals to 180,000ms (3 minutes)
+  - Updated CoinMarketCap hooks: usePopularCryptos, useRealTimeCryptos
+  - Updated TwelveData hooks: useRealTimeQuotes, useWatchlistRealTime  
+  - Updated stock price components: RealTimePrice, InlinePrice, InlineCryptoPrice
+  - Updated NewsAPI components: TopNews, NewsDemo with explicit 3-minute intervals
+  - Improved API rate limiting and reduced server load
 
 ## User Preferences
 - Language: English

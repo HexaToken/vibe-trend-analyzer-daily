@@ -407,7 +407,7 @@ export function useTimeSeries(
  */
 export function useRealTimeQuotes(
   symbols: string[],
-  refreshIntervalMs: number = 30000,
+  refreshIntervalMs: number = 180000, // 3 minutes
 ) {
   return useMultipleQuotes(symbols, {
     refreshInterval: refreshIntervalMs,
@@ -422,7 +422,7 @@ export function useWatchlistRealTime(watchlistSymbols: string[]) {
   const [isMarketOpen, setIsMarketOpen] = useState(true); // You could fetch this from market state API
 
   // Use faster refresh during market hours, slower when closed
-  const refreshInterval = isMarketOpen ? 30000 : 300000; // 30 seconds vs 5 minutes
+  const refreshInterval = isMarketOpen ? 180000 : 300000; // 3 minutes vs 5 minutes
 
   return useMultipleQuotes(watchlistSymbols, {
     refreshInterval,

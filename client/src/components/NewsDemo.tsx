@@ -34,7 +34,9 @@ export const NewsDemo = () => {
     loading: businessLoading,
     error: businessError,
     refetch: refetchBusiness,
-  } = useBusinessNews();
+  } = useBusinessNews({
+    refreshInterval: 180000, // Refresh every 3 minutes
+  });
 
   // Get technology news
   const {
@@ -42,7 +44,9 @@ export const NewsDemo = () => {
     loading: techLoading,
     error: techError,
     refetch: refetchTech,
-  } = useTechnologyNews();
+  } = useTechnologyNews({
+    refreshInterval: 180000, // Refresh every 3 minutes
+  });
 
   // Search news
   const {

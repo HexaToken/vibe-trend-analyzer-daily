@@ -18,7 +18,7 @@ export const TopNews = () => {
 
   // Get real business news from NewsAPI
   const { articles, loading, error, refetch } = useBusinessNews({
-    refreshInterval: 300000, // Refresh every 5 minutes
+    refreshInterval: 180000, // Refresh every 3 minutes
     enabled: true,
   });
 

@@ -405,7 +405,7 @@ export function useGlobalMetrics(
  */
 export function usePopularCryptos(
   limit: number = 10,
-  refreshIntervalMs: number = 60000,
+  refreshIntervalMs: number = 180000, // 3 minutes
 ) {
   return useCryptoListings(limit, {
     refreshInterval: refreshIntervalMs,
@@ -418,7 +418,7 @@ export function usePopularCryptos(
  */
 export function useRealTimeCryptos(
   symbols: string[],
-  refreshIntervalMs: number = 60000,
+  refreshIntervalMs: number = 180000, // 3 minutes
 ) {
   return useCryptoQuotes(symbols, {
     refreshInterval: refreshIntervalMs,

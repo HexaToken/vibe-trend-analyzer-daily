@@ -185,7 +185,7 @@ export const InlineCryptoPrice = ({
   className?: string;
 }) => {
   const { tickers, loading, error } = useCryptoQuotes([symbol], {
-    refreshInterval: 120000, // Refresh every 2 minutes for inline prices
+    refreshInterval: 180000, // Refresh every 3 minutes for inline prices
     enabled: true,
   });
 
