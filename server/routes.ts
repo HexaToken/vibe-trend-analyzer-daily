@@ -293,14 +293,6 @@ import sys
 import os
 sys.path.insert(0, os.path.join(os.getcwd(), '.pythonlibs', 'lib', 'python3.11', 'site-packages'))
 sys.path.insert(0, os.getcwd())
-
-# Debug: Check yfinance availability
-try:
-    import yfinance as yf
-    print("yfinance imported successfully", file=sys.stderr)
-except ImportError as e:
-    print(f"yfinance import failed: {e}", file=sys.stderr)
-
 from server.yfinance_service import yfinance_service
 import json
 result = yfinance_service.get_enhanced_sentiment_data()
