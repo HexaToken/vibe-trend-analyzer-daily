@@ -314,7 +314,12 @@ export function SerpApiDemo() {
             </CardHeader>
             <CardContent>
               {serpBusinessLoading ? (
-                <LoadingCard />
+                <div className="text-center py-8">
+                  <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-2 text-muted-foreground" />
+                  <p className="text-muted-foreground">
+                    Loading business news...
+                  </p>
+                </div>
               ) : (
                 <div className="space-y-4">
                   {serpBusinessNews
