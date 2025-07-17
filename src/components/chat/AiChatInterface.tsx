@@ -138,7 +138,7 @@ export const AiChatInterface = () => {
               )}
 
               <div
-                className={`max-w-[80%] ${message.type === "user" ? "order-1" : ""}`}
+                className={`max-w-[80%] min-w-0 ${message.type === "user" ? "order-1" : ""}`}
               >
                 <Card
                   className={`${
@@ -148,7 +148,7 @@ export const AiChatInterface = () => {
                   }`}
                 >
                   <CardContent className="p-3">
-                    <div className="whitespace-pre-wrap text-sm">
+                    <div className="whitespace-pre-wrap text-sm break-words overflow-hidden">
                       {message.content}
                     </div>
 
