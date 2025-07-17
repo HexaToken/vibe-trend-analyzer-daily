@@ -147,15 +147,21 @@ class CoinMarketCapService {
   private circuitBreaker = {
     isOpen: false,
     failureCount: 0,
-    threshold: 5,
-    timeout: 60000, // 1 minute
+    threshold: 3, // Lower threshold for faster fallback
+    timeout: 120000, // 2 minutes
     lastFailureTime: 0
   };
+  private proxyAvailable: boolean | null = null; // Track proxy availability
 
   private async fetchFromApi<T>(
     endpoint: string,
     params: Record<string, string> = {},
   ): Promise<T> {
+    // If proxy is known to be unavailable, fail immediately
+    if (this.proxyAvailable === false) {
+      throw new CoinMarketCapApiError("CoinMarketCap proxy is not available - using mock data");
+    }
+
     // Check circuit breaker
     if (this.circuitBreaker.isOpen) {
       const now = Date.now();
@@ -186,7 +192,28 @@ class CoinMarketCapService {
         );
       }
 
-      const data = await response.json();
+      const responseText = await response.text();
+      
+      // Check if response is HTML (proxy returning error page)
+      if (responseText.trim().startsWith('<!DOCTYPE') || responseText.trim().startsWith('<html')) {
+        this.proxyAvailable = false; // Mark proxy as unavailable
+        throw new CoinMarketCapApiError(
+          "API proxy returned HTML instead of JSON - service may be unavailable",
+          500,
+          "proxy_error"
+        );
+      }
+
+      let data;
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        throw new CoinMarketCapApiError(
+          "Invalid JSON response from API",
+          500,
+          "parse_error"
+        );
+      }
 
       // Check for API errors
       if (data.status && data.status.error_code !== 0) {
@@ -199,6 +226,7 @@ class CoinMarketCapService {
 
       // Reset failure count on success
       this.circuitBreaker.failureCount = 0;
+      this.proxyAvailable = true; // Mark proxy as available
       return data;
     } catch (error) {
       // Update circuit breaker on failure
