@@ -105,11 +105,19 @@ The application integrates with multiple external services:
 - **2025-01-17**: Replaced Alpha Vantage with Finnhub API integration
   - Removed all Alpha Vantage endpoints, components, and services
   - Created new Finnhub API endpoints: /symbol-lookup, /quote, /candles
-  - Implemented FinnhubDemo component with symbol search, real-time quotes, and candlestick data
+  - Implemented FinnhubDemo component with symbol search, real-time quotes, and 3-day price averaging
   - Added useFinnhub hooks with proper rate limiting and error handling
   - Updated navigation menu item to "Finnhub Stock Data"
   - API Key: d1sgqohr01qkbods878gd1sgqohr01qkbods8790
-  - Features: Symbol lookup (like "apple" search), real-time quotes, historical candle data
+  - Features: Symbol lookup, real-time quotes, 3-day price history calculations
+- **2025-01-17**: Implemented Stock Market Sentiment Scoring Module
+  - Created StockSentimentScoring component analyzing top 10 US stocks by market cap
+  - Implemented normalized scoring system from -50 to +50 based on daily price performance
+  - Scoring logic: +3%+ → +10, +1% to +3% → +5, -1% to +1% → 0, -1% to -3% → -5, -3%- → -10
+  - Final score calculation: Average across 10 stocks × 5 for -50 to +50 range
+  - Sentiment labels: Bullish (+30 to +50), Cautiously Optimistic (+10 to +29), Neutral (-9 to +9), Cautiously Bearish (-10 to -29), Bearish (-30 to -50)
+  - Uses real-time Finnhub API data for AAPL, MSFT, GOOGL, AMZN, NVDA, TSLA, META, BRK.B, AVGO, JPM
+  - Added menu item "Stock Sentiment Scoring" with comprehensive methodology documentation
 
 ## User Preferences
 - Language: English

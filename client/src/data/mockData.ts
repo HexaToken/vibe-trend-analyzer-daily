@@ -55,6 +55,7 @@ export const sentimentSources: SentimentSource[] = [
     change: 8.4,
     icon: "📈",
     samples: 12340,
+    description: "Legacy sentiment score (to be replaced by new scoring module)"
   },
 ];
 
