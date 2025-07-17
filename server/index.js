@@ -184,4 +184,5 @@ app.listen(PORT, () => {
   console.log(`🚀 Proxy server running on port ${PORT}`);
   console.log(`📈 CoinMarketCap proxy endpoints available`);
   console.log(`📰 NewsAPI proxy endpoints available`);
+  console.log(`🔍 SerpAPI Google News proxy endpoints available`);
 });
