@@ -125,9 +125,9 @@ export function useCombinedBusinessNews(
     setCombinedArticles(limitedArticles);
     setCombinedError(errors.length > 0 ? errors.join("; ") : null);
   }, [
-    newsApiResult.articles,
+    newsApiResult.articles.length,
     newsApiResult.error,
-    yfinanceResult.articles,
+    yfinanceResult.articles.length,
     yfinanceResult.error,
     includeNewsApi,
     includeYFinanceNews,
