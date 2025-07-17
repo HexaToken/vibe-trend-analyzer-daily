@@ -613,12 +613,12 @@ async function provideHelp(message) {
   if (lowerMessage.includes("dashboard")) {
     return {
       content:
-        "📊 **Dashboard Help**\n\nThe Dashboard is your main hub for market insights:\n\n• **Real-time Data**: Live stock prices and crypto values\n• **Sentiment Meters**: Visual sentiment indicators\n• **Quick Stats**: Key market metrics at a glance\n• **News Feed**: Latest financial news\n\nNavigate using the top menu or ask me about specific features!",
+        "📊 **Dashboard Guide**\n\nYour main command center for market intelligence:\n\n🎯 **Key Features:**\n• **Real-time Prices**: Live stock & crypto data with price alerts\n• **Sentiment Meters**: Community mood indicators for trending tickers\n• **Market Overview**: Key indices, volume, and volatility metrics\n• **News Integration**: Breaking financial news with sentiment analysis\n• **Quick Actions**: One-click access to trending discussions\n\n💡 **Pro Tips:**\n• Customize your watchlist for personalized insights\n• Use sentiment scores to gauge community mood\n• Set up price alerts for important levels\n• Check news sentiment before major moves\n\n🚀 **Getting Started:**\n1. Add tickers to your watchlist\n2. Monitor sentiment changes\n3. Follow breaking news alerts\n4. Join trending discussions",
       suggestions: [
-        "How do I use Analytics?",
-        "What's in the Social platform?",
-        "How to read sentiment data?",
-        "Getting started guide",
+        "How to customize watchlist?",
+        "What are sentiment scores?",
+        "How to set price alerts?",
+        "Analytics features guide",
       ],
     };
   }
@@ -626,24 +626,63 @@ async function provideHelp(message) {
   if (lowerMessage.includes("social") || lowerMessage.includes("fintwits")) {
     return {
       content:
-        "💬 **Social Platform Help**\n\nFinTwits is our social trading platform:\n\n• **Feed**: See all community posts and discussions\n• **Watchlist**: Track your favorite tickers\n• **Trending**: Discover what's hot in the market\n• **Rooms**: Join themed discussion groups\n\nYou can interact with posts, follow tickers, and join conversations!",
+        "💬 **FinTwits Social Guide**\n\nConnect with the trading community:\n\n🏠 **Main Sections:**\n• **Feed**: Real-time posts from traders and investors\n• **Watchlist**: Track posts about your favorite tickers\n• **Trending**: Discover what's hot in the markets\n• **Rooms**: Join topic-specific discussion groups\n• **Analytics**: Deep dive into social sentiment data\n\n✨ **Key Features:**\n• Follow specific tickers with $SYMBOL format\n• Real-time sentiment analysis on all posts\n• Community-driven insights and predictions\n• Direct interaction with verified traders\n• Trending hashtags and topics\n\n🎯 **Best Practices:**\n• Use $TICKER format for stock discussions\n• Engage respectfully with the community\n• Share insights, not just positions\n• Follow verified and experienced traders\n• Check sentiment before major decisions",
       suggestions: [
-        "How to add to watchlist?",
-        "What are trending tickers?",
+        "How to follow tickers?",
+        "What are verified traders?",
         "How to join rooms?",
-        "Dashboard help",
+        "Understanding sentiment analysis",
+      ],
+    };
+  }
+
+  if (lowerMessage.includes("analytics")) {
+    return {
+      content:
+        "📈 **Analytics Guide**\n\nDeep market analysis tools:\n\n🔍 **Analysis Types:**\n• **Sentiment Analysis**: Community mood tracking for any ticker\n• **Historical Trends**: Price and sentiment correlation over time\n• **Social Volume**: Mentions, engagement, and trending analysis\n• **Comparative Analysis**: Side-by-side ticker comparisons\n• **Prediction Accuracy**: Track community prediction performance\n\n📊 **Key Metrics:**\n• Bullish/Bearish/Neutral sentiment breakdown\n• Social volume vs price correlation\n• Trending score and momentum indicators\n• Community accuracy rates\n• Institutional vs retail sentiment\n\n💡 **How to Use:**\n1. Select tickers for analysis\n2. Choose time frames (1h, 1d, 1w, 1m)\n3. Compare multiple metrics\n4. Export data for further analysis",
+      suggestions: [
+        "How to compare tickers?",
+        "Understanding correlation data?",
+        "How to export analytics?",
+        "Setting up custom alerts?",
+      ],
+    };
+  }
+
+  if (lowerMessage.includes("watchlist") || lowerMessage.includes("alerts")) {
+    return {
+      content:
+        "⭐ **Watchlist & Alerts Guide**\n\nNever miss important market moves:\n\n📋 **Watchlist Features:**\n• Add unlimited tickers to track\n• Real-time price and sentiment updates\n• Custom categories (Tech, Crypto, etc.)\n• Performance tracking and analytics\n• Quick access to ticker discussions\n\n🔔 **Alert Types:**\n• **Price Alerts**: Set target prices for buy/sell levels\n• **Sentiment Alerts**: Get notified of major mood shifts\n• **Volume Alerts**: Track unusual social activity\n• **News Alerts**: Breaking news for your tickers\n• **Trend Alerts**: When tickers start trending\n\n⚙️ **Setup Instructions:**\n1. Click the star icon next to any ticker\n2. Go to your watchlist in the navigation\n3. Set up custom alerts for each ticker\n4. Choose notification preferences\n5. Monitor real-time updates",
+      suggestions: [
+        "How to organize watchlists?",
+        "Setting up price alerts?",
+        "Managing notifications?",
+        "Watchlist vs trending?",
+      ],
+    };
+  }
+
+  if (lowerMessage.includes("sentiment") || lowerMessage.includes("mood")) {
+    return {
+      content:
+        "🌡️ **Sentiment Analysis Guide**\n\nUnderstand market psychology:\n\n📊 **Sentiment Scores:**\n• **+100 to +50**: Strong Bullish (🟢)\n• **+49 to +10**: Mild Bullish (🟢)\n• **+9 to -9**: Neutral (🟡)\n• **-10 to -49**: Mild Bearish (🔴)\n• **-50 to -100**: Strong Bearish (🔴)\n\n🧠 **How It Works:**\n• AI analyzes every post mentioning a ticker\n• Natural language processing detects emotional tone\n• Weighted by user credibility and engagement\n• Updated in real-time as new posts arrive\n• Historical tracking shows sentiment trends\n\n💡 **Trading Insights:**\n• Extreme sentiment often signals reversals\n• Sentiment shifts can precede price moves\n• Compare sentiment vs actual price action\n• Use as one factor in trading decisions\n• Community sentiment ≠ guaranteed outcomes",
+      suggestions: [
+        "How accurate is sentiment?",
+        "Best times to check sentiment?",
+        "Sentiment vs technical analysis?",
+        "Historical sentiment data?",
       ],
     };
   }
 
   return {
     content:
-      "🚀 **Getting Started with MoodMeter**\n\n**Main Features:**\n• **Dashboard**: Real-time market data and sentiment\n• **Social (FinTwits)**: Community trading discussions\n• **Analytics**: Deep market analysis tools\n• **Profile**: Manage your preferences\n\n**Pro Tips:**\n• Use $ before ticker symbols (e.g., $AAPL)\n• Check sentiment before making decisions\n• Follow trending discussions\n• Build your watchlist\n\nWhat specific area would you like help with?",
+      "🚀 **MoodMeter Complete Guide**\n\n**🏠 Main Sections:**\n• **Dashboard**: Market overview, news, sentiment meters\n• **Social (FinTwits)**: Community discussions and insights\n• **Analytics**: Deep market and sentiment analysis\n• **Crypto**: Digital asset tracking and analysis\n• **Profile**: Personal settings and preferences\n\n**🎯 Quick Start (5 minutes):**\n1. **Add Tickers**: Click ⭐ to build your watchlist\n2. **Check Sentiment**: Look for 🟢🟡🔴 mood indicators\n3. **Join Discussions**: Engage in $TICKER conversations\n4. **Set Alerts**: Get notified of important moves\n5. **Explore Analytics**: Discover trends and correlations\n\n**💡 Pro Tips:**\n• Use $TICKER format for any stock/crypto symbol\n• Check sentiment before major trading decisions\n• Follow verified traders for quality insights\n• Combine sentiment with technical analysis\n• Set up alerts for your key positions\n\n**🔧 Need Help?**\nJust ask me about any specific feature or say 'help with [topic]'!",
     suggestions: [
-      "How do I use the Dashboard?",
-      "What's the Social platform?",
-      "How to read Analytics?",
-      "Profile and settings help",
+      "Dashboard walkthrough",
+      "Social platform tour",
+      "Analytics deep dive",
+      "Sentiment analysis guide",
     ],
   };
 }
