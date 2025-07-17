@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useBusinessNews } from "./useNewsApi";
 import { useYFinanceNews } from "./useYFinanceNews";
 import { NewsArticle } from "../data/mockData";
@@ -56,11 +56,8 @@ export function useCombinedBusinessNews(
     enabled: enabled && includeYFinanceNews,
   });
 
-  const [combinedArticles, setCombinedArticles] = useState<NewsArticle[]>([]);
-  const [combinedError, setCombinedError] = useState<string | null>(null);
-
-  // Combine and deduplicate articles
-  const combineArticles = useCallback(() => {
+  // Memoize the combined articles to prevent unnecessary recalculations
+  const combinedData = useMemo(() => {
     const allArticles: NewsArticle[] = [];
     const errors: string[] = [];
 
@@ -122,21 +119,19 @@ export function useCombinedBusinessNews(
     // Limit the number of articles
     const limitedArticles = uniqueArticles.slice(0, maxArticles);
 
-    setCombinedArticles(limitedArticles);
-    setCombinedError(errors.length > 0 ? errors.join("; ") : null);
+    return {
+      articles: limitedArticles,
+      error: errors.length > 0 ? errors.join("; ") : null,
+    };
   }, [
-    newsApiResult.articles.length,
+    newsApiResult.articles,
     newsApiResult.error,
-    yfinanceResult.articles.length,
+    yfinanceResult.articles,
     yfinanceResult.error,
     includeNewsApi,
     includeYFinanceNews,
     maxArticles,
   ]);
-
-  useEffect(() => {
-    combineArticles();
-  }, [combineArticles]);
 
   const refetch = useCallback(async () => {
     const promises: Promise<void>[] = [];
@@ -151,18 +146,18 @@ export function useCombinedBusinessNews(
 
     await Promise.all(promises);
   }, [
-    newsApiResult.refetch,
-    yfinanceResult.refetch,
     includeNewsApi,
     includeYFinanceNews,
+    newsApiResult.refetch,
+    yfinanceResult.refetch,
   ]);
 
   return {
-    articles: combinedArticles,
+    articles: combinedData.articles,
     loading:
       (includeNewsApi ? newsApiResult.loading : false) ||
       (includeYFinanceNews ? yfinanceResult.loading : false),
-    error: combinedError,
+    error: combinedData.error,
     refetch,
     sources: {
       newsApi: {
