@@ -30,7 +30,6 @@ import {
   useCombinedTopNews,
   useCombinedNewsSearch,
 } from "@/hooks/useCombinedNews";
-import { LoadingCard } from "./LoadingCard";
 
 export function SerpApiDemo() {
   const [searchQuery, setSearchQuery] = useState("");
