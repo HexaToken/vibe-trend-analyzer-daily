@@ -27,19 +27,25 @@ import {
 export const YFinanceDemo = () => {
   const [selectedTab, setSelectedTab] = useState("overview");
   const [tickerSymbol, setTickerSymbol] = useState("AAPL");
-  const { latestNews, stockNews, sentiment, isLoading, isError } = useYFinanceData(300000); // 5 minutes
+  const { latestNews, stockNews, sentiment, isLoading, isError } =
+    useYFinanceData(300000); // 5 minutes
   const tickerInfo = useYFinanceTickerInfo(tickerSymbol);
-  
-  // Check if any of the individual queries have errors
-  const hasActualError = (latestNews.error || stockNews.error || sentiment.error) && 
-                        !(latestNews.data || stockNews.data || sentiment.data);
 
-  const formatSentimentScore = (score: number): { label: string; color: string } => {
+  // Check if any of the individual queries have errors
+  const hasActualError =
+    (latestNews.error || stockNews.error || sentiment.error) &&
+    !(latestNews.data || stockNews.data || sentiment.data);
+
+  const formatSentimentScore = (
+    score: number,
+  ): { label: string; color: string } => {
     if (score >= 75) return { label: "Very Positive", color: "text-green-600" };
     if (score >= 60) return { label: "Positive", color: "text-green-500" };
-    if (score >= 45) return { label: "Slightly Positive", color: "text-blue-500" };
+    if (score >= 45)
+      return { label: "Slightly Positive", color: "text-blue-500" };
     if (score >= 35) return { label: "Neutral", color: "text-gray-500" };
-    if (score >= 25) return { label: "Slightly Negative", color: "text-orange-500" };
+    if (score >= 25)
+      return { label: "Slightly Negative", color: "text-orange-500" };
     if (score >= 15) return { label: "Negative", color: "text-red-500" };
     return { label: "Very Negative", color: "text-red-600" };
   };
@@ -61,7 +67,8 @@ export const YFinanceDemo = () => {
           YFinance Integration Demo
         </h2>
         <p className="text-muted-foreground max-w-3xl mx-auto">
-          Enhanced financial data integration using the yfinance Python package for real-time market news sentiment analysis and stock data.
+          Enhanced financial data integration using the yfinance Python package
+          for real-time market news sentiment analysis and stock data.
         </p>
       </div>
 
@@ -81,7 +88,15 @@ export const YFinanceDemo = () => {
             </div>
           </CardHeader>
           <CardContent>
-            <Badge variant={hasActualError ? "destructive" : isLoading ? "secondary" : "default"}>
+            <Badge
+              variant={
+                hasActualError
+                  ? "destructive"
+                  : isLoading
+                    ? "secondary"
+                    : "default"
+              }
+            >
               {hasActualError ? "Error" : isLoading ? "Loading" : "Active"}
             </Badge>
           </CardContent>
@@ -106,8 +121,12 @@ export const YFinanceDemo = () => {
           <CardContent>
             {sentiment.data?.sentiment_score !== undefined ? (
               <div>
-                <div className="text-2xl font-bold">{sentiment.data.sentiment_score}</div>
-                <p className={`text-xs ${formatSentimentScore(sentiment.data.sentiment_score).color}`}>
+                <div className="text-2xl font-bold">
+                  {sentiment.data.sentiment_score}
+                </div>
+                <p
+                  className={`text-xs ${formatSentimentScore(sentiment.data.sentiment_score).color}`}
+                >
                   {formatSentimentScore(sentiment.data.sentiment_score).label}
                 </p>
               </div>
@@ -123,10 +142,19 @@ export const YFinanceDemo = () => {
         <Alert>
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>
-            Unable to connect to YFinance service. This may be due to network issues or service configuration.
-            {latestNews.error && <div className="mt-1">Market News: {latestNews.error.message}</div>}
-            {stockNews.error && <div className="mt-1">Stock News: {stockNews.error.message}</div>}
-            {sentiment.error && <div className="mt-1">Sentiment: {sentiment.error.message}</div>}
+            Unable to connect to YFinance service. This may be due to network
+            issues or service configuration.
+            {latestNews.error && (
+              <div className="mt-1">
+                Market News: {latestNews.error.message}
+              </div>
+            )}
+            {stockNews.error && (
+              <div className="mt-1">Stock News: {stockNews.error.message}</div>
+            )}
+            {sentiment.error && (
+              <div className="mt-1">Sentiment: {sentiment.error.message}</div>
+            )}
           </AlertDescription>
         </Alert>
       )}
@@ -152,17 +180,29 @@ export const YFinanceDemo = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                {latestNews.data?.articles?.slice(0, 3).map((article, index) => (
-                  <div key={article.id} className="border-b pb-3 mb-3 last:border-b-0 last:mb-0">
-                    <h4 className="font-medium text-sm mb-1 line-clamp-2">{article.headline}</h4>
-                    <div className="flex items-center justify-between text-xs text-muted-foreground">
-                      <span>{formatTime(article.time)}</span>
-                      <Badge variant="outline" className="text-xs">
-                        Sentiment: {article.sentiment_score.toFixed(2)}
-                      </Badge>
+                {latestNews.data?.articles
+                  ?.slice(0, 3)
+                  .map((article, index) => (
+                    <div
+                      key={article.id}
+                      className="border-b pb-3 mb-3 last:border-b-0 last:mb-0"
+                    >
+                      <h4 className="font-medium text-sm mb-1 line-clamp-2">
+                        {article.headline}
+                      </h4>
+                      <div className="flex items-center justify-between text-xs text-muted-foreground">
+                        <span>{formatTime(article.time)}</span>
+                        <Badge variant="outline" className="text-xs">
+                          Sentiment:{" "}
+                          {article.sentiment_score?.toFixed(2) || "N/A"}
+                        </Badge>
+                      </div>
                     </div>
+                  )) || (
+                  <div className="text-sm text-muted-foreground">
+                    Loading news...
                   </div>
-                )) || <div className="text-sm text-muted-foreground">Loading news...</div>}
+                )}
               </CardContent>
             </Card>
 
@@ -176,16 +216,26 @@ export const YFinanceDemo = () => {
               </CardHeader>
               <CardContent>
                 {stockNews.data?.articles?.slice(0, 3).map((article, index) => (
-                  <div key={article.id} className="border-b pb-3 mb-3 last:border-b-0 last:mb-0">
-                    <h4 className="font-medium text-sm mb-1 line-clamp-2">{article.headline}</h4>
+                  <div
+                    key={article.id}
+                    className="border-b pb-3 mb-3 last:border-b-0 last:mb-0"
+                  >
+                    <h4 className="font-medium text-sm mb-1 line-clamp-2">
+                      {article.headline}
+                    </h4>
                     <div className="flex items-center justify-between text-xs text-muted-foreground">
                       <span>{formatTime(article.time)}</span>
                       <Badge variant="outline" className="text-xs">
-                        Sentiment: {article.sentiment_score.toFixed(2)}
+                        Sentiment:{" "}
+                        {article.sentiment_score?.toFixed(2) || "N/A"}
                       </Badge>
                     </div>
                   </div>
-                )) || <div className="text-sm text-muted-foreground">Loading stock news...</div>}
+                )) || (
+                  <div className="text-sm text-muted-foreground">
+                    Loading stock news...
+                  </div>
+                )}
               </CardContent>
             </Card>
           </div>
@@ -197,10 +247,13 @@ export const YFinanceDemo = () => {
               <CardTitle className="flex items-center gap-2">
                 <Activity className="h-5 w-5" />
                 Market News Feed
-                {latestNews.isLoading && <RefreshCw className="h-4 w-4 animate-spin ml-2" />}
+                {latestNews.isLoading && (
+                  <RefreshCw className="h-4 w-4 animate-spin ml-2" />
+                )}
               </CardTitle>
               <p className="text-sm text-muted-foreground">
-                Total: {latestNews.data?.total || 0} market articles from SPY, QQQ, IWM, VIX
+                Total: {latestNews.data?.total || 0} market articles from SPY,
+                QQQ, IWM, VIX
               </p>
             </CardHeader>
             <CardContent>
@@ -223,13 +276,16 @@ export const YFinanceDemo = () => {
               ) : latestNews.data?.articles?.length ? (
                 <div className="space-y-4">
                   {latestNews.data.articles.map((article, index) => (
-                    <div key={article.id} className="border-b pb-4 last:border-b-0">
+                    <div
+                      key={article.id}
+                      className="border-b pb-4 last:border-b-0"
+                    >
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex-1">
                           <h4 className="font-medium mb-2 line-clamp-2">
-                            <a 
-                              href={article.url} 
-                              target="_blank" 
+                            <a
+                              href={article.url}
+                              target="_blank"
                               rel="noopener noreferrer"
                               className="hover:text-blue-600 transition-colors"
                             >
@@ -242,7 +298,8 @@ export const YFinanceDemo = () => {
                               {article.symbol || "Market"}
                             </Badge>
                             <Badge variant="outline">
-                              Sentiment: {article.sentiment_score.toFixed(2)}
+                              Sentiment:{" "}
+                              {article.sentiment_score?.toFixed(2) || "N/A"}
                             </Badge>
                           </div>
                         </div>
@@ -268,7 +325,9 @@ export const YFinanceDemo = () => {
               <CardTitle className="flex items-center gap-2">
                 <TrendingUp className="h-5 w-5" />
                 SPY Stock-Specific News
-                {stockNews.isLoading && <RefreshCw className="h-4 w-4 animate-spin ml-2" />}
+                {stockNews.isLoading && (
+                  <RefreshCw className="h-4 w-4 animate-spin ml-2" />
+                )}
               </CardTitle>
               <p className="text-sm text-muted-foreground">
                 Total: {stockNews.data?.total || 0} SPY-related articles
@@ -294,13 +353,16 @@ export const YFinanceDemo = () => {
               ) : stockNews.data?.articles?.length ? (
                 <div className="space-y-4">
                   {stockNews.data.articles.map((article, index) => (
-                    <div key={article.id} className="border-b pb-4 last:border-b-0">
+                    <div
+                      key={article.id}
+                      className="border-b pb-4 last:border-b-0"
+                    >
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex-1">
                           <h4 className="font-medium mb-2 line-clamp-2">
-                            <a 
-                              href={article.url} 
-                              target="_blank" 
+                            <a
+                              href={article.url}
+                              target="_blank"
                               rel="noopener noreferrer"
                               className="hover:text-blue-600 transition-colors"
                             >
@@ -309,11 +371,10 @@ export const YFinanceDemo = () => {
                           </h4>
                           <div className="flex items-center gap-4 text-sm text-muted-foreground">
                             <span>{formatTime(article.time)}</span>
+                            <Badge variant="outline">{article.source}</Badge>
                             <Badge variant="outline">
-                              {article.source}
-                            </Badge>
-                            <Badge variant="outline">
-                              Sentiment: {article.sentiment_score.toFixed(2)}
+                              Sentiment:{" "}
+                              {article.sentiment_score?.toFixed(2) || "N/A"}
                             </Badge>
                           </div>
                         </div>
@@ -346,9 +407,16 @@ export const YFinanceDemo = () => {
                 <div className="space-y-6">
                   {/* Sentiment Score Display */}
                   <div className="text-center">
-                    <div className="text-6xl font-bold mb-2">{sentiment.data.sentiment_score}</div>
-                    <div className={`text-xl font-medium ${formatSentimentScore(sentiment.data.sentiment_score).color}`}>
-                      {formatSentimentScore(sentiment.data.sentiment_score).label}
+                    <div className="text-6xl font-bold mb-2">
+                      {sentiment.data.sentiment_score}
+                    </div>
+                    <div
+                      className={`text-xl font-medium ${formatSentimentScore(sentiment.data.sentiment_score).color}`}
+                    >
+                      {
+                        formatSentimentScore(sentiment.data.sentiment_score)
+                          .label
+                      }
                     </div>
                     <div className="text-sm text-muted-foreground mt-2">
                       Based on {sentiment.data.article_count} articles
@@ -358,15 +426,25 @@ export const YFinanceDemo = () => {
                   {/* Sentiment Details */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="p-4 border rounded-lg">
-                      <h4 className="font-semibold mb-2">Raw Sentiment Score</h4>
-                      <div className="text-2xl font-bold">{sentiment.data.raw_sentiment.toFixed(3)}</div>
-                      <div className="text-sm text-muted-foreground">(-1.0 to +1.0 scale)</div>
+                      <h4 className="font-semibold mb-2">
+                        Raw Sentiment Score
+                      </h4>
+                      <div className="text-2xl font-bold">
+                        {sentiment.data.raw_sentiment?.toFixed(3) || "N/A"}
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        (-1.0 to +1.0 scale)
+                      </div>
                     </div>
-                    
+
                     <div className="p-4 border rounded-lg">
                       <h4 className="font-semibold mb-2">Articles Analyzed</h4>
-                      <div className="text-2xl font-bold">{sentiment.data.article_count}</div>
-                      <div className="text-sm text-muted-foreground">Market news articles</div>
+                      <div className="text-2xl font-bold">
+                        {sentiment.data.article_count}
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        Market news articles
+                      </div>
                     </div>
                   </div>
 
@@ -374,20 +452,32 @@ export const YFinanceDemo = () => {
                   <div>
                     <h4 className="font-semibold mb-3">Sample Articles Used</h4>
                     <div className="space-y-2">
-                      {sentiment.data.latest_articles?.slice(0, 3).map((article) => (
-                        <div key={article.id} className="text-sm p-3 border rounded-lg">
-                          <div className="font-medium mb-1">{article.headline}</div>
-                          <div className="flex justify-between text-muted-foreground">
-                            <span>Sentiment: {article.sentiment_score.toFixed(2)}</span>
-                            <span>{article.source}</span>
+                      {sentiment.data.latest_articles
+                        ?.slice(0, 3)
+                        .map((article) => (
+                          <div
+                            key={article.id}
+                            className="text-sm p-3 border rounded-lg"
+                          >
+                            <div className="font-medium mb-1">
+                              {article.headline}
+                            </div>
+                            <div className="flex justify-between text-muted-foreground">
+                              <span>
+                                Sentiment:{" "}
+                                {article.sentiment_score?.toFixed(2) || "N/A"}
+                              </span>
+                              <span>{article.source}</span>
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
                     </div>
                   </div>
                 </div>
               ) : (
-                <div className="text-center text-muted-foreground">Loading sentiment analysis...</div>
+                <div className="text-center text-muted-foreground">
+                  Loading sentiment analysis...
+                </div>
               )}
             </CardContent>
           </Card>
@@ -410,11 +500,20 @@ export const YFinanceDemo = () => {
                   <Input
                     placeholder="Enter ticker symbol (e.g., AAPL, TSLA, GOOGL)"
                     value={tickerSymbol}
-                    onChange={(e) => setTickerSymbol(e.target.value.toUpperCase())}
+                    onChange={(e) =>
+                      setTickerSymbol(e.target.value.toUpperCase())
+                    }
                     className="flex-1"
                   />
-                  <Button onClick={() => tickerInfo.refetch()} disabled={tickerInfo.isLoading}>
-                    {tickerInfo.isLoading ? <RefreshCw className="h-4 w-4 animate-spin" /> : <Search className="h-4 w-4" />}
+                  <Button
+                    onClick={() => tickerInfo.refetch()}
+                    disabled={tickerInfo.isLoading}
+                  >
+                    {tickerInfo.isLoading ? (
+                      <RefreshCw className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <Search className="h-4 w-4" />
+                    )}
                   </Button>
                 </div>
               </div>
@@ -446,19 +545,31 @@ export const YFinanceDemo = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <p className="text-sm text-muted-foreground">Symbol</p>
-                        <p className="font-medium">{tickerInfo.data.data.symbol}</p>
+                        <p className="font-medium">
+                          {tickerInfo.data.data.symbol}
+                        </p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Exchange</p>
-                        <p className="font-medium">{tickerInfo.data.data.exchange}</p>
+                        <p className="text-sm text-muted-foreground">
+                          Exchange
+                        </p>
+                        <p className="font-medium">
+                          {tickerInfo.data.data.exchange}
+                        </p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Sector</p>
-                        <p className="font-medium">{tickerInfo.data.data.sector}</p>
+                        <p className="font-medium">
+                          {tickerInfo.data.data.sector}
+                        </p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Industry</p>
-                        <p className="font-medium">{tickerInfo.data.data.industry}</p>
+                        <p className="text-sm text-muted-foreground">
+                          Industry
+                        </p>
+                        <p className="font-medium">
+                          {tickerInfo.data.data.industry}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -471,19 +582,38 @@ export const YFinanceDemo = () => {
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <div>
-                        <p className="text-sm text-muted-foreground">Current Price</p>
-                        <p className="text-2xl font-bold">${tickerInfo.data.data.current_price?.toFixed(2)}</p>
-                      </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground">Price Change</p>
-                        <p className={`text-xl font-medium ${tickerInfo.data.data.price_change >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                          {tickerInfo.data.data.price_change >= 0 ? '+' : ''}${tickerInfo.data.data.price_change?.toFixed(2)}
+                        <p className="text-sm text-muted-foreground">
+                          Current Price
+                        </p>
+                        <p className="text-2xl font-bold">
+                          ${tickerInfo.data.data.current_price?.toFixed(2)}
                         </p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Change %</p>
-                        <p className={`text-xl font-medium ${tickerInfo.data.data.price_change_percent >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                          {tickerInfo.data.data.price_change_percent >= 0 ? '+' : ''}{tickerInfo.data.data.price_change_percent?.toFixed(2)}%
+                        <p className="text-sm text-muted-foreground">
+                          Price Change
+                        </p>
+                        <p
+                          className={`text-xl font-medium ${tickerInfo.data.data.price_change >= 0 ? "text-green-600" : "text-red-600"}`}
+                        >
+                          {tickerInfo.data.data.price_change >= 0 ? "+" : ""}$
+                          {tickerInfo.data.data.price_change?.toFixed(2)}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">
+                          Change %
+                        </p>
+                        <p
+                          className={`text-xl font-medium ${tickerInfo.data.data.price_change_percent >= 0 ? "text-green-600" : "text-red-600"}`}
+                        >
+                          {tickerInfo.data.data.price_change_percent >= 0
+                            ? "+"
+                            : ""}
+                          {tickerInfo.data.data.price_change_percent?.toFixed(
+                            2,
+                          )}
+                          %
                         </p>
                       </div>
                     </div>
@@ -497,28 +627,53 @@ export const YFinanceDemo = () => {
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       <div>
-                        <p className="text-sm text-muted-foreground">Market Cap</p>
-                        <p className="font-medium">${(tickerInfo.data.data.market_cap / 1e9).toFixed(2)}B</p>
+                        <p className="text-sm text-muted-foreground">
+                          Market Cap
+                        </p>
+                        <p className="font-medium">
+                          ${(tickerInfo.data.data.market_cap / 1e9).toFixed(2)}B
+                        </p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">P/E Ratio</p>
-                        <p className="font-medium">{tickerInfo.data.data.pe_ratio?.toFixed(2) || 'N/A'}</p>
+                        <p className="text-sm text-muted-foreground">
+                          P/E Ratio
+                        </p>
+                        <p className="font-medium">
+                          {tickerInfo.data.data.pe_ratio?.toFixed(2) || "N/A"}
+                        </p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">EPS</p>
-                        <p className="font-medium">${tickerInfo.data.data.earnings_per_share?.toFixed(2) || 'N/A'}</p>
+                        <p className="font-medium">
+                          $
+                          {tickerInfo.data.data.earnings_per_share?.toFixed(
+                            2,
+                          ) || "N/A"}
+                        </p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Beta</p>
-                        <p className="font-medium">{tickerInfo.data.data.beta?.toFixed(2) || 'N/A'}</p>
+                        <p className="font-medium">
+                          {tickerInfo.data.data.beta?.toFixed(2) || "N/A"}
+                        </p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">52W High</p>
-                        <p className="font-medium">${tickerInfo.data.data["52_week_high"]?.toFixed(2) || 'N/A'}</p>
+                        <p className="text-sm text-muted-foreground">
+                          52W High
+                        </p>
+                        <p className="font-medium">
+                          $
+                          {tickerInfo.data.data["52_week_high"]?.toFixed(2) ||
+                            "N/A"}
+                        </p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">52W Low</p>
-                        <p className="font-medium">${tickerInfo.data.data["52_week_low"]?.toFixed(2) || 'N/A'}</p>
+                        <p className="font-medium">
+                          $
+                          {tickerInfo.data.data["52_week_low"]?.toFixed(2) ||
+                            "N/A"}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -532,12 +687,25 @@ export const YFinanceDemo = () => {
                       </h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <p className="text-sm text-muted-foreground">Dividend Yield</p>
-                          <p className="font-medium">{(tickerInfo.data.data.dividend_yield * 100).toFixed(2)}%</p>
+                          <p className="text-sm text-muted-foreground">
+                            Dividend Yield
+                          </p>
+                          <p className="font-medium">
+                            {(
+                              tickerInfo.data.data.dividend_yield * 100
+                            ).toFixed(2)}
+                            %
+                          </p>
                         </div>
                         <div>
-                          <p className="text-sm text-muted-foreground">Dividend Rate</p>
-                          <p className="font-medium">${tickerInfo.data.data.dividend_rate?.toFixed(2) || 'N/A'}</p>
+                          <p className="text-sm text-muted-foreground">
+                            Dividend Rate
+                          </p>
+                          <p className="font-medium">
+                            $
+                            {tickerInfo.data.data.dividend_rate?.toFixed(2) ||
+                              "N/A"}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -551,24 +719,40 @@ export const YFinanceDemo = () => {
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <p className="text-sm text-muted-foreground">Employees</p>
-                        <p className="font-medium">{tickerInfo.data.data.full_time_employees?.toLocaleString() || 'N/A'}</p>
+                        <p className="text-sm text-muted-foreground">
+                          Employees
+                        </p>
+                        <p className="font-medium">
+                          {tickerInfo.data.data.full_time_employees?.toLocaleString() ||
+                            "N/A"}
+                        </p>
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Website</p>
                         <p className="font-medium">
                           {tickerInfo.data.data.website ? (
-                            <a href={tickerInfo.data.data.website} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                            <a
+                              href={tickerInfo.data.data.website}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-600 hover:underline"
+                            >
                               View Website
                             </a>
-                          ) : 'N/A'}
+                          ) : (
+                            "N/A"
+                          )}
                         </p>
                       </div>
                     </div>
                     {tickerInfo.data.data.business_summary && (
                       <div className="mt-4">
-                        <p className="text-sm text-muted-foreground mb-2">Business Summary</p>
-                        <p className="text-sm leading-relaxed">{tickerInfo.data.data.business_summary}</p>
+                        <p className="text-sm text-muted-foreground mb-2">
+                          Business Summary
+                        </p>
+                        <p className="text-sm leading-relaxed">
+                          {tickerInfo.data.data.business_summary}
+                        </p>
                       </div>
                     )}
                   </div>

@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { NewsDetailModal } from "./NewsDetailModal";
 import { useBusinessNews } from "@/hooks/useNewsApi";
+import { newsArticles } from "@/data/mockData";
 
 export const TopNews = () => {
   const [selectedArticle, setSelectedArticle] = useState<any>(null);
@@ -21,6 +22,19 @@ export const TopNews = () => {
     refreshInterval: 180000, // Refresh every 3 minutes
     enabled: true,
   });
+
+  // Debug logging
+  console.log(
+    "TopNews - articles:",
+    articles.length,
+    "loading:",
+    loading,
+    "error:",
+    error,
+  );
+
+  // Use mock articles if no articles from API
+  const displayArticles = articles.length > 0 ? articles : newsArticles;
 
   const handleArticleClick = (article: any) => {
     setSelectedArticle(article);
@@ -72,12 +86,12 @@ export const TopNews = () => {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          {loading && articles.length === 0 ? (
+          {loading && displayArticles.length === 0 ? (
             <div className="text-center py-8">
               <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-2 text-muted-foreground" />
               <p className="text-muted-foreground">Loading latest news...</p>
             </div>
-          ) : error && articles.length === 0 ? (
+          ) : error && displayArticles.length === 0 ? (
             <div className="text-center py-8">
               <p className="text-red-600 mb-2">Error loading news</p>
               <p className="text-sm text-muted-foreground mb-4">{error}</p>
@@ -87,7 +101,7 @@ export const TopNews = () => {
             </div>
           ) : (
             <>
-              {articles.slice(0, 5).map((article) => (
+              {displayArticles.slice(0, 5).map((article) => (
                 <div
                   key={article.id}
                   onClick={() => handleArticleClick(article)}
@@ -143,7 +157,7 @@ export const TopNews = () => {
             </>
           )}
 
-          {error && articles.length > 0 && (
+          {error && displayArticles.length > 0 && (
             <div className="mt-2 p-2 bg-orange-50 border border-orange-200 rounded text-center">
               <p className="text-xs text-orange-600">{error}</p>
             </div>

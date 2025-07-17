@@ -1,10 +1,11 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { 
-  finnhubApi, 
-  type FinnhubSymbolLookupResponse, 
-  type FinnhubQuoteResponse, 
-  type FinnhubCandleResponse 
+import {
+  finnhubApi,
+  type FinnhubSymbolLookupResponse,
+  type FinnhubQuoteResponse,
+  type FinnhubCandleResponse,
 } from "../services/finnhubApi";
+import { stockDataFallback } from "../services/stockDataFallback";
 
 interface UseFinnhubOptions {
   refreshInterval?: number;
@@ -57,12 +58,40 @@ export function useFinnhubSymbolLookup(
       setError(null);
     } catch (error) {
       console.error("Failed to fetch symbol lookup:", error);
+
+      // Fallback to mock data if API fails
+      const mockSymbols = [
+        "AAPL",
+        "MSFT",
+        "GOOGL",
+        "AMZN",
+        "TSLA",
+        "META",
+        "NVDA",
+        "NFLX",
+        "V",
+        "JPM",
+      ];
+      const filteredSymbols = mockSymbols.filter((symbol) =>
+        symbol.toLowerCase().includes(query.toLowerCase()),
+      );
+
+      const mockResponse: FinnhubSymbolLookupResponse = {
+        count: filteredSymbols.length,
+        result: filteredSymbols.map((symbol) => ({
+          description: `${symbol} - Mock Company`,
+          displaySymbol: symbol,
+          symbol: symbol,
+          type: "Common Stock",
+        })),
+      };
+
+      setData(mockResponse);
       setError(
         error instanceof Error
-          ? error.message
-          : "Failed to fetch symbol lookup",
+          ? error.message + " - using fallback data"
+          : "Failed to fetch symbol lookup - using fallback data",
       );
-      setData(null);
     } finally {
       setLoading(false);
     }
@@ -117,12 +146,34 @@ export function useFinnhubQuote(
       setError(null);
     } catch (error) {
       console.error("Failed to fetch quote:", error);
+
+      // Fallback to mock data if API fails
+      const mockTickers = stockDataFallback.getMockTickers([symbol]);
+      const mockTicker = mockTickers.find((t) => t.symbol === symbol);
+
+      if (mockTicker) {
+        const mockQuote: FinnhubQuoteResponse = {
+          c: mockTicker.price, // Current price
+          d: (mockTicker.changePercent * mockTicker.price) / 100, // Change
+          dp: mockTicker.changePercent, // Percent change
+          h: mockTicker.price * 1.02, // High (mock as 2% above current)
+          l: mockTicker.price * 0.98, // Low (mock as 2% below current)
+          o: mockTicker.price * 0.995, // Open (mock as slightly below current)
+          pc:
+            mockTicker.price -
+            (mockTicker.changePercent * mockTicker.price) / 100, // Previous close
+          t: Date.now() / 1000, // Timestamp
+        };
+        setData(mockQuote);
+      } else {
+        setData(null);
+      }
+
       setError(
         error instanceof Error
-          ? error.message
-          : "Failed to fetch quote",
+          ? error.message + " - using fallback data"
+          : "Failed to fetch quote - using fallback data",
       );
-      setData(null);
     } finally {
       setLoading(false);
     }
@@ -175,15 +226,18 @@ export function useFinnhubCandles(
     setError(null);
 
     try {
-      const response = await finnhubApi.getCandles(symbol, resolution, from, to);
+      const response = await finnhubApi.getCandles(
+        symbol,
+        resolution,
+        from,
+        to,
+      );
       setData(response);
       setError(null);
     } catch (error) {
       console.error("Failed to fetch candles:", error);
       setError(
-        error instanceof Error
-          ? error.message
-          : "Failed to fetch candle data",
+        error instanceof Error ? error.message : "Failed to fetch candle data",
       );
       setData(null);
     } finally {
@@ -220,15 +274,18 @@ export function useQuote(symbol: string, options: UseFinnhubOptions = {}) {
   return useFinnhubQuote(symbol, options);
 }
 
-export function useMultipleQuotes(symbols: string[], refreshIntervalMs: number = 300000) {
+export function useMultipleQuotes(
+  symbols: string[],
+  refreshIntervalMs: number = 300000,
+) {
   const results: Record<string, UseFinnhubQuoteResult> = {};
-  
-  symbols.forEach(symbol => {
-    results[symbol] = useFinnhubQuote(symbol, { 
+
+  symbols.forEach((symbol) => {
+    results[symbol] = useFinnhubQuote(symbol, {
       refreshInterval: refreshIntervalMs,
-      enabled: true 
+      enabled: true,
     });
   });
-  
+
   return results;
 }

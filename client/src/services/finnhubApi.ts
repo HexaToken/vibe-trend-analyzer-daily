@@ -55,25 +55,81 @@ export class AlphaVantageApiError extends Error {
 
 class FinnhubApiService {
   private baseUrl = "/api/proxy/finnhub";
+  private circuitBreaker = {
+    isOpen: false,
+    failureCount: 0,
+    threshold: 3,
+    timeout: 300000, // 5 minutes
+    lastFailureTime: 0,
+  };
 
-  private async fetchFromApi<T>(endpoint: string, params: Record<string, string> = {}): Promise<T> {
+  private async fetchFromApi<T>(
+    endpoint: string,
+    params: Record<string, string> = {},
+  ): Promise<T> {
+    // Check circuit breaker
+    if (this.circuitBreaker.isOpen) {
+      const now = Date.now();
+      if (
+        now - this.circuitBreaker.lastFailureTime <
+        this.circuitBreaker.timeout
+      ) {
+        throw new FinnhubApiError(
+          "Finnhub service temporarily unavailable - circuit breaker is open",
+        );
+      } else {
+        // Reset circuit breaker
+        this.circuitBreaker.isOpen = false;
+        this.circuitBreaker.failureCount = 0;
+      }
+    }
     const queryParams = new URLSearchParams(params);
     const url = `${this.baseUrl}${endpoint}?${queryParams.toString()}`;
 
-    const response = await fetch(url);
-    
-    if (!response.ok) {
-      throw new FinnhubApiError(`Finnhub API error: ${response.status}`);
-    }
+    try {
+      const response = await fetch(url);
 
-    const data = await response.json();
-    
-    // Check for API error messages
-    if (data.error) {
-      throw new FinnhubApiError(data.error || "Finnhub API error");
-    }
+      if (!response.ok) {
+        this.circuitBreaker.failureCount++;
+        this.circuitBreaker.lastFailureTime = Date.now();
 
-    return data;
+        if (this.circuitBreaker.failureCount >= this.circuitBreaker.threshold) {
+          this.circuitBreaker.isOpen = true;
+        }
+
+        throw new FinnhubApiError(`Finnhub API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      // Check for API error messages
+      if (data.error) {
+        this.circuitBreaker.failureCount++;
+        this.circuitBreaker.lastFailureTime = Date.now();
+
+        if (this.circuitBreaker.failureCount >= this.circuitBreaker.threshold) {
+          this.circuitBreaker.isOpen = true;
+        }
+
+        throw new FinnhubApiError(data.error || "Finnhub API error");
+      }
+
+      // Reset failure count on success
+      this.circuitBreaker.failureCount = 0;
+      return data;
+    } catch (error) {
+      // Update circuit breaker on network error
+      if (!(error instanceof FinnhubApiError)) {
+        this.circuitBreaker.failureCount++;
+        this.circuitBreaker.lastFailureTime = Date.now();
+
+        if (this.circuitBreaker.failureCount >= this.circuitBreaker.threshold) {
+          this.circuitBreaker.isOpen = true;
+        }
+      }
+
+      throw error;
+    }
   }
 
   /**
@@ -101,13 +157,13 @@ class FinnhubApiService {
     symbol: string,
     resolution: string = "D",
     from?: number,
-    to?: number
+    to?: number,
   ): Promise<FinnhubCandleResponse> {
     const params: Record<string, string> = {
       symbol,
       resolution,
     };
-    
+
     if (from) params.from = from.toString();
     if (to) params.to = to.toString();
 

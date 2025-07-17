@@ -149,7 +149,7 @@ class CoinMarketCapService {
     failureCount: 0,
     threshold: 3, // Lower threshold for faster fallback
     timeout: 120000, // 2 minutes
-    lastFailureTime: 0
+    lastFailureTime: 0,
   };
   private proxyAvailable: boolean | null = null; // Track proxy availability
 
@@ -159,14 +159,21 @@ class CoinMarketCapService {
   ): Promise<T> {
     // If proxy is known to be unavailable, fail immediately
     if (this.proxyAvailable === false) {
-      throw new CoinMarketCapApiError("CoinMarketCap proxy is not available - using mock data");
+      throw new CoinMarketCapApiError(
+        "CoinMarketCap proxy is not available - using mock data",
+      );
     }
 
     // Check circuit breaker
     if (this.circuitBreaker.isOpen) {
       const now = Date.now();
-      if (now - this.circuitBreaker.lastFailureTime < this.circuitBreaker.timeout) {
-        throw new CoinMarketCapApiError("Circuit breaker is open - service temporarily unavailable");
+      if (
+        now - this.circuitBreaker.lastFailureTime <
+        this.circuitBreaker.timeout
+      ) {
+        throw new CoinMarketCapApiError(
+          "Circuit breaker is open - service temporarily unavailable",
+        );
       } else {
         // Reset circuit breaker
         this.circuitBreaker.isOpen = false;
@@ -193,14 +200,17 @@ class CoinMarketCapService {
       }
 
       const responseText = await response.text();
-      
+
       // Check if response is HTML (proxy returning error page)
-      if (responseText.trim().startsWith('<!DOCTYPE') || responseText.trim().startsWith('<html')) {
+      if (
+        responseText.trim().startsWith("<!DOCTYPE") ||
+        responseText.trim().startsWith("<html")
+      ) {
         this.proxyAvailable = false; // Mark proxy as unavailable
         throw new CoinMarketCapApiError(
           "API proxy returned HTML instead of JSON - service may be unavailable",
           500,
-          "proxy_error"
+          "proxy_error",
         );
       }
 
@@ -211,12 +221,24 @@ class CoinMarketCapService {
         throw new CoinMarketCapApiError(
           "Invalid JSON response from API",
           500,
-          "parse_error"
+          "parse_error",
         );
       }
 
       // Check for API errors
       if (data.status && data.status.error_code !== 0) {
+        // Special handling for rate limit errors
+        if (
+          data.status.error_message &&
+          (data.status.error_message.includes("rate limit") ||
+            data.status.error_message.includes("IP rate limit"))
+        ) {
+          // Increase circuit breaker timeout for rate limits
+          this.circuitBreaker.timeout = 600000; // 10 minutes for rate limits
+          this.circuitBreaker.isOpen = true;
+          this.circuitBreaker.lastFailureTime = Date.now();
+        }
+
         throw new CoinMarketCapApiError(
           data.status.error_message || "API request failed",
           data.status.error_code,
@@ -232,10 +254,12 @@ class CoinMarketCapService {
       // Update circuit breaker on failure
       this.circuitBreaker.failureCount++;
       this.circuitBreaker.lastFailureTime = Date.now();
-      
+
       if (this.circuitBreaker.failureCount >= this.circuitBreaker.threshold) {
         this.circuitBreaker.isOpen = true;
-        console.warn("CoinMarketCap API circuit breaker opened due to failures");
+        console.warn(
+          "CoinMarketCap API circuit breaker opened due to failures",
+        );
       }
 
       if (error instanceof CoinMarketCapApiError) {

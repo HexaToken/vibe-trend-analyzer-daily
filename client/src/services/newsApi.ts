@@ -180,6 +180,36 @@ export function convertNewsAPIToNewsArticle(
     return analysis.score;
   };
 
+  // Generate key phrases from title and description
+  const generateKeyPhrases = (title: string, description?: string | null) => {
+    const text = `${title} ${description || ""}`;
+    const words = text.toLowerCase().match(/\b\w+\b/g) || [];
+    const significantWords = words.filter(
+      (word) =>
+        word.length > 4 &&
+        ![
+          "about",
+          "after",
+          "again",
+          "against",
+          "among",
+          "around",
+          "before",
+          "being",
+          "below",
+          "between",
+          "during",
+          "should",
+          "those",
+          "under",
+          "where",
+          "while",
+          "would",
+        ].includes(word),
+    );
+    return significantWords.slice(0, 5);
+  };
+
   return {
     id: `news_${Math.random().toString(36).substring(2, 9)}_${Date.now()}_${(article.url + article.title).replace(/[^a-zA-Z0-9]/g, "").substring(0, 8)}`, // Always unique ID with random prefix, timestamp, and url/title suffix
     headline: article.title,
@@ -187,13 +217,14 @@ export function convertNewsAPIToNewsArticle(
     sentimentScore:
       sentimentScore ||
       generateSentimentScore(article.title, article.description),
-    keyPhrases: [], // Could be extracted from content in a more sophisticated implementation
+    keyPhrases: generateKeyPhrases(article.title, article.description),
     source: {
       name: article.source.name,
       publishedAt: article.publishedAt,
     },
     originalUrl: article.url,
-    whyItMatters: "Financial markets and sentiment analysis", // Generic explanation
+    whyItMatters:
+      "This news may impact financial markets and public sentiment, affecting investor confidence and market trends.",
     relatedTrends: [], // Could be extracted from content
   };
 }

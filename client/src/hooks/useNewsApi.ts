@@ -110,6 +110,32 @@ export function useTopHeadlines(
           ).toISOString(),
           content: "The cryptocurrency market showed...",
         },
+        {
+          source: { id: "financial-times", name: "Financial Times" },
+          author: "Sarah Wilson",
+          title: "Global Supply Chain Shows Signs of Normalization",
+          description:
+            "International shipping costs decline as supply chain bottlenecks ease across major trade routes.",
+          url: "https://example.com/supply-chain-update",
+          urlToImage: null,
+          publishedAt: new Date(
+            Date.now() - Math.random() * 12 * 60 * 60 * 1000,
+          ).toISOString(),
+          content: "Supply chain improvements continue...",
+        },
+        {
+          source: { id: "wall-street-journal", name: "Wall Street Journal" },
+          author: "David Chen",
+          title: "Energy Sector Posts Strong Quarterly Results",
+          description:
+            "Oil and gas companies report robust earnings as energy demand remains steady amid economic uncertainty.",
+          url: "https://example.com/energy-earnings",
+          urlToImage: null,
+          publishedAt: new Date(
+            Date.now() - Math.random() * 6 * 60 * 60 * 1000,
+          ).toISOString(),
+          content: "The energy sector's performance...",
+        },
       ];
 
       const mockResponse = {
@@ -141,9 +167,10 @@ export function useTopHeadlines(
     };
   }, [fetchNews, refreshInterval, enabled]);
 
-  const articles = data && data.articles
-    ? data.articles.map((article) => convertNewsAPIToNewsArticle(article))
-    : [];
+  const articles =
+    data && data.articles
+      ? data.articles.map((article) => convertNewsAPIToNewsArticle(article))
+      : [];
 
   return {
     data,
@@ -246,9 +273,10 @@ export function useNewsSearch(
     };
   }, [searchNews, refreshInterval, enabled]);
 
-  const articles = data && data.articles
-    ? data.articles.map((article) => convertNewsAPIToNewsArticle(article))
-    : [];
+  const articles =
+    data && data.articles
+      ? data.articles.map((article) => convertNewsAPIToNewsArticle(article))
+      : [];
 
   return {
     data,
