@@ -337,7 +337,7 @@ class CoinMarketCapService {
       last_updated: string;
     };
   }> {
-    return this.fetchFromApi("/global-metrics/quotes/latest", { convert });
+    return this.fetchFromApi("/global-metrics", { convert });
   }
 }
 
