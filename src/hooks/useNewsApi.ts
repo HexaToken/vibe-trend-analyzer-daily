@@ -67,14 +67,59 @@ export function useTopHeadlines(
         data,
       );
     } catch (err) {
-      const shouldDisableApi = stockDataFallback.handleApiError(err);
+      console.warn("News API proxy failed, falling back to mock data:", err);
 
-      if (!shouldDisableApi) {
-        const errorMessage =
-          err instanceof Error ? err.message : "Failed to fetch news";
-        setError(errorMessage);
-        console.error("News fetch error:", err);
-      }
+      // Fallback to mock data if proxy fails
+      const mockArticles = [
+        {
+          source: { id: "reuters", name: "Reuters" },
+          author: "John Smith",
+          title: "Markets Rally as Tech Earnings Beat Expectations",
+          description:
+            "Major technology companies reported stronger-than-expected quarterly earnings, driving broad market gains.",
+          url: "https://example.com/tech-earnings-rally",
+          urlToImage: null,
+          publishedAt: new Date(
+            Date.now() - Math.random() * 24 * 60 * 60 * 1000,
+          ).toISOString(),
+          content: "Technology stocks led broader market gains today...",
+        },
+        {
+          source: { id: "bloomberg", name: "Bloomberg" },
+          author: "Jane Doe",
+          title: "Federal Reserve Signals Cautious Approach to Interest Rates",
+          description:
+            "Central bank officials indicate measured approach to monetary policy amid economic uncertainty.",
+          url: "https://example.com/fed-interest-rates",
+          urlToImage: null,
+          publishedAt: new Date(
+            Date.now() - Math.random() * 24 * 60 * 60 * 1000,
+          ).toISOString(),
+          content: "Federal Reserve officials signaled...",
+        },
+        {
+          source: { id: "cnbc", name: "CNBC" },
+          author: "Mike Johnson",
+          title: "Cryptocurrency Market Shows Signs of Recovery",
+          description:
+            "Bitcoin and major altcoins post gains as institutional interest returns to digital assets.",
+          url: "https://example.com/crypto-recovery",
+          urlToImage: null,
+          publishedAt: new Date(
+            Date.now() - Math.random() * 24 * 60 * 60 * 1000,
+          ).toISOString(),
+          content: "The cryptocurrency market showed...",
+        },
+      ];
+
+      const mockResponse = {
+        status: "ok",
+        totalResults: mockArticles.length,
+        articles: mockArticles,
+      };
+
+      setData(mockResponse);
+      setError("Using mock data - API proxy unavailable");
     } finally {
       setLoading(false);
     }
