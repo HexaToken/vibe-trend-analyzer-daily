@@ -69,10 +69,7 @@ export function useCryptoQuotes(
       setData(response);
       setIsRealData(true);
       setError(null);
-      console.log(
-        "✅ CoinMarketCap: Successfully fetched real data via proxy",
-        { symbolsCount: symbols.length, dataKeys: Object.keys(response.data) },
-      );
+      console.log("✅ CoinMarketCap: Using real data via proxy");
     } catch (err) {
       console.warn("⚠️ CoinMarketCap API failed, using mock data:", err);
 
@@ -197,10 +194,7 @@ export function useCryptoListings(
       setData(response);
       setIsRealData(true);
       setError(null);
-      console.log(
-        "✅ CoinMarketCap: Successfully fetched real data via proxy",
-        { symbolsCount: symbols.length, dataKeys: Object.keys(response.data) },
-      );
+      console.log("✅ CoinMarketCap: Using real data via proxy");
     } catch (err) {
       console.warn("⚠️ CoinMarketCap API failed, using mock data:", err);
 
@@ -340,10 +334,7 @@ export function useGlobalMetrics(
       setData(response);
       setIsRealData(true);
       setError(null);
-      console.log(
-        "✅ CoinMarketCap: Successfully fetched real data via proxy",
-        { symbolsCount: symbols.length, dataKeys: Object.keys(response.data) },
-      );
+      console.log("✅ CoinMarketCap: Using real data via proxy");
     } catch (err) {
       console.warn("⚠️ CoinMarketCap API failed, using mock data:", err);
 

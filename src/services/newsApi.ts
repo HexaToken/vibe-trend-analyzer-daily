@@ -143,11 +143,7 @@ class NewsService {
       return data;
     } catch (error) {
       // If proxy fails, try direct API as fallback
-      console.warn("NewsAPI proxy error, falling back to direct API:", {
-        error: error instanceof Error ? error.message : error,
-        endpoint: proxyEndpoint,
-        url: url.toString(),
-      });
+      console.warn("News proxy error, falling back to direct API:", error);
       this.useProxy = false;
       return this.fetchFromApi<T>(endpoint, params);
     }
