@@ -291,23 +291,124 @@ function extractTicker(message) {
 }
 
 async function analyzeSentiment(ticker) {
-  // Mock sentiment analysis - in production, this would use real data
-  const sentiments = ["bullish", "bearish", "neutral"];
-  const sentiment = sentiments[Math.floor(Math.random() * sentiments.length)];
-  const score = Math.floor(Math.random() * 100);
+  // Mock ticker data - in production, this would come from a database
+  const mockTickerData = {
+    AAPL: {
+      sentimentScore: 72,
+      bullishCount: 1247,
+      bearishCount: 423,
+      neutralCount: 156,
+      totalPosts: 1826,
+      postVolume24h: 342,
+      price: 195.25,
+      change: 2.75,
+      changePercent: 1.43,
+    },
+    TSLA: {
+      sentimentScore: -15,
+      bullishCount: 892,
+      bearishCount: 1543,
+      neutralCount: 298,
+      totalPosts: 2733,
+      postVolume24h: 567,
+      price: 248.5,
+      change: -8.25,
+      changePercent: -3.21,
+    },
+    NVDA: {
+      sentimentScore: 84,
+      bullishCount: 1658,
+      bearishCount: 234,
+      neutralCount: 187,
+      totalPosts: 2079,
+      postVolume24h: 423,
+      price: 875.25,
+      change: 23.5,
+      changePercent: 2.76,
+    },
+    BTC: {
+      sentimentScore: 45,
+      bullishCount: 2156,
+      bearishCount: 1876,
+      neutralCount: 432,
+      totalPosts: 4464,
+      postVolume24h: 892,
+      price: 67420.0,
+      change: 1250.75,
+      changePercent: 1.89,
+    },
+    ETH: {
+      sentimentScore: 12,
+      bullishCount: 1324,
+      bearishCount: 1789,
+      neutralCount: 356,
+      totalPosts: 3469,
+      postVolume24h: 634,
+      price: 3875.5,
+      change: -127.25,
+      changePercent: -3.18,
+    },
+  };
 
+  const tickerData = mockTickerData[ticker.toUpperCase()];
+
+  if (!tickerData) {
+    return {
+      content: `❓ **$${ticker} - Ticker Not Found**\n\nSorry, I don't have sentiment data for $${ticker} yet. \n\nTry one of these popular tickers instead:`,
+      suggestions: [
+        "What's the sentiment for $AAPL?",
+        "Check $TSLA sentiment",
+        "Analyze $NVDA mood",
+        "Show $BTC sentiment",
+      ],
+    };
+  }
+
+  const {
+    sentimentScore,
+    bullishCount,
+    bearishCount,
+    neutralCount,
+    totalPosts,
+    postVolume24h,
+    price,
+    change,
+    changePercent,
+  } = tickerData;
+
+  const sentiment =
+    sentimentScore > 20
+      ? "bullish"
+      : sentimentScore < -20
+        ? "bearish"
+        : "neutral";
   const sentimentEmoji =
     sentiment === "bullish" ? "🟢" : sentiment === "bearish" ? "🔴" : "🟡";
+  const priceEmoji = change >= 0 ? "📈" : "📉";
+
+  const bullishPercentage = ((bullishCount / totalPosts) * 100).toFixed(1);
+  const bearishPercentage = ((bearishCount / totalPosts) * 100).toFixed(1);
+  const neutralPercentage = ((neutralCount / totalPosts) * 100).toFixed(1);
 
   return {
-    content: `${sentimentEmoji} **$${ticker} Sentiment Analysis**\n\nCurrent Mood: **${sentiment.toUpperCase()}** (${score}%)\n\nBased on recent social media activity and market discussions, $${ticker} is showing ${sentiment} sentiment. Here's what traders are saying:\n\n• Recent posts show ${sentiment === "bullish" ? "optimistic" : sentiment === "bearish" ? "cautious" : "mixed"} outlook\n• ${sentiment === "bullish" ? "Positive catalysts being discussed" : sentiment === "bearish" ? "Concerns about recent performance" : "Balanced perspectives from the community"}\n• Social volume: ${Math.floor(Math.random() * 1000) + 100} mentions in 24h`,
+    content: `${sentimentEmoji} **$${ticker} Sentiment Analysis**\n\n**Current Mood:** ${sentiment.toUpperCase()} (Score: ${sentimentScore})\n\n${priceEmoji} **Price:** $${price.toLocaleString()} (${change >= 0 ? "+" : ""}${change} | ${changePercent >= 0 ? "+" : ""}${changePercent}%)\n\n**Community Sentiment Breakdown:**\n• 🟢 Bullish: ${bullishCount.toLocaleString()} posts (${bullishPercentage}%)\n• 🔴 Bearish: ${bearishCount.toLocaleString()} posts (${bearishPercentage}%)\n• 🟡 Neutral: ${neutralCount.toLocaleString()} posts (${neutralPercentage}%)\n\n**Social Activity:**\n• Total discussions: ${totalPosts.toLocaleString()}\n• Posts in 24h: ${postVolume24h}\n• Community engagement: ${sentiment === "bullish" ? "High" : sentiment === "bearish" ? "Cautious" : "Moderate"}\n\n${getSentimentInsights(sentiment, sentimentScore, changePercent)}`,
     suggestions: [
-      `View $${ticker} detailed analysis`,
-      `Check $${ticker} recent posts`,
+      `View $${ticker} detailed chart`,
+      `Check recent $${ticker} posts`,
       `Add $${ticker} to watchlist`,
       "Analyze another ticker",
     ],
   };
+}
+
+function getSentimentInsights(sentiment, sentimentScore, priceChange) {
+  if (sentiment === "bullish") {
+    return "**Insights:** Community is optimistic with strong bullish momentum. Positive catalysts and technical indicators are driving conversation.";
+  } else if (sentiment === "bearish") {
+    return "**Insights:** Community sentiment is cautious with bearish undertones. Recent price action and market concerns are influencing discussions.";
+  } else {
+    return "**Insights:** Mixed sentiment with balanced views from the community. Traders are waiting for clearer signals before taking positions.";
+  }
 }
 
 async function summarizePosts(ticker, limit = 10) {
