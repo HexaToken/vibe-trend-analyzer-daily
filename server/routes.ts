@@ -130,10 +130,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
         },
       );
       const data = await response.json();
+
+      // Check if the API returned an error (e.g., rate limit)
+      if (data.status && data.status.error_code !== 0) {
+        console.warn("CoinMarketCap API error:", data.status.error_message);
+        res.status(429).json({
+          status: data.status,
+          error: "CoinMarketCap API error: " + data.status.error_message,
+        });
+        return;
+      }
+
       res.json(data);
     } catch (error) {
       console.error("CoinMarketCap global metrics proxy error:", error);
-      res.status(500).json({ error: "Failed to fetch global metrics" });
+      res.status(500).json({
+        status: {
+          error_code: 500,
+          error_message: "Failed to fetch global metrics",
+        },
+        error: "Failed to fetch global metrics",
+      });
     }
   });
 
