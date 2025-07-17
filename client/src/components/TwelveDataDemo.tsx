@@ -18,7 +18,7 @@ import {
   useMultipleQuotes,
   useTimeSeries,
 } from "@/hooks/useAlphaVantage";
-import { alphaVantageApi } from "@/services/alphaVantageApi";
+import { polygonApi } from "@/services/alphaVantageApi";
 import { stockDataFallback } from "@/services/stockDataFallback";
 import {
   useCryptoListings,
@@ -84,8 +84,8 @@ export const TwelveDataDemo = () => {
 
     setIsSearching(true);
     try {
-      const results = await alphaVantageApi.symbolSearch(searchQuery);
-      setSearchResults(results.bestMatches?.slice(0, 10) || []); // Limit to 10 results
+      const results = await polygonApi.symbolSearch(searchQuery);
+      setSearchResults(results.results?.slice(0, 10) || []); // Limit to 10 results
     } catch (error) {
       console.error("Search error:", error);
       setSearchResults([]);
@@ -101,7 +101,7 @@ export const TwelveDataDemo = () => {
           Financial Data API Integration Demo
         </h1>
         <p className="text-muted-foreground">
-          Real-time stock market data powered by Alpha Vantage API +
+          Real-time dividends and financial data powered by Polygon.io API +
           cryptocurrency data from CoinMarketCap API + business news from
           NewsAPI
         </p>
@@ -118,7 +118,7 @@ export const TwelveDataDemo = () => {
             API Status & Testing
           </CardTitle>
           <CardDescription>
-            Test the Twelve Data API integration with various endpoints
+            Test the Polygon.io API integration with dividends and financial data
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">

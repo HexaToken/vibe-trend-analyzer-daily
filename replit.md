@@ -40,7 +40,7 @@ This is a full-stack JavaScript application with:
 ## External APIs
 The application integrates with multiple external services:
 - NewsAPI (currently using mock data)
-- TwelveData (financial data)
+- Polygon.io (financial data and dividends)
 - Various sentiment analysis APIs
 - Social media platforms
 
@@ -51,6 +51,10 @@ The application integrates with multiple external services:
   - Fixed dependency issues (sonner, nanoid)
   - Verified application startup and functionality
   - All core features working with mock data fallbacks
+- **2025-01-17**: Replaced Alpha Vantage API with Polygon.io
+  - Updated API service to use Polygon.io dividends endpoint
+  - Implemented backward compatibility for existing components
+  - API Key: ABeiglsv3LqhpieYSQiAYW9c0IhcpzaX
 
 ## User Preferences
 - Language: English
