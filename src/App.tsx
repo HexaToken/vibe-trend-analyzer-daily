@@ -18,6 +18,7 @@ import { SocialPlatform } from "@/components/social/SocialPlatform";
 import { TwelveDataDemo } from "@/components/TwelveDataDemo";
 import { ApiStatusIndicator } from "@/components/ApiStatusIndicator";
 import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
+import { SerpApiDemo } from "@/components/SerpApiDemo";
 
 const queryClient = new QueryClient();
 
