@@ -56,6 +56,16 @@ export function useCombinedBusinessNews(
     enabled: enabled && includeYFinanceNews,
   });
 
+  // Create stable string representations for dependency comparison
+  const newsApiDataKey = JSON.stringify({
+    articles: newsApiResult.articles.map((a) => a.id),
+    error: newsApiResult.error,
+  });
+  const yfinanceDataKey = JSON.stringify({
+    articles: yfinanceResult.articles.map((a) => a.id),
+    error: yfinanceResult.error,
+  });
+
   // Memoize the combined articles to prevent unnecessary recalculations
   const combinedData = useMemo(() => {
     const allArticles: NewsArticle[] = [];
@@ -124,10 +134,8 @@ export function useCombinedBusinessNews(
       error: errors.length > 0 ? errors.join("; ") : null,
     };
   }, [
-    newsApiResult.articles,
-    newsApiResult.error,
-    yfinanceResult.articles,
-    yfinanceResult.error,
+    newsApiDataKey,
+    yfinanceDataKey,
     includeNewsApi,
     includeYFinanceNews,
     maxArticles,
