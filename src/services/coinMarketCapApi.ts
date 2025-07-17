@@ -1,8 +1,8 @@
 // CoinMarketCap API Service
 // Documentation: https://coinmarketcap.com/api/documentation/v1/
+// Uses server proxy to avoid CORS restrictions
 
-const API_KEY = "a23f6083-9fcc-44d9-b03f-7cee769e3b91";
-const BASE_URL = "https://pro-api.coinmarketcap.com/v1";
+const BASE_URL = "/api/proxy/coinmarketcap";
 
 // CoinMarketCap API Response Types
 export interface CoinMarketCapQuote {
