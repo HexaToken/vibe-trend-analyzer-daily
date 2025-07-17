@@ -215,9 +215,11 @@ export function convertNewsAPIToNewsArticle(
   };
 
   return {
-    id: btoa(article.url + article.title + article.publishedAt)
-      .replace(/[^a-zA-Z0-9]/g, "")
-      .substring(0, 16), // Create unique ID from URL, title, and publish date
+    id:
+      (article.url + article.title + article.publishedAt)
+        .replace(/[^a-zA-Z0-9]/g, "")
+        .substring(0, 20) ||
+      `news_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`, // Create unique ID, fallback to timestamp + random
     headline: article.title,
     summary: article.description || "No description available",
     sentimentScore:
