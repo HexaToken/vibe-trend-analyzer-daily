@@ -71,6 +71,12 @@ The application integrates with multiple external services:
   - Modified popularStocks array in TwelveDataDemo to include top 10 stocks
   - Updated PostComposer popularTickers to match top 10 stocks
   - Ensured consistent display of exactly 10 popular stocks across all components
+- **2025-01-17**: Replaced TwelveDataDemo with PolygonDemo component
+  - Removed TwelveDataDemo.tsx and replaced with PolygonDemo.tsx
+  - Updated App.tsx routing from "twelvedata" to "polygon"
+  - Updated Navigation.tsx to show "Polygon.io API Demo" instead of "Financial APIs Demo"
+  - New PolygonDemo integrates Polygon.io API, CoinMarketCap API, and NewsAPI
+  - Maintains same functionality: stock quotes, crypto data, dividend information, and news integration
 
 ## User Preferences
 - Language: English
