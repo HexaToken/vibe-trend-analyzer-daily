@@ -248,7 +248,7 @@ class CoinMarketCapService {
       params.id = ids.join(",");
     }
 
-    return this.fetchFromApi("/cryptocurrency/info", params);
+    return this.fetchFromApi("/info", params);
   }
 
   /**
