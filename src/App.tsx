@@ -59,6 +59,8 @@ const App = () => {
         return <CryptoDashboard />;
       case "serpapi":
         return <SerpApiDemo />;
+      case "nlp":
+        return <NLPSentimentDemo />;
       default:
         return <Dashboard />;
     }
