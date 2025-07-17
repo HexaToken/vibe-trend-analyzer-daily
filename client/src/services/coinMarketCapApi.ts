@@ -144,11 +144,30 @@ export class CoinMarketCapApiError extends Error {
 // API Service Class
 class CoinMarketCapService {
   private baseURL = BASE_URL;
+  private circuitBreaker = {
+    isOpen: false,
+    failureCount: 0,
+    threshold: 5,
+    timeout: 60000, // 1 minute
+    lastFailureTime: 0
+  };
 
   private async fetchFromApi<T>(
     endpoint: string,
     params: Record<string, string> = {},
   ): Promise<T> {
+    // Check circuit breaker
+    if (this.circuitBreaker.isOpen) {
+      const now = Date.now();
+      if (now - this.circuitBreaker.lastFailureTime < this.circuitBreaker.timeout) {
+        throw new CoinMarketCapApiError("Circuit breaker is open - service temporarily unavailable");
+      } else {
+        // Reset circuit breaker
+        this.circuitBreaker.isOpen = false;
+        this.circuitBreaker.failureCount = 0;
+      }
+    }
+
     const url = new URL(`${this.baseURL}${endpoint}`, window.location.origin);
 
     // Add parameters
@@ -178,8 +197,19 @@ class CoinMarketCapService {
         );
       }
 
+      // Reset failure count on success
+      this.circuitBreaker.failureCount = 0;
       return data;
     } catch (error) {
+      // Update circuit breaker on failure
+      this.circuitBreaker.failureCount++;
+      this.circuitBreaker.lastFailureTime = Date.now();
+      
+      if (this.circuitBreaker.failureCount >= this.circuitBreaker.threshold) {
+        this.circuitBreaker.isOpen = true;
+        console.warn("CoinMarketCap API circuit breaker opened due to failures");
+      }
+
       if (error instanceof CoinMarketCapApiError) {
         throw error;
       }

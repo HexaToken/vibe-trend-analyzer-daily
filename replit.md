@@ -55,6 +55,11 @@ The application integrates with multiple external services:
   - Updated API service to use Polygon.io dividends endpoint
   - Implemented backward compatibility for existing components
   - API Key: ABeiglsv3LqhpieYSQiAYW9c0IhcpzaX
+- **2025-01-17**: Fixed CoinMarketCap API excessive requests
+  - Implemented circuit breaker pattern to prevent API spam
+  - Added proper error handling with fallback mechanisms
+  - Created new PolygonDividendsDemo component for dividend data
+  - Added component to navigation menu
 
 ## User Preferences
 - Language: English
