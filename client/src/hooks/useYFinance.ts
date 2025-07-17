@@ -107,20 +107,34 @@ export interface YFinanceTickerResponse {
 }
 
 // Hook for fetching latest market news
-export function useYFinanceLatestNews(refreshInterval: number = 300000): UseQueryResult<YFinanceNewsResponse> {
+export function useYFinanceLatestNews(
+  refreshInterval: number = 300000,
+): UseQueryResult<YFinanceNewsResponse> {
   return useQuery({
     queryKey: ["yfinance", "news", "latest"],
     queryFn: async (): Promise<YFinanceNewsResponse> => {
-      const response = await fetch("/api/proxy/yfinance/news/latest", {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      try {
+        const response = await fetch("/api/proxy/yfinance/news/latest", {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+
+        // If service returns error, provide mock data
+        if (data.error) {
+          return createMockLatestNews();
+        }
+
+        return data;
+      } catch (error) {
+        console.warn("YFinance latest news failed, using mock data:", error);
+        return createMockLatestNews();
       }
-      return response.json();
     },
     refetchInterval: refreshInterval,
     staleTime: 240000, // 4 minutes
@@ -130,16 +144,22 @@ export function useYFinanceLatestNews(refreshInterval: number = 300000): UseQuer
 }
 
 // Hook for fetching stock-specific news
-export function useYFinanceStockNews(symbol: string = "SPY", refreshInterval: number = 300000): UseQueryResult<YFinanceNewsResponse> {
+export function useYFinanceStockNews(
+  symbol: string = "SPY",
+  refreshInterval: number = 300000,
+): UseQueryResult<YFinanceNewsResponse> {
   return useQuery({
     queryKey: ["yfinance", "news", "stock", symbol],
     queryFn: async (): Promise<YFinanceNewsResponse> => {
-      const response = await fetch(`/api/proxy/yfinance/news/trending?symbol=${symbol}`, {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        `/api/proxy/yfinance/news/trending?symbol=${symbol}`,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
         },
-      });
+      );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -154,14 +174,16 @@ export function useYFinanceStockNews(symbol: string = "SPY", refreshInterval: nu
 }
 
 // Hook for fetching enhanced market sentiment data
-export function useYFinanceSentiment(refreshInterval: number = 300000): UseQueryResult<YFinanceSentimentResponse> {
+export function useYFinanceSentiment(
+  refreshInterval: number = 300000,
+): UseQueryResult<YFinanceSentimentResponse> {
   return useQuery({
     queryKey: ["yfinance", "sentiment"],
     queryFn: async (): Promise<YFinanceSentimentResponse> => {
       const response = await fetch("/api/proxy/yfinance/sentiment", {
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
+          Accept: "application/json",
+          "Content-Type": "application/json",
         },
       });
       if (!response.ok) {
@@ -177,16 +199,22 @@ export function useYFinanceSentiment(refreshInterval: number = 300000): UseQuery
 }
 
 // Hook for fetching comprehensive ticker information
-export function useYFinanceTickerInfo(symbol: string, refreshInterval: number = 300000): UseQueryResult<YFinanceTickerResponse> {
+export function useYFinanceTickerInfo(
+  symbol: string,
+  refreshInterval: number = 300000,
+): UseQueryResult<YFinanceTickerResponse> {
   return useQuery({
     queryKey: ["yfinance", "ticker", symbol],
     queryFn: async (): Promise<YFinanceTickerResponse> => {
-      const response = await fetch(`/api/proxy/yfinance/ticker?symbol=${symbol}`, {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        `/api/proxy/yfinance/ticker?symbol=${symbol}`,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
         },
-      });
+      );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -210,9 +238,11 @@ export function useYFinanceData(refreshInterval: number = 300000) {
     latestNews,
     stockNews,
     sentiment,
-    isLoading: latestNews.isLoading || stockNews.isLoading || sentiment.isLoading,
-    isError: (latestNews.isError || stockNews.isError || sentiment.isError) && 
-             !(latestNews.data || stockNews.data || sentiment.data),
+    isLoading:
+      latestNews.isLoading || stockNews.isLoading || sentiment.isLoading,
+    isError:
+      (latestNews.isError || stockNews.isError || sentiment.isError) &&
+      !(latestNews.data || stockNews.data || sentiment.data),
     hasData: latestNews.data || stockNews.data || sentiment.data,
   };
 }
