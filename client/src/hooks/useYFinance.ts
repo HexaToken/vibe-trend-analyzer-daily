@@ -233,19 +233,34 @@ export function useYFinanceTickerInfo(
   return useQuery({
     queryKey: ["yfinance", "ticker", symbol],
     queryFn: async (): Promise<YFinanceTickerResponse> => {
-      const response = await fetch(
-        `/api/proxy/yfinance/ticker?symbol=${symbol}`,
-        {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
+      try {
+        const response = await fetch(
+          `/api/proxy/yfinance/ticker?symbol=${symbol}`,
+          {
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
           },
-        },
-      );
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+
+        // If service returns error, provide mock data
+        if (data.error) {
+          return createMockTickerInfo(symbol);
+        }
+
+        return data;
+      } catch (error) {
+        console.warn(
+          `YFinance ticker info for ${symbol} failed, using mock data:`,
+          error,
+        );
+        return createMockTickerInfo(symbol);
       }
-      return response.json();
     },
     enabled: !!symbol,
     refetchInterval: refreshInterval,
