@@ -282,13 +282,10 @@ class CoinMarketCapService {
     limit: number = 10,
     timePeriod: "1h" | "24h" | "7d" | "30d" = "24h",
   ): Promise<CoinMarketCapListingsResponse> {
-    return this.fetchFromApi<CoinMarketCapListingsResponse>(
-      "/cryptocurrency/trending/latest",
-      {
-        limit: limit.toString(),
-        time_period: timePeriod,
-      },
-    );
+    return this.fetchFromApi<CoinMarketCapListingsResponse>("/trending", {
+      limit: limit.toString(),
+      time_period: timePeriod,
+    });
   }
 
   /**
