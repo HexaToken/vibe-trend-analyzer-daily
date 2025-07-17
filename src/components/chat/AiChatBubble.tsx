@@ -38,14 +38,14 @@ export const AiChatBubble = () => {
       {/* Chat Interface - Full screen/modal */}
       {isOpen && (
         <Card
-          className={`fixed z-50 bg-background border shadow-2xl transition-all duration-300 ${
+          className={`fixed z-50 bg-background border shadow-2xl transition-all duration-300 flex flex-col overflow-hidden ${
             isMinimized
               ? "bottom-6 right-6 w-80 h-12"
               : "bottom-6 right-6 w-96 h-[600px] md:w-[480px] md:h-[700px]"
           }`}
         >
           {/* Chat Header */}
-          <div className="flex items-center justify-between p-4 border-b bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-t-lg">
+          <div className="flex items-center justify-between p-4 border-b bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-t-lg flex-shrink-0">
             <div className="flex items-center gap-2">
               <MessageCircle className="h-5 w-5" />
               <span className="font-semibold">MoodMeter AI Assistant</span>
@@ -74,7 +74,7 @@ export const AiChatBubble = () => {
 
           {/* Chat Content */}
           {!isMinimized && (
-            <div className="flex-1 overflow-hidden">
+            <div className="flex-1 overflow-hidden min-h-0">
               <AiChatInterface />
             </div>
           )}
