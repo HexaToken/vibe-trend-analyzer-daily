@@ -22,6 +22,16 @@ export const TopNews = () => {
     enabled: true,
   });
 
+  // Debug logging
+  console.log(
+    "TopNews - articles:",
+    articles.length,
+    "loading:",
+    loading,
+    "error:",
+    error,
+  );
+
   const handleArticleClick = (article: any) => {
     setSelectedArticle(article);
     setIsModalOpen(true);
