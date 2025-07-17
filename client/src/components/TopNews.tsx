@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { NewsDetailModal } from "./NewsDetailModal";
 import { useBusinessNews } from "@/hooks/useNewsApi";
+import { newsArticles } from "@/data/mockData";
 
 export const TopNews = () => {
   const [selectedArticle, setSelectedArticle] = useState<any>(null);
