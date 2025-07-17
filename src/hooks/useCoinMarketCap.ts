@@ -318,53 +318,62 @@ export function useGlobalMetrics(
   const fetchMetrics = useCallback(async () => {
     if (!enabled) return;
 
-    // CoinMarketCap API doesn't support CORS for browser requests
-    // Always use mock data in browser environment
-    console.warn(
-      "CoinMarketCap API requires server-side implementation due to CORS restrictions. Using mock data.",
-    );
-
     setLoading(true);
     setError(null);
 
-    const mockData = {
-      status: {
-        timestamp: new Date().toISOString(),
-        error_code: 0,
-        error_message: null,
-        elapsed: 0,
-        credit_count: 0,
-        notice: null,
-      },
-      data: {
-        active_cryptocurrencies: 26950,
-        total_cryptocurrencies: 26950,
-        active_market_pairs: 95468,
-        active_exchanges: 756,
-        total_exchanges: 756,
-        eth_dominance: 17.8234,
-        btc_dominance: 52.1456,
-        defi_volume_24h: 4567890123,
-        defi_market_cap: 123456789012,
-        stablecoin_volume_24h: 45678901234,
-        stablecoin_market_cap: 156789012345,
-        quote: {
-          USD: {
-            total_market_cap: 2387654321098,
-            total_volume_24h: 98765432109,
-            total_market_cap_yesterday_percentage_change: 2.45,
-            total_volume_24h_yesterday_percentage_change: -1.23,
-            last_updated: new Date().toISOString(),
+    try {
+      // Use the CoinMarketCap service which now proxies through our server
+      const { coinMarketCapApi } = await import("../services/coinMarketCapApi");
+      const response = await coinMarketCapApi.getGlobalMetrics();
+
+      setData(response);
+      setError(null);
+    } catch (error) {
+      console.error("Failed to fetch global metrics:", error);
+
+      // Fallback to mock data if API fails
+      const mockData = {
+        status: {
+          timestamp: new Date().toISOString(),
+          error_code: 0,
+          error_message: null,
+          elapsed: 0,
+          credit_count: 0,
+          notice: null,
+        },
+        data: {
+          active_cryptocurrencies: 26950,
+          total_cryptocurrencies: 26950,
+          active_market_pairs: 95468,
+          active_exchanges: 756,
+          total_exchanges: 756,
+          eth_dominance: 17.8234,
+          btc_dominance: 52.1456,
+          defi_volume_24h: 4567890123,
+          defi_market_cap: 123456789012,
+          stablecoin_volume_24h: 45678901234,
+          stablecoin_market_cap: 156789012345,
+          quote: {
+            USD: {
+              total_market_cap: 2387654321098,
+              total_volume_24h: 98765432109,
+              total_market_cap_yesterday_percentage_change: 2.45,
+              total_volume_24h_yesterday_percentage_change: -1.23,
+              last_updated: new Date().toISOString(),
+            },
           },
         },
-      },
-    };
+      };
 
-    setData(mockData);
-    setError(
-      "Using mock data - CoinMarketCap API requires server-side implementation (CORS restriction)",
-    );
-    setLoading(false);
+      setData(mockData);
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Failed to fetch global metrics - using fallback data",
+      );
+    } finally {
+      setLoading(false);
+    }
   }, [enabled]);
 
   useEffect(() => {
