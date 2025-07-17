@@ -1,6 +1,8 @@
 // NewsAPI Service
 // Documentation: https://newsapi.org/docs
 
+import { nlpSentimentAnalyzer } from "./nlpSentimentAnalysis";
+
 const API_KEY = "9a45d08310a946bab8d2738f74b69fc5";
 const BASE_URL = "https://newsapi.org/v2";
 
