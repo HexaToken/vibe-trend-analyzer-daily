@@ -186,6 +186,9 @@ export const SentimentBreakdown = ({
                         <div className="flex items-center gap-2">
                           <h3 className="font-semibold text-lg hover:text-primary transition-colors">
                             {source.name}
+                            {source.name === "Stock Market" && (
+                              <span className="ml-2 text-xs bg-green-500 text-white px-2 py-1 rounded-full">LIVE</span>
+                            )}
                           </h3>
                           {sourceExplanations?.[
                             source.name.toLowerCase().replace(" ", "")
@@ -208,6 +211,7 @@ export const SentimentBreakdown = ({
                         </div>
                         <p className="text-sm text-muted-foreground">
                           {source.samples.toLocaleString()} samples analyzed
+                          {source.name === "Stock Market" && " (Real-time top 10 stocks)"}
                         </p>
                       </div>
                     </div>

@@ -11,12 +11,29 @@ import { TrendChart } from "./TrendChart";
 import { VibeSummary } from "./VibeSummary";
 import { TopNews } from "./TopNews";
 import { currentMoodScore, sentimentSources, weeklyTrend, vibePhrases, regions, topics } from "@/data/mockData";
+import { useStockSentiment } from "@/hooks/useStockSentiment";
 
 export const Dashboard = () => {
   const [selectedRegion, setSelectedRegion] = useState("GLOBAL");
   const [selectedTopic, setSelectedTopic] = useState("all");
   const [realTimeUpdates, setRealTimeUpdates] = useState(true);
   const [lastUpdated, setLastUpdated] = useState(new Date());
+  
+  // Get real-time stock sentiment data
+  const { data: stockSentimentData, loading: stockLoading } = useStockSentiment(300000); // 5 minutes
+
+  // Update sentiment sources with real stock market data
+  const updatedSentimentSources = sentimentSources.map(source => {
+    if (source.name === "Stock Market" && stockSentimentData) {
+      return {
+        ...source,
+        score: stockSentimentData.score,
+        change: stockSentimentData.change,
+        samples: stockSentimentData.samples
+      };
+    }
+    return source;
+  });
 
   const handleRefresh = () => {
     setLastUpdated(new Date());
@@ -123,7 +140,7 @@ export const Dashboard = () => {
 
         {/* Source Breakdown */}
         <div className="lg:col-span-2">
-          <SourceBreakdown sources={sentimentSources} />
+          <SourceBreakdown sources={updatedSentimentSources} />
         </div>
       </div>
 
