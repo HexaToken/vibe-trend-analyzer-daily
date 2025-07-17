@@ -27,7 +27,7 @@ export const CryptoPrice = ({
   className,
 }: CryptoPriceProps) => {
   const { tickers, loading, error, refetch } = useCryptoQuotes([symbol], {
-    refreshInterval,
+    refreshInterval: 300000, // 5 minutes to reduce API calls
     enabled: true,
   });
 
@@ -185,7 +185,7 @@ export const InlineCryptoPrice = ({
   className?: string;
 }) => {
   const { tickers, loading, error } = useCryptoQuotes([symbol], {
-    refreshInterval: 180000, // Refresh every 3 minutes for inline prices
+    refreshInterval: 300000, // 5 minutes to reduce API calls
     enabled: true,
   });
 
@@ -230,6 +230,36 @@ interface CryptoGridProps {
 }
 
 export const CryptoGrid = ({ symbols, className }: CryptoGridProps) => {
+  // Use a single API call for all symbols to reduce excessive requests
+  const { tickers, loading, error } = useCryptoQuotes(symbols, {
+    refreshInterval: 300000, // 5 minutes to reduce API calls
+    enabled: true,
+  });
+
+  if (loading) {
+    return (
+      <div className={cn("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4", className)}>
+        {symbols.map((symbol) => (
+          <div key={symbol} className="p-4 border rounded-lg">
+            <div className="animate-pulse space-y-2">
+              <div className="h-4 bg-gray-200 rounded w-16"></div>
+              <div className="h-6 bg-gray-200 rounded w-24"></div>
+              <div className="h-3 bg-gray-200 rounded w-20"></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center text-muted-foreground py-4">
+        <p>Unable to load cryptocurrency data</p>
+      </div>
+    );
+  }
+
   return (
     <div
       className={cn(
@@ -237,16 +267,41 @@ export const CryptoGrid = ({ symbols, className }: CryptoGridProps) => {
         className,
       )}
     >
-      {symbols.map((symbol) => (
-        <div key={symbol} className="p-4 border rounded-lg">
-          <CryptoPrice
-            symbol={symbol}
-            size="md"
-            showRefresh={true}
-            className="w-full"
-          />
-        </div>
-      ))}
+      {symbols.map((symbol) => {
+        const ticker = tickers.find(t => t.symbol === symbol);
+        if (!ticker) return null;
+        
+        const isPositive = ticker.change >= 0;
+        const changeColor = isPositive ? "text-green-600" : "text-red-600";
+        const TrendIcon = isPositive ? TrendingUp : TrendingDown;
+        
+        const formatPrice = (price: number) => {
+          if (price < 1) return `$${price.toFixed(6)}`;
+          if (price < 10) return `$${price.toFixed(4)}`;
+          return `$${price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        };
+
+        return (
+          <div key={symbol} className="p-4 border rounded-lg">
+            <div className="flex items-center gap-2">
+              <div className="flex flex-col w-full">
+                <div className="flex items-center gap-2">
+                  <span className="font-medium flex items-center gap-1">
+                    <Coins className="h-4 w-4" />
+                    {symbol}
+                  </span>
+                  <span className="text-lg font-bold">{formatPrice(ticker.price)}</span>
+                </div>
+                <div className={cn("flex items-center gap-1", changeColor, "text-sm")}>
+                  <TrendIcon className="h-4 w-4" />
+                  <span>{isPositive ? "+" : ""}{ticker.change.toFixed(2)}</span>
+                  <span>({isPositive ? "+" : ""}{ticker.changePercent.toFixed(2)}%)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };
@@ -256,7 +311,7 @@ export const CryptoMarketOverview = () => {
   const { tickers, loading, error } = useCryptoQuotes(
     ["BTC", "ETH", "BNB", "XRP"],
     {
-      refreshInterval: 60000,
+      refreshInterval: 300000, // 5 minutes to reduce API calls
       enabled: true,
     },
   );

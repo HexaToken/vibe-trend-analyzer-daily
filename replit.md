@@ -96,6 +96,12 @@ The application integrates with multiple external services:
   - Changed default limit from 100 to 10 in CoinMarketCap API service
   - Updated server proxy endpoint to accept limit parameter for rate limiting
   - Reduced excessive API calls to improve performance and stay within API limits
+- **2025-01-17**: Drastically reduced CoinMarketCap API calls
+  - Changed all refresh intervals from 1-3 minutes to 5 minutes (300000ms) 
+  - Modified CryptoGrid to use single bulk API call instead of individual calls per cryptocurrency
+  - Removed duplicate useCryptoQuotes calls in CryptoDashboard 
+  - Updated SocialPlatform and other components to use 5-minute refresh intervals
+  - Implemented proper bulk data fetching to minimize API request volume
 
 ## User Preferences
 - Language: English

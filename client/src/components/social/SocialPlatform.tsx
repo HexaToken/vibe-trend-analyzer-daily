@@ -49,7 +49,7 @@ export const SocialPlatform = () => {
   const { tickers: cryptoTickers, loading: cryptoLoading } = useCryptoQuotes(
     trendingCryptos,
     {
-      refreshInterval: 60000, // Refresh every minute
+      refreshInterval: 300000, // 5 minutes to reduce API calls
       enabled: true,
     },
   );

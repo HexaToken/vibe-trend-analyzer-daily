@@ -33,32 +33,18 @@ export const CryptoDashboard = () => {
   >("24h");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Get top 10 cryptocurrencies
+  // Get top 10 cryptocurrencies (this single call provides all crypto data)
   const {
     tickers: topCryptos,
     loading: cryptoLoading,
     error: cryptoError,
     refetch,
-  } = useCryptoListings(10);
+  } = useCryptoListings(10, { refreshInterval: 300000 }); // 5 minutes
 
-  // Get top 10 popular crypto quotes (reduced from 8 to limit API calls)
-  const popularSymbols = [
-    "BTC",
-    "ETH", 
-    "BNB",
-    "XRP",
-    "ADA",
-    "SOL",
-    "DOT",
-    "DOGE",
-    "MATIC",
-    "AVAX"
-  ];
-  const { tickers: popularCryptos, loading: popularLoading } =
-    useCryptoQuotes(popularSymbols.slice(0, 10));
-
-  // Get global metrics
-  const { data: globalMetrics, loading: metricsLoading } = useGlobalMetrics();
+  // Get global metrics with reduced refresh rate
+  const { data: globalMetrics, loading: metricsLoading } = useGlobalMetrics({
+    refreshInterval: 300000 // 5 minutes
+  });
 
   // Filter cryptocurrencies based on search
   const filteredCryptos = topCryptos.filter(
