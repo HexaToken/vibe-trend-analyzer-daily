@@ -373,7 +373,8 @@ export const YFinanceDemo = () => {
                             <span>{formatTime(article.time)}</span>
                             <Badge variant="outline">{article.source}</Badge>
                             <Badge variant="outline">
-                              Sentiment: {article.sentiment_score.toFixed(2)}
+                              Sentiment:{" "}
+                              {article.sentiment_score?.toFixed(2) || "N/A"}
                             </Badge>
                           </div>
                         </div>
