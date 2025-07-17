@@ -86,20 +86,50 @@ class FinnhubApiService {
     const queryParams = new URLSearchParams(params);
     const url = `${this.baseUrl}${endpoint}?${queryParams.toString()}`;
 
-    const response = await fetch(url);
+    try {
+      const response = await fetch(url);
 
-    if (!response.ok) {
-      throw new FinnhubApiError(`Finnhub API error: ${response.status}`);
+      if (!response.ok) {
+        this.circuitBreaker.failureCount++;
+        this.circuitBreaker.lastFailureTime = Date.now();
+
+        if (this.circuitBreaker.failureCount >= this.circuitBreaker.threshold) {
+          this.circuitBreaker.isOpen = true;
+        }
+
+        throw new FinnhubApiError(`Finnhub API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      // Check for API error messages
+      if (data.error) {
+        this.circuitBreaker.failureCount++;
+        this.circuitBreaker.lastFailureTime = Date.now();
+
+        if (this.circuitBreaker.failureCount >= this.circuitBreaker.threshold) {
+          this.circuitBreaker.isOpen = true;
+        }
+
+        throw new FinnhubApiError(data.error || "Finnhub API error");
+      }
+
+      // Reset failure count on success
+      this.circuitBreaker.failureCount = 0;
+      return data;
+    } catch (error) {
+      // Update circuit breaker on network error
+      if (!(error instanceof FinnhubApiError)) {
+        this.circuitBreaker.failureCount++;
+        this.circuitBreaker.lastFailureTime = Date.now();
+
+        if (this.circuitBreaker.failureCount >= this.circuitBreaker.threshold) {
+          this.circuitBreaker.isOpen = true;
+        }
+      }
+
+      throw error;
     }
-
-    const data = await response.json();
-
-    // Check for API error messages
-    if (data.error) {
-      throw new FinnhubApiError(data.error || "Finnhub API error");
-    }
-
-    return data;
   }
 
   /**
