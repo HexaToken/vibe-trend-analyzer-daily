@@ -182,53 +182,11 @@ export function convertSerpToNewsArticle(
   article: SerpNewsArticle,
   sentimentScore?: number,
 ): import("../data/mockData").NewsArticle {
-  // Generate a simple sentiment score based on headline analysis
+  // Generate advanced sentiment score using NLP analysis
   const generateSentimentScore = (title: string, snippet?: string) => {
-    const text = `${title} ${snippet || ""}`.toLowerCase();
-
-    // Simple sentiment keywords (in production, you'd use a proper sentiment analysis service)
-    const positiveWords = [
-      "gains",
-      "growth",
-      "surge",
-      "rise",
-      "boost",
-      "positive",
-      "success",
-      "profit",
-      "strong",
-      "up",
-      "rally",
-      "bull",
-      "breakthrough",
-    ];
-    const negativeWords = [
-      "loss",
-      "decline",
-      "fall",
-      "drop",
-      "crash",
-      "negative",
-      "fail",
-      "down",
-      "weak",
-      "concern",
-      "bear",
-      "recession",
-      "crisis",
-    ];
-
-    let score = 50; // neutral starting point
-
-    positiveWords.forEach((word) => {
-      if (text.includes(word)) score += 5;
-    });
-
-    negativeWords.forEach((word) => {
-      if (text.includes(word)) score -= 5;
-    });
-
-    return Math.max(0, Math.min(100, score));
+    const text = `${title} ${snippet || ""}`;
+    const analysis = nlpSentimentAnalyzer.analyzeSentiment(text);
+    return analysis.score;
   };
 
   // Parse date - SerpAPI returns dates in various formats
