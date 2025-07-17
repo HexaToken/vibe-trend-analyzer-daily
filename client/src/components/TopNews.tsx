@@ -86,7 +86,7 @@ export const TopNews = () => {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          {loading && articles.length === 0 ? (
+          {loading && displayArticles.length === 0 ? (
             <div className="text-center py-8">
               <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-2 text-muted-foreground" />
               <p className="text-muted-foreground">Loading latest news...</p>
