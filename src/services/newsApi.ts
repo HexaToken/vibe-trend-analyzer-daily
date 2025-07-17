@@ -170,50 +170,14 @@ export function convertNewsAPIToNewsArticle(
   article: NewsAPIArticle,
   sentimentScore?: number,
 ): import("../data/mockData").NewsArticle {
-  // Generate a simple sentiment score based on headline analysis
+  // Generate advanced sentiment score using NLP analysis
   const generateSentimentScore = (
     title: string,
     description?: string | null,
   ) => {
-    const text = `${title} ${description || ""}`.toLowerCase();
-
-    // Simple sentiment keywords (in production, you'd use a proper sentiment analysis service)
-    const positiveWords = [
-      "gains",
-      "growth",
-      "surge",
-      "rise",
-      "boost",
-      "positive",
-      "success",
-      "profit",
-      "strong",
-      "up",
-    ];
-    const negativeWords = [
-      "loss",
-      "decline",
-      "fall",
-      "drop",
-      "crash",
-      "negative",
-      "fail",
-      "down",
-      "weak",
-      "concern",
-    ];
-
-    let score = 50; // neutral starting point
-
-    positiveWords.forEach((word) => {
-      if (text.includes(word)) score += 5;
-    });
-
-    negativeWords.forEach((word) => {
-      if (text.includes(word)) score -= 5;
-    });
-
-    return Math.max(0, Math.min(100, score));
+    const text = `${title} ${description || ""}`;
+    const analysis = nlpSentimentAnalyzer.analyzeSentiment(text);
+    return analysis.score;
   };
 
   return {
