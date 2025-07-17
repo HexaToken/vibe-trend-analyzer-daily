@@ -298,7 +298,8 @@ export const YFinanceDemo = () => {
                               {article.symbol || "Market"}
                             </Badge>
                             <Badge variant="outline">
-                              Sentiment: {article.sentiment_score.toFixed(2)}
+                              Sentiment:{" "}
+                              {article.sentiment_score?.toFixed(2) || "N/A"}
                             </Badge>
                           </div>
                         </div>
