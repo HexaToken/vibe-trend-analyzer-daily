@@ -196,13 +196,13 @@ export const CryptoDashboard = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {popularLoading ? (
+          {cryptoLoading && topCryptos.length === 0 ? (
             <div className="text-center py-8">
               <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-2" />
               <p>Loading popular cryptocurrencies...</p>
             </div>
           ) : (
-            <CryptoGrid symbols={popularSymbols} />
+            <CryptoGrid symbols={topCryptos.slice(0, 6).map(crypto => crypto.symbol)} />
           )}
         </CardContent>
       </Card>
