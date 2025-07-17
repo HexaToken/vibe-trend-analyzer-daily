@@ -3,7 +3,6 @@
 
 const API_KEY = "a23f6083-9fcc-44d9-b03f-7cee769e3b91";
 const BASE_URL = "https://pro-api.coinmarketcap.com/v1";
-const PROXY_BASE_URL = "/api/proxy/coinmarketcap";
 
 // CoinMarketCap API Response Types
 export interface CoinMarketCapQuote {
@@ -145,19 +144,12 @@ export class CoinMarketCapApiError extends Error {
 // API Service Class
 class CoinMarketCapService {
   private baseURL = BASE_URL;
-  private proxyURL = PROXY_BASE_URL;
   private apiKey = API_KEY;
-  private useProxy = true; // Toggle to use proxy or direct API
 
   private async fetchFromApi<T>(
     endpoint: string,
     params: Record<string, string> = {},
   ): Promise<T> {
-    // Use proxy if available, fallback to direct API
-    if (this.useProxy) {
-      return this.fetchViaProxy<T>(endpoint, params);
-    }
-
     const url = new URL(`${this.baseURL}${endpoint}`);
 
     // Add parameters
@@ -199,58 +191,6 @@ class CoinMarketCapService {
       throw new CoinMarketCapApiError(
         `Network error: ${error instanceof Error ? error.message : "Unknown error"}`,
       );
-    }
-  }
-
-  private async fetchViaProxy<T>(
-    endpoint: string,
-    params: Record<string, string> = {},
-  ): Promise<T> {
-    try {
-      let proxyEndpoint = "";
-
-      // Map API endpoints to proxy endpoints
-      if (endpoint === "/cryptocurrency/listings/latest") {
-        proxyEndpoint = "/listings";
-      } else if (endpoint === "/cryptocurrency/quotes/latest") {
-        proxyEndpoint = "/quotes";
-      } else if (endpoint === "/global-metrics/quotes/latest") {
-        proxyEndpoint = "/global-metrics";
-      } else {
-        // Fallback to direct API for unsupported endpoints
-        this.useProxy = false;
-        return this.fetchFromApi<T>(endpoint, params);
-      }
-
-      const url = new URL(`${this.proxyURL}${proxyEndpoint}`);
-
-      // Add parameters
-      Object.entries(params).forEach(([key, value]) => {
-        url.searchParams.append(key, value);
-      });
-
-      const response = await fetch(url.toString());
-
-      if (!response.ok) {
-        // If proxy fails, try direct API as fallback
-        console.warn("Proxy failed, falling back to direct API");
-        this.useProxy = false;
-        return this.fetchFromApi<T>(endpoint, params);
-      }
-
-      const data = await response.json();
-
-      // Check for API errors
-      if (data.error) {
-        throw new CoinMarketCapApiError(data.error);
-      }
-
-      return data;
-    } catch (error) {
-      // If proxy fails, try direct API as fallback
-      console.warn("Proxy error, falling back to direct API:", error);
-      this.useProxy = false;
-      return this.fetchFromApi<T>(endpoint, params);
     }
   }
 

@@ -38,7 +38,6 @@ export const CryptoDashboard = () => {
     tickers: topCryptos,
     loading: cryptoLoading,
     error: cryptoError,
-    isRealData: cryptoIsRealData,
     refetch,
   } = useCryptoListings(50);
 
@@ -53,18 +52,11 @@ export const CryptoDashboard = () => {
     "DOT",
     "DOGE",
   ];
-  const {
-    tickers: popularCryptos,
-    loading: popularLoading,
-    isRealData: popularIsRealData,
-  } = useCryptoQuotes(popularSymbols);
+  const { tickers: popularCryptos, loading: popularLoading } =
+    useCryptoQuotes(popularSymbols);
 
   // Get global metrics
-  const {
-    data: globalMetrics,
-    loading: metricsLoading,
-    isRealData: metricsIsRealData,
-  } = useGlobalMetrics();
+  const { data: globalMetrics, loading: metricsLoading } = useGlobalMetrics();
 
   // Filter cryptocurrencies based on search
   const filteredCryptos = topCryptos.filter(
@@ -96,14 +88,9 @@ export const CryptoDashboard = () => {
             <Coins className="h-8 w-8" />
             Cryptocurrency Dashboard
           </h1>
-          <div className="flex items-center gap-2">
-            <p className="text-muted-foreground">
-              Real-time cryptocurrency data powered by CoinMarketCap API
-            </p>
-            <Badge variant={cryptoIsRealData ? "default" : "secondary"}>
-              {cryptoIsRealData ? "Live Data" : "Mock Data"}
-            </Badge>
-          </div>
+          <p className="text-muted-foreground">
+            Real-time cryptocurrency data powered by CoinMarketCap API
+          </p>
         </div>
         <Button onClick={refetch} disabled={cryptoLoading}>
           <RefreshCw
