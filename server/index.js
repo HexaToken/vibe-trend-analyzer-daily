@@ -186,8 +186,8 @@ app.post("/api/ai/chat", async (req, res) => {
       return res.status(400).json({ error: "Message is required" });
     }
 
-    // Simple rule-based AI responses for now
-    const response = await processAiMessage(message);
+    // Use DeepSeek API for AI responses
+    const response = await processAiMessageWithDeepSeek(message);
     res.json(response);
   } catch (error) {
     console.error("AI Chat Error:", error);
@@ -667,7 +667,7 @@ async function provideHelp(message) {
   if (lowerMessage.includes("sentiment") || lowerMessage.includes("mood")) {
     return {
       content:
-        "🌡️ **Sentiment Analysis Guide**\n\nUnderstand market psychology:\n\n📊 **Sentiment Scores:**\n• **+100 to +50**: Strong Bullish (🟢)\n• **+49 to +10**: Mild Bullish (🟢)\n• **+9 to -9**: Neutral (🟡)\n• **-10 to -49**: Mild Bearish (🔴)\n• **-50 to -100**: Strong Bearish (🔴)\n\n�� **How It Works:**\n• AI analyzes every post mentioning a ticker\n• Natural language processing detects emotional tone\n• Weighted by user credibility and engagement\n• Updated in real-time as new posts arrive\n• Historical tracking shows sentiment trends\n\n💡 **Trading Insights:**\n• Extreme sentiment often signals reversals\n• Sentiment shifts can precede price moves\n• Compare sentiment vs actual price action\n• Use as one factor in trading decisions\n• Community sentiment ≠ guaranteed outcomes",
+        "🌡️ **Sentiment Analysis Guide**\n\nUnderstand market psychology:\n\n📊 **Sentiment Scores:**\n• **+100 to +50**: Strong Bullish (🟢)\n• **+49 to +10**: Mild Bullish (🟢)\n• **+9 to -9**: Neutral (🟡)\n• **-10 to -49**: Mild Bearish (🔴)\n• **-50 to -100**: Strong Bearish (🔴)\n\n🧠 **How It Works:**\n• AI analyzes every post mentioning a ticker\n• Natural language processing detects emotional tone\n• Weighted by user credibility and engagement\n• Updated in real-time as new posts arrive\n• Historical tracking shows sentiment trends\n\n💡 **Trading Insights:**\n• Extreme sentiment often signals reversals\n• Sentiment shifts can precede price moves\n• Compare sentiment vs actual price action\n• Use as one factor in trading decisions\n• Community sentiment ≠ guaranteed outcomes",
       suggestions: [
         "How accurate is sentiment?",
         "Best times to check sentiment?",
