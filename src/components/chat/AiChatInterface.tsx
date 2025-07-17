@@ -122,9 +122,9 @@ export const AiChatInterface = () => {
   ];
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full min-h-0 overflow-hidden">
       {/* Messages Area */}
-      <ScrollArea className="flex-1 p-4">
+      <ScrollArea className="flex-1 p-4 min-h-0 overflow-hidden">
         <div className="space-y-4">
           {messages.map((message) => (
             <div
