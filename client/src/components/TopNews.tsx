@@ -10,30 +10,38 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { NewsDetailModal } from "./NewsDetailModal";
-import { useBusinessNews } from "@/hooks/useNewsApi";
+import { useCombinedBusinessNews } from "@/hooks/useCombinedBusinessNews";
 import { newsArticles } from "@/data/mockData";
 
 export const TopNews = () => {
   const [selectedArticle, setSelectedArticle] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Get real business news from NewsAPI
-  const { articles, loading, error, refetch } = useBusinessNews({
-    refreshInterval: 180000, // Refresh every 3 minutes
-    enabled: true,
-  });
+  // Get combined business news from NewsAPI and YFinance
+  const { articles, loading, error, refetch, sources } =
+    useCombinedBusinessNews({
+      refreshInterval: 180000, // Refresh every 3 minutes
+      enabled: true,
+      includeNewsApi: true,
+      includeYFinanceNews: true,
+      maxArticles: 25,
+    });
 
   // Debug logging
   console.log(
-    "TopNews - articles:",
+    "TopNews - Combined articles:",
     articles.length,
+    "NewsAPI:",
+    sources.newsApi.articles.length,
+    "YFinance:",
+    sources.yfinance.articles.length,
     "loading:",
     loading,
     "error:",
     error,
   );
 
-  // Use mock articles if no articles from API
+  // Use mock articles if no articles from any API
   const displayArticles = articles.length > 0 ? articles : newsArticles;
 
   const handleArticleClick = (article: any) => {
