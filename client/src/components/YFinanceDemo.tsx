@@ -226,7 +226,8 @@ export const YFinanceDemo = () => {
                     <div className="flex items-center justify-between text-xs text-muted-foreground">
                       <span>{formatTime(article.time)}</span>
                       <Badge variant="outline" className="text-xs">
-                        Sentiment: {article.sentiment_score.toFixed(2)}
+                        Sentiment:{" "}
+                        {article.sentiment_score?.toFixed(2) || "N/A"}
                       </Badge>
                     </div>
                   </div>
