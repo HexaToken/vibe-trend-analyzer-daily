@@ -211,13 +211,10 @@ class CoinMarketCapService {
     symbols: string[],
     convert: string = "USD",
   ): Promise<CoinMarketCapQuotesResponse> {
-    return this.fetchFromApi<CoinMarketCapQuotesResponse>(
-      "/cryptocurrency/quotes/latest",
-      {
-        symbol: symbols.join(","),
-        convert,
-      },
-    );
+    return this.fetchFromApi<CoinMarketCapQuotesResponse>("/quotes", {
+      symbol: symbols.join(","),
+      convert,
+    });
   }
 
   /**
