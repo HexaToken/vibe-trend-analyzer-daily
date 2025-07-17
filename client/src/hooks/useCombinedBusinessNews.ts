@@ -83,7 +83,11 @@ export function useCombinedBusinessNews(
     if (includeYFinanceNews && yfinanceResult.articles.length > 0) {
       allArticles.push(...yfinanceResult.articles);
     }
-    if (includeYFinanceNews && yfinanceResult.error) {
+    if (
+      includeYFinanceNews &&
+      yfinanceResult.error &&
+      !yfinanceResult.error.includes("service not available")
+    ) {
       errors.push(`YFinance: ${yfinanceResult.error}`);
     }
 
