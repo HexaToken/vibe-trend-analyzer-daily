@@ -101,7 +101,7 @@ export const TopNews = () => {
             </div>
           ) : (
             <>
-              {articles.slice(0, 5).map((article) => (
+              {displayArticles.slice(0, 5).map((article) => (
                 <div
                   key={article.id}
                   onClick={() => handleArticleClick(article)}
