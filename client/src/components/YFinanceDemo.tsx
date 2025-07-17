@@ -1,42 +1,44 @@
 import { useState } from "react";
+import { useYFinanceData } from "@/hooks/useYFinance";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { useYCNBCData } from "@/hooks/useYCNBC";
-import { 
-  Globe, 
-  TrendingUp, 
-  Activity, 
+import {
+  Activity,
+  BarChart3,
+  CheckCircle,
+  Clock,
   ExternalLink,
+  Globe,
   RefreshCw,
   AlertCircle,
-  CheckCircle,
-  BarChart3,
-  Clock
+  TrendingUp,
 } from "lucide-react";
 
-export const YCNBCDemo = () => {
+export const YFinanceDemo = () => {
   const [selectedTab, setSelectedTab] = useState("overview");
-  const { latestNews, trendingNews, sentiment, isLoading, isError } = useYCNBCData(300000); // 5 minutes
+  const { latestNews, stockNews, sentiment, isLoading, isError } = useYFinanceData(300000); // 5 minutes
   
   // Check if any of the individual queries have errors
-  const hasActualError = (latestNews.error || trendingNews.error || sentiment.error) && 
-                        !(latestNews.data || trendingNews.data || sentiment.data);
+  const hasActualError = (latestNews.error || stockNews.error || sentiment.error) && 
+                        !(latestNews.data || stockNews.data || sentiment.data);
 
   const formatSentimentScore = (score: number): { label: string; color: string } => {
     if (score >= 75) return { label: "Very Positive", color: "text-green-600" };
     if (score >= 60) return { label: "Positive", color: "text-green-500" };
-    if (score >= 40) return { label: "Neutral", color: "text-yellow-500" };
-    if (score >= 25) return { label: "Negative", color: "text-red-500" };
+    if (score >= 45) return { label: "Slightly Positive", color: "text-blue-500" };
+    if (score >= 35) return { label: "Neutral", color: "text-gray-500" };
+    if (score >= 25) return { label: "Slightly Negative", color: "text-orange-500" };
+    if (score >= 15) return { label: "Negative", color: "text-red-500" };
     return { label: "Very Negative", color: "text-red-600" };
   };
 
   const formatTime = (timeStr?: string) => {
     if (!timeStr) return "Recently";
-    if (timeStr.includes("Hour")) return timeStr;
-    if (timeStr.includes("Minutes")) return timeStr;
+    if (timeStr.includes("hour")) return timeStr;
+    if (timeStr.includes("minute")) return timeStr;
+    if (timeStr.includes("day")) return timeStr;
     return timeStr;
   };
 
@@ -46,10 +48,10 @@ export const YCNBCDemo = () => {
       <div className="text-center space-y-4">
         <h2 className="text-3xl font-bold flex items-center justify-center gap-3">
           <Globe className="h-8 w-8 text-blue-600" />
-          YCNBC Integration Demo
+          YFinance Integration Demo
         </h2>
         <p className="text-muted-foreground max-w-3xl mx-auto">
-          Enhanced CNBC data integration using the ycnbc Python package for real-time news sentiment analysis and market insights.
+          Enhanced financial data integration using the yfinance Python package for real-time market news sentiment analysis and stock data.
         </p>
       </div>
 
@@ -58,7 +60,7 @@ export const YCNBCDemo = () => {
         <Card>
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-sm">YCNBC Service</CardTitle>
+              <CardTitle className="text-sm">YFinance Service</CardTitle>
               {isLoading ? (
                 <RefreshCw className="h-4 w-4 animate-spin text-blue-500" />
               ) : hasActualError ? (
@@ -81,9 +83,9 @@ export const YCNBCDemo = () => {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {(latestNews.data?.total || 0) + (trendingNews.data?.total || 0)}
+              {(latestNews.data?.total || 0) + (stockNews.data?.total || 0)}
             </div>
-            <p className="text-xs text-muted-foreground">Latest + Trending</p>
+            <p className="text-xs text-muted-foreground">Market + Stock News</p>
           </CardContent>
         </Card>
 
@@ -111,9 +113,9 @@ export const YCNBCDemo = () => {
         <Alert>
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>
-            Unable to connect to YCNBC service. This may be due to network issues or service configuration.
-            {latestNews.error && <div className="mt-1">Latest News: {latestNews.error.message}</div>}
-            {trendingNews.error && <div className="mt-1">Trending News: {trendingNews.error.message}</div>}
+            Unable to connect to YFinance service. This may be due to network issues or service configuration.
+            {latestNews.error && <div className="mt-1">Market News: {latestNews.error.message}</div>}
+            {stockNews.error && <div className="mt-1">Stock News: {stockNews.error.message}</div>}
             {sentiment.error && <div className="mt-1">Sentiment: {sentiment.error.message}</div>}
           </AlertDescription>
         </Alert>
@@ -123,19 +125,19 @@ export const YCNBCDemo = () => {
       <Tabs value={selectedTab} onValueChange={setSelectedTab}>
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="latest">Latest News</TabsTrigger>
-          <TabsTrigger value="trending">Trending</TabsTrigger>
+          <TabsTrigger value="market">Market News</TabsTrigger>
+          <TabsTrigger value="stocks">Stock News</TabsTrigger>
           <TabsTrigger value="sentiment">Sentiment Analysis</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Latest News Preview */}
+            {/* Market News Preview */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Activity className="h-5 w-5" />
-                  Latest CNBC News
+                  Latest Market News
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -153,16 +155,16 @@ export const YCNBCDemo = () => {
               </CardContent>
             </Card>
 
-            {/* Trending News Preview */}
+            {/* Stock News Preview */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <TrendingUp className="h-5 w-5" />
-                  Trending Stories
+                  SPY Stock News
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                {trendingNews.data?.articles?.slice(0, 3).map((article, index) => (
+                {stockNews.data?.articles?.slice(0, 3).map((article, index) => (
                   <div key={article.id} className="border-b pb-3 mb-3 last:border-b-0 last:mb-0">
                     <h4 className="font-medium text-sm mb-1 line-clamp-2">{article.headline}</h4>
                     <div className="flex items-center justify-between text-xs text-muted-foreground">
@@ -172,84 +174,150 @@ export const YCNBCDemo = () => {
                       </Badge>
                     </div>
                   </div>
-                )) || <div className="text-sm text-muted-foreground">Loading trending...</div>}
+                )) || <div className="text-sm text-muted-foreground">Loading stock news...</div>}
               </CardContent>
             </Card>
           </div>
         </TabsContent>
 
-        <TabsContent value="latest" className="space-y-4">
+        <TabsContent value="market" className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle>Latest CNBC News Articles</CardTitle>
+              <CardTitle className="flex items-center gap-2">
+                <Activity className="h-5 w-5" />
+                Market News Feed
+                {latestNews.isLoading && <RefreshCw className="h-4 w-4 animate-spin ml-2" />}
+              </CardTitle>
+              <p className="text-sm text-muted-foreground">
+                Total: {latestNews.data?.total || 0} market articles from SPY, QQQ, IWM, VIX
+              </p>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                {latestNews.data?.articles?.map((article) => (
-                  <div key={article.id} className="p-4 border rounded-lg hover:shadow-md transition-shadow">
-                    <div className="flex items-start justify-between mb-2">
-                      <h3 className="font-medium text-lg mb-2 flex-1">{article.headline}</h3>
-                      <ExternalLink 
-                        className="h-4 w-4 text-muted-foreground hover:text-primary cursor-pointer ml-2 flex-shrink-0"
-                        onClick={() => window.open(article.url, '_blank')}
-                      />
+              {latestNews.isLoading ? (
+                <div className="space-y-3">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <div key={i} className="animate-pulse">
+                      <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                      <div className="h-3 bg-gray-100 rounded w-1/3"></div>
                     </div>
-                    <div className="flex items-center justify-between text-sm text-muted-foreground">
-                      <div className="flex items-center gap-4">
-                        <span className="flex items-center gap-1">
-                          <Clock className="h-3 w-3" />
-                          {formatTime(article.time)}
-                        </span>
-                        <Badge variant="outline">{article.source}</Badge>
+                  ))}
+                </div>
+              ) : latestNews.error ? (
+                <Alert>
+                  <AlertCircle className="h-4 w-4" />
+                  <AlertDescription>
+                    Error loading market news: {latestNews.error.message}
+                  </AlertDescription>
+                </Alert>
+              ) : latestNews.data?.articles?.length ? (
+                <div className="space-y-4">
+                  {latestNews.data.articles.map((article, index) => (
+                    <div key={article.id} className="border-b pb-4 last:border-b-0">
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1">
+                          <h4 className="font-medium mb-2 line-clamp-2">
+                            <a 
+                              href={article.url} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="hover:text-blue-600 transition-colors"
+                            >
+                              {article.headline}
+                            </a>
+                          </h4>
+                          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                            <span>{formatTime(article.time)}</span>
+                            <Badge variant="outline">
+                              {article.symbol || "Market"}
+                            </Badge>
+                            <Badge variant="outline">
+                              Sentiment: {article.sentiment_score.toFixed(2)}
+                            </Badge>
+                          </div>
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          #{index + 1}
+                        </div>
                       </div>
-                      <Badge 
-                        variant={article.sentiment_score > 0 ? "default" : article.sentiment_score < 0 ? "destructive" : "secondary"}
-                        className="text-xs"
-                      >
-                        Sentiment: {article.sentiment_score.toFixed(2)}
-                      </Badge>
                     </div>
-                  </div>
-                )) || <div className="text-center text-muted-foreground">Loading latest news...</div>}
-              </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-sm text-muted-foreground">
+                  No market news available at the moment.
+                </div>
+              )}
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="trending" className="space-y-4">
+        <TabsContent value="stocks" className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle>Trending CNBC Stories</CardTitle>
+              <CardTitle className="flex items-center gap-2">
+                <TrendingUp className="h-5 w-5" />
+                SPY Stock-Specific News
+                {stockNews.isLoading && <RefreshCw className="h-4 w-4 animate-spin ml-2" />}
+              </CardTitle>
+              <p className="text-sm text-muted-foreground">
+                Total: {stockNews.data?.total || 0} SPY-related articles
+              </p>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                {trendingNews.data?.articles?.map((article) => (
-                  <div key={article.id} className="p-4 border rounded-lg hover:shadow-md transition-shadow">
-                    <div className="flex items-start justify-between mb-2">
-                      <h3 className="font-medium text-lg mb-2 flex-1">{article.headline}</h3>
-                      <ExternalLink 
-                        className="h-4 w-4 text-muted-foreground hover:text-primary cursor-pointer ml-2 flex-shrink-0"
-                        onClick={() => window.open(article.url, '_blank')}
-                      />
+              {stockNews.isLoading ? (
+                <div className="space-y-3">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <div key={i} className="animate-pulse">
+                      <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                      <div className="h-3 bg-gray-100 rounded w-1/3"></div>
                     </div>
-                    <div className="flex items-center justify-between text-sm text-muted-foreground">
-                      <div className="flex items-center gap-4">
-                        <span className="flex items-center gap-1">
-                          <Clock className="h-3 w-3" />
-                          {formatTime(article.time)}
-                        </span>
-                        <Badge variant="outline">{article.source}</Badge>
+                  ))}
+                </div>
+              ) : stockNews.error ? (
+                <Alert>
+                  <AlertCircle className="h-4 w-4" />
+                  <AlertDescription>
+                    Error loading stock news: {stockNews.error.message}
+                  </AlertDescription>
+                </Alert>
+              ) : stockNews.data?.articles?.length ? (
+                <div className="space-y-4">
+                  {stockNews.data.articles.map((article, index) => (
+                    <div key={article.id} className="border-b pb-4 last:border-b-0">
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1">
+                          <h4 className="font-medium mb-2 line-clamp-2">
+                            <a 
+                              href={article.url} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="hover:text-blue-600 transition-colors"
+                            >
+                              {article.headline}
+                            </a>
+                          </h4>
+                          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                            <span>{formatTime(article.time)}</span>
+                            <Badge variant="outline">
+                              {article.source}
+                            </Badge>
+                            <Badge variant="outline">
+                              Sentiment: {article.sentiment_score.toFixed(2)}
+                            </Badge>
+                          </div>
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          #{index + 1}
+                        </div>
                       </div>
-                      <Badge 
-                        variant={article.sentiment_score > 0 ? "default" : article.sentiment_score < 0 ? "destructive" : "secondary"}
-                        className="text-xs"
-                      >
-                        Sentiment: {article.sentiment_score.toFixed(2)}
-                      </Badge>
                     </div>
-                  </div>
-                )) || <div className="text-center text-muted-foreground">Loading trending stories...</div>}
-              </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-sm text-muted-foreground">
+                  No stock news available at the moment.
+                </div>
+              )}
             </CardContent>
           </Card>
         </TabsContent>
@@ -280,14 +348,14 @@ export const YCNBCDemo = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="p-4 border rounded-lg">
                       <h4 className="font-semibold mb-2">Raw Sentiment Score</h4>
-                      <div className="text-2xl font-bold">{sentiment.data.raw_sentiment}</div>
+                      <div className="text-2xl font-bold">{sentiment.data.raw_sentiment.toFixed(3)}</div>
                       <div className="text-sm text-muted-foreground">(-1.0 to +1.0 scale)</div>
                     </div>
                     
                     <div className="p-4 border rounded-lg">
                       <h4 className="font-semibold mb-2">Articles Analyzed</h4>
                       <div className="text-2xl font-bold">{sentiment.data.article_count}</div>
-                      <div className="text-sm text-muted-foreground">CNBC articles</div>
+                      <div className="text-sm text-muted-foreground">Market news articles</div>
                     </div>
                   </div>
 
@@ -314,32 +382,6 @@ export const YCNBCDemo = () => {
           </Card>
         </TabsContent>
       </Tabs>
-
-      {/* Integration Info */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Integration Details</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="text-center">
-              <Globe className="h-8 w-8 mx-auto mb-2 text-blue-600" />
-              <h4 className="font-semibold">Data Source</h4>
-              <p className="text-sm text-muted-foreground">CNBC via ycnbc package</p>
-            </div>
-            <div className="text-center">
-              <RefreshCw className="h-8 w-8 mx-auto mb-2 text-green-600" />
-              <h4 className="font-semibold">Update Frequency</h4>
-              <p className="text-sm text-muted-foreground">Every 5 minutes</p>
-            </div>
-            <div className="text-center">
-              <BarChart3 className="h-8 w-8 mx-auto mb-2 text-purple-600" />
-              <h4 className="font-semibold">Sentiment Analysis</h4>
-              <p className="text-sm text-muted-foreground">NLP-based scoring</p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
     </div>
   );
 };

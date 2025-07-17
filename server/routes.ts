@@ -90,8 +90,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // YCNBC proxy endpoints
-  app.get("/api/proxy/ycnbc/news/latest", async (req, res) => {
+  // YFinance proxy endpoints
+  app.get("/api/proxy/yfinance/news/latest", async (req, res) => {
     try {
       const { spawn } = await import('child_process');
       const python = spawn('python3', ['-c', `
@@ -99,9 +99,9 @@ import sys
 import os
 sys.path.insert(0, os.path.join(os.getcwd(), '.pythonlibs', 'lib', 'python3.11', 'site-packages'))
 sys.path.insert(0, os.getcwd())
-from server.ycnbc_service import ycnbc_service
+from server.yfinance_service import yfinance_service
 import json
-result = ycnbc_service.get_latest_news()
+result = yfinance_service.get_market_news()
 print(json.dumps(result))
       `]);
       
@@ -115,26 +115,27 @@ print(json.dumps(result))
           const result = JSON.parse(output.trim().split('\n').pop() || '{}');
           res.json(result);
         } catch (e) {
-          res.status(500).json({ error: "Failed to parse YCNBC news data" });
+          res.status(500).json({ error: "Failed to parse YFinance news data" });
         }
       });
     } catch (error) {
-      console.error("YCNBC latest news proxy error:", error);
-      res.status(500).json({ error: "Failed to fetch YCNBC latest news" });
+      console.error("YFinance latest news proxy error:", error);
+      res.status(500).json({ error: "Failed to fetch YFinance latest news" });
     }
   });
 
-  app.get("/api/proxy/ycnbc/news/trending", async (req, res) => {
+  app.get("/api/proxy/yfinance/news/trending", async (req, res) => {
     try {
+      const symbol = req.query.symbol as string || "SPY";
       const { spawn } = await import('child_process');
       const python = spawn('python3', ['-c', `
 import sys
 import os
 sys.path.insert(0, os.path.join(os.getcwd(), '.pythonlibs', 'lib', 'python3.11', 'site-packages'))
 sys.path.insert(0, os.getcwd())
-from server.ycnbc_service import ycnbc_service
+from server.yfinance_service import yfinance_service
 import json
-result = ycnbc_service.get_trending_news()
+result = yfinance_service.get_stock_news("${symbol}")
 print(json.dumps(result))
       `]);
       
@@ -151,30 +152,28 @@ print(json.dumps(result))
       
       python.on('close', (code: number) => {
         try {
-          // Get the last line which should be JSON
           const lines = output.trim().split('\n');
           const jsonLine = lines[lines.length - 1];
           const result = JSON.parse(jsonLine);
           res.setHeader('Content-Type', 'application/json');
           res.json(result);
         } catch (e) {
-          console.error("YCNBC trending parse error:", e, "Output:", output, "Error:", error);
-          res.status(500).json({ error: "Failed to parse YCNBC trending data", debug: { output, error } });
+          console.error("YFinance trending parse error:", e, "Output:", output, "Error:", error);
+          res.status(500).json({ error: "Failed to parse YFinance trending data", debug: { output, error } });
         }
       });
       
-      // Set timeout
       setTimeout(() => {
         python.kill();
         res.status(408).json({ error: "Request timeout" });
       }, 30000);
     } catch (error) {
-      console.error("YCNBC trending news proxy error:", error);
-      res.status(500).json({ error: "Failed to fetch YCNBC trending news" });
+      console.error("YFinance trending news proxy error:", error);
+      res.status(500).json({ error: "Failed to fetch YFinance trending news" });
     }
   });
 
-  app.get("/api/proxy/ycnbc/sentiment", async (req, res) => {
+  app.get("/api/proxy/yfinance/sentiment", async (req, res) => {
     try {
       const { spawn } = await import('child_process');
       const python = spawn('python3', ['-c', `
@@ -182,9 +181,9 @@ import sys
 import os
 sys.path.insert(0, os.path.join(os.getcwd(), '.pythonlibs', 'lib', 'python3.11', 'site-packages'))
 sys.path.insert(0, os.getcwd())
-from server.ycnbc_service import ycnbc_service
+from server.yfinance_service import yfinance_service
 import json
-result = ycnbc_service.get_enhanced_sentiment_data()
+result = yfinance_service.get_enhanced_sentiment_data()
 print(json.dumps(result))
       `]);
       
@@ -198,12 +197,12 @@ print(json.dumps(result))
           const result = JSON.parse(output.trim().split('\n').pop() || '{}');
           res.json(result);
         } catch (e) {
-          res.status(500).json({ error: "Failed to parse YCNBC sentiment data" });
+          res.status(500).json({ error: "Failed to parse YFinance sentiment data" });
         }
       });
     } catch (error) {
-      console.error("YCNBC sentiment proxy error:", error);
-      res.status(500).json({ error: "Failed to fetch YCNBC sentiment data" });
+      console.error("YFinance sentiment proxy error:", error);
+      res.status(500).json({ error: "Failed to fetch YFinance sentiment data" });
     }
   });
 

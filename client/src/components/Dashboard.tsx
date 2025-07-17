@@ -12,7 +12,7 @@ import { VibeSummary } from "./VibeSummary";
 import { TopNews } from "./TopNews";
 import { currentMoodScore, sentimentSources, weeklyTrend, vibePhrases, regions, topics } from "@/data/mockData";
 import { useStockSentiment } from "@/hooks/useStockSentiment";
-import { useYCNBCSentiment } from "@/hooks/useYCNBC";
+import { useYFinanceSentiment } from "@/hooks/useYFinance";
 
 export const Dashboard = () => {
   const [selectedRegion, setSelectedRegion] = useState("GLOBAL");
@@ -23,10 +23,10 @@ export const Dashboard = () => {
   // Get real-time stock sentiment data
   const { data: stockSentimentData, loading: stockLoading } = useStockSentiment(300000); // 5 minutes
   
-  // Get YCNBC sentiment data
-  const { data: ycnbcSentimentData, isLoading: ycnbcLoading } = useYCNBCSentiment(300000); // 5 minutes
+  // Get YFinance sentiment data
+  const { data: yfinanceSentimentData, isLoading: yfinanceLoading } = useYFinanceSentiment(300000); // 5 minutes
 
-  // Update sentiment sources with real stock market and YCNBC data
+  // Update sentiment sources with real stock market and YFinance data
   const updatedSentimentSources = sentimentSources.map(source => {
     if (source.name === "Stock Market" && stockSentimentData) {
       return {
@@ -36,12 +36,12 @@ export const Dashboard = () => {
         samples: stockSentimentData.samples
       };
     }
-    if (source.name === "News" && ycnbcSentimentData && !ycnbcSentimentData.error && ycnbcSentimentData.sentiment_score !== undefined) {
+    if (source.name === "News" && yfinanceSentimentData && !yfinanceSentimentData.error && yfinanceSentimentData.sentiment_score !== undefined) {
       return {
         ...source,
-        score: ycnbcSentimentData.sentiment_score,
-        change: ycnbcSentimentData.raw_sentiment * 100, // Convert to percentage
-        samples: ycnbcSentimentData.article_count
+        score: yfinanceSentimentData.sentiment_score,
+        change: yfinanceSentimentData.raw_sentiment * 100, // Convert to percentage
+        samples: yfinanceSentimentData.article_count
       };
     }
     return source;

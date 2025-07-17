@@ -65,7 +65,7 @@ export const Navigation = ({
       { id: "finnhub", label: "Finnhub Stock Data", icon: TrendingUp, badge: "NEW" },
       { id: "sentiment-scoring", label: "Stock Sentiment Scoring", icon: BarChart3, badge: "NEW" },
       { id: "ai-analysis", label: "AI Sentiment Analysis", icon: Brain, badge: "NEW" },
-      { id: "ycnbc", label: "YCNBC Integration", icon: Globe, badge: "NEW" },
+      { id: "yfinance", label: "YFinance Integration", icon: Globe, badge: "NEW" },
       { id: "history", label: "Historical Data", icon: Calendar },
       { id: "database", label: "Database Demo", icon: Database, badge: "DEMO" },
     ],

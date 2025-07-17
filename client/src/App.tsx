@@ -24,7 +24,7 @@ import { AiChatBubble } from "@/components/chat/AiChatBubble";
 import { FinnhubDemo } from "@/components/FinnhubDemo";
 import { StockSentimentScoring } from "@/components/StockSentimentScoring";
 import { AiSentimentExplainer } from "@/components/AiSentimentExplainer";
-import { YCNBCDemo } from "@/components/YCNBCDemo";
+import { YFinanceDemo } from "@/components/YFinanceDemo";
 
 const queryClient = new QueryClient();
 
@@ -68,8 +68,8 @@ const App = () => {
         return <StockSentimentScoring />;
       case "ai-analysis":
         return <AiSentimentExplainer />;
-      case "ycnbc":
-        return <YCNBCDemo />;
+      case "yfinance":
+        return <YFinanceDemo />;
       default:
         return <Dashboard />;
     }
