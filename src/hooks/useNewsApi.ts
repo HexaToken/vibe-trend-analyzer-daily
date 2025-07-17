@@ -53,7 +53,7 @@ export function useTopHeadlines(
     try {
       // Use the proxy server to fetch real news data
       const response = await fetch(
-        `http://localhost:3001/api/proxy/newsapi/top-headlines?country=${country}&category=${category || "business"}&pageSize=20`,
+        `/api/proxy/newsapi/top-headlines?country=${country}&category=${category || "business"}&pageSize=20`,
       );
 
       if (!response.ok) {
