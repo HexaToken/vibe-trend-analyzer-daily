@@ -85,11 +85,17 @@ export const TopNews = () => {
                     NewsAPI: {sources.newsApi.articles.length}
                   </Badge>
                 )}
-                {sources.yfinance.articles.length > 0 && (
+                {sources.yfinance.articles.length > 0 ? (
                   <Badge variant="outline" className="text-xs">
                     YFinance: {sources.yfinance.articles.length}
                   </Badge>
-                )}
+                ) : sources.yfinance.error?.includes(
+                    "service not available",
+                  ) ? (
+                  <Badge variant="secondary" className="text-xs">
+                    YFinance: Setup Required
+                  </Badge>
+                ) : null}
               </div>
             </div>
             <Button
