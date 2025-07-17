@@ -19,6 +19,7 @@ app.use(express.json());
 // API Keys (in production, these should be environment variables)
 const COINMARKETCAP_API_KEY = "a23f6083-9fcc-44d9-b03f-7cee769e3b91";
 const NEWSAPI_KEY = "9a45d08310a946bab8d2738f74b69fc5";
+const SERPAPI_KEY = process.env.SERPAPI_KEY || "demo_api_key";
 
 // CoinMarketCap Proxy Endpoints
 app.get("/api/proxy/coinmarketcap/quotes", async (req, res) => {
