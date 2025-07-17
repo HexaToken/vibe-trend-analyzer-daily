@@ -53,7 +53,9 @@ The application integrates with multiple external services:
   - Updated YFinance service to handle new nested data structure from API
   - Fixed timestamp handling to properly parse ISO format timestamps
   - Added proper timeout handling for Python processes to prevent hanging
+  - Fixed null pointer errors in YFinance data parsing (clickThroughUrl and provider fields can be None)
   - YFinance now properly pulls real market news with correct headlines, URLs, and timestamps
+  - SPY Stock-Specific News functionality fully restored and working with 10 articles
 - **2025-01-17**: Complete migration from Lovable to Replit
   - Fixed dependency issues (sonner, nanoid)
   - Verified application startup and functionality

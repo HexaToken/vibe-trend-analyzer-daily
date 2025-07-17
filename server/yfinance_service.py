@@ -48,12 +48,28 @@ class YFinanceService:
             # Process and standardize the data
             processed_articles = []
             for idx, article in enumerate(news[:15]):  # Get top 15 news articles
-                if isinstance(article, dict):
+                if isinstance(article, dict) and article:
                     # YFinance now nests data under 'content' key
                     content = article.get('content', article)
+                    if not content or not isinstance(content, dict):
+                        continue
+                        
                     title = content.get('title', '')
-                    url = content.get('clickThroughUrl', {}).get('url', '') or content.get('canonicalUrl', {}).get('url', '')
-                    provider = content.get('provider', {}).get('displayName', 'YFinance')
+                    
+                    # Handle clickThroughUrl safely (can be None)
+                    clickthrough = content.get('clickThroughUrl', {})
+                    url1 = clickthrough.get('url', '') if clickthrough else ''
+                    
+                    # Handle canonicalUrl safely (can be None)
+                    canonical = content.get('canonicalUrl', {})
+                    url2 = canonical.get('url', '') if canonical else ''
+                    
+                    url = url1 or url2
+                    
+                    # Handle provider safely (can be None)
+                    provider_data = content.get('provider', {})
+                    provider = provider_data.get('displayName', 'YFinance') if provider_data else 'YFinance'
+                    
                     pub_date = content.get('pubDate', '') or content.get('displayTime', '')
                     
                     if title and url:  # Only include articles with valid title and URL
@@ -92,12 +108,28 @@ class YFinanceService:
                     news = ticker.news
                     
                     for article_idx, article in enumerate(news[:5]):  # Top 5 from each
-                        if isinstance(article, dict):
+                        if isinstance(article, dict) and article:
                             # YFinance now nests data under 'content' key
                             content = article.get('content', article)
+                            if not content or not isinstance(content, dict):
+                                continue
+                                
                             title = content.get('title', '')
-                            url = content.get('clickThroughUrl', {}).get('url', '') or content.get('canonicalUrl', {}).get('url', '')
-                            provider = content.get('provider', {}).get('displayName', 'YFinance')
+                            
+                            # Handle clickThroughUrl safely (can be None)
+                            clickthrough = content.get('clickThroughUrl', {})
+                            url1 = clickthrough.get('url', '') if clickthrough else ''
+                            
+                            # Handle canonicalUrl safely (can be None)
+                            canonical = content.get('canonicalUrl', {})
+                            url2 = canonical.get('url', '') if canonical else ''
+                            
+                            url = url1 or url2
+                            
+                            # Handle provider safely (can be None)
+                            provider_data = content.get('provider', {})
+                            provider = provider_data.get('displayName', 'YFinance') if provider_data else 'YFinance'
+                            
                             pub_date = content.get('pubDate', '') or content.get('displayTime', '')
                             
                             if title and url:  # Only include articles with valid title and URL
