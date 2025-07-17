@@ -19,6 +19,7 @@ app.use(express.json());
 // API Keys (in production, these should be environment variables)
 const COINMARKETCAP_API_KEY = "a23f6083-9fcc-44d9-b03f-7cee769e3b91";
 const NEWSAPI_KEY = "9a45d08310a946bab8d2738f74b69fc5";
+const SERPAPI_KEY = process.env.SERPAPI_KEY || "demo_api_key";
 
 // CoinMarketCap Proxy Endpoints
 app.get("/api/proxy/coinmarketcap/quotes", async (req, res) => {
@@ -134,6 +135,46 @@ app.get("/api/proxy/newsapi/everything", async (req, res) => {
   }
 });
 
+// SerpAPI Proxy Endpoints
+app.get("/api/proxy/serpapi/search", async (req, res) => {
+  try {
+    const { q, num = 20, gl = "us", hl = "en" } = req.query;
+
+    if (!q) {
+      return res.status(400).json({ error: "Query parameter 'q' is required" });
+    }
+
+    const url = new URL("https://serpapi.com/search");
+    url.searchParams.append("engine", "google_news");
+    url.searchParams.append("q", q);
+    url.searchParams.append("num", num.toString());
+    url.searchParams.append("gl", gl);
+    url.searchParams.append("hl", hl);
+    url.searchParams.append("api_key", SERPAPI_KEY);
+
+    const response = await fetch(url.toString());
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    // Check for SerpAPI errors
+    if (data.error) {
+      throw new Error(data.error);
+    }
+
+    res.json(data);
+  } catch (error) {
+    console.error("SerpAPI Error:", error);
+    res.status(500).json({
+      error: "Failed to fetch news from SerpAPI",
+      details: error.message,
+    });
+  }
+});
+
 // Health check endpoint
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
@@ -143,4 +184,5 @@ app.listen(PORT, () => {
   console.log(`🚀 Proxy server running on port ${PORT}`);
   console.log(`📈 CoinMarketCap proxy endpoints available`);
   console.log(`📰 NewsAPI proxy endpoints available`);
+  console.log(`🔍 SerpAPI Google News proxy endpoints available`);
 });

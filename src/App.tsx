@@ -18,6 +18,8 @@ import { SocialPlatform } from "@/components/social/SocialPlatform";
 import { TwelveDataDemo } from "@/components/TwelveDataDemo";
 import { ApiStatusIndicator } from "@/components/ApiStatusIndicator";
 import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
+import { SerpApiDemo } from "@/components/SerpApiDemo";
+import { NLPSentimentDemo } from "@/components/NLPSentimentDemo";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +57,10 @@ const App = () => {
         return <TwelveDataDemo />;
       case "crypto":
         return <CryptoDashboard />;
+      case "serpapi":
+        return <SerpApiDemo />;
+      case "nlp":
+        return <NLPSentimentDemo />;
       default:
         return <Dashboard />;
     }

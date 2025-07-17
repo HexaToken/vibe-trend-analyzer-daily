@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { VisuallyHidden } from "@/components/ui/visually-hidden";
 import { LoginForm } from "./LoginForm";
 import { SignupForm } from "./SignupForm";
 
@@ -26,6 +27,9 @@ export const AuthModal = ({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[480px] p-0 gap-0">
+        <VisuallyHidden>
+          <DialogTitle>{mode === "login" ? "Login" : "Sign Up"}</DialogTitle>
+        </VisuallyHidden>
         {mode === "login" ? (
           <LoginForm
             onSwitchToSignup={switchToSignup}
