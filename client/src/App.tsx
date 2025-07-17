@@ -22,6 +22,7 @@ import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
 import { NLPSentimentDemo } from "@/components/NLPSentimentDemo";
 import { AiChatBubble } from "@/components/chat/AiChatBubble";
 import { PolygonDividendsDemo } from "@/components/PolygonDividendsDemo";
+import { PolygonDemo } from "@/components/PolygonDemo";
 
 const queryClient = new QueryClient();
 
@@ -61,6 +62,8 @@ const App = () => {
         return <NLPSentimentDemo />;
       case "polygondividends":
         return <PolygonDividendsDemo />;
+      case "polygon":
+        return <PolygonDemo />;
       default:
         return <Dashboard />;
     }

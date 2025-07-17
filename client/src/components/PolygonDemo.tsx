@@ -1,0 +1,249 @@
+import { useState } from "react";
+import { RefreshCw, Building, DollarSign, Calendar, TrendingUp } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { usePolygonTickers, usePolygonDividends } from "@/hooks/usePolygon";
+
+export const PolygonDemo = () => {
+  const [selectedTicker, setSelectedTicker] = useState<string>("AAPL");
+  
+  // Get top 20 stock tickers with 5-minute refresh
+  const { 
+    data: tickersData, 
+    loading: tickersLoading, 
+    error: tickersError, 
+    refetch: refetchTickers 
+  } = usePolygonTickers("stocks", 20, { 
+    refreshInterval: 300000, // 5 minutes
+    enabled: true 
+  });
+
+  // Get dividend data for selected ticker
+  const { 
+    data: dividendsData, 
+    loading: dividendsLoading, 
+    error: dividendsError,
+    refetch: refetchDividends 
+  } = usePolygonDividends(selectedTicker, { 
+    refreshInterval: 300000, // 5 minutes
+    enabled: true 
+  });
+
+  const handleRefresh = () => {
+    refetchTickers();
+    refetchDividends();
+  };
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString();
+  };
+
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    }).format(amount);
+  };
+
+  return (
+    <div className="max-w-7xl mx-auto p-6 space-y-6">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold flex items-center gap-2">
+            <Building className="h-8 w-8" />
+            Polygon.io Stock Data
+          </h1>
+          <p className="text-muted-foreground">
+            Real-time stock ticker and dividend data from Polygon.io API
+          </p>
+        </div>
+        <Button onClick={handleRefresh} disabled={tickersLoading || dividendsLoading}>
+          <RefreshCw className={`h-4 w-4 mr-2 ${tickersLoading || dividendsLoading ? "animate-spin" : ""}`} />
+          Refresh Data
+        </Button>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Stock Tickers */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <TrendingUp className="h-5 w-5" />
+              Active Stock Tickers
+            </CardTitle>
+            <CardDescription>
+              Top 20 active stock tickers from Polygon.io
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            {tickersLoading ? (
+              <div className="flex items-center justify-center py-8">
+                <RefreshCw className="h-8 w-8 animate-spin mr-2" />
+                <span>Loading stock tickers...</span>
+              </div>
+            ) : tickersError ? (
+              <div className="text-center py-8 text-red-600">
+                <p>Error: {tickersError}</p>
+                <Button variant="outline" onClick={refetchTickers} className="mt-2">
+                  Try Again
+                </Button>
+              </div>
+            ) : tickersData?.results ? (
+              <div className="space-y-2 max-h-96 overflow-y-auto">
+                {tickersData.results.slice(0, 20).map((ticker) => (
+                  <div
+                    key={ticker.ticker}
+                    className={`p-3 border rounded-lg cursor-pointer transition-colors ${
+                      selectedTicker === ticker.ticker
+                        ? "bg-blue-50 border-blue-200"
+                        : "hover:bg-gray-50"
+                    }`}
+                    onClick={() => setSelectedTicker(ticker.ticker)}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex-1">
+                        <div className="font-semibold text-lg">{ticker.ticker}</div>
+                        <div className="text-sm text-muted-foreground truncate">
+                          {ticker.name}
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <Badge variant="secondary">{ticker.market}</Badge>
+                        <div className="text-xs text-muted-foreground mt-1">
+                          {ticker.primary_exchange}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-center py-8 text-muted-foreground">
+                No stock data available
+              </p>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Dividend Information */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <DollarSign className="h-5 w-5" />
+              Dividend Data for {selectedTicker}
+            </CardTitle>
+            <CardDescription>
+              Recent dividend information from Polygon.io
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            {dividendsLoading ? (
+              <div className="flex items-center justify-center py-8">
+                <RefreshCw className="h-8 w-8 animate-spin mr-2" />
+                <span>Loading dividend data...</span>
+              </div>
+            ) : dividendsError ? (
+              <div className="text-center py-8 text-red-600">
+                <p>Error: {dividendsError}</p>
+                <Button variant="outline" onClick={refetchDividends} className="mt-2">
+                  Try Again
+                </Button>
+              </div>
+            ) : dividendsData?.results && dividendsData.results.length > 0 ? (
+              <div className="space-y-4 max-h-96 overflow-y-auto">
+                {dividendsData.results.slice(0, 10).map((dividend, index) => (
+                  <div key={index} className="p-3 border rounded-lg">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <div className="text-sm text-muted-foreground">Cash Amount</div>
+                        <div className="font-semibold text-lg">
+                          {formatCurrency(dividend.cash_amount)}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-sm text-muted-foreground">Type</div>
+                        <div className="font-medium">{dividend.dividend_type}</div>
+                      </div>
+                    </div>
+                    
+                    <Separator className="my-3" />
+                    
+                    <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div>
+                        <div className="text-muted-foreground">Ex-Dividend Date</div>
+                        <div className="flex items-center gap-1">
+                          <Calendar className="h-3 w-3" />
+                          {formatDate(dividend.ex_dividend_date)}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-muted-foreground">Pay Date</div>
+                        <div className="flex items-center gap-1">
+                          <Calendar className="h-3 w-3" />
+                          {formatDate(dividend.pay_date)}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-muted-foreground">Record Date</div>
+                        <div className="flex items-center gap-1">
+                          <Calendar className="h-3 w-3" />
+                          {formatDate(dividend.record_date)}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-muted-foreground">Declaration Date</div>
+                        <div className="flex items-center gap-1">
+                          <Calendar className="h-3 w-3" />
+                          {formatDate(dividend.declaration_date)}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-8 text-muted-foreground">
+                <DollarSign className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                <p>No dividend data available for {selectedTicker}</p>
+                <p className="text-sm">Try selecting a different stock ticker</p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* API Status */}
+      <Card>
+        <CardHeader>
+          <CardTitle>API Status</CardTitle>
+          <CardDescription>
+            Current status of Polygon.io API integration
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="text-center p-4 border rounded-lg">
+              <div className="text-2xl font-bold text-green-600">
+                {tickersData?.count || 0}
+              </div>
+              <div className="text-sm text-muted-foreground">Stock Tickers Loaded</div>
+            </div>
+            <div className="text-center p-4 border rounded-lg">
+              <div className="text-2xl font-bold text-blue-600">
+                {dividendsData?.count || 0}
+              </div>
+              <div className="text-sm text-muted-foreground">Dividends for {selectedTicker}</div>
+            </div>
+            <div className="text-center p-4 border rounded-lg">
+              <div className="text-2xl font-bold text-purple-600">5min</div>
+              <div className="text-sm text-muted-foreground">Refresh Interval</div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
