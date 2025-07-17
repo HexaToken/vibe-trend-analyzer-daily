@@ -19,6 +19,7 @@ import { TwelveDataDemo } from "@/components/TwelveDataDemo";
 import { ApiStatusIndicator } from "@/components/ApiStatusIndicator";
 import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
 import { SerpApiDemo } from "@/components/SerpApiDemo";
+import { NLPSentimentDemo } from "@/components/NLPSentimentDemo";
 
 const queryClient = new QueryClient();
 
