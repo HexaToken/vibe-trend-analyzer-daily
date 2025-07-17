@@ -23,6 +23,7 @@ import { NLPSentimentDemo } from "@/components/NLPSentimentDemo";
 import { AiChatBubble } from "@/components/chat/AiChatBubble";
 import { FinnhubDemo } from "@/components/FinnhubDemo";
 import { StockSentimentScoring } from "@/components/StockSentimentScoring";
+import { AiSentimentExplainer } from "@/components/AiSentimentExplainer";
 
 const queryClient = new QueryClient();
 
@@ -64,6 +65,8 @@ const App = () => {
         return <FinnhubDemo />;
       case "sentiment-scoring":
         return <StockSentimentScoring />;
+      case "ai-analysis":
+        return <AiSentimentExplainer />;
       default:
         return <Dashboard />;
     }
