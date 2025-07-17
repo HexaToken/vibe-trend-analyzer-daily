@@ -25,7 +25,7 @@ import { mockTrendingData, mockTickers } from "@/data/socialMockData";
 import { useAuth } from "@/contexts/AuthContext";
 import { RealTimePrice, StockGrid } from "./RealTimePrice";
 import { CryptoPrice } from "../crypto/CryptoPrice";
-import { useMultipleQuotes } from "@/hooks/useAlphaVantage";
+import { useMultipleQuotes } from "@/hooks/useFinnhub";
 import { useCryptoQuotes } from "@/hooks/useCoinMarketCap";
 
 type ViewType = "feed" | "watchlist" | "ticker" | "trending" | "rooms";
@@ -38,11 +38,8 @@ export const SocialPlatform = () => {
   const trendingSymbols = mockTrendingData.tickers
     .slice(0, 5)
     .map((t) => t.symbol);
-  const { tickers: realTimeTickers, loading: tickersLoading } =
-    useMultipleQuotes(trendingSymbols, {
-      refreshInterval: 30000, // Refresh every 30 seconds
-      enabled: true,
-    });
+  const realTimeTickers = useMultipleQuotes(trendingSymbols, 300000); // 5 minutes
+  const tickersLoading = Object.values(realTimeTickers).some(ticker => ticker.loading);
 
   // Get crypto data for trending crypto
   const trendingCryptos = ["BTC", "ETH", "BNB"];

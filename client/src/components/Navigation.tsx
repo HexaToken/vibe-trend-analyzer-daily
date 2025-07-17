@@ -61,7 +61,7 @@ export const Navigation = ({
         badge: "NEW",
       },
       { id: "crypto", label: "Crypto Dashboard", icon: Coins, badge: "NEW" },
-      { id: "alphavantage", label: "Alpha Vantage Stock Data", icon: TrendingUp, badge: "NEW" },
+      { id: "finnhub", label: "Finnhub Stock Data", icon: TrendingUp, badge: "NEW" },
       { id: "history", label: "Historical Data", icon: Calendar },
       { id: "database", label: "Database Demo", icon: Database, badge: "DEMO" },
     ],

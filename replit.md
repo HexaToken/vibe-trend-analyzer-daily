@@ -102,14 +102,14 @@ The application integrates with multiple external services:
   - Removed duplicate useCryptoQuotes calls in CryptoDashboard 
   - Updated SocialPlatform and other components to use 5-minute refresh intervals
   - Implemented proper bulk data fetching to minimize API request volume
-- **2025-01-17**: Replaced Polygon.io with Alpha Vantage API integration
-  - Removed all Polygon.io endpoints, components, and services due to premium subscription limitations
-  - Created new Alpha Vantage API endpoint: /api/proxy/alphavantage/timeseries
-  - Implemented AlphaVantageDemo component with daily time series stock data
-  - Added useAlphaVantage hooks with proper rate limiting
-  - Updated navigation menu item to "Alpha Vantage Stock Data"
-  - API Key: YXENKKV17LXG1NL7 for Alpha Vantage TIME_SERIES_DAILY function
-  - Provides real-time stock prices, historical data, and volume information
+- **2025-01-17**: Replaced Alpha Vantage with Finnhub API integration
+  - Removed all Alpha Vantage endpoints, components, and services
+  - Created new Finnhub API endpoints: /symbol-lookup, /quote, /candles
+  - Implemented FinnhubDemo component with symbol search, real-time quotes, and candlestick data
+  - Added useFinnhub hooks with proper rate limiting and error handling
+  - Updated navigation menu item to "Finnhub Stock Data"
+  - API Key: d1sgqohr01qkbods878gd1sgqohr01qkbods8790
+  - Features: Symbol lookup (like "apple" search), real-time quotes, historical candle data
 
 ## User Preferences
 - Language: English

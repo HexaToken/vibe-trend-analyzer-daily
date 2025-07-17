@@ -21,7 +21,7 @@ import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
 
 import { NLPSentimentDemo } from "@/components/NLPSentimentDemo";
 import { AiChatBubble } from "@/components/chat/AiChatBubble";
-import { AlphaVantageDemo } from "@/components/AlphaVantageDemo";
+import { FinnhubDemo } from "@/components/FinnhubDemo";
 
 const queryClient = new QueryClient();
 
@@ -59,8 +59,8 @@ const App = () => {
         return <CryptoDashboard />;
       case "nlp":
         return <NLPSentimentDemo />;
-      case "alphavantage":
-        return <AlphaVantageDemo />;
+      case "finnhub":
+        return <FinnhubDemo />;
       default:
         return <Dashboard />;
     }

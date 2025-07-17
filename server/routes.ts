@@ -90,17 +90,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Alpha Vantage API endpoint
-  app.get("/api/proxy/alphavantage/timeseries", async (req, res) => {
+  // Finnhub API endpoints
+  app.get("/api/proxy/finnhub/symbol-lookup", async (req, res) => {
     try {
-      const { 
-        function: func = "TIME_SERIES_DAILY", 
-        symbol = "IBM" 
-      } = req.query;
-      const apiKey = "YXENKKV17LXG1NL7";
+      const { query = "apple" } = req.query;
+      const apiKey = "d1sgqohr01qkbods878gd1sgqohr01qkbods8790";
       
       const response = await fetch(
-        `https://www.alphavantage.co/query?function=${func}&symbol=${symbol}&apikey=${apiKey}`,
+        `https://finnhub.io/api/v1/search?q=${query}&token=${apiKey}`,
         {
           headers: {
             "Accept": "application/json",
@@ -109,15 +106,78 @@ export async function registerRoutes(app: Express): Promise<Server> {
       );
 
       if (!response.ok) {
-        throw new Error(`Alpha Vantage API error: ${response.status}`);
+        throw new Error(`Finnhub API error: ${response.status}`);
       }
 
       const data = await response.json();
       res.json(data);
     } catch (error) {
-      console.error("Alpha Vantage API error:", error);
+      console.error("Finnhub API error:", error);
       res.status(500).json({ 
-        error: "Failed to fetch stock data",
+        error: "Failed to fetch symbol lookup",
+        message: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  app.get("/api/proxy/finnhub/quote", async (req, res) => {
+    try {
+      const { symbol = "AAPL" } = req.query;
+      const apiKey = "d1sgqohr01qkbods878gd1sgqohr01qkbods8790";
+      
+      const response = await fetch(
+        `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`,
+        {
+          headers: {
+            "Accept": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Finnhub API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      res.json(data);
+    } catch (error) {
+      console.error("Finnhub quote API error:", error);
+      res.status(500).json({ 
+        error: "Failed to fetch quote data",
+        message: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
+  });
+
+  app.get("/api/proxy/finnhub/candles", async (req, res) => {
+    try {
+      const { 
+        symbol = "AAPL",
+        resolution = "D",
+        from = Math.floor(Date.now() / 1000) - 86400 * 30, // 30 days ago
+        to = Math.floor(Date.now() / 1000)
+      } = req.query;
+      const apiKey = "d1sgqohr01qkbods878gd1sgqohr01qkbods8790";
+      
+      const response = await fetch(
+        `https://finnhub.io/api/v1/stock/candle?symbol=${symbol}&resolution=${resolution}&from=${from}&to=${to}&token=${apiKey}`,
+        {
+          headers: {
+            "Accept": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Finnhub API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      res.json(data);
+    } catch (error) {
+      console.error("Finnhub candles API error:", error);
+      res.status(500).json({ 
+        error: "Failed to fetch candle data",
         message: error instanceof Error ? error.message : "Unknown error"
       });
     }

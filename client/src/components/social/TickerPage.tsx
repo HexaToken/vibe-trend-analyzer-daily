@@ -49,7 +49,7 @@ import type {
   SentimentType,
   CreatePostData,
 } from "@/types/social";
-import { useQuote } from "@/hooks/useAlphaVantage";
+import { useQuote } from "@/hooks/useFinnhub";
 import { Skeleton } from "@/components/ui/skeleton";
 
 interface TickerPageProps {
@@ -69,14 +69,14 @@ export const TickerPage = ({ symbol, onBack }: TickerPageProps) => {
   );
   const [sortBy, setSortBy] = useState<"recent" | "popular">("recent");
 
-  // Load real ticker data from Twelve Data API
+  // Load real ticker data from Finnhub API
   const {
-    ticker,
+    data: ticker,
     loading: tickerLoading,
     error: tickerError,
     refetch,
   } = useQuote(symbol, {
-    refreshInterval: 120000, // Refresh every 2 minutes (Alpha Vantage has stricter rate limits)
+    refreshInterval: 300000, // Refresh every 5 minutes
     enabled: true,
   });
 

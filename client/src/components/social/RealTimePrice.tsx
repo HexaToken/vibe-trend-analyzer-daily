@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { TrendingUp, TrendingDown, Loader2, RefreshCw } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { useQuote } from "@/hooks/useAlphaVantage";
+import { useQuote } from "@/hooks/useFinnhub";
 import { cn } from "@/lib/utils";
 
 interface RealTimePriceProps {
@@ -20,7 +20,7 @@ export const RealTimePrice = ({
   refreshInterval = 180000, // 3 minutes
   className,
 }: RealTimePriceProps) => {
-  const { ticker, loading, error, refetch } = useQuote(symbol, {
+  const { data: ticker, loading, error, refetch } = useQuote(symbol, {
     refreshInterval,
     enabled: true,
   });
@@ -117,8 +117,8 @@ export const RealTimePrice = ({
   }
 
   const { change, changePercent, isPositive } = formatChange(
-    ticker.change,
-    ticker.changePercent,
+    ticker.d, // Finnhub uses 'd' for change
+    ticker.dp, // Finnhub uses 'dp' for percent change
   );
   const changeColor = isPositive ? "text-green-600" : "text-red-600";
   const TrendIcon = isPositive ? TrendingUp : TrendingDown;
@@ -130,7 +130,7 @@ export const RealTimePrice = ({
       <div className="flex flex-col">
         <div className="flex items-center gap-2">
           <span className="font-medium">${symbol}</span>
-          <span className={classes.price}>{formatPrice(ticker.price)}</span>
+          <span className={classes.price}>{formatPrice(ticker.c)}</span>
           {showRefresh && (
             <Button
               variant="ghost"
@@ -168,8 +168,8 @@ export const InlinePrice = ({
   symbol: string;
   className?: string;
 }) => {
-  const { ticker, loading, error } = useQuote(symbol, {
-    refreshInterval: 180000, // Refresh every 3 minutes for inline prices (Alpha Vantage has lower rate limits)
+  const { data: ticker, loading, error } = useQuote(symbol, {
+    refreshInterval: 300000, // Refresh every 5 minutes for inline prices
     enabled: true,
   });
 
@@ -177,16 +177,16 @@ export const InlinePrice = ({
     return <span className={cn("font-medium", className)}>${symbol}</span>;
   }
 
-  const isPositive = ticker.change >= 0;
+  const isPositive = ticker.d >= 0; // Finnhub uses 'd' for change
   const changeColor = isPositive ? "text-green-600" : "text-red-600";
 
   return (
     <span className={cn("inline-flex items-center gap-1", className)}>
       <span className="font-medium">${symbol}</span>
-      <span className="font-semibold">${ticker.price.toFixed(2)}</span>
+      <span className="font-semibold">${ticker.c.toFixed(2)}</span>
       <span className={cn("text-xs", changeColor)}>
         ({isPositive ? "+" : ""}
-        {ticker.changePercent.toFixed(2)}%)
+        {ticker.dp.toFixed(2)}%)
       </span>
     </span>
   );

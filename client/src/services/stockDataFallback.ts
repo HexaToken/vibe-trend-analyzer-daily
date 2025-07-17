@@ -1,6 +1,6 @@
 import { Ticker } from "../types/social";
 import { mockTickers, getMockTickerBySymbol } from "../data/socialMockData";
-import { PolygonApiError } from "./alphaVantageApi";
+import { FinnhubApiError } from "./finnhubApi";
 import { CoinMarketCapApiError } from "./coinMarketCapApi";
 import { NewsApiError } from "./newsApi";
 
@@ -85,7 +85,7 @@ class StockDataFallbackService {
   // Handle API errors and determine if we should disable the API
   handleApiError(error: any): boolean {
     if (
-      error instanceof PolygonApiError ||
+      error instanceof FinnhubApiError ||
       error instanceof CoinMarketCapApiError ||
       error instanceof NewsApiError
     ) {
