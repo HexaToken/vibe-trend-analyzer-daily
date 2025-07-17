@@ -395,7 +395,12 @@ export function SerpApiDemo() {
                   Use the search box above to find specific news articles
                 </p>
               ) : combinedSearchLoading ? (
-                <LoadingCard />
+                <div className="text-center py-8">
+                  <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-2 text-muted-foreground" />
+                  <p className="text-muted-foreground">
+                    Loading search results...
+                  </p>
+                </div>
               ) : (
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
