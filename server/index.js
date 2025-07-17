@@ -233,7 +233,147 @@ app.post("/api/ai/recommendations", async (req, res) => {
   }
 });
 
-// AI Processing Functions
+// DeepSeek API Integration
+async function callDeepSeekAPI(messages) {
+  try {
+    const response = await fetch(DEEPSEEK_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${DEEPSEEK_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: "deepseek-chat",
+        messages: messages,
+        temperature: 0.7,
+        max_tokens: 1000,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`DeepSeek API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return (
+      data.choices[0]?.message?.content ||
+      "I'm sorry, I couldn't generate a response."
+    );
+  } catch (error) {
+    console.error("DeepSeek API Error:", error);
+    throw error;
+  }
+}
+
+async function processAiMessageWithDeepSeek(message) {
+  const lowerMessage = message.toLowerCase();
+
+  // Check for specific MoodMeter functionality requests
+  if (lowerMessage.includes("sentiment") || lowerMessage.includes("mood")) {
+    const ticker = extractTicker(message);
+    if (ticker) {
+      return await analyzeSentimentWithAI(ticker, message);
+    }
+  }
+
+  if (lowerMessage.includes("summarize") || lowerMessage.includes("summary")) {
+    const ticker = extractTicker(message);
+    return await summarizePostsWithAI(ticker, message);
+  }
+
+  if (
+    lowerMessage.includes("recommend") ||
+    lowerMessage.includes("watchlist")
+  ) {
+    return await getWatchlistRecommendationsWithAI(message);
+  }
+
+  // For general questions, use DeepSeek with MoodMeter context
+  const systemPrompt = `You are the MoodMeter AI assistant, a helpful financial assistant for a social trading platform called MoodMeter.
+
+MoodMeter features:
+- Dashboard: Real-time market data, sentiment analysis, and news
+- Social Platform (FinTwits): Community discussions about stocks and crypto
+- Analytics: Deep market analysis tools
+- Sentiment Analysis: Community mood tracking for tickers
+- Watchlists: Track favorite stocks and crypto
+
+You should be helpful, concise, and friendly. When users ask about features, guide them appropriately. For financial questions, provide educational information but always remind users to do their own research.
+
+Key capabilities you can help with:
+- Explaining MoodMeter features
+- Analyzing sentiment for tickers (use $ format like $AAPL)
+- Summarizing community posts
+- Providing market insights
+- Onboarding help
+
+Always be conversational and helpful!`;
+
+  try {
+    const aiResponse = await callDeepSeekAPI([
+      { role: "system", content: systemPrompt },
+      { role: "user", content: message },
+    ]);
+
+    // Generate relevant suggestions based on the response
+    const suggestions = generateSuggestions(message, aiResponse);
+
+    return {
+      content: aiResponse,
+      suggestions: suggestions,
+    };
+  } catch (error) {
+    // Fallback to rule-based response if DeepSeek fails
+    return await processAiMessage(message);
+  }
+}
+
+function generateSuggestions(userMessage, aiResponse) {
+  const lowerMessage = userMessage.toLowerCase();
+  const lowerResponse = aiResponse.toLowerCase();
+
+  let suggestions = [];
+
+  if (lowerMessage.includes("help") || lowerMessage.includes("start")) {
+    suggestions = [
+      "What's the sentiment for $AAPL?",
+      "How do I use the Dashboard?",
+      "Recommend trending stocks",
+      "Summarize recent posts",
+    ];
+  } else if (
+    lowerResponse.includes("sentiment") ||
+    lowerResponse.includes("mood")
+  ) {
+    suggestions = [
+      "Check $TSLA sentiment",
+      "Analyze $BTC mood",
+      "What's trending today?",
+      "How to read sentiment scores?",
+    ];
+  } else if (
+    lowerResponse.includes("dashboard") ||
+    lowerResponse.includes("feature")
+  ) {
+    suggestions = [
+      "Social platform guide",
+      "Analytics deep dive",
+      "Setting up watchlists",
+      "Understanding alerts",
+    ];
+  } else {
+    suggestions = [
+      "What's trending today?",
+      "How do I use Analytics?",
+      "Recommend stocks to watch",
+      "Help with MoodMeter features",
+    ];
+  }
+
+  return suggestions;
+}
+
+// AI Processing Functions (Fallback)
 async function processAiMessage(message) {
   const lowerMessage = message.toLowerCase();
 
