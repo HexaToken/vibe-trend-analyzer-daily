@@ -1,8 +1,8 @@
 // CoinMarketCap API Service
 // Documentation: https://coinmarketcap.com/api/documentation/v1/
+// Uses server proxy to avoid CORS restrictions
 
-const API_KEY = "a23f6083-9fcc-44d9-b03f-7cee769e3b91";
-const BASE_URL = "https://pro-api.coinmarketcap.com/v1";
+const BASE_URL = "/api/proxy/coinmarketcap";
 
 // CoinMarketCap API Response Types
 export interface CoinMarketCapQuote {
@@ -144,27 +144,29 @@ export class CoinMarketCapApiError extends Error {
 // API Service Class
 class CoinMarketCapService {
   private baseURL = BASE_URL;
-  private apiKey = API_KEY;
 
   private async fetchFromApi<T>(
     endpoint: string,
     params: Record<string, string> = {},
   ): Promise<T> {
-    const url = new URL(`${this.baseURL}${endpoint}`);
+    const url = new URL(`${this.baseURL}${endpoint}`, window.location.origin);
 
     // Add parameters
     Object.entries(params).forEach(([key, value]) => {
       url.searchParams.append(key, value);
     });
 
-    const headers = {
-      "X-CMC_PRO_API_KEY": this.apiKey,
-      Accept: "application/json",
-      "Accept-Encoding": "deflate, gzip",
-    };
-
     try {
-      const response = await fetch(url.toString(), { headers });
+      const response = await fetch(url.toString());
+
+      // Check response status BEFORE consuming the body
+      if (!response.ok) {
+        throw new CoinMarketCapApiError(
+          `HTTP ${response.status}: ${response.statusText}`,
+          response.status,
+        );
+      }
+
       const data = await response.json();
 
       // Check for API errors
@@ -173,13 +175,6 @@ class CoinMarketCapService {
           data.status.error_message || "API request failed",
           data.status.error_code,
           "error",
-        );
-      }
-
-      if (!response.ok) {
-        throw new CoinMarketCapApiError(
-          `HTTP ${response.status}: ${response.statusText}`,
-          response.status,
         );
       }
 
@@ -203,15 +198,12 @@ class CoinMarketCapService {
     convert: string = "USD",
     sort: string = "market_cap",
   ): Promise<CoinMarketCapListingsResponse> {
-    return this.fetchFromApi<CoinMarketCapListingsResponse>(
-      "/cryptocurrency/listings/latest",
-      {
-        start: start.toString(),
-        limit: limit.toString(),
-        convert,
-        sort,
-      },
-    );
+    return this.fetchFromApi<CoinMarketCapListingsResponse>("/listings", {
+      start: start.toString(),
+      limit: limit.toString(),
+      convert,
+      sort,
+    });
   }
 
   /**
@@ -221,13 +213,10 @@ class CoinMarketCapService {
     symbols: string[],
     convert: string = "USD",
   ): Promise<CoinMarketCapQuotesResponse> {
-    return this.fetchFromApi<CoinMarketCapQuotesResponse>(
-      "/cryptocurrency/quotes/latest",
-      {
-        symbol: symbols.join(","),
-        convert,
-      },
-    );
+    return this.fetchFromApi<CoinMarketCapQuotesResponse>("/quotes", {
+      symbol: symbols.join(","),
+      convert,
+    });
   }
 
   /**
@@ -237,13 +226,10 @@ class CoinMarketCapService {
     ids: number[],
     convert: string = "USD",
   ): Promise<CoinMarketCapQuotesResponse> {
-    return this.fetchFromApi<CoinMarketCapQuotesResponse>(
-      "/cryptocurrency/quotes/latest",
-      {
-        id: ids.join(","),
-        convert,
-      },
-    );
+    return this.fetchFromApi<CoinMarketCapQuotesResponse>("/quotes", {
+      id: ids.join(","),
+      convert,
+    });
   }
 
   /**
@@ -264,7 +250,7 @@ class CoinMarketCapService {
       params.id = ids.join(",");
     }
 
-    return this.fetchFromApi("/cryptocurrency/info", params);
+    return this.fetchFromApi("/info", params);
   }
 
   /**
@@ -285,7 +271,7 @@ class CoinMarketCapService {
       }>;
     };
   }> {
-    return this.fetchFromApi("/cryptocurrency/map", {
+    return this.fetchFromApi("/map", {
       listing_status: "active",
       symbol: query,
     });
@@ -298,13 +284,10 @@ class CoinMarketCapService {
     limit: number = 10,
     timePeriod: "1h" | "24h" | "7d" | "30d" = "24h",
   ): Promise<CoinMarketCapListingsResponse> {
-    return this.fetchFromApi<CoinMarketCapListingsResponse>(
-      "/cryptocurrency/trending/latest",
-      {
-        limit: limit.toString(),
-        time_period: timePeriod,
-      },
-    );
+    return this.fetchFromApi<CoinMarketCapListingsResponse>("/trending", {
+      limit: limit.toString(),
+      time_period: timePeriod,
+    });
   }
 
   /**
@@ -353,7 +336,7 @@ class CoinMarketCapService {
       last_updated: string;
     };
   }> {
-    return this.fetchFromApi("/global-metrics/quotes/latest", { convert });
+    return this.fetchFromApi("/global-metrics", { convert });
   }
 }
 
