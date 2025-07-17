@@ -135,6 +135,46 @@ app.get("/api/proxy/newsapi/everything", async (req, res) => {
   }
 });
 
+// SerpAPI Proxy Endpoints
+app.get("/api/proxy/serpapi/search", async (req, res) => {
+  try {
+    const { q, num = 20, gl = "us", hl = "en" } = req.query;
+
+    if (!q) {
+      return res.status(400).json({ error: "Query parameter 'q' is required" });
+    }
+
+    const url = new URL("https://serpapi.com/search");
+    url.searchParams.append("engine", "google_news");
+    url.searchParams.append("q", q);
+    url.searchParams.append("num", num.toString());
+    url.searchParams.append("gl", gl);
+    url.searchParams.append("hl", hl);
+    url.searchParams.append("api_key", SERPAPI_KEY);
+
+    const response = await fetch(url.toString());
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    // Check for SerpAPI errors
+    if (data.error) {
+      throw new Error(data.error);
+    }
+
+    res.json(data);
+  } catch (error) {
+    console.error("SerpAPI Error:", error);
+    res.status(500).json({
+      error: "Failed to fetch news from SerpAPI",
+      details: error.message,
+    });
+  }
+});
+
 // Health check endpoint
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
