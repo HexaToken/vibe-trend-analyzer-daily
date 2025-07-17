@@ -77,8 +77,8 @@ export const Navigation = ({
     tools: [
       { id: "analytics", label: "Analytics", icon: TrendingUp },
       {
-        id: "polygon",
-        label: "Polygon.io API Demo",
+        id: "googlefinance",
+        label: "Google Finance API Demo",
         icon: Analytics,
         badge: "API",
       },

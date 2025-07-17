@@ -77,6 +77,13 @@ The application integrates with multiple external services:
   - Updated Navigation.tsx to show "Polygon.io API Demo" instead of "Financial APIs Demo"
   - New PolygonDemo integrates Polygon.io API, CoinMarketCap API, and NewsAPI
   - Maintains same functionality: stock quotes, crypto data, dividend information, and news integration
+- **2025-01-17**: Replaced PolygonDemo with GoogleFinanceDemo component
+  - Removed PolygonDemo.tsx and replaced with GoogleFinanceDemo.tsx
+  - Updated App.tsx routing from "polygon" to "googlefinance"
+  - Updated Navigation.tsx to show "Google Finance API Demo"
+  - New GoogleFinanceDemo integrates Google Finance API via SerpAPI
+  - Added server proxy endpoints for Google Finance, NewsAPI, CoinMarketCap, and SerpAPI
+  - Provides comprehensive stock quotes, search, trending stocks, and market data
 
 ## User Preferences
 - Language: English

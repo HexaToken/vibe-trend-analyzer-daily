@@ -15,7 +15,7 @@ import { UserProfile } from "@/components/profile/UserProfile";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { DatabaseDemo } from "@/components/DatabaseDemo";
 import { SocialPlatform } from "@/components/social/SocialPlatform";
-import { PolygonDemo } from "@/components/PolygonDemo";
+import { GoogleFinanceDemo } from "@/components/GoogleFinanceDemo";
 import { ApiStatusIndicator } from "@/components/ApiStatusIndicator";
 import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
 import { SerpApiDemo } from "@/components/SerpApiDemo";
@@ -55,8 +55,8 @@ const App = () => {
         return <DatabaseDemo />;
       case "social":
         return <SocialPlatform />;
-      case "polygon":
-        return <PolygonDemo />;
+      case "googlefinance":
+        return <GoogleFinanceDemo />;
       case "crypto":
         return <CryptoDashboard />;
       case "serpapi":

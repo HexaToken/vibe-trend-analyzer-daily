@@ -141,7 +141,7 @@ export function useTopHeadlines(
     };
   }, [fetchNews, refreshInterval, enabled]);
 
-  const articles = data
+  const articles = data && data.articles
     ? data.articles.map((article) => convertNewsAPIToNewsArticle(article))
     : [];
 
@@ -246,7 +246,7 @@ export function useNewsSearch(
     };
   }, [searchNews, refreshInterval, enabled]);
 
-  const articles = data
+  const articles = data && data.articles
     ? data.articles.map((article) => convertNewsAPIToNewsArticle(article))
     : [];
 
