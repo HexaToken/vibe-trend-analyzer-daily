@@ -190,7 +190,12 @@ export function SerpApiDemo() {
             </CardHeader>
             <CardContent>
               {combinedTopLoading ? (
-                <LoadingCard />
+                <div className="text-center py-8">
+                  <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-2 text-muted-foreground" />
+                  <p className="text-muted-foreground">
+                    Loading combined news...
+                  </p>
+                </div>
               ) : (
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
