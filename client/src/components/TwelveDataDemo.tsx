@@ -457,7 +457,7 @@ export const TwelveDataDemo = () => {
         <CardHeader>
           <CardTitle>Symbol Search</CardTitle>
           <CardDescription>
-            Search for stock symbols using the Twelve Data API
+            Search for stock symbols using the Polygon.io API
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -558,13 +558,13 @@ export const TwelveDataDemo = () => {
         <CardHeader>
           <CardTitle>Integration Details</CardTitle>
           <CardDescription>
-            How both Twelve Data API (stocks) and CoinMarketCap API (crypto) are
+            How both Polygon.io API (stocks) and CoinMarketCap API (crypto) are
             integrated
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <h4 className="font-medium">Stock Features (Alpha Vantage API):</h4>
+            <h4 className="font-medium">Stock Features (Polygon.io API):</h4>
             <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
               <li>Real-time stock quotes with auto-refresh</li>
               <li>Multiple stock data fetching with rate limiting</li>
@@ -607,10 +607,10 @@ export const TwelveDataDemo = () => {
           <div className="space-y-2">
             <h4 className="font-medium">Components Created:</h4>
             <div className="flex flex-wrap gap-2">
-              <Badge variant="outline">AlphaVantageService</Badge>
+              <Badge variant="outline">PolygonService</Badge>
               <Badge variant="outline">CoinMarketCapService</Badge>
               <Badge variant="outline">NewsAPIService</Badge>
-              <Badge variant="outline">useAlphaVantage hooks</Badge>
+              <Badge variant="outline">usePolygon hooks</Badge>
               <Badge variant="outline">useCoinMarketCap hooks</Badge>
               <Badge variant="outline">useNewsApi hooks</Badge>
               <Badge variant="outline">RealTimePrice</Badge>
