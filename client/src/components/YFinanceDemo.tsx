@@ -464,7 +464,8 @@ export const YFinanceDemo = () => {
                             </div>
                             <div className="flex justify-between text-muted-foreground">
                               <span>
-                                Sentiment: {article.sentiment_score.toFixed(2)}
+                                Sentiment:{" "}
+                                {article.sentiment_score?.toFixed(2) || "N/A"}
                               </span>
                               <span>{article.source}</span>
                             </div>
