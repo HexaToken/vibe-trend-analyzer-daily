@@ -1,10 +1,11 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { 
-  finnhubApi, 
-  type FinnhubSymbolLookupResponse, 
-  type FinnhubQuoteResponse, 
-  type FinnhubCandleResponse 
+import {
+  finnhubApi,
+  type FinnhubSymbolLookupResponse,
+  type FinnhubQuoteResponse,
+  type FinnhubCandleResponse,
 } from "../services/finnhubApi";
+import { stockDataFallback } from "../services/stockDataFallback";
 
 interface UseFinnhubOptions {
   refreshInterval?: number;
@@ -118,9 +119,7 @@ export function useFinnhubQuote(
     } catch (error) {
       console.error("Failed to fetch quote:", error);
       setError(
-        error instanceof Error
-          ? error.message
-          : "Failed to fetch quote",
+        error instanceof Error ? error.message : "Failed to fetch quote",
       );
       setData(null);
     } finally {
@@ -175,15 +174,18 @@ export function useFinnhubCandles(
     setError(null);
 
     try {
-      const response = await finnhubApi.getCandles(symbol, resolution, from, to);
+      const response = await finnhubApi.getCandles(
+        symbol,
+        resolution,
+        from,
+        to,
+      );
       setData(response);
       setError(null);
     } catch (error) {
       console.error("Failed to fetch candles:", error);
       setError(
-        error instanceof Error
-          ? error.message
-          : "Failed to fetch candle data",
+        error instanceof Error ? error.message : "Failed to fetch candle data",
       );
       setData(null);
     } finally {
@@ -220,15 +222,18 @@ export function useQuote(symbol: string, options: UseFinnhubOptions = {}) {
   return useFinnhubQuote(symbol, options);
 }
 
-export function useMultipleQuotes(symbols: string[], refreshIntervalMs: number = 300000) {
+export function useMultipleQuotes(
+  symbols: string[],
+  refreshIntervalMs: number = 300000,
+) {
   const results: Record<string, UseFinnhubQuoteResult> = {};
-  
-  symbols.forEach(symbol => {
-    results[symbol] = useFinnhubQuote(symbol, { 
+
+  symbols.forEach((symbol) => {
+    results[symbol] = useFinnhubQuote(symbol, {
       refreshInterval: refreshIntervalMs,
-      enabled: true 
+      enabled: true,
     });
   });
-  
+
   return results;
 }
