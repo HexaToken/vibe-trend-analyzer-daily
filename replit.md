@@ -57,6 +57,7 @@ The application integrates with multiple external services:
   - YFinance now properly pulls real market news with correct headlines, URLs, and timestamps
   - SPY Stock-Specific News functionality fully restored and working with 10 articles
   - Added comprehensive stock ticker information functionality with 50+ financial metrics per stock
+  - Fixed runtime error in SocialPlatform component where realTimeTickers.find() was being called on object instead of array
 - **2025-01-17**: Complete migration from Lovable to Replit
   - Fixed dependency issues (sonner, nanoid)
   - Verified application startup and functionality

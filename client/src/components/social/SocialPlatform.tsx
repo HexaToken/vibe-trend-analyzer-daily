@@ -78,10 +78,8 @@ export const SocialPlatform = () => {
         </CardHeader>
         <CardContent className="space-y-3">
           {mockTrendingData.tickers.slice(0, 5).map((mockTicker, index) => {
-            const realTicker = realTimeTickers.find(
-              (t) => t.symbol === mockTicker.symbol,
-            );
-            const isPositive = realTicker ? realTicker.change >= 0 : false;
+            const realTicker = realTimeTickers[mockTicker.symbol];
+            const isPositive = realTicker?.data ? realTicker.data.d >= 0 : false;
 
             return (
               <div
@@ -96,13 +94,13 @@ export const SocialPlatform = () => {
                   <div>
                     <div className="font-semibold">${mockTicker.symbol}</div>
                     <div className="text-xs text-muted-foreground">
-                      {realTicker?.name || mockTicker.name}
+                      {mockTicker.name}
                     </div>
                   </div>
                 </div>
 
                 <div className="text-right">
-                  {tickersLoading || !realTicker ? (
+                  {tickersLoading || realTicker?.loading || !realTicker?.data ? (
                     <div className="text-right">
                       <div className="text-sm font-semibold text-muted-foreground">
                         Loading...
@@ -114,13 +112,13 @@ export const SocialPlatform = () => {
                   ) : (
                     <div className="text-right">
                       <div className="text-sm font-semibold">
-                        ${realTicker.price.toFixed(2)}
+                        ${realTicker.data.c.toFixed(2)}
                       </div>
                       <div
                         className={`text-xs ${isPositive ? "text-green-600" : "text-red-600"}`}
                       >
                         {isPositive ? "+" : ""}
-                        {realTicker.changePercent.toFixed(2)}%
+                        {realTicker.data.dp.toFixed(2)}%
                       </div>
                       <div className="text-xs text-muted-foreground">
                         {mockTicker.postCount} posts
