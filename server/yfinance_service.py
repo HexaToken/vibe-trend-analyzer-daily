@@ -47,10 +47,10 @@ class YFinanceService:
             
             # Process and standardize the data
             processed_articles = []
-            for article in news[:15]:  # Get top 15 news articles
+            for idx, article in enumerate(news[:15]):  # Get top 15 news articles
                 if isinstance(article, dict):
                     processed_articles.append({
-                        "id": f"yf_{hash(article.get('link', '')) % 1000000}",
+                        "id": f"yf_{symbol}_{idx}_{hash(article.get('link', '')) % 1000000}",
                         "headline": article.get('title', ''),
                         "url": article.get('link', ''),
                         "time": self._format_timestamp(article.get('providerPublishTime')),
@@ -78,15 +78,15 @@ class YFinanceService:
             tickers = ["SPY", "QQQ", "IWM", "^VIX"]
             all_articles = []
             
-            for symbol in tickers:
+            for ticker_idx, symbol in enumerate(tickers):
                 try:
                     ticker = yf.Ticker(symbol)
                     news = ticker.news
                     
-                    for article in news[:5]:  # Top 5 from each
+                    for article_idx, article in enumerate(news[:5]):  # Top 5 from each
                         if isinstance(article, dict):
                             all_articles.append({
-                                "id": f"yf_market_{hash(article.get('link', '')) % 1000000}",
+                                "id": f"yf_market_{ticker_idx}_{article_idx}_{hash(article.get('link', '')) % 1000000}",
                                 "headline": article.get('title', ''),
                                 "url": article.get('link', ''),
                                 "time": self._format_timestamp(article.get('providerPublishTime')),

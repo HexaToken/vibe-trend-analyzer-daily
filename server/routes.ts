@@ -106,17 +106,34 @@ print(json.dumps(result))
       `]);
       
       let output = '';
+      let responseHandled = false;
+      
       python.stdout.on('data', (data: any) => {
         output += data.toString();
       });
       
       python.on('close', (code: number) => {
+        if (responseHandled) return;
+        responseHandled = true;
+        
         try {
           const result = JSON.parse(output.trim().split('\n').pop() || '{}');
           res.json(result);
         } catch (e) {
           res.status(500).json({ error: "Failed to parse YFinance news data" });
         }
+      });
+      
+      const timeoutId = setTimeout(() => {
+        if (responseHandled) return;
+        responseHandled = true;
+        python.kill();
+        res.status(408).json({ error: "Request timeout" });
+      }, 30000);
+      
+      // Clear timeout if process completes normally
+      python.on('close', () => {
+        clearTimeout(timeoutId);
       });
     } catch (error) {
       console.error("YFinance latest news proxy error:", error);
@@ -141,6 +158,7 @@ print(json.dumps(result))
       
       let output = '';
       let error = '';
+      let responseHandled = false;
       
       python.stdout.on('data', (data: any) => {
         output += data.toString();
@@ -151,6 +169,9 @@ print(json.dumps(result))
       });
       
       python.on('close', (code: number) => {
+        if (responseHandled) return;
+        responseHandled = true;
+        
         try {
           const lines = output.trim().split('\n');
           const jsonLine = lines[lines.length - 1];
@@ -163,10 +184,17 @@ print(json.dumps(result))
         }
       });
       
-      setTimeout(() => {
+      const timeoutId = setTimeout(() => {
+        if (responseHandled) return;
+        responseHandled = true;
         python.kill();
         res.status(408).json({ error: "Request timeout" });
       }, 30000);
+      
+      // Clear timeout if process completes normally
+      python.on('close', () => {
+        clearTimeout(timeoutId);
+      });
     } catch (error) {
       console.error("YFinance trending news proxy error:", error);
       res.status(500).json({ error: "Failed to fetch YFinance trending news" });
@@ -188,17 +216,34 @@ print(json.dumps(result))
       `]);
       
       let output = '';
+      let responseHandled = false;
+      
       python.stdout.on('data', (data: any) => {
         output += data.toString();
       });
       
       python.on('close', (code: number) => {
+        if (responseHandled) return;
+        responseHandled = true;
+        
         try {
           const result = JSON.parse(output.trim().split('\n').pop() || '{}');
           res.json(result);
         } catch (e) {
           res.status(500).json({ error: "Failed to parse YFinance sentiment data" });
         }
+      });
+      
+      const timeoutId = setTimeout(() => {
+        if (responseHandled) return;
+        responseHandled = true;
+        python.kill();
+        res.status(408).json({ error: "Request timeout" });
+      }, 30000);
+      
+      // Clear timeout if process completes normally
+      python.on('close', () => {
+        clearTimeout(timeoutId);
       });
     } catch (error) {
       console.error("YFinance sentiment proxy error:", error);
