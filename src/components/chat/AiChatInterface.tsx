@@ -230,39 +230,39 @@ export const AiChatInterface = () => {
       </ScrollArea>
 
       {/* Quick Actions */}
-      <div className="p-3 border-t bg-muted/30">
+      <div className="p-3 border-t bg-muted/30 flex-shrink-0">
         <div className="grid grid-cols-4 gap-2">
           {quickActions.map((action, index) => (
             <Button
               key={index}
               variant="outline"
               size="sm"
-              className="h-8 text-xs"
+              className="h-8 text-xs overflow-hidden"
               onClick={() => handleSuggestionClick(action.query)}
             >
-              <action.icon className="h-3 w-3 mr-1" />
-              {action.label}
+              <action.icon className="h-3 w-3 mr-1 flex-shrink-0" />
+              <span className="truncate">{action.label}</span>
             </Button>
           ))}
         </div>
       </div>
 
       {/* Input Area */}
-      <div className="p-4 border-t">
+      <div className="p-4 border-t flex-shrink-0">
         <div className="flex gap-2">
           <Input
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder="Ask me anything about MoodMeter..."
-            className="flex-1"
+            className="flex-1 min-w-0"
             disabled={isLoading}
           />
           <Button
             onClick={handleSendMessage}
             disabled={!inputValue.trim() || isLoading}
             size="sm"
-            className="px-3"
+            className="px-3 flex-shrink-0"
           >
             <Send className="h-4 w-4" />
           </Button>
