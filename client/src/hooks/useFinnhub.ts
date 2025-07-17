@@ -118,10 +118,34 @@ export function useFinnhubQuote(
       setError(null);
     } catch (error) {
       console.error("Failed to fetch quote:", error);
+
+      // Fallback to mock data if API fails
+      const mockTickers = stockDataFallback.getMockTickers([symbol]);
+      const mockTicker = mockTickers.find((t) => t.symbol === symbol);
+
+      if (mockTicker) {
+        const mockQuote: FinnhubQuoteResponse = {
+          c: mockTicker.price, // Current price
+          d: (mockTicker.changePercent * mockTicker.price) / 100, // Change
+          dp: mockTicker.changePercent, // Percent change
+          h: mockTicker.price * 1.02, // High (mock as 2% above current)
+          l: mockTicker.price * 0.98, // Low (mock as 2% below current)
+          o: mockTicker.price * 0.995, // Open (mock as slightly below current)
+          pc:
+            mockTicker.price -
+            (mockTicker.changePercent * mockTicker.price) / 100, // Previous close
+          t: Date.now() / 1000, // Timestamp
+        };
+        setData(mockQuote);
+      } else {
+        setData(null);
+      }
+
       setError(
-        error instanceof Error ? error.message : "Failed to fetch quote",
+        error instanceof Error
+          ? error.message + " - using fallback data"
+          : "Failed to fetch quote - using fallback data",
       );
-      setData(null);
     } finally {
       setLoading(false);
     }
