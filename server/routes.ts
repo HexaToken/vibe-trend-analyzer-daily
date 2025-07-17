@@ -89,59 +89,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // SerpAPI proxy endpoints
-  app.get("/api/proxy/serpapi/search", async (req, res) => {
-    try {
-      const apiKey = process.env.SERPAPI_KEY || "demo_api_key";
-      const query = req.query.q || "business news";
-      const num = req.query.num || 20;
-      const response = await fetch(`https://serpapi.com/search?engine=google_news&q=${encodeURIComponent(query as string)}&num=${num}&api_key=${apiKey}`);
-      const data = await response.json();
-      res.json(data);
-    } catch (error) {
-      console.error("SerpAPI search proxy error:", error);
-      res.status(500).json({ error: "Failed to fetch search results" });
-    }
-  });
 
-  // Google Finance via SerpAPI proxy endpoints
-  app.get("/api/proxy/serpapi/google-finance", async (req, res) => {
-    try {
-      const apiKey = process.env.SERPAPI_KEY || "demo_api_key";
-      const symbol = req.query.symbol || "AAPL";
-      const response = await fetch(`https://serpapi.com/search?engine=google_finance&q=${encodeURIComponent(symbol as string)}&gl=us&hl=en&api_key=${apiKey}`);
-      const data = await response.json();
-      res.json(data);
-    } catch (error) {
-      console.error("Google Finance proxy error:", error);
-      res.status(500).json({ error: "Failed to fetch Google Finance data" });
-    }
-  });
-
-  app.get("/api/proxy/serpapi/google-finance-search", async (req, res) => {
-    try {
-      const apiKey = process.env.SERPAPI_KEY || "demo_api_key";
-      const query = req.query.q || "stocks";
-      const response = await fetch(`https://serpapi.com/search?engine=google_finance&q=${encodeURIComponent(query as string)}&gl=us&hl=en&api_key=${apiKey}`);
-      const data = await response.json();
-      res.json(data);
-    } catch (error) {
-      console.error("Google Finance search proxy error:", error);
-      res.status(500).json({ error: "Failed to fetch Google Finance search results" });
-    }
-  });
-
-  app.get("/api/proxy/serpapi/google-finance-trending", async (req, res) => {
-    try {
-      const apiKey = process.env.SERPAPI_KEY || "demo_api_key";
-      const response = await fetch(`https://serpapi.com/search?engine=google_finance&q=trending&gl=us&hl=en&api_key=${apiKey}`);
-      const data = await response.json();
-      res.json(data);
-    } catch (error) {
-      console.error("Google Finance trending proxy error:", error);
-      res.status(500).json({ error: "Failed to fetch Google Finance trending data" });
-    }
-  });
 
   const httpServer = createServer(app);
 

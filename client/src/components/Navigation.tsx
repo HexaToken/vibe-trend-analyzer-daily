@@ -76,18 +76,7 @@ export const Navigation = ({
     ],
     tools: [
       { id: "analytics", label: "Analytics", icon: TrendingUp },
-      {
-        id: "googlefinance",
-        label: "Google Finance API Demo",
-        icon: Analytics,
-        badge: "API",
-      },
-      {
-        id: "serpapi",
-        label: "SerpAPI News Demo",
-        icon: Brain,
-        badge: "NEW",
-      },
+
       {
         id: "nlp",
         label: "NLP Sentiment Analysis",

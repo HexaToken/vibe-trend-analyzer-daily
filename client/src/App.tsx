@@ -15,10 +15,10 @@ import { UserProfile } from "@/components/profile/UserProfile";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { DatabaseDemo } from "@/components/DatabaseDemo";
 import { SocialPlatform } from "@/components/social/SocialPlatform";
-import { GoogleFinanceDemo } from "@/components/GoogleFinanceDemo";
+
 import { ApiStatusIndicator } from "@/components/ApiStatusIndicator";
 import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
-import { SerpApiDemo } from "@/components/SerpApiDemo";
+
 import { NLPSentimentDemo } from "@/components/NLPSentimentDemo";
 import { AiChatBubble } from "@/components/chat/AiChatBubble";
 import { PolygonDividendsDemo } from "@/components/PolygonDividendsDemo";
@@ -55,12 +55,8 @@ const App = () => {
         return <DatabaseDemo />;
       case "social":
         return <SocialPlatform />;
-      case "googlefinance":
-        return <GoogleFinanceDemo />;
       case "crypto":
         return <CryptoDashboard />;
-      case "serpapi":
-        return <SerpApiDemo />;
       case "nlp":
         return <NLPSentimentDemo />;
       case "polygondividends":
