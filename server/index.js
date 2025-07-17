@@ -543,6 +543,107 @@ async function analyzeSentiment(ticker) {
   };
 }
 
+async function analyzeSentimentWithAI(ticker, originalMessage) {
+  // Get base sentiment data
+  const baseResponse = await analyzeSentiment(ticker);
+
+  try {
+    const systemPrompt = `You are a financial sentiment analyst for MoodMeter. Provide detailed sentiment analysis for stock/crypto tickers based on social media data.
+
+Context: User asked about ${ticker} sentiment. Here's the current data:
+${baseResponse.content}
+
+Provide a comprehensive but concise analysis including:
+- Current sentiment interpretation
+- What this means for traders
+- Key factors influencing sentiment
+- Risk considerations
+
+Be professional but conversational. Keep it under 300 words.`;
+
+    const aiAnalysis = await callDeepSeekAPI([
+      { role: "system", content: systemPrompt },
+      { role: "user", content: originalMessage },
+    ]);
+
+    return {
+      content: aiAnalysis,
+      suggestions: [
+        `View $${ticker} detailed chart`,
+        `Check recent $${ticker} posts`,
+        `Add $${ticker} to watchlist`,
+        "Analyze another ticker",
+      ],
+    };
+  } catch (error) {
+    // Fallback to base response
+    return baseResponse;
+  }
+}
+
+async function summarizePostsWithAI(ticker, originalMessage) {
+  // Get base summary data
+  const baseResponse = await summarizePosts(ticker);
+
+  try {
+    const tickerContext = ticker ? `for $${ticker}` : "";
+    const systemPrompt = `You are analyzing social media posts from FinTwits, a trading community platform.
+
+Provide a concise summary of recent community discussions ${tickerContext}. Include:
+- Key themes and trends
+- Overall sentiment
+- Notable insights or concerns
+- Trading implications
+
+Base data: ${baseResponse.content}
+
+Keep it informative but concise (under 250 words).`;
+
+    const aiSummary = await callDeepSeekAPI([
+      { role: "system", content: systemPrompt },
+      { role: "user", content: originalMessage },
+    ]);
+
+    return {
+      content: aiSummary,
+      suggestions: baseResponse.suggestions,
+    };
+  } catch (error) {
+    return baseResponse;
+  }
+}
+
+async function getWatchlistRecommendationsWithAI(originalMessage) {
+  // Get base recommendations
+  const baseResponse = await getWatchlistRecommendations();
+
+  try {
+    const systemPrompt = `You are a financial advisor helping users build watchlists on MoodMeter.
+
+Based on current market sentiment and social trends, provide personalized watchlist recommendations. Include:
+- Top 3-4 recommended tickers
+- Reasoning for each recommendation
+- Risk levels and time horizons
+- Current sentiment overview
+
+Base data: ${baseResponse.content}
+
+Be helpful and educational, but remind users to do their own research.`;
+
+    const aiRecommendations = await callDeepSeekAPI([
+      { role: "system", content: systemPrompt },
+      { role: "user", content: originalMessage },
+    ]);
+
+    return {
+      content: aiRecommendations,
+      suggestions: baseResponse.suggestions,
+    };
+  } catch (error) {
+    return baseResponse;
+  }
+}
+
 function getSentimentInsights(sentiment, sentimentScore, priceChange) {
   if (sentiment === "bullish") {
     return "**Insights:** Community is optimistic with strong bullish momentum. Positive catalysts and technical indicators are driving conversation.";
