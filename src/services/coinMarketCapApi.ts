@@ -158,6 +158,15 @@ class CoinMarketCapService {
 
     try {
       const response = await fetch(url.toString());
+
+      // Check response status BEFORE consuming the body
+      if (!response.ok) {
+        throw new CoinMarketCapApiError(
+          `HTTP ${response.status}: ${response.statusText}`,
+          response.status,
+        );
+      }
+
       const data = await response.json();
 
       // Check for API errors
@@ -166,13 +175,6 @@ class CoinMarketCapService {
           data.status.error_message || "API request failed",
           data.status.error_code,
           "error",
-        );
-      }
-
-      if (!response.ok) {
-        throw new CoinMarketCapApiError(
-          `HTTP ${response.status}: ${response.statusText}`,
-          response.status,
         );
       }
 
