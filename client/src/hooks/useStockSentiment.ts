@@ -44,6 +44,9 @@ export const useStockSentiment = (refreshInterval: number = 300000) => {
         try {
           const response = await fetch(
             `/api/proxy/finnhub/quote?symbol=${symbol}`,
+            {
+              signal: AbortSignal.timeout(10000), // 10 second timeout
+            },
           );
 
           if (!response.ok) {
@@ -75,7 +78,11 @@ export const useStockSentiment = (refreshInterval: number = 300000) => {
             sentimentScore: calculateSentimentScore(data.dp || 0),
           };
         } catch (stockError) {
-          console.warn(`Error fetching ${symbol}:`, stockError);
+          if (stockError.name === "AbortError") {
+            console.warn(`Timeout fetching ${symbol}`);
+          } else {
+            console.warn(`Network error fetching ${symbol}:`, stockError);
+          }
           return {
             symbol,
             changePercent: 0,
