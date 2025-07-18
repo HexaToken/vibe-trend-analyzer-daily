@@ -1569,13 +1569,7 @@ export default MoorMeterDashboard;
 
               
                                     
-            </div>
-          </>
-        );
-      }
-  };
-
-    export default MoorMeterDashboard;
+            
                 <WatchlistWidget />
 
                 {/* AI Insight */}
