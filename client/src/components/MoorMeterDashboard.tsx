@@ -222,7 +222,7 @@ export const MoorMeterDashboard: React.FC = () => {
   // Navigation items
   const navItems = [
     { label: "Home", href: "#" },
-    { label: "Market Mood", href: "#market" },
+    { label: "Today's Market Sentiment", href: "#market" },
     { label: "Watchlist", href: "#watchlist" },
     { label: "News Feed", href: "#news" },
     { label: "Community", href: "#community" },
@@ -231,7 +231,7 @@ export const MoorMeterDashboard: React.FC = () => {
   // Function to render content based on active tab
   const renderTabContent = () => {
     switch (activeTab) {
-      case "Market Mood":
+      case "Today's Market Sentiment":
         return (
           <div className="space-y-8">
             {/* Header */}
