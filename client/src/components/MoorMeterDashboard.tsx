@@ -1041,7 +1041,7 @@ export const MoorMeterDashboard: React.FC = () => {
                                 className="text-xs"
                               >
                                 {message.sentiment >= 70
-                                  ? "😃 Bullish"
+                                  ? "���� Bullish"
                                   : message.sentiment >= 40
                                     ? "😐 Neutral"
                                     : "😢 Bearish"}
@@ -1574,10 +1574,7 @@ export const MoorMeterDashboard: React.FC = () => {
                             </div>
             </div>
           </>
-                );
-                      <div className="flex justify-between items-center">
-                        <span className="font-medium">DIS</span>
-                        <span className="text-red-600 font-semibold">
+                        );
                           -1.78%
                         </span>
                       </div>
