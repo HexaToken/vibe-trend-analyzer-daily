@@ -1579,8 +1579,7 @@ export const MoorMeterDashboard: React.FC = () => {
                             </div>
             </div>
           </>
-                                                                                        );
-                      <div className="w-2 h-2 bg-orange-500 rounded-full mr-2"></div>
+                                                                                                );
                       Responsive design for mobile and desktop
                     </li>
                   </ul>
