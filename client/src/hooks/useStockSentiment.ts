@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { robustFetchJson, FetchError } from "../lib/robustFetch";
 
 interface StockSentimentData {
   score: number;
@@ -42,31 +43,16 @@ export const useStockSentiment = (refreshInterval: number = 300000) => {
     try {
       const stockPromises = TOP_10_STOCKS.map(async (symbol) => {
         try {
-          // Create AbortController for timeout
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
-
-          const response = await fetch(
+          const data = await robustFetchJson(
             `/api/proxy/finnhub/quote?symbol=${symbol}`,
             {
-              signal: controller.signal,
+              retry: {
+                maxRetries: 2,
+                retryDelay: 500,
+                timeout: 10000,
+              },
             },
           );
-
-          clearTimeout(timeoutId); // Clear timeout if fetch succeeds
-
-          if (!response.ok) {
-            console.warn(
-              `Failed to fetch ${symbol}: ${response.status} ${response.statusText}`,
-            );
-            return {
-              symbol,
-              changePercent: 0,
-              sentimentScore: 0,
-            };
-          }
-
-          const data = await response.json();
 
           // Handle API error responses
           if (data.error) {
@@ -83,8 +69,10 @@ export const useStockSentiment = (refreshInterval: number = 300000) => {
             changePercent: data.dp || 0,
             sentimentScore: calculateSentimentScore(data.dp || 0),
           };
-        } catch (stockError) {
-          if (stockError.name === "AbortError") {
+        } catch (stockError: any) {
+          if (stockError instanceof FetchError) {
+            console.warn(`API error fetching ${symbol}:`, stockError.message);
+          } else if (stockError.name === "AbortError") {
             console.warn(`Timeout fetching ${symbol}`);
           } else {
             console.warn(`Network error fetching ${symbol}:`, stockError);
@@ -97,7 +85,12 @@ export const useStockSentiment = (refreshInterval: number = 300000) => {
         }
       });
 
-      const stockData = await Promise.all(stockPromises);
+      const stockResults = await Promise.allSettled(stockPromises);
+
+      // Extract successful results and flatten them
+      const stockData = stockResults
+        .filter((result) => result.status === "fulfilled")
+        .map((result) => (result as PromiseFulfilledResult<any>).value);
 
       // Filter out symbols that returned no data and have at least some valid stocks
       const validStockData = stockData.filter(
@@ -106,6 +99,11 @@ export const useStockSentiment = (refreshInterval: number = 300000) => {
 
       // Use valid data if available, otherwise use all data (including zeros for fallback)
       const dataToUse = validStockData.length > 0 ? validStockData : stockData;
+
+      // If no data at all, throw error to trigger fallback
+      if (!dataToUse || dataToUse.length === 0) {
+        throw new Error("No stock data available from any source");
+      }
 
       // Calculate average sentiment score
       const totalSentimentScore = dataToUse.reduce(
@@ -157,9 +155,25 @@ export const useStockSentiment = (refreshInterval: number = 300000) => {
   };
 
   useEffect(() => {
-    fetchStockSentiment();
+    const safeExecute = async () => {
+      try {
+        await fetchStockSentiment();
+      } catch (error) {
+        console.error("useStockSentiment useEffect error:", error);
+        setError("Failed to initialize stock sentiment data");
+        setData({
+          score: 50,
+          label: "Neutral (Fallback)",
+          change: 0,
+          samples: 1000,
+        });
+        setLoading(false);
+      }
+    };
 
-    const interval = setInterval(fetchStockSentiment, refreshInterval);
+    safeExecute();
+
+    const interval = setInterval(safeExecute, refreshInterval);
     return () => clearInterval(interval);
   }, [refreshInterval]);
 

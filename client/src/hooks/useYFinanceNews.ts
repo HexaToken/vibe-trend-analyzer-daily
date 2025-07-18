@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { NewsArticle } from "../data/mockData";
+import { robustFetchJson, FetchError } from "../lib/robustFetch";
 
 interface UseYFinanceNewsOptions {
   refreshInterval?: number; // in milliseconds
@@ -48,13 +49,16 @@ export function useYFinanceNews(
     setError(null);
 
     try {
-      const response = await fetch("/api/proxy/yfinance/news/latest");
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data: YFinanceNewsResponse = await response.json();
+      const data: YFinanceNewsResponse = await robustFetchJson(
+        "/api/proxy/yfinance/news/latest",
+        {
+          retry: {
+            maxRetries: 2,
+            retryDelay: 1000,
+            timeout: 10000,
+          },
+        },
+      );
 
       if (data.error) {
         throw new Error(data.error);

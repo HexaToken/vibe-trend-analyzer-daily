@@ -1,6 +1,7 @@
 // CoinMarketCap API Service
 // Documentation: https://coinmarketcap.com/api/documentation/v1/
 // Uses server proxy to avoid CORS restrictions
+import { robustFetch, FetchError } from "../lib/robustFetch";
 
 const BASE_URL = "/api/proxy/coinmarketcap";
 
@@ -234,8 +235,11 @@ class CoinMarketCapService {
         return cached;
       }
     }
-    // If proxy is known to be unavailable, fail immediately
+    // If proxy is known to be unavailable, use cache or fail gracefully
     if (this.proxyAvailable === false) {
+      console.info(
+        "CoinMarketCap proxy is not available - falling back to mock data",
+      );
       throw new CoinMarketCapApiError(
         "CoinMarketCap proxy is not available - using mock data",
       );
@@ -271,7 +275,13 @@ class CoinMarketCapService {
     });
 
     try {
-      const response = await fetch(url.toString());
+      const response = await robustFetch(url.toString(), {
+        retry: {
+          maxRetries: 2,
+          retryDelay: 1000,
+          timeout: 10000,
+        },
+      });
 
       // Check response status BEFORE consuming the body
       if (!response.ok) {
@@ -382,6 +392,17 @@ class CoinMarketCapService {
       if (error instanceof CoinMarketCapApiError) {
         throw error;
       }
+
+      if (error instanceof FetchError) {
+        // Handle FetchError specifically
+        this.proxyAvailable = false;
+        throw new CoinMarketCapApiError(
+          `Network error: ${error.message}`,
+          error.status,
+          "network_error",
+        );
+      }
+
       throw new CoinMarketCapApiError(
         `Network error: ${error instanceof Error ? error.message : "Unknown error"}`,
       );
