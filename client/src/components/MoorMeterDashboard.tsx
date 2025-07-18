@@ -94,6 +94,7 @@ export const MoorMeterDashboard: React.FC = () => {
   >("7D");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("Home");
+  const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
 
   // Hooks for real data
   const { data: stockSentiment, loading: stockLoading } = useStockSentiment();
