@@ -1546,7 +1546,7 @@ export const MoorMeterDashboard: React.FC = () => {
                     <button
                       onClick={() => {
                         setActiveTab(item.key);
-                        setIsMobileMenuOpen(false);
+                        setMobileMenuOpen(false);
                       }}
                       className={`flex items-center w-full px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
                         activeTab === item.key
