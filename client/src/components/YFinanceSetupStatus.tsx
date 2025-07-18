@@ -16,6 +16,7 @@ export const YFinanceSetupStatus: React.FC = () => {
   const [status, setStatus] = useState<YFinanceStatusResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [lastChecked, setLastChecked] = useState<Date | null>(null);
+  const [retryAttempts, setRetryAttempts] = useState(0);
 
   const checkStatus = async () => {
     setLoading(true);
