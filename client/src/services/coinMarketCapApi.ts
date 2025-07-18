@@ -147,11 +147,15 @@ class CoinMarketCapService {
   private circuitBreaker = {
     isOpen: false,
     failureCount: 0,
-    threshold: 5, // Higher threshold - allow more failures before opening
-    timeout: 30000, // 30 seconds instead of 1 minute
+    threshold: 3, // Lower threshold to protect against rate limits
+    timeout: 60000, // 1 minute default
     lastFailureTime: 0,
   };
   private proxyAvailable: boolean | null = null; // Track proxy availability
+  private cache = new Map<
+    string,
+    { data: any; timestamp: number; ttl: number }
+  >();
 
   // Method to manually reset circuit breaker
   public resetCircuitBreaker(): void {
