@@ -149,7 +149,7 @@ export const Navigation = ({
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-1">
-                            {/* MoorMeter Dashboard */}
+              {/* MoorMeter Dashboard */}
               <Button
                 variant={activeSection === "moorMeter" ? "default" : "ghost"}
                 onClick={() => onSectionChange("moorMeter")}
@@ -389,7 +389,7 @@ export const Navigation = ({
           {isMenuOpen && (
             <div className="md:hidden py-4 border-t">
               <div className="flex flex-col space-y-2">
-                                {/* MoorMeter Dashboard */}
+                {/* MoorMeter Dashboard */}
                 <Button
                   variant={activeSection === "moorMeter" ? "default" : "ghost"}
                   onClick={() => {
@@ -403,7 +403,7 @@ export const Navigation = ({
                   <Badge variant="secondary" className="ml-auto text-xs">
                     NEW
                   </Badge>
-                
+                </Button>
 
                 {/* Data Section */}
                 <div className="text-sm font-medium text-muted-foreground px-3 py-1">
