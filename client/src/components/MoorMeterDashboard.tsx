@@ -1562,17 +1562,8 @@ export const MoorMeterDashboard: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <footer
-                    <div className="flex items-center space-x-2">
-                      <div className="w-4 h-4 bg-red-400 rounded"></div>
-                      <span className="text-sm text-gray-600 dark:text-gray-400">
-                        Decline (-2% to 0%)
-                      </span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <div className="w-4 h-4 bg-green-400 rounded"></div>
-                      <span className="text-sm text-gray-600 dark:text-gray-400">
-                        Gain (0% to 2%)
+            <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
                       </span>
                     </div>
                     <div className="flex items-center space-x-2">
