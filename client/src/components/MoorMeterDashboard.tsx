@@ -1311,20 +1311,7 @@ export const MoorMeterDashboard: React.FC = () => {
                         {/* Tools Content */}
             {activeToolsSubtab === "HeatMap" && (
               <SentimentHeatMap onRefresh={() => setHeatmapLoading(true)} />
-                <Card className="p-6">
-                  <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-                      📊 Market HeatMap
-                    </h2>
-                    <div className="flex space-x-2">
-                      <Button variant="outline" size="sm">
-                        🔄 Refresh
-                      </Button>
-                      <Button variant="outline" size="sm">
-                        ⚙️ Settings
-                      </Button>
-                    </div>
-                  </div>
+                
 
                   {/* HeatMap Controls */}
                   <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
@@ -1454,7 +1441,7 @@ export const MoorMeterDashboard: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold mb-4 flex items-center">
-                      ���� Market Summary
+                      ����� Market Summary
                     </h3>
                     <div className="space-y-3">
                       <div className="flex justify-between">
