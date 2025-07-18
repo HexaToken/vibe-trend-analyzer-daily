@@ -10,30 +10,38 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { NewsDetailModal } from "./NewsDetailModal";
-import { useBusinessNews } from "@/hooks/useNewsApi";
+import { useCombinedBusinessNews } from "@/hooks/useCombinedBusinessNews";
 import { newsArticles } from "@/data/mockData";
 
 export const TopNews = () => {
   const [selectedArticle, setSelectedArticle] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Get real business news from NewsAPI
-  const { articles, loading, error, refetch } = useBusinessNews({
-    refreshInterval: 180000, // Refresh every 3 minutes
-    enabled: true,
-  });
+  // Get combined business news from NewsAPI and YFinance
+  const { articles, loading, error, refetch, sources } =
+    useCombinedBusinessNews({
+      refreshInterval: 180000, // Refresh every 3 minutes
+      enabled: true,
+      includeNewsApi: true,
+      includeYFinanceNews: true,
+      maxArticles: 25,
+    });
 
   // Debug logging
   console.log(
-    "TopNews - articles:",
+    "TopNews - Combined articles:",
     articles.length,
+    "NewsAPI:",
+    sources.newsApi.articles.length,
+    "YFinance:",
+    sources.yfinance.articles.length,
     "loading:",
     loading,
     "error:",
     error,
   );
 
-  // Use mock articles if no articles from API
+  // Use mock articles if no articles from any API
   const displayArticles = articles.length > 0 ? articles : newsArticles;
 
   const handleArticleClick = (article: any) => {
@@ -71,6 +79,24 @@ export const TopNews = () => {
             <div className="flex items-center gap-2">
               <Newspaper className="h-5 w-5" />
               Top Business News
+              <div className="flex gap-1 ml-2">
+                {sources.newsApi.articles.length > 0 && (
+                  <Badge variant="outline" className="text-xs">
+                    NewsAPI: {sources.newsApi.articles.length}
+                  </Badge>
+                )}
+                {sources.yfinance.articles.length > 0 ? (
+                  <Badge variant="outline" className="text-xs">
+                    YFinance: {sources.yfinance.articles.length}
+                  </Badge>
+                ) : sources.yfinance.error?.includes(
+                    "service not available",
+                  ) ? (
+                  <Badge variant="secondary" className="text-xs">
+                    YFinance: Setup Required
+                  </Badge>
+                ) : null}
+              </div>
             </div>
             <Button
               variant="ghost"
@@ -160,6 +186,15 @@ export const TopNews = () => {
           {error && displayArticles.length > 0 && (
             <div className="mt-2 p-2 bg-orange-50 border border-orange-200 rounded text-center">
               <p className="text-xs text-orange-600">{error}</p>
+            </div>
+          )}
+
+          {sources.yfinance.error?.includes("service not available") && (
+            <div className="mt-2 p-2 bg-blue-50 border border-blue-200 rounded text-center">
+              <p className="text-xs text-blue-600">
+                📊 Enhanced financial news from YFinance requires Python setup.
+                Currently showing NewsAPI business news.
+              </p>
             </div>
           )}
         </CardContent>

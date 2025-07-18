@@ -257,12 +257,10 @@ print(json.dumps(result))
             "Error:",
             error,
           );
-          res
-            .status(500)
-            .json({
-              error: "Failed to parse YFinance trending data",
-              debug: { output, error },
-            });
+          res.status(500).json({
+            error: "Failed to parse YFinance trending data",
+            debug: { output, error },
+          });
         }
       });
 
@@ -393,6 +391,80 @@ print(json.dumps(result))
     } catch (error) {
       console.error("YFinance ticker proxy error:", error);
       res.status(500).json({ error: "Failed to fetch YFinance ticker data" });
+    }
+  });
+
+  // X/Twitter API endpoints - What's Happening
+  app.get("/api/proxy/twitter/trending", async (req, res) => {
+    try {
+      const bearerToken =
+        process.env.TWITTER_BEARER_TOKEN ||
+        "766687026-6nvFdqRnFE5MXI9a3nrtBEl08U4sFUK8ZrKBzhFm";
+
+      // Get trending topics for a specific location (1 = worldwide, 23424977 = United States)
+      const { woeid = 1 } = req.query;
+
+      const response = await fetch(
+        `https://api.x.com/1.1/trends/place.json?id=${woeid}`,
+        {
+          headers: {
+            Authorization: `Bearer ${bearerToken}`,
+            "Content-Type": "application/json",
+          },
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          `Twitter API error: ${response.status} ${response.statusText}`,
+        );
+      }
+
+      const data = await response.json();
+      res.json(data);
+    } catch (error) {
+      console.error("Twitter trending API proxy error:", error);
+      res.status(500).json({
+        error: "Failed to fetch Twitter trending topics",
+        message: error instanceof Error ? error.message : "Unknown error",
+      });
+    }
+  });
+
+  app.get("/api/proxy/twitter/search/recent", async (req, res) => {
+    try {
+      const {
+        query = "finance OR stocks OR markets OR trading",
+        max_results = 20,
+      } = req.query;
+      const bearerToken =
+        process.env.TWITTER_BEARER_TOKEN ||
+        "766687026-6nvFdqRnFE5MXI9a3nrtBEl08U4sFUK8ZrKBzhFm";
+
+      const response = await fetch(
+        `https://api.x.com/2/tweets/search/recent?query=${encodeURIComponent(query as string)}&max_results=${max_results}&tweet.fields=created_at,public_metrics,context_annotations,entities,author_id&expansions=author_id&user.fields=name,username,verified,public_metrics`,
+        {
+          headers: {
+            Authorization: `Bearer ${bearerToken}`,
+            "Content-Type": "application/json",
+          },
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          `Twitter API error: ${response.status} ${response.statusText}`,
+        );
+      }
+
+      const data = await response.json();
+      res.json(data);
+    } catch (error) {
+      console.error("Twitter search API proxy error:", error);
+      res.status(500).json({
+        error: "Failed to fetch Twitter search results",
+        message: error instanceof Error ? error.message : "Unknown error",
+      });
     }
   });
 

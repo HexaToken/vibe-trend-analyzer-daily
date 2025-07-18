@@ -68,6 +68,25 @@ export function useCryptoQuotes(
     } catch (error) {
       console.error("Failed to fetch crypto quotes:", error);
 
+      // Handle circuit breaker errors specifically
+      if (
+        error instanceof Error &&
+        error.message.includes("Circuit breaker is open")
+      ) {
+        setError(
+          "CoinMarketCap API temporarily unavailable (rate limited). Using mock data.",
+        );
+        console.warn(
+          "CoinMarketCap circuit breaker is open, falling back to mock data",
+        );
+      } else {
+        setError(
+          error instanceof Error
+            ? error.message
+            : "Failed to fetch crypto data",
+        );
+      }
+
       // Fallback to mock data if API fails
       const mockTickers = stockDataFallback.getMockTickers(symbols);
       const mockData: CoinMarketCapQuotesResponse = {

@@ -147,11 +147,41 @@ class CoinMarketCapService {
   private circuitBreaker = {
     isOpen: false,
     failureCount: 0,
-    threshold: 3, // Lower threshold for faster fallback
-    timeout: 120000, // 2 minutes
+    threshold: 5, // Higher threshold - allow more failures before opening
+    timeout: 30000, // 30 seconds instead of 1 minute
     lastFailureTime: 0,
   };
   private proxyAvailable: boolean | null = null; // Track proxy availability
+
+  // Method to manually reset circuit breaker
+  public resetCircuitBreaker(): void {
+    this.circuitBreaker.isOpen = false;
+    this.circuitBreaker.failureCount = 0;
+    this.circuitBreaker.lastFailureTime = 0;
+    this.proxyAvailable = null;
+    console.log("CoinMarketCap circuit breaker reset");
+  }
+
+  // Method to check circuit breaker status
+  public getCircuitBreakerStatus(): {
+    isOpen: boolean;
+    timeRemaining?: number;
+  } {
+    if (!this.circuitBreaker.isOpen) {
+      return { isOpen: false };
+    }
+
+    const now = Date.now();
+    const timeRemaining =
+      this.circuitBreaker.timeout - (now - this.circuitBreaker.lastFailureTime);
+
+    if (timeRemaining <= 0) {
+      this.resetCircuitBreaker();
+      return { isOpen: false };
+    }
+
+    return { isOpen: true, timeRemaining };
+  }
 
   private async fetchFromApi<T>(
     endpoint: string,
@@ -164,18 +194,23 @@ class CoinMarketCapService {
       );
     }
 
-    // Check circuit breaker
+    // Check circuit breaker - but be more lenient
     if (this.circuitBreaker.isOpen) {
       const now = Date.now();
-      if (
-        now - this.circuitBreaker.lastFailureTime <
-        this.circuitBreaker.timeout
-      ) {
+      const timeSinceFailure = now - this.circuitBreaker.lastFailureTime;
+
+      // If it's been more than 10 seconds, force reset and try again
+      if (timeSinceFailure > 10000) {
+        console.log("Circuit breaker forced reset after 10 seconds");
+        this.circuitBreaker.isOpen = false;
+        this.circuitBreaker.failureCount = 0;
+      } else if (timeSinceFailure < this.circuitBreaker.timeout) {
+        // Only block if it's been less than the timeout and less than 10 seconds
         throw new CoinMarketCapApiError(
           "Circuit breaker is open - service temporarily unavailable",
         );
       } else {
-        // Reset circuit breaker
+        // Normal reset after timeout
         this.circuitBreaker.isOpen = false;
         this.circuitBreaker.failureCount = 0;
       }
@@ -424,6 +459,37 @@ class CoinMarketCapService {
 
 // Export singleton instance
 export const coinMarketCapApi = new CoinMarketCapService();
+
+// Force immediate circuit breaker reset on module load
+coinMarketCapApi.resetCircuitBreaker();
+
+// Utility function to reset the circuit breaker
+export const resetCoinMarketCapCircuitBreaker = () => {
+  coinMarketCapApi.resetCircuitBreaker();
+};
+
+// Utility function to check circuit breaker status
+export const getCoinMarketCapCircuitBreakerStatus = () => {
+  return coinMarketCapApi.getCircuitBreakerStatus();
+};
+
+// Auto-reset circuit breaker on app start - always reset if open
+const autoResetCircuitBreaker = () => {
+  const status = coinMarketCapApi.getCircuitBreakerStatus();
+  if (status.isOpen) {
+    console.log("Auto-resetting circuit breaker on app start (forced)");
+    coinMarketCapApi.resetCircuitBreaker();
+  }
+};
+
+// Run auto-reset when the module loads
+autoResetCircuitBreaker();
+
+// Add global function for debugging in browser console
+(window as any).resetCryptoCircuitBreaker = () => {
+  coinMarketCapApi.resetCircuitBreaker();
+  console.log("Crypto circuit breaker manually reset");
+};
 
 // Utility functions to convert CoinMarketCap responses to our app's Ticker format
 export function convertCMCToTicker(

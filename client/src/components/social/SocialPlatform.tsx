@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Home,
   TrendingUp,
@@ -11,6 +11,7 @@ import {
   BarChart3,
   Crown,
   Settings,
+  Twitter,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -21,6 +22,7 @@ import { SocialFeed } from "./SocialFeed";
 import { TickerPage } from "./TickerPage";
 import { WatchlistManager } from "./WatchlistManager";
 import { CommunityRooms } from "./CommunityRooms";
+import { TwitterTrending } from "./TwitterTrending";
 import { mockTrendingData, mockTickers } from "@/data/socialMockData";
 import { useAuth } from "@/contexts/AuthContext";
 import { RealTimePrice, StockGrid } from "./RealTimePrice";
@@ -28,7 +30,13 @@ import { CryptoPrice } from "../crypto/CryptoPrice";
 import { useMultipleQuotes } from "@/hooks/useFinnhub";
 import { useCryptoQuotes } from "@/hooks/useCoinMarketCap";
 
-type ViewType = "feed" | "watchlist" | "ticker" | "trending" | "rooms";
+type ViewType =
+  | "feed"
+  | "watchlist"
+  | "ticker"
+  | "trending"
+  | "rooms"
+  | "twitter";
 
 export const SocialPlatform = () => {
   const { isAuthenticated, user } = useAuth();
@@ -39,19 +47,40 @@ export const SocialPlatform = () => {
     .slice(0, 5)
     .map((t) => t.symbol);
   const realTimeTickers = useMultipleQuotes(trendingSymbols, 300000); // 5 minutes
-  const tickersLoading = Object.values(realTimeTickers).some(ticker => ticker.loading);
+  const tickersLoading = Object.values(realTimeTickers).some(
+    (ticker) => ticker.loading,
+  );
 
   // Get crypto data for trending crypto
   const trendingCryptos = ["BTC", "ETH", "BNB"];
-  const { tickers: cryptoTickers, loading: cryptoLoading } = useCryptoQuotes(
-    trendingCryptos,
-    {
-      refreshInterval: 300000, // 5 minutes to reduce API calls
-      enabled: true,
-    },
-  );
+  const {
+    tickers: cryptoTickers,
+    loading: cryptoLoading,
+    error: cryptoError,
+  } = useCryptoQuotes(trendingCryptos, {
+    refreshInterval: 300000, // 5 minutes to reduce API calls
+    enabled: true,
+  });
   const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+
+  // Auto-reset circuit breaker when error occurs
+  useEffect(() => {
+    if (cryptoError?.includes("Circuit breaker is open")) {
+      console.log("Circuit breaker detected, attempting auto-reset...");
+      // Automatically reset after a short delay
+      const timer = setTimeout(() => {
+        import("../../services/coinMarketCapApi").then(
+          ({ resetCoinMarketCapCircuitBreaker }) => {
+            resetCoinMarketCapCircuitBreaker();
+            console.log("Circuit breaker auto-reset completed");
+          },
+        );
+      }, 3000); // Reset after 3 seconds
+
+      return () => clearTimeout(timer);
+    }
+  }, [cryptoError]);
 
   // Handle ticker navigation
   const handleTickerClick = (symbol: string) => {
@@ -79,7 +108,9 @@ export const SocialPlatform = () => {
         <CardContent className="space-y-3">
           {mockTrendingData.tickers.slice(0, 5).map((mockTicker, index) => {
             const realTicker = realTimeTickers[mockTicker.symbol];
-            const isPositive = realTicker?.data ? realTicker.data.d >= 0 : false;
+            const isPositive = realTicker?.data
+              ? realTicker.data.d >= 0
+              : false;
 
             return (
               <div
@@ -100,7 +131,9 @@ export const SocialPlatform = () => {
                 </div>
 
                 <div className="text-right">
-                  {tickersLoading || realTicker?.loading || !realTicker?.data ? (
+                  {tickersLoading ||
+                  realTicker?.loading ||
+                  !realTicker?.data ? (
                     <div className="text-right">
                       <div className="text-sm font-semibold text-muted-foreground">
                         Loading...
@@ -150,6 +183,37 @@ export const SocialPlatform = () => {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
+          {cryptoError && (
+            <div className="text-xs text-orange-600 p-2 bg-orange-50 rounded flex items-center justify-between">
+              <span>
+                {cryptoError.includes("Circuit breaker")
+                  ? "API rate limited - showing mock data"
+                  : cryptoError}
+              </span>
+              {cryptoError.includes("Circuit breaker") && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-6 px-2 text-xs"
+                  onClick={async () => {
+                    try {
+                      const { resetCoinMarketCapCircuitBreaker } = await import(
+                        "../../services/coinMarketCapApi"
+                      );
+                      resetCoinMarketCapCircuitBreaker();
+                      console.log("Manual circuit breaker reset completed");
+                      // Force refresh of crypto data
+                      setTimeout(() => window.location.reload(), 500);
+                    } catch (e) {
+                      console.error("Failed to reset circuit breaker:", e);
+                    }
+                  }}
+                >
+                  Reset & Retry
+                </Button>
+              )}
+            </div>
+          )}
           {cryptoTickers.slice(0, 3).map((crypto, index) => (
             <div
               key={crypto.symbol}
@@ -428,6 +492,30 @@ export const SocialPlatform = () => {
       case "rooms":
         return <CommunityRooms />;
 
+      case "twitter":
+        return (
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-2xl font-bold">What's Happening</h2>
+                <p className="text-muted-foreground">
+                  Trending topics and financial discussions from Twitter/X
+                </p>
+              </div>
+              <Button variant="outline" onClick={() => setCurrentView("feed")}>
+                Back to Feed
+              </Button>
+            </div>
+
+            <TwitterTrending
+              onCashtagClick={handleTickerClick}
+              onHashtagClick={(hashtag) =>
+                console.log("Hashtag clicked:", hashtag)
+              }
+            />
+          </div>
+        );
+
       default:
         return (
           <SocialFeed
@@ -513,9 +601,9 @@ export const SocialPlatform = () => {
               Soon
             </Badge>
           </TabsTrigger>
-          <TabsTrigger value="analytics" className="flex items-center gap-2">
-            <BarChart3 className="h-4 w-4" />
-            Analytics
+          <TabsTrigger value="twitter" className="flex items-center gap-2">
+            <Twitter className="h-4 w-4" />
+            Twitter
           </TabsTrigger>
         </TabsList>
       </Tabs>
