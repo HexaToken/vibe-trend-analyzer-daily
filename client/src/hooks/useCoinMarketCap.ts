@@ -218,7 +218,15 @@ export function useCryptoListings(
       setError(null);
       setLoading(false);
     } catch (error) {
-      console.error("Failed to fetch crypto listings:", error);
+      // Handle proxy unavailable errors more gracefully
+      if (
+        error instanceof Error &&
+        error.message.includes("proxy is not available")
+      ) {
+        console.info("CoinMarketCap API proxy unavailable, using mock data");
+      } else {
+        console.error("Failed to fetch crypto listings:", error);
+      }
 
       // Handle rate limit and circuit breaker errors specifically
       if (
