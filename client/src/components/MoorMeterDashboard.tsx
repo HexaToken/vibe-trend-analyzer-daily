@@ -1308,18 +1308,15 @@ export const MoorMeterDashboard: React.FC = () => {
               </div>
             </div>
 
-                        {/* Tools Content */}
+            {/* Tools Content */}
             {activeToolsSubtab === "HeatMap" && (
               <SentimentHeatMap onRefresh={() => setHeatmapLoading(true)} />
-                
-
-                              )}
-
+            )}
           </div>
         );
 
-            case "Home":
-            default:
+      case "Home":
+      default:
         return (
           <>
             {/* Dashboard Grid */}
@@ -1327,7 +1324,7 @@ export const MoorMeterDashboard: React.FC = () => {
               {/* Main Content Area */}
               <div className="lg:col-span-3 space-y-6">
                 {/* Top Stocks Widget */}
-                                                <TopStocksWidget stockLoading={stockLoading} />
+                <TopStocksWidget stockLoading={stockLoading} />
 
                 {/* News Feed Widget */}
                 <NewsWidget articles={newsArticles} loading={newsLoading} />
@@ -1359,52 +1356,54 @@ export const MoorMeterDashboard: React.FC = () => {
               </div>
             </div>
           </>
-                        );
-                    {[
-                      { symbol: "AAPL", change: 2.34, name: "Apple" },
-                      { symbol: "MSFT", change: 1.67, name: "Microsoft" },
-                      { symbol: "GOOGL", change: -0.89, name: "Alphabet" },
-                      { symbol: "AMZN", change: 3.12, name: "Amazon" },
-                      { symbol: "NVDA", change: 5.67, name: "NVIDIA" },
-                      { symbol: "TSLA", change: -2.45, name: "Tesla" },
-                      { symbol: "META", change: 1.23, name: "Meta" },
-                      { symbol: "BRK.B", change: 0.45, name: "Berkshire" },
-                      { symbol: "JPM", change: -1.12, name: "JPMorgan" },
-                      { symbol: "V", change: 0.78, name: "Visa" },
-                      { symbol: "JNJ", change: -0.34, name: "J&J" },
-                      { symbol: "WMT", change: 1.89, name: "Walmart" },
-                      { symbol: "PG", change: 0.56, name: "P&G" },
-                      { symbol: "UNH", change: 2.01, name: "UnitedHealth" },
-                      { symbol: "HD", change: -0.67, name: "Home Depot" },
-                      { symbol: "MA", change: 1.45, name: "Mastercard" },
-                      { symbol: "DIS", change: -1.78, name: "Disney" },
-                      { symbol: "BAC", change: 0.89, name: "Bank of America" },
-                    ].map((stock, i) => (
-                      <div
-                        key={i}
-                        className={`p-3 rounded-lg cursor-pointer hover:opacity-80 transition-all duration-200 flex flex-col justify-between min-h-[80px] ${
-                          stock.change > 2
-                            ? "bg-green-600 text-white"
-                            : stock.change > 0
-                              ? "bg-green-400 text-white"
-                              : stock.change > -2
-                                ? "bg-red-400 text-white"
-                                : "bg-red-600 text-white"
-                        }`}
-                        style={{
-                          transform: `scale(${Math.min(1.2, Math.max(0.8, 1 + Math.abs(stock.change) / 10))})`,
-                        }}
-                      >
-                        <div className="font-bold text-xs">{stock.symbol}</div>
-                        <div className="text-xs opacity-90">{stock.name}</div>
-                                                <div className="font-semibold text-sm">
-                          {stock.change > 0 ? "+" : ""}
-                          {stock.change}%
-                        </div>
-                      </div>
-                    ))}
-                      }
-    };
+        );
+        {
+          [
+            { symbol: "AAPL", change: 2.34, name: "Apple" },
+            { symbol: "MSFT", change: 1.67, name: "Microsoft" },
+            { symbol: "GOOGL", change: -0.89, name: "Alphabet" },
+            { symbol: "AMZN", change: 3.12, name: "Amazon" },
+            { symbol: "NVDA", change: 5.67, name: "NVIDIA" },
+            { symbol: "TSLA", change: -2.45, name: "Tesla" },
+            { symbol: "META", change: 1.23, name: "Meta" },
+            { symbol: "BRK.B", change: 0.45, name: "Berkshire" },
+            { symbol: "JPM", change: -1.12, name: "JPMorgan" },
+            { symbol: "V", change: 0.78, name: "Visa" },
+            { symbol: "JNJ", change: -0.34, name: "J&J" },
+            { symbol: "WMT", change: 1.89, name: "Walmart" },
+            { symbol: "PG", change: 0.56, name: "P&G" },
+            { symbol: "UNH", change: 2.01, name: "UnitedHealth" },
+            { symbol: "HD", change: -0.67, name: "Home Depot" },
+            { symbol: "MA", change: 1.45, name: "Mastercard" },
+            { symbol: "DIS", change: -1.78, name: "Disney" },
+            { symbol: "BAC", change: 0.89, name: "Bank of America" },
+          ].map((stock, i) => (
+            <div
+              key={i}
+              className={`p-3 rounded-lg cursor-pointer hover:opacity-80 transition-all duration-200 flex flex-col justify-between min-h-[80px] ${
+                stock.change > 2
+                  ? "bg-green-600 text-white"
+                  : stock.change > 0
+                    ? "bg-green-400 text-white"
+                    : stock.change > -2
+                      ? "bg-red-400 text-white"
+                      : "bg-red-600 text-white"
+              }`}
+              style={{
+                transform: `scale(${Math.min(1.2, Math.max(0.8, 1 + Math.abs(stock.change) / 10))})`,
+              }}
+            >
+              <div className="font-bold text-xs">{stock.symbol}</div>
+              <div className="text-xs opacity-90">{stock.name}</div>
+              <div className="font-semibold text-sm">
+                {stock.change > 0 ? "+" : ""}
+                {stock.change}%
+              </div>
+            </div>
+          ));
+        }
+    }
+  };
 
   return (
     <div
@@ -1452,7 +1451,9 @@ export const MoorMeterDashboard: React.FC = () => {
                             }}
                             className="flex items-center cursor-pointer"
                           >
-                            {subtab.icon && <subtab.icon className="w-4 h-4 mr-2" />}
+                            {subtab.icon && (
+                              <subtab.icon className="w-4 h-4 mr-2" />
+                            )}
                             {subtab.label}
                           </DropdownMenuItem>
                         ))}
@@ -1475,10 +1476,14 @@ export const MoorMeterDashboard: React.FC = () => {
               ))}
 
               <button
-                onClick={toggleDarkMode}
+                onClick={() => setDarkMode(!darkMode)}
                 className="p-2 rounded-md text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors duration-200"
               >
-                {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                {darkMode ? (
+                  <Sun className="h-5 w-5" />
+                ) : (
+                  <Moon className="h-5 w-5" />
+                )}
               </button>
             </div>
 
@@ -1488,7 +1493,11 @@ export const MoorMeterDashboard: React.FC = () => {
                 onClick={toggleDarkMode}
                 className="p-2 rounded-md text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors duration-200 mr-2"
               >
-                {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                {darkMode ? (
+                  <Sun className="h-5 w-5" />
+                ) : (
+                  <Moon className="h-5 w-5" />
+                )}
               </button>
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -1526,7 +1535,9 @@ export const MoorMeterDashboard: React.FC = () => {
                           }}
                           className="flex items-center w-full px-6 py-2 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                         >
-                          {subtab.icon && <subtab.icon className="w-4 h-4 mr-2" />}
+                          {subtab.icon && (
+                            <subtab.icon className="w-4 h-4 mr-2" />
+                          )}
                           {subtab.label}
                         </button>
                       ))}
@@ -1556,9 +1567,7 @@ export const MoorMeterDashboard: React.FC = () => {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <div className="px-4 py-6 sm:px-0">
-                    {renderContent()}
-        </div>
+        <div className="px-4 py-6 sm:px-0">{renderContent()}</div>
       </main>
     </div>
   );
