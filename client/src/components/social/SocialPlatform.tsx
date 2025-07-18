@@ -22,7 +22,7 @@ import { SocialFeed } from "./SocialFeed";
 import { TickerPage } from "./TickerPage";
 import { WatchlistManager } from "./WatchlistManager";
 import { CommunityRooms } from "./CommunityRooms";
-import { TwitterProfile } from "./TwitterProfile";
+import { TwitterTrending } from "./TwitterTrending";
 import { mockTrendingData, mockTickers } from "@/data/socialMockData";
 import { useAuth } from "@/contexts/AuthContext";
 import { RealTimePrice, StockGrid } from "./RealTimePrice";
