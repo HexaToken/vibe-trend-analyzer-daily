@@ -49,7 +49,6 @@ import { MoodTrendChart } from "./moorMeter/MoodTrendChart";
 import { TrendingTopicsWidget } from "./moorMeter/TrendingTopicsWidget";
 import { PersonalMoodCard } from "./moorMeter/PersonalMoodCard";
 import { WatchlistWidget } from "./moorMeter/WatchlistWidget";
-import { WatchlistModule } from "./moorMeter/WatchlistModule";
 import { AIInsightWidget } from "./moorMeter/AIInsightWidget";
 import { CommunityWidget } from "./moorMeter/CommunityWidget";
 import { MoodScoreHero } from "./builder/MoodScoreHero";
@@ -419,13 +418,9 @@ export const MoorMeterDashboard: React.FC = () => {
           </div>
         );
 
-            case "Watchlist":
+      case "Watchlist":
         return (
-          <WatchlistModule
-            searchQuery={searchQuery}
-            onSearchChange={setSearchQuery}
-          />
-                );
+          <div className="space-y-8">
             {/* Watchlist Header */}
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
               <div>
