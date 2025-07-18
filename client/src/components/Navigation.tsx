@@ -62,11 +62,36 @@ export const Navigation = ({
         badge: "NEW",
       },
       { id: "crypto", label: "Crypto Dashboard", icon: Coins, badge: "NEW" },
-      { id: "finnhub", label: "Finnhub Stock Data", icon: TrendingUp, badge: "NEW" },
-      { id: "sentiment-scoring", label: "Stock Sentiment Scoring", icon: BarChart3, badge: "NEW" },
-      { id: "ai-analysis", label: "AI Sentiment Analysis", icon: Brain, badge: "NEW" },
-      { id: "spacy-nlp", label: "spaCy NLP Analysis", icon: Brain, badge: "NEW" },
-      { id: "yfinance", label: "YFinance Integration", icon: Globe, badge: "NEW" },
+      {
+        id: "finnhub",
+        label: "Finnhub Stock Data",
+        icon: TrendingUp,
+        badge: "NEW",
+      },
+      {
+        id: "sentiment-scoring",
+        label: "Stock Sentiment Scoring",
+        icon: BarChart3,
+        badge: "NEW",
+      },
+      {
+        id: "ai-analysis",
+        label: "AI Sentiment Analysis",
+        icon: Brain,
+        badge: "NEW",
+      },
+      {
+        id: "spacy-nlp",
+        label: "spaCy NLP Analysis",
+        icon: Brain,
+        badge: "NEW",
+      },
+      {
+        id: "yfinance",
+        label: "YFinance Integration",
+        icon: Globe,
+        badge: "NEW",
+      },
       { id: "history", label: "Historical Data", icon: Calendar },
       { id: "database", label: "Database Demo", icon: Database, badge: "DEMO" },
     ],
@@ -138,6 +163,19 @@ export const Navigation = ({
               >
                 <BarChart3 className="h-4 w-4" />
                 Dashboard
+              </Button>
+
+              {/* MoorMeter Dashboard */}
+              <Button
+                variant={activeSection === "moorMeter" ? "default" : "ghost"}
+                onClick={() => onSectionChange("moorMeter")}
+                className="flex items-center gap-2"
+              >
+                <Brain className="h-4 w-4" />
+                MoorMeter
+                <Badge variant="secondary" className="text-xs">
+                  NEW
+                </Badge>
               </Button>
 
               {/* Data Dropdown */}
@@ -378,6 +416,22 @@ export const Navigation = ({
                 >
                   <BarChart3 className="h-4 w-4" />
                   Dashboard
+                </Button>
+
+                {/* MoorMeter Dashboard */}
+                <Button
+                  variant={activeSection === "moorMeter" ? "default" : "ghost"}
+                  onClick={() => {
+                    onSectionChange("moorMeter");
+                    setIsMenuOpen(false);
+                  }}
+                  className="justify-start gap-2"
+                >
+                  <Brain className="h-4 w-4" />
+                  MoorMeter
+                  <Badge variant="secondary" className="ml-auto text-xs">
+                    NEW
+                  </Badge>
                 </Button>
 
                 {/* Data Section */}
