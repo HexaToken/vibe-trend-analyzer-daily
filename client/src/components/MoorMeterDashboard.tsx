@@ -645,6 +645,105 @@ export const MoorMeterDashboard: React.FC = () => {
           </div>
         );
 
+      case "News":
+        return (
+          <div className="space-y-8">
+            {/* News Header */}
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                  📰 Market News
+                </h1>
+                <p className="text-gray-600 dark:text-gray-400">
+                  AI-powered news with real-time sentiment analysis
+                </p>
+              </div>
+
+              {/* Search Bar */}
+              <div className="flex gap-2">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                  <Input
+                    type="text"
+                    placeholder="Search news, tickers, or topics..."
+                    className="pl-10 w-64"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Filter Row */}
+            <div className="flex flex-wrap gap-2">
+              {[
+                "All",
+                "Positive",
+                "Neutral",
+                "Negative",
+                "Earnings",
+                "Tech",
+                "Economy",
+              ].map((filter) => (
+                <Button
+                  key={filter}
+                  variant="outline"
+                  size="sm"
+                  className="rounded-full"
+                >
+                  {filter}
+                </Button>
+              ))}
+            </div>
+
+            {/* News Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Enhanced News Widget */}
+              <div className="lg:col-span-2">
+                <NewsWidget articles={newsArticles} loading={newsLoading} />
+              </div>
+            </div>
+
+            {/* Builder.io Integration Note */}
+            <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
+              <h3 className="text-xl font-semibold mb-4 text-blue-900 dark:text-blue-100">
+                🧱 Builder.io News Feed Module
+              </h3>
+              <p className="text-blue-700 dark:text-blue-300 mb-4">
+                This News Feed module is designed as a modular Builder.io
+                component with the following features:
+              </p>
+              <ul className="text-sm text-blue-600 dark:text-blue-400 space-y-2">
+                <li className="flex items-center">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                  Real-time news headlines with sentiment indicators
+                </li>
+                <li className="flex items-center">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                  AI-powered news summaries and analysis
+                </li>
+                <li className="flex items-center">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                  Filterable by sentiment and category
+                </li>
+                <li className="flex items-center">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                  Responsive layout with search functionality
+                </li>
+                <li className="flex items-center">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                  Color-coded sentiment badges and mood emojis
+                </li>
+              </ul>
+              <div className="mt-4 p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg">
+                <p className="text-xs text-gray-600 dark:text-gray-400">
+                  <strong>API Integration:</strong> Connect to{" "}
+                  <code>GET /api/news/headlines</code> and{" "}
+                  <code>GET /api/sentiment?article=XYZ</code> for live data
+                </p>
+              </div>
+            </div>
+          </div>
+        );
+
       case "Home":
       default:
         return (
