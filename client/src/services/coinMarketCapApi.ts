@@ -455,6 +455,9 @@ class CoinMarketCapService {
 // Export singleton instance
 export const coinMarketCapApi = new CoinMarketCapService();
 
+// Force immediate circuit breaker reset on module load
+coinMarketCapApi.resetCircuitBreaker();
+
 // Utility function to reset the circuit breaker
 export const resetCoinMarketCapCircuitBreaker = () => {
   coinMarketCapApi.resetCircuitBreaker();
