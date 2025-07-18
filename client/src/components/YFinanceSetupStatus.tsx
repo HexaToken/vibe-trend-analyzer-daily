@@ -183,6 +183,7 @@ export const YFinanceSetupStatus: React.FC = () => {
             size="sm"
             onClick={() => {
               setRetryAttempts(0);
+              setHasCriticalError(false);
               checkStatus().catch(console.error);
             }}
             disabled={loading}
