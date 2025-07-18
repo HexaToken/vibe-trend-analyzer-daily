@@ -460,6 +460,11 @@ export const resetCoinMarketCapCircuitBreaker = () => {
   coinMarketCapApi.resetCircuitBreaker();
 };
 
+// Utility function to check circuit breaker status
+export const getCoinMarketCapCircuitBreakerStatus = () => {
+  return coinMarketCapApi.getCircuitBreakerStatus();
+};
+
 // Auto-reset circuit breaker on app start if it's been more than 1 minute
 const autoResetCircuitBreaker = () => {
   const status = coinMarketCapApi.getCircuitBreakerStatus();
