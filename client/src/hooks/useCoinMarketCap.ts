@@ -219,6 +219,32 @@ export function useCryptoListings(
     } catch (error) {
       console.error("Failed to fetch crypto listings:", error);
 
+      // Handle rate limit and circuit breaker errors specifically
+      if (
+        error instanceof CoinMarketCapApiError &&
+        (error.message.includes("rate limit") ||
+          error.message.includes("Rate limit") ||
+          error.code === 429)
+      ) {
+        setError("CoinMarketCap API rate limit exceeded. Using cached data.");
+        console.warn(
+          "CoinMarketCap rate limit hit for listings, falling back to mock data",
+        );
+      } else if (
+        error instanceof Error &&
+        error.message.includes("Circuit breaker is open")
+      ) {
+        setError(
+          "CoinMarketCap API temporarily unavailable. Using cached data.",
+        );
+      } else {
+        setError(
+          error instanceof Error
+            ? `API Error: ${error.message}`
+            : "Failed to fetch crypto listings",
+        );
+      }
+
       // Fallback to mock data if API fails
       const cryptoSymbols = [
         "BTC",
