@@ -147,8 +147,8 @@ class CoinMarketCapService {
   private circuitBreaker = {
     isOpen: false,
     failureCount: 0,
-    threshold: 2, // Even lower threshold for faster fallback
-    timeout: 60000, // 1 minute instead of 2
+    threshold: 5, // Higher threshold - allow more failures before opening
+    timeout: 30000, // 30 seconds instead of 1 minute
     lastFailureTime: 0,
   };
   private proxyAvailable: boolean | null = null; // Track proxy availability
