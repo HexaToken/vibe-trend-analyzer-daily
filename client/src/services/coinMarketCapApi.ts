@@ -217,7 +217,23 @@ class CoinMarketCapService {
   private async fetchFromApi<T>(
     endpoint: string,
     params: Record<string, string> = {},
+    useCache: boolean = true,
+    cacheTtl: number = 300000, // 5 minutes default
   ): Promise<T> {
+    // Generate cache key
+    const cacheKey = `${endpoint}?${new URLSearchParams(params).toString()}`;
+
+    // Check cache first if circuit breaker is open or we want to use cache
+    if (
+      useCache &&
+      (this.circuitBreaker.isOpen || this.proxyAvailable === false)
+    ) {
+      const cached = this.getCachedData<T>(cacheKey);
+      if (cached) {
+        console.log(`Using cached data for ${endpoint}`);
+        return cached;
+      }
+    }
     // If proxy is known to be unavailable, fail immediately
     if (this.proxyAvailable === false) {
       throw new CoinMarketCapApiError(
