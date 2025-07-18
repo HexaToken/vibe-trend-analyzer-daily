@@ -94,6 +94,7 @@ interface CommunityMessage {
 }
 
 export const MoorMeterDashboard: React.FC = () => {
+  console.log("MoorMeterDashboard component rendering...");
   const [darkMode, setDarkMode] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTimeframe, setSelectedTimeframe] = useState<
