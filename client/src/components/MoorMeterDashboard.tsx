@@ -1244,7 +1244,7 @@ export const MoorMeterDashboard: React.FC = () => {
             {/* Builder.io Integration Note */}
             <div className="bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-lg p-6 border border-purple-200 dark:border-purple-800">
               <h3 className="text-xl font-semibold mb-4 text-purple-900 dark:text-purple-100">
-                🧱 Builder.io Community Module
+                ��� Builder.io Community Module
               </h3>
               <p className="text-purple-700 dark:text-purple-300 mb-4">
                 This Community module is designed as modular Builder.io
@@ -1313,8 +1313,12 @@ export const MoorMeterDashboard: React.FC = () => {
               <SentimentHeatMap onRefresh={() => setHeatmapLoading(true)} />
                 
 
-                  {/* HeatMap Controls */}
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                              )}
+
+          </div>
+        );
+
+      case "Home":
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Market
