@@ -550,7 +550,12 @@ class CoinMarketCapService {
       last_updated: string;
     };
   }> {
-    return this.fetchFromApi("/global-metrics", { convert });
+    return this.fetchFromApi(
+      "/global-metrics",
+      { convert },
+      true,
+      600000, // 10 minutes cache for global metrics (less frequent updates needed)
+    );
   }
 }
 
