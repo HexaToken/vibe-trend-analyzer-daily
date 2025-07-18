@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { NewsDetailModal } from "./NewsDetailModal";
 import { useCombinedBusinessNews } from "@/hooks/useCombinedBusinessNews";
 import { newsArticles } from "@/data/mockData";
+import YFinanceSetupStatus from "./YFinanceSetupStatus";
 
 export const TopNews = () => {
   const [selectedArticle, setSelectedArticle] = useState<any>(null);
