@@ -421,7 +421,7 @@ export const MoorMeterDashboard: React.FC = () => {
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
               <div>
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                  📋 Your Watchlist
+                  ���� Your Watchlist
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400">
                   Track your favorite assets with real-time sentiment analysis
@@ -1588,11 +1588,7 @@ export const MoorMeterDashboard: React.FC = () => {
                             </div>
             </div>
           </>
-                                        );
-
-                {/* Builder.io Integration Note */}
-                <div className="bg-gradient-to-r from-orange-50 to-yellow-50 dark:from-orange-900/20 dark:to-yellow-900/20 rounded-lg p-6 border border-orange-200 dark:border-orange-800">
-                  <h3 className="text-xl font-semibold mb-4 text-orange-900 dark:text-orange-100">
+                                                );
                     🧱 Builder.io HeatMap Tool
                   </h3>
                   <p className="text-orange-700 dark:text-orange-300 mb-4">
