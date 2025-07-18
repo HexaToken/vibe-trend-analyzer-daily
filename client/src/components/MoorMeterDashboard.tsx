@@ -421,7 +421,7 @@ export const MoorMeterDashboard: React.FC = () => {
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
               <div>
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                  ��� Your Watchlist
+                  📋 Your Watchlist
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400">
                   Track your favorite assets with real-time sentiment analysis
@@ -1562,7 +1562,7 @@ export const MoorMeterDashboard: React.FC = () => {
       </main>
 
       {/* Footer */}
-                  <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+                        <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
               </div>
 
