@@ -1579,9 +1579,7 @@ export const MoorMeterDashboard: React.FC = () => {
                             </div>
             </div>
           </>
-                                                                                                                                        );
-        return (
-          <>
+                                                                                                                                                );
             {/* Dashboard Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
               {/* Main Content Area */}
