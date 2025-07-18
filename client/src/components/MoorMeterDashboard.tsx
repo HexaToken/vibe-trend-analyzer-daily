@@ -1568,12 +1568,7 @@ export default MoorMeterDashboard;
             
 
               
-                                    {/* AI Insight */}
-                <AIInsightWidget moodScore={moodScore} />
-
-                {/* Community Feed */}
-                                <CommunityWidget posts={communityPosts} />
-                                                        </div>
+                                    
             </div>
           </>
         );
