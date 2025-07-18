@@ -360,6 +360,12 @@ class CoinMarketCapService {
       // Reset failure count on success
       this.circuitBreaker.failureCount = 0;
       this.proxyAvailable = true; // Mark proxy as available
+
+      // Cache successful response
+      if (useCache) {
+        this.setCachedData(cacheKey, data, cacheTtl);
+      }
+
       return data;
     } catch (error) {
       // Update circuit breaker on failure
