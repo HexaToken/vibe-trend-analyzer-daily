@@ -9,6 +9,7 @@ import {
 } from "../services/newsApi";
 import { stockDataFallback } from "../services/stockDataFallback";
 import { NewsArticle } from "../data/mockData";
+import { robustFetchJson, FetchError } from "../lib/robustFetch";
 
 interface UseNewsOptions {
   refreshInterval?: number; // in milliseconds
