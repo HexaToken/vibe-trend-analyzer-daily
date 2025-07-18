@@ -35,6 +35,7 @@ export const SentimentHeatMap: React.FC = () => {
   const [timeFilter, setTimeFilter] = useState<"24h" | "7d" | "30d">("24h");
   const [viewMode, setViewMode] = useState<"absolute" | "net">("absolute");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const heatmapRef = useRef<HTMLDivElement>(null);
 
   // Mock data for different time periods
