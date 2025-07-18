@@ -175,21 +175,22 @@ export const YFinanceSetupStatus: React.FC = () => {
     }
   };
 
-  if (status?.status === "available") {
-    return (
-      <div className="flex items-center space-x-2 text-sm">
-        {getStatusIcon()}
-        <span className={getStatusColor()}>{getStatusText()}</span>
-        {lastChecked && (
-          <span className="text-gray-400 text-xs">
-            (checked {lastChecked.toLocaleTimeString()})
-          </span>
-        )}
-      </div>
-    );
-  }
+    try {
+    if (status?.status === "available") {
+      return (
+        <div className="flex items-center space-x-2 text-sm">
+          {getStatusIcon()}
+          <span className={getStatusColor()}>{getStatusText()}</span>
+          {lastChecked && (
+            <span className="text-gray-400 text-xs">
+              (checked {lastChecked.toLocaleTimeString()})
+            </span>
+          )}
+        </div>
+      );
+    }
 
-  return (
+    return (
     <Card className="w-full max-w-2xl">
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center space-x-2">
