@@ -168,6 +168,19 @@ export const Navigation = ({
                 </Badge>
               </Button>
 
+              {/* Market Mood */}
+              <Button
+                variant={activeSection === "sentiment" ? "default" : "ghost"}
+                onClick={() => onSectionChange("sentiment")}
+                className="flex items-center gap-2"
+              >
+                <Brain className="h-4 w-4" />
+                Market Mood
+                <Badge variant="secondary" className="text-xs">
+                  NEW
+                </Badge>
+              </Button>
+
               {/* Data Dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -406,6 +419,22 @@ export const Navigation = ({
                 >
                   <Brain className="h-4 w-4" />
                   MoorMeter
+                  <Badge variant="secondary" className="ml-auto text-xs">
+                    NEW
+                  </Badge>
+                </Button>
+
+                {/* Market Mood */}
+                <Button
+                  variant={activeSection === "sentiment" ? "default" : "ghost"}
+                  onClick={() => {
+                    onSectionChange("sentiment");
+                    setIsMenuOpen(false);
+                  }}
+                  className="justify-start gap-2"
+                >
+                  <Brain className="h-4 w-4" />
+                  Market Mood
                   <Badge variant="secondary" className="ml-auto text-xs">
                     NEW
                   </Badge>
