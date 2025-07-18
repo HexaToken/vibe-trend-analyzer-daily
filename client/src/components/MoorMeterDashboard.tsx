@@ -242,6 +242,128 @@ export const MoorMeterDashboard: React.FC = () => {
     social: 50 + Math.random() * 25,
   }));
 
+  // Sentiment Heatmap Mock Data
+  const generateSentimentData = (timeframe: "24h" | "7d" | "30d") => {
+    const watchlistTickers = [
+      "AAPL",
+      "MSFT",
+      "GOOGL",
+      "AMZN",
+      "NVDA",
+      "TSLA",
+      "META",
+      "JPM",
+    ];
+
+    const getTimePoints = () => {
+      switch (timeframe) {
+        case "24h":
+          return Array.from({ length: 24 }, (_, i) => {
+            const hour = new Date();
+            hour.setHours(hour.getHours() - (23 - i));
+            return hour.getHours() + ":00";
+          });
+        case "7d":
+          return Array.from({ length: 7 }, (_, i) => {
+            const day = new Date();
+            day.setDate(day.getDate() - (6 - i));
+            return day.toLocaleDateString("en-US", { weekday: "short" });
+          });
+        case "30d":
+          return Array.from({ length: 30 }, (_, i) => {
+            const day = new Date();
+            day.setDate(day.getDate() - (29 - i));
+            return day.toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+            });
+          });
+      }
+    };
+
+    const timePoints = getTimePoints();
+
+    return watchlistTickers.map((ticker) => ({
+      ticker,
+      data: timePoints.map((time) => {
+        const bullishCount = Math.floor(Math.random() * 50) + 5;
+        const bearishCount = Math.floor(Math.random() * 30) + 2;
+        const netSentiment = bullishCount - bearishCount;
+        const totalVolume = bullishCount + bearishCount;
+        const intensity = Math.min(totalVolume / 50, 1); // Normalize to 0-1
+
+        return {
+          time,
+          bullish: bullishCount,
+          bearish: bearishCount,
+          net: netSentiment,
+          total: totalVolume,
+          intensity,
+          dominantSentiment:
+            bullishCount > bearishCount ? "bullish" : "bearish",
+          ratio: bullishCount / (bullishCount + bearishCount),
+        };
+      }),
+    }));
+  };
+
+  const sentimentHeatmapData = generateSentimentData(sentimentTimeframe);
+
+  // Export functions for heatmap
+  const exportHeatmapAsPNG = () => {
+    // Mock implementation - in real app would use html2canvas or similar
+    console.log("Exporting heatmap as PNG...");
+    const link = document.createElement("a");
+    link.download = `sentiment-heatmap-${sentimentTimeframe}.png`;
+    link.href =
+      "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==";
+    link.click();
+  };
+
+  const exportHeatmapAsCSV = () => {
+    const headers = ["Ticker", "Time", "Bullish", "Bearish", "Net", "Total"];
+    const rows = sentimentHeatmapData.flatMap((ticker) =>
+      ticker.data.map((point) => [
+        ticker.ticker,
+        point.time,
+        point.bullish,
+        point.bearish,
+        point.net,
+        point.total,
+      ]),
+    );
+
+    const csvContent = [headers, ...rows]
+      .map((row) => row.join(","))
+      .join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.download = `sentiment-heatmap-${sentimentTimeframe}.csv`;
+    link.href = url;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const exportHeatmapAsJSON = () => {
+    const jsonData = {
+      timeframe: sentimentTimeframe,
+      viewMode: sentimentViewMode,
+      exportDate: new Date().toISOString(),
+      data: sentimentHeatmapData,
+    };
+
+    const blob = new Blob([JSON.stringify(jsonData, null, 2)], {
+      type: "application/json",
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.download = `sentiment-heatmap-${sentimentTimeframe}.json`;
+    link.href = url;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
   // Navigation items
   const navItems = [
     { label: "Home", href: "#" },
