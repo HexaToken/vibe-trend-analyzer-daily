@@ -389,6 +389,17 @@ class CoinMarketCapService {
       if (error instanceof CoinMarketCapApiError) {
         throw error;
       }
+
+      if (error instanceof FetchError) {
+        // Handle FetchError specifically
+        this.proxyAvailable = false;
+        throw new CoinMarketCapApiError(
+          `Network error: ${error.message}`,
+          error.status,
+          "network_error",
+        );
+      }
+
       throw new CoinMarketCapApiError(
         `Network error: ${error instanceof Error ? error.message : "Unknown error"}`,
       );
