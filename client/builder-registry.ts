@@ -1,14 +1,23 @@
+import React from "react";
 import { type RegisteredComponent } from "@builder.io/sdk-react";
 
 // Direct imports for Vite/React setup
-import { MoodScoreHero } from './src/components/builder/MoodScoreHero';
-import { TopStocksModule } from './src/components/builder/TopStocksModule';
+import { MoodScoreHero } from "./src/components/builder/MoodScoreHero";
+import { TopStocksModule } from "./src/components/builder/TopStocksModule";
 
 // Placeholder components for now - you can create these following the same pattern
-const NewsFeedModule = () => <div>News Feed Module - To be implemented</div>;
-const SentimentChart = () => <div>Sentiment Chart - To be implemented</div>;
-const TrendingTopicsModule = () => <div>Trending Topics Module - To be implemented</div>;
-const AIInsightModule = () => <div>AI Insight Module - To be implemented</div>;
+const NewsFeedModule = () =>
+  React.createElement("div", null, "News Feed Module - To be implemented");
+const SentimentChart = () =>
+  React.createElement("div", null, "Sentiment Chart - To be implemented");
+const TrendingTopicsModule = () =>
+  React.createElement(
+    "div",
+    null,
+    "Trending Topics Module - To be implemented",
+  );
+const AIInsightModule = () =>
+  React.createElement("div", null, "AI Insight Module - To be implemented");
 
 export const customComponents: RegisteredComponent[] = [
   {
