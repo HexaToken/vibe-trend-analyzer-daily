@@ -38,6 +38,20 @@ export const SentimentHeatMap: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const heatmapRef = useRef<HTMLDivElement>(null);
 
+  const handleTimeFilterChange = async (newFilter: "24h" | "7d" | "30d") => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      // Simulate API delay
+      await new Promise((resolve) => setTimeout(resolve, 800));
+      setTimeFilter(newFilter);
+    } catch (err) {
+      setError("Failed to load sentiment data. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   // Mock data for different time periods
   const generateMockData = (
     period: "24h" | "7d" | "30d",
