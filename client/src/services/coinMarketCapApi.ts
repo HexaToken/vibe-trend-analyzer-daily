@@ -460,6 +460,18 @@ export const resetCoinMarketCapCircuitBreaker = () => {
   coinMarketCapApi.resetCircuitBreaker();
 };
 
+// Auto-reset circuit breaker on app start if it's been more than 1 minute
+const autoResetCircuitBreaker = () => {
+  const status = coinMarketCapApi.getCircuitBreakerStatus();
+  if (status.isOpen && status.timeRemaining && status.timeRemaining < 30000) {
+    console.log("Auto-resetting circuit breaker on app start");
+    coinMarketCapApi.resetCircuitBreaker();
+  }
+};
+
+// Run auto-reset when the module loads
+autoResetCircuitBreaker();
+
 // Utility functions to convert CoinMarketCap responses to our app's Ticker format
 export function convertCMCToTicker(
   crypto: CoinMarketCapCryptocurrency,
