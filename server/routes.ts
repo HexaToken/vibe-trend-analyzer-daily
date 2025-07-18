@@ -641,12 +641,24 @@ print(json.dumps(result))
         responseHandled = true;
 
         try {
-          const result = JSON.parse(output.trim().split("\n").pop() || "{}");
+          const lastLine = output.trim().split("\n").pop() || "{}";
+          const result = JSON.parse(lastLine);
           res.json(result);
         } catch (e) {
-          res
-            .status(500)
-            .json({ error: "Failed to parse YFinance sentiment data" });
+          console.error(
+            "YFinance sentiment parse error - Output:",
+            output,
+            "Error:",
+            e,
+          );
+          // Return structured error response if parsing fails
+          res.json({
+            error: "YFinance service not available",
+            setup_required: true,
+            import_error: "Failed to parse Python output",
+            instructions:
+              "YFinance Python package needs to be installed. Run: pip install yfinance pandas",
+          });
         }
       });
 
