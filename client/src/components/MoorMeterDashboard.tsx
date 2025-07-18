@@ -1403,10 +1403,8 @@ export const MoorMeterDashboard: React.FC = () => {
                         </div>
                       </div>
                     ))}
-                  </div>
-                </Card>
-              </div>
-            )}
+                      }
+  };
           </div>
         );
     }
