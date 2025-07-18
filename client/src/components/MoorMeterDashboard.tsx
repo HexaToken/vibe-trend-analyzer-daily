@@ -1454,14 +1454,8 @@ export const MoorMeterDashboard: React.FC = () => {
                                 <CommunityWidget posts={communityPosts} />
               </div>
             </div>
-          </>
-                );
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="font-medium">AMZN</span>
-                        <span className="text-green-600 font-semibold">
-                          +3.12%
-                        </span>
+                    </>
+        );
                       </div>
                       <div className="flex justify-between items-center">
                         <span className="font-medium">AAPL</span>
