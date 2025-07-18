@@ -1318,16 +1318,8 @@ export const MoorMeterDashboard: React.FC = () => {
           </div>
         );
 
-      case "Home":
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                        Market
-                      </label>
-                      <select className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
-                        <option>S&P 500</option>
-                        <option>NASDAQ</option>
-                        <option>Crypto</option>
-                        <option>Forex</option>
+            case "Home":
+      default:
                       </select>
                     </div>
                     <div>
