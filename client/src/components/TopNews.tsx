@@ -111,6 +111,15 @@ export const TopNews = () => {
             </Button>
           </CardTitle>
         </CardHeader>
+
+        {/* Show YFinance setup component if service is not available */}
+        {sources.yfinance.error?.includes("service not available") ||
+        sources.yfinance.error?.includes("setup_required") ? (
+          <CardContent className="pt-0 pb-4">
+            <YFinanceSetupStatus />
+          </CardContent>
+        ) : null}
+
         <CardContent className="space-y-4">
           {loading && displayArticles.length === 0 ? (
             <div className="text-center py-8">
