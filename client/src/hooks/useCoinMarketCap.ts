@@ -219,6 +219,9 @@ export function useCryptoListings(
     } catch (error) {
       console.error("Failed to fetch crypto listings:", error);
 
+      // Immediately set fallback data to prevent app crashes
+      setLoading(false);
+
       // Handle rate limit and circuit breaker errors specifically
       if (
         error instanceof CoinMarketCapApiError &&
