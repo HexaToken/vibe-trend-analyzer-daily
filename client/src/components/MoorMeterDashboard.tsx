@@ -50,7 +50,6 @@ import { TrendingTopicsWidget } from "./moorMeter/TrendingTopicsWidget";
 import { PersonalMoodCard } from "./moorMeter/PersonalMoodCard";
 import { WatchlistWidget } from "./moorMeter/WatchlistWidget";
 import { WatchlistModule } from "./moorMeter/WatchlistModule";
-import { WatchlistModule } from "./moorMeter/WatchlistModule";
 import { AIInsightWidget } from "./moorMeter/AIInsightWidget";
 import { CommunityWidget } from "./moorMeter/CommunityWidget";
 import { MoodScoreHero } from "./builder/MoodScoreHero";
@@ -969,7 +968,7 @@ export const MoorMeterDashboard: React.FC = () => {
                               Sentiment:
                             </span>
                             <div className="flex space-x-1">
-                              {["😃", "😐", "����"].map((emoji, i) => (
+                              {["😃", "😐", "😢"].map((emoji, i) => (
                                 <Button
                                   key={i}
                                   variant="ghost"
