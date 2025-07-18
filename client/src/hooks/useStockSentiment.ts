@@ -95,11 +95,11 @@ export const useStockSentiment = (refreshInterval: number = 300000) => {
       const dataToUse = validStockData.length > 0 ? validStockData : stockData;
 
       // Calculate average sentiment score
-      const totalSentimentScore = stockData.reduce(
+      const totalSentimentScore = dataToUse.reduce(
         (sum, stock) => sum + stock.sentimentScore,
         0,
       );
-      const averageSentimentScore = totalSentimentScore / stockData.length;
+      const averageSentimentScore = totalSentimentScore / dataToUse.length;
 
       // Scale to -50 to +50 range, then normalize to 0-100 for dashboard display
       const scaledScore = averageSentimentScore * 5;
@@ -107,14 +107,14 @@ export const useStockSentiment = (refreshInterval: number = 300000) => {
 
       // Calculate average percentage change for change indicator
       const averageChange =
-        stockData.reduce((sum, stock) => sum + stock.changePercent, 0) /
-        stockData.length;
+        dataToUse.reduce((sum, stock) => sum + stock.changePercent, 0) /
+        dataToUse.length;
 
       setData({
         score: Math.round(normalizedScore),
         label: getScoreLabel(scaledScore),
         change: Number(averageChange.toFixed(2)),
-        samples: stockData.length * 1000, // Approximate sample size
+        samples: dataToUse.length * 1000, // Approximate sample size
       });
     } catch (err) {
       setError(
