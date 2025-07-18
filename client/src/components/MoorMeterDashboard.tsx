@@ -1327,10 +1327,7 @@ export const MoorMeterDashboard: React.FC = () => {
               {/* Main Content Area */}
               <div className="lg:col-span-3 space-y-6">
                 {/* Top Stocks Widget */}
-                <TopStocksWidget stockLoading={stockLoading} />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                <TopStocksWidget stockLoading={stockLoading} />
                         Metric
                       </label>
                       <select className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
