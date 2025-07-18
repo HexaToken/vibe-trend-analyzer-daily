@@ -166,6 +166,33 @@ class CoinMarketCapService {
     console.log("CoinMarketCap circuit breaker reset");
   }
 
+  // Cache management methods
+  private getCachedData<T>(key: string): T | null {
+    const cached = this.cache.get(key);
+    if (!cached) return null;
+
+    if (Date.now() - cached.timestamp > cached.ttl) {
+      this.cache.delete(key);
+      return null;
+    }
+
+    return cached.data as T;
+  }
+
+  private setCachedData<T>(key: string, data: T, ttlMs: number = 300000): void {
+    // Default 5 minutes TTL
+    this.cache.set(key, {
+      data,
+      timestamp: Date.now(),
+      ttl: ttlMs,
+    });
+  }
+
+  public clearCache(): void {
+    this.cache.clear();
+    console.log("CoinMarketCap cache cleared");
+  }
+
   // Method to check circuit breaker status
   public getCircuitBreakerStatus(): {
     isOpen: boolean;
