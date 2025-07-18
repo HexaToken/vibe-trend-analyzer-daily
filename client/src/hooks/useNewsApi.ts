@@ -53,18 +53,16 @@ export function useTopHeadlines(
 
     try {
       // Use the proxy server to fetch real news data
-      const response = await fetch(
+      const data = await robustFetchJson(
         `/api/proxy/newsapi/top-headlines?country=${country}&category=${category || "business"}&pageSize=20`,
         {
-          signal: AbortSignal.timeout(15000), // 15 second timeout
+          retry: {
+            maxRetries: 2,
+            retryDelay: 1000,
+            timeout: 15000,
+          },
         },
       );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
 
       // Check if the response contains valid articles
       if (
