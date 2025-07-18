@@ -415,6 +415,33 @@ export const MoorMeterDashboard: React.FC = () => {
           </div>
         );
 
+      case "Tool":
+        return (
+          <div className="space-y-8">
+            {/* Tools Header */}
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                  🛠️{" "}
+                  {activeToolsSubtab === "HeatMap"
+                    ? "Market HeatMap"
+                    : "Market Analysis Tools"}
+                </h1>
+                <p className="text-gray-600 dark:text-gray-400">
+                  {activeToolsSubtab === "HeatMap"
+                    ? "Interactive visual representation of market performance with real-time sentiment analysis"
+                    : "Advanced analytical tools for market research and data visualization"}
+                </p>
+              </div>
+            </div>
+
+            {/* Tools Content */}
+            {activeToolsSubtab === "HeatMap" && (
+              <SentimentHeatMap onRefresh={() => setHeatmapLoading(true)} />
+            )}
+          </div>
+        );
+
       case "Home":
       default:
         return (
