@@ -1454,9 +1454,8 @@ export const MoorMeterDashboard: React.FC = () => {
               <div className="space-y-6">
                 {/* Personal Mood Score */}
                 <PersonalMoodCard />
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <Card className="p-6">
-                    <h3 className="text-lg font-semibold mb-4 flex items-center">
+                                {/* Watchlist */}
+                <WatchlistWidget />
                       ����� Market Summary
                     </h3>
                     <div className="space-y-3">
