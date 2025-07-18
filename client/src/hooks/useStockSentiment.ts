@@ -117,10 +117,19 @@ export const useStockSentiment = (refreshInterval: number = 300000) => {
         samples: dataToUse.length * 1000, // Approximate sample size
       });
     } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Failed to fetch stock sentiment",
-      );
       console.error("Stock sentiment error:", err);
+
+      // Provide fallback data when API fails
+      setData({
+        score: 50, // Neutral score
+        label: "Neutral (Mock Data)",
+        change: 0.5, // Small positive change
+        samples: 5000, // Mock sample size
+      });
+
+      setError(
+        `API unavailable - using mock data (${err instanceof Error ? err.message : "Failed to fetch stock sentiment"})`,
+      );
     } finally {
       setLoading(false);
     }
