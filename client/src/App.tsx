@@ -34,6 +34,9 @@ const queryClient = new QueryClient();
 const App = () => {
   const [activeSection, setActiveSection] = useState("moorMeter");
 
+  // Debug: log current section
+  console.log("Current activeSection:", activeSection);
+
   const renderContent = () => {
     switch (activeSection) {
       case "sentiment":
