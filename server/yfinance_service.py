@@ -334,10 +334,15 @@ class YFinanceService:
         except Exception as e:
             return {"error": f"Failed to fetch ticker info for {symbol}: {str(e)}"}
     
-    def get_enhanced_sentiment_data(self) -> Dict[str, Any]:
+        def get_enhanced_sentiment_data(self) -> Dict[str, Any]:
         """Get enhanced sentiment analysis based on market news"""
         if not self.is_available():
-            return {"error": "YFinance service not available"}
+            return {
+                "error": "YFinance service not available",
+                "setup_required": True,
+                "import_error": self.import_error,
+                "instructions": "YFinance Python package needs to be installed. Run: pip install yfinance pandas"
+            }
         
         try:
             # Get market news for sentiment analysis
