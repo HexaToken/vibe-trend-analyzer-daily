@@ -153,9 +153,13 @@ export const YFinanceSetupStatus: React.FC = () => {
           <Button
             variant="ghost"
             size="sm"
-            onClick={checkStatus}
+            onClick={() => {
+              setRetryAttempts(0);
+              checkStatus().catch(console.error);
+            }}
             disabled={loading}
             className="ml-auto"
+            title="Refresh YFinance status"
           >
             <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
           </Button>
