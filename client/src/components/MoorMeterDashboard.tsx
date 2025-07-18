@@ -1563,21 +1563,7 @@ export const MoorMeterDashboard: React.FC = () => {
 
       {/* Footer */}
             <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
-        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-                      </span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <div className="w-4 h-4 bg-green-600 rounded"></div>
-                      <span className="text-sm text-gray-600 dark:text-gray-400">
-                        Strong Gain (&gt; 2%)
-                      </span>
-                    </div>
-                  </div>
-                                {/* News Feed Widget */}
-                <NewsWidget articles={newsArticles} loading={newsLoading} />
-
-                {/* Mood Trend Chart */}
-                <MoodTrendChart
+                <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
                   data={historicalMood}
                   timeframe={selectedTimeframe}
                   setTimeframe={setSelectedTimeframe}
