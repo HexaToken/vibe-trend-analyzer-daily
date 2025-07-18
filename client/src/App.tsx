@@ -81,6 +81,7 @@ const App = () => {
         return <MoorMeterDashboard />;
 
       default:
+        console.log("Loading MoorMeterDashboard as default");
         return <MoorMeterDashboard />;
     }
   };
