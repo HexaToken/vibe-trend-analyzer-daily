@@ -20,6 +20,7 @@ import { ApiStatusIndicator } from "@/components/ApiStatusIndicator";
 import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
 
 import { NLPSentimentDemo } from "@/components/NLPSentimentDemo";
+import { SpacyNLPDemo } from "@/components/SpacyNLPDemo";
 import { AiChatBubble } from "@/components/chat/AiChatBubble";
 import { FinnhubDemo } from "@/components/FinnhubDemo";
 import { StockSentimentScoring } from "@/components/StockSentimentScoring";
@@ -62,6 +63,8 @@ const App = () => {
         return <CryptoDashboard />;
       case "nlp":
         return <NLPSentimentDemo />;
+      case "spacy-nlp":
+        return <SpacyNLPDemo />;
       case "finnhub":
         return <FinnhubDemo />;
       case "sentiment-scoring":

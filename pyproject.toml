@@ -7,4 +7,5 @@ dependencies = [
     "instagrapi>=2.2.1",
     "ycnbc>=1.0.9",
     "yfinance>=0.2.65",
+    "spacy>=3.7.0",
 ]

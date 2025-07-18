@@ -47,6 +47,15 @@ The application integrates with multiple external services:
 **Note**: API keys need to be configured for live data integration.
 
 ## Recent Changes
+- **2025-01-18**: Integrated additional NLP models with spaCy for enhanced sentiment analysis
+  - Added spaCy NLP service with comprehensive financial text analysis capabilities
+  - Created multi-model ensemble combining rule-based lexicon analysis with spaCy NLP pipeline
+  - Implemented advanced entity recognition for organizations, persons, financial instruments, and market indicators
+  - Built linguistic feature extraction including POS tagging, dependency parsing, and sentence structure analysis
+  - Added intelligent fallback system providing sophisticated lexicon-based analysis when spaCy model unavailable
+  - Created React components and hooks for single and batch text analysis with detailed breakdowns
+  - Integrated spaCy NLP demo into navigation with comprehensive UI showing sentiment scores, entities, and linguistic features
+  - Enhanced financial context analysis with market direction indicators, risk detection, and performance metrics
 - **2025-01-18**: Added comprehensive Instagram integration to social platform
   - Installed instagrapi package for Instagram API access
   - Created Instagram service with Python endpoints for user profiles, hashtag search, and trending content

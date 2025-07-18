@@ -543,6 +543,123 @@ print(json.dumps(result))
     }
   });
 
+  // spaCy NLP Analysis endpoints
+  app.post("/api/nlp/spacy/analyze", async (req, res) => {
+    try {
+      const { text } = req.body;
+      
+      if (!text || typeof text !== 'string') {
+        return res.status(400).json({
+          status: "error",
+          error: "invalid_input",
+          message: "Please provide valid text for analysis"
+        });
+      }
+
+      const python = spawn("python3", ["server/spacy_nlp_service.py", "analyze", text]);
+      
+      let responseHandled = false;
+      let dataBuffer = "";
+
+      python.stdout.on("data", (data) => {
+        dataBuffer += data.toString();
+      });
+
+      python.stderr.on("data", (data) => {
+        console.error("spaCy NLP error:", data.toString());
+      });
+
+      python.on("close", (code) => {
+        if (responseHandled) return;
+        responseHandled = true;
+
+        try {
+          const result = JSON.parse(dataBuffer.trim());
+          if (result.status === "error") {
+            res.status(400).json(result);
+          } else {
+            res.json(result);
+          }
+        } catch (parseError) {
+          console.error("Failed to parse spaCy NLP data:", parseError);
+          res.status(500).json({ error: "Failed to parse NLP analysis data" });
+        }
+      });
+
+      const timeoutId = setTimeout(() => {
+        if (responseHandled) return;
+        responseHandled = true;
+        python.kill();
+        res.status(408).json({ error: "NLP analysis timeout" });
+      }, 15000);
+
+      python.on("close", () => {
+        clearTimeout(timeoutId);
+      });
+    } catch (error) {
+      console.error("spaCy NLP proxy error:", error);
+      res.status(500).json({ error: "Failed to perform NLP analysis" });
+    }
+  });
+
+  app.post("/api/nlp/spacy/batch", async (req, res) => {
+    try {
+      const { texts } = req.body;
+      
+      if (!Array.isArray(texts) || texts.length === 0) {
+        return res.status(400).json({
+          status: "error",
+          error: "invalid_input",
+          message: "Please provide an array of texts for batch analysis"
+        });
+      }
+
+      const python = spawn("python3", ["server/spacy_nlp_service.py", "batch", JSON.stringify(texts)]);
+      
+      let responseHandled = false;
+      let dataBuffer = "";
+
+      python.stdout.on("data", (data) => {
+        dataBuffer += data.toString();
+      });
+
+      python.stderr.on("data", (data) => {
+        console.error("spaCy batch NLP error:", data.toString());
+      });
+
+      python.on("close", (code) => {
+        if (responseHandled) return;
+        responseHandled = true;
+
+        try {
+          const result = JSON.parse(dataBuffer.trim());
+          if (result.status === "error") {
+            res.status(400).json(result);
+          } else {
+            res.json(result);
+          }
+        } catch (parseError) {
+          console.error("Failed to parse spaCy batch NLP data:", parseError);
+          res.status(500).json({ error: "Failed to parse batch NLP analysis data" });
+        }
+      });
+
+      const timeoutId = setTimeout(() => {
+        if (responseHandled) return;
+        responseHandled = true;
+        python.kill();
+        res.status(408).json({ error: "Batch NLP analysis timeout" });
+      }, 30000);
+
+      python.on("close", () => {
+        clearTimeout(timeoutId);
+      });
+    } catch (error) {
+      console.error("spaCy batch NLP proxy error:", error);
+      res.status(500).json({ error: "Failed to perform batch NLP analysis" });
+    }
+  });
+
   // X/Twitter API endpoints - What's Happening
   app.get("/api/proxy/twitter/trending", async (req, res) => {
     try {
