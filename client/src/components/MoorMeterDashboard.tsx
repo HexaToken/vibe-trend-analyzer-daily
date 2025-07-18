@@ -90,6 +90,7 @@ export const MoorMeterDashboard: React.FC = () => {
     "1D" | "7D" | "30D"
   >("7D");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("Home");
 
   // Hooks for real data
   const { data: stockSentiment, loading: stockLoading } = useStockSentiment();
@@ -131,7 +132,7 @@ export const MoorMeterDashboard: React.FC = () => {
   // Get mood emoji and color
   const getMoodEmoji = (score: number) => {
     if (score >= 80) return "🚀";
-    if (score >= 70) return "���";
+    if (score >= 70) return "�����";
     if (score >= 60) return "😊";
     if (score >= 50) return "😐";
     if (score >= 40) return "😕";
@@ -218,7 +219,7 @@ export const MoorMeterDashboard: React.FC = () => {
 
   // Navigation items
   const navItems = [
-    { label: "Home", href: "#", active: true },
+    { label: "Home", href: "#" },
     { label: "Market Mood", href: "#market" },
     { label: "Watchlist", href: "#watchlist" },
     { label: "News Feed", href: "#news" },
@@ -263,10 +264,11 @@ export const MoorMeterDashboard: React.FC = () => {
               {navItems.map((item) => (
                 <Button
                   key={item.label}
-                  variant={item.active ? "default" : "ghost"}
+                  variant={activeTab === item.label ? "default" : "ghost"}
                   size="sm"
+                  onClick={() => setActiveTab(item.label)}
                   className={
-                    item.active
+                    activeTab === item.label
                       ? "bg-gradient-to-r from-blue-500 to-purple-600"
                       : ""
                   }
