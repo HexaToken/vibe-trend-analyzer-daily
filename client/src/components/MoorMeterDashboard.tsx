@@ -425,8 +425,7 @@ export const MoorMeterDashboard: React.FC = () => {
             searchQuery={searchQuery}
             onSearchChange={setSearchQuery}
           />
-        );
-          <div className="space-y-8">
+                );
             {/* Watchlist Header */}
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
               <div>
