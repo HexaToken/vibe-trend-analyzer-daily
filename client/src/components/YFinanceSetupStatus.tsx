@@ -20,15 +20,35 @@ export const YFinanceSetupStatus: React.FC = () => {
   const checkStatus = async () => {
     setLoading(true);
     try {
-      const response = await fetch("/api/proxy/yfinance/status");
+      const response = await fetch("/api/proxy/yfinance/status", {
+        signal: AbortSignal.timeout(10000), // 10 second timeout
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const data = await response.json();
       setStatus(data);
       setLastChecked(new Date());
     } catch (error) {
       console.error("Failed to check YFinance status:", error);
+
+      // Provide different error messages based on error type
+      let errorMessage = "Failed to connect to YFinance service";
+      if (error.name === "AbortError") {
+        errorMessage = "Request timeout - service may be slow";
+      } else if (error.message.includes("fetch")) {
+        errorMessage = "Network connectivity issue";
+      }
+
       setStatus({
         status: "error",
-        error: "Failed to connect to YFinance service",
+        error: errorMessage,
         setup_instructions: [
           "Install YFinance and pandas:",
           "pip install yfinance pandas",
