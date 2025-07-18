@@ -396,6 +396,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
         responseHandled = true;
 
         try {
+          if (!output.trim()) {
+            console.error(
+              "YFinance news - No output from Python script. Stderr:",
+              error,
+            );
+            res.json({
+              error: "YFinance service not available",
+              setup_required: true,
+              import_error: error || "Python script produced no output",
+              instructions:
+                "YFinance Python package needs to be installed. Run: pip install yfinance pandas",
+              articles: [],
+            });
+            return;
+          }
+
           const lastLine = output.trim().split("\n").pop() || "{}";
           const result = JSON.parse(lastLine);
           res.json(result);
@@ -403,14 +419,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
           console.error(
             "YFinance news parse error - Output:",
             output,
-            "Error:",
+            "Stderr:",
+            error,
+            "Parse Error:",
             e,
           );
           // Return structured error response if parsing fails
           res.json({
             error: "YFinance service not available",
             setup_required: true,
-            import_error: "Failed to parse Python output",
+            import_error: error || "Failed to parse Python output",
             instructions:
               "YFinance Python package needs to be installed. Run: pip install yfinance pandas",
             articles: [],
