@@ -18,6 +18,7 @@ export const YFinanceSetupStatus: React.FC = () => {
   const [lastChecked, setLastChecked] = useState<Date | null>(null);
   const [retryAttempts, setRetryAttempts] = useState(0);
   const [hasCriticalError, setHasCriticalError] = useState(false);
+  const [componentError, setComponentError] = useState<string | null>(null);
 
   const checkStatus = async () => {
     if (hasCriticalError) return;
