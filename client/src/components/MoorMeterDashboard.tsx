@@ -1584,8 +1584,6 @@ export const MoorMeterDashboard: React.FC = () => {
   };
 
     export default MoorMeterDashboard;
-
-                {/* Watchlist Manager */}
                 <WatchlistWidget />
 
                 {/* AI Insight */}
