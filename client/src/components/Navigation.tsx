@@ -124,9 +124,9 @@ export const Navigation = ({
 
   const handleLogout = () => {
     logout();
-    // Redirect to dashboard if currently on protected pages
+    // Redirect to moorMeter if currently on protected pages
     if (activeSection === "profile") {
-      onSectionChange("dashboard");
+      onSectionChange("moorMeter");
     }
   };
 
