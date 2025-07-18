@@ -474,9 +474,9 @@ export const SocialPlatform = () => {
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-2xl font-bold">Twitter Integration</h2>
+                <h2 className="text-2xl font-bold">What's Happening</h2>
                 <p className="text-muted-foreground">
-                  View financial influencers and market sentiment from Twitter
+                  Trending topics and financial discussions from Twitter/X
                 </p>
               </div>
               <Button variant="outline" onClick={() => setCurrentView("feed")}>
@@ -484,8 +484,7 @@ export const SocialPlatform = () => {
               </Button>
             </div>
 
-            <TwitterProfile
-              username="thejuansanjuan"
+            <TwitterTrending
               onCashtagClick={handleTickerClick}
               onHashtagClick={(hashtag) =>
                 console.log("Hashtag clicked:", hashtag)
