@@ -527,9 +527,9 @@ export const SocialPlatform = () => {
               Soon
             </Badge>
           </TabsTrigger>
-          <TabsTrigger value="analytics" className="flex items-center gap-2">
-            <BarChart3 className="h-4 w-4" />
-            Analytics
+          <TabsTrigger value="twitter" className="flex items-center gap-2">
+            <Twitter className="h-4 w-4" />
+            Twitter
           </TabsTrigger>
         </TabsList>
       </Tabs>
