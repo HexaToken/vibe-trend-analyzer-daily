@@ -55,12 +55,6 @@ export const Navigation = ({
 
   const navigationGroups = {
     data: [
-      {
-        id: "sentiment",
-        label: "Market Mood",
-        icon: Brain,
-        badge: "NEW",
-      },
       { id: "crypto", label: "Crypto Dashboard", icon: Coins, badge: "NEW" },
       {
         id: "finnhub",
