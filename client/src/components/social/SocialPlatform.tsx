@@ -195,16 +195,21 @@ export const SocialPlatform = () => {
                   variant="outline"
                   size="sm"
                   className="h-6 px-2 text-xs"
-                  onClick={() => {
-                    import("../../services/coinMarketCapApi").then(
-                      ({ resetCoinMarketCapCircuitBreaker }) => {
-                        resetCoinMarketCapCircuitBreaker();
-                        window.location.reload(); // Simple way to retry
-                      },
-                    );
+                  onClick={async () => {
+                    try {
+                      const { resetCoinMarketCapCircuitBreaker } = await import(
+                        "../../services/coinMarketCapApi"
+                      );
+                      resetCoinMarketCapCircuitBreaker();
+                      console.log("Manual circuit breaker reset completed");
+                      // Force refresh of crypto data
+                      setTimeout(() => window.location.reload(), 500);
+                    } catch (e) {
+                      console.error("Failed to reset circuit breaker:", e);
+                    }
                   }}
                 >
-                  Retry
+                  Reset & Retry
                 </Button>
               )}
             </div>
