@@ -49,6 +49,7 @@ import { MoodTrendChart } from "./moorMeter/MoodTrendChart";
 import { TrendingTopicsWidget } from "./moorMeter/TrendingTopicsWidget";
 import { PersonalMoodCard } from "./moorMeter/PersonalMoodCard";
 import { WatchlistWidget } from "./moorMeter/WatchlistWidget";
+import { WatchlistModule } from "./moorMeter/WatchlistModule";
 import { AIInsightWidget } from "./moorMeter/AIInsightWidget";
 import { CommunityWidget } from "./moorMeter/CommunityWidget";
 import { MoodScoreHero } from "./builder/MoodScoreHero";
