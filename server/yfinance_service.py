@@ -17,10 +17,12 @@ logger = logging.getLogger(__name__)
 try:
     import yfinance as yf
     import pandas as pd
+    IMPORT_ERROR = None
 except ImportError as e:
     print(f"Warning: yfinance not available: {e}")
     yf = None
     pd = None
+    IMPORT_ERROR = str(e)
 
 class YFinanceService:
     """Service for fetching financial data using yfinance package"""
