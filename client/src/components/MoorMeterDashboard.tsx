@@ -1567,13 +1567,7 @@ export const MoorMeterDashboard: React.FC = () => {
 export default MoorMeterDashboard;
             
 
-              {/* Sidebar */}
-              <div className="space-y-6">
-                {/* Personal Mood Score */}
-                <PersonalMoodCard />
-                                {/* Watchlist */}
-                <WatchlistWidget />
-                      ������ Market Summary
+              
                                     {/* AI Insight */}
                 <AIInsightWidget moodScore={moodScore} />
 
