@@ -327,9 +327,38 @@ export const SentimentHeatMap: React.FC = () => {
         </CardContent>
       </Card>
 
+      {/* Error Message */}
+      {error && (
+        <Card className="border-red-200 bg-red-50 dark:bg-red-900/20">
+          <CardContent className="p-4">
+            <div className="flex items-center gap-2 text-red-600 dark:text-red-400">
+              <Activity className="w-4 h-4" />
+              <span className="text-sm">{error}</span>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setError(null)}
+                className="ml-auto"
+              >
+                Dismiss
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
       {/* Heatmap */}
-      <Card className="overflow-hidden">
+      <Card className="overflow-hidden relative">
         <CardContent className="p-0">
+          {/* Loading Overlay */}
+          {isLoading && (
+            <div className="absolute inset-0 bg-white/80 dark:bg-gray-900/80 z-10 flex items-center justify-center">
+              <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+                <div className="animate-spin w-5 h-5 border-2 border-gray-300 border-t-blue-500 rounded-full"></div>
+                <span className="text-sm">Loading sentiment data...</span>
+              </div>
+            </div>
+          )}
           <div ref={heatmapRef} className="overflow-x-auto">
             {/* Time Headers */}
             <div className="grid grid-cols-[100px_1fr] sm:grid-cols-[120px_1fr] bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
