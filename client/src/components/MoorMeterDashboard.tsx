@@ -53,6 +53,7 @@ import { AIInsightWidget } from "./moorMeter/AIInsightWidget";
 import { CommunityWidget } from "./moorMeter/CommunityWidget";
 import { MoodScoreHero } from "./builder/MoodScoreHero";
 import { TopStocksModule } from "./builder/TopStocksModule";
+import { SentimentHeatMap } from "./SentimentHeatMap";
 import { formatCurrency, cn } from "../lib/utils";
 
 // Types for our mood data
@@ -1320,7 +1321,7 @@ export const MoorMeterDashboard: React.FC = () => {
                         🔄 Refresh
                       </Button>
                       <Button variant="outline" size="sm">
-                        ⚙️ Settings
+                        ���️ Settings
                       </Button>
                     </div>
                   </div>
