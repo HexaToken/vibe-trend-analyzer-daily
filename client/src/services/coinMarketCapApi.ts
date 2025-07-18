@@ -194,18 +194,23 @@ class CoinMarketCapService {
       );
     }
 
-    // Check circuit breaker
+    // Check circuit breaker - but be more lenient
     if (this.circuitBreaker.isOpen) {
       const now = Date.now();
-      if (
-        now - this.circuitBreaker.lastFailureTime <
-        this.circuitBreaker.timeout
-      ) {
+      const timeSinceFailure = now - this.circuitBreaker.lastFailureTime;
+
+      // If it's been more than 10 seconds, force reset and try again
+      if (timeSinceFailure > 10000) {
+        console.log("Circuit breaker forced reset after 10 seconds");
+        this.circuitBreaker.isOpen = false;
+        this.circuitBreaker.failureCount = 0;
+      } else if (timeSinceFailure < this.circuitBreaker.timeout) {
+        // Only block if it's been less than the timeout and less than 10 seconds
         throw new CoinMarketCapApiError(
           "Circuit breaker is open - service temporarily unavailable",
         );
       } else {
-        // Reset circuit breaker
+        // Normal reset after timeout
         this.circuitBreaker.isOpen = false;
         this.circuitBreaker.failureCount = 0;
       }
