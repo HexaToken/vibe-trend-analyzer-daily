@@ -507,17 +507,54 @@ export const MoorMeterDashboard: React.FC = () => {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (
-                <button
-                  key={item.key}
-                  onClick={() => setActiveTab(item.key)}
-                  className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
-                    activeTab === item.key
-                      ? "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300"
-                      : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-                  }`}
-                >
-                  {item.label}
-                </button>
+                <div key={item.key} className="relative">
+                  {item.key === "Tool" ? (
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <button
+                          className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                            activeTab === item.key
+                              ? "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300"
+                              : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                          }`}
+                        >
+                          {item.icon && <item.icon className="w-4 h-4 mr-2" />}
+                          {item.label}
+                          <ChevronDown className="w-4 h-4 ml-1" />
+                        </button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end" className="w-48">
+                        {item.subtabs?.map((subtab) => (
+                          <DropdownMenuItem
+                            key={subtab.key}
+                            onClick={() => {
+                              setActiveTab(item.key);
+                              setActiveToolsSubtab(subtab.key);
+                            }}
+                            className="flex items-center cursor-pointer"
+                          >
+                            {subtab.icon && (
+                              <subtab.icon className="w-4 h-4 mr-2" />
+                            )}
+                            {subtab.label}
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  ) : (
+                    <button
+                      onClick={() => setActiveTab(item.key)}
+                      className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                        activeTab === item.key
+                          ? "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300"
+                          : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                      }`}
+                    >
+                      {item.icon && <item.icon className="w-4 h-4 mr-2" />}
+                      {item.label}
+                    </button>
+                  )}
+                </div>
               ))}
 
               <button
