@@ -1578,9 +1578,12 @@ export const MoorMeterDashboard: React.FC = () => {
                                 <CommunityWidget posts={communityPosts} />
                             </div>
             </div>
-          </>
-                                                                                                                                                                                );
-              <div className="space-y-6">
+                    </>
+        );
+      }
+  };
+
+  export default MoorMeterDashboard;
                 {/* Personal Mood Score */}
                 <PersonalMoodCard />
 
