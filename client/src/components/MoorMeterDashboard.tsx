@@ -224,6 +224,7 @@ export const MoorMeterDashboard: React.FC = () => {
     { label: "Home", href: "#" },
     { label: "Market Mood", href: "#market" },
     { label: "Watchlist", href: "#watchlist" },
+    { label: "News", href: "#news" },
     { label: "Community", href: "#community" },
   ];
 
