@@ -417,10 +417,15 @@ class CoinMarketCapService {
     symbols: string[],
     convert: string = "USD",
   ): Promise<CoinMarketCapQuotesResponse> {
-    return this.fetchFromApi<CoinMarketCapQuotesResponse>("/quotes", {
-      symbol: symbols.join(","),
-      convert,
-    });
+    return this.fetchFromApi<CoinMarketCapQuotesResponse>(
+      "/quotes",
+      {
+        symbol: symbols.join(","),
+        convert,
+      },
+      true,
+      120000, // 2 minutes cache for quotes (more frequent updates needed)
+    );
   }
 
   /**
@@ -430,10 +435,15 @@ class CoinMarketCapService {
     ids: number[],
     convert: string = "USD",
   ): Promise<CoinMarketCapQuotesResponse> {
-    return this.fetchFromApi<CoinMarketCapQuotesResponse>("/quotes", {
-      id: ids.join(","),
-      convert,
-    });
+    return this.fetchFromApi<CoinMarketCapQuotesResponse>(
+      "/quotes",
+      {
+        id: ids.join(","),
+        convert,
+      },
+      true,
+      120000, // 2 minutes cache for quotes
+    );
   }
 
   /**
