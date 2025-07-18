@@ -370,16 +370,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/proxy/yfinance/news/latest", async (req, res) => {
     try {
       const { spawn } = await import("child_process");
-      const python = spawn("python3", [
-        "server/yfinance_service.py",
-        "get_market_news",
-      ]);
+      const python = spawn(
+        "python3",
+        ["server/yfinance_service.py", "get_market_news"],
+        {
+          env: { ...process.env, PYTHONPATH: process.cwd() },
+          cwd: process.cwd(),
+        },
+      );
 
       let output = "";
+      let error = "";
       let responseHandled = false;
 
       python.stdout.on("data", (data: any) => {
         output += data.toString();
+      });
+
+      python.stderr.on("data", (data: any) => {
+        error += data.toString();
       });
 
       python.on("close", (code: number) => {
