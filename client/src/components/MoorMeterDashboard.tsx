@@ -54,7 +54,7 @@ import { AIInsightWidget } from "./moorMeter/AIInsightWidget";
 import { CommunityWidget } from "./moorMeter/CommunityWidget";
 import { MoodScoreHero } from "./builder/MoodScoreHero";
 import { TopStocksModule } from "./builder/TopStocksModule";
-import { SentimentHeatMap } from "./SentimentHeatMap";
+import { SentimentHeatMap } from "./moorMeter/SentimentHeatMap";
 import { formatCurrency, cn } from "../lib/utils";
 
 // Types for our mood data
