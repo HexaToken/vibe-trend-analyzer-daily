@@ -31,12 +31,10 @@ import { YFinanceDemo } from "@/components/YFinanceDemo";
 const queryClient = new QueryClient();
 
 const App = () => {
-  const [activeSection, setActiveSection] = useState("dashboard");
+  const [activeSection, setActiveSection] = useState("moorMeter");
 
   const renderContent = () => {
     switch (activeSection) {
-      case "dashboard":
-        return <Dashboard />;
       case "sentiment":
         return <SentimentDashboard />;
       case "analytics":
@@ -77,7 +75,7 @@ const App = () => {
       case "moorMeter":
         return <MoorMeterDashboard />;
       default:
-        return <Dashboard />;
+        return <MoorMeterDashboard />;
     }
   };
 
