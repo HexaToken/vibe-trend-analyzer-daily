@@ -468,11 +468,11 @@ export const getCoinMarketCapCircuitBreakerStatus = () => {
   return coinMarketCapApi.getCircuitBreakerStatus();
 };
 
-// Auto-reset circuit breaker on app start if it's been more than 1 minute
+// Auto-reset circuit breaker on app start - always reset if open
 const autoResetCircuitBreaker = () => {
   const status = coinMarketCapApi.getCircuitBreakerStatus();
-  if (status.isOpen && status.timeRemaining && status.timeRemaining < 30000) {
-    console.log("Auto-resetting circuit breaker on app start");
+  if (status.isOpen) {
+    console.log("Auto-resetting circuit breaker on app start (forced)");
     coinMarketCapApi.resetCircuitBreaker();
   }
 };
