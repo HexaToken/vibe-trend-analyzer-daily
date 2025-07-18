@@ -399,7 +399,15 @@ export function useGlobalMetrics(
       setData(response);
       setError(null);
     } catch (error) {
-      console.error("Failed to fetch global metrics:", error);
+      // Handle proxy unavailable errors more gracefully
+      if (
+        error instanceof Error &&
+        error.message.includes("proxy is not available")
+      ) {
+        console.info("CoinMarketCap API proxy unavailable, using mock data");
+      } else {
+        console.error("Failed to fetch global metrics:", error);
+      }
 
       // Handle rate limit and circuit breaker errors specifically
       if (
