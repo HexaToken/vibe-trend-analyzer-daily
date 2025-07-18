@@ -200,6 +200,19 @@ export const CryptoDashboard = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
+          {cryptoError && (
+            <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+              <p className="text-sm text-yellow-800">
+                <strong>API Notice:</strong> {cryptoError}
+              </p>
+              {cryptoError.includes("rate limit") && (
+                <p className="text-xs text-yellow-700 mt-1">
+                  The data shown below is cached. The API will automatically
+                  recover.
+                </p>
+              )}
+            </div>
+          )}
           {cryptoLoading && topCryptos.length === 0 ? (
             <div className="text-center py-8">
               <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-2" />
