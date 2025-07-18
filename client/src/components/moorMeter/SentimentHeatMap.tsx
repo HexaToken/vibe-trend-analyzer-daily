@@ -207,15 +207,15 @@ export const SentimentHeatMap: React.FC = () => {
         </div>
 
         {/* Controls */}
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-col sm:flex-row gap-3">
           {/* Time Filter */}
-          <div className="flex rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+          <div className="flex rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden w-full sm:w-auto">
             {(["24h", "7d", "30d"] as const).map((period) => (
               <Button
                 key={period}
                 variant={timeFilter === period ? "default" : "ghost"}
                 size="sm"
-                className={`rounded-none border-0 ${
+                className={`rounded-none border-0 flex-1 sm:flex-none ${
                   timeFilter === period
                     ? "bg-blue-500 text-white"
                     : "hover:bg-gray-100 dark:hover:bg-gray-800"
@@ -235,29 +235,49 @@ export const SentimentHeatMap: React.FC = () => {
             onClick={() =>
               setViewMode(viewMode === "absolute" ? "net" : "absolute")
             }
-            className="flex items-center gap-2"
+            className="flex items-center justify-center gap-2 w-full sm:w-auto"
           >
             {viewMode === "absolute" ? (
               <ToggleLeft className="w-4 h-4" />
             ) : (
               <ToggleRight className="w-4 h-4" />
             )}
-            {viewMode === "absolute" ? "Absolute" : "Net Sentiment"}
+            <span className="hidden sm:inline">
+              {viewMode === "absolute" ? "Absolute" : "Net Sentiment"}
+            </span>
+            <span className="sm:hidden">
+              {viewMode === "absolute" ? "Abs" : "Net"}
+            </span>
           </Button>
 
           {/* Export Options */}
-          <div className="flex gap-2">
-            <Button variant="outline" size="sm" onClick={exportToPNG}>
-              <Download className="w-4 h-4 mr-1" />
-              PNG
+          <div className="flex gap-2 w-full sm:w-auto">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={exportToPNG}
+              className="flex-1 sm:flex-none"
+            >
+              <Download className="w-4 h-4 sm:mr-1" />
+              <span className="hidden sm:inline">PNG</span>
             </Button>
-            <Button variant="outline" size="sm" onClick={exportToCSV}>
-              <FileBarChart className="w-4 h-4 mr-1" />
-              CSV
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={exportToCSV}
+              className="flex-1 sm:flex-none"
+            >
+              <FileBarChart className="w-4 h-4 sm:mr-1" />
+              <span className="hidden sm:inline">CSV</span>
             </Button>
-            <Button variant="outline" size="sm" onClick={exportToJSON}>
-              <BarChart className="w-4 h-4 mr-1" />
-              JSON
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={exportToJSON}
+              className="flex-1 sm:flex-none"
+            >
+              <BarChart className="w-4 h-4 sm:mr-1" />
+              <span className="hidden sm:inline">JSON</span>
             </Button>
           </div>
         </div>
