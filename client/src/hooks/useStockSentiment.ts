@@ -43,33 +43,16 @@ export const useStockSentiment = (refreshInterval: number = 300000) => {
     try {
       const stockPromises = TOP_10_STOCKS.map(async (symbol) => {
         try {
-          // Create AbortController for timeout
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
-
-          const response = await fetch(
+          const data = await robustFetchJson(
             `/api/proxy/finnhub/quote?symbol=${symbol}`,
             {
-              signal: controller.signal,
-              mode: "cors",
-              cache: "default",
+              retry: {
+                maxRetries: 2,
+                retryDelay: 500,
+                timeout: 10000,
+              },
             },
           );
-
-          clearTimeout(timeoutId); // Clear timeout if fetch succeeds
-
-          if (!response.ok) {
-            console.warn(
-              `Failed to fetch ${symbol}: ${response.status} ${response.statusText}`,
-            );
-            return {
-              symbol,
-              changePercent: 0,
-              sentimentScore: 0,
-            };
-          }
-
-          const data = await response.json();
 
           // Handle API error responses
           if (data.error) {
