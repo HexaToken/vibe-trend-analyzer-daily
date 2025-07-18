@@ -168,6 +168,19 @@ export const Navigation = ({
                 </Badge>
               </Button>
 
+              {/* Builder.io Demo */}
+              <Button
+                variant={activeSection === "builderDemo" ? "default" : "ghost"}
+                onClick={() => onSectionChange("builderDemo")}
+                className="flex items-center gap-2"
+              >
+                <Brain className="h-4 w-4" />
+                Builder.io Demo
+                <Badge variant="secondary" className="text-xs">
+                  NEW
+                </Badge>
+              </Button>
+
               {/* Data Dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -406,6 +419,24 @@ export const Navigation = ({
                 >
                   <Brain className="h-4 w-4" />
                   MoorMeter
+                  <Badge variant="secondary" className="ml-auto text-xs">
+                    NEW
+                  </Badge>
+                </Button>
+
+                {/* Builder.io Demo */}
+                <Button
+                  variant={
+                    activeSection === "builderDemo" ? "default" : "ghost"
+                  }
+                  onClick={() => {
+                    onSectionChange("builderDemo");
+                    setIsMenuOpen(false);
+                  }}
+                  className="justify-start gap-2"
+                >
+                  <Brain className="h-4 w-4" />
+                  Builder.io Demo
                   <Badge variant="secondary" className="ml-auto text-xs">
                     NEW
                   </Badge>
