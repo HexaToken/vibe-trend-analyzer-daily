@@ -442,6 +442,31 @@ export const SocialPlatform = () => {
       case "rooms":
         return <CommunityRooms />;
 
+      case "twitter":
+        return (
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-2xl font-bold">Twitter Integration</h2>
+                <p className="text-muted-foreground">
+                  View financial influencers and market sentiment from Twitter
+                </p>
+              </div>
+              <Button variant="outline" onClick={() => setCurrentView("feed")}>
+                Back to Feed
+              </Button>
+            </div>
+
+            <TwitterProfile
+              username="thejuansanjuan"
+              onCashtagClick={handleTickerClick}
+              onHashtagClick={(hashtag) =>
+                console.log("Hashtag clicked:", hashtag)
+              }
+            />
+          </div>
+        );
+
       default:
         return (
           <SocialFeed
