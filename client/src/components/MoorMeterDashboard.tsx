@@ -1570,21 +1570,7 @@ export default MoorMeterDashboard;
               
                                     
             
-                <WatchlistWidget />
-
-                {/* AI Insight */}
-                <AIInsightWidget moodScore={moodScore} />
-
-                {/* Community Feed */}
-                <CommunityWidget messages={communityMessages} />
-              </div>
-            </div>
-          </>
-        );
-    }
-  };
-
-  return (
+                
     <div
       className={`min-h-screen transition-colors duration-300 ${darkMode ? "dark bg-gray-900" : "bg-gray-50"}`}
     >
