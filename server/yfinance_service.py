@@ -438,3 +438,37 @@ class YFinanceService:
 
 # Create service instance
 yfinance_service = YFinanceService()
+
+# CLI interface for route calls
+if __name__ == "__main__":
+    import sys
+    import json
+
+    if len(sys.argv) < 2:
+        print(json.dumps({"error": "No method specified"}))
+        sys.exit(1)
+
+    method = sys.argv[1]
+
+    try:
+        if method == "get_market_news":
+            result = yfinance_service.get_market_news()
+        elif method == "get_enhanced_sentiment_data":
+            result = yfinance_service.get_enhanced_sentiment_data()
+        elif method == "get_stock_news":
+            symbol = sys.argv[2] if len(sys.argv) > 2 else "SPY"
+            result = yfinance_service.get_stock_news(symbol)
+        elif method == "get_stock_ticker_info":
+            symbol = sys.argv[2] if len(sys.argv) > 2 else "AAPL"
+            result = yfinance_service.get_stock_ticker_info(symbol)
+        else:
+            result = {"error": f"Unknown method: {method}"}
+
+        print(json.dumps(result))
+    except Exception as e:
+        print(json.dumps({
+            "error": f"Failed to execute {method}: {str(e)}",
+            "setup_required": True,
+            "import_error": str(e),
+            "instructions": "YFinance Python package needs to be installed. Run: pip install yfinance pandas"
+        }))
