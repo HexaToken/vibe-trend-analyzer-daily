@@ -1397,8 +1397,19 @@ export const MoorMeterDashboard: React.FC = () => {
                       >
                         <div className="font-bold text-xs">{stock.symbol}</div>
                         <div className="text-xs opacity-90">{stock.name}</div>
-                        <div className="font-semibold text-sm">
-                              }
+                                                <div className="font-semibold text-sm">
+                          {stock.change > 0 ? "+" : ""}
+                          {stock.change}%
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+              </div>
+            )}
+          </div>
+        );
+    }
   };
 
   return (
