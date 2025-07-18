@@ -34,8 +34,16 @@ import {
   Activity,
 } from "lucide-react";
 import { useStockSentiment } from "../hooks/useStockSentiment";
-import { useBusinessNews } from "../hooks/useNewsApi";
+import { useCombinedBusinessNews } from "../hooks/useCombinedBusinessNews";
 import { useCryptoListings } from "../hooks/useCoinMarketCap";
+import { TopStocksWidget } from "./moorMeter/TopStocksWidget";
+import { NewsWidget } from "./moorMeter/NewsWidget";
+import { MoodTrendChart } from "./moorMeter/MoodTrendChart";
+import { TrendingTopicsWidget } from "./moorMeter/TrendingTopicsWidget";
+import { PersonalMoodCard } from "./moorMeter/PersonalMoodCard";
+import { WatchlistWidget } from "./moorMeter/WatchlistWidget";
+import { AIInsightWidget } from "./moorMeter/AIInsightWidget";
+import { CommunityWidget } from "./moorMeter/CommunityWidget";
 import { formatCurrency, cn } from "../lib/utils";
 
 // Types for our mood data
@@ -85,7 +93,8 @@ export const MoorMeterDashboard: React.FC = () => {
 
   // Hooks for real data
   const { data: stockSentiment, loading: stockLoading } = useStockSentiment();
-  const { articles: newsArticles, loading: newsLoading } = useBusinessNews();
+  const { articles: newsArticles, loading: newsLoading } =
+    useCombinedBusinessNews();
   const { tickers: cryptoData, loading: cryptoLoading } = useCryptoListings(10);
 
   // Calculate overall mood score
@@ -592,56 +601,6 @@ export const MoorMeterDashboard: React.FC = () => {
       </footer>
     </div>
   );
-};
-
-// Widget Components (to be defined separately)
-const TopStocksWidget: React.FC<{ stockLoading: boolean }> = ({
-  stockLoading,
-}) => {
-  // This will be implemented in the next file
-  return null;
-};
-
-const NewsWidget: React.FC<{ articles: any[]; loading: boolean }> = ({
-  articles,
-  loading,
-}) => {
-  // This will be implemented in the next file
-  return null;
-};
-
-const MoodTrendChart: React.FC<{
-  data: any[];
-  timeframe: string;
-  setTimeframe: (tf: any) => void;
-}> = ({ data, timeframe, setTimeframe }) => {
-  // This will be implemented in the next file
-  return null;
-};
-
-const TrendingTopicsWidget: React.FC<{ topics: any[] }> = ({ topics }) => {
-  // This will be implemented in the next file
-  return null;
-};
-
-const PersonalMoodCard: React.FC = () => {
-  // This will be implemented in the next file
-  return null;
-};
-
-const WatchlistWidget: React.FC = () => {
-  // This will be implemented in the next file
-  return null;
-};
-
-const AIInsightWidget: React.FC<{ moodScore: any }> = ({ moodScore }) => {
-  // This will be implemented in the next file
-  return null;
-};
-
-const CommunityWidget: React.FC<{ messages: any[] }> = ({ messages }) => {
-  // This will be implemented in the next file
-  return null;
 };
 
 export default MoorMeterDashboard;
