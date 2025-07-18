@@ -1579,25 +1579,7 @@ export const MoorMeterDashboard: React.FC = () => {
                             </div>
             </div>
           </>
-                                                                                                                                                );
-            {/* Dashboard Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-              {/* Main Content Area */}
-              <div className="lg:col-span-3 space-y-6">
-                {/* Top Stocks Widget */}
-                <TopStocksWidget stockLoading={stockLoading} />
-
-                {/* News Feed Widget */}
-                <NewsWidget articles={newsArticles} loading={newsLoading} />
-
-                {/* Mood Trend Chart */}
-                <MoodTrendChart
-                  data={historicalMood}
-                  timeframe={selectedTimeframe}
-                  setTimeframe={setSelectedTimeframe}
-                />
-
-                {/* Trending Topics */}
+                                                                                                                                                        );
                 <TrendingTopicsWidget topics={trendingTopics} />
               </div>
 
