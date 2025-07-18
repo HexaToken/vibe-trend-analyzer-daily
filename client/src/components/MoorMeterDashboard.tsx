@@ -32,6 +32,7 @@ import {
   RefreshCw,
   Target,
   Activity,
+  Flag,
 } from "lucide-react";
 import { useStockSentiment } from "../hooks/useStockSentiment";
 import { useCombinedBusinessNews } from "../hooks/useCombinedBusinessNews";
