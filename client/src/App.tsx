@@ -32,7 +32,7 @@ import { YFinanceDemo } from "@/components/YFinanceDemo";
 const queryClient = new QueryClient();
 
 const App = () => {
-  const [activeSection, setActiveSection] = useState("moorMeter");
+  const [activeSection, setActiveSection] = useState("sentiment");
 
   // Debug: log current section
   console.log("Current activeSection:", activeSection);
