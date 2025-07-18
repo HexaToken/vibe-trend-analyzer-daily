@@ -38,6 +38,7 @@ export const YFinanceSetupStatus: React.FC = () => {
       setLastChecked(new Date());
     } catch (error) {
       console.error("Failed to check YFinance status:", error);
+      setRetryAttempts((prev) => prev + 1);
 
       // Provide different error messages based on error type
       let errorMessage = "Failed to connect to YFinance service";
@@ -47,16 +48,31 @@ export const YFinanceSetupStatus: React.FC = () => {
         errorMessage = "Network connectivity issue";
       }
 
-      setStatus({
-        status: "error",
-        error: errorMessage,
-        setup_instructions: [
-          "Install YFinance and pandas:",
-          "pip install yfinance pandas",
-          "Or using uv:",
-          "uv add yfinance pandas",
-        ],
-      });
+      // If this is the first failure, assume YFinance is not available rather than erroring
+      if (retryAttempts === 0) {
+        setStatus({
+          status: "not_available",
+          error: null,
+          output: ["YFinance package not detected"],
+          setup_instructions: [
+            "Install YFinance and pandas:",
+            "pip install yfinance pandas",
+            "Or using uv:",
+            "uv add yfinance pandas",
+          ],
+        });
+      } else {
+        setStatus({
+          status: "error",
+          error: errorMessage,
+          setup_instructions: [
+            "Install YFinance and pandas:",
+            "pip install yfinance pandas",
+            "Or using uv:",
+            "uv add yfinance pandas",
+          ],
+        });
+      }
     } finally {
       setLoading(false);
     }
