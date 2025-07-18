@@ -279,14 +279,28 @@ class CoinMarketCapService {
       if (data.status && data.status.error_code !== 0) {
         // Special handling for rate limit errors
         if (
-          data.status.error_message &&
-          (data.status.error_message.includes("rate limit") ||
-            data.status.error_message.includes("IP rate limit"))
+          data.status.error_code === 1008 || // Rate limit exceeded
+          data.status.error_code === 429 || // Too many requests
+          (data.status.error_message &&
+            (data.status.error_message.toLowerCase().includes("rate limit") ||
+              data.status.error_message
+                .toLowerCase()
+                .includes("ip rate limit") ||
+              data.status.error_message
+                .toLowerCase()
+                .includes("too many requests")))
         ) {
           // Increase circuit breaker timeout for rate limits
-          this.circuitBreaker.timeout = 600000; // 10 minutes for rate limits
+          this.circuitBreaker.timeout = 900000; // 15 minutes for rate limits
           this.circuitBreaker.isOpen = true;
           this.circuitBreaker.lastFailureTime = Date.now();
+          this.circuitBreaker.failureCount = this.circuitBreaker.threshold;
+
+          throw new CoinMarketCapApiError(
+            "CoinMarketCap API rate limit exceeded - using fallback data",
+            data.status.error_code,
+            "rate_limit",
+          );
         }
 
         throw new CoinMarketCapApiError(
