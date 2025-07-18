@@ -755,7 +755,7 @@ export const MoorMeterDashboard: React.FC = () => {
             {/* Builder.io Integration Note */}
             <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
               <h3 className="text-xl font-semibold mb-4 text-blue-900 dark:text-blue-100">
-                🧱 Builder.io Integration Ready
+                ���� Builder.io Integration Ready
               </h3>
               <p className="text-blue-700 dark:text-blue-300 mb-4">
                 This Watchlist module is designed as modular Builder.io
@@ -1562,16 +1562,7 @@ export const MoorMeterDashboard: React.FC = () => {
       </main>
 
       {/* Footer */}
-            <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
-                <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-                  data={historicalMood}
-                  timeframe={selectedTimeframe}
-                  setTimeframe={setSelectedTimeframe}
-                />
-
-                {/* Trending Topics */}
-                <TrendingTopicsWidget topics={trendingTopics} />
-              </div>
+            
 
               {/* Sidebar */}
               <div className="space-y-6">
