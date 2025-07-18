@@ -1447,12 +1447,15 @@ export const MoorMeterDashboard: React.FC = () => {
                                 {/* Watchlist */}
                 <WatchlistWidget />
                       ����� Market Summary
-                    </h3>
-                    <div className="space-y-3">
-                      <div className="flex justify-between">
-                        <span className="text-gray-600 dark:text-gray-400">
-                          Gainers
-                        </span>
+                                    {/* AI Insight */}
+                <AIInsightWidget moodScore={moodScore} />
+
+                {/* Community Feed */}
+                <CommunityWidget posts={communityPosts} />
+              </div>
+            </div>
+          </>
+        );
                         <span className="font-semibold text-green-600">
                           12 (66.7%)
                         </span>
