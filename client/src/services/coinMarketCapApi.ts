@@ -485,6 +485,12 @@ const autoResetCircuitBreaker = () => {
 // Run auto-reset when the module loads
 autoResetCircuitBreaker();
 
+// Add global function for debugging in browser console
+(window as any).resetCryptoCircuitBreaker = () => {
+  coinMarketCapApi.resetCircuitBreaker();
+  console.log("Crypto circuit breaker manually reset");
+};
+
 // Utility functions to convert CoinMarketCap responses to our app's Ticker format
 export function convertCMCToTicker(
   crypto: CoinMarketCapCryptocurrency,
