@@ -601,20 +601,46 @@ export const MoorMeterDashboard: React.FC = () => {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-50 dark:bg-gray-800">
               {navItems.map((item) => (
-                <button
-                  key={item.key}
-                  onClick={() => {
-                    setActiveTab(item.key);
-                    setMobileMenuOpen(false);
-                  }}
-                  className={`flex items-center w-full px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
-                    activeTab === item.key
-                      ? "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300"
-                      : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
-                  }`}
-                >
-                  {item.label}
-                </button>
+                <div key={item.key}>
+                  {item.key === "Tool" ? (
+                    <div className="space-y-2">
+                      <div className="px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400">
+                        Tool
+                      </div>
+                      {item.subtabs?.map((subtab) => (
+                        <button
+                          key={subtab.key}
+                          onClick={() => {
+                            setActiveTab(item.key);
+                            setActiveToolsSubtab(subtab.key);
+                            setMobileMenuOpen(false);
+                          }}
+                          className="flex items-center w-full px-6 py-2 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        >
+                          {subtab.icon && (
+                            <subtab.icon className="w-4 h-4 mr-2" />
+                          )}
+                          {subtab.label}
+                        </button>
+                      ))}
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        setActiveTab(item.key);
+                        setMobileMenuOpen(false);
+                      }}
+                      className={`flex items-center w-full px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                        activeTab === item.key
+                          ? "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300"
+                          : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
+                      }`}
+                    >
+                      {item.icon && <item.icon className="w-4 h-4 mr-2" />}
+                      {item.label}
+                    </button>
+                  )}
+                </div>
               ))}
             </div>
           </div>
