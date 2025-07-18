@@ -744,6 +744,401 @@ export const MoorMeterDashboard: React.FC = () => {
           </div>
         );
 
+      case "Community":
+        return (
+          <div className="space-y-8">
+            {/* Community Header */}
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                  🧑‍🤝‍🧑 Community Insights
+                </h1>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Discuss trends, share your sentiment, and track what others
+                  are saying.
+                </p>
+              </div>
+
+              {/* Search Bar */}
+              <div className="flex gap-2">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                  <Input
+                    type="text"
+                    placeholder="Search keywords, tickers, or users..."
+                    className="pl-10 w-64"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Main Community Layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+              {/* Main Feed */}
+              <div className="lg:col-span-3 space-y-6">
+                {/* Post Composer */}
+                <Card className="p-6">
+                  <div className="flex items-start space-x-4">
+                    <Avatar className="w-12 h-12">
+                      <AvatarImage src="/api/placeholder/48/48" />
+                      <AvatarFallback>YU</AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1 space-y-4">
+                      <textarea
+                        placeholder="What's your market sentiment?"
+                        className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        rows={3}
+                      />
+
+                      {/* Post Options */}
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-4">
+                          {/* Ticker Tag */}
+                          <div className="flex items-center space-x-2">
+                            <span className="text-sm text-gray-600 dark:text-gray-400">
+                              Add ticker:
+                            </span>
+                            <Input
+                              placeholder="$TSLA"
+                              className="w-20 h-8 text-sm"
+                            />
+                          </div>
+
+                          {/* Sentiment Emoji */}
+                          <div className="flex items-center space-x-2">
+                            <span className="text-sm text-gray-600 dark:text-gray-400">
+                              Sentiment:
+                            </span>
+                            <div className="flex space-x-1">
+                              {["😃", "😐", "😢"].map((emoji, i) => (
+                                <Button
+                                  key={i}
+                                  variant="ghost"
+                                  size="sm"
+                                  className="h-8 w-8 p-0 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                >
+                                  {emoji}
+                                </Button>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Category Tag */}
+                          <div className="flex items-center space-x-2">
+                            <span className="text-sm text-gray-600 dark:text-gray-400">
+                              Category:
+                            </span>
+                            <select className="text-sm border border-gray-300 dark:border-gray-600 rounded px-2 py-1 bg-white dark:bg-gray-800">
+                              <option>#Tech</option>
+                              <option>#Crypto</option>
+                              <option>#Earnings</option>
+                              <option>#Economy</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <Button className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700">
+                          Post
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+
+                {/* Live Feed of Posts */}
+                <div className="space-y-4">
+                  {communityMessages.map((message) => (
+                    <Card
+                      key={message.id}
+                      className="p-6 hover:shadow-lg transition-shadow"
+                    >
+                      <div className="flex items-start space-x-4">
+                        <Avatar className="w-10 h-10">
+                          <AvatarImage src={message.avatar} />
+                          <AvatarFallback>
+                            {message.user.slice(0, 2).toUpperCase()}
+                          </AvatarFallback>
+                        </Avatar>
+
+                        <div className="flex-1">
+                          {/* Post Header */}
+                          <div className="flex items-center justify-between mb-2">
+                            <div className="flex items-center space-x-2">
+                              <span className="font-semibold text-gray-900 dark:text-white">
+                                {message.user}
+                              </span>
+                              <Badge variant="secondary" className="text-xs">
+                                {message.platform}
+                              </Badge>
+                              <span className="text-sm text-gray-500">
+                                {Math.floor(
+                                  (Date.now() - message.timestamp.getTime()) /
+                                    60000,
+                                )}{" "}
+                                min ago
+                              </span>
+                            </div>
+
+                            {/* Sentiment Indicator */}
+                            <div className="flex items-center space-x-2">
+                              <Badge
+                                variant={
+                                  message.sentiment >= 70
+                                    ? "default"
+                                    : message.sentiment >= 40
+                                      ? "secondary"
+                                      : "destructive"
+                                }
+                                className="text-xs"
+                              >
+                                {message.sentiment >= 70
+                                  ? "😃 Bullish"
+                                  : message.sentiment >= 40
+                                    ? "😐 Neutral"
+                                    : "😢 Bearish"}
+                              </Badge>
+                            </div>
+                          </div>
+
+                          {/* Post Content */}
+                          <p className="text-gray-900 dark:text-white mb-3">
+                            {message.message}
+                          </p>
+
+                          {/* Post Actions */}
+                          <div className="flex items-center space-x-6">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="flex items-center space-x-1 text-gray-500 hover:text-blue-500"
+                            >
+                              <Heart className="w-4 h-4" />
+                              <span>{message.likes}</span>
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="flex items-center space-x-1 text-gray-500 hover:text-green-500"
+                            >
+                              <MessageCircle className="w-4 h-4" />
+                              <span>Reply</span>
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="flex items-center space-x-1 text-gray-500 hover:text-purple-500"
+                            >
+                              <RefreshCw className="w-4 h-4" />
+                              <span>Repost</span>
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="text-gray-400 hover:text-red-500"
+                            >
+                              <Flag className="w-4 h-4" />
+                            </Button>
+                          </div>
+
+                          {/* Threaded Comments Section */}
+                          <div className="mt-4 pl-6 border-l-2 border-gray-200 dark:border-gray-700">
+                            <div className="flex items-start space-x-3">
+                              <Avatar className="w-8 h-8">
+                                <AvatarFallback>U</AvatarFallback>
+                              </Avatar>
+                              <Input
+                                placeholder="Write a reply..."
+                                className="flex-1 h-8 text-sm"
+                              />
+                              <Button
+                                size="sm"
+                                variant="ghost"
+                                className="h-8 px-3 text-blue-500"
+                              >
+                                Reply
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+
+              {/* Sidebar */}
+              <div className="space-y-6">
+                {/* Trending Topics */}
+                <Card className="p-6">
+                  <h3 className="text-lg font-semibold mb-4 flex items-center">
+                    <TrendingUp className="w-5 h-5 mr-2 text-green-500" />
+                    📈 Trending Tickers
+                  </h3>
+                  <div className="space-y-3">
+                    {[
+                      { ticker: "$NVDA", mentions: 1240, sentiment: 85 },
+                      { ticker: "$TSLA", mentions: 890, sentiment: 42 },
+                      { ticker: "$AAPL", mentions: 756, sentiment: 78 },
+                      { ticker: "$BTC", mentions: 654, sentiment: 65 },
+                      { ticker: "$SPY", mentions: 543, sentiment: 55 },
+                    ].map((item, i) => (
+                      <div
+                        key={i}
+                        className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                      >
+                        <div className="flex items-center space-x-3">
+                          <Badge
+                            variant="outline"
+                            className="font-mono text-sm"
+                          >
+                            {item.ticker}
+                          </Badge>
+                          <span className="text-sm text-gray-600 dark:text-gray-400">
+                            {item.mentions} mentions
+                          </span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <div
+                            className={`w-2 h-2 rounded-full ${
+                              item.sentiment >= 70
+                                ? "bg-green-500"
+                                : item.sentiment >= 40
+                                  ? "bg-yellow-500"
+                                  : "bg-red-500"
+                            }`}
+                          ></div>
+                          <span className="text-sm font-medium">
+                            {item.sentiment}%
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+
+                {/* Daily Mood Poll */}
+                <Card className="p-6">
+                  <h3 className="text-lg font-semibold mb-4 flex items-center">
+                    <BarChart3 className="w-5 h-5 mr-2 text-blue-500" />
+                    🗳️ Daily Mood Poll
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                    How do you feel about today's market?
+                  </p>
+
+                  <div className="space-y-3">
+                    {[
+                      { label: "😃 Bullish", votes: 45, color: "bg-green-500" },
+                      {
+                        label: "😐 Neutral",
+                        votes: 32,
+                        color: "bg-yellow-500",
+                      },
+                      { label: "😢 Bearish", votes: 23, color: "bg-red-500" },
+                    ].map((option, i) => (
+                      <div key={i} className="space-y-2">
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm font-medium">
+                            {option.label}
+                          </span>
+                          <span className="text-sm text-gray-600 dark:text-gray-400">
+                            {option.votes}%
+                          </span>
+                        </div>
+                        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                          <div
+                            className={`h-2 rounded-full ${option.color}`}
+                            style={{ width: `${option.votes}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <Button className="w-full mt-4" variant="outline">
+                    Cast Your Vote
+                  </Button>
+                </Card>
+
+                {/* Community Stats */}
+                <Card className="p-6">
+                  <h3 className="text-lg font-semibold mb-4 flex items-center">
+                    <Users className="w-5 h-5 mr-2 text-purple-500" />
+                    Community Stats
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-gray-600 dark:text-gray-400">
+                        Active Users
+                      </span>
+                      <span className="font-semibold">2,847</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-gray-600 dark:text-gray-400">
+                        Posts Today
+                      </span>
+                      <span className="font-semibold">156</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-gray-600 dark:text-gray-400">
+                        Avg Sentiment
+                      </span>
+                      <Badge variant="default" className="bg-green-500">
+                        Bullish 68%
+                      </Badge>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            </div>
+
+            {/* Builder.io Integration Note */}
+            <div className="bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-lg p-6 border border-purple-200 dark:border-purple-800">
+              <h3 className="text-xl font-semibold mb-4 text-purple-900 dark:text-purple-100">
+                🧱 Builder.io Community Module
+              </h3>
+              <p className="text-purple-700 dark:text-purple-300 mb-4">
+                This Community module is designed as modular Builder.io
+                components with the following features:
+              </p>
+              <ul className="text-sm text-purple-600 dark:text-purple-400 space-y-2">
+                <li className="flex items-center">
+                  <div className="w-2 h-2 bg-purple-500 rounded-full mr-2"></div>
+                  Real-time post feed with sentiment analysis
+                </li>
+                <li className="flex items-center">
+                  <div className="w-2 h-2 bg-purple-500 rounded-full mr-2"></div>
+                  Interactive post composer with ticker tagging
+                </li>
+                <li className="flex items-center">
+                  <div className="w-2 h-2 bg-purple-500 rounded-full mr-2"></div>
+                  Threaded comments and replies system
+                </li>
+                <li className="flex items-center">
+                  <div className="w-2 h-2 bg-purple-500 rounded-full mr-2"></div>
+                  Trending tickers with sentiment indicators
+                </li>
+                <li className="flex items-center">
+                  <div className="w-2 h-2 bg-purple-500 rounded-full mr-2"></div>
+                  Daily mood polling with visual results
+                </li>
+                <li className="flex items-center">
+                  <div className="w-2 h-2 bg-purple-500 rounded-full mr-2"></div>
+                  Moderation tools and reporting features
+                </li>
+              </ul>
+              <div className="mt-4 p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg">
+                <p className="text-xs text-gray-600 dark:text-gray-400">
+                  <strong>API Integration:</strong> Connect to{" "}
+                  <code>GET /api/community/posts</code>,{" "}
+                  <code>POST /api/community/post</code>, and{" "}
+                  <code>GET /api/community/trending</code> for live data
+                </p>
+              </div>
+            </div>
+          </div>
+        );
+
       case "Home":
       default:
         return (
