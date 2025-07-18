@@ -370,11 +370,11 @@ export const MoorMeterDashboard: React.FC = () => {
 
   // Navigation items
   const navItems = [
-    { label: "Home", href: "#" },
-    { label: "Market Mood", href: "#market" },
-    { label: "Watchlist", href: "#watchlist" },
-    { label: "News", href: "#news" },
-    { label: "Community", href: "#community" },
+    { label: "Home", key: "Home", href: "#" },
+    { label: "Market Mood", key: "Market Mood", href: "#market" },
+    { label: "Watchlist", key: "Watchlist", href: "#watchlist" },
+    { label: "News", key: "News", href: "#news" },
+    { label: "Community", key: "Community", href: "#community" },
   ];
 
   // Tools dropdown items
