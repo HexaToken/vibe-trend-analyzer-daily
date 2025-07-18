@@ -1554,6 +1554,51 @@ export const MoorMeterDashboard: React.FC = () => {
                   {item.label}
                 </Button>
               ))}
+
+              {/* Tools Dropdown */}
+              <DropdownMenu
+                open={toolsDropdownOpen}
+                onOpenChange={setToolsDropdownOpen}
+              >
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant={activeTab === "Tools" ? "default" : "ghost"}
+                    size="sm"
+                    className={`${
+                      activeTab === "Tools"
+                        ? "bg-gradient-to-r from-blue-500 to-purple-600"
+                        : ""
+                    } flex items-center space-x-1`}
+                  >
+                    <span>Tools</span>
+                    <ChevronDown
+                      className={`w-4 h-4 transition-transform duration-200 ${
+                        toolsDropdownOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start" className="w-48">
+                  {toolsItems.map((tool) => (
+                    <DropdownMenuItem
+                      key={tool.value}
+                      onClick={() => {
+                        setActiveTab("Tools");
+                        setActiveToolsSubtab(tool.value);
+                        setToolsDropdownOpen(false);
+                      }}
+                      className={`cursor-pointer ${
+                        activeTab === "Tools" &&
+                        activeToolsSubtab === tool.value
+                          ? "bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
+                          : ""
+                      }`}
+                    >
+                      📊 {tool.label}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
             </nav>
 
             {/* Search Bar */}
