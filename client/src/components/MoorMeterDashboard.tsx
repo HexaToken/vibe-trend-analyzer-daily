@@ -1452,17 +1452,10 @@ export const MoorMeterDashboard: React.FC = () => {
 
                 {/* Community Feed */}
                 <CommunityWidget posts={communityPosts} />
-              </div>
+                            </div>
             </div>
-                    </>
+          </>
         );
-                        <span className="text-gray-600 dark:text-gray-400">
-                          Unchanged
-                        </span>
-                        <span className="font-semibold text-gray-600">
-                          0 (0%)
-                        </span>
-                      </div>
                     </div>
                   </Card>
 
