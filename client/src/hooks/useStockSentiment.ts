@@ -50,6 +50,8 @@ export const useStockSentiment = (refreshInterval: number = 300000) => {
             `/api/proxy/finnhub/quote?symbol=${symbol}`,
             {
               signal: controller.signal,
+              mode: "cors",
+              cache: "default",
             },
           );
 
@@ -83,7 +85,7 @@ export const useStockSentiment = (refreshInterval: number = 300000) => {
             changePercent: data.dp || 0,
             sentimentScore: calculateSentimentScore(data.dp || 0),
           };
-        } catch (stockError) {
+        } catch (stockError: any) {
           if (stockError.name === "AbortError") {
             console.warn(`Timeout fetching ${symbol}`);
           } else {
@@ -97,7 +99,7 @@ export const useStockSentiment = (refreshInterval: number = 300000) => {
         }
       });
 
-      const stockData = await Promise.all(stockPromises);
+      const stockData = await Promise.allSettled(stockPromises);
 
       // Filter out symbols that returned no data and have at least some valid stocks
       const validStockData = stockData.filter(
