@@ -493,6 +493,110 @@ print(json.dumps(result))
     }
   });
 
+  // YFinance setup and diagnosis endpoint
+  app.get("/api/proxy/yfinance/status", async (req, res) => {
+    try {
+      const { spawn } = await import("child_process");
+      const python = spawn("python3", [
+        "-c",
+        `
+import sys
+import os
+sys.path.insert(0, os.path.join(os.getcwd(), '.pythonlibs', 'lib', 'python3.11', 'site-packages'))
+sys.path.insert(0, os.getcwd())
+
+try:
+    import yfinance as yf
+    import pandas as pd
+    print("SUCCESS: YFinance and pandas are available")
+    print(f"yfinance version: {yf.__version__}")
+    print(f"pandas version: {pd.__version__}")
+
+    # Test basic functionality
+    ticker = yf.Ticker("AAPL")
+    info = ticker.info
+    if info:
+        print("SUCCESS: YFinance API test passed")
+    else:
+        print("WARNING: YFinance API test failed - no data returned")
+except ImportError as e:
+    print(f"ERROR: Import failed - {e}")
+except Exception as e:
+    print(f"ERROR: YFinance test failed - {e}")
+      `,
+      ]);
+
+      let output = "";
+      let error = "";
+      let responseHandled = false;
+
+      python.stdout.on("data", (data: any) => {
+        output += data.toString();
+      });
+
+      python.stderr.on("data", (data: any) => {
+        error += data.toString();
+      });
+
+      python.on("close", (code: number) => {
+        if (responseHandled) return;
+        responseHandled = true;
+
+        const lines = output.trim().split("\n");
+        const status = output.includes(
+          "SUCCESS: YFinance and pandas are available",
+        );
+
+        res.json({
+          status: status ? "available" : "not_available",
+          code,
+          output: lines,
+          error: error || null,
+          setup_instructions: status
+            ? null
+            : [
+                "Install YFinance and pandas:",
+                "pip install yfinance pandas",
+                "Or using uv:",
+                "uv add yfinance pandas",
+              ],
+        });
+      });
+
+      const timeoutId = setTimeout(() => {
+        if (responseHandled) return;
+        responseHandled = true;
+        python.kill();
+        res.status(408).json({
+          status: "timeout",
+          error: "Diagnosis timeout",
+          setup_instructions: [
+            "Install YFinance and pandas:",
+            "pip install yfinance pandas",
+            "Or using uv:",
+            "uv add yfinance pandas",
+          ],
+        });
+      }, 15000);
+
+      python.on("close", () => {
+        clearTimeout(timeoutId);
+      });
+    } catch (error) {
+      console.error("YFinance status check error:", error);
+      res.status(500).json({
+        status: "error",
+        error: "Failed to check YFinance status",
+        setup_instructions: [
+          "Install YFinance and pandas:",
+          "pip install yfinance pandas",
+          "Or using uv:",
+          "uv add yfinance pandas",
+        ],
+      });
+    }
+  });
+
   app.get("/api/proxy/yfinance/sentiment", async (req, res) => {
     try {
       const { spawn } = await import("child_process");
