@@ -1579,19 +1579,7 @@ export const MoorMeterDashboard: React.FC = () => {
                             </div>
             </div>
           </>
-                                                                                                );
-                      Responsive design for mobile and desktop
-                    </li>
-                  </ul>
-                  <div className="mt-4 p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg">
-                    <p className="text-xs text-gray-600 dark:text-gray-400">
-                      <strong>API Integration:</strong> Connect to{" "}
-                      <code>GET /api/market/heatmap</code> and{" "}
-                      <code>GET /api/quotes/realtime</code> for live data
-                    </p>
-                  </div>
-                </div>
-              </div>
+                                                                                                        );
             )}
           </div>
         );
