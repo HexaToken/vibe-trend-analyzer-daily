@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { NewsArticle } from "../data/mockData";
+import { robustFetchJson, FetchError } from "../lib/robustFetch";
 
 interface UseYFinanceNewsOptions {
   refreshInterval?: number; // in milliseconds
