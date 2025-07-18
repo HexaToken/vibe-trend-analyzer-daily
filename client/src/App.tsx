@@ -37,7 +37,7 @@ const App = () => {
   const renderContent = () => {
     switch (activeSection) {
       case "sentiment":
-        return <SentimentDashboard />;
+        return <BuilderDemo />;
       case "analytics":
         return <Analytics />;
       case "history":
@@ -75,8 +75,7 @@ const App = () => {
         return <YFinanceDemo />;
       case "moorMeter":
         return <MoorMeterDashboard />;
-      case "builderDemo":
-        return <BuilderDemo />;
+
       default:
         return <MoorMeterDashboard />;
     }
