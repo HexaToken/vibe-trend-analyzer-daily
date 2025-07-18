@@ -12,6 +12,7 @@ import {
   Crown,
   Settings,
   Twitter,
+  Instagram,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -23,6 +24,8 @@ import { TickerPage } from "./TickerPage";
 import { WatchlistManager } from "./WatchlistManager";
 import { CommunityRooms } from "./CommunityRooms";
 import { TwitterTrending } from "./TwitterTrending";
+import { InstagramProfile } from "./InstagramProfile";
+import { InstagramTrending } from "./InstagramTrending";
 import { mockTrendingData, mockTickers } from "@/data/socialMockData";
 import { useAuth } from "@/contexts/AuthContext";
 import { RealTimePrice, StockGrid } from "./RealTimePrice";
@@ -36,7 +39,8 @@ type ViewType =
   | "ticker"
   | "trending"
   | "rooms"
-  | "twitter";
+  | "twitter"
+  | "instagram";
 
 export const SocialPlatform = () => {
   const { isAuthenticated, user } = useAuth();
@@ -516,6 +520,28 @@ export const SocialPlatform = () => {
           </div>
         );
 
+      case "instagram":
+        return (
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-2xl font-bold">Instagram Financial Content</h2>
+                <p className="text-muted-foreground">
+                  Browse financial profiles and trending content from Instagram
+                </p>
+              </div>
+              <Button variant="outline" onClick={() => setCurrentView("feed")}>
+                Back to Feed
+              </Button>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <InstagramProfile />
+              <InstagramTrending />
+            </div>
+          </div>
+        );
+
       default:
         return (
           <SocialFeed
@@ -581,7 +607,7 @@ export const SocialPlatform = () => {
         onValueChange={(value: any) => setCurrentView(value)}
         className="mb-8"
       >
-        <TabsList className="grid w-full grid-cols-5">
+        <TabsList className="grid w-full grid-cols-6">
           <TabsTrigger value="feed" className="flex items-center gap-2">
             <Home className="h-4 w-4" />
             Feed
@@ -604,6 +630,10 @@ export const SocialPlatform = () => {
           <TabsTrigger value="twitter" className="flex items-center gap-2">
             <Twitter className="h-4 w-4" />
             Twitter
+          </TabsTrigger>
+          <TabsTrigger value="instagram" className="flex items-center gap-2">
+            <Instagram className="h-4 w-4" />
+            Instagram
           </TabsTrigger>
         </TabsList>
       </Tabs>

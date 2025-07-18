@@ -47,6 +47,14 @@ The application integrates with multiple external services:
 **Note**: API keys need to be configured for live data integration.
 
 ## Recent Changes
+- **2025-01-18**: Added comprehensive Instagram integration to social platform
+  - Installed instagrapi package for Instagram API access
+  - Created Instagram service with Python endpoints for user profiles, hashtag search, and trending content
+  - Added Instagram API proxy routes in Express server with proper authentication handling
+  - Built React components for Instagram profile search and trending financial content display
+  - Integrated Instagram tab into social platform navigation with full UI/UX
+  - Implemented intelligent fallback system when Instagram API requires authentication
+  - Added Instagram hooks for data fetching with proper error handling and caching
 - **2025-01-17**: Fixed YFinance integration and server stability issues
   - Resolved server crash due to race condition in response handling
   - Fixed duplicate React keys in YFinance data by improving ID generation

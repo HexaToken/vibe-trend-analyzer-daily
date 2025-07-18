@@ -1,5 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
+import { spawn } from "child_process";
 import { storage } from "./storage";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -391,6 +392,154 @@ print(json.dumps(result))
     } catch (error) {
       console.error("YFinance ticker proxy error:", error);
       res.status(500).json({ error: "Failed to fetch YFinance ticker data" });
+    }
+  });
+
+  // Instagram API endpoints
+  app.get("/api/proxy/instagram/user/:username", async (req, res) => {
+    try {
+      const { username } = req.params;
+      const python = spawn("python3", ["server/instagram_service.py", "user_info", username]);
+
+      let responseHandled = false;
+      let dataBuffer = "";
+
+      python.stdout.on("data", (data) => {
+        dataBuffer += data.toString();
+      });
+
+      python.stderr.on("data", (data) => {
+        console.error("Instagram user API error:", data.toString());
+      });
+
+      python.on("close", (code) => {
+        if (responseHandled) return;
+        responseHandled = true;
+
+        try {
+          const result = JSON.parse(dataBuffer.trim());
+          if (result.status === "error") {
+            res.status(400).json(result);
+          } else {
+            res.json(result);
+          }
+        } catch (parseError) {
+          console.error("Failed to parse Instagram user data:", parseError);
+          res.status(500).json({ error: "Failed to parse Instagram user data" });
+        }
+      });
+
+      const timeoutId = setTimeout(() => {
+        if (responseHandled) return;
+        responseHandled = true;
+        python.kill();
+        res.status(408).json({ error: "Request timeout" });
+      }, 30000);
+
+      python.on("close", () => {
+        clearTimeout(timeoutId);
+      });
+    } catch (error) {
+      console.error("Instagram user proxy error:", error);
+      res.status(500).json({ error: "Failed to fetch Instagram user data" });
+    }
+  });
+
+  app.get("/api/proxy/instagram/hashtag/:hashtag", async (req, res) => {
+    try {
+      const { hashtag } = req.params;
+      const { limit = 20 } = req.query;
+      const python = spawn("python3", ["server/instagram_service.py", "search_hashtag", hashtag, limit.toString()]);
+
+      let responseHandled = false;
+      let dataBuffer = "";
+
+      python.stdout.on("data", (data) => {
+        dataBuffer += data.toString();
+      });
+
+      python.stderr.on("data", (data) => {
+        console.error("Instagram hashtag API error:", data.toString());
+      });
+
+      python.on("close", (code) => {
+        if (responseHandled) return;
+        responseHandled = true;
+
+        try {
+          const result = JSON.parse(dataBuffer.trim());
+          if (result.status === "error") {
+            res.status(400).json(result);
+          } else {
+            res.json(result);
+          }
+        } catch (parseError) {
+          console.error("Failed to parse Instagram hashtag data:", parseError);
+          res.status(500).json({ error: "Failed to parse Instagram hashtag data" });
+        }
+      });
+
+      const timeoutId = setTimeout(() => {
+        if (responseHandled) return;
+        responseHandled = true;
+        python.kill();
+        res.status(408).json({ error: "Request timeout" });
+      }, 30000);
+
+      python.on("close", () => {
+        clearTimeout(timeoutId);
+      });
+    } catch (error) {
+      console.error("Instagram hashtag proxy error:", error);
+      res.status(500).json({ error: "Failed to fetch Instagram hashtag data" });
+    }
+  });
+
+  app.get("/api/proxy/instagram/trending/finance", async (req, res) => {
+    try {
+      const python = spawn("python3", ["server/instagram_service.py", "trending_finance"]);
+
+      let responseHandled = false;
+      let dataBuffer = "";
+
+      python.stdout.on("data", (data) => {
+        dataBuffer += data.toString();
+      });
+
+      python.stderr.on("data", (data) => {
+        console.error("Instagram trending API error:", data.toString());
+      });
+
+      python.on("close", (code) => {
+        if (responseHandled) return;
+        responseHandled = true;
+
+        try {
+          const result = JSON.parse(dataBuffer.trim());
+          if (result.status === "error") {
+            res.status(400).json(result);
+          } else {
+            res.json(result);
+          }
+        } catch (parseError) {
+          console.error("Failed to parse Instagram trending data:", parseError);
+          res.status(500).json({ error: "Failed to parse Instagram trending data" });
+        }
+      });
+
+      const timeoutId = setTimeout(() => {
+        if (responseHandled) return;
+        responseHandled = true;
+        python.kill();
+        res.status(408).json({ error: "Request timeout" });
+      }, 30000);
+
+      python.on("close", () => {
+        clearTimeout(timeoutId);
+      });
+    } catch (error) {
+      console.error("Instagram trending proxy error:", error);
+      res.status(500).json({ error: "Failed to fetch Instagram trending data" });
     }
   });
 
