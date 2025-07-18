@@ -42,12 +42,18 @@ export const useStockSentiment = (refreshInterval: number = 300000) => {
     try {
       const stockPromises = TOP_10_STOCKS.map(async (symbol) => {
         try {
+          // Create AbortController for timeout
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
           const response = await fetch(
             `/api/proxy/finnhub/quote?symbol=${symbol}`,
             {
-              signal: AbortSignal.timeout(10000), // 10 second timeout
+              signal: controller.signal,
             },
           );
+
+          clearTimeout(timeoutId); // Clear timeout if fetch succeeds
 
           if (!response.ok) {
             console.warn(
