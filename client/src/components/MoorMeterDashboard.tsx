@@ -234,10 +234,6 @@ export const MoorMeterDashboard: React.FC = () => {
       case "Market Mood":
         return (
           <div className="space-y-8">
-            <MoodScoreHero
-              title="Market Sentiment Analysis"
-              subtitle="Builder.io powered modular components for real-time market mood"
-            />
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <TopStocksModule
                 title="Top Performing Stocks"
