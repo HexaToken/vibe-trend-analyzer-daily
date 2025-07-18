@@ -1455,19 +1455,7 @@ export const MoorMeterDashboard: React.FC = () => {
               </div>
             </div>
           </>
-        );
-                  </Card>
-
-                  <Card className="p-6">
-                    <h3 className="text-lg font-semibold mb-4 flex items-center">
-                      🏆 Top Performers
-                    </h3>
-                    <div className="space-y-2">
-                      <div className="flex justify-between items-center">
-                        <span className="font-medium">NVDA</span>
-                        <span className="text-green-600 font-semibold">
-                          +5.67%
-                        </span>
+                );
                       </div>
                       <div className="flex justify-between items-center">
                         <span className="font-medium">AMZN</span>
