@@ -1576,15 +1576,14 @@ export const MoorMeterDashboard: React.FC = () => {
 
                 {/* Community Feed */}
                                 <CommunityWidget posts={communityPosts} />
-                            </div>
+                                                        </div>
             </div>
-                    </>
+          </>
         );
       }
   };
 
   export default MoorMeterDashboard;
-                {/* Personal Mood Score */}
                 <PersonalMoodCard />
 
                 {/* Watchlist Manager */}
