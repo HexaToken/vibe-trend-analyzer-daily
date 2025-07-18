@@ -165,6 +165,13 @@ export const SocialPlatform = () => {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
+          {cryptoError && (
+            <div className="text-xs text-orange-600 p-2 bg-orange-50 rounded">
+              {cryptoError.includes("Circuit breaker")
+                ? "API rate limited - showing mock data"
+                : cryptoError}
+            </div>
+          )}
           {cryptoTickers.slice(0, 3).map((crypto, index) => (
             <div
               key={crypto.symbol}
