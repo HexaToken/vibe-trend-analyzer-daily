@@ -1041,7 +1041,7 @@ export const MoorMeterDashboard: React.FC = () => {
                                 className="text-xs"
                               >
                                 {message.sentiment >= 70
-                                  ? "���� Bullish"
+                                  ? "😃 Bullish"
                                   : message.sentiment >= 40
                                     ? "😐 Neutral"
                                     : "😢 Bearish"}
@@ -1562,8 +1562,22 @@ export const MoorMeterDashboard: React.FC = () => {
       </main>
 
       {/* Footer */}
-                                    <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
-        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+                <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+                  data={historicalMood}
+                  timeframe={selectedTimeframe}
+                  setTimeframe={setSelectedTimeframe}
+                />
+
+                {/* Trending Topics */}
+                <TrendingTopicsWidget topics={trendingTopics} />
+              </div>
+
+              {/* Sidebar */}
+              <div className="space-y-6">
+                {/* Personal Mood Score */}
+                <PersonalMoodCard />
+                                {/* Watchlist */}
                 <WatchlistWidget />
                       ����� Market Summary
                                     {/* AI Insight */}
@@ -1574,7 +1588,28 @@ export const MoorMeterDashboard: React.FC = () => {
                             </div>
             </div>
           </>
-                        );
+        );
+                        <span className="text-green-600 font-semibold">
+                          +2.34%
+                        </span>
+                      </div>
+                    </div>
+                  </Card>
+
+                  <Card className="p-6">
+                    <h3 className="text-lg font-semibold mb-4 flex items-center">
+                      📉 Worst Performers
+                    </h3>
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium">TSLA</span>
+                        <span className="text-red-600 font-semibold">
+                          -2.45%
+                        </span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium">DIS</span>
+                        <span className="text-red-600 font-semibold">
                           -1.78%
                         </span>
                       </div>
