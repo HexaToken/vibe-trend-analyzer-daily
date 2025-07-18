@@ -175,7 +175,7 @@ export const YFinanceSetupStatus: React.FC = () => {
     }
   };
 
-    try {
+  try {
     if (status?.status === "available") {
       return (
         <div className="flex items-center space-x-2 text-sm">
@@ -191,86 +191,100 @@ export const YFinanceSetupStatus: React.FC = () => {
     }
 
     return (
-    <Card className="w-full max-w-2xl">
-      <CardHeader className="pb-3">
-        <CardTitle className="flex items-center space-x-2">
-          {getStatusIcon()}
-          <span className={getStatusColor()}>{getStatusText()}</span>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => {
-              setRetryAttempts(0);
-              setHasCriticalError(false);
-              checkStatus().catch(console.error);
-            }}
-            disabled={loading}
-            className="ml-auto"
-            title="Refresh YFinance status"
-          >
-            <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
-          </Button>
-        </CardTitle>
-      </CardHeader>
+      <Card className="w-full max-w-2xl">
+        <CardHeader className="pb-3">
+          <CardTitle className="flex items-center space-x-2">
+            {getStatusIcon()}
+            <span className={getStatusColor()}>{getStatusText()}</span>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => {
+                setRetryAttempts(0);
+                setHasCriticalError(false);
+                checkStatus().catch(console.error);
+              }}
+              disabled={loading}
+              className="ml-auto"
+              title="Refresh YFinance status"
+            >
+              <RefreshCw
+                className={`h-4 w-4 ${loading ? "animate-spin" : ""}`}
+              />
+            </Button>
+          </CardTitle>
+        </CardHeader>
 
-      <CardContent className="space-y-4">
-        {status?.error && (
-          <Alert>
-            <AlertCircle className="h-4 w-4" />
-            <AlertDescription>
-              <strong>Error:</strong> {status.error}
-            </AlertDescription>
-          </Alert>
-        )}
+        <CardContent className="space-y-4">
+          {status?.error && (
+            <Alert>
+              <AlertCircle className="h-4 w-4" />
+              <AlertDescription>
+                <strong>Error:</strong> {status.error}
+              </AlertDescription>
+            </Alert>
+          )}
 
-        {status?.output && status.output.length > 0 && (
-          <div>
-            <h4 className="font-medium mb-2">Diagnostic Output:</h4>
-            <pre className="bg-gray-100 p-3 rounded text-sm overflow-x-auto">
-              {status.output.join("\n")}
-            </pre>
-          </div>
-        )}
-
-        {status?.setup_instructions && (
-          <div>
-            <h4 className="font-medium mb-2">Setup Instructions:</h4>
-            <div className="bg-blue-50 p-3 rounded">
-              {status.setup_instructions.map((instruction, index) => (
-                <div key={index} className="text-sm">
-                  {instruction.includes("pip install") ||
-                  instruction.includes("uv add") ? (
-                    <code className="bg-gray-200 px-2 py-1 rounded font-mono">
-                      {instruction}
-                    </code>
-                  ) : (
-                    <span>{instruction}</span>
-                  )}
-                </div>
-              ))}
+          {status?.output && status.output.length > 0 && (
+            <div>
+              <h4 className="font-medium mb-2">Diagnostic Output:</h4>
+              <pre className="bg-gray-100 p-3 rounded text-sm overflow-x-auto">
+                {status.output.join("\n")}
+              </pre>
             </div>
-          </div>
-        )}
+          )}
 
-        <div className="text-sm text-gray-600">
-          <p>
-            <strong>What is YFinance?</strong>
-          </p>
-          <p>
-            YFinance provides real-time financial data, stock quotes, market
-            news, and sentiment analysis. When properly configured, it enhances
-            the application with live market data.
-          </p>
-        </div>
+          {status?.setup_instructions && (
+            <div>
+              <h4 className="font-medium mb-2">Setup Instructions:</h4>
+              <div className="bg-blue-50 p-3 rounded">
+                {status.setup_instructions.map((instruction, index) => (
+                  <div key={index} className="text-sm">
+                    {instruction.includes("pip install") ||
+                    instruction.includes("uv add") ? (
+                      <code className="bg-gray-200 px-2 py-1 rounded font-mono">
+                        {instruction}
+                      </code>
+                    ) : (
+                      <span>{instruction}</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
-        {lastChecked && (
-          <div className="text-xs text-gray-400">
-            Last checked: {lastChecked.toLocaleString()}
+          <div className="text-sm text-gray-600">
+            <p>
+              <strong>What is YFinance?</strong>
+            </p>
+            <p>
+              YFinance provides real-time financial data, stock quotes, market
+              news, and sentiment analysis. When properly configured, it
+              enhances the application with live market data.
+            </p>
           </div>
-        )}
-      </CardContent>
-    </Card>
-  );
+
+          {lastChecked && (
+            <div className="text-xs text-gray-400">
+              Last checked: {lastChecked.toLocaleString()}
+            </div>
+          )}
+        </CardContent>
+      </Card>
+    );
+  } catch (renderError) {
+    console.error("YFinance component render error:", renderError);
+    return (
+      <div className="p-4 bg-red-50 border border-red-200 rounded">
+        <p className="text-sm text-red-800">
+          YFinance setup component failed to render properly.
+          <br />
+          To set up YFinance manually: <code>pip install yfinance pandas</code>
+        </p>
+      </div>
+    );
+  }
 };
 
 export default YFinanceSetupStatus;
