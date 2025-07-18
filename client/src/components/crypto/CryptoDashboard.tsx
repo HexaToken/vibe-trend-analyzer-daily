@@ -26,6 +26,7 @@ import {
   useGlobalMetrics,
 } from "@/hooks/useCoinMarketCap";
 import { CryptoPrice, CryptoGrid } from "./CryptoPrice";
+import CoinMarketCapStatus from "../CoinMarketCapStatus";
 
 export const CryptoDashboard = () => {
   const [selectedTimeframe, setSelectedTimeframe] = useState<
@@ -43,7 +44,7 @@ export const CryptoDashboard = () => {
 
   // Get global metrics with reduced refresh rate
   const { data: globalMetrics, loading: metricsLoading } = useGlobalMetrics({
-    refreshInterval: 300000 // 5 minutes
+    refreshInterval: 300000, // 5 minutes
   });
 
   // Filter cryptocurrencies based on search
@@ -202,7 +203,9 @@ export const CryptoDashboard = () => {
               <p>Loading popular cryptocurrencies...</p>
             </div>
           ) : (
-            <CryptoGrid symbols={topCryptos.slice(0, 6).map(crypto => crypto.symbol)} />
+            <CryptoGrid
+              symbols={topCryptos.slice(0, 6).map((crypto) => crypto.symbol)}
+            />
           )}
         </CardContent>
       </Card>
