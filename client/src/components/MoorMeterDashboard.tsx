@@ -1332,7 +1332,7 @@ export const MoorMeterDashboard: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold mb-4 flex items-center">
-                      📈 Market Summary
+                      ���� Market Summary
                     </h3>
                     <div className="space-y-3">
                       <div className="flex justify-between">
@@ -1676,6 +1676,49 @@ export const MoorMeterDashboard: React.FC = () => {
                   {item.label}
                 </Button>
               ))}
+
+              {/* Tools Mobile Dropdown */}
+              <div className="space-y-1">
+                <Button
+                  variant={activeTab === "Tools" ? "default" : "ghost"}
+                  size="sm"
+                  onClick={() => setToolsDropdownOpen(!toolsDropdownOpen)}
+                  className="w-full justify-between"
+                >
+                  <span>Tools</span>
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform duration-200 ${
+                      toolsDropdownOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </Button>
+
+                {toolsDropdownOpen && (
+                  <div className="ml-4 space-y-1">
+                    {toolsItems.map((tool) => (
+                      <Button
+                        key={tool.value}
+                        variant={
+                          activeTab === "Tools" &&
+                          activeToolsSubtab === tool.value
+                            ? "default"
+                            : "ghost"
+                        }
+                        size="sm"
+                        onClick={() => {
+                          setActiveTab("Tools");
+                          setActiveToolsSubtab(tool.value);
+                          setMobileMenuOpen(false);
+                          setToolsDropdownOpen(false);
+                        }}
+                        className="w-full justify-start text-sm"
+                      >
+                        📊 {tool.label}
+                      </Button>
+                    ))}
+                  </div>
+                )}
+              </div>
               <div className="pt-2">
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
