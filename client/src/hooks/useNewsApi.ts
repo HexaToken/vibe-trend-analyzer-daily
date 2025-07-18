@@ -215,18 +215,16 @@ export function useNewsSearch(
 
     try {
       // Use the proxy server to search for real news data
-      const response = await fetch(
+      const data = await robustFetchJson(
         `/api/proxy/newsapi/everything?q=${encodeURIComponent(query)}&pageSize=20&sortBy=publishedAt`,
         {
-          signal: AbortSignal.timeout(15000), // 15 second timeout
+          retry: {
+            maxRetries: 2,
+            retryDelay: 1000,
+            timeout: 15000,
+          },
         },
       );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
 
       // Check if the response contains valid articles
       if (
