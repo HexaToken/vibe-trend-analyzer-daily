@@ -1313,7 +1313,7 @@ export const MoorMeterDashboard: React.FC = () => {
               <SentimentHeatMap onRefresh={() => setHeatmapLoading(true)} />
                 
 
-                  {/* HeatMap Controls */}
+                              )}
                   <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
