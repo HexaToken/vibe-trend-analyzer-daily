@@ -114,6 +114,11 @@ export const useStockSentiment = (refreshInterval: number = 300000) => {
       // Use valid data if available, otherwise use all data (including zeros for fallback)
       const dataToUse = validStockData.length > 0 ? validStockData : stockData;
 
+      // If no data at all, throw error to trigger fallback
+      if (!dataToUse || dataToUse.length === 0) {
+        throw new Error("No stock data available from any source");
+      }
+
       // Calculate average sentiment score
       const totalSentimentScore = dataToUse.reduce(
         (sum, stock) => sum + stock.sentimentScore,
