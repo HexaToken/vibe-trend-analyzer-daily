@@ -27,7 +27,7 @@ except ImportError as e:
 class YFinanceService:
     """Service for fetching financial data using yfinance package"""
     
-                    def __init__(self):
+    def __init__(self):
         self.available = yf is not None and pd is not None
         self.import_error = IMPORT_ERROR
         if self.available:
@@ -39,7 +39,7 @@ class YFinanceService:
         """Check if YFinance service is available"""
         return self.available
     
-        def get_stock_news(self, symbol: str = "SPY") -> Dict[str, Any]:
+    def get_stock_news(self, symbol: str = "SPY") -> Dict[str, Any]:
         """Get latest news for a stock symbol"""
         if not self.is_available():
             return {
@@ -101,7 +101,7 @@ class YFinanceService:
         except Exception as e:
             return {"error": f"Failed to fetch news for {symbol}: {str(e)}", "articles": []}
     
-        def get_market_news(self) -> Dict[str, Any]:
+    def get_market_news(self) -> Dict[str, Any]:
         """Get general market news from multiple major tickers"""
         if not self.is_available():
             return {
@@ -178,163 +178,7 @@ class YFinanceService:
         except Exception as e:
             return {"error": f"Failed to fetch market news: {str(e)}", "articles": []}
     
-    def get_stock_quote(self, symbol: str) -> Dict[str, Any]:
-        """Get stock quote from YFinance"""
-        if not self.is_available():
-            return {"error": "YFinance service not available"}
-        
-        try:
-            ticker = yf.Ticker(symbol)
-            info = ticker.info
-            hist = ticker.history(period="2d")
-            
-            if not hist.empty:
-                current_price = hist['Close'].iloc[-1]
-                prev_price = hist['Close'].iloc[-2] if len(hist) > 1 else current_price
-                change = current_price - prev_price
-                change_percent = (change / prev_price) * 100 if prev_price != 0 else 0
-                
-                return {
-                    "status": "success",
-                    "source": "YFinance",
-                    "symbol": symbol,
-                    "data": {
-                        "price": float(current_price),
-                        "change": float(change),
-                        "change_percent": float(change_percent),
-                        "volume": int(hist['Volume'].iloc[-1]) if 'Volume' in hist else 0,
-                        "company_name": info.get('longName', symbol),
-                        "market_cap": info.get('marketCap'),
-                        "pe_ratio": info.get('trailingPE')
-                    }
-                }
-            else:
-                return {"error": f"No quote data found for {symbol}"}
-                
-        except Exception as e:
-            return {"error": f"Failed to fetch quote for {symbol}: {str(e)}"}
-    
-    def get_stock_ticker_info(self, symbol: str) -> Dict[str, Any]:
-        """Get comprehensive stock ticker information from YFinance"""
-        if not self.is_available():
-            return {"error": "YFinance service not available"}
-        
-        try:
-            ticker = yf.Ticker(symbol)
-            info = ticker.info
-            hist = ticker.history(period="5d")
-            
-            # Basic validation
-            if not info or not isinstance(info, dict):
-                return {"error": f"No information available for ticker {symbol}"}
-            
-            # Extract comprehensive ticker information
-            ticker_data = {
-                "symbol": symbol,
-                "company_name": info.get('longName', info.get('shortName', symbol)),
-                "sector": info.get('sector', ''),
-                "industry": info.get('industry', ''),
-                "country": info.get('country', ''),
-                "currency": info.get('currency', 'USD'),
-                "exchange": info.get('exchange', ''),
-                "website": info.get('website', ''),
-                "business_summary": info.get('longBusinessSummary', ''),
-                
-                # Financial metrics
-                "market_cap": info.get('marketCap'),
-                "enterprise_value": info.get('enterpriseValue'),
-                "pe_ratio": info.get('trailingPE'),
-                "forward_pe": info.get('forwardPE'),
-                "peg_ratio": info.get('pegRatio'),
-                "price_to_book": info.get('priceToBook'),
-                "price_to_sales": info.get('priceToSalesTrailing12Months'),
-                "debt_to_equity": info.get('debtToEquity'),
-                "return_on_equity": info.get('returnOnEquity'),
-                "return_on_assets": info.get('returnOnAssets'),
-                "profit_margin": info.get('profitMargins'),
-                "gross_margin": info.get('grossMargins'),
-                "operating_margin": info.get('operatingMargins'),
-                
-                # Dividend information
-                "dividend_yield": info.get('dividendYield'),
-                "dividend_rate": info.get('dividendRate'),
-                "payout_ratio": info.get('payoutRatio'),
-                "ex_dividend_date": info.get('exDividendDate'),
-                
-                # Stock metrics
-                "shares_outstanding": info.get('sharesOutstanding'),
-                "float_shares": info.get('floatShares'),
-                "shares_short": info.get('sharesShort'),
-                "short_ratio": info.get('shortRatio'),
-                "beta": info.get('beta'),
-                "52_week_high": info.get('fiftyTwoWeekHigh'),
-                "52_week_low": info.get('fiftyTwoWeekLow'),
-                "50_day_average": info.get('fiftyDayAverage'),
-                "200_day_average": info.get('twoHundredDayAverage'),
-                
-                # Volume and trading
-                "average_volume": info.get('averageVolume'),
-                "average_volume_10days": info.get('averageVolume10days'),
-                "bid": info.get('bid'),
-                "ask": info.get('ask'),
-                "bid_size": info.get('bidSize'),
-                "ask_size": info.get('askSize'),
-                
-                # Revenue and earnings
-                "total_revenue": info.get('totalRevenue'),
-                "revenue_per_share": info.get('revenuePerShare'),
-                "earnings_per_share": info.get('trailingEps'),
-                "forward_eps": info.get('forwardEps'),
-                "earnings_growth": info.get('earningsGrowth'),
-                "revenue_growth": info.get('revenueGrowth'),
-                
-                # Analyst recommendations
-                "recommendation": info.get('recommendationKey', ''),
-                "target_high_price": info.get('targetHighPrice'),
-                "target_low_price": info.get('targetLowPrice'),
-                "target_mean_price": info.get('targetMeanPrice'),
-                "number_of_analyst_opinions": info.get('numberOfAnalystOpinions'),
-                
-                # Additional info
-                "full_time_employees": info.get('fullTimeEmployees'),
-                "audit_risk": info.get('auditRisk'),
-                "board_risk": info.get('boardRisk'),
-                "compensation_risk": info.get('compensationRisk'),
-                "shareholder_rights_risk": info.get('shareHolderRightsRisk'),
-                "overall_risk": info.get('overallRisk'),
-                
-                # Price data from history
-                "current_price": None,
-                "price_change": None,
-                "price_change_percent": None,
-                "volume": None
-            }
-            
-            # Add current price data if available
-            if not hist.empty:
-                current_price = hist['Close'].iloc[-1]
-                prev_price = hist['Close'].iloc[-2] if len(hist) > 1 else current_price
-                change = current_price - prev_price
-                change_percent = (change / prev_price) * 100 if prev_price != 0 else 0
-                
-                ticker_data.update({
-                    "current_price": float(current_price),
-                    "price_change": float(change),
-                    "price_change_percent": float(change_percent),
-                    "volume": int(hist['Volume'].iloc[-1]) if 'Volume' in hist else 0
-                })
-            
-            return {
-                "status": "success",
-                "source": "YFinance",
-                "symbol": symbol,
-                "data": ticker_data
-            }
-            
-        except Exception as e:
-            return {"error": f"Failed to fetch ticker info for {symbol}: {str(e)}"}
-    
-        def get_enhanced_sentiment_data(self) -> Dict[str, Any]:
+    def get_enhanced_sentiment_data(self) -> Dict[str, Any]:
         """Get enhanced sentiment analysis based on market news"""
         if not self.is_available():
             return {
@@ -443,13 +287,13 @@ yfinance_service = YFinanceService()
 if __name__ == "__main__":
     import sys
     import json
-
+    
     if len(sys.argv) < 2:
         print(json.dumps({"error": "No method specified"}))
         sys.exit(1)
-
+    
     method = sys.argv[1]
-
+    
     try:
         if method == "get_market_news":
             result = yfinance_service.get_market_news()
@@ -463,7 +307,7 @@ if __name__ == "__main__":
             result = yfinance_service.get_stock_ticker_info(symbol)
         else:
             result = {"error": f"Unknown method: {method}"}
-
+        
         print(json.dumps(result))
     except Exception as e:
         print(json.dumps({
