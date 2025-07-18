@@ -15,6 +15,7 @@ import { UserProfile } from "@/components/profile/UserProfile";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { DatabaseDemo } from "@/components/DatabaseDemo";
 import { SocialPlatform } from "@/components/social/SocialPlatform";
+import { MoorMeterDashboard } from "@/components/MoorMeterDashboard";
 
 import { ApiStatusIndicator } from "@/components/ApiStatusIndicator";
 import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
@@ -73,6 +74,8 @@ const App = () => {
         return <AiSentimentExplainer />;
       case "yfinance":
         return <YFinanceDemo />;
+      case "moorMeter":
+        return <MoorMeterDashboard />;
       default:
         return <Dashboard />;
     }
