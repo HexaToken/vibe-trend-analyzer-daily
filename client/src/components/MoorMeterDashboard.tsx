@@ -1579,8 +1579,7 @@ export const MoorMeterDashboard: React.FC = () => {
                             </div>
             </div>
           </>
-                                                                                                                                                        );
-                <TrendingTopicsWidget topics={trendingTopics} />
+                                                                                                                                                                );
               </div>
 
               {/* Sidebar */}
