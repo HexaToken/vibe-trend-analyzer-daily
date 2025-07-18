@@ -20,15 +20,24 @@ export const YFinanceSetupStatus: React.FC = () => {
   const [hasCriticalError, setHasCriticalError] = useState(false);
 
   const checkStatus = async () => {
+    if (hasCriticalError) return;
+
     setLoading(true);
     try {
+      // Use manual AbortController for better compatibility
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 8000);
+
       const response = await fetch("/api/proxy/yfinance/status", {
-        signal: AbortSignal.timeout(10000), // 10 second timeout
+        method: "GET",
+        signal: controller.signal,
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json",
         },
+        cache: "no-cache",
       });
+
+      clearTimeout(timeoutId);
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
