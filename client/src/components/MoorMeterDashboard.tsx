@@ -253,8 +253,17 @@ export const MoorMeterDashboard: React.FC = () => {
     { label: "Market Mood", key: "Market Mood", href: "#market" },
     { label: "Watchlist", key: "Watchlist", href: "#watchlist" },
     { label: "News", key: "News", href: "#news" },
+    {
+      label: "Tool",
+      key: "Tool",
+      href: "#tool",
+      subtabs: [{ label: "Heat map", key: "HeatMap", icon: BarChart3 }],
+    },
     { label: "Community", key: "Community", href: "#community" },
   ];
+
+  // Tools dropdown items
+  const toolsItems = [{ label: "Market HeatMap", value: "HeatMap" }];
 
   // Function to render content based on active tab
   const renderTabContent = () => {
