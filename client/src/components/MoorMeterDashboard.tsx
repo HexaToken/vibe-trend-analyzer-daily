@@ -1562,7 +1562,7 @@ export const MoorMeterDashboard: React.FC = () => {
       </main>
 
       {/* Footer */}
-                              <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+                                    <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
                 <WatchlistWidget />
                       ����� Market Summary
