@@ -99,7 +99,12 @@ export const useStockSentiment = (refreshInterval: number = 300000) => {
         }
       });
 
-      const stockData = await Promise.allSettled(stockPromises);
+      const stockResults = await Promise.allSettled(stockPromises);
+
+      // Extract successful results and flatten them
+      const stockData = stockResults
+        .filter((result) => result.status === "fulfilled")
+        .map((result) => (result as PromiseFulfilledResult<any>).value);
 
       // Filter out symbols that returned no data and have at least some valid stocks
       const validStockData = stockData.filter(
