@@ -57,7 +57,7 @@ export const Navigation = ({
     data: [
       {
         id: "sentiment",
-        label: "Sentiment Dashboard",
+        label: "Market Mood",
         icon: Brain,
         badge: "NEW",
       },
@@ -163,19 +163,6 @@ export const Navigation = ({
               >
                 <Brain className="h-4 w-4" />
                 MoorMeter
-                <Badge variant="secondary" className="text-xs">
-                  NEW
-                </Badge>
-              </Button>
-
-              {/* Builder.io Demo */}
-              <Button
-                variant={activeSection === "builderDemo" ? "default" : "ghost"}
-                onClick={() => onSectionChange("builderDemo")}
-                className="flex items-center gap-2"
-              >
-                <Brain className="h-4 w-4" />
-                Builder.io Demo
                 <Badge variant="secondary" className="text-xs">
                   NEW
                 </Badge>
@@ -419,24 +406,6 @@ export const Navigation = ({
                 >
                   <Brain className="h-4 w-4" />
                   MoorMeter
-                  <Badge variant="secondary" className="ml-auto text-xs">
-                    NEW
-                  </Badge>
-                </Button>
-
-                {/* Builder.io Demo */}
-                <Button
-                  variant={
-                    activeSection === "builderDemo" ? "default" : "ghost"
-                  }
-                  onClick={() => {
-                    onSectionChange("builderDemo");
-                    setIsMenuOpen(false);
-                  }}
-                  className="justify-start gap-2"
-                >
-                  <Brain className="h-4 w-4" />
-                  Builder.io Demo
                   <Badge variant="secondary" className="ml-auto text-xs">
                     NEW
                   </Badge>
