@@ -1,6 +1,7 @@
 // CoinMarketCap API Service
 // Documentation: https://coinmarketcap.com/api/documentation/v1/
 // Uses server proxy to avoid CORS restrictions
+import { robustFetch, FetchError } from "../lib/robustFetch";
 
 const BASE_URL = "/api/proxy/coinmarketcap";
 
