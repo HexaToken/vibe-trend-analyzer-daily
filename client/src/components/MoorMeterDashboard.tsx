@@ -1360,8 +1360,7 @@ export const MoorMeterDashboard: React.FC = () => {
           </>
         );
         
-    }
-  };
+    
 
   return (
     <div
