@@ -88,7 +88,10 @@ export const NewsWidget: React.FC<NewsWidgetProps> = ({
         summary:
           article.summary || article.description || "No summary available",
         sentiment,
-        source: article.source || "Unknown",
+        source:
+          typeof article.source === "object" && article.source?.name
+            ? article.source.name
+            : article.source || "Unknown",
         timestamp: new Date(article.publishedAt || Date.now()),
         url: article.url || "#",
         tags: extractTags(title),
