@@ -21,6 +21,7 @@ import { SocialFeed } from "./SocialFeed";
 import { TickerPage } from "./TickerPage";
 import { WatchlistManager } from "./WatchlistManager";
 import { CommunityRooms } from "./CommunityRooms";
+import { TwitterProfile } from "./TwitterProfile";
 import { mockTrendingData, mockTickers } from "@/data/socialMockData";
 import { useAuth } from "@/contexts/AuthContext";
 import { RealTimePrice, StockGrid } from "./RealTimePrice";
@@ -28,7 +29,13 @@ import { CryptoPrice } from "../crypto/CryptoPrice";
 import { useMultipleQuotes } from "@/hooks/useFinnhub";
 import { useCryptoQuotes } from "@/hooks/useCoinMarketCap";
 
-type ViewType = "feed" | "watchlist" | "ticker" | "trending" | "rooms";
+type ViewType =
+  | "feed"
+  | "watchlist"
+  | "ticker"
+  | "trending"
+  | "rooms"
+  | "twitter";
 
 export const SocialPlatform = () => {
   const { isAuthenticated, user } = useAuth();
@@ -39,7 +46,9 @@ export const SocialPlatform = () => {
     .slice(0, 5)
     .map((t) => t.symbol);
   const realTimeTickers = useMultipleQuotes(trendingSymbols, 300000); // 5 minutes
-  const tickersLoading = Object.values(realTimeTickers).some(ticker => ticker.loading);
+  const tickersLoading = Object.values(realTimeTickers).some(
+    (ticker) => ticker.loading,
+  );
 
   // Get crypto data for trending crypto
   const trendingCryptos = ["BTC", "ETH", "BNB"];
@@ -79,7 +88,9 @@ export const SocialPlatform = () => {
         <CardContent className="space-y-3">
           {mockTrendingData.tickers.slice(0, 5).map((mockTicker, index) => {
             const realTicker = realTimeTickers[mockTicker.symbol];
-            const isPositive = realTicker?.data ? realTicker.data.d >= 0 : false;
+            const isPositive = realTicker?.data
+              ? realTicker.data.d >= 0
+              : false;
 
             return (
               <div
@@ -100,7 +111,9 @@ export const SocialPlatform = () => {
                 </div>
 
                 <div className="text-right">
-                  {tickersLoading || realTicker?.loading || !realTicker?.data ? (
+                  {tickersLoading ||
+                  realTicker?.loading ||
+                  !realTicker?.data ? (
                     <div className="text-right">
                       <div className="text-sm font-semibold text-muted-foreground">
                         Loading...
