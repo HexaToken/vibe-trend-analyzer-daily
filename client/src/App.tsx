@@ -97,9 +97,7 @@ const App = () => {
               activeSection={activeSection}
               onSectionChange={setActiveSection}
             />
-            <main>
-              <MoorMeterDashboard />
-            </main>
+            <main>{renderContent()}</main>
             <ApiStatusIndicator />
             <AiChatBubble />
           </div>
