@@ -166,10 +166,29 @@ export const SocialPlatform = () => {
         </CardHeader>
         <CardContent className="space-y-3">
           {cryptoError && (
-            <div className="text-xs text-orange-600 p-2 bg-orange-50 rounded">
-              {cryptoError.includes("Circuit breaker")
-                ? "API rate limited - showing mock data"
-                : cryptoError}
+            <div className="text-xs text-orange-600 p-2 bg-orange-50 rounded flex items-center justify-between">
+              <span>
+                {cryptoError.includes("Circuit breaker")
+                  ? "API rate limited - showing mock data"
+                  : cryptoError}
+              </span>
+              {cryptoError.includes("Circuit breaker") && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-6 px-2 text-xs"
+                  onClick={() => {
+                    import("../../services/coinMarketCapApi").then(
+                      ({ resetCoinMarketCapCircuitBreaker }) => {
+                        resetCoinMarketCapCircuitBreaker();
+                        window.location.reload(); // Simple way to retry
+                      },
+                    );
+                  }}
+                >
+                  Retry
+                </Button>
+              )}
             </div>
           )}
           {cryptoTickers.slice(0, 3).map((crypto, index) => (
