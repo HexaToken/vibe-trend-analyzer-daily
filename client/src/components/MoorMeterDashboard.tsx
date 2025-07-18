@@ -1359,20 +1359,7 @@ export const MoorMeterDashboard: React.FC = () => {
               </div>
             </div>
           </>
-                );
-                        Size By
-                      </label>
-                      <select className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
-                        <option>Market Cap</option>
-                        <option>Volume</option>
-                        <option>Equal Weight</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  {/* HeatMap Grid */}
-                  <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 mb-6">
-                    {/* Generate mock heatmap tiles */}
+                        );
                     {[
                       { symbol: "AAPL", change: 2.34, name: "Apple" },
                       { symbol: "MSFT", change: 1.67, name: "Microsoft" },
