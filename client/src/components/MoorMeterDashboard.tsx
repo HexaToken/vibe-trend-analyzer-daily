@@ -1142,6 +1142,314 @@ export const MoorMeterDashboard: React.FC = () => {
           </div>
         );
 
+      case "Tools":
+        return (
+          <div className="space-y-8">
+            {/* Tools Header */}
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                  🛠️ Market Analysis Tools
+                </h1>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Advanced analytical tools for market research and data
+                  visualization
+                </p>
+              </div>
+            </div>
+
+            {/* Tools Subtabs */}
+            <div className="border-b border-gray-200 dark:border-gray-700">
+              <nav className="flex space-x-8" aria-label="Tools">
+                {["HeatMap"].map((subtab) => (
+                  <button
+                    key={subtab}
+                    onClick={() => setActiveToolsSubtab(subtab)}
+                    className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                      activeToolsSubtab === subtab
+                        ? "border-blue-500 text-blue-600 dark:text-blue-400"
+                        : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300"
+                    }`}
+                  >
+                    {subtab}
+                  </button>
+                ))}
+              </nav>
+            </div>
+
+            {/* Tools Subtab Content */}
+            {activeToolsSubtab === "HeatMap" && (
+              <div className="space-y-6">
+                <Card className="p-6">
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                      📊 Market HeatMap
+                    </h2>
+                    <div className="flex space-x-2">
+                      <Button variant="outline" size="sm">
+                        🔄 Refresh
+                      </Button>
+                      <Button variant="outline" size="sm">
+                        ⚙️ Settings
+                      </Button>
+                    </div>
+                  </div>
+
+                  {/* HeatMap Controls */}
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Market
+                      </label>
+                      <select className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+                        <option>S&P 500</option>
+                        <option>NASDAQ</option>
+                        <option>Crypto</option>
+                        <option>Forex</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Metric
+                      </label>
+                      <select className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+                        <option>% Change</option>
+                        <option>Volume</option>
+                        <option>Market Cap</option>
+                        <option>Sentiment Score</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Time Period
+                      </label>
+                      <select className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+                        <option>1D</option>
+                        <option>1W</option>
+                        <option>1M</option>
+                        <option>3M</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Size By
+                      </label>
+                      <select className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+                        <option>Market Cap</option>
+                        <option>Volume</option>
+                        <option>Equal Weight</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* HeatMap Grid */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 mb-6">
+                    {/* Generate mock heatmap tiles */}
+                    {[
+                      { symbol: "AAPL", change: 2.34, name: "Apple" },
+                      { symbol: "MSFT", change: 1.67, name: "Microsoft" },
+                      { symbol: "GOOGL", change: -0.89, name: "Alphabet" },
+                      { symbol: "AMZN", change: 3.12, name: "Amazon" },
+                      { symbol: "NVDA", change: 5.67, name: "NVIDIA" },
+                      { symbol: "TSLA", change: -2.45, name: "Tesla" },
+                      { symbol: "META", change: 1.23, name: "Meta" },
+                      { symbol: "BRK.B", change: 0.45, name: "Berkshire" },
+                      { symbol: "JPM", change: -1.12, name: "JPMorgan" },
+                      { symbol: "V", change: 0.78, name: "Visa" },
+                      { symbol: "JNJ", change: -0.34, name: "J&J" },
+                      { symbol: "WMT", change: 1.89, name: "Walmart" },
+                      { symbol: "PG", change: 0.56, name: "P&G" },
+                      { symbol: "UNH", change: 2.01, name: "UnitedHealth" },
+                      { symbol: "HD", change: -0.67, name: "Home Depot" },
+                      { symbol: "MA", change: 1.45, name: "Mastercard" },
+                      { symbol: "DIS", change: -1.78, name: "Disney" },
+                      { symbol: "BAC", change: 0.89, name: "Bank of America" },
+                    ].map((stock, i) => (
+                      <div
+                        key={i}
+                        className={`p-3 rounded-lg cursor-pointer hover:opacity-80 transition-all duration-200 flex flex-col justify-between min-h-[80px] ${
+                          stock.change > 2
+                            ? "bg-green-600 text-white"
+                            : stock.change > 0
+                              ? "bg-green-400 text-white"
+                              : stock.change > -2
+                                ? "bg-red-400 text-white"
+                                : "bg-red-600 text-white"
+                        }`}
+                        style={{
+                          transform: `scale(${Math.min(1.2, Math.max(0.8, 1 + Math.abs(stock.change) / 10))})`,
+                        }}
+                      >
+                        <div className="font-bold text-xs">{stock.symbol}</div>
+                        <div className="text-xs opacity-90">{stock.name}</div>
+                        <div className="font-semibold text-sm">
+                          {stock.change > 0 ? "+" : ""}
+                          {stock.change}%
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* HeatMap Legend */}
+                  <div className="flex items-center justify-center space-x-4 py-4 border-t border-gray-200 dark:border-gray-700">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-4 h-4 bg-red-600 rounded"></div>
+                      <span className="text-sm text-gray-600 dark:text-gray-400">
+                        Strong Decline (&lt; -2%)
+                      </span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-4 h-4 bg-red-400 rounded"></div>
+                      <span className="text-sm text-gray-600 dark:text-gray-400">
+                        Decline (-2% to 0%)
+                      </span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-4 h-4 bg-green-400 rounded"></div>
+                      <span className="text-sm text-gray-600 dark:text-gray-400">
+                        Gain (0% to 2%)
+                      </span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-4 h-4 bg-green-600 rounded"></div>
+                      <span className="text-sm text-gray-600 dark:text-gray-400">
+                        Strong Gain (&gt; 2%)
+                      </span>
+                    </div>
+                  </div>
+                </Card>
+
+                {/* HeatMap Stats */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <Card className="p-6">
+                    <h3 className="text-lg font-semibold mb-4 flex items-center">
+                      📈 Market Summary
+                    </h3>
+                    <div className="space-y-3">
+                      <div className="flex justify-between">
+                        <span className="text-gray-600 dark:text-gray-400">
+                          Gainers
+                        </span>
+                        <span className="font-semibold text-green-600">
+                          12 (66.7%)
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600 dark:text-gray-400">
+                          Decliners
+                        </span>
+                        <span className="font-semibold text-red-600">
+                          6 (33.3%)
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600 dark:text-gray-400">
+                          Unchanged
+                        </span>
+                        <span className="font-semibold text-gray-600">
+                          0 (0%)
+                        </span>
+                      </div>
+                    </div>
+                  </Card>
+
+                  <Card className="p-6">
+                    <h3 className="text-lg font-semibold mb-4 flex items-center">
+                      🏆 Top Performers
+                    </h3>
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium">NVDA</span>
+                        <span className="text-green-600 font-semibold">
+                          +5.67%
+                        </span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium">AMZN</span>
+                        <span className="text-green-600 font-semibold">
+                          +3.12%
+                        </span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium">AAPL</span>
+                        <span className="text-green-600 font-semibold">
+                          +2.34%
+                        </span>
+                      </div>
+                    </div>
+                  </Card>
+
+                  <Card className="p-6">
+                    <h3 className="text-lg font-semibold mb-4 flex items-center">
+                      📉 Worst Performers
+                    </h3>
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium">TSLA</span>
+                        <span className="text-red-600 font-semibold">
+                          -2.45%
+                        </span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium">DIS</span>
+                        <span className="text-red-600 font-semibold">
+                          -1.78%
+                        </span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium">JPM</span>
+                        <span className="text-red-600 font-semibold">
+                          -1.12%
+                        </span>
+                      </div>
+                    </div>
+                  </Card>
+                </div>
+
+                {/* Builder.io Integration Note */}
+                <div className="bg-gradient-to-r from-orange-50 to-yellow-50 dark:from-orange-900/20 dark:to-yellow-900/20 rounded-lg p-6 border border-orange-200 dark:border-orange-800">
+                  <h3 className="text-xl font-semibold mb-4 text-orange-900 dark:text-orange-100">
+                    🧱 Builder.io HeatMap Tool
+                  </h3>
+                  <p className="text-orange-700 dark:text-orange-300 mb-4">
+                    This HeatMap tool is designed as a modular Builder.io
+                    component with the following features:
+                  </p>
+                  <ul className="text-sm text-orange-600 dark:text-orange-400 space-y-2">
+                    <li className="flex items-center">
+                      <div className="w-2 h-2 bg-orange-500 rounded-full mr-2"></div>
+                      Interactive visual representation of market performance
+                    </li>
+                    <li className="flex items-center">
+                      <div className="w-2 h-2 bg-orange-500 rounded-full mr-2"></div>
+                      Configurable metrics and time periods
+                    </li>
+                    <li className="flex items-center">
+                      <div className="w-2 h-2 bg-orange-500 rounded-full mr-2"></div>
+                      Color-coded performance indicators
+                    </li>
+                    <li className="flex items-center">
+                      <div className="w-2 h-2 bg-orange-500 rounded-full mr-2"></div>
+                      Real-time market data integration
+                    </li>
+                    <li className="flex items-center">
+                      <div className="w-2 h-2 bg-orange-500 rounded-full mr-2"></div>
+                      Responsive design for mobile and desktop
+                    </li>
+                  </ul>
+                  <div className="mt-4 p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg">
+                    <p className="text-xs text-gray-600 dark:text-gray-400">
+                      <strong>API Integration:</strong> Connect to{" "}
+                      <code>GET /api/market/heatmap</code> and{" "}
+                      <code>GET /api/quotes/realtime</code> for live data
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        );
+
       case "Home":
       default:
         return (
