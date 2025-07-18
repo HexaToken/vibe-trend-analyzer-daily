@@ -1327,17 +1327,39 @@ export const MoorMeterDashboard: React.FC = () => {
               {/* Main Content Area */}
               <div className="lg:col-span-3 space-y-6">
                 {/* Top Stocks Widget */}
-                                <TopStocksWidget stockLoading={stockLoading} />
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                        Time Period
-                      </label>
-                      <select className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
-                        <option>1D</option>
-                        <option>1W</option>
-                        <option>1M</option>
-                        <option>3M</option>
-                      </select>
+                                                <TopStocksWidget stockLoading={stockLoading} />
+
+                {/* News Feed Widget */}
+                <NewsWidget articles={newsArticles} loading={newsLoading} />
+
+                {/* Mood Trend Chart */}
+                <MoodTrendChart
+                  data={historicalMood}
+                  timeframe={selectedTimeframe}
+                  setTimeframe={setSelectedTimeframe}
+                />
+
+                {/* Trending Topics */}
+                <TrendingTopicsWidget topics={trendingTopics} />
+              </div>
+
+              {/* Sidebar */}
+              <div className="space-y-6">
+                {/* Personal Mood Score */}
+                <PersonalMoodCard />
+
+                {/* Watchlist */}
+                <WatchlistWidget />
+
+                {/* AI Insight */}
+                <AIInsightWidget moodScore={moodScore} />
+
+                {/* Community Feed */}
+                <CommunityWidget posts={communityPosts} />
+              </div>
+            </div>
+          </>
+        );
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
