@@ -1319,10 +1319,15 @@ export const MoorMeterDashboard: React.FC = () => {
         );
 
             case "Home":
-      default:
-                      </select>
-                    </div>
-                    <div>
+            default:
+        return (
+          <>
+            {/* Dashboard Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+              {/* Main Content Area */}
+              <div className="lg:col-span-3 space-y-6">
+                {/* Top Stocks Widget */}
+                <TopStocksWidget stockLoading={stockLoading} />
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Metric
                       </label>
