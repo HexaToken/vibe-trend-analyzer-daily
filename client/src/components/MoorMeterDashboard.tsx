@@ -342,8 +342,12 @@ export const MoorMeterDashboard: React.FC = () => {
               {navItems.map((item) => (
                 <Button
                   key={item.label}
-                  variant={item.active ? "default" : "ghost"}
+                  variant={activeTab === item.label ? "default" : "ghost"}
                   size="sm"
+                  onClick={() => {
+                    setActiveTab(item.label);
+                    setMobileMenuOpen(false);
+                  }}
                   className="w-full justify-start"
                 >
                   {item.label}
