@@ -46,6 +46,7 @@ export const YFinanceSetupStatus: React.FC = () => {
       const data = await response.json();
       setStatus(data);
       setLastChecked(new Date());
+      setRetryAttempts(0); // Reset on success
     } catch (error) {
       console.error("Failed to check YFinance status:", error);
       setRetryAttempts((prev) => prev + 1);
