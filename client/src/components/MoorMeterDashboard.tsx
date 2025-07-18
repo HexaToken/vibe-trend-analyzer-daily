@@ -1579,8 +1579,7 @@ export const MoorMeterDashboard: React.FC = () => {
                             </div>
             </div>
           </>
-                                                                                                                                                                );
-              </div>
+                                                                                                                                                                        );
 
               {/* Sidebar */}
               <div className="space-y-6">
