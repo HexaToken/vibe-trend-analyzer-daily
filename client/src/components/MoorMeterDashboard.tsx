@@ -1588,16 +1588,7 @@ export const MoorMeterDashboard: React.FC = () => {
                             </div>
             </div>
           </>
-                        );
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="font-medium">JPM</span>
-                        <span className="text-red-600 font-semibold">
-                          -1.12%
-                        </span>
-                      </div>
-                    </div>
-                  </Card>
+                                );
                 </div>
 
                 {/* Builder.io Integration Note */}
