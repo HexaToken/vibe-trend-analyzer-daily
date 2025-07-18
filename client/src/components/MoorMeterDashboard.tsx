@@ -1451,12 +1451,11 @@ export const MoorMeterDashboard: React.FC = () => {
                 <AIInsightWidget moodScore={moodScore} />
 
                 {/* Community Feed */}
-                <CommunityWidget posts={communityPosts} />
-                            </div>
+                                <CommunityWidget posts={communityPosts} />
+              </div>
             </div>
           </>
         );
-                    </div>
                   </Card>
 
                   <Card className="p-6">
