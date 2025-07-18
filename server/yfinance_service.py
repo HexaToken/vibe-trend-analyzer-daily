@@ -27,7 +27,7 @@ except ImportError as e:
 class YFinanceService:
     """Service for fetching financial data using yfinance package"""
     
-        def __init__(self):
+            def __init__(self):
         self.available = yf is not None and pd is not None
         self.import_error = IMPORT_ERROR
         if self.available:
