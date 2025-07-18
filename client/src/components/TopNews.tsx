@@ -90,9 +90,8 @@ export const TopNews = () => {
                   <Badge variant="outline" className="text-xs">
                     YFinance: {sources.yfinance.articles.length}
                   </Badge>
-                ) : sources.yfinance.error?.includes(
-                    "service not available",
-                  ) ? (
+                ) : sources.yfinance.error?.includes("service not available") ||
+                  sources.yfinance.error?.includes("setup_required") ? (
                   <Badge variant="secondary" className="text-xs">
                     YFinance: Setup Required
                   </Badge>
