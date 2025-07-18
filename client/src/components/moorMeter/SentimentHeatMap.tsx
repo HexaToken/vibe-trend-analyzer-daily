@@ -394,10 +394,10 @@ export const SentimentHeatMap: React.FC = () => {
                 <div
                   className={`grid gap-0.5 sm:gap-1 p-2 sm:p-3 min-w-0 ${
                     timeFilter === "24h"
-                      ? "grid-cols-24"
+                      ? "grid-cols-12 sm:grid-cols-24"
                       : timeFilter === "7d"
                         ? "grid-cols-7"
-                        : "grid-cols-15"
+                        : "grid-cols-8 sm:grid-cols-15"
                   }`}
                 >
                   {ticker.data.map((dataPoint, cellIndex) => {
