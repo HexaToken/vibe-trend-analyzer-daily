@@ -79,7 +79,12 @@ export const YFinanceSetupStatus: React.FC = () => {
   };
 
   useEffect(() => {
-    checkStatus();
+    // Use a timeout to avoid blocking the component render
+    const timeoutId = setTimeout(() => {
+      checkStatus().catch(console.error);
+    }, 100);
+
+    return () => clearTimeout(timeoutId);
   }, []);
 
   const getStatusIcon = () => {
