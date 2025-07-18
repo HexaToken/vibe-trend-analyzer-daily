@@ -1,44 +1,14 @@
 import { type RegisteredComponent } from "@builder.io/sdk-react";
 
-// Dynamic imports for Builder.io components
-import dynamic from "next/dynamic";
+// Direct imports for Vite/React setup
+import { MoodScoreHero } from './src/components/builder/MoodScoreHero';
+import { TopStocksModule } from './src/components/builder/TopStocksModule';
 
-// For Vite/React setup, we'll use dynamic imports differently
-const MoodScoreHero = dynamic(() =>
-  import("./src/components/builder/MoodScoreHero").then((mod) => ({
-    default: mod.MoodScoreHero,
-  })),
-);
-
-const TopStocksModule = dynamic(() =>
-  import("./src/components/builder/TopStocksModule").then((mod) => ({
-    default: mod.TopStocksModule,
-  })),
-);
-
-const NewsFeedModule = dynamic(() =>
-  import("./src/components/builder/NewsFeedModule").then((mod) => ({
-    default: mod.NewsFeedModule,
-  })),
-);
-
-const SentimentChart = dynamic(() =>
-  import("./src/components/builder/SentimentChart").then((mod) => ({
-    default: mod.SentimentChart,
-  })),
-);
-
-const TrendingTopicsModule = dynamic(() =>
-  import("./src/components/builder/TrendingTopicsModule").then((mod) => ({
-    default: mod.TrendingTopicsModule,
-  })),
-);
-
-const AIInsightModule = dynamic(() =>
-  import("./src/components/builder/AIInsightModule").then((mod) => ({
-    default: mod.AIInsightModule,
-  })),
-);
+// Placeholder components for now - you can create these following the same pattern
+const NewsFeedModule = () => <div>News Feed Module - To be implemented</div>;
+const SentimentChart = () => <div>Sentiment Chart - To be implemented</div>;
+const TrendingTopicsModule = () => <div>Trending Topics Module - To be implemented</div>;
+const AIInsightModule = () => <div>AI Insight Module - To be implemented</div>;
 
 export const customComponents: RegisteredComponent[] = [
   {
