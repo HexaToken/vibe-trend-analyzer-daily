@@ -397,12 +397,17 @@ class CoinMarketCapService {
     convert: string = "USD",
     sort: string = "market_cap",
   ): Promise<CoinMarketCapListingsResponse> {
-    return this.fetchFromApi<CoinMarketCapListingsResponse>("/listings", {
-      start: start.toString(),
-      limit: limit.toString(),
-      convert,
-      sort,
-    });
+    return this.fetchFromApi<CoinMarketCapListingsResponse>(
+      "/listings",
+      {
+        start: start.toString(),
+        limit: limit.toString(),
+        convert,
+        sort,
+      },
+      true,
+      300000, // 5 minutes cache for listings
+    );
   }
 
   /**
