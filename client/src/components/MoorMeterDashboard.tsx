@@ -1158,35 +1158,20 @@ export const MoorMeterDashboard: React.FC = () => {
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
               <div>
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                  🛠️ Market Analysis Tools
+                  🛠️{" "}
+                  {activeToolsSubtab === "HeatMap"
+                    ? "Market HeatMap"
+                    : "Market Analysis Tools"}
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400">
-                  Advanced analytical tools for market research and data
-                  visualization
+                  {activeToolsSubtab === "HeatMap"
+                    ? "Interactive visual representation of market performance with real-time sentiment analysis"
+                    : "Advanced analytical tools for market research and data visualization"}
                 </p>
               </div>
             </div>
 
-            {/* Tools Subtabs */}
-            <div className="border-b border-gray-200 dark:border-gray-700">
-              <nav className="flex space-x-8" aria-label="Tools">
-                {["HeatMap"].map((subtab) => (
-                  <button
-                    key={subtab}
-                    onClick={() => setActiveToolsSubtab(subtab)}
-                    className={`py-2 px-1 border-b-2 font-medium text-sm ${
-                      activeToolsSubtab === subtab
-                        ? "border-blue-500 text-blue-600 dark:text-blue-400"
-                        : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300"
-                    }`}
-                  >
-                    {subtab}
-                  </button>
-                ))}
-              </nav>
-            </div>
-
-            {/* Tools Subtab Content */}
+            {/* Tools Content */}
             {activeToolsSubtab === "HeatMap" && (
               <div className="space-y-6">
                 <Card className="p-6">
