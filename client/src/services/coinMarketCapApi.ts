@@ -272,7 +272,13 @@ class CoinMarketCapService {
     });
 
     try {
-      const response = await fetch(url.toString());
+      const response = await robustFetch(url.toString(), {
+        retry: {
+          maxRetries: 2,
+          retryDelay: 1000,
+          timeout: 10000,
+        },
+      });
 
       // Check response status BEFORE consuming the body
       if (!response.ok) {
