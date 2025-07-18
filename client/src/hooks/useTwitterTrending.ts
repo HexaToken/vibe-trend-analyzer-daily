@@ -175,7 +175,7 @@ export function useTwitterTrending(
         { name: "#Economy", url: "", query: "#Economy", tweet_volume: 72000 },
       ];
       setTrending(mockTrending);
-      throw new Error(`${errorMessage} (using mock data)`);
+      setError("Twitter API rate limited - using sample data");
     }
   }, [enabled, woeid]);
 

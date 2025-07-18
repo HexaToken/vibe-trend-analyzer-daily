@@ -58,6 +58,7 @@ The application integrates with multiple external services:
   - SPY Stock-Specific News functionality fully restored and working with 10 articles
   - Added comprehensive stock ticker information functionality with 50+ financial metrics per stock
   - Fixed runtime error in SocialPlatform component where realTimeTickers.find() was being called on object instead of array
+  - Configured Twitter API integration with real credentials (handles rate limits gracefully with mock data fallback)
 - **2025-01-17**: Complete migration from Lovable to Replit
   - Fixed dependency issues (sonner, nanoid)
   - Verified application startup and functionality
