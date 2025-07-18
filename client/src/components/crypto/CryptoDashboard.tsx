@@ -81,12 +81,15 @@ export const CryptoDashboard = () => {
             Real-time cryptocurrency data powered by CoinMarketCap API
           </p>
         </div>
-        <Button onClick={refetch} disabled={cryptoLoading}>
-          <RefreshCw
-            className={`h-4 w-4 mr-2 ${cryptoLoading ? "animate-spin" : ""}`}
-          />
-          Refresh Data
-        </Button>
+        <div className="flex gap-3 items-center">
+          <CoinMarketCapStatus />
+          <Button onClick={refetch} disabled={cryptoLoading}>
+            <RefreshCw
+              className={`h-4 w-4 mr-2 ${cryptoLoading ? "animate-spin" : ""}`}
+            />
+            Refresh Data
+          </Button>
+        </div>
       </div>
 
       {/* Global Market Stats */}
