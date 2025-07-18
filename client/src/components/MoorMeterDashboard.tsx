@@ -436,9 +436,7 @@ export const MoorMeterDashboard: React.FC = () => {
             </div>
 
             {/* Tools Content */}
-            {activeToolsSubtab === "HeatMap" && (
-              <SentimentHeatMap onRefresh={() => setHeatmapLoading(true)} />
-            )}
+            {activeToolsSubtab === "HeatMap" && <SentimentHeatMap />}
           </div>
         );
 
