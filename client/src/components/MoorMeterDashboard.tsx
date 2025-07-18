@@ -959,7 +959,7 @@ export const MoorMeterDashboard: React.FC = () => {
                               Sentiment:
                             </span>
                             <div className="flex space-x-1">
-                              {["😃", "😐", "😢"].map((emoji, i) => (
+                              {["😃", "😐", "���"].map((emoji, i) => (
                                 <Button
                                   key={i}
                                   variant="ghost"
@@ -1515,7 +1515,7 @@ export const MoorMeterDashboard: React.FC = () => {
         </div>
 
         {/* Mobile menu */}
-        {isMobileMenuOpen && (
+        {mobileMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-50 dark:bg-gray-800">
               {navItems.map((item) => (
