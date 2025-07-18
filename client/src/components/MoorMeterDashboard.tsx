@@ -103,6 +103,20 @@ export const MoorMeterDashboard: React.FC = () => {
   const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
   const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false);
 
+  // Sentiment Heatmap State
+  const [sentimentTimeframe, setSentimentTimeframe] = useState<
+    "24h" | "7d" | "30d"
+  >("24h");
+  const [sentimentViewMode, setSentimentViewMode] = useState<
+    "absolute" | "net"
+  >("absolute");
+  const [heatmapLoading, setHeatmapLoading] = useState(false);
+  const [hoveredCell, setHoveredCell] = useState<{
+    ticker: string;
+    time: string;
+    data: any;
+  } | null>(null);
+
   // Hooks for real data
   const { data: stockSentiment, loading: stockLoading } = useStockSentiment();
   const { articles: newsArticles, loading: newsLoading } =
