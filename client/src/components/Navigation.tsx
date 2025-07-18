@@ -403,12 +403,7 @@ export const Navigation = ({
                   <Badge variant="secondary" className="ml-auto text-xs">
                     NEW
                   </Badge>
-                </Button>
-                  Market Mood
-                  <Badge variant="secondary" className="ml-auto text-xs">
-                    NEW
-                  </Badge>
-                </Button>
+                
 
                 {/* Data Section */}
                 <div className="text-sm font-medium text-muted-foreground px-3 py-1">
