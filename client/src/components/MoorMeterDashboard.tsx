@@ -122,7 +122,9 @@ export const MoorMeterDashboard: React.FC = () => {
   const { data: stockSentiment, loading: stockLoading } = useStockSentiment();
   const { articles: newsArticles, loading: newsLoading } =
     useCombinedBusinessNews();
-  const { tickers: cryptoData, loading: cryptoLoading } = useCryptoListings(10);
+  const cryptoListingsResult = useCryptoListings(10);
+  const { tickers: cryptoData = [], loading: cryptoLoading = false } =
+    cryptoListingsResult || {};
 
   // Calculate overall mood score
   const calculateMoodScore = (): MoodScore => {
