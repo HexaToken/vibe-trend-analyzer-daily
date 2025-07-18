@@ -1453,8 +1453,8 @@ export const MoorMeterDashboard: React.FC = () => {
                 {/* Community Feed */}
                                 <CommunityWidget posts={communityPosts} />
               </div>
-            </div>
-                    </>
+                        </div>
+          </>
         );
                       </div>
                       <div className="flex justify-between items-center">
