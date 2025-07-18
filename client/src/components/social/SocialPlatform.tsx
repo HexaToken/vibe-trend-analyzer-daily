@@ -64,6 +64,24 @@ export const SocialPlatform = () => {
   const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
+  // Auto-reset circuit breaker when error occurs
+  useEffect(() => {
+    if (cryptoError?.includes("Circuit breaker is open")) {
+      console.log("Circuit breaker detected, attempting auto-reset...");
+      // Automatically reset after a short delay
+      const timer = setTimeout(() => {
+        import("../../services/coinMarketCapApi").then(
+          ({ resetCoinMarketCapCircuitBreaker }) => {
+            resetCoinMarketCapCircuitBreaker();
+            console.log("Circuit breaker auto-reset completed");
+          },
+        );
+      }, 3000); // Reset after 3 seconds
+
+      return () => clearTimeout(timer);
+    }
+  }, [cryptoError]);
+
   // Handle ticker navigation
   const handleTickerClick = (symbol: string) => {
     setSelectedTicker(symbol);
