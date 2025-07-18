@@ -70,7 +70,9 @@ export const useStockSentiment = (refreshInterval: number = 300000) => {
             sentimentScore: calculateSentimentScore(data.dp || 0),
           };
         } catch (stockError: any) {
-          if (stockError.name === "AbortError") {
+          if (stockError instanceof FetchError) {
+            console.warn(`API error fetching ${symbol}:`, stockError.message);
+          } else if (stockError.name === "AbortError") {
             console.warn(`Timeout fetching ${symbol}`);
           } else {
             console.warn(`Network error fetching ${symbol}:`, stockError);
