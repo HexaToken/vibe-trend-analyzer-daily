@@ -235,7 +235,8 @@ export const SentimentHeatMap: React.FC = () => {
                     ? "bg-blue-500 text-white"
                     : "hover:bg-gray-100 dark:hover:bg-gray-800"
                 }`}
-                onClick={() => setTimeFilter(period)}
+                onClick={() => handleTimeFilterChange(period)}
+                disabled={isLoading}
               >
                 <Calendar className="w-4 h-4 mr-1" />
                 {period}
