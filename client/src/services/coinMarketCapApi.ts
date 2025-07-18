@@ -455,6 +455,11 @@ class CoinMarketCapService {
 // Export singleton instance
 export const coinMarketCapApi = new CoinMarketCapService();
 
+// Utility function to reset the circuit breaker
+export const resetCoinMarketCapCircuitBreaker = () => {
+  coinMarketCapApi.resetCircuitBreaker();
+};
+
 // Utility functions to convert CoinMarketCap responses to our app's Ticker format
 export function convertCMCToTicker(
   crypto: CoinMarketCapCryptocurrency,
