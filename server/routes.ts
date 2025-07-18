@@ -607,17 +607,8 @@ except Exception as e:
     try {
       const { spawn } = await import("child_process");
       const python = spawn("python3", [
-        "-c",
-        `
-import sys
-import os
-sys.path.insert(0, os.path.join(os.getcwd(), '.pythonlibs', 'lib', 'python3.11', 'site-packages'))
-sys.path.insert(0, os.getcwd())
-from server.yfinance_service import yfinance_service
-import json
-result = yfinance_service.get_enhanced_sentiment_data()
-print(json.dumps(result))
-      `,
+        "server/yfinance_service.py",
+        "get_enhanced_sentiment_data",
       ]);
 
       let output = "";
