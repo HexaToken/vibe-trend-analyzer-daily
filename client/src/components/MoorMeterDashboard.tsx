@@ -1579,9 +1579,7 @@ export const MoorMeterDashboard: React.FC = () => {
                             </div>
             </div>
           </>
-                                                                                                                                                                        );
-
-              {/* Sidebar */}
+                                                                                                                                                                                );
               <div className="space-y-6">
                 {/* Personal Mood Score */}
                 <PersonalMoodCard />
