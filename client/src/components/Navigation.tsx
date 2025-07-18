@@ -155,16 +155,6 @@ export const Navigation = ({
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-1">
-              {/* Dashboard */}
-              <Button
-                variant={activeSection === "dashboard" ? "default" : "ghost"}
-                onClick={() => onSectionChange("dashboard")}
-                className="flex items-center gap-2"
-              >
-                <BarChart3 className="h-4 w-4" />
-                Dashboard
-              </Button>
-
               {/* MoorMeter Dashboard */}
               <Button
                 variant={activeSection === "moorMeter" ? "default" : "ghost"}
@@ -405,19 +395,6 @@ export const Navigation = ({
           {isMenuOpen && (
             <div className="md:hidden py-4 border-t">
               <div className="flex flex-col space-y-2">
-                {/* Dashboard */}
-                <Button
-                  variant={activeSection === "dashboard" ? "default" : "ghost"}
-                  onClick={() => {
-                    onSectionChange("dashboard");
-                    setIsMenuOpen(false);
-                  }}
-                  className="justify-start gap-2"
-                >
-                  <BarChart3 className="h-4 w-4" />
-                  Dashboard
-                </Button>
-
                 {/* MoorMeter Dashboard */}
                 <Button
                   variant={activeSection === "moorMeter" ? "default" : "ghost"}
