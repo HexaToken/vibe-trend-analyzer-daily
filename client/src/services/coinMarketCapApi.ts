@@ -228,6 +228,21 @@ class CoinMarketCapService {
 
       // Check response status BEFORE consuming the body
       if (!response.ok) {
+        // Special handling for rate limit errors (429)
+        if (response.status === 429) {
+          // Open circuit breaker for longer on rate limits
+          this.circuitBreaker.isOpen = true;
+          this.circuitBreaker.lastFailureTime = Date.now();
+          this.circuitBreaker.timeout = 600000; // 10 minutes for rate limits
+          this.circuitBreaker.failureCount = this.circuitBreaker.threshold;
+
+          throw new CoinMarketCapApiError(
+            "Rate limit exceeded - API temporarily unavailable",
+            response.status,
+            "rate_limit",
+          );
+        }
+
         throw new CoinMarketCapApiError(
           `HTTP ${response.status}: ${response.statusText}`,
           response.status,
