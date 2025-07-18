@@ -1579,7 +1579,7 @@ export const MoorMeterDashboard: React.FC = () => {
                 <PersonalMoodCard />
                                 {/* Watchlist */}
                 <WatchlistWidget />
-                      ����� Market Summary
+                      ������ Market Summary
                                     {/* AI Insight */}
                 <AIInsightWidget moodScore={moodScore} />
 
@@ -1588,21 +1588,7 @@ export const MoorMeterDashboard: React.FC = () => {
                             </div>
             </div>
           </>
-        );
-                        <span className="text-green-600 font-semibold">
-                          +2.34%
-                        </span>
-                      </div>
-                    </div>
-                  </Card>
-
-                  <Card className="p-6">
-                    <h3 className="text-lg font-semibold mb-4 flex items-center">
-                      📉 Worst Performers
-                    </h3>
-                    <div className="space-y-2">
-                      <div className="flex justify-between items-center">
-                        <span className="font-medium">TSLA</span>
+                );
                         <span className="text-red-600 font-semibold">
                           -2.45%
                         </span>
