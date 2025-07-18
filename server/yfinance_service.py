@@ -101,10 +101,16 @@ class YFinanceService:
         except Exception as e:
             return {"error": f"Failed to fetch news for {symbol}: {str(e)}", "articles": []}
     
-    def get_market_news(self) -> Dict[str, Any]:
+        def get_market_news(self) -> Dict[str, Any]:
         """Get general market news from multiple major tickers"""
         if not self.is_available():
-            return {"error": "YFinance service not available", "articles": []}
+            return {
+                "error": "YFinance service not available",
+                "setup_required": True,
+                "import_error": self.import_error,
+                "instructions": "YFinance Python package needs to be installed. Run: pip install yfinance pandas",
+                "articles": []
+            }
         
         try:
             # Get news from major market indicators
