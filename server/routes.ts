@@ -394,16 +394,18 @@ print(json.dumps(result))
     }
   });
 
-  // X/Twitter API endpoints
-  app.get("/api/proxy/twitter/user/:username", async (req, res) => {
+  // X/Twitter API endpoints - What's Happening
+  app.get("/api/proxy/twitter/trending", async (req, res) => {
     try {
-      const { username } = req.params;
       const bearerToken =
         process.env.TWITTER_BEARER_TOKEN ||
         "766687026-6nvFdqRnFE5MXI9a3nrtBEl08U4sFUK8ZrKBzhFm";
 
+      // Get trending topics for a specific location (1 = worldwide, 23424977 = United States)
+      const { woeid = 1 } = req.query;
+
       const response = await fetch(
-        `https://api.x.com/2/users/by/username/${username}?user.fields=id,name,username,created_at,description,location,pinned_tweet_id,profile_image_url,protected,public_metrics,url,verified,verified_type`,
+        `https://api.x.com/1.1/trends/place.json?id=${woeid}`,
         {
           headers: {
             Authorization: `Bearer ${bearerToken}`,
@@ -421,24 +423,26 @@ print(json.dumps(result))
       const data = await response.json();
       res.json(data);
     } catch (error) {
-      console.error("Twitter API proxy error:", error);
+      console.error("Twitter trending API proxy error:", error);
       res.status(500).json({
-        error: "Failed to fetch Twitter user data",
+        error: "Failed to fetch Twitter trending topics",
         message: error instanceof Error ? error.message : "Unknown error",
       });
     }
   });
 
-  app.get("/api/proxy/twitter/user/:userId/tweets", async (req, res) => {
+  app.get("/api/proxy/twitter/search/recent", async (req, res) => {
     try {
-      const { userId } = req.params;
-      const { max_results = 10 } = req.query;
+      const {
+        query = "finance OR stocks OR markets OR trading",
+        max_results = 20,
+      } = req.query;
       const bearerToken =
         process.env.TWITTER_BEARER_TOKEN ||
         "766687026-6nvFdqRnFE5MXI9a3nrtBEl08U4sFUK8ZrKBzhFm";
 
       const response = await fetch(
-        `https://api.x.com/2/users/${userId}/tweets?max_results=${max_results}&tweet.fields=created_at,public_metrics,text,author_id,context_annotations,entities,in_reply_to_user_id,lang,possibly_sensitive,referenced_tweets,reply_settings,source&expansions=author_id`,
+        `https://api.x.com/2/tweets/search/recent?query=${encodeURIComponent(query as string)}&max_results=${max_results}&tweet.fields=created_at,public_metrics,context_annotations,entities,author_id&expansions=author_id&user.fields=name,username,verified,public_metrics`,
         {
           headers: {
             Authorization: `Bearer ${bearerToken}`,
@@ -456,9 +460,9 @@ print(json.dumps(result))
       const data = await response.json();
       res.json(data);
     } catch (error) {
-      console.error("Twitter tweets API proxy error:", error);
+      console.error("Twitter search API proxy error:", error);
       res.status(500).json({
-        error: "Failed to fetch Twitter user tweets",
+        error: "Failed to fetch Twitter search results",
         message: error instanceof Error ? error.message : "Unknown error",
       });
     }
