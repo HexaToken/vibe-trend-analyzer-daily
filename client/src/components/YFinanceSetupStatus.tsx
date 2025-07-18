@@ -110,11 +110,27 @@ export const YFinanceSetupStatus: React.FC = () => {
   useEffect(() => {
     // Use a timeout to avoid blocking the component render
     const timeoutId = setTimeout(() => {
-      checkStatus().catch(console.error);
+      checkStatus().catch((error) => {
+        console.error("Critical error in YFinance status check:", error);
+        setComponentError("Component failed to initialize");
+      });
     }, 100);
 
     return () => clearTimeout(timeoutId);
   }, []);
+
+  // If component has critical error, show minimal fallback
+  if (componentError) {
+    return (
+      <div className="p-4 bg-yellow-50 border border-yellow-200 rounded">
+        <p className="text-sm text-yellow-800">
+          YFinance setup component encountered an error.
+          <br />
+          To set up YFinance: <code>pip install yfinance pandas</code>
+        </p>
+      </div>
+    );
+  }
 
   const getStatusIcon = () => {
     if (loading) return <Loader2 className="h-5 w-5 animate-spin" />;
