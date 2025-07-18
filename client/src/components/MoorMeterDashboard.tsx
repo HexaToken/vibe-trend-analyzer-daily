@@ -222,7 +222,7 @@ export const MoorMeterDashboard: React.FC = () => {
   // Navigation items
   const navItems = [
     { label: "Home", href: "#" },
-    { label: "Today's Market Sentiment", href: "#market" },
+    { label: "Market Mood", href: "#market" },
     { label: "Watchlist", href: "#watchlist" },
     { label: "News Feed", href: "#news" },
     { label: "Community", href: "#community" },
