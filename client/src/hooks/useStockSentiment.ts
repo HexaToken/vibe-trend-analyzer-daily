@@ -164,9 +164,25 @@ export const useStockSentiment = (refreshInterval: number = 300000) => {
   };
 
   useEffect(() => {
-    fetchStockSentiment();
+    const safeExecute = async () => {
+      try {
+        await fetchStockSentiment();
+      } catch (error) {
+        console.error("useStockSentiment useEffect error:", error);
+        setError("Failed to initialize stock sentiment data");
+        setData({
+          score: 50,
+          label: "Neutral (Fallback)",
+          change: 0,
+          samples: 1000,
+        });
+        setLoading(false);
+      }
+    };
 
-    const interval = setInterval(fetchStockSentiment, refreshInterval);
+    safeExecute();
+
+    const interval = setInterval(safeExecute, refreshInterval);
     return () => clearInterval(interval);
   }, [refreshInterval]);
 
