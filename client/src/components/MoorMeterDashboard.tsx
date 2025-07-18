@@ -234,6 +234,16 @@ export const MoorMeterDashboard: React.FC = () => {
       case "Market Mood":
         return (
           <div className="space-y-8">
+            {/* Header */}
+            <div className="text-center">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                Today's Market Sentiment
+              </h1>
+              <p className="text-gray-600 dark:text-gray-400">
+                Real-time analysis of market mood and stock performance
+              </p>
+            </div>
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <TopStocksModule
                 title="Top Performing Stocks"
