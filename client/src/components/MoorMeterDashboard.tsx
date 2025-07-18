@@ -1454,14 +1454,8 @@ export const MoorMeterDashboard: React.FC = () => {
                 <CommunityWidget posts={communityPosts} />
               </div>
             </div>
-          </>
-                );
-                        </span>
-                        <span className="font-semibold text-red-600">
-                          6 (33.3%)
-                        </span>
-                      </div>
-                      <div className="flex justify-between">
+                    </>
+        );
                         <span className="text-gray-600 dark:text-gray-400">
                           Unchanged
                         </span>
