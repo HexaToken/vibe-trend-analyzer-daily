@@ -153,6 +153,36 @@ class CoinMarketCapService {
   };
   private proxyAvailable: boolean | null = null; // Track proxy availability
 
+  // Method to manually reset circuit breaker
+  public resetCircuitBreaker(): void {
+    this.circuitBreaker.isOpen = false;
+    this.circuitBreaker.failureCount = 0;
+    this.circuitBreaker.lastFailureTime = 0;
+    this.proxyAvailable = null;
+    console.log("CoinMarketCap circuit breaker reset");
+  }
+
+  // Method to check circuit breaker status
+  public getCircuitBreakerStatus(): {
+    isOpen: boolean;
+    timeRemaining?: number;
+  } {
+    if (!this.circuitBreaker.isOpen) {
+      return { isOpen: false };
+    }
+
+    const now = Date.now();
+    const timeRemaining =
+      this.circuitBreaker.timeout - (now - this.circuitBreaker.lastFailureTime);
+
+    if (timeRemaining <= 0) {
+      this.resetCircuitBreaker();
+      return { isOpen: false };
+    }
+
+    return { isOpen: true, timeRemaining };
+  }
+
   private async fetchFromApi<T>(
     endpoint: string,
     params: Record<string, string> = {},
