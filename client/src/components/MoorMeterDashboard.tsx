@@ -44,6 +44,8 @@ import { PersonalMoodCard } from "./moorMeter/PersonalMoodCard";
 import { WatchlistWidget } from "./moorMeter/WatchlistWidget";
 import { AIInsightWidget } from "./moorMeter/AIInsightWidget";
 import { CommunityWidget } from "./moorMeter/CommunityWidget";
+import { MoodScoreHero } from "./builder/MoodScoreHero";
+import { TopStocksModule } from "./builder/TopStocksModule";
 import { formatCurrency, cn } from "../lib/utils";
 
 // Types for our mood data
@@ -225,6 +227,85 @@ export const MoorMeterDashboard: React.FC = () => {
     { label: "News Feed", href: "#news" },
     { label: "Community", href: "#community" },
   ];
+
+  // Function to render content based on active tab
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case "Market Mood":
+        return (
+          <div className="space-y-8">
+            <MoodScoreHero
+              title="Market Sentiment Analysis"
+              subtitle="Builder.io powered modular components for real-time market mood"
+            />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <TopStocksModule
+                title="Top Performing Stocks"
+                maxStocks={5}
+                showSentiment={true}
+              />
+              <TopStocksModule
+                title="Trending Stocks"
+                maxStocks={5}
+                showSentiment={false}
+              />
+            </div>
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
+              <h3 className="text-xl font-semibold mb-4">
+                🧱 Builder.io Components
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                These components are designed as modular Builder.io blocks that
+                can be drag-and-dropped in the Builder.io visual editor.
+              </p>
+            </div>
+          </div>
+        );
+
+      case "Home":
+      default:
+        return (
+          <>
+            {/* Dashboard Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+              {/* Main Content Area */}
+              <div className="lg:col-span-3 space-y-6">
+                {/* Top Stocks Widget */}
+                <TopStocksWidget stockLoading={stockLoading} />
+
+                {/* News Feed Widget */}
+                <NewsWidget articles={newsArticles} loading={newsLoading} />
+
+                {/* Mood Trend Chart */}
+                <MoodTrendChart
+                  data={historicalMood}
+                  timeframe={selectedTimeframe}
+                  setTimeframe={setSelectedTimeframe}
+                />
+
+                {/* Trending Topics */}
+                <TrendingTopicsWidget topics={trendingTopics} />
+              </div>
+
+              {/* Sidebar */}
+              <div className="space-y-6">
+                {/* Personal Mood Score */}
+                <PersonalMoodCard />
+
+                {/* Watchlist Manager */}
+                <WatchlistWidget />
+
+                {/* AI Insight */}
+                <AIInsightWidget moodScore={moodScore} />
+
+                {/* Community Feed */}
+                <CommunityWidget messages={communityMessages} />
+              </div>
+            </div>
+          </>
+        );
+    }
+  };
 
   return (
     <div
@@ -470,42 +551,8 @@ export const MoorMeterDashboard: React.FC = () => {
           </div>
         </div>
 
-        {/* Dashboard Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          {/* Main Content Area */}
-          <div className="lg:col-span-3 space-y-6">
-            {/* Top Stocks Widget */}
-            <TopStocksWidget stockLoading={stockLoading} />
-
-            {/* News Feed Widget */}
-            <NewsWidget articles={newsArticles} loading={newsLoading} />
-
-            {/* Mood Trend Chart */}
-            <MoodTrendChart
-              data={historicalMood}
-              timeframe={selectedTimeframe}
-              setTimeframe={setSelectedTimeframe}
-            />
-
-            {/* Trending Topics */}
-            <TrendingTopicsWidget topics={trendingTopics} />
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Personal Mood Score */}
-            <PersonalMoodCard />
-
-            {/* Watchlist Manager */}
-            <WatchlistWidget />
-
-            {/* AI Insight */}
-            <AIInsightWidget moodScore={moodScore} />
-
-            {/* Community Feed */}
-            <CommunityWidget messages={communityMessages} />
-          </div>
-        </div>
+        {/* Tab Content */}
+        {renderTabContent()}
       </main>
 
       {/* Footer */}
