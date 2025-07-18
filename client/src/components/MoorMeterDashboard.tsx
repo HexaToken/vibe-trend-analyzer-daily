@@ -382,6 +382,7 @@ export const MoorMeterDashboard: React.FC = () => {
 
   // Function to render content based on active tab
   const renderTabContent = () => {
+    console.log("Rendering tab content for activeTab:", activeTab);
     switch (activeTab) {
       case "Market Mood":
         return (
