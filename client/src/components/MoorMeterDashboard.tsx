@@ -755,7 +755,7 @@ export const MoorMeterDashboard: React.FC = () => {
             {/* Builder.io Integration Note */}
             <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
               <h3 className="text-xl font-semibold mb-4 text-blue-900 dark:text-blue-100">
-                🧱 Builder.io Integration Ready
+                ���� Builder.io Integration Ready
               </h3>
               <p className="text-blue-700 dark:text-blue-300 mb-4">
                 This Watchlist module is designed as modular Builder.io
@@ -1438,7 +1438,24 @@ export const MoorMeterDashboard: React.FC = () => {
                   </div>
                 </Card>
 
-                {/* HeatMap Stats */}
+                                {/* News Feed Widget */}
+                <NewsWidget articles={newsArticles} loading={newsLoading} />
+
+                {/* Mood Trend Chart */}
+                <MoodTrendChart
+                  data={historicalMood}
+                  timeframe={selectedTimeframe}
+                  setTimeframe={setSelectedTimeframe}
+                />
+
+                {/* Trending Topics */}
+                <TrendingTopicsWidget topics={trendingTopics} />
+              </div>
+
+              {/* Sidebar */}
+              <div className="space-y-6">
+                {/* Personal Mood Score */}
+                <PersonalMoodCard />
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <Card className="p-6">
                     <h3 className="text-lg font-semibold mb-4 flex items-center">
