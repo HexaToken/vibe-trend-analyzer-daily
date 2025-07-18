@@ -794,13 +794,7 @@ export const MoorMeterDashboard: React.FC = () => {
               <div className="mt-4 p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg">
                 <p className="text-xs text-gray-600 dark:text-gray-400">
                   <strong>API Integration:</strong> Connect to{" "}
-                  <code>GET /user/watchlist</code> and{" "}
-                  <code>GET /sentiment?ticker=XYZ</code> for live data
-                </p>
-              </div>
-            </div>
-          </div>
-        );
+                  
 
       case "News":
         return (
