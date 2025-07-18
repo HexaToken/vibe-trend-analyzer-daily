@@ -39,10 +39,16 @@ class YFinanceService:
         """Check if YFinance service is available"""
         return self.available
     
-    def get_stock_news(self, symbol: str = "SPY") -> Dict[str, Any]:
+        def get_stock_news(self, symbol: str = "SPY") -> Dict[str, Any]:
         """Get latest news for a stock symbol"""
         if not self.is_available():
-            return {"error": "YFinance service not available", "articles": []}
+            return {
+                "error": "YFinance service not available",
+                "setup_required": True,
+                "import_error": self.import_error,
+                "instructions": "YFinance Python package needs to be installed. Run: pip install yfinance pandas",
+                "articles": []
+            }
         
         try:
             ticker = yf.Ticker(symbol)
