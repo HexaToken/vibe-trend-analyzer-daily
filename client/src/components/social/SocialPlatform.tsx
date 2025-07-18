@@ -53,13 +53,14 @@ export const SocialPlatform = () => {
 
   // Get crypto data for trending crypto
   const trendingCryptos = ["BTC", "ETH", "BNB"];
-  const { tickers: cryptoTickers, loading: cryptoLoading } = useCryptoQuotes(
-    trendingCryptos,
-    {
-      refreshInterval: 300000, // 5 minutes to reduce API calls
-      enabled: true,
-    },
-  );
+  const {
+    tickers: cryptoTickers,
+    loading: cryptoLoading,
+    error: cryptoError,
+  } = useCryptoQuotes(trendingCryptos, {
+    refreshInterval: 300000, // 5 minutes to reduce API calls
+    enabled: true,
+  });
   const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
