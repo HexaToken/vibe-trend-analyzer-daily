@@ -316,29 +316,45 @@ export const SentimentHeatMap: React.FC = () => {
         <CardContent className="p-0">
           <div ref={heatmapRef} className="overflow-x-auto">
             {/* Time Headers */}
-            <div className="grid grid-cols-[120px_1fr] bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
-              <div className="p-3 border-r border-gray-200 dark:border-gray-700">
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+            <div className="grid grid-cols-[100px_1fr] sm:grid-cols-[120px_1fr] bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
+              <div className="p-2 sm:p-3 border-r border-gray-200 dark:border-gray-700">
+                <span className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">
                   Ticker
                 </span>
               </div>
               <div
-                className={`grid gap-1 p-3 ${
+                className={`grid gap-0.5 sm:gap-1 p-2 sm:p-3 min-w-0 ${
                   timeFilter === "24h"
-                    ? "grid-cols-24"
+                    ? "grid-cols-12 sm:grid-cols-24"
                     : timeFilter === "7d"
                       ? "grid-cols-7"
-                      : "grid-cols-15"
+                      : "grid-cols-8 sm:grid-cols-15"
                 }`}
               >
-                {heatmapData[0]?.data.map((_, index) => (
-                  <div
-                    key={index}
-                    className="text-xs text-center text-gray-600 dark:text-gray-400 min-w-0"
-                  >
-                    {heatmapData[0].data[index].hour}
-                  </div>
-                ))}
+                {heatmapData[0]?.data.map((_, index) => {
+                  const shouldShow =
+                    timeFilter === "24h"
+                      ? index % 2 === 0
+                      : timeFilter === "30d"
+                        ? index % 2 === 0
+                        : true;
+                  return (
+                    <div
+                      key={index}
+                      className={`text-xs text-center text-gray-600 dark:text-gray-400 min-w-0 truncate ${
+                        timeFilter === "24h" && index % 2 !== 0
+                          ? "hidden sm:block"
+                          : ""
+                      } ${
+                        timeFilter === "30d" && index % 2 !== 0
+                          ? "hidden sm:block"
+                          : ""
+                      }`}
+                    >
+                      {heatmapData[0].data[index].hour}
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
