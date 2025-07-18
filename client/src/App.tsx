@@ -15,6 +15,8 @@ import { UserProfile } from "@/components/profile/UserProfile";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { DatabaseDemo } from "@/components/DatabaseDemo";
 import { SocialPlatform } from "@/components/social/SocialPlatform";
+import { MoorMeterDashboard } from "@/components/MoorMeterDashboard";
+import { BuilderDemo } from "@/components/BuilderDemo";
 
 import { ApiStatusIndicator } from "@/components/ApiStatusIndicator";
 import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
@@ -30,14 +32,12 @@ import { YFinanceDemo } from "@/components/YFinanceDemo";
 const queryClient = new QueryClient();
 
 const App = () => {
-  const [activeSection, setActiveSection] = useState("dashboard");
+  const [activeSection, setActiveSection] = useState("moorMeter");
 
   const renderContent = () => {
     switch (activeSection) {
-      case "dashboard":
-        return <Dashboard />;
       case "sentiment":
-        return <SentimentDashboard />;
+        return <BuilderDemo />;
       case "analytics":
         return <Analytics />;
       case "history":
@@ -73,8 +73,11 @@ const App = () => {
         return <AiSentimentExplainer />;
       case "yfinance":
         return <YFinanceDemo />;
+      case "moorMeter":
+        return <MoorMeterDashboard />;
+
       default:
-        return <Dashboard />;
+        return <MoorMeterDashboard />;
     }
   };
 

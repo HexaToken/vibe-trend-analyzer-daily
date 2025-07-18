@@ -26,6 +26,7 @@ import {
   useGlobalMetrics,
 } from "@/hooks/useCoinMarketCap";
 import { CryptoPrice, CryptoGrid } from "./CryptoPrice";
+import CoinMarketCapStatus from "../CoinMarketCapStatus";
 
 export const CryptoDashboard = () => {
   const [selectedTimeframe, setSelectedTimeframe] = useState<
@@ -43,7 +44,7 @@ export const CryptoDashboard = () => {
 
   // Get global metrics with reduced refresh rate
   const { data: globalMetrics, loading: metricsLoading } = useGlobalMetrics({
-    refreshInterval: 300000 // 5 minutes
+    refreshInterval: 300000, // 5 minutes
   });
 
   // Filter cryptocurrencies based on search
@@ -80,12 +81,15 @@ export const CryptoDashboard = () => {
             Real-time cryptocurrency data powered by CoinMarketCap API
           </p>
         </div>
-        <Button onClick={refetch} disabled={cryptoLoading}>
-          <RefreshCw
-            className={`h-4 w-4 mr-2 ${cryptoLoading ? "animate-spin" : ""}`}
-          />
-          Refresh Data
-        </Button>
+        <div className="flex gap-3 items-center">
+          <CoinMarketCapStatus />
+          <Button onClick={refetch} disabled={cryptoLoading}>
+            <RefreshCw
+              className={`h-4 w-4 mr-2 ${cryptoLoading ? "animate-spin" : ""}`}
+            />
+            Refresh Data
+          </Button>
+        </div>
       </div>
 
       {/* Global Market Stats */}
@@ -196,13 +200,28 @@ export const CryptoDashboard = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
+          {cryptoError && (
+            <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+              <p className="text-sm text-yellow-800">
+                <strong>API Notice:</strong> {cryptoError}
+              </p>
+              {cryptoError.includes("rate limit") && (
+                <p className="text-xs text-yellow-700 mt-1">
+                  The data shown below is cached. The API will automatically
+                  recover.
+                </p>
+              )}
+            </div>
+          )}
           {cryptoLoading && topCryptos.length === 0 ? (
             <div className="text-center py-8">
               <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-2" />
               <p>Loading popular cryptocurrencies...</p>
             </div>
           ) : (
-            <CryptoGrid symbols={topCryptos.slice(0, 6).map(crypto => crypto.symbol)} />
+            <CryptoGrid
+              symbols={topCryptos.slice(0, 6).map((crypto) => crypto.symbol)}
+            />
           )}
         </CardContent>
       </Card>

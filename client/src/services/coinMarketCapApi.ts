@@ -147,11 +147,15 @@ class CoinMarketCapService {
   private circuitBreaker = {
     isOpen: false,
     failureCount: 0,
-    threshold: 5, // Higher threshold - allow more failures before opening
-    timeout: 30000, // 30 seconds instead of 1 minute
+    threshold: 3, // Lower threshold to protect against rate limits
+    timeout: 60000, // 1 minute default
     lastFailureTime: 0,
   };
   private proxyAvailable: boolean | null = null; // Track proxy availability
+  private cache = new Map<
+    string,
+    { data: any; timestamp: number; ttl: number }
+  >();
 
   // Method to manually reset circuit breaker
   public resetCircuitBreaker(): void {
@@ -160,6 +164,33 @@ class CoinMarketCapService {
     this.circuitBreaker.lastFailureTime = 0;
     this.proxyAvailable = null;
     console.log("CoinMarketCap circuit breaker reset");
+  }
+
+  // Cache management methods
+  private getCachedData<T>(key: string): T | null {
+    const cached = this.cache.get(key);
+    if (!cached) return null;
+
+    if (Date.now() - cached.timestamp > cached.ttl) {
+      this.cache.delete(key);
+      return null;
+    }
+
+    return cached.data as T;
+  }
+
+  private setCachedData<T>(key: string, data: T, ttlMs: number = 300000): void {
+    // Default 5 minutes TTL
+    this.cache.set(key, {
+      data,
+      timestamp: Date.now(),
+      ttl: ttlMs,
+    });
+  }
+
+  public clearCache(): void {
+    this.cache.clear();
+    console.log("CoinMarketCap cache cleared");
   }
 
   // Method to check circuit breaker status
@@ -186,7 +217,23 @@ class CoinMarketCapService {
   private async fetchFromApi<T>(
     endpoint: string,
     params: Record<string, string> = {},
+    useCache: boolean = true,
+    cacheTtl: number = 300000, // 5 minutes default
   ): Promise<T> {
+    // Generate cache key
+    const cacheKey = `${endpoint}?${new URLSearchParams(params).toString()}`;
+
+    // Check cache first if circuit breaker is open or we want to use cache
+    if (
+      useCache &&
+      (this.circuitBreaker.isOpen || this.proxyAvailable === false)
+    ) {
+      const cached = this.getCachedData<T>(cacheKey);
+      if (cached) {
+        console.log(`Using cached data for ${endpoint}`);
+        return cached;
+      }
+    }
     // If proxy is known to be unavailable, fail immediately
     if (this.proxyAvailable === false) {
       throw new CoinMarketCapApiError(
@@ -228,6 +275,21 @@ class CoinMarketCapService {
 
       // Check response status BEFORE consuming the body
       if (!response.ok) {
+        // Special handling for rate limit errors (429)
+        if (response.status === 429) {
+          // Open circuit breaker for longer on rate limits
+          this.circuitBreaker.isOpen = true;
+          this.circuitBreaker.lastFailureTime = Date.now();
+          this.circuitBreaker.timeout = 600000; // 10 minutes for rate limits
+          this.circuitBreaker.failureCount = this.circuitBreaker.threshold;
+
+          throw new CoinMarketCapApiError(
+            "Rate limit exceeded - API temporarily unavailable",
+            response.status,
+            "rate_limit",
+          );
+        }
+
         throw new CoinMarketCapApiError(
           `HTTP ${response.status}: ${response.statusText}`,
           response.status,
@@ -264,14 +326,28 @@ class CoinMarketCapService {
       if (data.status && data.status.error_code !== 0) {
         // Special handling for rate limit errors
         if (
-          data.status.error_message &&
-          (data.status.error_message.includes("rate limit") ||
-            data.status.error_message.includes("IP rate limit"))
+          data.status.error_code === 1008 || // Rate limit exceeded
+          data.status.error_code === 429 || // Too many requests
+          (data.status.error_message &&
+            (data.status.error_message.toLowerCase().includes("rate limit") ||
+              data.status.error_message
+                .toLowerCase()
+                .includes("ip rate limit") ||
+              data.status.error_message
+                .toLowerCase()
+                .includes("too many requests")))
         ) {
           // Increase circuit breaker timeout for rate limits
-          this.circuitBreaker.timeout = 600000; // 10 minutes for rate limits
+          this.circuitBreaker.timeout = 900000; // 15 minutes for rate limits
           this.circuitBreaker.isOpen = true;
           this.circuitBreaker.lastFailureTime = Date.now();
+          this.circuitBreaker.failureCount = this.circuitBreaker.threshold;
+
+          throw new CoinMarketCapApiError(
+            "CoinMarketCap API rate limit exceeded - using fallback data",
+            data.status.error_code,
+            "rate_limit",
+          );
         }
 
         throw new CoinMarketCapApiError(
@@ -284,6 +360,12 @@ class CoinMarketCapService {
       // Reset failure count on success
       this.circuitBreaker.failureCount = 0;
       this.proxyAvailable = true; // Mark proxy as available
+
+      // Cache successful response
+      if (useCache) {
+        this.setCachedData(cacheKey, data, cacheTtl);
+      }
+
       return data;
     } catch (error) {
       // Update circuit breaker on failure
@@ -315,12 +397,17 @@ class CoinMarketCapService {
     convert: string = "USD",
     sort: string = "market_cap",
   ): Promise<CoinMarketCapListingsResponse> {
-    return this.fetchFromApi<CoinMarketCapListingsResponse>("/listings", {
-      start: start.toString(),
-      limit: limit.toString(),
-      convert,
-      sort,
-    });
+    return this.fetchFromApi<CoinMarketCapListingsResponse>(
+      "/listings",
+      {
+        start: start.toString(),
+        limit: limit.toString(),
+        convert,
+        sort,
+      },
+      true,
+      300000, // 5 minutes cache for listings
+    );
   }
 
   /**
@@ -330,10 +417,15 @@ class CoinMarketCapService {
     symbols: string[],
     convert: string = "USD",
   ): Promise<CoinMarketCapQuotesResponse> {
-    return this.fetchFromApi<CoinMarketCapQuotesResponse>("/quotes", {
-      symbol: symbols.join(","),
-      convert,
-    });
+    return this.fetchFromApi<CoinMarketCapQuotesResponse>(
+      "/quotes",
+      {
+        symbol: symbols.join(","),
+        convert,
+      },
+      true,
+      120000, // 2 minutes cache for quotes (more frequent updates needed)
+    );
   }
 
   /**
@@ -343,10 +435,15 @@ class CoinMarketCapService {
     ids: number[],
     convert: string = "USD",
   ): Promise<CoinMarketCapQuotesResponse> {
-    return this.fetchFromApi<CoinMarketCapQuotesResponse>("/quotes", {
-      id: ids.join(","),
-      convert,
-    });
+    return this.fetchFromApi<CoinMarketCapQuotesResponse>(
+      "/quotes",
+      {
+        id: ids.join(","),
+        convert,
+      },
+      true,
+      120000, // 2 minutes cache for quotes
+    );
   }
 
   /**
@@ -453,7 +550,12 @@ class CoinMarketCapService {
       last_updated: string;
     };
   }> {
-    return this.fetchFromApi("/global-metrics", { convert });
+    return this.fetchFromApi(
+      "/global-metrics",
+      { convert },
+      true,
+      600000, // 10 minutes cache for global metrics (less frequent updates needed)
+    );
   }
 }
 

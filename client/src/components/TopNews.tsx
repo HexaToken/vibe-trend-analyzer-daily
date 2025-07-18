@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { NewsDetailModal } from "./NewsDetailModal";
 import { useCombinedBusinessNews } from "@/hooks/useCombinedBusinessNews";
 import { newsArticles } from "@/data/mockData";
+import YFinanceSetupStatus from "./YFinanceSetupStatus";
 
 export const TopNews = () => {
   const [selectedArticle, setSelectedArticle] = useState<any>(null);
@@ -89,9 +90,8 @@ export const TopNews = () => {
                   <Badge variant="outline" className="text-xs">
                     YFinance: {sources.yfinance.articles.length}
                   </Badge>
-                ) : sources.yfinance.error?.includes(
-                    "service not available",
-                  ) ? (
+                ) : sources.yfinance.error?.includes("service not available") ||
+                  sources.yfinance.error?.includes("setup_required") ? (
                   <Badge variant="secondary" className="text-xs">
                     YFinance: Setup Required
                   </Badge>
@@ -111,6 +111,15 @@ export const TopNews = () => {
             </Button>
           </CardTitle>
         </CardHeader>
+
+        {/* Show YFinance setup component if service is not available */}
+        {sources.yfinance.error?.includes("service not available") ||
+        sources.yfinance.error?.includes("setup_required") ? (
+          <CardContent className="pt-0 pb-4">
+            <YFinanceSetupStatus />
+          </CardContent>
+        ) : null}
+
         <CardContent className="space-y-4">
           {loading && displayArticles.length === 0 ? (
             <div className="text-center py-8">

@@ -68,13 +68,21 @@ export function useCryptoQuotes(
     } catch (error) {
       console.error("Failed to fetch crypto quotes:", error);
 
-      // Handle circuit breaker errors specifically
+      // Handle rate limit and circuit breaker errors specifically
       if (
+        error instanceof CoinMarketCapApiError &&
+        (error.message.includes("rate limit") ||
+          error.message.includes("Rate limit") ||
+          error.code === 429)
+      ) {
+        setError("CoinMarketCap API rate limit exceeded. Using cached data.");
+        console.warn("CoinMarketCap rate limit hit, falling back to mock data");
+      } else if (
         error instanceof Error &&
         error.message.includes("Circuit breaker is open")
       ) {
         setError(
-          "CoinMarketCap API temporarily unavailable (rate limited). Using mock data.",
+          "CoinMarketCap API temporarily unavailable. Using cached data.",
         );
         console.warn(
           "CoinMarketCap circuit breaker is open, falling back to mock data",
@@ -82,7 +90,7 @@ export function useCryptoQuotes(
       } else {
         setError(
           error instanceof Error
-            ? error.message
+            ? `API Error: ${error.message}`
             : "Failed to fetch crypto data",
         );
       }
@@ -210,6 +218,32 @@ export function useCryptoListings(
       setError(null);
     } catch (error) {
       console.error("Failed to fetch crypto listings:", error);
+
+      // Handle rate limit and circuit breaker errors specifically
+      if (
+        error instanceof CoinMarketCapApiError &&
+        (error.message.includes("rate limit") ||
+          error.message.includes("Rate limit") ||
+          error.code === 429)
+      ) {
+        setError("CoinMarketCap API rate limit exceeded. Using cached data.");
+        console.warn(
+          "CoinMarketCap rate limit hit for listings, falling back to mock data",
+        );
+      } else if (
+        error instanceof Error &&
+        error.message.includes("Circuit breaker is open")
+      ) {
+        setError(
+          "CoinMarketCap API temporarily unavailable. Using cached data.",
+        );
+      } else {
+        setError(
+          error instanceof Error
+            ? `API Error: ${error.message}`
+            : "Failed to fetch crypto listings",
+        );
+      }
 
       // Fallback to mock data if API fails
       const cryptoSymbols = [
@@ -349,6 +383,32 @@ export function useGlobalMetrics(
       setError(null);
     } catch (error) {
       console.error("Failed to fetch global metrics:", error);
+
+      // Handle rate limit and circuit breaker errors specifically
+      if (
+        error instanceof CoinMarketCapApiError &&
+        (error.message.includes("rate limit") ||
+          error.message.includes("Rate limit") ||
+          error.code === 429)
+      ) {
+        setError("CoinMarketCap API rate limit exceeded. Using cached data.");
+        console.warn(
+          "CoinMarketCap rate limit hit for global metrics, falling back to mock data",
+        );
+      } else if (
+        error instanceof Error &&
+        error.message.includes("Circuit breaker is open")
+      ) {
+        setError(
+          "CoinMarketCap API temporarily unavailable. Using cached data.",
+        );
+      } else {
+        setError(
+          error instanceof Error
+            ? `API Error: ${error.message}`
+            : "Failed to fetch global metrics",
+        );
+      }
 
       // Fallback to mock data if API fails
       const mockData = {

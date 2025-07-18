@@ -54,6 +54,9 @@ export function useTopHeadlines(
       // Use the proxy server to fetch real news data
       const response = await fetch(
         `/api/proxy/newsapi/top-headlines?country=${country}&category=${category || "business"}&pageSize=20`,
+        {
+          signal: AbortSignal.timeout(15000), // 15 second timeout
+        },
       );
 
       if (!response.ok) {
@@ -61,11 +64,22 @@ export function useTopHeadlines(
       }
 
       const data = await response.json();
-      setData(data);
-      stockDataFallback.setCachedData(
-        `news_headlines_${country}_${category}`,
-        data,
-      );
+
+      // Check if the response contains valid articles
+      if (
+        data.status === "ok" &&
+        data.articles &&
+        Array.isArray(data.articles)
+      ) {
+        setData(data);
+        stockDataFallback.setCachedData(
+          `news_headlines_${country}_${category}`,
+          data,
+        );
+      } else {
+        // If invalid response structure, fall through to catch block
+        throw new Error(`Invalid response structure: ${JSON.stringify(data)}`);
+      }
     } catch (err) {
       console.warn("News API proxy failed, falling back to mock data:", err);
 
@@ -204,6 +218,9 @@ export function useNewsSearch(
       // Use the proxy server to search for real news data
       const response = await fetch(
         `/api/proxy/newsapi/everything?q=${encodeURIComponent(query)}&pageSize=20&sortBy=publishedAt`,
+        {
+          signal: AbortSignal.timeout(15000), // 15 second timeout
+        },
       );
 
       if (!response.ok) {
@@ -211,8 +228,21 @@ export function useNewsSearch(
       }
 
       const data = await response.json();
-      setData(data);
-      stockDataFallback.setCachedData(`news_search_${query}`, data);
+
+      // Check if the response contains valid articles
+      if (
+        data.status === "ok" &&
+        data.articles &&
+        Array.isArray(data.articles)
+      ) {
+        setData(data);
+        stockDataFallback.setCachedData(`news_search_${query}`, data);
+      } else {
+        // If invalid response structure, fall through to catch block
+        throw new Error(
+          `Invalid search response structure: ${JSON.stringify(data)}`,
+        );
+      }
     } catch (err) {
       console.warn("News search proxy failed, falling back to mock data:", err);
 

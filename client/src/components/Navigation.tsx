@@ -55,18 +55,37 @@ export const Navigation = ({
 
   const navigationGroups = {
     data: [
+      { id: "crypto", label: "Crypto Dashboard", icon: Coins, badge: "NEW" },
       {
-        id: "sentiment",
-        label: "Sentiment Dashboard",
+        id: "finnhub",
+        label: "Finnhub Stock Data",
+        icon: TrendingUp,
+        badge: "NEW",
+      },
+      {
+        id: "sentiment-scoring",
+        label: "Stock Sentiment Scoring",
+        icon: BarChart3,
+        badge: "NEW",
+      },
+      {
+        id: "ai-analysis",
+        label: "AI Sentiment Analysis",
         icon: Brain,
         badge: "NEW",
       },
-      { id: "crypto", label: "Crypto Dashboard", icon: Coins, badge: "NEW" },
-      { id: "finnhub", label: "Finnhub Stock Data", icon: TrendingUp, badge: "NEW" },
-      { id: "sentiment-scoring", label: "Stock Sentiment Scoring", icon: BarChart3, badge: "NEW" },
-      { id: "ai-analysis", label: "AI Sentiment Analysis", icon: Brain, badge: "NEW" },
-      { id: "spacy-nlp", label: "spaCy NLP Analysis", icon: Brain, badge: "NEW" },
-      { id: "yfinance", label: "YFinance Integration", icon: Globe, badge: "NEW" },
+      {
+        id: "spacy-nlp",
+        label: "spaCy NLP Analysis",
+        icon: Brain,
+        badge: "NEW",
+      },
+      {
+        id: "yfinance",
+        label: "YFinance Integration",
+        icon: Globe,
+        badge: "NEW",
+      },
       { id: "history", label: "Historical Data", icon: Calendar },
       { id: "database", label: "Database Demo", icon: Database, badge: "DEMO" },
     ],
@@ -99,9 +118,9 @@ export const Navigation = ({
 
   const handleLogout = () => {
     logout();
-    // Redirect to dashboard if currently on protected pages
+    // Redirect to moorMeter if currently on protected pages
     if (activeSection === "profile") {
-      onSectionChange("dashboard");
+      onSectionChange("moorMeter");
     }
   };
 
@@ -130,14 +149,17 @@ export const Navigation = ({
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-1">
-              {/* Dashboard */}
+              {/* MoorMeter Dashboard */}
               <Button
-                variant={activeSection === "dashboard" ? "default" : "ghost"}
-                onClick={() => onSectionChange("dashboard")}
+                variant={activeSection === "moorMeter" ? "default" : "ghost"}
+                onClick={() => onSectionChange("moorMeter")}
                 className="flex items-center gap-2"
               >
-                <BarChart3 className="h-4 w-4" />
-                Dashboard
+                <Brain className="h-4 w-4" />
+                MoorMeter
+                <Badge variant="secondary" className="text-xs">
+                  NEW
+                </Badge>
               </Button>
 
               {/* Data Dropdown */}
@@ -367,17 +389,20 @@ export const Navigation = ({
           {isMenuOpen && (
             <div className="md:hidden py-4 border-t">
               <div className="flex flex-col space-y-2">
-                {/* Dashboard */}
+                {/* MoorMeter Dashboard */}
                 <Button
-                  variant={activeSection === "dashboard" ? "default" : "ghost"}
+                  variant={activeSection === "moorMeter" ? "default" : "ghost"}
                   onClick={() => {
-                    onSectionChange("dashboard");
+                    onSectionChange("moorMeter");
                     setIsMenuOpen(false);
                   }}
                   className="justify-start gap-2"
                 >
-                  <BarChart3 className="h-4 w-4" />
-                  Dashboard
+                  <Brain className="h-4 w-4" />
+                  MoorMeter
+                  <Badge variant="secondary" className="ml-auto text-xs">
+                    NEW
+                  </Badge>
                 </Button>
 
                 {/* Data Section */}
