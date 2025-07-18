@@ -149,7 +149,7 @@ export const Navigation = ({
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-1">
-              {/* MoorMeter Dashboard */}
+                            {/* MoorMeter Dashboard */}
               <Button
                 variant={activeSection === "moorMeter" ? "default" : "ghost"}
                 onClick={() => onSectionChange("moorMeter")}
@@ -157,19 +157,6 @@ export const Navigation = ({
               >
                 <Brain className="h-4 w-4" />
                 MoorMeter
-                <Badge variant="secondary" className="text-xs">
-                  NEW
-                </Badge>
-              </Button>
-
-              {/* Market Mood */}
-              <Button
-                variant={activeSection === "sentiment" ? "default" : "ghost"}
-                onClick={() => onSectionChange("sentiment")}
-                className="flex items-center gap-2"
-              >
-                <Brain className="h-4 w-4" />
-                Market Mood
                 <Badge variant="secondary" className="text-xs">
                   NEW
                 </Badge>
@@ -402,7 +389,7 @@ export const Navigation = ({
           {isMenuOpen && (
             <div className="md:hidden py-4 border-t">
               <div className="flex flex-col space-y-2">
-                {/* MoorMeter Dashboard */}
+                                {/* MoorMeter Dashboard */}
                 <Button
                   variant={activeSection === "moorMeter" ? "default" : "ghost"}
                   onClick={() => {
@@ -417,17 +404,6 @@ export const Navigation = ({
                     NEW
                   </Badge>
                 </Button>
-
-                {/* Market Mood */}
-                <Button
-                  variant={activeSection === "sentiment" ? "default" : "ghost"}
-                  onClick={() => {
-                    onSectionChange("sentiment");
-                    setIsMenuOpen(false);
-                  }}
-                  className="justify-start gap-2"
-                >
-                  <Brain className="h-4 w-4" />
                   Market Mood
                   <Badge variant="secondary" className="ml-auto text-xs">
                     NEW
