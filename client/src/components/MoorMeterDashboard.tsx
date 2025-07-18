@@ -227,6 +227,7 @@ export const MoorMeterDashboard: React.FC = () => {
     { label: "Watchlist", href: "#watchlist" },
     { label: "News", href: "#news" },
     { label: "Community", href: "#community" },
+    { label: "Tools", href: "#tools" },
   ];
 
   // Function to render content based on active tab
