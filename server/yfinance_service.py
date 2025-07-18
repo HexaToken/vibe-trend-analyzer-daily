@@ -27,12 +27,13 @@ except ImportError as e:
 class YFinanceService:
     """Service for fetching financial data using yfinance package"""
     
-    def __init__(self):
+        def __init__(self):
         self.available = yf is not None and pd is not None
+        self.import_error = IMPORT_ERROR
         if self.available:
             print("✓ YFinance service initialized successfully")
         else:
-            print("Warning: YFinance service not available")
+            print(f"Warning: YFinance service not available. Import error: {IMPORT_ERROR}")
     
     def is_available(self) -> bool:
         """Check if YFinance service is available"""
