@@ -51,6 +51,23 @@ export const YFinanceSetupStatus: React.FC = () => {
       console.error("Failed to check YFinance status:", error);
       setRetryAttempts((prev) => prev + 1);
 
+      // If we've failed multiple times, show critical error
+      if (retryAttempts >= 2) {
+        setHasCriticalError(true);
+        setStatus({
+          status: "error",
+          error:
+            "Unable to connect to YFinance service after multiple attempts",
+          setup_instructions: [
+            "YFinance service may be temporarily unavailable",
+            "Try refreshing the page",
+            "Install YFinance if not already done:",
+            "pip install yfinance pandas",
+          ],
+        });
+        return;
+      }
+
       // Provide different error messages based on error type
       let errorMessage = "Failed to connect to YFinance service";
       if (error.name === "AbortError") {
