@@ -38,6 +38,7 @@ const App = () => {
   console.log("Current activeSection:", activeSection);
 
   const renderContent = () => {
+    console.log("Rendering content for section:", activeSection);
     switch (activeSection) {
       case "sentiment":
         return <BuilderDemo />;
