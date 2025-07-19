@@ -110,26 +110,52 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
       </DialogHeader>
 
       <div className="space-y-6">
-        {/* Room Limits Info */}
-        <Card className="bg-blue-50 border-blue-200 dark:bg-blue-950 dark:border-blue-800">
-          <CardContent className="p-4">
-            <div className="flex items-start gap-3">
-              <div className="flex-1">
-                <h4 className="font-medium text-sm mb-1">Room Limits</h4>
-                <div className="text-xs text-muted-foreground space-y-1">
-                  <div>• Max {userLimits.maxPrivateRooms} private rooms</div>
-                  <div>
-                    • Up to {userLimits.maxRoomMembers} members per room
-                  </div>
-                  <div>• Select 1-5 tickers from your watchlist</div>
+        {/* Limits Check */}
+        {!canCreate ? (
+          <Card className="bg-red-50 border-red-200 dark:bg-red-950 dark:border-red-800">
+            <CardContent className="p-4">
+              <div className="flex items-start gap-3">
+                <AlertCircle className="h-5 w-5 text-red-500 mt-0.5" />
+                <div className="flex-1">
+                  <h4 className="font-medium text-sm mb-1 text-red-800 dark:text-red-200">
+                    Room Creation Limit Reached
+                  </h4>
+                  <p className="text-xs text-red-700 dark:text-red-300 mb-2">
+                    {createRoomCheck.reason}
+                  </p>
+                  {createRoomCheck.upgradeRequired && (
+                    <div className="text-xs text-red-700 dark:text-red-300">
+                      Upgrade to Premium for up to 20 private rooms!
+                    </div>
+                  )}
                 </div>
               </div>
-              {userLimits.maxPrivateRooms > 1 && (
-                <Crown className="h-4 w-4 text-yellow-500" />
-              )}
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        ) : (
+          <Card className="bg-blue-50 border-blue-200 dark:bg-blue-950 dark:border-blue-800">
+            <CardContent className="p-4">
+              <div className="flex items-start gap-3">
+                <div className="flex-1">
+                  <h4 className="font-medium text-sm mb-1">Room Limits</h4>
+                  <div className="text-xs text-muted-foreground space-y-1">
+                    <div>
+                      • Rooms created: {createRoomCheck.currentUsage} /{" "}
+                      {createRoomCheck.limit}
+                    </div>
+                    <div>
+                      • Up to {userLimits.maxRoomMembers} members per room
+                    </div>
+                    <div>• Select 1-5 tickers from your watchlist</div>
+                  </div>
+                </div>
+                {userLimits.maxPrivateRooms > 1 && (
+                  <Crown className="h-4 w-4 text-yellow-500" />
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Room Name */}
         <div className="space-y-2">
