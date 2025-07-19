@@ -106,7 +106,7 @@ export const MoorMeterDashboard: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("Home");
   const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
-
+  const [activeCommunitySubtab, setActiveCommunitySubtab] = useState("General");
   const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false);
 
   // Sentiment Heatmap State
