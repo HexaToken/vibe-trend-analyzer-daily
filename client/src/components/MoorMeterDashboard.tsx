@@ -54,7 +54,7 @@ import { WatchlistModule } from "./moorMeter/WatchlistModule";
 import { AIInsightWidget } from "./moorMeter/AIInsightWidget";
 import { CommunityWidget } from "./moorMeter/CommunityWidget";
 import { CommunityRooms } from "./social/CommunityRooms";
-import { PrivateRooms } from "./rooms/PrivateRooms";
+
 import { StockTwistRoom } from "./rooms/StockTwistRoom";
 import { CommunityForum } from "./community/CommunityForum";
 import { ChatInterface } from "./moorMeter/ChatInterface";
@@ -279,7 +279,7 @@ export const MoorMeterDashboard: React.FC = () => {
         { label: "Chat", key: "Chat", icon: MessageCircle },
         { label: "Crypto", key: "Crypto", icon: TrendingUp },
         { label: "Off-Topic", key: "OffTopic", icon: Heart },
-        { label: "Private Rooms", key: "PrivateRooms", icon: Lock },
+
         { label: "StockTwist", key: "StockTwist", icon: Zap },
         { label: "Rooms", key: "Rooms", icon: Users },
       ],
@@ -412,15 +412,13 @@ export const MoorMeterDashboard: React.FC = () => {
                       ? "Dedicated crypto-only channels with real-time price feeds and sentiment tracking"
                       : activeCommunitySubtab === "OffTopic"
                         ? "Casual lounge for memes, general discussions, and relaxation"
-                        : activeCommunitySubtab === "PrivateRooms"
-                          ? "Create and manage private watchlist rooms"
-                          : activeCommunitySubtab === "StockTwist"
-                            ? "Share trade ideas and market insights"
-                            : activeCommunitySubtab === "Rooms"
-                              ? selectedCategory === "Crypto"
-                                ? "Join crypto-focused chat rooms and trending discussions"
-                                : "Discuss trends, share sentiment, and join chat rooms"
-                              : "Connect with fellow traders and share insights"}
+                        : activeCommunitySubtab === "StockTwist"
+                          ? "Share trade ideas and market insights"
+                          : activeCommunitySubtab === "Rooms"
+                            ? selectedCategory === "Crypto"
+                              ? "Join crypto-focused chat rooms and trending discussions"
+                              : "Discuss trends, share sentiment, and join chat rooms"
+                            : "Connect with fellow traders and share insights"}
                 </p>
               </div>
 
@@ -463,13 +461,11 @@ export const MoorMeterDashboard: React.FC = () => {
                         ? "Search crypto, $BTC, $ETH..."
                         : activeCommunitySubtab === "Chat"
                           ? "Search messages, tickers..."
-                          : activeCommunitySubtab === "PrivateRooms"
-                            ? "Search private rooms..."
-                            : activeCommunitySubtab === "StockTwist"
-                              ? "Search trade ideas..."
-                              : activeCommunitySubtab === "Rooms"
-                                ? "Search posts, chat rooms..."
-                                : "Search community..."
+                          : activeCommunitySubtab === "StockTwist"
+                            ? "Search trade ideas..."
+                            : activeCommunitySubtab === "Rooms"
+                              ? "Search posts, chat rooms..."
+                              : "Search community..."
                     }
                     className="pl-10 w-64"
                   />
@@ -503,7 +499,7 @@ export const MoorMeterDashboard: React.FC = () => {
             )}
             {activeCommunitySubtab === "Crypto" && <CryptoChannels />}
             {activeCommunitySubtab === "OffTopic" && <OffTopicLounge />}
-            {activeCommunitySubtab === "PrivateRooms" && <PrivateRooms />}
+
             {activeCommunitySubtab === "StockTwist" && <StockTwistRoom />}
             {activeCommunitySubtab === "Rooms" && <CommunityForum />}
           </div>
