@@ -57,6 +57,10 @@ export const ChatInterface: React.FC = () => {
   const [collapsedMessages, setCollapsedMessages] = useState<Set<string>>(
     new Set(),
   );
+  const [expandedThreads, setExpandedThreads] = useState<Set<string>>(
+    new Set(),
+  );
+  const [replyInputs, setReplyInputs] = useState<Record<string, boolean>>({});
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   // Simulate real-time messages
