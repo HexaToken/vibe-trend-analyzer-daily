@@ -23,6 +23,8 @@ import {
   Flame,
   ChevronDown,
   ChevronUp,
+  Reply,
+  Send,
 } from "lucide-react";
 
 interface MessageCardProps {
