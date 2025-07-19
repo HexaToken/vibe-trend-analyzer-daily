@@ -280,7 +280,7 @@ export const MoorMeterDashboard: React.FC = () => {
         { label: "Rooms", key: "Rooms", icon: Users },
       ],
     },
-  ];
+  ] as const;
 
   // Tools dropdown items
   const toolsItems = [{ label: "Market HeatMap", value: "HeatMap" }];
