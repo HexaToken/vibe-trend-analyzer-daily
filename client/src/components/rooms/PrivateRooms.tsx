@@ -59,6 +59,7 @@ import { CreateRoomModal } from "./CreateRoomModal";
 import { PrivateRoomChat } from "./PrivateRoomChat";
 import { RoomSettingsModal } from "./RoomSettingsModal";
 import { InviteUsersModal } from "./InviteUsersModal";
+import { InviteManagementModal } from "./InviteManagementModal";
 
 export const PrivateRooms: React.FC = () => {
   const { user, isAuthenticated } = useAuth();
