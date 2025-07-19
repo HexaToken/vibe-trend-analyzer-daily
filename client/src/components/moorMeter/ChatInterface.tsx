@@ -59,6 +59,71 @@ export const ChatInterface: React.FC = () => {
   );
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
+  // Simulate real-time messages
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Randomly add new messages to simulate real-time activity
+      if (Math.random() > 0.85) {
+        const mockNewMessages = [
+          {
+            content:
+              "Breaking: $TSLA just hit new resistance at $220! 📈 Could be a breakout incoming",
+            sentiment: "bullish" as const,
+            timeframe: "day" as const,
+            cashtags: ["$TSLA"],
+            user: {
+              username: "TeslaTrader",
+              avatar: "/api/placeholder/32/32",
+              role: "member" as const,
+            },
+          },
+          {
+            content:
+              "Fed minutes just released - more hawkish than expected. Preparing for $SPY dump 📉",
+            sentiment: "bearish" as const,
+            timeframe: "day" as const,
+            cashtags: ["$SPY"],
+            user: {
+              username: "FedWatcher",
+              avatar: "/api/placeholder/32/32",
+              role: "verified" as const,
+            },
+          },
+          {
+            content:
+              "Perfect setup on $NVDA - cup and handle formation completing. Target $1000 🎯",
+            sentiment: "bullish" as const,
+            timeframe: "swing" as const,
+            cashtags: ["$NVDA"],
+            user: {
+              username: "ChartMaster",
+              avatar: "/api/placeholder/32/32",
+              role: "premium" as const,
+            },
+          },
+        ];
+
+        const randomMsg =
+          mockNewMessages[Math.floor(Math.random() * mockNewMessages.length)];
+        const newMessage: Message = {
+          id: Date.now().toString(),
+          content: randomMsg.content,
+          sentiment: randomMsg.sentiment,
+          timeframe: randomMsg.timeframe,
+          cashtags: randomMsg.cashtags,
+          timestamp: new Date(),
+          user: randomMsg.user,
+          reactions: {},
+          replies: [],
+        };
+
+        setMessages((prev) => [newMessage, ...prev.slice(0, 19)]); // Keep only latest 20 messages
+      }
+    }, 8000); // Add new message every 8 seconds on average
+
+    return () => clearInterval(interval);
+  }, []);
+
   // Mock initial messages with more complex data
   useEffect(() => {
     const mockMessages: Message[] = [
