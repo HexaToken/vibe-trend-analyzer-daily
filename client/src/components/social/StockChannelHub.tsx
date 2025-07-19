@@ -510,42 +510,7 @@ export const StockChannelHub: React.FC = () => {
       </div>
 
       {/* Right Sidebar (Optional) */}
-      <div className="w-80 bg-gray-50 dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 p-4 space-y-6">
-        {/* Hot Takes */}
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-sm flex items-center gap-2">
-              <Flame className="w-4 h-4 text-red-500" />
-              Hot Takes
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <div className="text-xs space-y-2">
-              <div className="p-2 bg-gray-100 dark:bg-gray-700 rounded">
-                <div className="font-medium">🧠 Smart</div>
-                <div className="text-gray-600 dark:text-gray-400">
-                  "$TSLA ready for $300 breakout"
-                </div>
-                <div className="text-gray-500">47 votes</div>
-              </div>
-              <div className="p-2 bg-gray-100 dark:bg-gray-700 rounded">
-                <div className="font-medium">🚀 Moon</div>
-                <div className="text-gray-600 dark:text-gray-400">
-                  "AI revolution just getting started"
-                </div>
-                <div className="text-gray-500">32 votes</div>
-              </div>
-              <div className="p-2 bg-gray-100 dark:bg-gray-700 rounded">
-                <div className="font-medium">⚠️ Risky</div>
-                <div className="text-gray-600 dark:text-gray-400">
-                  "Overbought levels concern me"
-                </div>
-                <div className="text-gray-500">28 votes</div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+      <div className="w-80 bg-gray-50 dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 p-4 space-y-6"></div>
     </div>
   );
 };
