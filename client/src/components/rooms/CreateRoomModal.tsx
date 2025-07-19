@@ -95,7 +95,7 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
     setEnableAISummary(false);
   };
 
-  const canCreate =
+  const isFormValid =
     roomName.trim() &&
     selectedTickers.length > 0 &&
     selectedTickers.length <= 5;
