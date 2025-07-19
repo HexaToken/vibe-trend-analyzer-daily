@@ -271,7 +271,9 @@ export const MoorMeterDashboard: React.FC = () => {
       href: "#community",
       subtabs: [
         { label: "General", key: "General", icon: MessageCircle },
-        { label: "Room", key: "Room", icon: Users },
+        { label: "Private Rooms", key: "PrivateRooms", icon: Lock },
+        { label: "StockTwist", key: "StockTwist", icon: Zap },
+        { label: "Community Rooms", key: "Room", icon: Users },
       ],
     },
   ];
