@@ -382,7 +382,7 @@ export const StockTwistRoom: React.FC = () => {
               <CardTitle className="text-lg flex items-center gap-2">
                 <BarChart3 className="h-4 w-4" />
                 Live Polls
-                {canCreatePolls && (
+                {canCreatePollsFeature && (
                   <Button size="sm" variant="outline" className="ml-auto">
                     <PlusCircle className="h-3 w-3" />
                   </Button>
