@@ -408,15 +408,19 @@ export const MoorMeterDashboard: React.FC = () => {
                     ? selectedCategory === "Crypto"
                       ? "Real-time crypto discussion with price feeds and macro trends"
                       : "Real-time Reddit + StockTwits style messaging with sentiment tracking"
-                    : activeCommunitySubtab === "PrivateRooms"
-                      ? "Create and manage private watchlist rooms"
-                      : activeCommunitySubtab === "StockTwist"
-                        ? "Share trade ideas and market insights"
-                        : activeCommunitySubtab === "Rooms"
-                          ? selectedCategory === "Crypto"
-                            ? "Join crypto-focused chat rooms and trending discussions"
-                            : "Discuss trends, share sentiment, and join chat rooms"
-                          : "Connect with fellow traders and share insights"}
+                    : activeCommunitySubtab === "Crypto"
+                      ? "Dedicated crypto-only channels with real-time price feeds and sentiment tracking"
+                      : activeCommunitySubtab === "OffTopic"
+                        ? "Casual lounge for memes, general discussions, and relaxation"
+                        : activeCommunitySubtab === "PrivateRooms"
+                          ? "Create and manage private watchlist rooms"
+                          : activeCommunitySubtab === "StockTwist"
+                            ? "Share trade ideas and market insights"
+                            : activeCommunitySubtab === "Rooms"
+                              ? selectedCategory === "Crypto"
+                                ? "Join crypto-focused chat rooms and trending discussions"
+                                : "Discuss trends, share sentiment, and join chat rooms"
+                              : "Connect with fellow traders and share insights"}
                 </p>
               </div>
 
@@ -512,7 +516,7 @@ export const MoorMeterDashboard: React.FC = () => {
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
               <div>
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                  🛠️{" "}
+                  ���️{" "}
                   {activeToolsSubtab === "HeatMap"
                     ? "Market HeatMap"
                     : "Market Analysis Tools"}
