@@ -53,6 +53,8 @@ import { WatchlistModule } from "./moorMeter/WatchlistModule";
 import { AIInsightWidget } from "./moorMeter/AIInsightWidget";
 import { CommunityWidget } from "./moorMeter/CommunityWidget";
 import { CommunityRooms } from "./social/CommunityRooms";
+import { PrivateRooms } from "./rooms/PrivateRooms";
+import { StockTwistRoom } from "./rooms/StockTwistRoom";
 import { MoodScoreHero } from "./builder/MoodScoreHero";
 import { TopStocksModule } from "./builder/TopStocksModule";
 import { SentimentHeatMap } from "./moorMeter/SentimentHeatMap";
