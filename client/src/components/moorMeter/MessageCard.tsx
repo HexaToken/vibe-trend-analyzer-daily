@@ -284,14 +284,24 @@ export const MessageCard: React.FC<MessageCardProps> = ({
               dangerouslySetInnerHTML={formatContent(message.content)}
             />
 
-            {/* Cashtag Pills */}
-            {message.cashtags && message.cashtags.length > 0 && (
+            {/* Tags */}
+            {((message.cashtags && message.cashtags.length > 0) ||
+              (message.hashtags && message.hashtags.length > 0)) && (
               <div className="flex gap-1 flex-wrap">
-                {message.cashtags.map((tag: string, i: number) => (
+                {message.cashtags?.map((tag: string, i: number) => (
                   <Badge
-                    key={i}
+                    key={`cash-${i}`}
                     variant="outline"
-                    className="text-xs bg-blue-50 text-blue-700 hover:bg-blue-100"
+                    className="text-xs bg-blue-50 text-blue-700 hover:bg-blue-100 dark:bg-blue-900/20 dark:text-blue-300"
+                  >
+                    {tag}
+                  </Badge>
+                ))}
+                {message.hashtags?.map((tag: string, i: number) => (
+                  <Badge
+                    key={`hash-${i}`}
+                    variant="outline"
+                    className="text-xs bg-purple-50 text-purple-700 hover:bg-purple-100 dark:bg-purple-900/20 dark:text-purple-300"
                   >
                     {tag}
                   </Badge>
