@@ -380,10 +380,11 @@ export const MoorMeterDashboard: React.FC = () => {
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
               <div>
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                  🧑‍🤝‍🧑 Community Rooms
+                  🧑‍🤝‍🧑 Community Hub
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400">
-                  Join community rooms and chat with other traders in real-time.
+                  Connect with fellow traders, share insights, and join
+                  community discussions.
                 </p>
               </div>
 
@@ -393,15 +394,136 @@ export const MoorMeterDashboard: React.FC = () => {
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                   <Input
                     type="text"
-                    placeholder="Search rooms..."
+                    placeholder={
+                      activeCommunitySubtab === "Room"
+                        ? "Search rooms..."
+                        : "Search community..."
+                    }
                     className="pl-10 w-64"
                   />
                 </div>
               </div>
             </div>
 
-            {/* Community Rooms */}
-            <CommunityRooms />
+            {/* Community Sub-Navigation */}
+            <Tabs
+              value={activeCommunitySubtab}
+              onValueChange={setActiveCommunitySubtab}
+              className="w-full"
+            >
+              <TabsList className="grid w-full grid-cols-3">
+                <TabsTrigger
+                  value="General"
+                  className="flex items-center gap-2"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  General
+                </TabsTrigger>
+                <TabsTrigger value="Room" className="flex items-center gap-2">
+                  <Users className="h-4 w-4" />
+                  Room
+                </TabsTrigger>
+                <TabsTrigger
+                  value="Insights"
+                  className="flex items-center gap-2"
+                >
+                  <BarChart3 className="h-4 w-4" />
+                  Insights
+                </TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="General" className="space-y-6">
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                  {/* Main Feed */}
+                  <div className="lg:col-span-3 space-y-6">
+                    <CommunityWidget messages={communityMessages} />
+                  </div>
+                  {/* Sidebar */}
+                  <div className="space-y-6">
+                    <TrendingTopicsWidget topics={trendingTopics} />
+                  </div>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="Room" className="space-y-6">
+                <CommunityRooms />
+              </TabsContent>
+
+              <TabsContent value="Insights" className="space-y-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                  {/* Community Insights Cards */}
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <TrendingUp className="h-5 w-5 text-green-500" />
+                        Trending Discussions
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm">AI & Tech Stocks</span>
+                          <Badge variant="secondary">+24%</Badge>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm">Fed Rate Discussions</span>
+                          <Badge variant="secondary">+18%</Badge>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm">
+                            Crypto Market Analysis
+                          </span>
+                          <Badge variant="secondary">+15%</Badge>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <Users className="h-5 w-5 text-blue-500" />
+                        Active Members
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        <div className="text-3xl font-bold text-blue-600">
+                          2,847
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          Online now
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                          <span className="text-sm">+156 in last hour</span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <Heart className="h-5 w-5 text-red-500" />
+                        Sentiment Score
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        <div className="text-3xl font-bold text-green-600">
+                          73
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          Community Mood
+                        </div>
+                        <Progress value={73} className="h-2" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </TabsContent>
+            </Tabs>
           </div>
         );
 
