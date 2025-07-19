@@ -51,6 +51,51 @@ export function useTopHeadlines(
     setLoading(true);
     setError(null);
 
+    // In development mode, provide immediate mock data to prevent FullStory fetch issues
+    const isDevelopment = import.meta.env.DEV;
+    if (isDevelopment) {
+      const mockArticles = [
+        {
+          source: { id: "reuters", name: "Reuters" },
+          author: "John Smith",
+          title: "Markets Rally as Tech Earnings Beat Expectations (Mock)",
+          description:
+            "Major technology companies reported stronger-than-expected quarterly earnings, driving broad market gains.",
+          url: "https://example.com/tech-earnings-rally",
+          urlToImage: null,
+          publishedAt: new Date(
+            Date.now() - Math.random() * 24 * 60 * 60 * 1000,
+          ).toISOString(),
+          content: "Technology stocks led broader market gains today...",
+        },
+        {
+          source: { id: "bloomberg", name: "Bloomberg" },
+          author: "Jane Doe",
+          title:
+            "Federal Reserve Signals Cautious Approach to Interest Rates (Mock)",
+          description:
+            "Central bank officials indicate measured approach to monetary policy amid economic uncertainty.",
+          url: "https://example.com/fed-interest-rates",
+          urlToImage: null,
+          publishedAt: new Date(
+            Date.now() - Math.random() * 24 * 60 * 60 * 1000,
+          ).toISOString(),
+          content: "Federal Reserve officials signaled...",
+        },
+      ];
+
+      const mockResponse = {
+        status: "ok",
+        totalResults: mockArticles.length,
+        articles: mockArticles,
+      };
+
+      setData(mockResponse);
+      setError("Development mode - using mock data");
+      setLoading(false);
+      return;
+    }
+
     try {
       // Use the proxy server to fetch real news data
       const data = await robustFetchJson(
