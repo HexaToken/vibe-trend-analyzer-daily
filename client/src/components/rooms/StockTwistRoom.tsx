@@ -602,7 +602,21 @@ export const StockTwistRoom: React.FC = () => {
             </div>
           </Card>
         </div>
+
+        {/* Right Sidebar - Leaderboard */}
+        <div className="col-span-3">
+          <StockTwistLeaderboard />
+        </div>
       </div>
+
+      {/* Create Poll Modal */}
+      <Dialog open={showCreatePollModal} onOpenChange={setShowCreatePollModal}>
+        <CreatePollModal
+          onCreatePoll={handleCreatePoll}
+          userId={user?.id || ""}
+          username={user?.username || ""}
+        />
+      </Dialog>
     </div>
   );
 };
