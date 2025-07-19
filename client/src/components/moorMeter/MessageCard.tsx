@@ -389,22 +389,6 @@ export const MessageCard: React.FC<MessageCardProps> = ({
             </div>
           )}
         </div>
-
-        {/* Inline Styles for Cashtags */}
-        <style jsx>{`
-          :global(.cashtag) {
-            color: #2563eb;
-            font-weight: 600;
-            background: #dbeafe;
-            padding: 2px 4px;
-            border-radius: 4px;
-            cursor: pointer;
-          }
-          :global(.dark .cashtag) {
-            color: #60a5fa;
-            background: #1e3a8a;
-          }
-        `}</style>
       </div>
     </TooltipProvider>
   );
