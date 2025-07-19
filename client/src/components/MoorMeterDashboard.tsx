@@ -647,7 +647,11 @@ export const MoorMeterDashboard: React.FC = () => {
                             key={subtab.key}
                             onClick={() => {
                               setActiveTab(item.key);
-                              setActiveToolsSubtab(subtab.key);
+                              if (item.key === "Tool") {
+                                setActiveToolsSubtab(subtab.key);
+                              } else if (item.key === "Community") {
+                                setActiveCommunitySubtab(subtab.key);
+                              }
                             }}
                             className="flex items-center cursor-pointer"
                           >
