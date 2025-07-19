@@ -52,6 +52,7 @@ import { WatchlistWidget } from "./moorMeter/WatchlistWidget";
 import { WatchlistModule } from "./moorMeter/WatchlistModule";
 import { AIInsightWidget } from "./moorMeter/AIInsightWidget";
 import { CommunityWidget } from "./moorMeter/CommunityWidget";
+import { CommunityRooms } from "./social/CommunityRooms";
 import { MoodScoreHero } from "./builder/MoodScoreHero";
 import { TopStocksModule } from "./builder/TopStocksModule";
 import { SentimentHeatMap } from "./moorMeter/SentimentHeatMap";
@@ -415,20 +416,7 @@ export const MoorMeterDashboard: React.FC = () => {
 
             {/* Render content based on subtab */}
             {activeCommunitySubtab === "Room" ? (
-              <div>
-                {/* Import and render CommunityRooms component here */}
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
-                  <h3 className="text-xl font-semibold mb-4">
-                    Community Rooms
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400 mb-4">
-                    Community rooms functionality will be integrated here.
-                  </p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    Note: This will connect to the CommunityRooms component.
-                  </p>
-                </div>
-              </div>
+              <CommunityRooms />
             ) : (
               <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
                 {/* Main Feed */}
