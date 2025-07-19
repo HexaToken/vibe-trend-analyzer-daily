@@ -469,11 +469,11 @@ export const CommunityForum: React.FC = () => {
         className="w-full"
       >
         <TabsList className="grid w-full grid-cols-2 mb-6">
-          <TabsTrigger value="forum" className="flex items-center gap-2">
-            <MessageCircle className="h-4 w-4" />
-            Forum
-          </TabsTrigger>
           <TabsTrigger value="chat" className="flex items-center gap-2">
+            <MessageCircle className="h-4 w-4" />
+            Chat
+          </TabsTrigger>
+          <TabsTrigger value="chat-rooms" className="flex items-center gap-2">
             <Users className="h-4 w-4" />
             Chat Rooms
           </TabsTrigger>
