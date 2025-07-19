@@ -479,7 +479,13 @@ export const CommunityForum: React.FC = () => {
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="forum" className="space-y-6">
+        <TabsContent value="chat" className="space-y-6">
+          <div className="h-[600px]">
+            <ChatInterface />
+          </div>
+        </TabsContent>
+
+        <TabsContent value="chat-rooms" className="space-y-6">
           <div className="grid grid-cols-12 gap-6">
             {/* Main Content */}
             <div className="col-span-12 lg:col-span-8 space-y-6">
