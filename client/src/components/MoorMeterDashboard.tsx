@@ -589,8 +589,7 @@ export const MoorMeterDashboard: React.FC = () => {
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-50 dark:bg-gray-800">
               {navItems.map((item) => (
                 <div key={item.key}>
-                  {(item.key === "Tool" || item.key === "Community") &&
-                  item.subtabs ? (
+                  {item.key === "Tool" && item.subtabs ? (
                     <div className="space-y-2">
                       <div className="px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400">
                         {item.label}
@@ -600,11 +599,7 @@ export const MoorMeterDashboard: React.FC = () => {
                           key={subtab.key}
                           onClick={() => {
                             setActiveTab(item.key);
-                            if (item.key === "Tool") {
-                              setActiveToolsSubtab(subtab.key);
-                            } else if (item.key === "Community") {
-                              setActiveCommunitySubtab(subtab.key);
-                            }
+                            setActiveToolsSubtab(subtab.key);
                             setMobileMenuOpen(false);
                           }}
                           className="flex items-center w-full px-6 py-2 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
