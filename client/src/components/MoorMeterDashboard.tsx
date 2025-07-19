@@ -39,6 +39,7 @@ import {
   Target,
   Activity,
   Flag,
+  Lock,
 } from "lucide-react";
 import { useStockSentiment } from "../hooks/useStockSentiment";
 import { useCombinedBusinessNews } from "../hooks/useCombinedBusinessNews";
@@ -52,6 +53,10 @@ import { WatchlistWidget } from "./moorMeter/WatchlistWidget";
 import { WatchlistModule } from "./moorMeter/WatchlistModule";
 import { AIInsightWidget } from "./moorMeter/AIInsightWidget";
 import { CommunityWidget } from "./moorMeter/CommunityWidget";
+import { CommunityRooms } from "./social/CommunityRooms";
+import { PrivateRooms } from "./rooms/PrivateRooms";
+import { StockTwistRoom } from "./rooms/StockTwistRoom";
+import { CommunityForum } from "./community/CommunityForum";
 import { MoodScoreHero } from "./builder/MoodScoreHero";
 import { TopStocksModule } from "./builder/TopStocksModule";
 import { SentimentHeatMap } from "./moorMeter/SentimentHeatMap";
@@ -104,6 +109,8 @@ export const MoorMeterDashboard: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("Home");
   const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
+  const [activeCommunitySubtab, setActiveCommunitySubtab] =
+    useState("PrivateRooms");
   const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false);
 
   // Sentiment Heatmap State
@@ -259,7 +266,16 @@ export const MoorMeterDashboard: React.FC = () => {
       href: "#tool",
       subtabs: [{ label: "Heat map", key: "HeatMap", icon: BarChart3 }],
     },
-    { label: "Community", key: "Community", href: "#community" },
+    {
+      label: "Community",
+      key: "Community",
+      href: "#community",
+      subtabs: [
+        { label: "Private Rooms", key: "PrivateRooms", icon: Lock },
+        { label: "StockTwist", key: "StockTwist", icon: Zap },
+        { label: "Rooms", key: "Rooms", icon: MessageCircle },
+      ],
+    },
   ];
 
   // Tools dropdown items
@@ -377,11 +393,16 @@ export const MoorMeterDashboard: React.FC = () => {
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
               <div>
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                  🧑‍🤝‍🧑 Community Insights
+                  🧑‍🤝‍🧑 Community Hub
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400">
-                  Discuss trends, share your sentiment, and track what others
-                  are saying.
+                  {activeCommunitySubtab === "PrivateRooms"
+                    ? "Create and manage private watchlist rooms"
+                    : activeCommunitySubtab === "StockTwist"
+                      ? "Share trade ideas and market insights"
+                      : activeCommunitySubtab === "Rooms"
+                        ? "Discuss trends, share sentiment, and join chat rooms"
+                        : "Connect with fellow traders and share insights"}
                 </p>
               </div>
 
@@ -391,27 +412,25 @@ export const MoorMeterDashboard: React.FC = () => {
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                   <Input
                     type="text"
-                    placeholder="Search keywords, tickers, or users..."
+                    placeholder={
+                      activeCommunitySubtab === "PrivateRooms"
+                        ? "Search private rooms..."
+                        : activeCommunitySubtab === "StockTwist"
+                          ? "Search trade ideas..."
+                          : activeCommunitySubtab === "Rooms"
+                            ? "Search posts, chat rooms..."
+                            : "Search community..."
+                    }
                     className="pl-10 w-64"
                   />
                 </div>
               </div>
             </div>
 
-            {/* Main Community Layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-              {/* Main Feed */}
-              <div className="lg:col-span-3 space-y-6">
-                {/* Community content would go here */}
-                <CommunityWidget messages={communityMessages} />
-              </div>
-
-              {/* Sidebar */}
-              <div className="space-y-6">
-                {/* Trending Topics */}
-                <TrendingTopicsWidget topics={trendingTopics} />
-              </div>
-            </div>
+            {/* Render content based on active subtab */}
+            {activeCommunitySubtab === "PrivateRooms" && <PrivateRooms />}
+            {activeCommunitySubtab === "StockTwist" && <StockTwistRoom />}
+            {activeCommunitySubtab === "Rooms" && <CommunityForum />}
           </div>
         );
 
@@ -506,7 +525,8 @@ export const MoorMeterDashboard: React.FC = () => {
             <div className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (
                 <div key={item.key} className="relative">
-                  {item.key === "Tool" ? (
+                  {(item.key === "Tool" || item.key === "Community") &&
+                  item.subtabs ? (
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <button
@@ -527,7 +547,11 @@ export const MoorMeterDashboard: React.FC = () => {
                             key={subtab.key}
                             onClick={() => {
                               setActiveTab(item.key);
-                              setActiveToolsSubtab(subtab.key);
+                              if (item.key === "Tool") {
+                                setActiveToolsSubtab(subtab.key);
+                              } else if (item.key === "Community") {
+                                setActiveCommunitySubtab(subtab.key);
+                              }
                             }}
                             className="flex items-center cursor-pointer"
                           >
@@ -600,17 +624,22 @@ export const MoorMeterDashboard: React.FC = () => {
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-50 dark:bg-gray-800">
               {navItems.map((item) => (
                 <div key={item.key}>
-                  {item.key === "Tool" ? (
+                  {(item.key === "Tool" || item.key === "Community") &&
+                  item.subtabs ? (
                     <div className="space-y-2">
                       <div className="px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400">
-                        Tool
+                        {item.label}
                       </div>
                       {item.subtabs?.map((subtab) => (
                         <button
                           key={subtab.key}
                           onClick={() => {
                             setActiveTab(item.key);
-                            setActiveToolsSubtab(subtab.key);
+                            if (item.key === "Tool") {
+                              setActiveToolsSubtab(subtab.key);
+                            } else if (item.key === "Community") {
+                              setActiveCommunitySubtab(subtab.key);
+                            }
                             setMobileMenuOpen(false);
                           }}
                           className="flex items-center w-full px-6 py-2 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
