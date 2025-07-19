@@ -261,7 +261,15 @@ export const MoorMeterDashboard: React.FC = () => {
       href: "#tool",
       subtabs: [{ label: "Heat map", key: "HeatMap", icon: BarChart3 }],
     },
-    { label: "Community", key: "Community", href: "#community" },
+    {
+      label: "Community",
+      key: "Community",
+      href: "#community",
+      subtabs: [
+        { label: "General", key: "General", icon: MessageCircle },
+        { label: "Room", key: "Room", icon: Users },
+      ],
+    },
   ];
 
   // Tools dropdown items
