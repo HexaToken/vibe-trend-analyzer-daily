@@ -94,7 +94,6 @@ interface CommunityMessage {
 }
 
 export const MoorMeterDashboard: React.FC = () => {
-  console.log("MoorMeterDashboard component rendering...");
   const [darkMode, setDarkMode] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTimeframe, setSelectedTimeframe] = useState<
@@ -123,9 +122,7 @@ export const MoorMeterDashboard: React.FC = () => {
   const { data: stockSentiment, loading: stockLoading } = useStockSentiment();
   const { articles: newsArticles, loading: newsLoading } =
     useCombinedBusinessNews();
-  const cryptoListingsResult = useCryptoListings(10);
-  const { tickers: cryptoData = [], loading: cryptoLoading = false } =
-    cryptoListingsResult || {};
+  const { tickers: cryptoData, loading: cryptoLoading } = useCryptoListings(10);
 
   // Calculate overall mood score
   const calculateMoodScore = (): MoodScore => {
@@ -370,11 +367,11 @@ export const MoorMeterDashboard: React.FC = () => {
 
   // Navigation items
   const navItems = [
-    { label: "Home", key: "Home", href: "#" },
-    { label: "Market Mood", key: "Market Mood", href: "#market" },
-    { label: "Watchlist", key: "Watchlist", href: "#watchlist" },
-    { label: "News", key: "News", href: "#news" },
-    { label: "Community", key: "Community", href: "#community" },
+    { label: "Home", href: "#" },
+    { label: "Market Mood", href: "#market" },
+    { label: "Watchlist", href: "#watchlist" },
+    { label: "News", href: "#news" },
+    { label: "Community", href: "#community" },
   ];
 
   // Tools dropdown items
@@ -382,7 +379,6 @@ export const MoorMeterDashboard: React.FC = () => {
 
   // Function to render content based on active tab
   const renderTabContent = () => {
-    console.log("Rendering tab content for activeTab:", activeTab);
     switch (activeTab) {
       case "Market Mood":
         return (
@@ -421,7 +417,6 @@ export const MoorMeterDashboard: React.FC = () => {
       case "Watchlist":
         return (
           <div className="space-y-8">
-            <WatchlistWidget />
             {/* Watchlist Header */}
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
               <div>
@@ -966,7 +961,7 @@ export const MoorMeterDashboard: React.FC = () => {
                             <div className="flex space-x-1">
                               {["😃", "😐", "😢"].map((emoji, i) => (
                                 <Button
-                                  key={i}
+                                  key={`emoji-${i}`}
                                   variant="ghost"
                                   size="sm"
                                   className="h-8 w-8 p-0 hover:bg-gray-100 dark:hover:bg-gray-700"
@@ -1137,7 +1132,7 @@ export const MoorMeterDashboard: React.FC = () => {
                       { ticker: "$SPY", mentions: 543, sentiment: 55 },
                     ].map((item, i) => (
                       <div
-                        key={i}
+                        key={`trending-${i}`}
                         className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
                       >
                         <div className="flex items-center space-x-3">
@@ -1190,7 +1185,7 @@ export const MoorMeterDashboard: React.FC = () => {
                       },
                       { label: "😢 Bearish", votes: 23, color: "bg-red-500" },
                     ].map((option, i) => (
-                      <div key={i} className="space-y-2">
+                      <div key={`poll-option-${i}`} className="space-y-2">
                         <div className="flex items-center justify-between">
                           <span className="text-sm font-medium">
                             {option.label}
