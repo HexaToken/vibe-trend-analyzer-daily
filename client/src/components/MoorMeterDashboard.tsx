@@ -397,7 +397,7 @@ export const MoorMeterDashboard: React.FC = () => {
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
               <div>
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                  ��‍🤝‍🧑 Community Hub
+                  🧑‍🤝‍🧑 Community Hub
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400">
                   {activeCommunitySubtab === "Chat"
@@ -468,6 +468,24 @@ export const MoorMeterDashboard: React.FC = () => {
                 </div>
               </div>
             </div>
+
+            {/* Category indicator for applicable subtabs */}
+            {(activeCommunitySubtab === "Chat" ||
+              activeCommunitySubtab === "Rooms") && (
+              <div className="flex items-center gap-3 mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border">
+                <div className="flex items-center gap-2">
+                  {selectedCategory === "Crypto" ? "🪙" : "💬"}
+                  <span className="font-medium text-gray-900 dark:text-white">
+                    {selectedCategory} Channels
+                  </span>
+                </div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">
+                  {selectedCategory === "Crypto"
+                    ? "Focused on crypto tickers, trends, and blockchain discussions"
+                    : "Open discussions on all topics, memes, and general market talk"}
+                </div>
+              </div>
+            )}
 
             {/* Render content based on active subtab */}
             {activeCommunitySubtab === "Chat" && (
