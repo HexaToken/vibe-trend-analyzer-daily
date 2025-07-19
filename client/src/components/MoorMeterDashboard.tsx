@@ -112,6 +112,9 @@ export const MoorMeterDashboard: React.FC = () => {
   const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
   const [activeCommunitySubtab, setActiveCommunitySubtab] = useState("Chat");
   const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<
+    "General" | "Crypto"
+  >("General");
 
   // Sentiment Heatmap State
   const [sentimentTimeframe, setSentimentTimeframe] = useState<
