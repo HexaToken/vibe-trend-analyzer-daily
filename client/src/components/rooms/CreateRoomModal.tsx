@@ -324,10 +324,20 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
           </Button>
           <Button
             onClick={handleCreateRoom}
-            disabled={!canCreate || isCreating}
+            disabled={
+              !canCreate ||
+              isCreating ||
+              !roomName.trim() ||
+              selectedTickers.length === 0 ||
+              selectedTickers.length > 5
+            }
             className="min-w-[100px]"
           >
-            {isCreating ? "Creating..." : "Create Room"}
+            {isCreating
+              ? "Creating..."
+              : !canCreate
+                ? "Limit Reached"
+                : "Create Room"}
           </Button>
         </div>
       </div>
