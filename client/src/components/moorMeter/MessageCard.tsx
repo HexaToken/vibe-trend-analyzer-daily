@@ -341,14 +341,34 @@ export const MessageCard: React.FC<MessageCardProps> = ({
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => onReply(message)}
+                onClick={() => onReplyToggle && onReplyToggle(message.id)}
                 className="h-7 px-2 text-xs hover:bg-gray-100 dark:hover:bg-gray-800"
               >
-                <MessageSquare className="w-3 h-3 mr-1" />
-                {message.replies?.length > 0 && (
-                  <span>{message.replies.length}</span>
-                )}
+                <Reply className="w-3 h-3 mr-1" />
+                Reply
               </Button>
+
+              {/* Thread toggle button for messages with replies */}
+              {message.replies?.length > 0 && onThreadToggle && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => onThreadToggle(message.id)}
+                  className="h-7 px-2 text-xs hover:bg-gray-100 dark:hover:bg-gray-800 text-blue-600 dark:text-blue-400"
+                >
+                  <MessageSquare className="w-3 h-3 mr-1" />
+                  🔗 {message.replies.length}{" "}
+                  {message.replies.length === 1 ? "reply" : "replies"}
+                  {message.replies.some(
+                    (reply) =>
+                      reply.timestamp > new Date(Date.now() - 5 * 60 * 1000),
+                  ) && (
+                    <span className="ml-1 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300 text-xs px-1 rounded">
+                      New
+                    </span>
+                  )}
+                </Button>
+              )}
 
               {onShare && (
                 <Button
