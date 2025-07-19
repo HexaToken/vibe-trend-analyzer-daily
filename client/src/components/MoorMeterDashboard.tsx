@@ -104,6 +104,7 @@ export const MoorMeterDashboard: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("Home");
   const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
+  const [activeCommunitySubtab, setActiveCommunitySubtab] = useState("Feed");
   const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false);
 
   // Sentiment Heatmap State
@@ -259,7 +260,15 @@ export const MoorMeterDashboard: React.FC = () => {
       href: "#tool",
       subtabs: [{ label: "Heat map", key: "HeatMap", icon: BarChart3 }],
     },
-    { label: "Community", key: "Community", href: "#community" },
+    {
+      label: "Community",
+      key: "Community",
+      href: "#community",
+      subtabs: [
+        { label: "Feed", key: "Feed", icon: MessageCircle },
+        { label: "Room", key: "Room", icon: Users },
+      ],
+    },
   ];
 
   // Tools dropdown items
@@ -377,11 +386,13 @@ export const MoorMeterDashboard: React.FC = () => {
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
               <div>
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                  🧑‍🤝‍🧑 Community Insights
+                  🧑‍🤝‍🧑 Community{" "}
+                  {activeCommunitySubtab === "Room" ? "Rooms" : "Insights"}
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400">
-                  Discuss trends, share your sentiment, and track what others
-                  are saying.
+                  {activeCommunitySubtab === "Room"
+                    ? "Join community rooms and chat with other traders in real-time."
+                    : "Discuss trends, share your sentiment, and track what others are saying."}
                 </p>
               </div>
 
@@ -391,27 +402,48 @@ export const MoorMeterDashboard: React.FC = () => {
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                   <Input
                     type="text"
-                    placeholder="Search keywords, tickers, or users..."
+                    placeholder={
+                      activeCommunitySubtab === "Room"
+                        ? "Search rooms..."
+                        : "Search keywords, tickers, or users..."
+                    }
                     className="pl-10 w-64"
                   />
                 </div>
               </div>
             </div>
 
-            {/* Main Community Layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-              {/* Main Feed */}
-              <div className="lg:col-span-3 space-y-6">
-                {/* Community content would go here */}
-                <CommunityWidget messages={communityMessages} />
+            {/* Render content based on subtab */}
+            {activeCommunitySubtab === "Room" ? (
+              <div>
+                {/* Import and render CommunityRooms component here */}
+                <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
+                  <h3 className="text-xl font-semibold mb-4">
+                    Community Rooms
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    Community rooms functionality will be integrated here.
+                  </p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    Note: This will connect to the CommunityRooms component.
+                  </p>
+                </div>
               </div>
+            ) : (
+              <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                {/* Main Feed */}
+                <div className="lg:col-span-3 space-y-6">
+                  {/* Community content would go here */}
+                  <CommunityWidget messages={communityMessages} />
+                </div>
 
-              {/* Sidebar */}
-              <div className="space-y-6">
-                {/* Trending Topics */}
-                <TrendingTopicsWidget topics={trendingTopics} />
+                {/* Sidebar */}
+                <div className="space-y-6">
+                  {/* Trending Topics */}
+                  <TrendingTopicsWidget topics={trendingTopics} />
+                </div>
               </div>
-            </div>
+            )}
           </div>
         );
 
@@ -506,7 +538,8 @@ export const MoorMeterDashboard: React.FC = () => {
             <div className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (
                 <div key={item.key} className="relative">
-                  {item.key === "Tool" ? (
+                  {(item.key === "Tool" || item.key === "Community") &&
+                  item.subtabs ? (
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <button
@@ -527,7 +560,11 @@ export const MoorMeterDashboard: React.FC = () => {
                             key={subtab.key}
                             onClick={() => {
                               setActiveTab(item.key);
-                              setActiveToolsSubtab(subtab.key);
+                              if (item.key === "Tool") {
+                                setActiveToolsSubtab(subtab.key);
+                              } else if (item.key === "Community") {
+                                setActiveCommunitySubtab(subtab.key);
+                              }
                             }}
                             className="flex items-center cursor-pointer"
                           >
@@ -600,17 +637,22 @@ export const MoorMeterDashboard: React.FC = () => {
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-50 dark:bg-gray-800">
               {navItems.map((item) => (
                 <div key={item.key}>
-                  {item.key === "Tool" ? (
+                  {(item.key === "Tool" || item.key === "Community") &&
+                  item.subtabs ? (
                     <div className="space-y-2">
                       <div className="px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400">
-                        Tool
+                        {item.label}
                       </div>
                       {item.subtabs?.map((subtab) => (
                         <button
                           key={subtab.key}
                           onClick={() => {
                             setActiveTab(item.key);
-                            setActiveToolsSubtab(subtab.key);
+                            if (item.key === "Tool") {
+                              setActiveToolsSubtab(subtab.key);
+                            } else if (item.key === "Community") {
+                              setActiveCommunitySubtab(subtab.key);
+                            }
                             setMobileMenuOpen(false);
                           }}
                           className="flex items-center w-full px-6 py-2 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
