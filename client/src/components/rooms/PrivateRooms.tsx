@@ -444,6 +444,20 @@ export const PrivateRooms: React.FC = () => {
             room={currentRoom}
             userLimits={userLimits}
           />
+
+          {/* Enhanced Invite Management Modal */}
+          <Dialog
+            open={enhancedInviteOpen}
+            onOpenChange={setEnhancedInviteOpen}
+          >
+            {currentRoom && (
+              <InviteManagementModal
+                room={currentRoom}
+                userLimits={userLimits}
+                onInviteSent={handleInviteSent}
+              />
+            )}
+          </Dialog>
         </>
       )}
     </div>
