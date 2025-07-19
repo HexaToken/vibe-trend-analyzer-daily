@@ -961,7 +961,7 @@ export const MoorMeterDashboard: React.FC = () => {
                             <div className="flex space-x-1">
                               {["😃", "😐", "😢"].map((emoji, i) => (
                                 <Button
-                                  key={`emoji-${i}`}
+                                  key={i}
                                   variant="ghost"
                                   size="sm"
                                   className="h-8 w-8 p-0 hover:bg-gray-100 dark:hover:bg-gray-700"
@@ -1132,7 +1132,7 @@ export const MoorMeterDashboard: React.FC = () => {
                       { ticker: "$SPY", mentions: 543, sentiment: 55 },
                     ].map((item, i) => (
                       <div
-                        key={`trending-${i}`}
+                        key={i}
                         className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
                       >
                         <div className="flex items-center space-x-3">
@@ -1185,7 +1185,7 @@ export const MoorMeterDashboard: React.FC = () => {
                       },
                       { label: "😢 Bearish", votes: 23, color: "bg-red-500" },
                     ].map((option, i) => (
-                      <div key={`poll-option-${i}`} className="space-y-2">
+                      <div key={i} className="space-y-2">
                         <div className="flex items-center justify-between">
                           <span className="text-sm font-medium">
                             {option.label}
@@ -1308,15 +1308,18 @@ export const MoorMeterDashboard: React.FC = () => {
               </div>
             </div>
 
-            {/* Tools Content */}
+                        {/* Tools Content */}
             {activeToolsSubtab === "HeatMap" && (
               <SentimentHeatMap onRefresh={() => setHeatmapLoading(true)} />
-            )}
+                
+
+                              )}
+
           </div>
         );
 
-      case "Home":
-      default:
+            case "Home":
+            default:
         return (
           <>
             {/* Dashboard Grid */}
@@ -1324,7 +1327,7 @@ export const MoorMeterDashboard: React.FC = () => {
               {/* Main Content Area */}
               <div className="lg:col-span-3 space-y-6">
                 {/* Top Stocks Widget */}
-                <TopStocksWidget stockLoading={stockLoading} />
+                                                <TopStocksWidget stockLoading={stockLoading} />
 
                 {/* News Feed Widget */}
                 <NewsWidget articles={newsArticles} loading={newsLoading} />
@@ -1352,58 +1355,56 @@ export const MoorMeterDashboard: React.FC = () => {
                 <AIInsightWidget moodScore={moodScore} />
 
                 {/* Community Feed */}
-                <CommunityWidget messages={communityMessages} />
+                <CommunityWidget posts={communityPosts} />
               </div>
             </div>
           </>
-        );
-        {
-          [
-            { symbol: "AAPL", change: 2.34, name: "Apple" },
-            { symbol: "MSFT", change: 1.67, name: "Microsoft" },
-            { symbol: "GOOGL", change: -0.89, name: "Alphabet" },
-            { symbol: "AMZN", change: 3.12, name: "Amazon" },
-            { symbol: "NVDA", change: 5.67, name: "NVIDIA" },
-            { symbol: "TSLA", change: -2.45, name: "Tesla" },
-            { symbol: "META", change: 1.23, name: "Meta" },
-            { symbol: "BRK.B", change: 0.45, name: "Berkshire" },
-            { symbol: "JPM", change: -1.12, name: "JPMorgan" },
-            { symbol: "V", change: 0.78, name: "Visa" },
-            { symbol: "JNJ", change: -0.34, name: "J&J" },
-            { symbol: "WMT", change: 1.89, name: "Walmart" },
-            { symbol: "PG", change: 0.56, name: "P&G" },
-            { symbol: "UNH", change: 2.01, name: "UnitedHealth" },
-            { symbol: "HD", change: -0.67, name: "Home Depot" },
-            { symbol: "MA", change: 1.45, name: "Mastercard" },
-            { symbol: "DIS", change: -1.78, name: "Disney" },
-            { symbol: "BAC", change: 0.89, name: "Bank of America" },
-          ].map((stock, i) => (
-            <div
-              key={i}
-              className={`p-3 rounded-lg cursor-pointer hover:opacity-80 transition-all duration-200 flex flex-col justify-between min-h-[80px] ${
-                stock.change > 2
-                  ? "bg-green-600 text-white"
-                  : stock.change > 0
-                    ? "bg-green-400 text-white"
-                    : stock.change > -2
-                      ? "bg-red-400 text-white"
-                      : "bg-red-600 text-white"
-              }`}
-              style={{
-                transform: `scale(${Math.min(1.2, Math.max(0.8, 1 + Math.abs(stock.change) / 10))})`,
-              }}
-            >
-              <div className="font-bold text-xs">{stock.symbol}</div>
-              <div className="text-xs opacity-90">{stock.name}</div>
-              <div className="font-semibold text-sm">
-                {stock.change > 0 ? "+" : ""}
-                {stock.change}%
-              </div>
-            </div>
-          ));
-        }
-    }
-  };
+                        );
+                    {[
+                      { symbol: "AAPL", change: 2.34, name: "Apple" },
+                      { symbol: "MSFT", change: 1.67, name: "Microsoft" },
+                      { symbol: "GOOGL", change: -0.89, name: "Alphabet" },
+                      { symbol: "AMZN", change: 3.12, name: "Amazon" },
+                      { symbol: "NVDA", change: 5.67, name: "NVIDIA" },
+                      { symbol: "TSLA", change: -2.45, name: "Tesla" },
+                      { symbol: "META", change: 1.23, name: "Meta" },
+                      { symbol: "BRK.B", change: 0.45, name: "Berkshire" },
+                      { symbol: "JPM", change: -1.12, name: "JPMorgan" },
+                      { symbol: "V", change: 0.78, name: "Visa" },
+                      { symbol: "JNJ", change: -0.34, name: "J&J" },
+                      { symbol: "WMT", change: 1.89, name: "Walmart" },
+                      { symbol: "PG", change: 0.56, name: "P&G" },
+                      { symbol: "UNH", change: 2.01, name: "UnitedHealth" },
+                      { symbol: "HD", change: -0.67, name: "Home Depot" },
+                      { symbol: "MA", change: 1.45, name: "Mastercard" },
+                      { symbol: "DIS", change: -1.78, name: "Disney" },
+                      { symbol: "BAC", change: 0.89, name: "Bank of America" },
+                    ].map((stock, i) => (
+                      <div
+                        key={i}
+                        className={`p-3 rounded-lg cursor-pointer hover:opacity-80 transition-all duration-200 flex flex-col justify-between min-h-[80px] ${
+                          stock.change > 2
+                            ? "bg-green-600 text-white"
+                            : stock.change > 0
+                              ? "bg-green-400 text-white"
+                              : stock.change > -2
+                                ? "bg-red-400 text-white"
+                                : "bg-red-600 text-white"
+                        }`}
+                        style={{
+                          transform: `scale(${Math.min(1.2, Math.max(0.8, 1 + Math.abs(stock.change) / 10))})`,
+                        }}
+                      >
+                        <div className="font-bold text-xs">{stock.symbol}</div>
+                        <div className="text-xs opacity-90">{stock.name}</div>
+                                                <div className="font-semibold text-sm">
+                          {stock.change > 0 ? "+" : ""}
+                          {stock.change}%
+                        </div>
+                      </div>
+                    ))}
+                      }
+    };
 
   return (
     <div
@@ -1451,9 +1452,7 @@ export const MoorMeterDashboard: React.FC = () => {
                             }}
                             className="flex items-center cursor-pointer"
                           >
-                            {subtab.icon && (
-                              <subtab.icon className="w-4 h-4 mr-2" />
-                            )}
+                            {subtab.icon && <subtab.icon className="w-4 h-4 mr-2" />}
                             {subtab.label}
                           </DropdownMenuItem>
                         ))}
@@ -1476,35 +1475,27 @@ export const MoorMeterDashboard: React.FC = () => {
               ))}
 
               <button
-                onClick={() => setDarkMode(!darkMode)}
+                onClick={toggleDarkMode}
                 className="p-2 rounded-md text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors duration-200"
               >
-                {darkMode ? (
-                  <Sun className="h-5 w-5" />
-                ) : (
-                  <Moon className="h-5 w-5" />
-                )}
+                {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
               </button>
             </div>
 
             {/* Mobile menu button */}
             <div className="md:hidden flex items-center">
               <button
-                onClick={() => setDarkMode(!darkMode)}
+                onClick={toggleDarkMode}
                 className="p-2 rounded-md text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors duration-200 mr-2"
               >
-                {darkMode ? (
-                  <Sun className="h-5 w-5" />
-                ) : (
-                  <Moon className="h-5 w-5" />
-                )}
+                {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
               </button>
               <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
               >
                 <span className="sr-only">Open main menu</span>
-                {mobileMenuOpen ? (
+                {isMobileMenuOpen ? (
                   <X className="block h-6 w-6" aria-hidden="true" />
                 ) : (
                   <Menu className="block h-6 w-6" aria-hidden="true" />
@@ -1515,7 +1506,7 @@ export const MoorMeterDashboard: React.FC = () => {
         </div>
 
         {/* Mobile menu */}
-        {mobileMenuOpen && (
+        {isMobileMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-50 dark:bg-gray-800">
               {navItems.map((item) => (
@@ -1531,13 +1522,11 @@ export const MoorMeterDashboard: React.FC = () => {
                           onClick={() => {
                             setActiveTab(item.key);
                             setActiveToolsSubtab(subtab.key);
-                            setMobileMenuOpen(false);
+                            setIsMobileMenuOpen(false);
                           }}
                           className="flex items-center w-full px-6 py-2 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
                         >
-                          {subtab.icon && (
-                            <subtab.icon className="w-4 h-4 mr-2" />
-                          )}
+                          {subtab.icon && <subtab.icon className="w-4 h-4 mr-2" />}
                           {subtab.label}
                         </button>
                       ))}
@@ -1546,7 +1535,7 @@ export const MoorMeterDashboard: React.FC = () => {
                     <button
                       onClick={() => {
                         setActiveTab(item.key);
-                        setMobileMenuOpen(false);
+                        setIsMobileMenuOpen(false);
                       }}
                       className={`flex items-center w-full px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
                         activeTab === item.key
@@ -1567,8 +1556,484 @@ export const MoorMeterDashboard: React.FC = () => {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <div className="px-4 py-6 sm:px-0">{renderTabContent()}</div>
+        <div className="px-4 py-6 sm:px-0">
+                    {renderContent()}
+        </div>
       </main>
+    </div>
+  );
+};
+
+export default MoorMeterDashboard;
+            
+
+              {/* Sidebar */}
+              <div className="space-y-6">
+                {/* Personal Mood Score */}
+                <PersonalMoodCard />
+                                {/* Watchlist */}
+                <WatchlistWidget />
+                      ������ Market Summary
+                                    {/* AI Insight */}
+                <AIInsightWidget moodScore={moodScore} />
+
+                {/* Community Feed */}
+                                <CommunityWidget posts={communityPosts} />
+                                                        </div>
+            </div>
+          </>
+        );
+      }
+  };
+
+    export default MoorMeterDashboard;
+                <WatchlistWidget />
+
+                {/* AI Insight */}
+                <AIInsightWidget moodScore={moodScore} />
+
+                {/* Community Feed */}
+                <CommunityWidget messages={communityMessages} />
+              </div>
+            </div>
+          </>
+        );
+    }
+  };
+
+  return (
+    <div
+      className={`min-h-screen transition-colors duration-300 ${darkMode ? "dark bg-gray-900" : "bg-gray-50"}`}
+    >
+      {/* Header */}
+      <header
+        className={`sticky top-0 z-50 backdrop-blur-md ${darkMode ? "bg-gray-900/80 border-gray-700" : "bg-white/80 border-gray-200"} border-b`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-3">
+                <div className="relative">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 via-purple-600 to-indigo-700 flex items-center justify-center">
+                    <Brain className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                </div>
+                <div>
+                  <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-purple-500 to-indigo-600 bg-clip-text text-transparent">
+                    MoorMeter
+                  </h1>
+                  <div className="text-xs text-gray-500">
+                    Real-time Market Sentiment
+                  </div>
+                </div>
+              </div>
+              <Badge variant="secondary" className="hidden sm:inline-flex">
+                v2.0
+              </Badge>
+            </div>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-1">
+              {navItems.map((item) => (
+                <Button
+                  key={item.label}
+                  variant={activeTab === item.label ? "default" : "ghost"}
+                  size="sm"
+                  onClick={() => setActiveTab(item.label)}
+                  className={
+                    activeTab === item.label
+                      ? "bg-gradient-to-r from-blue-500 to-purple-600"
+                      : ""
+                  }
+                >
+                  {item.label}
+                </Button>
+              ))}
+
+              {/* Tools Dropdown */}
+              <DropdownMenu
+                open={toolsDropdownOpen}
+                onOpenChange={setToolsDropdownOpen}
+              >
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant={activeTab === "Tools" ? "default" : "ghost"}
+                    size="sm"
+                    className={`${
+                      activeTab === "Tools"
+                        ? "bg-gradient-to-r from-blue-500 to-purple-600"
+                        : ""
+                    } flex items-center space-x-1`}
+                  >
+                    <span>Tools</span>
+                    <ChevronDown
+                      className={`w-4 h-4 transition-transform duration-200 ${
+                        toolsDropdownOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start" className="w-48">
+                  {toolsItems.map((tool) => (
+                    <DropdownMenuItem
+                      key={tool.value}
+                      onClick={() => {
+                        setActiveTab("Tools");
+                        setActiveToolsSubtab(tool.value);
+                        setToolsDropdownOpen(false);
+                      }}
+                      className={`cursor-pointer ${
+                        activeTab === "Tools" &&
+                        activeToolsSubtab === tool.value
+                          ? "bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
+                          : ""
+                      }`}
+                    >
+                      📊 {tool.label}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </nav>
+
+            {/* Search Bar */}
+            <div className="hidden lg:flex items-center flex-1 max-w-lg mx-8">
+              <div className="relative w-full">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                <Input
+                  type="text"
+                  placeholder="Search stocks, news, topics..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 bg-gray-800/50 border-gray-600 focus:border-blue-500 transition-colors"
+                />
+              </div>
+            </div>
+
+            {/* Header Actions */}
+            <div className="flex items-center space-x-3">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setDarkMode(!darkMode)}
+                className="hidden sm:inline-flex"
+              >
+                {darkMode ? (
+                  <Sun className="w-4 h-4" />
+                ) : (
+                  <Moon className="w-4 h-4" />
+                )}
+              </Button>
+
+              <div className="relative">
+                <Button variant="ghost" size="sm">
+                  <Avatar className="w-8 h-8">
+                    <AvatarImage src="/api/placeholder/32/32" />
+                    <AvatarFallback>JD</AvatarFallback>
+                  </Avatar>
+                  <ChevronDown className="w-4 h-4 ml-1" />
+                </Button>
+              </div>
+
+              <Button
+                variant="ghost"
+                size="sm"
+                className="md:hidden"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              >
+                {mobileMenuOpen ? (
+                  <X className="w-5 h-5" />
+                ) : (
+                  <Menu className="w-5 h-5" />
+                )}
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div
+            className={`md:hidden border-t ${darkMode ? "border-gray-700 bg-gray-800" : "border-gray-200 bg-white"}`}
+          >
+            <div className="px-4 py-3 space-y-2">
+              {navItems.map((item) => (
+                <Button
+                  key={item.label}
+                  variant={activeTab === item.label ? "default" : "ghost"}
+                  size="sm"
+                  onClick={() => {
+                    setActiveTab(item.label);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="w-full justify-start"
+                >
+                  {item.label}
+                </Button>
+              ))}
+
+              {/* Tools Mobile Dropdown */}
+              <div className="space-y-1">
+                <Button
+                  variant={activeTab === "Tools" ? "default" : "ghost"}
+                  size="sm"
+                  onClick={() => setToolsDropdownOpen(!toolsDropdownOpen)}
+                  className="w-full justify-between"
+                >
+                  <span>Tools</span>
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform duration-200 ${
+                      toolsDropdownOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </Button>
+
+                {toolsDropdownOpen && (
+                  <div className="ml-4 space-y-1">
+                    {toolsItems.map((tool) => (
+                      <Button
+                        key={tool.value}
+                        variant={
+                          activeTab === "Tools" &&
+                          activeToolsSubtab === tool.value
+                            ? "default"
+                            : "ghost"
+                        }
+                        size="sm"
+                        onClick={() => {
+                          setActiveTab("Tools");
+                          setActiveToolsSubtab(tool.value);
+                          setMobileMenuOpen(false);
+                          setToolsDropdownOpen(false);
+                        }}
+                        className="w-full justify-start text-sm"
+                      >
+                        📊 {tool.label}
+                      </Button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div className="pt-2">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                  <Input
+                    type="text"
+                    placeholder="Search..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-10"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </header>
+
+      {/* Main Content */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Hero Section */}
+        <div className="relative mb-8 overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 via-purple-700 to-indigo-800">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-indigo-600/20"></div>
+          <div
+            className={
+              'absolute inset-0 bg-[url(\'data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.1"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\')] opacity-20'
+            }
+          ></div>
+
+          <div className="relative px-8 py-12">
+            <div className="text-center">
+              <div className="mb-6">
+                <div className="inline-flex items-center space-x-4 mb-4">
+                  <div className="text-6xl animate-bounce">
+                    {getMoodEmoji(moodScore.overall)}
+                  </div>
+                  <div>
+                    <div className="text-5xl font-bold text-white mb-2">
+                      {moodScore.overall}
+                    </div>
+                    <div className="text-xl text-blue-200">
+                      {getMoodLabel(moodScore.overall)}
+                    </div>
+                  </div>
+                </div>
+
+                <h2 className="text-2xl font-semibold text-white mb-2">
+                  Today's Market Mood
+                </h2>
+                <p className="text-blue-200 max-w-2xl mx-auto">
+                  Real-time sentiment analysis powered by AI, aggregating market
+                  data, news sentiment, and social media buzz
+                </p>
+              </div>
+
+              {/* Mood Breakdown */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center space-x-2">
+                      <BarChart3 className="w-5 h-5 text-blue-300" />
+                      <span className="text-white font-medium">Stocks</span>
+                    </div>
+                    <span className="text-2xl font-bold text-white">
+                      {Math.round(moodScore.stocks)}
+                    </span>
+                  </div>
+                  <div className="w-full bg-white/20 rounded-full h-2">
+                    <div
+                      className={`h-2 rounded-full bg-gradient-to-r ${getMoodColor(moodScore.stocks)}`}
+                      style={{ width: `${moodScore.stocks}%` }}
+                    ></div>
+                  </div>
+                  <div className="text-blue-200 text-sm mt-2">40% weight</div>
+                </div>
+
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center space-x-2">
+                      <Globe className="w-5 h-5 text-purple-300" />
+                      <span className="text-white font-medium">News</span>
+                    </div>
+                    <span className="text-2xl font-bold text-white">
+                      {Math.round(moodScore.news)}
+                    </span>
+                  </div>
+                  <div className="w-full bg-white/20 rounded-full h-2">
+                    <div
+                      className={`h-2 rounded-full bg-gradient-to-r ${getMoodColor(moodScore.news)}`}
+                      style={{ width: `${moodScore.news}%` }}
+                    ></div>
+                  </div>
+                  <div className="text-purple-200 text-sm mt-2">30% weight</div>
+                </div>
+
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center space-x-2">
+                      <MessageCircle className="w-5 h-5 text-indigo-300" />
+                      <span className="text-white font-medium">Social</span>
+                    </div>
+                    <span className="text-2xl font-bold text-white">
+                      {Math.round(moodScore.social)}
+                    </span>
+                  </div>
+                  <div className="w-full bg-white/20 rounded-full h-2">
+                    <div
+                      className={`h-2 rounded-full bg-gradient-to-r ${getMoodColor(moodScore.social)}`}
+                      style={{ width: `${moodScore.social}%` }}
+                    ></div>
+                  </div>
+                  <div className="text-indigo-200 text-sm mt-2">30% weight</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Tab Content */}
+        {renderTabContent()}
+      </main>
+
+      {/* Footer */}
+      <footer
+        className={`mt-16 border-t ${darkMode ? "border-gray-700 bg-gray-800" : "border-gray-200 bg-gray-50"}`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="md:col-span-2">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                  <Brain className="w-5 h-5 text-white" />
+                </div>
+                <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+                  MoorMeter
+                </span>
+              </div>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
+                Advanced sentiment analysis for the modern trader. Real-time
+                market mood tracking powered by AI.
+              </p>
+              <div className="flex space-x-4">
+                <Button variant="ghost" size="sm">
+                  <MessageCircle className="w-4 h-4" />
+                </Button>
+                <Button variant="ghost" size="sm">
+                  <Globe className="w-4 h-4" />
+                </Button>
+                <Button variant="ghost" size="sm">
+                  <Users className="w-4 h-4" />
+                </Button>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="font-semibold mb-4">Platform</h3>
+              <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                <li>
+                  <a href="#" className="hover:text-blue-500 transition-colors">
+                    About
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-blue-500 transition-colors">
+                    FAQ
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-blue-500 transition-colors">
+                    Privacy
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-blue-500 transition-colors">
+                    Terms
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-semibold mb-4">Community</h3>
+              <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                <li>
+                  <a href="#" className="hover:text-blue-500 transition-colors">
+                    Twitter
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-blue-500 transition-colors">
+                    LinkedIn
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-blue-500 transition-colors">
+                    Discord
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-blue-500 transition-colors">
+                    Reddit
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <div className="flex flex-col sm:flex-row justify-between items-center">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                © 2024 MoorMeter. All rights reserved.
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 sm:mt-0">
+                Market data delayed by 15 minutes
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
