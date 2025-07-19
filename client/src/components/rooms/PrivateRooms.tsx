@@ -229,21 +229,15 @@ export const PrivateRooms: React.FC = () => {
                 </Dialog>
               </div>
 
-              {/* Usage Stats */}
-              <div className="text-xs text-muted-foreground space-y-1">
-                <div className="flex justify-between">
-                  <span>
-                    Rooms: {rooms.length}/{userLimits.maxPrivateRooms}
-                  </span>
-                  {user?.isPremium && (
-                    <Crown className="h-3 w-3 text-yellow-500" />
-                  )}
-                </div>
-                <Progress
-                  value={(rooms.length / userLimits.maxPrivateRooms) * 100}
-                  className="h-1"
-                />
-              </div>
+              {/* User Limits Display */}
+              <UserLimitsDisplay
+                userId={user?.id || ""}
+                userLimits={userLimits}
+                existingRooms={rooms}
+                isPremium={user?.isPremium}
+                isVerified={user?.isVerified}
+                onUpgrade={() => console.log("Upgrade to Premium!")}
+              />
 
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
