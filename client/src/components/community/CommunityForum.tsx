@@ -117,8 +117,8 @@ export const CommunityForum: React.FC = () => {
       username: "TechBull2024",
       userAvatar: "/api/placeholder/40/40",
       content:
-        "AI earnings season is looking incredibly strong! $NVDA absolutely crushing expectations and $MSFT showing solid cloud growth. The future is bright for tech 🚀",
-      tickers: ["NVDA", "MSFT"],
+        "Buy $NVDA at 875 / Target 950 / SL 820 📈 AI earnings season is looking incredibly strong! Expecting a breakout above resistance.",
+      tickers: ["NVDA"],
       tags: ["Tech", "Earnings"],
       sentiment: "bullish",
       likes: 47,
@@ -130,7 +130,7 @@ export const CommunityForum: React.FC = () => {
           username: "ValueInvestor",
           userAvatar: "/api/placeholder/32/32",
           content:
-            "Agree on NVDA but worried about MSFT valuations at these levels",
+            "Great analysis! I'm also bullish on NVDA but watching for any earnings guidance surprises.",
           likes: 12,
           createdAt: new Date(Date.now() - 15 * 60 * 1000),
           replies: [],
@@ -141,6 +141,16 @@ export const CommunityForum: React.FC = () => {
       createdAt: new Date(Date.now() - 45 * 60 * 1000),
       isUserLiked: false,
       isUserDisliked: false,
+      tradeIdea: {
+        ticker: "NVDA",
+        action: "buy",
+        entryPrice: 875,
+        targetPrice: 950,
+        stopLoss: 820,
+        sentiment: "bullish",
+        confidence: 4,
+        timeframe: "swing",
+      },
     },
     {
       id: "post-2",
