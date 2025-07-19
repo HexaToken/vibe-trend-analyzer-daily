@@ -431,6 +431,7 @@ export const MoorMeterDashboard: React.FC = () => {
             {/* Render content based on active subtab */}
             {activeCommunitySubtab === "PrivateRooms" && <PrivateRooms />}
             {activeCommunitySubtab === "StockTwist" && <StockTwistRoom />}
+            {activeCommunitySubtab === "Rooms" && <CommunityForum />}
             {activeCommunitySubtab === "Room" && <CommunityRooms />}
           </div>
         );
