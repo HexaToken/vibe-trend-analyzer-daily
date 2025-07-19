@@ -417,13 +417,15 @@ export const MoorMeterDashboard: React.FC = () => {
                   <Input
                     type="text"
                     placeholder={
-                      activeCommunitySubtab === "PrivateRooms"
-                        ? "Search private rooms..."
-                        : activeCommunitySubtab === "StockTwist"
-                          ? "Search trade ideas..."
-                          : activeCommunitySubtab === "Rooms"
-                            ? "Search posts, chat rooms..."
-                            : "Search community..."
+                      activeCommunitySubtab === "Chat"
+                        ? "Search messages, tickers..."
+                        : activeCommunitySubtab === "PrivateRooms"
+                          ? "Search private rooms..."
+                          : activeCommunitySubtab === "StockTwist"
+                            ? "Search trade ideas..."
+                            : activeCommunitySubtab === "Rooms"
+                              ? "Search posts, chat rooms..."
+                              : "Search community..."
                     }
                     className="pl-10 w-64"
                   />
