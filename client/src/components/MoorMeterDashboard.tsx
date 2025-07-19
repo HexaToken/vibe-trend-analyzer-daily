@@ -497,6 +497,8 @@ export const MoorMeterDashboard: React.FC = () => {
                 <ChatInterface />
               </div>
             )}
+            {activeCommunitySubtab === "Crypto" && <CryptoChannels />}
+            {activeCommunitySubtab === "OffTopic" && <OffTopicLounge />}
             {activeCommunitySubtab === "PrivateRooms" && <PrivateRooms />}
             {activeCommunitySubtab === "StockTwist" && <StockTwistRoom />}
             {activeCommunitySubtab === "Rooms" && <CommunityForum />}
