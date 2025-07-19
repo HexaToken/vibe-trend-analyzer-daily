@@ -114,7 +114,7 @@ export const StockTwistRoom: React.FC = () => {
         targetPrice: targetMatch ? parseFloat(targetMatch[1]) : undefined,
         stopLoss: slMatch ? parseFloat(slMatch[1]) : undefined,
         sentiment:
-          newMessage.includes("📈") ||
+          newMessage.includes("����") ||
           newMessage.toLowerCase().includes("bullish")
             ? "bullish"
             : newMessage.includes("📉") ||
