@@ -235,8 +235,11 @@ class CoinMarketCapService {
         return cached;
       }
     }
-    // If proxy is known to be unavailable, fail immediately
+    // If proxy is known to be unavailable, use cache or fail gracefully
     if (this.proxyAvailable === false) {
+      console.info(
+        "CoinMarketCap proxy is not available - falling back to mock data",
+      );
       throw new CoinMarketCapApiError(
         "CoinMarketCap proxy is not available - using mock data",
       );

@@ -47,6 +47,13 @@ The application integrates with multiple external services:
 **Note**: API keys need to be configured for live data integration.
 
 ## Recent Changes
+- **2025-01-19**: Fully restored pull request #10 "Add robust fetch utility and debug logging"
+  - Implemented robustFetch.ts utility with retry logic, timeout handling, and exponential backoff
+  - Updated all API hooks (useCoinMarketCap, useNewsApi, useStockSentiment, useYFinanceNews) to use robustFetchJson
+  - Enhanced error handling with FetchError support and specific timeout/rate limit detection
+  - Added comprehensive debug logging throughout the application for better monitoring
+  - Improved reliability for all external API integrations (CoinMarketCap, NewsAPI, YFinance, Finnhub)
+  - Fixed HMR reload issues in SentimentHeatMap and WatchlistModule components
 - **2025-01-18**: Integrated additional NLP models with spaCy for enhanced sentiment analysis
   - Added spaCy NLP service with comprehensive financial text analysis capabilities
   - Created multi-model ensemble combining rule-based lexicon analysis with spaCy NLP pipeline

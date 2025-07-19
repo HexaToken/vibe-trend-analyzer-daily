@@ -8,6 +8,7 @@ import {
   convertMultipleCMCToTickers,
 } from "../services/coinMarketCapApi";
 import { stockDataFallback } from "../services/stockDataFallback";
+import { robustFetchJson, FetchError } from "../lib/robustFetch";
 import { Ticker } from "../types/social";
 
 interface UseCryptoOptions {
@@ -59,40 +60,44 @@ export function useCryptoQuotes(
     setError(null);
 
     try {
-      // Use the CoinMarketCap service which now proxies through our server
-      const { coinMarketCapApi } = await import("../services/coinMarketCapApi");
-      const response = await coinMarketCapApi.getQuotesBySymbol(symbols);
+      // Use robust fetch to get crypto quotes through our server proxy
+      const response = await robustFetchJson<CoinMarketCapQuotesResponse>(
+        `/api/proxy/coinmarketcap/quotes?symbol=${symbols.join(",")}`,
+        {
+          retry: {
+            maxRetries: 2,
+            retryDelay: 1000,
+            timeout: 15000,
+          },
+        }
+      );
 
       setData(response);
       setError(null);
     } catch (error) {
-      console.error("Failed to fetch crypto quotes:", error);
-
-      // Handle rate limit and circuit breaker errors specifically
-      if (
-        error instanceof CoinMarketCapApiError &&
-        (error.message.includes("rate limit") ||
-          error.message.includes("Rate limit") ||
-          error.code === 429)
-      ) {
-        setError("CoinMarketCap API rate limit exceeded. Using cached data.");
-        console.warn("CoinMarketCap rate limit hit, falling back to mock data");
-      } else if (
-        error instanceof Error &&
-        error.message.includes("Circuit breaker is open")
-      ) {
-        setError(
-          "CoinMarketCap API temporarily unavailable. Using cached data.",
-        );
-        console.warn(
-          "CoinMarketCap circuit breaker is open, falling back to mock data",
-        );
+      // Enhanced error handling with robustFetch FetchError
+      if (error instanceof FetchError) {
+        console.info(`CoinMarketCap API error (${error.status}): ${error.message}`);
+        if (error.status === 429) {
+          setError("CoinMarketCap API rate limit exceeded. Using cached data.");
+        } else if (error.status && error.status >= 500) {
+          setError("CoinMarketCap API temporarily unavailable. Using cached data.");
+        } else {
+          setError(`API Error: ${error.message}`);
+        }
+      } else if (error instanceof Error) {
+        if (error.name === "AbortError") {
+          setError("Request timeout. Using cached data.");
+          console.warn("CoinMarketCap request timed out, falling back to mock data");
+        } else if (error.message.includes("proxy is not available")) {
+          console.info("CoinMarketCap API proxy unavailable, using mock data");
+          setError("API proxy unavailable. Using cached data.");
+        } else {
+          console.error("Failed to fetch crypto quotes:", error);
+          setError(`Network Error: ${error.message}`);
+        }
       } else {
-        setError(
-          error instanceof Error
-            ? `API Error: ${error.message}`
-            : "Failed to fetch crypto data",
-        );
+        setError("Failed to fetch crypto data");
       }
 
       // Fallback to mock data if API fails
@@ -210,39 +215,45 @@ export function useCryptoListings(
     setError(null);
 
     try {
-      // Use the CoinMarketCap service which now proxies through our server
-      const { coinMarketCapApi } = await import("../services/coinMarketCapApi");
-      const response = await coinMarketCapApi.getListingsLatest(1, limit);
+      // Use robust fetch to get crypto listings through our server proxy
+      const response = await robustFetchJson<CoinMarketCapListingsResponse>(
+        `/api/proxy/coinmarketcap/listings?limit=${limit}`,
+        {
+          retry: {
+            maxRetries: 2,
+            retryDelay: 1000,
+            timeout: 15000,
+          },
+        }
+      );
 
       setData(response);
       setError(null);
+      setLoading(false);
     } catch (error) {
-      console.error("Failed to fetch crypto listings:", error);
-
-      // Handle rate limit and circuit breaker errors specifically
-      if (
-        error instanceof CoinMarketCapApiError &&
-        (error.message.includes("rate limit") ||
-          error.message.includes("Rate limit") ||
-          error.code === 429)
-      ) {
-        setError("CoinMarketCap API rate limit exceeded. Using cached data.");
-        console.warn(
-          "CoinMarketCap rate limit hit for listings, falling back to mock data",
-        );
-      } else if (
-        error instanceof Error &&
-        error.message.includes("Circuit breaker is open")
-      ) {
-        setError(
-          "CoinMarketCap API temporarily unavailable. Using cached data.",
-        );
+      // Enhanced error handling with robustFetch FetchError
+      if (error instanceof FetchError) {
+        console.info(`CoinMarketCap listings API error (${error.status}): ${error.message}`);
+        if (error.status === 429) {
+          setError("CoinMarketCap API rate limit exceeded. Using cached data.");
+        } else if (error.status && error.status >= 500) {
+          setError("CoinMarketCap API temporarily unavailable. Using cached data.");
+        } else {
+          setError(`API Error: ${error.message}`);
+        }
+      } else if (error instanceof Error) {
+        if (error.name === "AbortError") {
+          setError("Request timeout. Using cached data.");
+          console.warn("CoinMarketCap listings request timed out, falling back to mock data");
+        } else if (error.message.includes("proxy is not available")) {
+          console.info("CoinMarketCap listings API proxy unavailable, using mock data");
+          setError("API proxy unavailable. Using cached data.");
+        } else {
+          console.error("Failed to fetch crypto listings:", error);
+          setError(`Network Error: ${error.message}`);
+        }
       } else {
-        setError(
-          error instanceof Error
-            ? `API Error: ${error.message}`
-            : "Failed to fetch crypto listings",
-        );
+        setError("Failed to fetch crypto listings");
       }
 
       // Fallback to mock data if API fails
@@ -382,7 +393,15 @@ export function useGlobalMetrics(
       setData(response);
       setError(null);
     } catch (error) {
-      console.error("Failed to fetch global metrics:", error);
+      // Handle proxy unavailable errors more gracefully
+      if (
+        error instanceof Error &&
+        error.message.includes("proxy is not available")
+      ) {
+        console.info("CoinMarketCap API proxy unavailable, using mock data");
+      } else {
+        console.error("Failed to fetch global metrics:", error);
+      }
 
       // Handle rate limit and circuit breaker errors specifically
       if (
