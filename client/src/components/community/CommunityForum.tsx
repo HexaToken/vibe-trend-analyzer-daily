@@ -50,6 +50,7 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { CommunityRooms } from "@/components/social/CommunityRooms";
+import { ChatInterface } from "@/components/moorMeter/ChatInterface";
 import { TradeIdea } from "@/types/rooms";
 
 interface Post {
