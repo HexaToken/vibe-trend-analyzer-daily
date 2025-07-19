@@ -57,6 +57,7 @@ import { CommunityRooms } from "./social/CommunityRooms";
 import { PrivateRooms } from "./rooms/PrivateRooms";
 import { StockTwistRoom } from "./rooms/StockTwistRoom";
 import { CommunityForum } from "./community/CommunityForum";
+import { ChatInterface } from "./moorMeter/ChatInterface";
 import { MoodScoreHero } from "./builder/MoodScoreHero";
 import { TopStocksModule } from "./builder/TopStocksModule";
 import { SentimentHeatMap } from "./moorMeter/SentimentHeatMap";
@@ -109,8 +110,7 @@ export const MoorMeterDashboard: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("Home");
   const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
-  const [activeCommunitySubtab, setActiveCommunitySubtab] =
-    useState("PrivateRooms");
+  const [activeCommunitySubtab, setActiveCommunitySubtab] = useState("Chat");
   const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false);
 
   // Sentiment Heatmap State
@@ -271,9 +271,10 @@ export const MoorMeterDashboard: React.FC = () => {
       key: "Community",
       href: "#community",
       subtabs: [
+        { label: "Chat", key: "Chat", icon: MessageCircle },
         { label: "Private Rooms", key: "PrivateRooms", icon: Lock },
         { label: "StockTwist", key: "StockTwist", icon: Zap },
-        { label: "Rooms", key: "Rooms", icon: MessageCircle },
+        { label: "Rooms", key: "Rooms", icon: Users },
       ],
     },
   ];
@@ -396,13 +397,15 @@ export const MoorMeterDashboard: React.FC = () => {
                   🧑‍🤝‍🧑 Community Hub
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400">
-                  {activeCommunitySubtab === "PrivateRooms"
-                    ? "Create and manage private watchlist rooms"
-                    : activeCommunitySubtab === "StockTwist"
-                      ? "Share trade ideas and market insights"
-                      : activeCommunitySubtab === "Rooms"
-                        ? "Discuss trends, share sentiment, and join chat rooms"
-                        : "Connect with fellow traders and share insights"}
+                  {activeCommunitySubtab === "Chat"
+                    ? "Real-time Reddit + StockTwits style messaging with sentiment tracking"
+                    : activeCommunitySubtab === "PrivateRooms"
+                      ? "Create and manage private watchlist rooms"
+                      : activeCommunitySubtab === "StockTwist"
+                        ? "Share trade ideas and market insights"
+                        : activeCommunitySubtab === "Rooms"
+                          ? "Discuss trends, share sentiment, and join chat rooms"
+                          : "Connect with fellow traders and share insights"}
                 </p>
               </div>
 
@@ -413,13 +416,15 @@ export const MoorMeterDashboard: React.FC = () => {
                   <Input
                     type="text"
                     placeholder={
-                      activeCommunitySubtab === "PrivateRooms"
-                        ? "Search private rooms..."
-                        : activeCommunitySubtab === "StockTwist"
-                          ? "Search trade ideas..."
-                          : activeCommunitySubtab === "Rooms"
-                            ? "Search posts, chat rooms..."
-                            : "Search community..."
+                      activeCommunitySubtab === "Chat"
+                        ? "Search messages, tickers..."
+                        : activeCommunitySubtab === "PrivateRooms"
+                          ? "Search private rooms..."
+                          : activeCommunitySubtab === "StockTwist"
+                            ? "Search trade ideas..."
+                            : activeCommunitySubtab === "Rooms"
+                              ? "Search posts, chat rooms..."
+                              : "Search community..."
                     }
                     className="pl-10 w-64"
                   />
@@ -428,6 +433,11 @@ export const MoorMeterDashboard: React.FC = () => {
             </div>
 
             {/* Render content based on active subtab */}
+            {activeCommunitySubtab === "Chat" && (
+              <div className="h-[600px]">
+                <ChatInterface />
+              </div>
+            )}
             {activeCommunitySubtab === "PrivateRooms" && <PrivateRooms />}
             {activeCommunitySubtab === "StockTwist" && <StockTwistRoom />}
             {activeCommunitySubtab === "Rooms" && <CommunityForum />}

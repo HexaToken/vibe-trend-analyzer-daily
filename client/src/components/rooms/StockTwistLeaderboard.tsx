@@ -12,11 +12,6 @@ import {
   TrendingUp,
   MessageSquare,
   ThumbsUp,
-  Star,
-  Calendar,
-  Users,
-  Target,
-  Flame,
   Crown,
   Shield,
 } from "lucide-react";
@@ -30,22 +25,6 @@ interface LeaderboardEntry {
   change: number;
   metric: string;
   details?: string;
-}
-
-interface TopTradeIdea {
-  id: string;
-  userId: string;
-  username: string;
-  avatar?: string;
-  content: string;
-  ticker: string;
-  action: "buy" | "sell";
-  entryPrice: number;
-  likes: number;
-  accuracy?: number;
-  performance?: number;
-  timeframe: string;
-  postedAt: Date;
 }
 
 export const StockTwistLeaderboard: React.FC = () => {
@@ -128,54 +107,6 @@ export const StockTwistLeaderboard: React.FC = () => {
     },
   ];
 
-  const topTradeIdeas: TopTradeIdea[] = [
-    {
-      id: "trade-1",
-      userId: "user-1",
-      username: "ChipWhisperer",
-      avatar: "/api/placeholder/32/32",
-      content: "Buy $NVDA at 875 / Target 950 / SL 820 📈",
-      ticker: "NVDA",
-      action: "buy",
-      entryPrice: 875,
-      likes: 234,
-      accuracy: 89,
-      performance: 8.6,
-      timeframe: "swing",
-      postedAt: new Date(Date.now() - 4 * 60 * 60 * 1000),
-    },
-    {
-      id: "trade-2",
-      userId: "user-2",
-      username: "OptionsKing",
-      avatar: "/api/placeholder/32/32",
-      content: "Sell $SPY at 425 / Target 410 / SL 430 📉",
-      ticker: "SPY",
-      action: "sell",
-      entryPrice: 425,
-      likes: 156,
-      accuracy: 92,
-      performance: 3.5,
-      timeframe: "day",
-      postedAt: new Date(Date.now() - 2 * 60 * 60 * 1000),
-    },
-    {
-      id: "trade-3",
-      userId: "user-3",
-      username: "TechBull2024",
-      avatar: "/api/placeholder/32/32",
-      content: "Buy $TSLA at 195 / Target 220 / SL 185 🚀",
-      ticker: "TSLA",
-      action: "buy",
-      entryPrice: 195,
-      likes: 98,
-      accuracy: 76,
-      performance: 12.8,
-      timeframe: "swing",
-      postedAt: new Date(Date.now() - 6 * 60 * 60 * 1000),
-    },
-  ];
-
   const getRankIcon = (rank: number) => {
     switch (rank) {
       case 1:
@@ -204,19 +135,6 @@ export const StockTwistLeaderboard: React.FC = () => {
     }
   };
 
-  const formatTimeAgo = (date: Date) => {
-    const now = new Date();
-    const diff = now.getTime() - date.getTime();
-    const hours = Math.floor(diff / (1000 * 60 * 60));
-
-    if (hours < 1) {
-      const minutes = Math.floor(diff / (1000 * 60));
-      return `${minutes}m ago`;
-    }
-    if (hours < 24) return `${hours}h ago`;
-    return `${Math.floor(hours / 24)}d ago`;
-  };
-
   return (
     <Card className="h-full">
       <CardHeader>
@@ -227,7 +145,7 @@ export const StockTwistLeaderboard: React.FC = () => {
       </CardHeader>
       <CardContent className="p-0">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mx-4 mb-4">
+          <TabsList className="grid w-full grid-cols-2 mx-4 mb-4">
             <TabsTrigger value="today" className="text-xs">
               <ThumbsUp className="h-3 w-3 mr-1" />
               Top Liked
@@ -235,10 +153,6 @@ export const StockTwistLeaderboard: React.FC = () => {
             <TabsTrigger value="active" className="text-xs">
               <MessageSquare className="h-3 w-3 mr-1" />
               Most Active
-            </TabsTrigger>
-            <TabsTrigger value="trades" className="text-xs">
-              <Target className="h-3 w-3 mr-1" />
-              Best Trades
             </TabsTrigger>
           </TabsList>
 
@@ -319,72 +233,6 @@ export const StockTwistLeaderboard: React.FC = () => {
                     <div className="text-right">
                       <div className="font-bold text-sm">{user.score}</div>
                       <div className="text-xs text-muted-foreground">posts</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </ScrollArea>
-          </TabsContent>
-
-          <TabsContent value="trades" className="m-0">
-            <ScrollArea className="h-64 px-4">
-              <div className="space-y-3">
-                {topTradeIdeas.map((trade, index) => (
-                  <div
-                    key={trade.id}
-                    className="p-3 border rounded-lg space-y-2"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        {getRankIcon(index + 1)}
-                        <Avatar className="h-6 w-6">
-                          <AvatarImage src={trade.avatar} />
-                          <AvatarFallback className="text-xs">
-                            {trade.username[0].toUpperCase()}
-                          </AvatarFallback>
-                        </Avatar>
-                        <span className="font-medium text-sm">
-                          {trade.username}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Badge variant="outline" className="text-xs">
-                          ${trade.ticker}
-                        </Badge>
-                        <div className="text-xs text-muted-foreground">
-                          {formatTimeAgo(trade.postedAt)}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="text-sm">{trade.content}</div>
-
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                        <div className="flex items-center gap-1">
-                          <ThumbsUp className="h-3 w-3" />
-                          {trade.likes}
-                        </div>
-                        {trade.accuracy && (
-                          <div className="flex items-center gap-1">
-                            <Star className="h-3 w-3" />
-                            {trade.accuracy}% accuracy
-                          </div>
-                        )}
-                        {trade.performance && (
-                          <div
-                            className={`flex items-center gap-1 ${
-                              trade.performance > 0
-                                ? "text-green-600"
-                                : "text-red-600"
-                            }`}
-                          >
-                            <TrendingUp className="h-3 w-3" />
-                            {trade.performance > 0 ? "+" : ""}
-                            {trade.performance}%
-                          </div>
-                        )}
-                      </div>
                     </div>
                   </div>
                 ))}

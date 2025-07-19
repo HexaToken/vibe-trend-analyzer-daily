@@ -5,6 +5,14 @@ import { Badge } from "../ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Input } from "../ui/input";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import { ChatInterface } from "./ChatInterface";
+import {
   MessageCircle,
   Heart,
   Share,
@@ -13,6 +21,7 @@ import {
   Hash,
   TrendingUp,
   TrendingDown,
+  ChevronDown,
 } from "lucide-react";
 
 interface CommunityMessage {
@@ -38,6 +47,9 @@ export const CommunityWidget: React.FC<CommunityWidgetProps> = ({
   const [selectedPlatform, setSelectedPlatform] = useState<
     "all" | "reddit" | "twitter" | "discord"
   >("all");
+  const [activeSubcategory, setActiveSubcategory] = useState<
+    "social-feed" | "chat" | "forums" | "discussions"
+  >("social-feed");
 
   // Simulate live message updates
   useEffect(() => {
@@ -176,8 +188,214 @@ export const CommunityWidget: React.FC<CommunityWidgetProps> = ({
     );
   };
 
+  const subcategoryOptions = [
+    { value: "social-feed", label: "Social Feed", icon: Users },
+    { value: "chat", label: "Chat", icon: MessageCircle },
+    { value: "forums", label: "Forums", icon: Hash },
+    { value: "discussions", label: "Discussions", icon: Share },
+  ];
+
+  const renderContent = () => {
+    switch (activeSubcategory) {
+      case "chat":
+        return <ChatInterface />;
+      case "social-feed":
+      default:
+        return renderSocialFeed();
+    }
+  };
+
+  const renderSocialFeed = () => (
+    <>
+      {/* Platform Filter */}
+      <div className="flex space-x-1 mb-4">
+        {[
+          { key: "all", label: "All", icon: MessageCircle },
+          { key: "reddit", label: "Reddit", icon: MessageCircle },
+          { key: "twitter", label: "Twitter", icon: Hash },
+          { key: "discord", label: "Discord", icon: Users },
+        ].map((platform) => {
+          const Icon = platform.icon;
+          return (
+            <Button
+              key={platform.key}
+              variant={
+                selectedPlatform === platform.key ? "default" : "outline"
+              }
+              size="sm"
+              onClick={() => setSelectedPlatform(platform.key as any)}
+              className={`text-xs transition-all duration-200 ${
+                selectedPlatform === platform.key
+                  ? "bg-gradient-to-r from-purple-500 to-indigo-600 text-white"
+                  : "hover:bg-purple-50 dark:hover:bg-purple-900/20"
+              }`}
+            >
+              <Icon className="w-3 h-3 mr-1" />
+              {platform.label}
+            </Button>
+          );
+        })}
+      </div>
+
+      {/* Message Input */}
+      <div className="flex space-x-2 mb-4 p-2 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-700">
+        <Avatar className="w-8 h-8">
+          <AvatarImage src="/api/placeholder/32/32" />
+          <AvatarFallback>You</AvatarFallback>
+        </Avatar>
+        <div className="flex-1 flex space-x-2">
+          <Input
+            type="text"
+            placeholder="Share your market thoughts..."
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
+            className="text-sm"
+          />
+          <Button
+            size="sm"
+            onClick={handleSendMessage}
+            disabled={!newMessage.trim()}
+            className="bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700"
+          >
+            <Send className="w-3 h-3" />
+          </Button>
+        </div>
+      </div>
+
+      {/* Messages Feed */}
+      <div className="space-y-3 max-h-80 overflow-y-auto">
+        {filteredMessages.length === 0 ? (
+          <div className="text-center py-8">
+            <Users className="w-8 h-8 mx-auto mb-2 text-gray-400" />
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              No messages for selected platform
+            </p>
+          </div>
+        ) : (
+          filteredMessages.map((message) => (
+            <div
+              key={message.id}
+              className="group p-3 rounded-lg border border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-500 transition-all duration-200 bg-white dark:bg-gray-800"
+            >
+              {/* Message Header */}
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center space-x-2">
+                  <Avatar className="w-6 h-6">
+                    <AvatarImage src={message.avatar} />
+                    <AvatarFallback className="text-xs">
+                      {message.user.slice(0, 2).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                  <span className="text-sm font-medium text-gray-900 dark:text-white">
+                    {message.user}
+                  </span>
+                  <Badge
+                    className={`text-xs ${getPlatformColor(message.platform)}`}
+                  >
+                    <div className="flex items-center space-x-1">
+                      {getPlatformIcon(message.platform)}
+                      <span>{message.platform}</span>
+                    </div>
+                  </Badge>
+                </div>
+
+                <div className="flex items-center space-x-2">
+                  <span className="text-xs text-gray-400">
+                    {getTimeAgo(message.timestamp)}
+                  </span>
+                  {getSentimentIcon(message.sentiment)}
+                </div>
+              </div>
+
+              {/* Message Content */}
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2 leading-relaxed">
+                {message.message}
+              </p>
+
+              {/* Message Actions */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-6 px-2 text-gray-500 hover:text-purple-600 dark:hover:text-purple-400"
+                    onClick={() => toggleLike(message.id)}
+                  >
+                    <Heart className="w-3 h-3 mr-1" />
+                    <span className="text-xs">{message.likes}</span>
+                  </Button>
+
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-6 px-2 text-gray-500 hover:text-purple-600 dark:hover:text-purple-400"
+                  >
+                    <Share className="w-3 h-3 mr-1" />
+                    <span className="text-xs">Share</span>
+                  </Button>
+                </div>
+
+                <div className="flex items-center space-x-2">
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                    Sentiment:
+                  </span>
+                  <span
+                    className={`text-xs font-medium ${getSentimentColor(message.sentiment)}`}
+                  >
+                    {Math.round(message.sentiment)}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Community Stats */}
+      <div className="mt-4 p-3 bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-lg border border-purple-200 dark:border-purple-700">
+        <div className="grid grid-cols-3 gap-3 text-center">
+          <div>
+            <div className="text-lg font-bold text-purple-600 dark:text-purple-400">
+              {filteredMessages.length}
+            </div>
+            <div className="text-xs text-gray-600 dark:text-gray-400">
+              Messages
+            </div>
+          </div>
+          <div>
+            <div className="text-lg font-bold text-indigo-600 dark:text-indigo-400">
+              {Math.round(
+                filteredMessages.reduce((sum, msg) => sum + msg.sentiment, 0) /
+                  (filteredMessages.length || 1),
+              )}
+            </div>
+            <div className="text-xs text-gray-600 dark:text-gray-400">
+              Avg Mood
+            </div>
+          </div>
+          <div>
+            <div className="text-lg font-bold text-green-600 dark:text-green-400">
+              {filteredMessages.filter((msg) => msg.sentiment >= 60).length}
+            </div>
+            <div className="text-xs text-gray-600 dark:text-gray-400">
+              Bullish
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div className="mt-3 text-center">
+        <p className="text-xs text-gray-500 dark:text-gray-400">
+          Real-time community sentiment • Discord-style chat
+        </p>
+      </div>
+    </>
+  );
+
   return (
-    <Card className="overflow-hidden border-0 shadow-lg bg-gradient-to-br from-purple-50 via-white to-indigo-50 dark:from-gray-800 dark:via-gray-800 dark:to-purple-900/20">
+    <Card className="overflow-hidden border-0 shadow-lg bg-gradient-to-br from-purple-50 via-white to-indigo-50 dark:from-gray-800 dark:via-gray-800 dark:to-purple-900/20 h-full">
       <CardHeader className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
         <CardTitle className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
@@ -197,193 +415,40 @@ export const CommunityWidget: React.FC<CommunityWidgetProps> = ({
         </CardTitle>
       </CardHeader>
 
-      <CardContent className="p-4">
-        {/* Platform Filter */}
-        <div className="flex space-x-1 mb-4">
-          {[
-            { key: "all", label: "All", icon: MessageCircle },
-            { key: "reddit", label: "Reddit", icon: MessageCircle },
-            { key: "twitter", label: "Twitter", icon: Hash },
-            { key: "discord", label: "Discord", icon: Users },
-          ].map((platform) => {
-            const Icon = platform.icon;
-            return (
-              <Button
-                key={platform.key}
-                variant={
-                  selectedPlatform === platform.key ? "default" : "outline"
-                }
-                size="sm"
-                onClick={() => setSelectedPlatform(platform.key as any)}
-                className={`text-xs transition-all duration-200 ${
-                  selectedPlatform === platform.key
-                    ? "bg-gradient-to-r from-purple-500 to-indigo-600 text-white"
-                    : "hover:bg-purple-50 dark:hover:bg-purple-900/20"
-                }`}
-              >
-                <Icon className="w-3 h-3 mr-1" />
-                {platform.label}
-              </Button>
-            );
-          })}
+      {/* Subcategory Dropdown */}
+      <div className="p-4 border-b bg-gray-50 dark:bg-gray-800/50">
+        <div className="flex items-center gap-2">
+          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+            Category:
+          </span>
+          <Select
+            value={activeSubcategory}
+            onValueChange={(value: any) => setActiveSubcategory(value)}
+          >
+            <SelectTrigger className="w-40 h-8 text-xs">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {subcategoryOptions.map((option) => {
+                const Icon = option.icon;
+                return (
+                  <SelectItem key={option.value} value={option.value}>
+                    <div className="flex items-center gap-2">
+                      <Icon className="w-3 h-3" />
+                      <span>{option.label}</span>
+                    </div>
+                  </SelectItem>
+                );
+              })}
+            </SelectContent>
+          </Select>
         </div>
+      </div>
 
-        {/* Message Input */}
-        <div className="flex space-x-2 mb-4 p-2 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-700">
-          <Avatar className="w-8 h-8">
-            <AvatarImage src="/api/placeholder/32/32" />
-            <AvatarFallback>You</AvatarFallback>
-          </Avatar>
-          <div className="flex-1 flex space-x-2">
-            <Input
-              type="text"
-              placeholder="Share your market thoughts..."
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
-              className="text-sm"
-            />
-            <Button
-              size="sm"
-              onClick={handleSendMessage}
-              disabled={!newMessage.trim()}
-              className="bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700"
-            >
-              <Send className="w-3 h-3" />
-            </Button>
-          </div>
-        </div>
-
-        {/* Messages Feed */}
-        <div className="space-y-3 max-h-80 overflow-y-auto">
-          {filteredMessages.length === 0 ? (
-            <div className="text-center py-8">
-              <Users className="w-8 h-8 mx-auto mb-2 text-gray-400" />
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                No messages for selected platform
-              </p>
-            </div>
-          ) : (
-            filteredMessages.map((message) => (
-              <div
-                key={message.id}
-                className="group p-3 rounded-lg border border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-500 transition-all duration-200 bg-white dark:bg-gray-800"
-              >
-                {/* Message Header */}
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center space-x-2">
-                    <Avatar className="w-6 h-6">
-                      <AvatarImage src={message.avatar} />
-                      <AvatarFallback className="text-xs">
-                        {message.user.slice(0, 2).toUpperCase()}
-                      </AvatarFallback>
-                    </Avatar>
-                    <span className="text-sm font-medium text-gray-900 dark:text-white">
-                      {message.user}
-                    </span>
-                    <Badge
-                      className={`text-xs ${getPlatformColor(message.platform)}`}
-                    >
-                      <div className="flex items-center space-x-1">
-                        {getPlatformIcon(message.platform)}
-                        <span>{message.platform}</span>
-                      </div>
-                    </Badge>
-                  </div>
-
-                  <div className="flex items-center space-x-2">
-                    <span className="text-xs text-gray-400">
-                      {getTimeAgo(message.timestamp)}
-                    </span>
-                    {getSentimentIcon(message.sentiment)}
-                  </div>
-                </div>
-
-                {/* Message Content */}
-                <p className="text-sm text-gray-700 dark:text-gray-300 mb-2 leading-relaxed">
-                  {message.message}
-                </p>
-
-                {/* Message Actions */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="h-6 px-2 text-gray-500 hover:text-purple-600 dark:hover:text-purple-400"
-                      onClick={() => toggleLike(message.id)}
-                    >
-                      <Heart className="w-3 h-3 mr-1" />
-                      <span className="text-xs">{message.likes}</span>
-                    </Button>
-
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="h-6 px-2 text-gray-500 hover:text-purple-600 dark:hover:text-purple-400"
-                    >
-                      <Share className="w-3 h-3 mr-1" />
-                      <span className="text-xs">Share</span>
-                    </Button>
-                  </div>
-
-                  <div className="flex items-center space-x-2">
-                    <span className="text-xs text-gray-500 dark:text-gray-400">
-                      Sentiment:
-                    </span>
-                    <span
-                      className={`text-xs font-medium ${getSentimentColor(message.sentiment)}`}
-                    >
-                      {Math.round(message.sentiment)}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))
-          )}
-        </div>
-
-        {/* Community Stats */}
-        <div className="mt-4 p-3 bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-lg border border-purple-200 dark:border-purple-700">
-          <div className="grid grid-cols-3 gap-3 text-center">
-            <div>
-              <div className="text-lg font-bold text-purple-600 dark:text-purple-400">
-                {filteredMessages.length}
-              </div>
-              <div className="text-xs text-gray-600 dark:text-gray-400">
-                Messages
-              </div>
-            </div>
-            <div>
-              <div className="text-lg font-bold text-indigo-600 dark:text-indigo-400">
-                {Math.round(
-                  filteredMessages.reduce(
-                    (sum, msg) => sum + msg.sentiment,
-                    0,
-                  ) / (filteredMessages.length || 1),
-                )}
-              </div>
-              <div className="text-xs text-gray-600 dark:text-gray-400">
-                Avg Mood
-              </div>
-            </div>
-            <div>
-              <div className="text-lg font-bold text-green-600 dark:text-green-400">
-                {filteredMessages.filter((msg) => msg.sentiment >= 60).length}
-              </div>
-              <div className="text-xs text-gray-600 dark:text-gray-400">
-                Bullish
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div className="mt-3 text-center">
-          <p className="text-xs text-gray-500 dark:text-gray-400">
-            Real-time community sentiment • Discord-style chat
-          </p>
-        </div>
+      <CardContent
+        className={`${activeSubcategory === "chat" ? "p-0 h-full" : "p-4"}`}
+      >
+        {renderContent()}
       </CardContent>
     </Card>
   );
