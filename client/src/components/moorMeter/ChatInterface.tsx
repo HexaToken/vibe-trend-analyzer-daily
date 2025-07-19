@@ -309,22 +309,113 @@ export const ChatInterface: React.FC = () => {
     return filtered;
   };
 
+  const handleThreadToggle = (messageId: string) => {
+    setExpandedThreads((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(messageId)) {
+        newSet.delete(messageId);
+      } else {
+        newSet.add(messageId);
+      }
+      return newSet;
+    });
+  };
+
+  const handleReplyToggle = (messageId: string) => {
+    setReplyInputs((prev) => ({
+      ...prev,
+      [messageId]: !prev[messageId],
+    }));
+  };
+
+  const handleQuickReply = (parentMessage: Message) => {
+    setReplyingTo(parentMessage);
+    setReplyInputs((prev) => ({
+      ...prev,
+      [parentMessage.id]: true,
+    }));
+
+    // Auto-expand thread if collapsed
+    if (
+      !expandedThreads.has(parentMessage.id) &&
+      parentMessage.replies.length > 0
+    ) {
+      setExpandedThreads((prev) => new Set(prev).add(parentMessage.id));
+    }
+  };
+
+  const handleReplySubmit = (content: string, parentId: string) => {
+    if (!content.trim()) return;
+
+    const replyMessage: Message = {
+      id: Date.now().toString(),
+      content: content.trim(),
+      sentiment: "neutral",
+      timeframe: "day",
+      cashtags: content.match(/\$[A-Z]{1,5}/g) || [],
+      timestamp: new Date(),
+      replyTo: parentId,
+      user: {
+        username: "You",
+        avatar: "/api/placeholder/32/32",
+        role: "member",
+      },
+      reactions: {},
+      replies: [],
+    };
+
+    handleNewMessage(replyMessage);
+    setReplyInputs((prev) => ({
+      ...prev,
+      [parentId]: false,
+    }));
+  };
+
   const renderMessage = (message: Message, depth = 0) => {
     const isCollapsed = collapsedMessages.has(message.id);
+    const isThreadExpanded = expandedThreads.has(message.id);
+    const showReplyInput = replyInputs[message.id];
 
     return (
-      <div key={message.id}>
+      <div key={message.id} className="space-y-2">
         <MessageCard
           message={message}
-          onReply={setReplyingTo}
+          onReply={handleQuickReply}
           onReaction={handleReaction}
           depth={depth}
           isCollapsed={isCollapsed}
           onToggleCollapse={handleToggleCollapse}
+          onThreadToggle={handleThreadToggle}
+          onReplyToggle={handleReplyToggle}
+          isThreadExpanded={isThreadExpanded}
+          showReplyInput={showReplyInput}
+          onReplySubmit={handleReplySubmit}
         />
 
-        {!isCollapsed &&
-          message.replies.map((reply) => renderMessage(reply, depth + 1))}
+        {/* Thread expansion */}
+        {!isCollapsed && message.replies.length > 0 && (
+          <div className="ml-6 border-l-2 border-gray-200 dark:border-gray-700 pl-4 space-y-2">
+            {isThreadExpanded ? (
+              message.replies.map((reply) => renderMessage(reply, depth + 1))
+            ) : (
+              <button
+                onClick={() => handleThreadToggle(message.id)}
+                className="text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 flex items-center gap-1"
+              >
+                🔗 {message.replies.length}{" "}
+                {message.replies.length === 1 ? "reply" : "replies"}
+                {message.replies.some(
+                  (reply) =>
+                    reply.timestamp > new Date(Date.now() - 5 * 60 * 1000),
+                ) && (
+                  <span className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300 text-xs px-1 rounded">
+                    New
+                  </span>
+                )}
+              </button>
+            )}
+          </div>
+        )}
       </div>
     );
   };
