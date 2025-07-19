@@ -197,7 +197,9 @@ export const AISummaryWidget: React.FC = () => {
             onClick={handleRefresh}
             disabled={isLoading}
           >
-            <Refresh className={`h-4 w-4 ${isLoading ? "animate-spin" : ""}`} />
+            <RefreshCw
+              className={`h-4 w-4 ${isLoading ? "animate-spin" : ""}`}
+            />
           </Button>
         </div>
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
