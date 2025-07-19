@@ -392,7 +392,12 @@ export const StockTwistRoom: React.FC = () => {
                 <BarChart3 className="h-4 w-4" />
                 Live Polls
                 {canCreatePollsFeature && (
-                  <Button size="sm" variant="outline" className="ml-auto">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="ml-auto"
+                    onClick={() => setShowCreatePollModal(true)}
+                  >
                     <PlusCircle className="h-3 w-3" />
                   </Button>
                 )}
