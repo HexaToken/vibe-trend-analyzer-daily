@@ -87,6 +87,7 @@ interface TrendingItem {
 
 export const CommunityForum: React.FC = () => {
   const { user, isAuthenticated } = useAuth();
+  const [activeTab, setActiveTab] = useState<"forum" | "chat">("forum");
   const [posts, setPosts] = useState<Post[]>([]);
   const [newPost, setNewPost] = useState("");
   const [selectedSentiment, setSelectedSentiment] = useState<
