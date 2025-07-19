@@ -69,6 +69,7 @@ export const PrivateRooms: React.FC = () => {
   const [createRoomOpen, setCreateRoomOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [inviteOpen, setInviteOpen] = useState(false);
+  const [enhancedInviteOpen, setEnhancedInviteOpen] = useState(false);
   const [userLimits, setUserLimits] = useState<UserLimits>(mockUserLimits);
   const [watchlistTickers] = useState<string[]>(getUserWatchlistTickers());
 
