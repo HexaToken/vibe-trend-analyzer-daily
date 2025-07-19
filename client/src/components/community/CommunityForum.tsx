@@ -485,8 +485,9 @@ export const CommunityForum: React.FC = () => {
           </div>
         </TabsContent>
 
-        <TabsContent value="chat-rooms" className="space-y-6">
-          <div className="grid grid-cols-12 gap-6">
+                <TabsContent value="chat-rooms" className="space-y-6">
+          <CommunityRooms />
+        </TabsContent>
             {/* Main Content */}
             <div className="col-span-12 lg:col-span-8 space-y-6">
               {/* Filters */}
