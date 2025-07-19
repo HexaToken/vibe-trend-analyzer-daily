@@ -511,36 +511,6 @@ export const StockChannelHub: React.FC = () => {
 
       {/* Right Sidebar (Optional) */}
       <div className="w-80 bg-gray-50 dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 p-4 space-y-6">
-        {/* Top Posters */}
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-sm flex items-center gap-2">
-              <Trophy className="w-4 h-4 text-yellow-500" />
-              Top Posters in ${selectedChannel?.ticker}
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            {topPosters.map((poster, index) => (
-              <div key={poster.username} className="flex items-center gap-3">
-                <div className="text-sm font-medium text-gray-500">
-                  #{index + 1}
-                </div>
-                <Avatar className="w-8 h-8">
-                  <AvatarImage src={poster.avatar} alt={poster.username} />
-                  <AvatarFallback>{poster.username[0]}</AvatarFallback>
-                </Avatar>
-                <div className="flex-1">
-                  <div className="text-sm font-medium">{poster.username}</div>
-                  <div className="text-xs text-gray-500">
-                    {poster.accuracy}% accuracy
-                  </div>
-                </div>
-                <div className="text-xs text-blue-600">{poster.points} pts</div>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
-
         {/* Sentiment Breakdown */}
         <Card>
           <CardHeader className="pb-3">
