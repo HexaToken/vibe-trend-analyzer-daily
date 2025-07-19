@@ -30,6 +30,7 @@ interface Message {
   sentiment: "bullish" | "bearish" | "neutral";
   timeframe: "day" | "swing" | "long";
   cashtags: string[];
+  hashtags?: string[];
   timestamp: Date;
   replyTo?: string;
   user: {
