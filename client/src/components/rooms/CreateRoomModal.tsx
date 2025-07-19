@@ -32,6 +32,8 @@ interface CreateRoomModalProps {
   onCreateRoom: (roomData: any) => void;
   watchlistTickers: string[];
   userLimits: UserLimits;
+  existingRooms: PrivateRoom[];
+  userId: string;
 }
 
 export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
