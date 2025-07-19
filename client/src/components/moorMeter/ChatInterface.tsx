@@ -603,6 +603,11 @@ export const ChatInterface: React.FC = () => {
           </div>
         </div>
 
+        {/* Post Composer */}
+        <div className="p-4 border-b bg-gray-50 dark:bg-gray-800/50">
+          <PostComposer onSubmit={handleNewMessage} />
+        </div>
+
         {/* Messages */}
         <ScrollArea ref={scrollAreaRef} className="flex-1 p-4">
           <div className="space-y-4">
