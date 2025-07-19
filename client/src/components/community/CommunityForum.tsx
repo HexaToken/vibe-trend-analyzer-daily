@@ -46,6 +46,7 @@ import {
   Filter,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { CommunityRooms } from "@/components/social/CommunityRooms";
 
 interface Post {
   id: string;
