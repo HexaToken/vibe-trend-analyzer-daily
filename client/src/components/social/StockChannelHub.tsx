@@ -511,42 +511,6 @@ export const StockChannelHub: React.FC = () => {
 
       {/* Right Sidebar (Optional) */}
       <div className="w-80 bg-gray-50 dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 p-4 space-y-6">
-        {/* Trending Tickers */}
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-sm flex items-center gap-2">
-              <Flame className="w-4 h-4 text-orange-500" />
-              Trending Today
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            {trendingTickers.map((ticker, index) => (
-              <div
-                key={ticker.ticker}
-                className="flex items-center justify-between"
-              >
-                <div>
-                  <div className="font-medium text-sm">${ticker.ticker}</div>
-                  <div className="text-xs text-gray-500">
-                    {ticker.companyName}
-                  </div>
-                </div>
-                <div className="text-right">
-                  <div
-                    className={cn(
-                      "text-sm font-medium",
-                      ticker.change >= 0 ? "text-green-500" : "text-red-500",
-                    )}
-                  >
-                    {ticker.change >= 0 ? "+" : ""}
-                    {ticker.changePercent.toFixed(2)}%
-                  </div>
-                </div>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
-
         {/* Top Posters */}
         <Card>
           <CardHeader className="pb-3">
