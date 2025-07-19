@@ -168,6 +168,21 @@ export const useStockSentiment = (refreshInterval: number = 300000) => {
   useEffect(() => {
     const safeExecute = async () => {
       try {
+        // In development mode, provide immediate fallback to prevent FullStory fetch issues
+        const isDevelopment = import.meta.env.DEV;
+        if (isDevelopment) {
+          const mockVariation = Math.random() * 20 - 10; // -10 to +10 variation
+          setData({
+            score: Math.max(20, Math.min(80, 50 + mockVariation)),
+            label: "Mock Data (Dev Mode)",
+            change: (Math.random() - 0.5) * 4,
+            samples: 5000 + Math.floor(Math.random() * 3000),
+          });
+          setError("Development mode - using mock data");
+          setLoading(false);
+          return;
+        }
+
         await fetchStockSentiment();
       } catch (error) {
         console.error("useStockSentiment useEffect error:", error);
