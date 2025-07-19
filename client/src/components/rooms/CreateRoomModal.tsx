@@ -40,6 +40,8 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
   onCreateRoom,
   watchlistTickers,
   userLimits,
+  existingRooms,
+  userId,
 }) => {
   const [roomName, setRoomName] = useState("");
   const [description, setDescription] = useState("");
