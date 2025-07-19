@@ -1,6 +1,6 @@
 import React from "react";
-import { PrivateGroupChat } from "./PrivateGroupChat";
+import { StockChannelHub } from "../social/StockChannelHub";
 
 export const ChatInterface: React.FC = () => {
-  return <PrivateGroupChat />;
+  return <StockChannelHub />;
 };
