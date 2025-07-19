@@ -726,7 +726,6 @@ export const MoorMeterDashboard: React.FC = () => {
                           : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
                       }`}
                     >
-                      {item.icon && <item.icon className="w-4 h-4 mr-2" />}
                       {item.label}
                     </button>
                   )}
