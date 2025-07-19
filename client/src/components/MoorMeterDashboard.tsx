@@ -420,9 +420,11 @@ export const MoorMeterDashboard: React.FC = () => {
                         ? "Search private rooms..."
                         : activeCommunitySubtab === "StockTwist"
                           ? "Search trade ideas..."
-                          : activeCommunitySubtab === "Room"
-                            ? "Search rooms..."
-                            : "Search community..."
+                          : activeCommunitySubtab === "Rooms"
+                            ? "Search posts, tickers, topics..."
+                            : activeCommunitySubtab === "Room"
+                              ? "Search rooms..."
+                              : "Search community..."
                     }
                     className="pl-10 w-64"
                   />
