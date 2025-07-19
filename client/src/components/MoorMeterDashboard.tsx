@@ -397,37 +397,71 @@ export const MoorMeterDashboard: React.FC = () => {
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
               <div>
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                  🧑‍🤝‍🧑 Community Hub
+                  ��‍🤝‍🧑 Community Hub
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400">
                   {activeCommunitySubtab === "Chat"
-                    ? "Real-time Reddit + StockTwits style messaging with sentiment tracking"
+                    ? selectedCategory === "Crypto"
+                      ? "Real-time crypto discussion with price feeds and macro trends"
+                      : "Real-time Reddit + StockTwits style messaging with sentiment tracking"
                     : activeCommunitySubtab === "PrivateRooms"
                       ? "Create and manage private watchlist rooms"
                       : activeCommunitySubtab === "StockTwist"
                         ? "Share trade ideas and market insights"
                         : activeCommunitySubtab === "Rooms"
-                          ? "Discuss trends, share sentiment, and join chat rooms"
+                          ? selectedCategory === "Crypto"
+                            ? "Join crypto-focused chat rooms and trending discussions"
+                            : "Discuss trends, share sentiment, and join chat rooms"
                           : "Connect with fellow traders and share insights"}
                 </p>
               </div>
 
-              {/* Search Bar */}
+              {/* Category Selector and Search Bar */}
               <div className="flex gap-2">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className="flex items-center gap-2"
+                    >
+                      {selectedCategory === "Crypto" ? "🪙" : "💬"}{" "}
+                      {selectedCategory}
+                      <ChevronDown className="w-4 h-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-40">
+                    <DropdownMenuItem
+                      onClick={() => setSelectedCategory("General")}
+                      className="flex items-center cursor-pointer"
+                    >
+                      <MessageCircle className="w-4 h-4 mr-2" />
+                      General
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => setSelectedCategory("Crypto")}
+                      className="flex items-center cursor-pointer"
+                    >
+                      <TrendingUp className="w-4 h-4 mr-2" />
+                      Crypto
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                   <Input
                     type="text"
                     placeholder={
-                      activeCommunitySubtab === "Chat"
-                        ? "Search messages, tickers..."
-                        : activeCommunitySubtab === "PrivateRooms"
-                          ? "Search private rooms..."
-                          : activeCommunitySubtab === "StockTwist"
-                            ? "Search trade ideas..."
-                            : activeCommunitySubtab === "Rooms"
-                              ? "Search posts, chat rooms..."
-                              : "Search community..."
+                      selectedCategory === "Crypto"
+                        ? "Search crypto, $BTC, $ETH..."
+                        : activeCommunitySubtab === "Chat"
+                          ? "Search messages, tickers..."
+                          : activeCommunitySubtab === "PrivateRooms"
+                            ? "Search private rooms..."
+                            : activeCommunitySubtab === "StockTwist"
+                              ? "Search trade ideas..."
+                              : activeCommunitySubtab === "Rooms"
+                                ? "Search posts, chat rooms..."
+                                : "Search community..."
                     }
                     className="pl-10 w-64"
                   />
