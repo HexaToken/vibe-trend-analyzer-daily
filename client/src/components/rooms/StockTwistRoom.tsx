@@ -35,6 +35,10 @@ import {
   MessageSquare,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import {
+  canPostInStockTwist,
+  canCreatePolls,
+} from "@/utils/userLimitsEnforcement";
 import { RoomMessage, StockTwistPoll, TradeIdea } from "@/types/rooms";
 import {
   mockStockTwistMessages,
