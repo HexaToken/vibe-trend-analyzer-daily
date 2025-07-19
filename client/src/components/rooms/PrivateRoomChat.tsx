@@ -27,6 +27,7 @@ import {
   Target,
   DollarSign,
   Clock,
+  Star,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { PrivateRoom, RoomMessage, TradeIdea } from "@/types/rooms";
@@ -80,23 +81,34 @@ export const PrivateRoomChat: React.FC<PrivateRoomChatProps> = ({ room }) => {
     const cashtags = parseCashtags(newMessage);
     let tradeIdea: TradeIdea | undefined;
 
-    // Simple trade idea detection
-    const tradeMatch = newMessage.match(/buy|sell|target|tp|sl/i);
-    const priceMatch = newMessage.match(/(\d+\.?\d*)/);
-    const tickerMatch = cashtags[0];
+    // Enhanced trade idea detection
+    const buyMatch = newMessage.match(/buy\s+\$(\w+)\s+at\s+(\d+\.?\d*)/i);
+    const sellMatch = newMessage.match(/sell\s+\$(\w+)\s+at\s+(\d+\.?\d*)/i);
+    const targetMatch = newMessage.match(/target\s+(\d+\.?\d*)/i);
+    const slMatch = newMessage.match(/sl\s+(\d+\.?\d*)/i);
 
-    if (tradeMatch && priceMatch && tickerMatch) {
+    if (buyMatch || sellMatch) {
+      const match = buyMatch || sellMatch;
       tradeIdea = {
-        ticker: tickerMatch,
-        action: newMessage.toLowerCase().includes("sell") ? "sell" : "buy",
-        entryPrice: parseFloat(priceMatch[1]),
+        ticker: match![1].toUpperCase(),
+        action: buyMatch ? "buy" : "sell",
+        entryPrice: parseFloat(match![2]),
+        targetPrice: targetMatch ? parseFloat(targetMatch[1]) : undefined,
+        stopLoss: slMatch ? parseFloat(slMatch[1]) : undefined,
         sentiment:
-          newMessage.toLowerCase().includes("bearish") ||
-          newMessage.includes("📉")
-            ? "bearish"
-            : "bullish",
+          newMessage.includes("📈") ||
+          newMessage.toLowerCase().includes("bullish")
+            ? "bullish"
+            : newMessage.includes("📉") ||
+                newMessage.toLowerCase().includes("bearish")
+              ? "bearish"
+              : "bullish",
         confidence: 3,
-        timeframe: "day",
+        timeframe: newMessage.toLowerCase().includes("swing")
+          ? "swing"
+          : newMessage.toLowerCase().includes("long")
+            ? "long"
+            : "day",
       };
     }
 
@@ -202,39 +214,42 @@ export const PrivateRoomChat: React.FC<PrivateRoomChatProps> = ({ room }) => {
   };
 
   const renderTradeIdea = (tradeIdea: TradeIdea) => (
-    <div className="mt-2 p-3 bg-muted/50 rounded-lg border">
+    <div className="mt-2 p-3 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950 rounded-lg border">
       <div className="flex items-center gap-2 mb-2">
-        <Target className="h-4 w-4" />
-        <span className="font-medium text-sm">Trade Idea</span>
+        <Target className="h-4 w-4 text-blue-500" />
+        <span className="font-medium text-sm">Trade Signal</span>
         <Badge
           variant={
             tradeIdea.sentiment === "bullish" ? "default" : "destructive"
           }
+          className="text-xs"
         >
-          {tradeIdea.sentiment === "bullish" ? "📈" : "📉"}{" "}
-          {tradeIdea.sentiment}
+          {tradeIdea.sentiment === "bullish" ? "📈 BULLISH" : "📉 BEARISH"}
+        </Badge>
+        <Badge variant="outline" className="text-xs">
+          {tradeIdea.timeframe.toUpperCase()}
         </Badge>
       </div>
       <div className="grid grid-cols-2 gap-2 text-sm">
-        <div className="flex items-center gap-1">
-          <DollarSign className="h-3 w-3" />
+        <div className="flex items-center gap-1 font-medium">
+          <DollarSign className="h-3 w-3 text-green-500" />
           <span>Entry: ${tradeIdea.entryPrice}</span>
         </div>
         {tradeIdea.targetPrice && (
           <div className="flex items-center gap-1">
-            <TrendingUp className="h-3 w-3" />
+            <TrendingUp className="h-3 w-3 text-blue-500" />
             <span>Target: ${tradeIdea.targetPrice}</span>
           </div>
         )}
         {tradeIdea.stopLoss && (
           <div className="flex items-center gap-1">
-            <TrendingDown className="h-3 w-3" />
-            <span>SL: ${tradeIdea.stopLoss}</span>
+            <TrendingDown className="h-3 w-3 text-red-500" />
+            <span>Stop: ${tradeIdea.stopLoss}</span>
           </div>
         )}
         <div className="flex items-center gap-1">
-          <Clock className="h-3 w-3" />
-          <span>{tradeIdea.timeframe}</span>
+          <Star className="h-3 w-3 text-yellow-500" />
+          <span>Confidence: {tradeIdea.confidence}/5</span>
         </div>
       </div>
     </div>
@@ -453,8 +468,8 @@ export const PrivateRoomChat: React.FC<PrivateRoomChatProps> = ({ room }) => {
         </div>
 
         <div className="text-xs text-muted-foreground mt-2">
-          Use $SYMBOL for tickers • Trade ideas auto-detected • React with
-          📈📉🚀
+          <strong>Format:</strong> Buy $TICKER at price / Target price / SL
+          price 📈 Bullish • Use $SYMBOL for tickers • React with 📈📉🚀
         </div>
       </div>
     </>
