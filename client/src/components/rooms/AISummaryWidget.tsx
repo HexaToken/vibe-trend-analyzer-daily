@@ -10,7 +10,7 @@ import {
   TrendingUp,
   TrendingDown,
   Clock,
-  Refresh,
+  RefreshCw,
   BarChart3,
   Users,
   MessageSquare,
