@@ -13,6 +13,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { MessageComposer } from "./MessageComposer";
 import { MessageCard } from "./MessageCard";
+import { PostComposer } from "./PostComposer";
 import {
   MessageSquare,
   Filter,
