@@ -32,6 +32,11 @@ interface MessageCardProps {
   depth?: number;
   isCollapsed?: boolean;
   onToggleCollapse?: (messageId: string) => void;
+  onThreadToggle?: (messageId: string) => void;
+  onReplyToggle?: (messageId: string) => void;
+  isThreadExpanded?: boolean;
+  showReplyInput?: boolean;
+  onReplySubmit?: (content: string, parentId: string) => void;
 }
 
 const REACTIONS = [
