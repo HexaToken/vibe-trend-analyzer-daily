@@ -398,13 +398,15 @@ export const MoorMeterDashboard: React.FC = () => {
                   🧑‍🤝‍🧑 Community Hub
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400">
-                  {activeCommunitySubtab === "PrivateRooms"
-                    ? "Create and manage private watchlist rooms"
-                    : activeCommunitySubtab === "StockTwist"
-                      ? "Share trade ideas and market insights"
-                      : activeCommunitySubtab === "Rooms"
-                        ? "Discuss trends, share sentiment, and join chat rooms"
-                        : "Connect with fellow traders and share insights"}
+                  {activeCommunitySubtab === "Chat"
+                    ? "Real-time Reddit + StockTwits style messaging with sentiment tracking"
+                    : activeCommunitySubtab === "PrivateRooms"
+                      ? "Create and manage private watchlist rooms"
+                      : activeCommunitySubtab === "StockTwist"
+                        ? "Share trade ideas and market insights"
+                        : activeCommunitySubtab === "Rooms"
+                          ? "Discuss trends, share sentiment, and join chat rooms"
+                          : "Connect with fellow traders and share insights"}
                 </p>
               </div>
 
