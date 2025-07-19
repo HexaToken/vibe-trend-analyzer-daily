@@ -222,6 +222,8 @@ export const PrivateRooms: React.FC = () => {
                     onCreateRoom={handleCreateRoom}
                     watchlistTickers={watchlistTickers}
                     userLimits={userLimits}
+                    existingRooms={rooms}
+                    userId={user?.id || ""}
                   />
                 </Dialog>
               </div>
