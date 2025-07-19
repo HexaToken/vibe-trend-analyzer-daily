@@ -383,9 +383,9 @@ export const StockTwistRoom: React.FC = () => {
         </Card>
       </div>
 
-      <div className="grid grid-cols-4 gap-6">
-        {/* Active Polls Sidebar */}
-        <div className="col-span-1">
+      <div className="grid grid-cols-12 gap-6">
+        {/* Left Sidebar - Polls and AI Summary */}
+        <div className="col-span-3 space-y-6">
           <Card className="mb-4">
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
