@@ -377,7 +377,9 @@ export const PrivateRooms: React.FC = () => {
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
-                        <DropdownMenuItem onClick={() => setInviteOpen(true)}>
+                        <DropdownMenuItem
+                          onClick={() => setEnhancedInviteOpen(true)}
+                        >
                           <UserPlus className="h-4 w-4 mr-2" />
                           Invite Members
                         </DropdownMenuItem>
