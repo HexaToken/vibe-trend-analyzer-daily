@@ -450,7 +450,7 @@ export const StockTwistRoom: React.FC = () => {
         </div>
 
         {/* Main Chat */}
-        <div className="col-span-3">
+        <div className="col-span-6">
           <Card className="h-[700px] flex flex-col">
             <CardHeader className="border-b">
               <div className="flex items-center justify-between">
