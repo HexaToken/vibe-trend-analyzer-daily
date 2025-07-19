@@ -51,6 +51,10 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
   const [enableAISummary, setEnableAISummary] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
 
+  // Check if user can create rooms
+  const createRoomCheck = canCreateRoom(userId, userLimits, existingRooms);
+  const canCreate = createRoomCheck.allowed;
+
   const filteredTickers = watchlistTickers.filter((ticker) =>
     ticker.toLowerCase().includes(tickerSearch.toLowerCase()),
   );
