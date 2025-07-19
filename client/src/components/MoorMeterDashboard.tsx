@@ -401,9 +401,11 @@ export const MoorMeterDashboard: React.FC = () => {
                     ? "Create and manage private watchlist rooms"
                     : activeCommunitySubtab === "StockTwist"
                       ? "Share trade ideas and market insights"
-                      : activeCommunitySubtab === "Room"
-                        ? "Join community chat rooms"
-                        : "Connect with fellow traders and share insights"}
+                      : activeCommunitySubtab === "Rooms"
+                        ? "Discuss trends, share sentiment, and track what others are saying"
+                        : activeCommunitySubtab === "Room"
+                          ? "Join community chat rooms"
+                          : "Connect with fellow traders and share insights"}
                 </p>
               </div>
 
