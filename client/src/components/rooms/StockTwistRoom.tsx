@@ -64,8 +64,21 @@ export const StockTwistRoom: React.FC = () => {
   });
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const canPost = user?.isVerified || user?.isPremium;
-  const canCreatePolls = user?.isPremium;
+  // Get user limits based on subscription
+  const userLimits = {
+    maxPrivateRooms: user?.isPremium ? 20 : 1,
+    maxJoinedRooms: user?.isPremium ? 50 : 5,
+    maxRoomMembers: user?.isPremium ? 50 : 10,
+    maxInvitesPerHour: user?.isPremium ? 25 : 5,
+    canCreateStockTwistPosts: user?.isVerified || user?.isPremium || false,
+    canCreatePolls: user?.isPremium || false,
+  };
+
+  const canPostCheck = canPostInStockTwist(user?.id || "", userLimits);
+  const canCreatePollsCheck = canCreatePolls(user?.id || "", userLimits);
+
+  const canPost = canPostCheck.allowed;
+  const canCreatePollsFeature = canCreatePollsCheck.allowed;
 
   useEffect(() => {
     setMessages(mockStockTwistMessages);
