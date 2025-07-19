@@ -59,6 +59,7 @@ export const StockTwistRoom: React.FC = () => {
   const [isTyping, setIsTyping] = useState(false);
   const [showTradeIdeaForm, setShowTradeIdeaForm] = useState(false);
   const [showPollForm, setShowPollForm] = useState(false);
+  const [showCreatePollModal, setShowCreatePollModal] = useState(false);
   const [dailyStats, setDailyStats] = useState({
     totalMessages: 1247,
     activeUsers: 342,
