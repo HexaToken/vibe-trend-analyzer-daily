@@ -445,34 +445,8 @@ export const StockTwistRoom: React.FC = () => {
             </CardContent>
           </Card>
 
-          {/* AI Summary Card */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg flex items-center gap-2">
-                <Bot className="h-4 w-4" />
-                AI Summary
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="text-sm">
-                <strong>Top Discussed:</strong>
-                <div className="flex flex-wrap gap-1 mt-1">
-                  <Badge variant="outline">$NVDA</Badge>
-                  <Badge variant="outline">$TSLA</Badge>
-                  <Badge variant="outline">$AAPL</Badge>
-                </div>
-              </div>
-              <div className="text-sm">
-                <strong>Sentiment Shift:</strong>
-                <div className="text-green-600 text-xs">
-                  📈 +12% bullish on tech
-                </div>
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Last updated 5 minutes ago
-              </div>
-            </CardContent>
-          </Card>
+          {/* AI Summary Widget */}
+          <AISummaryWidget />
         </div>
 
         {/* Main Chat */}
