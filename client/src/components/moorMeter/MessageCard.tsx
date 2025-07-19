@@ -62,7 +62,10 @@ export const MessageCard: React.FC<MessageCardProps> = ({
       // Italic
       .replace(/\*(.*?)\*/g, "<em>$1</em>")
       // Cashtags
-      .replace(/(\$[A-Z]{1,5})/g, '<span class="cashtag">$1</span>');
+      .replace(
+        /(\$[A-Z]{1,5})/g,
+        '<span style="color: #2563eb; font-weight: 600; background: #dbeafe; padding: 2px 4px; border-radius: 4px; cursor: pointer;">$1</span>',
+      );
 
     return { __html: formatted };
   };
