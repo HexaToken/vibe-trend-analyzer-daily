@@ -56,8 +56,14 @@ export const MessageCard: React.FC<MessageCardProps> = ({
   depth = 0,
   isCollapsed = false,
   onToggleCollapse,
+  onThreadToggle,
+  onReplyToggle,
+  isThreadExpanded = false,
+  showReplyInput = false,
+  onReplySubmit,
 }) => {
   const [showReactions, setShowReactions] = useState(false);
+  const [replyContent, setReplyContent] = useState("");
 
   const formatContent = (content: string) => {
     // Convert markdown and cashtags to JSX
