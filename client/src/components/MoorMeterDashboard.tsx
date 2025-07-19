@@ -495,8 +495,7 @@ export const MoorMeterDashboard: React.FC = () => {
             <div className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (
                 <div key={item.key} className="relative">
-                  {(item.key === "Tool" || item.key === "Community") &&
-                  item.subtabs ? (
+                  {item.key === "Tool" && item.subtabs ? (
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <button
@@ -517,11 +516,7 @@ export const MoorMeterDashboard: React.FC = () => {
                             key={subtab.key}
                             onClick={() => {
                               setActiveTab(item.key);
-                              if (item.key === "Tool") {
-                                setActiveToolsSubtab(subtab.key);
-                              } else if (item.key === "Community") {
-                                setActiveCommunitySubtab(subtab.key);
-                              }
+                              setActiveToolsSubtab(subtab.key);
                             }}
                             className="flex items-center cursor-pointer"
                           >
