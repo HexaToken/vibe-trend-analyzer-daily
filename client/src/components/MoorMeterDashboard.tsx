@@ -270,7 +270,7 @@ export const MoorMeterDashboard: React.FC = () => {
       subtabs: [{ label: "Heat map", key: "HeatMap", icon: BarChart3 }],
     },
     {
-      label: "Community",
+      label: "Crypto",
       key: "Community",
       href: "#community",
       subtabs: [
