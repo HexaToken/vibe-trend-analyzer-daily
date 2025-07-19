@@ -40,7 +40,6 @@ import {
   Activity,
   Flag,
   Lock,
-  Zap,
 } from "lucide-react";
 import { useStockSentiment } from "../hooks/useStockSentiment";
 import { useCombinedBusinessNews } from "../hooks/useCombinedBusinessNews";
