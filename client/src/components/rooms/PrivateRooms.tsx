@@ -60,6 +60,7 @@ import { PrivateRoomChat } from "./PrivateRoomChat";
 import { RoomSettingsModal } from "./RoomSettingsModal";
 import { InviteUsersModal } from "./InviteUsersModal";
 import { InviteManagementModal } from "./InviteManagementModal";
+import { UserLimitsDisplay } from "./UserLimitsDisplay";
 
 export const PrivateRooms: React.FC = () => {
   const { user, isAuthenticated } = useAuth();
