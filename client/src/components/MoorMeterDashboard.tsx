@@ -435,7 +435,6 @@ export const MoorMeterDashboard: React.FC = () => {
             {activeCommunitySubtab === "PrivateRooms" && <PrivateRooms />}
             {activeCommunitySubtab === "StockTwist" && <StockTwistRoom />}
             {activeCommunitySubtab === "Rooms" && <CommunityForum />}
-            {activeCommunitySubtab === "Room" && <CommunityRooms />}
           </div>
         );
 
