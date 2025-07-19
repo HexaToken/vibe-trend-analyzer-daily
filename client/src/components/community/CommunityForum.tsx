@@ -158,7 +158,7 @@ export const CommunityForum: React.FC = () => {
       username: "CryptoWhale",
       userAvatar: "/api/placeholder/40/40",
       content:
-        "Fed meeting tomorrow has me nervous. Expecting volatility across all markets. $SPY puts might be the play 📉",
+        "Sell $SPY at 425 / Target 410 / SL 430 📉 Fed meeting tomorrow has me nervous. Expecting volatility across all markets.",
       tickers: ["SPY"],
       tags: ["Fed", "Options"],
       sentiment: "bearish",
@@ -169,6 +169,16 @@ export const CommunityForum: React.FC = () => {
       createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000),
       isUserLiked: false,
       isUserDisliked: false,
+      tradeIdea: {
+        ticker: "SPY",
+        action: "sell",
+        entryPrice: 425,
+        targetPrice: 410,
+        stopLoss: 430,
+        sentiment: "bearish",
+        confidence: 3,
+        timeframe: "day",
+      },
     },
     {
       id: "post-3",
