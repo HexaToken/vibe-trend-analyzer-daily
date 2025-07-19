@@ -45,7 +45,9 @@ export async function robustFetch(
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), timeout);
 
-      const response = await fetch(url, {
+      // Use native fetch to avoid FullStory interference
+      const originalFetch = window.fetch;
+      const response = await originalFetch(url, {
         ...fetchOptions,
         signal: controller.signal,
       });
