@@ -178,7 +178,7 @@ export const MoorMeterDashboard: React.FC = () => {
     if (score >= 60) return "😊";
     if (score >= 50) return "😐";
     if (score >= 40) return "😕";
-    if (score >= 30) return "😢";
+    if (score >= 30) return "���";
     return "😱";
   };
 
@@ -493,8 +493,236 @@ export const MoorMeterDashboard: React.FC = () => {
 
             {/* Render content based on active subtab */}
             {activeCommunitySubtab === "Chat" && (
-              <div className="h-[600px]">
-                <ChatInterface />
+              <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                {/* Left Sidebar - Widgets */}
+                <div className="lg:col-span-1 space-y-6">
+                  {/* Live Polls Widget */}
+                  <Card className="bg-gradient-to-br from-violet-900/50 to-purple-900/50 border-violet-500/20">
+                    <CardHeader className="pb-3">
+                      <CardTitle className="text-white flex items-center gap-2">
+                        📊 Live Polls
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <h4 className="text-white font-medium">
+                          Which ticker will moon today?
+                        </h4>
+                        <div className="space-y-3">
+                          {[
+                            { ticker: "NVDA", votes: 1247, percentage: 35 },
+                            { ticker: "TSLA", votes: 892, percentage: 25 },
+                            { ticker: "AAPL", votes: 743, percentage: 21 },
+                            { ticker: "MSFT", votes: 678, percentage: 19 },
+                          ].map((stock, index) => (
+                            <div key={stock.ticker} className="space-y-2">
+                              <div className="flex justify-between text-sm text-gray-300">
+                                <span>${stock.ticker}</span>
+                                <span>
+                                  {stock.percentage}% ({stock.votes} votes)
+                                </span>
+                              </div>
+                              <div className="w-full bg-gray-700 rounded-full h-2">
+                                <div
+                                  className="bg-gradient-to-r from-violet-400 to-purple-400 h-2 rounded-full glow-effect"
+                                  style={{ width: `${stock.percentage}%` }}
+                                ></div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="pt-2 border-t border-violet-500/20">
+                          <div className="flex justify-between text-sm text-gray-400">
+                            <span>⏳ Expires in 2h</span>
+                            <span>3,560 total votes</span>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* AI Summary Widget */}
+                  <Card className="bg-gradient-to-br from-blue-900/50 to-green-900/50 border-blue-500/20">
+                    <CardHeader className="pb-3">
+                      <CardTitle className="text-white flex items-center gap-2">
+                        🤖 AI Summary
+                      </CardTitle>
+                      <p className="text-sm text-gray-300">Market Sentiment</p>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-center space-y-3">
+                        <div className="text-3xl font-bold text-white">
+                          73% Bullish
+                        </div>
+                        <div className="flex items-center justify-center gap-2 text-green-400">
+                          <TrendingUp className="w-4 h-4" />
+                          <span className="text-sm">+5.2% from yesterday</span>
+                        </div>
+                        <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
+                          📈 Strong Bullish
+                        </Badge>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Trending Topics Widget */}
+                  <Card className="bg-gray-800/50 border-gray-700/50">
+                    <CardHeader className="pb-3">
+                      <CardTitle className="text-white flex items-center gap-2">
+                        🔥 Trending Topics
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        {[
+                          {
+                            tag: "#AIRevolution",
+                            mentions: 1247,
+                            sentiment: 85,
+                            type: "hashtag",
+                          },
+                          {
+                            tag: "$NVDA",
+                            mentions: 892,
+                            sentiment: 78,
+                            type: "ticker",
+                          },
+                          {
+                            tag: "#CryptoRally",
+                            mentions: 743,
+                            sentiment: -23,
+                            type: "hashtag",
+                          },
+                          {
+                            tag: "$TSLA",
+                            mentions: 567,
+                            sentiment: 34,
+                            type: "ticker",
+                          },
+                          {
+                            tag: "#TechEarnings",
+                            mentions: 423,
+                            sentiment: 65,
+                            type: "hashtag",
+                          },
+                        ].map((topic, index) => (
+                          <div
+                            key={index}
+                            className="flex items-center justify-between p-2 rounded-lg bg-gray-700/30 hover:bg-gray-700/50 transition-colors"
+                          >
+                            <div className="flex items-center gap-3">
+                              <span className="text-white font-medium">
+                                {topic.tag}
+                              </span>
+                              <span className="text-xs text-gray-400">
+                                {topic.mentions.toLocaleString()}
+                              </span>
+                            </div>
+                            <Badge
+                              className={`${topic.sentiment > 0 ? "bg-green-500/20 text-green-400 border-green-500/30" : "bg-red-500/20 text-red-400 border-red-500/30"}`}
+                            >
+                              {topic.sentiment > 0 ? "+" : ""}
+                              {topic.sentiment}%
+                            </Badge>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Top Discussed Widget */}
+                  <Card className="bg-gray-800/50 border-gray-700/50">
+                    <CardHeader className="pb-3">
+                      <CardTitle className="text-white flex items-center gap-2">
+                        💬 Top Discussed
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        {[
+                          {
+                            ticker: "NVDA",
+                            price: 3.42,
+                            mentions: 1247,
+                            sentiment: 85,
+                          },
+                          {
+                            ticker: "TSLA",
+                            price: -2.15,
+                            mentions: 892,
+                            sentiment: -34,
+                          },
+                          {
+                            ticker: "AAPL",
+                            price: 1.23,
+                            mentions: 743,
+                            sentiment: 67,
+                          },
+                          {
+                            ticker: "MSFT",
+                            price: 0.89,
+                            mentions: 567,
+                            sentiment: 23,
+                          },
+                          {
+                            ticker: "AMD",
+                            price: -1.45,
+                            mentions: 423,
+                            sentiment: -12,
+                          },
+                        ].map((stock, index) => (
+                          <div
+                            key={index}
+                            className="p-3 rounded-lg bg-gray-700/30 hover:bg-gray-700/50 transition-colors"
+                          >
+                            <div className="flex items-center justify-between mb-2">
+                              <span className="text-white font-medium">
+                                ${stock.ticker}
+                              </span>
+                              <div className="flex items-center gap-2">
+                                <span
+                                  className={`text-sm font-medium ${
+                                    stock.price > 0
+                                      ? "text-green-400"
+                                      : "text-red-400"
+                                  }`}
+                                >
+                                  {stock.price > 0 ? "+" : ""}
+                                  {stock.price}%
+                                </span>
+                                {stock.price > 0 ? (
+                                  <TrendingUp className="w-3 h-3 text-green-400" />
+                                ) : (
+                                  <TrendingDown className="w-3 h-3 text-red-400" />
+                                )}
+                              </div>
+                            </div>
+                            <div className="flex items-center justify-between text-xs text-gray-400">
+                              <span>
+                                {stock.mentions.toLocaleString()} mentions
+                              </span>
+                              <Badge
+                                className={`text-xs ${
+                                  stock.sentiment > 0
+                                    ? "bg-green-500/20 text-green-400 border-green-500/30"
+                                    : "bg-red-500/20 text-red-400 border-red-500/30"
+                                }`}
+                              >
+                                {stock.sentiment > 0 ? "+" : ""}
+                                {stock.sentiment}% sentiment
+                              </Badge>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Main Chat Content */}
+                <div className="lg:col-span-3 h-[600px]">
+                  <ChatInterface />
+                </div>
               </div>
             )}
             {activeCommunitySubtab === "Crypto" && <CryptoChannels />}
