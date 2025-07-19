@@ -100,6 +100,15 @@ export const PrivateRooms: React.FC = () => {
   const isRoomAdmin = currentRoom?.createdBy === user?.id;
   const canCreateNewRoom = canUserCreateRoom(rooms.length, userLimits);
 
+  const handleInviteSent = (
+    method: "email" | "username" | "link",
+    target: string,
+  ) => {
+    console.log(`Invite sent via ${method} to ${target}`);
+    // Here you would implement the actual invite logic
+    // This could involve API calls to send emails, create notifications, etc.
+  };
+
   const handleCreateRoom = (roomData: any) => {
     const newRoom: PrivateRoom = {
       id: `room-${Date.now()}`,
