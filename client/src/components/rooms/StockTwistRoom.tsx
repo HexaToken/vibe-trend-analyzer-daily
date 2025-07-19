@@ -600,11 +600,14 @@ export const StockTwistRoom: React.FC = () => {
                   <div className="flex items-center justify-center gap-2 text-muted-foreground mb-2">
                     <Eye className="h-4 w-4" />
                     <span className="text-sm">
-                      You can read messages but need verification to post
+                      {canPostCheck.reason ||
+                        "You can read messages but need verification to post"}
                     </span>
                   </div>
                   <Button size="sm" variant="outline">
-                    Get Verified
+                    {canPostCheck.upgradeRequired
+                      ? "Upgrade to Premium"
+                      : "Get Verified"}
                   </Button>
                 </div>
               )}
