@@ -511,38 +511,6 @@ export const StockChannelHub: React.FC = () => {
 
       {/* Right Sidebar (Optional) */}
       <div className="w-80 bg-gray-50 dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 p-4 space-y-6">
-        {/* Sentiment Breakdown */}
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-sm flex items-center gap-2">
-              <Activity className="w-4 h-4 text-blue-500" />
-              Sentiment Breakdown
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-sm flex items-center gap-2">
-                  📈 Bullish
-                </span>
-                <span className="text-sm font-medium text-green-500">68%</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm flex items-center gap-2">
-                  📉 Bearish
-                </span>
-                <span className="text-sm font-medium text-red-500">18%</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm flex items-center gap-2">
-                  ⚖️ Neutral
-                </span>
-                <span className="text-sm font-medium text-gray-500">14%</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
         {/* Hot Takes */}
         <Card>
           <CardHeader className="pb-3">
