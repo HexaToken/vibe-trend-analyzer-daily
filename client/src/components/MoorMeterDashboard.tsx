@@ -430,18 +430,6 @@ export const MoorMeterDashboard: React.FC = () => {
             {activeCommunitySubtab === "PrivateRooms" && <PrivateRooms />}
             {activeCommunitySubtab === "StockTwist" && <StockTwistRoom />}
             {activeCommunitySubtab === "Room" && <CommunityRooms />}
-            {activeCommunitySubtab === "General" && (
-              <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                {/* Main Feed */}
-                <div className="lg:col-span-3 space-y-6">
-                  <CommunityWidget messages={communityMessages} />
-                </div>
-                {/* Sidebar */}
-                <div className="space-y-6">
-                  <TrendingTopicsWidget topics={trendingTopics} />
-                </div>
-              </div>
-            )}
           </div>
         );
 
