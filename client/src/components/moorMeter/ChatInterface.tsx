@@ -214,7 +214,25 @@ export const ChatInterface: React.FC = () => {
           role: "pro",
         },
         reactions: { bearish: 12, smart: 4 },
-        replies: [],
+        replies: [
+          {
+            id: "2-1",
+            content:
+              "Agree on the bearish outlook but $SPY has strong support at 420. Might bounce from there 📈",
+            sentiment: "neutral",
+            timeframe: "day",
+            cashtags: ["$SPY"],
+            timestamp: new Date(Date.now() - 12 * 60 * 1000),
+            replyTo: "2",
+            user: {
+              username: "SupportResistance",
+              avatar: "/api/placeholder/32/32",
+              role: "verified",
+            },
+            reactions: { smart: 6 },
+            replies: [],
+          },
+        ],
         streak: 5,
       },
       {
