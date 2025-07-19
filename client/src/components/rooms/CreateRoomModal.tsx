@@ -324,13 +324,7 @@ export const CreateRoomModal: React.FC<CreateRoomModalProps> = ({
           </Button>
           <Button
             onClick={handleCreateRoom}
-            disabled={
-              !canCreate ||
-              isCreating ||
-              !roomName.trim() ||
-              selectedTickers.length === 0 ||
-              selectedTickers.length > 5
-            }
+            disabled={!canCreate || !isFormValid || isCreating}
             className="min-w-[100px]"
           >
             {isCreating
