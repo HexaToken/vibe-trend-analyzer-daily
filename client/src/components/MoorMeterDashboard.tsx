@@ -58,6 +58,8 @@ import { PrivateRooms } from "./rooms/PrivateRooms";
 import { StockTwistRoom } from "./rooms/StockTwistRoom";
 import { CommunityForum } from "./community/CommunityForum";
 import { ChatInterface } from "./moorMeter/ChatInterface";
+import { CryptoChannels } from "./social/CryptoChannels";
+import { OffTopicLounge } from "./social/OffTopicLounge";
 import { MoodScoreHero } from "./builder/MoodScoreHero";
 import { TopStocksModule } from "./builder/TopStocksModule";
 import { SentimentHeatMap } from "./moorMeter/SentimentHeatMap";
