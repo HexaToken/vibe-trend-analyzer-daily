@@ -422,6 +422,52 @@ export const MessageCard: React.FC<MessageCardProps> = ({
               </div>
             </div>
           )}
+
+          {/* Inline Reply Input */}
+          {showReplyInput && onReplySubmit && (
+            <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-600">
+              <div className="flex items-center gap-2">
+                <Avatar className="w-6 h-6 flex-shrink-0">
+                  <AvatarImage src="/api/placeholder/32/32" />
+                  <AvatarFallback className="text-xs">You</AvatarFallback>
+                </Avatar>
+                <div className="flex-1 flex gap-2">
+                  <Input
+                    value={replyContent}
+                    onChange={(e) => setReplyContent(e.target.value)}
+                    placeholder={`Reply to ${message.user.username}...`}
+                    className="text-sm"
+                    onKeyPress={(e) => {
+                      if (e.key === "Enter" && !e.shiftKey) {
+                        e.preventDefault();
+                        if (replyContent.trim()) {
+                          onReplySubmit(replyContent, message.id);
+                          setReplyContent("");
+                        }
+                      }
+                    }}
+                  />
+                  <Button
+                    size="sm"
+                    onClick={() => {
+                      if (replyContent.trim()) {
+                        onReplySubmit(replyContent, message.id);
+                        setReplyContent("");
+                      }
+                    }}
+                    disabled={!replyContent.trim()}
+                    className="h-8 px-3"
+                  >
+                    <Send className="w-3 h-3" />
+                  </Button>
+                </div>
+              </div>
+              <div className="text-xs text-gray-500 mt-1 ml-8">
+                💡 Use $TICKER to tag stocks • Enter to send • Shift+Enter for
+                new line
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </TooltipProvider>
