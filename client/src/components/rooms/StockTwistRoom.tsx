@@ -229,6 +229,11 @@ export const StockTwistRoom: React.FC = () => {
     );
   };
 
+  const handleCreatePoll = (pollData: StockTwistPoll) => {
+    setPolls((prev) => [pollData, ...prev]);
+    setShowCreatePollModal(false);
+  };
+
   const getUserRoleIcon = (role: string) => {
     switch (role) {
       case "premium":
