@@ -508,9 +508,6 @@ export const StockChannelHub: React.FC = () => {
           </>
         )}
       </div>
-
-      {/* Right Sidebar (Optional) */}
-      <div className="w-80 bg-gray-50 dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 p-4 space-y-6"></div>
     </div>
   );
 };
