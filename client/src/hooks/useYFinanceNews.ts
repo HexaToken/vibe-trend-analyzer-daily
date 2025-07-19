@@ -48,6 +48,14 @@ export function useYFinanceNews(
     setLoading(true);
     setError(null);
 
+    // In development mode, provide immediate fallback to prevent FullStory fetch issues
+    const isDevelopment = import.meta.env.DEV;
+    if (isDevelopment) {
+      setError("Development mode - API calls disabled");
+      setLoading(false);
+      return;
+    }
+
     try {
       const data: YFinanceNewsResponse = await robustFetchJson(
         "/api/proxy/yfinance/news/latest",
