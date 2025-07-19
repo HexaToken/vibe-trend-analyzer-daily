@@ -74,14 +74,19 @@ export const useStockSentiment = (refreshInterval: number = 300000) => {
             console.warn(`API error fetching ${symbol}:`, stockError.message);
           } else if (stockError.name === "AbortError") {
             console.warn(`Timeout fetching ${symbol}`);
+          } else if (
+            stockError.message &&
+            stockError.message.includes("Failed to fetch")
+          ) {
+            console.warn(
+              `Network connectivity issue fetching ${symbol}:`,
+              stockError.message,
+            );
           } else {
-            console.warn(`Network error fetching ${symbol}:`, stockError);
+            console.warn(`Unexpected error fetching ${symbol}:`, stockError);
           }
-          return {
-            symbol,
-            changePercent: 0,
-            sentimentScore: 0,
-          };
+          // Return null to exclude from calculations rather than 0 values
+          return null;
         }
       });
 
