@@ -58,6 +58,8 @@ import { PrivateRooms } from "./rooms/PrivateRooms";
 import { StockTwistRoom } from "./rooms/StockTwistRoom";
 import { CommunityForum } from "./community/CommunityForum";
 import { ChatInterface } from "./moorMeter/ChatInterface";
+import { CryptoChannels } from "./social/CryptoChannels";
+import { OffTopicLounge } from "./social/OffTopicLounge";
 import { MoodScoreHero } from "./builder/MoodScoreHero";
 import { TopStocksModule } from "./builder/TopStocksModule";
 import { SentimentHeatMap } from "./moorMeter/SentimentHeatMap";
@@ -112,6 +114,9 @@ export const MoorMeterDashboard: React.FC = () => {
   const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
   const [activeCommunitySubtab, setActiveCommunitySubtab] = useState("Chat");
   const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<
+    "General" | "Crypto"
+  >("General");
 
   // Sentiment Heatmap State
   const [sentimentTimeframe, setSentimentTimeframe] = useState<
@@ -267,17 +272,19 @@ export const MoorMeterDashboard: React.FC = () => {
       subtabs: [{ label: "Heat map", key: "HeatMap", icon: BarChart3 }],
     },
     {
-      label: "Community",
+      label: "Social",
       key: "Community",
       href: "#community",
       subtabs: [
         { label: "Chat", key: "Chat", icon: MessageCircle },
+        { label: "Crypto", key: "Crypto", icon: TrendingUp },
+        { label: "Off-Topic", key: "OffTopic", icon: Heart },
         { label: "Private Rooms", key: "PrivateRooms", icon: Lock },
         { label: "StockTwist", key: "StockTwist", icon: Zap },
         { label: "Rooms", key: "Rooms", icon: Users },
       ],
     },
-  ];
+  ] as const;
 
   // Tools dropdown items
   const toolsItems = [{ label: "Market HeatMap", value: "HeatMap" }];
@@ -398,33 +405,71 @@ export const MoorMeterDashboard: React.FC = () => {
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400">
                   {activeCommunitySubtab === "Chat"
-                    ? "Real-time Reddit + StockTwits style messaging with sentiment tracking"
-                    : activeCommunitySubtab === "PrivateRooms"
-                      ? "Create and manage private watchlist rooms"
-                      : activeCommunitySubtab === "StockTwist"
-                        ? "Share trade ideas and market insights"
-                        : activeCommunitySubtab === "Rooms"
-                          ? "Discuss trends, share sentiment, and join chat rooms"
-                          : "Connect with fellow traders and share insights"}
+                    ? selectedCategory === "Crypto"
+                      ? "Real-time crypto discussion with price feeds and macro trends"
+                      : "Real-time Reddit + StockTwits style messaging with sentiment tracking"
+                    : activeCommunitySubtab === "Crypto"
+                      ? "Dedicated crypto-only channels with real-time price feeds and sentiment tracking"
+                      : activeCommunitySubtab === "OffTopic"
+                        ? "Casual lounge for memes, general discussions, and relaxation"
+                        : activeCommunitySubtab === "PrivateRooms"
+                          ? "Create and manage private watchlist rooms"
+                          : activeCommunitySubtab === "StockTwist"
+                            ? "Share trade ideas and market insights"
+                            : activeCommunitySubtab === "Rooms"
+                              ? selectedCategory === "Crypto"
+                                ? "Join crypto-focused chat rooms and trending discussions"
+                                : "Discuss trends, share sentiment, and join chat rooms"
+                              : "Connect with fellow traders and share insights"}
                 </p>
               </div>
 
-              {/* Search Bar */}
+              {/* Category Selector and Search Bar */}
               <div className="flex gap-2">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className="flex items-center gap-2"
+                    >
+                      {selectedCategory === "Crypto" ? "🪙" : "💬"}{" "}
+                      {selectedCategory}
+                      <ChevronDown className="w-4 h-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-40">
+                    <DropdownMenuItem
+                      onClick={() => setSelectedCategory("General")}
+                      className="flex items-center cursor-pointer"
+                    >
+                      <MessageCircle className="w-4 h-4 mr-2" />
+                      General
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => setSelectedCategory("Crypto")}
+                      className="flex items-center cursor-pointer"
+                    >
+                      <TrendingUp className="w-4 h-4 mr-2" />
+                      Crypto
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                   <Input
                     type="text"
                     placeholder={
-                      activeCommunitySubtab === "Chat"
-                        ? "Search messages, tickers..."
-                        : activeCommunitySubtab === "PrivateRooms"
-                          ? "Search private rooms..."
-                          : activeCommunitySubtab === "StockTwist"
-                            ? "Search trade ideas..."
-                            : activeCommunitySubtab === "Rooms"
-                              ? "Search posts, chat rooms..."
-                              : "Search community..."
+                      selectedCategory === "Crypto"
+                        ? "Search crypto, $BTC, $ETH..."
+                        : activeCommunitySubtab === "Chat"
+                          ? "Search messages, tickers..."
+                          : activeCommunitySubtab === "PrivateRooms"
+                            ? "Search private rooms..."
+                            : activeCommunitySubtab === "StockTwist"
+                              ? "Search trade ideas..."
+                              : activeCommunitySubtab === "Rooms"
+                                ? "Search posts, chat rooms..."
+                                : "Search community..."
                     }
                     className="pl-10 w-64"
                   />
@@ -432,12 +477,32 @@ export const MoorMeterDashboard: React.FC = () => {
               </div>
             </div>
 
+            {/* Category indicator for applicable subtabs */}
+            {(activeCommunitySubtab === "Chat" ||
+              activeCommunitySubtab === "Rooms") && (
+              <div className="flex items-center gap-3 mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border">
+                <div className="flex items-center gap-2">
+                  {selectedCategory === "Crypto" ? "🪙" : "💬"}
+                  <span className="font-medium text-gray-900 dark:text-white">
+                    {selectedCategory} Channels
+                  </span>
+                </div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">
+                  {selectedCategory === "Crypto"
+                    ? "Focused on crypto tickers, trends, and blockchain discussions"
+                    : "Open discussions on all topics, memes, and general market talk"}
+                </div>
+              </div>
+            )}
+
             {/* Render content based on active subtab */}
             {activeCommunitySubtab === "Chat" && (
               <div className="h-[600px]">
                 <ChatInterface />
               </div>
             )}
+            {activeCommunitySubtab === "Crypto" && <CryptoChannels />}
+            {activeCommunitySubtab === "OffTopic" && <OffTopicLounge />}
             {activeCommunitySubtab === "PrivateRooms" && <PrivateRooms />}
             {activeCommunitySubtab === "StockTwist" && <StockTwistRoom />}
             {activeCommunitySubtab === "Rooms" && <CommunityForum />}
@@ -451,7 +516,7 @@ export const MoorMeterDashboard: React.FC = () => {
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
               <div>
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                  🛠️{" "}
+                  ���️{" "}
                   {activeToolsSubtab === "HeatMap"
                     ? "Market HeatMap"
                     : "Market Analysis Tools"}
@@ -546,7 +611,6 @@ export const MoorMeterDashboard: React.FC = () => {
                               : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                           }`}
                         >
-                          {item.icon && <item.icon className="w-4 h-4 mr-2" />}
                           {item.label}
                           <ChevronDown className="w-4 h-4 ml-1" />
                         </button>
@@ -582,7 +646,6 @@ export const MoorMeterDashboard: React.FC = () => {
                           : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                       }`}
                     >
-                      {item.icon && <item.icon className="w-4 h-4 mr-2" />}
                       {item.label}
                     </button>
                   )}
@@ -673,7 +736,6 @@ export const MoorMeterDashboard: React.FC = () => {
                           : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200"
                       }`}
                     >
-                      {item.icon && <item.icon className="w-4 h-4 mr-2" />}
                       {item.label}
                     </button>
                   )}

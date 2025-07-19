@@ -73,6 +73,11 @@ export async function robustFetch(
     } catch (error) {
       lastError = error instanceof Error ? error : new Error(String(error));
 
+      console.warn(
+        `Fetch attempt ${attempt + 1} failed for ${url}:`,
+        lastError.message,
+      );
+
       // Don't retry on abort (timeout) or 4xx errors
       if (
         lastError.name === "AbortError" ||
@@ -86,11 +91,16 @@ export async function robustFetch(
 
       // Don't retry on the last attempt
       if (attempt === maxRetries) {
+        console.error(
+          `All ${maxRetries + 1} fetch attempts failed for ${url}:`,
+          lastError.message,
+        );
         break;
       }
 
       // Wait before retrying with exponential backoff
       const delay = retryDelay * Math.pow(backoffMultiplier, attempt);
+      console.warn(`Retrying fetch for ${url} in ${delay}ms...`);
       await new Promise((resolve) => setTimeout(resolve, delay));
     }
   }

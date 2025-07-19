@@ -69,7 +69,7 @@ export function useCryptoQuotes(
             retryDelay: 1000,
             timeout: 15000,
           },
-        }
+        },
       );
 
       setData(response);
@@ -77,18 +77,24 @@ export function useCryptoQuotes(
     } catch (error) {
       // Enhanced error handling with robustFetch FetchError
       if (error instanceof FetchError) {
-        console.info(`CoinMarketCap API error (${error.status}): ${error.message}`);
+        console.info(
+          `CoinMarketCap API error (${error.status}): ${error.message}`,
+        );
         if (error.status === 429) {
           setError("CoinMarketCap API rate limit exceeded. Using cached data.");
         } else if (error.status && error.status >= 500) {
-          setError("CoinMarketCap API temporarily unavailable. Using cached data.");
+          setError(
+            "CoinMarketCap API temporarily unavailable. Using cached data.",
+          );
         } else {
           setError(`API Error: ${error.message}`);
         }
       } else if (error instanceof Error) {
         if (error.name === "AbortError") {
           setError("Request timeout. Using cached data.");
-          console.warn("CoinMarketCap request timed out, falling back to mock data");
+          console.warn(
+            "CoinMarketCap request timed out, falling back to mock data",
+          );
         } else if (error.message.includes("proxy is not available")) {
           console.info("CoinMarketCap API proxy unavailable, using mock data");
           setError("API proxy unavailable. Using cached data.");
@@ -214,6 +220,64 @@ export function useCryptoListings(
     setLoading(true);
     setError(null);
 
+    // In development mode, provide immediate mock data to prevent FullStory fetch issues
+    const isDevelopment = import.meta.env.DEV;
+    if (isDevelopment) {
+      const cryptoSymbols = [
+        "BTC",
+        "ETH",
+        "BNB",
+        "XRP",
+        "ADA",
+        "SOL",
+        "DOT",
+        "DOGE",
+        "AVAX",
+        "SHIB",
+      ];
+      const mockTickers = Array.from(
+        { length: Math.min(limit, 10) },
+        (_, i) => ({
+          symbol: cryptoSymbols[i] || `MOCK${i}`,
+          name: `Mock Crypto ${i + 1}`,
+          price: 1000 + Math.random() * 50000,
+          change: (Math.random() - 0.5) * 20,
+          changePercent: (Math.random() - 0.5) * 20,
+          marketCap: 1000000000 + Math.random() * 900000000000,
+        }),
+      );
+
+      const mockData = {
+        status: {
+          timestamp: new Date().toISOString(),
+          error_code: 0,
+          error_message: null,
+          elapsed: 0,
+          credit_count: 0,
+          notice: null,
+        },
+        data: mockTickers.map((ticker, index) => ({
+          id: index + 1,
+          name: ticker.name,
+          symbol: ticker.symbol,
+          slug: ticker.symbol.toLowerCase(),
+          quote: {
+            USD: {
+              price: ticker.price,
+              percent_change_24h: ticker.changePercent,
+              market_cap: ticker.marketCap,
+              last_updated: new Date().toISOString(),
+            },
+          },
+        })),
+      };
+
+      setData(mockData);
+      setError("Development mode - using mock data");
+      setLoading(false);
+      return;
+    }
+
     try {
       // Use robust fetch to get crypto listings through our server proxy
       const response = await robustFetchJson<CoinMarketCapListingsResponse>(
@@ -224,7 +288,7 @@ export function useCryptoListings(
             retryDelay: 1000,
             timeout: 15000,
           },
-        }
+        },
       );
 
       setData(response);
@@ -233,20 +297,28 @@ export function useCryptoListings(
     } catch (error) {
       // Enhanced error handling with robustFetch FetchError
       if (error instanceof FetchError) {
-        console.info(`CoinMarketCap listings API error (${error.status}): ${error.message}`);
+        console.info(
+          `CoinMarketCap listings API error (${error.status}): ${error.message}`,
+        );
         if (error.status === 429) {
           setError("CoinMarketCap API rate limit exceeded. Using cached data.");
         } else if (error.status && error.status >= 500) {
-          setError("CoinMarketCap API temporarily unavailable. Using cached data.");
+          setError(
+            "CoinMarketCap API temporarily unavailable. Using cached data.",
+          );
         } else {
           setError(`API Error: ${error.message}`);
         }
       } else if (error instanceof Error) {
         if (error.name === "AbortError") {
           setError("Request timeout. Using cached data.");
-          console.warn("CoinMarketCap listings request timed out, falling back to mock data");
+          console.warn(
+            "CoinMarketCap listings request timed out, falling back to mock data",
+          );
         } else if (error.message.includes("proxy is not available")) {
-          console.info("CoinMarketCap listings API proxy unavailable, using mock data");
+          console.info(
+            "CoinMarketCap listings API proxy unavailable, using mock data",
+          );
           setError("API proxy unavailable. Using cached data.");
         } else {
           console.error("Failed to fetch crypto listings:", error);
