@@ -22,7 +22,11 @@ import {
   Crown,
   Zap,
 } from "lucide-react";
-import { UserLimits } from "@/types/rooms";
+import { UserLimits, PrivateRoom } from "@/types/rooms";
+import {
+  canCreateRoom,
+  canAddMembersToRoom,
+} from "@/utils/userLimitsEnforcement";
 
 interface CreateRoomModalProps {
   onCreateRoom: (roomData: any) => void;
