@@ -139,7 +139,27 @@ export const MoorMeterDashboard: React.FC = () => {
     };
   }, [stockSentiment?.score]);
 
-  const [localMoodScore, setLocalMoodScore] = useState<MoodScore>(moodScore);
+    const [localMoodScore, setLocalMoodScore] = useState<MoodScore>(moodScore);
+
+  const generateMockTrendData = () => {
+    const data = [];
+    const baseDate = new Date();
+
+    for (let i = 6; i >= 0; i--) {
+      const date = new Date(baseDate);
+      date.setDate(date.getDate() - i);
+
+      data.push({
+        date: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+        score: 45 + Math.random() * 30,
+        stocks: 40 + Math.random() * 40,
+        news: 35 + Math.random() * 35,
+        social: 50 + Math.random() * 30,
+      });
+    }
+
+    return data;
+  };
 
   useEffect(() => {
     setLocalMoodScore(moodScore);
