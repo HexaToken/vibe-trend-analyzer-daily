@@ -291,10 +291,22 @@ export const FuturisticHomepage: React.FC = () => {
                 </div>
               </div>
               
-              {/* Multiple pulse rings */}
-              <div className="absolute inset-0 rounded-full border-2 border-pink-400/40 animate-ping" />
-              <div className="absolute inset-2 rounded-full border border-purple-400/30 animate-ping delay-75" />
-              <div className="absolute inset-4 rounded-full border border-cyan-400/20 animate-ping delay-150" />
+                            {/* Multiple pulse rings with sentiment-based colors */}
+              <div className={`absolute inset-0 rounded-full border-2 animate-ping ${
+                currentSentiment === 'positive' ? 'border-emerald-400/40' :
+                currentSentiment === 'neutral' ? 'border-gray-400/40' :
+                'border-red-400/40'
+              }`} />
+              <div className={`absolute inset-2 rounded-full border animate-ping delay-75 ${
+                currentSentiment === 'positive' ? 'border-green-400/30' :
+                currentSentiment === 'neutral' ? 'border-slate-400/30' :
+                'border-rose-400/30'
+              }`} />
+              <div className={`absolute inset-4 rounded-full border animate-ping delay-150 ${
+                currentSentiment === 'positive' ? 'border-cyan-400/20' :
+                currentSentiment === 'neutral' ? 'border-purple-400/20' :
+                'border-purple-400/20'
+              }`} />
             </div>
           </div>
           
