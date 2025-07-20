@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { TrendingTicker } from "./TrendingTicker";
 import { Button } from "./ui/button";
@@ -106,7 +106,7 @@ interface CommunityMessage {
   platform: "reddit" | "twitter" | "discord";
 }
 
-export const MoorMeterDashboard: React.FC = () => {
+export const MoorMeterDashboard: React.FC = memo(() => {
   console.log("MoorMeterDashboard component rendering...");
   const [darkMode, setDarkMode] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
