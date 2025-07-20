@@ -176,32 +176,37 @@ export const useAppStore = create<AppState>()(
   )
 );
 
-// Selectors for commonly used state combinations with shallow comparison
-export const useNavigation = () => useAppStore((state) => ({
-  activeSection: state.activeSection,
-  setActiveSection: state.setActiveSection,
-}), shallow);
+// Selectors for commonly used state combinations
+export const useNavigation = () => {
+  const activeSection = useAppStore((state) => state.activeSection);
+  const setActiveSection = useAppStore((state) => state.setActiveSection);
+  return { activeSection, setActiveSection };
+};
 
-export const useUI = () => useAppStore((state) => ({
-  sidebarOpen: state.sidebarOpen,
-  setSidebarOpen: state.setSidebarOpen,
-  isDarkMode: state.isDarkMode,
-  toggleDarkMode: state.toggleDarkMode,
-}), shallow);
+export const useUI = () => {
+  const sidebarOpen = useAppStore((state) => state.sidebarOpen);
+  const setSidebarOpen = useAppStore((state) => state.setSidebarOpen);
+  const isDarkMode = useAppStore((state) => state.isDarkMode);
+  const toggleDarkMode = useAppStore((state) => state.toggleDarkMode);
+  return { sidebarOpen, setSidebarOpen, isDarkMode, toggleDarkMode };
+};
 
-export const useNotifications = () => useAppStore((state) => ({
-  notifications: state.notifications,
-  addNotification: state.addNotification,
-  markNotificationRead: state.markNotificationRead,
-  clearNotifications: state.clearNotifications,
-}), shallow);
+export const useNotifications = () => {
+  const notifications = useAppStore((state) => state.notifications);
+  const addNotification = useAppStore((state) => state.addNotification);
+  const markNotificationRead = useAppStore((state) => state.markNotificationRead);
+  const clearNotifications = useAppStore((state) => state.clearNotifications);
+  return { notifications, addNotification, markNotificationRead, clearNotifications };
+};
 
-export const useFeatures = () => useAppStore((state) => ({
-  features: state.features,
-  toggleFeature: state.toggleFeature,
-}), shallow);
+export const useFeatures = () => {
+  const features = useAppStore((state) => state.features);
+  const toggleFeature = useAppStore((state) => state.toggleFeature);
+  return { features, toggleFeature };
+};
 
-export const usePreferences = () => useAppStore((state) => ({
-  preferences: state.preferences,
-  updatePreferences: state.updatePreferences,
-}), shallow);
+export const usePreferences = () => {
+  const preferences = useAppStore((state) => state.preferences);
+  const updatePreferences = useAppStore((state) => state.updatePreferences);
+  return { preferences, updatePreferences };
+};
