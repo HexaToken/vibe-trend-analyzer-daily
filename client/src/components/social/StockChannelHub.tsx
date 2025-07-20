@@ -445,7 +445,7 @@ export const StockChannelHub: React.FC = () => {
               {channelMessages.map((message) => (
                 <div key={message.id} className="space-y-2">
                   {message.isPinned && (
-                    <div className="flex items-center gap-2 text-xs text-blue-600 dark:text-blue-400">
+                    <div className="flex items-center gap-2 text-xs text-blue-600 dark:text-blue-400 mb-1">
                       <Pin className="w-3 h-3" />
                       <span>Pinned Message</span>
                     </div>
@@ -461,7 +461,7 @@ export const StockChannelHub: React.FC = () => {
                     </Avatar>
 
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      <div className="flex items-center gap-2 mb-1.5 flex-wrap">
                         <span className="font-medium text-sm text-gray-900 dark:text-white">
                           {message.username}
                         </span>
@@ -529,7 +529,7 @@ export const StockChannelHub: React.FC = () => {
             </div>
 
             {/* Message Input */}
-            <div className="p-4 border-t border-gray-200 dark:border-gray-700 flex-shrink-0">
+            <div className="p-3 border-t border-gray-200 dark:border-gray-700 flex-shrink-0 bg-gray-50 dark:bg-gray-800/50">
               <div className="flex gap-2">
                 <Input
                   placeholder={`Post your idea... Use $${selectedChannel.ticker} to link stocks`}
