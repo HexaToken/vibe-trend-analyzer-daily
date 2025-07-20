@@ -34,11 +34,7 @@ const queryClient = new QueryClient();
 const App = () => {
   const [activeSection, setActiveSection] = useState("moorMeter");
 
-  // Debug: log current section
-  console.log("Current activeSection:", activeSection);
-
   const renderContent = () => {
-    console.log("Rendering content for section:", activeSection);
     switch (activeSection) {
       case "sentiment":
         return <BuilderDemo />;
@@ -81,7 +77,6 @@ const App = () => {
         return <MoorMeterDashboard />;
 
       default:
-        console.log("Loading MoorMeterDashboard as default");
         return <MoorMeterDashboard />;
     }
   };

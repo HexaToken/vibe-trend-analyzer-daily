@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { TrendingTicker } from "./TrendingTicker";
 import { Button } from "./ui/button";
@@ -108,7 +108,7 @@ interface CommunityMessage {
 }
 
 export const MoorMeterDashboard: React.FC = () => {
-  console.log("MoorMeterDashboard component rendering...");
+  // Removed debug log to reduce noise
   const [darkMode, setDarkMode] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTimeframe, setSelectedTimeframe] = useState<
@@ -145,11 +145,11 @@ export const MoorMeterDashboard: React.FC = () => {
   const { tickers: cryptoData = [], loading: cryptoLoading = false } =
     cryptoListingsResult || {};
 
-  // Calculate overall mood score
-  const calculateMoodScore = (): MoodScore => {
+  // Calculate overall mood score with stable values to prevent excessive re-renders
+  const moodScore: MoodScore = useMemo(() => {
     let stocksScore = stockSentiment?.score || 50;
-    let newsScore = 45 + Math.random() * 20; // Mock for now
-    let socialScore = 55 + Math.random() * 15; // Mock for now
+    let newsScore = 65; // Use stable mock values instead of random
+    let socialScore = 68; // Use stable mock values instead of random
 
     // Weight the scores: Stocks 40%, News 30%, Social 30%
     const overall = Math.round(
@@ -163,18 +163,7 @@ export const MoorMeterDashboard: React.FC = () => {
       social: socialScore,
       timestamp: new Date(),
     };
-  };
-
-  const [moodScore, setMoodScore] = useState<MoodScore>(calculateMoodScore());
-
-  // Update mood score periodically
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setMoodScore(calculateMoodScore());
-    }, 30000); // Update every 30 seconds
-
-    return () => clearInterval(interval);
-  }, [stockSentiment]);
+  }, [stockSentiment?.score]); // Only recalculate when actual stock sentiment changes
 
   // Get mood emoji and color
   const getMoodEmoji = (score: number) => {
@@ -296,7 +285,7 @@ export const MoorMeterDashboard: React.FC = () => {
 
   // Function to render content based on active tab
   const renderTabContent = () => {
-    console.log("Rendering tab content for activeTab:", activeTab);
+    // Tab content rendering - debug log removed
     switch (activeTab) {
       case "Market Mood":
         return (
