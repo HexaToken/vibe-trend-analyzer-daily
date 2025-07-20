@@ -123,12 +123,12 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
           🔥 Trending Topics
         </CardTitle>
       </CardHeader>
-      <CardContent className="overflow-y-auto max-h-[200px] p-4">
-        <div className="space-y-3">
+      <CardContent className="overflow-y-auto max-h-[400px] p-3">
+        <div className="space-y-2">
           {topics.map((topic, index) => (
             <div
               key={topic.id}
-              className="flex items-center justify-between p-3 rounded-lg bg-gray-700/30 hover:bg-gray-700/50 transition-all duration-200 cursor-pointer border border-gray-600/20 hover:border-gray-500/50 overflow-hidden gap-2"
+              className="flex items-center justify-between p-2 rounded-lg bg-gray-700/30 hover:bg-gray-700/50 transition-all duration-200 cursor-pointer border border-gray-600/20 hover:border-gray-500/50 overflow-hidden gap-2 min-w-0"
             >
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2">
