@@ -67,6 +67,7 @@ import { MoodScoreHero } from "./builder/MoodScoreHero";
 import { TopStocksModule } from "./builder/TopStocksModule";
 import { SentimentHeatMap } from "./moorMeter/SentimentHeatMap";
 import { PrivateRoomsContainer } from "./privateRooms/PrivateRoomsContainer";
+import { StockTwistRoom } from "./privateRooms/StockTwistRoom";
 import { formatCurrency, cn } from "../lib/utils";
 
 // Types for our mood data
