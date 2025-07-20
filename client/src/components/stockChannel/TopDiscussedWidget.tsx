@@ -252,7 +252,7 @@ export const TopDiscussedWidget: React.FC<TopDiscussedWidgetProps> = ({
               <div className="flex items-center gap-2 text-right">
                 <div className="space-y-1">
                   <div
-                    className={`text-sm font-medium ${getPriceChangeColor(stock.priceChange)}`}
+                    className={`text-sm font-medium whitespace-nowrap ${getPriceChangeColor(stock.priceChange)}`}
                   >
                     {stock.priceChange > 0 ? "+" : ""}
                     {stock.priceChange.toFixed(2)}%
@@ -263,10 +263,10 @@ export const TopDiscussedWidget: React.FC<TopDiscussedWidgetProps> = ({
                 </div>
 
                 <Badge
-                  className={`text-xs px-1 py-1 min-w-[50px] text-center ${getSentimentColor(stock.sentiment)}`}
+                  className={`text-xs px-1 py-1 min-w-[50px] text-center whitespace-nowrap ${getSentimentColor(stock.sentiment)}`}
                 >
                   {stock.sentiment > 0 ? "+" : ""}
-                  {stock.sentiment}%
+                  {stock.sentiment.toFixed(2)}%
                 </Badge>
               </div>
             </div>
