@@ -595,5 +595,5 @@ export const SocialPlatform = memo(() => {
         <div className="lg:col-span-1">{renderTrendingSidebar()}</div>
       </div>
     </div>
-  );
-};
+    );
+});
