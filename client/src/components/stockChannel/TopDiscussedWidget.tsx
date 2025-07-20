@@ -180,58 +180,23 @@ export const TopDiscussedWidget: React.FC<TopDiscussedWidgetProps> = ({
               key={stock.id}
               className="flex items-center justify-between p-3 rounded-lg bg-gray-700/30 hover:bg-gray-700/50 transition-all duration-200 cursor-pointer border border-gray-600/20 hover:border-gray-500/50 overflow-hidden"
             >
-              <div className="flex items-center gap-3 flex-1">
-                <div className="flex items-center gap-2">
+              <div className="flex items-center justify-between w-full">
+                <div className="flex items-center gap-3">
                   <div className="text-gray-400 text-sm font-bold w-6">
                     #{index + 1}
                   </div>
                   {getRankChangeIcon(stock.changeFromPrevious)}
-                </div>
-
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-white font-bold text-sm">
-                      ${stock.symbol}
-                    </span>
-                    <span className="text-xs text-gray-400 truncate max-w-16">
-                      {stock.name}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-3 text-xs">
-                    <div className="flex items-center gap-1 text-gray-400">
-                      <MessageCircle className="w-3 h-3" />
-                      <span>{stock.mentions.toLocaleString()}</span>
-                    </div>
-                    <div className="flex items-center gap-1 text-gray-400">
-                      <Eye className="w-3 h-3" />
-                      <span>{formatVolume(stock.volume)}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-1 text-right flex-shrink-0 overflow-hidden">
-                <div className="space-y-1 overflow-hidden">
-                  <div
-                    className={`text-sm font-medium whitespace-nowrap truncate max-w-[60px] ${getPriceChangeColor(stock.priceChange)}`}
-                  >
-                    {stock.priceChange > 0 ? "+" : ""}
-                    {stock.priceChange.toFixed(2)}%
-                  </div>
-                  <div className="text-xs text-gray-400 truncate max-w-[60px]">
-                    ${stock.price.toFixed(2)}
-                  </div>
-                </div>
-
-                <Badge
-                  className={`text-xs px-1 py-1 min-w-[45px] max-w-[55px] text-center whitespace-nowrap overflow-hidden ${getSentimentColor(stock.sentiment)}`}
-                >
-                  <span className="truncate">
-                    {stock.sentiment > 0 ? "+" : ""}
-                    {stock.sentiment.toFixed(2)}%
+                  <span className="text-white font-bold text-lg">
+                    ${stock.symbol}
                   </span>
-                </Badge>
+                </div>
+
+                <div
+                  className={`text-lg font-medium ${getPriceChangeColor(stock.priceChange)}`}
+                >
+                  {stock.priceChange > 0 ? "+" : ""}
+                  {stock.priceChange.toFixed(2)}%
+                </div>
               </div>
             </div>
           ))}
