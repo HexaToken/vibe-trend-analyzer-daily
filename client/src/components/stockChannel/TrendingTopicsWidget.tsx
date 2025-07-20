@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Badge } from "../ui/badge";
-import { Button } from "../ui/button";
 import {
   Flame,
   TrendingUp,
   TrendingDown,
   Hash,
   DollarSign,
-  RefreshCw,
 } from "lucide-react";
 
 interface TrendingTopic {
@@ -81,9 +79,6 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
       isRising: true,
     },
   ]);
-
-  const [isRefreshing, setIsRefreshing] = useState(false);
-  const [timeframe, setTimeframe] = useState<"1h" | "4h" | "24h">("4h");
 
   // Simulate real-time updates
   useEffect(() => {
