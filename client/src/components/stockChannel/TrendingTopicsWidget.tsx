@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Badge } from "../ui/badge";
-import { Button } from "../ui/button";
-import {
-  Flame,
-  TrendingUp,
-  TrendingDown,
-  Hash,
-  DollarSign,
-  RefreshCw,
-} from "lucide-react";
+import { Flame, Hash, DollarSign } from "lucide-react";
 
 interface TrendingTopic {
   id: string;
@@ -82,9 +74,6 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
     },
   ]);
 
-  const [isRefreshing, setIsRefreshing] = useState(false);
-  const [timeframe, setTimeframe] = useState<"1h" | "4h" | "24h">("4h");
-
   // Simulate real-time updates
   useEffect(() => {
     const interval = setInterval(() => {
@@ -107,21 +96,6 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
     return () => clearInterval(interval);
   }, []);
 
-  const handleRefresh = async () => {
-    setIsRefreshing(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setIsRefreshing(false);
-  };
-
-  const getSentimentColor = (sentiment: number) => {
-    if (sentiment > 20)
-      return "bg-green-500/20 text-green-400 border-green-500/30";
-    if (sentiment > -20)
-      return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30";
-    return "bg-red-500/20 text-red-400 border-red-500/30";
-  };
-
   const getVolumeColor = (volume: string) => {
     switch (volume) {
       case "High":
@@ -142,54 +116,19 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
 
   return (
     <Card
-      className={`bg-gray-800/50 border-gray-700/50 hover:border-gray-600/70 transition-all duration-300 ${className}`}
+      className={`bg-gradient-to-br from-orange-900/30 to-red-900/30 border-orange-500/20 hover:border-orange-400/40 transition-all duration-300 overflow-hidden w-full max-w-full rounded-xl ${className || ""}`}
     >
       <CardHeader className="pb-3">
-        <div className="flex items-center justify-between">
-          <CardTitle className="text-white flex items-center gap-2 text-lg font-bold">
-            🔥 Trending Topics
-          </CardTitle>
-          <div className="flex items-center gap-2">
-            <div className="flex rounded-lg bg-gray-700/50 p-1">
-              {(["1h", "4h", "24h"] as const).map((period) => (
-                <Button
-                  key={period}
-                  size="sm"
-                  variant={timeframe === period ? "default" : "ghost"}
-                  className={`text-xs h-6 px-2 ${
-                    timeframe === period
-                      ? "bg-blue-600 text-white"
-                      : "text-gray-400 hover:text-white"
-                  }`}
-                  onClick={() => setTimeframe(period)}
-                >
-                  {period}
-                </Button>
-              ))}
-            </div>
-            <Button
-              size="sm"
-              variant="ghost"
-              className="text-gray-400 hover:text-white h-6 w-6 p-0"
-              onClick={handleRefresh}
-              disabled={isRefreshing}
-            >
-              <RefreshCw
-                className={`w-3 h-3 ${isRefreshing ? "animate-spin" : ""}`}
-              />
-            </Button>
-          </div>
-        </div>
-        <div className="text-sm text-gray-400">
-          Most discussed in the last {timeframe}
-        </div>
+        <CardTitle className="text-white flex items-center gap-2 text-lg font-bold">
+          🔥 Trending Topics
+        </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="overflow-y-auto max-h-[200px] p-4">
         <div className="space-y-3">
           {topics.map((topic, index) => (
             <div
               key={topic.id}
-              className="flex items-center justify-between p-3 rounded-lg bg-gray-700/30 hover:bg-gray-700/50 transition-all duration-200 cursor-pointer border border-gray-600/20 hover:border-gray-500/50"
+              className="flex items-center justify-between p-3 rounded-lg bg-gray-700/30 hover:bg-gray-700/50 transition-all duration-200 cursor-pointer border border-gray-600/20 hover:border-gray-500/50 overflow-hidden gap-2"
             >
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2">
@@ -202,47 +141,33 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
                     <DollarSign className="w-4 h-4 text-green-400" />
                   )}
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-white font-medium text-sm">
+                    <span className="text-white font-medium text-sm truncate block">
                       {topic.tag}
                     </span>
                     {topic.isRising && (
                       <div className="flex items-center gap-1">
-                        <Flame className="w-3 h-3 text-orange-400" />
-                        <span
-                          className={`text-xs ${topic.change > 0 ? "text-green-400" : "text-red-400"}`}
+                        <Flame className="w-3 h-3 text-orange-400 flex-shrink-0" />
+                        <div
+                          className={`px-2 py-1 rounded-md text-center min-w-[60px] max-w-[80px] overflow-hidden text-ellipsis whitespace-nowrap ${
+                            topic.change > 0
+                              ? "bg-green-500/20 text-green-400"
+                              : "bg-red-500/20 text-red-400"
+                          }`}
                         >
-                          {topic.change > 0 ? "+" : ""}
-                          {topic.change.toFixed(1)}%
-                        </span>
+                          <span className="text-[clamp(0.75rem,2vw,1rem)] font-medium">
+                            {topic.change > 0 ? "+" : ""}
+                            {topic.change.toFixed(2)}%
+                          </span>
+                        </div>
                       </div>
                     )}
                   </div>
-                  <div className="flex items-center gap-2 text-xs text-gray-400">
+                  <div className="flex items-center gap-2 text-[10px] text-gray-400">
                     <span>{formatNumber(topic.mentions)} mentions</span>
-                    <span>•</span>
-                    <span className={getVolumeColor(topic.volume)}>
-                      {topic.volume} volume
-                    </span>
                   </div>
                 </div>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <Badge
-                  className={`text-xs px-2 py-1 ${getSentimentColor(topic.sentiment)}`}
-                >
-                  <div className="flex items-center gap-1">
-                    {topic.sentiment > 0 ? (
-                      <TrendingUp className="w-3 h-3" />
-                    ) : (
-                      <TrendingDown className="w-3 h-3" />
-                    )}
-                    {topic.sentiment > 0 ? "+" : ""}
-                    {topic.sentiment}%
-                  </div>
-                </Badge>
               </div>
             </div>
           ))}
