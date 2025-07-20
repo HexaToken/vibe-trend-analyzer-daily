@@ -223,7 +223,7 @@ export const Navigation = ({
                       </DropdownMenuItem>
                     );
                   })}
-                  <DropdownMenuItem
+                                    <DropdownMenuItem
                     onClick={() => onSectionChange('theme-demo')}
                     className="flex items-center gap-2"
                   >
@@ -231,6 +231,16 @@ export const Navigation = ({
                     Mood Theme Demo
                     <Badge variant="secondary" className="ml-auto text-xs">
                       NEW
+                    </Badge>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => onSectionChange('builder-finance')}
+                    className="flex items-center gap-2"
+                  >
+                    <BarChart3 className="h-4 w-4" />
+                    Builder.io Finance Components
+                    <Badge variant="secondary" className="ml-auto text-xs bg-gradient-to-r from-blue-400/20 to-slate-500/20 text-blue-300 border-blue-400/30">
+                      BUILDER
                     </Badge>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
