@@ -17,7 +17,7 @@ import {
 interface Room {
   id: string;
   name: string;
-  type: "private" | "stocktwist";
+  type: "private";
   tickers: string[];
   memberCount: number;
   unreadCount: number;
@@ -29,22 +29,6 @@ interface Room {
 export const PrivateGroupChat: React.FC = () => {
   const [currentRoom, setCurrentRoom] = useState<Room | null>(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
-
-  // Default to StockTwist Room when component mounts
-  React.useEffect(() => {
-    setCurrentRoom({
-      id: "stocktwist",
-      name: "StockTwist Room",
-      type: "stocktwist",
-      tickers: ["TSLA", "NVDA", "AAPL"],
-      memberCount: 2847,
-      unreadCount: 0,
-      lastActivity: new Date(),
-      isOwner: false,
-      description:
-        "Share trade ideas and market insights with verified traders",
-    });
-  }, []);
 
   const handleCreateRoom = (roomData: any) => {
     // Mock room creation - in real app would call API
@@ -133,23 +117,7 @@ export const PrivateGroupChat: React.FC = () => {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
-          <div
-            className="p-4 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer transition-colors"
-            onClick={() =>
-              setCurrentRoom({
-                id: "stocktwist",
-                name: "StockTwist Room",
-                type: "stocktwist",
-                tickers: ["TSLA", "NVDA", "AAPL"],
-                memberCount: 2847,
-                unreadCount: 0,
-                lastActivity: new Date(),
-                isOwner: false,
-                description:
-                  "Share trade ideas and market insights with verified traders",
-              })
-            }
-          >
+          <div className="p-4 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer transition-colors">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center">
@@ -157,7 +125,7 @@ export const PrivateGroupChat: React.FC = () => {
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="font-medium">StockTwist Room</span>
+                    <span className="font-medium">AI & Tech Watchlist</span>
                     <Badge className="bg-yellow-100 text-yellow-800 text-xs">
                       Premium
                     </Badge>
@@ -244,9 +212,7 @@ export const PrivateGroupChat: React.FC = () => {
           {currentRoom && (
             <div className="flex items-center gap-2">
               <Badge variant="outline" className="text-xs">
-                {currentRoom.type === "stocktwist"
-                  ? "Premium Room"
-                  : "Private Room"}
+                "Private Room"
               </Badge>
               <span className="text-sm text-gray-500">
                 {currentRoom.memberCount} members
