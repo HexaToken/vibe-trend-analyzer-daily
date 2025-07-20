@@ -63,14 +63,16 @@ export const SocialPlatform = memo(() => {
     refreshInterval: 300000, // 5 minutes to reduce API calls
     enabled: true,
   });
-  const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
+    const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [hasAttemptedReset, setHasAttemptedReset] = useState(false);
 
-  // Auto-reset circuit breaker when error occurs
+  // Auto-reset circuit breaker when error occurs (with guard to prevent repeated resets)
   useEffect(() => {
-    if (cryptoError?.includes("Circuit breaker is open")) {
+    if (cryptoError?.includes("Circuit breaker is open") && !hasAttemptedReset) {
       console.log("Circuit breaker detected, attempting auto-reset...");
-      // Automatically reset after a short delay
+      setHasAttemptedReset(true);
+
       const timer = setTimeout(() => {
         import("../../services/coinMarketCapApi").then(
           ({ resetCoinMarketCapCircuitBreaker }) => {
@@ -78,11 +80,11 @@ export const SocialPlatform = memo(() => {
             console.log("Circuit breaker auto-reset completed");
           },
         );
-      }, 3000); // Reset after 3 seconds
+      }, 3000);
 
       return () => clearTimeout(timer);
     }
-  }, [cryptoError]);
+  }, [cryptoError, hasAttemptedReset]);
 
   // Handle ticker navigation
   const handleTickerClick = (symbol: string) => {
