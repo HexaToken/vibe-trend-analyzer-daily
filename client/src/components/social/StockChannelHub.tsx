@@ -263,7 +263,7 @@ export const StockChannelHub: React.FC = () => {
   );
 
   return (
-    <div className="flex h-[700px] bg-white dark:bg-gray-900 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+    <div className="flex h-full bg-white dark:bg-gray-900 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
       {/* Left Sidebar - Stock Channels */}
       <div className="w-fit pr-[3%] max-w-[220px] bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col">
         {/* Sidebar Header */}
