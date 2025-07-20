@@ -374,8 +374,8 @@ export const FuturisticHomepage: React.FC = () => {
             {/* Trending Forum Topics */}
             <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
               <CardHeader className="border-b border-purple-500/20">
-                <CardTitle className="text-white flex items-center gap-2">
-                  <Fire className="w-6 h-6 text-orange-400" />
+                                <CardTitle className="text-white flex items-center gap-2">
+                  <Flame className="w-6 h-6 text-orange-400" />
                   Trending Forum Topics
                 </CardTitle>
               </CardHeader>
