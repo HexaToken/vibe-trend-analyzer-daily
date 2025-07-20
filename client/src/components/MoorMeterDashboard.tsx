@@ -547,18 +547,20 @@ export const MoorMeterDashboard: React.FC = () => {
                 </div>
 
                 {/* Right Sidebar - Enhanced Widgets (30%) */}
-                <div className="lg:col-span-3 space-y-4 h-full overflow-y-auto">
-                  {/* Enhanced Live Polls Widget */}
-                  <LivePollsWidget />
+                <div className="lg:col-span-3 h-full flex flex-col">
+                  <div className="space-y-4 overflow-y-auto flex-1 min-h-0 pr-2">
+                    {/* Enhanced Live Polls Widget */}
+                    <LivePollsWidget />
 
-                  {/* Enhanced AI Summary Widget */}
-                  <AISummaryWidget />
+                    {/* Enhanced AI Summary Widget */}
+                    <AISummaryWidget />
 
-                  {/* Enhanced Trending Topics Widget */}
-                  <EnhancedTrendingTopicsWidget />
+                    {/* Enhanced Trending Topics Widget */}
+                    <EnhancedTrendingTopicsWidget />
 
-                  {/* Enhanced Top Discussed Widget */}
-                  <TopDiscussedWidget />
+                    {/* Enhanced Top Discussed Widget */}
+                    <TopDiscussedWidget />
+                  </div>
                 </div>
               </div>
             )}
