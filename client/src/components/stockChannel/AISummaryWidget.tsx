@@ -80,7 +80,7 @@ export const AISummaryWidget: React.FC<AISummaryWidgetProps> = ({
 
   return (
     <Card
-      className={`bg-gradient-to-br ${getSentimentColor(sentiment.percentage)}/20 border-blue-500/20 hover:border-blue-400/40 transition-all duration-300 ${className}`}
+      className={`bg-gradient-to-br ${getSentimentColor(sentiment.percentage)}/20 border-blue-500/20 hover:border-blue-400/40 transition-all duration-300 overflow-hidden ${className}`}
     >
       <CardHeader className="pb-3">
         <CardTitle className="text-white flex items-center gap-2 text-lg font-bold">
@@ -91,9 +91,9 @@ export const AISummaryWidget: React.FC<AISummaryWidgetProps> = ({
         </CardTitle>
         <div className="text-sm text-blue-200">Market Sentiment Analysis</div>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-4 overflow-hidden">
         <div className="text-center space-y-3">
-          <div className="relative">
+          <div className="relative px-4">
             <div className="text-4xl font-bold text-white mb-1">
               {sentiment.percentage}%
             </div>
@@ -102,7 +102,7 @@ export const AISummaryWidget: React.FC<AISummaryWidgetProps> = ({
             </div>
 
             {/* Animated indicator */}
-            <div className="absolute -top-2 -right-2">
+            <div className="absolute top-0 right-0">
               <div
                 className={`w-3 h-3 rounded-full ${
                   currentSentimentLabel === "Bullish"
