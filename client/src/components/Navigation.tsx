@@ -155,14 +155,14 @@ export const Navigation = ({
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-1">
-                            {/* Luxury Homepage */}
+                                          {/* Luxury Experience */}
               <Button
-                variant={activeSection === "luxury-home" ? "default" : "ghost"}
-                onClick={() => onSectionChange("luxury-home")}
+                variant={activeSection === "luxury-experience" ? "default" : "ghost"}
+                onClick={() => onSectionChange("luxury-experience")}
                 className="flex items-center gap-2"
               >
                 <Crown className="h-4 w-4" />
-                Luxury Home
+                Luxury Suite
                 <Badge variant="secondary" className="text-xs bg-gradient-to-r from-yellow-400/20 to-yellow-500/20 text-yellow-300 border-yellow-400/30">
                   PREMIUM
                 </Badge>
