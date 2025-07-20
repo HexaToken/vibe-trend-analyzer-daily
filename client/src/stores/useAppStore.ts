@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
+import { shallow } from 'zustand/shallow';
 
 // Types for app state
 export type ViewType = 
@@ -175,32 +176,32 @@ export const useAppStore = create<AppState>()(
   )
 );
 
-// Selectors for commonly used state combinations
+// Selectors for commonly used state combinations with shallow comparison
 export const useNavigation = () => useAppStore((state) => ({
   activeSection: state.activeSection,
   setActiveSection: state.setActiveSection,
-}));
+}), shallow);
 
 export const useUI = () => useAppStore((state) => ({
   sidebarOpen: state.sidebarOpen,
   setSidebarOpen: state.setSidebarOpen,
   isDarkMode: state.isDarkMode,
   toggleDarkMode: state.toggleDarkMode,
-}));
+}), shallow);
 
 export const useNotifications = () => useAppStore((state) => ({
   notifications: state.notifications,
   addNotification: state.addNotification,
   markNotificationRead: state.markNotificationRead,
   clearNotifications: state.clearNotifications,
-}));
+}), shallow);
 
 export const useFeatures = () => useAppStore((state) => ({
   features: state.features,
   toggleFeature: state.toggleFeature,
-}));
+}), shallow);
 
 export const usePreferences = () => useAppStore((state) => ({
   preferences: state.preferences,
   updatePreferences: state.updatePreferences,
-}));
+}), shallow);
