@@ -116,7 +116,7 @@ export const MoorMeterDashboard: React.FC = () => {
   >("7D");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("Home");
-  const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
+    const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
   const [activeCommunitySubtab, setActiveCommunitySubtab] = useState("Chat");
   const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<
@@ -285,7 +285,7 @@ export const MoorMeterDashboard: React.FC = () => {
         { label: "Crypto", key: "Crypto", icon: TrendingUp },
         { label: "Off-Topic", key: "OffTopic", icon: Heart },
 
-        { label: "Rooms", key: "Rooms", icon: Users },
+                { label: "Rooms", key: "Rooms", icon: Users },
         { label: "Private Room", key: "PrivateRoom", icon: Lock },
       ],
     },
@@ -601,6 +601,8 @@ export const MoorMeterDashboard: React.FC = () => {
           </div>
         );
 
+            
+
       case "Tool":
         return (
           <div className="space-y-8">
@@ -692,9 +694,7 @@ export const MoorMeterDashboard: React.FC = () => {
             <div className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (
                 <div key={item.key} className="relative">
-                  {(item.key === "Tool" ||
-                    item.key === "Community" ||
-                    (item.key === "StockTwist" && item.subtabs)) &&
+                                    (item.key === "Tool" || item.key === "Community") &&
                   item.subtabs ? (
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
@@ -715,12 +715,10 @@ export const MoorMeterDashboard: React.FC = () => {
                             key={subtab.key}
                             onClick={() => {
                               setActiveTab(item.key);
-                              if (item.key === "Tool") {
+                                                            if (item.key === "Tool") {
                                 setActiveToolsSubtab(subtab.key);
                               } else if (item.key === "Community") {
                                 setActiveCommunitySubtab(subtab.key);
-                              } else if (item.key === "StockTwist") {
-                                setActiveStockTwistSubtab(subtab.key);
                               }
                             }}
                             className="flex items-center cursor-pointer"
@@ -793,9 +791,7 @@ export const MoorMeterDashboard: React.FC = () => {
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-50 dark:bg-gray-800">
               {navItems.map((item) => (
                 <div key={item.key}>
-                  {(item.key === "Tool" ||
-                    item.key === "Community" ||
-                    (item.key === "StockTwist" && item.subtabs)) &&
+                                    (item.key === "Tool" || item.key === "Community") &&
                   item.subtabs ? (
                     <div className="space-y-2">
                       <div className="px-3 py-2 text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -806,12 +802,10 @@ export const MoorMeterDashboard: React.FC = () => {
                           key={subtab.key}
                           onClick={() => {
                             setActiveTab(item.key);
-                            if (item.key === "Tool") {
+                                                        if (item.key === "Tool") {
                               setActiveToolsSubtab(subtab.key);
                             } else if (item.key === "Community") {
                               setActiveCommunitySubtab(subtab.key);
-                            } else if (item.key === "StockTwist") {
-                              setActiveStockTwistSubtab(subtab.key);
                             }
                             setMobileMenuOpen(false);
                           }}
