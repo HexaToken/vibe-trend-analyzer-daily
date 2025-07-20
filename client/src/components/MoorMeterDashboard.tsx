@@ -543,7 +543,10 @@ export const MoorMeterDashboard: React.FC = () => {
                         </div>
 
                         {/* Chat Interface Area - Now expands to fill remaining space */}
-                        <div className="flex-1 bg-gray-900/50 rounded-lg border border-gray-600/30 min-h-0 overflow-hidden">
+                        <div
+                          className="flex-1 bg-gray-900/50 rounded-lg border border-gray-600/30 min-h-0 overflow-hidden"
+                          style={{ flexGrow: 1.2 }}
+                        >
                           <ChatInterface />
                         </div>
                       </CardContent>
