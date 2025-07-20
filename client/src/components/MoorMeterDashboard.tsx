@@ -550,22 +550,22 @@ export const MoorMeterDashboard: React.FC = () => {
                 <div className="lg:col-span-3 h-full max-h-full flex flex-col overflow-hidden">
                   <div className="space-y-4 overflow-y-auto flex-1 min-h-0 max-h-full pr-2 overflow-x-hidden">
                     {/* Enhanced Live Polls Widget */}
-                    <div className="flex-shrink-0">
+                    <div className="flex-shrink-0 overflow-hidden">
                       <LivePollsWidget />
                     </div>
 
                     {/* Enhanced AI Summary Widget */}
-                    <div className="flex-shrink-0">
+                    <div className="flex-shrink-0 overflow-hidden">
                       <AISummaryWidget />
                     </div>
 
                     {/* Enhanced Trending Topics Widget */}
-                    <div className="flex-shrink-0">
+                    <div className="flex-shrink-0 overflow-hidden">
                       <EnhancedTrendingTopicsWidget />
                     </div>
 
                     {/* Enhanced Top Discussed Widget */}
-                    <div className="flex-shrink-0">
+                    <div className="flex-shrink-0 overflow-hidden">
                       <TopDiscussedWidget />
                     </div>
                   </div>
