@@ -282,7 +282,7 @@ export const MoorMeterDashboard: React.FC = () => {
       subtabs: [
         { label: "Chat", key: "Chat", icon: MessageCircle },
                 { label: "Channels", key: "Channels", icon: Users, badge: "NEW" },
-        { label: "Off-Topic", key: "OffTopic", icon: Heart },
+        
 
         
         { label: "Private Room", key: "PrivateRoom", icon: Lock },
@@ -430,7 +430,7 @@ export const MoorMeterDashboard: React.FC = () => {
                       variant="outline"
                       className="flex items-center gap-2"
                     >
-                      {selectedCategory === "Crypto" ? "🪙" : "💬"}{" "}
+                      {selectedCategory === "Crypto" ? "����" : "💬"}{" "}
                       {selectedCategory}
                       <ChevronDown className="w-4 h-4" />
                     </Button>
