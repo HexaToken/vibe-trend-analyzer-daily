@@ -51,28 +51,17 @@ interface StockData {
   trendData: number[];
 }
 
-interface NewsItem {
-  id: string;
-  title: string;
-  summary: string;
+interface TrendingTopic {
+  topic: string;
+  label: string;
+  mentions: string;
   sentiment: 'bullish' | 'bearish' | 'neutral';
-  timestamp: Date;
-  source: string;
-}
-
-interface MarketReaction {
-  id: string;
-  user: string;
-  avatar: string;
-  message: string;
-  sentiment: 'bullish' | 'bearish' | 'neutral';
-  timestamp: Date;
-  mood: string;
+  icon: string;
 }
 
 export const FuturisticHomepage: React.FC = () => {
   const { setMoodScore } = useMoodTheme();
-  const [currentTheme, setCurrentTheme] = useState<'dark' | 'dynamic' | 'light'>('dynamic');
+  const [searchFocused, setSearchFocused] = useState(false);
   
   // Core mood data
   const [moodScore] = useState<MoodScore>({
@@ -83,30 +72,33 @@ export const FuturisticHomepage: React.FC = () => {
     timestamp: new Date()
   });
 
-  const [personalMoodScore] = useState(67);
-  const [searchFocused, setSearchFocused] = useState(false);
-
-    // Top 10 Movers data with logos and sentiment
+  // Top 10 Movers data with logos and sentiment
   const [topMovers] = useState<StockData[]>([
     { symbol: 'NVDA', name: 'NVIDIA Corp', price: 875.28, change: 23.45, changePercent: 2.76, sentiment: 'bullish', trendData: [870, 872, 878, 875] },
     { symbol: 'TSLA', name: 'Tesla Inc', price: 248.50, change: -8.22, changePercent: -3.21, sentiment: 'bearish', trendData: [245, 247, 250, 248] },
     { symbol: 'AAPL', name: 'Apple Inc', price: 190.64, change: 4.12, changePercent: 2.21, sentiment: 'bullish', trendData: [192, 191, 189, 190] },
     { symbol: 'GOOGL', name: 'Alphabet Inc', price: 139.69, change: -2.87, changePercent: -2.02, sentiment: 'bearish', trendData: [142, 140, 138, 139] },
     { symbol: 'MSFT', name: 'Microsoft Corp', price: 378.85, change: 7.44, changePercent: 2.00, sentiment: 'bullish', trendData: [375, 377, 380, 378] },
-    { symbol: 'AMZN', name: 'Amazon.com Inc', price: 155.74, change: -3.12, changePercent: -1.96, sentiment: 'bearish', trendData: [158, 156, 154, 155] },
-    { symbol: 'META', name: 'Meta Platforms', price: 501.92, change: 12.33, changePercent: 2.52, sentiment: 'bullish', trendData: [495, 498, 505, 501] },
-    { symbol: 'NFLX', name: 'Netflix Inc', price: 487.23, change: -15.77, changePercent: -3.14, sentiment: 'bearish', trendData: [492, 489, 485, 487] },
-    { symbol: 'CRM', name: 'Salesforce Inc', price: 284.56, change: 8.92, changePercent: 3.24, sentiment: 'bullish', trendData: [278, 281, 286, 284] },
-    { symbol: 'AMD', name: 'Advanced Micro Devices', price: 142.87, change: 5.43, changePercent: 3.95, sentiment: 'bullish', trendData: [138, 140, 144, 142] }
+    { symbol: 'AMZN', name: 'Amazon.com Inc', price: 155.74, change: -3.12, changePercent: -1.96, sentiment: 'bearish', trendData: [158, 156, 154, 155] }
   ]);
 
-    const [trendingTopics] = useState([
+  const [trendingTopics] = useState<TrendingTopic[]>([
     { topic: '$NVDA', label: 'Hype', mentions: '2,847', sentiment: 'bullish', icon: '🚀' },
     { topic: '$TSLA', label: 'Panic', mentions: '1,923', sentiment: 'bearish', icon: '📉' },
     { topic: 'AI Revolution', label: 'Hype', mentions: '4,512', sentiment: 'bullish', icon: '🤖' },
     { topic: 'Fed Meeting', label: 'Neutral', mentions: '3,674', sentiment: 'neutral', icon: '🏛️' },
     { topic: '$BTC', label: 'Hype', mentions: '5,291', sentiment: 'bullish', icon: '₿' },
     { topic: 'Inflation Data', label: 'Neutral', mentions: '2,183', sentiment: 'neutral', icon: '📊' }
+  ]);
+
+  const [moodTrendData] = useState([
+    { day: 'Mon', score: 58 },
+    { day: 'Tue', score: 62 },
+    { day: 'Wed', score: 55 },
+    { day: 'Thu', score: 68 },
+    { day: 'Fri', score: 72 },
+    { day: 'Sat', score: 69 },
+    { day: 'Sun', score: 72 }
   ]);
 
   const [aiInsight] = useState({
@@ -122,64 +114,14 @@ export const FuturisticHomepage: React.FC = () => {
     { symbol: 'GOOGL', change: -2.02, mood: 'bearish' }
   ]);
 
-  const [marketReactions] = useState<MarketReaction[]>([
-    {
-      id: '1',
-      user: 'Michael',
-      avatar: '/api/placeholder/32/32',
-      message: 'Looks like bull market coming',
-      sentiment: 'bullish',
-      timestamp: new Date(Date.now() - 300000),
-      mood: '😊'
-    },
-    {
-      id: '2',
-      user: 'Olivia',
-      avatar: '/api/placeholder/32/32',
-      message: 'Fed news seem prized in',
-      sentiment: 'neutral',
-      timestamp: new Date(Date.now() - 900000),
-      mood: '🤔'
-    },
-    {
-      id: '3',
-      user: 'Daniel',
-      avatar: '/api/placeholder/32/32',
-      message: "I've worried about those headlines",
-      sentiment: 'bearish',
-      timestamp: new Date(Date.now() - 1200000),
-      mood: '😰'
-    }
-  ]);
-
-  const [moodTrendData] = useState([
-    { day: 'Mon', score: 58, stocks: 55, news: 60, forums: 59 },
-    { day: 'Tue', score: 62, stocks: 58, news: 65, forums: 63 },
-    { day: 'Wed', score: 55, stocks: 52, news: 57, forums: 56 },
-    { day: 'Thu', score: 68, stocks: 65, news: 70, forums: 69 },
-    { day: 'Fri', score: 72, stocks: 70, news: 74, forums: 71 },
-    { day: 'Sat', score: 69, stocks: 67, news: 71, forums: 68 },
-    { day: 'Sun', score: 72, stocks: 69, news: 75, forums: 72 }
-  ]);
-
   // Update mood context
   useEffect(() => {
     setMoodScore(moodScore);
   }, [moodScore, setMoodScore]);
 
-  const getMoodLabel = (score: number) => {
-    if (score >= 80) return 'Euphoric';
-    if (score >= 70) return 'Optimistic';
-    if (score >= 60) return 'Positive';
-    if (score >= 50) return 'Neutral';
-    if (score >= 40) return 'Cautious';
-    if (score >= 30) return 'Bearish';
-    return 'Fearful';
-  };
-
   const getSentimentColor = (sentiment: string) => {
     switch (sentiment) {
-      case 'bullish': return 'text-cyan-400';
+      case 'bullish': return 'text-emerald-400';
       case 'bearish': return 'text-red-400';
       default: return 'text-amber-400';
     }
@@ -187,25 +129,24 @@ export const FuturisticHomepage: React.FC = () => {
 
   const getSentimentBadge = (sentiment: string) => {
     const colors = {
-      bullish: 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30',
+      bullish: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
       bearish: 'bg-red-500/20 text-red-400 border-red-500/30',
       neutral: 'bg-amber-500/20 text-amber-400 border-amber-500/30'
     };
     return colors[sentiment as keyof typeof colors];
   };
 
-  const formatTimeAgo = (timestamp: Date) => {
-    const now = new Date();
-    const diff = now.getTime() - timestamp.getTime();
-    const minutes = Math.floor(diff / 60000);
-    if (minutes < 60) return `${minutes}m ago`;
-    const hours = Math.floor(minutes / 60);
-    return `${hours}h ago`;
+  const getTrendingBadge = (label: string) => {
+    switch (label) {
+      case 'Hype': return 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30';
+      case 'Panic': return 'bg-red-500/20 text-red-400 border-red-500/30';
+      default: return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
+    }
   };
 
-    return (
+  return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
-            {/* Ambient Background Effects */}
+      {/* Ambient Background Effects */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-pink-500/10 to-purple-500/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
@@ -213,7 +154,7 @@ export const FuturisticHomepage: React.FC = () => {
         <div className="absolute top-3/4 left-1/3 w-64 h-64 bg-gradient-to-r from-emerald-500/6 to-teal-500/6 rounded-full blur-3xl animate-pulse delay-3000" />
       </div>
 
-            {/* Navigation */}
+      {/* Navigation */}
       <nav className="relative z-50 border-b border-purple-500/20 bg-black/60 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
@@ -229,21 +170,21 @@ export const FuturisticHomepage: React.FC = () => {
               </div>
               
               <nav className="hidden md:flex items-center gap-6">
-                {['Home', 'Market Mood', 'Watchlist', 'Economic Insights', 'Community'].map((item, index) => (
+                {['Home', 'Market Mood', 'Watchlist', 'News Feed', 'Community'].map((item, index) => (
                   <button
                     key={item}
                     className={cn(
                       "text-sm font-medium transition-all duration-300 relative group",
                       index === 0 
-                        ? "text-cyan-400" 
+                        ? "text-pink-400" 
                         : "text-gray-400 hover:text-white"
                     )}
                   >
                     {item}
                     {index === 0 && (
-                      <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full" />
+                      <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
                     )}
-                    <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </button>
                 ))}
               </nav>
@@ -261,32 +202,32 @@ export const FuturisticHomepage: React.FC = () => {
                     type="text"
                     placeholder="Search tickers or keywords..."
                     className={cn(
-                      "pl-12 pr-4 py-3 bg-black/30 border-cyan-500/30 rounded-xl text-white placeholder-gray-400 transition-all duration-300 backdrop-blur-sm",
-                      "focus:bg-black/50 focus:border-cyan-400/50 focus:ring-0 focus:outline-none",
-                      searchFocused && "shadow-lg shadow-cyan-500/10"
+                      "pl-12 pr-4 py-3 bg-black/30 border-purple-500/30 rounded-xl text-white placeholder-gray-400 transition-all duration-300 backdrop-blur-sm",
+                      "focus:bg-black/50 focus:border-pink-400/50 focus:ring-0 focus:outline-none",
+                      searchFocused && "shadow-lg shadow-pink-500/10"
                     )}
                     onFocus={() => setSearchFocused(true)}
                     onBlur={() => setSearchFocused(false)}
                   />
                   {searchFocused && (
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-pulse" />
+                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-pink-400 to-transparent animate-pulse" />
                   )}
                 </div>
               </div>
 
-              <Button variant="ghost" size="sm" className="relative p-3 hover:bg-cyan-500/10 rounded-xl group">
-                <Bell className="w-5 h-5 text-gray-300 group-hover:text-cyan-400 transition-colors" />
-                <Badge className="absolute -top-1 -right-1 w-5 h-5 p-0 bg-cyan-500 text-black text-xs flex items-center justify-center animate-pulse">
+              <Button variant="ghost" size="sm" className="relative p-3 hover:bg-purple-500/10 rounded-xl group">
+                <Bell className="w-5 h-5 text-gray-300 group-hover:text-purple-400 transition-colors" />
+                <Badge className="absolute -top-1 -right-1 w-5 h-5 p-0 bg-pink-500 text-white text-xs flex items-center justify-center animate-pulse">
                   3
                 </Badge>
               </Button>
 
-              <Button variant="ghost" size="sm" className="p-3 hover:bg-cyan-500/10 rounded-xl group">
-                <Settings className="w-5 h-5 text-gray-300 group-hover:text-cyan-400 transition-colors" />
+              <Button variant="ghost" size="sm" className="p-3 hover:bg-purple-500/10 rounded-xl">
+                <Moon className="w-5 h-5 text-gray-300 hover:text-purple-400 transition-colors" />
               </Button>
 
-              <Avatar className="w-10 h-10 ring-2 ring-cyan-500/30">
-                <AvatarFallback className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-cyan-300 text-sm">
+              <Avatar className="w-10 h-10 ring-2 ring-purple-500/30">
+                <AvatarFallback className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 text-sm">
                   JD
                 </AvatarFallback>
               </Avatar>
@@ -297,114 +238,107 @@ export const FuturisticHomepage: React.FC = () => {
 
       {/* Main Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-8">
+        
+        {/* Hero Mood Score Section */}
+        <div className="text-center mb-16">
+          {/* Large Mood Score with Animated Character */}
+          <div className="relative inline-block mb-8">
+            <div className="w-96 h-96 rounded-full relative">
+              {/* Animated gradient ring */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 via-cyan-500 to-pink-500 p-2 animate-spin-slow">
+                <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-900/90 to-purple-900/90 backdrop-blur-sm flex items-center justify-center">
+                  <div className="text-center">
+                    {/* Mood Emoji */}
+                    <div className="text-6xl mb-4 animate-bounce">
+                      😊
+                    </div>
+                    {/* Score */}
+                    <div className="text-9xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mb-2">
+                      {moodScore.overall}
+                    </div>
+                    {/* Label */}
+                    <div className="text-2xl font-bold text-white mb-1">
+                      Market is Positive
+                    </div>
+                    <div className="text-sm text-purple-300 uppercase tracking-wider">
+                      AI SENTIMENT SCORE
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Multiple pulse rings */}
+              <div className="absolute inset-0 rounded-full border-2 border-pink-400/40 animate-ping" />
+              <div className="absolute inset-2 rounded-full border border-purple-400/30 animate-ping delay-75" />
+              <div className="absolute inset-4 rounded-full border border-cyan-400/20 animate-ping delay-150" />
+            </div>
+          </div>
+          
+          {/* Subtitle */}
+          <p className="text-xl text-gray-200 max-w-3xl mx-auto mb-12 leading-relaxed">
+            Today's sentiment analysis powered by AI across stocks, news, and social media
+          </p>
+          
+          {/* Sentiment Source Breakdown */}
+          <div className="max-w-4xl mx-auto">
+            <h3 className="text-lg font-semibold text-white mb-6">Sentiment Source Breakdown</h3>
+            <div className="grid grid-cols-3 gap-6">
+              {[
+                { label: 'Stocks', value: moodScore.stocks, percentage: '40%', color: 'from-pink-500 to-rose-500', icon: '📈' },
+                { label: 'News', value: moodScore.news, percentage: '30%', color: 'from-purple-500 to-violet-500', icon: '📰' },
+                { label: 'Forums', value: moodScore.social, percentage: '30%', color: 'from-cyan-500 to-blue-500', icon: '💬' }
+              ].map((item) => (
+                <div key={item.label} className="bg-black/40 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-purple-500/30 transition-all duration-300">
+                  <div className="text-3xl mb-3">{item.icon}</div>
+                  <div className="text-3xl font-bold text-white mb-2">{item.value}</div>
+                  <div className="text-gray-300 font-medium mb-1">{item.label}</div>
+                  <div className="text-sm text-gray-400 mb-3">{item.percentage} weight</div>
+                  <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                    <div 
+                      className={`h-full bg-gradient-to-r ${item.color} transition-all duration-1000`}
+                      style={{ width: `${item.value}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           
           {/* Main Content Area */}
           <div className="lg:col-span-3 space-y-8">
             
-            {/* Hero Mood Score */}
-            <div className="text-center mb-12">
-              <div className="relative inline-block">
-                {/* Outer ring with animated gradient */}
-                <div className="w-80 h-80 rounded-full relative">
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 p-1 animate-spin-slow">
-                    <div className="w-full h-full rounded-full bg-black flex items-center justify-center">
-                      {/* Inner content */}
-                      <div className="text-center">
-                        <div className="text-8xl font-light text-white mb-4 animate-pulse">
-                          {moodScore.overall}
-                        </div>
-                        <div className="text-xl text-cyan-400 font-medium mb-2">
-                          {getMoodLabel(moodScore.overall)}
-                        </div>
-                        <div className="text-sm text-gray-400 uppercase tracking-wider">
-                          SCORE | 4%
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Pulse rings */}
-                  <div className="absolute inset-0 rounded-full border border-cyan-400/30 animate-ping" />
-                  <div className="absolute inset-4 rounded-full border border-cyan-400/20 animate-ping delay-75" />
-                </div>
-              </div>
-              
-              <p className="text-gray-300 max-w-2xl mx-auto mt-8 text-lg leading-relaxed">
-                Today's sentiment suggests rising investor confidence led by tech earnings.
-              </p>
-              
-              {/* Sentiment Breakdown */}
-              <div className="flex justify-center gap-8 mt-8">
-                {[
-                  { label: 'Stocks', value: moodScore.stocks, percentage: '40%' },
-                  { label: 'News', value: moodScore.news, percentage: '30%' },
-                  { label: 'Forums', value: moodScore.social, percentage: '30%' }
-                ].map((item) => (
-                  <div key={item.label} className="text-center">
-                    <div className="text-white font-medium text-lg mb-1">{item.value}</div>
-                    <div className="text-gray-400 text-sm">{item.label}</div>
-                    <div className="text-cyan-400 text-xs">{item.percentage}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Top Stocks */}
-            <Card className="bg-black/40 border-cyan-500/20 backdrop-blur-xl">
-              <CardHeader className="border-b border-cyan-500/20">
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-white flex items-center gap-2">
-                    Top 10 Stocks Today
-                  </CardTitle>
-                  <div className="flex gap-2">
-                    <Button variant="ghost" size="sm" className="text-cyan-400 hover:bg-cyan-500/10">
-                      Today
-                    </Button>
-                    <Button variant="ghost" size="sm" className="text-gray-400 hover:bg-cyan-500/10">
-                      Trend
-                    </Button>
-                  </div>
-                </div>
+            {/* Top 10 Movers Widget */}
+            <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
+              <CardHeader className="border-b border-purple-500/20">
+                <CardTitle className="text-white flex items-center gap-2">
+                  <TrendingUp className="w-6 h-6 text-emerald-400" />
+                  Top 10 Movers Today
+                </CardTitle>
               </CardHeader>
               <CardContent className="p-0">
-                <div className="divide-y divide-cyan-500/10">
-                  {topStocks.map((stock, index) => (
-                    <div key={stock.symbol} className="flex items-center justify-between p-6 hover:bg-cyan-500/5 transition-all duration-300 group">
-                      <div className="flex items-center gap-4">
-                        <span className="text-gray-400 text-sm w-6">{index + 1}</span>
-                        <div>
-                          <div className="flex items-center gap-3">
-                            <span className="font-medium text-white text-lg">{stock.symbol}</span>
-                            <Badge className={getSentimentBadge(stock.sentiment)}>
-                              {stock.sentiment}
-                            </Badge>
-                          </div>
-                          <div className="text-gray-400 text-sm">{stock.name}</div>
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 p-6">
+                  {topMovers.map((stock, index) => (
+                    <div key={stock.symbol} className="bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-4 border border-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="w-10 h-10 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg flex items-center justify-center">
+                          <span className="text-xs font-bold text-white">{stock.symbol[0]}</span>
                         </div>
+                        <Badge className={getSentimentBadge(stock.sentiment)}>
+                          {stock.sentiment}
+                        </Badge>
                       </div>
-                      
-                      {/* Mini trend chart */}
-                      <div className="hidden md:block">
-                        <svg width="60" height="30" className="text-cyan-400">
-                          <polyline
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            points={stock.trendData.map((value, i) => `${i * 20},${30 - (value - Math.min(...stock.trendData)) / (Math.max(...stock.trendData) - Math.min(...stock.trendData)) * 20}`).join(' ')}
-                            className="opacity-70 group-hover:opacity-100 transition-opacity"
-                          />
-                        </svg>
-                      </div>
-                      
-                      <div className="text-right">
-                        <div className="text-white font-medium text-lg">${stock.price}</div>
-                        <div className={cn(
-                          "text-sm font-medium flex items-center gap-1",
-                          stock.change >= 0 ? "text-cyan-400" : "text-red-400"
-                        )}>
-                          {stock.change >= 0 ? '+' : ''}{stock.change} ({stock.changePercent}%)
-                        </div>
+                      <div className="text-lg font-bold text-white mb-1">{stock.symbol}</div>
+                      <div className="text-sm text-gray-400 mb-2">{stock.name}</div>
+                      <div className="text-xl font-bold text-white mb-1">${stock.price}</div>
+                      <div className={cn(
+                        "flex items-center gap-1 text-sm font-medium",
+                        stock.change >= 0 ? "text-emerald-400" : "text-red-400"
+                      )}>
+                        {stock.change >= 0 ? <ArrowUp className="w-4 h-4" /> : <ArrowDown className="w-4 h-4" />}
+                        {stock.change >= 0 ? '+' : ''}{stock.change} ({stock.changePercent}%)
                       </div>
                     </div>
                   ))}
@@ -412,26 +346,33 @@ export const FuturisticHomepage: React.FC = () => {
               </CardContent>
             </Card>
 
-            {/* Mood Trend Graph */}
-            <Card className="bg-black/40 border-cyan-500/20 backdrop-blur-xl">
-              <CardHeader className="border-b border-cyan-500/20">
-                <CardTitle className="text-white">Mood Trend Graph</CardTitle>
+            {/* 7-Day Mood Trend Chart */}
+            <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
+              <CardHeader className="border-b border-purple-500/20">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <BarChart3 className="w-6 h-6 text-cyan-400" />
+                    7-Day Mood Trend
+                  </CardTitle>
+                  <div className="flex gap-2">
+                    <Button variant="ghost" size="sm" className="text-cyan-400 hover:bg-cyan-500/10">7D</Button>
+                    <Button variant="ghost" size="sm" className="text-gray-400 hover:bg-purple-500/10">30D</Button>
+                    <Button variant="ghost" size="sm" className="text-gray-400 hover:bg-purple-500/10">90D</Button>
+                  </div>
+                </div>
               </CardHeader>
               <CardContent className="p-6">
                 <div className="h-64 flex items-end justify-between gap-4">
                   {moodTrendData.map((day, index) => (
                     <div key={day.day} className="flex-1 flex flex-col items-center group">
                       <div 
-                        className="w-full bg-gradient-to-t from-cyan-500/60 to-cyan-400/80 rounded-t transition-all duration-500 hover:from-cyan-500/80 relative"
-                        style={{ height: `${day.score * 2.5}px` }}
+                        className="w-full bg-gradient-to-t from-cyan-500/60 to-purple-500/80 rounded-t transition-all duration-500 hover:from-cyan-500/80 hover:to-purple-500/100 relative"
+                        style={{ height: `${day.score * 2.8}px` }}
                       >
-                        {/* Hover tooltip */}
+                        {/* Hover popup */}
                         <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/80 text-white text-xs rounded px-2 py-1 whitespace-nowrap">
                           <div className="font-medium">{day.day}</div>
                           <div>Score: {day.score}</div>
-                          <div className="text-cyan-400">Stocks: {day.stocks}</div>
-                          <div className="text-blue-400">News: {day.news}</div>
-                          <div className="text-purple-400">Forums: {day.forums}</div>
                         </div>
                       </div>
                       <div className="text-xs text-gray-400 mt-2">{day.day}</div>
@@ -442,28 +383,26 @@ export const FuturisticHomepage: React.FC = () => {
               </CardContent>
             </Card>
 
-            {/* Smart News Feed */}
-            <Card className="bg-black/40 border-cyan-500/20 backdrop-blur-xl">
-              <CardHeader className="border-b border-cyan-500/20">
-                <CardTitle className="text-white">Smart News Feed</CardTitle>
+            {/* Trending Forum Topics */}
+            <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
+              <CardHeader className="border-b border-purple-500/20">
+                <CardTitle className="text-white flex items-center gap-2">
+                  <Fire className="w-6 h-6 text-orange-400" />
+                  Trending Forum Topics
+                </CardTitle>
               </CardHeader>
               <CardContent className="p-6">
-                <div className="space-y-4">
-                  {[
-                    { title: 'Tech, stocks rally as market has now high;', sentiment: 'bullish' as const },
-                    { title: 'Fed expected to maintain market safes', sentiment: 'neutral' as const }
-                  ].map((news, index) => (
-                    <div key={index} className="group p-4 rounded-lg border border-cyan-500/20 hover:border-cyan-500/40 transition-all duration-300 hover:bg-cyan-500/5">
-                      <div className="flex items-start gap-3">
-                        <Badge className={getSentimentBadge(news.sentiment)}>
-                          {news.sentiment}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {trendingTopics.map((topic, index) => (
+                    <div key={index} className="bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-4 border border-white/10 hover:border-purple-500/30 transition-all duration-300">
+                      <div className="flex items-center gap-3 mb-3">
+                        <span className="text-2xl">{topic.icon}</span>
+                        <Badge className={getTrendingBadge(topic.label)}>
+                          {topic.label}
                         </Badge>
-                        <div className="flex-1">
-                          <h3 className="text-white font-medium group-hover:text-cyan-400 transition-colors">
-                            {news.title}
-                          </h3>
-                        </div>
                       </div>
+                      <div className="text-lg font-bold text-white mb-1">{topic.topic}</div>
+                      <div className="text-sm text-gray-400">{topic.mentions} mentions</div>
                     </div>
                   ))}
                 </div>
@@ -474,84 +413,75 @@ export const FuturisticHomepage: React.FC = () => {
           {/* Right Sidebar */}
           <div className="space-y-6">
             
-            {/* Personalized Mood Score */}
-            <Card className="bg-black/40 border-cyan-500/20 backdrop-blur-xl">
-              <CardHeader className="border-b border-cyan-500/20">
-                <CardTitle className="text-white text-sm">Personalized Mood Score</CardTitle>
+            {/* Your Mood Score Card */}
+            <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
+              <CardHeader className="border-b border-purple-500/20">
+                <CardTitle className="text-white text-sm">Your Mood Score</CardTitle>
               </CardHeader>
               <CardContent className="p-6">
                 <div className="text-center mb-4">
-                  <div className="text-4xl font-bold text-white mb-2">+{personalMoodScore}</div>
-                  <div className="text-cyan-400 text-sm mb-4">Calm Optimism</div>
-                  <Button className="w-full bg-cyan-600/20 hover:bg-cyan-600/30 text-cyan-400 border border-cyan-500/30">
-                    Edit Watchlist
+                  <div className="text-4xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent mb-2">
+                    +64
+                  </div>
+                  <div className="text-emerald-400 text-sm mb-4">Based on your watchlist</div>
+                  <div className="space-y-2 mb-4">
+                    {userWatchlist.map((item, index) => (
+                      <div key={index} className="flex items-center justify-between text-sm">
+                        <span className="text-gray-300">{item.symbol}</span>
+                        <span className={cn(
+                          "font-medium",
+                          item.change >= 0 ? "text-emerald-400" : "text-red-400"
+                        )}>
+                          {item.change >= 0 ? '+' : ''}{item.change}%
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  <Button className="w-full bg-gradient-to-r from-purple-600/20 to-pink-600/20 hover:from-purple-600/30 hover:to-pink-600/30 text-purple-300 border border-purple-500/30">
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add/Remove Ticker
                   </Button>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Trending Topics */}
-            <Card className="bg-black/40 border-cyan-500/20 backdrop-blur-xl">
-              <CardHeader className="border-b border-cyan-500/20">
-                <CardTitle className="text-white text-sm">Trending Topics</CardTitle>
+            {/* AI Insight Module */}
+            <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
+              <CardHeader className="border-b border-purple-500/20">
+                <CardTitle className="text-white text-sm flex items-center gap-2">
+                  <Brain className="w-4 h-4 text-cyan-400" />
+                  {aiInsight.title}
+                </CardTitle>
               </CardHeader>
               <CardContent className="p-6">
-                <div className="space-y-3">
-                  {trendingTopics.map((topic, index) => (
-                    <div key={index} className="flex items-center justify-between group hover:bg-cyan-500/5 p-2 -m-2 rounded transition-colors">
-                      <div className="flex items-center gap-3">
-                        <Badge className={getSentimentBadge(topic.sentiment)}>
-                          {topic.sentiment}
-                        </Badge>
-                        <span className="text-white text-sm group-hover:text-cyan-400 transition-colors">
-                          {topic.topic}
-                        </span>
-                      </div>
-                    </div>
+                <p className="text-gray-300 text-sm leading-relaxed mb-4">
+                  {aiInsight.content}
+                </p>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs text-gray-400">Confidence</span>
+                  <span className="text-sm font-bold text-cyan-400">{aiInsight.confidence}%</span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {aiInsight.keyDrivers.map((driver, index) => (
+                    <Badge key={index} className="bg-cyan-500/20 text-cyan-400 border-cyan-500/30 text-xs">
+                      {driver}
+                    </Badge>
                   ))}
                 </div>
               </CardContent>
             </Card>
 
-            {/* Market Reactions */}
-            <Card className="bg-black/40 border-cyan-500/20 backdrop-blur-xl">
-              <CardHeader className="border-b border-cyan-500/20">
-                <CardTitle className="text-white text-sm">Market Reactions</CardTitle>
-              </CardHeader>
-              <CardContent className="p-6">
-                <div className="space-y-4">
-                  {marketReactions.map((reaction) => (
-                    <div key={reaction.id} className="flex items-start gap-3 p-3 rounded-lg hover:bg-cyan-500/5 transition-colors">
-                      <Avatar className="w-8 h-8">
-                        <AvatarFallback className="bg-cyan-500/20 text-cyan-300 text-xs">
-                          {reaction.user[0]}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="text-sm font-medium text-white">{reaction.user}</span>
-                          <span className="text-lg">{reaction.mood}</span>
-                          <span className="text-xs text-gray-500">{formatTimeAgo(reaction.timestamp)}</span>
-                        </div>
-                        <p className="text-sm text-gray-300">{reaction.message}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* API Status */}
+            {/* Footer Status */}
             <div className="text-center">
-              <Badge className="bg-cyan-500/20 text-cyan-400 border-cyan-500/30">
-                Mood Score API: ● Live
+              <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30">
+                Mood Score API: ✅ Live
               </Badge>
             </div>
           </div>
         </div>
       </div>
 
-            {/* Custom CSS for animations */}
+      {/* Custom CSS for animations */}
       <style>{`
         @keyframes spin-slow {
           from {
