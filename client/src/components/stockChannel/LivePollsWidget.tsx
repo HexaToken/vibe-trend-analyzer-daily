@@ -40,7 +40,7 @@ export const LivePollsWidget: React.FC<LivePollsWidgetProps> = ({
 
   return (
     <Card
-      className={`bg-gradient-to-br from-violet-900/50 to-purple-900/50 border-violet-500/20 hover:border-violet-400/40 transition-all duration-300 ${className}`}
+      className={`bg-gradient-to-br from-violet-900/50 to-purple-900/50 border-violet-500/20 hover:border-violet-400/40 transition-all duration-300 overflow-hidden ${className}`}
     >
       <CardHeader className="pb-3">
         <CardTitle className="text-white flex items-center gap-2 text-lg font-bold">
@@ -51,7 +51,7 @@ export const LivePollsWidget: React.FC<LivePollsWidgetProps> = ({
           <span className="text-sm">⏳ Expires in {timeRemaining}</span>
         </div>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-4 overflow-hidden">
         <div className="space-y-3">
           <h4 className="text-white font-semibold text-base">
             Which ticker will moon today? 🚀
@@ -116,7 +116,7 @@ export const LivePollsWidget: React.FC<LivePollsWidgetProps> = ({
                   </button>
 
                   {selectedOption === option.ticker && (
-                    <div className="absolute -top-1 -right-1">
+                    <div className="absolute top-0 right-0">
                       <div className="w-2 h-2 bg-violet-400 rounded-full animate-pulse" />
                     </div>
                   )}
