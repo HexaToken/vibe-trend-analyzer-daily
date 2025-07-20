@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import DOMPurify from 'dompurify';
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
@@ -393,9 +394,9 @@ export const PostComposer: React.FC<PostComposerProps> = ({
             {content.trim() && (
               <div className="text-xs text-gray-600 dark:text-gray-400 p-2 bg-gray-100 dark:bg-gray-800 rounded">
                 <div className="font-medium mb-1">Preview:</div>
-                <div
+                                <div
                   dangerouslySetInnerHTML={{
-                    __html: highlightContent(content),
+                    __html: DOMPurify.sanitize(highlightContent(content)),
                   }}
                   className="leading-relaxed"
                 />
