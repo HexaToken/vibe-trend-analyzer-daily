@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { PrivateRoomsMain } from "./PrivateRoomsMain";
 import { CreateRoomModal } from "./CreateRoomModal";
+import { PrivateRoomChat } from "./PrivateRoomChat";
 import { PrivateRoom, User } from "@/types/privateRooms";
 import { mockUsers } from "@/data/privateRoomsMockData";
 
