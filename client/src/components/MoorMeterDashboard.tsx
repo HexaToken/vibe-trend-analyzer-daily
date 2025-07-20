@@ -58,7 +58,6 @@ import { CommunityRooms } from "./social/CommunityRooms";
 import { LivePollsWidget } from "./stockChannel/LivePollsWidget";
 import { AISummaryWidget } from "./stockChannel/AISummaryWidget";
 import { TrendingTopicsWidget as EnhancedTrendingTopicsWidget } from "./stockChannel/TrendingTopicsWidget";
-import { TopDiscussedWidget } from "./stockChannel/TopDiscussedWidget";
 
 import { StockTwistRoom } from "./rooms/StockTwistRoom";
 import { CommunityForum } from "./community/CommunityForum";
