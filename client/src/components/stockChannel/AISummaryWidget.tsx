@@ -147,9 +147,11 @@ export const AISummaryWidget: React.FC<AISummaryWidgetProps> = ({
 
         {/* Confidence meter */}
         <div className="space-y-2">
-          <div className="flex justify-between text-xs text-blue-200">
-            <span>AI Confidence</span>
-            <span>{sentiment.confidence}%</span>
+          <div className="flex justify-between text-xs text-blue-200 overflow-hidden">
+            <span className="truncate">AI Confidence</span>
+            <span className="whitespace-nowrap">
+              {sentiment.confidence.toFixed(2)}%
+            </span>
           </div>
           <div className="w-full bg-gray-700/50 rounded-full h-2">
             <div
