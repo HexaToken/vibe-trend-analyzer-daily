@@ -128,7 +128,7 @@ const HeroSection: React.FC<{ moodScore: MoodScore }> = ({ moodScore }) => {
     if (score >= 70) return "😊";
     if (score >= 60) return "😊";
     if (score >= 50) return "😐";
-    if (score >= 40) return "😕";
+    if (score >= 40) return "����";
     if (score >= 30) return "😢";
     return "😱";
   };
@@ -674,34 +674,14 @@ export const HomePage: React.FC = () => {
   const { data: stockSentiment, loading: stockLoading } = useStockSentiment();
   const { articles: newsArticles, loading: newsLoading } = useCombinedBusinessNews();
 
-    const calculateMoodScore = useCallback((): MoodScore => {
-    let stocksScore = stockSentiment?.score || 50;
-    let newsScore = 45 + Math.random() * 20;
-    let socialScore = 55 + Math.random() * 15;
-
-    const overall = Math.round(
-      stocksScore * 0.4 + newsScore * 0.3 + socialScore * 0.3
-    );
-
-    return {
-      overall,
-      stocks: stocksScore,
-      news: newsScore,
-      social: socialScore,
-      timestamp: new Date(),
-    };
-  }, [stockSentiment?.score]);
-
-    const [moodScore, setMoodScore] = useState<MoodScore>(() => calculateMoodScore());
-
-        // Periodic updates every 30 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setMoodScore(calculateMoodScore());
-    }, 30000);
-
-    return () => clearInterval(interval);
-  }, [calculateMoodScore]);
+      // Simple static mood score to prevent render loops
+  const moodScore: MoodScore = useMemo(() => ({
+    overall: stockSentiment?.score || 72,
+    stocks: stockSentiment?.score || 72,
+    news: 65,
+    social: 68,
+    timestamp: new Date(),
+  }), [stockSentiment?.score]);
 
   const trendingTopics: TrendingTopic[] = [
     { term: "AI Revolution", sentiment: 85, volume: 12500, source: "reddit", change24h: 12.5, discussion_count: 1247 },
