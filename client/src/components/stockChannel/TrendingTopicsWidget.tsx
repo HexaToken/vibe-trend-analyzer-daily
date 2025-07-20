@@ -96,14 +96,6 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
     return () => clearInterval(interval);
   }, []);
 
-  const getSentimentColor = (sentiment: number) => {
-    if (sentiment > 20)
-      return "bg-green-500/20 text-green-400 border-green-500/30";
-    if (sentiment > -20)
-      return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30";
-    return "bg-red-500/20 text-red-400 border-red-500/30";
-  };
-
   const getVolumeColor = (volume: string) => {
     switch (volume) {
       case "High":
