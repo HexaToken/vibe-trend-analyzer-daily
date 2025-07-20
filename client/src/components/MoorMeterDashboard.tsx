@@ -548,25 +548,39 @@ export const MoorMeterDashboard: React.FC = () => {
 
                 {/* Right Sidebar - Enhanced Widgets (20%) */}
                 <div className="lg:col-span-2 h-full max-h-full flex flex-col overflow-hidden">
-                  <div className="space-y-4 overflow-y-auto flex-1 min-h-0 max-h-full pr-2 overflow-x-hidden w-full">
-                    {/* Enhanced Live Polls Widget */}
-                    <div className="flex-shrink-0 overflow-hidden w-full">
-                      <LivePollsWidget className="w-full" />
+                  <div className="space-y-6 overflow-y-auto flex-1 min-h-0 max-h-full pr-2 overflow-x-hidden w-full">
+                    {/* Sentiment Zone */}
+                    <div className="space-y-4">
+                      <div className="text-xs font-medium text-blue-300 uppercase tracking-wider px-1">
+                        📊 Sentiment Zone
+                      </div>
+
+                      {/* Live Polls Widget */}
+                      <div className="flex-shrink-0 overflow-hidden w-full">
+                        <LivePollsWidget className="w-full max-h-[280px] shadow-lg hover:shadow-xl transition-shadow duration-300" />
+                      </div>
+
+                      {/* AI Summary Widget */}
+                      <div className="flex-shrink-0 overflow-hidden w-full">
+                        <AISummaryWidget className="w-full max-h-[280px] shadow-lg hover:shadow-xl transition-shadow duration-300" />
+                      </div>
                     </div>
 
-                    {/* Enhanced AI Summary Widget */}
-                    <div className="flex-shrink-0 overflow-hidden w-full">
-                      <AISummaryWidget className="w-full" />
-                    </div>
+                    {/* Hype Zone */}
+                    <div className="space-y-4">
+                      <div className="text-xs font-medium text-orange-300 uppercase tracking-wider px-1">
+                        🔥 Hype Zone
+                      </div>
 
-                    {/* Enhanced Trending Topics Widget */}
-                    <div className="flex-shrink-0 overflow-hidden w-full">
-                      <EnhancedTrendingTopicsWidget className="w-full" />
-                    </div>
+                      {/* Trending Topics Widget */}
+                      <div className="flex-shrink-0 overflow-hidden w-full">
+                        <EnhancedTrendingTopicsWidget className="w-full max-h-[280px] shadow-lg hover:shadow-xl transition-shadow duration-300" />
+                      </div>
 
-                    {/* Enhanced Top Discussed Widget */}
-                    <div className="flex-shrink-0 overflow-hidden w-full">
-                      <TopDiscussedWidget className="w-full" />
+                      {/* Top Discussed Widget */}
+                      <div className="flex-shrink-0 overflow-hidden w-full">
+                        <TopDiscussedWidget className="w-full max-h-[280px] shadow-lg hover:shadow-xl transition-shadow duration-300" />
+                      </div>
                     </div>
                   </div>
                 </div>
