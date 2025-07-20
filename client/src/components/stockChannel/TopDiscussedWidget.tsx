@@ -132,7 +132,7 @@ export const TopDiscussedWidget: React.FC<TopDiscussedWidgetProps> = ({
       </CardHeader>
       <CardContent className="overflow-hidden">
         <div className="space-y-3">
-          {sortedStocks.map((stock, index) => (
+          {stocks.map((stock, index) => (
             <div
               key={stock.id}
               className="flex items-center justify-between p-3 rounded-lg bg-gray-700/30 hover:bg-gray-700/50 transition-all duration-200 cursor-pointer border border-gray-600/20 hover:border-gray-500/50 overflow-hidden"
