@@ -416,12 +416,8 @@ export const MoorMeterDashboard: React.FC = () => {
                     : activeCommunitySubtab === "Crypto"
                       ? "Dedicated crypto-only channels with real-time price feeds and sentiment tracking"
                       : activeCommunitySubtab === "OffTopic"
-                        ? "Casual lounge for memes, general discussions, and relaxation"
-                        : activeCommunitySubtab === "Rooms"
-                          ? selectedCategory === "Crypto"
-                            ? "Join crypto-focused chat rooms and trending discussions"
-                            : "Discuss trends, share sentiment, and join chat rooms"
-                          : activeCommunitySubtab === "PrivateRoom"
+                                                ? "Casual lounge for memes, general discussions, and relaxation"
+                        : activeCommunitySubtab === "PrivateRoom"
                             ? "Create invite-only watchlist rooms for focused discussions with fellow traders"
                             : "Connect with fellow traders and share insights"}
                 </p>
