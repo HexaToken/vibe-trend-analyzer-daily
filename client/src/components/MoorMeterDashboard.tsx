@@ -561,7 +561,7 @@ export const MoorMeterDashboard: React.FC = () => {
                       {/* Sentiment Zone */}
                       <div className="space-y-4">
                         <div className="text-xs font-medium text-blue-300 uppercase tracking-wider px-1">
-                          ��� Sentiment Zone
+                                                    <p>Buzz Board</p>
                         </div>
 
                         {/* Live Polls Widget */}

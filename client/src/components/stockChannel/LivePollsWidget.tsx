@@ -53,8 +53,8 @@ export const LivePollsWidget: React.FC<LivePollsWidgetProps> = ({
       </CardHeader>
       <CardContent className="space-y-3 overflow-y-auto max-h-[200px] p-4">
         <div className="space-y-3">
-          <h4 className="text-white font-semibold text-base">
-            Which ticker will moon today? 🚀
+                    <h4 className="text-white font-semibold text-base">
+            <p>Next to moon? 🚀</p>
           </h4>
 
           <div className="space-y-3">
@@ -81,10 +81,7 @@ export const LivePollsWidget: React.FC<LivePollsWidgetProps> = ({
                       </span>
                     )}
                   </div>
-                  <div className="flex items-center gap-2 text-violet-200 overflow-hidden">
-                    <span className="whitespace-nowrap text-xs">
-                      {option.percentage.toFixed(2)}%
-                    </span>
+                                    <div className="flex items-center gap-2 text-violet-200 overflow-hidden">
                     <span className="text-[10px] truncate">
                       ({option.votes.toLocaleString()})
                     </span>
