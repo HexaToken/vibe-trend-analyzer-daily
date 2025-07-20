@@ -100,12 +100,26 @@ export const FuturisticHomepage: React.FC = () => {
     { symbol: 'AMD', name: 'Advanced Micro Devices', price: 142.87, change: 5.43, changePercent: 3.95, sentiment: 'bullish', trendData: [138, 140, 144, 142] }
   ]);
 
-  const [trendingTopics] = useState([
-    { topic: 'CPI', sentiment: 'bullish', discussions: '8.9K' },
-    { topic: 'Fed', sentiment: 'bullish', discussions: '12.5K' },
-    { topic: 'Fed', sentiment: 'neutral', discussions: '15.6K' },
-    { topic: 'Inflation', sentiment: 'neutral', discussions: '7.2K' },
-    { topic: 'Bearish', sentiment: 'bearish', discussions: '5.8K' }
+    const [trendingTopics] = useState([
+    { topic: '$NVDA', label: 'Hype', mentions: '2,847', sentiment: 'bullish', icon: '🚀' },
+    { topic: '$TSLA', label: 'Panic', mentions: '1,923', sentiment: 'bearish', icon: '📉' },
+    { topic: 'AI Revolution', label: 'Hype', mentions: '4,512', sentiment: 'bullish', icon: '🤖' },
+    { topic: 'Fed Meeting', label: 'Neutral', mentions: '3,674', sentiment: 'neutral', icon: '🏛️' },
+    { topic: '$BTC', label: 'Hype', mentions: '5,291', sentiment: 'bullish', icon: '₿' },
+    { topic: 'Inflation Data', label: 'Neutral', mentions: '2,183', sentiment: 'neutral', icon: '📊' }
+  ]);
+
+  const [aiInsight] = useState({
+    title: "Today's AI Market Insight",
+    content: "Today's sentiment is driven by strong AI earnings momentum, with tech stocks leading the rally. The Fed's dovish stance is providing additional tailwinds for growth sectors.",
+    confidence: 87,
+    keyDrivers: ['AI Earnings', 'Fed Policy', 'Tech Rally']
+  });
+
+  const [userWatchlist] = useState([
+    { symbol: 'NVDA', change: 2.76, mood: 'bullish' },
+    { symbol: 'AAPL', change: 2.21, mood: 'bullish' },
+    { symbol: 'GOOGL', change: -2.02, mood: 'bearish' }
   ]);
 
   const [marketReactions] = useState<MarketReaction[]>([
