@@ -496,100 +496,101 @@ export const MoorMeterDashboard: React.FC = () => {
               </div>
             )}
 
-                        {/* Render content based on active subtab */}
+            {/* Render content based on active subtab */}
             {activeCommunitySubtab === "Chat" && (
               <>
                 {/* Live Trending Ticker */}
                 <TrendingTicker className="mb-4" />
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[calc(100vh-240px)] min-h-[700px] max-h-[calc(100vh-240px)] overflow-hidden">
-                {/* Left Section - Stock Channels (Primary Content 75%) */}
-                <div className="lg:col-span-9 flex flex-col h-full max-h-full overflow-hidden">
-                  <Card className="bg-gray-800/50 border-gray-700/50 flex flex-col h-full max-h-full overflow-hidden">
-                    <CardHeader className="pb-4 flex-shrink-0">
-                      <div className="text-white text-2xl font-normal gap-2 -tracking-wide">
-                        📈 Stock Channels – Real-time market chat
-                      </div>
-                      {/* Search Bar */}
-                      <div className="relative mt-4">
-                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                        <Input
-                          type="text"
-                          placeholder="Search ticker... ($TSLA, $NVDA, $AAPL)"
-                          className="pl-10 bg-gray-700/50 border-gray-600/50 text-white placeholder-gray-400"
-                        />
-                      </div>
-                    </CardHeader>
-                    <CardContent className="flex-1 flex flex-col overflow-hidden min-h-0">
-                      {/* Pinned Post */}
-                      <div className="mb-4 p-4 bg-blue-900/20 border border-blue-500/30 rounded-lg flex-shrink-0">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Flag className="w-4 h-4 text-blue-400" />
-                          <span className="text-blue-400 font-medium">
-                            Pinned
-                          </span>
-                          <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30">
-                            Mod Post
-                          </Badge>
+                  {/* Left Section - Stock Channels (Primary Content 75%) */}
+                  <div className="lg:col-span-9 flex flex-col h-full max-h-full overflow-hidden">
+                    <Card className="bg-gray-800/50 border-gray-700/50 flex flex-col h-full max-h-full overflow-hidden">
+                      <CardHeader className="pb-4 flex-shrink-0">
+                        <div className="text-white text-2xl font-normal gap-2 -tracking-wide">
+                          📈 Stock Channels – Real-time market chat
                         </div>
-                        <p className="text-white text-sm">
-                          📊 <strong>Daily Market Wrap:</strong> Tech earnings
-                          season heating up! NVDA reports after market close.
-                          Remember to follow community guidelines and keep
-                          discussions respectful.
-                          <span className="text-blue-400">
-                            #TechEarnings #NVDA
-                          </span>
-                        </p>
+                        {/* Search Bar */}
+                        <div className="relative mt-4">
+                          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                          <Input
+                            type="text"
+                            placeholder="Search ticker... ($TSLA, $NVDA, $AAPL)"
+                            className="pl-10 bg-gray-700/50 border-gray-600/50 text-white placeholder-gray-400"
+                          />
+                        </div>
+                      </CardHeader>
+                      <CardContent className="flex-1 flex flex-col overflow-hidden min-h-0">
+                        {/* Pinned Post */}
+                        <div className="mb-4 p-4 bg-blue-900/20 border border-blue-500/30 rounded-lg flex-shrink-0">
+                          <div className="flex items-center gap-2 mb-2">
+                            <Flag className="w-4 h-4 text-blue-400" />
+                            <span className="text-blue-400 font-medium">
+                              Pinned
+                            </span>
+                            <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30">
+                              Mod Post
+                            </Badge>
+                          </div>
+                          <p className="text-white text-sm">
+                            📊 <strong>Daily Market Wrap:</strong> Tech earnings
+                            season heating up! NVDA reports after market close.
+                            Remember to follow community guidelines and keep
+                            discussions respectful.
+                            <span className="text-blue-400">
+                              #TechEarnings #NVDA
+                            </span>
+                          </p>
+                        </div>
+
+                        {/* Chat Interface Area - Now expands to fill remaining space */}
+                        <div className="flex-1 bg-gray-900/50 rounded-lg border border-gray-600/30 min-h-0 overflow-hidden">
+                          <ChatInterface />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+
+                  {/* Right Sidebar - Enhanced Widgets (20%) */}
+                  <div className="lg:col-span-3 h-full max-h-full flex flex-col overflow-hidden">
+                    <div className="space-y-6 overflow-y-auto flex-1 min-h-0 max-h-full pr-2 overflow-x-hidden w-full">
+                      {/* Sentiment Zone */}
+                      <div className="space-y-4">
+                        <div className="text-xs font-medium text-blue-300 uppercase tracking-wider px-1">
+                          📊 Sentiment Zone
+                        </div>
+
+                        {/* Live Polls Widget */}
+                        <div className="flex-shrink-0 overflow-hidden w-full">
+                          <LivePollsWidget className="w-full max-h-[280px] shadow-lg hover:shadow-xl transition-shadow duration-300" />
+                        </div>
+
+                        {/* AI Summary Widget */}
+                        <div className="flex-shrink-0 overflow-hidden w-full">
+                          <AISummaryWidget className="w-full max-h-[280px] shadow-lg hover:shadow-xl transition-shadow duration-300" />
+                        </div>
                       </div>
 
-                      {/* Chat Interface Area - Now expands to fill remaining space */}
-                      <div className="flex-1 bg-gray-900/50 rounded-lg border border-gray-600/30 min-h-0 overflow-hidden">
-                        <ChatInterface />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
+                      {/* Hype Zone */}
+                      <div className="space-y-4">
+                        <div className="text-xs font-medium text-orange-300 uppercase tracking-wider px-1">
+                          🔥 Hype Zone
+                        </div>
 
-                {/* Right Sidebar - Enhanced Widgets (20%) */}
-                <div className="lg:col-span-3 h-full max-h-full flex flex-col overflow-hidden">
-                  <div className="space-y-6 overflow-y-auto flex-1 min-h-0 max-h-full pr-2 overflow-x-hidden w-full">
-                    {/* Sentiment Zone */}
-                    <div className="space-y-4">
-                      <div className="text-xs font-medium text-blue-300 uppercase tracking-wider px-1">
-                        📊 Sentiment Zone
-                      </div>
+                        {/* Trending Topics Widget */}
+                        <div className="flex-shrink-0 overflow-hidden w-full">
+                          <EnhancedTrendingTopicsWidget className="w-full max-h-[280px] shadow-lg hover:shadow-xl transition-shadow duration-300" />
+                        </div>
 
-                      {/* Live Polls Widget */}
-                      <div className="flex-shrink-0 overflow-hidden w-full">
-                        <LivePollsWidget className="w-full max-h-[280px] shadow-lg hover:shadow-xl transition-shadow duration-300" />
-                      </div>
-
-                      {/* AI Summary Widget */}
-                      <div className="flex-shrink-0 overflow-hidden w-full">
-                        <AISummaryWidget className="w-full max-h-[280px] shadow-lg hover:shadow-xl transition-shadow duration-300" />
-                      </div>
-                    </div>
-
-                    {/* Hype Zone */}
-                    <div className="space-y-4">
-                      <div className="text-xs font-medium text-orange-300 uppercase tracking-wider px-1">
-                        🔥 Hype Zone
-                      </div>
-
-                      {/* Trending Topics Widget */}
-                      <div className="flex-shrink-0 overflow-hidden w-full">
-                        <EnhancedTrendingTopicsWidget className="w-full max-h-[280px] shadow-lg hover:shadow-xl transition-shadow duration-300" />
-                      </div>
-
-                      {/* Top Discussed Widget */}
-                      <div className="flex-shrink-0 overflow-hidden w-full">
-                        <TopDiscussedWidget className="w-full max-h-[280px] shadow-lg hover:shadow-xl transition-shadow duration-300" />
+                        {/* Top Discussed Widget */}
+                        <div className="flex-shrink-0 overflow-hidden w-full">
+                          <TopDiscussedWidget className="w-full max-h-[280px] shadow-lg hover:shadow-xl transition-shadow duration-300" />
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </>
             )}
             {activeCommunitySubtab === "Crypto" && <CryptoChannels />}
             {activeCommunitySubtab === "OffTopic" && <OffTopicLounge />}
