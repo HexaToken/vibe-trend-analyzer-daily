@@ -183,24 +183,6 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
                   </div>
                 </div>
               </div>
-
-              <div className="flex items-center gap-2 flex-shrink-0">
-                <Badge
-                  className={`px-2 py-1 min-w-[60px] max-w-[80px] overflow-hidden text-ellipsis whitespace-nowrap text-center ${getSentimentColor(topic.sentiment)}`}
-                >
-                  <div className="flex items-center justify-center gap-1">
-                    {topic.sentiment > 0 ? (
-                      <TrendingUp className="w-3 h-3 flex-shrink-0" />
-                    ) : (
-                      <TrendingDown className="w-3 h-3 flex-shrink-0" />
-                    )}
-                    <span className="text-[clamp(0.75rem,2vw,1rem)] font-medium">
-                      {topic.sentiment > 0 ? "+" : ""}
-                      {topic.sentiment.toFixed(2)}%
-                    </span>
-                  </div>
-                </Badge>
-              </div>
             </div>
           ))}
         </div>
