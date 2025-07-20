@@ -49,6 +49,7 @@ import {
   Filter,
   Sparkles,
   TrendingDownIcon,
+  Minus,
 } from "lucide-react";
 
 import {
@@ -393,7 +394,7 @@ export const StockTwistRoom: React.FC<StockTwistRoomProps> = ({
               <div className="space-y-2 text-sm">
                 <div className="font-medium">Key Insights:</div>
                 <ul className="space-y-1 text-xs text-gray-600 dark:text-gray-400">
-                  <li>• Strong bullish sentiment on AI stocks</li>
+                  <li>�� Strong bullish sentiment on AI stocks</li>
                   <li>• 73% of trades are buy signals</li>
                   <li>• NVDA most discussed (+247 mentions)</li>
                   <li>• Average confidence: 3.2/5 stars</li>
