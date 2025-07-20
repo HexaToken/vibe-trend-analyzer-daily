@@ -134,11 +134,23 @@ All colors MUST be HSL.
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    /* Mood Theme Variables */
+        /* Mood Theme Variables */
     --mood-gradient-from: 15 23 42; /* slate-900 fallback */
     --mood-gradient-to: 30 64 175; /* blue-700 fallback */
     --mood-accent: 59 130 246; /* blue-500 fallback */
     --mood-glow: rgba(59, 130, 246, 0.2); /* blue glow fallback */
+
+    /* Luxury Theme Variables */
+    --luxury-gold: 212 175 55; /* #d4af37 */
+    --luxury-gold-light: 255 223 0; /* #ffdf00 */
+    --luxury-blue: 20 62 138; /* #143e8a */
+    --luxury-sapphire: 15 82 186; /* #0f52ba */
+    --luxury-obsidian: 8 8 12; /* #08080c */
+    --luxury-charcoal: 24 24 27; /* #18181b */
+    --luxury-glass: rgba(255, 255, 255, 0.05);
+    --luxury-glass-border: rgba(255, 255, 255, 0.1);
+    --luxury-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+    --luxury-glow: 0 0 40px rgba(212, 175, 55, 0.3);
   }
 
   /* Mood-based dynamic classes */
@@ -196,21 +208,129 @@ All colors MUST be HSL.
     }
   }
 
-  /* Mood-based animations */
+    /* Mood-based animations */
   .mood-transition {
     transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Luxury animations and effects */
+  .luxury-glow {
+    box-shadow: var(--luxury-glow);
+    animation: luxury-pulse 4s ease-in-out infinite;
+  }
+
+  .luxury-card {
+    background: linear-gradient(145deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.02) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--luxury-glass-border);
+    box-shadow: var(--luxury-shadow);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .luxury-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--luxury-shadow), var(--luxury-glow);
+    border-color: rgba(212, 175, 55, 0.3);
+  }
+
+  .glassmorphism {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(30px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .luxury-gradient {
+    background: linear-gradient(135deg,
+      rgb(var(--luxury-obsidian)) 0%,
+      rgb(var(--luxury-charcoal)) 50%,
+      rgb(var(--luxury-obsidian)) 100%);
+  }
+
+  .gold-gradient {
+    background: linear-gradient(135deg,
+      rgb(var(--luxury-gold)) 0%,
+      rgb(var(--luxury-gold-light)) 100%);
+  }
+
+  .mood-orb {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mood-orb::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: conic-gradient(from 0deg,
+      transparent 0deg,
+      rgb(var(--luxury-gold)) 90deg,
+      transparent 180deg,
+      rgb(var(--luxury-sapphire)) 270deg,
+      transparent 360deg);
+    border-radius: inherit;
+    animation: rotate-border 8s linear infinite;
+    z-index: -1;
+  }
+
+  .mood-orb::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: var(--luxury-gradient);
+    border-radius: inherit;
+    z-index: -1;
   }
 
   .mood-glow-animation {
     animation: mood-pulse 3s ease-in-out infinite;
   }
 
-  @keyframes mood-pulse {
+    @keyframes mood-pulse {
     0%, 100% {
       box-shadow: 0 0 20px var(--mood-glow);
     }
     50% {
       box-shadow: 0 0 40px var(--mood-glow), 0 0 60px var(--mood-glow);
+    }
+  }
+
+  @keyframes luxury-pulse {
+    0%, 100% {
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 60px rgba(212, 175, 55, 0.4), 0 0 100px rgba(212, 175, 55, 0.2);
+    }
+  }
+
+  @keyframes rotate-border {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes emerge {
+    0% {
+      opacity: 0;
+      transform: translateY(30px) scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0px) scale(1);
     }
   }
 
