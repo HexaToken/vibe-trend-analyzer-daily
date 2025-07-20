@@ -265,25 +265,28 @@ export const FuturisticHomepage: React.FC = () => {
           {/* Large Mood Score with Animated Character */}
           <div className="relative inline-block mb-8">
             <div className="w-96 h-96 rounded-full relative">
-              {/* Animated gradient ring */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 via-cyan-500 to-pink-500 p-2 animate-spin-slow">
-                <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-900/90 to-purple-900/90 backdrop-blur-sm flex items-center justify-center">
-                  <div className="text-center">
-                    {/* Mood Emoji */}
-                    <div className="text-6xl mb-4 animate-bounce">
-                      😊
-                    </div>
-                    {/* Score */}
-                    <div className="text-9xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mb-2">
-                      {moodScore.overall}
-                    </div>
-                    {/* Label */}
-                    <div className="text-2xl font-bold text-white mb-1">
-                      Market is Positive
-                    </div>
-                    <div className="text-sm text-purple-300 uppercase tracking-wider">
-                      AI SENTIMENT SCORE
-                    </div>
+                            {/* Animated gradient ring - rotates around the content */}
+              <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${getSentimentGradient(currentSentiment)} p-2 animate-spin-slow`}>
+                <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-900/90 to-purple-900/90 backdrop-blur-sm" />
+              </div>
+
+              {/* Fixed content container - does not rotate */}
+              <div className="absolute inset-2 flex items-center justify-center">
+                <div className="text-center">
+                  {/* Mood Emoji - Fixed in place */}
+                  <div className="text-6xl mb-4 animate-bounce">
+                    {getSentimentEmoji(currentSentiment)}
+                  </div>
+                  {/* Score */}
+                  <div className="text-9xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mb-2">
+                    {moodScore.overall}
+                  </div>
+                  {/* Dynamic Label */}
+                  <div className="text-2xl font-bold text-white mb-1">
+                    {getSentimentLabel(currentSentiment)}
+                  </div>
+                  <div className="text-sm text-purple-300 uppercase tracking-wider">
+                    AI SENTIMENT SCORE
                   </div>
                 </div>
               </div>
