@@ -97,7 +97,7 @@ export const AISummaryWidget: React.FC<AISummaryWidgetProps> = ({
             <div className="text-[clamp(1.25rem,4vw,2.25rem)] font-bold text-white mb-1 w-full text-center truncate">
               {sentiment.percentage.toFixed(2)}%
             </div>
-            <div className="text-xl font-semibold text-white/90">
+            <div className="text-[clamp(0.875rem,2.5vw,1.25rem)] font-semibold text-white/90 truncate">
               {currentSentimentLabel}
             </div>
 
