@@ -8,6 +8,8 @@ import {
   Search,
   TrendingUp,
   TrendingDown,
+  ArrowUp,
+  ArrowDown,
   BarChart3,
   Users,
   Globe,
@@ -21,7 +23,12 @@ import {
   Eye,
   Palette,
   Sun,
-  Moon
+  Moon,
+  Plus,
+  ExternalLink,
+  MessageCircle,
+  Star,
+  Fire
 } from 'lucide-react';
 import { useMoodTheme } from '../contexts/MoodThemeContext';
 import { cn } from '../lib/utils';
