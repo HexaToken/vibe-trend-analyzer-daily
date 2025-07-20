@@ -189,7 +189,7 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
           {topics.map((topic, index) => (
             <div
               key={topic.id}
-              className="flex items-center justify-between p-3 rounded-lg bg-gray-700/30 hover:bg-gray-700/50 transition-all duration-200 cursor-pointer border border-gray-600/20 hover:border-gray-500/50 overflow-hidden"
+              className="flex items-center justify-between p-3 rounded-lg bg-gray-700/30 hover:bg-gray-700/50 transition-all duration-200 cursor-pointer border border-gray-600/20 hover:border-gray-500/50 overflow-hidden gap-2"
             >
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2">
