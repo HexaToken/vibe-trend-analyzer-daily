@@ -12,20 +12,20 @@ import SocialFeature from "@/components/features/social/SocialFeature";
 import TradingFeature from "@/components/features/trading/TradingFeature";
 
 // Individual component lazy imports
-const Settings = React.lazy(() => import("@/components/Settings"));
-const UserProfile = React.lazy(() => import("@/components/profile/UserProfile"));
-const DatabaseDemo = React.lazy(() => import("@/components/DatabaseDemo"));
-const BuilderDemo = React.lazy(() => import("@/components/BuilderDemo"));
-const NLPSentimentDemo = React.lazy(() => import("@/components/NLPSentimentDemo"));
-const SpacyNLPDemo = React.lazy(() => import("@/components/SpacyNLPDemo"));
-const AiSentimentExplainer = React.lazy(() => import("@/components/AiSentimentExplainer"));
-const ProtectedRoute = React.lazy(() => import("@/components/auth/ProtectedRoute"));
+const Settings = React.lazy(() => import("@/components/Settings").then(module => ({ default: module.Settings || module.default })));
+const UserProfile = React.lazy(() => import("@/components/profile/UserProfile").then(module => ({ default: module.UserProfile || module.default })));
+const DatabaseDemo = React.lazy(() => import("@/components/DatabaseDemo").then(module => ({ default: module.DatabaseDemo || module.default })));
+const BuilderDemo = React.lazy(() => import("@/components/BuilderDemo").then(module => ({ default: module.BuilderDemo || module.default })));
+const NLPSentimentDemo = React.lazy(() => import("@/components/NLPSentimentDemo").then(module => ({ default: module.NLPSentimentDemo || module.default })));
+const SpacyNLPDemo = React.lazy(() => import("@/components/SpacyNLPDemo").then(module => ({ default: module.SpacyNLPDemo || module.default })));
+const AiSentimentExplainer = React.lazy(() => import("@/components/AiSentimentExplainer").then(module => ({ default: module.AiSentimentExplainer || module.default })));
+const ProtectedRoute = React.lazy(() => import("@/components/auth/ProtectedRoute").then(module => ({ default: module.ProtectedRoute || module.default })));
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 5 * 60 * 1000, // 5 minutes
-      cacheTime: 10 * 60 * 1000, // 10 minutes
+      gcTime: 10 * 60 * 1000, // 10 minutes (gcTime replaces cacheTime in v5)
       retry: 1,
       refetchOnWindowFocus: false,
     },
