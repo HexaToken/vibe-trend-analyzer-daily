@@ -30,9 +30,7 @@ import { StockSentimentScoring } from "@/components/StockSentimentScoring";
 import { AiSentimentExplainer } from "@/components/AiSentimentExplainer";
 import { YFinanceDemo } from "@/components/YFinanceDemo";
 import { MoodThemeDemo } from "@/components/MoodThemeDemo";
-import { LuxuryHomepage } from "@/components/LuxuryHomepage";
-import { LuxuryExperience } from "@/components/LuxuryExperience";
-import { FinanceHomepage } from "@/components/FinanceHomepage";
+
 import { BuilderFinanceDemo } from "@/components/BuilderFinanceDemo";
 
 const queryClient = new QueryClient();
