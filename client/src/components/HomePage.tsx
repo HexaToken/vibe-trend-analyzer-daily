@@ -692,7 +692,7 @@ export const HomePage: React.FC = () => {
     };
   }, [stockSentiment?.score]);
 
-  const [moodScore, setMoodScore] = useState<MoodScore>(calculateMoodScore());
+    const [moodScore, setMoodScore] = useState<MoodScore>(() => calculateMoodScore());
 
     useEffect(() => {
     const interval = setInterval(() => {
