@@ -59,7 +59,6 @@ import { LivePollsWidget } from "./stockChannel/LivePollsWidget";
 import { AISummaryWidget } from "./stockChannel/AISummaryWidget";
 import { TrendingTopicsWidget as EnhancedTrendingTopicsWidget } from "./stockChannel/TrendingTopicsWidget";
 
-import { StockTwistRoom } from "./rooms/StockTwistRoom";
 import { CommunityForum } from "./community/CommunityForum";
 import { ChatInterface } from "./moorMeter/ChatInterface";
 import { CryptoChannels } from "./social/CryptoChannels";
@@ -284,7 +283,6 @@ export const MoorMeterDashboard: React.FC = () => {
         { label: "Crypto", key: "Crypto", icon: TrendingUp },
         { label: "Off-Topic", key: "OffTopic", icon: Heart },
 
-        { label: "StockTwist", key: "StockTwist", icon: Zap },
         { label: "Rooms", key: "Rooms", icon: Users },
       ],
     },
@@ -416,13 +414,11 @@ export const MoorMeterDashboard: React.FC = () => {
                       ? "Dedicated crypto-only channels with real-time price feeds and sentiment tracking"
                       : activeCommunitySubtab === "OffTopic"
                         ? "Casual lounge for memes, general discussions, and relaxation"
-                        : activeCommunitySubtab === "StockTwist"
-                          ? "Share trade ideas and market insights"
-                          : activeCommunitySubtab === "Rooms"
-                            ? selectedCategory === "Crypto"
-                              ? "Join crypto-focused chat rooms and trending discussions"
-                              : "Discuss trends, share sentiment, and join chat rooms"
-                            : "Connect with fellow traders and share insights"}
+                        : activeCommunitySubtab === "Rooms"
+                          ? selectedCategory === "Crypto"
+                            ? "Join crypto-focused chat rooms and trending discussions"
+                            : "Discuss trends, share sentiment, and join chat rooms"
+                          : "Connect with fellow traders and share insights"}
                 </p>
               </div>
 
@@ -465,11 +461,9 @@ export const MoorMeterDashboard: React.FC = () => {
                         ? "Search crypto, $BTC, $ETH..."
                         : activeCommunitySubtab === "Chat"
                           ? "Search messages, tickers..."
-                          : activeCommunitySubtab === "StockTwist"
-                            ? "Search trade ideas..."
-                            : activeCommunitySubtab === "Rooms"
-                              ? "Search posts, chat rooms..."
-                              : "Search community..."
+                          : activeCommunitySubtab === "Rooms"
+                            ? "Search posts, chat rooms..."
+                            : "Search community..."
                     }
                     className="pl-10 w-64"
                   />
@@ -595,7 +589,6 @@ export const MoorMeterDashboard: React.FC = () => {
             {activeCommunitySubtab === "Crypto" && <CryptoChannels />}
             {activeCommunitySubtab === "OffTopic" && <OffTopicLounge />}
 
-            {activeCommunitySubtab === "StockTwist" && <StockTwistRoom />}
             {activeCommunitySubtab === "Rooms" && <CommunityForum />}
           </div>
         );
