@@ -231,7 +231,7 @@ export const SocialRoom: React.FC<SocialRoomProps> = ({ onCreateRoom }) => {
         <div className="p-3 border-t bg-gray-50 dark:bg-gray-800/50">
           <Button
             onClick={() => {
-              onCreateRoom?.();
+              handleCreateRoom();
               setShowDropdown(false);
             }}
             className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
