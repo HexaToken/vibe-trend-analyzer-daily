@@ -16,7 +16,8 @@ import {
   Brain,
   Moon,
   Plus,
-  Flame
+  Flame,
+  Newspaper
 } from 'lucide-react';
 import { useMoodTheme } from '../contexts/MoodThemeContext';
 import { cn } from '../lib/utils';
