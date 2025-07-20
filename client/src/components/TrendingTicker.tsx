@@ -84,10 +84,10 @@ export const TrendingTicker: React.FC<TrendingTickerProps> = ({
     }
   };
 
-  // Auto-update every 5 minutes to reduce API calls
+  // Auto-update every 30 seconds
   useEffect(() => {
     fetchTickerData();
-    const interval = setInterval(fetchTickerData, 300000); // 5 minutes
+    const interval = setInterval(fetchTickerData, 30000);
     return () => clearInterval(interval);
   }, []);
 

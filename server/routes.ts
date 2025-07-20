@@ -10,23 +10,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // use storage to perform CRUD operations on the storage interface
   // e.g. storage.insertUser(user) or storage.getUserByUsername(username)
 
-  // Placeholder image endpoint to fix 404 errors
-  app.get("/api/placeholder/:width/:height", (req, res) => {
-    const { width, height } = req.params;
-    const w = parseInt(width) || 32;
-    const h = parseInt(height) || 32;
-    
-    // Generate a simple SVG placeholder
-    const svg = `<svg width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg">
-      <rect width="100%" height="100%" fill="#e2e8f0"/>
-      <circle cx="${w/2}" cy="${h/2}" r="${Math.min(w,h)/3}" fill="#64748b"/>
-    </svg>`;
-    
-    res.setHeader('Content-Type', 'image/svg+xml');
-    res.setHeader('Cache-Control', 'public, max-age=86400'); // Cache for 24 hours
-    res.send(svg);
-  });
-
   // API Proxy endpoints for external services
 
   // NewsAPI proxy
@@ -1278,14 +1261,9 @@ except Exception as e:
   // X/Twitter API endpoints - What's Happening
   app.get("/api/proxy/twitter/trending", async (req, res) => {
     try {
-            const bearerToken = process.env.TWITTER_BEARER_TOKEN;
-
-      if (!bearerToken) {
-        return res.status(501).json({
-          error: "Twitter API not configured",
-          message: "TWITTER_BEARER_TOKEN environment variable is required"
-        });
-      }
+      const bearerToken =
+        process.env.TWITTER_BEARER_TOKEN ||
+        "766687026-6nvFdqRnFE5MXI9a3nrtBEl08U4sFUK8ZrKBzhFm";
 
       // Get trending topics for a specific location (1 = worldwide, 23424977 = United States)
       const { woeid = 1 } = req.query;
@@ -1385,14 +1363,9 @@ except Exception as e:
         query = "finance OR stocks OR markets OR trading",
         max_results = 20,
       } = req.query;
-            const bearerToken = process.env.TWITTER_BEARER_TOKEN;
-
-      if (!bearerToken) {
-        return res.status(501).json({
-          error: "Twitter API not configured",
-          message: "TWITTER_BEARER_TOKEN environment variable is required"
-        });
-      }
+      const bearerToken =
+        process.env.TWITTER_BEARER_TOKEN ||
+        "766687026-6nvFdqRnFE5MXI9a3nrtBEl08U4sFUK8ZrKBzhFm";
 
       const response = await fetch(
         `https://api.twitter.com/2/tweets/search/recent?query=${encodeURIComponent(query as string)}&max_results=${max_results}&tweet.fields=created_at,public_metrics,context_annotations,entities,author_id&expansions=author_id&user.fields=name,username,verified,public_metrics`,
@@ -1483,14 +1456,7 @@ except Exception as e:
   app.get("/api/proxy/finnhub/symbol-lookup", async (req, res) => {
     try {
       const { query = "apple" } = req.query;
-            const apiKey = process.env.FINNHUB_API_KEY;
-
-      if (!apiKey) {
-        return res.status(501).json({
-          error: "Finnhub API not configured",
-          message: "FINNHUB_API_KEY environment variable is required"
-        });
-      }
+      const apiKey = "d1sgqohr01qkbods878gd1sgqohr01qkbods8790";
 
       const response = await fetch(
         `https://finnhub.io/api/v1/search?q=${query}&token=${apiKey}`,
@@ -1519,14 +1485,7 @@ except Exception as e:
   app.get("/api/proxy/finnhub/quote", async (req, res) => {
     try {
       const { symbol = "AAPL" } = req.query;
-            const apiKey = process.env.FINNHUB_API_KEY;
-
-      if (!apiKey) {
-        return res.status(501).json({
-          error: "Finnhub API not configured",
-          message: "FINNHUB_API_KEY environment variable is required"
-        });
-      }
+      const apiKey = "d1sgqohr01qkbods878gd1sgqohr01qkbods8790";
 
       const response = await fetch(
         `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`,
@@ -1560,14 +1519,7 @@ except Exception as e:
         from = Math.floor(Date.now() / 1000) - 86400 * 30, // 30 days ago
         to = Math.floor(Date.now() / 1000),
       } = req.query;
-            const apiKey = process.env.FINNHUB_API_KEY;
-
-      if (!apiKey) {
-        return res.status(501).json({
-          error: "Finnhub API not configured",
-          message: "FINNHUB_API_KEY environment variable is required"
-        });
-      }
+      const apiKey = "d1sgqohr01qkbods878gd1sgqohr01qkbods8790";
 
       const response = await fetch(
         `https://finnhub.io/api/v1/stock/candle?symbol=${symbol}&resolution=${resolution}&from=${from}&to=${to}&token=${apiKey}`,

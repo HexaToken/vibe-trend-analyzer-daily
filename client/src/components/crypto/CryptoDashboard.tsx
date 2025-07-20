@@ -21,7 +21,8 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import {
-    useCryptoListings,
+  useCryptoListings,
+  useCryptoQuotes,
   useGlobalMetrics,
 } from "@/hooks/useCoinMarketCap";
 import { CryptoPrice, CryptoGrid } from "./CryptoPrice";

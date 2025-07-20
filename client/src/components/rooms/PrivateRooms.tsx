@@ -104,7 +104,8 @@ export const PrivateRooms: React.FC = () => {
   const handleInviteSent = (
     method: "email" | "username" | "link",
     target: string,
-    ) => {
+  ) => {
+    console.log(`Invite sent via ${method} to ${target}`);
     // Here you would implement the actual invite logic
     // This could involve API calls to send emails, create notifications, etc.
   };
@@ -235,7 +236,7 @@ export const PrivateRooms: React.FC = () => {
                 existingRooms={rooms}
                 isPremium={user?.isPremium}
                 isVerified={user?.isVerified}
-                                onUpgrade={() => {}}
+                onUpgrade={() => console.log("Upgrade to Premium!")}
               />
 
               <div className="relative">

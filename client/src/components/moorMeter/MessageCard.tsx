@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import DOMPurify from 'dompurify';
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
@@ -280,11 +279,9 @@ export const MessageCard: React.FC<MessageCardProps> = ({
 
           {/* Content */}
           <div className="space-y-2">
-                        <div
+            <div
               className="text-sm leading-relaxed"
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(formatContent(message.content).__html)
-              }}
+              dangerouslySetInnerHTML={formatContent(message.content)}
             />
 
             {/* Tags */}

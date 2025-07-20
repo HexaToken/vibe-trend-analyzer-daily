@@ -216,8 +216,6 @@ export const Analytics = () => {
           </div>
         </CardContent>
       </Card>
-        </div>
+    </div>
   );
 };
-
-export default Analytics;

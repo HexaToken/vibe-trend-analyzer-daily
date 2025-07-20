@@ -327,8 +327,6 @@ export const Community = () => {
           </Card>
         </div>
       </div>
-        </div>
+    </div>
   );
 };
-
-export default Community;

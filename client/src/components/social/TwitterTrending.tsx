@@ -1,5 +1,4 @@
 import { useState } from "react";
-import DOMPurify from 'dompurify';
 import {
   TrendingUp,
   Hash,
@@ -239,10 +238,10 @@ export const TwitterTrending = ({
               )}
 
               {/* Tweet Content */}
-                            <div
+              <div
                 className="text-sm mb-3 leading-relaxed"
                 dangerouslySetInnerHTML={{
-                  __html: DOMPurify.sanitize(renderTweetText(tweet.text)),
+                  __html: renderTweetText(tweet.text),
                 }}
                 onClick={handleTextClick}
               />

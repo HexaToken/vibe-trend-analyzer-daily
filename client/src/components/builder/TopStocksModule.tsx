@@ -111,10 +111,7 @@ export const TopStocksModule: React.FC<TopStocksModuleProps> = ({
             variant="ghost"
             size="sm"
             className="text-white hover:bg-white/20"
-                        onClick={() => {
-              // Just trigger a re-render instead of page reload
-              console.log("Stock data refresh triggered");
-            }}
+            onClick={() => window.location.reload()}
           >
             <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
           </Button>

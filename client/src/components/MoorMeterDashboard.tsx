@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo, useMemo, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { TrendingTicker } from "./TrendingTicker";
 import { Button } from "./ui/button";
@@ -55,14 +55,15 @@ import { WatchlistWidget } from "./moorMeter/WatchlistWidget";
 import { WatchlistModule } from "./moorMeter/WatchlistModule";
 import { AIInsightWidget } from "./moorMeter/AIInsightWidget";
 import { CommunityWidget } from "./moorMeter/CommunityWidget";
-
+import { CommunityRooms } from "./social/CommunityRooms";
 import { LivePollsWidget } from "./stockChannel/LivePollsWidget";
 import { AISummaryWidget } from "./stockChannel/AISummaryWidget";
 import { TrendingTopicsWidget as EnhancedTrendingTopicsWidget } from "./stockChannel/TrendingTopicsWidget";
 
-
+import { CommunityForum } from "./community/CommunityForum";
 import { ChatInterface } from "./moorMeter/ChatInterface";
-import { Channels } from "./social/Channels";
+import { CryptoChannels } from "./social/CryptoChannels";
+import { OffTopicLounge } from "./social/OffTopicLounge";
 import { MoodScoreHero } from "./builder/MoodScoreHero";
 import { TopStocksModule } from "./builder/TopStocksModule";
 import { SentimentHeatMap } from "./moorMeter/SentimentHeatMap";
@@ -106,7 +107,7 @@ interface CommunityMessage {
   platform: "reddit" | "twitter" | "discord";
 }
 
-export const MoorMeterDashboard: React.FC = memo(() => {
+export const MoorMeterDashboard: React.FC = () => {
   console.log("MoorMeterDashboard component rendering...");
   const [darkMode, setDarkMode] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -144,8 +145,8 @@ export const MoorMeterDashboard: React.FC = memo(() => {
   const { tickers: cryptoData = [], loading: cryptoLoading = false } =
     cryptoListingsResult || {};
 
-    // Calculate overall mood score with memoization
-  const calculateMoodScore = useCallback((): MoodScore => {
+  // Calculate overall mood score
+  const calculateMoodScore = (): MoodScore => {
     let stocksScore = stockSentiment?.score || 50;
     let newsScore = 45 + Math.random() * 20; // Mock for now
     let socialScore = 55 + Math.random() * 15; // Mock for now
@@ -162,7 +163,7 @@ export const MoorMeterDashboard: React.FC = memo(() => {
       social: socialScore,
       timestamp: new Date(),
     };
-  }, [stockSentiment?.score]);
+  };
 
   const [moodScore, setMoodScore] = useState<MoodScore>(calculateMoodScore());
 
@@ -173,7 +174,7 @@ export const MoorMeterDashboard: React.FC = memo(() => {
     }, 30000); // Update every 30 seconds
 
     return () => clearInterval(interval);
-  }, [calculateMoodScore]); // Include calculateMoodScore in dependency array
+  }, [stockSentiment]);
 
   // Get mood emoji and color
   const getMoodEmoji = (score: number) => {
@@ -252,18 +253,16 @@ export const MoorMeterDashboard: React.FC = memo(() => {
     },
   ];
 
-    // Mock historical mood data for the chart (memoized)
-  const historicalMood = useMemo(() =>
-    Array.from({ length: 7 }, (_, i) => ({
-      date: new Date(
-        Date.now() - (6 - i) * 24 * 60 * 60 * 1000,
-      ).toLocaleDateString("en-US", { month: "short", day: "numeric" }),
-      score: 45 + Math.random() * 30,
-      stocks: 40 + Math.random() * 35,
-      news: 35 + Math.random() * 40,
-      social: 50 + Math.random() * 25,
-    })), []
-  );
+  // Mock historical mood data for the chart
+  const historicalMood = Array.from({ length: 7 }, (_, i) => ({
+    date: new Date(
+      Date.now() - (6 - i) * 24 * 60 * 60 * 1000,
+    ).toLocaleDateString("en-US", { month: "short", day: "numeric" }),
+    score: 45 + Math.random() * 30,
+    stocks: 40 + Math.random() * 35,
+    news: 35 + Math.random() * 40,
+    social: 50 + Math.random() * 25,
+  }));
 
   // Navigation items
   const navItems = [
@@ -283,10 +282,10 @@ export const MoorMeterDashboard: React.FC = memo(() => {
       href: "#community",
       subtabs: [
         { label: "Chat", key: "Chat", icon: MessageCircle },
-                { label: "Channels", key: "Channels", icon: Users, badge: "NEW" },
-        
+        { label: "Crypto", key: "Crypto", icon: TrendingUp },
+        { label: "Off-Topic", key: "OffTopic", icon: Heart },
 
-        
+        { label: "Rooms", key: "Rooms", icon: Users },
         { label: "Private Room", key: "PrivateRoom", icon: Lock },
       ],
     },
@@ -407,7 +406,7 @@ export const MoorMeterDashboard: React.FC = memo(() => {
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
               <div>
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                  🧑‍🤝���🧑 Community Hub
+                  🧑‍🤝‍🧑 Community Hub
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400">
                   {activeCommunitySubtab === "Chat"
@@ -417,8 +416,12 @@ export const MoorMeterDashboard: React.FC = memo(() => {
                     : activeCommunitySubtab === "Crypto"
                       ? "Dedicated crypto-only channels with real-time price feeds and sentiment tracking"
                       : activeCommunitySubtab === "OffTopic"
-                                                ? "Casual lounge for memes, general discussions, and relaxation"
-                        : activeCommunitySubtab === "PrivateRoom"
+                        ? "Casual lounge for memes, general discussions, and relaxation"
+                        : activeCommunitySubtab === "Rooms"
+                          ? selectedCategory === "Crypto"
+                            ? "Join crypto-focused chat rooms and trending discussions"
+                            : "Discuss trends, share sentiment, and join chat rooms"
+                          : activeCommunitySubtab === "PrivateRoom"
                             ? "Create invite-only watchlist rooms for focused discussions with fellow traders"
                             : "Connect with fellow traders and share insights"}
                 </p>
@@ -432,7 +435,7 @@ export const MoorMeterDashboard: React.FC = memo(() => {
                       variant="outline"
                       className="flex items-center gap-2"
                     >
-                      {selectedCategory === "Crypto" ? "����" : "💬"}{" "}
+                      {selectedCategory === "Crypto" ? "🪙" : "💬"}{" "}
                       {selectedCategory}
                       <ChevronDown className="w-4 h-4" />
                     </Button>
@@ -462,7 +465,9 @@ export const MoorMeterDashboard: React.FC = memo(() => {
                       selectedCategory === "Crypto"
                         ? "Search crypto, $BTC, $ETH..."
                         : activeCommunitySubtab === "Chat"
-                                                    ? "Search messages, tickers..."
+                          ? "Search messages, tickers..."
+                          : activeCommunitySubtab === "Rooms"
+                            ? "Search posts, chat rooms..."
                             : "Search community..."
                     }
                     className="pl-10 w-64"
@@ -472,7 +477,8 @@ export const MoorMeterDashboard: React.FC = memo(() => {
             </div>
 
             {/* Category indicator for applicable subtabs */}
-                        {activeCommunitySubtab === "Chat" && (
+            {(activeCommunitySubtab === "Chat" ||
+              activeCommunitySubtab === "Rooms") && (
               <div className="flex items-center gap-3 mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border">
                 <div className="flex items-center gap-2">
                   {selectedCategory === "Crypto" ? "���" : "💬"}
@@ -528,7 +534,7 @@ export const MoorMeterDashboard: React.FC = memo(() => {
                             </Badge>
                           </div>
                           <p className="text-white text-sm">
-                            ��� <strong>Daily Market Wrap:</strong> Tech earnings
+                            📊 <strong>Daily Market Wrap:</strong> Tech earnings
                             season heating up! NVDA reports after market close.
                             Remember to follow community guidelines and keep
                             discussions respectful.
@@ -585,9 +591,10 @@ export const MoorMeterDashboard: React.FC = memo(() => {
                 </div>
               </>
             )}
-                        {activeCommunitySubtab === "Channels" && <Channels />}
+            {activeCommunitySubtab === "Crypto" && <CryptoChannels />}
+            {activeCommunitySubtab === "OffTopic" && <OffTopicLounge />}
 
-            
+            {activeCommunitySubtab === "Rooms" && <CommunityForum />}
             {activeCommunitySubtab === "PrivateRoom" && (
               <PrivateRoomsContainer />
             )}
@@ -619,7 +626,7 @@ export const MoorMeterDashboard: React.FC = memo(() => {
           </div>
         );
 
-                  case "Home":
+      case "Home":
       default:
         return (
           <>
@@ -664,13 +671,12 @@ export const MoorMeterDashboard: React.FC = memo(() => {
     }
   };
 
-    return (
+  return (
     <div
       className={`min-h-screen transition-colors duration-300 ${darkMode ? "dark bg-gray-900" : "bg-gray-50"}`}
     >
-      {/* Navigation - Hidden for Home tab since HomePage has its own hero */}
-      {activeTab !== "Home" && (
-        <nav className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
+      {/* Navigation */}
+      <nav className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
@@ -830,19 +836,14 @@ export const MoorMeterDashboard: React.FC = memo(() => {
             </div>
           </div>
         )}
-            </nav>
-      )}
+      </nav>
 
       {/* Main Content */}
-      {activeTab !== "Home" ? (
-        <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-          <div className="px-4 py-6 sm:px-0">{renderTabContent()}</div>
-        </main>
-      ) : (
-        renderTabContent()
-      )}
+      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div className="px-4 py-6 sm:px-0">{renderTabContent()}</div>
+      </main>
     </div>
-    );
-});
+  );
+};
 
 export default MoorMeterDashboard;

@@ -14,11 +14,9 @@ import {
   UserCircle,
   Bell,
   MessageSquare,
-  Search,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -31,17 +29,25 @@ import {
 import {
   ChevronDown,
   Database,
-    Users2,
+  BarChart3 as Analytics,
+  Users2,
+  UserPlus,
   Coins,
   Globe,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { AuthModal } from "@/components/auth/AuthModal";
 import { ApiStatusBadge } from "@/components/ApiStatusIndicator";
-import { useNavigation } from "@/stores/useAppStore";
 
-export const Navigation = () => {
-  const { activeSection, setActiveSection } = useNavigation();
+interface NavigationProps {
+  activeSection: string;
+  onSectionChange: (section: string) => void;
+}
+
+export const Navigation = ({
+  activeSection,
+  onSectionChange,
+}: NavigationProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState<"login" | "signup">("login");
@@ -83,7 +89,7 @@ export const Navigation = () => {
       { id: "history", label: "Historical Data", icon: Calendar },
       { id: "database", label: "Database Demo", icon: Database, badge: "DEMO" },
     ],
-        social: [
+    social: [
       {
         id: "social",
         label: "FinTwits Social",
@@ -91,7 +97,6 @@ export const Navigation = () => {
         badge: "HOT",
       },
       { id: "community", label: "Community", icon: Users },
-      { id: "channels", label: "Channels", icon: Users2, badge: "NEW" },
     ],
     tools: [
       { id: "analytics", label: "Analytics", icon: TrendingUp },
@@ -115,12 +120,12 @@ export const Navigation = () => {
     logout();
     // Redirect to moorMeter if currently on protected pages
     if (activeSection === "profile") {
-      setActiveSection("moorMeter");
+      onSectionChange("moorMeter");
     }
   };
 
   const handleProfileClick = () => {
-    setActiveSection("profile");
+    onSectionChange("profile");
     setIsMenuOpen(false);
   };
 
@@ -142,29 +147,12 @@ export const Navigation = () => {
               </div>
             </div>
 
-                        {/* Search Bar - Desktop */}
-            <div className="hidden md:flex items-center flex-1 max-w-md mx-8">
-              <div className="relative w-full">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                <Input
-                  type="text"
-                  placeholder="Search stocks, news, topics... (e.g. $TSLA, AI, crypto)"
-                  className="pl-10 w-full bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus:border-blue-500 dark:focus:border-blue-400"
-                />
-                <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
-                  <Badge variant="secondary" className="text-xs">
-                    ⌘K
-                  </Badge>
-                </div>
-              </div>
-            </div>
-
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-1">
               {/* MoorMeter Dashboard */}
               <Button
                 variant={activeSection === "moorMeter" ? "default" : "ghost"}
-                onClick={() => setActiveSection("moorMeter")}
+                onClick={() => onSectionChange("moorMeter")}
                 className="flex items-center gap-2"
               >
                 <Brain className="h-4 w-4" />
@@ -188,7 +176,7 @@ export const Navigation = () => {
                     return (
                       <DropdownMenuItem
                         key={item.id}
-                        onClick={() => setActiveSection(item.id)}
+                        onClick={() => onSectionChange(item.id)}
                         className="flex items-center gap-2"
                       >
                         <Icon className="h-4 w-4" />
@@ -221,7 +209,7 @@ export const Navigation = () => {
                     return (
                       <DropdownMenuItem
                         key={item.id}
-                        onClick={() => setActiveSection(item.id)}
+                        onClick={() => onSectionChange(item.id)}
                         className="flex items-center gap-2"
                       >
                         <Icon className="h-4 w-4" />
@@ -254,7 +242,7 @@ export const Navigation = () => {
                     return (
                       <DropdownMenuItem
                         key={item.id}
-                        onClick={() => setActiveSection(item.id)}
+                        onClick={() => onSectionChange(item.id)}
                         className="flex items-center gap-2"
                       >
                         <Icon className="h-4 w-4" />
@@ -341,7 +329,7 @@ export const Navigation = () => {
                         <span>Profile</span>
                       </DropdownMenuItem>
                       <DropdownMenuItem
-                        onClick={() => setActiveSection("settings")}
+                        onClick={() => onSectionChange("settings")}
                       >
                         <Settings className="mr-2 h-4 w-4" />
                         <span>Settings</span>
@@ -405,7 +393,7 @@ export const Navigation = () => {
                 <Button
                   variant={activeSection === "moorMeter" ? "default" : "ghost"}
                   onClick={() => {
-                    setActiveSection("moorMeter");
+                    onSectionChange("moorMeter");
                     setIsMenuOpen(false);
                   }}
                   className="justify-start gap-2"
@@ -428,7 +416,7 @@ export const Navigation = () => {
                       key={item.id}
                       variant={activeSection === item.id ? "default" : "ghost"}
                       onClick={() => {
-                        setActiveSection(item.id);
+                        onSectionChange(item.id);
                         setIsMenuOpen(false);
                       }}
                       className="justify-start gap-2 ml-4"
@@ -455,7 +443,7 @@ export const Navigation = () => {
                       key={item.id}
                       variant={activeSection === item.id ? "default" : "ghost"}
                       onClick={() => {
-                        setActiveSection(item.id);
+                        onSectionChange(item.id);
                         setIsMenuOpen(false);
                       }}
                       className="justify-start gap-2 ml-4"
@@ -482,7 +470,7 @@ export const Navigation = () => {
                       key={item.id}
                       variant={activeSection === item.id ? "default" : "ghost"}
                       onClick={() => {
-                        setActiveSection(item.id);
+                        onSectionChange(item.id);
                         setIsMenuOpen(false);
                       }}
                       className="justify-start gap-2 ml-4"

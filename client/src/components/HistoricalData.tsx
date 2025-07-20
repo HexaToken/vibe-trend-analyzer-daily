@@ -227,7 +227,5 @@ export const HistoricalData = () => {
         </Card>
       </div>
     </div>
-    );
+  );
 };
-
-export default HistoricalData;

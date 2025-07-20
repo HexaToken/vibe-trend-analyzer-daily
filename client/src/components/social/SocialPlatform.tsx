@@ -1,11 +1,12 @@
-import { useState, useEffect, memo } from "react";
+import { useState, useEffect } from "react";
 import {
   Home,
   TrendingUp,
   Star,
   Users,
   Search,
-    Bell,
+  Bell,
+  MessageSquare,
   Hash,
   BarChart3,
   Crown,
@@ -21,7 +22,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SocialFeed } from "./SocialFeed";
 import { TickerPage } from "./TickerPage";
 import { WatchlistManager } from "./WatchlistManager";
-
+import { CommunityRooms } from "./CommunityRooms";
 import { TwitterTrending } from "./TwitterTrending";
 import { InstagramProfile } from "./InstagramProfile";
 import { InstagramTrending } from "./InstagramTrending";
@@ -36,11 +37,12 @@ type ViewType =
   | "feed"
   | "watchlist"
   | "ticker"
-    | "trending"
+  | "trending"
+  | "rooms"
   | "twitter"
   | "instagram";
 
-export const SocialPlatform = memo(() => {
+export const SocialPlatform = () => {
   const { isAuthenticated, user } = useAuth();
   const [currentView, setCurrentView] = useState<ViewType>("feed");
 
@@ -63,16 +65,14 @@ export const SocialPlatform = memo(() => {
     refreshInterval: 300000, // 5 minutes to reduce API calls
     enabled: true,
   });
-    const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
+  const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [hasAttemptedReset, setHasAttemptedReset] = useState(false);
 
-  // Auto-reset circuit breaker when error occurs (with guard to prevent repeated resets)
+  // Auto-reset circuit breaker when error occurs
   useEffect(() => {
-    if (cryptoError?.includes("Circuit breaker is open") && !hasAttemptedReset) {
+    if (cryptoError?.includes("Circuit breaker is open")) {
       console.log("Circuit breaker detected, attempting auto-reset...");
-      setHasAttemptedReset(true);
-
+      // Automatically reset after a short delay
       const timer = setTimeout(() => {
         import("../../services/coinMarketCapApi").then(
           ({ resetCoinMarketCapCircuitBreaker }) => {
@@ -80,11 +80,11 @@ export const SocialPlatform = memo(() => {
             console.log("Circuit breaker auto-reset completed");
           },
         );
-      }, 3000);
+      }, 3000); // Reset after 3 seconds
 
       return () => clearTimeout(timer);
     }
-  }, [cryptoError, hasAttemptedReset]);
+  }, [cryptoError]);
 
   // Handle ticker navigation
   const handleTickerClick = (symbol: string) => {
@@ -204,9 +204,10 @@ export const SocialPlatform = memo(() => {
                       const { resetCoinMarketCapCircuitBreaker } = await import(
                         "../../services/coinMarketCapApi"
                       );
-                                            resetCoinMarketCapCircuitBreaker();
+                      resetCoinMarketCapCircuitBreaker();
                       console.log("Manual circuit breaker reset completed");
-                      // Note: Removed page reload to prevent infinite refresh loops
+                      // Force refresh of crypto data
+                      setTimeout(() => window.location.reload(), 500);
                     } catch (e) {
                       console.error("Failed to reset circuit breaker:", e);
                     }
@@ -330,7 +331,50 @@ export const SocialPlatform = memo(() => {
         </CardContent>
       </Card>
 
-      
+      {/* Community Rooms Preview */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg flex items-center gap-2">
+            <MessageSquare className="h-5 w-5" />
+            Active Rooms
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-2">
+          {[
+            { name: "$AAPL Traders", members: 15420, online: 892 },
+            { name: "Crypto Central", members: 28453, online: 1247 },
+            { name: "Options Trading", members: 8934, online: 234 },
+          ].map((room, index) => (
+            <div
+              key={index}
+              className="flex items-center justify-between p-2 hover:bg-muted/50 rounded cursor-pointer transition-colors"
+            >
+              <div>
+                <div className="font-medium text-sm">{room.name}</div>
+                <div className="text-xs text-muted-foreground">
+                  {room.members.toLocaleString()} members
+                </div>
+              </div>
+
+              <div className="flex items-center gap-1">
+                <div className="w-2 h-2 bg-green-500 rounded-full" />
+                <span className="text-xs text-muted-foreground">
+                  {room.online}
+                </span>
+              </div>
+            </div>
+          ))}
+
+          <Button
+            variant="outline"
+            size="sm"
+            className="w-full"
+            onClick={() => setCurrentView("rooms")}
+          >
+            Browse All Rooms
+          </Button>
+        </CardContent>
+      </Card>
     </div>
   );
 
@@ -449,7 +493,8 @@ export const SocialPlatform = memo(() => {
           </div>
         );
 
-      
+      case "rooms":
+        return <CommunityRooms />;
 
       case "twitter":
         return (
@@ -575,7 +620,13 @@ export const SocialPlatform = memo(() => {
             <TrendingUp className="h-4 w-4" />
             Trending
           </TabsTrigger>
-          
+          <TabsTrigger value="rooms" className="flex items-center gap-2">
+            <MessageSquare className="h-4 w-4" />
+            Rooms
+            <Badge variant="secondary" className="text-xs">
+              Soon
+            </Badge>
+          </TabsTrigger>
           <TabsTrigger value="twitter" className="flex items-center gap-2">
             <Twitter className="h-4 w-4" />
             Twitter
@@ -595,8 +646,6 @@ export const SocialPlatform = memo(() => {
         {/* Sidebar */}
         <div className="lg:col-span-1">{renderTrendingSidebar()}</div>
       </div>
-        </div>
-    );
-});
-
-export default SocialPlatform;
+    </div>
+  );
+};

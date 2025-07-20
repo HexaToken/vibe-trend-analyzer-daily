@@ -11,8 +11,10 @@ import {
   BarChart3, 
   MessageSquare, 
   Globe, 
-      Zap,
+  Calculator,
+  Zap,
   Target,
+  RefreshCw,
   Activity,
   ExternalLink
 } from "lucide-react";

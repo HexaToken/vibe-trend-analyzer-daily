@@ -20,38 +20,18 @@ export function log(message: string, source = "express") {
 }
 
 export async function setupVite(app: Express, server: Server) {
-  // Detect if we're in a hosted environment (like Replit, Fly.dev, etc.)
-  const isHostedEnvironment = !!(process.env.REPL_ID || process.env.FLY_APP_NAME || process.env.VERCEL || process.env.NETLIFY);
-
   const serverOptions = {
     middlewareMode: true,
-    host: '0.0.0.0',
-    port: 5000,
-        hmr: isHostedEnvironment ? false : {
-      server,
-      port: 5000,
-      host: '0.0.0.0',
-      clientPort: 5000
-    },
+    hmr: { server },
     allowedHosts: true,
-    cors: true,
   };
 
-  if (isHostedEnvironment) {
-    log("Detected hosted environment - HMR WebSocket disabled to prevent fetch errors");
-  }
-
-    const vite = await createViteServer({
+  const vite = await createViteServer({
     ...viteConfig,
     configFile: false,
     customLogger: {
       ...viteLogger,
       error: (msg, options) => {
-        // Don't exit on HMR errors in hosted environments
-        if (msg.includes('HMR') || msg.includes('WebSocket') || msg.includes('ping')) {
-          viteLogger.warn(msg, options);
-          return;
-        }
         viteLogger.error(msg, options);
         process.exit(1);
       },
@@ -60,22 +40,9 @@ export async function setupVite(app: Express, server: Server) {
     appType: "custom",
   });
 
-    app.use(vite.middlewares);
-
-  // Only serve HTML for non-API routes and non-Vite internal routes
+  app.use(vite.middlewares);
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
-
-    // Skip serving HTML for API routes or Vite internal routes
-    if (url.startsWith('/api') || url.startsWith('/@') || url.startsWith('/__vite')) {
-      return next();
-    }
-
-    // Check if this is a Vite ping request
-    const acceptHeader = req.get('Accept');
-    if (acceptHeader === 'text/x-vite-ping') {
-      return next();
-    }
 
     try {
       const clientTemplate = path.resolve(
@@ -85,37 +52,12 @@ export async function setupVite(app: Express, server: Server) {
         "index.html",
       );
 
-            // always reload the index.html file from disk incase it changes
+      // always reload the index.html file from disk incase it changes
       let template = await fs.promises.readFile(clientTemplate, "utf-8");
       template = template.replace(
         `src="/src/main.tsx"`,
         `src="/src/main.tsx?v=${nanoid()}"`,
       );
-
-      // For hosted environments, inject script to disable Vite's problematic fetch calls
-      const isHostedEnvironment = !!(process.env.REPL_ID || process.env.FLY_APP_NAME || process.env.VERCEL || process.env.NETLIFY);
-      if (isHostedEnvironment) {
-                template = template.replace(
-          '<head>',
-          `<head>
-    <script>
-      // Prevent Vite ping failures in hosted environments
-      const originalFetch = window.fetch;
-      window.fetch = function(url, options) {
-        // Block Vite ping requests that fail in hosted environments
-        if (typeof url === 'string' && (
-          options?.headers?.Accept === 'text/x-vite-ping' ||
-          url.includes('/@vite/') ||
-          url.includes('__vite')
-        )) {
-          return Promise.resolve(new Response(null, { status: 204 }));
-        }
-        return originalFetch.apply(this, arguments);
-      };
-    </script>`
-        );
-      }
-
       const page = await vite.transformIndexHtml(url, template);
       res.status(200).set({ "Content-Type": "text/html" }).end(page);
     } catch (e) {
