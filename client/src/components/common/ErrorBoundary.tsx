@@ -257,8 +257,6 @@ export function withErrorBoundary<P extends object>(
 
 // Hook for programmatic error handling
 export function useErrorHandler() {
-  const updateMetrics = useAppStore((state) => state.updatePerformanceMetrics);
-  const addNotification = useAppStore((state) => state.addNotification);
 
   return React.useCallback((error: Error, context?: string) => {
     console.error('Manual error handled:', error, context);
