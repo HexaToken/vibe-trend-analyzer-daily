@@ -497,11 +497,11 @@ export const MoorMeterDashboard: React.FC = () => {
 
             {/* Render content based on active subtab */}
             {activeCommunitySubtab === "Chat" && (
-              <div className="grid grid-cols-1 lg:grid-cols-10 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-10 gap-6 h-[calc(100vh-200px)] min-h-[700px]">
                 {/* Left Section - Stock Channels (Primary Content 70%) */}
-                <div className="lg:col-span-7 space-y-6">
-                  <Card className="bg-gray-800/50 border-gray-700/50">
-                    <CardHeader className="pb-4">
+                <div className="lg:col-span-7 flex flex-col h-full">
+                  <Card className="bg-gray-800/50 border-gray-700/50 flex flex-col h-full">
+                    <CardHeader className="pb-4 flex-shrink-0">
                       <div className="text-white text-2xl font-normal gap-2 -tracking-wide">
                         📈 Stock Channels – Real-time market chat
                       </div>
@@ -515,9 +515,9 @@ export const MoorMeterDashboard: React.FC = () => {
                         />
                       </div>
                     </CardHeader>
-                    <CardContent className="h-auto flex-grow-0">
+                    <CardContent className="flex-1 flex flex-col overflow-hidden">
                       {/* Pinned Post */}
-                      <div className="mb-4 p-4 bg-blue-900/20 border border-blue-500/30 rounded-lg">
+                      <div className="mb-4 p-4 bg-blue-900/20 border border-blue-500/30 rounded-lg flex-shrink-0">
                         <div className="flex items-center gap-2 mb-2">
                           <Flag className="w-4 h-4 text-blue-400" />
                           <span className="text-blue-400 font-medium">
@@ -538,8 +538,8 @@ export const MoorMeterDashboard: React.FC = () => {
                         </p>
                       </div>
 
-                      {/* Chat Interface Area */}
-                      <div className="h-[400px] bg-gray-900/50 rounded-lg border border-gray-600/30">
+                      {/* Chat Interface Area - Now expands to fill remaining space */}
+                      <div className="flex-1 bg-gray-900/50 rounded-lg border border-gray-600/30 min-h-0">
                         <ChatInterface />
                       </div>
                     </CardContent>
@@ -547,7 +547,7 @@ export const MoorMeterDashboard: React.FC = () => {
                 </div>
 
                 {/* Right Sidebar - Enhanced Widgets (30%) */}
-                <div className="lg:col-span-3 space-y-4">
+                <div className="lg:col-span-3 space-y-4 h-full overflow-y-auto">
                   {/* Enhanced Live Polls Widget */}
                   <LivePollsWidget />
 
