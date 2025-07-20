@@ -209,22 +209,24 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
                     </span>
                     {topic.isRising && (
                       <div className="flex items-center gap-1">
-                        <Flame className="w-3 h-3 text-orange-400" />
-                        <span
-                          className={`text-xs whitespace-nowrap ${topic.change > 0 ? "text-green-400" : "text-red-400"}`}
+                        <Flame className="w-3 h-3 text-orange-400 flex-shrink-0" />
+                        <div
+                          className={`px-2 py-1 rounded-md text-center min-w-[60px] max-w-[80px] overflow-hidden text-ellipsis whitespace-nowrap ${
+                            topic.change > 0
+                              ? "bg-green-500/20 text-green-400"
+                              : "bg-red-500/20 text-red-400"
+                          }`}
                         >
-                          {topic.change > 0 ? "+" : ""}
-                          {topic.change.toFixed(2)}%
-                        </span>
+                          <span className="text-[clamp(0.75rem,2vw,1rem)] font-medium">
+                            {topic.change > 0 ? "+" : ""}
+                            {topic.change.toFixed(2)}%
+                          </span>
+                        </div>
                       </div>
                     )}
                   </div>
                   <div className="flex items-center gap-2 text-xs text-gray-400">
                     <span>{formatNumber(topic.mentions)} mentions</span>
-                    <span>•</span>
-                    <span className={getVolumeColor(topic.volume)}>
-                      {topic.volume} volume
-                    </span>
                   </div>
                 </div>
               </div>
