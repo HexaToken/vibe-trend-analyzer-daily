@@ -674,7 +674,7 @@ export const HomePage: React.FC = () => {
   const { data: stockSentiment, loading: stockLoading } = useStockSentiment();
   const { articles: newsArticles, loading: newsLoading } = useCombinedBusinessNews();
 
-  const calculateMoodScore = useCallback((): MoodScore => {
+    const calculateMoodScore = useCallback((): MoodScore => {
     let stocksScore = stockSentiment?.score || 50;
     let newsScore = 45 + Math.random() * 20;
     let socialScore = 55 + Math.random() * 15;
