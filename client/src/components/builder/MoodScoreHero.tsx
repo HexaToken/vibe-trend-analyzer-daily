@@ -10,6 +10,9 @@ interface MoodScoreHeroProps {
   title?: string;
   subtitle?: string;
   apiEndpoint?: string;
+  moodScore?: MoodData;
+  timeframe?: "1D" | "7D" | "30D";
+  onTimeframeChange?: (timeframe: "1D" | "7D" | "30D") => void;
 }
 
 interface MoodData {
