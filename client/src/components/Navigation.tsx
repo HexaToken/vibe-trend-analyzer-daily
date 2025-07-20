@@ -154,7 +154,20 @@ export const Navigation = ({
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-1">
-                                          {/* Luxury Experience */}
+                                                        {/* Finance Homepage */}
+              <Button
+                variant={activeSection === "finance-home" ? "default" : "ghost"}
+                onClick={() => onSectionChange("finance-home")}
+                className="flex items-center gap-2"
+              >
+                <BarChart3 className="h-4 w-4" />
+                Finance Pro
+                <Badge variant="secondary" className="text-xs bg-gradient-to-r from-blue-400/20 to-slate-500/20 text-blue-300 border-blue-400/30">
+                  PRO
+                </Badge>
+              </Button>
+
+              {/* Luxury Experience */}
               <Button
                 variant={activeSection === "luxury-experience" ? "default" : "ghost"}
                 onClick={() => onSectionChange("luxury-experience")}
