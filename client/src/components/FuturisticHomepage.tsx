@@ -89,6 +89,44 @@ export const FuturisticHomepage: React.FC = () => {
     { day: 'Sun', score: 72 }
   ]);
 
+    const [smartNews] = useState([
+    {
+      headline: "Tech stocks rally as investors eye AI-driven growth",
+      summary: "Major tech players saw gains amid optimism around AI earnings reports and continued innovation in artificial intelligence sectors.",
+      sentiment: 'bullish' as const,
+      source: "MarketWatch",
+      timestamp: "2h ago"
+    },
+    {
+      headline: "Federal Reserve signals pause in rate hikes",
+      summary: "Fed commentary suggests a wait-and-see approach to further rate adjustments as officials monitor economic data.",
+      sentiment: 'neutral' as const,
+      source: "Reuters",
+      timestamp: "4h ago"
+    },
+    {
+      headline: "Tesla drops as deliveries fall short of analyst expectations",
+      summary: "TSLA shares fell after quarterly delivery data missed estimates, raising concerns about electric vehicle demand.",
+      sentiment: 'bearish' as const,
+      source: "CNBC",
+      timestamp: "1h ago"
+    },
+    {
+      headline: "Consumer confidence rebounds in July",
+      summary: "The latest index shows stronger than expected consumer sentiment, indicating economic resilience despite inflation concerns.",
+      sentiment: 'bullish' as const,
+      source: "Bloomberg",
+      timestamp: "3h ago"
+    },
+    {
+      headline: "China's economic data triggers global market caution",
+      summary: "Weak export numbers from China created uncertainty across markets as investors assess global trade implications.",
+      sentiment: 'bearish' as const,
+      source: "Financial Times",
+      timestamp: "5h ago"
+    }
+  ]);
+
   const [aiInsight] = useState({
     title: "Today's AI Market Insight",
     content: "Today's sentiment is driven by strong AI earnings momentum, with tech stocks leading the rally. The Fed's dovish stance is providing additional tailwinds for growth sectors.",
