@@ -22,7 +22,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SocialFeed } from "./SocialFeed";
 import { TickerPage } from "./TickerPage";
 import { WatchlistManager } from "./WatchlistManager";
-import { CommunityRooms } from "./CommunityRooms";
+
 import { TwitterTrending } from "./TwitterTrending";
 import { InstagramProfile } from "./InstagramProfile";
 import { InstagramTrending } from "./InstagramTrending";
