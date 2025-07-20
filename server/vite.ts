@@ -36,12 +36,17 @@ export async function setupVite(app: Express, server: Server) {
     cors: true,
   };
 
-  const vite = await createViteServer({
+    const vite = await createViteServer({
     ...viteConfig,
     configFile: false,
     customLogger: {
       ...viteLogger,
       error: (msg, options) => {
+        // Don't exit on HMR errors in hosted environments
+        if (msg.includes('HMR') || msg.includes('WebSocket') || msg.includes('ping')) {
+          viteLogger.warn(msg, options);
+          return;
+        }
         viteLogger.error(msg, options);
         process.exit(1);
       },
