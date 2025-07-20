@@ -693,8 +693,8 @@ export const MoorMeterDashboard: React.FC = () => {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (
-                <div key={item.key} className="relative">
-                                    (item.key === "Tool" || item.key === "Community") &&
+                                <div key={item.key} className="relative">
+                  {(item.key === "Tool" || item.key === "Community") &&
                   item.subtabs ? (
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
