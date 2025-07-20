@@ -287,7 +287,15 @@ export const MoorMeterDashboard: React.FC = () => {
 
         { label: "Rooms", key: "Rooms", icon: Users },
         { label: "Private Room", key: "PrivateRoom", icon: Lock },
-        { label: "StockTwist", key: "StockTwist", icon: Zap },
+        {
+          label: "StockTwist",
+          key: "StockTwist",
+          icon: Zap,
+          subtabs: [
+            { label: "Trade Ideas", key: "TradeIdeas", icon: Target },
+            { label: "Social Room", key: "SocialRoom", icon: MessageSquare },
+          ],
+        },
       ],
     },
   ] as const;
@@ -484,7 +492,7 @@ export const MoorMeterDashboard: React.FC = () => {
               activeCommunitySubtab === "Rooms") && (
               <div className="flex items-center gap-3 mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border">
                 <div className="flex items-center gap-2">
-                  {selectedCategory === "Crypto" ? "🪙" : "💬"}
+                  {selectedCategory === "Crypto" ? "���" : "💬"}
                   <span className="font-medium text-gray-900 dark:text-white">
                     {selectedCategory} Channels
                   </span>
