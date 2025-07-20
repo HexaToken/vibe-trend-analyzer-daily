@@ -127,16 +127,11 @@ export const MoodScoreHero: React.FC<MoodScoreHeroProps> = ({
               </div>
             </div>
 
-                        <h2 className="text-2xl font-semibold text-white mb-2">{title}</h2>
+                                                <h2 className="text-2xl font-semibold text-white mb-2">{title}</h2>
             <p className={cn(
               "max-w-2xl mx-auto transition-colors duration-500",
-              isDynamicMode ? "text-white/80" : "text-blue-200"
+              "text-blue-200"
             )}>{subtitle}</p>
-            {isDynamicMode && (
-              <Badge className="mt-3 bg-white/20 text-white border-white/30 animate-pulse">
-                Dynamic Mode • {moodState}
-              </Badge>
-            )}
           </div>
 
           {/* Mood Breakdown */}
