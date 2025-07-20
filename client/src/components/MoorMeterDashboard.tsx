@@ -68,8 +68,6 @@ import { MoodScoreHero } from "./builder/MoodScoreHero";
 import { TopStocksModule } from "./builder/TopStocksModule";
 import { SentimentHeatMap } from "./moorMeter/SentimentHeatMap";
 import { PrivateRoomsContainer } from "./privateRooms/PrivateRoomsContainer";
-import { StockTwistRoom } from "./privateRooms/StockTwistRoom";
-import { SocialRoom } from "./privateRooms/SocialRoom";
 import { formatCurrency, cn } from "../lib/utils";
 
 // Types for our mood data
@@ -448,7 +446,7 @@ export const MoorMeterDashboard: React.FC = () => {
                       variant="outline"
                       className="flex items-center gap-2"
                     >
-                      {selectedCategory === "Crypto" ? "���" : "💬"}{" "}
+                      {selectedCategory === "Crypto" ? "🪙" : "💬"}{" "}
                       {selectedCategory}
                       <ChevronDown className="w-4 h-4" />
                     </Button>
