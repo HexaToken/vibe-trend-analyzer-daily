@@ -49,11 +49,6 @@ export const UserLimitsDisplay: React.FC<UserLimitsDisplayProps> = ({
 
   const features = [
     {
-      name: "StockTwist Posts",
-      enabled: limitInfo.features.canPostStockTwist,
-      requirement: "Verified or Premium",
-    },
-    {
       name: "Create Polls",
       enabled: limitInfo.features.canCreatePolls,
       requirement: "Premium",
@@ -201,7 +196,7 @@ export const UserLimitsDisplay: React.FC<UserLimitsDisplayProps> = ({
                   <li>• Join up to 50 rooms</li>
                   <li>• Send 25 invites per day</li>
                   <li>• Up to 50 members per room</li>
-                  <li>• Create polls in StockTwist</li>
+
                   <li>• Priority support</li>
                 </ul>
                 <Button onClick={onUpgrade} size="sm" className="w-full">

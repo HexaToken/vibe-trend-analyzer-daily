@@ -71,24 +71,6 @@ export interface MessageReaction {
   userReacted: boolean;
 }
 
-export interface StockTwistPoll {
-  id: string;
-  question: string;
-  options: PollOption[];
-  createdBy: string;
-  createdAt: Date;
-  expiresAt: Date;
-  totalVotes: number;
-}
-
-export interface PollOption {
-  id: string;
-  text: string;
-  ticker?: string;
-  votes: number;
-  voters: string[];
-}
-
 export interface SentimentAlert {
   id: string;
   ticker: string;
@@ -122,6 +104,5 @@ export interface UserLimits {
   maxJoinedRooms: number;
   maxRoomMembers: number;
   maxInvitesPerHour: number;
-  canCreateStockTwistPosts: boolean;
   canCreatePolls: boolean;
 }

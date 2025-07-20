@@ -1,7 +1,6 @@
 import {
   PrivateRoom,
   RoomMessage,
-  StockTwistPoll,
   UserLimits,
   WatchlistRoom,
   SentimentAlert,
@@ -13,7 +12,7 @@ export const mockUserLimits: UserLimits = {
   maxJoinedRooms: 5,
   maxRoomMembers: 10,
   maxInvitesPerHour: 5,
-  canCreateStockTwistPosts: false,
+
   canCreatePolls: false,
 };
 
@@ -22,7 +21,7 @@ export const mockPremiumUserLimits: UserLimits = {
   maxJoinedRooms: 50,
   maxRoomMembers: 50,
   maxInvitesPerHour: 25,
-  canCreateStockTwistPosts: true,
+
   canCreatePolls: true,
 };
 
@@ -199,92 +198,6 @@ export const mockRoomMessages: RoomMessage[] = [
     isPinned: false,
     type: "sentiment_alert",
     createdAt: new Date(Date.now() - 15 * 60 * 1000),
-  },
-];
-
-export const mockStockTwistMessages: RoomMessage[] = [
-  {
-    id: "st-msg-1",
-    roomId: "stocktwist",
-    userId: "user-5",
-    username: "DayTraderPro",
-    userAvatar: "/api/placeholder/32/32",
-    userRole: "premium",
-    content:
-      "💬 Buy $SOFI at 7.10 / Target 8.20 / SL 6.90 📈 Bullish on fintech recovery",
-    cashtags: ["SOFI"],
-    sentiment: "bullish",
-    tradeIdea: {
-      ticker: "SOFI",
-      action: "buy",
-      entryPrice: 7.1,
-      targetPrice: 8.2,
-      stopLoss: 6.9,
-      sentiment: "bullish",
-      confidence: 3,
-      timeframe: "day",
-    },
-    reactions: [
-      { emoji: "✅", count: 12, users: [], userReacted: false },
-      { emoji: "⚠️", count: 3, users: [], userReacted: false },
-      { emoji: "🧠", count: 8, users: [], userReacted: false },
-    ],
-    isPinned: false,
-    type: "trade_idea",
-    createdAt: new Date(Date.now() - 45 * 60 * 1000),
-  },
-  {
-    id: "st-msg-2",
-    roomId: "stocktwist",
-    userId: "user-6",
-    username: "OptionsGuru",
-    userAvatar: "/api/placeholder/32/32",
-    userRole: "verified",
-    content:
-      "$AAPL 175 calls looking juicy for next week. Expecting bounce from support 📊",
-    cashtags: ["AAPL"],
-    sentiment: "bullish",
-    reactions: [
-      { emoji: "✅", count: 18, users: [], userReacted: false },
-      { emoji: "🧠", count: 15, users: [], userReacted: false },
-    ],
-    isPinned: false,
-    type: "message",
-    createdAt: new Date(Date.now() - 20 * 60 * 1000),
-  },
-  {
-    id: "st-msg-3",
-    roomId: "stocktwist",
-    userId: "user-7",
-    username: "CryptoTrader",
-    userAvatar: "/api/placeholder/32/32",
-    userRole: "member",
-    content: "Anyone else seeing this $RIOT volume spike? 👀",
-    cashtags: ["RIOT"],
-    reactions: [
-      { emoji: "👀", count: 5, users: [], userReacted: false },
-      { emoji: "⚠️", count: 2, users: [], userReacted: false },
-    ],
-    isPinned: false,
-    type: "message",
-    createdAt: new Date(Date.now() - 10 * 60 * 1000),
-  },
-];
-
-export const mockStockTwistPolls: StockTwistPoll[] = [
-  {
-    id: "poll-1",
-    question: "Which ticker will move the most today?",
-    options: [
-      { id: "opt-1", text: "NVDA", ticker: "NVDA", votes: 45, voters: [] },
-      { id: "opt-2", text: "TSLA", ticker: "TSLA", votes: 32, voters: [] },
-      { id: "opt-3", text: "AAPL", ticker: "AAPL", votes: 28, voters: [] },
-      { id: "opt-4", text: "MSFT", ticker: "MSFT", votes: 19, voters: [] },
-    ],
-    createdBy: "user-8",
-    createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000),
-    expiresAt: new Date(Date.now() + 4 * 60 * 60 * 1000),
-    totalVotes: 124,
   },
 ];
 
