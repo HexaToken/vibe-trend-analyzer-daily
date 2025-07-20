@@ -169,47 +169,9 @@ export const TopDiscussedWidget: React.FC<TopDiscussedWidgetProps> = ({
       className={`bg-gray-800/50 border-gray-700/50 hover:border-gray-600/70 transition-all duration-300 overflow-hidden ${className}`}
     >
       <CardHeader className="pb-3">
-        <div className="flex items-center justify-between">
-          <CardTitle className="text-white flex items-center gap-2 text-lg font-bold">
-            💬 Top Discussed
-          </CardTitle>
-          <div className="flex items-center gap-2">
-            <div className="flex rounded-lg bg-gray-700/50 p-1">
-              {(["1h", "4h", "24h"] as const).map((period) => (
-                <Button
-                  key={period}
-                  size="sm"
-                  variant={timeframe === period ? "default" : "ghost"}
-                  className={`text-xs h-6 px-2 ${
-                    timeframe === period
-                      ? "bg-blue-600 text-white"
-                      : "text-gray-400 hover:text-white"
-                  }`}
-                  onClick={() => setTimeframe(period)}
-                >
-                  {period}
-                </Button>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className="flex items-center justify-between">
-          <div className="text-sm text-gray-400">
-            Most mentioned stocks in the last {timeframe}
-          </div>
-          <div className="flex items-center gap-1">
-            <Filter className="w-3 h-3 text-gray-500" />
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
-              className="text-xs bg-gray-700/50 text-gray-300 border border-gray-600/50 rounded px-2 py-1"
-            >
-              <option value="mentions">By Mentions</option>
-              <option value="sentiment">By Sentiment</option>
-              <option value="price">By Price Change</option>
-            </select>
-          </div>
-        </div>
+        <CardTitle className="text-white flex items-center gap-2 text-lg font-bold">
+          💬 Top Discussed
+        </CardTitle>
       </CardHeader>
       <CardContent className="overflow-hidden">
         <div className="space-y-3">
