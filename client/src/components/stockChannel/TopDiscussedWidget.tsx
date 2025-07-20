@@ -107,14 +107,6 @@ export const TopDiscussedWidget: React.FC<TopDiscussedWidgetProps> = ({
     return () => clearInterval(interval);
   }, []);
 
-  const getSentimentColor = (sentiment: number) => {
-    if (sentiment > 20)
-      return "bg-green-500/20 text-green-400 border-green-500/30";
-    if (sentiment > -20)
-      return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30";
-    return "bg-red-500/20 text-red-400 border-red-500/30";
-  };
-
   const getPriceChangeColor = (change: number) => {
     return change > 0
       ? "text-green-400"
@@ -128,26 +120,6 @@ export const TopDiscussedWidget: React.FC<TopDiscussedWidgetProps> = ({
     if (change < 0) return <TrendingDown className="w-3 h-3 text-red-400" />;
     return <Activity className="w-3 h-3 text-gray-400" />;
   };
-
-  const formatVolume = (volume: number) => {
-    if (volume >= 1000000000) return `${(volume / 1000000000).toFixed(1)}B`;
-    if (volume >= 1000000) return `${(volume / 1000000).toFixed(1)}M`;
-    if (volume >= 1000) return `${(volume / 1000).toFixed(1)}K`;
-    return volume.toString();
-  };
-
-  const sortedStocks = [...stocks].sort((a, b) => {
-    switch (sortBy) {
-      case "mentions":
-        return b.mentions - a.mentions;
-      case "sentiment":
-        return b.sentiment - a.sentiment;
-      case "price":
-        return b.priceChange - a.priceChange;
-      default:
-        return 0;
-    }
-  });
 
   return (
     <Card
