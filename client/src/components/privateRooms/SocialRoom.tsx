@@ -41,6 +41,7 @@ import {
   mockUsers,
   getTimeAgo,
 } from "@/data/privateRoomsMockData";
+import { CreateRoomModal } from "./CreateRoomModal";
 
 interface SocialRoomProps {
   onCreateRoom?: () => void;
