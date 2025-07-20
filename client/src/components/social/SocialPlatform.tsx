@@ -330,50 +330,7 @@ export const SocialPlatform = () => {
         </CardContent>
       </Card>
 
-      {/* Community Rooms Preview */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg flex items-center gap-2">
-            <MessageSquare className="h-5 w-5" />
-            Active Rooms
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-2">
-          {[
-            { name: "$AAPL Traders", members: 15420, online: 892 },
-            { name: "Crypto Central", members: 28453, online: 1247 },
-            { name: "Options Trading", members: 8934, online: 234 },
-          ].map((room, index) => (
-            <div
-              key={index}
-              className="flex items-center justify-between p-2 hover:bg-muted/50 rounded cursor-pointer transition-colors"
-            >
-              <div>
-                <div className="font-medium text-sm">{room.name}</div>
-                <div className="text-xs text-muted-foreground">
-                  {room.members.toLocaleString()} members
-                </div>
-              </div>
-
-              <div className="flex items-center gap-1">
-                <div className="w-2 h-2 bg-green-500 rounded-full" />
-                <span className="text-xs text-muted-foreground">
-                  {room.online}
-                </span>
-              </div>
-            </div>
-          ))}
-
-          <Button
-            variant="outline"
-            size="sm"
-            className="w-full"
-            onClick={() => setCurrentView("rooms")}
-          >
-            Browse All Rooms
-          </Button>
-        </CardContent>
-      </Card>
+      
     </div>
   );
 
