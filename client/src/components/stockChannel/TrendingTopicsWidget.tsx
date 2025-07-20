@@ -123,7 +123,7 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
           🔥 Trending Topics
         </CardTitle>
       </CardHeader>
-      <CardContent className="overflow-y-auto max-h-[400px] p-3">
+      <CardContent className="overflow-y-auto max-h-[440px] p-3">
         <div className="space-y-2">
           {topics.map((topic, index) => (
             <div
