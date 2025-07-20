@@ -266,8 +266,11 @@ export const Navigation = ({
               </DropdownMenu>
             </div>
 
-            {/* User Section */}
+                        {/* User Section */}
             <div className="flex items-center gap-3">
+              {/* Theme Toggle */}
+              <MoodThemeToggle />
+
               {isAuthenticated ? (
                 <>
                   {/* Notifications */}
