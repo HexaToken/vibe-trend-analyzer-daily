@@ -408,7 +408,7 @@ export const MoorMeterDashboard: React.FC = memo(() => {
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
               <div>
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                  🧑‍🤝‍🧑 Community Hub
+                  🧑‍🤝���🧑 Community Hub
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400">
                   {activeCommunitySubtab === "Chat"
@@ -529,7 +529,7 @@ export const MoorMeterDashboard: React.FC = memo(() => {
                             </Badge>
                           </div>
                           <p className="text-white text-sm">
-                            📊 <strong>Daily Market Wrap:</strong> Tech earnings
+                            ��� <strong>Daily Market Wrap:</strong> Tech earnings
                             season heating up! NVDA reports after market close.
                             Remember to follow community guidelines and keep
                             discussions respectful.
@@ -626,12 +626,13 @@ export const MoorMeterDashboard: React.FC = memo(() => {
     }
   };
 
-  return (
+    return (
     <div
       className={`min-h-screen transition-colors duration-300 ${darkMode ? "dark bg-gray-900" : "bg-gray-50"}`}
     >
-      {/* Navigation */}
-      <nav className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
+      {/* Navigation - Hidden for Home tab since HomePage has its own hero */}
+      {activeTab !== "Home" && (
+        <nav className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
