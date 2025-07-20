@@ -281,7 +281,7 @@ export const MoorMeterDashboard: React.FC = () => {
       href: "#community",
       subtabs: [
         { label: "Chat", key: "Chat", icon: MessageCircle },
-        { label: "Crypto", key: "Crypto", icon: TrendingUp },
+                { label: "Channels", key: "Channels", icon: Users, badge: "NEW" },
         { label: "Off-Topic", key: "OffTopic", icon: Heart },
 
         
