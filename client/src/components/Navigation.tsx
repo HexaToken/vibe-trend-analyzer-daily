@@ -36,16 +36,10 @@ import {
 import { useAuth } from "@/contexts/AuthContext";
 import { AuthModal } from "@/components/auth/AuthModal";
 import { ApiStatusBadge } from "@/components/ApiStatusIndicator";
+import { useNavigation } from "@/stores/useAppStore";
 
-interface NavigationProps {
-  activeSection: string;
-  onSectionChange: (section: string) => void;
-}
-
-export const Navigation = ({
-  activeSection,
-  onSectionChange,
-}: NavigationProps) => {
+export const Navigation = () => {
+  const { activeSection, setActiveSection } = useNavigation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState<"login" | "signup">("login");
