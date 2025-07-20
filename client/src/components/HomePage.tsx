@@ -694,13 +694,19 @@ export const HomePage: React.FC = () => {
 
     const [moodScore, setMoodScore] = useState<MoodScore>(() => calculateMoodScore());
 
-    useEffect(() => {
+      // Update mood score when stock sentiment changes
+  useEffect(() => {
+    setMoodScore(calculateMoodScore());
+  }, [stockSentiment?.score]);
+
+  // Periodic updates every 30 seconds
+  useEffect(() => {
     const interval = setInterval(() => {
       setMoodScore(calculateMoodScore());
     }, 30000);
 
     return () => clearInterval(interval);
-  }, []); // Remove calculateMoodScore dependency to prevent infinite loop
+  }, []);
 
   const trendingTopics: TrendingTopic[] = [
     { term: "AI Revolution", sentiment: 85, volume: 12500, source: "reddit", change24h: 12.5, discussion_count: 1247 },
