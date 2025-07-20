@@ -123,14 +123,14 @@ export const TopDiscussedWidget: React.FC<TopDiscussedWidgetProps> = ({
 
   return (
     <Card
-      className={`bg-gray-800/50 border-gray-700/50 hover:border-gray-600/70 transition-all duration-300 overflow-hidden w-full max-w-full ${className || ""}`}
+      className={`bg-gradient-to-br from-red-900/30 to-pink-900/30 border-red-500/20 hover:border-red-400/40 transition-all duration-300 overflow-hidden w-full max-w-full rounded-xl ${className || ""}`}
     >
       <CardHeader className="pb-3">
         <CardTitle className="text-white flex items-center gap-2 text-lg font-bold">
           💬 Top Discussed
         </CardTitle>
       </CardHeader>
-      <CardContent className="overflow-hidden">
+      <CardContent className="overflow-y-auto max-h-[200px] p-4">
         <div className="space-y-3">
           {stocks.map((stock, index) => (
             <div
