@@ -502,13 +502,8 @@ export const MoorMeterDashboard: React.FC = () => {
                 <div className="lg:col-span-7 space-y-6">
                   <Card className="bg-gray-800/50 border-gray-700/50">
                     <CardHeader className="pb-4">
-                      <div className="flex items-center justify-between">
-                        <CardTitle className="text-white flex items-center gap-2">
-                          📈 Stock Channels – Real-time market chat
-                        </CardTitle>
-                        <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
-                          2,847 active traders
-                        </Badge>
+                      <div className="text-white text-2xl font-normal gap-2 -tracking-wide">
+                        📈 Stock Channels – Real-time market chat
                       </div>
                       {/* Search Bar */}
                       <div className="relative mt-4">
@@ -521,106 +516,6 @@ export const MoorMeterDashboard: React.FC = () => {
                       </div>
                     </CardHeader>
                     <CardContent>
-                      {/* Stock Channels List */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
-                        {[
-                          {
-                            ticker: "TSLA",
-                            name: "Tesla Inc",
-                            price: 248.42,
-                            change: 3.42,
-                            users: 892,
-                            posts: 1247,
-                          },
-                          {
-                            ticker: "NVDA",
-                            name: "NVIDIA Corp",
-                            price: 875.28,
-                            change: -2.15,
-                            users: 1205,
-                            posts: 2134,
-                          },
-                          {
-                            ticker: "AAPL",
-                            name: "Apple Inc",
-                            price: 182.52,
-                            change: 1.23,
-                            users: 743,
-                            posts: 985,
-                          },
-                          {
-                            ticker: "MSFT",
-                            name: "Microsoft Corp",
-                            price: 378.85,
-                            change: 0.89,
-                            users: 567,
-                            posts: 742,
-                          },
-                          {
-                            ticker: "AMD",
-                            name: "Advanced Micro",
-                            price: 142.67,
-                            change: -1.45,
-                            users: 423,
-                            posts: 658,
-                          },
-                          {
-                            ticker: "META",
-                            name: "Meta Platforms",
-                            price: 306.34,
-                            change: 2.78,
-                            users: 334,
-                            posts: 445,
-                          },
-                        ].map((stock, index) => (
-                          <div
-                            key={stock.ticker}
-                            className="p-4 rounded-lg bg-gray-700/30 hover:bg-gray-700/50 transition-all duration-200 cursor-pointer border border-gray-600/30 hover:border-blue-500/50"
-                          >
-                            <div className="flex items-center justify-between mb-2">
-                              <div>
-                                <div className="text-white font-bold text-lg">
-                                  ${stock.ticker}
-                                </div>
-                                <div className="text-xs text-gray-400 truncate">
-                                  {stock.name}
-                                </div>
-                              </div>
-                              <div className="text-right">
-                                <div className="text-white font-medium">
-                                  ${stock.price}
-                                </div>
-                                <div
-                                  className={`text-sm font-medium flex items-center gap-1 ${
-                                    stock.change > 0
-                                      ? "text-green-400"
-                                      : "text-red-400"
-                                  }`}
-                                >
-                                  {stock.change > 0 ? (
-                                    <TrendingUp className="w-3 h-3" />
-                                  ) : (
-                                    <TrendingDown className="w-3 h-3" />
-                                  )}
-                                  {stock.change > 0 ? "+" : ""}
-                                  {stock.change}%
-                                </div>
-                              </div>
-                            </div>
-                            <div className="flex items-center justify-between text-xs text-gray-400">
-                              <span className="flex items-center gap-1">
-                                <Users className="w-3 h-3" />
-                                {stock.users} online
-                              </span>
-                              <span className="flex items-center gap-1">
-                                <MessageCircle className="w-3 h-3" />
-                                {stock.posts} posts
-                              </span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-
                       {/* Pinned Post */}
                       <div className="mb-4 p-4 bg-blue-900/20 border border-blue-500/30 rounded-lg">
                         <div className="flex items-center gap-2 mb-2">
