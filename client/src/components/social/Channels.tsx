@@ -66,6 +66,8 @@ export const Channels: React.FC = () => {
           </TabsContent>
         </div>
       </Tabs>
-    </div>
+        </div>
   );
 };
+
+export default Channels;
