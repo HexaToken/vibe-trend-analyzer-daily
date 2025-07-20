@@ -56,6 +56,17 @@ export const SocialRoom: React.FC<SocialRoomProps> = ({ onCreateRoom }) => {
   // Mock current user
   const currentUser: User = mockUsers[0]; // TechBull2024
 
+  const handleCreateRoom = () => {
+    setShowCreateModal(true);
+  };
+
+  const handleRoomCreated = (roomData: Partial<PrivateRoom>) => {
+    console.log("Creating social room:", roomData);
+    // Here we would call the API to create the room
+    setShowCreateModal(false);
+    // Optionally refresh the rooms list or add the new room locally
+  };
+
   // Filter rooms for current user (social rooms only)
   const userRooms = mockPrivateRooms.filter(
     (room) =>
