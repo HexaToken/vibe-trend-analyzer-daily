@@ -157,7 +157,7 @@ export const StockChannelHub: React.FC = () => {
       avatar: "/api/placeholder/32/32",
       timestamp: new Date(Date.now() - 600000),
       content:
-        "RSI approaching overbought on the 4H chart. Expecting a pullback to $241.5k before continuation. What do you think?",
+        "RSI approaching overbought on the 4H chart. Expecting a pullback to $241.5 before continuation. What do you think?",
       sentiment: "neutral",
       badges: ["TA Expert"],
       likes: 23,
@@ -175,6 +175,45 @@ export const StockChannelHub: React.FC = () => {
       badges: ["Diamond Hands"],
       likes: 156,
       comments: 24,
+      tickers: ["TSLA"],
+    },
+    {
+      id: "4",
+      username: "ElonWatcher",
+      avatar: "/api/placeholder/32/32",
+      timestamp: new Date(Date.now() - 1200000),
+      content:
+        "Anyone else watching the Cybertruck production numbers? Could be a major catalyst if they hit targets 📈",
+      sentiment: "bullish",
+      badges: ["Industry Expert"],
+      likes: 89,
+      comments: 15,
+      tickers: ["TSLA"],
+    },
+    {
+      id: "5",
+      username: "BearishBob",
+      avatar: "/api/placeholder/32/32",
+      timestamp: new Date(Date.now() - 1500000),
+      content:
+        "EV competition is heating up. Ford, GM, and others are catching up fast. Not sure $TSLA can maintain this premium 📉",
+      sentiment: "bearish",
+      badges: ["Contrarian"],
+      likes: 34,
+      comments: 28,
+      tickers: ["TSLA"],
+    },
+    {
+      id: "6",
+      username: "MarketSage",
+      avatar: "/api/placeholder/32/32",
+      timestamp: new Date(Date.now() - 1800000),
+      content:
+        "Key support at $240. If it holds, next target is $255. Clean breakout pattern forming on daily chart 📊",
+      sentiment: "neutral",
+      badges: ["Chart Master"],
+      likes: 67,
+      comments: 9,
       tickers: ["TSLA"],
     },
   ];
@@ -263,7 +302,7 @@ export const StockChannelHub: React.FC = () => {
   );
 
   return (
-    <div className="flex h-full bg-white dark:bg-gray-900 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+    <div className="flex h-full min-h-[600px] bg-white dark:bg-gray-900 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
       {/* Left Sidebar - Stock Channels */}
       <div className="w-fit pr-[3%] max-w-[220px] bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col min-h-0">
         {/* Sidebar Header */}
@@ -350,7 +389,7 @@ export const StockChannelHub: React.FC = () => {
       </div>
 
       {/* Main Feed - Ticker Chatroom */}
-      <div className="flex-1 flex flex-col min-h-0">
+      <div className="flex-1 flex flex-col min-h-0" style={{ flexGrow: 2 }}>
         {selectedChannel && (
           <>
             {/* Channel Header */}
@@ -402,11 +441,11 @@ export const StockChannelHub: React.FC = () => {
             </div>
 
             {/* Messages Feed */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0">
+            <div className="flex-1 overflow-y-auto p-4 space-y-3 min-h-[550px] max-h-none lg:max-h-[600px]">
               {channelMessages.map((message) => (
-                <div key={message.id} className="space-y-3">
+                <div key={message.id} className="space-y-2">
                   {message.isPinned && (
-                    <div className="flex items-center gap-2 text-xs text-blue-600 dark:text-blue-400">
+                    <div className="flex items-center gap-2 text-xs text-blue-600 dark:text-blue-400 mb-1">
                       <Pin className="w-3 h-3" />
                       <span>Pinned Message</span>
                     </div>
@@ -422,7 +461,7 @@ export const StockChannelHub: React.FC = () => {
                     </Avatar>
 
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      <div className="flex items-center gap-2 mb-1.5 flex-wrap">
                         <span className="font-medium text-sm text-gray-900 dark:text-white">
                           {message.username}
                         </span>
@@ -452,7 +491,7 @@ export const StockChannelHub: React.FC = () => {
                         </span>
                       </div>
 
-                      <p className="text-sm text-gray-800 dark:text-gray-200 mb-2 break-words">
+                      <p className="text-sm text-gray-800 dark:text-gray-200 mb-2 break-words leading-relaxed">
                         {message.content}
                       </p>
 
@@ -490,7 +529,7 @@ export const StockChannelHub: React.FC = () => {
             </div>
 
             {/* Message Input */}
-            <div className="p-4 border-t border-gray-200 dark:border-gray-700 flex-shrink-0">
+            <div className="p-3 border-t border-gray-200 dark:border-gray-700 flex-shrink-0 bg-gray-50 dark:bg-gray-800/50">
               <div className="flex gap-2">
                 <Input
                   placeholder={`Post your idea... Use $${selectedChannel.ticker} to link stocks`}

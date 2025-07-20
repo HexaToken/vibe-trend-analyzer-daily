@@ -504,7 +504,10 @@ export const MoorMeterDashboard: React.FC = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[calc(100vh-240px)] min-h-[700px] max-h-[calc(100vh-240px)] overflow-hidden">
                   {/* Left Section - Stock Channels (Primary Content 75%) */}
                   <div className="lg:col-span-9 flex flex-col h-full max-h-full overflow-hidden">
-                    <Card className="bg-gray-800/50 border-gray-700/50 flex flex-col h-full max-h-full overflow-hidden">
+                    <Card
+                      className="bg-gray-800/50 border-gray-700/50 flex flex-col h-full max-h-full overflow-hidden"
+                      style={{ height: "120%" }}
+                    >
                       <CardHeader className="pb-4 flex-shrink-0">
                         <div className="text-white text-2xl font-normal gap-2 -tracking-wide">
                           📈 Stock Channels – Real-time market chat
@@ -543,7 +546,10 @@ export const MoorMeterDashboard: React.FC = () => {
                         </div>
 
                         {/* Chat Interface Area - Now expands to fill remaining space */}
-                        <div className="flex-1 bg-gray-900/50 rounded-lg border border-gray-600/30 min-h-0 overflow-hidden">
+                        <div
+                          className="flex-1 bg-gray-900/50 rounded-lg border border-gray-600/30 min-h-0 overflow-hidden"
+                          style={{ flexGrow: 1.2 }}
+                        >
                           <ChatInterface />
                         </div>
                       </CardContent>
@@ -577,8 +583,8 @@ export const MoorMeterDashboard: React.FC = () => {
                         </div>
 
                         {/* Trending Topics Widget */}
-                        <div className="flex-shrink-0 overflow-hidden w-full">
-                          <EnhancedTrendingTopicsWidget className="w-full max-h-[280px] shadow-lg hover:shadow-xl transition-shadow duration-300" />
+                        <div className="flex-shrink-0 overflow-hidden w-full min-w-0">
+                          <EnhancedTrendingTopicsWidget className="w-full max-h-[440px] shadow-lg hover:shadow-xl transition-shadow duration-300" />
                         </div>
                       </div>
                     </div>

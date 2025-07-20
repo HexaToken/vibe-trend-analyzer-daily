@@ -123,14 +123,14 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
           🔥 Trending Topics
         </CardTitle>
       </CardHeader>
-      <CardContent className="overflow-y-auto max-h-[200px] p-4">
-        <div className="space-y-3">
+      <CardContent className="overflow-y-auto max-h-[440px] p-3">
+        <div className="space-y-2">
           {topics.map((topic, index) => (
             <div
               key={topic.id}
-              className="flex items-center justify-between p-3 rounded-lg bg-gray-700/30 hover:bg-gray-700/50 transition-all duration-200 cursor-pointer border border-gray-600/20 hover:border-gray-500/50 overflow-hidden gap-2"
+              className="flex items-center justify-between p-2 rounded-lg bg-gray-700/30 hover:bg-gray-700/50 transition-all duration-200 cursor-pointer border border-gray-600/20 hover:border-gray-500/50 overflow-hidden gap-2 min-w-0"
             >
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 flex-shrink-0 min-w-0">
                 <div className="flex items-center gap-2">
                   <div className="text-gray-400 text-sm font-bold">
                     #{index + 1}
@@ -141,30 +141,34 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
                     <DollarSign className="w-4 h-4 text-green-400" />
                   )}
                 </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <span className="text-white font-medium text-sm truncate block">
+                <div className="flex-1 min-w-0 flex-shrink-1">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="text-white font-medium text-sm truncate block flex-shrink-1 min-w-0">
                       {topic.tag}
                     </span>
                     {topic.isRising && (
-                      <div className="flex items-center gap-1">
+                      <div className="flex items-center gap-1 flex-shrink-0">
                         <Flame className="w-3 h-3 text-orange-400 flex-shrink-0" />
                         <div
-                          className={`px-2 py-1 rounded-md text-center min-w-[60px] max-w-[80px] overflow-hidden text-ellipsis whitespace-nowrap ${
+                          className={`px-2 py-1 rounded-md text-center min-w-[50px] max-w-[75px] overflow-hidden text-ellipsis whitespace-nowrap flex-shrink-0 ${
                             topic.change > 0
                               ? "bg-green-500/20 text-green-400"
                               : "bg-red-500/20 text-red-400"
                           }`}
+                          title={`${topic.change > 0 ? "+" : ""}${topic.change.toFixed(3)}%`}
                         >
-                          <span className="text-[clamp(0.75rem,2vw,1rem)] font-medium">
+                          <span className="text-[clamp(0.65rem,1.5vw,0.85rem)] font-medium">
                             {topic.change > 0 ? "+" : ""}
-                            {topic.change.toFixed(2)}%
+                            {Math.abs(topic.change) >= 10
+                              ? topic.change.toFixed(1)
+                              : topic.change.toFixed(2)}
+                            %
                           </span>
                         </div>
                       </div>
                     )}
                   </div>
-                  <div className="flex items-center gap-2 text-[10px] text-gray-400">
+                  <div className="flex items-center gap-2 text-[10px] text-gray-400 mt-1">
                     <span>{formatNumber(topic.mentions)} mentions</span>
                   </div>
                 </div>
