@@ -302,7 +302,7 @@ export const StockChannelHub: React.FC = () => {
   );
 
   return (
-    <div className="flex h-full bg-white dark:bg-gray-900 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+    <div className="flex h-full min-h-[600px] bg-white dark:bg-gray-900 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
       {/* Left Sidebar - Stock Channels */}
       <div className="w-fit pr-[3%] max-w-[220px] bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col min-h-0">
         {/* Sidebar Header */}
@@ -389,7 +389,7 @@ export const StockChannelHub: React.FC = () => {
       </div>
 
       {/* Main Feed - Ticker Chatroom */}
-      <div className="flex-1 flex flex-col min-h-0">
+      <div className="flex-1 flex flex-col min-h-0" style={{ flexGrow: 2 }}>
         {selectedChannel && (
           <>
             {/* Channel Header */}
@@ -441,7 +441,7 @@ export const StockChannelHub: React.FC = () => {
             </div>
 
             {/* Messages Feed */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-3 min-h-[550px] max-h-[600px]">
+            <div className="flex-1 overflow-y-auto p-4 space-y-3 min-h-[550px] max-h-none lg:max-h-[600px]">
               {channelMessages.map((message) => (
                 <div key={message.id} className="space-y-2">
                   {message.isPinned && (
