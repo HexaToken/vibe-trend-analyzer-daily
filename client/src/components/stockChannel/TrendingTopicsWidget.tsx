@@ -102,13 +102,6 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
     return () => clearInterval(interval);
   }, []);
 
-  const handleRefresh = async () => {
-    setIsRefreshing(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setIsRefreshing(false);
-  };
-
   const getSentimentColor = (sentiment: number) => {
     if (sentiment > 20)
       return "bg-green-500/20 text-green-400 border-green-500/30";
