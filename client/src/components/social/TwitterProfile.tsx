@@ -1,4 +1,5 @@
 import { useState } from "react";
+import DOMPurify from 'dompurify';
 import {
   Users,
   MessageCircle,
@@ -251,10 +252,10 @@ export const TwitterProfile = ({
                 key={tweet.id}
                 className="p-4 border rounded-lg hover:bg-muted/50 transition-colors"
               >
-                <div
+                                <div
                   className="text-sm mb-3 leading-relaxed"
                   dangerouslySetInnerHTML={{
-                    __html: renderTweetText(tweet.text),
+                    __html: DOMPurify.sanitize(renderTweetText(tweet.text)),
                   }}
                   onClick={handleTextClick}
                 />
