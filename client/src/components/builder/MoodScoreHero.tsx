@@ -95,12 +95,10 @@ export const MoodScoreHero: React.FC<MoodScoreHeroProps> = ({
     return "Bearish";
   };
 
-    return (
+        return (
     <div className={cn(
       "relative mb-8 overflow-hidden rounded-3xl transition-all duration-700",
-      isDynamicMode
-        ? `bg-gradient-to-br ${accentColor} ${glowEffect}`
-        : "bg-gradient-to-br from-blue-600 via-purple-700 to-indigo-800"
+      "bg-gradient-to-br from-blue-600 via-purple-700 to-indigo-800"
     )}>
       <div className={cn(
         "absolute inset-0 transition-all duration-700",
