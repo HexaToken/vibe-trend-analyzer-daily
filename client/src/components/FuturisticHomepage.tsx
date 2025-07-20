@@ -419,6 +419,48 @@ export const FuturisticHomepage: React.FC = () => {
                   ))}
                 </div>
               </CardContent>
+                        </Card>
+
+            {/* Smart News Feed */}
+            <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
+              <CardHeader className="border-b border-purple-500/20">
+                <CardTitle className="text-white flex items-center gap-2">
+                  <Newspaper className="w-6 h-6 text-cyan-400" />
+                  Smart News Feed
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                <div className="space-y-4">
+                  {smartNews.map((news, index) => (
+                    <div key={index} className="bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-5 border border-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer">
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex-1">
+                          <h3 className="text-lg font-bold text-white mb-2 line-clamp-2 group-hover:text-purple-300 transition-colors">
+                            {news.headline}
+                          </h3>
+                          <p className="text-sm text-gray-400 leading-relaxed line-clamp-3">
+                            {news.summary}
+                          </p>
+                        </div>
+                        <Badge className={cn(
+                          "ml-4 flex-shrink-0",
+                          news.sentiment === 'bullish' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' :
+                          news.sentiment === 'bearish' ? 'bg-red-500/20 text-red-400 border-red-500/30' :
+                          'bg-gray-500/20 text-gray-400 border-gray-500/30'
+                        )}>
+                          {news.sentiment === 'bullish' ? '🟢 Bullish' :
+                           news.sentiment === 'bearish' ? '🔴 Bearish' :
+                           '🟡 Neutral'}
+                        </Badge>
+                      </div>
+                      <div className="flex items-center justify-between text-xs text-gray-500">
+                        <span className="font-medium">{news.source}</span>
+                        <span>{news.timestamp}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
             </Card>
 
             {/* 7-Day Mood Trend Chart */}
