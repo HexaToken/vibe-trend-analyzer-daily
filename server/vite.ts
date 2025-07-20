@@ -85,12 +85,37 @@ export async function setupVite(app: Express, server: Server) {
         "index.html",
       );
 
-      // always reload the index.html file from disk incase it changes
+            // always reload the index.html file from disk incase it changes
       let template = await fs.promises.readFile(clientTemplate, "utf-8");
       template = template.replace(
         `src="/src/main.tsx"`,
         `src="/src/main.tsx?v=${nanoid()}"`,
       );
+
+      // For hosted environments, inject script to disable Vite's problematic fetch calls
+      const isHostedEnvironment = !!(process.env.REPL_ID || process.env.FLY_APP_NAME || process.env.VERCEL || process.env.NETLIFY);
+      if (isHostedEnvironment) {
+        template = template.replace(
+          '<head>',
+          `<head>
+    <script>
+      // Prevent Vite ping failures in hosted environments
+      const originalFetch = window.fetch;
+      window.fetch = function(url, options) {
+        // Block Vite ping requests that fail in hosted environments
+        if (typeof url === 'string' && (
+          options?.headers?.Accept === 'text/x-vite-ping' ||
+          url.includes('/@vite/') ||
+          url.includes('__vite')
+        )) {
+          return Promise.resolve(new Response('', { status: 204 }));
+        }
+        return originalFetch.apply(this, arguments);
+      };
+    </script>`
+        );
+      }
+
       const page = await vite.transformIndexHtml(url, template);
       res.status(200).set({ "Content-Type": "text/html" }).end(page);
     } catch (e) {
