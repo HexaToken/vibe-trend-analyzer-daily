@@ -323,7 +323,7 @@ All colors MUST be HSL.
     }
   }
 
-  @keyframes emerge {
+    @keyframes emerge {
     0% {
       opacity: 0;
       transform: translateY(30px) scale(0.9);
@@ -333,6 +333,21 @@ All colors MUST be HSL.
       transform: translateY(0px) scale(1);
     }
   }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-emerge {
+    animation: emerge 0.8s ease-out forwards;
+  }
+
+  /* Stagger emerge animations */
+  .emerge-1 { animation-delay: 0.1s; }
+  .emerge-2 { animation-delay: 0.2s; }
+  .emerge-3 { animation-delay: 0.3s; }
+  .emerge-4 { animation-delay: 0.4s; }
+  .emerge-5 { animation-delay: 0.5s; }
 
   .mood-shimmer {
     position: relative;
