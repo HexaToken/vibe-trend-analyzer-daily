@@ -201,21 +201,6 @@ export const TopDiscussedWidget: React.FC<TopDiscussedWidgetProps> = ({
             </div>
           ))}
         </div>
-
-        <div className="mt-4 pt-3 border-t border-gray-700/50">
-          <div className="flex items-center justify-between text-xs text-gray-400">
-            <span className="flex items-center gap-1">
-              <BarChart3 className="w-3 h-3" />
-              Sorted by {sortBy}
-            </span>
-            <span>
-              {stocks
-                .reduce((sum, stock) => sum + stock.mentions, 0)
-                .toLocaleString()}{" "}
-              total mentions
-            </span>
-          </div>
-        </div>
       </CardContent>
     </Card>
   );
