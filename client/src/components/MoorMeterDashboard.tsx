@@ -284,6 +284,7 @@ export const MoorMeterDashboard: React.FC = () => {
         { label: "Off-Topic", key: "OffTopic", icon: Heart },
 
         { label: "Rooms", key: "Rooms", icon: Users },
+        { label: "Private Room", key: "PrivateRoom", icon: Lock },
       ],
     },
   ] as const;
