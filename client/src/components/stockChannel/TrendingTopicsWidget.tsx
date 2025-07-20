@@ -211,10 +211,10 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
                       <div className="flex items-center gap-1">
                         <Flame className="w-3 h-3 text-orange-400" />
                         <span
-                          className={`text-xs ${topic.change > 0 ? "text-green-400" : "text-red-400"}`}
+                          className={`text-xs whitespace-nowrap ${topic.change > 0 ? "text-green-400" : "text-red-400"}`}
                         >
                           {topic.change > 0 ? "+" : ""}
-                          {topic.change.toFixed(1)}%
+                          {topic.change.toFixed(2)}%
                         </span>
                       </div>
                     )}
@@ -240,7 +240,7 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
                       <TrendingDown className="w-3 h-3" />
                     )}
                     {topic.sentiment > 0 ? "+" : ""}
-                    {topic.sentiment}%
+                    {topic.sentiment.toFixed(2)}%
                   </div>
                 </Badge>
               </div>
