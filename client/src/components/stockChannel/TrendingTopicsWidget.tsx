@@ -168,7 +168,7 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
                       </div>
                     )}
                   </div>
-                  <div className="flex items-center gap-2 text-[10px] text-gray-400">
+                  <div className="flex items-center gap-2 text-[10px] text-gray-400 mt-1">
                     <span>{formatNumber(topic.mentions)} mentions</span>
                   </div>
                 </div>
