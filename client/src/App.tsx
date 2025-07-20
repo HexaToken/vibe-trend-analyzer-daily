@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { MoodThemeProvider } from "@/contexts/MoodThemeContext";
 import { Navigation } from "@/components/Navigation";
 import { Dashboard } from "@/components/Dashboard";
 import { SentimentDashboard } from "@/components/SentimentDashboard";
@@ -86,22 +87,24 @@ const App = () => {
     }
   };
 
-  return (
+    return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <div className="min-h-screen bg-background">
-            <Navigation
-              activeSection={activeSection}
-              onSectionChange={setActiveSection}
-            />
-            <main>{renderContent()}</main>
-            <ApiStatusIndicator />
-            <AiChatBubble />
-          </div>
-        </TooltipProvider>
+        <MoodThemeProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <div className="min-h-screen bg-background transition-all duration-500">
+              <Navigation
+                activeSection={activeSection}
+                onSectionChange={setActiveSection}
+              />
+              <main>{renderContent()}</main>
+              <ApiStatusIndicator />
+              <AiChatBubble />
+            </div>
+          </TooltipProvider>
+        </MoodThemeProvider>
       </AuthProvider>
     </QueryClientProvider>
   );
