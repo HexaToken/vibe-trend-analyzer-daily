@@ -69,6 +69,8 @@ import { TopStocksModule } from "./builder/TopStocksModule";
 import { SentimentHeatMap } from "./moorMeter/SentimentHeatMap";
 import { PrivateRoomsContainer } from "./privateRooms/PrivateRoomsContainer";
 import { formatCurrency, cn } from "../lib/utils";
+import { useMoodTheme } from "../contexts/MoodThemeContext";
+import { MoodThemeToggle } from "./ui/mood-theme-toggle";
 
 // Types for our mood data
 interface MoodScore {
@@ -109,7 +111,7 @@ interface CommunityMessage {
 
 export const MoorMeterDashboard: React.FC = () => {
   console.log("MoorMeterDashboard component rendering...");
-  const [darkMode, setDarkMode] = useState(true);
+  const { setMoodScore, bodyGradient, isDynamicMode } = useMoodTheme();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTimeframe, setSelectedTimeframe] = useState<
     "1D" | "7D" | "30D"
@@ -165,16 +167,22 @@ export const MoorMeterDashboard: React.FC = () => {
     };
   };
 
-  const [moodScore, setMoodScore] = useState<MoodScore>(calculateMoodScore());
+    const [localMoodScore, setLocalMoodScore] = useState<MoodScore>(calculateMoodScore());
 
-  // Update mood score periodically
+  // Update mood score periodically and sync with theme context
   useEffect(() => {
+    const newScore = calculateMoodScore();
+    setLocalMoodScore(newScore);
+    setMoodScore(newScore); // Sync with theme context
+
     const interval = setInterval(() => {
-      setMoodScore(calculateMoodScore());
+      const updatedScore = calculateMoodScore();
+      setLocalMoodScore(updatedScore);
+      setMoodScore(updatedScore); // Sync with theme context
     }, 30000); // Update every 30 seconds
 
     return () => clearInterval(interval);
-  }, [stockSentiment]);
+  }, [stockSentiment, setMoodScore]);
 
   // Get mood emoji and color
   const getMoodEmoji = (score: number) => {
@@ -659,8 +667,8 @@ export const MoorMeterDashboard: React.FC = () => {
                 {/* Watchlist */}
                 <WatchlistWidget />
 
-                {/* AI Insight */}
-                <AIInsightWidget moodScore={moodScore} />
+                                {/* AI Insight */}
+                <AIInsightWidget moodScore={localMoodScore} />
 
                 {/* Community Feed */}
                 <CommunityWidget messages={communityMessages} />
@@ -671,10 +679,14 @@ export const MoorMeterDashboard: React.FC = () => {
     }
   };
 
-  return (
-    <div
-      className={`min-h-screen transition-colors duration-300 ${darkMode ? "dark bg-gray-900" : "bg-gray-50"}`}
-    >
+    return (
+    <div className={`min-h-screen transition-all duration-500 ${isDynamicMode ? `${bodyGradient} dark` : 'dark bg-gray-900'}`}>
+      {/* Dynamic mood overlay for enhanced visual feedback */}
+      {isDynamicMode && (
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-black/5 to-transparent animate-pulse" />
+        </div>
+      )}
       {/* Navigation */}
       <nav className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -744,30 +756,14 @@ export const MoorMeterDashboard: React.FC = () => {
                 </div>
               ))}
 
-              <button
-                onClick={() => setDarkMode(!darkMode)}
-                className="p-2 rounded-md text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors duration-200"
-              >
-                {darkMode ? (
-                  <Sun className="h-5 w-5" />
-                ) : (
-                  <Moon className="h-5 w-5" />
-                )}
-              </button>
+                            <MoodThemeToggle />
             </div>
 
             {/* Mobile menu button */}
             <div className="md:hidden flex items-center">
-              <button
-                onClick={() => setDarkMode(!darkMode)}
-                className="p-2 rounded-md text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors duration-200 mr-2"
-              >
-                {darkMode ? (
-                  <Sun className="h-5 w-5" />
-                ) : (
-                  <Moon className="h-5 w-5" />
-                )}
-              </button>
+                            <div className="mr-2">
+                <MoodThemeToggle />
+              </div>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
