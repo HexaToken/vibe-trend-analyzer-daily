@@ -55,7 +55,7 @@ import { WatchlistWidget } from "./moorMeter/WatchlistWidget";
 import { WatchlistModule } from "./moorMeter/WatchlistModule";
 import { AIInsightWidget } from "./moorMeter/AIInsightWidget";
 import { CommunityWidget } from "./moorMeter/CommunityWidget";
-import { CommunityRooms } from "./social/CommunityRooms";
+
 import { LivePollsWidget } from "./stockChannel/LivePollsWidget";
 import { AISummaryWidget } from "./stockChannel/AISummaryWidget";
 import { TrendingTopicsWidget as EnhancedTrendingTopicsWidget } from "./stockChannel/TrendingTopicsWidget";
