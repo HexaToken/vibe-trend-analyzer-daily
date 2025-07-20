@@ -504,7 +504,10 @@ export const MoorMeterDashboard: React.FC = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[calc(100vh-240px)] min-h-[700px] max-h-[calc(100vh-240px)] overflow-hidden">
                   {/* Left Section - Stock Channels (Primary Content 75%) */}
                   <div className="lg:col-span-9 flex flex-col h-full max-h-full overflow-hidden">
-                    <Card className="bg-gray-800/50 border-gray-700/50 flex flex-col h-full max-h-full overflow-hidden">
+                    <Card
+                      className="bg-gray-800/50 border-gray-700/50 flex flex-col h-full max-h-full overflow-hidden"
+                      style={{ height: "120%" }}
+                    >
                       <CardHeader className="pb-4 flex-shrink-0">
                         <div className="text-white text-2xl font-normal gap-2 -tracking-wide">
                           📈 Stock Channels – Real-time market chat
