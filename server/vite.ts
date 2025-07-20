@@ -20,21 +20,31 @@ export function log(message: string, source = "express") {
 }
 
 export async function setupVite(app: Express, server: Server) {
+  // Detect if we're in a hosted environment (like Replit, Fly.dev, etc.)
+  const isHostedEnvironment = !!(process.env.REPL_ID || process.env.FLY_APP_NAME || process.env.VERCEL || process.env.NETLIFY);
+
   const serverOptions = {
     middlewareMode: true,
     host: '0.0.0.0',
     port: 5000,
-    hmr: {
+    hmr: isHostedEnvironment ? {
+      // For hosted environments, disable websocket HMR to prevent fetch errors
+      server: false,
+      // Use overlay instead of websocket for error reporting
+      overlay: true
+    } : {
       server,
       port: 5000,
       host: '0.0.0.0',
-      // Disable client-side polling for hosted environments
       clientPort: 5000
     },
     allowedHosts: true,
-    // Improve CORS handling for hosted environments
     cors: true,
   };
+
+  if (isHostedEnvironment) {
+    log("Detected hosted environment - HMR WebSocket disabled to prevent fetch errors");
+  }
 
     const vite = await createViteServer({
     ...viteConfig,
