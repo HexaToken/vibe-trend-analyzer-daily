@@ -95,7 +95,7 @@ export async function setupVite(app: Express, server: Server) {
       // For hosted environments, inject script to disable Vite's problematic fetch calls
       const isHostedEnvironment = !!(process.env.REPL_ID || process.env.FLY_APP_NAME || process.env.VERCEL || process.env.NETLIFY);
       if (isHostedEnvironment) {
-        template = template.replace(
+                template = template.replace(
           '<head>',
           `<head>
     <script>
@@ -108,7 +108,7 @@ export async function setupVite(app: Express, server: Server) {
           url.includes('/@vite/') ||
           url.includes('__vite')
         )) {
-          return Promise.resolve(new Response('', { status: 204 }));
+          return Promise.resolve(new Response(null, { status: 204 }));
         }
         return originalFetch.apply(this, arguments);
       };
