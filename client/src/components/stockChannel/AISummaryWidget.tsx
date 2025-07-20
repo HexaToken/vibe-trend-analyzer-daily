@@ -80,7 +80,7 @@ export const AISummaryWidget: React.FC<AISummaryWidgetProps> = ({
 
   return (
     <Card
-      className={`bg-gradient-to-br ${getSentimentColor(sentiment.percentage)}/20 border-blue-500/20 hover:border-blue-400/40 transition-all duration-300 overflow-hidden w-full max-w-full ${className || ""}`}
+      className={`bg-gradient-to-br ${getSentimentColor(sentiment.percentage)}/20 border-blue-500/20 hover:border-blue-400/40 transition-all duration-300 overflow-hidden w-full max-w-full rounded-xl ${className || ""}`}
     >
       <CardHeader className="pb-3">
         <CardTitle className="text-white flex items-center gap-2 text-lg font-bold">
@@ -91,7 +91,7 @@ export const AISummaryWidget: React.FC<AISummaryWidgetProps> = ({
         </CardTitle>
         <div className="text-sm text-blue-200">Market Sentiment Analysis</div>
       </CardHeader>
-      <CardContent className="space-y-4 overflow-hidden">
+      <CardContent className="space-y-3 overflow-y-auto max-h-[200px] p-4">
         <div className="text-center space-y-3">
           <div className="relative px-4 overflow-hidden">
             <div className="text-[clamp(1.25rem,4vw,2.25rem)] font-bold text-white mb-1 w-full text-center truncate">
@@ -169,11 +169,11 @@ export const AISummaryWidget: React.FC<AISummaryWidgetProps> = ({
 
         {/* Key insights */}
         <div className="space-y-2 pt-2 border-t border-blue-500/20">
-          <div className="text-xs text-blue-200 font-medium mb-1">
+          <div className="text-[10px] text-blue-200 font-medium mb-1">
             Key Insights:
           </div>
           <div className="space-y-1">
-            <div className="text-xs text-white/80 flex items-center gap-2">
+            <div className="text-[10px] text-white/80 flex items-center gap-2">
               <Brain className="w-3 h-3 text-blue-400" />
               {currentSentimentLabel === "Bullish"
                 ? "Strong buying momentum across tech sector"
@@ -181,7 +181,7 @@ export const AISummaryWidget: React.FC<AISummaryWidgetProps> = ({
                   ? "Risk-off sentiment dominates market"
                   : "Mixed signals from institutional traders"}
             </div>
-            <div className="text-xs text-white/80 flex items-center gap-2">
+            <div className="text-[10px] text-white/80 flex items-center gap-2">
               <Activity className="w-3 h-3 text-green-400" />
               Social sentiment:{" "}
               {sentiment.percentage > 60
