@@ -224,10 +224,11 @@ export const MoorMeterDashboard: React.FC = () => {
               <NewsWidget articles={newsArticles} loading={newsLoading} />
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <MoodTrendChart
+                data={generateMockTrendData()}
                 timeframe={selectedTimeframe}
-                moodScore={localMoodScore}
+                setTimeframe={setSelectedTimeframe}
               />
               <TrendingTopicsWidget topics={trendingTopics} />
             </div>
