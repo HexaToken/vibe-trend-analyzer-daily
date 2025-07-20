@@ -116,14 +116,14 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
 
   return (
     <Card
-      className={`bg-gray-800/50 border-gray-700/50 hover:border-gray-600/70 transition-all duration-300 overflow-hidden w-full max-w-full ${className || ""}`}
+      className={`bg-gradient-to-br from-orange-900/30 to-red-900/30 border-orange-500/20 hover:border-orange-400/40 transition-all duration-300 overflow-hidden w-full max-w-full rounded-xl ${className || ""}`}
     >
       <CardHeader className="pb-3">
         <CardTitle className="text-white flex items-center gap-2 text-lg font-bold">
           🔥 Trending Topics
         </CardTitle>
       </CardHeader>
-      <CardContent className="overflow-hidden">
+      <CardContent className="overflow-y-auto max-h-[200px] p-4">
         <div className="space-y-3">
           {topics.map((topic, index) => (
             <div
@@ -164,7 +164,7 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
                       </div>
                     )}
                   </div>
-                  <div className="flex items-center gap-2 text-xs text-gray-400">
+                  <div className="flex items-center gap-2 text-[10px] text-gray-400">
                     <span>{formatNumber(topic.mentions)} mentions</span>
                   </div>
                 </div>
