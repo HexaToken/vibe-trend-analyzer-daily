@@ -213,17 +213,17 @@ export const FuturisticHomepage: React.FC = () => {
         <div className="absolute top-3/4 left-1/3 w-64 h-64 bg-gradient-to-r from-emerald-500/6 to-teal-500/6 rounded-full blur-3xl animate-pulse delay-3000" />
       </div>
 
-      {/* Navigation */}
-      <nav className="relative z-50 border-b border-cyan-500/20 bg-black/50 backdrop-blur-xl">
+            {/* Navigation */}
+      <nav className="relative z-50 border-b border-purple-500/20 bg-black/60 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo and Navigation */}
             <div className="flex items-center gap-8">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-lg flex items-center justify-center shadow-lg shadow-cyan-500/25">
-                  <Brain className="w-6 h-6 text-black" />
+                <div className="w-12 h-12 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/50 animate-pulse">
+                  <Brain className="w-7 h-7 text-white" />
                 </div>
-                <h1 className="text-2xl font-light bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
                   MoorMeter
                 </h1>
               </div>
