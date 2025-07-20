@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect, memo, useMemo, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { TrendingTicker } from "./TrendingTicker";
 import { Button } from "./ui/button";
@@ -144,8 +144,8 @@ export const MoorMeterDashboard: React.FC = memo(() => {
   const { tickers: cryptoData = [], loading: cryptoLoading = false } =
     cryptoListingsResult || {};
 
-  // Calculate overall mood score
-  const calculateMoodScore = (): MoodScore => {
+    // Calculate overall mood score with memoization
+  const calculateMoodScore = useCallback((): MoodScore => {
     let stocksScore = stockSentiment?.score || 50;
     let newsScore = 45 + Math.random() * 20; // Mock for now
     let socialScore = 55 + Math.random() * 15; // Mock for now
@@ -162,7 +162,7 @@ export const MoorMeterDashboard: React.FC = memo(() => {
       social: socialScore,
       timestamp: new Date(),
     };
-  };
+  }, [stockSentiment?.score]);
 
   const [moodScore, setMoodScore] = useState<MoodScore>(calculateMoodScore());
 
