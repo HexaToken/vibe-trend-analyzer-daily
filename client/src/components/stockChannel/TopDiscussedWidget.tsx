@@ -166,7 +166,7 @@ export const TopDiscussedWidget: React.FC<TopDiscussedWidgetProps> = ({
 
   return (
     <Card
-      className={`bg-gray-800/50 border-gray-700/50 hover:border-gray-600/70 transition-all duration-300 ${className}`}
+      className={`bg-gray-800/50 border-gray-700/50 hover:border-gray-600/70 transition-all duration-300 overflow-hidden ${className}`}
     >
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
@@ -211,7 +211,7 @@ export const TopDiscussedWidget: React.FC<TopDiscussedWidgetProps> = ({
           </div>
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="overflow-hidden">
         <div className="space-y-3">
           {sortedStocks.map((stock, index) => (
             <div
@@ -231,7 +231,7 @@ export const TopDiscussedWidget: React.FC<TopDiscussedWidgetProps> = ({
                     <span className="text-white font-bold text-sm">
                       ${stock.symbol}
                     </span>
-                    <span className="text-xs text-gray-400 truncate max-w-20">
+                    <span className="text-xs text-gray-400 truncate max-w-16">
                       {stock.name}
                     </span>
                   </div>
@@ -263,7 +263,7 @@ export const TopDiscussedWidget: React.FC<TopDiscussedWidgetProps> = ({
                 </div>
 
                 <Badge
-                  className={`text-xs px-2 py-1 min-w-[60px] text-center ${getSentimentColor(stock.sentiment)}`}
+                  className={`text-xs px-1 py-1 min-w-[50px] text-center ${getSentimentColor(stock.sentiment)}`}
                 >
                   {stock.sentiment > 0 ? "+" : ""}
                   {stock.sentiment}%
