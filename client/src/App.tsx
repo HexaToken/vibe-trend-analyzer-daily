@@ -20,6 +20,7 @@ import { NLPSentimentDemo } from "@/components/NLPSentimentDemo";
 import { SpacyNLPDemo } from "@/components/SpacyNLPDemo";
 import { AiSentimentExplainer } from "@/components/AiSentimentExplainer";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
+import { HomePage } from "@/components/HomePage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
