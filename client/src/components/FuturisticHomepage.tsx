@@ -115,7 +115,7 @@ export const FuturisticHomepage: React.FC = () => {
     }
   };
 
-  const getSentimentBadge = (sentiment: string) => {
+    const getSentimentBadge = (sentiment: string) => {
     const colors = {
       bullish: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
       bearish: 'bg-red-500/20 text-red-400 border-red-500/30',
@@ -123,6 +123,39 @@ export const FuturisticHomepage: React.FC = () => {
     };
     return colors[sentiment as keyof typeof colors];
   };
+
+  // Dynamic sentiment-based mood scoring
+  const getMoodSentiment = (score: number): 'positive' | 'neutral' | 'negative' => {
+    if (score >= 70) return 'positive';
+    if (score >= 40) return 'neutral';
+    return 'negative';
+  };
+
+  const getSentimentEmoji = (sentiment: 'positive' | 'neutral' | 'negative'): string => {
+    switch (sentiment) {
+      case 'positive': return '😊';
+      case 'neutral': return '😐';
+      case 'negative': return '😢';
+    }
+  };
+
+  const getSentimentGradient = (sentiment: 'positive' | 'neutral' | 'negative'): string => {
+    switch (sentiment) {
+      case 'positive': return 'from-emerald-500 via-green-400 via-cyan-400 to-emerald-500';
+      case 'neutral': return 'from-gray-400 via-slate-300 via-purple-300 to-gray-400';
+      case 'negative': return 'from-red-500 via-rose-400 via-purple-500 to-red-500';
+    }
+  };
+
+  const getSentimentLabel = (sentiment: 'positive' | 'neutral' | 'negative'): string => {
+    switch (sentiment) {
+      case 'positive': return 'Market is Positive';
+      case 'neutral': return 'Market is Neutral';
+      case 'negative': return 'Market is Negative';
+    }
+  };
+
+  const currentSentiment = getMoodSentiment(moodScore.overall);
 
   const getTrendingBadge = (label: string) => {
     switch (label) {
