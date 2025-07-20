@@ -506,6 +506,14 @@ export const SocialRoom: React.FC<SocialRoomProps> = ({ onCreateRoom }) => {
           </Card>
         </div>
       </div>
+
+      {/* Create Room Modal */}
+      <CreateRoomModal
+        isOpen={showCreateModal}
+        onClose={() => setShowCreateModal(false)}
+        onCreateRoom={handleRoomCreated}
+        userTier={currentUser.tier}
+      />
     </div>
   );
 };
