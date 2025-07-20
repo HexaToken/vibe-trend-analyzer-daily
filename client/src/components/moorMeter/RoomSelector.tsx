@@ -23,7 +23,7 @@ import {
 interface Room {
   id: string;
   name: string;
-  type: "private" | "stocktwist";
+  type: "private";
   tickers: string[];
   memberCount: number;
   unreadCount: number;
@@ -46,16 +46,6 @@ export const RoomSelector: React.FC<RoomSelectorProps> = ({
 
   // Mock rooms data
   const rooms: Room[] = [
-    {
-      id: "stocktwist",
-      name: "StockTwist Room",
-      type: "stocktwist",
-      tickers: ["TSLA", "NVDA", "AAPL"],
-      memberCount: 2847,
-      unreadCount: 12,
-      lastActivity: new Date(Date.now() - 5 * 60 * 1000),
-      isOwner: false,
-    },
     {
       id: "room-1",
       name: "AI & Tech Watchlist",
@@ -101,9 +91,6 @@ export const RoomSelector: React.FC<RoomSelectorProps> = ({
   };
 
   const getRoomIcon = (room: Room) => {
-    if (room.type === "stocktwist") {
-      return <Star className="w-4 h-4 text-yellow-500" />;
-    }
     return room.isOwner ? (
       <Lock className="w-4 h-4 text-blue-500" />
     ) : (
