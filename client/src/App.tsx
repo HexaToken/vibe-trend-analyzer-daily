@@ -79,6 +79,10 @@ const App = () => {
         return <AiSentimentExplainer />;
       case "yfinance":
         return <YFinanceDemo />;
+      case "stocktwist":
+        return <StockTwistRoom />;
+      case "socialroom":
+        return <SocialRoom />;
       case "moorMeter":
         return <MoorMeterDashboard />;
 
