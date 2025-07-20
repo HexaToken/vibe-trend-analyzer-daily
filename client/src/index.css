@@ -359,8 +359,153 @@ All colors MUST be HSL.
   .emerge-1 { animation-delay: 0.1s; }
   .emerge-2 { animation-delay: 0.2s; }
   .emerge-3 { animation-delay: 0.3s; }
-    .emerge-4 { animation-delay: 0.4s; }
+      .emerge-4 { animation-delay: 0.4s; }
   .emerge-5 { animation-delay: 0.5s; }
+
+  /* Futuristic effects */
+  .futuristic-gradient {
+    background: linear-gradient(135deg,
+      #0f172a 0%,
+      #1e293b 25%,
+      #0f1419 50%,
+      #1e293b 75%,
+      #000000 100%);
+  }
+
+  .cyber-glow {
+    box-shadow:
+      0 0 20px rgba(6, 182, 212, 0.3),
+      0 0 40px rgba(6, 182, 212, 0.1),
+      inset 0 0 20px rgba(6, 182, 212, 0.05);
+  }
+
+  .neon-border {
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    box-shadow:
+      0 0 10px rgba(6, 182, 212, 0.2),
+      inset 0 0 10px rgba(6, 182, 212, 0.1);
+  }
+
+  .hologram-card {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(6, 182, 212, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hologram-card:hover {
+    background: rgba(6, 182, 212, 0.05);
+    border-color: rgba(6, 182, 212, 0.4);
+    box-shadow:
+      0 0 30px rgba(6, 182, 212, 0.2),
+      0 20px 40px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .pulse-ring {
+    animation: pulse-ring 2s infinite;
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1.1);
+      opacity: 0;
+    }
+  }
+
+  .data-stream {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .data-stream::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(6, 182, 212, 0.6),
+      transparent
+    );
+    animation: data-flow 3s infinite;
+  }
+
+  @keyframes data-flow {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+
+  .matrix-bg {
+    background-image:
+      radial-gradient(circle at 25% 25%, rgba(6, 182, 212, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+  }
+
+  .cyber-text {
+    background: linear-gradient(
+      45deg,
+      #06b6d4,
+      #3b82f6,
+      #8b5cf6,
+      #06b6d4
+    );
+    background-size: 300% 300%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: cyber-gradient 3s ease infinite;
+  }
+
+  @keyframes cyber-gradient {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .scan-line {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scan-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(6, 182, 212, 0.8),
+      transparent
+    );
+    animation: scan 2s infinite;
+  }
+
+  @keyframes scan {
+    0% {
+      transform: translateY(-2px);
+    }
+    100% {
+      transform: translateY(calc(100vh + 2px));
+    }
+  }
 
   /* Finance-grade styling */
   .finance-gradient {
