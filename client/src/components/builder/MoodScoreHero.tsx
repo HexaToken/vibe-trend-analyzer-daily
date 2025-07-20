@@ -31,7 +31,7 @@ export const MoodScoreHero: React.FC<MoodScoreHeroProps> = ({
   timeframe,
   onTimeframeChange,
 }) => {
-  const [moodScore, setMoodScore] = useState<MoodData>({
+    const [moodScore, setMoodScore] = useState<MoodData>(propMoodScore || {
     overall: 65,
     stocks: 70,
     news: 55,
