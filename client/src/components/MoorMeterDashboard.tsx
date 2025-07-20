@@ -118,6 +118,8 @@ export const MoorMeterDashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState("Home");
   const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
   const [activeCommunitySubtab, setActiveCommunitySubtab] = useState("Chat");
+  const [activeStockTwistSubtab, setActiveStockTwistSubtab] =
+    useState("TradeIdeas");
   const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<
     "General" | "Crypto"
