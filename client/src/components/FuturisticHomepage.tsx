@@ -86,11 +86,18 @@ export const FuturisticHomepage: React.FC = () => {
   const [personalMoodScore] = useState(67);
   const [searchFocused, setSearchFocused] = useState(false);
 
-  // Stocks data with trend lines
-  const [topStocks] = useState<StockData[]>([
-    { symbol: 'TSLA', name: 'Tesla Inc', price: 248.50, change: 3.36, changePercent: 3.36, sentiment: 'bullish', trendData: [245, 247, 250, 248] },
-    { symbol: 'NVDA', name: 'NVIDIA Corp', price: 875.28, change: 2.45, changePercent: 2.45, sentiment: 'bullish', trendData: [870, 872, 878, 875] },
-    { symbol: 'AAPL', name: 'Apple Inc', price: 190.64, change: 1.12, changePercent: 1.12, sentiment: 'bearish', trendData: [192, 191, 189, 190] }
+    // Top 10 Movers data with logos and sentiment
+  const [topMovers] = useState<StockData[]>([
+    { symbol: 'NVDA', name: 'NVIDIA Corp', price: 875.28, change: 23.45, changePercent: 2.76, sentiment: 'bullish', trendData: [870, 872, 878, 875] },
+    { symbol: 'TSLA', name: 'Tesla Inc', price: 248.50, change: -8.22, changePercent: -3.21, sentiment: 'bearish', trendData: [245, 247, 250, 248] },
+    { symbol: 'AAPL', name: 'Apple Inc', price: 190.64, change: 4.12, changePercent: 2.21, sentiment: 'bullish', trendData: [192, 191, 189, 190] },
+    { symbol: 'GOOGL', name: 'Alphabet Inc', price: 139.69, change: -2.87, changePercent: -2.02, sentiment: 'bearish', trendData: [142, 140, 138, 139] },
+    { symbol: 'MSFT', name: 'Microsoft Corp', price: 378.85, change: 7.44, changePercent: 2.00, sentiment: 'bullish', trendData: [375, 377, 380, 378] },
+    { symbol: 'AMZN', name: 'Amazon.com Inc', price: 155.74, change: -3.12, changePercent: -1.96, sentiment: 'bearish', trendData: [158, 156, 154, 155] },
+    { symbol: 'META', name: 'Meta Platforms', price: 501.92, change: 12.33, changePercent: 2.52, sentiment: 'bullish', trendData: [495, 498, 505, 501] },
+    { symbol: 'NFLX', name: 'Netflix Inc', price: 487.23, change: -15.77, changePercent: -3.14, sentiment: 'bearish', trendData: [492, 489, 485, 487] },
+    { symbol: 'CRM', name: 'Salesforce Inc', price: 284.56, change: 8.92, changePercent: 3.24, sentiment: 'bullish', trendData: [278, 281, 286, 284] },
+    { symbol: 'AMD', name: 'Advanced Micro Devices', price: 142.87, change: 5.43, changePercent: 3.95, sentiment: 'bullish', trendData: [138, 140, 144, 142] }
   ]);
 
   const [trendingTopics] = useState([
