@@ -37,8 +37,7 @@ type ViewType =
   | "feed"
   | "watchlist"
   | "ticker"
-  | "trending"
-  | "rooms"
+    | "trending"
   | "twitter"
   | "instagram";
 
