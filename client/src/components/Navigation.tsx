@@ -33,7 +33,8 @@ import {
   Users2,
   UserPlus,
   Coins,
-  Globe,
+    Globe,
+  Palette,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { AuthModal } from "@/components/auth/AuthModal";
