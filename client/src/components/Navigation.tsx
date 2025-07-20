@@ -89,7 +89,7 @@ export const Navigation = ({
       { id: "history", label: "Historical Data", icon: Calendar },
       { id: "database", label: "Database Demo", icon: Database, badge: "DEMO" },
     ],
-    social: [
+        social: [
       {
         id: "social",
         label: "FinTwits Social",
@@ -97,6 +97,7 @@ export const Navigation = ({
         badge: "HOT",
       },
       { id: "community", label: "Community", icon: Users },
+      { id: "channels", label: "Channels", icon: Users2, badge: "NEW" },
     ],
     tools: [
       { id: "analytics", label: "Analytics", icon: TrendingUp },

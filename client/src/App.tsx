@@ -28,6 +28,7 @@ import { FinnhubDemo } from "@/components/FinnhubDemo";
 import { StockSentimentScoring } from "@/components/StockSentimentScoring";
 import { AiSentimentExplainer } from "@/components/AiSentimentExplainer";
 import { YFinanceDemo } from "@/components/YFinanceDemo";
+import { Channels } from "@/components/social/Channels";
 
 const queryClient = new QueryClient();
 
@@ -75,8 +76,10 @@ const App = () => {
         return <StockSentimentScoring />;
       case "ai-analysis":
         return <AiSentimentExplainer />;
-      case "yfinance":
+            case "yfinance":
         return <YFinanceDemo />;
+      case "channels":
+        return <Channels />;
       case "moorMeter":
         return <MoorMeterDashboard />;
 

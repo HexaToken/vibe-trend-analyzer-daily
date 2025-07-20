@@ -62,8 +62,7 @@ import { TrendingTopicsWidget as EnhancedTrendingTopicsWidget } from "./stockCha
 
 
 import { ChatInterface } from "./moorMeter/ChatInterface";
-import { CryptoChannels } from "./social/CryptoChannels";
-import { OffTopicLounge } from "./social/OffTopicLounge";
+import { Channels } from "./social/Channels";
 import { MoodScoreHero } from "./builder/MoodScoreHero";
 import { TopStocksModule } from "./builder/TopStocksModule";
 import { SentimentHeatMap } from "./moorMeter/SentimentHeatMap";
@@ -282,8 +281,8 @@ export const MoorMeterDashboard: React.FC = () => {
       href: "#community",
       subtabs: [
         { label: "Chat", key: "Chat", icon: MessageCircle },
-        { label: "Crypto", key: "Crypto", icon: TrendingUp },
-        { label: "Off-Topic", key: "OffTopic", icon: Heart },
+                { label: "Channels", key: "Channels", icon: Users, badge: "NEW" },
+        
 
         
         { label: "Private Room", key: "PrivateRoom", icon: Lock },
@@ -431,7 +430,7 @@ export const MoorMeterDashboard: React.FC = () => {
                       variant="outline"
                       className="flex items-center gap-2"
                     >
-                      {selectedCategory === "Crypto" ? "🪙" : "💬"}{" "}
+                      {selectedCategory === "Crypto" ? "����" : "💬"}{" "}
                       {selectedCategory}
                       <ChevronDown className="w-4 h-4" />
                     </Button>
@@ -584,8 +583,7 @@ export const MoorMeterDashboard: React.FC = () => {
                 </div>
               </>
             )}
-            {activeCommunitySubtab === "Crypto" && <CryptoChannels />}
-            {activeCommunitySubtab === "OffTopic" && <OffTopicLounge />}
+                        {activeCommunitySubtab === "Channels" && <Channels />}
 
             
             {activeCommunitySubtab === "PrivateRoom" && (
