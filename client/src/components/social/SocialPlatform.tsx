@@ -595,6 +595,8 @@ export const SocialPlatform = memo(() => {
         {/* Sidebar */}
         <div className="lg:col-span-1">{renderTrendingSidebar()}</div>
       </div>
-    </div>
+        </div>
     );
 });
+
+export default SocialPlatform;
