@@ -156,6 +156,19 @@ export const Navigation = ({
             <div className="hidden md:flex items-center space-x-1">
                                                         
 
+                            {/* Futuristic Homepage */}
+              <Button
+                variant={activeSection === "futuristic-home" ? "default" : "ghost"}
+                onClick={() => onSectionChange("futuristic-home")}
+                className="flex items-center gap-2"
+              >
+                <Zap className="h-4 w-4" />
+                Futuristic Home
+                <Badge variant="secondary" className="text-xs bg-gradient-to-r from-cyan-400/20 to-blue-500/20 text-cyan-300 border-cyan-400/30">
+                  FUTURE
+                </Badge>
+              </Button>
+
               {/* MoorMeter Dashboard */}
               <Button
                 variant={activeSection === "moorMeter" ? "default" : "ghost"}
