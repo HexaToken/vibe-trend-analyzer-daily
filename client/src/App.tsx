@@ -46,7 +46,7 @@ const AppContent = () => {
       lastRenderTime: endTime - startTime,
       componentMountCount: 1,
     });
-  }, [setIsInitializing, updatePerformanceMetrics]);
+    }, []); // Empty dependency array - this should only run once on mount
 
   const renderContent = () => {
     switch (activeSection) {
