@@ -27,12 +27,7 @@ export async function setupVite(app: Express, server: Server) {
     middlewareMode: true,
     host: '0.0.0.0',
     port: 5000,
-    hmr: isHostedEnvironment ? {
-      // For hosted environments, disable websocket HMR to prevent fetch errors
-      server: false,
-      // Use overlay instead of websocket for error reporting
-      overlay: true
-    } : {
+        hmr: isHostedEnvironment ? false : {
       server,
       port: 5000,
       host: '0.0.0.0',
