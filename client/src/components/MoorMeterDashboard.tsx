@@ -167,13 +167,13 @@ export const MoorMeterDashboard: React.FC = memo(() => {
   const [moodScore, setMoodScore] = useState<MoodScore>(calculateMoodScore());
 
   // Update mood score periodically
-    useEffect(() => {
+  useEffect(() => {
     const interval = setInterval(() => {
       setMoodScore(calculateMoodScore());
     }, 30000); // Update every 30 seconds
 
     return () => clearInterval(interval);
-  }, []); // Empty dependency array for stable interval
+  }, [calculateMoodScore]); // Include calculateMoodScore in dependency array
 
   // Get mood emoji and color
   const getMoodEmoji = (score: number) => {

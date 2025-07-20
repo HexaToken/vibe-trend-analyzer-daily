@@ -95,7 +95,10 @@ class ErrorBoundary extends Component<Props, State> {
   };
 
   private handleReload = () => {
-    window.location.reload();
+    // Only reload if user explicitly confirms and we have tried other recovery methods
+    if (confirm('This will reload the entire page. Any unsaved changes will be lost. Continue?')) {
+      window.location.reload();
+    }
   };
 
     private handleGoHome = () => {

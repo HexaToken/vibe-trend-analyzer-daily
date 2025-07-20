@@ -47,6 +47,15 @@ The application integrates with multiple external services:
 **Note**: API keys need to be configured for live data integration.
 
 ## Recent Changes
+- **2025-01-20**: Performance optimizations and re-rendering fixes
+  - Fixed infinite loop in MoodScore component by removing displayScore from useEffect dependency array
+  - Fixed missing calculateMoodScore dependency in MoorMeterDashboard useEffect
+  - Added confirmation dialog to ErrorBoundary reload function to prevent unintentional page reloads
+  - Optimized TrendingTicker polling interval from 30 seconds to 5 minutes to reduce API calls
+  - Added placeholder image API endpoint (/api/placeholder/:width/:height) to fix 404 errors for avatars
+  - Improved error handling and user experience for re-rendering issues
+
+## Previous Changes
 - **2025-01-19**: Fully restored pull request #10 "Add robust fetch utility and debug logging"
   - Implemented robustFetch.ts utility with retry logic, timeout handling, and exponential backoff
   - Updated all API hooks (useCoinMarketCap, useNewsApi, useStockSentiment, useYFinanceNews) to use robustFetchJson

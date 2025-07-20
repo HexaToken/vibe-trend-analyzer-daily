@@ -10,6 +10,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // use storage to perform CRUD operations on the storage interface
   // e.g. storage.insertUser(user) or storage.getUserByUsername(username)
 
+  // Placeholder image endpoint to fix 404 errors
+  app.get("/api/placeholder/:width/:height", (req, res) => {
+    const { width, height } = req.params;
+    const w = parseInt(width) || 32;
+    const h = parseInt(height) || 32;
+    
+    // Generate a simple SVG placeholder
+    const svg = `<svg width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#e2e8f0"/>
+      <circle cx="${w/2}" cy="${h/2}" r="${Math.min(w,h)/3}" fill="#64748b"/>
+    </svg>`;
+    
+    res.setHeader('Content-Type', 'image/svg+xml');
+    res.setHeader('Cache-Control', 'public, max-age=86400'); // Cache for 24 hours
+    res.send(svg);
+  });
+
   // API Proxy endpoints for external services
 
   // NewsAPI proxy

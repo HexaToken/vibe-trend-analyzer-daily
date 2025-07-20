@@ -38,7 +38,7 @@ export const MoodScore = ({ score, previousScore = 68 }: MoodScoreProps) => {
 
       return () => clearInterval(timer);
     }
-  }, [score, displayScore]);
+  }, [score]); // Remove displayScore from dependency array to prevent infinite loops
 
   const getScoreColor = (score: number) => {
     if (score >= 80) return "text-green-500";
