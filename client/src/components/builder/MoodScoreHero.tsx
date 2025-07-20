@@ -27,6 +27,9 @@ export const MoodScoreHero: React.FC<MoodScoreHeroProps> = ({
   title = "Today's Market Mood",
   subtitle = "Real-time sentiment analysis powered by AI",
   apiEndpoint = "/api/proxy/stock-sentiment",
+  moodScore: propMoodScore,
+  timeframe,
+  onTimeframeChange,
 }) => {
   const [moodScore, setMoodScore] = useState<MoodData>({
     overall: 65,
