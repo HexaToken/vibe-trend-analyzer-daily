@@ -593,7 +593,7 @@ export const MoorMeterDashboard: React.FC = () => {
 
             {activeCommunitySubtab === "Rooms" && <CommunityForum />}
             {activeCommunitySubtab === "PrivateRoom" && (
-              <div>Private Room Component Coming Soon...</div>
+              <PrivateRoomsContainer />
             )}
           </div>
         );
