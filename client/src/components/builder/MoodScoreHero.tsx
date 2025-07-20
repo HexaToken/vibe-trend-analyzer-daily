@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { Brain, Activity } from "lucide-react";
+import { cn } from "../../lib/utils";
 
 interface MoodScoreHeroProps {
   title?: string;
