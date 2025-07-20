@@ -5,8 +5,7 @@ import {
   Star,
   Users,
   Search,
-  Bell,
-  MessageSquare,
+    Bell,
   Hash,
   BarChart3,
   Crown,
@@ -22,7 +21,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SocialFeed } from "./SocialFeed";
 import { TickerPage } from "./TickerPage";
 import { WatchlistManager } from "./WatchlistManager";
-import { CommunityRooms } from "./CommunityRooms";
+
 import { TwitterTrending } from "./TwitterTrending";
 import { InstagramProfile } from "./InstagramProfile";
 import { InstagramTrending } from "./InstagramTrending";
@@ -37,8 +36,7 @@ type ViewType =
   | "feed"
   | "watchlist"
   | "ticker"
-  | "trending"
-  | "rooms"
+    | "trending"
   | "twitter"
   | "instagram";
 
@@ -331,50 +329,7 @@ export const SocialPlatform = () => {
         </CardContent>
       </Card>
 
-      {/* Community Rooms Preview */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg flex items-center gap-2">
-            <MessageSquare className="h-5 w-5" />
-            Active Rooms
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-2">
-          {[
-            { name: "$AAPL Traders", members: 15420, online: 892 },
-            { name: "Crypto Central", members: 28453, online: 1247 },
-            { name: "Options Trading", members: 8934, online: 234 },
-          ].map((room, index) => (
-            <div
-              key={index}
-              className="flex items-center justify-between p-2 hover:bg-muted/50 rounded cursor-pointer transition-colors"
-            >
-              <div>
-                <div className="font-medium text-sm">{room.name}</div>
-                <div className="text-xs text-muted-foreground">
-                  {room.members.toLocaleString()} members
-                </div>
-              </div>
-
-              <div className="flex items-center gap-1">
-                <div className="w-2 h-2 bg-green-500 rounded-full" />
-                <span className="text-xs text-muted-foreground">
-                  {room.online}
-                </span>
-              </div>
-            </div>
-          ))}
-
-          <Button
-            variant="outline"
-            size="sm"
-            className="w-full"
-            onClick={() => setCurrentView("rooms")}
-          >
-            Browse All Rooms
-          </Button>
-        </CardContent>
-      </Card>
+      
     </div>
   );
 
@@ -493,8 +448,7 @@ export const SocialPlatform = () => {
           </div>
         );
 
-      case "rooms":
-        return <CommunityRooms />;
+      
 
       case "twitter":
         return (
@@ -620,13 +574,7 @@ export const SocialPlatform = () => {
             <TrendingUp className="h-4 w-4" />
             Trending
           </TabsTrigger>
-          <TabsTrigger value="rooms" className="flex items-center gap-2">
-            <MessageSquare className="h-4 w-4" />
-            Rooms
-            <Badge variant="secondary" className="text-xs">
-              Soon
-            </Badge>
-          </TabsTrigger>
+          
           <TabsTrigger value="twitter" className="flex items-center gap-2">
             <Twitter className="h-4 w-4" />
             Twitter

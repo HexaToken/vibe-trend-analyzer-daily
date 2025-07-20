@@ -55,12 +55,12 @@ import { WatchlistWidget } from "./moorMeter/WatchlistWidget";
 import { WatchlistModule } from "./moorMeter/WatchlistModule";
 import { AIInsightWidget } from "./moorMeter/AIInsightWidget";
 import { CommunityWidget } from "./moorMeter/CommunityWidget";
-import { CommunityRooms } from "./social/CommunityRooms";
+
 import { LivePollsWidget } from "./stockChannel/LivePollsWidget";
 import { AISummaryWidget } from "./stockChannel/AISummaryWidget";
 import { TrendingTopicsWidget as EnhancedTrendingTopicsWidget } from "./stockChannel/TrendingTopicsWidget";
 
-import { CommunityForum } from "./community/CommunityForum";
+
 import { ChatInterface } from "./moorMeter/ChatInterface";
 import { CryptoChannels } from "./social/CryptoChannels";
 import { OffTopicLounge } from "./social/OffTopicLounge";
@@ -285,7 +285,7 @@ export const MoorMeterDashboard: React.FC = () => {
         { label: "Crypto", key: "Crypto", icon: TrendingUp },
         { label: "Off-Topic", key: "OffTopic", icon: Heart },
 
-        { label: "Rooms", key: "Rooms", icon: Users },
+        
         { label: "Private Room", key: "PrivateRoom", icon: Lock },
       ],
     },
@@ -416,12 +416,8 @@ export const MoorMeterDashboard: React.FC = () => {
                     : activeCommunitySubtab === "Crypto"
                       ? "Dedicated crypto-only channels with real-time price feeds and sentiment tracking"
                       : activeCommunitySubtab === "OffTopic"
-                        ? "Casual lounge for memes, general discussions, and relaxation"
-                        : activeCommunitySubtab === "Rooms"
-                          ? selectedCategory === "Crypto"
-                            ? "Join crypto-focused chat rooms and trending discussions"
-                            : "Discuss trends, share sentiment, and join chat rooms"
-                          : activeCommunitySubtab === "PrivateRoom"
+                                                ? "Casual lounge for memes, general discussions, and relaxation"
+                        : activeCommunitySubtab === "PrivateRoom"
                             ? "Create invite-only watchlist rooms for focused discussions with fellow traders"
                             : "Connect with fellow traders and share insights"}
                 </p>
@@ -465,9 +461,7 @@ export const MoorMeterDashboard: React.FC = () => {
                       selectedCategory === "Crypto"
                         ? "Search crypto, $BTC, $ETH..."
                         : activeCommunitySubtab === "Chat"
-                          ? "Search messages, tickers..."
-                          : activeCommunitySubtab === "Rooms"
-                            ? "Search posts, chat rooms..."
+                                                    ? "Search messages, tickers..."
                             : "Search community..."
                     }
                     className="pl-10 w-64"
@@ -477,8 +471,7 @@ export const MoorMeterDashboard: React.FC = () => {
             </div>
 
             {/* Category indicator for applicable subtabs */}
-            {(activeCommunitySubtab === "Chat" ||
-              activeCommunitySubtab === "Rooms") && (
+                        {activeCommunitySubtab === "Chat" && (
               <div className="flex items-center gap-3 mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border">
                 <div className="flex items-center gap-2">
                   {selectedCategory === "Crypto" ? "���" : "💬"}
@@ -594,7 +587,7 @@ export const MoorMeterDashboard: React.FC = () => {
             {activeCommunitySubtab === "Crypto" && <CryptoChannels />}
             {activeCommunitySubtab === "OffTopic" && <OffTopicLounge />}
 
-            {activeCommunitySubtab === "Rooms" && <CommunityForum />}
+            
             {activeCommunitySubtab === "PrivateRoom" && (
               <PrivateRoomsContainer />
             )}
