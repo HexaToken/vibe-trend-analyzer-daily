@@ -150,15 +150,19 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
                       <div className="flex items-center gap-1 flex-shrink-0">
                         <Flame className="w-3 h-3 text-orange-400 flex-shrink-0" />
                         <div
-                          className={`px-2 py-1 rounded-md text-center min-w-[60px] max-w-[80px] overflow-hidden text-ellipsis whitespace-nowrap ${
+                          className={`px-2 py-1 rounded-md text-center min-w-[50px] max-w-[75px] overflow-hidden text-ellipsis whitespace-nowrap flex-shrink-0 ${
                             topic.change > 0
                               ? "bg-green-500/20 text-green-400"
                               : "bg-red-500/20 text-red-400"
                           }`}
+                          title={`${topic.change > 0 ? "+" : ""}${topic.change.toFixed(3)}%`}
                         >
-                          <span className="text-[clamp(0.75rem,2vw,1rem)] font-medium">
+                          <span className="text-[clamp(0.65rem,1.5vw,0.85rem)] font-medium">
                             {topic.change > 0 ? "+" : ""}
-                            {topic.change.toFixed(2)}%
+                            {Math.abs(topic.change) >= 10
+                              ? topic.change.toFixed(1)
+                              : topic.change.toFixed(2)}
+                            %
                           </span>
                         </div>
                       </div>
