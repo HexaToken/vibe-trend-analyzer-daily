@@ -147,22 +147,6 @@ export const canAddMembersToRoom = (
   };
 };
 
-export const canPostInStockTwist = (
-  userId: string,
-  userLimits: UserLimits,
-): LimitCheckResult => {
-  if (!userLimits.canCreateStockTwistPosts) {
-    return {
-      allowed: false,
-      reason:
-        "Posting in StockTwist requires verification or premium membership",
-      upgradeRequired: true,
-    };
-  }
-
-  return { allowed: true };
-};
-
 export const canCreatePolls = (
   userId: string,
   userLimits: UserLimits,
@@ -223,7 +207,6 @@ export const getUserLimitInfo = (
       remaining: userLimits.maxInvitesPerHour - usage.invitesSentToday,
     },
     features: {
-      canPostStockTwist: userLimits.canCreateStockTwistPosts,
       canCreatePolls: userLimits.canCreatePolls,
       maxRoomMembers: userLimits.maxRoomMembers,
     },
@@ -236,7 +219,7 @@ export const getUpgradeMessage = (limitType: string): string => {
       "Upgrade to Premium to create up to 20 private rooms and join 50 rooms!",
     invites: "Upgrade to Premium to send up to 25 invites per day!",
     members: "Upgrade to Premium to have up to 50 members per room!",
-    stocktwist: "Get verified or upgrade to Premium to post in StockTwist!",
+
     polls: "Upgrade to Premium to create polls and engage the community!",
   };
 
