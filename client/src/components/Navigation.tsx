@@ -113,12 +113,12 @@ export const Navigation = () => {
     logout();
     // Redirect to moorMeter if currently on protected pages
     if (activeSection === "profile") {
-      onSectionChange("moorMeter");
+      setActiveSection("moorMeter");
     }
   };
 
   const handleProfileClick = () => {
-    onSectionChange("profile");
+    setActiveSection("profile");
     setIsMenuOpen(false);
   };
 
@@ -145,7 +145,7 @@ export const Navigation = () => {
               {/* MoorMeter Dashboard */}
               <Button
                 variant={activeSection === "moorMeter" ? "default" : "ghost"}
-                onClick={() => onSectionChange("moorMeter")}
+                onClick={() => setActiveSection("moorMeter")}
                 className="flex items-center gap-2"
               >
                 <Brain className="h-4 w-4" />
@@ -169,7 +169,7 @@ export const Navigation = () => {
                     return (
                       <DropdownMenuItem
                         key={item.id}
-                        onClick={() => onSectionChange(item.id)}
+                        onClick={() => setActiveSection(item.id)}
                         className="flex items-center gap-2"
                       >
                         <Icon className="h-4 w-4" />
@@ -202,7 +202,7 @@ export const Navigation = () => {
                     return (
                       <DropdownMenuItem
                         key={item.id}
-                        onClick={() => onSectionChange(item.id)}
+                        onClick={() => setActiveSection(item.id)}
                         className="flex items-center gap-2"
                       >
                         <Icon className="h-4 w-4" />
@@ -235,7 +235,7 @@ export const Navigation = () => {
                     return (
                       <DropdownMenuItem
                         key={item.id}
-                        onClick={() => onSectionChange(item.id)}
+                        onClick={() => setActiveSection(item.id)}
                         className="flex items-center gap-2"
                       >
                         <Icon className="h-4 w-4" />
@@ -322,7 +322,7 @@ export const Navigation = () => {
                         <span>Profile</span>
                       </DropdownMenuItem>
                       <DropdownMenuItem
-                        onClick={() => onSectionChange("settings")}
+                        onClick={() => setActiveSection("settings")}
                       >
                         <Settings className="mr-2 h-4 w-4" />
                         <span>Settings</span>
@@ -386,7 +386,7 @@ export const Navigation = () => {
                 <Button
                   variant={activeSection === "moorMeter" ? "default" : "ghost"}
                   onClick={() => {
-                    onSectionChange("moorMeter");
+                    setActiveSection("moorMeter");
                     setIsMenuOpen(false);
                   }}
                   className="justify-start gap-2"
@@ -409,7 +409,7 @@ export const Navigation = () => {
                       key={item.id}
                       variant={activeSection === item.id ? "default" : "ghost"}
                       onClick={() => {
-                        onSectionChange(item.id);
+                        setActiveSection(item.id);
                         setIsMenuOpen(false);
                       }}
                       className="justify-start gap-2 ml-4"
@@ -436,7 +436,7 @@ export const Navigation = () => {
                       key={item.id}
                       variant={activeSection === item.id ? "default" : "ghost"}
                       onClick={() => {
-                        onSectionChange(item.id);
+                        setActiveSection(item.id);
                         setIsMenuOpen(false);
                       }}
                       className="justify-start gap-2 ml-4"
@@ -463,7 +463,7 @@ export const Navigation = () => {
                       key={item.id}
                       variant={activeSection === item.id ? "default" : "ghost"}
                       onClick={() => {
-                        onSectionChange(item.id);
+                        setActiveSection(item.id);
                         setIsMenuOpen(false);
                       }}
                       className="justify-start gap-2 ml-4"
