@@ -28,8 +28,6 @@ import { FinnhubDemo } from "@/components/FinnhubDemo";
 import { StockSentimentScoring } from "@/components/StockSentimentScoring";
 import { AiSentimentExplainer } from "@/components/AiSentimentExplainer";
 import { YFinanceDemo } from "@/components/YFinanceDemo";
-import { StockTwistRoom } from "@/components/privateRooms/StockTwistRoom";
-import { SocialRoom } from "@/components/privateRooms/SocialRoom";
 
 const queryClient = new QueryClient();
 
