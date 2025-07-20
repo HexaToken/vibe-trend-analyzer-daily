@@ -20,6 +20,7 @@ import { NLPSentimentDemo } from "@/components/NLPSentimentDemo";
 import { SpacyNLPDemo } from "@/components/SpacyNLPDemo";
 import { AiSentimentExplainer } from "@/components/AiSentimentExplainer";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
+import { HomePage } from "@/components/HomePage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -50,9 +51,9 @@ const AppContent = () => {
 
   const renderContent = () => {
     switch (activeSection) {
-      // Dashboard variants
+            // Dashboard variants
       case "moorMeter":
-        return <DashboardFeature variant="moorMeter" />;
+        return <HomePage />;
       case "analytics":
         return <DashboardFeature variant="analytics" />;
       case "history":

@@ -313,6 +313,8 @@ export const SentimentDashboard = () => {
           </div>
         </CardContent>
       </Card>
-    </div>
+        </div>
   );
 };
+
+export default SentimentDashboard;

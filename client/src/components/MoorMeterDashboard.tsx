@@ -167,13 +167,13 @@ export const MoorMeterDashboard: React.FC = memo(() => {
   const [moodScore, setMoodScore] = useState<MoodScore>(calculateMoodScore());
 
   // Update mood score periodically
-  useEffect(() => {
+    useEffect(() => {
     const interval = setInterval(() => {
       setMoodScore(calculateMoodScore());
     }, 30000); // Update every 30 seconds
 
     return () => clearInterval(interval);
-  }, [stockSentiment]);
+  }, []); // Empty dependency array for stable interval
 
   // Get mood emoji and color
   const getMoodEmoji = (score: number) => {
@@ -407,7 +407,7 @@ export const MoorMeterDashboard: React.FC = memo(() => {
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
               <div>
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-                  🧑‍🤝‍🧑 Community Hub
+                  🧑‍🤝���🧑 Community Hub
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400">
                   {activeCommunitySubtab === "Chat"
@@ -528,7 +528,7 @@ export const MoorMeterDashboard: React.FC = memo(() => {
                             </Badge>
                           </div>
                           <p className="text-white text-sm">
-                            📊 <strong>Daily Market Wrap:</strong> Tech earnings
+                            ��� <strong>Daily Market Wrap:</strong> Tech earnings
                             season heating up! NVDA reports after market close.
                             Remember to follow community guidelines and keep
                             discussions respectful.
@@ -619,7 +619,7 @@ export const MoorMeterDashboard: React.FC = memo(() => {
           </div>
         );
 
-      case "Home":
+                  case "Home":
       default:
         return (
           <>
@@ -664,12 +664,13 @@ export const MoorMeterDashboard: React.FC = memo(() => {
     }
   };
 
-  return (
+    return (
     <div
       className={`min-h-screen transition-colors duration-300 ${darkMode ? "dark bg-gray-900" : "bg-gray-50"}`}
     >
-      {/* Navigation */}
-      <nav className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
+      {/* Navigation - Hidden for Home tab since HomePage has its own hero */}
+      {activeTab !== "Home" && (
+        <nav className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
@@ -829,12 +830,17 @@ export const MoorMeterDashboard: React.FC = memo(() => {
             </div>
           </div>
         )}
-      </nav>
+            </nav>
+      )}
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <div className="px-4 py-6 sm:px-0">{renderTabContent()}</div>
-      </main>
+      {activeTab !== "Home" ? (
+        <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+          <div className="px-4 py-6 sm:px-0">{renderTabContent()}</div>
+        </main>
+      ) : (
+        renderTabContent()
+      )}
     </div>
     );
 });
