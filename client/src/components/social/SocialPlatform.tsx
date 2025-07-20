@@ -493,8 +493,7 @@ export const SocialPlatform = () => {
           </div>
         );
 
-      case "rooms":
-        return <CommunityRooms />;
+      
 
       case "twitter":
         return (
