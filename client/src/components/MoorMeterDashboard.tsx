@@ -62,8 +62,7 @@ import { TrendingTopicsWidget as EnhancedTrendingTopicsWidget } from "./stockCha
 
 
 import { ChatInterface } from "./moorMeter/ChatInterface";
-import { CryptoChannels } from "./social/CryptoChannels";
-import { OffTopicLounge } from "./social/OffTopicLounge";
+import { Channels } from "./social/Channels";
 import { MoodScoreHero } from "./builder/MoodScoreHero";
 import { TopStocksModule } from "./builder/TopStocksModule";
 import { SentimentHeatMap } from "./moorMeter/SentimentHeatMap";
