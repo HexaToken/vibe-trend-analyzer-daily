@@ -162,19 +162,6 @@ export const Navigation = ({
                 </Badge>
               </Button>
 
-              {/* StockTwist */}
-              <Button
-                variant={activeSection === "stocktwist" ? "default" : "ghost"}
-                onClick={() => onSectionChange("stocktwist")}
-                className="flex items-center gap-2"
-              >
-                <Zap className="h-4 w-4" />
-                StockTwist
-                <Badge variant="secondary" className="text-xs">
-                  HOT
-                </Badge>
-              </Button>
-
               {/* Data Dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
