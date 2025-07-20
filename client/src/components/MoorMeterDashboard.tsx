@@ -706,7 +706,9 @@ export const MoorMeterDashboard: React.FC = () => {
             <div className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (
                 <div key={item.key} className="relative">
-                  {(item.key === "Tool" || item.key === "Community") &&
+                  {(item.key === "Tool" ||
+                    item.key === "Community" ||
+                    (item.key === "StockTwist" && item.subtabs)) &&
                   item.subtabs ? (
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
