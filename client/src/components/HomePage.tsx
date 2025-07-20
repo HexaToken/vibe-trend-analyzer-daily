@@ -151,7 +151,6 @@ const HeroSection: React.FC<{ moodScore: MoodScore }> = ({ moodScore }) => {
 
   return (
     <div className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 dark:from-gray-900 dark:via-blue-900 dark:to-purple-900">
-      {/* Animated background elements */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-10 left-10 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
         <div className="absolute top-40 right-10 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-1000"></div>
@@ -160,7 +159,6 @@ const HeroSection: React.FC<{ moodScore: MoodScore }> = ({ moodScore }) => {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
         <div className="text-center">
-          {/* Main Hero Content */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
             <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               MoorMeter
@@ -171,11 +169,9 @@ const HeroSection: React.FC<{ moodScore: MoodScore }> = ({ moodScore }) => {
             Real-time market sentiment analysis powered by AI
           </p>
 
-          {/* Today's Mood Score */}
           <div className="flex flex-col items-center mb-12">
             <div className="text-lg text-blue-200 mb-4">Today's Market Mood</div>
             
-            {/* Large Mood Score Circle */}
             <div className="relative">
               <div className="w-40 h-40 md:w-48 md:h-48 rounded-full bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/20 flex items-center justify-center shadow-2xl">
                 <div className="text-center">
@@ -191,15 +187,12 @@ const HeroSection: React.FC<{ moodScore: MoodScore }> = ({ moodScore }) => {
                 </div>
               </div>
               
-              {/* Floating animation elements */}
               <div className="absolute -top-2 -right-2 w-4 h-4 bg-yellow-400 rounded-full animate-ping"></div>
               <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-green-400 rounded-full animate-ping delay-1000"></div>
             </div>
           </div>
 
-          {/* Data Source Breakdown */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {/* Stocks */}
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center">
@@ -222,7 +215,6 @@ const HeroSection: React.FC<{ moodScore: MoodScore }> = ({ moodScore }) => {
               <div className="text-sm text-blue-200 mt-2">Market Performance</div>
             </div>
 
-            {/* News */}
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center">
@@ -245,7 +237,6 @@ const HeroSection: React.FC<{ moodScore: MoodScore }> = ({ moodScore }) => {
               <div className="text-sm text-purple-200 mt-2">Headlines Sentiment</div>
             </div>
 
-            {/* Social */}
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center">
@@ -269,7 +260,6 @@ const HeroSection: React.FC<{ moodScore: MoodScore }> = ({ moodScore }) => {
             </div>
           </div>
 
-          {/* Call to Action */}
           <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
               <Brain className="w-5 h-5 mr-2" />
@@ -517,9 +507,10 @@ const CommunityReactions: React.FC<{ messages: CommunityMessage[] }> = ({ messag
 
 // Enhanced Sidebar Component
 const EnhancedSidebar: React.FC<{ moodScore: MoodScore }> = ({ moodScore }) => {
+  const personalizedScore = Math.round(moodScore.overall * 0.85);
+  
   return (
     <div className="space-y-6">
-      {/* Personal Mood Score */}
       <Card className="overflow-hidden border-0 shadow-xl bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-800 dark:via-gray-800 dark:to-blue-900/20">
         <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
           <CardTitle className="flex items-center space-x-2">
@@ -530,7 +521,7 @@ const EnhancedSidebar: React.FC<{ moodScore: MoodScore }> = ({ moodScore }) => {
         <CardContent className="p-6">
           <div className="text-center">
             <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">
-              {Math.round(moodScore.overall * 0.85)} {/* Slightly lower for personalized */}
+              {personalizedScore}
             </div>
             <div className="text-sm text-gray-600 dark:text-gray-400 mb-4">
               Based on your watchlist
@@ -538,17 +529,15 @@ const EnhancedSidebar: React.FC<{ moodScore: MoodScore }> = ({ moodScore }) => {
             <div className="w-full bg-blue-200 dark:bg-blue-800 rounded-full h-3">
               <div
                 className="bg-blue-500 h-3 rounded-full transition-all duration-1000"
-                style={{ width: `${moodScore.overall * 0.85}%` }}
+                style={{ width: `${personalizedScore}%` }}
               ></div>
             </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* Watchlist Manager */}
       <WatchlistWidget />
 
-      {/* AI Daily Insight */}
       <Card className="overflow-hidden border-0 shadow-xl bg-gradient-to-br from-green-50 via-white to-emerald-50 dark:from-gray-800 dark:via-gray-800 dark:to-green-900/20">
         <CardHeader className="bg-gradient-to-r from-green-600 to-emerald-600 text-white">
           <CardTitle className="flex items-center space-x-2">
@@ -561,10 +550,13 @@ const EnhancedSidebar: React.FC<{ moodScore: MoodScore }> = ({ moodScore }) => {
         </CardHeader>
         <CardContent className="p-6">
           <div className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-            📊 <strong>Market Analysis:</strong> Technology sector showing strong momentum with AI-related stocks leading gains. 
-            Federal Reserve sentiment remains neutral, suggesting stable interest rate environment. 
-            <br /><br />
-            🎯 <strong>Recommendation:</strong> Consider diversifying into emerging tech sectors while maintaining defensive positions.
+            <div className="mb-3">
+              📊 <span className="font-semibold">Market Analysis:</span> Technology sector showing strong momentum with AI-related stocks leading gains. 
+              Federal Reserve sentiment remains neutral, suggesting stable interest rate environment.
+            </div>
+            <div>
+              🎯 <span className="font-semibold">Recommendation:</span> Consider diversifying into emerging tech sectors while maintaining defensive positions.
+            </div>
           </div>
           <Button variant="outline" size="sm" className="w-full mt-4">
             <Brain className="w-4 h-4 mr-2" />
@@ -573,7 +565,6 @@ const EnhancedSidebar: React.FC<{ moodScore: MoodScore }> = ({ moodScore }) => {
         </CardContent>
       </Card>
 
-      {/* Quick Stats */}
       <Card className="overflow-hidden border-0 shadow-xl">
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
@@ -608,7 +599,6 @@ const Footer: React.FC = () => {
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center mb-4">
               <TrendingUp className="h-8 w-8 text-blue-400 mr-2" />
@@ -620,7 +610,6 @@ const Footer: React.FC = () => {
             </p>
           </div>
 
-          {/* Links */}
           <div>
             <h4 className="font-semibold mb-4">Product</h4>
             <ul className="space-y-2 text-sm text-gray-400">
@@ -657,7 +646,6 @@ const Footer: React.FC = () => {
             © 2024 MoorMeter. All rights reserved.
           </div>
           
-          {/* Social Links */}
           <div className="flex space-x-4 mt-4 md:mt-0">
             <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
               <Twitter className="w-5 h-5" />
@@ -683,11 +671,9 @@ export const HomePage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTimeframe, setSelectedTimeframe] = useState<"1D" | "7D" | "30D">("7D");
 
-  // Hooks for real data
   const { data: stockSentiment, loading: stockLoading } = useStockSentiment();
   const { articles: newsArticles, loading: newsLoading } = useCombinedBusinessNews();
 
-  // Calculate overall mood score
   const calculateMoodScore = useCallback((): MoodScore => {
     let stocksScore = stockSentiment?.score || 50;
     let newsScore = 45 + Math.random() * 20;
@@ -708,7 +694,6 @@ export const HomePage: React.FC = () => {
 
   const [moodScore, setMoodScore] = useState<MoodScore>(calculateMoodScore());
 
-  // Update mood score periodically
   useEffect(() => {
     const interval = setInterval(() => {
       setMoodScore(calculateMoodScore());
@@ -717,7 +702,6 @@ export const HomePage: React.FC = () => {
     return () => clearInterval(interval);
   }, [calculateMoodScore]);
 
-  // Mock data for trending topics
   const trendingTopics: TrendingTopic[] = [
     { term: "AI Revolution", sentiment: 85, volume: 12500, source: "reddit", change24h: 12.5, discussion_count: 1247 },
     { term: "Fed Meeting", sentiment: 35, volume: 8900, source: "twitter", change24h: -8.2, discussion_count: 892 },
@@ -726,7 +710,6 @@ export const HomePage: React.FC = () => {
     { term: "Market Volatility", sentiment: 42, volume: 5800, source: "twitter", change24h: -2.1, discussion_count: 423 },
   ];
 
-  // Mock community messages
   const communityMessages: CommunityMessage[] = [
     {
       id: "1",
@@ -760,7 +743,6 @@ export const HomePage: React.FC = () => {
     },
   ];
 
-  // Mock historical mood data
   const historicalMood = useMemo(() =>
     Array.from({ length: 7 }, (_, i) => ({
       date: new Date(
@@ -775,42 +757,28 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      {/* Hero Section */}
       <HeroSection moodScore={moodScore} />
 
-      {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Main Content Area */}
           <div className="lg:col-span-3 space-y-8">
-            {/* Top Stocks Widget */}
             <TopStocksWidget stockLoading={stockLoading} />
-
-            {/* Smart News Feed */}
             <NewsWidget articles={newsArticles} loading={newsLoading} />
-
-            {/* Mood Over Time Chart */}
             <MoodTrendChart
               data={historicalMood}
               timeframe={selectedTimeframe}
               setTimeframe={setSelectedTimeframe}
             />
-
-            {/* Trending Topics */}
             <EnhancedTrendingTopics topics={trendingTopics} />
-
-            {/* Community Reactions */}
             <CommunityReactions messages={communityMessages} />
           </div>
 
-          {/* Enhanced Sidebar */}
           <div className="lg:col-span-1">
             <EnhancedSidebar moodScore={moodScore} />
           </div>
         </div>
       </main>
 
-      {/* Footer */}
       <Footer />
     </div>
   );
