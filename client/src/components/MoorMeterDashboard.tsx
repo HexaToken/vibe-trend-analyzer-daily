@@ -54,6 +54,10 @@ import { WatchlistModule } from "./moorMeter/WatchlistModule";
 import { AIInsightWidget } from "./moorMeter/AIInsightWidget";
 import { CommunityWidget } from "./moorMeter/CommunityWidget";
 import { CommunityRooms } from "./social/CommunityRooms";
+import { LivePollsWidget } from "./stockChannel/LivePollsWidget";
+import { AISummaryWidget } from "./stockChannel/AISummaryWidget";
+import { TrendingTopicsWidget as EnhancedTrendingTopicsWidget } from "./stockChannel/TrendingTopicsWidget";
+import { TopDiscussedWidget } from "./stockChannel/TopDiscussedWidget";
 
 import { StockTwistRoom } from "./rooms/StockTwistRoom";
 import { CommunityForum } from "./community/CommunityForum";
@@ -647,171 +651,19 @@ export const MoorMeterDashboard: React.FC = () => {
                   </Card>
                 </div>
 
-                {/* Right Sidebar - Widgets (30%) */}
+                {/* Right Sidebar - Enhanced Widgets (30%) */}
                 <div className="lg:col-span-3 space-y-4">
-                  {/* Live Polls Widget */}
-                  <Card className="bg-gradient-to-br from-violet-900/50 to-purple-900/50 border-violet-500/20">
-                    <CardHeader className="pb-3">
-                      <CardTitle className="text-white flex items-center gap-2 text-sm">
-                        📊 Live Polls
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-3">
-                        <h4 className="text-white font-medium text-sm">
-                          Which ticker will moon today?
-                        </h4>
-                        <div className="space-y-2">
-                          {[
-                            { ticker: "NVDA", votes: 1247, percentage: 35 },
-                            { ticker: "TSLA", votes: 892, percentage: 25 },
-                            { ticker: "AAPL", votes: 743, percentage: 21 },
-                            { ticker: "MSFT", votes: 678, percentage: 19 },
-                          ].map((stock, index) => (
-                            <div key={stock.ticker} className="space-y-1">
-                              <div className="flex justify-between text-xs text-gray-300">
-                                <span>${stock.ticker}</span>
-                                <span>{stock.percentage}%</span>
-                              </div>
-                              <div className="w-full bg-gray-700 rounded-full h-1.5">
-                                <div
-                                  className="bg-gradient-to-r from-violet-400 to-purple-400 h-1.5 rounded-full"
-                                  style={{ width: `${stock.percentage}%` }}
-                                ></div>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                        <div className="pt-2 border-t border-violet-500/20 text-xs text-gray-400">
-                          ⏳ Expires in 2h | 3,560 votes
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                  {/* Enhanced Live Polls Widget */}
+                  <LivePollsWidget />
 
-                  {/* AI Summary Widget */}
-                  <Card className="bg-gradient-to-br from-blue-900/50 to-green-900/50 border-blue-500/20">
-                    <CardHeader className="pb-3">
-                      <CardTitle className="text-white flex items-center gap-2 text-sm">
-                        🤖 AI Summary
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="text-center space-y-2">
-                        <div className="text-2xl font-bold text-white">
-                          73% Bullish
-                        </div>
-                        <div className="flex items-center justify-center gap-2 text-green-400 text-xs">
-                          <TrendingUp className="w-3 h-3" />
-                          <span>+5.2% from yesterday</span>
-                        </div>
-                        <Badge className="bg-green-500/20 text-green-400 border-green-500/30 text-xs">
-                          Strong Bullish
-                        </Badge>
-                      </div>
-                    </CardContent>
-                  </Card>
+                  {/* Enhanced AI Summary Widget */}
+                  <AISummaryWidget />
 
-                  {/* Trending Topics Widget */}
-                  <Card className="bg-gray-800/50 border-gray-700/50">
-                    <CardHeader className="pb-3">
-                      <CardTitle className="text-white flex items-center gap-2 text-sm">
-                        🔥 Trending Topics
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-2">
-                        {[
-                          {
-                            tag: "#AIRevolution",
-                            mentions: 1247,
-                            sentiment: 85,
-                          },
-                          { tag: "$NVDA", mentions: 892, sentiment: 78 },
-                          {
-                            tag: "#TechEarnings",
-                            mentions: 743,
-                            sentiment: -23,
-                          },
-                          { tag: "$TSLA", mentions: 567, sentiment: 34 },
-                        ].map((topic, index) => (
-                          <div
-                            key={index}
-                            className="flex items-center justify-between p-2 rounded bg-gray-700/30 hover:bg-gray-700/50 transition-colors"
-                          >
-                            <div className="flex items-center gap-2">
-                              <span className="text-white text-sm font-medium">
-                                {topic.tag}
-                              </span>
-                              <span className="text-xs text-gray-400">
-                                {topic.mentions}
-                              </span>
-                            </div>
-                            <Badge
-                              className={`text-xs ${
-                                topic.sentiment > 0
-                                  ? "bg-green-500/20 text-green-400"
-                                  : "bg-red-500/20 text-red-400"
-                              }`}
-                            >
-                              {topic.sentiment > 0 ? "+" : ""}
-                              {topic.sentiment}%
-                            </Badge>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
+                  {/* Enhanced Trending Topics Widget */}
+                  <EnhancedTrendingTopicsWidget />
 
-                  {/* Trending Today Widget */}
-                  <Card className="bg-gray-800/50 border-gray-700/50">
-                    <CardHeader className="pb-3">
-                      <CardTitle className="text-white flex items-center gap-2 text-sm">
-                        📢 Trending Today
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-2">
-                        {[
-                          { ticker: "AMD", change: 8.42, volume: "High" },
-                          { ticker: "META", change: -3.15, volume: "High" },
-                          { ticker: "GOOGL", change: 2.78, volume: "Medium" },
-                          { ticker: "AMZN", change: 1.23, volume: "Medium" },
-                        ].map((stock, index) => (
-                          <div
-                            key={index}
-                            className="flex items-center justify-between p-2 rounded bg-gray-700/30"
-                          >
-                            <div className="flex items-center gap-2">
-                              <span className="text-white text-sm font-medium">
-                                ${stock.ticker}
-                              </span>
-                              <span className="text-xs text-gray-400">
-                                {stock.volume} vol
-                              </span>
-                            </div>
-                            <div className="flex items-center gap-1">
-                              <span
-                                className={`text-sm font-medium ${
-                                  stock.change > 0
-                                    ? "text-green-400"
-                                    : "text-red-400"
-                                }`}
-                              >
-                                {stock.change > 0 ? "+" : ""}
-                                {stock.change}%
-                              </span>
-                              {stock.change > 0 ? (
-                                <Activity className="w-3 h-3 text-green-400" />
-                              ) : (
-                                <Activity className="w-3 h-3 text-red-400" />
-                              )}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
+                  {/* Enhanced Top Discussed Widget */}
+                  <TopDiscussedWidget />
 
                   {/* Top Posters Widget */}
                   <Card className="bg-gray-800/50 border-gray-700/50">
