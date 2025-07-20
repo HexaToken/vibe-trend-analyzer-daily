@@ -471,8 +471,7 @@ export const MoorMeterDashboard: React.FC = () => {
             </div>
 
             {/* Category indicator for applicable subtabs */}
-            {(activeCommunitySubtab === "Chat" ||
-              activeCommunitySubtab === "Rooms") && (
+                        {activeCommunitySubtab === "Chat" && (
               <div className="flex items-center gap-3 mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border">
                 <div className="flex items-center gap-2">
                   {selectedCategory === "Crypto" ? "���" : "💬"}
