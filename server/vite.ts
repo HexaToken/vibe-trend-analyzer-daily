@@ -22,14 +22,18 @@ export function log(message: string, source = "express") {
 export async function setupVite(app: Express, server: Server) {
   const serverOptions = {
     middlewareMode: true,
-    host: 'localhost',
+    host: '0.0.0.0',
     port: 5000,
     hmr: {
       server,
       port: 5000,
-      host: 'localhost'
+      host: '0.0.0.0',
+      // Disable client-side polling for hosted environments
+      clientPort: 5000
     },
     allowedHosts: true,
+    // Improve CORS handling for hosted environments
+    cors: true,
   };
 
   const vite = await createViteServer({
