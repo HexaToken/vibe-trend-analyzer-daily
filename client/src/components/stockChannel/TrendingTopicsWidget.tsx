@@ -130,7 +130,7 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
               key={topic.id}
               className="flex items-center justify-between p-2 rounded-lg bg-gray-700/30 hover:bg-gray-700/50 transition-all duration-200 cursor-pointer border border-gray-600/20 hover:border-gray-500/50 overflow-hidden gap-2 min-w-0"
             >
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 flex-shrink-0 min-w-0">
                 <div className="flex items-center gap-2">
                   <div className="text-gray-400 text-sm font-bold">
                     #{index + 1}
@@ -141,7 +141,7 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
                     <DollarSign className="w-4 h-4 text-green-400" />
                   )}
                 </div>
-                <div className="flex-1 min-w-0">
+                <div className="flex-1 min-w-0 flex-shrink-1">
                   <div className="flex items-center gap-2">
                     <span className="text-white font-medium text-sm truncate block">
                       {topic.tag}
