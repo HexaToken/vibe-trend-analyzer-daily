@@ -620,13 +620,7 @@ export const SocialPlatform = () => {
             <TrendingUp className="h-4 w-4" />
             Trending
           </TabsTrigger>
-          <TabsTrigger value="rooms" className="flex items-center gap-2">
-            <MessageSquare className="h-4 w-4" />
-            Rooms
-            <Badge variant="secondary" className="text-xs">
-              Soon
-            </Badge>
-          </TabsTrigger>
+          
           <TabsTrigger value="twitter" className="flex items-center gap-2">
             <Twitter className="h-4 w-4" />
             Twitter
