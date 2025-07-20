@@ -46,9 +46,22 @@ export async function setupVite(app: Express, server: Server) {
     appType: "custom",
   });
 
-  app.use(vite.middlewares);
+    app.use(vite.middlewares);
+
+  // Only serve HTML for non-API routes and non-Vite internal routes
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
+
+    // Skip serving HTML for API routes or Vite internal routes
+    if (url.startsWith('/api') || url.startsWith('/@') || url.startsWith('/__vite')) {
+      return next();
+    }
+
+    // Check if this is a Vite ping request
+    const acceptHeader = req.get('Accept');
+    if (acceptHeader === 'text/x-vite-ping') {
+      return next();
+    }
 
     try {
       const clientTemplate = path.resolve(
