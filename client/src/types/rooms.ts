@@ -104,6 +104,5 @@ export interface UserLimits {
   maxJoinedRooms: number;
   maxRoomMembers: number;
   maxInvitesPerHour: number;
-  canCreateStockTwistPosts: boolean;
   canCreatePolls: boolean;
 }
