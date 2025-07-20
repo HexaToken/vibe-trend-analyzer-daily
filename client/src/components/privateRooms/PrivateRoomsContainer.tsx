@@ -37,27 +37,10 @@ export const PrivateRoomsContainer: React.FC = () => {
           onCreateRoom={handleCreateRoom}
         />
       ) : (
-        <div className="p-6">
-          <div className="flex items-center gap-4 mb-6">
-            <button
-              onClick={() => setSelectedRoom(null)}
-              className="text-blue-600 hover:text-blue-800"
-            >
-              ← Back to Rooms
-            </button>
-            <h1 className="text-2xl font-bold">{selectedRoom.name}</h1>
-          </div>
-
-          <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-8 text-center">
-            <h3 className="text-lg font-semibold mb-2">
-              Room Chat Coming Soon
-            </h3>
-            <p className="text-gray-600 dark:text-gray-400">
-              The chat interface for "{selectedRoom.name}" will be implemented
-              in the next step.
-            </p>
-          </div>
-        </div>
+        <PrivateRoomChat
+          room={selectedRoom}
+          onBackToRooms={() => setSelectedRoom(null)}
+        />
       )}
 
       <CreateRoomModal
