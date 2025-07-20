@@ -435,9 +435,7 @@ export const MoorMeterDashboard: React.FC = () => {
                             : "Discuss trends, share sentiment, and join chat rooms"
                           : activeCommunitySubtab === "PrivateRoom"
                             ? "Create invite-only watchlist rooms for focused discussions with fellow traders"
-                            : activeCommunitySubtab === "StockTwist"
-                              ? "Share real-time trade ideas with cashtags, sentiment tagging, and live polls"
-                              : "Connect with fellow traders and share insights"}
+                            : "Connect with fellow traders and share insights"}
                 </p>
               </div>
 
