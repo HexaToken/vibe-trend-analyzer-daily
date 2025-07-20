@@ -581,11 +581,6 @@ export const MoorMeterDashboard: React.FC = () => {
                         <div className="flex-shrink-0 overflow-hidden w-full">
                           <EnhancedTrendingTopicsWidget className="w-full max-h-[280px] shadow-lg hover:shadow-xl transition-shadow duration-300" />
                         </div>
-
-                        {/* Top Discussed Widget */}
-                        <div className="flex-shrink-0 overflow-hidden w-full">
-                          <TopDiscussedWidget className="w-full max-h-[280px] shadow-lg hover:shadow-xl transition-shadow duration-300" />
-                        </div>
                       </div>
                     </div>
                   </div>
