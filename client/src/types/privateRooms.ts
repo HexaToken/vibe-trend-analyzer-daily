@@ -41,7 +41,7 @@ export interface PrivateRoom {
   isArchived: boolean;
   messageCount: number;
   unreadCount: number;
-  type: "private" | "public" | "stocktwist";
+  type: "private" | "public";
   status: "active" | "archived" | "read-only";
   category?: "watchlist" | "general" | "trading";
 }
