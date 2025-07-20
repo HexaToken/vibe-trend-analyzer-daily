@@ -522,8 +522,8 @@ export const FuturisticHomepage: React.FC = () => {
         </div>
       </div>
 
-      {/* Custom CSS for animations */}
-      <style jsx>{`
+            {/* Custom CSS for animations */}
+      <style>{`
         @keyframes spin-slow {
           from {
             transform: rotate(0deg);
