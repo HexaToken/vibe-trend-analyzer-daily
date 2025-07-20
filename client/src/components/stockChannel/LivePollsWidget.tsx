@@ -40,7 +40,7 @@ export const LivePollsWidget: React.FC<LivePollsWidgetProps> = ({
 
   return (
     <Card
-      className={`bg-gradient-to-br from-violet-900/50 to-purple-900/50 border-violet-500/20 hover:border-violet-400/40 transition-all duration-300 overflow-hidden ${className}`}
+      className={`bg-gradient-to-br from-violet-900/50 to-purple-900/50 border-violet-500/20 hover:border-violet-400/40 transition-all duration-300 overflow-hidden w-full max-w-full ${className || ""}`}
     >
       <CardHeader className="pb-3">
         <CardTitle className="text-white flex items-center gap-2 text-lg font-bold">
