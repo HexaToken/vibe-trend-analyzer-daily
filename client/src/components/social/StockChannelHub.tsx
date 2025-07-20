@@ -402,9 +402,9 @@ export const StockChannelHub: React.FC = () => {
             </div>
 
             {/* Messages Feed */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0">
+            <div className="flex-1 overflow-y-auto p-4 space-y-3 min-h-[550px] max-h-[600px]">
               {channelMessages.map((message) => (
-                <div key={message.id} className="space-y-3">
+                <div key={message.id} className="space-y-2">
                   {message.isPinned && (
                     <div className="flex items-center gap-2 text-xs text-blue-600 dark:text-blue-400">
                       <Pin className="w-3 h-3" />
@@ -452,7 +452,7 @@ export const StockChannelHub: React.FC = () => {
                         </span>
                       </div>
 
-                      <p className="text-sm text-gray-800 dark:text-gray-200 mb-2 break-words">
+                      <p className="text-sm text-gray-800 dark:text-gray-200 mb-2 break-words leading-relaxed">
                         {message.content}
                       </p>
 
