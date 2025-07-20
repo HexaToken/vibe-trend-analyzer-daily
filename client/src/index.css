@@ -130,9 +130,44 @@ All colors MUST be HSL.
     --sidebar-primary: 224.3 76.3% 48%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
+        --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Mood Theme Variables */
+    --mood-gradient-from: 15 23 42; /* slate-900 fallback */
+    --mood-gradient-to: 30 64 175; /* blue-700 fallback */
+    --mood-accent: 59 130 246; /* blue-500 fallback */
+    --mood-glow: rgba(59, 130, 246, 0.2); /* blue glow fallback */
+  }
+
+  /* Mood-based dynamic classes */
+  .mood-neutral {
+    --mood-gradient-from: 15 23 42; /* slate-900 */
+    --mood-gradient-to: 30 64 175; /* blue-700 */
+    --mood-accent: 59 130 246; /* blue-500 */
+    --mood-glow: rgba(59, 130, 246, 0.2);
+  }
+
+  .mood-bearish {
+    --mood-gradient-from: 30 41 59; /* slate-800 */
+    --mood-gradient-to: 55 65 81; /* gray-700 */
+    --mood-accent: 107 114 128; /* gray-500 */
+    --mood-glow: rgba(107, 114, 128, 0.2);
+  }
+
+  .mood-bullish {
+    --mood-gradient-from: 69 26 3; /* amber-950 */
+    --mood-gradient-to: 234 88 12; /* orange-600 */
+    --mood-accent: 245 158 11; /* amber-500 */
+    --mood-glow: rgba(245, 158, 11, 0.3);
+  }
+
+  .mood-extreme {
+    --mood-gradient-from: 88 28 135; /* purple-900 */
+    --mood-gradient-to: 219 39 119; /* pink-600 */
+    --mood-accent: 168 85 247; /* purple-500 */
+    --mood-glow: rgba(168, 85, 247, 0.4);
   }
 }
 
@@ -159,5 +194,74 @@ All colors MUST be HSL.
     to {
       box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
     }
+  }
+
+  /* Mood-based animations */
+  .mood-transition {
+    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .mood-glow-animation {
+    animation: mood-pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes mood-pulse {
+    0%, 100% {
+      box-shadow: 0 0 20px var(--mood-glow);
+    }
+    50% {
+      box-shadow: 0 0 40px var(--mood-glow), 0 0 60px var(--mood-glow);
+    }
+  }
+
+  .mood-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mood-shimmer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    animation: shimmer 3s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+
+  /* Dynamic background classes */
+  .bg-mood-gradient {
+    background: linear-gradient(
+      135deg,
+      rgb(var(--mood-gradient-from)),
+      rgb(var(--mood-gradient-to))
+    );
+  }
+
+  .border-mood-accent {
+    border-color: rgb(var(--mood-accent));
+  }
+
+  .text-mood-accent {
+    color: rgb(var(--mood-accent));
+  }
+
+  .shadow-mood-glow {
+    box-shadow: 0 0 20px var(--mood-glow);
   }
 }
