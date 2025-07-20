@@ -249,24 +249,26 @@ export const TopDiscussedWidget: React.FC<TopDiscussedWidgetProps> = ({
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 text-right">
-                <div className="space-y-1">
+              <div className="flex items-center gap-1 text-right flex-shrink-0 overflow-hidden">
+                <div className="space-y-1 overflow-hidden">
                   <div
-                    className={`text-sm font-medium whitespace-nowrap ${getPriceChangeColor(stock.priceChange)}`}
+                    className={`text-sm font-medium whitespace-nowrap truncate max-w-[60px] ${getPriceChangeColor(stock.priceChange)}`}
                   >
                     {stock.priceChange > 0 ? "+" : ""}
                     {stock.priceChange.toFixed(2)}%
                   </div>
-                  <div className="text-xs text-gray-400">
+                  <div className="text-xs text-gray-400 truncate max-w-[60px]">
                     ${stock.price.toFixed(2)}
                   </div>
                 </div>
 
                 <Badge
-                  className={`text-xs px-1 py-1 min-w-[50px] text-center whitespace-nowrap ${getSentimentColor(stock.sentiment)}`}
+                  className={`text-xs px-1 py-1 min-w-[45px] max-w-[55px] text-center whitespace-nowrap overflow-hidden ${getSentimentColor(stock.sentiment)}`}
                 >
-                  {stock.sentiment > 0 ? "+" : ""}
-                  {stock.sentiment.toFixed(2)}%
+                  <span className="truncate">
+                    {stock.sentiment > 0 ? "+" : ""}
+                    {stock.sentiment.toFixed(2)}%
+                  </span>
                 </Badge>
               </div>
             </div>
