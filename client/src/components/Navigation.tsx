@@ -38,6 +38,8 @@ import {
 import { useAuth } from "@/contexts/AuthContext";
 import { AuthModal } from "@/components/auth/AuthModal";
 import { ApiStatusBadge } from "@/components/ApiStatusIndicator";
+import { MoodPulseIndicator } from "@/components/ui/mood-pulse-indicator";
+import { MoodThemeToggle } from "@/components/ui/mood-theme-toggle";
 
 interface NavigationProps {
   activeSection: string;
@@ -134,7 +136,7 @@ export const Navigation = ({
       <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            {/* Logo */}
+                        {/* Logo */}
             <div className="flex items-center gap-3">
               <div className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
                 MoodMeter
@@ -145,6 +147,8 @@ export const Navigation = ({
               <div className="hidden sm:inline-flex">
                 <ApiStatusBadge />
               </div>
+              {/* Mood Pulse Indicator */}
+              <MoodPulseIndicator size="sm" className="hidden lg:flex" />
             </div>
 
             {/* Desktop Navigation */}
