@@ -32,10 +32,9 @@ import {
   BarChart3 as Analytics,
   Users2,
   UserPlus,
-  Coins,
+    Coins,
       Globe,
   Palette,
-  Crown,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { AuthModal } from "@/components/auth/AuthModal";
