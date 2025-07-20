@@ -93,9 +93,9 @@ export const AISummaryWidget: React.FC<AISummaryWidgetProps> = ({
       </CardHeader>
       <CardContent className="space-y-4 overflow-hidden">
         <div className="text-center space-y-3">
-          <div className="relative px-4">
-            <div className="text-4xl font-bold text-white mb-1">
-              {sentiment.percentage}%
+          <div className="relative px-4 overflow-hidden">
+            <div className="text-[clamp(1.25rem,4vw,2.25rem)] font-bold text-white mb-1 w-full text-center truncate">
+              {sentiment.percentage.toFixed(2)}%
             </div>
             <div className="text-xl font-semibold text-white/90">
               {currentSentimentLabel}
