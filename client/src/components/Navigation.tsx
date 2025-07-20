@@ -405,22 +405,6 @@ export const Navigation = ({
                   </Badge>
                 </Button>
 
-                {/* StockTwist */}
-                <Button
-                  variant={activeSection === "stocktwist" ? "default" : "ghost"}
-                  onClick={() => {
-                    onSectionChange("stocktwist");
-                    setIsMenuOpen(false);
-                  }}
-                  className="justify-start gap-2"
-                >
-                  <Zap className="h-4 w-4" />
-                  StockTwist
-                  <Badge variant="secondary" className="ml-auto text-xs">
-                    HOT
-                  </Badge>
-                </Button>
-
                 {/* Data Section */}
                 <div className="text-sm font-medium text-muted-foreground px-3 py-1">
                   Data
