@@ -574,7 +574,7 @@ export const MoorMeterDashboard: React.FC = () => {
                       {/* Sentiment Zone */}
                       <div className="space-y-4">
                         <div className="text-xs font-medium text-blue-300 uppercase tracking-wider px-1">
-                          📊 Sentiment Zone
+                          ��� Sentiment Zone
                         </div>
 
                         {/* Live Polls Widget */}
@@ -611,7 +611,6 @@ export const MoorMeterDashboard: React.FC = () => {
             {activeCommunitySubtab === "PrivateRoom" && (
               <PrivateRoomsContainer />
             )}
-            {activeCommunitySubtab === "StockTwist" && <StockTwistRoom />}
           </div>
         );
 
