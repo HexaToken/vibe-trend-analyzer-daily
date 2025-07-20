@@ -176,7 +176,7 @@ export const Navigation = ({
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="start">
-                  {navigationGroups.data.map((item) => {
+                                    {navigationGroups.data.map((item) => {
                     const Icon = item.icon;
                     return (
                       <DropdownMenuItem
@@ -197,6 +197,16 @@ export const Navigation = ({
                       </DropdownMenuItem>
                     );
                   })}
+                  <DropdownMenuItem
+                    onClick={() => onSectionChange('theme-demo')}
+                    className="flex items-center gap-2"
+                  >
+                    <Palette className="h-4 w-4" />
+                    Mood Theme Demo
+                    <Badge variant="secondary" className="ml-auto text-xs">
+                      NEW
+                    </Badge>
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
 
