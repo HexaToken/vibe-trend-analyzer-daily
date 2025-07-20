@@ -123,7 +123,7 @@ export const TopDiscussedWidget: React.FC<TopDiscussedWidgetProps> = ({
 
   return (
     <Card
-      className={`bg-gray-800/50 border-gray-700/50 hover:border-gray-600/70 transition-all duration-300 overflow-hidden ${className}`}
+      className={`bg-gray-800/50 border-gray-700/50 hover:border-gray-600/70 transition-all duration-300 overflow-hidden w-full max-w-full ${className || ""}`}
     >
       <CardHeader className="pb-3">
         <CardTitle className="text-white flex items-center gap-2 text-lg font-bold">
