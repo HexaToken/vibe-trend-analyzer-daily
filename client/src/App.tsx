@@ -51,9 +51,9 @@ const AppContent = () => {
 
   const renderContent = () => {
     switch (activeSection) {
-      // Dashboard variants
+            // Dashboard variants
       case "moorMeter":
-        return <DashboardFeature variant="moorMeter" />;
+        return <HomePage />;
       case "analytics":
         return <DashboardFeature variant="analytics" />;
       case "history":
