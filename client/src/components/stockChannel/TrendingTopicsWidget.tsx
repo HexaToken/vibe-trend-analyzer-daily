@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Badge } from "../ui/badge";
-import {
-  Flame,
-  TrendingUp,
-  TrendingDown,
-  Hash,
-  DollarSign,
-} from "lucide-react";
+import { Flame, Hash, DollarSign } from "lucide-react";
 
 interface TrendingTopic {
   id: string;
