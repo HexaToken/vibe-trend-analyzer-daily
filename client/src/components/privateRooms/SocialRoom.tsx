@@ -51,6 +51,7 @@ export const SocialRoom: React.FC<SocialRoomProps> = ({ onCreateRoom }) => {
   const [selectedRoom, setSelectedRoom] = useState<PrivateRoom | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
   // Mock current user
   const currentUser: User = mockUsers[0]; // TechBull2024
