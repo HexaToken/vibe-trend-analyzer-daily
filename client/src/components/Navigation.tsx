@@ -32,12 +32,16 @@ import {
   BarChart3 as Analytics,
   Users2,
   UserPlus,
-  Coins,
-  Globe,
+    Coins,
+        Globe,
+  Palette,
+  Zap,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { AuthModal } from "@/components/auth/AuthModal";
 import { ApiStatusBadge } from "@/components/ApiStatusIndicator";
+import { MoodPulseIndicator } from "@/components/ui/mood-pulse-indicator";
+import { MoodThemeToggle } from "@/components/ui/mood-theme-toggle";
 
 interface NavigationProps {
   activeSection: string;
@@ -134,7 +138,7 @@ export const Navigation = ({
       <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            {/* Logo */}
+                        {/* Logo */}
             <div className="flex items-center gap-3">
               <div className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
                 MoodMeter
@@ -145,10 +149,27 @@ export const Navigation = ({
               <div className="hidden sm:inline-flex">
                 <ApiStatusBadge />
               </div>
+              {/* Mood Pulse Indicator */}
+              <MoodPulseIndicator size="sm" className="hidden lg:flex" />
             </div>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-1">
+                                                        
+
+                            {/* Futuristic Homepage */}
+              <Button
+                variant={activeSection === "futuristic-home" ? "default" : "ghost"}
+                onClick={() => onSectionChange("futuristic-home")}
+                className="flex items-center gap-2"
+              >
+                <Zap className="h-4 w-4" />
+                Futuristic Home
+                <Badge variant="secondary" className="text-xs bg-gradient-to-r from-cyan-400/20 to-blue-500/20 text-cyan-300 border-cyan-400/30">
+                  FUTURE
+                </Badge>
+              </Button>
+
               {/* MoorMeter Dashboard */}
               <Button
                 variant={activeSection === "moorMeter" ? "default" : "ghost"}
@@ -171,7 +192,7 @@ export const Navigation = ({
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="start">
-                  {navigationGroups.data.map((item) => {
+                                    {navigationGroups.data.map((item) => {
                     const Icon = item.icon;
                     return (
                       <DropdownMenuItem
@@ -192,6 +213,26 @@ export const Navigation = ({
                       </DropdownMenuItem>
                     );
                   })}
+                                    <DropdownMenuItem
+                    onClick={() => onSectionChange('theme-demo')}
+                    className="flex items-center gap-2"
+                  >
+                    <Palette className="h-4 w-4" />
+                    Mood Theme Demo
+                    <Badge variant="secondary" className="ml-auto text-xs">
+                      NEW
+                    </Badge>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => onSectionChange('builder-finance')}
+                    className="flex items-center gap-2"
+                  >
+                    <BarChart3 className="h-4 w-4" />
+                    Builder.io Finance Components
+                    <Badge variant="secondary" className="ml-auto text-xs bg-gradient-to-r from-blue-400/20 to-slate-500/20 text-blue-300 border-blue-400/30">
+                      BUILDER
+                    </Badge>
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
 
@@ -262,8 +303,11 @@ export const Navigation = ({
               </DropdownMenu>
             </div>
 
-            {/* User Section */}
+                        {/* User Section */}
             <div className="flex items-center gap-3">
+              {/* Theme Toggle */}
+              <MoodThemeToggle />
+
               {isAuthenticated ? (
                 <>
                   {/* Notifications */}

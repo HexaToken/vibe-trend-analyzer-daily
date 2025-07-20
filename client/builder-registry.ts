@@ -5,6 +5,13 @@ import { type RegisteredComponent } from "@builder.io/sdk-react";
 import { MoodScoreHero } from "./src/components/builder/MoodScoreHero";
 import { TopStocksModule } from "./src/components/builder/TopStocksModule";
 
+// Finance-grade components
+import { FinanceMoodGauge } from "./src/components/builder/FinanceMoodGauge";
+import { FinanceStockTable } from "./src/components/builder/FinanceStockTable";
+import { FinanceNewsFeed } from "./src/components/builder/FinanceNewsFeed";
+import { FinanceTrendingTopics } from "./src/components/builder/FinanceTrendingTopics";
+import { FinanceMoodChart } from "./src/components/builder/FinanceMoodChart";
+
 // Placeholder components for now - you can create these following the same pattern
 const NewsFeedModule = () =>
   React.createElement("div", null, "News Feed Module - To be implemented");
@@ -181,6 +188,200 @@ export const customComponents: RegisteredComponent[] = [
       },
       {
         name: "showConfidence",
+        type: "boolean",
+        defaultValue: true,
+        required: false,
+      },
+    ],
+    canHaveChildren: false,
+    },
+  // Finance-grade components
+  {
+    component: FinanceMoodGauge,
+    name: "FinanceMoodGauge",
+    inputs: [
+      {
+        name: "title",
+        type: "string",
+        defaultValue: "Market Sentiment",
+        required: false,
+      },
+      {
+        name: "subtitle",
+        type: "string",
+        defaultValue: "Today's sentiment suggests rising investor confidence led by tech earnings.",
+        required: false,
+      },
+      {
+        name: "showBreakdown",
+        type: "boolean",
+        defaultValue: true,
+        required: false,
+      },
+      {
+        name: "size",
+        type: "string",
+        enum: ["small", "medium", "large"],
+        defaultValue: "large",
+        required: false,
+      },
+      {
+        name: "apiEndpoint",
+        type: "string",
+        defaultValue: "/api/proxy/stock-sentiment",
+        required: false,
+      },
+    ],
+    canHaveChildren: false,
+  },
+  {
+    component: FinanceStockTable,
+    name: "FinanceStockTable",
+    inputs: [
+      {
+        name: "title",
+        type: "string",
+        defaultValue: "Top Stocks Today",
+        required: false,
+      },
+      {
+        name: "maxStocks",
+        type: "number",
+        defaultValue: 10,
+        required: false,
+      },
+      {
+        name: "showSentiment",
+        type: "boolean",
+        defaultValue: true,
+        required: false,
+      },
+      {
+        name: "showVolume",
+        type: "boolean",
+        defaultValue: true,
+        required: false,
+      },
+      {
+        name: "autoRefresh",
+        type: "boolean",
+        defaultValue: true,
+        required: false,
+      },
+    ],
+    canHaveChildren: false,
+  },
+  {
+    component: FinanceNewsFeed,
+    name: "FinanceNewsFeed",
+    inputs: [
+      {
+        name: "title",
+        type: "string",
+        defaultValue: "Smart News Feed",
+        required: false,
+      },
+      {
+        name: "maxArticles",
+        type: "number",
+        defaultValue: 5,
+        required: false,
+      },
+      {
+        name: "showSentiment",
+        type: "boolean",
+        defaultValue: true,
+        required: false,
+      },
+      {
+        name: "showSummary",
+        type: "boolean",
+        defaultValue: true,
+        required: false,
+      },
+      {
+        name: "autoRefresh",
+        type: "boolean",
+        defaultValue: true,
+        required: false,
+      },
+      {
+        name: "categories",
+        type: "string",
+        defaultValue: "finance,technology,economy",
+        required: false,
+      },
+    ],
+    canHaveChildren: false,
+  },
+  {
+    component: FinanceTrendingTopics,
+    name: "FinanceTrendingTopics",
+    inputs: [
+      {
+        name: "title",
+        type: "string",
+        defaultValue: "Trending Topics",
+        required: false,
+      },
+      {
+        name: "maxTopics",
+        type: "number",
+        defaultValue: 5,
+        required: false,
+      },
+      {
+        name: "showVolume",
+        type: "boolean",
+        defaultValue: true,
+        required: false,
+      },
+      {
+        name: "autoRefresh",
+        type: "boolean",
+        defaultValue: true,
+        required: false,
+      },
+      {
+        name: "platforms",
+        type: "string",
+        defaultValue: "reddit,twitter,discord",
+        required: false,
+      },
+    ],
+    canHaveChildren: false,
+  },
+  {
+    component: FinanceMoodChart,
+    name: "FinanceMoodChart",
+    inputs: [
+      {
+        name: "title",
+        type: "string",
+        defaultValue: "7-Day Mood Trend",
+        required: false,
+      },
+      {
+        name: "timeframe",
+        type: "string",
+        enum: ["1D", "7D", "30D", "1Y"],
+        defaultValue: "7D",
+        required: false,
+      },
+      {
+        name: "height",
+        type: "number",
+        defaultValue: 250,
+        required: false,
+      },
+      {
+        name: "showControls",
+        type: "boolean",
+        defaultValue: true,
+        required: false,
+      },
+      {
+        name: "showLegend",
         type: "boolean",
         defaultValue: true,
         required: false,

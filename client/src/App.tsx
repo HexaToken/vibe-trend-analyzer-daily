@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { MoodThemeProvider } from "@/contexts/MoodThemeContext";
 import { Navigation } from "@/components/Navigation";
 import { Dashboard } from "@/components/Dashboard";
 import { SentimentDashboard } from "@/components/SentimentDashboard";
@@ -28,6 +29,10 @@ import { FinnhubDemo } from "@/components/FinnhubDemo";
 import { StockSentimentScoring } from "@/components/StockSentimentScoring";
 import { AiSentimentExplainer } from "@/components/AiSentimentExplainer";
 import { YFinanceDemo } from "@/components/YFinanceDemo";
+import { MoodThemeDemo } from "@/components/MoodThemeDemo";
+
+import { BuilderFinanceDemo } from "@/components/BuilderFinanceDemo";
+import { FuturisticHomepage } from "@/components/FuturisticHomepage";
 
 const queryClient = new QueryClient();
 
@@ -71,8 +76,15 @@ const App = () => {
         return <StockSentimentScoring />;
       case "ai-analysis":
         return <AiSentimentExplainer />;
-      case "yfinance":
+            case "yfinance":
         return <YFinanceDemo />;
+            case "theme-demo":
+        return <MoodThemeDemo />;
+            
+            case "builder-finance":
+        return <BuilderFinanceDemo />;
+      case "futuristic-home":
+        return <FuturisticHomepage />;
       case "moorMeter":
         return <MoorMeterDashboard />;
 
@@ -81,22 +93,24 @@ const App = () => {
     }
   };
 
-  return (
+    return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <div className="min-h-screen bg-background">
-            <Navigation
-              activeSection={activeSection}
-              onSectionChange={setActiveSection}
-            />
-            <main>{renderContent()}</main>
-            <ApiStatusIndicator />
-            <AiChatBubble />
-          </div>
-        </TooltipProvider>
+        <MoodThemeProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <div className="min-h-screen bg-background transition-all duration-500">
+              <Navigation
+                activeSection={activeSection}
+                onSectionChange={setActiveSection}
+              />
+              <main>{renderContent()}</main>
+              <ApiStatusIndicator />
+              <AiChatBubble />
+            </div>
+          </TooltipProvider>
+        </MoodThemeProvider>
       </AuthProvider>
     </QueryClientProvider>
   );
