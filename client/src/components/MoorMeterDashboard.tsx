@@ -252,16 +252,18 @@ export const MoorMeterDashboard: React.FC = memo(() => {
     },
   ];
 
-  // Mock historical mood data for the chart
-  const historicalMood = Array.from({ length: 7 }, (_, i) => ({
-    date: new Date(
-      Date.now() - (6 - i) * 24 * 60 * 60 * 1000,
-    ).toLocaleDateString("en-US", { month: "short", day: "numeric" }),
-    score: 45 + Math.random() * 30,
-    stocks: 40 + Math.random() * 35,
-    news: 35 + Math.random() * 40,
-    social: 50 + Math.random() * 25,
-  }));
+    // Mock historical mood data for the chart (memoized)
+  const historicalMood = useMemo(() =>
+    Array.from({ length: 7 }, (_, i) => ({
+      date: new Date(
+        Date.now() - (6 - i) * 24 * 60 * 60 * 1000,
+      ).toLocaleDateString("en-US", { month: "short", day: "numeric" }),
+      score: 45 + Math.random() * 30,
+      stocks: 40 + Math.random() * 35,
+      news: 35 + Math.random() * 40,
+      social: 50 + Math.random() * 25,
+    })), []
+  );
 
   // Navigation items
   const navItems = [
