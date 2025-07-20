@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo, useMemo, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { TrendingTicker } from "./TrendingTicker";
 import { Button } from "./ui/button";
@@ -106,7 +106,7 @@ interface CommunityMessage {
   platform: "reddit" | "twitter" | "discord";
 }
 
-export const MoorMeterDashboard: React.FC = () => {
+export const MoorMeterDashboard: React.FC = memo(() => {
   console.log("MoorMeterDashboard component rendering...");
   const [darkMode, setDarkMode] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -144,8 +144,8 @@ export const MoorMeterDashboard: React.FC = () => {
   const { tickers: cryptoData = [], loading: cryptoLoading = false } =
     cryptoListingsResult || {};
 
-  // Calculate overall mood score
-  const calculateMoodScore = (): MoodScore => {
+    // Calculate overall mood score with memoization
+  const calculateMoodScore = useCallback((): MoodScore => {
     let stocksScore = stockSentiment?.score || 50;
     let newsScore = 45 + Math.random() * 20; // Mock for now
     let socialScore = 55 + Math.random() * 15; // Mock for now
@@ -162,7 +162,7 @@ export const MoorMeterDashboard: React.FC = () => {
       social: socialScore,
       timestamp: new Date(),
     };
-  };
+  }, [stockSentiment?.score]);
 
   const [moodScore, setMoodScore] = useState<MoodScore>(calculateMoodScore());
 
@@ -252,16 +252,18 @@ export const MoorMeterDashboard: React.FC = () => {
     },
   ];
 
-  // Mock historical mood data for the chart
-  const historicalMood = Array.from({ length: 7 }, (_, i) => ({
-    date: new Date(
-      Date.now() - (6 - i) * 24 * 60 * 60 * 1000,
-    ).toLocaleDateString("en-US", { month: "short", day: "numeric" }),
-    score: 45 + Math.random() * 30,
-    stocks: 40 + Math.random() * 35,
-    news: 35 + Math.random() * 40,
-    social: 50 + Math.random() * 25,
-  }));
+    // Mock historical mood data for the chart (memoized)
+  const historicalMood = useMemo(() =>
+    Array.from({ length: 7 }, (_, i) => ({
+      date: new Date(
+        Date.now() - (6 - i) * 24 * 60 * 60 * 1000,
+      ).toLocaleDateString("en-US", { month: "short", day: "numeric" }),
+      score: 45 + Math.random() * 30,
+      stocks: 40 + Math.random() * 35,
+      news: 35 + Math.random() * 40,
+      social: 50 + Math.random() * 25,
+    })), []
+  );
 
   // Navigation items
   const navItems = [
@@ -834,7 +836,7 @@ export const MoorMeterDashboard: React.FC = () => {
         <div className="px-4 py-6 sm:px-0">{renderTabContent()}</div>
       </main>
     </div>
-  );
-};
+    );
+});
 
 export default MoorMeterDashboard;

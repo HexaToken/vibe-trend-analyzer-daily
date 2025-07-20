@@ -1,56 +1,86 @@
-import { useState } from "react";
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import React, { Suspense, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/contexts/AuthContext";
-import { Navigation } from "@/components/Navigation";
-import { Dashboard } from "@/components/Dashboard";
-import { SentimentDashboard } from "@/components/SentimentDashboard";
-import { Analytics } from "@/components/Analytics";
-import { HistoricalData } from "@/components/HistoricalData";
-import { Community } from "@/components/Community";
+import { AppLayout } from "@/components/layouts/AppLayout";
+import { Loading } from "@/components/common/Loading";
+import ErrorBoundary from "@/components/common/ErrorBoundary";
+import { useNavigation, useAppStore } from "@/stores/useAppStore";
+
+// Feature-based lazy imports
+import DashboardFeature from "@/components/features/dashboard/DashboardFeature";
+import SocialFeature from "@/components/features/social/SocialFeature";
+import TradingFeature from "@/components/features/trading/TradingFeature";
+
+// Individual component imports (non-lazy for now to avoid TypeScript issues)
 import { Settings } from "@/components/Settings";
 import { UserProfile } from "@/components/profile/UserProfile";
-import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { DatabaseDemo } from "@/components/DatabaseDemo";
-import { SocialPlatform } from "@/components/social/SocialPlatform";
-import { MoorMeterDashboard } from "@/components/MoorMeterDashboard";
 import { BuilderDemo } from "@/components/BuilderDemo";
-
-import { ApiStatusIndicator } from "@/components/ApiStatusIndicator";
-import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
-
 import { NLPSentimentDemo } from "@/components/NLPSentimentDemo";
 import { SpacyNLPDemo } from "@/components/SpacyNLPDemo";
-import { AiChatBubble } from "@/components/chat/AiChatBubble";
-import { FinnhubDemo } from "@/components/FinnhubDemo";
-import { StockSentimentScoring } from "@/components/StockSentimentScoring";
 import { AiSentimentExplainer } from "@/components/AiSentimentExplainer";
-import { YFinanceDemo } from "@/components/YFinanceDemo";
-import { Channels } from "@/components/social/Channels";
+import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      gcTime: 10 * 60 * 1000, // 10 minutes (gcTime replaces cacheTime in v5)
+      retry: 1,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
-const App = () => {
-  const [activeSection, setActiveSection] = useState("moorMeter");
+const AppContent = () => {
+  const { activeSection } = useNavigation();
+  const { setIsInitializing, updatePerformanceMetrics } = useAppStore();
 
-  // Debug: log current section
-  console.log("Current activeSection:", activeSection);
+  // Track app initialization
+  useEffect(() => {
+    const startTime = performance.now();
+    setIsInitializing(false);
+    
+    const endTime = performance.now();
+    updatePerformanceMetrics({
+      lastRenderTime: endTime - startTime,
+      componentMountCount: 1,
+    });
+    }, []); // Empty dependency array - this should only run once on mount
 
   const renderContent = () => {
-    console.log("Rendering content for section:", activeSection);
     switch (activeSection) {
-      case "sentiment":
-        return <BuilderDemo />;
+      // Dashboard variants
+      case "moorMeter":
+        return <DashboardFeature variant="moorMeter" />;
       case "analytics":
-        return <Analytics />;
+        return <DashboardFeature variant="analytics" />;
       case "history":
-        return <HistoricalData />;
+        return <DashboardFeature variant="historical" />;
+      case "sentiment":
+                return <BuilderDemo />;
+
+      // Social features
       case "community":
-        return <Community />;
+        return <SocialFeature variant="community" />;
+      case "social":
+        return <SocialFeature variant="platform" />;
+      case "channels":
+        return <SocialFeature variant="channels" />;
+
+      // Trading features
+      case "crypto":
+        return <TradingFeature variant="crypto" />;
+      case "finnhub":
+        return <TradingFeature variant="finnhub" />;
+      case "yfinance":
+        return <TradingFeature variant="yfinance" />;
+      case "sentiment-scoring":
+        return <TradingFeature variant="sentiment-scoring" />;
+
+      // Individual features
       case "profile":
-        return (
+                return (
           <ProtectedRoute
             fallbackTitle="Profile Access Required"
             fallbackDescription="Please sign in to view and manage your profile."
@@ -59,54 +89,39 @@ const App = () => {
           </ProtectedRoute>
         );
       case "settings":
-        return <Settings />;
+                return <Settings />;
       case "database":
-        return <DatabaseDemo />;
-      case "social":
-        return <SocialPlatform />;
-      case "crypto":
-        return <CryptoDashboard />;
+                return <DatabaseDemo />;
       case "nlp":
-        return <NLPSentimentDemo />;
+                return <NLPSentimentDemo />;
       case "spacy-nlp":
-        return <SpacyNLPDemo />;
-      case "finnhub":
-        return <FinnhubDemo />;
-      case "sentiment-scoring":
-        return <StockSentimentScoring />;
+                return <SpacyNLPDemo />;
       case "ai-analysis":
-        return <AiSentimentExplainer />;
-            case "yfinance":
-        return <YFinanceDemo />;
-      case "channels":
-        return <Channels />;
-      case "moorMeter":
-        return <MoorMeterDashboard />;
+                return <AiSentimentExplainer />;
 
       default:
-        console.log("Loading MoorMeterDashboard as default");
-        return <MoorMeterDashboard />;
+        return <DashboardFeature variant="moorMeter" />;
     }
   };
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <div className="min-h-screen bg-background">
-            <Navigation
-              activeSection={activeSection}
-              onSectionChange={setActiveSection}
-            />
-            <main>{renderContent()}</main>
-            <ApiStatusIndicator />
-            <AiChatBubble />
-          </div>
-        </TooltipProvider>
-      </AuthProvider>
-    </QueryClientProvider>
+    <AppLayout>
+      <ErrorBoundary level="page">
+        {renderContent()}
+      </ErrorBoundary>
+    </AppLayout>
+  );
+};
+
+const App = () => {
+  return (
+    <ErrorBoundary level="critical">
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <AppContent />
+        </AuthProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 };
 

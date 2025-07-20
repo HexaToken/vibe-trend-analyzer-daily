@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import {
   Home,
   TrendingUp,
@@ -40,7 +40,7 @@ type ViewType =
   | "twitter"
   | "instagram";
 
-export const SocialPlatform = () => {
+export const SocialPlatform = memo(() => {
   const { isAuthenticated, user } = useAuth();
   const [currentView, setCurrentView] = useState<ViewType>("feed");
 
@@ -595,5 +595,5 @@ export const SocialPlatform = () => {
         <div className="lg:col-span-1">{renderTrendingSidebar()}</div>
       </div>
     </div>
-  );
-};
+    );
+});
