@@ -13,17 +13,15 @@ export const PrivateRoomsContainer: React.FC = () => {
   const currentUser: User = mockUsers[0]; // TechBull2024 (premium user)
 
   const handleRoomSelect = (room: PrivateRoom) => {
-    setSelectedRoom(room);
+        setSelectedRoom(room);
     // Here we would navigate to the room chat view
-    console.log("Selected room:", room.name);
   };
 
   const handleCreateRoom = () => {
     setShowCreateModal(true);
   };
 
-  const handleRoomCreated = (roomData: Partial<PrivateRoom>) => {
-    console.log("Creating room:", roomData);
+    const handleRoomCreated = (roomData: Partial<PrivateRoom>) => {
     // Here we would call the API to create the room
     // For now, just close the modal
     setShowCreateModal(false);
