@@ -824,6 +824,8 @@ export const MoorMeterDashboard: React.FC = () => {
                               setActiveToolsSubtab(subtab.key);
                             } else if (item.key === "Community") {
                               setActiveCommunitySubtab(subtab.key);
+                            } else if (item.key === "StockTwist") {
+                              setActiveStockTwistSubtab(subtab.key);
                             }
                             setMobileMenuOpen(false);
                           }}
