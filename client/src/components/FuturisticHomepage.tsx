@@ -527,8 +527,8 @@ export const FuturisticHomepage: React.FC = () => {
             transform: rotate(360deg);
           }
         }
-        .animate-spin-slow {
-          animation: spin-slow 8s linear infinite;
+                .animate-spin-slow {
+          animation: spin-slow 10s linear infinite;
         }
       `}</style>
     </div>
