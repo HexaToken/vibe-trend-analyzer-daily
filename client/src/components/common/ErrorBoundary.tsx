@@ -263,17 +263,17 @@ export function useErrorHandler() {
     
         try {
       const store = useAppStore.getState();
-      updateMetrics({
+            store.updatePerformanceMetrics({
         errorCount: store.performanceMetrics.errorCount + 1,
       });
-    } catch (storeError) {
-      console.warn('Failed to update error metrics in hook:', storeError);
-    }
 
-    addNotification({
-      type: 'error',
-      title: 'An error occurred',
-      message: context || error.message,
-    });
-  }, [updateMetrics, addNotification]);
+      store.addNotification({
+        type: 'error',
+        title: 'An error occurred',
+        message: context || error.message,
+      });
+    } catch (storeError) {
+      console.warn('Failed to handle error:', storeError);
+    }
+  }, []);
 }
