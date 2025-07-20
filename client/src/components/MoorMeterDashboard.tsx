@@ -496,9 +496,13 @@ export const MoorMeterDashboard: React.FC = () => {
               </div>
             )}
 
-            {/* Render content based on active subtab */}
+                        {/* Render content based on active subtab */}
             {activeCommunitySubtab === "Chat" && (
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[calc(100vh-200px)] min-h-[700px] max-h-[calc(100vh-200px)] overflow-hidden">
+              <>
+                {/* Live Trending Ticker */}
+                <TrendingTicker className="mb-4" />
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[calc(100vh-240px)] min-h-[700px] max-h-[calc(100vh-240px)] overflow-hidden">
                 {/* Left Section - Stock Channels (Primary Content 75%) */}
                 <div className="lg:col-span-9 flex flex-col h-full max-h-full overflow-hidden">
                   <Card className="bg-gray-800/50 border-gray-700/50 flex flex-col h-full max-h-full overflow-hidden">
