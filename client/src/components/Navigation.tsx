@@ -140,6 +140,23 @@ export const Navigation = () => {
               </div>
             </div>
 
+                        {/* Search Bar - Desktop */}
+            <div className="hidden md:flex items-center flex-1 max-w-md mx-8">
+              <div className="relative w-full">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                <Input
+                  type="text"
+                  placeholder="Search stocks, news, topics... (e.g. $TSLA, AI, crypto)"
+                  className="pl-10 w-full bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus:border-blue-500 dark:focus:border-blue-400"
+                />
+                <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
+                  <Badge variant="secondary" className="text-xs">
+                    ⌘K
+                  </Badge>
+                </div>
+              </div>
+            </div>
+
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-1">
               {/* MoorMeter Dashboard */}
