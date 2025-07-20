@@ -50,11 +50,15 @@ class ErrorBoundary extends Component<Props, State> {
       timestamp: new Date().toISOString(),
     });
 
-    // Update performance metrics
-    const updateMetrics = useAppStore.getState().updatePerformanceMetrics;
-    updateMetrics({
-      errorCount: useAppStore.getState().performanceMetrics.errorCount + 1,
-    });
+        // Update performance metrics
+    try {
+      const store = useAppStore.getState();
+      store.updatePerformanceMetrics({
+        errorCount: store.performanceMetrics.errorCount + 1,
+      });
+    } catch (storeError) {
+      console.warn('Failed to update error metrics:', storeError);
+    }
 
     // Report to external service (if available)
     this.reportError(error, errorInfo);
@@ -94,10 +98,15 @@ class ErrorBoundary extends Component<Props, State> {
     window.location.reload();
   };
 
-  private handleGoHome = () => {
-    const setActiveSection = useAppStore.getState().setActiveSection;
-    setActiveSection('moorMeter');
-    this.handleRetry();
+    private handleGoHome = () => {
+    try {
+      const store = useAppStore.getState();
+      store.setActiveSection('moorMeter');
+      this.handleRetry();
+    } catch (storeError) {
+      console.warn('Failed to navigate home:', storeError);
+      this.handleRetry();
+    }
   };
 
   render() {
@@ -254,9 +263,14 @@ export function useErrorHandler() {
   return React.useCallback((error: Error, context?: string) => {
     console.error('Manual error handled:', error, context);
     
-    updateMetrics({
-      errorCount: useAppStore.getState().performanceMetrics.errorCount + 1,
-    });
+        try {
+      const store = useAppStore.getState();
+      updateMetrics({
+        errorCount: store.performanceMetrics.errorCount + 1,
+      });
+    } catch (storeError) {
+      console.warn('Failed to update error metrics in hook:', storeError);
+    }
 
     addNotification({
       type: 'error',
