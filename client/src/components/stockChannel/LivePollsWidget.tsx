@@ -40,7 +40,7 @@ export const LivePollsWidget: React.FC<LivePollsWidgetProps> = ({
 
   return (
     <Card
-      className={`bg-gradient-to-br from-violet-900/50 to-purple-900/50 border-violet-500/20 hover:border-violet-400/40 transition-all duration-300 overflow-hidden w-full max-w-full ${className || ""}`}
+      className={`bg-gradient-to-br from-violet-900/50 to-purple-900/50 border-violet-500/20 hover:border-violet-400/40 transition-all duration-300 overflow-hidden w-full max-w-full rounded-xl ${className || ""}`}
     >
       <CardHeader className="pb-3">
         <CardTitle className="text-white flex items-center gap-2 text-lg font-bold">
@@ -51,7 +51,7 @@ export const LivePollsWidget: React.FC<LivePollsWidgetProps> = ({
           <span className="text-sm">⏳ Expires in {timeRemaining}</span>
         </div>
       </CardHeader>
-      <CardContent className="space-y-4 overflow-hidden">
+      <CardContent className="space-y-3 overflow-y-auto max-h-[200px] p-4">
         <div className="space-y-3">
           <h4 className="text-white font-semibold text-base">
             Which ticker will moon today? 🚀
@@ -82,10 +82,10 @@ export const LivePollsWidget: React.FC<LivePollsWidgetProps> = ({
                     )}
                   </div>
                   <div className="flex items-center gap-2 text-violet-200 overflow-hidden">
-                    <span className="whitespace-nowrap">
+                    <span className="whitespace-nowrap text-xs">
                       {option.percentage.toFixed(2)}%
                     </span>
-                    <span className="text-xs truncate">
+                    <span className="text-[10px] truncate">
                       ({option.votes.toLocaleString()})
                     </span>
                   </div>
