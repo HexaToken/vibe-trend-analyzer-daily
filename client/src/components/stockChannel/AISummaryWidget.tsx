@@ -80,7 +80,7 @@ export const AISummaryWidget: React.FC<AISummaryWidgetProps> = ({
 
   return (
     <Card
-      className={`bg-gradient-to-br ${getSentimentColor(sentiment.percentage)}/20 border-blue-500/20 hover:border-blue-400/40 transition-all duration-300 overflow-hidden ${className}`}
+      className={`bg-gradient-to-br ${getSentimentColor(sentiment.percentage)}/20 border-blue-500/20 hover:border-blue-400/40 transition-all duration-300 overflow-hidden w-full max-w-full ${className || ""}`}
     >
       <CardHeader className="pb-3">
         <CardTitle className="text-white flex items-center gap-2 text-lg font-bold">
