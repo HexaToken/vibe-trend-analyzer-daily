@@ -12,14 +12,14 @@ import SocialFeature from "@/components/features/social/SocialFeature";
 import TradingFeature from "@/components/features/trading/TradingFeature";
 
 // Individual component lazy imports
-const Settings = React.lazy(() => import("@/components/Settings").then(module => ({ default: module.Settings || module.default })));
-const UserProfile = React.lazy(() => import("@/components/profile/UserProfile").then(module => ({ default: module.UserProfile || module.default })));
-const DatabaseDemo = React.lazy(() => import("@/components/DatabaseDemo").then(module => ({ default: module.DatabaseDemo || module.default })));
-const BuilderDemo = React.lazy(() => import("@/components/BuilderDemo").then(module => ({ default: module.BuilderDemo || module.default })));
-const NLPSentimentDemo = React.lazy(() => import("@/components/NLPSentimentDemo").then(module => ({ default: module.NLPSentimentDemo || module.default })));
-const SpacyNLPDemo = React.lazy(() => import("@/components/SpacyNLPDemo").then(module => ({ default: module.SpacyNLPDemo || module.default })));
-const AiSentimentExplainer = React.lazy(() => import("@/components/AiSentimentExplainer").then(module => ({ default: module.AiSentimentExplainer || module.default })));
-const ProtectedRoute = React.lazy(() => import("@/components/auth/ProtectedRoute").then(module => ({ default: module.ProtectedRoute || module.default })));
+const Settings = React.lazy(() => import("@/components/Settings").then(module => ({ default: (module as any).Settings || module.default })));
+const UserProfile = React.lazy(() => import("@/components/profile/UserProfile").then(module => ({ default: (module as any).UserProfile || module.default })));
+const DatabaseDemo = React.lazy(() => import("@/components/DatabaseDemo").then(module => ({ default: (module as any).DatabaseDemo || module.default })));
+const BuilderDemo = React.lazy(() => import("@/components/BuilderDemo").then(module => ({ default: (module as any).BuilderDemo || module.default })));
+const NLPSentimentDemo = React.lazy(() => import("@/components/NLPSentimentDemo").then(module => ({ default: (module as any).NLPSentimentDemo || module.default })));
+const SpacyNLPDemo = React.lazy(() => import("@/components/SpacyNLPDemo").then(module => ({ default: (module as any).SpacyNLPDemo || module.default })));
+const AiSentimentExplainer = React.lazy(() => import("@/components/AiSentimentExplainer").then(module => ({ default: (module as any).AiSentimentExplainer || module.default })));
+const ProtectedRoute = React.lazy(() => import("@/components/auth/ProtectedRoute").then(module => ({ default: (module as any).ProtectedRoute || module.default })));
 
 const queryClient = new QueryClient({
   defaultOptions: {
