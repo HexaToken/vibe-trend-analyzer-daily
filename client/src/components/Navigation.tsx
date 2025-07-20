@@ -29,9 +29,7 @@ import {
 import {
   ChevronDown,
   Database,
-  BarChart3 as Analytics,
-  Users2,
-  UserPlus,
+    Users2,
   Coins,
   Globe,
 } from "lucide-react";
