@@ -202,10 +202,9 @@ export const SocialPlatform = memo(() => {
                       const { resetCoinMarketCapCircuitBreaker } = await import(
                         "../../services/coinMarketCapApi"
                       );
-                      resetCoinMarketCapCircuitBreaker();
+                                            resetCoinMarketCapCircuitBreaker();
                       console.log("Manual circuit breaker reset completed");
-                      // Force refresh of crypto data
-                      setTimeout(() => window.location.reload(), 500);
+                      // Note: Removed page reload to prevent infinite refresh loops
                     } catch (e) {
                       console.error("Failed to reset circuit breaker:", e);
                     }
