@@ -461,9 +461,7 @@ export const MoorMeterDashboard: React.FC = () => {
                       selectedCategory === "Crypto"
                         ? "Search crypto, $BTC, $ETH..."
                         : activeCommunitySubtab === "Chat"
-                          ? "Search messages, tickers..."
-                          : activeCommunitySubtab === "Rooms"
-                            ? "Search posts, chat rooms..."
+                                                    ? "Search messages, tickers..."
                             : "Search community..."
                     }
                     className="pl-10 w-64"
