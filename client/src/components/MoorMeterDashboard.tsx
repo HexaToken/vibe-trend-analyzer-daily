@@ -591,6 +591,9 @@ export const MoorMeterDashboard: React.FC = () => {
             {activeCommunitySubtab === "OffTopic" && <OffTopicLounge />}
 
             {activeCommunitySubtab === "Rooms" && <CommunityForum />}
+            {activeCommunitySubtab === "PrivateRoom" && (
+              <div>Private Room Component Coming Soon...</div>
+            )}
           </div>
         );
 
