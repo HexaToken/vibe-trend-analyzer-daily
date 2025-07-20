@@ -39,7 +39,7 @@ import {
 interface Room {
   id: string;
   name: string;
-  type: "private" | "stocktwist";
+  type: "private";
   tickers: string[];
   memberCount: number;
   description?: string;
@@ -111,10 +111,7 @@ export const RoomChatView: React.FC<RoomChatViewProps> = ({
     const mockMessages: Message[] = [
       {
         id: "msg-1",
-        content:
-          room.type === "stocktwist"
-            ? "Buy $NVDA at $875 / Target $950 / SL $820 📈 AI earnings season looking strong!"
-            : `Just added more $${room.tickers[0]} to my position. The fundamentals are solid and I see strong upside potential.`,
+        content: `Just added more $${room.tickers[0]} to my position. The fundamentals are solid and I see strong upside potential.`,
         sentiment: "bullish",
         timestamp: new Date(Date.now() - 5 * 60 * 1000),
         user: {
@@ -138,24 +135,12 @@ export const RoomChatView: React.FC<RoomChatViewProps> = ({
             replies: [],
           },
         ],
-        isTradeIdea: room.type === "stocktwist",
-        tradeData:
-          room.type === "stocktwist"
-            ? {
-                ticker: "NVDA",
-                action: "buy",
-                entryPrice: 875,
-                targetPrice: 950,
-                stopLoss: 820,
-              }
-            : undefined,
+        isTradeIdea: false,
+        tradeData: undefined,
       },
       {
         id: "msg-2",
-        content:
-          room.type === "stocktwist"
-            ? "Sell $SPY at $425 / Target $410 / SL $430 📉 Fed meeting concerns"
-            : `Market volatility is creating some interesting opportunities. What do you all think about ${room.tickers[1] || room.tickers[0]}?`,
+        content: `Market volatility is creating some interesting opportunities. What do you all think about ${room.tickers[1] || room.tickers[0]}?`,
         sentiment: "bearish",
         timestamp: new Date(Date.now() - 15 * 60 * 1000),
         user: {
@@ -165,17 +150,8 @@ export const RoomChatView: React.FC<RoomChatViewProps> = ({
         },
         reactions: { risky: 8, smart: 2 },
         replies: [],
-        isTradeIdea: room.type === "stocktwist",
-        tradeData:
-          room.type === "stocktwist"
-            ? {
-                ticker: "SPY",
-                action: "sell",
-                entryPrice: 425,
-                targetPrice: 410,
-                stopLoss: 430,
-              }
-            : undefined,
+        isTradeIdea: false,
+        tradeData: undefined,
       },
     ];
 
@@ -185,9 +161,7 @@ export const RoomChatView: React.FC<RoomChatViewProps> = ({
   const handleSendMessage = () => {
     if (!newMessage.trim()) return;
 
-    const isTradeIdea =
-      room.type === "stocktwist" &&
-      /((buy|sell)\s+\$[A-Z]{1,5}\s+at\s+\$?\d+)/i.test(newMessage);
+    const isTradeIdea = false;
 
     let tradeData;
     if (isTradeIdea) {
@@ -562,13 +536,6 @@ export const RoomChatView: React.FC<RoomChatViewProps> = ({
               </div>
             </div>
           </div>
-
-          {room.type === "stocktwist" && (
-            <Badge className="bg-yellow-500 text-black">
-              <Star className="w-3 h-3 mr-1" />
-              Premium Room
-            </Badge>
-          )}
         </div>
       </div>
 
@@ -610,11 +577,7 @@ export const RoomChatView: React.FC<RoomChatViewProps> = ({
             <Textarea
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
-              placeholder={
-                room.type === "stocktwist"
-                  ? "Buy/Sell $TICKER at $PRICE / Target $X / SL $X"
-                  : "Share your thoughts..."
-              }
+              placeholder="Share your thoughts..."
               className="min-h-[60px] resize-none"
               onKeyDown={(e) => {
                 if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
