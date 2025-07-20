@@ -834,7 +834,7 @@ export const MoorMeterDashboard: React.FC = memo(() => {
         <div className="px-4 py-6 sm:px-0">{renderTabContent()}</div>
       </main>
     </div>
-  );
-};
+    );
+});
 
 export default MoorMeterDashboard;
