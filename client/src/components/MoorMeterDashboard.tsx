@@ -637,9 +637,7 @@ export const MoorMeterDashboard: React.FC = () => {
 
             {/* StockTwist Content */}
             {activeStockTwistSubtab === "TradeIdeas" && <StockTwistRoom />}
-            {activeStockTwistSubtab === "SocialRoom" && (
-              <div>Social Room Component Coming Soon...</div>
-            )}
+            {activeStockTwistSubtab === "SocialRoom" && <SocialRoom />}
           </div>
         );
 
