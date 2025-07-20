@@ -1,16 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Badge } from "../ui/badge";
-import { Button } from "../ui/button";
-import {
-  MessageCircle,
-  TrendingUp,
-  TrendingDown,
-  Activity,
-  Filter,
-  BarChart3,
-  Eye,
-} from "lucide-react";
+import { TrendingUp, TrendingDown, Activity } from "lucide-react";
 
 interface DiscussedStock {
   id: string;
@@ -94,11 +84,6 @@ export const TopDiscussedWidget: React.FC<TopDiscussedWidgetProps> = ({
       changeFromPrevious: -2,
     },
   ]);
-
-  const [sortBy, setSortBy] = useState<"mentions" | "sentiment" | "price">(
-    "mentions",
-  );
-  const [timeframe, setTimeframe] = useState<"1h" | "4h" | "24h">("4h");
 
   // Simulate real-time updates
   useEffect(() => {
