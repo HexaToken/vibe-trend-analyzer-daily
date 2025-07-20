@@ -126,9 +126,9 @@ export const AISummaryWidget: React.FC<AISummaryWidgetProps> = ({
               ) : (
                 <TrendingDown className="w-4 h-4" />
               )}
-              <span>
+              <span className="whitespace-nowrap">
                 {sentiment.change > 0 ? "+" : ""}
-                {sentiment.change.toFixed(1)}% from yesterday
+                {sentiment.change.toFixed(2)}% from yesterday
               </span>
             </div>
           </div>
