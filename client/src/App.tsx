@@ -32,6 +32,7 @@ import { YFinanceDemo } from "@/components/YFinanceDemo";
 import { MoodThemeDemo } from "@/components/MoodThemeDemo";
 import { LuxuryHomepage } from "@/components/LuxuryHomepage";
 import { LuxuryExperience } from "@/components/LuxuryExperience";
+import { FinanceHomepage } from "@/components/FinanceHomepage";
 
 const queryClient = new QueryClient();
 
@@ -85,8 +86,10 @@ const App = () => {
         return <MoodThemeDemo />;
             case "luxury-home":
         return <LuxuryHomepage />;
-      case "luxury-experience":
+            case "luxury-experience":
         return <LuxuryExperience />;
+      case "finance-home":
+        return <FinanceHomepage />;
       case "moorMeter":
         return <MoorMeterDashboard />;
 
