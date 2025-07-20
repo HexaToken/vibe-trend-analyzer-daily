@@ -547,7 +547,7 @@ export const MoorMeterDashboard: React.FC = () => {
                 </div>
 
                 {/* Right Sidebar - Enhanced Widgets (20%) */}
-                <div className="lg:col-span-2 h-full max-h-full flex flex-col overflow-hidden">
+                <div className="lg:col-span-3 h-full max-h-full flex flex-col overflow-hidden">
                   <div className="space-y-6 overflow-y-auto flex-1 min-h-0 max-h-full pr-2 overflow-x-hidden w-full">
                     {/* Sentiment Zone */}
                     <div className="space-y-4">
