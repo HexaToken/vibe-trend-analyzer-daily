@@ -1,109 +1,153 @@
-import { useState } from "react";
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import React, { Suspense, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/contexts/AuthContext";
-import { Navigation } from "@/components/Navigation";
-import { Dashboard } from "@/components/Dashboard";
-import { SentimentDashboard } from "@/components/SentimentDashboard";
-import { Analytics } from "@/components/Analytics";
-import { HistoricalData } from "@/components/HistoricalData";
-import { Community } from "@/components/Community";
-import { Settings } from "@/components/Settings";
-import { UserProfile } from "@/components/profile/UserProfile";
-import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
-import { DatabaseDemo } from "@/components/DatabaseDemo";
-import { SocialPlatform } from "@/components/social/SocialPlatform";
-import { MoorMeterDashboard } from "@/components/MoorMeterDashboard";
-import { BuilderDemo } from "@/components/BuilderDemo";
+import { AppLayout } from "@/components/layouts/AppLayout";
+import { Loading } from "@/components/common/Loading";
+import ErrorBoundary from "@/components/common/ErrorBoundary";
+import { useNavigation, useAppStore } from "@/stores/useAppStore";
 
-import { ApiStatusIndicator } from "@/components/ApiStatusIndicator";
-import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
+// Feature-based lazy imports
+import DashboardFeature from "@/components/features/dashboard/DashboardFeature";
+import SocialFeature from "@/components/features/social/SocialFeature";
+import TradingFeature from "@/components/features/trading/TradingFeature";
 
-import { NLPSentimentDemo } from "@/components/NLPSentimentDemo";
-import { SpacyNLPDemo } from "@/components/SpacyNLPDemo";
-import { AiChatBubble } from "@/components/chat/AiChatBubble";
-import { FinnhubDemo } from "@/components/FinnhubDemo";
-import { StockSentimentScoring } from "@/components/StockSentimentScoring";
-import { AiSentimentExplainer } from "@/components/AiSentimentExplainer";
-import { YFinanceDemo } from "@/components/YFinanceDemo";
-import { Channels } from "@/components/social/Channels";
+// Individual component lazy imports
+const Settings = React.lazy(() => import("@/components/Settings"));
+const UserProfile = React.lazy(() => import("@/components/profile/UserProfile"));
+const DatabaseDemo = React.lazy(() => import("@/components/DatabaseDemo"));
+const BuilderDemo = React.lazy(() => import("@/components/BuilderDemo"));
+const NLPSentimentDemo = React.lazy(() => import("@/components/NLPSentimentDemo"));
+const SpacyNLPDemo = React.lazy(() => import("@/components/SpacyNLPDemo"));
+const AiSentimentExplainer = React.lazy(() => import("@/components/AiSentimentExplainer"));
+const ProtectedRoute = React.lazy(() => import("@/components/auth/ProtectedRoute"));
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      cacheTime: 10 * 60 * 1000, // 10 minutes
+      retry: 1,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
-const App = () => {
-  const [activeSection, setActiveSection] = useState("moorMeter");
+const AppContent = () => {
+  const { activeSection } = useNavigation();
+  const { setIsInitializing, updatePerformanceMetrics } = useAppStore();
 
-  
+  // Track app initialization
+  useEffect(() => {
+    const startTime = performance.now();
+    setIsInitializing(false);
+    
+    const endTime = performance.now();
+    updatePerformanceMetrics({
+      lastRenderTime: endTime - startTime,
+      componentMountCount: 1,
+    });
+  }, [setIsInitializing, updatePerformanceMetrics]);
 
-    const renderContent = () => {
+  const renderContent = () => {
     switch (activeSection) {
-      case "sentiment":
-        return <BuilderDemo />;
+      // Dashboard variants
+      case "moorMeter":
+        return <DashboardFeature variant="moorMeter" />;
       case "analytics":
-        return <Analytics />;
+        return <DashboardFeature variant="analytics" />;
       case "history":
-        return <HistoricalData />;
+        return <DashboardFeature variant="historical" />;
+      case "sentiment":
+        return (
+          <Suspense fallback={<Loading size="lg" text="Loading Builder demo..." />}>
+            <BuilderDemo />
+          </Suspense>
+        );
+
+      // Social features
       case "community":
-        return <Community />;
+        return <SocialFeature variant="community" />;
+      case "social":
+        return <SocialFeature variant="platform" />;
+      case "channels":
+        return <SocialFeature variant="channels" />;
+
+      // Trading features
+      case "crypto":
+        return <TradingFeature variant="crypto" />;
+      case "finnhub":
+        return <TradingFeature variant="finnhub" />;
+      case "yfinance":
+        return <TradingFeature variant="yfinance" />;
+      case "sentiment-scoring":
+        return <TradingFeature variant="sentiment-scoring" />;
+
+      // Individual features
       case "profile":
         return (
-          <ProtectedRoute
-            fallbackTitle="Profile Access Required"
-            fallbackDescription="Please sign in to view and manage your profile."
-          >
-            <UserProfile />
-          </ProtectedRoute>
+          <Suspense fallback={<Loading size="lg" text="Loading profile..." />}>
+            <ProtectedRoute
+              fallbackTitle="Profile Access Required"
+              fallbackDescription="Please sign in to view and manage your profile."
+            >
+              <UserProfile />
+            </ProtectedRoute>
+          </Suspense>
         );
       case "settings":
-        return <Settings />;
+        return (
+          <Suspense fallback={<Loading size="lg" text="Loading settings..." />}>
+            <Settings />
+          </Suspense>
+        );
       case "database":
-        return <DatabaseDemo />;
-      case "social":
-        return <SocialPlatform />;
-      case "crypto":
-        return <CryptoDashboard />;
+        return (
+          <Suspense fallback={<Loading size="lg" text="Loading database demo..." />}>
+            <DatabaseDemo />
+          </Suspense>
+        );
       case "nlp":
-        return <NLPSentimentDemo />;
+        return (
+          <Suspense fallback={<Loading size="lg" text="Loading NLP demo..." />}>
+            <NLPSentimentDemo />
+          </Suspense>
+        );
       case "spacy-nlp":
-        return <SpacyNLPDemo />;
-      case "finnhub":
-        return <FinnhubDemo />;
-      case "sentiment-scoring":
-        return <StockSentimentScoring />;
+        return (
+          <Suspense fallback={<Loading size="lg" text="Loading Spacy NLP..." />}>
+            <SpacyNLPDemo />
+          </Suspense>
+        );
       case "ai-analysis":
-        return <AiSentimentExplainer />;
-            case "yfinance":
-        return <YFinanceDemo />;
-      case "channels":
-        return <Channels />;
-      case "moorMeter":
-        return <MoorMeterDashboard />;
+        return (
+          <Suspense fallback={<Loading size="lg" text="Loading AI analysis..." />}>
+            <AiSentimentExplainer />
+          </Suspense>
+        );
 
-            default:
-        return <MoorMeterDashboard />;
+      default:
+        return <DashboardFeature variant="moorMeter" />;
     }
   };
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <div className="min-h-screen bg-background">
-            <Navigation
-              activeSection={activeSection}
-              onSectionChange={setActiveSection}
-            />
-            <main>{renderContent()}</main>
-            <ApiStatusIndicator />
-            <AiChatBubble />
-          </div>
-        </TooltipProvider>
-      </AuthProvider>
-    </QueryClientProvider>
+    <AppLayout>
+      <ErrorBoundary level="page">
+        {renderContent()}
+      </ErrorBoundary>
+    </AppLayout>
+  );
+};
+
+const App = () => {
+  return (
+    <ErrorBoundary level="critical">
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <AppContent />
+        </AuthProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 };
 
