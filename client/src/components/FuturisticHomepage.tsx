@@ -11,24 +11,12 @@ import {
   ArrowUp,
   ArrowDown,
   BarChart3,
-  Users,
-  Globe,
   Bell,
   Settings,
-  User,
-  ChevronDown,
-  Activity,
-  Zap,
   Brain,
-  Eye,
-  Palette,
-  Sun,
   Moon,
   Plus,
-  ExternalLink,
-  MessageCircle,
-  Star,
-  Fire
+  Flame
 } from 'lucide-react';
 import { useMoodTheme } from '../contexts/MoodThemeContext';
 import { cn } from '../lib/utils';
