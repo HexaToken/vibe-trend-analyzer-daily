@@ -1,8 +1,8 @@
-# 🔐 Private Watchlist Rooms Feature + StockTwist Room Integration
+# 🔐 Private Watchlist Rooms Feature
 
 ## 🎯 Overview
 
-A comprehensive private room system allowing users to create invite-only discussion channels tied to their personal watchlist, plus a shared StockTwist Room for time-sensitive trade idea sharing.
+A comprehensive private room system allowing users to create invite-only discussion channels tied to their personal watchlist.
 
 ## ✨ Features Implemented
 
@@ -40,30 +40,6 @@ A comprehensive private room system allowing users to create invite-only discuss
 - ✅ Real-time price and sentiment updates
 - ✅ AI-generated daily summaries (Premium)
 
-### ⚡ StockTwist Room (Public Shared Room)
-
-#### Trade Idea Sharing
-
-- ✅ Formatted trade posts: `Buy $SOFI at 7.10 / Target 8.20 / SL 6.90 📈`
-- ✅ Cashtag autocompletion
-- ✅ Sentiment tagging (📈/📉)
-- ✅ Confidence scoring (1-5 stars)
-- ✅ Timeframe indicators (day/swing/long)
-
-#### Community Features
-
-- ✅ Specialized reactions: ✅ Like | ⚠️ Risky | 🧠 Smart
-- ✅ Live polls: "Which ticker will move most today?"
-- ✅ Hourly AI-generated summaries
-- ✅ Real-time stats dashboard
-- ✅ Trending tickers display
-
-#### Access Control
-
-- ✅ Verified/Premium users can post
-- ✅ Free users can view and react
-- ✅ Anti-spam measures
-
 ### 🛡️ Security & Moderation
 
 #### Anti-Spam Features
@@ -90,7 +66,6 @@ client/src/components/rooms/
 ├── PrivateRooms.tsx          # Main private rooms interface
 ├── CreateRoomModal.tsx       # Room creation flow
 ├── PrivateRoomChat.tsx       # Chat interface with trade ideas
-├── StockTwistRoom.tsx        # Public trade sharing room
 ├── RoomSettingsModal.tsx     # Room management settings
 └── InviteUsersModal.tsx      # User invitation system
 ```
@@ -108,7 +83,6 @@ client/src/data/roomsMockData.ts # Mock data and utilities
 - `RoomMessage` - Chat messages with trade ideas
 - `TradeIdea` - Structured trade information
 - `UserLimits` - User tier permissions
-- `StockTwistPoll` - Community polls
 
 ## 🎮 User Experience
 
@@ -197,7 +171,6 @@ client/src/data/roomsMockData.ts # Mock data and utilities
 
 - **Private collaboration** on watchlist analysis
 - **Real-time insights** from community experts
-- **Structured trade sharing** in StockTwist
 - **Professional networking** with verified traders
 
 ### Platform Benefits
