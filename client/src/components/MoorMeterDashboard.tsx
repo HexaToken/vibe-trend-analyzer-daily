@@ -614,6 +614,34 @@ export const MoorMeterDashboard: React.FC = () => {
           </div>
         );
 
+      case "StockTwist":
+        return (
+          <div className="space-y-8">
+            {/* StockTwist Header */}
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                  ⚡{" "}
+                  {activeStockTwistSubtab === "TradeIdeas"
+                    ? "Trade Ideas"
+                    : "Social Room"}
+                </h1>
+                <p className="text-gray-600 dark:text-gray-400">
+                  {activeStockTwistSubtab === "TradeIdeas"
+                    ? "Share real-time trade ideas with cashtags, sentiment tagging, and live polls"
+                    : "Create invite-only watchlist rooms for focused discussions with fellow traders"}
+                </p>
+              </div>
+            </div>
+
+            {/* StockTwist Content */}
+            {activeStockTwistSubtab === "TradeIdeas" && <StockTwistRoom />}
+            {activeStockTwistSubtab === "SocialRoom" && (
+              <div>Social Room Component Coming Soon...</div>
+            )}
+          </div>
+        );
+
       case "Tool":
         return (
           <div className="space-y-8">
