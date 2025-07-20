@@ -11,15 +11,15 @@ import DashboardFeature from "@/components/features/dashboard/DashboardFeature";
 import SocialFeature from "@/components/features/social/SocialFeature";
 import TradingFeature from "@/components/features/trading/TradingFeature";
 
-// Individual component lazy imports
-const Settings = React.lazy(() => import("@/components/Settings").then(module => ({ default: (module as any).Settings || module.default })));
-const UserProfile = React.lazy(() => import("@/components/profile/UserProfile").then(module => ({ default: (module as any).UserProfile || module.default })));
-const DatabaseDemo = React.lazy(() => import("@/components/DatabaseDemo").then(module => ({ default: (module as any).DatabaseDemo || module.default })));
-const BuilderDemo = React.lazy(() => import("@/components/BuilderDemo").then(module => ({ default: (module as any).BuilderDemo || module.default })));
-const NLPSentimentDemo = React.lazy(() => import("@/components/NLPSentimentDemo").then(module => ({ default: (module as any).NLPSentimentDemo || module.default })));
-const SpacyNLPDemo = React.lazy(() => import("@/components/SpacyNLPDemo").then(module => ({ default: (module as any).SpacyNLPDemo || module.default })));
-const AiSentimentExplainer = React.lazy(() => import("@/components/AiSentimentExplainer").then(module => ({ default: (module as any).AiSentimentExplainer || module.default })));
-const ProtectedRoute = React.lazy(() => import("@/components/auth/ProtectedRoute").then(module => ({ default: (module as any).ProtectedRoute || module.default })));
+// Individual component imports (non-lazy for now to avoid TypeScript issues)
+import { Settings } from "@/components/Settings";
+import { UserProfile } from "@/components/profile/UserProfile";
+import { DatabaseDemo } from "@/components/DatabaseDemo";
+import { BuilderDemo } from "@/components/BuilderDemo";
+import { NLPSentimentDemo } from "@/components/NLPSentimentDemo";
+import { SpacyNLPDemo } from "@/components/SpacyNLPDemo";
+import { AiSentimentExplainer } from "@/components/AiSentimentExplainer";
+import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -58,11 +58,7 @@ const AppContent = () => {
       case "history":
         return <DashboardFeature variant="historical" />;
       case "sentiment":
-        return (
-          <Suspense fallback={<Loading size="lg" text="Loading Builder demo..." />}>
-            <BuilderDemo />
-          </Suspense>
-        );
+                return <BuilderDemo />;
 
       // Social features
       case "community":
@@ -84,46 +80,24 @@ const AppContent = () => {
 
       // Individual features
       case "profile":
-        return (
-          <Suspense fallback={<Loading size="lg" text="Loading profile..." />}>
-            <ProtectedRoute
-              fallbackTitle="Profile Access Required"
-              fallbackDescription="Please sign in to view and manage your profile."
-            >
-              <UserProfile />
-            </ProtectedRoute>
-          </Suspense>
+                return (
+          <ProtectedRoute
+            fallbackTitle="Profile Access Required"
+            fallbackDescription="Please sign in to view and manage your profile."
+          >
+            <UserProfile />
+          </ProtectedRoute>
         );
       case "settings":
-        return (
-          <Suspense fallback={<Loading size="lg" text="Loading settings..." />}>
-            <Settings />
-          </Suspense>
-        );
+                return <Settings />;
       case "database":
-        return (
-          <Suspense fallback={<Loading size="lg" text="Loading database demo..." />}>
-            <DatabaseDemo />
-          </Suspense>
-        );
+                return <DatabaseDemo />;
       case "nlp":
-        return (
-          <Suspense fallback={<Loading size="lg" text="Loading NLP demo..." />}>
-            <NLPSentimentDemo />
-          </Suspense>
-        );
+                return <NLPSentimentDemo />;
       case "spacy-nlp":
-        return (
-          <Suspense fallback={<Loading size="lg" text="Loading Spacy NLP..." />}>
-            <SpacyNLPDemo />
-          </Suspense>
-        );
+                return <SpacyNLPDemo />;
       case "ai-analysis":
-        return (
-          <Suspense fallback={<Loading size="lg" text="Loading AI analysis..." />}>
-            <AiSentimentExplainer />
-          </Suspense>
-        );
+                return <AiSentimentExplainer />;
 
       default:
         return <DashboardFeature variant="moorMeter" />;
