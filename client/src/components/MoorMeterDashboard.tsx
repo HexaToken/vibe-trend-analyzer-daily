@@ -515,7 +515,7 @@ export const MoorMeterDashboard: React.FC = () => {
                         />
                       </div>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className="h-auto flex-grow-0">
                       {/* Pinned Post */}
                       <div className="mb-4 p-4 bg-blue-900/20 border border-blue-500/30 rounded-lg">
                         <div className="flex items-center gap-2 mb-2">
