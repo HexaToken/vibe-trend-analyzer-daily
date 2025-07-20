@@ -59,10 +59,10 @@ export const LivePollsWidget: React.FC<LivePollsWidgetProps> = ({
 
           <div className="space-y-3">
             {pollData.map((option) => (
-              <div key={option.ticker} className="space-y-2">
-                <div className="flex justify-between items-center text-sm">
-                  <div className="flex items-center gap-2">
-                    <span className="text-white font-medium">
+              <div key={option.ticker} className="space-y-2 overflow-hidden">
+                <div className="flex justify-between items-center text-sm overflow-hidden">
+                  <div className="flex items-center gap-2 min-w-0 flex-1">
+                    <span className="text-white font-medium whitespace-nowrap">
                       ${option.ticker}
                     </span>
                     {option.change && (
@@ -77,13 +77,15 @@ export const LivePollsWidget: React.FC<LivePollsWidgetProps> = ({
                           <TrendingDown className="w-3 h-3" />
                         )}
                         {option.change > 0 ? "+" : ""}
-                        {option.change}%
+                        {option.change.toFixed(2)}%
                       </span>
                     )}
                   </div>
-                  <div className="flex items-center gap-2 text-violet-200">
-                    <span>{option.percentage}%</span>
-                    <span className="text-xs">
+                  <div className="flex items-center gap-2 text-violet-200 overflow-hidden">
+                    <span className="whitespace-nowrap">
+                      {option.percentage.toFixed(2)}%
+                    </span>
+                    <span className="text-xs truncate">
                       ({option.votes.toLocaleString()})
                     </span>
                   </div>
