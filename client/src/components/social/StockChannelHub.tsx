@@ -265,9 +265,9 @@ export const StockChannelHub: React.FC = () => {
   return (
     <div className="flex h-full bg-white dark:bg-gray-900 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
       {/* Left Sidebar - Stock Channels */}
-      <div className="w-fit pr-[3%] max-w-[220px] bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col">
+      <div className="w-fit pr-[3%] max-w-[220px] bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col min-h-0">
         {/* Sidebar Header */}
-        <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+        <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
             # Stock Channels
           </h2>
@@ -286,7 +286,7 @@ export const StockChannelHub: React.FC = () => {
         </div>
 
         {/* Channels List */}
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto min-h-0">
           <div className="p-2 space-y-1">
             {filteredChannels.map((channel) => (
               <div
@@ -350,11 +350,11 @@ export const StockChannelHub: React.FC = () => {
       </div>
 
       {/* Main Feed - Ticker Chatroom */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col min-h-0">
         {selectedChannel && (
           <>
             {/* Channel Header */}
-            <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
+            <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 flex-shrink-0">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-3">
                   <Hash className="w-6 h-6 text-blue-500" />
@@ -402,7 +402,7 @@ export const StockChannelHub: React.FC = () => {
             </div>
 
             {/* Messages Feed */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0">
               {channelMessages.map((message) => (
                 <div key={message.id} className="space-y-3">
                   {message.isPinned && (
@@ -413,7 +413,7 @@ export const StockChannelHub: React.FC = () => {
                   )}
 
                   <div className="flex gap-3">
-                    <Avatar className="w-10 h-10">
+                    <Avatar className="w-10 h-10 flex-shrink-0">
                       <AvatarImage
                         src={message.avatar}
                         alt={message.username}
@@ -421,8 +421,8 @@ export const StockChannelHub: React.FC = () => {
                       <AvatarFallback>{message.username[0]}</AvatarFallback>
                     </Avatar>
 
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1 flex-wrap">
                         <span className="font-medium text-sm text-gray-900 dark:text-white">
                           {message.username}
                         </span>
@@ -452,7 +452,7 @@ export const StockChannelHub: React.FC = () => {
                         </span>
                       </div>
 
-                      <p className="text-sm text-gray-800 dark:text-gray-200 mb-2">
+                      <p className="text-sm text-gray-800 dark:text-gray-200 mb-2 break-words">
                         {message.content}
                       </p>
 
@@ -490,7 +490,7 @@ export const StockChannelHub: React.FC = () => {
             </div>
 
             {/* Message Input */}
-            <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+            <div className="p-4 border-t border-gray-200 dark:border-gray-700 flex-shrink-0">
               <div className="flex gap-2">
                 <Input
                   placeholder={`Post your idea... Use $${selectedChannel.ticker} to link stocks`}
