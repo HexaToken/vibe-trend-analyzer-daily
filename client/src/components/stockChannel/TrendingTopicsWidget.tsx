@@ -142,7 +142,7 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
 
   return (
     <Card
-      className={`bg-gray-800/50 border-gray-700/50 hover:border-gray-600/70 transition-all duration-300 ${className}`}
+      className={`bg-gray-800/50 border-gray-700/50 hover:border-gray-600/70 transition-all duration-300 overflow-hidden ${className}`}
     >
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
@@ -184,7 +184,7 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
           Most discussed in the last {timeframe}
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="overflow-hidden">
         <div className="space-y-3">
           {topics.map((topic, index) => (
             <div
@@ -202,9 +202,9 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
                     <DollarSign className="w-4 h-4 text-green-400" />
                   )}
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-white font-medium text-sm">
+                    <span className="text-white font-medium text-sm truncate block">
                       {topic.tag}
                     </span>
                     {topic.isRising && (
