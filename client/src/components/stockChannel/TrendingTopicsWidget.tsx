@@ -142,8 +142,8 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
                   )}
                 </div>
                 <div className="flex-1 min-w-0 flex-shrink-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-white font-medium text-sm truncate block">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="text-white font-medium text-sm truncate block flex-shrink-1 min-w-0">
                       {topic.tag}
                     </span>
                     {topic.isRising && (
