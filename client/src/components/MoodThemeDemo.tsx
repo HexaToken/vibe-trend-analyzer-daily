@@ -227,7 +227,7 @@ export const MoodThemeDemo: React.FC = () => {
                 <li>• 😐 Neutral (-10 to +10)</li>
                 <li>• 📉 Bearish (-50 to -11)</li>
                 <li>• 📈 Bullish (+11 to +50)</li>
-                <li>• 🔥 Extreme (>+50 or <-50)</li>
+                <li>• 🔥 Extreme (beyond ±50)</li>
               </ul>
             </div>
           </div>
