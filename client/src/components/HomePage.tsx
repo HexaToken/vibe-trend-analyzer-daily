@@ -694,13 +694,13 @@ export const HomePage: React.FC = () => {
 
   const [moodScore, setMoodScore] = useState<MoodScore>(calculateMoodScore());
 
-  useEffect(() => {
+    useEffect(() => {
     const interval = setInterval(() => {
       setMoodScore(calculateMoodScore());
     }, 30000);
 
     return () => clearInterval(interval);
-  }, [calculateMoodScore]);
+  }, []); // Remove calculateMoodScore dependency to prevent infinite loop
 
   const trendingTopics: TrendingTopic[] = [
     { term: "AI Revolution", sentiment: 85, volume: 12500, source: "reddit", change24h: 12.5, discussion_count: 1247 },
