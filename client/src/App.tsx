@@ -85,12 +85,7 @@ const App = () => {
         return <YFinanceDemo />;
             case "theme-demo":
         return <MoodThemeDemo />;
-            case "luxury-home":
-        return <LuxuryHomepage />;
-            case "luxury-experience":
-        return <LuxuryExperience />;
-            case "finance-home":
-        return <FinanceHomepage />;
+            
       case "builder-finance":
         return <BuilderFinanceDemo />;
       case "moorMeter":
