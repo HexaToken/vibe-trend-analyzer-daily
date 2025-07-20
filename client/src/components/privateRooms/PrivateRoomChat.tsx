@@ -60,6 +60,7 @@ import {
   DollarSign,
   Clock,
   Eye,
+  Lock,
 } from "lucide-react";
 
 import {
