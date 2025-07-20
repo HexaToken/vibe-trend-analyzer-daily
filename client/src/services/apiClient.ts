@@ -103,12 +103,16 @@ class ApiClient {
       }
     }
 
-    // Log error and update metrics
+        // Log error and update metrics
     console.error('API request failed:', { endpoint, error: lastError });
-    const updateMetrics = useAppStore.getState().updatePerformanceMetrics;
-    updateMetrics({
-      errorCount: useAppStore.getState().performanceMetrics.errorCount + 1,
-    });
+    try {
+      const store = useAppStore.getState();
+      store.updatePerformanceMetrics({
+        errorCount: store.performanceMetrics.errorCount + 1,
+      });
+    } catch (storeError) {
+      console.warn('Failed to update metrics:', storeError);
+    }
 
     throw lastError;
   }
