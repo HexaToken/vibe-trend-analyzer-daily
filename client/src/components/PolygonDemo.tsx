@@ -278,13 +278,13 @@ export const PolygonDemo = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="text-center p-4 border rounded-lg">
               <div className="text-2xl font-bold text-green-600">
-                {tickersData?.count || 0}
+                0
               </div>
               <div className="text-sm text-muted-foreground">Stock Tickers Loaded</div>
             </div>
             <div className="text-center p-4 border rounded-lg">
               <div className="text-2xl font-bold text-blue-600">
-                {dividendsData?.count || 0}
+                0
               </div>
               <div className="text-sm text-muted-foreground">Dividends for {selectedTicker}</div>
             </div>
