@@ -413,35 +413,53 @@ export const FuturisticHomepage: React.FC = () => {
               </p>
             </div>
 
-            {/* Tool Subtabs */}
+                        {/* Tool Dropdown Menu */}
             <div className="max-w-7xl mx-auto">
-              <Tabs value={activeToolSubtab} onValueChange={setActiveToolSubtab}>
-                <TabsList className="grid w-full grid-cols-4 bg-black/40 backdrop-blur-xl border border-purple-500/20">
-                  <TabsTrigger
-                    value="Market"
-                    className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-white text-gray-400"
+              <div className="mb-6">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className="w-64 justify-between bg-black/40 backdrop-blur-xl border-purple-500/20 text-white hover:bg-purple-500/20"
+                    >
+                      {activeToolSubtab === "Market" && "📈 Market"}
+                      {activeToolSubtab === "Analysis" && "📊 Analysis"}
+                      {activeToolSubtab === "Scanner" && "🔍 Scanner"}
+                      {activeToolSubtab === "Alerts" && "🔔 Alerts"}
+                      <ChevronDown className="h-4 w-4 opacity-50" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent
+                    className="w-64 bg-black/90 backdrop-blur-xl border-purple-500/30 text-white"
+                    align="start"
                   >
-                    📈 Market
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="Analysis"
-                    className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-white text-gray-400"
-                  >
-                    📊 Analysis
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="Scanner"
-                    className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-white text-gray-400"
-                  >
-                    🔍 Scanner
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="Alerts"
-                    className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-white text-gray-400"
-                  >
-                    🔔 Alerts
-                  </TabsTrigger>
-                </TabsList>
+                    <DropdownMenuItem
+                      onClick={() => setActiveToolSubtab("Market")}
+                      className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer"
+                    >
+                      📈 Market
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => setActiveToolSubtab("Analysis")}
+                      className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer"
+                    >
+                      📊 Analysis
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => setActiveToolSubtab("Scanner")}
+                      className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer"
+                    >
+                      🔍 Scanner
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => setActiveToolSubtab("Alerts")}
+                      className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer"
+                    >
+                      🔔 Alerts
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
 
                                 <TabsContent value="Market" className="mt-6">
                   <div className="space-y-6">
