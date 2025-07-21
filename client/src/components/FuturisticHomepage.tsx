@@ -31,6 +31,7 @@ import { SpaceSwitcherWidget } from './community/SpaceSwitcherWidget';
 import { PrivateRoomsContainer } from './privateRooms/PrivateRoomsContainer';
 import { SentimentHeatMap } from './moorMeter/SentimentHeatMap';
 import { MoodTrendChart } from './moorMeter/MoodTrendChart';
+import { SmartNewsFeed } from './SmartNewsFeed';
 import {
   DropdownMenu,
   DropdownMenuContent,
