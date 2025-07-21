@@ -170,18 +170,7 @@ export const Navigation = ({
                 </Badge>
               </Button>
 
-              {/* MoorMeter Dashboard */}
-              <Button
-                variant={activeSection === "moorMeter" ? "default" : "ghost"}
-                onClick={() => onSectionChange("moorMeter")}
-                className="flex items-center gap-2"
-              >
-                <Brain className="h-4 w-4" />
-                MoorMeter
-                <Badge variant="secondary" className="text-xs">
-                  NEW
-                </Badge>
-              </Button>
+              
 
               {/* Data Dropdown */}
               <DropdownMenu>
