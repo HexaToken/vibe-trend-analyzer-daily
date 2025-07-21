@@ -414,12 +414,7 @@ export const FuturisticHomepage: React.FC = () => {
 
                     
                       
-                        <TabsTrigger
-                          value="HeatMap"
-                          className="data-[state=active]:bg-gray-700/50 data-[state=active]:text-white text-gray-400"
-                        >
-                          📊 Heat Map
-                        </TabsTrigger>
+                        
                         <TabsTrigger
                           value="Analytics"
                           className="data-[state=active]:bg-gray-700/50 data-[state=active]:text-white text-gray-400"
