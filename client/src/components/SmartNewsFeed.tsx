@@ -50,7 +50,8 @@ export const SmartNewsFeed: React.FC<SmartNewsFeedProps> = ({ className }) => {
       sentimentScore: 85,
       isRising: true,
       category: 'Tech',
-      aiAnalysis: 'Strong positive sentiment driven by AI revenue growth across major tech companies. Market confidence is high based on analyst upgrades and increased institutional buying.'
+      aiAnalysis: 'Strong positive sentiment driven by AI revenue growth across major tech companies. Market confidence is high based on analyst upgrades and increased institutional buying.',
+      articleUrl: 'https://example.com/tech-rally-ai-growth'
     },
     {
       id: '2',
