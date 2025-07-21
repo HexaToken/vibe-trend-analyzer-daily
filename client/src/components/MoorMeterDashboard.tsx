@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { Input } from "./ui/input";
 import { Progress } from "./ui/progress";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import {
   DropdownMenu,
@@ -23,26 +23,8 @@ import {
   Zap,
   Globe,
   MessageCircle,
-  BarChart3,
-  Star,
-  Flame,
-  Users,
-  Calendar,
-  Settings,
-  Moon,
-  Sun,
   Menu,
   X,
-  ChevronDown,
-  ChevronUp,
-  ExternalLink,
-  RefreshCw,
-  Target,
-  Activity,
-  Flag,
-  Lock,
-  MessageSquare,
-  Hash,
 } from "lucide-react";
 import { useStockSentiment } from "../hooks/useStockSentiment";
 import { useCombinedBusinessNews } from "../hooks/useCombinedBusinessNews";
@@ -105,10 +87,7 @@ export const MoorMeterDashboard: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTimeframe, setSelectedTimeframe] = useState<"1D" | "7D" | "30D">("7D");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("Home");
-    const [activeToolsSubtab, setActiveToolsSubtab] = useState("Watchlist");
-  const [activeCommunitySubtab, setActiveCommunitySubtab] = useState("Chat");
-  const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false);
+
   const [selectedCategory, setSelectedCategory] = useState<"General" | "Crypto">("General");
 
   const [sentimentTimeframe, setSentimentTimeframe] = useState<"24h" | "7d" | "30d">("24h");
