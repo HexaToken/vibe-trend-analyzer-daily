@@ -323,8 +323,30 @@ export const MoorMeterDashboard: React.FC = () => {
                 </div>
               </TabsContent>
 
-                            <TabsContent value="Space">
-                <SpaceSwitcherWidget />
+                                          <TabsContent value="Space">
+                <div className="space-y-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <Hash className="h-5 w-5 text-purple-400" />
+                        Space Central
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-center py-8">
+                        <div className="text-6xl mb-4">🚀</div>
+                        <h3 className="text-xl font-semibold mb-2">Welcome to Space Central</h3>
+                        <p className="text-muted-foreground mb-4">
+                          A dedicated space for community discussions and interactions.
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          For the full Space experience with crypto channels and off-topic lounge,
+                          visit the Futuristic Homepage → Community → Space.
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
               </TabsContent>
 
               <TabsContent value="Forum">
