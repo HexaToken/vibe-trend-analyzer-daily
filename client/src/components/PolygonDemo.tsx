@@ -101,7 +101,7 @@ export const PolygonDemo = () => {
                         ? "bg-blue-50 border-blue-200"
                         : "hover:bg-gray-50"
                     }`}
-                    onClick={() => setSelectedTicker(ticker.ticker)}
+                    onClick={() => setSelectedTicker((ticker as any).ticker)}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex-1">
