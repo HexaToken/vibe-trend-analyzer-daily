@@ -112,9 +112,7 @@ export const MoorMeterDashboard: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<"General" | "Crypto">("General");
 
   const [sentimentTimeframe, setSentimentTimeframe] = useState<"24h" | "7d" | "30d">("24h");
-  const [sentimentViewMode, setSentimentViewMode] = useState<"absolute" | "net">("absolute");
-  const [heatmapLoading, setHeatmapLoading] = useState(false);
-  const [hoveredCell, setHoveredCell] = useState<{ ticker: string; time: string; data: any } | null>(null);
+  
 
   const { data: stockSentiment, loading: stockLoading } = useStockSentiment();
   const { articles: newsArticles, loading: newsLoading } = useCombinedBusinessNews();
