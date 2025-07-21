@@ -82,6 +82,7 @@ export const FuturisticHomepage: React.FC = () => {
   const [activeFinanceTab, setActiveFinanceTab] = useState("risk-analysis");
   const [selectedFinanceStock, setSelectedFinanceStock] = useState("AAPL");
   const [financeSearchQuery, setFinanceSearchQuery] = useState("");
+  const [mobileFinanceOpen, setMobileFinanceOpen] = useState(false);
   const [selectedTimeframe, setSelectedTimeframe] = useState<"1D" | "7D" | "30D">("7D");
 
   // Core mood data
@@ -506,7 +507,7 @@ export const FuturisticHomepage: React.FC = () => {
                   value="financial-reports"
                   className="data-[state=active]:bg-purple-600/30 data-[state=active]:text-purple-300 text-gray-400 flex items-center gap-2"
                 >
-                  ��� Financial Reports
+                  📁 Financial Reports
                 </TabsTrigger>
               </TabsList>
 
