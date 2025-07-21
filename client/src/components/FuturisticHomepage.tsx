@@ -454,14 +454,7 @@ export const FuturisticHomepage: React.FC = () => {
 
                       <TabsContent value="HeatMap" className="mt-6">
                         <div className="space-y-6">
-                          <div className="mb-6">
-                            <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-                              📊 Market Heat Map
-                            </h3>
-                            <p className="text-gray-400">
-                              Visualize real-time sentiment movements across different stocks and timeframes
-                            </p>
-                          </div>
+                          
 
                           <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-6">
                             <SentimentHeatMap />
