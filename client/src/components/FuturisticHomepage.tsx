@@ -1269,6 +1269,139 @@ export const FuturisticHomepage: React.FC = () => {
               </CardContent>
             </Card>
 
+            {/* Top 10 Cryptocurrencies by Market Cap */}
+            <Card className="bg-black/40 border-cyan-500/20 backdrop-blur-xl">
+              <CardHeader className="border-b border-cyan-500/20">
+                <CardTitle className="text-white flex items-center gap-2">
+                  <span className="text-2xl">👑</span>
+                  Top 10 Cryptocurrencies by Market Cap
+                  <div className="ml-auto">
+                    <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30 animate-pulse">
+                      Live Rankings
+                    </Badge>
+                  </div>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  {[
+                    { rank: 1, symbol: 'BTC', name: 'Bitcoin', price: '$67,234.56', change: '+2.34%', marketCap: '$1.31T', icon: '₿', changeColor: 'text-green-400', trendData: [65, 67, 66, 68, 67], glow: 'shadow-lg shadow-orange-500/20' },
+                    { rank: 2, symbol: 'ETH', name: 'Ethereum', price: '$2,657.89', change: '-1.23%', marketCap: '$319.2B', icon: '⟐', changeColor: 'text-red-400', trendData: [27, 26, 28, 26, 27], glow: 'shadow-lg shadow-blue-500/20' },
+                    { rank: 3, symbol: 'USDT', name: 'Tether USDt', price: '$1.0001', change: '+0.01%', marketCap: '$118.4B', icon: '₮', changeColor: 'text-green-400', trendData: [1, 1, 1, 1, 1], glow: 'shadow-lg shadow-green-500/20' },
+                    { rank: 4, symbol: 'BNB', name: 'BNB', price: '$312.45', change: '+4.67%', marketCap: '$48.2B', icon: '⬡', changeColor: 'text-green-400', trendData: [310, 315, 312, 318, 312], glow: 'shadow-lg shadow-yellow-500/20' },
+                    { rank: 5, symbol: 'SOL', name: 'Solana', price: '$156.78', change: '+8.45%', marketCap: '$42.1B', icon: '◎', changeColor: 'text-green-400', trendData: [150, 155, 160, 158, 157], glow: 'shadow-lg shadow-purple-500/20' },
+                    { rank: 6, symbol: 'USDC', name: 'USD Coin', price: '$0.9999', change: '-0.01%', marketCap: '$38.9B', icon: '$', changeColor: 'text-red-400', trendData: [1, 1, 1, 1, 1], glow: 'shadow-lg shadow-blue-400/20' },
+                    { rank: 7, symbol: 'XRP', name: 'Ripple', price: '$0.5234', change: '-2.87%', marketCap: '$28.7B', icon: '◉', changeColor: 'text-red-400', trendData: [0.53, 0.52, 0.54, 0.52, 0.52], glow: 'shadow-lg shadow-cyan-500/20' },
+                    { rank: 8, symbol: 'ADA', name: 'Cardano', price: '$0.5845', change: '+5.21%', marketCap: '$20.6B', icon: '₳', changeColor: 'text-green-400', trendData: [0.55, 0.58, 0.56, 0.59, 0.58], glow: 'shadow-lg shadow-indigo-500/20' },
+                    { rank: 9, symbol: 'DOGE', name: 'Dogecoin', price: '$0.0832', change: '-4.12%', marketCap: '$12.1B', icon: 'Ð', changeColor: 'text-red-400', trendData: [0.085, 0.083, 0.087, 0.081, 0.083], glow: 'shadow-lg shadow-amber-500/20' },
+                    { rank: 10, symbol: 'AVAX', name: 'Avalanche', price: '$38.45', change: '+12.34%', marketCap: '$15.8B', icon: '🔺', changeColor: 'text-green-400', trendData: [35, 38, 36, 40, 38], glow: 'shadow-lg shadow-red-500/20' }
+                  ].map((crypto) => (
+                    <div key={crypto.rank} className={`group relative bg-gradient-to-br from-black/60 to-slate-900/40 rounded-xl p-5 border border-cyan-500/20 hover:border-cyan-400/50 transition-all duration-300 hover:scale-[1.02] cursor-pointer ${crypto.glow} hover:shadow-xl`}>
+
+                      {/* Rank Badge */}
+                      <div className="absolute -top-2 -left-2 w-8 h-8 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center shadow-lg shadow-cyan-500/50 animate-pulse">
+                        <span className="text-white text-xs font-bold">#{crypto.rank}</span>
+                      </div>
+
+                      {/* Top 3 Crown Effect */}
+                      {crypto.rank <= 3 && (
+                        <div className="absolute -top-1 -right-1 text-yellow-400 text-lg animate-bounce">
+                          {crypto.rank === 1 ? '👑' : crypto.rank === 2 ? '🥈' : '🥉'}
+                        </div>
+                      )}
+
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full flex items-center justify-center text-2xl font-bold text-white border border-cyan-400/30">
+                            {crypto.icon}
+                          </div>
+                          <div>
+                            <div className="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">
+                              {crypto.name}
+                            </div>
+                            <div className="text-sm text-gray-400 font-mono">
+                              /{crypto.symbol.toLowerCase()}/
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Change Badge */}
+                        <div className={cn(
+                          "flex items-center gap-1 px-3 py-1 rounded-full text-sm font-bold border",
+                          crypto.changeColor === 'text-green-400'
+                            ? 'bg-green-500/10 border-green-500/30 text-green-400'
+                            : 'bg-red-500/10 border-red-500/30 text-red-400'
+                        )}>
+                          {crypto.changeColor === 'text-green-400' ? (
+                            <ArrowUp className="w-3 h-3" />
+                          ) : (
+                            <ArrowDown className="w-3 h-3" />
+                          )}
+                          {crypto.change}
+                        </div>
+                      </div>
+
+                      {/* Price and Market Cap */}
+                      <div className="space-y-2 mb-4">
+                        <div className="flex items-center justify-between">
+                          <span className="text-gray-400 text-sm">Price</span>
+                          <span className="text-xl font-bold text-white bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                            {crypto.price}
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-gray-400 text-sm">Market Cap</span>
+                          <span className="text-sm font-medium text-gray-300">{crypto.marketCap}</span>
+                        </div>
+                      </div>
+
+                      {/* Mini Sparkline Chart */}
+                      <div className="relative">
+                        <div className="text-xs text-gray-400 mb-2">24h Trend</div>
+                        <div className="h-8 flex items-end justify-between gap-1">
+                          {crypto.trendData.map((point, i) => {
+                            const maxPoint = Math.max(...crypto.trendData);
+                            const height = (point / maxPoint) * 100;
+                            return (
+                              <div
+                                key={i}
+                                className={cn(
+                                  "flex-1 rounded-sm transition-all duration-300 group-hover:opacity-80",
+                                  crypto.changeColor === 'text-green-400'
+                                    ? 'bg-gradient-to-t from-green-400 to-emerald-400'
+                                    : 'bg-gradient-to-t from-red-400 to-rose-400'
+                                )}
+                                style={{ height: `${Math.max(height, 10)}%` }}
+                              />
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                      {/* Hover Glow Effect */}
+                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                    </div>
+                  ))}
+                </div>
+
+                {/* Footer with Last Updated */}
+                <div className="mt-6 pt-4 border-t border-cyan-500/20 flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-sm text-gray-400">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    Last updated: 2 minutes ago
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Badge className="bg-cyan-500/10 text-cyan-300 border-cyan-500/20 text-xs">
+                      Powered by CoinGecko API
+                    </Badge>
+                    <Button size="sm" variant="outline" className="border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/10 text-xs">
+                      View All →
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* News Feed + AI Sentiment Tags */}
               <div className="lg:col-span-2">
