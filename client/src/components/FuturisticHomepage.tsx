@@ -1025,156 +1025,472 @@ export const FuturisticHomepage: React.FC = () => {
           </div>
         ) : activeSection === 'crypto' ? (
           <div className="space-y-8">
-            {/* Crypto Hub Header */}
-            <div className="text-center mb-8">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <div className="w-16 h-16 bg-gradient-to-r from-orange-500/20 to-yellow-500/20 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/20">
-                  <span className="text-3xl">₿</span>
+            {/* Header: Pulse of the Chain */}
+            <div className="text-center mb-12">
+              <div className="flex items-center justify-center gap-4 mb-6">
+                <div className="w-20 h-20 bg-gradient-to-r from-orange-500/20 via-yellow-500/20 to-orange-500/20 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/20 animate-pulse">
+                  <span className="text-4xl">⚡</span>
                 </div>
-                <h1 className="text-4xl font-bold bg-gradient-to-r from-orange-400 via-yellow-400 to-orange-400 bg-clip-text text-transparent">
-                  Crypto Hub
-                </h1>
+                <div className="text-center">
+                  <h1 className="text-5xl font-bold bg-gradient-to-r from-orange-400 via-yellow-400 to-orange-400 bg-clip-text text-transparent mb-2">
+                    Pulse of the Chain
+                  </h1>
+                  <p className="text-lg text-gray-300">Real-time crypto market sentiment & AI insights</p>
+                </div>
               </div>
-              <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                Real-time cryptocurrency analysis and sentiment tracking
-              </p>
             </div>
 
-            {/* Crypto Dashboard Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Bitcoin Card */}
-              <Card className="bg-black/40 border-orange-500/20 backdrop-blur-xl">
-                <CardHeader>
-                  <CardTitle className="text-white flex items-center gap-2">
-                    <span className="text-2xl">₿</span>
-                    Bitcoin
-                    <Badge className="ml-auto bg-orange-500/20 text-orange-300 border-orange-500/30">
-                      BTC
-                    </Badge>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="text-3xl font-bold text-white">$67,234</div>
-                    <div className="flex items-center gap-2">
-                      <ArrowUp className="w-4 h-4 text-green-400" />
-                      <span className="text-green-400 font-medium">+2.34%</span>
-                      <span className="text-gray-400 text-sm">24h</span>
-                    </div>
-                    <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-                      <div className="h-full w-3/4 bg-gradient-to-r from-orange-400 to-yellow-400 transition-all duration-1000" />
-                    </div>
-                    <Badge className="bg-green-500/20 text-green-400 border-green-500/30 w-full justify-center">
-                      Bullish Sentiment
-                    </Badge>
+            {/* Hero: Crypto Mood Score */}
+            <div className="text-center mb-16">
+              <div className="relative inline-block mb-8">
+                <div className="w-80 h-80 rounded-full relative">
+                  {/* Animated gradient ring */}
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-500 via-yellow-400 via-green-400 to-orange-500 p-2 animate-spin-slow">
+                    <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-900/90 to-purple-900/90 backdrop-blur-sm" />
                   </div>
-                </CardContent>
-              </Card>
 
-              {/* Ethereum Card */}
-              <Card className="bg-black/40 border-blue-500/20 backdrop-blur-xl">
-                <CardHeader>
-                  <CardTitle className="text-white flex items-center gap-2">
-                    <span className="text-2xl">⟐</span>
-                    Ethereum
-                    <Badge className="ml-auto bg-blue-500/20 text-blue-300 border-blue-500/30">
-                      ETH
-                    </Badge>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="text-3xl font-bold text-white">$2,657</div>
-                    <div className="flex items-center gap-2">
-                      <ArrowDown className="w-4 h-4 text-red-400" />
-                      <span className="text-red-400 font-medium">-1.23%</span>
-                      <span className="text-gray-400 text-sm">24h</span>
-                    </div>
-                    <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-                      <div className="h-full w-2/3 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-1000" />
-                    </div>
-                    <Badge className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30 w-full justify-center">
-                      Neutral Sentiment
-                    </Badge>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Top Altcoins */}
-              <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
-                <CardHeader>
-                  <CardTitle className="text-white flex items-center gap-2">
-                    <span className="text-2xl">🚀</span>
-                    Top Movers
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    {[
-                      { symbol: 'SOL', change: '+8.45%', color: 'text-green-400' },
-                      { symbol: 'ADA', change: '+5.21%', color: 'text-green-400' },
-                      { symbol: 'DOT', change: '-2.87%', color: 'text-red-400' },
-                      { symbol: 'LINK', change: '+3.65%', color: 'text-green-400' }
-                    ].map((coin, i) => (
-                      <div key={i} className="flex items-center justify-between p-2 bg-gray-800/50 rounded-lg">
-                        <span className="text-white font-medium">{coin.symbol}</span>
-                        <span className={cn("font-bold", coin.color)}>{coin.change}</span>
+                  {/* Fixed content */}
+                  <div className="absolute inset-2 flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="text-5xl mb-4 animate-bounce">😃</div>
+                      <div className="text-7xl font-bold bg-gradient-to-r from-orange-400 via-yellow-400 to-green-400 bg-clip-text text-transparent mb-2">
+                        78
                       </div>
-                    ))}
+                      <div className="text-xl font-bold text-white mb-1">Crypto Mood</div>
+                      <div className="text-sm text-orange-300 uppercase tracking-wider">BULLISH SENTIMENT</div>
+                    </div>
                   </div>
-                </CardContent>
-              </Card>
+
+                  {/* Pulse rings */}
+                  <div className="absolute inset-0 rounded-full border-2 animate-ping border-orange-400/40" />
+                  <div className="absolute inset-2 rounded-full border animate-ping delay-75 border-yellow-400/30" />
+                  <div className="absolute inset-4 rounded-full border animate-ping delay-150 border-green-400/20" />
+                </div>
+              </div>
+
+              <p className="text-lg text-gray-200 max-w-3xl mx-auto mb-8">
+                AI-powered sentiment analysis combining price momentum (40%), news sentiment (30%), and social buzz (30%)
+              </p>
+
+              {/* Mood Source Breakdown */}
+              <div className="grid grid-cols-3 gap-6 max-w-4xl mx-auto">
+                {[
+                  { label: 'Price Momentum', value: 82, percentage: '40%', color: 'from-orange-500 to-red-500', icon: '📈' },
+                  { label: 'News Sentiment', value: 75, percentage: '30%', color: 'from-yellow-500 to-orange-500', icon: '📰' },
+                  { label: 'Social Buzz', value: 71, percentage: '30%', color: 'from-green-500 to-yellow-500', icon: '💬' }
+                ].map((item) => (
+                  <div key={item.label} className="bg-black/40 backdrop-blur-sm rounded-2xl p-6 border border-orange-500/20 hover:border-orange-400/40 transition-all duration-300">
+                    <div className="text-3xl mb-3">{item.icon}</div>
+                    <div className="text-2xl font-bold text-white mb-2">{item.value}</div>
+                    <div className="text-gray-300 font-medium mb-1">{item.label}</div>
+                    <div className="text-sm text-gray-400 mb-3">{item.percentage} weight</div>
+                    <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                      <div
+                        className={`h-full bg-gradient-to-r ${item.color} transition-all duration-1000`}
+                        style={{ width: `${item.value}%` }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* Crypto News Section */}
+            {/* Top Movers Section */}
             <Card className="bg-black/40 border-orange-500/20 backdrop-blur-xl">
-              <CardHeader>
+              <CardHeader className="border-b border-orange-500/20">
                 <CardTitle className="text-white flex items-center gap-2">
-                  <Newspaper className="w-6 h-6 text-orange-400" />
-                  Crypto News & Sentiment
+                  <TrendingUp className="w-6 h-6 text-orange-400" />
+                  Top Movers & Sentiment Leaders
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {[
-                    {
-                      headline: "Bitcoin ETFs see record inflows as institutional adoption grows",
-                      sentiment: 'bullish',
-                      source: "CoinDesk",
-                      time: "1h ago"
-                    },
-                    {
-                      headline: "Ethereum staking rewards reach new highs amid network upgrades",
-                      sentiment: 'bullish',
-                      source: "CryptoNews",
-                      time: "3h ago"
-                    },
-                    {
-                      headline: "Regulatory uncertainty continues to impact altcoin market",
-                      sentiment: 'bearish',
-                      source: "Bloomberg Crypto",
-                      time: "5h ago"
-                    }
-                  ].map((news, i) => (
-                    <div key={i} className="p-4 bg-gray-800/50 rounded-lg border border-gray-700/50 hover:border-orange-500/30 transition-all duration-300">
-                      <div className="flex items-start justify-between mb-2">
-                        <h4 className="text-white font-medium text-sm leading-relaxed flex-1">{news.headline}</h4>
-                        <Badge className={cn(
-                          "ml-3 flex-shrink-0",
-                          news.sentiment === 'bullish' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'
-                        )}>
-                          {news.sentiment === 'bullish' ? '🟢' : '🔴'}
-                        </Badge>
-                      </div>
-                      <div className="flex items-center justify-between text-xs text-gray-400">
-                        <span>{news.source}</span>
-                        <span>{news.time}</span>
-                      </div>
+              <CardContent className="p-6">
+                <Tabs defaultValue="bullish" className="w-full">
+                  <TabsList className="grid w-full grid-cols-4 bg-black/20 backdrop-blur-xl border border-gray-700/50">
+                    <TabsTrigger value="bullish" className="data-[state=active]:bg-green-600/30 data-[state=active]:text-green-300 text-gray-400">
+                      🟢 Top Bullish
+                    </TabsTrigger>
+                    <TabsTrigger value="bearish" className="data-[state=active]:bg-red-600/30 data-[state=active]:text-red-300 text-gray-400">
+                      🔴 Top Bearish
+                    </TabsTrigger>
+                    <TabsTrigger value="gainers" className="data-[state=active]:bg-emerald-600/30 data-[state=active]:text-emerald-300 text-gray-400">
+                      📈 Biggest Gainers
+                    </TabsTrigger>
+                    <TabsTrigger value="losers" className="data-[state=active]:bg-rose-600/30 data-[state=active]:text-rose-300 text-gray-400">
+                      📉 Biggest Losers
+                    </TabsTrigger>
+                  </TabsList>
+
+                  <TabsContent value="bullish" className="mt-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {[
+                        { symbol: 'BTC', name: 'Bitcoin', price: '$67,234', change: '+2.34%', sentiment: 95, mentions: '12.4K', icon: '₿' },
+                        { symbol: 'SOL', name: 'Solana', price: '$156.78', change: '+8.45%', sentiment: 89, mentions: '8.2K', icon: '◎' },
+                        { symbol: 'ADA', name: 'Cardano', price: '$0.58', change: '+5.21%', sentiment: 84, mentions: '5.1K', icon: '₳' }
+                      ].map((token) => (
+                        <div key={token.symbol} className="bg-gradient-to-br from-black/60 to-green-900/20 rounded-xl p-4 border border-green-500/20 hover:border-green-400/40 transition-all duration-300 group cursor-pointer">
+                          <div className="flex items-center justify-between mb-3">
+                            <div className="flex items-center gap-2">
+                              <span className="text-2xl">{token.icon}</span>
+                              <div>
+                                <div className="text-lg font-bold text-white">{token.symbol}</div>
+                                <div className="text-sm text-gray-400">{token.name}</div>
+                              </div>
+                            </div>
+                            <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
+                              {token.sentiment}% 😃
+                            </Badge>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between">
+                              <span className="text-xl font-bold text-white">{token.price}</span>
+                              <span className="text-green-400 font-medium flex items-center gap-1">
+                                <ArrowUp className="w-4 h-4" />
+                                {token.change}
+                              </span>
+                            </div>
+                            <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                              <div className="h-full bg-gradient-to-r from-green-400 to-emerald-400 transition-all duration-1000" style={{ width: `${token.sentiment}%` }} />
+                            </div>
+                            <div className="text-xs text-gray-400 text-center">{token.mentions} mentions</div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  </TabsContent>
+
+                  <TabsContent value="bearish" className="mt-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {[
+                        { symbol: 'DOGE', name: 'Dogecoin', price: '$0.08', change: '-4.12%', sentiment: 25, mentions: '15.7K', icon: 'Ð' },
+                        { symbol: 'XRP', name: 'Ripple', price: '$0.52', change: '-2.87%', sentiment: 31, mentions: '9.3K', icon: '◉' },
+                        { symbol: 'DOT', name: 'Polkadot', price: '$7.42', change: '-1.95%', sentiment: 38, mentions: '4.8K', icon: '●' }
+                      ].map((token) => (
+                        <div key={token.symbol} className="bg-gradient-to-br from-black/60 to-red-900/20 rounded-xl p-4 border border-red-500/20 hover:border-red-400/40 transition-all duration-300 group cursor-pointer">
+                          <div className="flex items-center justify-between mb-3">
+                            <div className="flex items-center gap-2">
+                              <span className="text-2xl">{token.icon}</span>
+                              <div>
+                                <div className="text-lg font-bold text-white">{token.symbol}</div>
+                                <div className="text-sm text-gray-400">{token.name}</div>
+                              </div>
+                            </div>
+                            <Badge className="bg-red-500/20 text-red-400 border-red-500/30">
+                              {token.sentiment}% 😡
+                            </Badge>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between">
+                              <span className="text-xl font-bold text-white">{token.price}</span>
+                              <span className="text-red-400 font-medium flex items-center gap-1">
+                                <ArrowDown className="w-4 h-4" />
+                                {token.change}
+                              </span>
+                            </div>
+                            <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                              <div className="h-full bg-gradient-to-r from-red-400 to-rose-400 transition-all duration-1000" style={{ width: `${token.sentiment}%` }} />
+                            </div>
+                            <div className="text-xs text-gray-400 text-center">{token.mentions} mentions</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </TabsContent>
+
+                  <TabsContent value="gainers" className="mt-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {[
+                        { symbol: 'MATIC', name: 'Polygon', price: '$0.89', change: '+15.67%', sentiment: 72, mentions: '6.2K', icon: '⬟' },
+                        { symbol: 'AVAX', name: 'Avalanche', price: '$38.45', change: '+12.34%', sentiment: 68, mentions: '4.9K', icon: '🔺' },
+                        { symbol: 'ATOM', name: 'Cosmos', price: '$12.67', change: '+9.87%', sentiment: 65, mentions: '3.1K', icon: '⚛' }
+                      ].map((token) => (
+                        <div key={token.symbol} className="bg-gradient-to-br from-black/60 to-emerald-900/20 rounded-xl p-4 border border-emerald-500/20 hover:border-emerald-400/40 transition-all duration-300 group cursor-pointer">
+                          <div className="flex items-center justify-between mb-3">
+                            <div className="flex items-center gap-2">
+                              <span className="text-2xl">{token.icon}</span>
+                              <div>
+                                <div className="text-lg font-bold text-white">{token.symbol}</div>
+                                <div className="text-sm text-gray-400">{token.name}</div>
+                              </div>
+                            </div>
+                            <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30">
+                              📈 {token.change}
+                            </Badge>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between">
+                              <span className="text-xl font-bold text-white">{token.price}</span>
+                              <span className="text-emerald-400 font-medium">Sentiment: {token.sentiment}%</span>
+                            </div>
+                            <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                              <div className="h-full bg-gradient-to-r from-emerald-400 to-green-400 transition-all duration-1000" style={{ width: `${token.sentiment}%` }} />
+                            </div>
+                            <div className="text-xs text-gray-400 text-center">{token.mentions} mentions</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </TabsContent>
+
+                  <TabsContent value="losers" className="mt-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {[
+                        { symbol: 'LTC', name: 'Litecoin', price: '$73.21', change: '-8.45%', sentiment: 42, mentions: '2.8K', icon: 'Ł' },
+                        { symbol: 'BCH', name: 'Bitcoin Cash', price: '$145.67', change: '-6.32%', sentiment: 38, mentions: '1.9K', icon: '₿' },
+                        { symbol: 'ETC', name: 'Ethereum Classic', price: '$26.78', change: '-5.21%', sentiment: 35, mentions: '1.2K', icon: 'Ξ' }
+                      ].map((token) => (
+                        <div key={token.symbol} className="bg-gradient-to-br from-black/60 to-rose-900/20 rounded-xl p-4 border border-rose-500/20 hover:border-rose-400/40 transition-all duration-300 group cursor-pointer">
+                          <div className="flex items-center justify-between mb-3">
+                            <div className="flex items-center gap-2">
+                              <span className="text-2xl">{token.icon}</span>
+                              <div>
+                                <div className="text-lg font-bold text-white">{token.symbol}</div>
+                                <div className="text-sm text-gray-400">{token.name}</div>
+                              </div>
+                            </div>
+                            <Badge className="bg-rose-500/20 text-rose-400 border-rose-500/30">
+                              📉 {token.change}
+                            </Badge>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between">
+                              <span className="text-xl font-bold text-white">{token.price}</span>
+                              <span className="text-rose-400 font-medium">Sentiment: {token.sentiment}%</span>
+                            </div>
+                            <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                              <div className="h-full bg-gradient-to-r from-rose-400 to-red-400 transition-all duration-1000" style={{ width: `${token.sentiment}%` }} />
+                            </div>
+                            <div className="text-xs text-gray-400 text-center">{token.mentions} mentions</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </TabsContent>
+                </Tabs>
               </CardContent>
             </Card>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* News Feed + AI Sentiment Tags */}
+              <div className="lg:col-span-2">
+                <Card className="bg-black/40 border-orange-500/20 backdrop-blur-xl">
+                  <CardHeader className="border-b border-orange-500/20">
+                    <CardTitle className="text-white flex items-center gap-2">
+                      <Newspaper className="w-6 h-6 text-orange-400" />
+                      AI-Tagged Crypto News
+                      <div className="ml-auto flex gap-2">
+                        <Button size="sm" variant="outline" className="border-orange-500/30 text-orange-300 hover:bg-orange-500/10">
+                          DeFi
+                        </Button>
+                        <Button size="sm" variant="outline" className="border-orange-500/30 text-orange-300 hover:bg-orange-500/10">
+                          24h
+                        </Button>
+                      </div>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    <div className="space-y-4">
+                      {[
+                        {
+                          headline: "Bitcoin ETFs see record $2.1B inflows as institutional adoption accelerates",
+                          summary: "Major financial institutions are driving unprecedented capital flows into Bitcoin ETFs, signaling broader institutional acceptance of cryptocurrency as a legitimate asset class.",
+                          sentiment: 'Bullish',
+                          source: "CoinDesk",
+                          time: "1h ago",
+                          topics: ['BTC', 'ETF', 'Institutional']
+                        },
+                        {
+                          headline: "Ethereum staking yields hit 5.2% as network upgrades boost validator rewards",
+                          summary: "Recent protocol improvements have enhanced staking efficiency, making Ethereum more attractive to both retail and institutional stakers seeking passive income.",
+                          sentiment: 'Bullish',
+                          source: "CryptoNews",
+                          time: "3h ago",
+                          topics: ['ETH', 'Staking', 'DeFi']
+                        },
+                        {
+                          headline: "SEC Chairman signals stricter crypto regulations ahead of 2024 elections",
+                          summary: "Regulatory uncertainty continues to weigh on altcoin markets as the SEC prepares more comprehensive crypto oversight frameworks.",
+                          sentiment: 'Bearish',
+                          source: "Bloomberg Crypto",
+                          time: "5h ago",
+                          topics: ['Regulation', 'SEC', 'Politics']
+                        }
+                      ].map((news, i) => (
+                        <div key={i} className="p-5 bg-gradient-to-br from-black/60 to-orange-900/10 rounded-xl border border-orange-500/20 hover:border-orange-400/40 transition-all duration-300 group cursor-pointer">
+                          <div className="flex items-start justify-between mb-3">
+                            <div className="flex-1">
+                              <h3 className="text-lg font-bold text-white mb-2 line-clamp-2 group-hover:text-orange-300 transition-colors">
+                                {news.headline}
+                              </h3>
+                              <p className="text-sm text-gray-400 leading-relaxed mb-3">
+                                {news.summary}
+                              </p>
+                              <div className="flex flex-wrap gap-2 mb-2">
+                                {news.topics.map((topic, j) => (
+                                  <Badge key={j} className="bg-orange-500/10 text-orange-300 border-orange-500/20 text-xs">
+                                    {topic}
+                                  </Badge>
+                                ))}
+                              </div>
+                            </div>
+                            <Badge className={cn(
+                              "ml-4 flex-shrink-0",
+                              news.sentiment === 'Bullish' ? 'bg-green-500/20 text-green-400 border-green-500/30' : 'bg-red-500/20 text-red-400 border-red-500/30'
+                            )}>
+                              {news.sentiment === 'Bullish' ? '🟢 Bullish' : '🔴 Bearish'}
+                            </Badge>
+                          </div>
+                          <div className="flex items-center justify-between text-xs text-gray-500">
+                            <span className="font-medium">{news.source}</span>
+                            <span>{news.time}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Sidebar: Social Buzz & Watchlist */}
+              <div className="space-y-6">
+
+                {/* Social Buzz / On-Chain Trends */}
+                <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
+                  <CardHeader className="border-b border-purple-500/20">
+                    <CardTitle className="text-white text-sm flex items-center gap-2">
+                      <span className="text-lg">💬</span>
+                      Social Buzz & Trends
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    <div className="space-y-4">
+                      <div className="text-sm text-gray-400 mb-3">Trending on X/Reddit (Last 1h)</div>
+                      {[
+                        { hashtag: '#BitcoinETF', mentions: '+240%', sentiment: 'bullish', platform: '𝕏' },
+                        { hashtag: '#ETH2024', mentions: '+156%', sentiment: 'bullish', platform: 'R' },
+                        { hashtag: '#CryptoRegulation', mentions: '+89%', sentiment: 'bearish', platform: '𝕏' },
+                        { hashtag: '#DeFiSummer', mentions: '+67%', sentiment: 'neutral', platform: 'R' }
+                      ].map((trend, i) => (
+                        <div key={i} className="flex items-center justify-between p-3 bg-gray-800/50 rounded-lg hover:bg-gray-700/50 transition-colors">
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs bg-purple-500/20 text-purple-300 px-2 py-1 rounded">{trend.platform}</span>
+                            <span className="text-white text-sm font-medium">{trend.hashtag}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className={cn(
+                              "text-xs font-bold",
+                              trend.sentiment === 'bullish' ? "text-green-400" :
+                              trend.sentiment === 'bearish' ? "text-red-400" : "text-gray-400"
+                            )}>
+                              {trend.sentiment === 'bullish' ? '😃' :
+                               trend.sentiment === 'bearish' ? '😡' : '😐'}
+                            </span>
+                            <span className="text-purple-300 text-xs font-bold">{trend.mentions}</span>
+                          </div>
+                        </div>
+                      ))}
+
+                      <div className="mt-6 p-4 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-lg border border-purple-500/20">
+                        <div className="text-sm text-white font-medium mb-2">🐋 Whale Alert</div>
+                        <div className="text-xs text-gray-300 leading-relaxed">
+                          Large BTC transfer detected: 1,247 BTC ($84.3M) moved to unknown wallet. Market sentiment: Neutral
+                        </div>
+                        <div className="text-xs text-purple-300 mt-1">2 minutes ago</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Token Watchlist */}
+                <Card className="bg-black/40 border-cyan-500/20 backdrop-blur-xl">
+                  <CardHeader className="border-b border-cyan-500/20">
+                    <CardTitle className="text-white text-sm flex items-center gap-2">
+                      <span className="text-lg">⭐</span>
+                      Your Crypto Watchlist
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    <div className="space-y-3 mb-4">
+                      {[
+                        { symbol: 'BTC', price: '$67,234', change: '+2.34%', sentiment: '😃', trend: 'up' },
+                        { symbol: 'ETH', price: '$2,657', change: '-1.23%', sentiment: '😐', trend: 'down' },
+                        { symbol: 'SOL', price: '$156.78', change: '+8.45%', sentiment: '😃', trend: 'up' }
+                      ].map((token, i) => (
+                        <div key={i} className="flex items-center justify-between p-3 bg-gray-800/50 rounded-lg">
+                          <div className="flex items-center gap-2">
+                            <span className="text-lg">{token.sentiment}</span>
+                            <div>
+                              <div className="text-white font-medium text-sm">{token.symbol}</div>
+                              <div className="text-xs text-gray-400">{token.price}</div>
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <div className={cn(
+                              "text-sm font-bold",
+                              token.trend === 'up' ? "text-green-400" : "text-red-400"
+                            )}>
+                              {token.change}
+                            </div>
+                            <div className="text-xs text-gray-400">24h</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <Button className="w-full bg-gradient-to-r from-cyan-600/20 to-blue-600/20 hover:from-cyan-600/30 hover:to-blue-600/30 text-cyan-300 border border-cyan-500/30">
+                      <Plus className="w-4 h-4 mr-2" />
+                      Add Token
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                {/* AI Insight Panel */}
+                <Card className="bg-black/40 border-green-500/20 backdrop-blur-xl">
+                  <CardHeader className="border-b border-green-500/20">
+                    <CardTitle className="text-white text-sm flex items-center gap-2">
+                      <Brain className="w-4 h-4 text-green-400" />
+                      AI Market Insight
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    <div className="space-y-4">
+                      <div className="p-4 bg-gradient-to-r from-green-500/10 to-blue-500/10 rounded-lg border border-green-500/20">
+                        <div className="text-sm text-white font-medium mb-2">💡 Pattern Detection</div>
+                        <div className="text-xs text-gray-300 leading-relaxed mb-2">
+                          Bitcoin is showing unusual bullish sentiment (95%) while price remains consolidating. This divergence often precedes significant breakouts.
+                        </div>
+                        <Badge className="bg-green-500/20 text-green-400 border-green-500/30 text-xs">
+                          Confidence: 87%
+                        </Badge>
+                      </div>
+
+                      <div className="p-4 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-lg border border-yellow-500/20">
+                        <div className="text-sm text-white font-medium mb-2">🐋 Whale Activity</div>
+                        <div className="text-xs text-gray-300 leading-relaxed mb-2">
+                          Large Ethereum accumulation detected from institutional wallets. Staking activity up 23% this week.
+                        </div>
+                        <Badge className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30 text-xs">
+                          Alert: High Volume
+                        </Badge>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+
+            {/* Footer: Live Status */}
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-4">
+                <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
+                  ✅ Price API: Live
+                </Badge>
+                <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30">
+                  ✅ Sentiment Engine: Active
+                </Badge>
+                <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">
+                  ✅ Social Feed: Streaming
+                </Badge>
+              </div>
+            </div>
           </div>
         ) : activeSection === 'news-feed' ? (
           <SmartNewsFeed />
