@@ -350,7 +350,7 @@ export const FuturisticHomepage: React.FC = () => {
                     <button
                       className={cn(
                         "text-sm font-medium transition-all duration-300 relative group flex items-center gap-1",
-                        activeSection === 'finance' || activeSection === 'market'
+                        activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist'
                           ? "text-pink-400"
                           : "text-gray-400 hover:text-white"
                       )}
