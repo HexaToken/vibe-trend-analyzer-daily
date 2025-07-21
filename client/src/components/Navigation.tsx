@@ -287,10 +287,10 @@ export const Navigation = ({
                         className="relative h-10 w-10 rounded-full"
                       >
                         <Avatar className="h-10 w-10">
-                          <AvatarImage src={user.avatar} alt={user.username} />
+                          <AvatarImage src={user?.avatar} alt={user?.username} />
                           <AvatarFallback className="bg-primary text-primary-foreground">
                             {(
-                              user.firstName?.[0] || user.username[0]
+                              user?.firstName?.[0] || user?.username?.[0] || '?'
                             ).toUpperCase()}
                           </AvatarFallback>
                         </Avatar>
@@ -304,20 +304,20 @@ export const Navigation = ({
                       <DropdownMenuLabel className="font-normal">
                         <div className="flex flex-col space-y-1">
                           <p className="text-sm font-medium leading-none">
-                            {user.firstName && user.lastName
+                            {user?.firstName && user?.lastName
                               ? `${user.firstName} ${user.lastName}`
-                              : user.username}
+                              : user?.username}
                           </p>
                           <p className="text-xs leading-none text-muted-foreground">
-                            {user.email}
+                            {user?.email}
                           </p>
                           <div className="flex gap-1 mt-1">
-                            {user.isPremium && (
+                            {user?.isPremium && (
                               <Badge variant="secondary" className="text-xs">
                                 Premium
                               </Badge>
                             )}
-                            {user.isVerified && (
+                            {user?.isVerified && (
                               <Badge variant="secondary" className="text-xs">
                                 Verified
                               </Badge>
