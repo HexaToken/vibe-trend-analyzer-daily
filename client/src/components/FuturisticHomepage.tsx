@@ -381,6 +381,13 @@ export const FuturisticHomepage: React.FC = () => {
                       <BarChart3 className="w-4 h-4 mr-2" />
                       Market Analytics
                     </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => setActiveSection('watchlist')}
+                      className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer transition-colors duration-200"
+                    >
+                      <TrendingUp className="w-4 h-4 mr-2" />
+                      Watchlist
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
 
@@ -582,7 +589,7 @@ export const FuturisticHomepage: React.FC = () => {
               <div className="text-center mb-6">
                 <div className="flex items-center justify-center gap-3 mb-4">
                   <div className="w-16 h-16 bg-gradient-to-r from-green-500/20 to-purple-500/20 rounded-xl flex items-center justify-center shadow-lg shadow-green-500/20">
-                    <span className="text-3xl">💰</span>
+                    <span className="text-3xl">��</span>
                   </div>
                   <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
                     Finance Hub
