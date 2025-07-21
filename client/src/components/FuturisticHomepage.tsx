@@ -26,6 +26,7 @@ import { useMoodTheme } from '../contexts/MoodThemeContext';
 import { cn } from '../lib/utils';
 import { WatchlistContainerBlock } from './watchlist/WatchlistContainerBlock';
 import { ChatInterface } from './moorMeter/ChatInterface';
+import { SpaceSwitcherWidget } from './community/SpaceSwitcherWidget';
 import {
   DropdownMenu,
   DropdownMenuContent,
