@@ -447,21 +447,7 @@ export const Navigation = ({
                   );
                 })}
 
-                                {/* Tool Section */}
-                <div className="text-sm font-medium text-muted-foreground px-3 py-1">
-                  Tool
-                </div>
-                <Button
-                  variant={activeSection === "market" ? "default" : "ghost"}
-                  onClick={() => {
-                    onSectionChange("market");
-                    setIsMenuOpen(false);
-                  }}
-                  className="justify-start gap-2 ml-4"
-                >
-                  <BarChart3 className="h-4 w-4" />
-                  Market
-                </Button>
+                                
 
                 {/* Mobile Auth Section */}
                 <div className="pt-4 border-t">
