@@ -80,22 +80,7 @@ export const TrendingTickerBar: React.FC<TrendingTickerBarProps> = ({ className 
 
   return (
     <>
-      <style jsx>{`
-        @keyframes scroll-ticker {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-        .ticker-scroll {
-          animation: scroll-ticker 30s linear infinite;
-        }
-        .ticker-scroll:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
+      
       
       <div className={cn(
         "w-full bg-[#0e1423] border-b border-[#2c3140] px-4 py-3 relative overflow-hidden",
