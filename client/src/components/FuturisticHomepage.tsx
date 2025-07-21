@@ -406,9 +406,7 @@ export const FuturisticHomepage: React.FC = () => {
                                 ) : activeSection === 'tool' ? (
                     <div></div>
 
-            {/* Tool Subtabs */}
-            <div className="max-w-7xl mx-auto">
-              <Tabs value={activeToolSubtab} onValueChange={setActiveToolSubtab}>
+            
                 
 
                                 <TabsContent value="Market" className="mt-6">
