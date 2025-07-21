@@ -121,7 +121,16 @@ export const TrendingTickerBar: React.FC<TrendingTickerBarProps> = ({ className 
 
           {/* Center Section - Auto-Scrolling Ticker Strip */}
           <div className="flex-1 mx-4 overflow-hidden">
-            <div className="ticker-scroll flex items-center gap-3" style={{ width: '200%' }}>
+                        <div
+              className="flex items-center gap-3"
+              style={{
+                width: '200%',
+                animation: 'scroll-ticker 30s linear infinite',
+                transform: 'translateX(0)'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.animationPlayState = 'paused'}
+              onMouseLeave={(e) => e.currentTarget.style.animationPlayState = 'running'}
+            >
               {/* Duplicate tickers for seamless loop */}
               {trendingTickers.concat(trendingTickers).map((ticker, index) => (
                 <div
