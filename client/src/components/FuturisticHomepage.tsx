@@ -404,16 +404,7 @@ export const FuturisticHomepage: React.FC = () => {
         ) : activeSection === 'rooms' ? (
           <PrivateRoomsContainer />
                                 ) : activeSection === 'tool' ? (
-          <div className="space-y-6">
-                        {/* Tool Header */}
-            <div className="text-center space-y-4">
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                🔧 Tool
-              </h1>
-              <p className="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
-                Professional trading and analysis tools suite
-              </p>
-            </div>
+                    <div></div>
 
             {/* Tool Subtabs */}
             <div className="max-w-7xl mx-auto">
