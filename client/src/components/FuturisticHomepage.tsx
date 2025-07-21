@@ -253,7 +253,7 @@ export const FuturisticHomepage: React.FC = () => {
               </div>
               
               <nav className="hidden md:flex items-center gap-6">
-                                                                                                {['Home', 'Market Mood', 'Watchlist', 'News Feed'].map((item, index) => (
+                                                                                                {['Home', 'Market Mood', 'Watchlist', 'Finance', 'News Feed'].map((item, index) => (
                                     <button
                     key={item}
                     onClick={() => {
@@ -419,6 +419,21 @@ export const FuturisticHomepage: React.FC = () => {
           <MarketMoodPage />
         ) : activeSection === 'watchlist' ? (
           <WatchlistContainerBlock />
+        ) : activeSection === 'finance' ? (
+          <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-8">
+            <div className="text-center space-y-4">
+              <div className="text-6xl mb-4">💰</div>
+              <h3 className="text-2xl font-bold text-white mb-2">Finance Hub</h3>
+              <p className="text-gray-400 mb-4">
+                Advanced financial tools and analytics for portfolio management.
+              </p>
+              <div className="flex flex-wrap gap-2 justify-center">
+                <Badge className="bg-green-500/20 text-green-300 border-green-500/30">Portfolio Tracker</Badge>
+                <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30">Risk Analysis</Badge>
+                <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">Financial Reports</Badge>
+              </div>
+            </div>
+          </div>
         ) : activeSection === 'news-feed' ? (
           <SmartNewsFeed />
         ) : activeSection === 'chat' ? (
