@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { usePolygonTickers, usePolygonDividends, usePolygonQuotes } from "@/hooks/usePolygon";
+// import { usePolygonTickers, usePolygonDividends, usePolygonQuotes } from "@/hooks/usePolygon";
 
 export const PolygonDemo = () => {
   const [selectedTicker, setSelectedTicker] = useState<string>("AAPL");
