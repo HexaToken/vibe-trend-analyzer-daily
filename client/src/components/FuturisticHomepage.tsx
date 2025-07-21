@@ -488,7 +488,7 @@ export const FuturisticHomepage: React.FC = () => {
                     variant="ghost"
                     className={cn(
                       "w-full justify-between text-left transition-colors duration-200",
-                      (activeSection === 'finance' || activeSection === 'market')
+                      (activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist')
                         ? "text-pink-400 bg-pink-500/10"
                         : "text-gray-300 hover:text-white hover:bg-purple-500/10"
                     )}
