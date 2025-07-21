@@ -401,7 +401,7 @@ export const FuturisticHomepage: React.FC = () => {
           <SpaceSwitcherWidget />
         ) : activeSection === 'rooms' ? (
           <PrivateRoomsContainer />
-                        ) : activeSection === 'market' ? (
+                                ) : activeSection === 'tool' ? (
           <div className="space-y-6">
             {/* Market Header */}
             <div className="text-center space-y-4">
