@@ -23,7 +23,7 @@ import { FinanceMoodChart } from './builder/FinanceMoodChart';
 import { FinanceNewsFeed } from './builder/FinanceNewsFeed';
 import { AIInsightWidget } from './builder/AIInsightWidget';
 import { SocialBuzzHeatmap } from './builder/SocialBuzzHeatmap';
-import { TopMoversMarketSentiment } from './builder/TopMoversMarketSentiment';
+
 import { MarketMoodControls } from './builder/MarketMoodControls';
 
 interface MarketMoodPageProps {
@@ -183,24 +183,12 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
               showLegend={true}
             />
 
-            {/* Two Column Layout for Components */}
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-              
-              {/* AI Insight */}
-              <AIInsightWidget
-                title="AI Market Insight"
-                refreshInterval={300000}
-                showConfidence={true}
-              />
-
-              {/* Top Movers */}
-              <TopMoversMarketSentiment
-                title="Top Sentiment Movers"
-                maxStocks={6}
-                showSparklines={true}
-                autoRefresh={true}
-              />
-            </div>
+            {/* AI Market Insight - Full Width */}
+            <AIInsightWidget
+              title="AI Market Insight"
+              refreshInterval={300000}
+              showConfidence={true}
+            />
 
             {/* Social Buzz Heatmap - Full Width */}
             <SocialBuzzHeatmap
