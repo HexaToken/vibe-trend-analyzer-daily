@@ -412,8 +412,7 @@ export const FuturisticHomepage: React.FC = () => {
                                 
                   
 
-                    {/* Tools Sub-subtabs */}
-                    <Tabs value={activeToolsSubtab} onValueChange={setActiveToolsSubtab}>
+                    
                       <TabsList className="grid w-full grid-cols-3 bg-black/20 backdrop-blur-xl border border-gray-700/50">
                         <TabsTrigger
                           value="HeatMap"
