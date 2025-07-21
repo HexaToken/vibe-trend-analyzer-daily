@@ -422,21 +422,7 @@ export const Navigation = ({
           {isMenuOpen && (
             <div className="md:hidden py-4 border-t">
               <div className="flex flex-col space-y-2">
-                {/* MoorMeter Dashboard */}
-                <Button
-                  variant={activeSection === "moorMeter" ? "default" : "ghost"}
-                  onClick={() => {
-                    onSectionChange("moorMeter");
-                    setIsMenuOpen(false);
-                  }}
-                  className="justify-start gap-2"
-                >
-                  <Brain className="h-4 w-4" />
-                  MoorMeter
-                  <Badge variant="secondary" className="ml-auto text-xs">
-                    NEW
-                  </Badge>
-                </Button>
+                
 
                 {/* Data Section */}
                 <div className="text-sm font-medium text-muted-foreground px-3 py-1">
