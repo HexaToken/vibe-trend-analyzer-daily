@@ -28,6 +28,7 @@ import { WatchlistContainerBlock } from './watchlist/WatchlistContainerBlock';
 import { ChatInterface } from './moorMeter/ChatInterface';
 import { SpaceSwitcherWidget } from './community/SpaceSwitcherWidget';
 import { PrivateRoomsContainer } from './privateRooms/PrivateRoomsContainer';
+import { SentimentHeatMap } from './moorMeter/SentimentHeatMap';
 import {
   DropdownMenu,
   DropdownMenuContent,
