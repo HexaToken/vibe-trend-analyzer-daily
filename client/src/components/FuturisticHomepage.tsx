@@ -416,32 +416,7 @@ export const FuturisticHomepage: React.FC = () => {
             {/* Tool Subtabs */}
             <div className="max-w-7xl mx-auto">
               <Tabs value={activeToolSubtab} onValueChange={setActiveToolSubtab}>
-                <TabsList className="grid w-full grid-cols-4 bg-black/40 backdrop-blur-xl border border-purple-500/20">
-                  <TabsTrigger
-                    value="Market"
-                    className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-white text-gray-400"
-                  >
-                    📈 Market
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="Analysis"
-                    className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-white text-gray-400"
-                  >
-                    📊 Analysis
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="Scanner"
-                    className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-white text-gray-400"
-                  >
-                    🔍 Scanner
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="Alerts"
-                    className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-white text-gray-400"
-                  >
-                    🔔 Alerts
-                  </TabsTrigger>
-                </TabsList>
+                
 
                                 <TabsContent value="Market" className="mt-6">
                   <div className="space-y-6">
