@@ -233,8 +233,12 @@ export const FuturisticHomepage: React.FC = () => {
               
               <nav className="hidden md:flex items-center gap-6">
                 {['Home', 'Market Mood', 'Watchlist', 'News Feed', 'Community'].map((item, index) => (
-                  <button
+                                    <button
                     key={item}
+                    onClick={() => {
+                      const sectionKey = item.toLowerCase().replace(' ', '-') as typeof activeSection;
+                      setActiveSection(sectionKey);
+                    }}
                     className={cn(
                       "text-sm font-medium transition-all duration-300 relative group",
                       index === 0 
