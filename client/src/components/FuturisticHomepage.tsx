@@ -318,8 +318,25 @@ export const FuturisticHomepage: React.FC = () => {
                       <MessageSquare className="w-4 h-4 mr-2" />
                       Chat
                     </DropdownMenuItem>
-                  </DropdownMenuContent>
+                                    </DropdownMenuContent>
                 </DropdownMenu>
+
+                {/* Tools Tab */}
+                <button
+                  onClick={() => setActiveSection('tools')}
+                  className={cn(
+                    "text-sm font-medium transition-all duration-300 relative group",
+                    activeSection === 'tools'
+                      ? "text-pink-400"
+                      : "text-gray-400 hover:text-white"
+                  )}
+                >
+                  Tools
+                  {activeSection === 'tools' && (
+                    <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
+                  )}
+                  <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </button>
               </nav>
             </div>
 
