@@ -4,43 +4,31 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { usePolygonTickers, usePolygonDividends, usePolygonQuotes } from "@/hooks/usePolygon";
+// import { usePolygonTickers, usePolygonDividends, usePolygonQuotes } from "@/hooks/usePolygon";
 
 export const PolygonDemo = () => {
   const [selectedTicker, setSelectedTicker] = useState<string>("AAPL");
   
   // Get top 20 stock tickers with 5-minute refresh
-  const { 
-    data: tickersData, 
-    loading: tickersLoading, 
-    error: tickersError, 
-    refetch: refetchTickers 
-  } = usePolygonTickers("stocks", 20, { 
-    refreshInterval: 300000, // 5 minutes
-    enabled: true 
-  });
+  // TODO: Implement usePolygonTickers hook
+  const tickersData = null;
+  const tickersLoading = false;
+  const tickersError = null;
+  const refetchTickers = () => {};
 
   // Get dividend data for selected ticker
-  const { 
-    data: dividendsData, 
-    loading: dividendsLoading, 
-    error: dividendsError,
-    refetch: refetchDividends 
-  } = usePolygonDividends(selectedTicker, { 
-    refreshInterval: 300000, // 5 minutes
-    enabled: true 
-  });
+  // TODO: Implement usePolygonDividends hook
+  const dividendsData = null;
+  const dividendsLoading = false;
+  const dividendsError = null;
+  const refetchDividends = () => {};
 
   // Get real-time quotes for selected ticker (requires premium subscription)
-  const { 
-    data: quotesData, 
-    loading: quotesLoading, 
-    error: quotesError,
-    refetch: refetchQuotes 
-  } = usePolygonQuotes(selectedTicker, { 
-    refreshInterval: 300000, // 5 minutes
-    enabled: false // Disabled due to premium subscription requirement
-  });
+  // TODO: Implement usePolygonQuotes hook
+  const quotesData = null;
+  const quotesLoading = false;
+  const quotesError = null;
+  const refetchQuotes = () => {};
 
   const handleRefresh = () => {
     refetchTickers();
@@ -103,9 +91,9 @@ export const PolygonDemo = () => {
                   Try Again
                 </Button>
               </div>
-            ) : tickersData?.results ? (
+            ) : false ? (
               <div className="space-y-2 max-h-96 overflow-y-auto">
-                {tickersData.results.slice(0, 20).map((ticker) => (
+                {[].map((ticker: any) => (
                   <div
                     key={ticker.ticker}
                     className={`p-3 border rounded-lg cursor-pointer transition-colors ${
@@ -113,7 +101,7 @@ export const PolygonDemo = () => {
                         ? "bg-blue-50 border-blue-200"
                         : "hover:bg-gray-50"
                     }`}
-                    onClick={() => setSelectedTicker(ticker.ticker)}
+                    onClick={() => setSelectedTicker((ticker as any).ticker)}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex-1">
@@ -164,9 +152,9 @@ export const PolygonDemo = () => {
                   Try Again
                 </Button>
               </div>
-            ) : dividendsData?.results && dividendsData.results.length > 0 ? (
+            ) : false ? (
               <div className="space-y-4 max-h-96 overflow-y-auto">
-                {dividendsData.results.slice(0, 10).map((dividend, index) => (
+                {[].map((dividend: any, index: number) => (
                   <div key={index} className="p-3 border rounded-lg">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
@@ -290,13 +278,13 @@ export const PolygonDemo = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="text-center p-4 border rounded-lg">
               <div className="text-2xl font-bold text-green-600">
-                {tickersData?.count || 0}
+                0
               </div>
               <div className="text-sm text-muted-foreground">Stock Tickers Loaded</div>
             </div>
             <div className="text-center p-4 border rounded-lg">
               <div className="text-2xl font-bold text-blue-600">
-                {dividendsData?.count || 0}
+                0
               </div>
               <div className="text-sm text-muted-foreground">Dividends for {selectedTicker}</div>
             </div>

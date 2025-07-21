@@ -12,6 +12,12 @@ import { FinanceNewsFeed } from "./src/components/builder/FinanceNewsFeed";
 import { FinanceTrendingTopics } from "./src/components/builder/FinanceTrendingTopics";
 import { FinanceMoodChart } from "./src/components/builder/FinanceMoodChart";
 
+// Market Mood page components
+import { AIInsightWidget } from "./src/components/builder/AIInsightWidget";
+import { SocialBuzzHeatmap } from "./src/components/builder/SocialBuzzHeatmap";
+import { TopMoversMarketSentiment } from "./src/components/builder/TopMoversMarketSentiment";
+import { MarketMoodControls } from "./src/components/builder/MarketMoodControls";
+
 // Placeholder components for now - you can create these following the same pattern
 const NewsFeedModule = () =>
   React.createElement("div", null, "News Feed Module - To be implemented");
@@ -23,8 +29,7 @@ const TrendingTopicsModule = () =>
     null,
     "Trending Topics Module - To be implemented",
   );
-const AIInsightModule = () =>
-  React.createElement("div", null, "AI Insight Module - To be implemented");
+// AIInsightModule is now imported as AIInsightWidget
 
 export const customComponents: RegisteredComponent[] = [
   {
@@ -171,8 +176,8 @@ export const customComponents: RegisteredComponent[] = [
     canHaveChildren: false,
   },
   {
-    component: AIInsightModule,
-    name: "AIInsightModule",
+    component: AIInsightWidget,
+    name: "AIInsightWidget",
     inputs: [
       {
         name: "title",
@@ -192,9 +197,114 @@ export const customComponents: RegisteredComponent[] = [
         defaultValue: true,
         required: false,
       },
+      {
+        name: "apiEndpoint",
+        type: "string",
+        defaultValue: "/api/ai/insight",
+        required: false,
+      },
     ],
     canHaveChildren: false,
-    },
+  },
+  {
+    component: SocialBuzzHeatmap,
+    name: "SocialBuzzHeatmap",
+    inputs: [
+      {
+        name: "title",
+        type: "string",
+        defaultValue: "Social Buzz Heatmap",
+        required: false,
+      },
+      {
+        name: "maxTopics",
+        type: "number",
+        defaultValue: 12,
+        required: false,
+      },
+      {
+        name: "platforms",
+        type: "string",
+        defaultValue: "reddit,twitter,discord",
+        required: false,
+      },
+      {
+        name: "autoRefresh",
+        type: "boolean",
+        defaultValue: true,
+        required: false,
+      },
+      {
+        name: "apiEndpoint",
+        type: "string",
+        defaultValue: "/api/social/trending",
+        required: false,
+      },
+    ],
+    canHaveChildren: false,
+  },
+  {
+    component: TopMoversMarketSentiment,
+    name: "TopMoversMarketSentiment",
+    inputs: [
+      {
+        name: "title",
+        type: "string",
+        defaultValue: "Top Movers - Market Sentiment",
+        required: false,
+      },
+      {
+        name: "maxStocks",
+        type: "number",
+        defaultValue: 6,
+        required: false,
+      },
+      {
+        name: "showSparklines",
+        type: "boolean",
+        defaultValue: true,
+        required: false,
+      },
+      {
+        name: "autoRefresh",
+        type: "boolean",
+        defaultValue: true,
+        required: false,
+      },
+      {
+        name: "apiEndpoint",
+        type: "string",
+        defaultValue: "/api/stocks/top-movers",
+        required: false,
+      },
+    ],
+    canHaveChildren: false,
+  },
+  {
+    component: MarketMoodControls,
+    name: "MarketMoodControls",
+    inputs: [
+      {
+        name: "title",
+        type: "string",
+        defaultValue: "Market Mood Controls",
+        required: false,
+      },
+      {
+        name: "showFilters",
+        type: "boolean",
+        defaultValue: true,
+        required: false,
+      },
+      {
+        name: "showExport",
+        type: "boolean",
+        defaultValue: true,
+        required: false,
+      },
+    ],
+    canHaveChildren: false,
+  },
   // Finance-grade components
   {
     component: FinanceMoodGauge,

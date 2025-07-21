@@ -30,6 +30,9 @@ import { ChatInterface } from './moorMeter/ChatInterface';
 import { SpaceSwitcherWidget } from './community/SpaceSwitcherWidget';
 import { PrivateRoomsContainer } from './privateRooms/PrivateRoomsContainer';
 import { SentimentHeatMap } from './moorMeter/SentimentHeatMap';
+import { MoodTrendChart } from './moorMeter/MoodTrendChart';
+import { SmartNewsFeed } from './SmartNewsFeed';
+import { MarketMoodPage } from './MarketMoodPage';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -70,7 +73,8 @@ export const FuturisticHomepage: React.FC = () => {
       const [activeToolSubtab, setActiveToolSubtab] = useState("Market");
     const [activeMarketSubtab, setActiveMarketSubtab] = useState("Tools");
   const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
-  
+  const [selectedTimeframe, setSelectedTimeframe] = useState<"1D" | "7D" | "30D">("7D");
+
   // Core mood data
   const [moodScore] = useState<MoodScore>({
     overall: 72,
@@ -100,13 +104,13 @@ export const FuturisticHomepage: React.FC = () => {
   ]);
 
   const [moodTrendData] = useState([
-    { day: 'Mon', score: 58 },
-    { day: 'Tue', score: 62 },
-    { day: 'Wed', score: 55 },
-    { day: 'Thu', score: 68 },
-    { day: 'Fri', score: 72 },
-    { day: 'Sat', score: 69 },
-    { day: 'Sun', score: 72 }
+    { date: 'Mon', score: 58, stocks: 55, news: 62, social: 57 },
+    { date: 'Tue', score: 62, stocks: 58, news: 65, social: 63 },
+    { date: 'Wed', score: 55, stocks: 52, news: 58, social: 55 },
+    { date: 'Thu', score: 68, stocks: 65, news: 71, social: 68 },
+    { date: 'Fri', score: 72, stocks: 68, news: 75, social: 74 },
+    { date: 'Sat', score: 69, stocks: 66, news: 72, social: 70 },
+    { date: 'Sun', score: 72, stocks: 69, news: 74, social: 73 }
   ]);
 
     const [smartNews] = useState([
@@ -411,8 +415,12 @@ export const FuturisticHomepage: React.FC = () => {
             {/* Main Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-8">
 
-                                        {activeSection === 'watchlist' ? (
+                                        {activeSection === 'market-mood' ? (
+          <MarketMoodPage />
+        ) : activeSection === 'watchlist' ? (
           <WatchlistContainerBlock />
+        ) : activeSection === 'news-feed' ? (
+          <SmartNewsFeed />
         ) : activeSection === 'chat' ? (
           <ChatInterface />
         ) : activeSection === 'space' ? (
@@ -649,42 +657,14 @@ export const FuturisticHomepage: React.FC = () => {
               </CardContent>
             </Card>
 
-            {/* 7-Day Mood Trend Chart */}
-            <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
-              <CardHeader className="border-b border-purple-500/20">
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-white flex items-center gap-2">
-                    <BarChart3 className="w-6 h-6 text-cyan-400" />
-                    7-Day Mood Trend
-                  </CardTitle>
-                  <div className="flex gap-2">
-                    <Button variant="ghost" size="sm" className="text-cyan-400 hover:bg-cyan-500/10">7D</Button>
-                    <Button variant="ghost" size="sm" className="text-gray-400 hover:bg-purple-500/10">30D</Button>
-                    <Button variant="ghost" size="sm" className="text-gray-400 hover:bg-purple-500/10">90D</Button>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="p-6">
-                <div className="h-64 flex items-end justify-between gap-4">
-                  {moodTrendData.map((day, index) => (
-                    <div key={day.day} className="flex-1 flex flex-col items-center group">
-                      <div 
-                        className="w-full bg-gradient-to-t from-cyan-500/60 to-purple-500/80 rounded-t transition-all duration-500 hover:from-cyan-500/80 hover:to-purple-500/100 relative"
-                        style={{ height: `${day.score * 2.8}px` }}
-                      >
-                        {/* Hover popup */}
-                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/80 text-white text-xs rounded px-2 py-1 whitespace-nowrap">
-                          <div className="font-medium">{day.day}</div>
-                          <div>Score: {day.score}</div>
-                        </div>
-                      </div>
-                      <div className="text-xs text-gray-400 mt-2">{day.day}</div>
-                      <div className="text-xs text-white">{day.score}</div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            {/* MoodTrendChart Widget - Full Width */}
+            <div className="w-full">
+              <MoodTrendChart
+                data={moodTrendData}
+                timeframe={selectedTimeframe}
+                setTimeframe={setSelectedTimeframe}
+              />
+            </div>
 
             {/* Trending Forum Topics */}
             <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">

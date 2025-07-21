@@ -242,12 +242,8 @@ export const MoorMeterDashboard: React.FC = () => {
               <NewsWidget articles={newsArticles} loading={newsLoading} />
             </div>
 
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <MoodTrendChart
-                data={generateMockTrendData()}
-                timeframe={selectedTimeframe}
-                setTimeframe={setSelectedTimeframe}
-              />
+                        {/* Full-width layout with consistent spacing */}
+            <div className="w-full space-y-6">
               <TrendingTopicsWidget topics={trendingTopics} />
             </div>
 
@@ -269,7 +265,7 @@ export const MoorMeterDashboard: React.FC = () => {
               </TabsList>
 
                             <TabsContent value="Watchlist">
-                <WatchlistModule />
+                <WatchlistModule searchQuery="" onSearchChange={() => {}} />
               </TabsContent>
 
               <TabsContent value="Analytics">
