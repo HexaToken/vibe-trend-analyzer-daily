@@ -47,8 +47,8 @@ const App = () => {
         return <Analytics />;
       case "history":
         return <HistoricalData />;
-      case "community":
-        return <Community />;
+            case "community":
+        return <CommunityRooms />;
       case "profile":
         return (
           <ProtectedRoute
