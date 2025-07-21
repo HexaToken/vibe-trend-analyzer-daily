@@ -26,6 +26,7 @@ interface NewsItem {
   isRising: boolean;
   category: string;
   aiAnalysis?: string;
+  articleUrl?: string;
 }
 
 interface SmartNewsFeedProps {
