@@ -102,13 +102,13 @@ export const FuturisticHomepage: React.FC = () => {
   ]);
 
   const [moodTrendData] = useState([
-    { day: 'Mon', score: 58 },
-    { day: 'Tue', score: 62 },
-    { day: 'Wed', score: 55 },
-    { day: 'Thu', score: 68 },
-    { day: 'Fri', score: 72 },
-    { day: 'Sat', score: 69 },
-    { day: 'Sun', score: 72 }
+    { date: 'Mon', score: 58, stocks: 55, news: 62, social: 57 },
+    { date: 'Tue', score: 62, stocks: 58, news: 65, social: 63 },
+    { date: 'Wed', score: 55, stocks: 52, news: 58, social: 55 },
+    { date: 'Thu', score: 68, stocks: 65, news: 71, social: 68 },
+    { date: 'Fri', score: 72, stocks: 68, news: 75, social: 74 },
+    { date: 'Sat', score: 69, stocks: 66, news: 72, social: 70 },
+    { date: 'Sun', score: 72, stocks: 69, news: 74, social: 73 }
   ]);
 
     const [smartNews] = useState([
