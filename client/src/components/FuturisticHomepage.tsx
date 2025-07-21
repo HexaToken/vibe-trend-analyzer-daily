@@ -67,6 +67,7 @@ export const FuturisticHomepage: React.FC = () => {
   const { setMoodScore } = useMoodTheme();
     const [searchFocused, setSearchFocused] = useState(false);
                                         const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'tool'>('home');
+      const [activeToolSubtab, setActiveToolSubtab] = useState("Market");
     const [activeMarketSubtab, setActiveMarketSubtab] = useState("Tools");
   const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
   
