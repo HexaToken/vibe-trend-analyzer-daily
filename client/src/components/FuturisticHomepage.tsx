@@ -77,7 +77,7 @@ interface TrendingTopic {
 export const FuturisticHomepage: React.FC = () => {
   const { setMoodScore } = useMoodTheme();
     const [searchFocused, setSearchFocused] = useState(false);
-                                                                                const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'tool' | 'market' | 'crypto'>('home');
+                                                                                const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'tool' | 'market' | 'crypto' | 'charts'>('home');
       const [activeToolSubtab, setActiveToolSubtab] = useState("Market");
     const [activeMarketSubtab, setActiveMarketSubtab] = useState("Tools");
   const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
@@ -344,14 +344,14 @@ export const FuturisticHomepage: React.FC = () => {
                     <button
                       className={cn(
                         "text-sm font-medium transition-all duration-300 relative group flex items-center gap-1",
-                        activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'crypto'
+                        activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'crypto' || activeSection === 'charts'
                           ? "text-pink-400"
                           : "text-gray-400 hover:text-white"
                       )}
                     >
                       Finance
                       <ChevronDown className="w-3 h-3 transition-transform duration-200 group-hover:rotate-180" />
-                      {(activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'crypto') && (
+                      {(activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'crypto' || activeSection === 'charts') && (
                         <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
                       )}
                       <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -388,6 +388,13 @@ export const FuturisticHomepage: React.FC = () => {
                     >
                       <span className="mr-2">₿</span>
                       Crypto
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => setActiveSection('charts')}
+                      className="hover:bg-indigo-500/20 focus:bg-indigo-500/20 cursor-pointer transition-colors duration-200"
+                    >
+                      <BarChart3 className="w-4 h-4 mr-2" />
+                      Charts
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -489,7 +496,7 @@ export const FuturisticHomepage: React.FC = () => {
                     variant="ghost"
                     className={cn(
                       "w-full justify-between text-left transition-colors duration-200",
-                      (activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'crypto')
+                      (activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'crypto' || activeSection === 'charts')
                         ? "text-pink-400 bg-pink-500/10"
                         : "text-gray-300 hover:text-white hover:bg-purple-500/10"
                     )}
@@ -572,6 +579,23 @@ export const FuturisticHomepage: React.FC = () => {
                     >
                       <span className="mr-2">₿</span>
                       Crypto
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      onClick={() => {
+                        setActiveSection('charts');
+                        setMobileMenuOpen(false);
+                        setMobileFinanceOpen(false);
+                      }}
+                      className={cn(
+                        "w-full justify-start text-sm transition-colors duration-200",
+                        activeSection === 'charts'
+                          ? "text-indigo-400 bg-indigo-500/10"
+                          : "text-gray-400 hover:text-indigo-300 hover:bg-indigo-500/5"
+                      )}
+                    >
+                      <BarChart3 className="w-4 h-4 mr-2" />
+                      Charts
                     </Button>
                   </div>
                 </CollapsibleContent>
