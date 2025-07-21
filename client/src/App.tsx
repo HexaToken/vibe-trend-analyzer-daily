@@ -11,6 +11,7 @@ import { SentimentDashboard } from "@/components/SentimentDashboard";
 import { Analytics } from "@/components/Analytics";
 import { HistoricalData } from "@/components/HistoricalData";
 import { CommunityRooms } from "@/components/social/CommunityRooms";
+import { Watchlist } from "@/components/Watchlist";
 import { Settings } from "@/components/Settings";
 import { UserProfile } from "@/components/profile/UserProfile";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
