@@ -32,6 +32,7 @@ import { PrivateRoomsContainer } from './privateRooms/PrivateRoomsContainer';
 import { SentimentHeatMap } from './moorMeter/SentimentHeatMap';
 import { MoodTrendChart } from './moorMeter/MoodTrendChart';
 import { SmartNewsFeed } from './SmartNewsFeed';
+import { MarketMoodPage } from './MarketMoodPage';
 import {
   DropdownMenu,
   DropdownMenuContent,
