@@ -85,6 +85,7 @@ export const FuturisticHomepage: React.FC = () => {
   const [selectedFinanceStock, setSelectedFinanceStock] = useState("AAPL");
   const [financeSearchQuery, setFinanceSearchQuery] = useState("");
   const [mobileFinanceOpen, setMobileFinanceOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedTimeframe, setSelectedTimeframe] = useState<"1D" | "7D" | "30D">("7D");
 
   // Core mood data
