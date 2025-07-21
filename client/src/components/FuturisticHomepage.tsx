@@ -271,14 +271,14 @@ export const FuturisticHomepage: React.FC = () => {
                     <button
                       className={cn(
                         "text-sm font-medium transition-all duration-300 relative group flex items-center gap-1",
-                        activeSection === 'community' || activeSection === 'chat'
+                                                activeSection === 'community' || activeSection === 'chat' || activeSection === 'space'
                           ? "text-pink-400"
                           : "text-gray-400 hover:text-white"
                       )}
                     >
                       Community
                       <ChevronDown className="w-3 h-3" />
-                      {(activeSection === 'community' || activeSection === 'chat') && (
+                                            {(activeSection === 'community' || activeSection === 'chat' || activeSection === 'space') && (
                         <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
                       )}
                       <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
