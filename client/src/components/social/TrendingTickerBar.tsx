@@ -56,20 +56,20 @@ export const TrendingTickerBar: React.FC<TrendingTickerBarProps> = ({ className 
 
   const marketSummary = 4.32; // Overall market change percentage
 
-  const getStatusColor = (color: string) => {
+    const getStatusColor = (color: string) => {
     switch (color) {
       case 'green':
-        return 'bg-emerald-500';
+        return 'bg-[#00FF99]';
       case 'red':
-        return 'bg-red-500';
+        return 'bg-[#FF4B4B]';
       case 'blue':
       default:
-        return 'bg-blue-500';
+        return 'bg-[#61A0FF]';
     }
   };
 
   const getChangeColor = (change: number) => {
-    return change >= 0 ? 'text-emerald-400' : 'text-red-400';
+    return change >= 0 ? 'text-[#22c55e]' : 'text-[#ef4444]';
   };
 
   const formatChange = (change: number) => {
