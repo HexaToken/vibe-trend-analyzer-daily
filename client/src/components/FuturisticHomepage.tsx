@@ -531,52 +531,52 @@ export const FuturisticHomepage: React.FC = () => {
                   </div>
                 </TabsContent>
 
-                <TabsContent value="Overview" className="mt-6">
+                                <TabsContent value="Analysis" className="mt-6">
                   <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-8">
                     <div className="text-center space-y-4">
-                      <div className="text-6xl mb-4">📋</div>
-                      <h3 className="text-2xl font-bold text-white mb-2">Market Overview</h3>
+                      <div className="text-6xl mb-4">📊</div>
+                      <h3 className="text-2xl font-bold text-white mb-2">Advanced Analysis Suite</h3>
                       <p className="text-gray-400 mb-4">
-                        Real-time market summary, indices, and key metrics.
+                        Comprehensive technical and fundamental analysis tools.
                       </p>
                       <div className="flex flex-wrap gap-2 justify-center">
-                        <Badge className="bg-green-500/20 text-green-300 border-green-500/30">Indices</Badge>
-                        <Badge className="bg-green-500/20 text-green-300 border-green-500/30">Sectors</Badge>
-                        <Badge className="bg-green-500/20 text-green-300 border-green-500/30">Top Movers</Badge>
+                        <Badge className="bg-orange-500/20 text-orange-300 border-orange-500/30">Technical Analysis</Badge>
+                        <Badge className="bg-orange-500/20 text-orange-300 border-orange-500/30">Chart Patterns</Badge>
+                        <Badge className="bg-orange-500/20 text-orange-300 border-orange-500/30">Indicators</Badge>
                       </div>
                     </div>
                   </div>
                 </TabsContent>
 
-                <TabsContent value="News" className="mt-6">
+                <TabsContent value="Scanner" className="mt-6">
                   <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-8">
                     <div className="text-center space-y-4">
-                      <div className="text-6xl mb-4">📰</div>
-                      <h3 className="text-2xl font-bold text-white mb-2">Market News</h3>
+                      <div className="text-6xl mb-4">🔍</div>
+                      <h3 className="text-2xl font-bold text-white mb-2">Market Scanner</h3>
                       <p className="text-gray-400 mb-4">
-                        Latest market news, earnings reports, and financial updates.
+                        Real-time stock and crypto scanner with custom filters.
                       </p>
                       <div className="flex flex-wrap gap-2 justify-center">
-                        <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30">Breaking News</Badge>
-                        <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30">Earnings</Badge>
-                        <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30">Economic Data</Badge>
+                        <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">Price Alerts</Badge>
+                        <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">Volume Spikes</Badge>
+                        <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">Breakouts</Badge>
                       </div>
                     </div>
                   </div>
                 </TabsContent>
 
-                <TabsContent value="Insights" className="mt-6">
+                <TabsContent value="Alerts" className="mt-6">
                   <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-8">
                     <div className="text-center space-y-4">
-                      <div className="text-6xl mb-4">🧠</div>
-                      <h3 className="text-2xl font-bold text-white mb-2">AI Market Insights</h3>
+                      <div className="text-6xl mb-4">🔔</div>
+                      <h3 className="text-2xl font-bold text-white mb-2">Smart Alerts</h3>
                       <p className="text-gray-400 mb-4">
-                        AI-powered market analysis, predictions, and trading insights.
+                        Intelligent alerts and notifications for trading opportunities.
                       </p>
                       <div className="flex flex-wrap gap-2 justify-center">
-                        <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30">AI Analysis</Badge>
-                        <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30">Predictions</Badge>
-                        <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30">Sentiment</Badge>
+                        <Badge className="bg-red-500/20 text-red-300 border-red-500/30">Price Alerts</Badge>
+                        <Badge className="bg-red-500/20 text-red-300 border-red-500/30">News Alerts</Badge>
+                        <Badge className="bg-red-500/20 text-red-300 border-red-500/30">Technical Signals</Badge>
                       </div>
                     </div>
                   </div>
