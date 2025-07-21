@@ -404,7 +404,7 @@ export const FuturisticHomepage: React.FC = () => {
         ) : activeSection === 'rooms' ? (
           <PrivateRoomsContainer />
                                 ) : activeSection === 'tool' ? (
-                    <div></div>
+                                        <div></div>
 
             
                 
