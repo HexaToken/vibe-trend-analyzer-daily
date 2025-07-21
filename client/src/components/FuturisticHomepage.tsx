@@ -313,13 +313,7 @@ export const FuturisticHomepage: React.FC = () => {
                     align="start"
                     className="bg-black/90 backdrop-blur-xl border-purple-500/30 text-white"
                   >
-                                        <DropdownMenuItem
-                      onClick={() => setActiveSection('community')}
-                      className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer"
-                    >
-                      <Users className="w-4 h-4 mr-2" />
-                      Community Forum
-                    </DropdownMenuItem>
+                    
                                         <DropdownMenuItem
                       onClick={() => setActiveSection('space')}
                       className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer"
