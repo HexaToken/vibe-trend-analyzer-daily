@@ -416,6 +416,8 @@ export const FuturisticHomepage: React.FC = () => {
 
                                         {activeSection === 'watchlist' ? (
           <WatchlistContainerBlock />
+        ) : activeSection === 'news-feed' ? (
+          <SmartNewsFeed />
         ) : activeSection === 'chat' ? (
           <ChatInterface />
         ) : activeSection === 'space' ? (
