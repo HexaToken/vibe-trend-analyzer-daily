@@ -552,7 +552,8 @@ export const StockChannelHub: React.FC = () => {
             </div>
           </>
         )}
-      </div>
+            </div>
+    </div>
     </div>
   );
 };
