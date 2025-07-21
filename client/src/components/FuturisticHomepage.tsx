@@ -5,7 +5,7 @@ import { Badge } from './ui/badge';
 import { Input } from './ui/input';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import {
-  Search,
+    Search,
   TrendingUp,
   TrendingDown,
   ArrowUp,
@@ -17,11 +17,21 @@ import {
   Moon,
   Plus,
   Flame,
-  Newspaper
+  Newspaper,
+  ChevronDown,
+  MessageSquare,
+  Users
 } from 'lucide-react';
 import { useMoodTheme } from '../contexts/MoodThemeContext';
 import { cn } from '../lib/utils';
 import { WatchlistContainerBlock } from './watchlist/WatchlistContainerBlock';
+import { ChatInterface } from './moorMeter/ChatInterface';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from './ui/dropdown-menu';
 
 interface MoodScore {
   overall: number;
@@ -52,7 +62,7 @@ interface TrendingTopic {
 export const FuturisticHomepage: React.FC = () => {
   const { setMoodScore } = useMoodTheme();
   const [searchFocused, setSearchFocused] = useState(false);
-  const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community'>('home');
+    const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat'>('home');
   
   // Core mood data
   const [moodScore] = useState<MoodScore>({
@@ -232,7 +242,7 @@ export const FuturisticHomepage: React.FC = () => {
               </div>
               
               <nav className="hidden md:flex items-center gap-6">
-                {['Home', 'Market Mood', 'Watchlist', 'News Feed', 'Community'].map((item, index) => (
+                                {['Home', 'Market Mood', 'Watchlist', 'News Feed'].map((item, index) => (
                                     <button
                     key={item}
                     onClick={() => {
@@ -252,7 +262,47 @@ export const FuturisticHomepage: React.FC = () => {
                     )}
                     <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </button>
-                ))}
+                                ))}
+
+                {/* Community Dropdown */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button
+                      className={cn(
+                        "text-sm font-medium transition-all duration-300 relative group flex items-center gap-1",
+                        activeSection === 'community' || activeSection === 'chat'
+                          ? "text-pink-400"
+                          : "text-gray-400 hover:text-white"
+                      )}
+                    >
+                      Community
+                      <ChevronDown className="w-3 h-3" />
+                      {(activeSection === 'community' || activeSection === 'chat') && (
+                        <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
+                      )}
+                      <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent
+                    align="start"
+                    className="bg-black/90 backdrop-blur-xl border-purple-500/30 text-white"
+                  >
+                    <DropdownMenuItem
+                      onClick={() => setActiveSection('community')}
+                      className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer"
+                    >
+                      <Users className="w-4 h-4 mr-2" />
+                      Community Forum
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => setActiveSection('chat')}
+                      className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer"
+                    >
+                      <MessageSquare className="w-4 h-4 mr-2" />
+                      Chat
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </nav>
             </div>
 
@@ -305,8 +355,10 @@ export const FuturisticHomepage: React.FC = () => {
             {/* Main Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-8">
 
-        {activeSection === 'watchlist' ? (
+                {activeSection === 'watchlist' ? (
           <WatchlistContainerBlock />
+        ) : activeSection === 'chat' ? (
+          <ChatInterface />
         ) : (
           <>
         

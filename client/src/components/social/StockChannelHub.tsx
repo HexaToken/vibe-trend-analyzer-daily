@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { TrendingTickerBar } from "./TrendingTickerBar";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { Input } from "../ui/input";
@@ -301,8 +302,13 @@ export const StockChannelHub: React.FC = () => {
       channel.companyName.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
-  return (
-    <div className="flex h-full min-h-[600px] bg-white dark:bg-gray-900 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+    return (
+    <div className="flex flex-col h-full min-h-[600px]">
+      {/* Trending Ticker Bar */}
+      <TrendingTickerBar />
+
+      {/* Main Chat Interface */}
+      <div className="flex h-full bg-white dark:bg-gray-900 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
       {/* Left Sidebar - Stock Channels */}
       <div className="w-fit pr-[3%] max-w-[220px] bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col min-h-0">
         {/* Sidebar Header */}
@@ -546,7 +552,8 @@ export const StockChannelHub: React.FC = () => {
             </div>
           </>
         )}
-      </div>
+            </div>
+    </div>
     </div>
   );
 };
