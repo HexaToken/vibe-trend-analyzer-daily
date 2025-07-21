@@ -154,7 +154,7 @@ export const PolygonDemo = () => {
               </div>
             ) : dividendsData?.results && dividendsData.results.length > 0 ? (
               <div className="space-y-4 max-h-96 overflow-y-auto">
-                {dividendsData.results.slice(0, 10).map((dividend, index) => (
+                {dividendsData.results.slice(0, 10).map((dividend: any, index: number) => (
                   <div key={index} className="p-3 border rounded-lg">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
