@@ -349,12 +349,8 @@ export const MoorMeterDashboard: React.FC = () => {
                 </div>
               </TabsContent>
 
-              <TabsContent value="Forum">
+                            <TabsContent value="Forum">
                 <CommunityForum />
-              </TabsContent>
-
-              <TabsContent value="Private">
-                <PrivateRoomsContainer />
               </TabsContent>
             </Tabs>
           </div>
