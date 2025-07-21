@@ -410,15 +410,7 @@ export const FuturisticHomepage: React.FC = () => {
                 
 
                                 
-                  <div className="space-y-6">
-                    <div className="mb-6">
-                      <h2 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
-                        📊 Advanced Market Analysis Tools
-                      </h2>
-                      <p className="text-gray-400">
-                        Professional tools for market analysis and visualization
-                      </p>
-                    </div>
+                  
 
                     {/* Tools Sub-subtabs */}
                     <Tabs value={activeToolsSubtab} onValueChange={setActiveToolsSubtab}>
