@@ -22,7 +22,9 @@ import {
   ChevronDown,
   ChevronRight,
   MessageSquare,
-  Users
+  Users,
+  Menu,
+  X
 } from 'lucide-react';
 import { useMoodTheme } from '../contexts/MoodThemeContext';
 import { cn } from '../lib/utils';
