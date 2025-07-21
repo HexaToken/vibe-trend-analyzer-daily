@@ -258,24 +258,7 @@ export const Navigation = ({
                 </DropdownMenuContent>
               </DropdownMenu>
 
-                            {/* Tool Dropdown */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="flex items-center gap-1">
-                    Tool
-                    <ChevronDown className="h-3 w-3" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="start">
-                  <DropdownMenuItem
-                    onClick={() => onSectionChange("market")}
-                    className="flex items-center gap-2"
-                  >
-                    <BarChart3 className="h-4 w-4" />
-                    Market
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+                            
             </div>
 
                         {/* User Section */}
