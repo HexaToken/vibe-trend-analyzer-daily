@@ -40,6 +40,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from './ui/collapsible';
 
 interface MoodScore {
   overall: number;
@@ -501,7 +506,7 @@ export const FuturisticHomepage: React.FC = () => {
                   value="financial-reports"
                   className="data-[state=active]:bg-purple-600/30 data-[state=active]:text-purple-300 text-gray-400 flex items-center gap-2"
                 >
-                  📁 Financial Reports
+                  ��� Financial Reports
                 </TabsTrigger>
               </TabsList>
 
