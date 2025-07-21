@@ -401,21 +401,61 @@ export const FuturisticHomepage: React.FC = () => {
           <SpaceSwitcherWidget />
         ) : activeSection === 'rooms' ? (
           <PrivateRoomsContainer />
-                        ) : activeSection === 'market' ? (
+                                ) : activeSection === 'tool' ? (
           <div className="space-y-6">
-            {/* Market Header */}
+            {/* Tool Header */}
             <div className="text-center space-y-4">
               <h1 className="text-4xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                📈 Market
+                🔧 Tool
               </h1>
               <p className="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
-                Comprehensive market analysis, tools, and insights
+                Professional trading and analysis tools suite
               </p>
             </div>
 
-            {/* Market Subtabs */}
+            {/* Tool Subtabs */}
             <div className="max-w-7xl mx-auto">
-              <Tabs value={activeMarketSubtab} onValueChange={setActiveMarketSubtab}>
+              <Tabs value={activeToolSubtab} onValueChange={setActiveToolSubtab}>
+                <TabsList className="grid w-full grid-cols-4 bg-black/40 backdrop-blur-xl border border-purple-500/20">
+                  <TabsTrigger
+                    value="Market"
+                    className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-white text-gray-400"
+                  >
+                    📈 Market
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="Analysis"
+                    className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-white text-gray-400"
+                  >
+                    📊 Analysis
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="Scanner"
+                    className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-white text-gray-400"
+                  >
+                    🔍 Scanner
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="Alerts"
+                    className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-white text-gray-400"
+                  >
+                    🔔 Alerts
+                  </TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="Market" className="mt-6">
+                  <div className="space-y-6">
+                    <div className="mb-6">
+                      <h2 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
+                        📈 Market Tools & Analysis
+                      </h2>
+                      <p className="text-gray-400">
+                        Comprehensive market analysis, tools, and insights
+                      </p>
+                    </div>
+
+                    {/* Market Sub-subtabs */}
+                    <Tabs value={activeMarketSubtab} onValueChange={setActiveMarketSubtab}>
                 <TabsList className="grid w-full grid-cols-4 bg-black/40 backdrop-blur-xl border border-purple-500/20">
                   <TabsTrigger
                     value="Tools"
@@ -879,7 +919,7 @@ export const FuturisticHomepage: React.FC = () => {
             {/* Footer Status */}
             <div className="text-center">
               <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30">
-                Mood Score API: ✅ Live
+                Mood Score API: �� Live
               </Badge>
             </div>
                     </div>
