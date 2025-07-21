@@ -61,6 +61,7 @@ import { AISummaryWidget } from "./stockChannel/AISummaryWidget";
 import { TrendingTopicsWidget as EnhancedTrendingTopicsWidget } from "./stockChannel/TrendingTopicsWidget";
 
 import { CommunityForum } from "./community/CommunityForum";
+import { SpaceToggleWidget } from "./community/SpaceToggleWidget";
 import { ChatInterface } from "./moorMeter/ChatInterface";
 import { CryptoChannels } from "./social/CryptoChannels";
 import { OffTopicLounge } from "./social/OffTopicLounge";
