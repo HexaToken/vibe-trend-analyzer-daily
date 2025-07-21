@@ -265,8 +265,7 @@ export const MoorMeterDashboard: React.FC = () => {
         return (
           <div className="space-y-6">
             <Tabs value={activeToolsSubtab} onValueChange={setActiveToolsSubtab}>
-              <TabsList>
-                <TabsTrigger value="HeatMap">Heat Map</TabsTrigger>
+                            <TabsList>
                 <TabsTrigger value="Watchlist">Watchlist</TabsTrigger>
                 <TabsTrigger value="Analytics">Analytics</TabsTrigger>
               </TabsList>
