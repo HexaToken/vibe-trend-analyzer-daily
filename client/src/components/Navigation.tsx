@@ -120,11 +120,11 @@ export const Navigation = ({
     setAuthModalOpen(true);
   };
 
-  const handleLogout = () => {
+    const handleLogout = () => {
     logout();
-    // Redirect to moorMeter if currently on protected pages
+    // Redirect to home if currently on protected pages
     if (activeSection === "profile") {
-      onSectionChange("moorMeter");
+      onSectionChange("home");
     }
   };
 
