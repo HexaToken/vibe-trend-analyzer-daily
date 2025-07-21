@@ -461,7 +461,9 @@ export const FuturisticHomepage: React.FC = () => {
                 </DropdownMenu>
               </div>
 
-                                <TabsContent value="Market" className="mt-6">
+                                              {/* Content based on dropdown selection */}
+              {activeToolSubtab === "Market" && (
+                <div className="mt-6">
                   <div className="space-y-6">
                     <div className="mb-6">
                       <h2 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
