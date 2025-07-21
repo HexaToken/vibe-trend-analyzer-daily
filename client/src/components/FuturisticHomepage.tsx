@@ -296,12 +296,19 @@ export const FuturisticHomepage: React.FC = () => {
                       <Users className="w-4 h-4 mr-2" />
                       Community Forum
                     </DropdownMenuItem>
-                    <DropdownMenuItem
+                                        <DropdownMenuItem
                       onClick={() => setActiveSection('space')}
                       className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer"
                     >
                       <Users className="w-4 h-4 mr-2" />
                       Space
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => setActiveSection('rooms')}
+                      className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer"
+                    >
+                      <Users className="w-4 h-4 mr-2" />
+                      Rooms
                     </DropdownMenuItem>
                     <DropdownMenuItem
                       onClick={() => setActiveSection('chat')}
