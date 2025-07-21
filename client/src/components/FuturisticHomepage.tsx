@@ -5,7 +5,7 @@ import { Badge } from './ui/badge';
 import { Input } from './ui/input';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import {
-  Search,
+    Search,
   TrendingUp,
   TrendingDown,
   ArrowUp,
@@ -17,7 +17,10 @@ import {
   Moon,
   Plus,
   Flame,
-  Newspaper
+  Newspaper,
+  ChevronDown,
+  MessageSquare,
+  Users
 } from 'lucide-react';
 import { useMoodTheme } from '../contexts/MoodThemeContext';
 import { cn } from '../lib/utils';
