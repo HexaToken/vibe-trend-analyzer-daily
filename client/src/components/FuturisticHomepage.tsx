@@ -413,7 +413,7 @@ export const FuturisticHomepage: React.FC = () => {
                   
 
                     
-                      <TabsList className="grid w-full grid-cols-3 bg-black/20 backdrop-blur-xl border border-gray-700/50">
+                      
                         <TabsTrigger
                           value="HeatMap"
                           className="data-[state=active]:bg-gray-700/50 data-[state=active]:text-white text-gray-400"
