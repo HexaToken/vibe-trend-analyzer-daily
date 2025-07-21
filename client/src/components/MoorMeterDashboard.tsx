@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { Input } from "./ui/input";
 import { Progress } from "./ui/progress";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import {
   DropdownMenu,
@@ -23,26 +23,8 @@ import {
   Zap,
   Globe,
   MessageCircle,
-  BarChart3,
-  Star,
-  Flame,
-  Users,
-  Calendar,
-  Settings,
-  Moon,
-  Sun,
   Menu,
   X,
-  ChevronDown,
-  ChevronUp,
-  ExternalLink,
-  RefreshCw,
-  Target,
-  Activity,
-  Flag,
-  Lock,
-  MessageSquare,
-  Hash,
 } from "lucide-react";
 import { useStockSentiment } from "../hooks/useStockSentiment";
 import { useCombinedBusinessNews } from "../hooks/useCombinedBusinessNews";
@@ -105,10 +87,7 @@ export const MoorMeterDashboard: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTimeframe, setSelectedTimeframe] = useState<"1D" | "7D" | "30D">("7D");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("Home");
-    const [activeToolsSubtab, setActiveToolsSubtab] = useState("Watchlist");
-  const [activeCommunitySubtab, setActiveCommunitySubtab] = useState("Chat");
-  const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false);
+
   const [selectedCategory, setSelectedCategory] = useState<"General" | "Crypto">("General");
 
   const [sentimentTimeframe, setSentimentTimeframe] = useState<"24h" | "7d" | "30d">("24h");
@@ -228,121 +207,12 @@ export const MoorMeterDashboard: React.FC = () => {
   ];
 
   const renderMainContent = () => {
-    switch (activeTab) {
-      case "Home":
-        return (
-          <div className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-                            <MoodScoreHero
-                moodScore={localMoodScore}
-                timeframe={selectedTimeframe}
-                onTimeframeChange={setSelectedTimeframe}
-              />
-              <TopStocksModule />
-              <NewsWidget articles={newsArticles} loading={newsLoading} />
-            </div>
-
-                        {/* Full-width layout with consistent spacing */}
-            <div className="w-full space-y-6">
-              <TrendingTopicsWidget topics={trendingTopics} />
-            </div>
-
-                        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-              <PersonalMoodCard />
-              <WatchlistWidget />
-              <AIInsightWidget moodScore={localMoodScore} />
-            </div>
-          </div>
-        );
-
-      case "Tools":
-        return (
-          <div className="space-y-6">
-            <Tabs value={activeToolsSubtab} onValueChange={setActiveToolsSubtab}>
-                            <TabsList>
-                <TabsTrigger value="Watchlist">Watchlist</TabsTrigger>
-                <TabsTrigger value="Analytics">Analytics</TabsTrigger>
-              </TabsList>
-
-                            <TabsContent value="Watchlist">
-                <WatchlistModule searchQuery="" onSearchChange={() => {}} />
-              </TabsContent>
-
-              <TabsContent value="Analytics">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <LivePollsWidget />
-                  <AISummaryWidget />
-                  <EnhancedTrendingTopicsWidget />
-                </div>
-              </TabsContent>
-            </Tabs>
-          </div>
-        );
-
-      case "Community":
-        return (
-          <div className="space-y-6">
-            <Tabs value={activeCommunitySubtab} onValueChange={setActiveCommunitySubtab}>
-                            <TabsList>
-                                <TabsTrigger value="Chat">Live Chat</TabsTrigger>
-                <TabsTrigger value="Rooms">Rooms</TabsTrigger>
-                <TabsTrigger value="Space">Space</TabsTrigger>
-                <TabsTrigger value="Forum">Forum</TabsTrigger>
-              </TabsList>
-
-              <TabsContent value="Chat">
-                <ChatInterface />
-              </TabsContent>
-
-                            <TabsContent value="Rooms">
-                <div className="space-y-6">
-                  <CommunityRooms />
-                  <CryptoChannels />
-                  <OffTopicLounge />
-                </div>
-              </TabsContent>
-
-                                          <TabsContent value="Space">
-                <div className="space-y-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <Hash className="h-5 w-5 text-purple-400" />
-                        Space Central
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="text-center py-8">
-                        <div className="text-6xl mb-4">🚀</div>
-                        <h3 className="text-xl font-semibold mb-2">Welcome to Space Central</h3>
-                        <p className="text-muted-foreground mb-4">
-                          A dedicated space for community discussions and interactions.
-                        </p>
-                        <p className="text-sm text-muted-foreground">
-                          For the full Space experience with crypto channels and off-topic lounge,
-                          visit the Futuristic Homepage → Community → Space.
-                        </p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </TabsContent>
-
-                            <TabsContent value="Forum">
-                <CommunityForum />
-              </TabsContent>
-            </Tabs>
-          </div>
-        );
-
-      default:
-        return (
-          <div className="text-center py-12">
-            <h2 className="text-xl font-semibold mb-2">Coming Soon</h2>
-            <p className="text-muted-foreground">This section is under development.</p>
-          </div>
-        );
-    }
+    return (
+      <div className="text-center py-12">
+        <h2 className="text-xl font-semibold mb-2">Dashboard Cleared</h2>
+        <p className="text-muted-foreground">The dashboard layout has been safely removed while preserving all reusable components.</p>
+      </div>
+    );
   };
 
   return (
@@ -395,28 +265,7 @@ export const MoorMeterDashboard: React.FC = () => {
           </div>
         </div>
 
-        {/* Navigation */}
-        <div className={cn(
-          "mb-6 transition-all duration-300",
-          mobileMenuOpen ? "block" : "hidden lg:block"
-        )}>
-          <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-3 lg:w-auto lg:flex">
-              <TabsTrigger value="Home" className="flex items-center gap-2">
-                <BarChart3 className="h-4 w-4" />
-                <span className="hidden sm:inline">Home</span>
-              </TabsTrigger>
-              <TabsTrigger value="Tools" className="flex items-center gap-2">
-                <Activity className="h-4 w-4" />
-                <span className="hidden sm:inline">Tools</span>
-              </TabsTrigger>
-              <TabsTrigger value="Community" className="flex items-center gap-2">
-                <Users className="h-4 w-4" />
-                <span className="hidden sm:inline">Community</span>
-              </TabsTrigger>
-            </TabsList>
-          </Tabs>
-        </div>
+
 
         {/* Main Content */}
         {renderMainContent()}

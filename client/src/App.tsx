@@ -38,7 +38,7 @@ import { FuturisticHomepage } from "@/components/FuturisticHomepage";
 const queryClient = new QueryClient();
 
 const App = () => {
-  const [activeSection, setActiveSection] = useState("moorMeter");
+  const [activeSection, setActiveSection] = useState("futuristic-home");
 
   const renderContent = () => {
     switch (activeSection) {
@@ -90,7 +90,7 @@ const App = () => {
         return <MoorMeterDashboard />;
 
       default:
-        return <MoorMeterDashboard />;
+        return <FuturisticHomepage />;
     }
   };
 
