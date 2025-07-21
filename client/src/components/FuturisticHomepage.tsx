@@ -73,6 +73,7 @@ export const FuturisticHomepage: React.FC = () => {
       const [activeToolSubtab, setActiveToolSubtab] = useState("Market");
     const [activeMarketSubtab, setActiveMarketSubtab] = useState("Tools");
   const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
+  const [activeFinanceTab, setActiveFinanceTab] = useState("risk-analysis");
   const [selectedTimeframe, setSelectedTimeframe] = useState<"1D" | "7D" | "30D">("7D");
 
   // Core mood data
