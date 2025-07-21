@@ -660,17 +660,30 @@ export const FuturisticHomepage: React.FC = () => {
                     <CardHeader>
                       <CardTitle className="text-white flex items-center gap-2">
                         🚨 Live Risk Alerts
+                        <Badge className="ml-auto bg-blue-500/20 text-blue-300 border-blue-500/30">
+                          ${selectedFinanceStock}
+                        </Badge>
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-3">
                         {[
-                          { alert: '$TSLA moved into High Risk Zone', icon: '📉', time: '2m ago', type: 'danger' },
+                          {
+                            alert: `$${selectedFinanceStock} ${selectedFinanceStock === 'TSLA' ? 'moved into High Risk Zone' : selectedFinanceStock === 'NVDA' ? 'showing strong momentum' : 'volatility detected'}`,
+                            icon: selectedFinanceStock === 'TSLA' ? '📉' : selectedFinanceStock === 'NVDA' ? '🚀' : '⚠️',
+                            time: '2m ago',
+                            type: selectedFinanceStock === 'TSLA' ? 'danger' : 'info'
+                          },
                           { alert: 'VIX spike detected', icon: '🚨', time: '5m ago', type: 'warning' },
-                          { alert: 'Tech sector volatility increased', icon: '⚠️', time: '8m ago', type: 'warning' },
+                          {
+                            alert: `${selectedFinanceStock === 'NVDA' ? 'AI sector' : selectedFinanceStock === 'TSLA' ? 'EV sector' : 'Tech sector'} volatility increased`,
+                            icon: '⚠️',
+                            time: '8m ago',
+                            type: 'warning'
+                          },
                           { alert: 'Bond yields rising rapidly', icon: '📊', time: '12m ago', type: 'info' }
                         ].map((item, i) => (
-                          <div key={i} className="flex items-center gap-3 p-2 rounded-lg bg-gray-800/50">
+                          <div key={i} className="flex items-center gap-3 p-2 rounded-lg bg-gray-800/50 hover:bg-gray-700/50 transition-colors">
                             <span className="text-lg">{item.icon}</span>
                             <div className="flex-1">
                               <div className="text-sm text-white">{item.alert}</div>
