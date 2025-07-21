@@ -1023,6 +1023,159 @@ export const FuturisticHomepage: React.FC = () => {
               </TabsContent>
             </Tabs>
           </div>
+        ) : activeSection === 'crypto' ? (
+          <div className="space-y-8">
+            {/* Crypto Hub Header */}
+            <div className="text-center mb-8">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <div className="w-16 h-16 bg-gradient-to-r from-orange-500/20 to-yellow-500/20 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/20">
+                  <span className="text-3xl">₿</span>
+                </div>
+                <h1 className="text-4xl font-bold bg-gradient-to-r from-orange-400 via-yellow-400 to-orange-400 bg-clip-text text-transparent">
+                  Crypto Hub
+                </h1>
+              </div>
+              <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+                Real-time cryptocurrency analysis and sentiment tracking
+              </p>
+            </div>
+
+            {/* Crypto Dashboard Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Bitcoin Card */}
+              <Card className="bg-black/40 border-orange-500/20 backdrop-blur-xl">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <span className="text-2xl">₿</span>
+                    Bitcoin
+                    <Badge className="ml-auto bg-orange-500/20 text-orange-300 border-orange-500/30">
+                      BTC
+                    </Badge>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="text-3xl font-bold text-white">$67,234</div>
+                    <div className="flex items-center gap-2">
+                      <ArrowUp className="w-4 h-4 text-green-400" />
+                      <span className="text-green-400 font-medium">+2.34%</span>
+                      <span className="text-gray-400 text-sm">24h</span>
+                    </div>
+                    <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                      <div className="h-full w-3/4 bg-gradient-to-r from-orange-400 to-yellow-400 transition-all duration-1000" />
+                    </div>
+                    <Badge className="bg-green-500/20 text-green-400 border-green-500/30 w-full justify-center">
+                      Bullish Sentiment
+                    </Badge>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Ethereum Card */}
+              <Card className="bg-black/40 border-blue-500/20 backdrop-blur-xl">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <span className="text-2xl">⟐</span>
+                    Ethereum
+                    <Badge className="ml-auto bg-blue-500/20 text-blue-300 border-blue-500/30">
+                      ETH
+                    </Badge>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="text-3xl font-bold text-white">$2,657</div>
+                    <div className="flex items-center gap-2">
+                      <ArrowDown className="w-4 h-4 text-red-400" />
+                      <span className="text-red-400 font-medium">-1.23%</span>
+                      <span className="text-gray-400 text-sm">24h</span>
+                    </div>
+                    <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                      <div className="h-full w-2/3 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-1000" />
+                    </div>
+                    <Badge className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30 w-full justify-center">
+                      Neutral Sentiment
+                    </Badge>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Top Altcoins */}
+              <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    <span className="text-2xl">🚀</span>
+                    Top Movers
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {[
+                      { symbol: 'SOL', change: '+8.45%', color: 'text-green-400' },
+                      { symbol: 'ADA', change: '+5.21%', color: 'text-green-400' },
+                      { symbol: 'DOT', change: '-2.87%', color: 'text-red-400' },
+                      { symbol: 'LINK', change: '+3.65%', color: 'text-green-400' }
+                    ].map((coin, i) => (
+                      <div key={i} className="flex items-center justify-between p-2 bg-gray-800/50 rounded-lg">
+                        <span className="text-white font-medium">{coin.symbol}</span>
+                        <span className={cn("font-bold", coin.color)}>{coin.change}</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Crypto News Section */}
+            <Card className="bg-black/40 border-orange-500/20 backdrop-blur-xl">
+              <CardHeader>
+                <CardTitle className="text-white flex items-center gap-2">
+                  <Newspaper className="w-6 h-6 text-orange-400" />
+                  Crypto News & Sentiment
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {[
+                    {
+                      headline: "Bitcoin ETFs see record inflows as institutional adoption grows",
+                      sentiment: 'bullish',
+                      source: "CoinDesk",
+                      time: "1h ago"
+                    },
+                    {
+                      headline: "Ethereum staking rewards reach new highs amid network upgrades",
+                      sentiment: 'bullish',
+                      source: "CryptoNews",
+                      time: "3h ago"
+                    },
+                    {
+                      headline: "Regulatory uncertainty continues to impact altcoin market",
+                      sentiment: 'bearish',
+                      source: "Bloomberg Crypto",
+                      time: "5h ago"
+                    }
+                  ].map((news, i) => (
+                    <div key={i} className="p-4 bg-gray-800/50 rounded-lg border border-gray-700/50 hover:border-orange-500/30 transition-all duration-300">
+                      <div className="flex items-start justify-between mb-2">
+                        <h4 className="text-white font-medium text-sm leading-relaxed flex-1">{news.headline}</h4>
+                        <Badge className={cn(
+                          "ml-3 flex-shrink-0",
+                          news.sentiment === 'bullish' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'
+                        )}>
+                          {news.sentiment === 'bullish' ? '🟢' : '🔴'}
+                        </Badge>
+                      </div>
+                      <div className="flex items-center justify-between text-xs text-gray-400">
+                        <span>{news.source}</span>
+                        <span>{news.time}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         ) : activeSection === 'news-feed' ? (
           <SmartNewsFeed />
         ) : activeSection === 'chat' ? (
