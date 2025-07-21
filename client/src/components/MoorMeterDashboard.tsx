@@ -270,20 +270,7 @@ export const MoorMeterDashboard: React.FC = () => {
                 <TabsTrigger value="Analytics">Analytics</TabsTrigger>
               </TabsList>
 
-              <TabsContent value="HeatMap">
-                <SentimentHeatMap
-                  timeframe={sentimentTimeframe}
-                  onTimeframeChange={setSentimentTimeframe}
-                  viewMode={sentimentViewMode}
-                  onViewModeChange={setSentimentViewMode}
-                  loading={heatmapLoading}
-                  onLoadingChange={setHeatmapLoading}
-                  hoveredCell={hoveredCell}
-                  onHoveredCellChange={setHoveredCell}
-                />
-              </TabsContent>
-
-              <TabsContent value="Watchlist">
+                            <TabsContent value="Watchlist">
                 <WatchlistModule />
               </TabsContent>
 
