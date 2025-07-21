@@ -448,6 +448,126 @@ export const FuturisticHomepage: React.FC = () => {
         </div>
       </nav>
 
+      {/* Mobile Navigation */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-black/95 backdrop-blur-xl border-b border-purple-500/20 animate-in slide-in-from-top duration-300">
+          <div className="max-w-7xl mx-auto px-6 py-4">
+            <div className="space-y-2">
+              {/* Regular Navigation Items */}
+              {['Home', 'Market Mood', 'Watchlist', 'News Feed'].map((item) => (
+                <Button
+                  key={item}
+                  variant="ghost"
+                  onClick={() => {
+                    const sectionKey = item.toLowerCase().replace(' ', '-') as typeof activeSection;
+                    setActiveSection(sectionKey);
+                    setMobileMenuOpen(false);
+                  }}
+                  className={cn(
+                    "w-full justify-start text-left transition-colors duration-200",
+                    activeSection === item.toLowerCase().replace(' ', '-')
+                      ? "text-pink-400 bg-pink-500/10"
+                      : "text-gray-300 hover:text-white hover:bg-purple-500/10"
+                  )}
+                >
+                  {item}
+                </Button>
+              ))}
+
+              {/* Finance Accordion */}
+              <Collapsible open={mobileFinanceOpen} onOpenChange={setMobileFinanceOpen}>
+                <CollapsibleTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className={cn(
+                      "w-full justify-between text-left transition-colors duration-200",
+                      (activeSection === 'finance' || activeSection === 'market')
+                        ? "text-pink-400 bg-pink-500/10"
+                        : "text-gray-300 hover:text-white hover:bg-purple-500/10"
+                    )}
+                  >
+                    Finance
+                    <ChevronRight
+                      className={cn(
+                        "w-4 h-4 transition-transform duration-200",
+                        mobileFinanceOpen && "rotate-90"
+                      )}
+                    />
+                  </Button>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="animate-in slide-in-from-top duration-200">
+                  <div className="ml-4 space-y-1 mt-2">
+                    <Button
+                      variant="ghost"
+                      onClick={() => {
+                        setActiveSection('finance');
+                        setMobileMenuOpen(false);
+                        setMobileFinanceOpen(false);
+                      }}
+                      className={cn(
+                        "w-full justify-start text-sm transition-colors duration-200",
+                        activeSection === 'finance'
+                          ? "text-green-400 bg-green-500/10"
+                          : "text-gray-400 hover:text-green-300 hover:bg-green-500/5"
+                      )}
+                    >
+                      <span className="mr-2">💰</span>
+                      Finance Hub
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      onClick={() => {
+                        setActiveSection('market');
+                        setMobileMenuOpen(false);
+                        setMobileFinanceOpen(false);
+                      }}
+                      className={cn(
+                        "w-full justify-start text-sm transition-colors duration-200",
+                        activeSection === 'market'
+                          ? "text-blue-400 bg-blue-500/10"
+                          : "text-gray-400 hover:text-blue-300 hover:bg-blue-500/5"
+                      )}
+                    >
+                      <BarChart3 className="w-4 h-4 mr-2" />
+                      Market Analytics
+                    </Button>
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
+
+              {/* Community Items */}
+              {[
+                { id: 'community', label: 'Community', icon: Users },
+                { id: 'chat', label: 'Chat', icon: MessageSquare },
+                { id: 'space', label: 'Space', icon: Users },
+                { id: 'rooms', label: 'Rooms', icon: Users }
+              ].map((item) => {
+                const Icon = item.icon;
+                return (
+                  <Button
+                    key={item.id}
+                    variant="ghost"
+                    onClick={() => {
+                      setActiveSection(item.id as typeof activeSection);
+                      setMobileMenuOpen(false);
+                    }}
+                    className={cn(
+                      "w-full justify-start text-left transition-colors duration-200",
+                      activeSection === item.id
+                        ? "text-pink-400 bg-pink-500/10"
+                        : "text-gray-300 hover:text-white hover:bg-purple-500/10"
+                    )}
+                  >
+                    <Icon className="w-4 h-4 mr-2" />
+                    {item.label}
+                  </Button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+
             {/* Main Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-8">
 
