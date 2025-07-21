@@ -1649,6 +1649,343 @@ export const FuturisticHomepage: React.FC = () => {
               </div>
             </div>
           </div>
+        ) : activeSection === 'charts' ? (
+          <div className="space-y-8">
+            {/* Charts Hub Header */}
+            <div className="text-center mb-12">
+              <div className="flex items-center justify-center gap-4 mb-6">
+                <div className="w-20 h-20 bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-indigo-500/20 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20 animate-pulse">
+                  <BarChart3 className="w-10 h-10 text-indigo-400" />
+                </div>
+                <div className="text-center">
+                  <h1 className="text-5xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent mb-2">
+                    Advanced Charts
+                  </h1>
+                  <p className="text-lg text-gray-300">Interactive trading charts and technical analysis</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Chart Controls */}
+            <Card className="bg-black/40 border-indigo-500/20 backdrop-blur-xl">
+              <CardHeader className="border-b border-indigo-500/20">
+                <CardTitle className="text-white flex items-center gap-2">
+                  <Settings className="w-6 h-6 text-indigo-400" />
+                  Chart Configuration
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  {/* Asset Selection */}
+                  <div className="space-y-2">
+                    <label className="text-sm text-gray-400">Trading Pair</label>
+                    <div className="relative">
+                      <Input
+                        defaultValue="BTC/USD"
+                        className="bg-black/40 border-indigo-500/30 text-white placeholder-gray-400 focus:border-indigo-400 focus:ring-0"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Timeframe Selection */}
+                  <div className="space-y-2">
+                    <label className="text-sm text-gray-400">Timeframe</label>
+                    <div className="flex gap-1">
+                      {['1m', '5m', '1h', '1D'].map((tf) => (
+                        <Button
+                          key={tf}
+                          size="sm"
+                          variant={tf === '1h' ? 'default' : 'outline'}
+                          className={cn(
+                            "text-xs flex-1",
+                            tf === '1h'
+                              ? "bg-indigo-600 text-white"
+                              : "border-indigo-500/30 text-indigo-300 hover:bg-indigo-500/10"
+                          )}
+                        >
+                          {tf}
+                        </Button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Chart Type */}
+                  <div className="space-y-2">
+                    <label className="text-sm text-gray-400">Chart Type</label>
+                    <div className="flex gap-1">
+                      {[
+                        { type: 'Candlestick', icon: '📊' },
+                        { type: 'Line', icon: '📈' }
+                      ].map((chart) => (
+                        <Button
+                          key={chart.type}
+                          size="sm"
+                          variant={chart.type === 'Candlestick' ? 'default' : 'outline'}
+                          className={cn(
+                            "text-xs flex-1",
+                            chart.type === 'Candlestick'
+                              ? "bg-indigo-600 text-white"
+                              : "border-indigo-500/30 text-indigo-300 hover:bg-indigo-500/10"
+                          )}
+                        >
+                          {chart.icon}
+                        </Button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Indicators */}
+                  <div className="space-y-2">
+                    <label className="text-sm text-gray-400">Indicators</label>
+                    <div className="flex gap-1">
+                      {['RSI', 'MACD', 'MA'].map((indicator) => (
+                        <Button
+                          key={indicator}
+                          size="sm"
+                          variant="outline"
+                          className="text-xs flex-1 border-indigo-500/30 text-indigo-300 hover:bg-indigo-500/10"
+                        >
+                          {indicator}
+                        </Button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Main Chart Area */}
+            <Card className="bg-black/40 border-indigo-500/20 backdrop-blur-xl">
+              <CardHeader className="border-b border-indigo-500/20">
+                <CardTitle className="text-white flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="text-2xl">₿</span>
+                    BTC/USD Chart
+                    <Badge className="bg-indigo-500/20 text-indigo-300 border-indigo-500/30">
+                      Live Data
+                    </Badge>
+                  </div>
+                  <div className="flex items-center gap-4 text-sm">
+                    <span className="text-green-400 font-bold">$67,234.56</span>
+                    <span className="text-green-400">+2.34% (+$1,567.89)</span>
+                  </div>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                {/* Chart Visualization Area */}
+                <div className="h-96 bg-gradient-to-br from-indigo-900/20 to-purple-900/20 rounded-xl border border-indigo-500/20 p-6 relative overflow-hidden">
+                  {/* Simulated Chart Grid */}
+                  <div className="absolute inset-0 opacity-10">
+                    {[...Array(8)].map((_, i) => (
+                      <div key={`h-${i}`} className="absolute w-full border-t border-indigo-400" style={{ top: `${i * 12.5}%` }} />
+                    ))}
+                    {[...Array(12)].map((_, i) => (
+                      <div key={`v-${i}`} className="absolute h-full border-l border-indigo-400" style={{ left: `${i * 8.33}%` }} />
+                    ))}
+                  </div>
+
+                  {/* Simulated Candlestick Chart */}
+                  <div className="relative h-full flex items-end justify-between px-4">
+                    {[
+                      { open: 65000, close: 66500, high: 67000, low: 64800, volume: 1200 },
+                      { open: 66500, close: 65800, high: 67200, low: 65400, volume: 980 },
+                      { open: 65800, close: 67100, high: 67400, low: 65600, volume: 1450 },
+                      { open: 67100, close: 66900, high: 67800, low: 66700, volume: 1100 },
+                      { open: 66900, close: 67234, high: 67500, low: 66500, volume: 1350 },
+                      { open: 67234, close: 67400, high: 67600, low: 67100, volume: 890 },
+                      { open: 67400, close: 67234, high: 67800, low: 67000, volume: 1200 }
+                    ].map((candle, i) => {
+                      const isGreen = candle.close > candle.open;
+                      const bodyHeight = Math.abs(candle.close - candle.open) / 100;
+                      const wickTop = (candle.high - Math.max(candle.open, candle.close)) / 100;
+                      const wickBottom = (Math.min(candle.open, candle.close) - candle.low) / 100;
+
+                      return (
+                        <div key={i} className="relative flex flex-col items-center" style={{ height: '80%' }}>
+                          {/* Upper wick */}
+                          <div
+                            className={`w-0.5 ${isGreen ? 'bg-green-400' : 'bg-red-400'}`}
+                            style={{ height: `${wickTop * 2}px` }}
+                          />
+                          {/* Candle body */}
+                          <div
+                            className={`w-3 ${isGreen ? 'bg-green-400' : 'bg-red-400'} opacity-80`}
+                            style={{ height: `${Math.max(bodyHeight * 3, 8)}px` }}
+                          />
+                          {/* Lower wick */}
+                          <div
+                            className={`w-0.5 ${isGreen ? 'bg-green-400' : 'bg-red-400'}`}
+                            style={{ height: `${wickBottom * 2}px` }}
+                          />
+
+                          {/* Volume bar at bottom */}
+                          <div
+                            className="w-2 bg-indigo-400/30 mt-auto"
+                            style={{ height: `${(candle.volume / 1500) * 20}px` }}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Chart Overlay Info */}
+                  <div className="absolute top-4 left-4 space-y-2">
+                    <div className="bg-black/60 backdrop-blur-sm rounded-lg p-3 border border-indigo-500/20">
+                      <div className="text-white text-sm font-medium mb-1">Technical Indicators</div>
+                      <div className="space-y-1 text-xs">
+                        <div className="flex justify-between gap-4">
+                          <span className="text-gray-400">RSI (14):</span>
+                          <span className="text-yellow-400">68.3</span>
+                        </div>
+                        <div className="flex justify-between gap-4">
+                          <span className="text-gray-400">MACD:</span>
+                          <span className="text-green-400">+234.5</span>
+                        </div>
+                        <div className="flex justify-between gap-4">
+                          <span className="text-gray-400">MA (20):</span>
+                          <span className="text-blue-400">$66,847</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Trading Tools Overlay */}
+                  <div className="absolute top-4 right-4">
+                    <div className="bg-black/60 backdrop-blur-sm rounded-lg p-3 border border-indigo-500/20">
+                      <div className="text-white text-sm font-medium mb-2">Quick Actions</div>
+                      <div className="space-y-2">
+                        <Button size="sm" className="w-full bg-green-600/20 text-green-400 border border-green-500/30 hover:bg-green-600/30">
+                          Buy BTC
+                        </Button>
+                        <Button size="sm" className="w-full bg-red-600/20 text-red-400 border border-red-500/30 hover:bg-red-600/30">
+                          Sell BTC
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Chart Analytics Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+              {/* Market Depth */}
+              <Card className="bg-black/40 border-indigo-500/20 backdrop-blur-xl">
+                <CardHeader>
+                  <CardTitle className="text-white text-lg flex items-center gap-2">
+                    📊 Market Depth
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="text-center mb-4">
+                      <div className="text-2xl font-bold text-white">$67,234.56</div>
+                      <div className="text-sm text-gray-400">Current Price</div>
+                    </div>
+
+                    {/* Bid/Ask Visualization */}
+                    <div className="space-y-2">
+                      <div className="text-sm text-gray-400">Order Book</div>
+                      {[
+                        { price: '67,245', amount: '2.45', side: 'ask' },
+                        { price: '67,240', amount: '1.23', side: 'ask' },
+                        { price: '67,235', amount: '3.67', side: 'current' },
+                        { price: '67,230', amount: '1.89', side: 'bid' },
+                        { price: '67,225', amount: '4.12', side: 'bid' }
+                      ].map((order, i) => (
+                        <div key={i} className={cn(
+                          "flex justify-between p-2 rounded text-sm",
+                          order.side === 'ask' ? 'bg-red-500/10 text-red-300' :
+                          order.side === 'bid' ? 'bg-green-500/10 text-green-300' :
+                          'bg-indigo-500/20 text-indigo-300 font-bold'
+                        )}>
+                          <span>${order.price}</span>
+                          <span>{order.amount} BTC</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Recent Trades */}
+              <Card className="bg-black/40 border-indigo-500/20 backdrop-blur-xl">
+                <CardHeader>
+                  <CardTitle className="text-white text-lg flex items-center gap-2">
+                    ⚡ Recent Trades
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2">
+                    {[
+                      { price: '67,234', amount: '0.15', time: '14:23:45', side: 'buy' },
+                      { price: '67,230', amount: '0.08', time: '14:23:42', side: 'sell' },
+                      { price: '67,235', amount: '0.25', time: '14:23:38', side: 'buy' },
+                      { price: '67,228', amount: '0.12', time: '14:23:35', side: 'sell' },
+                      { price: '67,240', amount: '0.18', time: '14:23:30', side: 'buy' },
+                      { price: '67,225', amount: '0.09', time: '14:23:28', side: 'sell' }
+                    ].map((trade, i) => (
+                      <div key={i} className="flex justify-between items-center p-2 bg-gray-800/30 rounded text-sm">
+                        <div className="flex items-center gap-2">
+                          <div className={cn(
+                            "w-2 h-2 rounded-full",
+                            trade.side === 'buy' ? 'bg-green-400' : 'bg-red-400'
+                          )} />
+                          <span className="text-white font-medium">${trade.price}</span>
+                        </div>
+                        <span className="text-gray-400">{trade.amount}</span>
+                        <span className="text-xs text-gray-500">{trade.time}</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Chart Statistics */}
+              <Card className="bg-black/40 border-indigo-500/20 backdrop-blur-xl">
+                <CardHeader>
+                  <CardTitle className="text-white text-lg flex items-center gap-2">
+                    📈 24h Statistics
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {[
+                      { label: '24h High', value: '$67,845.32', color: 'text-green-400' },
+                      { label: '24h Low', value: '$65,234.18', color: 'text-red-400' },
+                      { label: '24h Volume', value: '28,456 BTC', color: 'text-blue-400' },
+                      { label: '24h Change', value: '+2.34%', color: 'text-green-400' },
+                      { label: 'Market Cap', value: '$1.31T', color: 'text-purple-400' },
+                      { label: 'Dominance', value: '48.7%', color: 'text-orange-400' }
+                    ].map((stat, i) => (
+                      <div key={i} className="flex justify-between items-center">
+                        <span className="text-gray-400 text-sm">{stat.label}</span>
+                        <span className={cn("font-bold text-sm", stat.color)}>
+                          {stat.value}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Footer: Chart Status */}
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-4">
+                <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
+                  ✅ Chart Data: Real-time
+                </Badge>
+                <Badge className="bg-indigo-500/20 text-indigo-400 border-indigo-500/30">
+                  ✅ Technical Analysis: Active
+                </Badge>
+                <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">
+                  ✅ Order Book: Live
+                </Badge>
+              </div>
+            </div>
+          </div>
         ) : activeSection === 'news-feed' ? (
           <SmartNewsFeed />
         ) : activeSection === 'chat' ? (
