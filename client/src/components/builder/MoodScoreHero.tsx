@@ -4,11 +4,15 @@ import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { Brain, Activity } from "lucide-react";
+import { cn } from "../../lib/utils";
 
 interface MoodScoreHeroProps {
   title?: string;
   subtitle?: string;
   apiEndpoint?: string;
+  moodScore?: MoodData;
+  timeframe?: "1D" | "7D" | "30D";
+  onTimeframeChange?: (timeframe: "1D" | "7D" | "30D") => void;
 }
 
 interface MoodData {
@@ -23,8 +27,11 @@ export const MoodScoreHero: React.FC<MoodScoreHeroProps> = ({
   title = "Today's Market Mood",
   subtitle = "Real-time sentiment analysis powered by AI",
   apiEndpoint = "/api/proxy/stock-sentiment",
+  moodScore: propMoodScore,
+  timeframe,
+  onTimeframeChange,
 }) => {
-  const [moodScore, setMoodScore] = useState<MoodData>({
+    const [moodScore, setMoodScore] = useState<MoodData>(propMoodScore || {
     overall: 65,
     stocks: 70,
     news: 55,
@@ -88,18 +95,14 @@ export const MoodScoreHero: React.FC<MoodScoreHeroProps> = ({
     return "Bearish";
   };
 
-    return (
+        return (
     <div className={cn(
       "relative mb-8 overflow-hidden rounded-3xl transition-all duration-700",
-      isDynamicMode
-        ? `bg-gradient-to-br ${accentColor} ${glowEffect}`
-        : "bg-gradient-to-br from-blue-600 via-purple-700 to-indigo-800"
+      "bg-gradient-to-br from-blue-600 via-purple-700 to-indigo-800"
     )}>
-      <div className={cn(
+            <div className={cn(
         "absolute inset-0 transition-all duration-700",
-        isDynamicMode
-          ? "bg-gradient-to-r from-white/10 via-white/5 to-white/10"
-          : "bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-indigo-600/20"
+        "bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-indigo-600/20"
       )}></div>
       <div
         className={
@@ -124,16 +127,11 @@ export const MoodScoreHero: React.FC<MoodScoreHeroProps> = ({
               </div>
             </div>
 
-                        <h2 className="text-2xl font-semibold text-white mb-2">{title}</h2>
+                                                <h2 className="text-2xl font-semibold text-white mb-2">{title}</h2>
             <p className={cn(
               "max-w-2xl mx-auto transition-colors duration-500",
-              isDynamicMode ? "text-white/80" : "text-blue-200"
+              "text-blue-200"
             )}>{subtitle}</p>
-            {isDynamicMode && (
-              <Badge className="mt-3 bg-white/20 text-white border-white/30 animate-pulse">
-                Dynamic Mode • {moodState}
-              </Badge>
-            )}
           </div>
 
           {/* Mood Breakdown */}
