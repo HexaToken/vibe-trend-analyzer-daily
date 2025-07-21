@@ -305,11 +305,10 @@ export const MoorMeterDashboard: React.FC = () => {
           <div className="space-y-6">
             <Tabs value={activeCommunitySubtab} onValueChange={setActiveCommunitySubtab}>
                             <TabsList>
-                <TabsTrigger value="Chat">Live Chat</TabsTrigger>
+                                <TabsTrigger value="Chat">Live Chat</TabsTrigger>
                 <TabsTrigger value="Rooms">Rooms</TabsTrigger>
                 <TabsTrigger value="Space">Space</TabsTrigger>
                 <TabsTrigger value="Forum">Forum</TabsTrigger>
-                <TabsTrigger value="Private">Private Rooms</TabsTrigger>
               </TabsList>
 
               <TabsContent value="Chat">
