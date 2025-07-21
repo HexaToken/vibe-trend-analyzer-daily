@@ -79,7 +79,7 @@ export const TrendingTickerBar: React.FC<TrendingTickerBarProps> = ({ className 
   };
 
   return (
-    <>
+    
       
       
       <div className={cn(
