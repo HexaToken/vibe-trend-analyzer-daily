@@ -302,8 +302,13 @@ export const FuturisticHomepage: React.FC = () => {
         </div>
       </nav>
 
-      {/* Main Content */}
+            {/* Main Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-8">
+
+        {activeSection === 'watchlist' ? (
+          <WatchlistContainerBlock />
+        ) : (
+          <>
         
         {/* Hero Mood Score Section */}
         <div className="text-center mb-16">
