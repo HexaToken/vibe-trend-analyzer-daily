@@ -66,7 +66,7 @@ interface TrendingTopic {
 export const FuturisticHomepage: React.FC = () => {
   const { setMoodScore } = useMoodTheme();
     const [searchFocused, setSearchFocused] = useState(false);
-                                        const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'tool'>('home');
+                                                                                const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'tool' | 'market'>('home');
       const [activeToolSubtab, setActiveToolSubtab] = useState("Market");
     const [activeMarketSubtab, setActiveMarketSubtab] = useState("Tools");
   const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
@@ -249,7 +249,7 @@ export const FuturisticHomepage: React.FC = () => {
               </div>
               
               <nav className="hidden md:flex items-center gap-6">
-                                                {['Home', 'Market Mood', 'Watchlist', 'News Feed', 'Tool'].map((item, index) => (
+                                                                                                {['Home', 'Market Mood', 'Watchlist', 'News Feed'].map((item, index) => (
                                     <button
                     key={item}
                     onClick={() => {
@@ -263,8 +263,8 @@ export const FuturisticHomepage: React.FC = () => {
                         : "text-gray-400 hover:text-white"
                     )}
                                     >
-                    <span>
-                      {item === 'Tool' ? <p>Market</p> : item}
+                                        <span>
+                      {item}
                     </span>
                     {                      activeSection === item.toLowerCase().replace(' ', '-') && (
                       <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
@@ -327,22 +327,38 @@ export const FuturisticHomepage: React.FC = () => {
                                     </DropdownMenuContent>
                 </DropdownMenu>
 
-                                                {/* Tool Tab */}
-                <button
-                  onClick={() => setActiveSection('tool')}
-                  className={cn(
-                    "text-sm font-medium transition-all duration-300 relative group",
-                    activeSection === 'tool'
-                      ? "text-pink-400"
-                      : "text-gray-400 hover:text-white"
-                  )}
-                >
-                  Tool
-                  {activeSection === 'tool' && (
-                    <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
-                  )}
-                  <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </button>
+                                                                {/* Tool Dropdown */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button
+                      className={cn(
+                        "text-sm font-medium transition-all duration-300 relative group flex items-center gap-1",
+                        activeSection === 'tool' || activeSection === 'market'
+                          ? "text-pink-400"
+                          : "text-gray-400 hover:text-white"
+                      )}
+                    >
+                      Tool
+                      <ChevronDown className="w-3 h-3" />
+                      {(activeSection === 'tool' || activeSection === 'market') && (
+                        <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
+                      )}
+                      <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent
+                    align="start"
+                    className="bg-black/90 backdrop-blur-xl border-purple-500/30 text-white"
+                  >
+                    <DropdownMenuItem
+                      onClick={() => setActiveSection('market')}
+                      className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer"
+                    >
+                      <BarChart3 className="w-4 h-4 mr-2" />
+                      Market
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </nav>
             </div>
 
@@ -403,7 +419,7 @@ export const FuturisticHomepage: React.FC = () => {
           <SpaceSwitcherWidget />
         ) : activeSection === 'rooms' ? (
           <PrivateRoomsContainer />
-        ) : activeSection === 'tool' ? (
+                ) : activeSection === 'tool' || activeSection === 'market' ? (
           <Tabs value={activeToolsSubtab} onValueChange={setActiveToolsSubtab}>
             <TabsList className="grid w-full grid-cols-3 bg-black/20 backdrop-blur-xl border border-gray-700/50">
               <TabsTrigger
