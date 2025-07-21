@@ -41,9 +41,9 @@ export async function robustFetch(
 
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
     try {
-      // Create abort controller for timeout
+            // Create abort controller for timeout
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), timeout);
+      const timeoutId = setTimeout(() => controller.abort(new Error('Request timeout')), timeout);
 
       const response = await fetch(url, {
         ...fetchOptions,
