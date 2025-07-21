@@ -461,7 +461,7 @@ export const FuturisticHomepage: React.FC = () => {
           <div className="max-w-7xl mx-auto px-6 py-4">
             <div className="space-y-2">
               {/* Regular Navigation Items */}
-              {['Home', 'Market Mood', 'Watchlist', 'News Feed'].map((item) => (
+              {['Home', 'Market Mood', 'News Feed'].map((item) => (
                 <Button
                   key={item}
                   variant="ghost"
@@ -589,7 +589,7 @@ export const FuturisticHomepage: React.FC = () => {
               <div className="text-center mb-6">
                 <div className="flex items-center justify-center gap-3 mb-4">
                   <div className="w-16 h-16 bg-gradient-to-r from-green-500/20 to-purple-500/20 rounded-xl flex items-center justify-center shadow-lg shadow-green-500/20">
-                    <span className="text-3xl">��</span>
+                    <span className="text-3xl">💰</span>
                   </div>
                   <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
                     Finance Hub
