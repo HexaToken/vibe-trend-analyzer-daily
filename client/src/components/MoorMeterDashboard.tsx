@@ -324,8 +324,8 @@ export const MoorMeterDashboard: React.FC = () => {
                 </div>
               </TabsContent>
 
-              <TabsContent value="Space">
-                <SpaceToggleWidget />
+                            <TabsContent value="Space">
+                <SpaceSwitcherWidget />
               </TabsContent>
 
               <TabsContent value="Forum">
