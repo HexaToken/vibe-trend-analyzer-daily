@@ -120,11 +120,11 @@ export const Navigation = ({
     setAuthModalOpen(true);
   };
 
-  const handleLogout = () => {
+    const handleLogout = () => {
     logout();
-    // Redirect to moorMeter if currently on protected pages
+    // Redirect to home if currently on protected pages
     if (activeSection === "profile") {
-      onSectionChange("moorMeter");
+      onSectionChange("home");
     }
   };
 
@@ -170,18 +170,7 @@ export const Navigation = ({
                 </Badge>
               </Button>
 
-              {/* MoorMeter Dashboard */}
-              <Button
-                variant={activeSection === "moorMeter" ? "default" : "ghost"}
-                onClick={() => onSectionChange("moorMeter")}
-                className="flex items-center gap-2"
-              >
-                <Brain className="h-4 w-4" />
-                MoorMeter
-                <Badge variant="secondary" className="text-xs">
-                  NEW
-                </Badge>
-              </Button>
+              
 
               {/* Data Dropdown */}
               <DropdownMenu>
@@ -269,38 +258,7 @@ export const Navigation = ({
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              {/* Tools Dropdown */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="flex items-center gap-1">
-                    Tools
-                    <ChevronDown className="h-3 w-3" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="start">
-                  {navigationGroups.tools.map((item) => {
-                    const Icon = item.icon;
-                    return (
-                      <DropdownMenuItem
-                        key={item.id}
-                        onClick={() => onSectionChange(item.id)}
-                        className="flex items-center gap-2"
-                      >
-                        <Icon className="h-4 w-4" />
-                        {item.label}
-                        {item.badge && (
-                          <Badge
-                            variant="secondary"
-                            className="ml-auto text-xs"
-                          >
-                            {item.badge}
-                          </Badge>
-                        )}
-                      </DropdownMenuItem>
-                    );
-                  })}
-                </DropdownMenuContent>
-              </DropdownMenu>
+                            
             </div>
 
                         {/* User Section */}
@@ -433,21 +391,7 @@ export const Navigation = ({
           {isMenuOpen && (
             <div className="md:hidden py-4 border-t">
               <div className="flex flex-col space-y-2">
-                {/* MoorMeter Dashboard */}
-                <Button
-                  variant={activeSection === "moorMeter" ? "default" : "ghost"}
-                  onClick={() => {
-                    onSectionChange("moorMeter");
-                    setIsMenuOpen(false);
-                  }}
-                  className="justify-start gap-2"
-                >
-                  <Brain className="h-4 w-4" />
-                  MoorMeter
-                  <Badge variant="secondary" className="ml-auto text-xs">
-                    NEW
-                  </Badge>
-                </Button>
+                
 
                 {/* Data Section */}
                 <div className="text-sm font-medium text-muted-foreground px-3 py-1">
@@ -503,32 +447,7 @@ export const Navigation = ({
                   );
                 })}
 
-                {/* Tools Section */}
-                <div className="text-sm font-medium text-muted-foreground px-3 py-1">
-                  Tools
-                </div>
-                {navigationGroups.tools.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <Button
-                      key={item.id}
-                      variant={activeSection === item.id ? "default" : "ghost"}
-                      onClick={() => {
-                        onSectionChange(item.id);
-                        setIsMenuOpen(false);
-                      }}
-                      className="justify-start gap-2 ml-4"
-                    >
-                      <Icon className="h-4 w-4" />
-                      {item.label}
-                      {item.badge && (
-                        <Badge variant="secondary" className="ml-auto text-xs">
-                          {item.badge}
-                        </Badge>
-                      )}
-                    </Button>
-                  );
-                })}
+                                
 
                 {/* Mobile Auth Section */}
                 <div className="pt-4 border-t">

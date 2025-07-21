@@ -4,6 +4,7 @@ import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Input } from './ui/input';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import {
     Search,
   TrendingUp,
@@ -26,6 +27,9 @@ import { useMoodTheme } from '../contexts/MoodThemeContext';
 import { cn } from '../lib/utils';
 import { WatchlistContainerBlock } from './watchlist/WatchlistContainerBlock';
 import { ChatInterface } from './moorMeter/ChatInterface';
+import { SpaceSwitcherWidget } from './community/SpaceSwitcherWidget';
+import { PrivateRoomsContainer } from './privateRooms/PrivateRoomsContainer';
+import { SentimentHeatMap } from './moorMeter/SentimentHeatMap';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -61,8 +65,11 @@ interface TrendingTopic {
 
 export const FuturisticHomepage: React.FC = () => {
   const { setMoodScore } = useMoodTheme();
-  const [searchFocused, setSearchFocused] = useState(false);
-    const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat'>('home');
+    const [searchFocused, setSearchFocused] = useState(false);
+                                                                                const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'tool' | 'market'>('home');
+      const [activeToolSubtab, setActiveToolSubtab] = useState("Market");
+    const [activeMarketSubtab, setActiveMarketSubtab] = useState("Tools");
+  const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
   
   // Core mood data
   const [moodScore] = useState<MoodScore>({
@@ -242,7 +249,7 @@ export const FuturisticHomepage: React.FC = () => {
               </div>
               
               <nav className="hidden md:flex items-center gap-6">
-                                {['Home', 'Market Mood', 'Watchlist', 'News Feed'].map((item, index) => (
+                                                                                                {['Home', 'Market Mood', 'Watchlist', 'News Feed'].map((item, index) => (
                                     <button
                     key={item}
                     onClick={() => {
@@ -255,8 +262,10 @@ export const FuturisticHomepage: React.FC = () => {
                         ? "text-pink-400" 
                         : "text-gray-400 hover:text-white"
                     )}
-                  >
-                    {item}
+                                    >
+                                        <span>
+                      {item}
+                    </span>
                     {                      activeSection === item.toLowerCase().replace(' ', '-') && (
                       <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
                     )}
@@ -270,14 +279,68 @@ export const FuturisticHomepage: React.FC = () => {
                     <button
                       className={cn(
                         "text-sm font-medium transition-all duration-300 relative group flex items-center gap-1",
-                        activeSection === 'community' || activeSection === 'chat'
+                                                                        activeSection === 'community' || activeSection === 'chat' || activeSection === 'space' || activeSection === 'rooms'
                           ? "text-pink-400"
                           : "text-gray-400 hover:text-white"
                       )}
                     >
                       Community
                       <ChevronDown className="w-3 h-3" />
-                      {(activeSection === 'community' || activeSection === 'chat') && (
+                                                                  {(activeSection === 'community' || activeSection === 'chat' || activeSection === 'space' || activeSection === 'rooms') && (
+                        <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
+                      )}
+                      <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent
+                    align="start"
+                    className="bg-black/90 backdrop-blur-xl border-purple-500/30 text-white"
+                  >
+                                        <DropdownMenuItem
+                      onClick={() => setActiveSection('community')}
+                      className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer"
+                    >
+                      <Users className="w-4 h-4 mr-2" />
+                      Community Forum
+                    </DropdownMenuItem>
+                                        <DropdownMenuItem
+                      onClick={() => setActiveSection('space')}
+                      className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer"
+                    >
+                      <Users className="w-4 h-4 mr-2" />
+                      Space
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => setActiveSection('rooms')}
+                      className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer"
+                    >
+                      <Users className="w-4 h-4 mr-2" />
+                      Rooms
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => setActiveSection('chat')}
+                      className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer"
+                    >
+                      <MessageSquare className="w-4 h-4 mr-2" />
+                      Chat
+                    </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                </DropdownMenu>
+
+                                                                {/* Tool Dropdown */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button
+                      className={cn(
+                        "text-sm font-medium transition-all duration-300 relative group flex items-center gap-1",
+                        activeSection === 'tool' || activeSection === 'market'
+                          ? "text-pink-400"
+                          : "text-gray-400 hover:text-white"
+                      )}
+                    >
+                      Tool
+                      <ChevronDown className="w-3 h-3" />
+                      {(activeSection === 'tool' || activeSection === 'market') && (
                         <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
                       )}
                       <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -288,18 +351,11 @@ export const FuturisticHomepage: React.FC = () => {
                     className="bg-black/90 backdrop-blur-xl border-purple-500/30 text-white"
                   >
                     <DropdownMenuItem
-                      onClick={() => setActiveSection('community')}
+                      onClick={() => setActiveSection('market')}
                       className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer"
                     >
-                      <Users className="w-4 h-4 mr-2" />
-                      Community Forum
-                    </DropdownMenuItem>
-                    <DropdownMenuItem
-                      onClick={() => setActiveSection('chat')}
-                      className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer"
-                    >
-                      <MessageSquare className="w-4 h-4 mr-2" />
-                      Chat
+                      <BarChart3 className="w-4 h-4 mr-2" />
+                      Market
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -355,10 +411,77 @@ export const FuturisticHomepage: React.FC = () => {
             {/* Main Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-8">
 
-                {activeSection === 'watchlist' ? (
+                                        {activeSection === 'watchlist' ? (
           <WatchlistContainerBlock />
         ) : activeSection === 'chat' ? (
           <ChatInterface />
+        ) : activeSection === 'space' ? (
+          <SpaceSwitcherWidget />
+        ) : activeSection === 'rooms' ? (
+          <PrivateRoomsContainer />
+                ) : activeSection === 'tool' || activeSection === 'market' ? (
+          <Tabs value={activeToolsSubtab} onValueChange={setActiveToolsSubtab}>
+            <TabsList className="grid w-full grid-cols-3 bg-black/20 backdrop-blur-xl border border-gray-700/50">
+              <TabsTrigger
+                value="HeatMap"
+                className="data-[state=active]:bg-gray-700/50 data-[state=active]:text-white text-gray-400"
+              >
+                📊 Heat Map
+              </TabsTrigger>
+              <TabsTrigger
+                value="Analytics"
+                className="data-[state=active]:bg-gray-700/50 data-[state=active]:text-white text-gray-400"
+              >
+                📈 Analytics
+              </TabsTrigger>
+              <TabsTrigger
+                value="Scanner"
+                className="data-[state=active]:bg-gray-700/50 data-[state=active]:text-white text-gray-400"
+              >
+                🔍 Scanner
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="HeatMap" className="mt-6">
+              <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-6">
+                <SentimentHeatMap />
+              </div>
+            </TabsContent>
+
+            <TabsContent value="Analytics" className="mt-6">
+              <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-8">
+                <div className="text-center space-y-4">
+                  <div className="text-6xl mb-4">📈</div>
+                  <h3 className="text-2xl font-bold text-white mb-2">Advanced Analytics</h3>
+                  <p className="text-gray-400 mb-4">
+                    Comprehensive market analysis and trend insights coming soon.
+                  </p>
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">Technical Indicators</Badge>
+                    <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">Trend Analysis</Badge>
+                    <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">Volume Patterns</Badge>
+                  </div>
+                </div>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="Scanner" className="mt-6">
+              <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-8">
+                <div className="text-center space-y-4">
+                  <div className="text-6xl mb-4">🔍</div>
+                  <h3 className="text-2xl font-bold text-white mb-2">Market Scanner</h3>
+                  <p className="text-gray-400 mb-4">
+                    Real-time stock and crypto scanner with custom filters and alerts.
+                  </p>
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30">Price Alerts</Badge>
+                    <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30">Volume Spikes</Badge>
+                    <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30">Breakout Detection</Badge>
+                  </div>
+                </div>
+              </div>
+            </TabsContent>
+          </Tabs>
         ) : (
           <>
         

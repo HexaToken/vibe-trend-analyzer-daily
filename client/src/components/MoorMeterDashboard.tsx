@@ -42,6 +42,7 @@ import {
   Flag,
   Lock,
   MessageSquare,
+  Hash,
 } from "lucide-react";
 import { useStockSentiment } from "../hooks/useStockSentiment";
 import { useCombinedBusinessNews } from "../hooks/useCombinedBusinessNews";
@@ -66,8 +67,7 @@ import { CryptoChannels } from "./social/CryptoChannels";
 import { OffTopicLounge } from "./social/OffTopicLounge";
 import { MoodScoreHero } from "./builder/MoodScoreHero";
 import { TopStocksModule } from "./builder/TopStocksModule";
-import { SentimentHeatMap } from "./moorMeter/SentimentHeatMap";
-import { PrivateRoomsContainer } from "./privateRooms/PrivateRoomsContainer";
+
 import { formatCurrency, cn } from "../lib/utils";
 import { useMoodTheme } from "../contexts/MoodThemeContext";
 import { MoodThemeToggle } from "./ui/mood-theme-toggle";
@@ -106,15 +106,13 @@ export const MoorMeterDashboard: React.FC = () => {
   const [selectedTimeframe, setSelectedTimeframe] = useState<"1D" | "7D" | "30D">("7D");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("Home");
-  const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
+    const [activeToolsSubtab, setActiveToolsSubtab] = useState("Watchlist");
   const [activeCommunitySubtab, setActiveCommunitySubtab] = useState("Chat");
   const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<"General" | "Crypto">("General");
 
   const [sentimentTimeframe, setSentimentTimeframe] = useState<"24h" | "7d" | "30d">("24h");
-  const [sentimentViewMode, setSentimentViewMode] = useState<"absolute" | "net">("absolute");
-  const [heatmapLoading, setHeatmapLoading] = useState(false);
-  const [hoveredCell, setHoveredCell] = useState<{ ticker: string; time: string; data: any } | null>(null);
+  
 
   const { data: stockSentiment, loading: stockLoading } = useStockSentiment();
   const { articles: newsArticles, loading: newsLoading } = useCombinedBusinessNews();
@@ -265,26 +263,12 @@ export const MoorMeterDashboard: React.FC = () => {
         return (
           <div className="space-y-6">
             <Tabs value={activeToolsSubtab} onValueChange={setActiveToolsSubtab}>
-              <TabsList>
-                <TabsTrigger value="HeatMap">Heat Map</TabsTrigger>
+                            <TabsList>
                 <TabsTrigger value="Watchlist">Watchlist</TabsTrigger>
                 <TabsTrigger value="Analytics">Analytics</TabsTrigger>
               </TabsList>
 
-              <TabsContent value="HeatMap">
-                <SentimentHeatMap
-                  timeframe={sentimentTimeframe}
-                  onTimeframeChange={setSentimentTimeframe}
-                  viewMode={sentimentViewMode}
-                  onViewModeChange={setSentimentViewMode}
-                  loading={heatmapLoading}
-                  onLoadingChange={setHeatmapLoading}
-                  hoveredCell={hoveredCell}
-                  onHoveredCellChange={setHoveredCell}
-                />
-              </TabsContent>
-
-              <TabsContent value="Watchlist">
+                            <TabsContent value="Watchlist">
                 <WatchlistModule />
               </TabsContent>
 
@@ -303,18 +287,18 @@ export const MoorMeterDashboard: React.FC = () => {
         return (
           <div className="space-y-6">
             <Tabs value={activeCommunitySubtab} onValueChange={setActiveCommunitySubtab}>
-              <TabsList>
-                <TabsTrigger value="Chat">Live Chat</TabsTrigger>
+                            <TabsList>
+                                <TabsTrigger value="Chat">Live Chat</TabsTrigger>
                 <TabsTrigger value="Rooms">Rooms</TabsTrigger>
+                <TabsTrigger value="Space">Space</TabsTrigger>
                 <TabsTrigger value="Forum">Forum</TabsTrigger>
-                <TabsTrigger value="Private">Private Rooms</TabsTrigger>
               </TabsList>
 
               <TabsContent value="Chat">
                 <ChatInterface />
               </TabsContent>
 
-              <TabsContent value="Rooms">
+                            <TabsContent value="Rooms">
                 <div className="space-y-6">
                   <CommunityRooms />
                   <CryptoChannels />
@@ -322,12 +306,34 @@ export const MoorMeterDashboard: React.FC = () => {
                 </div>
               </TabsContent>
 
-              <TabsContent value="Forum">
-                <CommunityForum />
+                                          <TabsContent value="Space">
+                <div className="space-y-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <Hash className="h-5 w-5 text-purple-400" />
+                        Space Central
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-center py-8">
+                        <div className="text-6xl mb-4">🚀</div>
+                        <h3 className="text-xl font-semibold mb-2">Welcome to Space Central</h3>
+                        <p className="text-muted-foreground mb-4">
+                          A dedicated space for community discussions and interactions.
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          For the full Space experience with crypto channels and off-topic lounge,
+                          visit the Futuristic Homepage → Community → Space.
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
               </TabsContent>
 
-              <TabsContent value="Private">
-                <PrivateRoomsContainer />
+                            <TabsContent value="Forum">
+                <CommunityForum />
               </TabsContent>
             </Tabs>
           </div>
