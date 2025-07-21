@@ -334,6 +334,46 @@ export const FuturisticHomepage: React.FC = () => {
                                     </DropdownMenuContent>
                 </DropdownMenu>
 
+                {/* Finance Dropdown */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button
+                      className={cn(
+                        "text-sm font-medium transition-all duration-300 relative group flex items-center gap-1",
+                        activeSection === 'finance' || activeSection === 'market'
+                          ? "text-pink-400"
+                          : "text-gray-400 hover:text-white"
+                      )}
+                    >
+                      Finance
+                      <ChevronDown className="w-3 h-3 transition-transform duration-200 group-hover:rotate-180" />
+                      {(activeSection === 'finance' || activeSection === 'market') && (
+                        <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
+                      )}
+                      <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent
+                    align="start"
+                    className="bg-black/95 backdrop-blur-xl border-green-500/30 text-white animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2"
+                  >
+                    <DropdownMenuItem
+                      onClick={() => setActiveSection('finance')}
+                      className="hover:bg-green-500/20 focus:bg-green-500/20 cursor-pointer transition-colors duration-200"
+                    >
+                      <span className="mr-2">💰</span>
+                      Finance Hub
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => setActiveSection('market')}
+                      className="hover:bg-blue-500/20 focus:bg-blue-500/20 cursor-pointer transition-colors duration-200"
+                    >
+                      <BarChart3 className="w-4 h-4 mr-2" />
+                      Market Analytics
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
                                                                 {/* Tool Dropdown */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
