@@ -538,6 +538,23 @@ export const FuturisticHomepage: React.FC = () => {
                       <BarChart3 className="w-4 h-4 mr-2" />
                       Market Analytics
                     </Button>
+                    <Button
+                      variant="ghost"
+                      onClick={() => {
+                        setActiveSection('watchlist');
+                        setMobileMenuOpen(false);
+                        setMobileFinanceOpen(false);
+                      }}
+                      className={cn(
+                        "w-full justify-start text-sm transition-colors duration-200",
+                        activeSection === 'watchlist'
+                          ? "text-purple-400 bg-purple-500/10"
+                          : "text-gray-400 hover:text-purple-300 hover:bg-purple-500/5"
+                      )}
+                    >
+                      <TrendingUp className="w-4 h-4 mr-2" />
+                      Watchlist
+                    </Button>
                   </div>
                 </CollapsibleContent>
               </Collapsible>
