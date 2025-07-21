@@ -256,7 +256,7 @@ export const FuturisticHomepage: React.FC = () => {
               </div>
               
               <nav className="hidden md:flex items-center gap-6">
-                                                                                                {['Home', 'Market Mood', 'Watchlist', 'Finance', 'News Feed'].map((item, index) => (
+                                                                                                {['Home', 'Market Mood', 'Watchlist', 'News Feed'].map((item, index) => (
                                     <button
                     key={item}
                     onClick={() => {
