@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { useMoodTheme } from '../contexts/MoodThemeContext';
 import { cn } from '../lib/utils';
+import { WatchlistContainerBlock } from './watchlist/WatchlistContainerBlock';
 
 interface MoodScore {
   overall: number;
