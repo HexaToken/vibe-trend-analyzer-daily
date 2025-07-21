@@ -20,6 +20,7 @@ import {
   Flame,
   Newspaper,
   ChevronDown,
+  ChevronRight,
   MessageSquare,
   Users
 } from 'lucide-react';
