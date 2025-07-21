@@ -385,6 +385,20 @@ export const FuturisticHomepage: React.FC = () => {
               </nav>
             </div>
 
+            {/* Mobile Menu Button */}
+            <Button
+              variant="ghost"
+              size="sm"
+              className="md:hidden p-3 hover:bg-purple-500/10 rounded-xl"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? (
+                <X className="w-5 h-5 text-gray-300" />
+              ) : (
+                <Menu className="w-5 h-5 text-gray-300" />
+              )}
+            </Button>
+
             {/* Search and Controls */}
             <div className="flex items-center gap-4">
               <div className="relative">
