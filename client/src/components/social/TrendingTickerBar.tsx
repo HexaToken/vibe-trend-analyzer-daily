@@ -78,11 +78,29 @@ export const TrendingTickerBar: React.FC<TrendingTickerBarProps> = ({ className 
     return `${symbol} ${sign}${change.toFixed(2)}%`;
   };
 
-  return (
-    <div className={cn(
-      "w-full bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border-b border-purple-500/20 px-4 py-3",
-      className
-    )}>
+    return (
+    <>
+      <style jsx>{`
+        @keyframes scroll-ticker {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        .ticker-scroll {
+          animation: scroll-ticker 30s linear infinite;
+        }
+        .ticker-scroll:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
+
+      <div className={cn(
+        "w-full bg-[#0e1423] border-b border-[#2c3140] px-4 py-3 relative overflow-hidden",
+        className
+      )}>
       <div className="flex items-center justify-between max-w-full">
         {/* Left Section - Trending Label */}
         <div className="flex items-center gap-3 flex-shrink-0">
