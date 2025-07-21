@@ -329,9 +329,22 @@ export const SmartNewsFeed: React.FC<SmartNewsFeedProps> = ({ className }) => {
                       <Brain className="w-4 h-4 text-purple-400" />
                       <span className="text-sm font-medium text-purple-300">AI Analysis</span>
                     </div>
-                    <p className="text-sm text-gray-300 leading-relaxed">
+                    <p className="text-sm text-gray-300 leading-relaxed mb-3">
                       {item.aiAnalysis}
                     </p>
+                    {/* Read Full Article Link */}
+                    {item.articleUrl && (
+                      <a
+                        href={item.articleUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-sm text-purple-400 hover:text-purple-300 transition-colors group"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                        Read Full Article
+                        <span className="text-xs text-gray-500 group-hover:text-gray-400">↗</span>
+                      </a>
+                    )}
                   </div>
                 )}
               </div>
