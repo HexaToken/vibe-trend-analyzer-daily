@@ -371,12 +371,14 @@ export const FuturisticHomepage: React.FC = () => {
             {/* Main Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-8">
 
-                        {activeSection === 'watchlist' ? (
+                                {activeSection === 'watchlist' ? (
           <WatchlistContainerBlock />
         ) : activeSection === 'chat' ? (
           <ChatInterface />
         ) : activeSection === 'space' ? (
           <SpaceSwitcherWidget />
+        ) : activeSection === 'rooms' ? (
+          <PrivateRoomsContainer />
         ) : (
           <>
         
