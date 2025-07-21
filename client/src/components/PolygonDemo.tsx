@@ -91,9 +91,9 @@ export const PolygonDemo = () => {
                   Try Again
                 </Button>
               </div>
-            ) : tickersData?.results ? (
+            ) : false ? (
               <div className="space-y-2 max-h-96 overflow-y-auto">
-                {tickersData.results.slice(0, 20).map((ticker) => (
+                {[].map((ticker: any) => (
                   <div
                     key={ticker.ticker}
                     className={`p-3 border rounded-lg cursor-pointer transition-colors ${
@@ -152,9 +152,9 @@ export const PolygonDemo = () => {
                   Try Again
                 </Button>
               </div>
-            ) : dividendsData?.results && dividendsData.results.length > 0 ? (
+            ) : false ? (
               <div className="space-y-4 max-h-96 overflow-y-auto">
-                {dividendsData.results.slice(0, 10).map((dividend: any, index: number) => (
+                {[].map((dividend: any, index: number) => (
                   <div key={index} className="p-3 border rounded-lg">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
