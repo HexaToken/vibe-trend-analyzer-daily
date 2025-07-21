@@ -620,6 +620,57 @@ export const FuturisticHomepage: React.FC = () => {
                       </div>
                     </div>
                   </div>
+                                </TabsContent>
+
+                <TabsContent value="Analysis" className="mt-6">
+                  <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-8">
+                    <div className="text-center space-y-4">
+                      <div className="text-6xl mb-4">📊</div>
+                      <h3 className="text-2xl font-bold text-white mb-2">Advanced Analysis Suite</h3>
+                      <p className="text-gray-400 mb-4">
+                        Comprehensive technical and fundamental analysis tools.
+                      </p>
+                      <div className="flex flex-wrap gap-2 justify-center">
+                        <Badge className="bg-orange-500/20 text-orange-300 border-orange-500/30">Technical Analysis</Badge>
+                        <Badge className="bg-orange-500/20 text-orange-300 border-orange-500/30">Chart Patterns</Badge>
+                        <Badge className="bg-orange-500/20 text-orange-300 border-orange-500/30">Indicators</Badge>
+                      </div>
+                    </div>
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="Scanner" className="mt-6">
+                  <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-8">
+                    <div className="text-center space-y-4">
+                      <div className="text-6xl mb-4">🔍</div>
+                      <h3 className="text-2xl font-bold text-white mb-2">Market Scanner</h3>
+                      <p className="text-gray-400 mb-4">
+                        Real-time stock and crypto scanner with custom filters.
+                      </p>
+                      <div className="flex flex-wrap gap-2 justify-center">
+                        <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">Price Alerts</Badge>
+                        <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">Volume Spikes</Badge>
+                        <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">Breakouts</Badge>
+                      </div>
+                    </div>
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="Alerts" className="mt-6">
+                  <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-8">
+                    <div className="text-center space-y-4">
+                      <div className="text-6xl mb-4">🔔</div>
+                      <h3 className="text-2xl font-bold text-white mb-2">Smart Alerts</h3>
+                      <p className="text-gray-400 mb-4">
+                        Intelligent alerts and notifications for trading opportunities.
+                      </p>
+                      <div className="flex flex-wrap gap-2 justify-center">
+                        <Badge className="bg-red-500/20 text-red-300 border-red-500/30">Price Alerts</Badge>
+                        <Badge className="bg-red-500/20 text-red-300 border-red-500/30">News Alerts</Badge>
+                        <Badge className="bg-red-500/20 text-red-300 border-red-500/30">Technical Signals</Badge>
+                      </div>
+                    </div>
+                  </div>
                 </TabsContent>
               </Tabs>
             </div>
