@@ -269,7 +269,7 @@ export const MoorMeterDashboard: React.FC = () => {
               </TabsList>
 
                             <TabsContent value="Watchlist">
-                <WatchlistModule />
+                <WatchlistModule searchQuery="" onSearchChange={() => {}} />
               </TabsContent>
 
               <TabsContent value="Analytics">
