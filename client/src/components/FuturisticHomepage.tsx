@@ -66,9 +66,8 @@ interface TrendingTopic {
 export const FuturisticHomepage: React.FC = () => {
   const { setMoodScore } = useMoodTheme();
     const [searchFocused, setSearchFocused] = useState(false);
-                              const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'tool'>('home');
-      const [activeToolSubtab, setActiveToolSubtab] = useState("Market");
-  const [activeMarketSubtab, setActiveMarketSubtab] = useState("Tools");
+                    const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'market'>('home');
+    const [activeMarketSubtab, setActiveMarketSubtab] = useState("Tools");
   const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
   
   // Core mood data
@@ -325,18 +324,18 @@ export const FuturisticHomepage: React.FC = () => {
                                     </DropdownMenuContent>
                 </DropdownMenu>
 
-                                                {/* Tool Tab */}
+                                {/* Market Tab */}
                 <button
-                  onClick={() => setActiveSection('tool')}
+                  onClick={() => setActiveSection('market')}
                   className={cn(
                     "text-sm font-medium transition-all duration-300 relative group",
-                    activeSection === 'tool'
+                    activeSection === 'market'
                       ? "text-pink-400"
                       : "text-gray-400 hover:text-white"
                   )}
                 >
-                  Tool
-                  {activeSection === 'tool' && (
+                  Market
+                  {activeSection === 'market' && (
                     <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
                   )}
                   <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -401,61 +400,21 @@ export const FuturisticHomepage: React.FC = () => {
           <SpaceSwitcherWidget />
         ) : activeSection === 'rooms' ? (
           <PrivateRoomsContainer />
-                                ) : activeSection === 'tool' ? (
+                        ) : activeSection === 'market' ? (
           <div className="space-y-6">
-            {/* Tool Header */}
+            {/* Market Header */}
             <div className="text-center space-y-4">
               <h1 className="text-4xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                🔧 Tool
+                📈 Market
               </h1>
               <p className="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
-                Professional trading and analysis tools suite
+                Comprehensive market analysis, tools, and insights
               </p>
             </div>
 
-            {/* Tool Subtabs */}
+            {/* Market Subtabs */}
             <div className="max-w-7xl mx-auto">
-              <Tabs value={activeToolSubtab} onValueChange={setActiveToolSubtab}>
-                <TabsList className="grid w-full grid-cols-4 bg-black/40 backdrop-blur-xl border border-purple-500/20">
-                  <TabsTrigger
-                    value="Market"
-                    className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-white text-gray-400"
-                  >
-                    📈 Market
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="Analysis"
-                    className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-white text-gray-400"
-                  >
-                    📊 Analysis
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="Scanner"
-                    className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-white text-gray-400"
-                  >
-                    🔍 Scanner
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="Alerts"
-                    className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-white text-gray-400"
-                  >
-                    🔔 Alerts
-                  </TabsTrigger>
-                </TabsList>
-
-                <TabsContent value="Market" className="mt-6">
-                  <div className="space-y-6">
-                    <div className="mb-6">
-                      <h2 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
-                        📈 Market Tools & Analysis
-                      </h2>
-                      <p className="text-gray-400">
-                        Comprehensive market analysis, tools, and insights
-                      </p>
-                    </div>
-
-                    {/* Market Sub-subtabs */}
-                    <Tabs value={activeMarketSubtab} onValueChange={setActiveMarketSubtab}>
+              <Tabs value={activeMarketSubtab} onValueChange={setActiveMarketSubtab}>
                 <TabsList className="grid w-full grid-cols-4 bg-black/40 backdrop-blur-xl border border-purple-500/20">
                   <TabsTrigger
                     value="Tools"
@@ -617,57 +576,6 @@ export const FuturisticHomepage: React.FC = () => {
                         <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30">AI Analysis</Badge>
                         <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30">Predictions</Badge>
                         <Badge className="bg-pink-500/20 text-pink-300 border-pink-500/30">Sentiment</Badge>
-                      </div>
-                    </div>
-                  </div>
-                                </TabsContent>
-
-                <TabsContent value="Analysis" className="mt-6">
-                  <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-8">
-                    <div className="text-center space-y-4">
-                      <div className="text-6xl mb-4">📊</div>
-                      <h3 className="text-2xl font-bold text-white mb-2">Advanced Analysis Suite</h3>
-                      <p className="text-gray-400 mb-4">
-                        Comprehensive technical and fundamental analysis tools.
-                      </p>
-                      <div className="flex flex-wrap gap-2 justify-center">
-                        <Badge className="bg-orange-500/20 text-orange-300 border-orange-500/30">Technical Analysis</Badge>
-                        <Badge className="bg-orange-500/20 text-orange-300 border-orange-500/30">Chart Patterns</Badge>
-                        <Badge className="bg-orange-500/20 text-orange-300 border-orange-500/30">Indicators</Badge>
-                      </div>
-                    </div>
-                  </div>
-                </TabsContent>
-
-                <TabsContent value="Scanner" className="mt-6">
-                  <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-8">
-                    <div className="text-center space-y-4">
-                      <div className="text-6xl mb-4">🔍</div>
-                      <h3 className="text-2xl font-bold text-white mb-2">Market Scanner</h3>
-                      <p className="text-gray-400 mb-4">
-                        Real-time stock and crypto scanner with custom filters.
-                      </p>
-                      <div className="flex flex-wrap gap-2 justify-center">
-                        <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">Price Alerts</Badge>
-                        <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">Volume Spikes</Badge>
-                        <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">Breakouts</Badge>
-                      </div>
-                    </div>
-                  </div>
-                </TabsContent>
-
-                <TabsContent value="Alerts" className="mt-6">
-                  <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-8">
-                    <div className="text-center space-y-4">
-                      <div className="text-6xl mb-4">🔔</div>
-                      <h3 className="text-2xl font-bold text-white mb-2">Smart Alerts</h3>
-                      <p className="text-gray-400 mb-4">
-                        Intelligent alerts and notifications for trading opportunities.
-                      </p>
-                      <div className="flex flex-wrap gap-2 justify-center">
-                        <Badge className="bg-red-500/20 text-red-300 border-red-500/30">Price Alerts</Badge>
-                        <Badge className="bg-red-500/20 text-red-300 border-red-500/30">News Alerts</Badge>
-                        <Badge className="bg-red-500/20 text-red-300 border-red-500/30">Technical Signals</Badge>
                       </div>
                     </div>
                   </div>
@@ -970,7 +878,7 @@ export const FuturisticHomepage: React.FC = () => {
             {/* Footer Status */}
             <div className="text-center">
               <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30">
-                Mood Score API: �� Live
+                Mood Score API: ✅ Live
               </Badge>
             </div>
                     </div>
