@@ -63,7 +63,8 @@ export const SmartNewsFeed: React.FC<SmartNewsFeedProps> = ({ className }) => {
       sentimentScore: 55,
       isRising: false,
       category: 'Economy',
-      aiAnalysis: 'Mixed market reaction to Fed commentary. While rate pause is positive for growth stocks, concerns remain about economic slowdown.'
+      aiAnalysis: 'Mixed market reaction to Fed commentary. While rate pause is positive for growth stocks, concerns remain about economic slowdown.',
+      articleUrl: 'https://example.com/fed-rate-pause-signals'
     },
     {
       id: '3',
@@ -75,7 +76,8 @@ export const SmartNewsFeed: React.FC<SmartNewsFeedProps> = ({ className }) => {
       sentimentScore: 25,
       isRising: false,
       category: 'Earnings',
-      aiAnalysis: 'Negative sentiment primarily driven by missed delivery targets. However, long-term outlook remains positive based on expanding production capacity.'
+      aiAnalysis: 'Negative sentiment primarily driven by missed delivery targets. However, long-term outlook remains positive based on expanding production capacity.',
+      articleUrl: 'https://example.com/tesla-delivery-miss-q4'
     },
     {
       id: '4',
@@ -87,7 +89,8 @@ export const SmartNewsFeed: React.FC<SmartNewsFeedProps> = ({ className }) => {
       sentimentScore: 78,
       isRising: true,
       category: 'Crypto',
-      aiAnalysis: 'Strong bullish momentum supported by institutional inflows and regulatory clarity. Technical indicators suggest continued upward trend.'
+      aiAnalysis: 'Strong bullish momentum supported by institutional inflows and regulatory clarity. Technical indicators suggest continued upward trend.',
+      articleUrl: 'https://example.com/bitcoin-surge-institutional'
     },
     {
       id: '5',
@@ -99,7 +102,8 @@ export const SmartNewsFeed: React.FC<SmartNewsFeedProps> = ({ className }) => {
       sentimentScore: 72,
       isRising: true,
       category: 'Economy',
-      aiAnalysis: 'Positive economic indicator suggesting consumer resilience. Supports arguments for soft landing scenario and reduced recession risk.'
+      aiAnalysis: 'Positive economic indicator suggesting consumer resilience. Supports arguments for soft landing scenario and reduced recession risk.',
+      articleUrl: 'https://example.com/consumer-spending-resilient'
     },
     {
       id: '6',
@@ -111,7 +115,8 @@ export const SmartNewsFeed: React.FC<SmartNewsFeedProps> = ({ className }) => {
       sentimentScore: 35,
       isRising: false,
       category: 'Banking',
-      aiAnalysis: 'Sector-specific challenges related to interest rate sensitivity. Some banks better positioned than others based on loan portfolios.'
+      aiAnalysis: 'Sector-specific challenges related to interest rate sensitivity. Some banks better positioned than others based on loan portfolios.',
+      articleUrl: 'https://example.com/banking-regulatory-headwinds'
     },
     {
       id: '7',
@@ -123,7 +128,8 @@ export const SmartNewsFeed: React.FC<SmartNewsFeedProps> = ({ className }) => {
       sentimentScore: 68,
       isRising: true,
       category: 'Energy',
-      aiAnalysis: 'Fundamental supply-demand dynamics supporting higher energy prices. Geopolitical factors adding additional upward pressure.'
+      aiAnalysis: 'Fundamental supply-demand dynamics supporting higher energy prices. Geopolitical factors adding additional upward pressure.',
+      articleUrl: 'https://example.com/energy-sector-rebound'
     },
     {
       id: '8',
@@ -135,7 +141,8 @@ export const SmartNewsFeed: React.FC<SmartNewsFeedProps> = ({ className }) => {
       sentimentScore: 58,
       isRising: true,
       category: 'Healthcare',
-      aiAnalysis: 'Mixed sentiment with innovation positives balanced against regulatory risks. Selective opportunities in biotech and medical devices.'
+      aiAnalysis: 'Mixed sentiment with innovation positives balanced against regulatory risks. Selective opportunities in biotech and medical devices.',
+      articleUrl: 'https://example.com/healthcare-innovation-outlook'
     }
   ]);
 
