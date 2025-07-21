@@ -403,137 +403,69 @@ export const FuturisticHomepage: React.FC = () => {
           <SpaceSwitcherWidget />
         ) : activeSection === 'rooms' ? (
           <PrivateRoomsContainer />
-                                ) : activeSection === 'tool' ? (
-                                        <div></div>
+        ) : activeSection === 'tool' ? (
+          <Tabs value={activeToolsSubtab} onValueChange={setActiveToolsSubtab}>
+            <TabsList className="grid w-full grid-cols-3 bg-black/20 backdrop-blur-xl border border-gray-700/50">
+              <TabsTrigger
+                value="HeatMap"
+                className="data-[state=active]:bg-gray-700/50 data-[state=active]:text-white text-gray-400"
+              >
+                📊 Heat Map
+              </TabsTrigger>
+              <TabsTrigger
+                value="Analytics"
+                className="data-[state=active]:bg-gray-700/50 data-[state=active]:text-white text-gray-400"
+              >
+                📈 Analytics
+              </TabsTrigger>
+              <TabsTrigger
+                value="Scanner"
+                className="data-[state=active]:bg-gray-700/50 data-[state=active]:text-white text-gray-400"
+              >
+                🔍 Scanner
+              </TabsTrigger>
+            </TabsList>
 
-            
-                
+            <TabsContent value="HeatMap" className="mt-6">
+              <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-6">
+                <SentimentHeatMap />
+              </div>
+            </TabsContent>
 
-                                
-                  
-
-                    
-                      <TabsList className="grid w-full grid-cols-3 bg-black/20 backdrop-blur-xl border border-gray-700/50">
-                        <TabsTrigger
-                          value="HeatMap"
-                          className="data-[state=active]:bg-gray-700/50 data-[state=active]:text-white text-gray-400"
-                        >
-                          📊 Heat Map
-                        </TabsTrigger>
-                        <TabsTrigger
-                          value="Analytics"
-                          className="data-[state=active]:bg-gray-700/50 data-[state=active]:text-white text-gray-400"
-                        >
-                          📈 Analytics
-                        </TabsTrigger>
-                        <TabsTrigger
-                          value="Scanner"
-                          className="data-[state=active]:bg-gray-700/50 data-[state=active]:text-white text-gray-400"
-                        >
-                          🔍 Scanner
-                        </TabsTrigger>
-                      </TabsList>
-
-                      <TabsContent value="HeatMap" className="mt-6">
-                        <div className="space-y-6">
-                          
-
-                          <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-6">
-                            <SentimentHeatMap />
-                          </div>
-                        </div>
-                      </TabsContent>
-
-                      <TabsContent value="Analytics" className="mt-6">
-                        <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-8">
-                          <div className="text-center space-y-4">
-                            <div className="text-6xl mb-4">📈</div>
-                            <h3 className="text-2xl font-bold text-white mb-2">Advanced Analytics</h3>
-                            <p className="text-gray-400 mb-4">
-                              Comprehensive market analysis and trend insights coming soon.
-                            </p>
-                            <div className="flex flex-wrap gap-2 justify-center">
-                              <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">Technical Indicators</Badge>
-                              <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">Trend Analysis</Badge>
-                              <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">Volume Patterns</Badge>
-                            </div>
-                          </div>
-                        </div>
-                      </TabsContent>
-
-                      <TabsContent value="Scanner" className="mt-6">
-                        <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-8">
-                          <div className="text-center space-y-4">
-                            <div className="text-6xl mb-4">🔍</div>
-                            <h3 className="text-2xl font-bold text-white mb-2">Market Scanner</h3>
-                            <p className="text-gray-400 mb-4">
-                              Real-time stock and crypto scanner with custom filters and alerts.
-                            </p>
-                            <div className="flex flex-wrap gap-2 justify-center">
-                              <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30">Price Alerts</Badge>
-                              <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30">Volume Spikes</Badge>
-                              <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30">Breakout Detection</Badge>
-                            </div>
-                          </div>
-                        </div>
-                      </TabsContent>
-                    </Tabs>
+            <TabsContent value="Analytics" className="mt-6">
+              <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-8">
+                <div className="text-center space-y-4">
+                  <div className="text-6xl mb-4">📈</div>
+                  <h3 className="text-2xl font-bold text-white mb-2">Advanced Analytics</h3>
+                  <p className="text-gray-400 mb-4">
+                    Comprehensive market analysis and trend insights coming soon.
+                  </p>
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">Technical Indicators</Badge>
+                    <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">Trend Analysis</Badge>
+                    <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">Volume Patterns</Badge>
                   </div>
-                </TabsContent>
+                </div>
+              </div>
+            </TabsContent>
 
-                                <TabsContent value="Analysis" className="mt-6">
-                  <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-8">
-                    <div className="text-center space-y-4">
-                      <div className="text-6xl mb-4">📊</div>
-                      <h3 className="text-2xl font-bold text-white mb-2">Advanced Analysis Suite</h3>
-                      <p className="text-gray-400 mb-4">
-                        Comprehensive technical and fundamental analysis tools.
-                      </p>
-                      <div className="flex flex-wrap gap-2 justify-center">
-                        <Badge className="bg-orange-500/20 text-orange-300 border-orange-500/30">Technical Analysis</Badge>
-                        <Badge className="bg-orange-500/20 text-orange-300 border-orange-500/30">Chart Patterns</Badge>
-                        <Badge className="bg-orange-500/20 text-orange-300 border-orange-500/30">Indicators</Badge>
-                      </div>
-                    </div>
+            <TabsContent value="Scanner" className="mt-6">
+              <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-8">
+                <div className="text-center space-y-4">
+                  <div className="text-6xl mb-4">🔍</div>
+                  <h3 className="text-2xl font-bold text-white mb-2">Market Scanner</h3>
+                  <p className="text-gray-400 mb-4">
+                    Real-time stock and crypto scanner with custom filters and alerts.
+                  </p>
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30">Price Alerts</Badge>
+                    <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30">Volume Spikes</Badge>
+                    <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30">Breakout Detection</Badge>
                   </div>
-                </TabsContent>
-
-                <TabsContent value="Scanner" className="mt-6">
-                  <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-8">
-                    <div className="text-center space-y-4">
-                      <div className="text-6xl mb-4">🔍</div>
-                      <h3 className="text-2xl font-bold text-white mb-2">Market Scanner</h3>
-                      <p className="text-gray-400 mb-4">
-                        Real-time stock and crypto scanner with custom filters.
-                      </p>
-                      <div className="flex flex-wrap gap-2 justify-center">
-                        <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">Price Alerts</Badge>
-                        <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">Volume Spikes</Badge>
-                        <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">Breakouts</Badge>
-                      </div>
-                    </div>
-                  </div>
-                </TabsContent>
-
-                <TabsContent value="Alerts" className="mt-6">
-                  <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-8">
-                    <div className="text-center space-y-4">
-                      <div className="text-6xl mb-4">🔔</div>
-                      <h3 className="text-2xl font-bold text-white mb-2">Smart Alerts</h3>
-                      <p className="text-gray-400 mb-4">
-                        Intelligent alerts and notifications for trading opportunities.
-                      </p>
-                      <div className="flex flex-wrap gap-2 justify-center">
-                        <Badge className="bg-red-500/20 text-red-300 border-red-500/30">Price Alerts</Badge>
-                        <Badge className="bg-red-500/20 text-red-300 border-red-500/30">News Alerts</Badge>
-                        <Badge className="bg-red-500/20 text-red-300 border-red-500/30">Technical Signals</Badge>
-                      </div>
-                    </div>
-                  </div>
-                </TabsContent>
-              </Tabs>
-            </div>
-          </div>
+                </div>
+              </div>
+            </TabsContent>
+          </Tabs>
         ) : (
           <>
         
