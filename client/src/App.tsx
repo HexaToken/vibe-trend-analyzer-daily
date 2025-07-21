@@ -90,7 +90,7 @@ const App = () => {
         return <MoorMeterDashboard />;
 
       default:
-        return <MoorMeterDashboard />;
+        return <FuturisticHomepage />;
     }
   };
 
