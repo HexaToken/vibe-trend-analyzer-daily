@@ -504,16 +504,27 @@ export const FuturisticHomepage: React.FC = () => {
                     <CardHeader>
                       <CardTitle className="text-white flex items-center gap-2">
                         🎯 Sentiment Risk Meter
+                        <Badge className="ml-auto bg-blue-500/20 text-blue-300 border-blue-500/30">
+                          ${selectedFinanceStock}
+                        </Badge>
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="text-center py-8">
                       <div className="relative w-32 h-32 mx-auto mb-4">
-                        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-red-500/20 via-yellow-500/20 to-green-500/20 p-1">
+                        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-red-500/20 via-yellow-500/20 to-green-500/20 p-1 animate-pulse">
                           <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-900/90 to-blue-900/90" />
                         </div>
                         <div className="absolute inset-0 flex items-center justify-center">
                           <div className="text-center">
-                            <div className="text-3xl font-bold text-yellow-400">MEDIUM</div>
+                            <div className={`text-3xl font-bold ${
+                              selectedFinanceStock === 'TSLA' ? 'text-red-400' :
+                              selectedFinanceStock === 'NVDA' ? 'text-green-400' :
+                              'text-yellow-400'
+                            }`}>
+                              {selectedFinanceStock === 'TSLA' ? 'HIGH' :
+                               selectedFinanceStock === 'NVDA' ? 'LOW' :
+                               'MEDIUM'}
+                            </div>
                             <div className="text-sm text-gray-400">Risk Level</div>
                           </div>
                         </div>
@@ -525,7 +536,11 @@ export const FuturisticHomepage: React.FC = () => {
                           <span className="text-red-400">High</span>
                         </div>
                         <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-                          <div className="h-full w-3/5 bg-gradient-to-r from-green-400 to-yellow-400" />
+                          <div className={`h-full transition-all duration-1000 ${
+                            selectedFinanceStock === 'TSLA' ? 'w-5/6 bg-gradient-to-r from-yellow-400 to-red-400' :
+                            selectedFinanceStock === 'NVDA' ? 'w-1/4 bg-gradient-to-r from-green-400 to-green-500' :
+                            'w-3/5 bg-gradient-to-r from-green-400 to-yellow-400'
+                          }`} />
                         </div>
                       </div>
                     </CardContent>
@@ -536,23 +551,51 @@ export const FuturisticHomepage: React.FC = () => {
                     <CardHeader>
                       <CardTitle className="text-white flex items-center gap-2">
                         🎓 AI Risk Grade
+                        <Badge className="ml-auto bg-blue-500/20 text-blue-300 border-blue-500/30">
+                          ${selectedFinanceStock}
+                        </Badge>
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="text-center py-8">
-                      <div className="text-6xl font-bold text-blue-400 mb-2">B+</div>
-                      <div className="text-lg text-white mb-4">Moderate Risk</div>
+                      <div className={`text-6xl font-bold mb-2 ${
+                        selectedFinanceStock === 'TSLA' ? 'text-red-400' :
+                        selectedFinanceStock === 'NVDA' ? 'text-green-400' :
+                        selectedFinanceStock === 'GOOGL' ? 'text-yellow-400' :
+                        'text-blue-400'
+                      }`}>
+                        {selectedFinanceStock === 'TSLA' ? 'C-' :
+                         selectedFinanceStock === 'NVDA' ? 'A+' :
+                         selectedFinanceStock === 'GOOGL' ? 'B' :
+                         'B+'}
+                      </div>
+                      <div className="text-lg text-white mb-4">
+                        {selectedFinanceStock === 'TSLA' ? 'High Risk' :
+                         selectedFinanceStock === 'NVDA' ? 'Low Risk' :
+                         'Moderate Risk'}
+                      </div>
                       <div className="space-y-2 text-sm">
                         <div className="flex justify-between">
                           <span className="text-gray-400">Beta</span>
-                          <span className="text-blue-400">1.24</span>
+                          <span className="text-blue-400">
+                            {selectedFinanceStock === 'TSLA' ? '2.18' :
+                             selectedFinanceStock === 'NVDA' ? '1.68' :
+                             selectedFinanceStock === 'GOOGL' ? '1.05' :
+                             '1.24'}
+                          </span>
                         </div>
                         <div className="flex justify-between">
                           <span className="text-gray-400">Volume Spike</span>
-                          <span className="text-yellow-400">+15%</span>
+                          <span className={selectedFinanceStock === 'TSLA' ? 'text-red-400' : 'text-yellow-400'}>
+                            {selectedFinanceStock === 'TSLA' ? '+45%' :
+                             selectedFinanceStock === 'NVDA' ? '+8%' :
+                             '+15%'}
+                          </span>
                         </div>
                         <div className="flex justify-between">
                           <span className="text-gray-400">Sentiment Shift</span>
-                          <span className="text-green-400">Stable</span>
+                          <span className={selectedFinanceStock === 'TSLA' ? 'text-red-400' : 'text-green-400'}>
+                            {selectedFinanceStock === 'TSLA' ? 'Declining' : 'Stable'}
+                          </span>
                         </div>
                       </div>
                     </CardContent>
