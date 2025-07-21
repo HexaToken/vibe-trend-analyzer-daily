@@ -605,8 +605,10 @@ export const FuturisticHomepage: React.FC = () => {
                 Mood Score API: ✅ Live
               </Badge>
             </div>
-          </div>
+                    </div>
         </div>
+          </>
+        )}
       </div>
 
       {/* Custom CSS for animations */}
