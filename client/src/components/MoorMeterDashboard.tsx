@@ -316,12 +316,16 @@ export const MoorMeterDashboard: React.FC = () => {
                 <ChatInterface />
               </TabsContent>
 
-              <TabsContent value="Rooms">
+                            <TabsContent value="Rooms">
                 <div className="space-y-6">
                   <CommunityRooms />
                   <CryptoChannels />
                   <OffTopicLounge />
                 </div>
+              </TabsContent>
+
+              <TabsContent value="Space">
+                <SpaceToggleWidget />
               </TabsContent>
 
               <TabsContent value="Forum">
