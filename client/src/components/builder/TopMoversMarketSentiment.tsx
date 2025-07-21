@@ -119,7 +119,7 @@ export const TopMoversMarketSentiment: React.FC<TopMoversMarketSentimentProps> =
   };
 
   const StockCard = ({ stock }: { stock: StockMover }) => (
-    <div className="bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-5 border border-white/10 hover:border-purple-500/30 transition-all duration-300 group">
+    <div className="bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-4 border border-white/10 hover:border-purple-500/30 transition-all duration-300 group overflow-hidden">
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1">
           <div className="flex items-center gap-3 mb-2">
@@ -137,15 +137,17 @@ export const TopMoversMarketSentiment: React.FC<TopMoversMarketSentimentProps> =
         </Badge>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 mb-4">
+      <div className="grid grid-cols-2 gap-3 mb-4">
         <div>
-          <div className="text-xl font-bold text-white">{formatPrice(stock.price)}</div>
+          <div className="text-lg font-bold text-white truncate">{formatPrice(stock.price)}</div>
           <div className={cn(
-            "flex items-center gap-1 text-sm font-medium",
+            "flex items-center gap-1 text-xs font-medium",
             stock.change >= 0 ? "text-emerald-400" : "text-red-400"
           )}>
-            {stock.change >= 0 ? <ArrowUp className="w-3 h-3" /> : <ArrowDown className="w-3 h-3" />}
-            {stock.change >= 0 ? '+' : ''}{stock.change.toFixed(2)} ({stock.changePercent.toFixed(2)}%)
+            {stock.change >= 0 ? <ArrowUp className="w-3 h-3 flex-shrink-0" /> : <ArrowDown className="w-3 h-3 flex-shrink-0" />}
+            <span className="truncate">
+              {stock.change >= 0 ? '+' : ''}{stock.change.toFixed(2)} ({stock.changePercent.toFixed(2)}%)
+            </span>
           </div>
         </div>
         <div className="text-right">
@@ -158,9 +160,9 @@ export const TopMoversMarketSentiment: React.FC<TopMoversMarketSentimentProps> =
         {/* Sentiment Score */}
         <div>
           <div className="flex items-center justify-between text-xs mb-1">
-            <span className="text-slate-400">Market Sentiment</span>
-            <span className={cn("font-bold", getSentimentColor(stock.sentimentScore))}>
-              {stock.sentimentScore}
+            <span className="text-slate-400 truncate flex-1">Market Sentiment</span>
+            <span className={cn("font-medium text-xs ml-2 min-w-[30px] text-right", getSentimentColor(stock.sentimentScore))}>
+              {Math.round(stock.sentimentScore)}
             </span>
           </div>
           <div className="h-1.5 bg-slate-700 rounded-full overflow-hidden">
@@ -177,9 +179,9 @@ export const TopMoversMarketSentiment: React.FC<TopMoversMarketSentimentProps> =
         {/* Social Sentiment */}
         <div>
           <div className="flex items-center justify-between text-xs mb-1">
-            <span className="text-slate-400">Social Sentiment</span>
-            <span className={cn("font-bold", getSentimentColor(stock.socialSentiment))}>
-              {stock.socialSentiment}
+            <span className="text-slate-400 truncate flex-1">Social Sentiment</span>
+            <span className={cn("font-medium text-xs ml-2 min-w-[30px] text-right", getSentimentColor(stock.socialSentiment))}>
+              {Math.round(stock.socialSentiment)}
             </span>
           </div>
           <div className="h-1.5 bg-slate-700 rounded-full overflow-hidden">
@@ -195,8 +197,8 @@ export const TopMoversMarketSentiment: React.FC<TopMoversMarketSentimentProps> =
 
         {/* Stats */}
         <div className="flex items-center justify-between text-xs text-slate-400 pt-2 border-t border-slate-700/50">
-          <span>Vol: {formatVolume(stock.volume)}</span>
-          <span>{stock.mentions.toLocaleString()} mentions</span>
+          <span className="truncate flex-1">Vol: {formatVolume(stock.volume)}</span>
+          <span className="ml-2 whitespace-nowrap">{stock.mentions.toLocaleString()} mentions</span>
         </div>
       </div>
 
@@ -258,7 +260,7 @@ export const TopMoversMarketSentiment: React.FC<TopMoversMarketSentimentProps> =
         </div>
 
         {/* Stock Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {(activeTab === 'bullish' ? bullishMovers : bearishMovers).map((stock, index) => (
             <StockCard key={stock.symbol} stock={stock} />
           ))}
