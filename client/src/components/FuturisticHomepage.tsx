@@ -403,43 +403,43 @@ export const FuturisticHomepage: React.FC = () => {
           <PrivateRoomsContainer />
                                 ) : activeSection === 'tool' ? (
           <div className="space-y-6">
-            {/* Market Header */}
+                        {/* Tool Header */}
             <div className="text-center space-y-4">
               <h1 className="text-4xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                📈 Market
+                🔧 Tool
               </h1>
               <p className="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
-                Comprehensive market analysis, tools, and insights
+                Professional trading and analysis tools suite
               </p>
             </div>
 
-            {/* Market Subtabs */}
+            {/* Tool Subtabs */}
             <div className="max-w-7xl mx-auto">
-              <Tabs value={activeMarketSubtab} onValueChange={setActiveMarketSubtab}>
+              <Tabs value={activeToolSubtab} onValueChange={setActiveToolSubtab}>
                 <TabsList className="grid w-full grid-cols-4 bg-black/40 backdrop-blur-xl border border-purple-500/20">
                   <TabsTrigger
-                    value="Tools"
+                    value="Market"
                     className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-white text-gray-400"
                   >
-                    📊 Tools
+                    📈 Market
                   </TabsTrigger>
                   <TabsTrigger
-                    value="Overview"
+                    value="Analysis"
                     className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-white text-gray-400"
                   >
-                    📋 Overview
+                    📊 Analysis
                   </TabsTrigger>
                   <TabsTrigger
-                    value="News"
+                    value="Scanner"
                     className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-white text-gray-400"
                   >
-                    📰 News
+                    🔍 Scanner
                   </TabsTrigger>
                   <TabsTrigger
-                    value="Insights"
+                    value="Alerts"
                     className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-white text-gray-400"
                   >
-                    🧠 Insights
+                    🔔 Alerts
                   </TabsTrigger>
                 </TabsList>
 
