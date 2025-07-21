@@ -66,7 +66,7 @@ interface TrendingTopic {
 export const FuturisticHomepage: React.FC = () => {
   const { setMoodScore } = useMoodTheme();
     const [searchFocused, setSearchFocused] = useState(false);
-                    const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'market'>('home');
+                              const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'tool'>('home');
     const [activeMarketSubtab, setActiveMarketSubtab] = useState("Tools");
   const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
   
