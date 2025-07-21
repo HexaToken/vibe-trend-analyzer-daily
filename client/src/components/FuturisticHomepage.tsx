@@ -651,42 +651,14 @@ export const FuturisticHomepage: React.FC = () => {
               </CardContent>
             </Card>
 
-            {/* 7-Day Mood Trend Chart */}
-            <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
-              <CardHeader className="border-b border-purple-500/20">
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-white flex items-center gap-2">
-                    <BarChart3 className="w-6 h-6 text-cyan-400" />
-                    7-Day Mood Trend
-                  </CardTitle>
-                  <div className="flex gap-2">
-                    <Button variant="ghost" size="sm" className="text-cyan-400 hover:bg-cyan-500/10">7D</Button>
-                    <Button variant="ghost" size="sm" className="text-gray-400 hover:bg-purple-500/10">30D</Button>
-                    <Button variant="ghost" size="sm" className="text-gray-400 hover:bg-purple-500/10">90D</Button>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="p-6">
-                <div className="h-64 flex items-end justify-between gap-4">
-                  {moodTrendData.map((day, index) => (
-                    <div key={day.day} className="flex-1 flex flex-col items-center group">
-                      <div 
-                        className="w-full bg-gradient-to-t from-cyan-500/60 to-purple-500/80 rounded-t transition-all duration-500 hover:from-cyan-500/80 hover:to-purple-500/100 relative"
-                        style={{ height: `${day.score * 2.8}px` }}
-                      >
-                        {/* Hover popup */}
-                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/80 text-white text-xs rounded px-2 py-1 whitespace-nowrap">
-                          <div className="font-medium">{day.day}</div>
-                          <div>Score: {day.score}</div>
-                        </div>
-                      </div>
-                      <div className="text-xs text-gray-400 mt-2">{day.day}</div>
-                      <div className="text-xs text-white">{day.score}</div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            {/* MoodTrendChart Widget - Full Width */}
+            <div className="w-full">
+              <MoodTrendChart
+                data={moodTrendData}
+                timeframe={selectedTimeframe}
+                setTimeframe={setSelectedTimeframe}
+              />
+            </div>
 
             {/* Trending Forum Topics */}
             <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
