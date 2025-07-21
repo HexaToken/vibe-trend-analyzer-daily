@@ -163,6 +163,5 @@ export const TrendingTickerBar: React.FC<TrendingTickerBarProps> = ({ className 
           </div>
         </div>
       </div>
-    </>
-  );
+      );
 };
