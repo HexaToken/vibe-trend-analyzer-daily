@@ -389,7 +389,7 @@ export const FuturisticHomepage: React.FC = () => {
             {/* Main Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-8">
 
-                                {activeSection === 'watchlist' ? (
+                                        {activeSection === 'watchlist' ? (
           <WatchlistContainerBlock />
         ) : activeSection === 'chat' ? (
           <ChatInterface />
@@ -397,6 +397,34 @@ export const FuturisticHomepage: React.FC = () => {
           <SpaceSwitcherWidget />
         ) : activeSection === 'rooms' ? (
           <PrivateRoomsContainer />
+        ) : activeSection === 'tools' ? (
+          <div className="space-y-6">
+            {/* Tools Header */}
+            <div className="text-center space-y-4">
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                📊 Tools
+              </h1>
+              <p className="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
+                Advanced market analysis and visualization tools
+              </p>
+            </div>
+
+            {/* Heat Map Section */}
+            <div className="max-w-7xl mx-auto">
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
+                  📊 Market Heat Map
+                </h2>
+                <p className="text-gray-400">
+                  Visualize real-time sentiment movements across different stocks and timeframes
+                </p>
+              </div>
+
+              <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-6">
+                <SentimentHeatMap />
+              </div>
+            </div>
+          </div>
         ) : (
           <>
         
