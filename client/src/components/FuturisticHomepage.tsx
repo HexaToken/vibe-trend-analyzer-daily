@@ -404,7 +404,7 @@ export const FuturisticHomepage: React.FC = () => {
         ) : activeSection === 'rooms' ? (
           <PrivateRoomsContainer />
                                 ) : activeSection === 'tool' ? (
-                                        <div></div>
+                    <div></div>
 
             
                 
@@ -413,8 +413,13 @@ export const FuturisticHomepage: React.FC = () => {
                   
 
                     
-                      
-                        
+                      <TabsList className="grid w-full grid-cols-3 bg-black/20 backdrop-blur-xl border border-gray-700/50">
+                        <TabsTrigger
+                          value="HeatMap"
+                          className="data-[state=active]:bg-gray-700/50 data-[state=active]:text-white text-gray-400"
+                        >
+                          📊 Heat Map
+                        </TabsTrigger>
                         <TabsTrigger
                           value="Analytics"
                           className="data-[state=active]:bg-gray-700/50 data-[state=active]:text-white text-gray-400"
