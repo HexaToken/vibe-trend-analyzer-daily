@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { useMoodTheme } from '../contexts/MoodThemeContext';
 import { cn } from '../lib/utils';
+import { WatchlistContainerBlock } from './watchlist/WatchlistContainerBlock';
 
 interface MoodScore {
   overall: number;
@@ -51,6 +52,7 @@ interface TrendingTopic {
 export const FuturisticHomepage: React.FC = () => {
   const { setMoodScore } = useMoodTheme();
   const [searchFocused, setSearchFocused] = useState(false);
+  const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community'>('home');
   
   // Core mood data
   const [moodScore] = useState<MoodScore>({
@@ -231,17 +233,21 @@ export const FuturisticHomepage: React.FC = () => {
               
               <nav className="hidden md:flex items-center gap-6">
                 {['Home', 'Market Mood', 'Watchlist', 'News Feed', 'Community'].map((item, index) => (
-                  <button
+                                    <button
                     key={item}
+                    onClick={() => {
+                      const sectionKey = item.toLowerCase().replace(' ', '-') as typeof activeSection;
+                      setActiveSection(sectionKey);
+                    }}
                     className={cn(
                       "text-sm font-medium transition-all duration-300 relative group",
-                      index === 0 
+                                            activeSection === item.toLowerCase().replace(' ', '-') 
                         ? "text-pink-400" 
                         : "text-gray-400 hover:text-white"
                     )}
                   >
                     {item}
-                    {index === 0 && (
+                    {                      activeSection === item.toLowerCase().replace(' ', '-') && (
                       <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
                     )}
                     <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -296,8 +302,13 @@ export const FuturisticHomepage: React.FC = () => {
         </div>
       </nav>
 
-      {/* Main Content */}
+            {/* Main Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-8">
+
+        {activeSection === 'watchlist' ? (
+          <WatchlistContainerBlock />
+        ) : (
+          <>
         
         {/* Hero Mood Score Section */}
         <div className="text-center mb-16">
@@ -594,8 +605,10 @@ export const FuturisticHomepage: React.FC = () => {
                 Mood Score API: ✅ Live
               </Badge>
             </div>
-          </div>
+                    </div>
         </div>
+          </>
+        )}
       </div>
 
       {/* Custom CSS for animations */}

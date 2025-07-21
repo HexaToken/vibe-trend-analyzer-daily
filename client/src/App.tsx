@@ -10,7 +10,8 @@ import { Dashboard } from "@/components/Dashboard";
 import { SentimentDashboard } from "@/components/SentimentDashboard";
 import { Analytics } from "@/components/Analytics";
 import { HistoricalData } from "@/components/HistoricalData";
-import { Community } from "@/components/Community";
+import { CommunityRooms } from "@/components/social/CommunityRooms";
+import { Watchlist } from "@/components/Watchlist";
 import { Settings } from "@/components/Settings";
 import { UserProfile } from "@/components/profile/UserProfile";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
@@ -47,8 +48,8 @@ const App = () => {
         return <Analytics />;
       case "history":
         return <HistoricalData />;
-      case "community":
-        return <Community />;
+            case "community":
+        return <CommunityRooms />;
       case "profile":
         return (
           <ProtectedRoute
