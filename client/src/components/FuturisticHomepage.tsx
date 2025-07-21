@@ -74,6 +74,8 @@ export const FuturisticHomepage: React.FC = () => {
     const [activeMarketSubtab, setActiveMarketSubtab] = useState("Tools");
   const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
   const [activeFinanceTab, setActiveFinanceTab] = useState("risk-analysis");
+  const [selectedFinanceStock, setSelectedFinanceStock] = useState("AAPL");
+  const [financeSearchQuery, setFinanceSearchQuery] = useState("");
   const [selectedTimeframe, setSelectedTimeframe] = useState<"1D" | "7D" | "30D">("7D");
 
   // Core mood data
@@ -422,19 +424,58 @@ export const FuturisticHomepage: React.FC = () => {
           <WatchlistContainerBlock />
         ) : activeSection === 'finance' ? (
           <div className="space-y-8">
-            {/* Finance Hub Header */}
-            <div className="text-center mb-8">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <div className="w-16 h-16 bg-gradient-to-r from-green-500/20 to-purple-500/20 rounded-xl flex items-center justify-center">
-                  <span className="text-3xl">💰</span>
+            {/* Finance Hub Header with Search */}
+            <div className="sticky top-20 z-40 bg-black/80 backdrop-blur-xl border border-purple-500/20 rounded-2xl p-6 mb-8">
+              <div className="text-center mb-6">
+                <div className="flex items-center justify-center gap-3 mb-4">
+                  <div className="w-16 h-16 bg-gradient-to-r from-green-500/20 to-purple-500/20 rounded-xl flex items-center justify-center shadow-lg shadow-green-500/20">
+                    <span className="text-3xl">💰</span>
+                  </div>
+                  <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+                    Finance Hub
+                  </h1>
                 </div>
-                <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  Finance Hub
-                </h1>
+                <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-6">
+                  Advanced financial tools and analytics for portfolio management
+                </p>
               </div>
-              <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                Advanced financial tools and analytics for portfolio management
-              </p>
+
+              {/* Stock Search Bar */}
+              <div className="max-w-md mx-auto mb-6">
+                <div className="relative">
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <Input
+                    type="text"
+                    placeholder="Search stock ticker (e.g., AAPL, TSLA, NVDA)..."
+                    value={financeSearchQuery}
+                    onChange={(e) => setFinanceSearchQuery(e.target.value)}
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter' && financeSearchQuery.trim()) {
+                        setSelectedFinanceStock(financeSearchQuery.toUpperCase().trim());
+                        setFinanceSearchQuery('');
+                      }
+                    }}
+                    className="pl-12 pr-20 py-4 bg-black/40 border-purple-500/30 rounded-xl text-white placeholder-gray-400 focus:bg-black/60 focus:border-blue-400/50 focus:ring-0 focus:outline-none backdrop-blur-sm text-lg"
+                  />
+                  <Button
+                    onClick={() => {
+                      if (financeSearchQuery.trim()) {
+                        setSelectedFinanceStock(financeSearchQuery.toUpperCase().trim());
+                        setFinanceSearchQuery('');
+                      }
+                    }}
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 rounded-lg"
+                  >
+                    Search
+                  </Button>
+                </div>
+                <div className="flex items-center justify-center gap-2 mt-3">
+                  <span className="text-sm text-gray-400">Currently analyzing:</span>
+                  <Badge className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 border-blue-500/30 font-semibold">
+                    ${selectedFinanceStock}
+                  </Badge>
+                </div>
+              </div>
             </div>
 
             {/* Finance Tabs */}
