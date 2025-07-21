@@ -68,7 +68,6 @@ import { OffTopicLounge } from "./social/OffTopicLounge";
 import { MoodScoreHero } from "./builder/MoodScoreHero";
 import { TopStocksModule } from "./builder/TopStocksModule";
 import { SentimentHeatMap } from "./moorMeter/SentimentHeatMap";
-import { PrivateRoomsContainer } from "./privateRooms/PrivateRoomsContainer";
 import { formatCurrency, cn } from "../lib/utils";
 import { useMoodTheme } from "../contexts/MoodThemeContext";
 import { MoodThemeToggle } from "./ui/mood-theme-toggle";
