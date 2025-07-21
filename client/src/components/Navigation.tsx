@@ -258,36 +258,22 @@ export const Navigation = ({
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              {/* Tools Dropdown */}
+                            {/* Tool Dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" className="flex items-center gap-1">
-                    Tools
+                    Tool
                     <ChevronDown className="h-3 w-3" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="start">
-                  {navigationGroups.tools.map((item) => {
-                    const Icon = item.icon;
-                    return (
-                      <DropdownMenuItem
-                        key={item.id}
-                        onClick={() => onSectionChange(item.id)}
-                        className="flex items-center gap-2"
-                      >
-                        <Icon className="h-4 w-4" />
-                        {item.label}
-                        {item.badge && (
-                          <Badge
-                            variant="secondary"
-                            className="ml-auto text-xs"
-                          >
-                            {item.badge}
-                          </Badge>
-                        )}
-                      </DropdownMenuItem>
-                    );
-                  })}
+                  <DropdownMenuItem
+                    onClick={() => onSectionChange("market")}
+                    className="flex items-center gap-2"
+                  >
+                    <BarChart3 className="h-4 w-4" />
+                    Market
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
