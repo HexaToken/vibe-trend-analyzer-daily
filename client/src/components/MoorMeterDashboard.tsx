@@ -106,7 +106,7 @@ export const MoorMeterDashboard: React.FC = () => {
   const [selectedTimeframe, setSelectedTimeframe] = useState<"1D" | "7D" | "30D">("7D");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("Home");
-  const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
+    const [activeToolsSubtab, setActiveToolsSubtab] = useState("Watchlist");
   const [activeCommunitySubtab, setActiveCommunitySubtab] = useState("Chat");
   const [toolsDropdownOpen, setToolsDropdownOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<"General" | "Crypto">("General");
