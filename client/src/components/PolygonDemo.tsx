@@ -10,37 +10,25 @@ export const PolygonDemo = () => {
   const [selectedTicker, setSelectedTicker] = useState<string>("AAPL");
   
   // Get top 20 stock tickers with 5-minute refresh
-  const { 
-    data: tickersData, 
-    loading: tickersLoading, 
-    error: tickersError, 
-    refetch: refetchTickers 
-  } = usePolygonTickers("stocks", 20, { 
-    refreshInterval: 300000, // 5 minutes
-    enabled: true 
-  });
+  // TODO: Implement usePolygonTickers hook
+  const tickersData = null;
+  const tickersLoading = false;
+  const tickersError = null;
+  const refetchTickers = () => {};
 
   // Get dividend data for selected ticker
-  const { 
-    data: dividendsData, 
-    loading: dividendsLoading, 
-    error: dividendsError,
-    refetch: refetchDividends 
-  } = usePolygonDividends(selectedTicker, { 
-    refreshInterval: 300000, // 5 minutes
-    enabled: true 
-  });
+  // TODO: Implement usePolygonDividends hook
+  const dividendsData = null;
+  const dividendsLoading = false;
+  const dividendsError = null;
+  const refetchDividends = () => {};
 
   // Get real-time quotes for selected ticker (requires premium subscription)
-  const { 
-    data: quotesData, 
-    loading: quotesLoading, 
-    error: quotesError,
-    refetch: refetchQuotes 
-  } = usePolygonQuotes(selectedTicker, { 
-    refreshInterval: 300000, // 5 minutes
-    enabled: false // Disabled due to premium subscription requirement
-  });
+  // TODO: Implement usePolygonQuotes hook
+  const quotesData = null;
+  const quotesLoading = false;
+  const quotesError = null;
+  const refetchQuotes = () => {};
 
   const handleRefresh = () => {
     refetchTickers();
