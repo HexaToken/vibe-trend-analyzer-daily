@@ -124,23 +124,29 @@ const AppContent = () => {
     }
   };
 
-    return (
+  return (
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <div className={`min-h-screen ${bodyGradient} transition-all duration-500`}>
+        <Navigation
+          activeSection={activeSection}
+          onSectionChange={setActiveSection}
+        />
+        <main>{renderContent()}</main>
+        <ApiStatusIndicator />
+        <AiChatBubble />
+      </div>
+    </TooltipProvider>
+  );
+};
+
+const App = () => {
+  return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <MoodThemeProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <div className="min-h-screen bg-background transition-all duration-500">
-              <Navigation
-                activeSection={activeSection}
-                onSectionChange={setActiveSection}
-              />
-              <main>{renderContent()}</main>
-              <ApiStatusIndicator />
-              <AiChatBubble />
-            </div>
-          </TooltipProvider>
+          <AppContent />
         </MoodThemeProvider>
       </AuthProvider>
     </QueryClientProvider>
