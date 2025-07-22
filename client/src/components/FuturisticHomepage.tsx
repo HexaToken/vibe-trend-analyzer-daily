@@ -707,7 +707,7 @@ export const FuturisticHomepage: React.FC = () => {
               </Button>
 
               {/* Dynamic Theme Selector */}
-              <div className="p-1">
+              <div className="hidden sm:block">
                 <DynamicThemeSelector />
               </div>
 
