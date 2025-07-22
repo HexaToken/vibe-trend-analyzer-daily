@@ -4,7 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/contexts/AuthContext";
-import { MoodThemeProvider } from "@/contexts/MoodThemeContext";
+import { MoodThemeProvider, useMoodTheme } from "@/contexts/MoodThemeContext";
 import { Navigation } from "@/components/Navigation";
 import { Dashboard } from "@/components/Dashboard";
 import { SentimentDashboard } from "@/components/SentimentDashboard";
