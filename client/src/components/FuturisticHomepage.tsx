@@ -317,7 +317,11 @@ interface TrendingTopic {
   icon: string;
 }
 
-export const FuturisticHomepage: React.FC = () => {
+interface FuturisticHomepageProps {
+  onNavigate?: (section: string) => void;
+}
+
+export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNavigate }) => {
   const { setMoodScore } = useMoodTheme();
     const [searchFocused, setSearchFocused] = useState(false);
                                                                                 const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'tool' | 'market' | 'crypto' | 'charts' | 'trending' | 'earnings' | 'finance'>('home');
@@ -1263,7 +1267,7 @@ export const FuturisticHomepage: React.FC = () => {
                   <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
                     <CardHeader>
                       <CardTitle className="text-white flex items-center gap-2">
-                        📊 Earnings Snapshot
+                        ���� Earnings Snapshot
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
