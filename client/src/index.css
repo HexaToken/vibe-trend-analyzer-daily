@@ -730,6 +730,48 @@ All colors MUST be HSL.
     backdrop-filter: none;
   }
 
+  /* Theme-aware text colors */
+  .text-theme-primary {
+    @apply text-white;
+  }
+
+  :root:not(.dark) .text-theme-primary {
+    @apply text-[#1C1E21];
+  }
+
+  .text-theme-secondary {
+    @apply text-slate-400;
+  }
+
+  :root:not(.dark) .text-theme-secondary {
+    @apply text-[#444];
+  }
+
+  .text-theme-muted {
+    @apply text-slate-500;
+  }
+
+  :root:not(.dark) .text-theme-muted {
+    @apply text-[#666];
+  }
+
+  .text-theme-accent {
+    @apply text-cyan-400;
+  }
+
+  :root:not(.dark) .text-theme-accent {
+    @apply text-[#3F51B5];
+  }
+
+  /* Theme-aware border colors */
+  .border-theme {
+    @apply border-slate-700/50;
+  }
+
+  :root:not(.dark) .border-theme {
+    @apply border-[#E0E0E0];
+  }
+
   /* Hero Sentiment Section - Always Dark */
   .hero-sentiment-section {
     /* Force dark theme styling regardless of global theme */
