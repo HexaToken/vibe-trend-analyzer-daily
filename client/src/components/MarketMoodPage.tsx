@@ -25,6 +25,8 @@ import { AIInsightWidget } from './builder/AIInsightWidget';
 import { SocialBuzzHeatmap } from './builder/SocialBuzzHeatmap';
 
 import { MarketMoodControls } from './builder/MarketMoodControls';
+import { AIMoodBreakdownPanel } from './mood/AIMoodBreakdownPanel';
+import { SentimentAnalyticsDashboard } from './mood/SentimentAnalyticsDashboard';
 
 interface MarketMoodPageProps {
   title?: string;
@@ -41,6 +43,8 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [isExplainingMood, setIsExplainingMood] = useState(false);
   const [lastUpdated, setLastUpdated] = useState<Date>(new Date());
+  const [isMoodBreakdownOpen, setIsMoodBreakdownOpen] = useState(false);
+  const [isAnalyticsDashboardOpen, setIsAnalyticsDashboardOpen] = useState(false);
 
   // Auto-refresh timestamp
   useEffect(() => {
@@ -63,11 +67,11 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
   };
 
   const handleExplainMood = () => {
-    setIsExplainingMood(true);
-    // Simulate AI analysis
-    setTimeout(() => {
-      setIsExplainingMood(false);
-    }, 3000);
+    setIsMoodBreakdownOpen(true);
+  };
+
+  const handleViewAnalytics = () => {
+    setIsAnalyticsDashboardOpen(true);
   };
 
   const getMoodSentiment = (score: number): 'positive' | 'neutral' | 'negative' => {
@@ -172,6 +176,7 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
               onSourceToggle={handleSourceToggle}
               onSearch={handleSearch}
               onExplainMood={handleExplainMood}
+              onViewAnalytics={handleViewAnalytics}
             />
 
             {/* Mood Trend Chart */}
@@ -316,6 +321,18 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
           animation: spin-slow 10s linear infinite;
         }
       `}</style>
+
+      {/* Modal Components */}
+      <AIMoodBreakdownPanel
+        isOpen={isMoodBreakdownOpen}
+        onClose={() => setIsMoodBreakdownOpen(false)}
+        moodScore={moodScore || { overall: 72, stocks: 68, news: 75, social: 74 }}
+      />
+
+      <SentimentAnalyticsDashboard
+        isOpen={isAnalyticsDashboardOpen}
+        onClose={() => setIsAnalyticsDashboardOpen(false)}
+      />
     </div>
   );
 };
