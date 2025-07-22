@@ -43,7 +43,7 @@ export async function robustFetch(
     try {
             // Create abort controller for timeout
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(new Error('Request timeout')), timeout);
+      const timeoutId = setTimeout(() => controller.abort(), timeout);
 
       const response = await fetch(url, {
         ...fetchOptions,
@@ -73,6 +73,11 @@ export async function robustFetch(
     } catch (error) {
       lastError = error instanceof Error ? error : new Error(String(error));
 
+      // Handle timeout specifically
+      if (lastError.name === "AbortError") {
+        lastError = new Error("Request timeout");
+      }
+
       console.warn(
         `Fetch attempt ${attempt + 1} failed for ${url}:`,
         lastError.message,
@@ -80,7 +85,7 @@ export async function robustFetch(
 
       // Don't retry on abort (timeout) or 4xx errors
       if (
-        lastError.name === "AbortError" ||
+        lastError.message === "Request timeout" ||
         (error instanceof FetchError &&
           error.status &&
           error.status >= 400 &&
