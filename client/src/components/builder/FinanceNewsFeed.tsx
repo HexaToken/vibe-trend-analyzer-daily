@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
 import { Globe, ExternalLink, ChevronUp, ChevronDown, Minus } from 'lucide-react';
 import { cn } from '../../lib/utils';
+import { useMoodTheme } from '../../contexts/MoodThemeContext';
 
 interface FinanceNewsFeedProps {
   title?: string;
