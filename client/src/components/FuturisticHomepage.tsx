@@ -1634,7 +1634,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     { rank: 2, symbol: 'ETH', name: 'Ethereum', price: '$2,657.89', change: '-1.23%', marketCap: '$319.2B', icon: '⟐', changeColor: 'text-red-400', trendData: [27, 26, 28, 26, 27], glow: 'shadow-lg shadow-blue-500/20' },
                     { rank: 3, symbol: 'USDT', name: 'Tether USDt', price: '$1.0001', change: '+0.01%', marketCap: '$118.4B', icon: '₮', changeColor: 'text-green-400', trendData: [1, 1, 1, 1, 1], glow: 'shadow-lg shadow-green-500/20' },
                     { rank: 4, symbol: 'BNB', name: 'BNB', price: '$312.45', change: '+4.67%', marketCap: '$48.2B', icon: '⬡', changeColor: 'text-green-400', trendData: [310, 315, 312, 318, 312], glow: 'shadow-lg shadow-yellow-500/20' },
-                    { rank: 5, symbol: 'SOL', name: 'Solana', price: '$156.78', change: '+8.45%', marketCap: '$42.1B', icon: '◎', changeColor: 'text-green-400', trendData: [150, 155, 160, 158, 157], glow: 'shadow-lg shadow-purple-500/20' },
+                    { rank: 5, symbol: 'SOL', name: 'Solana', price: '$156.78', change: '+8.45%', marketCap: '$42.1B', icon: '���', changeColor: 'text-green-400', trendData: [150, 155, 160, 158, 157], glow: 'shadow-lg shadow-purple-500/20' },
                     { rank: 6, symbol: 'USDC', name: 'USD Coin', price: '$0.9999', change: '-0.01%', marketCap: '$38.9B', icon: '$', changeColor: 'text-red-400', trendData: [1, 1, 1, 1, 1], glow: 'shadow-lg shadow-blue-400/20' },
                     { rank: 7, symbol: 'XRP', name: 'Ripple', price: '$0.5234', change: '-2.87%', marketCap: '$28.7B', icon: '◉', changeColor: 'text-red-400', trendData: [0.53, 0.52, 0.54, 0.52, 0.52], glow: 'shadow-lg shadow-cyan-500/20' },
                     { rank: 8, symbol: 'ADA', name: 'Cardano', price: '$0.5845', change: '+5.21%', marketCap: '$20.6B', icon: '₳', changeColor: 'text-green-400', trendData: [0.55, 0.58, 0.56, 0.59, 0.58], glow: 'shadow-lg shadow-indigo-500/20' },
@@ -1882,7 +1882,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <Card className="bg-black/40 border-cyan-500/20 backdrop-blur-xl">
                   <CardHeader className="border-b border-cyan-500/20">
                     <CardTitle className="text-white text-sm flex items-center gap-2">
-                      <span className="text-lg">⭐</span>
+                      <span className="text-lg">���</span>
                       Your Crypto Watchlist
                     </CardTitle>
                   </CardHeader>
@@ -3242,10 +3242,10 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
           <div className="lg:col-span-3 space-y-8">
             
             {/* Top 10 Movers Widget */}
-            <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
-              <CardHeader className="border-b border-purple-500/20">
-                <CardTitle className="text-white flex items-center gap-2">
-                  <TrendingUp className="w-6 h-6 text-emerald-400" />
+            <Card className={themeMode === 'light' ? `${cardBackground} border ${borderColor} shadow-[0_2px_6px_rgba(0,0,0,0.05)]` : "bg-black/40 border-purple-500/20 backdrop-blur-xl"}>
+              <CardHeader className={themeMode === 'light' ? `border-b ${borderColor}` : "border-b border-purple-500/20"}>
+                <CardTitle className={`flex items-center gap-2 ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>
+                  <TrendingUp className={`w-6 h-6 ${themeMode === 'light' ? 'text-[#4CAF50]' : 'text-emerald-400'}`} />
                   Top 10 Movers Today
                 </CardTitle>
               </CardHeader>
