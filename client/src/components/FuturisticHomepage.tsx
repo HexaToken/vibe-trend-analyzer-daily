@@ -1700,11 +1700,8 @@ export const FuturisticHomepage: React.FC = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6">
-                <Tabs defaultValue="assets" className="w-full">
-                  <TabsList className="grid w-full grid-cols-4 bg-black/20 backdrop-blur-xl border border-gray-700/50">
-                    <TabsTrigger value="assets" className="data-[state=active]:bg-pink-600/30 data-[state=active]:text-pink-300 text-gray-400">
-                      🔥 Trending Assets
-                    </TabsTrigger>
+                <Tabs defaultValue="news" className="w-full">
+                  <TabsList className="grid w-full grid-cols-3 bg-black/20 backdrop-blur-xl border border-gray-700/50">
                     <TabsTrigger value="news" className="data-[state=active]:bg-purple-600/30 data-[state=active]:text-purple-300 text-gray-400">
                       📰 Trending News
                     </TabsTrigger>
@@ -1715,52 +1712,6 @@ export const FuturisticHomepage: React.FC = () => {
                       🔍 Top Searches
                     </TabsTrigger>
                   </TabsList>
-
-                  <TabsContent value="assets" className="mt-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {[
-                        { symbol: 'NVDA', name: 'NVIDIA', price: '$875.28', change: '+23.45%', trend: '+45%', mentions: '156K', icon: '🎮', category: 'AI/Gaming' },
-                        { symbol: 'SOL', name: 'Solana', price: '$156.78', change: '+18.67%', trend: '+67%', mentions: '89K', icon: '◎', category: 'DeFi' },
-                        { symbol: 'TSLA', name: 'Tesla', price: '$248.50', change: '-8.22%', trend: '+23%', mentions: '234K', icon: '⚡', category: 'EV' },
-                        { symbol: 'BTC', name: 'Bitcoin', price: '$67,234', change: '+3.21%', trend: '+12%', mentions: '445K', icon: '₿', category: 'Crypto' },
-                        { symbol: 'AAPL', name: 'Apple', price: '$190.64', change: '+4.12%', trend: '+8%', mentions: '178K', icon: '🍎', category: 'Tech' },
-                        { symbol: 'DOGE', name: 'Dogecoin', price: '$0.08', change: '-12.45%', trend: '+89%', mentions: '567K', icon: '🐕', category: 'Meme' }
-                      ].map((asset, i) => (
-                        <div key={i} className="bg-gradient-to-br from-black/60 to-pink-900/20 rounded-xl p-4 border border-pink-500/20 hover:border-pink-400/40 transition-all duration-300 group cursor-pointer hover:scale-105">
-                          <div className="flex items-center justify-between mb-3">
-                            <div className="flex items-center gap-2">
-                              <span className="text-2xl">{asset.icon}</span>
-                              <div>
-                                <div className="text-lg font-bold text-white">{asset.symbol}</div>
-                                <div className="text-sm text-gray-400">{asset.name}</div>
-                              </div>
-                            </div>
-                            <Badge className="bg-pink-500/20 text-pink-400 border-pink-500/30">
-                              {asset.trend} 🔥
-                            </Badge>
-                          </div>
-                          <div className="space-y-2">
-                            <div className="flex items-center justify-between">
-                              <span className="text-xl font-bold text-white">{asset.price}</span>
-                              <span className={cn(
-                                "font-medium flex items-center gap-1",
-                                asset.change.startsWith('+') ? "text-green-400" : "text-red-400"
-                              )}>
-                                {asset.change.startsWith('+') ? <ArrowUp className="w-4 h-4" /> : <ArrowDown className="w-4 h-4" />}
-                                {asset.change}
-                              </span>
-                            </div>
-                            <div className="flex items-center justify-between text-sm">
-                              <span className="text-gray-400">Mentions: {asset.mentions}</span>
-                              <Badge className="bg-gray-500/20 text-gray-300 border-gray-500/30 text-xs">
-                                {asset.category}
-                              </Badge>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </TabsContent>
 
                   <TabsContent value="news" className="mt-6">
                     <div className="space-y-4">
