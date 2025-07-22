@@ -52,7 +52,11 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useMoodTheme } from '../../contexts/MoodThemeContext';
 import DynamicThemeSelector from '../DynamicThemeSelector';
 
-const SettingsPage = () => {
+interface SettingsPageProps {
+  onNavigate?: (section: string) => void;
+}
+
+const SettingsPage: React.FC<SettingsPageProps> = ({ onNavigate }) => {
   const { user, logout } = useAuth();
   const { themeMode, setThemeMode } = useMoodTheme();
   
