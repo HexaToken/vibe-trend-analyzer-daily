@@ -598,6 +598,12 @@ All colors MUST be HSL.
     justify-content: center;
   }
 
+  /* Light mode sentiment inner circle */
+  :root:not(.dark) .sentiment-inner {
+    background: #FFFFFF;
+    border: 2px solid #F7F9FB;
+  }
+
   .finance-trend-line {
     stroke-dasharray: 1000;
     stroke-dashoffset: 1000;
