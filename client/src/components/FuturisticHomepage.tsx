@@ -728,7 +728,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               </div>
 
               {/* User Authentication Toggle */}
-              <UserAuthenticationToggle />
+              <UserAuthenticationToggle onNavigate={onNavigate} />
             </div>
           </div>
         </div>
