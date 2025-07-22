@@ -42,8 +42,9 @@ import MembershipPageSummary from "@/components/examples/MembershipPageSummary";
 
 const queryClient = new QueryClient();
 
-const App = () => {
+const AppContent = () => {
   const [activeSection, setActiveSection] = useState("futuristic-home");
+  const { bodyGradient } = useMoodTheme();
 
   const renderContent = () => {
     switch (activeSection) {
