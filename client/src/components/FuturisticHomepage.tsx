@@ -1212,7 +1212,7 @@ export const FuturisticHomepage: React.FC = () => {
                               </div>
                             </div>
                             <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
-                              {token.sentiment}% 😃
+                              {token.sentiment.toFixed(2)}% 😃
                             </Badge>
                           </div>
                           <div className="space-y-2">
@@ -1250,7 +1250,7 @@ export const FuturisticHomepage: React.FC = () => {
                               </div>
                             </div>
                             <Badge className="bg-red-500/20 text-red-400 border-red-500/30">
-                              {token.sentiment}% 😡
+                              {token.sentiment.toFixed(2)}% 😡
                             </Badge>
                           </div>
                           <div className="space-y-2">
@@ -1294,7 +1294,7 @@ export const FuturisticHomepage: React.FC = () => {
                           <div className="space-y-2">
                             <div className="flex items-center justify-between">
                               <span className="text-xl font-bold text-white">{token.price}</span>
-                              <span className="text-emerald-400 font-medium">Sentiment: {token.sentiment}%</span>
+                              <span className="text-emerald-400 font-medium">Sentiment: {token.sentiment.toFixed(2)}%</span>
                             </div>
                             <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
                               <div className="h-full bg-gradient-to-r from-emerald-400 to-green-400 transition-all duration-1000" style={{ width: `${token.sentiment}%` }} />
@@ -1329,7 +1329,7 @@ export const FuturisticHomepage: React.FC = () => {
                           <div className="space-y-2">
                             <div className="flex items-center justify-between">
                               <span className="text-xl font-bold text-white">{token.price}</span>
-                              <span className="text-rose-400 font-medium">Sentiment: {token.sentiment}%</span>
+                              <span className="text-rose-400 font-medium">Sentiment: {token.sentiment.toFixed(2)}%</span>
                             </div>
                             <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
                               <div className="h-full bg-gradient-to-r from-rose-400 to-red-400 transition-all duration-1000" style={{ width: `${token.sentiment}%` }} />
@@ -2181,7 +2181,7 @@ export const FuturisticHomepage: React.FC = () => {
                                   </div>
                                   <div className="flex justify-between">
                                     <span className="text-gray-400">Sentiment:</span>
-                                    <span className="text-purple-300">{candle.sentiment}%</span>
+                                    <span className="text-purple-300">{candle.sentiment.toFixed(2)}%</span>
                                   </div>
                                 </div>
                               </div>
@@ -2684,7 +2684,7 @@ export const FuturisticHomepage: React.FC = () => {
                                 <div className="text-center">
                                   <div className="text-2xl mb-1">{item.icon}</div>
                                   <div className="text-white font-bold text-sm">{item.symbol}</div>
-                                  <div className="text-white/80 text-xs">{item.sentiment}%</div>
+                                  <div className="text-white/80 text-xs">{item.sentiment.toFixed(2)}%</div>
                                 </div>
 
                                 {/* Hover Tooltip */}
@@ -2707,7 +2707,7 @@ export const FuturisticHomepage: React.FC = () => {
                                             item.sentiment >= 70 ? "text-green-400" :
                                             item.sentiment >= 50 ? "text-yellow-400" : "text-red-400"
                                           )}>
-                                            {item.sentiment}% {item.sentiment >= 70 ? "🟢" : item.sentiment >= 50 ? "🟡" : "🔴"}
+                                            {item.sentiment.toFixed(2)}% {item.sentiment >= 70 ? "🟢" : item.sentiment >= 50 ? "🟡" : "🔴"}
                                           </span>
                                         </div>
                                         <div className="flex justify-between">
