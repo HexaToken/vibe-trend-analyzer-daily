@@ -812,6 +812,11 @@ export const FuturisticHomepage: React.FC = () => {
                   </Button>
                 );
               })}
+
+              {/* Mobile Authentication Section */}
+              <div className="border-t border-purple-500/20 pt-4 mt-4">
+                <MobileAuthenticationSection />
+              </div>
             </div>
           </div>
         </div>
