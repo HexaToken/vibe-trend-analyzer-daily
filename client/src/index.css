@@ -890,6 +890,63 @@ All colors MUST be HSL.
     border: 1px solid #FFB300;
   }
 
+  /* Global overrides for remaining dark backgrounds in light mode */
+  :root:not(.dark) .bg-black\/40 {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    border-radius: 16px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  :root:not(.dark) .bg-black\/60 {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    border-radius: 16px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  :root:not(.dark) .border-purple-500\/20 {
+    border-color: #E0E0E0 !important;
+  }
+
+  :root:not(.dark) .border-blue-500\/20 {
+    border-color: #E0E0E0 !important;
+  }
+
+  :root:not(.dark) .border-slate-700\/50 {
+    border-color: #E0E0E0 !important;
+  }
+
+  /* Fix text colors in light mode */
+  :root:not(.dark) .text-blue-300 {
+    color: #303F9F !important;
+  }
+
+  :root:not(.dark) .text-purple-300 {
+    color: #6A1B9A !important;
+  }
+
+  :root:not(.dark) .text-cyan-400 {
+    color: #00796B !important;
+  }
+
+  /* Fix badges in light mode */
+  :root:not(.dark) .bg-blue-500\/20 {
+    background: #E8EAF6 !important;
+  }
+
+  :root:not(.dark) .bg-purple-500\/20 {
+    background: #F3E5F5 !important;
+  }
+
+  :root:not(.dark) .border-blue-500\/30 {
+    border-color: #303F9F !important;
+  }
+
+  :root:not(.dark) .border-purple-500\/30 {
+    border-color: #6A1B9A !important;
+  }
+
   /* Hero Sentiment Section - Always Dark */
   .hero-sentiment-section {
     /* Force dark theme styling regardless of global theme */
