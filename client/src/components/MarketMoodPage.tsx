@@ -195,8 +195,6 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
               showLegend={true}
             />
 
-
-
             {/* Social Buzz Heatmap - Full Width */}
             <SocialBuzzHeatmap
               title="Social Media Buzz Heatmap"
