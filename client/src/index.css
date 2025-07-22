@@ -106,6 +106,13 @@ All colors MUST be HSL.
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Chart Colors - Light Mode */
+    --chart-1: 195 32% 40%; /* #4D7C8A */
+    --chart-2: 123 46% 34%; /* #4CAF50 */
+    --chart-3: 0 67% 49%; /* #D32F2F */
+    --chart-4: 199 18% 33%; /* #607D8B */
+    --chart-5: 212 17% 65%; /* #95A5B8 */
   }
 
   .dark {
