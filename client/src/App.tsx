@@ -31,9 +31,14 @@ import { StockSentimentScoring } from "@/components/StockSentimentScoring";
 import { AiSentimentExplainer } from "@/components/AiSentimentExplainer";
 import { YFinanceDemo } from "@/components/YFinanceDemo";
 import { MoodThemeDemo } from "@/components/MoodThemeDemo";
+import DynamicThemeSelectorDemo from "@/components/DynamicThemeSelectorDemo";
 
 import { BuilderFinanceDemo } from "@/components/BuilderFinanceDemo";
 import { FuturisticHomepage } from "@/components/FuturisticHomepage";
+import SettingsPage from "@/components/user/SettingsPage";
+import ViewProfilePage from "@/components/user/ViewProfilePage";
+import MoorMeterMembershipPage from "@/components/membership/MoorMeterMembershipPage";
+import MembershipPageSummary from "@/components/examples/MembershipPageSummary";
 
 const queryClient = new QueryClient();
 
@@ -59,7 +64,32 @@ const App = () => {
           </ProtectedRoute>
         );
       case "settings":
-        return <Settings />;
+        return (
+          <ProtectedRoute
+            fallbackTitle="Settings Access Required"
+            fallbackDescription="Please sign in to access your settings."
+          >
+            <SettingsPage onNavigate={setActiveSection} />
+          </ProtectedRoute>
+        );
+      case "user-settings":
+        return (
+          <ProtectedRoute
+            fallbackTitle="Settings Access Required"
+            fallbackDescription="Please sign in to access your settings."
+          >
+            <SettingsPage onNavigate={setActiveSection} />
+          </ProtectedRoute>
+        );
+      case "user-profile":
+        return (
+          <ProtectedRoute
+            fallbackTitle="Profile Access Required"
+            fallbackDescription="Please sign in to view your profile."
+          >
+            <ViewProfilePage />
+          </ProtectedRoute>
+        );
       case "database":
         return <DatabaseDemo />;
       case "social":
@@ -76,16 +106,20 @@ const App = () => {
         return <AiSentimentExplainer />;
             case "yfinance":
         return <YFinanceDemo />;
-            // Removed "theme-demo" route - MoodThemeDemo component retained, theming handled by MoodThemeProvider
-            
+      case "theme-demo":
+        return <DynamicThemeSelectorDemo />;
+      case "membership":
+        return <MoorMeterMembershipPage />;
+      case "membership-demo":
+        return <MembershipPageSummary />;
             // Removed "builder-finance" route - BuilderFinanceDemo component retained for Builder.io integration examples
       case "futuristic-home":
-        return <FuturisticHomepage />;
+        return <FuturisticHomepage onNavigate={setActiveSection} />;
       case "moorMeter":
         return <MoorMeterDashboard />;
 
       default:
-        return <FuturisticHomepage />;
+        return <FuturisticHomepage onNavigate={setActiveSection} />;
     }
   };
 

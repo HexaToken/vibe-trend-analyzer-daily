@@ -17,6 +17,9 @@ import {
   Brain,
   Moon,
   Plus,
+  UserCircle,
+  LogOut,
+  LogIn,
   Flame,
   Newspaper,
   ChevronDown,
@@ -28,6 +31,8 @@ import {
   DollarSign
 } from 'lucide-react';
 import { useMoodTheme } from '../contexts/MoodThemeContext';
+import { useAuth } from '../contexts/AuthContext';
+import DynamicThemeSelector from './DynamicThemeSelector';
 import { cn } from '../lib/utils';
 import { WatchlistContainerBlock } from './watchlist/WatchlistContainerBlock';
 import { ChatInterface } from './moorMeter/ChatInterface';
@@ -51,6 +56,252 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from './ui/collapsible';
+import { AuthModal } from './auth/AuthModal';
+
+// User Authentication Toggle Component
+interface UserAuthenticationToggleProps {
+  onNavigate?: (section: string) => void;
+}
+
+const UserAuthenticationToggle: React.FC<UserAuthenticationToggleProps> = ({ onNavigate }) => {
+  const { user, isAuthenticated, logout } = useAuth();
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<"login" | "signup">("login");
+
+  const openAuthModal = (mode: "login" | "signup") => {
+    setAuthMode(mode);
+    setAuthModalOpen(true);
+  };
+
+  const handleLogout = () => {
+    logout();
+  };
+
+  const getUserInitials = () => {
+    if (user?.firstName && user?.lastName) {
+      return `${user.firstName[0]}${user.lastName[0]}`.toUpperCase();
+    }
+    if (user?.username) {
+      return user.username.slice(0, 2).toUpperCase();
+    }
+    if (user?.email) {
+      return user.email.slice(0, 2).toUpperCase();
+    }
+    return 'JD';
+  };
+
+  if (!isAuthenticated) {
+    // Show generic person icon when not signed in
+    return (
+      <>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="p-3 hover:bg-purple-500/10 rounded-xl group transition-all duration-300"
+            >
+              <UserCircle className="w-5 h-5 text-gray-300 group-hover:text-purple-400 transition-colors" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            align="end"
+            className="w-56 bg-black/95 backdrop-blur-xl border-purple-500/30 text-white animate-in fade-in-0 zoom-in-95 transition-all duration-300"
+          >
+            <DropdownMenuItem
+              onClick={() => openAuthModal("login")}
+              className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer transition-colors duration-200"
+            >
+              <LogIn className="w-4 h-4 mr-2" />
+              Sign In
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => openAuthModal("signup")}
+              className="hover:bg-pink-500/20 focus:bg-pink-500/20 cursor-pointer transition-colors duration-200"
+            >
+              <UserCircle className="w-4 h-4 mr-2" />
+              Sign Up
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
+        <AuthModal
+          isOpen={authModalOpen}
+          onClose={() => setAuthModalOpen(false)}
+          defaultMode={authMode}
+        />
+      </>
+    );
+  }
+
+  // Show user avatar with initials when signed in
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="p-0 hover:bg-transparent rounded-full group transition-all duration-300"
+        >
+          <Avatar className="w-10 h-10 ring-2 ring-purple-500/30 group-hover:ring-purple-400/50 transition-all duration-300">
+            <AvatarImage src={user?.avatar} alt={user?.username} />
+            <AvatarFallback className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 text-sm group-hover:from-purple-500/30 group-hover:to-pink-500/30 transition-all duration-300">
+              {getUserInitials()}
+            </AvatarFallback>
+          </Avatar>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
+        align="end"
+        className="w-56 bg-black/95 backdrop-blur-xl border-purple-500/30 text-white animate-in fade-in-0 zoom-in-95 transition-all duration-300"
+      >
+        <div className="px-2 py-1.5 text-sm">
+          <div className="font-medium">
+            {user?.firstName && user?.lastName
+              ? `${user.firstName} ${user.lastName}`
+              : user?.username}
+          </div>
+          <div className="text-xs text-gray-400">{user?.email}</div>
+        </div>
+        <div className="border-t border-purple-500/20 my-1"></div>
+        <DropdownMenuItem
+          onClick={() => onNavigate?.('user-profile')}
+          className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer transition-colors duration-200"
+        >
+          <UserCircle className="w-4 h-4 mr-2" />
+          View Profile
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => onNavigate?.('user-settings')}
+          className="hover:bg-blue-500/20 focus:bg-blue-500/20 cursor-pointer transition-colors duration-200"
+        >
+          <Settings className="w-4 h-4 mr-2" />
+          Settings
+        </DropdownMenuItem>
+        <div className="border-t border-purple-500/20 my-1"></div>
+        <DropdownMenuItem
+          onClick={handleLogout}
+          className="hover:bg-red-500/20 focus:bg-red-500/20 cursor-pointer transition-colors duration-200 text-red-300"
+        >
+          <LogOut className="w-4 h-4 mr-2" />
+          Log out
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
+
+// Mobile Authentication Section Component
+interface MobileAuthenticationSectionProps {
+  onNavigate?: (section: string) => void;
+}
+
+const MobileAuthenticationSection: React.FC<MobileAuthenticationSectionProps> = ({ onNavigate }) => {
+  const { user, isAuthenticated, logout } = useAuth();
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<"login" | "signup">("login");
+
+  const openAuthModal = (mode: "login" | "signup") => {
+    setAuthMode(mode);
+    setAuthModalOpen(true);
+  };
+
+  const handleLogout = () => {
+    logout();
+  };
+
+  const getUserInitials = () => {
+    if (user?.firstName && user?.lastName) {
+      return `${user.firstName[0]}${user.lastName[0]}`.toUpperCase();
+    }
+    if (user?.username) {
+      return user.username.slice(0, 2).toUpperCase();
+    }
+    if (user?.email) {
+      return user.email.slice(0, 2).toUpperCase();
+    }
+    return 'JD';
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <>
+        <div className="space-y-2">
+          <Button
+            variant="ghost"
+            onClick={() => openAuthModal("login")}
+            className="w-full justify-start text-left transition-colors duration-200 text-gray-300 hover:text-white hover:bg-purple-500/10"
+          >
+            <LogIn className="w-4 h-4 mr-2" />
+            Sign In
+          </Button>
+          <Button
+            variant="ghost"
+            onClick={() => openAuthModal("signup")}
+            className="w-full justify-start text-left transition-colors duration-200 text-gray-300 hover:text-white hover:bg-pink-500/10"
+          >
+            <UserCircle className="w-4 h-4 mr-2" />
+            Sign Up
+          </Button>
+        </div>
+
+        <AuthModal
+          isOpen={authModalOpen}
+          onClose={() => setAuthModalOpen(false)}
+          defaultMode={authMode}
+        />
+      </>
+    );
+  }
+
+  return (
+    <div className="space-y-2">
+      {/* User Info */}
+      <div className="flex items-center gap-3 px-3 py-2 rounded-xl bg-purple-500/10">
+        <Avatar className="w-8 h-8 ring-2 ring-purple-500/30">
+          <AvatarImage src={user?.avatar} alt={user?.username} />
+          <AvatarFallback className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 text-xs">
+            {getUserInitials()}
+          </AvatarFallback>
+        </Avatar>
+        <div className="flex-1 min-w-0">
+          <div className="text-sm font-medium text-white truncate">
+            {user?.firstName && user?.lastName
+              ? `${user.firstName} ${user.lastName}`
+              : user?.username}
+          </div>
+          <div className="text-xs text-gray-400 truncate">{user?.email}</div>
+        </div>
+      </div>
+
+      {/* User Actions */}
+      <Button
+        variant="ghost"
+        onClick={() => onNavigate?.('user-profile')}
+        className="w-full justify-start text-left transition-colors duration-200 text-gray-300 hover:text-white hover:bg-purple-500/10"
+      >
+        <UserCircle className="w-4 h-4 mr-2" />
+        View Profile
+      </Button>
+      <Button
+        variant="ghost"
+        onClick={() => onNavigate?.('user-settings')}
+        className="w-full justify-start text-left transition-colors duration-200 text-gray-300 hover:text-white hover:bg-blue-500/10"
+      >
+        <Settings className="w-4 h-4 mr-2" />
+        Settings
+      </Button>
+      <Button
+        variant="ghost"
+        onClick={handleLogout}
+        className="w-full justify-start text-left transition-colors duration-200 text-red-300 hover:text-white hover:bg-red-500/10"
+      >
+        <LogOut className="w-4 h-4 mr-2" />
+        Log out
+      </Button>
+    </div>
+  );
+};
 
 interface MoodScore {
   overall: number;
@@ -78,7 +329,11 @@ interface TrendingTopic {
   icon: string;
 }
 
-export const FuturisticHomepage: React.FC = () => {
+interface FuturisticHomepageProps {
+  onNavigate?: (section: string) => void;
+}
+
+export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNavigate }) => {
   const { setMoodScore } = useMoodTheme();
     const [searchFocused, setSearchFocused] = useState(false);
                                                                                 const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'tool' | 'market' | 'crypto' | 'charts' | 'trending' | 'earnings' | 'finance'>('home');
@@ -467,15 +722,13 @@ export const FuturisticHomepage: React.FC = () => {
                 </Badge>
               </Button>
 
-              <Button variant="ghost" size="sm" className="p-3 hover:bg-purple-500/10 rounded-xl">
-                <Moon className="w-5 h-5 text-gray-300 hover:text-purple-400 transition-colors" />
-              </Button>
+              {/* Dynamic Theme Selector */}
+              <div className="hidden sm:block">
+                <DynamicThemeSelector />
+              </div>
 
-              <Avatar className="w-10 h-10 ring-2 ring-purple-500/30">
-                <AvatarFallback className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 text-sm">
-                  JD
-                </AvatarFallback>
-              </Avatar>
+              {/* User Authentication Toggle */}
+              <UserAuthenticationToggle onNavigate={onNavigate} />
             </div>
           </div>
         </div>
@@ -681,6 +934,21 @@ export const FuturisticHomepage: React.FC = () => {
                   </Button>
                 );
               })}
+
+              {/* Mobile Theme Selector */}
+              <div className="border-t border-purple-500/20 pt-4 mt-4">
+                <div className="mb-4">
+                  <h4 className="text-sm font-medium text-gray-400 mb-2 px-3">Theme</h4>
+                  <div className="px-3">
+                    <DynamicThemeSelector />
+                  </div>
+                </div>
+              </div>
+
+              {/* Mobile Authentication Section */}
+              <div className="border-t border-purple-500/20 pt-4 mt-4">
+                <MobileAuthenticationSection onNavigate={onNavigate} />
+              </div>
             </div>
           </div>
         </div>
@@ -1370,7 +1638,7 @@ export const FuturisticHomepage: React.FC = () => {
                     { rank: 7, symbol: 'XRP', name: 'Ripple', price: '$0.5234', change: '-2.87%', marketCap: '$28.7B', icon: '◉', changeColor: 'text-red-400', trendData: [0.53, 0.52, 0.54, 0.52, 0.52], glow: 'shadow-lg shadow-cyan-500/20' },
                     { rank: 8, symbol: 'ADA', name: 'Cardano', price: '$0.5845', change: '+5.21%', marketCap: '$20.6B', icon: '₳', changeColor: 'text-green-400', trendData: [0.55, 0.58, 0.56, 0.59, 0.58], glow: 'shadow-lg shadow-indigo-500/20' },
                     { rank: 9, symbol: 'DOGE', name: 'Dogecoin', price: '$0.0832', change: '-4.12%', marketCap: '$12.1B', icon: 'Ð', changeColor: 'text-red-400', trendData: [0.085, 0.083, 0.087, 0.081, 0.083], glow: 'shadow-lg shadow-amber-500/20' },
-                    { rank: 10, symbol: 'AVAX', name: 'Avalanche', price: '$38.45', change: '+12.34%', marketCap: '$15.8B', icon: '🔺', changeColor: 'text-green-400', trendData: [35, 38, 36, 40, 38], glow: 'shadow-lg shadow-red-500/20' }
+                    { rank: 10, symbol: 'AVAX', name: 'Avalanche', price: '$38.45', change: '+12.34%', marketCap: '$15.8B', icon: '����', changeColor: 'text-green-400', trendData: [35, 38, 36, 40, 38], glow: 'shadow-lg shadow-red-500/20' }
                   ].map((crypto) => (
                     <div key={crypto.rank} className={`group relative bg-gradient-to-br from-black/60 to-slate-900/40 rounded-xl p-5 border border-cyan-500/20 hover:border-cyan-400/50 transition-all duration-300 hover:scale-[1.02] cursor-pointer ${crypto.glow} hover:shadow-xl`}>
 
@@ -1791,7 +2059,7 @@ export const FuturisticHomepage: React.FC = () => {
                               </div>
                             </div>
                             <Badge className="ml-4 bg-pink-500/20 text-pink-400 border-pink-500/30">
-                              {news.trending} ���
+                              {news.trending} �����
                             </Badge>
                           </div>
                           <div className="flex items-center justify-between text-xs text-gray-500">
