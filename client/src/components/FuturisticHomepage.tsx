@@ -1452,7 +1452,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <Tabs defaultValue="bullish" className="w-full">
                   <TabsList className="grid w-full grid-cols-4 bg-black/20 backdrop-blur-xl border border-gray-700/50">
                     <TabsTrigger value="bullish" className="data-[state=active]:bg-green-600/30 data-[state=active]:text-green-300 text-gray-400">
-                      ��� Top Bullish
+                      🟢 Top Bullish
                     </TabsTrigger>
                     <TabsTrigger value="bearish" className="data-[state=active]:bg-red-600/30 data-[state=active]:text-red-300 text-gray-400">
                       🔴 Top Bearish
@@ -3332,10 +3332,10 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
             </div>
 
             {/* Trending Forum Topics */}
-            <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
-              <CardHeader className="border-b border-purple-500/20">
-                                <CardTitle className="text-white flex items-center gap-2">
-                  <Flame className="w-6 h-6 text-orange-400" />
+            <Card className={themeMode === 'light' ? `${cardBackground} border ${borderColor} shadow-[0_2px_6px_rgba(0,0,0,0.05)]` : "bg-black/40 border-purple-500/20 backdrop-blur-xl"}>
+              <CardHeader className={themeMode === 'light' ? `border-b ${borderColor}` : "border-b border-purple-500/20"}>
+                                <CardTitle className={`flex items-center gap-2 ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>
+                  <Flame className={`w-6 h-6 ${themeMode === 'light' ? 'text-[#D32F2F]' : 'text-orange-400'}`} />
                   Trending Forum Topics
                 </CardTitle>
               </CardHeader>
