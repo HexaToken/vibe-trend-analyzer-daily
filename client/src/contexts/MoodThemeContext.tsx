@@ -89,6 +89,8 @@ const MOOD_THEMES = {
       glowEffect: 'shadow-blue-500/20',
       textPrimary: 'text-slate-100',
       textSecondary: 'text-slate-300',
+      cardBackground: 'bg-slate-800/50',
+      border: 'border-slate-700',
     },
     bearish: {
       background: 'bg-slate-900',
@@ -97,6 +99,8 @@ const MOOD_THEMES = {
       glowEffect: 'shadow-gray-500/20',
       textPrimary: 'text-slate-100',
       textSecondary: 'text-slate-400',
+      cardBackground: 'bg-slate-800/50',
+      border: 'border-slate-700',
     },
     bullish: {
       background: 'bg-slate-900',
@@ -105,6 +109,8 @@ const MOOD_THEMES = {
       glowEffect: 'shadow-amber-500/30',
       textPrimary: 'text-amber-100',
       textSecondary: 'text-amber-200',
+      cardBackground: 'bg-slate-800/50',
+      border: 'border-slate-700',
     },
     extreme: {
       background: 'bg-slate-900',
@@ -113,6 +119,8 @@ const MOOD_THEMES = {
       glowEffect: 'shadow-purple-500/40',
       textPrimary: 'text-purple-100',
       textSecondary: 'text-purple-200',
+      cardBackground: 'bg-slate-800/50',
+      border: 'border-slate-700',
     }
   }
 };
