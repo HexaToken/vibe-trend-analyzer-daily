@@ -144,8 +144,7 @@ export const Navigation = ({
               <div className="hidden sm:inline-flex">
                 <ApiStatusBadge />
               </div>
-              {/* Mood Pulse Indicator */}
-              <MoodPulseIndicator size="sm" className="hidden lg:flex" />
+
             </div>
 
             {/* Desktop Navigation */}
