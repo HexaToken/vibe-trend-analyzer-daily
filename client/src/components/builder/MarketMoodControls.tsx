@@ -177,7 +177,7 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
                           : "border-slate-600 bg-slate-800/30"
                       )}
                     >
-                      <IconComponent className="w-5 h-5" />
+                      <IconComponent className="w-6 h-6" />
                       <span className="text-xs font-medium">{source.label}</span>
                       {isActive && (
                         <div className="absolute top-2 right-2 w-2 h-2 bg-current rounded-full" />
