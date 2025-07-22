@@ -30,7 +30,6 @@ interface MarketMoodControlsProps {
 }
 
 interface FilterState {
-  dateRange: '1D' | '7D' | '30D' | '90D' | '6M' | '1Y';
   sources: {
     stocks: boolean;
     news: boolean;
@@ -50,7 +49,6 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
   onViewAnalytics
 }) => {
   const [filters, setFilters] = useState<FilterState>({
-    dateRange: '7D',
     sources: {
       stocks: true,
       news: true,
