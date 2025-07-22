@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
 import { Globe, ExternalLink, ChevronUp, ChevronDown, Minus } from 'lucide-react';
 import { cn } from '../../lib/utils';
+import { useMoodTheme } from '../../contexts/MoodThemeContext';
 
 interface FinanceNewsFeedProps {
   title?: string;
@@ -33,6 +34,7 @@ export const FinanceNewsFeed: React.FC<FinanceNewsFeedProps> = ({
   categories = "finance,technology,economy",
   apiEndpoint = "/api/proxy/newsapi/top-headlines"
 }) => {
+  const { themeMode } = useMoodTheme();
   const [articles, setArticles] = useState<NewsArticle[]>([
     {
       id: '1',
@@ -124,8 +126,8 @@ export const FinanceNewsFeed: React.FC<FinanceNewsFeedProps> = ({
   const displayedArticles = articles.slice(0, maxArticles);
 
   return (
-    <Card className="finance-card border-0">
-      <CardHeader className="border-b border-slate-700/50">
+    <Card className={themeMode === 'light' ? "widget-news enhanced-card-light" : "finance-card border-0"}>
+      <CardHeader className={themeMode === 'light' ? "border-b border-[#E0E0E0]" : "border-b border-slate-700/50"}>
         <CardTitle className="flex items-center gap-2 text-white">
           <Globe className="w-5 h-5 text-blue-400" />
           {title}

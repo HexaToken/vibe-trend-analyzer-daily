@@ -18,75 +18,76 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
+    /* Light Mode (Clarity Mode) - Finance-focused design system */
+    --background: 216 27% 98%; /* #F7F9FB */
+    --foreground: 220 13% 12%; /* #1E1E1E */
 
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 100%; /* #FFFFFF */
+    --card-foreground: 220 13% 12%; /* #1E1E1E */
 
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 100%; /* #FFFFFF */
+    --popover-foreground: 220 13% 12%; /* #1E1E1E */
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 222.2 84% 4.9%;
+    --primary: 228 45% 42%; /* #3F51B5 */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 220 13% 91%; /* #E8EBF0 */
+    --secondary-foreground: 220 13% 29%; /* #4A4A4A */
 
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted: 220 13% 88%; /* #E0E0E0 */
+    --muted-foreground: 220 13% 29%; /* #4A4A4A */
 
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 228 45% 42%; /* #3F51B5 */
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 4 90% 58%; /* #F44336 */
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 217 91% 60%;
+    --border: 220 13% 88%; /* #E0E0E0 */
+    --input: 220 13% 88%; /* #E0E0E0 */
+    --ring: 195 32% 40%; /* #4D7C8A */
 
     --radius: 0.75rem;
 
-    /* Sentiment Colors */
-    --positive: 120 100% 50%;
-    --positive-light: 120 60% 70%;
-    --negative: 0 84% 60%;
-    --negative-light: 0 60% 70%;
-    --neutral: 45 93% 58%;
-    --neutral-light: 45 60% 70%;
+    /* Sentiment Colors - Light Mode */
+    --positive: 122 39% 49%; /* #4CAF50 */
+    --positive-light: 122 39% 70%;
+    --negative: 4 90% 58%; /* #F44336 */
+    --negative-light: 4 90% 78%;
+    --neutral: 199 18% 33%; /* #607D8B */
+    --neutral-light: 199 18% 60%;
 
-    /* Data Visualization */
-    --chart-primary: 217 91% 60%;
-    --chart-secondary: 120 100% 50%;
-    --chart-tertiary: 0 84% 60%;
-    --chart-quaternary: 280 100% 70%;
+    /* Data Visualization - Light Mode */
+    --chart-primary: 195 32% 40%; /* #4D7C8A */
+    --chart-secondary: 123 46% 34%; /* #4CAF50 */
+    --chart-tertiary: 0 67% 49%; /* #D32F2F */
+    --chart-quaternary: 199 18% 33%; /* #607D8B */
 
-    /* Gradients */
+    /* Gradients - Light Mode */
     --gradient-hero: linear-gradient(
       135deg,
-      hsl(217 91% 60%) 0%,
-      hsl(280 100% 70%) 100%
+      hsl(195 32% 40%) 0%,
+      hsl(199 18% 33%) 100%
     );
     --gradient-card: linear-gradient(
       145deg,
-      hsl(240 3.7% 15.9%) 0%,
-      hsl(240 5% 20%) 100%
+      hsl(0 0% 100%) 0%,
+      hsl(212 17% 97%) 100%
     );
     --gradient-positive: linear-gradient(
       90deg,
-      hsl(120 100% 50%) 0%,
-      hsl(120 60% 70%) 100%
+      hsl(123 46% 34%) 0%,
+      hsl(123 46% 60%) 100%
     );
     --gradient-negative: linear-gradient(
       90deg,
-      hsl(0 84% 60%) 0%,
-      hsl(0 60% 70%) 100%
+      hsl(0 67% 49%) 0%,
+      hsl(0 67% 70%) 100%
     );
 
-    /* Shadows */
-    --shadow-glow: 0 0 40px hsl(217 91% 60% / 0.3);
-    --shadow-card: 0 10px 30px -10px hsl(240 3.7% 15.9% / 0.8);
+    /* Shadows - Light Mode */
+    --shadow-glow: 0 2px 6px hsl(0 0% 0% / 0.05);
+    --shadow-card: 0 2px 6px hsl(0 0% 0% / 0.05);
 
     --radius: 0.75rem;
 
@@ -105,6 +106,13 @@ All colors MUST be HSL.
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Chart Colors - Light Mode */
+    --chart-1: 195 32% 40%; /* #4D7C8A */
+    --chart-2: 123 46% 34%; /* #4CAF50 */
+    --chart-3: 0 67% 49%; /* #D32F2F */
+    --chart-4: 199 18% 33%; /* #607D8B */
+    --chart-5: 212 17% 65%; /* #95A5B8 */
   }
 
   .dark {
@@ -143,6 +151,13 @@ All colors MUST be HSL.
         --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Chart Colors - Dark Mode */
+    --chart-1: 217 91% 60%; /* #3B82F6 */
+    --chart-2: 142 69% 58%; /* #10B981 */
+    --chart-3: 0 84% 60%; /* #EF4444 */
+    --chart-4: 280 100% 70%; /* #A855F7 */
+    --chart-5: 43 74% 66%; /* #F59E0B */
 
         /* Mood Theme Variables */
     --mood-gradient-from: 15 23 42; /* slate-900 fallback */
@@ -560,6 +575,18 @@ All colors MUST be HSL.
     padding: 8px;
   }
 
+  /* Light mode sentiment ring with pastel colors */
+  :root:not(.dark) .sentiment-ring {
+    background: conic-gradient(
+      from 0deg,
+      #F28B82 0deg,     /* Pastel red */
+      #FFF176 90deg,    /* Pastel yellow */
+      #81C784 180deg,   /* Pastel green */
+      #64B5F6 270deg,   /* Pastel blue */
+      #F28B82 360deg    /* Back to pastel red */
+    );
+  }
+
   .sentiment-inner {
     width: 100%;
     height: 100%;
@@ -569,6 +596,12 @@ All colors MUST be HSL.
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+
+  /* Light mode sentiment inner circle */
+  :root:not(.dark) .sentiment-inner {
+    background: #FFFFFF;
+    border: 2px solid #F7F9FB;
   }
 
   .finance-trend-line {
@@ -644,5 +677,317 @@ All colors MUST be HSL.
 
   .shadow-mood-glow {
     box-shadow: 0 0 20px var(--mood-glow);
+  }
+
+  /* Light Theme Utility Classes */
+  .clarity-card {
+    @apply bg-white border border-[#E0E0E0] shadow-[0_2px_8px_rgba(0,0,0,0.06)];
+  }
+
+  .clarity-text-primary {
+    @apply text-[#1E1E1E];
+  }
+
+  .clarity-text-secondary {
+    @apply text-[#4A4A4A];
+  }
+
+  .clarity-bg-primary {
+    @apply bg-[#F7F9FB];
+  }
+
+  .clarity-bg-hover {
+    @apply hover:bg-[#E8EBF0];
+  }
+
+  .clarity-accent {
+    @apply text-[#3F51B5];
+  }
+
+  .clarity-positive {
+    @apply text-[#4CAF50];
+  }
+
+  .clarity-negative {
+    @apply text-[#F44336];
+  }
+
+  .clarity-neutral {
+    @apply text-[#607D8B];
+  }
+
+  .clarity-border {
+    @apply border-[#E0E0E0];
+  }
+
+  /* Finance Card with Theme Support */
+  .themed-finance-card {
+    @apply transition-all duration-300;
+  }
+
+  .dark .themed-finance-card {
+    @apply bg-slate-800/50 border-slate-700;
+  }
+
+  :root:not(.dark) .themed-finance-card {
+    @apply clarity-card;
+  }
+
+  /* Make finance-card responsive to theme */
+  .finance-card {
+    @apply transition-all duration-300;
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  }
+
+  :root:not(.dark) .finance-card {
+    @apply bg-white border-[#E0E0E0];
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    backdrop-filter: none;
+  }
+
+  /* Theme-aware text colors */
+  .text-theme-primary {
+    @apply text-white;
+  }
+
+  :root:not(.dark) .text-theme-primary {
+    @apply text-[#1C1E21];
+  }
+
+  .text-theme-secondary {
+    @apply text-slate-400;
+  }
+
+  :root:not(.dark) .text-theme-secondary {
+    @apply text-[#444];
+  }
+
+  .text-theme-muted {
+    @apply text-slate-500;
+  }
+
+  :root:not(.dark) .text-theme-muted {
+    @apply text-[#666];
+  }
+
+  .text-theme-accent {
+    @apply text-cyan-400;
+  }
+
+  :root:not(.dark) .text-theme-accent {
+    @apply text-[#3F51B5];
+  }
+
+  /* Theme-aware border colors */
+  .border-theme {
+    @apply border-slate-700/50;
+  }
+
+  :root:not(.dark) .border-theme {
+    @apply border-[#E0E0E0];
+  }
+
+  /* Pastel-inspired widget backgrounds for Light Mode */
+  .widget-stocks {
+    background: #E0F7FA;
+    color: #00796B;
+  }
+
+  .widget-news {
+    background: #E8EAF6;
+    color: #303F9F;
+  }
+
+  .widget-social {
+    background: #F3E5F5;
+    color: #6A1B9A;
+  }
+
+  .widget-mood {
+    background: #F1F8E9;
+    color: #388E3C;
+  }
+
+  .widget-neutral {
+    background: #FAFAFA;
+    color: #607D8B;
+  }
+
+  /* AI Analysis button gradient for light mode */
+  .ai-analysis-btn-light {
+    background: linear-gradient(135deg, #7B1FA2, #303F9F);
+    color: white;
+  }
+
+  /* Enhanced card styling for light mode */
+  .enhanced-card-light {
+    background: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 16px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Typography readability overrides for light mode */
+  :root:not(.dark) .text-theme-heading {
+    color: #1E1E1E !important;
+    font-weight: 700;
+  }
+
+  :root:not(.dark) .text-theme-subheading {
+    color: #333 !important;
+    font-weight: 600;
+  }
+
+  :root:not(.dark) .text-theme-body {
+    color: #444 !important;
+    font-weight: 500;
+  }
+
+  :root:not(.dark) .text-theme-label {
+    color: #666 !important;
+  }
+
+  :root:not(.dark) .text-white {
+    color: #1E1E1E !important;
+  }
+
+  :root:not(.dark) .text-gray-300 {
+    color: #444 !important;
+  }
+
+  :root:not(.dark) .text-gray-400 {
+    color: #666 !important;
+  }
+
+  :root:not(.dark) .text-slate-300 {
+    color: #444 !important;
+  }
+
+  :root:not(.dark) .text-slate-400 {
+    color: #666 !important;
+  }
+
+  /* Pastel gradient colors for mood gauge in light mode */
+  .mood-gauge-light {
+    background: conic-gradient(
+      from 0deg,
+      #F28B82 0deg,     /* Pastel red */
+      #FFF176 90deg,    /* Pastel yellow */
+      #81C784 180deg,   /* Pastel green */
+      #64B5F6 270deg,   /* Pastel blue */
+      #BA68C8 360deg    /* Pastel purple */
+    );
+  }
+
+  /* Improved sentiment badges for light mode */
+  .sentiment-badge-light {
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+  }
+
+  .sentiment-bullish-light {
+    background: #E8F5E9;
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+  }
+
+  .sentiment-bearish-light {
+    background: #FFEBEE;
+    color: #F44336;
+    border: 1px solid #F44336;
+  }
+
+  .sentiment-neutral-light {
+    background: #FFF8E1;
+    color: #FFB300;
+    border: 1px solid #FFB300;
+  }
+
+  /* Global overrides for remaining dark backgrounds in light mode */
+  :root:not(.dark) .bg-black\/40 {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    border-radius: 16px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  :root:not(.dark) .bg-black\/60 {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    border-radius: 16px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  :root:not(.dark) .border-purple-500\/20 {
+    border-color: #E0E0E0 !important;
+  }
+
+  :root:not(.dark) .border-blue-500\/20 {
+    border-color: #E0E0E0 !important;
+  }
+
+  :root:not(.dark) .border-slate-700\/50 {
+    border-color: #E0E0E0 !important;
+  }
+
+  /* Fix text colors in light mode */
+  :root:not(.dark) .text-blue-300 {
+    color: #303F9F !important;
+  }
+
+  :root:not(.dark) .text-purple-300 {
+    color: #6A1B9A !important;
+  }
+
+  :root:not(.dark) .text-cyan-400 {
+    color: #00796B !important;
+  }
+
+  /* Fix badges in light mode */
+  :root:not(.dark) .bg-blue-500\/20 {
+    background: #E8EAF6 !important;
+  }
+
+  :root:not(.dark) .bg-purple-500\/20 {
+    background: #F3E5F5 !important;
+  }
+
+  :root:not(.dark) .border-blue-500\/30 {
+    border-color: #303F9F !important;
+  }
+
+  :root:not(.dark) .border-purple-500\/30 {
+    border-color: #6A1B9A !important;
+  }
+
+  /* Hero Sentiment Section - Always Dark */
+  .hero-sentiment-section {
+    /* Force dark theme styling regardless of global theme */
+    color: white;
+  }
+
+  .hero-sentiment-section * {
+    /* Ensure all child elements inherit the dark theme */
+    color: inherit;
+  }
+
+  .hero-sentiment-section .text-gray-200 {
+    /* Preserve specific gray text colors */
+    color: rgb(229 231 235) !important;
+  }
+
+  .hero-sentiment-section .text-purple-300 {
+    /* Preserve purple text colors */
+    color: rgb(196 181 253) !important;
+  }
+
+  .hero-sentiment-section .text-white {
+    /* Ensure white text stays white */
+    color: white !important;
   }
 }

@@ -4,7 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/contexts/AuthContext";
-import { MoodThemeProvider } from "@/contexts/MoodThemeContext";
+import { MoodThemeProvider, useMoodTheme } from "@/contexts/MoodThemeContext";
 import { Navigation } from "@/components/Navigation";
 import { Dashboard } from "@/components/Dashboard";
 import { SentimentDashboard } from "@/components/SentimentDashboard";
@@ -42,8 +42,9 @@ import MembershipPageSummary from "@/components/examples/MembershipPageSummary";
 
 const queryClient = new QueryClient();
 
-const App = () => {
+const AppContent = () => {
   const [activeSection, setActiveSection] = useState("futuristic-home");
+  const { bodyGradient } = useMoodTheme();
 
   const renderContent = () => {
     switch (activeSection) {
@@ -123,23 +124,29 @@ const App = () => {
     }
   };
 
-    return (
+  return (
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <div className={`min-h-screen ${bodyGradient} transition-all duration-500`}>
+        <Navigation
+          activeSection={activeSection}
+          onSectionChange={setActiveSection}
+        />
+        <main>{renderContent()}</main>
+        <ApiStatusIndicator />
+        <AiChatBubble />
+      </div>
+    </TooltipProvider>
+  );
+};
+
+const App = () => {
+  return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <MoodThemeProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <div className="min-h-screen bg-background transition-all duration-500">
-              <Navigation
-                activeSection={activeSection}
-                onSectionChange={setActiveSection}
-              />
-              <main>{renderContent()}</main>
-              <ApiStatusIndicator />
-              <AiChatBubble />
-            </div>
-          </TooltipProvider>
+          <AppContent />
         </MoodThemeProvider>
       </AuthProvider>
     </QueryClientProvider>

@@ -25,6 +25,8 @@ interface MoodThemeContextType {
   glowEffect: string;
   moodEmoji: string;
   moodLabel: string;
+  cardBackground: string;
+  borderColor: string;
 }
 
 const MoodThemeContext = createContext<MoodThemeContextType | undefined>(undefined);
@@ -39,36 +41,44 @@ const MOOD_RANGES = {
 const MOOD_THEMES = {
   light: {
     neutral: {
-      background: 'bg-slate-50',
-      bodyGradient: 'from-slate-100 to-blue-50',
-      accentColor: 'from-slate-400 to-blue-400',
-      glowEffect: 'shadow-slate-200',
-      textPrimary: 'text-slate-900',
-      textSecondary: 'text-slate-600',
+      background: 'bg-[#F7F9FB]',
+      bodyGradient: 'from-[#F7F9FB] to-white',
+      accentColor: 'from-[#3F51B5] to-[#607D8B]',
+      glowEffect: 'shadow-[0_2px_8px_rgba(0,0,0,0.06)]',
+      textPrimary: 'text-[#1E1E1E]',
+      textSecondary: 'text-[#4A4A4A]',
+      cardBackground: 'bg-white',
+      border: 'border-[#E0E0E0]',
     },
     bearish: {
-      background: 'bg-slate-50',
-      bodyGradient: 'from-slate-100 to-gray-100',
-      accentColor: 'from-slate-500 to-gray-500',
-      glowEffect: 'shadow-slate-300',
-      textPrimary: 'text-slate-900',
-      textSecondary: 'text-slate-700',
+      background: 'bg-[#F7F9FB]',
+      bodyGradient: 'from-[#F7F9FB] to-slate-50',
+      accentColor: 'from-[#607D8B] to-slate-500',
+      glowEffect: 'shadow-[0_2px_8px_rgba(0,0,0,0.06)]',
+      textPrimary: 'text-[#1E1E1E]',
+      textSecondary: 'text-[#4A4A4A]',
+      cardBackground: 'bg-white',
+      border: 'border-[#E0E0E0]',
     },
     bullish: {
-      background: 'bg-amber-50',
-      bodyGradient: 'from-amber-50 to-orange-50',
-      accentColor: 'from-amber-400 to-orange-400',
-      glowEffect: 'shadow-amber-200',
-      textPrimary: 'text-amber-900',
-      textSecondary: 'text-amber-700',
+      background: 'bg-[#F7F9FB]',
+      bodyGradient: 'from-[#F7F9FB] to-green-50',
+      accentColor: 'from-[#4CAF50] to-green-500',
+      glowEffect: 'shadow-[0_2px_8px_rgba(76,175,80,0.1)]',
+      textPrimary: 'text-[#1E1E1E]',
+      textSecondary: 'text-[#4A4A4A]',
+      cardBackground: 'bg-white',
+      border: 'border-[#E0E0E0]',
     },
     extreme: {
-      background: 'bg-purple-50',
-      bodyGradient: 'from-purple-50 to-pink-50',
-      accentColor: 'from-purple-500 to-pink-500',
-      glowEffect: 'shadow-purple-300',
-      textPrimary: 'text-purple-900',
-      textSecondary: 'text-purple-700',
+      background: 'bg-[#F7F9FB]',
+      bodyGradient: 'from-[#F7F9FB] to-red-50',
+      accentColor: 'from-[#F44336] to-red-500',
+      glowEffect: 'shadow-[0_2px_8px_rgba(244,67,54,0.1)]',
+      textPrimary: 'text-[#1E1E1E]',
+      textSecondary: 'text-[#4A4A4A]',
+      cardBackground: 'bg-white',
+      border: 'border-[#E0E0E0]',
     }
   },
   dark: {
@@ -79,6 +89,8 @@ const MOOD_THEMES = {
       glowEffect: 'shadow-blue-500/20',
       textPrimary: 'text-slate-100',
       textSecondary: 'text-slate-300',
+      cardBackground: 'bg-slate-800/50',
+      border: 'border-slate-700',
     },
     bearish: {
       background: 'bg-slate-900',
@@ -87,6 +99,8 @@ const MOOD_THEMES = {
       glowEffect: 'shadow-gray-500/20',
       textPrimary: 'text-slate-100',
       textSecondary: 'text-slate-400',
+      cardBackground: 'bg-slate-800/50',
+      border: 'border-slate-700',
     },
     bullish: {
       background: 'bg-slate-900',
@@ -95,6 +109,8 @@ const MOOD_THEMES = {
       glowEffect: 'shadow-amber-500/30',
       textPrimary: 'text-amber-100',
       textSecondary: 'text-amber-200',
+      cardBackground: 'bg-slate-800/50',
+      border: 'border-slate-700',
     },
     extreme: {
       background: 'bg-slate-900',
@@ -103,6 +119,8 @@ const MOOD_THEMES = {
       glowEffect: 'shadow-purple-500/40',
       textPrimary: 'text-purple-100',
       textSecondary: 'text-purple-200',
+      cardBackground: 'bg-slate-800/50',
+      border: 'border-slate-700',
     }
   }
 };
@@ -185,6 +203,8 @@ export const MoodThemeProvider: React.FC<MoodThemeProviderProps> = ({ children }
     glowEffect: currentTheme.glowEffect,
     moodEmoji: MOOD_EMOJIS[moodState],
     moodLabel: MOOD_LABELS[moodState],
+    cardBackground: currentTheme.cardBackground,
+    borderColor: currentTheme.border,
   };
 
   return (

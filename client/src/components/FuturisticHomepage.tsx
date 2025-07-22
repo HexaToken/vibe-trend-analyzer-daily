@@ -5,6 +5,7 @@ import { Badge } from './ui/badge';
 import { Input } from './ui/input';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
+import { useMoodTheme } from '../contexts/MoodThemeContext';
 import {
     Search,
   TrendingUp,
@@ -30,7 +31,6 @@ import {
   X,
   DollarSign
 } from 'lucide-react';
-import { useMoodTheme } from '../contexts/MoodThemeContext';
 import { useAuth } from '../contexts/AuthContext';
 import DynamicThemeSelector from './DynamicThemeSelector';
 import { cn } from '../lib/utils';
@@ -334,7 +334,7 @@ interface FuturisticHomepageProps {
 }
 
 export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNavigate }) => {
-  const { setMoodScore } = useMoodTheme();
+  const { setMoodScore, themeMode, cardBackground, borderColor } = useMoodTheme();
     const [searchFocused, setSearchFocused] = useState(false);
                                                                                 const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'tool' | 'market' | 'crypto' | 'charts' | 'trending' | 'earnings' | 'finance'>('home');
       const [activeToolSubtab, setActiveToolSubtab] = useState("Market");
@@ -371,8 +371,8 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
     { topic: '$TSLA', label: 'Panic', mentions: '1,923', sentiment: 'bearish', icon: '📉' },
     { topic: 'AI Revolution', label: 'Hype', mentions: '4,512', sentiment: 'bullish', icon: '🤖' },
     { topic: 'Fed Meeting', label: 'Neutral', mentions: '3,674', sentiment: 'neutral', icon: '🏛️' },
-    { topic: '$BTC', label: 'Hype', mentions: '5,291', sentiment: 'bullish', icon: '₿' },
-    { topic: 'Inflation Data', label: 'Neutral', mentions: '2,183', sentiment: 'neutral', icon: '📊' }
+    { topic: '$BTC', label: 'Hype', mentions: '5,291', sentiment: 'bullish', icon: '��' },
+    { topic: 'Inflation Data', label: 'Neutral', mentions: '2,183', sentiment: 'neutral', icon: '���' }
   ]);
 
   const [moodTrendData] = useState([
@@ -500,14 +500,20 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
-      {/* Ambient Background Effects */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-pink-500/10 to-purple-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-gradient-to-r from-violet-500/8 to-indigo-500/8 rounded-full blur-3xl animate-pulse delay-2000" />
-        <div className="absolute top-3/4 left-1/3 w-64 h-64 bg-gradient-to-r from-emerald-500/6 to-teal-500/6 rounded-full blur-3xl animate-pulse delay-3000" />
-      </div>
+    <div className={`min-h-screen relative overflow-hidden ${
+      themeMode === 'light'
+        ? 'bg-[#F7F9FB]'
+        : 'bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900'
+    }`}>
+      {/* Ambient Background Effects - Only in Dark Mode */}
+      {themeMode !== 'light' && (
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-pink-500/10 to-purple-500/10 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-gradient-to-r from-violet-500/8 to-indigo-500/8 rounded-full blur-3xl animate-pulse delay-2000" />
+          <div className="absolute top-3/4 left-1/3 w-64 h-64 bg-gradient-to-r from-emerald-500/6 to-teal-500/6 rounded-full blur-3xl animate-pulse delay-3000" />
+        </div>
+      )}
 
       {/* Navigation */}
       <nav className="relative z-50 border-b border-purple-500/20 bg-black/60 backdrop-blur-xl">
@@ -964,17 +970,31 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
         ) : activeSection === 'finance' ? (
           <div className="space-y-8">
             {/* Finance Hub Header with Search */}
-            <div className="sticky top-20 z-40 bg-black/80 backdrop-blur-xl border border-purple-500/20 rounded-2xl p-6 mb-8">
+            <div className={`sticky top-20 z-40 rounded-2xl p-6 mb-8 ${
+              themeMode === 'light'
+                ? 'enhanced-card-light border border-[#E0E0E0]'
+                : 'bg-black/80 backdrop-blur-xl border border-purple-500/20'
+            }`}>
               <div className="text-center mb-6">
                 <div className="flex items-center justify-center gap-3 mb-4">
-                  <div className="w-16 h-16 bg-gradient-to-r from-green-500/20 to-purple-500/20 rounded-xl flex items-center justify-center shadow-lg shadow-green-500/20">
+                  <div className={`w-16 h-16 rounded-xl flex items-center justify-center shadow-lg ${
+                    themeMode === 'light'
+                      ? 'bg-gradient-to-r from-[#388E3C]/20 to-[#00796B]/20 shadow-[#388E3C]/20'
+                      : 'bg-gradient-to-r from-green-500/20 to-purple-500/20 shadow-green-500/20'
+                  }`}>
                     <span className="text-3xl">💰</span>
                   </div>
-                  <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+                  <h1 className={`text-4xl font-bold ${
+                    themeMode === 'light'
+                      ? 'bg-gradient-to-r from-[#388E3C] via-[#00796B] to-[#303F9F] bg-clip-text text-transparent'
+                      : 'bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent'
+                  }`}>
                     Finance Hub
                   </h1>
                 </div>
-                <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-6">
+                <p className={`text-xl max-w-2xl mx-auto mb-6 ${
+                  themeMode === 'light' ? 'text-[#444]' : 'text-gray-300'
+                }`}>
                   Advanced financial tools and analytics for portfolio management
                 </p>
               </div>
@@ -982,7 +1002,9 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               {/* Stock Search Bar */}
               <div className="max-w-md mx-auto mb-6">
                 <div className="relative">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <Search className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 ${
+                    themeMode === 'light' ? 'text-[#888]' : 'text-gray-400'
+                  }`} />
                   <Input
                     type="text"
                     placeholder="Search stock ticker (e.g., AAPL, TSLA, NVDA)..."
@@ -994,7 +1016,11 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         setFinanceSearchQuery('');
                       }
                     }}
-                    className="pl-12 pr-20 py-4 bg-black/40 border-purple-500/30 rounded-xl text-white placeholder-gray-400 focus:bg-black/60 focus:border-blue-400/50 focus:ring-0 focus:outline-none backdrop-blur-sm text-lg"
+                    className={`pl-12 pr-20 py-4 rounded-xl text-lg focus:ring-0 focus:outline-none ${
+                      themeMode === 'light'
+                        ? 'bg-white border-[#E0E0E0] text-[#1C1E21] placeholder-[#888] focus:bg-white focus:border-[#3F51B5]/50'
+                        : 'bg-black/40 border-purple-500/30 text-white placeholder-gray-400 focus:bg-black/60 focus:border-blue-400/50 backdrop-blur-sm'
+                    }`}
                   />
                   <Button
                     onClick={() => {
@@ -1003,14 +1029,20 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         setFinanceSearchQuery('');
                       }
                     }}
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 rounded-lg"
+                    className={themeMode === 'light'
+                      ? "absolute right-2 top-1/2 transform -translate-y-1/2 ai-analysis-btn-light hover:opacity-90 px-4 py-2 rounded-lg"
+                      : "absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 rounded-lg"
+                    }
                   >
                     Search
                   </Button>
                 </div>
                 <div className="flex items-center justify-center gap-2 mt-3">
-                  <span className="text-sm text-gray-400">Currently analyzing:</span>
-                  <Badge className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 border-blue-500/30 font-semibold">
+                  <span className={`text-sm ${themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'}`}>Currently analyzing:</span>
+                  <Badge className={themeMode === 'light'
+                    ? "bg-[#E8EAF6] text-[#303F9F] border-[#303F9F]/30 font-semibold"
+                    : "bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 border-blue-500/30 font-semibold"
+                  }>
                     ${selectedFinanceStock}
                   </Badge>
                 </div>
@@ -1019,16 +1051,26 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
 
             {/* Finance Tabs */}
             <Tabs value={activeFinanceTab} onValueChange={setActiveFinanceTab}>
-              <TabsList className="grid w-full grid-cols-2 bg-black/20 backdrop-blur-xl border border-gray-700/50 max-w-md mx-auto">
+              <TabsList className={`grid w-full grid-cols-2 max-w-md mx-auto ${
+                themeMode === 'light'
+                  ? 'bg-[#F5F5F5] border border-[#E0E0E0]'
+                  : 'bg-black/20 backdrop-blur-xl border border-gray-700/50'
+              }`}>
                 <TabsTrigger
                   value="risk-analysis"
-                  className="data-[state=active]:bg-blue-600/30 data-[state=active]:text-blue-300 text-gray-400 flex items-center gap-2"
+                  className={themeMode === 'light'
+                    ? "data-[state=active]:bg-[#3F51B5] data-[state=active]:text-white text-[#444] flex items-center gap-2"
+                    : "data-[state=active]:bg-blue-600/30 data-[state=active]:text-blue-300 text-gray-400 flex items-center gap-2"
+                  }
                 >
                   📊 Risk Analysis
                 </TabsTrigger>
                 <TabsTrigger
                   value="financial-reports"
-                  className="data-[state=active]:bg-purple-600/30 data-[state=active]:text-purple-300 text-gray-400 flex items-center gap-2"
+                  className={themeMode === 'light'
+                    ? "data-[state=active]:bg-[#3F51B5] data-[state=active]:text-white text-[#444] flex items-center gap-2"
+                    : "data-[state=active]:bg-purple-600/30 data-[state=active]:text-purple-300 text-gray-400 flex items-center gap-2"
+                  }
                 >
                   📁 Financial Reports
                 </TabsTrigger>
@@ -1039,42 +1081,65 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
                   {/* Sentiment Risk Meter */}
-                  <Card className="bg-black/40 border-blue-500/20 backdrop-blur-xl">
+                  <Card className={themeMode === 'light'
+                    ? "enhanced-card-light widget-mood"
+                    : "bg-black/40 border-blue-500/20 backdrop-blur-xl"
+                  }>
                     <CardHeader>
-                      <CardTitle className="text-white flex items-center gap-2">
+                      <CardTitle className={`flex items-center gap-2 ${
+                        themeMode === 'light' ? 'text-[#388E3C]' : 'text-white'
+                      }`}>
                         🎯 Sentiment Risk Meter
-                        <Badge className="ml-auto bg-blue-500/20 text-blue-300 border-blue-500/30">
+                        <Badge className={`ml-auto ${
+                          themeMode === 'light'
+                            ? 'bg-[#F1F8E9] text-[#388E3C] border-[#388E3C]/30'
+                            : 'bg-blue-500/20 text-blue-300 border-blue-500/30'
+                        }`}>
                           ${selectedFinanceStock}
                         </Badge>
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="text-center py-8">
                       <div className="relative w-32 h-32 mx-auto mb-4">
-                        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-red-500/20 via-yellow-500/20 to-green-500/20 p-1 animate-pulse">
-                          <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-900/90 to-blue-900/90" />
+                        <div className={`absolute inset-0 rounded-full p-1 animate-pulse ${
+                          themeMode === 'light'
+                            ? 'mood-gauge-light'
+                            : 'bg-gradient-to-r from-red-500/20 via-yellow-500/20 to-green-500/20'
+                        }`}>
+                          <div className={`w-full h-full rounded-full ${
+                            themeMode === 'light'
+                              ? 'bg-white'
+                              : 'bg-gradient-to-br from-slate-900/90 to-blue-900/90'
+                          }`} />
                         </div>
                         <div className="absolute inset-0 flex items-center justify-center">
                           <div className="text-center">
                             <div className={`text-3xl font-bold ${
-                              selectedFinanceStock === 'TSLA' ? 'text-red-400' :
-                              selectedFinanceStock === 'NVDA' ? 'text-green-400' :
-                              'text-yellow-400'
+                              themeMode === 'light'
+                                ? selectedFinanceStock === 'TSLA' ? 'text-[#F44336]' :
+                                  selectedFinanceStock === 'NVDA' ? 'text-[#4CAF50]' :
+                                  'text-[#FFB300]'
+                                : selectedFinanceStock === 'TSLA' ? 'text-red-400' :
+                                  selectedFinanceStock === 'NVDA' ? 'text-green-400' :
+                                  'text-yellow-400'
                             }`}>
                               {selectedFinanceStock === 'TSLA' ? 'HIGH' :
                                selectedFinanceStock === 'NVDA' ? 'LOW' :
                                'MEDIUM'}
                             </div>
-                            <div className="text-sm text-gray-400">Risk Level</div>
+                            <div className={`text-sm ${themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'}`}>Risk Level</div>
                           </div>
                         </div>
                       </div>
                       <div className="space-y-2">
                         <div className="flex justify-between text-sm">
-                          <span className="text-green-400">Low</span>
-                          <span className="text-yellow-400">Medium</span>
-                          <span className="text-red-400">High</span>
+                          <span className={themeMode === 'light' ? 'text-[#4CAF50]' : 'text-green-400'}>Low</span>
+                          <span className={themeMode === 'light' ? 'text-[#FFB300]' : 'text-yellow-400'}>Medium</span>
+                          <span className={themeMode === 'light' ? 'text-[#F44336]' : 'text-red-400'}>High</span>
                         </div>
-                        <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                        <div className={`h-2 rounded-full overflow-hidden ${
+                          themeMode === 'light' ? 'bg-[#E0E0E0]' : 'bg-gray-700'
+                        }`}>
                           <div className={`h-full transition-all duration-1000 ${
                             selectedFinanceStock === 'TSLA' ? 'w-5/6 bg-gradient-to-r from-yellow-400 to-red-400' :
                             selectedFinanceStock === 'NVDA' ? 'w-1/4 bg-gradient-to-r from-green-400 to-green-500' :
@@ -1089,7 +1154,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   <Card className="bg-black/40 border-blue-500/20 backdrop-blur-xl">
                     <CardHeader>
                       <CardTitle className="text-white flex items-center gap-2">
-                        🎓 AI Risk Grade
+                        ��� AI Risk Grade
                         <Badge className="ml-auto bg-blue-500/20 text-blue-300 border-blue-500/30">
                           ${selectedFinanceStock}
                         </Badge>
@@ -1469,7 +1534,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       {[
                         { symbol: 'BTC', name: 'Bitcoin', price: '$67,234', change: '+2.34%', sentiment: 95, mentions: '12.4K', icon: '₿' },
                         { symbol: 'SOL', name: 'Solana', price: '$156.78', change: '+8.45%', sentiment: 89, mentions: '8.2K', icon: '◎' },
-                        { symbol: 'ADA', name: 'Cardano', price: '$0.58', change: '+5.21%', sentiment: 84, mentions: '5.1K', icon: '₳' }
+                        { symbol: 'ADA', name: 'Cardano', price: '$0.58', change: '+5.21%', sentiment: 84, mentions: '5.1K', icon: '���' }
                       ].map((token) => (
                         <div key={token.symbol} className="bg-gradient-to-br from-black/60 to-green-900/20 rounded-xl p-4 border border-green-500/20 hover:border-green-400/40 transition-all duration-300 group cursor-pointer">
                           <div className="flex items-center justify-between mb-3">
@@ -1638,7 +1703,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     { rank: 7, symbol: 'XRP', name: 'Ripple', price: '$0.5234', change: '-2.87%', marketCap: '$28.7B', icon: '◉', changeColor: 'text-red-400', trendData: [0.53, 0.52, 0.54, 0.52, 0.52], glow: 'shadow-lg shadow-cyan-500/20' },
                     { rank: 8, symbol: 'ADA', name: 'Cardano', price: '$0.5845', change: '+5.21%', marketCap: '$20.6B', icon: '₳', changeColor: 'text-green-400', trendData: [0.55, 0.58, 0.56, 0.59, 0.58], glow: 'shadow-lg shadow-indigo-500/20' },
                     { rank: 9, symbol: 'DOGE', name: 'Dogecoin', price: '$0.0832', change: '-4.12%', marketCap: '$12.1B', icon: 'Ð', changeColor: 'text-red-400', trendData: [0.085, 0.083, 0.087, 0.081, 0.083], glow: 'shadow-lg shadow-amber-500/20' },
-                    { rank: 10, symbol: 'AVAX', name: 'Avalanche', price: '$38.45', change: '+12.34%', marketCap: '$15.8B', icon: '����', changeColor: 'text-green-400', trendData: [35, 38, 36, 40, 38], glow: 'shadow-lg shadow-red-500/20' }
+                    { rank: 10, symbol: 'AVAX', name: 'Avalanche', price: '$38.45', change: '+12.34%', marketCap: '$15.8B', icon: '�����', changeColor: 'text-green-400', trendData: [35, 38, 36, 40, 38], glow: 'shadow-lg shadow-red-500/20' }
                   ].map((crypto) => (
                     <div key={crypto.rank} className={`group relative bg-gradient-to-br from-black/60 to-slate-900/40 rounded-xl p-5 border border-cyan-500/20 hover:border-cyan-400/50 transition-all duration-300 hover:scale-[1.02] cursor-pointer ${crypto.glow} hover:shadow-xl`}>
 
@@ -1813,7 +1878,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                               "ml-4 flex-shrink-0",
                               news.sentiment === 'Bullish' ? 'bg-green-500/20 text-green-400 border-green-500/30' : 'bg-red-500/20 text-red-400 border-red-500/30'
                             )}>
-                              {news.sentiment === 'Bullish' ? '🟢 Bullish' : '🔴 Bearish'}
+                              {news.sentiment === 'Bullish' ? '���� Bullish' : '🔴 Bearish'}
                             </Badge>
                           </div>
                           <div className="flex items-center justify-between text-xs text-gray-500">
@@ -1859,7 +1924,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                               trend.sentiment === 'bearish' ? "text-red-400" : "text-gray-400"
                             )}>
                               {trend.sentiment === 'bullish' ? '😃' :
-                               trend.sentiment === 'bearish' ? '😡' : '😐'}
+                               trend.sentiment === 'bearish' ? '😡' : '����'}
                             </span>
                             <span className="text-purple-300 text-xs font-bold">{trend.mentions}</span>
                           </div>
@@ -2011,7 +2076,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       💬 Social Buzz
                     </TabsTrigger>
                     <TabsTrigger value="searches" className="data-[state=active]:bg-orange-600/30 data-[state=active]:text-orange-300 text-gray-400">
-                      🔍 Top Searches
+                      ���� Top Searches
                     </TabsTrigger>
                   </TabsList>
 
@@ -2171,7 +2236,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
                 <CardHeader>
                   <CardTitle className="text-white text-lg flex items-center gap-2">
-                    📈 Biggest Mover
+                    �� Biggest Mover
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -2734,7 +2799,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   ✅ Technical Analysis: Active
                 </Badge>
                 <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">
-                  ✅ Order Book: Live
+                  �� Order Book: Live
                 </Badge>
               </div>
             </div>
@@ -2754,7 +2819,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 value="HeatMap"
                 className="data-[state=active]:bg-gray-700/50 data-[state=active]:text-white text-gray-400"
               >
-                📊 Heat Map
+                �� Heat Map
               </TabsTrigger>
               <TabsTrigger
                 value="Analytics"
@@ -3174,60 +3239,65 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
         ) : (
           <>
         
-        {/* Hero Mood Score Section */}
-        <div className="text-center mb-16">
-          {/* Large Mood Score with Animated Character */}
-          <div className="relative inline-block mb-8">
-            <div className="w-96 h-96 rounded-full relative">
-                            {/* Animated gradient ring - rotates around the content */}
-              <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${getSentimentGradient(currentSentiment)} p-2 animate-spin-slow`}>
-                <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-900/90 to-purple-900/90 backdrop-blur-sm" />
-              </div>
+        {/* Hero Mood Score Section - Always Dark Theme */}
+        <div className="hero-sentiment-section text-center mb-16 relative">
+          {/* Dark theme overlay container - ensures this section stays dark */}
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-900/95 to-purple-900/95 rounded-3xl -mx-6 -my-6 backdrop-blur-sm" />
 
-              {/* Fixed content container - does not rotate */}
-              <div className="absolute inset-2 flex items-center justify-center">
-                <div className="text-center">
-                  {/* Mood Emoji - Fixed in place */}
-                  <div className="text-6xl mb-4 animate-bounce">
-                    {getSentimentEmoji(currentSentiment)}
-                  </div>
-                  {/* Score */}
-                  <div className="text-9xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mb-2">
-                    {moodScore.overall}
-                  </div>
-                  {/* Dynamic Label */}
-                  <div className="text-2xl font-bold text-white mb-1">
-                    {getSentimentLabel(currentSentiment)}
-                  </div>
-                  <div className="text-sm text-purple-300 uppercase tracking-wider">
-                    AI SENTIMENT SCORE
+          <div className="relative z-10 py-6">
+            {/* Large Mood Score with Animated Character */}
+            <div className="relative inline-block mb-8">
+              <div className="w-96 h-96 rounded-full relative">
+                              {/* Animated gradient ring - rotates around the content */}
+                <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${getSentimentGradient(currentSentiment)} p-2 animate-spin-slow`}>
+                  <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-900/90 to-purple-900/90 backdrop-blur-sm" />
+                </div>
+
+                {/* Fixed content container - does not rotate */}
+                <div className="absolute inset-2 flex items-center justify-center">
+                  <div className="text-center">
+                    {/* Mood Emoji - Fixed in place */}
+                    <div className="text-6xl mb-4 animate-bounce">
+                      {getSentimentEmoji(currentSentiment)}
+                    </div>
+                    {/* Score */}
+                    <div className="text-9xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mb-2">
+                      {moodScore.overall}
+                    </div>
+                    {/* Dynamic Label */}
+                    <div className="text-2xl font-bold text-white mb-1">
+                      {getSentimentLabel(currentSentiment)}
+                    </div>
+                    <div className="text-sm text-purple-300 uppercase tracking-wider">
+                      AI SENTIMENT SCORE
+                    </div>
                   </div>
                 </div>
+
+                              {/* Multiple pulse rings with sentiment-based colors */}
+                <div className={`absolute inset-0 rounded-full border-2 animate-ping ${
+                  currentSentiment === 'positive' ? 'border-emerald-400/40' :
+                  currentSentiment === 'neutral' ? 'border-gray-400/40' :
+                  'border-red-400/40'
+                }`} />
+                <div className={`absolute inset-2 rounded-full border animate-ping delay-75 ${
+                  currentSentiment === 'positive' ? 'border-green-400/30' :
+                  currentSentiment === 'neutral' ? 'border-slate-400/30' :
+                  'border-rose-400/30'
+                }`} />
+                <div className={`absolute inset-4 rounded-full border animate-ping delay-150 ${
+                  currentSentiment === 'positive' ? 'border-cyan-400/20' :
+                  currentSentiment === 'neutral' ? 'border-purple-400/20' :
+                  'border-purple-400/20'
+                }`} />
               </div>
-              
-                            {/* Multiple pulse rings with sentiment-based colors */}
-              <div className={`absolute inset-0 rounded-full border-2 animate-ping ${
-                currentSentiment === 'positive' ? 'border-emerald-400/40' :
-                currentSentiment === 'neutral' ? 'border-gray-400/40' :
-                'border-red-400/40'
-              }`} />
-              <div className={`absolute inset-2 rounded-full border animate-ping delay-75 ${
-                currentSentiment === 'positive' ? 'border-green-400/30' :
-                currentSentiment === 'neutral' ? 'border-slate-400/30' :
-                'border-rose-400/30'
-              }`} />
-              <div className={`absolute inset-4 rounded-full border animate-ping delay-150 ${
-                currentSentiment === 'positive' ? 'border-cyan-400/20' :
-                currentSentiment === 'neutral' ? 'border-purple-400/20' :
-                'border-purple-400/20'
-              }`} />
             </div>
+
+            {/* Subtitle - Always dark theme text */}
+            <p className="text-xl text-gray-200 max-w-3xl mx-auto mb-12 leading-relaxed">
+              Advanced AI-powered sentiment analysis with intelligent insights and mood breakdown
+            </p>
           </div>
-          
-          {/* Subtitle */}
-          <p className="text-xl text-gray-200 max-w-3xl mx-auto mb-12 leading-relaxed">
-            Advanced AI-powered sentiment analysis with intelligent insights and mood breakdown
-          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
@@ -3236,28 +3306,37 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
           <div className="lg:col-span-3 space-y-8">
             
             {/* Top 10 Movers Widget */}
-            <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
-              <CardHeader className="border-b border-purple-500/20">
-                <CardTitle className="text-white flex items-center gap-2">
-                  <TrendingUp className="w-6 h-6 text-emerald-400" />
+            <Card className={themeMode === 'light' ? `${cardBackground} border ${borderColor} shadow-[0_2px_6px_rgba(0,0,0,0.05)]` : "bg-black/40 border-purple-500/20 backdrop-blur-xl"}>
+              <CardHeader className={themeMode === 'light' ? `border-b ${borderColor}` : "border-b border-purple-500/20"}>
+                <CardTitle className={`flex items-center gap-2 ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>
+                  <TrendingUp className={`w-6 h-6 ${themeMode === 'light' ? 'text-[#4CAF50]' : 'text-emerald-400'}`} />
                   Top 10 Movers Today
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-0">
                 <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 p-6">
                   {topMovers.map((stock, index) => (
-                    <div key={stock.symbol} className="bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-4 border border-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer">
+                    <div key={stock.symbol} className={themeMode === 'light'
+                      ? `bg-white border border-[#E0E0E0] hover:border-[#4D7C8A]/30 rounded-xl p-4 transition-all duration-300 group cursor-pointer shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)]`
+                      : "bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-4 border border-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer"
+                    }>
                       <div className="flex items-center justify-between mb-3">
-                        <div className="w-10 h-10 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg flex items-center justify-center">
-                          <span className="text-xs font-bold text-white">{stock.symbol[0]}</span>
+                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                          themeMode === 'light'
+                            ? 'bg-gradient-to-r from-[#3F51B5]/10 to-[#3F51B5]/20'
+                            : 'bg-gradient-to-r from-purple-500/20 to-pink-500/20'
+                        }`}>
+                          <span className={`text-xs font-bold ${
+                            themeMode === 'light' ? 'text-[#3F51B5]' : 'text-white'
+                          }`}>{stock.symbol[0]}</span>
                         </div>
                         <Badge className={getSentimentBadge(stock.sentiment)}>
                           {stock.sentiment}
                         </Badge>
                       </div>
-                      <div className="text-lg font-bold text-white mb-1">{stock.symbol}</div>
-                      <div className="text-sm text-gray-400 mb-2">{stock.name}</div>
-                      <div className="text-xl font-bold text-white mb-1">${stock.price}</div>
+                      <div className={`text-lg font-bold mb-1 ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>{stock.symbol}</div>
+                      <div className={`text-sm mb-2 ${themeMode === 'light' ? 'text-[#4A4A4A]' : 'text-gray-400'}`}>{stock.name}</div>
+                      <div className={`text-xl font-bold mb-1 ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>${stock.price}</div>
                       <div className={cn(
                         "flex items-center gap-1 text-sm font-medium",
                         stock.change >= 0 ? "text-emerald-400" : "text-red-400"
@@ -3272,38 +3351,53 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         </Card>
 
             {/* Smart News Feed */}
-            <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
-              <CardHeader className="border-b border-purple-500/20">
-                <CardTitle className="text-white flex items-center gap-2">
-                  <Newspaper className="w-6 h-6 text-cyan-400" />
+            <Card className={themeMode === 'light' ? `${cardBackground} border ${borderColor} shadow-[0_2px_6px_rgba(0,0,0,0.05)]` : "bg-black/40 border-purple-500/20 backdrop-blur-xl"}>
+              <CardHeader className={themeMode === 'light' ? `border-b ${borderColor}` : "border-b border-purple-500/20"}>
+                <CardTitle className={`flex items-center gap-2 ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>
+                  <Newspaper className={`w-6 h-6 ${themeMode === 'light' ? 'text-[#3F51B5]' : 'text-cyan-400'}`} />
                   Smart News Feed
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6">
                 <div className="space-y-4">
                   {smartNews.map((news, index) => (
-                    <div key={index} className="bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-5 border border-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer">
+                    <div key={index} className={themeMode === 'light'
+                      ? `bg-white rounded-xl p-5 border border-[#E0E0E0] hover:border-[#3F51B5]/30 transition-all duration-300 group cursor-pointer shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]`
+                      : "bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-5 border border-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer"
+                    }>
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex-1">
-                          <h3 className="text-lg font-bold text-white mb-2 line-clamp-2 group-hover:text-purple-300 transition-colors">
+                          <h3 className={`text-lg font-semibold mb-2 line-clamp-2 transition-colors ${
+                            themeMode === 'light'
+                              ? 'text-[#1C1E21] group-hover:text-[#3F51B5]'
+                              : 'text-white group-hover:text-purple-300'
+                          }`}>
                             {news.headline}
                           </h3>
-                          <p className="text-sm text-gray-400 leading-relaxed line-clamp-3">
+                          <p className={`text-sm leading-relaxed line-clamp-3 ${
+                            themeMode === 'light' ? 'text-[#444]' : 'text-gray-400'
+                          }`}>
                             {news.summary}
                           </p>
                         </div>
                         <Badge className={cn(
-                          "ml-4 flex-shrink-0",
-                          news.sentiment === 'bullish' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' :
-                          news.sentiment === 'bearish' ? 'bg-red-500/20 text-red-400 border-red-500/30' :
-                          'bg-gray-500/20 text-gray-400 border-gray-500/30'
+                          "ml-4 flex-shrink-0 text-xs font-medium px-3 py-1 rounded-full",
+                          themeMode === 'light'
+                            ? news.sentiment === 'bullish' ? 'bg-[#E8F5E9] text-[#4CAF50] border-[#4CAF50]/20' :
+                              news.sentiment === 'bearish' ? 'bg-[#FFEBEE] text-[#F44336] border-[#F44336]/20' :
+                              'bg-[#FFF8E1] text-[#FFB300] border-[#FFB300]/20'
+                            : news.sentiment === 'bullish' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' :
+                              news.sentiment === 'bearish' ? 'bg-red-500/20 text-red-400 border-red-500/30' :
+                              'bg-gray-500/20 text-gray-400 border-gray-500/30'
                         )}>
                           {news.sentiment === 'bullish' ? '🟢 Bullish' :
                            news.sentiment === 'bearish' ? '🔴 Bearish' :
                            '🟡 Neutral'}
                         </Badge>
                       </div>
-                      <div className="flex items-center justify-between text-xs text-gray-500">
+                      <div className={`flex items-center justify-between text-xs ${
+                        themeMode === 'light' ? 'text-[#666]' : 'text-gray-500'
+                      }`}>
                         <span className="font-medium">{news.source}</span>
                         <span>{news.timestamp}</span>
                       </div>
@@ -3323,25 +3417,28 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
             </div>
 
             {/* Trending Forum Topics */}
-            <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
-              <CardHeader className="border-b border-purple-500/20">
-                                <CardTitle className="text-white flex items-center gap-2">
-                  <Flame className="w-6 h-6 text-orange-400" />
+            <Card className={themeMode === 'light' ? `${cardBackground} border ${borderColor} shadow-[0_2px_6px_rgba(0,0,0,0.05)]` : "bg-black/40 border-purple-500/20 backdrop-blur-xl"}>
+              <CardHeader className={themeMode === 'light' ? `border-b ${borderColor}` : "border-b border-purple-500/20"}>
+                                <CardTitle className={`flex items-center gap-2 ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>
+                  <Flame className={`w-6 h-6 ${themeMode === 'light' ? 'text-[#F44336]' : 'text-orange-400'}`} />
                   Trending Forum Topics
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {trendingTopics.map((topic, index) => (
-                    <div key={index} className="bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-4 border border-white/10 hover:border-purple-500/30 transition-all duration-300">
+                    <div key={index} className={themeMode === 'light'
+                      ? `bg-white rounded-xl p-4 border border-[#E0E0E0] hover:border-[#3F51B5]/30 transition-all duration-300 shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]`
+                      : "bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-4 border border-white/10 hover:border-purple-500/30 transition-all duration-300"
+                    }>
                       <div className="flex items-center gap-3 mb-3">
                         <span className="text-2xl">{topic.icon}</span>
                         <Badge className={getTrendingBadge(topic.label)}>
                           {topic.label}
                         </Badge>
                       </div>
-                      <div className="text-lg font-bold text-white mb-1">{topic.topic}</div>
-                      <div className="text-sm text-gray-400">{topic.mentions} mentions</div>
+                      <div className={`text-lg font-semibold mb-1 ${themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'}`}>{topic.topic}</div>
+                      <div className={`text-sm ${themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'}`}>{topic.mentions} mentions</div>
                     </div>
                   ))}
                 </div>
@@ -3353,30 +3450,39 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
           <div className="space-y-6">
             
             {/* Your Mood Score Card */}
-            <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
-              <CardHeader className="border-b border-purple-500/20">
-                <CardTitle className="text-white text-sm">Your Mood Score</CardTitle>
+            <Card className={themeMode === 'light' ? `${cardBackground} border ${borderColor} shadow-[0_2px_6px_rgba(0,0,0,0.05)]` : "bg-black/40 border-purple-500/20 backdrop-blur-xl"}>
+              <CardHeader className={themeMode === 'light' ? `border-b ${borderColor}` : "border-b border-purple-500/20"}>
+                <CardTitle className={`text-sm ${themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'}`}>Your Mood Score</CardTitle>
               </CardHeader>
               <CardContent className="p-6">
                 <div className="text-center mb-4">
-                  <div className="text-4xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent mb-2">
+                  <div className={`text-4xl font-bold mb-2 ${
+                    themeMode === 'light'
+                      ? 'bg-gradient-to-r from-[#4CAF50] to-[#3F51B5] bg-clip-text text-transparent'
+                      : 'bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent'
+                  }`}>
                     +64
                   </div>
-                  <div className="text-emerald-400 text-sm mb-4">Based on your watchlist</div>
+                  <div className={`text-sm mb-4 ${themeMode === 'light' ? 'text-[#4CAF50]' : 'text-emerald-400'}`}>Based on your watchlist</div>
                   <div className="space-y-2 mb-4">
                     {userWatchlist.map((item, index) => (
                       <div key={index} className="flex items-center justify-between text-sm">
-                        <span className="text-gray-300">{item.symbol}</span>
+                        <span className={themeMode === 'light' ? 'text-[#444]' : 'text-gray-300'}>{item.symbol}</span>
                         <span className={cn(
                           "font-medium",
-                          item.change >= 0 ? "text-emerald-400" : "text-red-400"
+                          item.change >= 0
+                            ? themeMode === 'light' ? "text-[#4CAF50]" : "text-emerald-400"
+                            : themeMode === 'light' ? "text-[#F44336]" : "text-red-400"
                         )}>
                           {item.change >= 0 ? '+' : ''}{item.change}%
                         </span>
                       </div>
                     ))}
                   </div>
-                  <Button className="w-full bg-gradient-to-r from-purple-600/20 to-pink-600/20 hover:from-purple-600/30 hover:to-pink-600/30 text-purple-300 border border-purple-500/30">
+                  <Button className={themeMode === 'light'
+                    ? "w-full bg-[#3F51B5]/10 hover:bg-[#3F51B5]/20 text-[#3F51B5] border border-[#3F51B5]/30 hover:border-[#3F51B5]/50 transition-all"
+                    : "w-full bg-gradient-to-r from-purple-600/20 to-pink-600/20 hover:from-purple-600/30 hover:to-pink-600/30 text-purple-300 border border-purple-500/30"
+                  }>
                     <Plus className="w-4 h-4 mr-2" />
                     Add/Remove Ticker
                   </Button>
@@ -3386,7 +3492,10 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
 
             {/* Footer Status */}
             <div className="text-center">
-              <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30">
+              <Badge className={themeMode === 'light'
+                ? "bg-[#E8F5E9] text-[#4CAF50] border-[#4CAF50]/30"
+                : "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
+              }>
                 Mood Score API: ✅ Live
               </Badge>
             </div>

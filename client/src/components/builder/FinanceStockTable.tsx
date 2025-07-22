@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
 import { TrendingUp, TrendingDown, ChevronUp, ChevronDown, Minus } from 'lucide-react';
 import { cn } from '../../lib/utils';
+import { useMoodTheme } from '../../contexts/MoodThemeContext';
 
 interface FinanceStockTableProps {
   title?: string;
@@ -31,6 +32,7 @@ export const FinanceStockTable: React.FC<FinanceStockTableProps> = ({
   autoRefresh = true,
   apiEndpoint = "/api/proxy/finnhub/quote"
 }) => {
+  const { themeMode, cardBackground, borderColor } = useMoodTheme();
   const [stocks, setStocks] = useState<StockData[]>([
     { symbol: 'TSLA', name: 'Tesla Inc', price: 248.50, change: -3.22, changePercent: -1.28, sentiment: 'bearish', volume: '45.2M' },
     { symbol: 'NVDA', name: 'NVIDIA Corp', price: 875.28, change: 12.45, changePercent: 1.44, sentiment: 'bullish', volume: '38.7M' },
@@ -80,53 +82,99 @@ export const FinanceStockTable: React.FC<FinanceStockTableProps> = ({
   const displayedStocks = stocks.slice(0, maxStocks);
 
   return (
-    <Card className="finance-card border-0">
-      <CardHeader className="border-b border-slate-700/50">
-        <CardTitle className="flex items-center gap-2 text-white">
-          <TrendingUp className="w-5 h-5 text-blue-400" />
+    <Card className={cn(
+      "shadow-[0_2px_6px_rgba(0,0,0,0.05)]",
+      themeMode === 'light' ? `widget-stocks enhanced-card-light` : "finance-card border-0"
+    )}>
+      <CardHeader className={cn(
+        "border-b",
+        themeMode === 'light' ? borderColor : "border-slate-700/50"
+      )}>
+        <CardTitle className={cn(
+          "flex items-center gap-2",
+          themeMode === 'light' ? "text-[#1E1E1E]" : "text-white"
+        )}>
+          <TrendingUp className={cn(
+            "w-5 h-5",
+            themeMode === 'light' ? "text-[#4D7C8A]" : "text-blue-400"
+          )} />
           {title}
           {loading && (
-            <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
+            <div className={cn(
+              "w-2 h-2 rounded-full animate-pulse",
+              themeMode === 'light' ? "bg-[#4D7C8A]" : "bg-blue-400"
+            )} />
           )}
         </CardTitle>
       </CardHeader>
       <CardContent className="p-0">
-        <div className="divide-y divide-slate-700/50">
+        <div className={cn(
+          "divide-y",
+          themeMode === 'light' ? "divide-[#E0E0E0]" : "divide-slate-700/50"
+        )}>
           {displayedStocks.map((stock, index) => (
-            <div key={stock.symbol} className="flex items-center justify-between p-4 hover:bg-slate-800/30 transition-colors">
+            <div key={stock.symbol} className={cn(
+              "flex items-center justify-between p-4 transition-colors",
+              themeMode === 'light' ? "hover:bg-[#E8EBF0]" : "hover:bg-slate-800/30"
+            )}>
               <div className="flex items-center gap-4">
-                <span className="text-xs text-slate-400 w-6">{index + 1}</span>
+                <span className={cn(
+                  "text-xs w-6",
+                  themeMode === 'light' ? "text-[#4A4A4A]" : "text-slate-400"
+                )}>{index + 1}</span>
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="font-medium text-white">{stock.symbol}</span>
+                    <span className={cn(
+                      "font-medium",
+                      themeMode === 'light' ? "text-[#1E1E1E]" : "text-white"
+                    )}>{stock.symbol}</span>
                     {showSentiment && (
                       <Badge className={cn(
                         "text-xs px-2",
-                        stock.sentiment === 'bullish' ? "bg-green-500/20 text-green-400" :
-                        stock.sentiment === 'bearish' ? "bg-red-500/20 text-red-400" :
-                        "bg-amber-500/20 text-amber-400"
+                        stock.sentiment === 'bullish'
+                          ? themeMode === 'light'
+                            ? "bg-[#4CAF50]/20 text-[#4CAF50]"
+                            : "bg-green-500/20 text-green-400"
+                          : stock.sentiment === 'bearish'
+                            ? themeMode === 'light'
+                              ? "bg-[#D32F2F]/20 text-[#D32F2F]"
+                              : "bg-red-500/20 text-red-400"
+                            : themeMode === 'light'
+                              ? "bg-[#607D8B]/20 text-[#607D8B]"
+                              : "bg-amber-500/20 text-amber-400"
                       )}>
                         {getSentimentIcon(stock.sentiment)}
                         {stock.sentiment}
                       </Badge>
                     )}
                   </div>
-                  <div className="text-sm text-slate-400">{stock.name}</div>
+                  <div className={cn(
+                    "text-sm",
+                    themeMode === 'light' ? "text-[#4A4A4A]" : "text-slate-400"
+                  )}>{stock.name}</div>
                 </div>
               </div>
-              
+
               <div className="text-right">
-                <div className="text-white font-medium">${stock.price.toFixed(2)}</div>
+                <div className={cn(
+                  "font-medium",
+                  themeMode === 'light' ? "text-[#1E1E1E]" : "text-white"
+                )}>${stock.price.toFixed(2)}</div>
                 <div className={cn(
                   "text-sm font-medium",
-                  stock.change >= 0 ? "text-green-400" : "text-red-400"
+                  stock.change >= 0
+                    ? themeMode === 'light' ? "text-[#4CAF50]" : "text-green-400"
+                    : themeMode === 'light' ? "text-[#D32F2F]" : "text-red-400"
                 )}>
                   {stock.change >= 0 ? '+' : ''}{stock.change.toFixed(2)} ({stock.changePercent.toFixed(2)}%)
                 </div>
               </div>
-              
+
               {showVolume && (
-                <div className="text-right text-xs text-slate-400">
+                <div className={cn(
+                  "text-right text-xs",
+                  themeMode === 'light' ? "text-[#4A4A4A]" : "text-slate-400"
+                )}>
                   Vol: {stock.volume}
                 </div>
               )}
