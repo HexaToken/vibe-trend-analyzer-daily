@@ -919,6 +919,16 @@ export const FuturisticHomepage: React.FC = () => {
                 );
               })}
 
+              {/* Mobile Theme Selector */}
+              <div className="border-t border-purple-500/20 pt-4 mt-4">
+                <div className="mb-4">
+                  <h4 className="text-sm font-medium text-gray-400 mb-2 px-3">Theme</h4>
+                  <div className="px-3">
+                    <DynamicThemeSelector />
+                  </div>
+                </div>
+              </div>
+
               {/* Mobile Authentication Section */}
               <div className="border-t border-purple-500/20 pt-4 mt-4">
                 <MobileAuthenticationSection />
