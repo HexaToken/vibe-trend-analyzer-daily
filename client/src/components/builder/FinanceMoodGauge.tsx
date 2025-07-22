@@ -26,7 +26,7 @@ export const FinanceMoodGauge: React.FC<FinanceMoodGaugeProps> = ({
   size = 'large',
   apiEndpoint = "/api/proxy/stock-sentiment"
 }) => {
-  const { setMoodScore } = useMoodTheme();
+  const { setMoodScore, themeMode, cardBackground, borderColor } = useMoodTheme();
   const [moodData, setMoodData] = useState<MoodData>({
     overall: 72,
     stocks: 68,
