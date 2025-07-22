@@ -3116,12 +3116,6 @@ export const FuturisticHomepage: React.FC = () => {
               </CardContent>
             </Card>
 
-            {/* AI Sentiment Engine - Unified Module */}
-            <AISentimentEngine
-              moodScore={moodScore}
-              className="w-full"
-            />
-
             {/* Footer Status */}
             <div className="text-center">
               <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30">
