@@ -14,8 +14,7 @@ import {
   BarChart3,
   Brain,
   RefreshCw,
-  Download,
-  Share
+
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
