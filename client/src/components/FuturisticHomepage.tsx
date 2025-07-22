@@ -3433,7 +3433,10 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
 
             {/* Footer Status */}
             <div className="text-center">
-              <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30">
+              <Badge className={themeMode === 'light'
+                ? "bg-[#E8F5E9] text-[#4CAF50] border-[#4CAF50]/30"
+                : "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
+              }>
                 Mood Score API: ✅ Live
               </Badge>
             </div>
