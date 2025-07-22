@@ -47,8 +47,7 @@ import {
   Check,
   AlertTriangle,
   ChevronRight,
-  Star,
-  Zap
+  Star
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useMoodTheme } from '../../contexts/MoodThemeContext';
