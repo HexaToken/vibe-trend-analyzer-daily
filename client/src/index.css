@@ -18,33 +18,34 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
+    /* Light Mode (Clarity Mode) - Finance-focused design system */
+    --background: 212 17% 97%; /* #F4F6F9 */
+    --foreground: 220 13% 12%; /* #1E1E1E */
 
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 100%; /* #FFFFFF */
+    --card-foreground: 220 13% 12%; /* #1E1E1E */
 
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 100%; /* #FFFFFF */
+    --popover-foreground: 220 13% 12%; /* #1E1E1E */
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 222.2 84% 4.9%;
+    --primary: 195 32% 40%; /* #4D7C8A */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 220 13% 91%; /* #E8EBF0 */
+    --secondary-foreground: 220 13% 29%; /* #4A4A4A */
 
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted: 220 13% 88%; /* #E0E0E0 */
+    --muted-foreground: 220 13% 29%; /* #4A4A4A */
 
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 195 32% 40%; /* #4D7C8A */
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 67% 49%; /* #D32F2F */
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 217 91% 60%;
+    --border: 220 13% 88%; /* #E0E0E0 */
+    --input: 220 13% 88%; /* #E0E0E0 */
+    --ring: 195 32% 40%; /* #4D7C8A */
 
     --radius: 0.75rem;
 
