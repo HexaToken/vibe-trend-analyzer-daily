@@ -110,6 +110,8 @@ const App = () => {
         return <DynamicThemeSelectorDemo />;
       case "membership":
         return <MoorMeterMembershipPage />;
+      case "membership-demo":
+        return <MembershipPageSummary />;
             // Removed "builder-finance" route - BuilderFinanceDemo component retained for Builder.io integration examples
       case "futuristic-home":
         return <FuturisticHomepage onNavigate={setActiveSection} />;
