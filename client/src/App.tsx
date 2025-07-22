@@ -62,7 +62,32 @@ const App = () => {
           </ProtectedRoute>
         );
       case "settings":
-        return <Settings />;
+        return (
+          <ProtectedRoute
+            fallbackTitle="Settings Access Required"
+            fallbackDescription="Please sign in to access your settings."
+          >
+            <SettingsPage />
+          </ProtectedRoute>
+        );
+      case "user-settings":
+        return (
+          <ProtectedRoute
+            fallbackTitle="Settings Access Required"
+            fallbackDescription="Please sign in to access your settings."
+          >
+            <SettingsPage />
+          </ProtectedRoute>
+        );
+      case "user-profile":
+        return (
+          <ProtectedRoute
+            fallbackTitle="Profile Access Required"
+            fallbackDescription="Please sign in to view your profile."
+          >
+            <ViewProfilePage />
+          </ProtectedRoute>
+        );
       case "database":
         return <DatabaseDemo />;
       case "social":
