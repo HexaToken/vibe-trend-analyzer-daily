@@ -173,7 +173,7 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
                       className={cn(
                         "h-16 p-4 flex flex-col items-center gap-2 border cursor-default",
                         isActive
-                          ? getSourceColor(source.color).replace('hover:bg-', 'bg-').replace('/30', '/20')
+                          ? getSourceColor(source.color).split(' ').filter(cls => !cls.startsWith('hover:')).join(' ')
                           : "border-slate-600 bg-slate-800/30"
                       )}
                     >
