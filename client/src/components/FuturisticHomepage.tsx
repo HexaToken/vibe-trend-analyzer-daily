@@ -335,7 +335,7 @@ interface FuturisticHomepageProps {
 }
 
 export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNavigate }) => {
-  const { setMoodScore } = useMoodTheme();
+  const { setMoodScore, themeMode, cardBackground, borderColor } = useMoodTheme();
     const [searchFocused, setSearchFocused] = useState(false);
                                                                                 const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'tool' | 'market' | 'crypto' | 'charts' | 'trending' | 'earnings' | 'finance'>('home');
       const [activeToolSubtab, setActiveToolSubtab] = useState("Market");
@@ -2755,7 +2755,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 value="HeatMap"
                 className="data-[state=active]:bg-gray-700/50 data-[state=active]:text-white text-gray-400"
               >
-                📊 Heat Map
+                �� Heat Map
               </TabsTrigger>
               <TabsTrigger
                 value="Analytics"
