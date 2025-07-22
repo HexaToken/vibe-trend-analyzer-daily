@@ -273,8 +273,6 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
           </div>
         </div>
 
-
-
         {/* Active Filters Summary */}
         {(filters.searchQuery || getActiveSources().length < 3) && (
           <div className="pt-4 border-t border-slate-700/50">
