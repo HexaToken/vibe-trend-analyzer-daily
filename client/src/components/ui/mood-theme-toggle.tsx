@@ -31,9 +31,9 @@ export const MoodThemeToggle: React.FC = () => {
   const getThemeLabel = () => {
     switch (themeMode) {
       case 'light':
-        return 'Light';
+        return 'Clarity';
       case 'dark':
-        return 'Dark';
+        return 'Focus';
       case 'dynamic':
         return 'Dynamic';
       default:
