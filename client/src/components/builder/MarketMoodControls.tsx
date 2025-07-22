@@ -21,7 +21,7 @@ import { cn } from '../../lib/utils';
 interface MarketMoodControlsProps {
   title?: string;
   showFilters?: boolean;
-  showExport?: boolean;
+
   onDateRangeChange?: (range: string) => void;
   onSourceToggle?: (sources: string[]) => void;
   onSearch?: (query: string) => void;
