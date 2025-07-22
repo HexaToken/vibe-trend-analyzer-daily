@@ -34,6 +34,7 @@ export const FinanceNewsFeed: React.FC<FinanceNewsFeedProps> = ({
   categories = "finance,technology,economy",
   apiEndpoint = "/api/proxy/newsapi/top-headlines"
 }) => {
+  const { themeMode } = useMoodTheme();
   const [articles, setArticles] = useState<NewsArticle[]>([
     {
       id: '1',
