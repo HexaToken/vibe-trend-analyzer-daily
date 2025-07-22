@@ -63,31 +63,31 @@ All colors MUST be HSL.
     --chart-tertiary: 0 67% 49%; /* #D32F2F */
     --chart-quaternary: 199 18% 33%; /* #607D8B */
 
-    /* Gradients */
+    /* Gradients - Light Mode */
     --gradient-hero: linear-gradient(
       135deg,
-      hsl(217 91% 60%) 0%,
-      hsl(280 100% 70%) 100%
+      hsl(195 32% 40%) 0%,
+      hsl(199 18% 33%) 100%
     );
     --gradient-card: linear-gradient(
       145deg,
-      hsl(240 3.7% 15.9%) 0%,
-      hsl(240 5% 20%) 100%
+      hsl(0 0% 100%) 0%,
+      hsl(212 17% 97%) 100%
     );
     --gradient-positive: linear-gradient(
       90deg,
-      hsl(120 100% 50%) 0%,
-      hsl(120 60% 70%) 100%
+      hsl(123 46% 34%) 0%,
+      hsl(123 46% 60%) 100%
     );
     --gradient-negative: linear-gradient(
       90deg,
-      hsl(0 84% 60%) 0%,
-      hsl(0 60% 70%) 100%
+      hsl(0 67% 49%) 0%,
+      hsl(0 67% 70%) 100%
     );
 
-    /* Shadows */
-    --shadow-glow: 0 0 40px hsl(217 91% 60% / 0.3);
-    --shadow-card: 0 10px 30px -10px hsl(240 3.7% 15.9% / 0.8);
+    /* Shadows - Light Mode */
+    --shadow-glow: 0 2px 6px hsl(0 0% 0% / 0.05);
+    --shadow-card: 0 2px 6px hsl(0 0% 0% / 0.05);
 
     --radius: 0.75rem;
 
