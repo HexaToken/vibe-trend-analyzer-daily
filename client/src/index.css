@@ -772,6 +772,79 @@ All colors MUST be HSL.
     @apply border-[#E0E0E0];
   }
 
+  /* Pastel-inspired widget backgrounds for Light Mode */
+  .widget-stocks {
+    background: #E0F7FA;
+    color: #00796B;
+  }
+
+  .widget-news {
+    background: #E8EAF6;
+    color: #303F9F;
+  }
+
+  .widget-social {
+    background: #F3E5F5;
+    color: #6A1B9A;
+  }
+
+  .widget-mood {
+    background: #F1F8E9;
+    color: #388E3C;
+  }
+
+  .widget-neutral {
+    background: #FAFAFA;
+    color: #607D8B;
+  }
+
+  /* AI Analysis button gradient for light mode */
+  .ai-analysis-btn-light {
+    background: linear-gradient(135deg, #7B1FA2, #303F9F);
+    color: white;
+  }
+
+  /* Enhanced card styling for light mode */
+  .enhanced-card-light {
+    background: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 12px;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.04);
+  }
+
+  /* Typography readability overrides for light mode */
+  :root:not(.dark) .text-theme-heading {
+    color: #1C1E21 !important;
+  }
+
+  :root:not(.dark) .text-theme-body {
+    color: #444 !important;
+  }
+
+  :root:not(.dark) .text-theme-label {
+    color: #666 !important;
+  }
+
+  :root:not(.dark) .text-white {
+    color: #1E1E1E !important;
+  }
+
+  :root:not(.dark) .text-gray-300 {
+    color: #444 !important;
+  }
+
+  :root:not(.dark) .text-gray-400 {
+    color: #666 !important;
+  }
+
+  :root:not(.dark) .text-slate-300 {
+    color: #444 !important;
+  }
+
+  :root:not(.dark) .text-slate-400 {
+    color: #666 !important;
+  }
+
   /* Hero Sentiment Section - Always Dark */
   .hero-sentiment-section {
     /* Force dark theme styling regardless of global theme */
