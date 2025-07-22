@@ -1922,7 +1922,7 @@ export const FuturisticHomepage: React.FC = () => {
                               </div>
                             </div>
                             <Badge className="ml-4 bg-pink-500/20 text-pink-400 border-pink-500/30">
-                              {news.trending} ���
+                              {news.trending} �����
                             </Badge>
                           </div>
                           <div className="flex items-center justify-between text-xs text-gray-500">
