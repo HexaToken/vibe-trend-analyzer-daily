@@ -50,10 +50,10 @@ All colors MUST be HSL.
     --radius: 0.75rem;
 
     /* Sentiment Colors - Light Mode */
-    --positive: 123 46% 34%; /* #4CAF50 adjusted for light theme */
-    --positive-light: 123 46% 60%;
-    --negative: 0 67% 49%; /* #D32F2F */
-    --negative-light: 0 67% 70%;
+    --positive: 122 39% 49%; /* #4CAF50 */
+    --positive-light: 122 39% 70%;
+    --negative: 4 90% 58%; /* #F44336 */
+    --negative-light: 4 90% 78%;
     --neutral: 199 18% 33%; /* #607D8B */
     --neutral-light: 199 18% 60%;
 
