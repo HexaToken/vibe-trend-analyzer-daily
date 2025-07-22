@@ -105,7 +105,7 @@ export const FinanceMoodGauge: React.FC<FinanceMoodGaugeProps> = ({
         <div className={`sentiment-gauge ${getGaugeSize()}`}>
           <div className="sentiment-ring">
             <div className="sentiment-inner">
-              <div className={`${getTextSize()} font-bold text-white mb-1`}>
+              <div className={`${getTextSize()} font-bold mb-1 ${themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'}`}>
                 {loading ? "..." : Math.round(moodData.overall)}
               </div>
               <div className="text-sm text-blue-400 font-medium">
