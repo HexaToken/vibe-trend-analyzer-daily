@@ -84,7 +84,7 @@ export const FinanceStockTable: React.FC<FinanceStockTableProps> = ({
   return (
     <Card className={cn(
       "shadow-[0_2px_6px_rgba(0,0,0,0.05)]",
-      themeMode === 'light' ? `${cardBackground} border ${borderColor}` : "finance-card border-0"
+      themeMode === 'light' ? `widget-stocks enhanced-card-light` : "finance-card border-0"
     )}>
       <CardHeader className={cn(
         "border-b",
