@@ -207,7 +207,7 @@ export const SocialBuzzHeatmap: React.FC<SocialBuzzHeatmapProps> = ({
                 <div className="mb-3">
                   <div className="flex items-center justify-between text-xs mb-1">
                     <span className="text-white/70">Sentiment</span>
-                    <span className="font-bold text-white">{topic.sentimentScore}</span>
+                    <span className="font-bold text-white">{topic.sentimentScore.toFixed(2)}</span>
                   </div>
                   <div className="h-1.5 bg-black/30 rounded-full overflow-hidden">
                     <div 
