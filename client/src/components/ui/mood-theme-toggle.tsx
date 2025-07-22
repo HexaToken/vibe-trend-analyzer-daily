@@ -72,14 +72,14 @@ export const MoodThemeToggle: React.FC = () => {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         
-        <DropdownMenuItem 
+        <DropdownMenuItem
           onClick={() => handleThemeChange('light')}
           className="flex items-center gap-3 cursor-pointer"
         >
           <Sun className="h-4 w-4" />
           <div className="flex-1">
-            <div className="font-medium">Light Mode</div>
-            <div className="text-xs text-muted-foreground">Classic bright theme</div>
+            <div className="font-medium">🌞 Clarity Mode</div>
+            <div className="text-xs text-muted-foreground">Financial professionalism & calm emotions</div>
           </div>
           {themeMode === 'light' && (
             <Badge variant="default" className="bg-yellow-500/20 text-yellow-700 border-yellow-400/30">
@@ -88,14 +88,14 @@ export const MoodThemeToggle: React.FC = () => {
           )}
         </DropdownMenuItem>
 
-        <DropdownMenuItem 
+        <DropdownMenuItem
           onClick={() => handleThemeChange('dark')}
           className="flex items-center gap-3 cursor-pointer"
         >
           <Moon className="h-4 w-4" />
           <div className="flex-1">
-            <div className="font-medium">Dark Mode</div>
-            <div className="text-xs text-muted-foreground">Standard dark theme</div>
+            <div className="font-medium">🌚 Focus Mode</div>
+            <div className="text-xs text-muted-foreground">Dark theme for concentrated analysis</div>
           </div>
           {themeMode === 'dark' && (
             <Badge variant="default" className="bg-blue-500/20 text-blue-700 border-blue-400/30">
