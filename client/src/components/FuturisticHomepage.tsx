@@ -1475,7 +1475,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       {[
                         { symbol: 'BTC', name: 'Bitcoin', price: '$67,234', change: '+2.34%', sentiment: 95, mentions: '12.4K', icon: '₿' },
                         { symbol: 'SOL', name: 'Solana', price: '$156.78', change: '+8.45%', sentiment: 89, mentions: '8.2K', icon: '◎' },
-                        { symbol: 'ADA', name: 'Cardano', price: '$0.58', change: '+5.21%', sentiment: 84, mentions: '5.1K', icon: '₳' }
+                        { symbol: 'ADA', name: 'Cardano', price: '$0.58', change: '+5.21%', sentiment: 84, mentions: '5.1K', icon: '���' }
                       ].map((token) => (
                         <div key={token.symbol} className="bg-gradient-to-br from-black/60 to-green-900/20 rounded-xl p-4 border border-green-500/20 hover:border-green-400/40 transition-all duration-300 group cursor-pointer">
                           <div className="flex items-center justify-between mb-3">
@@ -1865,7 +1865,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                               trend.sentiment === 'bearish' ? "text-red-400" : "text-gray-400"
                             )}>
                               {trend.sentiment === 'bullish' ? '😃' :
-                               trend.sentiment === 'bearish' ? '😡' : '😐'}
+                               trend.sentiment === 'bearish' ? '😡' : '����'}
                             </span>
                             <span className="text-purple-300 text-xs font-bold">{trend.mentions}</span>
                           </div>
@@ -3368,15 +3368,18 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               <CardContent className="p-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {trendingTopics.map((topic, index) => (
-                    <div key={index} className="bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-4 border border-white/10 hover:border-purple-500/30 transition-all duration-300">
+                    <div key={index} className={themeMode === 'light'
+                      ? `bg-white rounded-xl p-4 border border-[#E0E0E0] hover:border-[#3F51B5]/30 transition-all duration-300 shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]`
+                      : "bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-4 border border-white/10 hover:border-purple-500/30 transition-all duration-300"
+                    }>
                       <div className="flex items-center gap-3 mb-3">
                         <span className="text-2xl">{topic.icon}</span>
                         <Badge className={getTrendingBadge(topic.label)}>
                           {topic.label}
                         </Badge>
                       </div>
-                      <div className="text-lg font-bold text-white mb-1">{topic.topic}</div>
-                      <div className="text-sm text-gray-400">{topic.mentions} mentions</div>
+                      <div className={`text-lg font-semibold mb-1 ${themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'}`}>{topic.topic}</div>
+                      <div className={`text-sm ${themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'}`}>{topic.mentions} mentions</div>
                     </div>
                   ))}
                 </div>
