@@ -3284,7 +3284,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
             <Card className={themeMode === 'light' ? `${cardBackground} border ${borderColor} shadow-[0_2px_6px_rgba(0,0,0,0.05)]` : "bg-black/40 border-purple-500/20 backdrop-blur-xl"}>
               <CardHeader className={themeMode === 'light' ? `border-b ${borderColor}` : "border-b border-purple-500/20"}>
                 <CardTitle className={`flex items-center gap-2 ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>
-                  <Newspaper className={`w-6 h-6 ${themeMode === 'light' ? 'text-[#4D7C8A]' : 'text-cyan-400'}`} />
+                  <Newspaper className={`w-6 h-6 ${themeMode === 'light' ? 'text-[#3F51B5]' : 'text-cyan-400'}`} />
                   Smart News Feed
                 </CardTitle>
               </CardHeader>
