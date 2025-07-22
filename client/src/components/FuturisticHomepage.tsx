@@ -277,6 +277,7 @@ const MobileAuthenticationSection: React.FC<MobileAuthenticationSectionProps> = 
       {/* User Actions */}
       <Button
         variant="ghost"
+        onClick={() => onNavigate?.('user-profile')}
         className="w-full justify-start text-left transition-colors duration-200 text-gray-300 hover:text-white hover:bg-purple-500/10"
       >
         <UserCircle className="w-4 h-4 mr-2" />
@@ -284,6 +285,7 @@ const MobileAuthenticationSection: React.FC<MobileAuthenticationSectionProps> = 
       </Button>
       <Button
         variant="ghost"
+        onClick={() => onNavigate?.('user-settings')}
         className="w-full justify-start text-left transition-colors duration-200 text-gray-300 hover:text-white hover:bg-blue-500/10"
       >
         <Settings className="w-4 h-4 mr-2" />
