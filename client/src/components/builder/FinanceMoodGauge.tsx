@@ -90,10 +90,14 @@ export const FinanceMoodGauge: React.FC<FinanceMoodGaugeProps> = ({
   };
 
   return (
-    <div className="finance-card rounded-lg p-8 text-center">
+    <div className={`rounded-lg p-8 text-center ${
+      themeMode === 'light'
+        ? `${cardBackground} border ${borderColor} shadow-[0_2px_8px_rgba(0,0,0,0.06)]`
+        : 'finance-card'
+    }`}>
       <div className="mb-6">
-        <h2 className="text-2xl font-semibold text-white mb-2">{title}</h2>
-        <p className="text-slate-300 text-sm">{subtitle}</p>
+        <h2 className={`text-2xl font-semibold mb-2 ${themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'}`}>{title}</h2>
+        <p className={`text-sm ${themeMode === 'light' ? 'text-[#444]' : 'text-slate-300'}`}>{subtitle}</p>
       </div>
       
       {/* Mood Score Gauge */}
