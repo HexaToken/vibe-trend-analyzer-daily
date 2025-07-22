@@ -195,12 +195,7 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
               showLegend={true}
             />
 
-            {/* AI Market Insight - Full Width */}
-            <AIInsightWidget
-              title="AI Market Insight"
-              refreshInterval={300000}
-              showConfidence={true}
-            />
+
 
             {/* Social Buzz Heatmap - Full Width */}
             <SocialBuzzHeatmap
