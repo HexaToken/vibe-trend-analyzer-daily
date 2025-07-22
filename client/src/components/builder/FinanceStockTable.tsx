@@ -32,6 +32,7 @@ export const FinanceStockTable: React.FC<FinanceStockTableProps> = ({
   autoRefresh = true,
   apiEndpoint = "/api/proxy/finnhub/quote"
 }) => {
+  const { themeMode, cardBackground, borderColor } = useMoodTheme();
   const [stocks, setStocks] = useState<StockData[]>([
     { symbol: 'TSLA', name: 'Tesla Inc', price: 248.50, change: -3.22, changePercent: -1.28, sentiment: 'bearish', volume: '45.2M' },
     { symbol: 'NVDA', name: 'NVIDIA Corp', price: 875.28, change: 12.45, changePercent: 1.44, sentiment: 'bullish', volume: '38.7M' },
