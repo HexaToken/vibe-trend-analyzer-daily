@@ -2958,33 +2958,8 @@ export const FuturisticHomepage: React.FC = () => {
           
           {/* Subtitle */}
           <p className="text-xl text-gray-200 max-w-3xl mx-auto mb-12 leading-relaxed">
-            Today's sentiment analysis powered by AI across stocks, news, and social media
+            Advanced AI-powered sentiment analysis with intelligent insights and mood breakdown
           </p>
-          
-          {/* Sentiment Source Breakdown */}
-          <div className="max-w-4xl mx-auto">
-            <h3 className="text-lg font-semibold text-white mb-6">Sentiment Source Breakdown</h3>
-            <div className="grid grid-cols-3 gap-6">
-              {[
-                { label: 'Stocks', value: moodScore.stocks, percentage: '40%', color: 'from-pink-500 to-rose-500', icon: '📈' },
-                { label: 'News', value: moodScore.news, percentage: '30%', color: 'from-purple-500 to-violet-500', icon: '📰' },
-                { label: 'Forums', value: moodScore.social, percentage: '30%', color: 'from-cyan-500 to-blue-500', icon: '💬' }
-              ].map((item) => (
-                <div key={item.label} className="bg-black/40 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-purple-500/30 transition-all duration-300">
-                  <div className="text-3xl mb-3">{item.icon}</div>
-                  <div className="text-3xl font-bold text-white mb-2">{item.value}</div>
-                  <div className="text-gray-300 font-medium mb-1">{item.label}</div>
-                  <div className="text-sm text-gray-400 mb-3">{item.percentage} weight</div>
-                  <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-                    <div 
-                      className={`h-full bg-gradient-to-r ${item.color} transition-all duration-1000`}
-                      style={{ width: `${item.value}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
