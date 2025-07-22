@@ -3264,9 +3264,9 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                           {stock.sentiment}
                         </Badge>
                       </div>
-                      <div className="text-lg font-bold text-white mb-1">{stock.symbol}</div>
-                      <div className="text-sm text-gray-400 mb-2">{stock.name}</div>
-                      <div className="text-xl font-bold text-white mb-1">${stock.price}</div>
+                      <div className={`text-lg font-bold mb-1 ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>{stock.symbol}</div>
+                      <div className={`text-sm mb-2 ${themeMode === 'light' ? 'text-[#4A4A4A]' : 'text-gray-400'}`}>{stock.name}</div>
+                      <div className={`text-xl font-bold mb-1 ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>${stock.price}</div>
                       <div className={cn(
                         "flex items-center gap-1 text-sm font-medium",
                         stock.change >= 0 ? "text-emerald-400" : "text-red-400"
