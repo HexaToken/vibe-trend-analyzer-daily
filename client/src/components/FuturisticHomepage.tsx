@@ -970,17 +970,31 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
         ) : activeSection === 'finance' ? (
           <div className="space-y-8">
             {/* Finance Hub Header with Search */}
-            <div className="sticky top-20 z-40 bg-black/80 backdrop-blur-xl border border-purple-500/20 rounded-2xl p-6 mb-8">
+            <div className={`sticky top-20 z-40 rounded-2xl p-6 mb-8 ${
+              themeMode === 'light'
+                ? 'enhanced-card-light border border-[#E0E0E0]'
+                : 'bg-black/80 backdrop-blur-xl border border-purple-500/20'
+            }`}>
               <div className="text-center mb-6">
                 <div className="flex items-center justify-center gap-3 mb-4">
-                  <div className="w-16 h-16 bg-gradient-to-r from-green-500/20 to-purple-500/20 rounded-xl flex items-center justify-center shadow-lg shadow-green-500/20">
+                  <div className={`w-16 h-16 rounded-xl flex items-center justify-center shadow-lg ${
+                    themeMode === 'light'
+                      ? 'bg-gradient-to-r from-[#388E3C]/20 to-[#00796B]/20 shadow-[#388E3C]/20'
+                      : 'bg-gradient-to-r from-green-500/20 to-purple-500/20 shadow-green-500/20'
+                  }`}>
                     <span className="text-3xl">💰</span>
                   </div>
-                  <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+                  <h1 className={`text-4xl font-bold ${
+                    themeMode === 'light'
+                      ? 'bg-gradient-to-r from-[#388E3C] via-[#00796B] to-[#303F9F] bg-clip-text text-transparent'
+                      : 'bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent'
+                  }`}>
                     Finance Hub
                   </h1>
                 </div>
-                <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-6">
+                <p className={`text-xl max-w-2xl mx-auto mb-6 ${
+                  themeMode === 'light' ? 'text-[#444]' : 'text-gray-300'
+                }`}>
                   Advanced financial tools and analytics for portfolio management
                 </p>
               </div>
@@ -2177,7 +2191,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
                 <CardHeader>
                   <CardTitle className="text-white text-lg flex items-center gap-2">
-                    📈 Biggest Mover
+                    �� Biggest Mover
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
