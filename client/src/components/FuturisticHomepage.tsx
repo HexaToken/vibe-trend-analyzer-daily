@@ -1133,11 +1133,13 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       </div>
                       <div className="space-y-2">
                         <div className="flex justify-between text-sm">
-                          <span className="text-green-400">Low</span>
-                          <span className="text-yellow-400">Medium</span>
-                          <span className="text-red-400">High</span>
+                          <span className={themeMode === 'light' ? 'text-[#4CAF50]' : 'text-green-400'}>Low</span>
+                          <span className={themeMode === 'light' ? 'text-[#FFB300]' : 'text-yellow-400'}>Medium</span>
+                          <span className={themeMode === 'light' ? 'text-[#F44336]' : 'text-red-400'}>High</span>
                         </div>
-                        <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                        <div className={`h-2 rounded-full overflow-hidden ${
+                          themeMode === 'light' ? 'bg-[#E0E0E0]' : 'bg-gray-700'
+                        }`}>
                           <div className={`h-full transition-all duration-1000 ${
                             selectedFinanceStock === 'TSLA' ? 'w-5/6 bg-gradient-to-r from-yellow-400 to-red-400' :
                             selectedFinanceStock === 'NVDA' ? 'w-1/4 bg-gradient-to-r from-green-400 to-green-500' :
@@ -2074,7 +2076,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       💬 Social Buzz
                     </TabsTrigger>
                     <TabsTrigger value="searches" className="data-[state=active]:bg-orange-600/30 data-[state=active]:text-orange-300 text-gray-400">
-                      🔍 Top Searches
+                      ���� Top Searches
                     </TabsTrigger>
                   </TabsList>
 
@@ -2973,7 +2975,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                             // Crypto
                             { symbol: 'BTC', name: 'Bitcoin', sentiment: 82, change: '+3.8%', volume: '2.1B', category: 'crypto', icon: '₿' },
                             { symbol: 'ETH', name: 'Ethereum', sentiment: 76, change: '+2.4%', volume: '1.8B', category: 'crypto', icon: '⟐' },
-                            { symbol: 'SOL', name: 'Solana', sentiment: 88, change: '+7.2%', volume: '890M', category: 'crypto', icon: '���' },
+                            { symbol: 'SOL', name: 'Solana', sentiment: 88, change: '+7.2%', volume: '890M', category: 'crypto', icon: '◎' },
                             { symbol: 'ADA', name: 'Cardano', sentiment: 71, change: '+4.1%', volume: '234M', category: 'crypto', icon: '₳' },
                             { symbol: 'DOT', name: 'Polkadot', sentiment: 39, change: '-3.2%', volume: '156M', category: 'crypto', icon: '●' },
                             { symbol: 'MATIC', name: 'Polygon', sentiment: 79, change: '+6.7%', volume: '312M', category: 'crypto', icon: '⬟' },
