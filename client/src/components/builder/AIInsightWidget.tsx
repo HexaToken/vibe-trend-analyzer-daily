@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { Brain, RefreshCw, TrendingUp, TrendingDown, AlertCircle } from 'lucide-react';
+import { useMoodTheme } from '../../contexts/MoodThemeContext';
 
 interface AIInsightWidgetProps {
   title?: string;
