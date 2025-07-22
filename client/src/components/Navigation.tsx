@@ -99,7 +99,7 @@ export const Navigation = ({
     ],
     tools: [
       { id: "analytics", label: "Analytics", icon: TrendingUp },
-
+      { id: "membership", label: "Membership", icon: Crown, badge: "PRO" },
       {
         id: "nlp",
         label: "NLP Sentiment Analysis",
