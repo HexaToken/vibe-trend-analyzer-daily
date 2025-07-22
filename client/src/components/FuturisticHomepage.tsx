@@ -1691,6 +1691,13 @@ export const FuturisticHomepage: React.FC = () => {
               </div>
             </div>
 
+            {/* Stock Activity Dashboard - Market Pulse Panel */}
+            <StockActivityDashboard
+              className="mt-8"
+              showHeader={true}
+              defaultTab="trending"
+            />
+
             {/* Trending Categories Tabs */}
             <Card className="bg-black/40 border-pink-500/20 backdrop-blur-xl">
               <CardHeader className="border-b border-pink-500/20">
@@ -1902,13 +1909,6 @@ export const FuturisticHomepage: React.FC = () => {
                 </CardContent>
               </Card>
             </div>
-
-            {/* Stock Activity Dashboard - Market Pulse Panel */}
-            <StockActivityDashboard
-              className="mt-8"
-              showHeader={true}
-              defaultTab="trending"
-            />
 
             {/* Footer: Trending Status */}
             <div className="text-center">
