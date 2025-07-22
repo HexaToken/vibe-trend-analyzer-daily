@@ -25,6 +25,8 @@ interface MoodThemeContextType {
   glowEffect: string;
   moodEmoji: string;
   moodLabel: string;
+  cardBackground: string;
+  borderColor: string;
 }
 
 const MoodThemeContext = createContext<MoodThemeContextType | undefined>(undefined);
