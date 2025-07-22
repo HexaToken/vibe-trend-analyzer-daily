@@ -1051,16 +1051,26 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
 
             {/* Finance Tabs */}
             <Tabs value={activeFinanceTab} onValueChange={setActiveFinanceTab}>
-              <TabsList className="grid w-full grid-cols-2 bg-black/20 backdrop-blur-xl border border-gray-700/50 max-w-md mx-auto">
+              <TabsList className={`grid w-full grid-cols-2 max-w-md mx-auto ${
+                themeMode === 'light'
+                  ? 'bg-[#F5F5F5] border border-[#E0E0E0]'
+                  : 'bg-black/20 backdrop-blur-xl border border-gray-700/50'
+              }`}>
                 <TabsTrigger
                   value="risk-analysis"
-                  className="data-[state=active]:bg-blue-600/30 data-[state=active]:text-blue-300 text-gray-400 flex items-center gap-2"
+                  className={themeMode === 'light'
+                    ? "data-[state=active]:bg-[#3F51B5] data-[state=active]:text-white text-[#444] flex items-center gap-2"
+                    : "data-[state=active]:bg-blue-600/30 data-[state=active]:text-blue-300 text-gray-400 flex items-center gap-2"
+                  }
                 >
                   📊 Risk Analysis
                 </TabsTrigger>
                 <TabsTrigger
                   value="financial-reports"
-                  className="data-[state=active]:bg-purple-600/30 data-[state=active]:text-purple-300 text-gray-400 flex items-center gap-2"
+                  className={themeMode === 'light'
+                    ? "data-[state=active]:bg-[#3F51B5] data-[state=active]:text-white text-[#444] flex items-center gap-2"
+                    : "data-[state=active]:bg-purple-600/30 data-[state=active]:text-purple-300 text-gray-400 flex items-center gap-2"
+                  }
                 >
                   📁 Financial Reports
                 </TabsTrigger>
