@@ -660,4 +660,58 @@ All colors MUST be HSL.
   .shadow-mood-glow {
     box-shadow: 0 0 20px var(--mood-glow);
   }
+
+  /* Light Theme Utility Classes */
+  .clarity-card {
+    @apply bg-white border border-[#E0E0E0] shadow-[0_2px_6px_rgba(0,0,0,0.05)];
+  }
+
+  .clarity-text-primary {
+    @apply text-[#1E1E1E];
+  }
+
+  .clarity-text-secondary {
+    @apply text-[#4A4A4A];
+  }
+
+  .clarity-bg-primary {
+    @apply bg-[#F4F6F9];
+  }
+
+  .clarity-bg-hover {
+    @apply hover:bg-[#E8EBF0];
+  }
+
+  .clarity-accent {
+    @apply text-[#4D7C8A];
+  }
+
+  .clarity-positive {
+    @apply text-[#4CAF50];
+  }
+
+  .clarity-negative {
+    @apply text-[#D32F2F];
+  }
+
+  .clarity-neutral {
+    @apply text-[#607D8B];
+  }
+
+  .clarity-border {
+    @apply border-[#E0E0E0];
+  }
+
+  /* Finance Card with Theme Support */
+  .themed-finance-card {
+    @apply transition-all duration-300;
+  }
+
+  .dark .themed-finance-card {
+    @apply bg-slate-800/50 border-slate-700;
+  }
+
+  :root:not(.dark) .themed-finance-card {
+    @apply clarity-card;
+  }
 }
