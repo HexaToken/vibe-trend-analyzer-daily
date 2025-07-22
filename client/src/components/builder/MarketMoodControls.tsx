@@ -247,9 +247,7 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
                   {getActiveSources().length}/3 sources
                 </Badge>
               )}
-              <Badge className="bg-slate-500/20 text-slate-400 border-slate-500/30">
-                Range: {filters.dateRange}
-              </Badge>
+
             </div>
           </div>
         )}
