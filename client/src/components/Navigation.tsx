@@ -40,7 +40,7 @@ import {
 import { useAuth } from "@/contexts/AuthContext";
 import { AuthModal } from "@/components/auth/AuthModal";
 import { ApiStatusBadge } from "@/components/ApiStatusIndicator";
-import { MoodPulseIndicator } from "@/components/ui/mood-pulse-indicator";
+
 import { MoodThemeToggle } from "@/components/ui/mood-theme-toggle";
 
 interface NavigationProps {
