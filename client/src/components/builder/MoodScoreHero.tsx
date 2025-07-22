@@ -5,6 +5,7 @@ import { Card, CardContent } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { Brain, Activity } from "lucide-react";
 import { cn } from "../../lib/utils";
+import { useMoodTheme } from "../../contexts/MoodThemeContext";
 
 interface MoodScoreHeroProps {
   title?: string;
