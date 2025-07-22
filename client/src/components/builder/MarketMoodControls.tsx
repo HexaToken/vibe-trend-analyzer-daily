@@ -111,7 +111,7 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
 
   return (
     <Card className="finance-card border-0">
-      <CardHeader className="border-b border-slate-700/50">
+      <CardHeader className="border-b border-theme">
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2 text-theme-primary">
             <Settings className="w-5 h-5 text-theme-accent" />
@@ -160,7 +160,7 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
               <label className="text-sm font-medium text-white flex items-center gap-2">
                 <Filter className="w-4 h-4 text-cyan-400" />
                 Data Sources
-                <span className="text-xs text-slate-400 ml-auto">ℹ️ Pre-selected for transparency</span>
+                <span className="text-xs text-slate-400 ml-auto">��️ Pre-selected for transparency</span>
               </label>
               <div className="grid grid-cols-3 gap-3">
                 {sources.map((source) => {
