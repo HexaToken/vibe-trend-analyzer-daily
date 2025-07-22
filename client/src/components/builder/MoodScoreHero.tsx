@@ -124,19 +124,28 @@ export const MoodScoreHero: React.FC<MoodScoreHeroProps> = ({
                 {getMoodEmoji(moodScore.overall)}
               </div>
               <div>
-                <div className="text-5xl font-bold text-white mb-2">
+                <div className={cn(
+                  "text-5xl font-bold mb-2",
+                  themeMode === 'light' ? "text-[#1E1E1E]" : "text-white"
+                )}>
                   {loading ? "..." : Math.round(moodScore.overall)}
                 </div>
-                <div className="text-xl text-blue-200">
+                <div className={cn(
+                  "text-xl",
+                  themeMode === 'light' ? "text-[#4A4A4A]" : "text-blue-200"
+                )}>
                   {getMoodLabel(moodScore.overall)}
                 </div>
               </div>
             </div>
 
-                                                <h2 className="text-2xl font-semibold text-white mb-2">{title}</h2>
+                                                <h2 className={cn(
+              "text-2xl font-semibold mb-2",
+              themeMode === 'light' ? "text-[#1E1E1E]" : "text-white"
+            )}>{title}</h2>
             <p className={cn(
               "max-w-2xl mx-auto transition-colors duration-500",
-              "text-blue-200"
+              themeMode === 'light' ? "text-[#4A4A4A]" : "text-blue-200"
             )}>{subtitle}</p>
           </div>
 
