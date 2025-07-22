@@ -3174,60 +3174,65 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
         ) : (
           <>
         
-        {/* Hero Mood Score Section */}
-        <div className="text-center mb-16">
-          {/* Large Mood Score with Animated Character */}
-          <div className="relative inline-block mb-8">
-            <div className="w-96 h-96 rounded-full relative">
-                            {/* Animated gradient ring - rotates around the content */}
-              <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${getSentimentGradient(currentSentiment)} p-2 animate-spin-slow`}>
-                <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-900/90 to-purple-900/90 backdrop-blur-sm" />
-              </div>
+        {/* Hero Mood Score Section - Always Dark Theme */}
+        <div className="hero-sentiment-section text-center mb-16 relative">
+          {/* Dark theme overlay container - ensures this section stays dark */}
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-900/95 to-purple-900/95 rounded-3xl -mx-6 -my-6 backdrop-blur-sm" />
 
-              {/* Fixed content container - does not rotate */}
-              <div className="absolute inset-2 flex items-center justify-center">
-                <div className="text-center">
-                  {/* Mood Emoji - Fixed in place */}
-                  <div className="text-6xl mb-4 animate-bounce">
-                    {getSentimentEmoji(currentSentiment)}
-                  </div>
-                  {/* Score */}
-                  <div className="text-9xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mb-2">
-                    {moodScore.overall}
-                  </div>
-                  {/* Dynamic Label */}
-                  <div className="text-2xl font-bold text-white mb-1">
-                    {getSentimentLabel(currentSentiment)}
-                  </div>
-                  <div className="text-sm text-purple-300 uppercase tracking-wider">
-                    AI SENTIMENT SCORE
+          <div className="relative z-10 py-6">
+            {/* Large Mood Score with Animated Character */}
+            <div className="relative inline-block mb-8">
+              <div className="w-96 h-96 rounded-full relative">
+                              {/* Animated gradient ring - rotates around the content */}
+                <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${getSentimentGradient(currentSentiment)} p-2 animate-spin-slow`}>
+                  <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-900/90 to-purple-900/90 backdrop-blur-sm" />
+                </div>
+
+                {/* Fixed content container - does not rotate */}
+                <div className="absolute inset-2 flex items-center justify-center">
+                  <div className="text-center">
+                    {/* Mood Emoji - Fixed in place */}
+                    <div className="text-6xl mb-4 animate-bounce">
+                      {getSentimentEmoji(currentSentiment)}
+                    </div>
+                    {/* Score */}
+                    <div className="text-9xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mb-2">
+                      {moodScore.overall}
+                    </div>
+                    {/* Dynamic Label */}
+                    <div className="text-2xl font-bold text-white mb-1">
+                      {getSentimentLabel(currentSentiment)}
+                    </div>
+                    <div className="text-sm text-purple-300 uppercase tracking-wider">
+                      AI SENTIMENT SCORE
+                    </div>
                   </div>
                 </div>
+
+                              {/* Multiple pulse rings with sentiment-based colors */}
+                <div className={`absolute inset-0 rounded-full border-2 animate-ping ${
+                  currentSentiment === 'positive' ? 'border-emerald-400/40' :
+                  currentSentiment === 'neutral' ? 'border-gray-400/40' :
+                  'border-red-400/40'
+                }`} />
+                <div className={`absolute inset-2 rounded-full border animate-ping delay-75 ${
+                  currentSentiment === 'positive' ? 'border-green-400/30' :
+                  currentSentiment === 'neutral' ? 'border-slate-400/30' :
+                  'border-rose-400/30'
+                }`} />
+                <div className={`absolute inset-4 rounded-full border animate-ping delay-150 ${
+                  currentSentiment === 'positive' ? 'border-cyan-400/20' :
+                  currentSentiment === 'neutral' ? 'border-purple-400/20' :
+                  'border-purple-400/20'
+                }`} />
               </div>
-              
-                            {/* Multiple pulse rings with sentiment-based colors */}
-              <div className={`absolute inset-0 rounded-full border-2 animate-ping ${
-                currentSentiment === 'positive' ? 'border-emerald-400/40' :
-                currentSentiment === 'neutral' ? 'border-gray-400/40' :
-                'border-red-400/40'
-              }`} />
-              <div className={`absolute inset-2 rounded-full border animate-ping delay-75 ${
-                currentSentiment === 'positive' ? 'border-green-400/30' :
-                currentSentiment === 'neutral' ? 'border-slate-400/30' :
-                'border-rose-400/30'
-              }`} />
-              <div className={`absolute inset-4 rounded-full border animate-ping delay-150 ${
-                currentSentiment === 'positive' ? 'border-cyan-400/20' :
-                currentSentiment === 'neutral' ? 'border-purple-400/20' :
-                'border-purple-400/20'
-              }`} />
             </div>
+
+            {/* Subtitle - Always dark theme text */}
+            <p className="text-xl text-gray-200 max-w-3xl mx-auto mb-12 leading-relaxed">
+              Advanced AI-powered sentiment analysis with intelligent insights and mood breakdown
+            </p>
           </div>
-          
-          {/* Subtitle */}
-          <p className="text-xl text-gray-200 max-w-3xl mx-auto mb-12 leading-relaxed">
-            Advanced AI-powered sentiment analysis with intelligent insights and mood breakdown
-          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
