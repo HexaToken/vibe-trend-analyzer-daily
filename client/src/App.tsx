@@ -31,6 +31,7 @@ import { StockSentimentScoring } from "@/components/StockSentimentScoring";
 import { AiSentimentExplainer } from "@/components/AiSentimentExplainer";
 import { YFinanceDemo } from "@/components/YFinanceDemo";
 import { MoodThemeDemo } from "@/components/MoodThemeDemo";
+import DynamicThemeSelectorDemo from "@/components/DynamicThemeSelectorDemo";
 
 import { BuilderFinanceDemo } from "@/components/BuilderFinanceDemo";
 import { FuturisticHomepage } from "@/components/FuturisticHomepage";
@@ -76,8 +77,8 @@ const App = () => {
         return <AiSentimentExplainer />;
             case "yfinance":
         return <YFinanceDemo />;
-            // Removed "theme-demo" route - MoodThemeDemo component retained, theming handled by MoodThemeProvider
-            
+      case "theme-demo":
+        return <DynamicThemeSelectorDemo />;
             // Removed "builder-finance" route - BuilderFinanceDemo component retained for Builder.io integration examples
       case "futuristic-home":
         return <FuturisticHomepage />;
