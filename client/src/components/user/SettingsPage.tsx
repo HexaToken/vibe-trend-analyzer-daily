@@ -420,9 +420,12 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onNavigate }) => {
                       <p className="text-gray-400">Basic market sentiment access</p>
                     </div>
                   </div>
-                  <Button className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600">
+                  <Button
+                    onClick={() => onNavigate?.('membership')}
+                    className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600"
+                  >
                     <Crown className="w-4 h-4 mr-2" />
-                    Upgrade to Pro
+                    View Plans
                   </Button>
                 </div>
 
