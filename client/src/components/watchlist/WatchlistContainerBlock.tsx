@@ -157,7 +157,7 @@ export const WatchlistContainerBlock = ({ className }: WatchlistContainerBlockPr
                   liveStats.avgSentiment >= 70 ? "text-emerald-400" :
                   liveStats.avgSentiment >= 50 ? "text-yellow-400" : "text-red-400"
                 )}>
-                  {liveStats.avgSentiment}%
+                  {liveStats.avgSentiment.toFixed(2)}%
                 </div>
               </CardContent>
             </Card>
@@ -316,7 +316,7 @@ export const WatchlistContainerBlock = ({ className }: WatchlistContainerBlockPr
                       +{liveStats.topPerformer.dailyChangePercent.toFixed(2)}%
                     </div>
                     <div className="text-sm text-gray-400">
-                      Sentiment: {liveStats.topPerformer.sentimentScore}%
+                      Sentiment: {liveStats.topPerformer.sentimentScore.toFixed(2)}%
                     </div>
                   </div>
                 </div>
@@ -343,7 +343,7 @@ export const WatchlistContainerBlock = ({ className }: WatchlistContainerBlockPr
                       {liveStats.worstPerformer.dailyChangePercent.toFixed(2)}%
                     </div>
                     <div className="text-sm text-gray-400">
-                      Sentiment: {liveStats.worstPerformer.sentimentScore}%
+                      Sentiment: {liveStats.worstPerformer.sentimentScore.toFixed(2)}%
                     </div>
                   </div>
                 </div>

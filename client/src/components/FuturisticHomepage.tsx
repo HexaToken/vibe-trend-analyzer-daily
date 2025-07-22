@@ -37,6 +37,7 @@ import { SentimentHeatMap } from './moorMeter/SentimentHeatMap';
 import { MoodTrendChart } from './moorMeter/MoodTrendChart';
 import { SmartNewsFeed } from './SmartNewsFeed';
 import { MarketMoodPage } from './MarketMoodPage';
+import { AISentimentEngine } from './mood/AISentimentEngine';
 import StockActivityDashboard from './StockActivityDashboard';
 import EarningsCalendarDashboard from './EarningsCalendarDashboard';
 import {
@@ -80,7 +81,7 @@ interface TrendingTopic {
 export const FuturisticHomepage: React.FC = () => {
   const { setMoodScore } = useMoodTheme();
     const [searchFocused, setSearchFocused] = useState(false);
-                                                                                const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'tool' | 'market' | 'crypto' | 'charts' | 'trending' | 'earnings'>('home');
+                                                                                const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'tool' | 'market' | 'crypto' | 'charts' | 'trending' | 'earnings' | 'finance'>('home');
       const [activeToolSubtab, setActiveToolSubtab] = useState("Market");
     const [activeMarketSubtab, setActiveMarketSubtab] = useState("Tools");
   const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
@@ -1212,7 +1213,7 @@ export const FuturisticHomepage: React.FC = () => {
                               </div>
                             </div>
                             <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
-                              {token.sentiment}% 😃
+                              {token.sentiment.toFixed(2)}% 😃
                             </Badge>
                           </div>
                           <div className="space-y-2">
@@ -1250,7 +1251,7 @@ export const FuturisticHomepage: React.FC = () => {
                               </div>
                             </div>
                             <Badge className="bg-red-500/20 text-red-400 border-red-500/30">
-                              {token.sentiment}% 😡
+                              {token.sentiment.toFixed(2)}% 😡
                             </Badge>
                           </div>
                           <div className="space-y-2">
@@ -1294,7 +1295,7 @@ export const FuturisticHomepage: React.FC = () => {
                           <div className="space-y-2">
                             <div className="flex items-center justify-between">
                               <span className="text-xl font-bold text-white">{token.price}</span>
-                              <span className="text-emerald-400 font-medium">Sentiment: {token.sentiment}%</span>
+                              <span className="text-emerald-400 font-medium">Sentiment: {token.sentiment.toFixed(2)}%</span>
                             </div>
                             <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
                               <div className="h-full bg-gradient-to-r from-emerald-400 to-green-400 transition-all duration-1000" style={{ width: `${token.sentiment}%` }} />
@@ -1329,7 +1330,7 @@ export const FuturisticHomepage: React.FC = () => {
                           <div className="space-y-2">
                             <div className="flex items-center justify-between">
                               <span className="text-xl font-bold text-white">{token.price}</span>
-                              <span className="text-rose-400 font-medium">Sentiment: {token.sentiment}%</span>
+                              <span className="text-rose-400 font-medium">Sentiment: {token.sentiment.toFixed(2)}%</span>
                             </div>
                             <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
                               <div className="h-full bg-gradient-to-r from-rose-400 to-red-400 transition-all duration-1000" style={{ width: `${token.sentiment}%` }} />
@@ -1790,7 +1791,7 @@ export const FuturisticHomepage: React.FC = () => {
                               </div>
                             </div>
                             <Badge className="ml-4 bg-pink-500/20 text-pink-400 border-pink-500/30">
-                              {news.trending} 🔥
+                              {news.trending} ���
                             </Badge>
                           </div>
                           <div className="flex items-center justify-between text-xs text-gray-500">
@@ -2181,7 +2182,7 @@ export const FuturisticHomepage: React.FC = () => {
                                   </div>
                                   <div className="flex justify-between">
                                     <span className="text-gray-400">Sentiment:</span>
-                                    <span className="text-purple-300">{candle.sentiment}%</span>
+                                    <span className="text-purple-300">{candle.sentiment.toFixed(2)}%</span>
                                   </div>
                                 </div>
                               </div>
@@ -2684,7 +2685,7 @@ export const FuturisticHomepage: React.FC = () => {
                                 <div className="text-center">
                                   <div className="text-2xl mb-1">{item.icon}</div>
                                   <div className="text-white font-bold text-sm">{item.symbol}</div>
-                                  <div className="text-white/80 text-xs">{item.sentiment}%</div>
+                                  <div className="text-white/80 text-xs">{item.sentiment.toFixed(2)}%</div>
                                 </div>
 
                                 {/* Hover Tooltip */}
@@ -2707,7 +2708,7 @@ export const FuturisticHomepage: React.FC = () => {
                                             item.sentiment >= 70 ? "text-green-400" :
                                             item.sentiment >= 50 ? "text-yellow-400" : "text-red-400"
                                           )}>
-                                            {item.sentiment}% {item.sentiment >= 70 ? "🟢" : item.sentiment >= 50 ? "🟡" : "🔴"}
+                                            {item.sentiment.toFixed(2)}% {item.sentiment >= 70 ? "🟢" : item.sentiment >= 50 ? "🟡" : "🔴"}
                                           </span>
                                         </div>
                                         <div className="flex justify-between">
@@ -2957,33 +2958,8 @@ export const FuturisticHomepage: React.FC = () => {
           
           {/* Subtitle */}
           <p className="text-xl text-gray-200 max-w-3xl mx-auto mb-12 leading-relaxed">
-            Today's sentiment analysis powered by AI across stocks, news, and social media
+            Advanced AI-powered sentiment analysis with intelligent insights and mood breakdown
           </p>
-          
-          {/* Sentiment Source Breakdown */}
-          <div className="max-w-4xl mx-auto">
-            <h3 className="text-lg font-semibold text-white mb-6">Sentiment Source Breakdown</h3>
-            <div className="grid grid-cols-3 gap-6">
-              {[
-                { label: 'Stocks', value: moodScore.stocks, percentage: '40%', color: 'from-pink-500 to-rose-500', icon: '📈' },
-                { label: 'News', value: moodScore.news, percentage: '30%', color: 'from-purple-500 to-violet-500', icon: '📰' },
-                { label: 'Forums', value: moodScore.social, percentage: '30%', color: 'from-cyan-500 to-blue-500', icon: '💬' }
-              ].map((item) => (
-                <div key={item.label} className="bg-black/40 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-purple-500/30 transition-all duration-300">
-                  <div className="text-3xl mb-3">{item.icon}</div>
-                  <div className="text-3xl font-bold text-white mb-2">{item.value}</div>
-                  <div className="text-gray-300 font-medium mb-1">{item.label}</div>
-                  <div className="text-sm text-gray-400 mb-3">{item.percentage} weight</div>
-                  <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-                    <div 
-                      className={`h-full bg-gradient-to-r ${item.color} transition-all duration-1000`}
-                      style={{ width: `${item.value}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
@@ -3136,32 +3112,6 @@ export const FuturisticHomepage: React.FC = () => {
                     <Plus className="w-4 h-4 mr-2" />
                     Add/Remove Ticker
                   </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* AI Insight Module */}
-            <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
-              <CardHeader className="border-b border-purple-500/20">
-                <CardTitle className="text-white text-sm flex items-center gap-2">
-                  <Brain className="w-4 h-4 text-cyan-400" />
-                  {aiInsight.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-6">
-                <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                  {aiInsight.content}
-                </p>
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs text-gray-400">Confidence</span>
-                  <span className="text-sm font-bold text-cyan-400">{aiInsight.confidence}%</span>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {aiInsight.keyDrivers.map((driver, index) => (
-                    <Badge key={index} className="bg-cyan-500/20 text-cyan-400 border-cyan-500/30 text-xs">
-                      {driver}
-                    </Badge>
-                  ))}
                 </div>
               </CardContent>
             </Card>
