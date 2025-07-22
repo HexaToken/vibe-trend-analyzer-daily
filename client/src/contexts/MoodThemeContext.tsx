@@ -203,6 +203,8 @@ export const MoodThemeProvider: React.FC<MoodThemeProviderProps> = ({ children }
     glowEffect: currentTheme.glowEffect,
     moodEmoji: MOOD_EMOJIS[moodState],
     moodLabel: MOOD_LABELS[moodState],
+    cardBackground: currentTheme.cardBackground,
+    borderColor: currentTheme.border,
   };
 
   return (
