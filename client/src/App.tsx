@@ -46,8 +46,7 @@ const App = () => {
         return <BuilderDemo />;
       case "analytics":
         return <Analytics />;
-      case "history":
-        return <HistoricalData />;
+      // Removed "history" route - HistoricalData component retained for potential reuse
             case "community":
         return <CommunityRooms />;
       case "profile":
@@ -65,25 +64,21 @@ const App = () => {
         return <DatabaseDemo />;
       case "social":
         return <SocialPlatform />;
-      case "crypto":
-        return <CryptoDashboard />;
+      // Removed "crypto" route - CryptoDashboard component retained, crypto features moved to Finance section
       case "nlp":
         return <NLPSentimentDemo />;
       case "spacy-nlp":
         return <SpacyNLPDemo />;
       case "finnhub":
         return <FinnhubDemo />;
-      case "sentiment-scoring":
-        return <StockSentimentScoring />;
+      // Removed "sentiment-scoring" route - StockSentimentScoring component retained for backend sentiment utilities
       case "ai-analysis":
         return <AiSentimentExplainer />;
             case "yfinance":
         return <YFinanceDemo />;
-            case "theme-demo":
-        return <MoodThemeDemo />;
+            // Removed "theme-demo" route - MoodThemeDemo component retained, theming handled by MoodThemeProvider
             
-            case "builder-finance":
-        return <BuilderFinanceDemo />;
+            // Removed "builder-finance" route - BuilderFinanceDemo component retained for Builder.io integration examples
       case "futuristic-home":
         return <FuturisticHomepage />;
       case "moorMeter":
