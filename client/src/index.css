@@ -152,6 +152,13 @@ All colors MUST be HSL.
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
+    /* Chart Colors - Dark Mode */
+    --chart-1: 217 91% 60%; /* #3B82F6 */
+    --chart-2: 142 69% 58%; /* #10B981 */
+    --chart-3: 0 84% 60%; /* #EF4444 */
+    --chart-4: 280 100% 70%; /* #A855F7 */
+    --chart-5: 43 74% 66%; /* #F59E0B */
+
         /* Mood Theme Variables */
     --mood-gradient-from: 15 23 42; /* slate-900 fallback */
     --mood-gradient-to: 30 64 175; /* blue-700 fallback */
