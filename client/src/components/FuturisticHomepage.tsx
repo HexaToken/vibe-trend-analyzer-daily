@@ -3296,21 +3296,34 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               <CardContent className="p-6">
                 <div className="space-y-4">
                   {smartNews.map((news, index) => (
-                    <div key={index} className="bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-5 border border-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer">
+                    <div key={index} className={themeMode === 'light'
+                      ? `bg-white rounded-xl p-5 border border-[#E0E0E0] hover:border-[#3F51B5]/30 transition-all duration-300 group cursor-pointer shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]`
+                      : "bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-5 border border-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer"
+                    }>
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex-1">
-                          <h3 className="text-lg font-bold text-white mb-2 line-clamp-2 group-hover:text-purple-300 transition-colors">
+                          <h3 className={`text-lg font-semibold mb-2 line-clamp-2 transition-colors ${
+                            themeMode === 'light'
+                              ? 'text-[#1C1E21] group-hover:text-[#3F51B5]'
+                              : 'text-white group-hover:text-purple-300'
+                          }`}>
                             {news.headline}
                           </h3>
-                          <p className="text-sm text-gray-400 leading-relaxed line-clamp-3">
+                          <p className={`text-sm leading-relaxed line-clamp-3 ${
+                            themeMode === 'light' ? 'text-[#444]' : 'text-gray-400'
+                          }`}>
                             {news.summary}
                           </p>
                         </div>
                         <Badge className={cn(
-                          "ml-4 flex-shrink-0",
-                          news.sentiment === 'bullish' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' :
-                          news.sentiment === 'bearish' ? 'bg-red-500/20 text-red-400 border-red-500/30' :
-                          'bg-gray-500/20 text-gray-400 border-gray-500/30'
+                          "ml-4 flex-shrink-0 text-xs font-medium px-3 py-1 rounded-full",
+                          themeMode === 'light'
+                            ? news.sentiment === 'bullish' ? 'bg-[#E8F5E9] text-[#4CAF50] border-[#4CAF50]/20' :
+                              news.sentiment === 'bearish' ? 'bg-[#FFEBEE] text-[#F44336] border-[#F44336]/20' :
+                              'bg-[#FFF8E1] text-[#FFB300] border-[#FFB300]/20'
+                            : news.sentiment === 'bullish' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' :
+                              news.sentiment === 'bearish' ? 'bg-red-500/20 text-red-400 border-red-500/30' :
+                              'bg-gray-500/20 text-gray-400 border-gray-500/30'
                         )}>
                           {news.sentiment === 'bullish' ? '🟢 Bullish' :
                            news.sentiment === 'bearish' ? '🔴 Bearish' :
