@@ -126,11 +126,11 @@ export const AIInsightWidget: React.FC<AIInsightWidgetProps> = ({
     <Card className={themeMode === 'light' ? `${cardBackground} border ${borderColor} shadow-[0_2px_8px_rgba(0,0,0,0.06)]` : "finance-card border-0"}>
       <CardHeader className={themeMode === 'light' ? `border-b ${borderColor}` : "border-b border-slate-700/50"}>
         <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-2 text-white">
-            <Brain className="w-5 h-5 text-cyan-400" />
+          <CardTitle className={`flex items-center gap-2 ${themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'}`}>
+            <Brain className={`w-5 h-5 ${themeMode === 'light' ? 'text-[#3F51B5]' : 'text-cyan-400'}`} />
             {title}
             {loading && (
-              <RefreshCw className="w-4 h-4 text-cyan-400 animate-spin" />
+              <RefreshCw className={`w-4 h-4 animate-spin ${themeMode === 'light' ? 'text-[#3F51B5]' : 'text-cyan-400'}`} />
             )}
           </CardTitle>
           
