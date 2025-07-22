@@ -430,26 +430,98 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onNavigate }) => {
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
-                  <div className="p-4 border border-purple-500/20 rounded-xl">
-                    <h4 className="font-medium text-white mb-2">Free Plan Features</h4>
-                    <ul className="space-y-1 text-sm text-gray-400">
-                      <li>• Basic mood score tracking</li>
-                      <li>• Limited watchlist (5 stocks)</li>
-                      <li>• Daily sentiment summaries</li>
-                      <li>• Community access</li>
-                    </ul>
-                  </div>
-                  
-                  <div className="p-4 border border-yellow-500/30 rounded-xl bg-yellow-500/5">
-                    <h4 className="font-medium text-white mb-2">Pro Plan Features</h4>
-                    <ul className="space-y-1 text-sm text-gray-400">
-                      <li>• Advanced AI insights</li>
-                      <li>• Unlimited watchlist</li>
-                      <li>• Real-time alerts</li>
-                      <li>• Historical data access</li>
-                      <li>• Priority support</li>
-                    </ul>
-                  </div>
+                  {/* Free Plan Features Card */}
+                  <Card className="bg-black/40 backdrop-blur-xl border-purple-500/20 hover:border-purple-500/30 transition-all duration-300">
+                    <CardContent className="p-6">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
+                          <Zap className="w-5 h-5 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="text-lg font-bold text-white">Free Plan Features</h4>
+                          <p className="text-gray-400 text-xs">Essential tools to get started</p>
+                        </div>
+                      </div>
+
+                      <ul className="space-y-2">
+                        <li className="flex items-center gap-3 text-gray-300 text-sm">
+                          <div className="w-1.5 h-1.5 bg-green-400 rounded-full"></div>
+                          <span>Basic mood score tracking</span>
+                        </li>
+                        <li className="flex items-center gap-3 text-gray-300 text-sm">
+                          <div className="w-1.5 h-1.5 bg-green-400 rounded-full"></div>
+                          <span>Limited watchlist (5 stocks)</span>
+                        </li>
+                        <li className="flex items-center gap-3 text-gray-300 text-sm">
+                          <div className="w-1.5 h-1.5 bg-green-400 rounded-full"></div>
+                          <span>Daily sentiment summaries</span>
+                        </li>
+                        <li className="flex items-center gap-3 text-gray-300 text-sm">
+                          <div className="w-1.5 h-1.5 bg-green-400 rounded-full"></div>
+                          <span>Community access</span>
+                        </li>
+                        <li className="flex items-center gap-3 text-gray-400 text-sm">
+                          <div className="w-1.5 h-1.5 bg-orange-400 rounded-full"></div>
+                          <span>Ad-supported experience</span>
+                        </li>
+                      </ul>
+                    </CardContent>
+                  </Card>
+
+                  {/* Pro Plan Features Card */}
+                  <Card className="bg-black/40 backdrop-blur-xl border-blue-500/20 hover:border-blue-500/30 transition-all duration-300 bg-gradient-to-br from-blue-500/5 to-cyan-500/5">
+                    <CardContent className="p-6">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
+                          <Star className="w-5 h-5 text-white" />
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <h4 className="text-lg font-bold text-white">Pro Plan Features</h4>
+                            <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30 text-xs">
+                              Popular
+                            </Badge>
+                          </div>
+                          <p className="text-gray-400 text-xs">Advanced AI-powered tools</p>
+                        </div>
+                      </div>
+
+                      <ul className="space-y-2">
+                        <li className="flex items-center gap-3 text-gray-300 text-sm">
+                          <div className="w-1.5 h-1.5 bg-blue-400 rounded-full"></div>
+                          <span>Advanced AI insights</span>
+                        </li>
+                        <li className="flex items-center gap-3 text-gray-300 text-sm">
+                          <div className="w-1.5 h-1.5 bg-blue-400 rounded-full"></div>
+                          <span>Unlimited watchlist</span>
+                        </li>
+                        <li className="flex items-center gap-3 text-gray-300 text-sm">
+                          <div className="w-1.5 h-1.5 bg-blue-400 rounded-full"></div>
+                          <span>Real-time alerts</span>
+                        </li>
+                        <li className="flex items-center gap-3 text-gray-300 text-sm">
+                          <div className="w-1.5 h-1.5 bg-blue-400 rounded-full"></div>
+                          <span>Historical data access</span>
+                        </li>
+                        <li className="flex items-center gap-3 text-gray-300 text-sm">
+                          <div className="w-1.5 h-1.5 bg-blue-400 rounded-full"></div>
+                          <span>Priority support</span>
+                        </li>
+                        <li className="flex items-center gap-3 text-green-300 text-sm">
+                          <div className="w-1.5 h-1.5 bg-green-400 rounded-full"></div>
+                          <span>Ad-free experience</span>
+                        </li>
+                        <li className="flex items-center gap-3 text-purple-300 text-sm">
+                          <div className="w-1.5 h-1.5 bg-purple-400 rounded-full"></div>
+                          <span>Full community access (Post + Comment)</span>
+                        </li>
+                        <li className="flex items-center gap-3 text-cyan-300 text-sm">
+                          <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full"></div>
+                          <span>Trending topics & sentiment explorer</span>
+                        </li>
+                      </ul>
+                    </CardContent>
+                  </Card>
                 </div>
               </CardContent>
             </Card>
