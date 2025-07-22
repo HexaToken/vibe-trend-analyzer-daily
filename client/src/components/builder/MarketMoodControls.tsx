@@ -27,6 +27,7 @@ interface MarketMoodControlsProps {
   onSourceToggle?: (sources: string[]) => void;
   onSearch?: (query: string) => void;
   onExplainMood?: () => void;
+  onViewAnalytics?: () => void;
 }
 
 interface FilterState {
@@ -46,7 +47,8 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
   onDateRangeChange,
   onSourceToggle,
   onSearch,
-  onExplainMood
+  onExplainMood,
+  onViewAnalytics
 }) => {
   const [filters, setFilters] = useState<FilterState>({
     dateRange: '7D',
@@ -259,10 +261,14 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
             </Button>
             
             <Button
-              variant="ghost"
-              className="h-12 border border-slate-600 hover:border-slate-500 bg-slate-800/30 hover:bg-slate-800/50"
+              onClick={onViewAnalytics}
+              className={cn(
+                "h-12 bg-gradient-to-r from-blue-600/20 to-cyan-600/20 hover:from-blue-600/30 hover:to-cyan-600/30",
+                "text-blue-300 border border-blue-500/30 transition-all duration-300",
+                "hover:shadow-lg hover:shadow-blue-500/20"
+              )}
             >
-              <BarChart3 className="w-4 h-4 mr-2 text-cyan-400" />
+              <BarChart3 className="w-4 h-4 mr-2" />
               View Detailed Analytics
             </Button>
           </div>
