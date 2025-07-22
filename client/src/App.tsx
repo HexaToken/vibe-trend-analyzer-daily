@@ -35,6 +35,8 @@ import DynamicThemeSelectorDemo from "@/components/DynamicThemeSelectorDemo";
 
 import { BuilderFinanceDemo } from "@/components/BuilderFinanceDemo";
 import { FuturisticHomepage } from "@/components/FuturisticHomepage";
+import SettingsPage from "@/components/user/SettingsPage";
+import ViewProfilePage from "@/components/user/ViewProfilePage";
 
 const queryClient = new QueryClient();
 
