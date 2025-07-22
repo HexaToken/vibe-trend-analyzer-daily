@@ -430,7 +430,7 @@ export const YFinanceDemo = () => {
                         Raw Sentiment Score
                       </h4>
                       <div className="text-2xl font-bold">
-                        {sentiment.data.raw_sentiment?.toFixed(3) || "N/A"}
+                        {sentiment.data.raw_sentiment?.toFixed(2) || "N/A"}
                       </div>
                       <div className="text-sm text-muted-foreground">
                         (-1.0 to +1.0 scale)
