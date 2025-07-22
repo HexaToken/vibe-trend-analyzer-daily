@@ -139,7 +139,7 @@ export const AIMoodBreakdownPanel: React.FC<AIMoodBreakdownPanelProps> = ({
               </CardHeader>
               <CardContent>
                 <div className="text-center mb-4">
-                  <div className="text-4xl font-bold text-pink-400 mb-2">{moodScore.stocks}</div>
+                  <div className="text-4xl font-bold text-pink-400 mb-2">{moodScore.stocks.toFixed(2)}</div>
                   <p className="text-sm text-gray-400">
                     "Positive price action in AAPL, NVDA, and MSFT contributed to bullish sentiment."
                   </p>
@@ -164,7 +164,7 @@ export const AIMoodBreakdownPanel: React.FC<AIMoodBreakdownPanelProps> = ({
               </CardHeader>
               <CardContent>
                 <div className="text-center mb-4">
-                  <div className="text-4xl font-bold text-blue-400 mb-2">{moodScore.news}</div>
+                  <div className="text-4xl font-bold text-blue-400 mb-2">{moodScore.news.toFixed(2)}</div>
                   <p className="text-sm text-gray-400">
                     "Federal Reserve hints at rate pause. CPI lower than expected."
                   </p>
@@ -192,7 +192,7 @@ export const AIMoodBreakdownPanel: React.FC<AIMoodBreakdownPanelProps> = ({
               </CardHeader>
               <CardContent>
                 <div className="text-center mb-4">
-                  <div className="text-4xl font-bold text-cyan-400 mb-2">{moodScore.social}</div>
+                  <div className="text-4xl font-bold text-cyan-400 mb-2">{moodScore.social.toFixed(2)}</div>
                   <p className="text-sm text-gray-400">
                     "Reddit buzz rising on AI-related tickers. Twitter/X sentiment spikes for TSLA."
                   </p>
