@@ -814,11 +814,18 @@ All colors MUST be HSL.
 
   /* Typography readability overrides for light mode */
   :root:not(.dark) .text-theme-heading {
-    color: #1C1E21 !important;
+    color: #1E1E1E !important;
+    font-weight: 700;
+  }
+
+  :root:not(.dark) .text-theme-subheading {
+    color: #333 !important;
+    font-weight: 600;
   }
 
   :root:not(.dark) .text-theme-body {
     color: #444 !important;
+    font-weight: 500;
   }
 
   :root:not(.dark) .text-theme-label {
