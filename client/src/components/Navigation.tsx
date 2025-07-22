@@ -41,7 +41,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { AuthModal } from "@/components/auth/AuthModal";
 import { ApiStatusBadge } from "@/components/ApiStatusIndicator";
 
-import { MoodThemeToggle } from "@/components/ui/mood-theme-toggle";
+import DynamicThemeSelector from "@/components/DynamicThemeSelector";
 
 interface NavigationProps {
   activeSection: string;
@@ -196,7 +196,16 @@ export const Navigation = ({
                       </DropdownMenuItem>
                     );
                   })}
-                                    {/* Removed Mood Theme Demo view - retained MoodThemeProvider for global theming */}
+                  <DropdownMenuItem
+                    onClick={() => onSectionChange("theme-demo")}
+                    className="flex items-center gap-2"
+                  >
+                    <Palette className="h-4 w-4" />
+                    Theme Selector Demo
+                    <Badge variant="secondary" className="ml-auto text-xs">
+                      NEW
+                    </Badge>
+                  </DropdownMenuItem>
                   {/* Removed Builder.io Finance Components view - retained builder components for reuse */}
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -239,8 +248,8 @@ export const Navigation = ({
 
                         {/* User Section */}
             <div className="flex items-center gap-3">
-              {/* Theme Toggle */}
-              <MoodThemeToggle />
+              {/* Dynamic Theme Selector */}
+              <DynamicThemeSelector />
 
               {isAuthenticated ? (
                 <>
