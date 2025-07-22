@@ -575,6 +575,18 @@ All colors MUST be HSL.
     padding: 8px;
   }
 
+  /* Light mode sentiment ring with pastel colors */
+  :root:not(.dark) .sentiment-ring {
+    background: conic-gradient(
+      from 0deg,
+      #F28B82 0deg,     /* Pastel red */
+      #FFF176 90deg,    /* Pastel yellow */
+      #81C784 180deg,   /* Pastel green */
+      #64B5F6 270deg,   /* Pastel blue */
+      #F28B82 360deg    /* Back to pastel red */
+    );
+  }
+
   .sentiment-inner {
     width: 100%;
     height: 100%;
