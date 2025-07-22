@@ -274,29 +274,7 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
           </div>
         </div>
 
-        {showExport && (
-          <div className="space-y-3">
-            <label className="text-sm font-medium text-white">Export & Share</label>
-            <div className="flex gap-3">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="flex-1 border border-slate-600 hover:border-slate-500 bg-slate-800/30 hover:bg-slate-800/50"
-              >
-                <Download className="w-4 h-4 mr-2" />
-                Export Data
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="flex-1 border border-slate-600 hover:border-slate-500 bg-slate-800/30 hover:bg-slate-800/50"
-              >
-                <Share className="w-4 h-4 mr-2" />
-                Share Analysis
-              </Button>
-            </div>
-          </div>
-        )}
+
 
         {/* Active Filters Summary */}
         {(filters.searchQuery || getActiveSources().length < 3) && (
