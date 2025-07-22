@@ -117,10 +117,16 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
         
         {/* Page Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mb-4">
+          <h1 className={`text-4xl font-bold mb-4 ${
+            themeMode === 'light'
+              ? 'bg-gradient-to-r from-[#3F51B5] via-[#4CAF50] to-[#3F51B5] bg-clip-text text-transparent'
+              : 'bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent'
+          }`}>
             {title}
           </h1>
-          <p className="text-xl text-gray-200 max-w-3xl mx-auto mb-8">
+          <p className={`text-xl max-w-3xl mx-auto mb-8 ${
+            themeMode === 'light' ? 'text-[#444]' : 'text-gray-200'
+          }`}>
             {subtitle}
           </p>
           
