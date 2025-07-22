@@ -1029,14 +1029,20 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         setFinanceSearchQuery('');
                       }
                     }}
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 rounded-lg"
+                    className={themeMode === 'light'
+                      ? "absolute right-2 top-1/2 transform -translate-y-1/2 ai-analysis-btn-light hover:opacity-90 px-4 py-2 rounded-lg"
+                      : "absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 rounded-lg"
+                    }
                   >
                     Search
                   </Button>
                 </div>
                 <div className="flex items-center justify-center gap-2 mt-3">
-                  <span className="text-sm text-gray-400">Currently analyzing:</span>
-                  <Badge className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 border-blue-500/30 font-semibold">
+                  <span className={`text-sm ${themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'}`}>Currently analyzing:</span>
+                  <Badge className={themeMode === 'light'
+                    ? "bg-[#E8EAF6] text-[#303F9F] border-[#303F9F]/30 font-semibold"
+                    : "bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 border-blue-500/30 font-semibold"
+                  }>
                     ${selectedFinanceStock}
                   </Badge>
                 </div>
