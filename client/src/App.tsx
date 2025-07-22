@@ -113,7 +113,7 @@ const App = () => {
         return <MoorMeterDashboard />;
 
       default:
-        return <FuturisticHomepage />;
+        return <FuturisticHomepage onNavigate={setActiveSection} />;
     }
   };
 
