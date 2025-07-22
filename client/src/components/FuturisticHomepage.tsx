@@ -3391,30 +3391,39 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
           <div className="space-y-6">
             
             {/* Your Mood Score Card */}
-            <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
-              <CardHeader className="border-b border-purple-500/20">
-                <CardTitle className="text-white text-sm">Your Mood Score</CardTitle>
+            <Card className={themeMode === 'light' ? `${cardBackground} border ${borderColor} shadow-[0_2px_6px_rgba(0,0,0,0.05)]` : "bg-black/40 border-purple-500/20 backdrop-blur-xl"}>
+              <CardHeader className={themeMode === 'light' ? `border-b ${borderColor}` : "border-b border-purple-500/20"}>
+                <CardTitle className={`text-sm ${themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'}`}>Your Mood Score</CardTitle>
               </CardHeader>
               <CardContent className="p-6">
                 <div className="text-center mb-4">
-                  <div className="text-4xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent mb-2">
+                  <div className={`text-4xl font-bold mb-2 ${
+                    themeMode === 'light'
+                      ? 'bg-gradient-to-r from-[#4CAF50] to-[#3F51B5] bg-clip-text text-transparent'
+                      : 'bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent'
+                  }`}>
                     +64
                   </div>
-                  <div className="text-emerald-400 text-sm mb-4">Based on your watchlist</div>
+                  <div className={`text-sm mb-4 ${themeMode === 'light' ? 'text-[#4CAF50]' : 'text-emerald-400'}`}>Based on your watchlist</div>
                   <div className="space-y-2 mb-4">
                     {userWatchlist.map((item, index) => (
                       <div key={index} className="flex items-center justify-between text-sm">
-                        <span className="text-gray-300">{item.symbol}</span>
+                        <span className={themeMode === 'light' ? 'text-[#444]' : 'text-gray-300'}>{item.symbol}</span>
                         <span className={cn(
                           "font-medium",
-                          item.change >= 0 ? "text-emerald-400" : "text-red-400"
+                          item.change >= 0
+                            ? themeMode === 'light' ? "text-[#4CAF50]" : "text-emerald-400"
+                            : themeMode === 'light' ? "text-[#F44336]" : "text-red-400"
                         )}>
                           {item.change >= 0 ? '+' : ''}{item.change}%
                         </span>
                       </div>
                     ))}
                   </div>
-                  <Button className="w-full bg-gradient-to-r from-purple-600/20 to-pink-600/20 hover:from-purple-600/30 hover:to-pink-600/30 text-purple-300 border border-purple-500/30">
+                  <Button className={themeMode === 'light'
+                    ? "w-full bg-[#3F51B5]/10 hover:bg-[#3F51B5]/20 text-[#3F51B5] border border-[#3F51B5]/30 hover:border-[#3F51B5]/50 transition-all"
+                    : "w-full bg-gradient-to-r from-purple-600/20 to-pink-600/20 hover:from-purple-600/30 hover:to-pink-600/30 text-purple-300 border border-purple-500/30"
+                  }>
                     <Plus className="w-4 h-4 mr-2" />
                     Add/Remove Ticker
                   </Button>
