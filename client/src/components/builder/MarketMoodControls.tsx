@@ -43,7 +43,7 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
   title = "Market Mood Controls",
   showFilters = true,
 
-  onDateRangeChange,
+
   onSourceToggle,
   onSearch,
   onExplainMood,
