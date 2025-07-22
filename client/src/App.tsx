@@ -38,6 +38,7 @@ import { FuturisticHomepage } from "@/components/FuturisticHomepage";
 import SettingsPage from "@/components/user/SettingsPage";
 import ViewProfilePage from "@/components/user/ViewProfilePage";
 import MoorMeterMembershipPage from "@/components/membership/MoorMeterMembershipPage";
+import MembershipPageSummary from "@/components/examples/MembershipPageSummary";
 
 const queryClient = new QueryClient();
 
