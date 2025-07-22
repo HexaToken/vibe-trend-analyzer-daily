@@ -199,7 +199,7 @@ export const SentimentAnalyticsDashboard: React.FC<SentimentAnalyticsDashboardPr
                             <div className="flex items-center gap-2">
                               <span className="font-bold text-white">{stock.symbol}</span>
                               <Badge className={getSentimentColor(stock.sentiment)}>
-                                {stock.sentiment}%
+                                {stock.sentiment.toFixed(2)}%
                               </Badge>
                             </div>
                             <div className="text-right">
@@ -249,19 +249,19 @@ export const SentimentAnalyticsDashboard: React.FC<SentimentAnalyticsDashboardPr
                         <div className="flex justify-between items-center">
                           <span className="text-green-400">Positive</span>
                           <span className="text-green-400 font-bold">
-                            {sourceAnalytics.news.sentimentBreakdown.positive}%
+                            {sourceAnalytics.news.sentimentBreakdown.positive.toFixed(2)}%
                           </span>
                         </div>
                         <div className="flex justify-between items-center">
                           <span className="text-yellow-400">Neutral</span>
                           <span className="text-yellow-400 font-bold">
-                            {sourceAnalytics.news.sentimentBreakdown.neutral}%
+                            {sourceAnalytics.news.sentimentBreakdown.neutral.toFixed(2)}%
                           </span>
                         </div>
                         <div className="flex justify-between items-center">
                           <span className="text-red-400">Negative</span>
                           <span className="text-red-400 font-bold">
-                            {sourceAnalytics.news.sentimentBreakdown.negative}%
+                            {sourceAnalytics.news.sentimentBreakdown.negative.toFixed(2)}%
                           </span>
                         </div>
                       </div>
@@ -313,7 +313,7 @@ export const SentimentAnalyticsDashboard: React.FC<SentimentAnalyticsDashboardPr
                             <div className="flex items-center gap-2">
                               <span className="text-white">{platform.name}</span>
                               <Badge className={getSentimentColor(platform.sentiment)}>
-                                {platform.sentiment}%
+                                {platform.sentiment.toFixed(2)}%
                               </Badge>
                             </div>
                             <div className="text-cyan-300 text-sm">{platform.mentions}</div>
@@ -373,7 +373,7 @@ export const SentimentAnalyticsDashboard: React.FC<SentimentAnalyticsDashboardPr
                           {/* Hover Tooltip */}
                           <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 bg-black/90 border border-purple-500/30 rounded-lg p-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
                             <div className="text-xs space-y-1 whitespace-nowrap">
-                              <div>Sentiment: <span className="text-purple-400">{point.sentiment}%</span></div>
+                              <div>Sentiment: <span className="text-purple-400">{point.sentiment.toFixed(2)}%</span></div>
                               <div>Price: <span className="text-blue-400">${point.price.toLocaleString()}</span></div>
                               <div>Volume: <span className="text-green-400">{point.volume}K</span></div>
                               <div>Social: <span className="text-pink-400">{point.social}%</span></div>
@@ -446,7 +446,7 @@ export const SentimentAnalyticsDashboard: React.FC<SentimentAnalyticsDashboardPr
                     <CardContent className="space-y-4">
                       <div className="text-center">
                         <div className="text-4xl font-bold text-green-400 mb-2">
-                          {tickerAnalysis[selectedTicker as keyof typeof tickerAnalysis].sentiment}%
+                          {tickerAnalysis[selectedTicker as keyof typeof tickerAnalysis].sentiment.toFixed(2)}%
                         </div>
                         <div className="text-sm text-gray-400">Overall Sentiment</div>
                       </div>
@@ -566,7 +566,7 @@ export const SentimentAnalyticsDashboard: React.FC<SentimentAnalyticsDashboardPr
                             sector.color === 'yellow' ? 'text-yellow-400' :
                             'text-red-400'
                           )}>
-                            {sector.sentiment}%
+                            {sector.sentiment.toFixed(2)}%
                           </div>
                           <div className="text-white font-medium mb-1">{sector.sector}</div>
                           <div className={cn(
@@ -651,7 +651,7 @@ export const SentimentAnalyticsDashboard: React.FC<SentimentAnalyticsDashboardPr
                     <div className="mt-6 p-4 bg-gradient-to-r from-purple-500/10 to-cyan-500/10 rounded-lg border border-purple-500/20">
                       <div className="text-white font-medium mb-2">🧠 AI Smart Alert</div>
                       <div className="text-sm text-gray-300">
-                        Watch $META — sharp rise in bullish mentions (+220%) detected in the last 2 hours
+                        Watch $META �� sharp rise in bullish mentions (+220%) detected in the last 2 hours
                       </div>
                     </div>
                   </div>
