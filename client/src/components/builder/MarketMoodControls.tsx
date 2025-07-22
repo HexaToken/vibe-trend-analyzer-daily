@@ -22,7 +22,7 @@ interface MarketMoodControlsProps {
   title?: string;
   showFilters?: boolean;
 
-  onDateRangeChange?: (range: string) => void;
+
   onSourceToggle?: (sources: string[]) => void;
   onSearch?: (query: string) => void;
   onExplainMood?: () => void;
@@ -61,14 +61,7 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isExplaining, setIsExplaining] = useState(false);
 
-  const dateRanges = [
-    { value: '1D', label: '1 Day', icon: '📅' },
-    { value: '7D', label: '7 Days', icon: '📊' },
-    { value: '30D', label: '30 Days', icon: '📈' },
-    { value: '90D', label: '90 Days', icon: '📉' },
-    { value: '6M', label: '6 Months', icon: '🗓️' },
-    { value: '1Y', label: '1 Year', icon: '📋' }
-  ];
+
 
   const sources = [
     { key: 'stocks', label: 'Stocks', icon: TrendingUp, color: 'emerald' },
@@ -76,10 +69,7 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
     { key: 'social', label: 'Social', icon: MessageSquare, color: 'purple' }
   ];
 
-  const handleDateRangeChange = (range: string) => {
-    setFilters(prev => ({ ...prev, dateRange: range as FilterState['dateRange'] }));
-    onDateRangeChange?.(range);
-  };
+
 
   const handleSourceToggle = (sourceKey: string) => {
     const newSources = {
