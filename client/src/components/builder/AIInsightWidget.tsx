@@ -27,6 +27,7 @@ export const AIInsightWidget: React.FC<AIInsightWidgetProps> = ({
   showConfidence = true,
   apiEndpoint = "/api/ai/insight"
 }) => {
+  const { themeMode, cardBackground, borderColor } = useMoodTheme();
   const [insight, setInsight] = useState<AIInsight>({
     content: "Today's sentiment surge is primarily driven by strong earnings momentum across tech giants, with AI-related stocks leading the rally. Federal Reserve's dovish commentary provides additional market support, while institutional buying suggests sustained optimism through Q4.",
     confidence: 87,
