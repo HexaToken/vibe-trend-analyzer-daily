@@ -663,7 +663,7 @@ All colors MUST be HSL.
 
   /* Light Theme Utility Classes */
   .clarity-card {
-    @apply bg-white border border-[#E0E0E0] shadow-[0_2px_6px_rgba(0,0,0,0.05)];
+    @apply bg-white border border-[#E0E0E0] shadow-[0_2px_8px_rgba(0,0,0,0.06)];
   }
 
   .clarity-text-primary {
@@ -675,7 +675,7 @@ All colors MUST be HSL.
   }
 
   .clarity-bg-primary {
-    @apply bg-[#F4F6F9];
+    @apply bg-[#F7F9FB];
   }
 
   .clarity-bg-hover {
@@ -683,7 +683,7 @@ All colors MUST be HSL.
   }
 
   .clarity-accent {
-    @apply text-[#4D7C8A];
+    @apply text-[#3F51B5];
   }
 
   .clarity-positive {
@@ -691,7 +691,7 @@ All colors MUST be HSL.
   }
 
   .clarity-negative {
-    @apply text-[#D32F2F];
+    @apply text-[#F44336];
   }
 
   .clarity-neutral {
