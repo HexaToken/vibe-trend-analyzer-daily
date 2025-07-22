@@ -852,6 +852,44 @@ All colors MUST be HSL.
     color: #666 !important;
   }
 
+  /* Pastel gradient colors for mood gauge in light mode */
+  .mood-gauge-light {
+    background: conic-gradient(
+      from 0deg,
+      #F28B82 0deg,     /* Pastel red */
+      #FFF176 90deg,    /* Pastel yellow */
+      #81C784 180deg,   /* Pastel green */
+      #64B5F6 270deg,   /* Pastel blue */
+      #BA68C8 360deg    /* Pastel purple */
+    );
+  }
+
+  /* Improved sentiment badges for light mode */
+  .sentiment-badge-light {
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+  }
+
+  .sentiment-bullish-light {
+    background: #E8F5E9;
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+  }
+
+  .sentiment-bearish-light {
+    background: #FFEBEE;
+    color: #F44336;
+    border: 1px solid #F44336;
+  }
+
+  .sentiment-neutral-light {
+    background: #FFF8E1;
+    color: #FFB300;
+    border: 1px solid #FFB300;
+  }
+
   /* Hero Sentiment Section - Always Dark */
   .hero-sentiment-section {
     /* Force dark theme styling regardless of global theme */
