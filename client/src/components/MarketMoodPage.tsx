@@ -21,7 +21,6 @@ import { useMoodTheme } from '../contexts/MoodThemeContext';
 import { FinanceMoodGauge } from './builder/FinanceMoodGauge';
 import { FinanceMoodChart } from './builder/FinanceMoodChart';
 import { FinanceNewsFeed } from './builder/FinanceNewsFeed';
-
 import { SocialBuzzHeatmap } from './builder/SocialBuzzHeatmap';
 
 import { MarketMoodControls } from './builder/MarketMoodControls';
