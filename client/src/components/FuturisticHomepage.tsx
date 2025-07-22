@@ -192,7 +192,11 @@ const UserAuthenticationToggle: React.FC<UserAuthenticationToggleProps> = ({ onN
 };
 
 // Mobile Authentication Section Component
-const MobileAuthenticationSection: React.FC = () => {
+interface MobileAuthenticationSectionProps {
+  onNavigate?: (section: string) => void;
+}
+
+const MobileAuthenticationSection: React.FC<MobileAuthenticationSectionProps> = ({ onNavigate }) => {
   const { user, isAuthenticated, logout } = useAuth();
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState<"login" | "signup">("login");
@@ -365,7 +369,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
     { topic: '$TSLA', label: 'Panic', mentions: '1,923', sentiment: 'bearish', icon: '📉' },
     { topic: 'AI Revolution', label: 'Hype', mentions: '4,512', sentiment: 'bullish', icon: '🤖' },
     { topic: 'Fed Meeting', label: 'Neutral', mentions: '3,674', sentiment: 'neutral', icon: '🏛️' },
-    { topic: '$BTC', label: 'Hype', mentions: '5,291', sentiment: 'bullish', icon: '��' },
+    { topic: '$BTC', label: 'Hype', mentions: '5,291', sentiment: 'bullish', icon: '₿' },
     { topic: 'Inflation Data', label: 'Neutral', mentions: '2,183', sentiment: 'neutral', icon: '📊' }
   ]);
 
