@@ -3262,8 +3262,14 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       : "bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-4 border border-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer"
                     }>
                       <div className="flex items-center justify-between mb-3">
-                        <div className="w-10 h-10 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-lg flex items-center justify-center">
-                          <span className="text-xs font-bold text-white">{stock.symbol[0]}</span>
+                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                          themeMode === 'light'
+                            ? 'bg-gradient-to-r from-[#3F51B5]/10 to-[#3F51B5]/20'
+                            : 'bg-gradient-to-r from-purple-500/20 to-pink-500/20'
+                        }`}>
+                          <span className={`text-xs font-bold ${
+                            themeMode === 'light' ? 'text-[#3F51B5]' : 'text-white'
+                          }`}>{stock.symbol[0]}</span>
                         </div>
                         <Badge className={getSentimentBadge(stock.sentiment)}>
                           {stock.sentiment}
