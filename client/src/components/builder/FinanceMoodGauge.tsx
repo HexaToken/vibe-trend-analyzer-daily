@@ -108,7 +108,9 @@ export const FinanceMoodGauge: React.FC<FinanceMoodGaugeProps> = ({
               <div className={`${getTextSize()} font-bold mb-1 ${themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'}`}>
                 {loading ? "..." : Math.round(moodData.overall)}
               </div>
-              <div className="text-sm text-blue-400 font-medium">
+              <div className={`text-sm font-medium ${
+                themeMode === 'light' ? 'text-[#607D8B]' : 'text-blue-400'
+              }`}>
                 {getMoodLabel(moodData.overall)}
               </div>
             </div>
