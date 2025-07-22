@@ -59,19 +59,14 @@ export const Navigation = ({
 
   const navigationGroups = {
     data: [
-      { id: "crypto", label: "Crypto Dashboard", icon: Coins, badge: "NEW" },
+      // Removed Crypto Dashboard view - retained crypto components for Finance section reuse
       {
         id: "finnhub",
         label: "Finnhub Stock Data",
         icon: TrendingUp,
         badge: "NEW",
       },
-      {
-        id: "sentiment-scoring",
-        label: "Stock Sentiment Scoring",
-        icon: BarChart3,
-        badge: "NEW",
-      },
+      // Removed Stock Sentiment Scoring view - retained sentiment analysis utilities
       {
         id: "ai-analysis",
         label: "AI Sentiment Analysis",
@@ -90,7 +85,7 @@ export const Navigation = ({
         icon: Globe,
         badge: "NEW",
       },
-      { id: "history", label: "Historical Data", icon: Calendar },
+      // Removed Historical Data view - retained data hooks for potential reuse
       { id: "database", label: "Database Demo", icon: Database, badge: "DEMO" },
     ],
     social: [
@@ -202,26 +197,8 @@ export const Navigation = ({
                       </DropdownMenuItem>
                     );
                   })}
-                                    <DropdownMenuItem
-                    onClick={() => onSectionChange('theme-demo')}
-                    className="flex items-center gap-2"
-                  >
-                    <Palette className="h-4 w-4" />
-                    Mood Theme Demo
-                    <Badge variant="secondary" className="ml-auto text-xs">
-                      NEW
-                    </Badge>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    onClick={() => onSectionChange('builder-finance')}
-                    className="flex items-center gap-2"
-                  >
-                    <BarChart3 className="h-4 w-4" />
-                    Builder.io Finance Components
-                    <Badge variant="secondary" className="ml-auto text-xs bg-gradient-to-r from-blue-400/20 to-slate-500/20 text-blue-300 border-blue-400/30">
-                      BUILDER
-                    </Badge>
-                  </DropdownMenuItem>
+                                    {/* Removed Mood Theme Demo view - retained MoodThemeProvider for global theming */}
+                  {/* Removed Builder.io Finance Components view - retained builder components for reuse */}
                 </DropdownMenuContent>
               </DropdownMenu>
 
