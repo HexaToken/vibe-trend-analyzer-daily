@@ -100,11 +100,15 @@ export const MoodScoreHero: React.FC<MoodScoreHeroProps> = ({
         return (
     <div className={cn(
       "relative mb-8 overflow-hidden rounded-3xl transition-all duration-700",
-      "bg-gradient-to-br from-blue-600 via-purple-700 to-indigo-800"
+      themeMode === 'light'
+        ? `${bodyGradient} border ${borderColor}`
+        : "bg-gradient-to-br from-blue-600 via-purple-700 to-indigo-800"
     )}>
             <div className={cn(
         "absolute inset-0 transition-all duration-700",
-        "bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-indigo-600/20"
+        themeMode === 'light'
+          ? "bg-gradient-to-r from-[#4D7C8A]/10 via-[#607D8B]/10 to-[#4D7C8A]/10"
+          : "bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-indigo-600/20"
       )}></div>
       <div
         className={
