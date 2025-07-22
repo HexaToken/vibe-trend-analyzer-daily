@@ -121,7 +121,16 @@ export const SocialBuzzHeatmap: React.FC<SocialBuzzHeatmapProps> = ({
   };
 
   const formatVolume = (volume: number) => {
-    if (volume >= 10000) return `${(volume / 1000).toFixed(1)}k`;
+    if (volume >= 1000000) {
+      return volume >= 100000000
+        ? `${Math.round(volume / 1000000)}m`
+        : `${(volume / 1000000).toFixed(1)}m`;
+    }
+    if (volume >= 1000) {
+      return volume >= 100000
+        ? `${Math.round(volume / 1000)}k`
+        : `${(volume / 1000).toFixed(1)}k`;
+    }
     return volume.toString();
   };
 
@@ -198,7 +207,7 @@ export const SocialBuzzHeatmap: React.FC<SocialBuzzHeatmapProps> = ({
                 <div className="mb-3">
                   <div className="flex items-center justify-between text-xs mb-1">
                     <span className="text-white/70">Sentiment</span>
-                    <span className="font-bold text-white">{topic.sentimentScore}</span>
+                    <span className="font-bold text-white">{topic.sentimentScore.toFixed(2)}</span>
                   </div>
                   <div className="h-1.5 bg-black/30 rounded-full overflow-hidden">
                     <div 

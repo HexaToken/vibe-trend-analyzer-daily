@@ -21,7 +21,6 @@ import { useMoodTheme } from '../contexts/MoodThemeContext';
 import { FinanceMoodGauge } from './builder/FinanceMoodGauge';
 import { FinanceMoodChart } from './builder/FinanceMoodChart';
 import { FinanceNewsFeed } from './builder/FinanceNewsFeed';
-import { AIInsightWidget } from './builder/AIInsightWidget';
 import { SocialBuzzHeatmap } from './builder/SocialBuzzHeatmap';
 
 import { MarketMoodControls } from './builder/MarketMoodControls';
@@ -193,13 +192,6 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
               height={300}
               showControls={true}
               showLegend={true}
-            />
-
-            {/* AI Market Insight - Full Width */}
-            <AIInsightWidget
-              title="AI Market Insight"
-              refreshInterval={300000}
-              showConfidence={true}
             />
 
             {/* Social Buzz Heatmap - Full Width */}

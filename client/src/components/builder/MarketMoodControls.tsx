@@ -6,7 +6,7 @@ import { Input } from '../ui/input';
 import { 
   Search, 
   Filter, 
-  Calendar, 
+ 
   Settings, 
   TrendingUp, 
   Newspaper, 
@@ -14,16 +14,15 @@ import {
   BarChart3,
   Brain,
   RefreshCw,
-  Download,
-  Share
+
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
 interface MarketMoodControlsProps {
   title?: string;
   showFilters?: boolean;
-  showExport?: boolean;
-  onDateRangeChange?: (range: string) => void;
+
+
   onSourceToggle?: (sources: string[]) => void;
   onSearch?: (query: string) => void;
   onExplainMood?: () => void;
@@ -31,7 +30,6 @@ interface MarketMoodControlsProps {
 }
 
 interface FilterState {
-  dateRange: '1D' | '7D' | '30D' | '90D' | '6M' | '1Y';
   sources: {
     stocks: boolean;
     news: boolean;
@@ -43,15 +41,14 @@ interface FilterState {
 export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
   title = "Market Mood Controls",
   showFilters = true,
-  showExport = true,
-  onDateRangeChange,
+
+
   onSourceToggle,
   onSearch,
   onExplainMood,
   onViewAnalytics
 }) => {
   const [filters, setFilters] = useState<FilterState>({
-    dateRange: '7D',
     sources: {
       stocks: true,
       news: true,
@@ -62,14 +59,7 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isExplaining, setIsExplaining] = useState(false);
 
-  const dateRanges = [
-    { value: '1D', label: '1 Day', icon: '📅' },
-    { value: '7D', label: '7 Days', icon: '📊' },
-    { value: '30D', label: '30 Days', icon: '📈' },
-    { value: '90D', label: '90 Days', icon: '📉' },
-    { value: '6M', label: '6 Months', icon: '🗓️' },
-    { value: '1Y', label: '1 Year', icon: '📋' }
-  ];
+
 
   const sources = [
     { key: 'stocks', label: 'Stocks', icon: TrendingUp, color: 'emerald' },
@@ -77,10 +67,7 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
     { key: 'social', label: 'Social', icon: MessageSquare, color: 'purple' }
   ];
 
-  const handleDateRangeChange = (range: string) => {
-    setFilters(prev => ({ ...prev, dateRange: range as FilterState['dateRange'] }));
-    onDateRangeChange?.(range);
-  };
+
 
   const handleSourceToggle = (sourceKey: string) => {
     const newSources = {
@@ -168,62 +155,34 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
 
         {showFilters && (
           <>
-            {/* Date Range Filter */}
-            <div className="space-y-3">
-              <label className="text-sm font-medium text-white flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-cyan-400" />
-                Date Range
-              </label>
-              <div className="grid grid-cols-3 md:grid-cols-6 gap-2">
-                {dateRanges.map((range) => (
-                  <Button
-                    key={range.value}
-                    variant={filters.dateRange === range.value ? "default" : "ghost"}
-                    size="sm"
-                    onClick={() => handleDateRangeChange(range.value)}
-                    className={cn(
-                      "text-xs h-10 px-3 transition-all duration-300",
-                      filters.dateRange === range.value 
-                        ? "bg-cyan-500/20 text-cyan-400 border-cyan-500/30 shadow-lg shadow-cyan-500/20" 
-                        : "hover:bg-slate-700/50"
-                    )}
-                  >
-                    <span className="mr-1">{range.icon}</span>
-                    {range.label}
-                  </Button>
-                ))}
-              </div>
-            </div>
-
-            {/* Source Toggles */}
-            <div className="space-y-3">
+            {/* Source Toggles - View Only */}
+            <div className="space-y-3 opacity-90">
               <label className="text-sm font-medium text-white flex items-center gap-2">
                 <Filter className="w-4 h-4 text-cyan-400" />
                 Data Sources
+                <span className="text-xs text-slate-400 ml-auto">ℹ️ Pre-selected for transparency</span>
               </label>
               <div className="grid grid-cols-3 gap-3">
                 {sources.map((source) => {
                   const IconComponent = source.icon;
                   const isActive = filters.sources[source.key as keyof FilterState['sources']];
-                  
+
                   return (
-                    <Button
+                    <div
                       key={source.key}
-                      variant="ghost"
-                      onClick={() => handleSourceToggle(source.key)}
                       className={cn(
-                        "h-16 p-4 flex flex-col items-center gap-2 border transition-all duration-300",
-                        isActive 
-                          ? getSourceColor(source.color)
-                          : "border-slate-600 hover:border-slate-500 bg-slate-800/30"
+                        "h-16 p-4 flex flex-col items-center gap-2 border cursor-default",
+                        isActive
+                          ? getSourceColor(source.color).split(' ').filter(cls => !cls.startsWith('hover:')).join(' ')
+                          : "border-slate-600 bg-slate-800/30"
                       )}
                     >
-                      <IconComponent className="w-5 h-5" />
+                      <IconComponent className="w-7 h-7" />
                       <span className="text-xs font-medium">{source.label}</span>
                       {isActive && (
-                        <div className="absolute top-2 right-2 w-2 h-2 bg-current rounded-full animate-pulse" />
+                        <div className="absolute top-2 right-2 w-2 h-2 bg-current rounded-full" />
                       )}
-                    </Button>
+                    </div>
                   );
                 })}
               </div>
@@ -274,30 +233,6 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
           </div>
         </div>
 
-        {showExport && (
-          <div className="space-y-3">
-            <label className="text-sm font-medium text-white">Export & Share</label>
-            <div className="flex gap-3">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="flex-1 border border-slate-600 hover:border-slate-500 bg-slate-800/30 hover:bg-slate-800/50"
-              >
-                <Download className="w-4 h-4 mr-2" />
-                Export Data
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="flex-1 border border-slate-600 hover:border-slate-500 bg-slate-800/30 hover:bg-slate-800/50"
-              >
-                <Share className="w-4 h-4 mr-2" />
-                Share Analysis
-              </Button>
-            </div>
-          </div>
-        )}
-
         {/* Active Filters Summary */}
         {(filters.searchQuery || getActiveSources().length < 3) && (
           <div className="pt-4 border-t border-slate-700/50">
@@ -312,9 +247,7 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
                   {getActiveSources().length}/3 sources
                 </Badge>
               )}
-              <Badge className="bg-slate-500/20 text-slate-400 border-slate-500/30">
-                Range: {filters.dateRange}
-              </Badge>
+
             </div>
           </div>
         )}

@@ -155,7 +155,7 @@ export const TrendingTopicsWidget: React.FC<TrendingTopicsWidgetProps> = ({
                               ? "bg-green-500/20 text-green-400"
                               : "bg-red-500/20 text-red-400"
                           }`}
-                          title={`${topic.change > 0 ? "+" : ""}${topic.change.toFixed(3)}%`}
+                          title={`${topic.change > 0 ? "+" : ""}${topic.change.toFixed(2)}%`}
                         >
                           <span className="text-[clamp(0.65rem,1.5vw,0.85rem)] font-medium">
                             {topic.change > 0 ? "+" : ""}
