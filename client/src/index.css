@@ -49,19 +49,19 @@ All colors MUST be HSL.
 
     --radius: 0.75rem;
 
-    /* Sentiment Colors */
-    --positive: 120 100% 50%;
-    --positive-light: 120 60% 70%;
-    --negative: 0 84% 60%;
-    --negative-light: 0 60% 70%;
-    --neutral: 45 93% 58%;
-    --neutral-light: 45 60% 70%;
+    /* Sentiment Colors - Light Mode */
+    --positive: 123 46% 34%; /* #4CAF50 adjusted for light theme */
+    --positive-light: 123 46% 60%;
+    --negative: 0 67% 49%; /* #D32F2F */
+    --negative-light: 0 67% 70%;
+    --neutral: 199 18% 33%; /* #607D8B */
+    --neutral-light: 199 18% 60%;
 
-    /* Data Visualization */
-    --chart-primary: 217 91% 60%;
-    --chart-secondary: 120 100% 50%;
-    --chart-tertiary: 0 84% 60%;
-    --chart-quaternary: 280 100% 70%;
+    /* Data Visualization - Light Mode */
+    --chart-primary: 195 32% 40%; /* #4D7C8A */
+    --chart-secondary: 123 46% 34%; /* #4CAF50 */
+    --chart-tertiary: 0 67% 49%; /* #D32F2F */
+    --chart-quaternary: 199 18% 33%; /* #607D8B */
 
     /* Gradients */
     --gradient-hero: linear-gradient(
