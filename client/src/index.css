@@ -714,4 +714,30 @@ All colors MUST be HSL.
   :root:not(.dark) .themed-finance-card {
     @apply clarity-card;
   }
+
+  /* Hero Sentiment Section - Always Dark */
+  .hero-sentiment-section {
+    /* Force dark theme styling regardless of global theme */
+    color: white;
+  }
+
+  .hero-sentiment-section * {
+    /* Ensure all child elements inherit the dark theme */
+    color: inherit;
+  }
+
+  .hero-sentiment-section .text-gray-200 {
+    /* Preserve specific gray text colors */
+    color: rgb(229 231 235) !important;
+  }
+
+  .hero-sentiment-section .text-purple-300 {
+    /* Preserve purple text colors */
+    color: rgb(196 181 253) !important;
+  }
+
+  .hero-sentiment-section .text-white {
+    /* Ensure white text stays white */
+    color: white !important;
+  }
 }
