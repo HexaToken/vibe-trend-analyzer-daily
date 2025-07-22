@@ -17,6 +17,9 @@ import {
   Brain,
   Moon,
   Plus,
+  UserCircle,
+  LogOut,
+  LogIn,
   Flame,
   Newspaper,
   ChevronDown,
@@ -28,6 +31,8 @@ import {
   DollarSign
 } from 'lucide-react';
 import { useMoodTheme } from '../contexts/MoodThemeContext';
+import { useAuth } from '../contexts/AuthContext';
+import DynamicThemeSelector from './DynamicThemeSelector';
 import { cn } from '../lib/utils';
 import { WatchlistContainerBlock } from './watchlist/WatchlistContainerBlock';
 import { ChatInterface } from './moorMeter/ChatInterface';
@@ -467,15 +472,13 @@ export const FuturisticHomepage: React.FC = () => {
                 </Badge>
               </Button>
 
-              <Button variant="ghost" size="sm" className="p-3 hover:bg-purple-500/10 rounded-xl">
-                <Moon className="w-5 h-5 text-gray-300 hover:text-purple-400 transition-colors" />
-              </Button>
+              {/* Dynamic Theme Selector */}
+              <div className="p-1">
+                <DynamicThemeSelector />
+              </div>
 
-              <Avatar className="w-10 h-10 ring-2 ring-purple-500/30">
-                <AvatarFallback className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 text-sm">
-                  JD
-                </AvatarFallback>
-              </Avatar>
+              {/* User Authentication Toggle */}
+              <UserAuthenticationToggle />
             </div>
           </div>
         </div>
@@ -1370,7 +1373,7 @@ export const FuturisticHomepage: React.FC = () => {
                     { rank: 7, symbol: 'XRP', name: 'Ripple', price: '$0.5234', change: '-2.87%', marketCap: '$28.7B', icon: '◉', changeColor: 'text-red-400', trendData: [0.53, 0.52, 0.54, 0.52, 0.52], glow: 'shadow-lg shadow-cyan-500/20' },
                     { rank: 8, symbol: 'ADA', name: 'Cardano', price: '$0.5845', change: '+5.21%', marketCap: '$20.6B', icon: '₳', changeColor: 'text-green-400', trendData: [0.55, 0.58, 0.56, 0.59, 0.58], glow: 'shadow-lg shadow-indigo-500/20' },
                     { rank: 9, symbol: 'DOGE', name: 'Dogecoin', price: '$0.0832', change: '-4.12%', marketCap: '$12.1B', icon: 'Ð', changeColor: 'text-red-400', trendData: [0.085, 0.083, 0.087, 0.081, 0.083], glow: 'shadow-lg shadow-amber-500/20' },
-                    { rank: 10, symbol: 'AVAX', name: 'Avalanche', price: '$38.45', change: '+12.34%', marketCap: '$15.8B', icon: '🔺', changeColor: 'text-green-400', trendData: [35, 38, 36, 40, 38], glow: 'shadow-lg shadow-red-500/20' }
+                    { rank: 10, symbol: 'AVAX', name: 'Avalanche', price: '$38.45', change: '+12.34%', marketCap: '$15.8B', icon: '����', changeColor: 'text-green-400', trendData: [35, 38, 36, 40, 38], glow: 'shadow-lg shadow-red-500/20' }
                   ].map((crypto) => (
                     <div key={crypto.rank} className={`group relative bg-gradient-to-br from-black/60 to-slate-900/40 rounded-xl p-5 border border-cyan-500/20 hover:border-cyan-400/50 transition-all duration-300 hover:scale-[1.02] cursor-pointer ${crypto.glow} hover:shadow-xl`}>
 
