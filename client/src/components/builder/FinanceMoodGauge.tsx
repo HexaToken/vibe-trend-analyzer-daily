@@ -125,14 +125,18 @@ export const FinanceMoodGauge: React.FC<FinanceMoodGaugeProps> = ({
             { label: 'Forums', value: moodData.social, weight: '30%' }
           ].map((item) => (
             <div key={item.label} className="text-center">
-              <div className="h-2 bg-slate-700 rounded-full overflow-hidden mb-2">
-                <div 
-                  className="h-full bg-blue-500 transition-all duration-1000"
+              <div className={`h-2 rounded-full overflow-hidden mb-2 ${
+                themeMode === 'light' ? 'bg-[#E0E0E0]' : 'bg-slate-700'
+              }`}>
+                <div
+                  className={`h-full transition-all duration-1000 ${
+                    themeMode === 'light' ? 'bg-[#3F51B5]' : 'bg-blue-500'
+                  }`}
                   style={{ width: `${item.value}%` }}
                 />
               </div>
-              <div className="text-xs text-slate-400">{item.label} {item.weight}</div>
-              <div className="text-sm text-white font-medium">{Math.round(item.value)}</div>
+              <div className={`text-xs ${themeMode === 'light' ? 'text-[#666]' : 'text-slate-400'}`}>{item.label} {item.weight}</div>
+              <div className={`text-sm font-medium ${themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'}`}>{Math.round(item.value)}</div>
             </div>
           ))}
         </div>
