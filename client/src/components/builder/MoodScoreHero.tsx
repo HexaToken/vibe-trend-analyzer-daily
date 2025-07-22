@@ -32,6 +32,7 @@ export const MoodScoreHero: React.FC<MoodScoreHeroProps> = ({
   timeframe,
   onTimeframeChange,
 }) => {
+  const { themeMode, cardBackground, borderColor, bodyGradient, accentColor } = useMoodTheme();
     const [moodScore, setMoodScore] = useState<MoodData>(propMoodScore || {
     overall: 65,
     stocks: 70,
