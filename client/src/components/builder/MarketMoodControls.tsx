@@ -167,62 +167,34 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
 
         {showFilters && (
           <>
-            {/* Date Range Filter */}
-            <div className="space-y-3">
-              <label className="text-sm font-medium text-white flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-cyan-400" />
-                Date Range
-              </label>
-              <div className="grid grid-cols-3 md:grid-cols-6 gap-2">
-                {dateRanges.map((range) => (
-                  <Button
-                    key={range.value}
-                    variant={filters.dateRange === range.value ? "default" : "ghost"}
-                    size="sm"
-                    onClick={() => handleDateRangeChange(range.value)}
-                    className={cn(
-                      "text-xs h-10 px-3 transition-all duration-300",
-                      filters.dateRange === range.value 
-                        ? "bg-cyan-500/20 text-cyan-400 border-cyan-500/30 shadow-lg shadow-cyan-500/20" 
-                        : "hover:bg-slate-700/50"
-                    )}
-                  >
-                    <span className="mr-1">{range.icon}</span>
-                    {range.label}
-                  </Button>
-                ))}
-              </div>
-            </div>
-
-            {/* Source Toggles */}
-            <div className="space-y-3">
+            {/* Source Toggles - View Only */}
+            <div className="space-y-3 opacity-90">
               <label className="text-sm font-medium text-white flex items-center gap-2">
                 <Filter className="w-4 h-4 text-cyan-400" />
                 Data Sources
+                <span className="text-xs text-slate-400 ml-auto">ℹ️ Pre-selected for transparency</span>
               </label>
               <div className="grid grid-cols-3 gap-3">
                 {sources.map((source) => {
                   const IconComponent = source.icon;
                   const isActive = filters.sources[source.key as keyof FilterState['sources']];
-                  
+
                   return (
-                    <Button
+                    <div
                       key={source.key}
-                      variant="ghost"
-                      onClick={() => handleSourceToggle(source.key)}
                       className={cn(
-                        "h-16 p-4 flex flex-col items-center gap-2 border transition-all duration-300",
-                        isActive 
-                          ? getSourceColor(source.color)
-                          : "border-slate-600 hover:border-slate-500 bg-slate-800/30"
+                        "h-16 p-4 flex flex-col items-center gap-2 border cursor-default",
+                        isActive
+                          ? getSourceColor(source.color).replace('hover:bg-', 'bg-').replace('/30', '/20')
+                          : "border-slate-600 bg-slate-800/30"
                       )}
                     >
                       <IconComponent className="w-5 h-5" />
                       <span className="text-xs font-medium">{source.label}</span>
                       {isActive && (
-                        <div className="absolute top-2 right-2 w-2 h-2 bg-current rounded-full animate-pulse" />
+                        <div className="absolute top-2 right-2 w-2 h-2 bg-current rounded-full" />
                       )}
-                    </Button>
+                    </div>
                   );
                 })}
               </div>
