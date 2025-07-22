@@ -42,7 +42,7 @@ interface FilterState {
 export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
   title = "Market Mood Controls",
   showFilters = true,
-  showExport = true,
+
   onDateRangeChange,
   onSourceToggle,
   onSearch,
