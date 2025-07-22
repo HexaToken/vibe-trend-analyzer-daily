@@ -371,7 +371,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
     { topic: '$TSLA', label: 'Panic', mentions: '1,923', sentiment: 'bearish', icon: '📉' },
     { topic: 'AI Revolution', label: 'Hype', mentions: '4,512', sentiment: 'bullish', icon: '🤖' },
     { topic: 'Fed Meeting', label: 'Neutral', mentions: '3,674', sentiment: 'neutral', icon: '🏛️' },
-    { topic: '$BTC', label: 'Hype', mentions: '5,291', sentiment: 'bullish', icon: '₿' },
+    { topic: '$BTC', label: 'Hype', mentions: '5,291', sentiment: 'bullish', icon: '��' },
     { topic: 'Inflation Data', label: 'Neutral', mentions: '2,183', sentiment: 'neutral', icon: '���' }
   ]);
 
@@ -3330,7 +3330,9 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                            '🟡 Neutral'}
                         </Badge>
                       </div>
-                      <div className="flex items-center justify-between text-xs text-gray-500">
+                      <div className={`flex items-center justify-between text-xs ${
+                        themeMode === 'light' ? 'text-[#666]' : 'text-gray-500'
+                      }`}>
                         <span className="font-medium">{news.source}</span>
                         <span>{news.timestamp}</span>
                       </div>
