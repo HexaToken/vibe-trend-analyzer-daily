@@ -24,7 +24,8 @@ import {
   MessageSquare,
   Users,
   Menu,
-  X
+  X,
+  DollarSign
 } from 'lucide-react';
 import { useMoodTheme } from '../contexts/MoodThemeContext';
 import { cn } from '../lib/utils';
@@ -36,6 +37,8 @@ import { SentimentHeatMap } from './moorMeter/SentimentHeatMap';
 import { MoodTrendChart } from './moorMeter/MoodTrendChart';
 import { SmartNewsFeed } from './SmartNewsFeed';
 import { MarketMoodPage } from './MarketMoodPage';
+import StockActivityDashboard from './StockActivityDashboard';
+import EarningsCalendarDashboard from './EarningsCalendarDashboard';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -77,7 +80,7 @@ interface TrendingTopic {
 export const FuturisticHomepage: React.FC = () => {
   const { setMoodScore } = useMoodTheme();
     const [searchFocused, setSearchFocused] = useState(false);
-                                                                                const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'tool' | 'market' | 'crypto' | 'charts'>('home');
+                                                                                const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'tool' | 'market' | 'crypto' | 'charts' | 'trending' | 'earnings'>('home');
       const [activeToolSubtab, setActiveToolSubtab] = useState("Market");
     const [activeMarketSubtab, setActiveMarketSubtab] = useState("Tools");
   const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
@@ -344,14 +347,14 @@ export const FuturisticHomepage: React.FC = () => {
                     <button
                       className={cn(
                         "text-sm font-medium transition-all duration-300 relative group flex items-center gap-1",
-                        activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'crypto' || activeSection === 'charts'
+                        activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings'
                           ? "text-pink-400"
                           : "text-gray-400 hover:text-white"
                       )}
                     >
                       Finance
                       <ChevronDown className="w-3 h-3 transition-transform duration-200 group-hover:rotate-180" />
-                      {(activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'crypto' || activeSection === 'charts') && (
+                      {(activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings') && (
                         <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
                       )}
                       <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -381,6 +384,20 @@ export const FuturisticHomepage: React.FC = () => {
                     >
                       <TrendingUp className="w-4 h-4 mr-2" />
                       Watchlist
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => setActiveSection('trending')}
+                      className="hover:bg-pink-500/20 focus:bg-pink-500/20 cursor-pointer transition-colors duration-200"
+                    >
+                      <Flame className="w-4 h-4 mr-2" />
+                      Trending
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => setActiveSection('earnings')}
+                      className="hover:bg-emerald-500/20 focus:bg-emerald-500/20 cursor-pointer transition-colors duration-200"
+                    >
+                      <DollarSign className="w-4 h-4 mr-2" />
+                      Earnings
                     </DropdownMenuItem>
                     <DropdownMenuItem
                       onClick={() => setActiveSection('crypto')}
@@ -496,7 +513,7 @@ export const FuturisticHomepage: React.FC = () => {
                     variant="ghost"
                     className={cn(
                       "w-full justify-between text-left transition-colors duration-200",
-                      (activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'crypto' || activeSection === 'charts')
+                      (activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings')
                         ? "text-pink-400 bg-pink-500/10"
                         : "text-gray-300 hover:text-white hover:bg-purple-500/10"
                     )}
@@ -562,6 +579,40 @@ export const FuturisticHomepage: React.FC = () => {
                     >
                       <TrendingUp className="w-4 h-4 mr-2" />
                       Watchlist
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      onClick={() => {
+                        setActiveSection('trending');
+                        setMobileMenuOpen(false);
+                        setMobileFinanceOpen(false);
+                      }}
+                      className={cn(
+                        "w-full justify-start text-sm transition-colors duration-200",
+                        activeSection === 'trending'
+                          ? "text-pink-400 bg-pink-500/10"
+                          : "text-gray-400 hover:text-pink-300 hover:bg-pink-500/5"
+                      )}
+                    >
+                      <Flame className="w-4 h-4 mr-2" />
+                      Trending
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      onClick={() => {
+                        setActiveSection('earnings');
+                        setMobileMenuOpen(false);
+                        setMobileFinanceOpen(false);
+                      }}
+                      className={cn(
+                        "w-full justify-start text-sm transition-colors duration-200",
+                        activeSection === 'earnings'
+                          ? "text-emerald-400 bg-emerald-500/10"
+                          : "text-gray-400 hover:text-emerald-300 hover:bg-emerald-500/5"
+                      )}
+                    >
+                      <DollarSign className="w-4 h-4 mr-2" />
+                      Earnings
                     </Button>
                     <Button
                       variant="ghost"
@@ -1649,6 +1700,259 @@ export const FuturisticHomepage: React.FC = () => {
               </div>
             </div>
           </div>
+        ) : activeSection === 'trending' ? (
+          <div className="space-y-8">
+            {/* Trending Hub Header */}
+            <div className="text-center mb-12">
+              <div className="flex items-center justify-center gap-4 mb-6">
+                <div className="w-20 h-20 bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-pink-500/20 rounded-xl flex items-center justify-center shadow-lg shadow-pink-500/20 animate-pulse">
+                  <Flame className="w-10 h-10 text-pink-400" />
+                </div>
+                <div className="text-center">
+                  <h1 className="text-5xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
+                    Trending Hub
+                  </h1>
+                  <p className="text-lg text-gray-300">Real-time trending assets, topics, and market movers</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Stock Activity Dashboard - Market Pulse Panel */}
+            <StockActivityDashboard
+              className="mt-8"
+              showHeader={true}
+              defaultTab="trending"
+            />
+
+            {/* Trending Categories Tabs */}
+            <Card className="bg-black/40 border-pink-500/20 backdrop-blur-xl">
+              <CardHeader className="border-b border-pink-500/20">
+                <CardTitle className="text-white flex items-center gap-2">
+                  <Flame className="w-6 h-6 text-pink-400" />
+                  What's Trending Now
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                <Tabs defaultValue="news" className="w-full">
+                  <TabsList className="grid w-full grid-cols-3 bg-black/20 backdrop-blur-xl border border-gray-700/50">
+                    <TabsTrigger value="news" className="data-[state=active]:bg-purple-600/30 data-[state=active]:text-purple-300 text-gray-400">
+                      📰 Trending News
+                    </TabsTrigger>
+                    <TabsTrigger value="social" className="data-[state=active]:bg-blue-600/30 data-[state=active]:text-blue-300 text-gray-400">
+                      💬 Social Buzz
+                    </TabsTrigger>
+                    <TabsTrigger value="searches" className="data-[state=active]:bg-orange-600/30 data-[state=active]:text-orange-300 text-gray-400">
+                      🔍 Top Searches
+                    </TabsTrigger>
+                  </TabsList>
+
+                  <TabsContent value="news" className="mt-6">
+                    <div className="space-y-4">
+                      {[
+                        {
+                          headline: "NVIDIA's AI chip demand surges 400% as tech giants race for supremacy",
+                          summary: "Major cloud providers are scrambling to secure NVIDIA's latest H100 chips, driving unprecedented demand.",
+                          trending: "+156%",
+                          source: "TechCrunch",
+                          time: "2h ago",
+                          category: "AI/Tech"
+                        },
+                        {
+                          headline: "Solana DeFi ecosystem explodes with new protocol launches",
+                          summary: "Three major DeFi protocols launched on Solana this week, driving massive trading volume.",
+                          trending: "+89%",
+                          source: "CoinDesk",
+                          time: "4h ago",
+                          category: "DeFi"
+                        },
+                        {
+                          headline: "Tesla's robotaxi reveal sparks mixed reactions from investors",
+                          summary: "While some see potential, others question the timeline and feasibility of full autonomy.",
+                          trending: "+67%",
+                          source: "Reuters",
+                          time: "1h ago",
+                          category: "Automotive"
+                        }
+                      ].map((news, i) => (
+                        <div key={i} className="bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-5 border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300 group cursor-pointer">
+                          <div className="flex items-start justify-between mb-3">
+                            <div className="flex-1">
+                              <h3 className="text-lg font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">
+                                {news.headline}
+                              </h3>
+                              <p className="text-sm text-gray-400 leading-relaxed mb-3">
+                                {news.summary}
+                              </p>
+                              <div className="flex items-center gap-2">
+                                <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30 text-xs">
+                                  {news.category}
+                                </Badge>
+                              </div>
+                            </div>
+                            <Badge className="ml-4 bg-pink-500/20 text-pink-400 border-pink-500/30">
+                              {news.trending} 🔥
+                            </Badge>
+                          </div>
+                          <div className="flex items-center justify-between text-xs text-gray-500">
+                            <span className="font-medium">{news.source}</span>
+                            <span>{news.time}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </TabsContent>
+
+                  <TabsContent value="social" className="mt-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {[
+                        { platform: "Twitter", hashtag: "#NVDAtoTheMoon", mentions: "245K", sentiment: "bullish", growth: "+340%" },
+                        { platform: "Reddit", hashtag: "r/wallstreetbets", mentions: "189K", sentiment: "mixed", growth: "+156%" },
+                        { platform: "Discord", hashtag: "#SolanaGang", mentions: "78K", sentiment: "bullish", growth: "+234%" },
+                        { platform: "Telegram", hashtag: "#DogecoinRise", mentions: "567K", sentiment: "bearish", growth: "+89%" },
+                        { platform: "TikTok", hashtag: "#CryptoTok", mentions: "1.2M", sentiment: "bullish", growth: "+45%" },
+                        { platform: "Instagram", hashtag: "#TeslaNews", mentions: "134K", sentiment: "neutral", growth: "+23%" }
+                      ].map((social, i) => (
+                        <div key={i} className="bg-gradient-to-br from-black/60 to-blue-900/20 rounded-xl p-4 border border-blue-500/20 hover:border-blue-400/40 transition-all duration-300">
+                          <div className="flex items-center justify-between mb-3">
+                            <div className="flex items-center gap-2">
+                              <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30 text-xs">
+                                {social.platform}
+                              </Badge>
+                              <span className="text-white font-medium">{social.hashtag}</span>
+                            </div>
+                            <Badge className={cn(
+                              "text-xs",
+                              social.sentiment === 'bullish' ? "bg-green-500/20 text-green-400 border-green-500/30" :
+                              social.sentiment === 'bearish' ? "bg-red-500/20 text-red-400 border-red-500/30" :
+                              "bg-gray-500/20 text-gray-400 border-gray-500/30"
+                            )}>
+                              {social.sentiment === 'bullish' ? '😃' : social.sentiment === 'bearish' ? '😡' : '😐'}
+                            </Badge>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <div className="text-lg font-bold text-white">{social.mentions}</div>
+                              <div className="text-xs text-gray-400">mentions</div>
+                            </div>
+                            <div className="text-right">
+                              <div className="text-pink-400 font-bold">{social.growth}</div>
+                              <div className="text-xs text-gray-400">24h growth</div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </TabsContent>
+
+                  <TabsContent value="searches" className="mt-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {[
+                        { query: "NVIDIA stock prediction", volume: "2.3M", growth: "+456%", region: "Global" },
+                        { query: "Solana price target", volume: "1.8M", growth: "+234%", region: "US" },
+                        { query: "Tesla robotaxi news", volume: "3.1M", growth: "+189%", region: "Global" },
+                        { query: "Bitcoin ETF approval", volume: "4.2M", growth: "+123%", region: "US" },
+                        { query: "Dogecoin price crash", volume: "5.6M", growth: "+567%", region: "Global" },
+                        { query: "Apple earnings report", volume: "2.7M", growth: "+78%", region: "US" }
+                      ].map((search, i) => (
+                        <div key={i} className="bg-gradient-to-br from-black/60 to-orange-900/20 rounded-xl p-4 border border-orange-500/20 hover:border-orange-400/40 transition-all duration-300">
+                          <div className="mb-3">
+                            <h4 className="text-white font-medium mb-1">{search.query}</h4>
+                            <Badge className="bg-orange-500/20 text-orange-300 border-orange-500/30 text-xs">
+                              {search.region}
+                            </Badge>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <div className="text-lg font-bold text-white">{search.volume}</div>
+                              <div className="text-xs text-gray-400">searches</div>
+                            </div>
+                            <div className="text-right">
+                              <div className="text-orange-400 font-bold">{search.growth}</div>
+                              <div className="text-xs text-gray-400">24h growth</div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </TabsContent>
+                </Tabs>
+              </CardContent>
+            </Card>
+
+            {/* Real-time Trending Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <Card className="bg-black/40 border-pink-500/20 backdrop-blur-xl">
+                <CardHeader>
+                  <CardTitle className="text-white text-lg flex items-center gap-2">
+                    🔥 Most Trending
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-center">
+                    <div className="text-4xl mb-2">🎮</div>
+                    <div className="text-2xl font-bold text-pink-400">NVIDIA</div>
+                    <div className="text-sm text-gray-400 mb-2">+456% trending</div>
+                    <Badge className="bg-pink-500/20 text-pink-400 border-pink-500/30">
+                      AI Revolution
+                    </Badge>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
+                <CardHeader>
+                  <CardTitle className="text-white text-lg flex items-center gap-2">
+                    📈 Biggest Mover
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-center">
+                    <div className="text-4xl mb-2">◎</div>
+                    <div className="text-2xl font-bold text-purple-400">Solana</div>
+                    <div className="text-sm text-gray-400 mb-2">+18.67% today</div>
+                    <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">
+                      DeFi Surge
+                    </Badge>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-black/40 border-blue-500/20 backdrop-blur-xl">
+                <CardHeader>
+                  <CardTitle className="text-white text-lg flex items-center gap-2">
+                    💬 Social Leader
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-center">
+                    <div className="text-4xl mb-2">🐕</div>
+                    <div className="text-2xl font-bold text-blue-400">Dogecoin</div>
+                    <div className="text-sm text-gray-400 mb-2">5.6M mentions</div>
+                    <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30">
+                      Viral Trend
+                    </Badge>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Footer: Trending Status */}
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-4">
+                <Badge className="bg-pink-500/20 text-pink-400 border-pink-500/30">
+                  ✅ Trending Data: Live
+                </Badge>
+                <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">
+                  ✅ Social Analytics: Active
+                </Badge>
+                <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30">
+                  ✅ Search Trends: Real-time
+                </Badge>
+              </div>
+            </div>
+          </div>
+        ) : activeSection === 'earnings' ? (
+          <EarningsCalendarDashboard />
         ) : activeSection === 'charts' ? (
           <div className="space-y-8">
             {/* Charts Hub Header */}
