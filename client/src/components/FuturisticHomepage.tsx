@@ -37,6 +37,7 @@ import { SentimentHeatMap } from './moorMeter/SentimentHeatMap';
 import { MoodTrendChart } from './moorMeter/MoodTrendChart';
 import { SmartNewsFeed } from './SmartNewsFeed';
 import { MarketMoodPage } from './MarketMoodPage';
+import { AISentimentEngine } from './mood/AISentimentEngine';
 import StockActivityDashboard from './StockActivityDashboard';
 import EarningsCalendarDashboard from './EarningsCalendarDashboard';
 import {
@@ -1790,7 +1791,7 @@ export const FuturisticHomepage: React.FC = () => {
                               </div>
                             </div>
                             <Badge className="ml-4 bg-pink-500/20 text-pink-400 border-pink-500/30">
-                              {news.trending} 🔥
+                              {news.trending} ���
                             </Badge>
                           </div>
                           <div className="flex items-center justify-between text-xs text-gray-500">
@@ -3140,31 +3141,11 @@ export const FuturisticHomepage: React.FC = () => {
               </CardContent>
             </Card>
 
-            {/* AI Insight Module */}
-            <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
-              <CardHeader className="border-b border-purple-500/20">
-                <CardTitle className="text-white text-sm flex items-center gap-2">
-                  <Brain className="w-4 h-4 text-cyan-400" />
-                  {aiInsight.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-6">
-                <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                  {aiInsight.content}
-                </p>
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs text-gray-400">Confidence</span>
-                  <span className="text-sm font-bold text-cyan-400">{aiInsight.confidence}%</span>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {aiInsight.keyDrivers.map((driver, index) => (
-                    <Badge key={index} className="bg-cyan-500/20 text-cyan-400 border-cyan-500/30 text-xs">
-                      {driver}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            {/* AI Sentiment Engine - Unified Module */}
+            <AISentimentEngine
+              moodScore={moodScore}
+              className="w-full"
+            />
 
             {/* Footer Status */}
             <div className="text-center">
