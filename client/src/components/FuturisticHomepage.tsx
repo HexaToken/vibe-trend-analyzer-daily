@@ -1081,11 +1081,20 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
                   {/* Sentiment Risk Meter */}
-                  <Card className="bg-black/40 border-blue-500/20 backdrop-blur-xl">
+                  <Card className={themeMode === 'light'
+                    ? "enhanced-card-light widget-mood"
+                    : "bg-black/40 border-blue-500/20 backdrop-blur-xl"
+                  }>
                     <CardHeader>
-                      <CardTitle className="text-white flex items-center gap-2">
+                      <CardTitle className={`flex items-center gap-2 ${
+                        themeMode === 'light' ? 'text-[#388E3C]' : 'text-white'
+                      }`}>
                         🎯 Sentiment Risk Meter
-                        <Badge className="ml-auto bg-blue-500/20 text-blue-300 border-blue-500/30">
+                        <Badge className={`ml-auto ${
+                          themeMode === 'light'
+                            ? 'bg-[#F1F8E9] text-[#388E3C] border-[#388E3C]/30'
+                            : 'bg-blue-500/20 text-blue-300 border-blue-500/30'
+                        }`}>
                           ${selectedFinanceStock}
                         </Badge>
                       </CardTitle>
@@ -1680,7 +1689,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     { rank: 7, symbol: 'XRP', name: 'Ripple', price: '$0.5234', change: '-2.87%', marketCap: '$28.7B', icon: '◉', changeColor: 'text-red-400', trendData: [0.53, 0.52, 0.54, 0.52, 0.52], glow: 'shadow-lg shadow-cyan-500/20' },
                     { rank: 8, symbol: 'ADA', name: 'Cardano', price: '$0.5845', change: '+5.21%', marketCap: '$20.6B', icon: '₳', changeColor: 'text-green-400', trendData: [0.55, 0.58, 0.56, 0.59, 0.58], glow: 'shadow-lg shadow-indigo-500/20' },
                     { rank: 9, symbol: 'DOGE', name: 'Dogecoin', price: '$0.0832', change: '-4.12%', marketCap: '$12.1B', icon: 'Ð', changeColor: 'text-red-400', trendData: [0.085, 0.083, 0.087, 0.081, 0.083], glow: 'shadow-lg shadow-amber-500/20' },
-                    { rank: 10, symbol: 'AVAX', name: 'Avalanche', price: '$38.45', change: '+12.34%', marketCap: '$15.8B', icon: '����', changeColor: 'text-green-400', trendData: [35, 38, 36, 40, 38], glow: 'shadow-lg shadow-red-500/20' }
+                    { rank: 10, symbol: 'AVAX', name: 'Avalanche', price: '$38.45', change: '+12.34%', marketCap: '$15.8B', icon: '�����', changeColor: 'text-green-400', trendData: [35, 38, 36, 40, 38], glow: 'shadow-lg shadow-red-500/20' }
                   ].map((crypto) => (
                     <div key={crypto.rank} className={`group relative bg-gradient-to-br from-black/60 to-slate-900/40 rounded-xl p-5 border border-cyan-500/20 hover:border-cyan-400/50 transition-all duration-300 hover:scale-[1.02] cursor-pointer ${crypto.glow} hover:shadow-xl`}>
 
@@ -1855,7 +1864,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                               "ml-4 flex-shrink-0",
                               news.sentiment === 'Bullish' ? 'bg-green-500/20 text-green-400 border-green-500/30' : 'bg-red-500/20 text-red-400 border-red-500/30'
                             )}>
-                              {news.sentiment === 'Bullish' ? '🟢 Bullish' : '🔴 Bearish'}
+                              {news.sentiment === 'Bullish' ? '���� Bullish' : '🔴 Bearish'}
                             </Badge>
                           </div>
                           <div className="flex items-center justify-between text-xs text-gray-500">
@@ -2776,7 +2785,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   ✅ Technical Analysis: Active
                 </Badge>
                 <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">
-                  ✅ Order Book: Live
+                  �� Order Book: Live
                 </Badge>
               </div>
             </div>
