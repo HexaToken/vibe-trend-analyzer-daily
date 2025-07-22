@@ -113,40 +113,68 @@ export const FinanceStockTable: React.FC<FinanceStockTableProps> = ({
           themeMode === 'light' ? "divide-[#E0E0E0]" : "divide-slate-700/50"
         )}>
           {displayedStocks.map((stock, index) => (
-            <div key={stock.symbol} className="flex items-center justify-between p-4 hover:bg-slate-800/30 transition-colors">
+            <div key={stock.symbol} className={cn(
+              "flex items-center justify-between p-4 transition-colors",
+              themeMode === 'light' ? "hover:bg-[#E8EBF0]" : "hover:bg-slate-800/30"
+            )}>
               <div className="flex items-center gap-4">
-                <span className="text-xs text-slate-400 w-6">{index + 1}</span>
+                <span className={cn(
+                  "text-xs w-6",
+                  themeMode === 'light' ? "text-[#4A4A4A]" : "text-slate-400"
+                )}>{index + 1}</span>
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="font-medium text-white">{stock.symbol}</span>
+                    <span className={cn(
+                      "font-medium",
+                      themeMode === 'light' ? "text-[#1E1E1E]" : "text-white"
+                    )}>{stock.symbol}</span>
                     {showSentiment && (
                       <Badge className={cn(
                         "text-xs px-2",
-                        stock.sentiment === 'bullish' ? "bg-green-500/20 text-green-400" :
-                        stock.sentiment === 'bearish' ? "bg-red-500/20 text-red-400" :
-                        "bg-amber-500/20 text-amber-400"
+                        stock.sentiment === 'bullish'
+                          ? themeMode === 'light'
+                            ? "bg-[#4CAF50]/20 text-[#4CAF50]"
+                            : "bg-green-500/20 text-green-400"
+                          : stock.sentiment === 'bearish'
+                            ? themeMode === 'light'
+                              ? "bg-[#D32F2F]/20 text-[#D32F2F]"
+                              : "bg-red-500/20 text-red-400"
+                            : themeMode === 'light'
+                              ? "bg-[#607D8B]/20 text-[#607D8B]"
+                              : "bg-amber-500/20 text-amber-400"
                       )}>
                         {getSentimentIcon(stock.sentiment)}
                         {stock.sentiment}
                       </Badge>
                     )}
                   </div>
-                  <div className="text-sm text-slate-400">{stock.name}</div>
+                  <div className={cn(
+                    "text-sm",
+                    themeMode === 'light' ? "text-[#4A4A4A]" : "text-slate-400"
+                  )}>{stock.name}</div>
                 </div>
               </div>
-              
+
               <div className="text-right">
-                <div className="text-white font-medium">${stock.price.toFixed(2)}</div>
+                <div className={cn(
+                  "font-medium",
+                  themeMode === 'light' ? "text-[#1E1E1E]" : "text-white"
+                )}>${stock.price.toFixed(2)}</div>
                 <div className={cn(
                   "text-sm font-medium",
-                  stock.change >= 0 ? "text-green-400" : "text-red-400"
+                  stock.change >= 0
+                    ? themeMode === 'light' ? "text-[#4CAF50]" : "text-green-400"
+                    : themeMode === 'light' ? "text-[#D32F2F]" : "text-red-400"
                 )}>
                   {stock.change >= 0 ? '+' : ''}{stock.change.toFixed(2)} ({stock.changePercent.toFixed(2)}%)
                 </div>
               </div>
-              
+
               {showVolume && (
-                <div className="text-right text-xs text-slate-400">
+                <div className={cn(
+                  "text-right text-xs",
+                  themeMode === 'light' ? "text-[#4A4A4A]" : "text-slate-400"
+                )}>
                   Vol: {stock.volume}
                 </div>
               )}
