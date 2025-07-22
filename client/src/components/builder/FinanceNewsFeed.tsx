@@ -126,8 +126,8 @@ export const FinanceNewsFeed: React.FC<FinanceNewsFeedProps> = ({
   const displayedArticles = articles.slice(0, maxArticles);
 
   return (
-    <Card className="finance-card border-0">
-      <CardHeader className="border-b border-slate-700/50">
+    <Card className={themeMode === 'light' ? "widget-news enhanced-card-light" : "finance-card border-0"}>
+      <CardHeader className={themeMode === 'light' ? "border-b border-[#E0E0E0]" : "border-b border-slate-700/50"}>
         <CardTitle className="flex items-center gap-2 text-white">
           <Globe className="w-5 h-5 text-blue-400" />
           {title}
