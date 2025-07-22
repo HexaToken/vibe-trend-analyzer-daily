@@ -947,7 +947,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
 
               {/* Mobile Authentication Section */}
               <div className="border-t border-purple-500/20 pt-4 mt-4">
-                <MobileAuthenticationSection />
+                <MobileAuthenticationSection onNavigate={onNavigate} />
               </div>
             </div>
           </div>
