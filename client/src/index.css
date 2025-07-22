@@ -19,7 +19,7 @@ All colors MUST be HSL.
 @layer base {
   :root {
     /* Light Mode (Clarity Mode) - Finance-focused design system */
-    --background: 212 17% 97%; /* #F4F6F9 */
+    --background: 216 27% 98%; /* #F7F9FB */
     --foreground: 220 13% 12%; /* #1E1E1E */
 
     --card: 0 0% 100%; /* #FFFFFF */
@@ -28,7 +28,7 @@ All colors MUST be HSL.
     --popover: 0 0% 100%; /* #FFFFFF */
     --popover-foreground: 220 13% 12%; /* #1E1E1E */
 
-    --primary: 195 32% 40%; /* #4D7C8A */
+    --primary: 228 45% 42%; /* #3F51B5 */
     --primary-foreground: 0 0% 100%;
 
     --secondary: 220 13% 91%; /* #E8EBF0 */
@@ -37,10 +37,10 @@ All colors MUST be HSL.
     --muted: 220 13% 88%; /* #E0E0E0 */
     --muted-foreground: 220 13% 29%; /* #4A4A4A */
 
-    --accent: 195 32% 40%; /* #4D7C8A */
+    --accent: 228 45% 42%; /* #3F51B5 */
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 67% 49%; /* #D32F2F */
+    --destructive: 4 90% 58%; /* #F44336 */
     --destructive-foreground: 0 0% 100%;
 
     --border: 220 13% 88%; /* #E0E0E0 */
