@@ -715,6 +715,21 @@ All colors MUST be HSL.
     @apply clarity-card;
   }
 
+  /* Make finance-card responsive to theme */
+  .finance-card {
+    @apply transition-all duration-300;
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  }
+
+  :root:not(.dark) .finance-card {
+    @apply bg-white border-[#E0E0E0];
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    backdrop-filter: none;
+  }
+
   /* Hero Sentiment Section - Always Dark */
   .hero-sentiment-section {
     /* Force dark theme styling regardless of global theme */
