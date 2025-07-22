@@ -1101,21 +1101,33 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     </CardHeader>
                     <CardContent className="text-center py-8">
                       <div className="relative w-32 h-32 mx-auto mb-4">
-                        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-red-500/20 via-yellow-500/20 to-green-500/20 p-1 animate-pulse">
-                          <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-900/90 to-blue-900/90" />
+                        <div className={`absolute inset-0 rounded-full p-1 animate-pulse ${
+                          themeMode === 'light'
+                            ? 'mood-gauge-light'
+                            : 'bg-gradient-to-r from-red-500/20 via-yellow-500/20 to-green-500/20'
+                        }`}>
+                          <div className={`w-full h-full rounded-full ${
+                            themeMode === 'light'
+                              ? 'bg-white'
+                              : 'bg-gradient-to-br from-slate-900/90 to-blue-900/90'
+                          }`} />
                         </div>
                         <div className="absolute inset-0 flex items-center justify-center">
                           <div className="text-center">
                             <div className={`text-3xl font-bold ${
-                              selectedFinanceStock === 'TSLA' ? 'text-red-400' :
-                              selectedFinanceStock === 'NVDA' ? 'text-green-400' :
-                              'text-yellow-400'
+                              themeMode === 'light'
+                                ? selectedFinanceStock === 'TSLA' ? 'text-[#F44336]' :
+                                  selectedFinanceStock === 'NVDA' ? 'text-[#4CAF50]' :
+                                  'text-[#FFB300]'
+                                : selectedFinanceStock === 'TSLA' ? 'text-red-400' :
+                                  selectedFinanceStock === 'NVDA' ? 'text-green-400' :
+                                  'text-yellow-400'
                             }`}>
                               {selectedFinanceStock === 'TSLA' ? 'HIGH' :
                                selectedFinanceStock === 'NVDA' ? 'LOW' :
                                'MEDIUM'}
                             </div>
-                            <div className="text-sm text-gray-400">Risk Level</div>
+                            <div className={`text-sm ${themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'}`}>Risk Level</div>
                           </div>
                         </div>
                       </div>
@@ -2961,7 +2973,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                             // Crypto
                             { symbol: 'BTC', name: 'Bitcoin', sentiment: 82, change: '+3.8%', volume: '2.1B', category: 'crypto', icon: '₿' },
                             { symbol: 'ETH', name: 'Ethereum', sentiment: 76, change: '+2.4%', volume: '1.8B', category: 'crypto', icon: '⟐' },
-                            { symbol: 'SOL', name: 'Solana', sentiment: 88, change: '+7.2%', volume: '890M', category: 'crypto', icon: '◎' },
+                            { symbol: 'SOL', name: 'Solana', sentiment: 88, change: '+7.2%', volume: '890M', category: 'crypto', icon: '���' },
                             { symbol: 'ADA', name: 'Cardano', sentiment: 71, change: '+4.1%', volume: '234M', category: 'crypto', icon: '₳' },
                             { symbol: 'DOT', name: 'Polkadot', sentiment: 39, change: '-3.2%', volume: '156M', category: 'crypto', icon: '●' },
                             { symbol: 'MATIC', name: 'Polygon', sentiment: 79, change: '+6.7%', volume: '312M', category: 'crypto', icon: '⬟' },
