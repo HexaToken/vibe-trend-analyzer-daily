@@ -31,7 +31,6 @@ import {
   X,
   DollarSign
 } from 'lucide-react';
-import { useMoodTheme } from '../contexts/MoodThemeContext';
 import { useAuth } from '../contexts/AuthContext';
 import DynamicThemeSelector from './DynamicThemeSelector';
 import { cn } from '../lib/utils';
