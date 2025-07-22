@@ -27,6 +27,7 @@ import { SocialBuzzHeatmap } from './builder/SocialBuzzHeatmap';
 import { MarketMoodControls } from './builder/MarketMoodControls';
 import { AIMoodBreakdownPanel } from './mood/AIMoodBreakdownPanel';
 import { SentimentAnalyticsDashboard } from './mood/SentimentAnalyticsDashboard';
+import { AISentimentEngine } from './mood/AISentimentEngine';
 
 interface MarketMoodPageProps {
   title?: string;
@@ -177,6 +178,12 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
               onSearch={handleSearch}
               onExplainMood={handleExplainMood}
               onViewAnalytics={handleViewAnalytics}
+            />
+
+            {/* AI Sentiment Engine - Unified Module */}
+            <AISentimentEngine
+              moodScore={moodScore || { overall: 72, stocks: 68, news: 75, social: 74 }}
+              className="w-full"
             />
 
             {/* Mood Trend Chart */}
