@@ -68,7 +68,7 @@ const App = () => {
             fallbackTitle="Settings Access Required"
             fallbackDescription="Please sign in to access your settings."
           >
-            <SettingsPage />
+            <SettingsPage onNavigate={setActiveSection} />
           </ProtectedRoute>
         );
       case "user-settings":
@@ -77,7 +77,7 @@ const App = () => {
             fallbackTitle="Settings Access Required"
             fallbackDescription="Please sign in to access your settings."
           >
-            <SettingsPage />
+            <SettingsPage onNavigate={setActiveSection} />
           </ProtectedRoute>
         );
       case "user-profile":
