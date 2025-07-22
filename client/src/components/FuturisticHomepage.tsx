@@ -1002,7 +1002,9 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               {/* Stock Search Bar */}
               <div className="max-w-md mx-auto mb-6">
                 <div className="relative">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <Search className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 ${
+                    themeMode === 'light' ? 'text-[#888]' : 'text-gray-400'
+                  }`} />
                   <Input
                     type="text"
                     placeholder="Search stock ticker (e.g., AAPL, TSLA, NVDA)..."
@@ -1014,7 +1016,11 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         setFinanceSearchQuery('');
                       }
                     }}
-                    className="pl-12 pr-20 py-4 bg-black/40 border-purple-500/30 rounded-xl text-white placeholder-gray-400 focus:bg-black/60 focus:border-blue-400/50 focus:ring-0 focus:outline-none backdrop-blur-sm text-lg"
+                    className={`pl-12 pr-20 py-4 rounded-xl text-lg focus:ring-0 focus:outline-none ${
+                      themeMode === 'light'
+                        ? 'bg-white border-[#E0E0E0] text-[#1C1E21] placeholder-[#888] focus:bg-white focus:border-[#3F51B5]/50'
+                        : 'bg-black/40 border-purple-500/30 text-white placeholder-gray-400 focus:bg-black/60 focus:border-blue-400/50 backdrop-blur-sm'
+                    }`}
                   />
                   <Button
                     onClick={() => {
