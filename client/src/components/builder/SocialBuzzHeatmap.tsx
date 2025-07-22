@@ -121,7 +121,12 @@ export const SocialBuzzHeatmap: React.FC<SocialBuzzHeatmapProps> = ({
   };
 
   const formatVolume = (volume: number) => {
-    if (volume >= 10000) return `${(volume / 1000).toFixed(1)}k`;
+    if (volume >= 1000000) {
+      return `${(volume / 1000000).toFixed(1)}m`;
+    }
+    if (volume >= 1000) {
+      return `${(volume / 1000).toFixed(1)}k`;
+    }
     return volume.toString();
   };
 
