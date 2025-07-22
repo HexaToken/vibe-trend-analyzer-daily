@@ -46,7 +46,9 @@ import {
   Moon,
   Check,
   AlertTriangle,
-  ChevronRight
+  ChevronRight,
+  Star,
+  Zap
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useMoodTheme } from '../../contexts/MoodThemeContext';
