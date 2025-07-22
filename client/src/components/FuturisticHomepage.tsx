@@ -1248,7 +1248,7 @@ export const FuturisticHomepage: React.FC = () => {
                   <TabsContent value="gainers" className="mt-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {[
-                        { symbol: 'MATIC', name: 'Polygon', price: '$0.89', change: '+15.67%', sentiment: 72, mentions: '6.2K', icon: '���' },
+                        { symbol: 'MATIC', name: 'Polygon', price: '$0.89', change: '+15.67%', sentiment: 72, mentions: '6.2K', icon: '⬟' },
                         { symbol: 'AVAX', name: 'Avalanche', price: '$38.45', change: '+12.34%', sentiment: 68, mentions: '4.9K', icon: '🔺' },
                         { symbol: 'ATOM', name: 'Cosmos', price: '$12.67', change: '+9.87%', sentiment: 65, mentions: '3.1K', icon: '⚛' }
                       ].map((token) => (
@@ -1951,6 +1951,13 @@ export const FuturisticHomepage: React.FC = () => {
                 </CardContent>
               </Card>
             </div>
+
+            {/* Stock Activity Dashboard - Market Pulse Panel */}
+            <StockActivityDashboard
+              className="mt-8"
+              showHeader={true}
+              defaultTab="trending"
+            />
 
             {/* Footer: Trending Status */}
             <div className="text-center">
