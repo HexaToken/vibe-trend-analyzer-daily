@@ -38,6 +38,7 @@ import { MoodTrendChart } from './moorMeter/MoodTrendChart';
 import { SmartNewsFeed } from './SmartNewsFeed';
 import { MarketMoodPage } from './MarketMoodPage';
 import StockActivityDashboard from './StockActivityDashboard';
+import EarningsCalendarDashboard from './EarningsCalendarDashboard';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -2675,7 +2676,7 @@ export const FuturisticHomepage: React.FC = () => {
               <Card className="bg-black/40 border-indigo-500/20 backdrop-blur-xl">
                 <CardHeader>
                   <CardTitle className="text-white text-lg flex items-center gap-2">
-                    ⚡ Recent Trades
+                    ��� Recent Trades
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
