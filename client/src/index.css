@@ -1247,12 +1247,15 @@ All colors MUST be HSL.
   /* Hero Sentiment Section - Always Dark */
   .hero-sentiment-section {
     /* Force dark theme styling regardless of global theme */
-    color: white;
+    color: white !important;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(88, 28, 135, 0.95) 100%) !important;
+    border-radius: 24px !important;
+    position: relative !important;
   }
 
   .hero-sentiment-section * {
     /* Ensure all child elements inherit the dark theme */
-    color: inherit;
+    color: inherit !important;
   }
 
   .hero-sentiment-section .text-gray-200 {
@@ -1268,6 +1271,34 @@ All colors MUST be HSL.
   .hero-sentiment-section .text-white {
     /* Ensure white text stays white */
     color: white !important;
+  }
+
+  /* Fix gradient text highlighting issues in Light Mode */
+  :root:not(.dark) .bg-gradient-to-r.bg-clip-text.text-transparent {
+    /* Ensure gradient text has enough contrast in Light Mode */
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    -webkit-background-clip: text !important;
+  }
+
+  /* Fix highlighted title appearance - remove excessive highlighting */
+  :root:not(.dark) h1.bg-gradient-to-r,
+  :root:not(.dark) h2.bg-gradient-to-r,
+  :root:not(.dark) h3.bg-gradient-to-r {
+    /* For titles in light mode, use solid color instead of gradient to avoid highlighting effect */
+    background: none !important;
+    -webkit-text-fill-color: #1E1E1E !important;
+    color: #1E1E1E !important;
+    font-weight: 700 !important;
+  }
+
+  /* Only keep gradients for specific branded elements */
+  :root:not(.dark) .brand-gradient-text {
+    background: linear-gradient(135deg, #3F51B5 0%, #9C27B0 50%, #4CAF50 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    color: transparent !important;
   }
 
   /* Component-specific Light Mode fixes */
@@ -1405,5 +1436,24 @@ All colors MUST be HSL.
 
   :root:not(.dark) .hover\:border-green-500\/50:hover {
     border-color: rgba(76, 175, 80, 0.5) !important;
+  }
+
+  /* Ensure hero sections with dark backgrounds stay visible */
+  :root:not(.dark) [class*="hero"] {
+    position: relative;
+  }
+
+  :root:not(.dark) .hero-sentiment-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(88, 28, 135, 0.95) 100%);
+    border-radius: 24px;
+    z-index: 1;
+  }
+
+  :root:not(.dark) .hero-sentiment-section > * {
+    position: relative;
+    z-index: 2;
   }
 }
