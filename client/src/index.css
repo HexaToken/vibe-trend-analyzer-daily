@@ -1445,6 +1445,15 @@ All colors MUST be HSL.
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
   }
 
+  /* Force override for all cards with specific bg-black classes */
+  :root:not(.dark) .bg-black\/40 {
+    background: linear-gradient(135deg, #D2E3FC 0%, #B6D7FB 100%) !important;
+  }
+
+  :root:not(.dark) .border-purple-500\/20 {
+    border-color: #B6D7FB !important;
+  }
+
   /* Fix input styling in Space components */
   :root:not(.dark) .bg-gray-800.border-gray-600 {
     background: #FFFFFF !important;
