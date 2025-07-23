@@ -1702,6 +1702,36 @@ All colors MUST be HSL.
     z-index: 2;
   }
 
+  /* Comprehensive hero section dark theme enforcement */
+  :root:not(.dark) .hero-sentiment-section .bg-gradient-to-br,
+  :root:not(.dark) .hero-sentiment-section [class*="bg-gradient"],
+  :root:not(.dark) .hero-sentiment-section [class*="from-slate"],
+  :root:not(.dark) .hero-sentiment-section [class*="to-purple"] {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(88, 28, 135, 0.95) 100%) !important;
+  }
+
+  /* Ensure all text in hero stays dark theme appropriate */
+  :root:not(.dark) .hero-sentiment-section,
+  :root:not(.dark) .hero-sentiment-section * {
+    color: white !important;
+  }
+
+  /* Preserve specific color elements in hero */
+  :root:not(.dark) .hero-sentiment-section .text-gray-200 {
+    color: rgb(229 231 235) !important;
+  }
+
+  :root:not(.dark) .hero-sentiment-section .text-purple-300 {
+    color: rgb(196 181 253) !important;
+  }
+
+  :root:not(.dark) .hero-sentiment-section .bg-clip-text.text-transparent {
+    -webkit-text-fill-color: transparent !important;
+    background: linear-gradient(to right, #f472b6, #a855f7, #06b6d4) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+  }
+
   /* AI Analysis Button Light Mode Fixes */
   :root:not(.dark) button:has(> [data-testid="brain-icon"]),
   :root:not(.dark) button:has(> svg[class*="Brain"]),
