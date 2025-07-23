@@ -39,6 +39,7 @@ export const WatchlistAssetCard = ({
   onToggleFavorite,
   className
 }: WatchlistAssetCardProps) => {
+  const { themeMode } = useMoodTheme();
   const [isHovered, setIsHovered] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   
