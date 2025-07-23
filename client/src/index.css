@@ -1715,12 +1715,38 @@ All colors MUST be HSL.
     z-index: 2;
   }
 
-  /* Comprehensive hero section dark theme enforcement */
+  /* Fix white square issue - ensure all background elements stay dark */
   :root:not(.dark) .hero-sentiment-section .bg-gradient-to-br,
   :root:not(.dark) .hero-sentiment-section [class*="bg-gradient"],
   :root:not(.dark) .hero-sentiment-section [class*="from-slate"],
   :root:not(.dark) .hero-sentiment-section [class*="to-purple"] {
-    background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(88, 28, 135, 0.95) 100%) !important;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(88, 28, 135, 0.95) 100%) !important;
+  }
+
+  /* Specifically target the inner circle background that might be showing as white */
+  :root:not(.dark) .hero-sentiment-section .w-full.h-full.rounded-full.bg-gradient-to-br {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(88, 28, 135, 0.95) 100%) !important;
+  }
+
+  /* Ensure the rotating ring container doesn't show white */
+  :root:not(.dark) .hero-sentiment-section .absolute.inset-0.rounded-full[class*="bg-gradient-to-r"] {
+    background: inherit !important;
+  }
+
+  /* Remove any white fills or light backgrounds from decorative elements */
+  :root:not(.dark) .hero-sentiment-section [fill="white"],
+  :root:not(.dark) .hero-sentiment-section [fill="#ffffff"],
+  :root:not(.dark) .hero-sentiment-section [fill*="rgba(255"],
+  :root:not(.dark) .hero-sentiment-section .bg-white {
+    fill: rgba(0, 0, 0, 0.05) !important;
+    background: transparent !important;
+  }
+
+  /* Fix any rotated background shapes or SVG elements */
+  :root:not(.dark) .hero-sentiment-section svg,
+  :root:not(.dark) .hero-sentiment-section [class*="rotate"] {
+    fill: rgba(88, 28, 135, 0.1) !important;
+    background: transparent !important;
   }
 
   /* Exact text styling to match Dark Mode */
