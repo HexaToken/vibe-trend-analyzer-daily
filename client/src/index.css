@@ -37,8 +37,8 @@ All colors MUST be HSL.
     --muted: 220 13% 88%; /* #E0E0E0 - Borders */
     --muted-foreground: 220 13% 33%; /* #555 - Descriptions */
 
-    --accent: 228 45% 42%; /* #3F51B5 */
-    --accent-foreground: 0 0% 100%;
+    --accent: 240 10% 96%; /* #F5F5F5 - Light hover background */
+    --accent-foreground: 220 13% 12%; /* #1E1E1E - Dark text on light hover */
 
     --destructive: 4 90% 58%; /* #F44336 - Red accent */
     --destructive-foreground: 0 0% 100%;
