@@ -1621,6 +1621,22 @@ All colors MUST be HSL.
     border-color: #D2E3FC !important;
   }
 
+  /* Nuclear option: Force white background on ALL possible card selectors */
+  :root:not(.dark) .group.relative.rounded-xl.p-4.backdrop-blur-sm.transition-all.duration-300.cursor-pointer,
+  :root:not(.dark) .group.relative.rounded-xl.p-4.backdrop-blur-sm.transition-all.duration-300.cursor-pointer:hover,
+  :root:not(.dark) .group.relative.rounded-xl.p-4.backdrop-blur-sm.transition-all.duration-300.cursor-pointer:focus {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    background-image: none !important;
+  }
+
+  /* Prevent any child elements from having blue backgrounds */
+  :root:not(.dark) .group.relative.rounded-xl.p-4 *:not(.bg-gradient-to-br):not([class*="sentiment"]):not([class*="badge"]) {
+    background: inherit !important;
+    background-color: transparent !important;
+    background-image: none !important;
+  }
+
   /* Fix input styling in Space components */
   :root:not(.dark) .bg-gray-800.border-gray-600 {
     background: #FFFFFF !important;
