@@ -1253,6 +1253,13 @@ All colors MUST be HSL.
     position: relative !important;
   }
 
+  /* Additional enforcement for light mode */
+  :root:not(.dark) .hero-sentiment-section {
+    color: white !important;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(88, 28, 135, 0.95) 100%) !important;
+    border-radius: 24px !important;
+  }
+
   .hero-sentiment-section * {
     /* Ensure all child elements inherit the dark theme */
     color: inherit !important;
