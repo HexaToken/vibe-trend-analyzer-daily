@@ -176,7 +176,12 @@ export const WatchlistAssetCard = ({
         <Button
           size="sm"
           variant="ghost"
-          className="h-7 w-7 p-0 hover:bg-red-500/20 hover:text-red-400"
+          className={cn(
+            "h-7 w-7 p-0",
+            themeMode === 'light'
+              ? 'hover:bg-[#FFEBEE] hover:text-[#F44336]'
+              : 'hover:bg-red-500/20 hover:text-red-400'
+          )}
           onClick={(e) => {
             e.stopPropagation();
             onRemove?.(asset.id);
@@ -190,7 +195,12 @@ export const WatchlistAssetCard = ({
             <Button
               size="sm"
               variant="ghost"
-              className="h-7 w-7 p-0 hover:bg-gray-700/50"
+              className={cn(
+                "h-7 w-7 p-0",
+                themeMode === 'light'
+                  ? 'hover:bg-[#F5F5F5] hover:text-[#333]'
+                  : 'hover:bg-gray-700/50'
+              )}
               onClick={(e) => e.stopPropagation()}
             >
               <MoreHorizontal className="w-3 h-3" />
