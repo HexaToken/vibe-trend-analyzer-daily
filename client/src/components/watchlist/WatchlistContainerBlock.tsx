@@ -99,15 +99,29 @@ export const WatchlistContainerBlock = ({ className }: WatchlistContainerBlockPr
   };
 
   return (
-    <div className={cn("space-y-6 p-6", className)}>
+    <div className={cn(
+      "space-y-6 p-6",
+      themeMode === 'light'
+        ? 'bg-gradient-to-b from-[#F8F9FB] to-[#EDE7F6] min-h-screen'
+        : '',
+      className
+    )}>
       {/* Header Section */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
+            <h1 className={cn(
+              "text-3xl font-bold mt-4",
+              themeMode === 'light'
+                ? 'text-[#1C1E21]'
+                : 'bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent'
+            )}>
               Your Watchlist
             </h1>
-            <p className="text-gray-400 mt-1">
+            <p className={cn(
+              "mt-1",
+              themeMode === 'light' ? 'text-[#444]' : 'text-gray-400'
+            )}>
               Track your favorite assets with real-time sentiment analysis
             </p>
           </div>
@@ -138,49 +152,101 @@ export const WatchlistContainerBlock = ({ className }: WatchlistContainerBlockPr
         {/* Stats Cards */}
         {showStats && (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Card className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50">
+            <Card className={cn(
+              themeMode === 'light'
+                ? 'bg-[#E3F2FD] border-[#E0E0E0] shadow-[0_2px_6px_rgba(0,0,0,0.05)]'
+                : 'bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50'
+            )}>
               <CardContent className="p-4">
                 <div className="flex items-center gap-2">
-                  <BarChart3 className="w-4 h-4 text-purple-400" />
-                  <span className="text-xs text-gray-400">TOTAL ASSETS</span>
-                </div>
-                <div className="text-2xl font-bold text-white mt-1">{liveStats.totalAssets}</div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-2">
-                  <Activity className="w-4 h-4 text-cyan-400" />
-                  <span className="text-xs text-gray-400">AVG SENTIMENT</span>
+                  <BarChart3 className={cn(
+                    "w-4 h-4",
+                    themeMode === 'light' ? 'text-[#2196F3]' : 'text-purple-400'
+                  )} />
+                  <span className={cn(
+                    "text-xs font-semibold",
+                    themeMode === 'light' ? 'text-[#1C1E21]' : 'text-gray-400'
+                  )}>TOTAL ASSETS</span>
                 </div>
                 <div className={cn(
                   "text-2xl font-bold mt-1",
-                  liveStats.avgSentiment >= 70 ? "text-emerald-400" :
-                  liveStats.avgSentiment >= 50 ? "text-yellow-400" : "text-red-400"
+                  themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'
+                )}>{liveStats.totalAssets}</div>
+              </CardContent>
+            </Card>
+
+            <Card className={cn(
+              themeMode === 'light'
+                ? 'bg-[#E8F5E9] border-[#E0E0E0] shadow-[0_2px_6px_rgba(0,0,0,0.05)]'
+                : 'bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50'
+            )}>
+              <CardContent className="p-4">
+                <div className="flex items-center gap-2">
+                  <Activity className={cn(
+                    "w-4 h-4",
+                    themeMode === 'light' ? 'text-[#4CAF50]' : 'text-cyan-400'
+                  )} />
+                  <span className={cn(
+                    "text-xs font-semibold",
+                    themeMode === 'light' ? 'text-[#1C1E21]' : 'text-gray-400'
+                  )}>AVG SENTIMENT</span>
+                </div>
+                <div className={cn(
+                  "text-2xl font-bold mt-1",
+                  themeMode === 'light'
+                    ? (liveStats.avgSentiment >= 70 ? "text-[#4CAF50]" :
+                       liveStats.avgSentiment >= 50 ? "text-[#FFB300]" : "text-[#F44336]")
+                    : (liveStats.avgSentiment >= 70 ? "text-emerald-400" :
+                       liveStats.avgSentiment >= 50 ? "text-yellow-400" : "text-red-400")
                 )}>
                   {liveStats.avgSentiment.toFixed(2)}%
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50">
+            <Card className={cn(
+              themeMode === 'light'
+                ? 'bg-[#E6F4EA] border-[#E0E0E0] shadow-[0_2px_6px_rgba(0,0,0,0.05)]'
+                : 'bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50'
+            )}>
               <CardContent className="p-4">
                 <div className="flex items-center gap-2">
-                  <TrendingUp className="w-4 h-4 text-emerald-400" />
-                  <span className="text-xs text-gray-400">GAINERS</span>
+                  <TrendingUp className={cn(
+                    "w-4 h-4",
+                    themeMode === 'light' ? 'text-[#4CAF50]' : 'text-emerald-400'
+                  )} />
+                  <span className={cn(
+                    "text-xs font-semibold",
+                    themeMode === 'light' ? 'text-[#1C1E21]' : 'text-gray-400'
+                  )}>GAINERS</span>
                 </div>
-                <div className="text-2xl font-bold text-emerald-400 mt-1">{liveStats.totalGainers}</div>
+                <div className={cn(
+                  "text-2xl font-bold mt-1",
+                  themeMode === 'light' ? 'text-[#4CAF50]' : 'text-emerald-400'
+                )}>{liveStats.totalGainers}</div>
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50">
+            <Card className={cn(
+              themeMode === 'light'
+                ? 'bg-[#FFEBEE] border-[#E0E0E0] shadow-[0_2px_6px_rgba(0,0,0,0.05)]'
+                : 'bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50'
+            )}>
               <CardContent className="p-4">
                 <div className="flex items-center gap-2">
-                  <TrendingDown className="w-4 h-4 text-red-400" />
-                  <span className="text-xs text-gray-400">LOSERS</span>
+                  <TrendingDown className={cn(
+                    "w-4 h-4",
+                    themeMode === 'light' ? 'text-[#F44336]' : 'text-red-400'
+                  )} />
+                  <span className={cn(
+                    "text-xs font-semibold",
+                    themeMode === 'light' ? 'text-[#1C1E21]' : 'text-gray-400'
+                  )}>LOSERS</span>
                 </div>
-                <div className="text-2xl font-bold text-red-400 mt-1">{liveStats.totalLosers}</div>
+                <div className={cn(
+                  "text-2xl font-bold mt-1",
+                  themeMode === 'light' ? 'text-[#F44336]' : 'text-red-400'
+                )}>{liveStats.totalLosers}</div>
               </CardContent>
             </Card>
           </div>
