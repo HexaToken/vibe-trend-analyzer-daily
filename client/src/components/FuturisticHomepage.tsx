@@ -628,7 +628,10 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     className="bg-black/95 backdrop-blur-xl border-green-500/30 text-white animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 transition-all duration-300"
                   >
                     <DropdownMenuItem
-                      onClick={() => setActiveSection('finance')}
+                      onClick={() => {
+                        setActiveSection('finance');
+                        setFinanceDropdownOpen(false);
+                      }}
                       className="hover:bg-green-500/20 focus:bg-green-500/20 cursor-pointer transition-colors duration-200"
                     >
                       <span className="mr-2">💰</span>
@@ -2133,7 +2136,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                               </div>
                             </div>
                             <Badge className="ml-4 bg-pink-500/20 text-pink-400 border-pink-500/30">
-                              {news.trending} ������
+                              {news.trending} �����
                             </Badge>
                           </div>
                           <div className="flex items-center justify-between text-xs text-gray-500">
