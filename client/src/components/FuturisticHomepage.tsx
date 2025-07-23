@@ -1059,18 +1059,26 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <TabsTrigger
                   value="risk-analysis"
                   className={themeMode === 'light'
-                    ? "data-[state=active]:bg-[#3F51B5] data-[state=active]:text-white text-[#444] flex items-center gap-2"
+                    ? "data-[state=active]:text-[#1C1E21] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E0E0E0] text-[#444] flex items-center gap-2"
                     : "data-[state=active]:bg-blue-600/30 data-[state=active]:text-blue-300 text-gray-400 flex items-center gap-2"
                   }
+                  style={themeMode === 'light' ? {
+                    '--active-bg': 'linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%)',
+                    '--active-shadow': '0 2px 4px rgba(0, 0, 0, 0.05)'
+                  } : {}}
                 >
                   📊 Risk Analysis
                 </TabsTrigger>
                 <TabsTrigger
                   value="financial-reports"
                   className={themeMode === 'light'
-                    ? "data-[state=active]:bg-[#3F51B5] data-[state=active]:text-white text-[#444] flex items-center gap-2"
+                    ? "data-[state=active]:text-[#1C1E21] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E0E0E0] text-[#444] flex items-center gap-2"
                     : "data-[state=active]:bg-purple-600/30 data-[state=active]:text-purple-300 text-gray-400 flex items-center gap-2"
                   }
+                  style={themeMode === 'light' ? {
+                    '--active-bg': 'linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%)',
+                    '--active-shadow': '0 2px 4px rgba(0, 0, 0, 0.05)'
+                  } : {}}
                 >
                   📁 Financial Reports
                 </TabsTrigger>
