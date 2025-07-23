@@ -19,75 +19,76 @@ All colors MUST be HSL.
 @layer base {
   :root {
     /* Light Mode (Clarity Mode) - Finance-focused design system */
-    --background: 216 27% 98%; /* #F7F9FB */
-    --foreground: 220 13% 12%; /* #1E1E1E */
+    --background: 220 14% 96%; /* #F5F7FA - Clean neutral base */
+    --foreground: 220 13% 12%; /* #1E1E1E - Headlines */
 
-    --card: 0 0% 100%; /* #FFFFFF */
+    --card: 0 0% 100%; /* #FFFFFF - Pure white cards */
     --card-foreground: 220 13% 12%; /* #1E1E1E */
 
     --popover: 0 0% 100%; /* #FFFFFF */
     --popover-foreground: 220 13% 12%; /* #1E1E1E */
 
-    --primary: 228 45% 42%; /* #3F51B5 */
+    --primary: 228 45% 42%; /* #3F51B5 - Financial blue */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 13% 91%; /* #E8EBF0 */
-    --secondary-foreground: 220 13% 29%; /* #4A4A4A */
+    --secondary: 220 13% 20%; /* #333 - Subheadings */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 220 13% 88%; /* #E0E0E0 */
-    --muted-foreground: 220 13% 29%; /* #4A4A4A */
+    --muted: 220 13% 88%; /* #E0E0E0 - Borders */
+    --muted-foreground: 220 13% 33%; /* #555 - Descriptions */
 
     --accent: 228 45% 42%; /* #3F51B5 */
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 4 90% 58%; /* #F44336 */
+    --destructive: 4 90% 58%; /* #F44336 - Red accent */
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 88%; /* #E0E0E0 */
+    --border: 220 13% 88%; /* #E0E0E0 - Gray borders */
     --input: 220 13% 88%; /* #E0E0E0 */
-    --ring: 195 32% 40%; /* #4D7C8A */
+    --ring: 228 45% 42%; /* #3F51B5 - Focus ring */
 
-    --radius: 0.75rem;
+    --radius: 0.75rem; /* 12px border radius */
 
-    /* Sentiment Colors - Light Mode */
-    --positive: 122 39% 49%; /* #4CAF50 */
-    --positive-light: 122 39% 70%;
-    --negative: 4 90% 58%; /* #F44336 */
-    --negative-light: 4 90% 78%;
-    --neutral: 199 18% 33%; /* #607D8B */
-    --neutral-light: 199 18% 60%;
+    /* Sentiment Colors - Light Mode Financial Grade */
+    --positive: 123 46% 49%; /* #4CAF50 - Green */
+    --positive-light: 123 46% 85%;
+    --negative: 4 90% 58%; /* #F44336 - Red */
+    --negative-light: 4 90% 85%;
+    --neutral: 199 18% 33%; /* #607D8B - Gray */
+    --neutral-light: 199 18% 80%;
 
-    /* Data Visualization - Light Mode */
-    --chart-primary: 195 32% 40%; /* #4D7C8A */
-    --chart-secondary: 123 46% 34%; /* #4CAF50 */
-    --chart-tertiary: 0 67% 49%; /* #D32F2F */
-    --chart-quaternary: 199 18% 33%; /* #607D8B */
+    /* Data Visualization - Clean Financial Colors */
+    --chart-primary: 174 72% 56%; /* #26A69A - Teal for primary charts */
+    --chart-secondary: 123 46% 49%; /* #4CAF50 - Green */
+    --chart-tertiary: 4 90% 58%; /* #F44336 - Red */
+    --chart-quaternary: 228 45% 42%; /* #3F51B5 - Blue */
 
-    /* Gradients - Light Mode */
+    /* Clean Financial Gradients */
     --gradient-hero: linear-gradient(
       135deg,
-      hsl(195 32% 40%) 0%,
-      hsl(199 18% 33%) 100%
+      hsl(220 14% 96%) 0%,
+      hsl(0 0% 100%) 100%
     );
     --gradient-card: linear-gradient(
       145deg,
       hsl(0 0% 100%) 0%,
-      hsl(212 17% 97%) 100%
+      hsl(220 14% 98%) 100%
     );
     --gradient-positive: linear-gradient(
       90deg,
-      hsl(123 46% 34%) 0%,
-      hsl(123 46% 60%) 100%
+      hsl(123 46% 49%) 0%,
+      hsl(123 46% 70%) 100%
     );
     --gradient-negative: linear-gradient(
       90deg,
-      hsl(0 67% 49%) 0%,
-      hsl(0 67% 70%) 100%
+      hsl(4 90% 58%) 0%,
+      hsl(4 90% 75%) 100%
     );
 
-    /* Shadows - Light Mode */
-    --shadow-glow: 0 2px 6px hsl(0 0% 0% / 0.05);
-    --shadow-card: 0 2px 6px hsl(0 0% 0% / 0.05);
+    /* Soft Shadows - Clean Design */
+    --shadow-glow: 0 2px 8px hsl(0 0% 0% / 0.04);
+    --shadow-card: 0 2px 8px hsl(0 0% 0% / 0.04);
+    --shadow-hover: 0 4px 12px hsl(0 0% 0% / 0.08);
 
     --radius: 0.75rem;
 
@@ -107,12 +108,12 @@ All colors MUST be HSL.
 
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    /* Chart Colors - Light Mode */
-    --chart-1: 195 32% 40%; /* #4D7C8A */
-    --chart-2: 123 46% 34%; /* #4CAF50 */
-    --chart-3: 0 67% 49%; /* #D32F2F */
-    --chart-4: 199 18% 33%; /* #607D8B */
-    --chart-5: 212 17% 65%; /* #95A5B8 */
+    /* Chart Colors - Clean Financial Light Mode */
+    --chart-1: 174 72% 56%; /* #26A69A - Teal primary */
+    --chart-2: 123 46% 49%; /* #4CAF50 - Green secondary */
+    --chart-3: 4 90% 58%; /* #F44336 - Red tertiary */
+    --chart-4: 228 45% 42%; /* #3F51B5 - Blue quaternary */
+    --chart-5: 199 18% 33%; /* #607D8B - Gray quinary */
   }
 
   .dark {
@@ -679,25 +680,36 @@ All colors MUST be HSL.
     box-shadow: 0 0 20px var(--mood-glow);
   }
 
-  /* Light Theme Utility Classes */
+  /* Clarity Mode (Light Theme) Utility Classes */
   .clarity-card {
-    @apply bg-white border border-[#E0E0E0] shadow-[0_2px_8px_rgba(0,0,0,0.06)];
+    @apply bg-white border border-[#E0E0E0] rounded-xl;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .clarity-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
   }
 
   .clarity-text-primary {
-    @apply text-[#1E1E1E];
+    @apply text-[#1E1E1E] font-semibold;
   }
 
   .clarity-text-secondary {
-    @apply text-[#4A4A4A];
+    @apply text-[#333] font-medium;
+  }
+
+  .clarity-text-body {
+    @apply text-[#555] font-normal;
   }
 
   .clarity-bg-primary {
-    @apply bg-[#F7F9FB];
+    @apply bg-[#F5F7FA];
   }
 
   .clarity-bg-hover {
-    @apply hover:bg-[#E8EBF0];
+    @apply hover:bg-[#F0F0F0] transition-colors duration-200;
   }
 
   .clarity-accent {
@@ -720,6 +732,25 @@ All colors MUST be HSL.
     @apply border-[#E0E0E0];
   }
 
+  .clarity-button {
+    @apply rounded-full px-6 py-2 font-semibold transition-all duration-200;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .clarity-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .clarity-tab-active {
+    @apply bg-white text-black font-medium px-4 py-2 rounded-lg;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .clarity-tab-inactive {
+    @apply bg-[#F0F0F0] text-[#666] font-normal px-4 py-2 rounded-lg hover:bg-[#E8E8E8] transition-colors;
+  }
+
   /* Finance Card with Theme Support */
   .themed-finance-card {
     @apply transition-all duration-300;
@@ -733,9 +764,9 @@ All colors MUST be HSL.
     @apply clarity-card;
   }
 
-  /* Make finance-card responsive to theme */
+  /* Financial-grade cards with theme support */
   .finance-card {
-    @apply transition-all duration-300;
+    @apply transition-all duration-300 rounded-xl;
     background: rgba(30, 41, 59, 0.8);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(148, 163, 184, 0.1);
@@ -744,8 +775,13 @@ All colors MUST be HSL.
 
   :root:not(.dark) .finance-card {
     @apply bg-white border-[#E0E0E0];
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     backdrop-filter: none;
+  }
+
+  :root:not(.dark) .finance-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
   }
 
   /* Theme-aware text colors */
@@ -870,15 +906,17 @@ All colors MUST be HSL.
     color: #666 !important;
   }
 
-  /* Pastel gradient colors for mood gauge in light mode */
+  /* Financial-grade mood gauge for light mode */
   .mood-gauge-light {
     background: conic-gradient(
       from 0deg,
-      #F28B82 0deg,     /* Pastel red */
-      #FFF176 90deg,    /* Pastel yellow */
-      #81C784 180deg,   /* Pastel green */
-      #64B5F6 270deg,   /* Pastel blue */
-      #BA68C8 360deg    /* Pastel purple */
+      #F44336 0deg,     /* Financial red */
+      #FF9800 60deg,    /* Warning orange */
+      #FFEB3B 120deg,   /* Caution yellow */
+      #4CAF50 180deg,   /* Financial green */
+      #2196F3 240deg,   /* Financial blue */
+      #3F51B5 300deg,   /* Professional blue */
+      #F44336 360deg    /* Back to financial red */
     );
   }
 
