@@ -263,13 +263,23 @@ export const WatchlistContainerBlock = ({ className }: WatchlistContainerBlockPr
               placeholder="Search ticker..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 bg-gray-800/50 border-gray-700 focus:border-purple-500"
+              className={cn(
+                "pl-10",
+                themeMode === 'light'
+                  ? 'bg-white border-[#E0E0E0] focus:border-[#2196F3] text-[#1C1E21]'
+                  : 'bg-gray-800/50 border-gray-700 focus:border-purple-500'
+              )}
             />
           </div>
 
           {/* Filters */}
           <Select value={filterType} onValueChange={(value: typeof filterType) => setFilterType(value)}>
-            <SelectTrigger className="w-32 bg-gray-800/50 border-gray-700">
+            <SelectTrigger className={cn(
+              "w-32",
+              themeMode === 'light'
+                ? 'bg-white border-[#E0E0E0] text-[#1C1E21]'
+                : 'bg-gray-800/50 border-gray-700'
+            )}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -280,7 +290,12 @@ export const WatchlistContainerBlock = ({ className }: WatchlistContainerBlockPr
           </Select>
 
           <Select value={sortBy} onValueChange={(value: typeof sortBy) => setSortBy(value)}>
-            <SelectTrigger className="w-36 bg-gray-800/50 border-gray-700">
+            <SelectTrigger className={cn(
+              "w-36",
+              themeMode === 'light'
+                ? 'bg-white border-[#E0E0E0] text-[#1C1E21]'
+                : 'bg-gray-800/50 border-gray-700'
+            )}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -293,7 +308,12 @@ export const WatchlistContainerBlock = ({ className }: WatchlistContainerBlockPr
         </div>
 
         {/* View Mode Toggle */}
-        <div className="flex items-center gap-1 bg-gray-800/50 rounded-lg p-1">
+        <div className={cn(
+          "flex items-center gap-1 rounded-lg p-1",
+          themeMode === 'light'
+            ? 'bg-white border border-[#E0E0E0]'
+            : 'bg-gray-800/50'
+        )}>
           <Button
             size="sm"
             variant={viewMode === 'grid' ? 'default' : 'ghost'}
@@ -333,16 +353,34 @@ export const WatchlistContainerBlock = ({ className }: WatchlistContainerBlockPr
           ))}
         </div>
       ) : (
-        <Card className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50">
+        <Card className={cn(
+          themeMode === 'light'
+            ? 'bg-white border-[#E0E0E0] shadow-[0_2px_6px_rgba(0,0,0,0.05)]'
+            : 'bg-gradient-to-br from-gray-900/90 to-gray-800/90 border-gray-700/50'
+        )}>
           <CardContent className="p-12 text-center">
-            <div className="w-16 h-16 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <BarChart3 className="w-8 h-8 text-purple-400" />
+            <div className={cn(
+              "w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4",
+              themeMode === 'light'
+                ? 'bg-gradient-to-r from-[#E3F2FD] to-[#E8F5E9]'
+                : 'bg-gradient-to-r from-purple-500/20 to-pink-500/20'
+            )}>
+              <BarChart3 className={cn(
+                "w-8 h-8",
+                themeMode === 'light' ? 'text-[#2196F3]' : 'text-purple-400'
+              )} />
             </div>
-            <h3 className="text-lg font-semibold text-white mb-2">
+            <h3 className={cn(
+              "text-lg font-semibold mb-2",
+              themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'
+            )}>
               {searchQuery ? 'No assets found' : 'Your watchlist is empty'}
             </h3>
-            <p className="text-gray-400 mb-6">
-              {searchQuery 
+            <p className={cn(
+              "mb-6",
+              themeMode === 'light' ? 'text-[#444]' : 'text-gray-400'
+            )}>
+              {searchQuery
                 ? `No assets matching "${searchQuery}" found.`
                 : 'Start by adding your favorite stocks and crypto assets to track their sentiment and performance.'
               }
