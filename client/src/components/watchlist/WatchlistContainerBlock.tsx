@@ -37,6 +37,7 @@ interface WatchlistContainerBlockProps {
 }
 
 export const WatchlistContainerBlock = ({ className }: WatchlistContainerBlockProps) => {
+  const { themeMode } = useMoodTheme();
   const [assets, setAssets] = useState<WatchlistAsset[]>(mockWatchlistAssets);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState<'name' | 'price' | 'change' | 'sentiment'>('sentiment');
