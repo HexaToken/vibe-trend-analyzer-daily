@@ -98,12 +98,10 @@ export const AIInsightFooterBlock = ({
 
   return (
     <div className={cn(
-      "relative group",
-      "bg-gradient-to-br from-gray-900/80 via-gray-800/60 to-gray-900/80",
-      "border border-gray-700/50 rounded-lg p-3",
-      "backdrop-blur-sm",
-      "hover:border-purple-500/30 transition-all duration-300",
-      "hover:shadow-lg hover:shadow-purple-500/10",
+      "relative group rounded-xl p-3 backdrop-blur-sm transition-all duration-200",
+      themeMode === 'light'
+        ? "bg-gradient-to-br from-[#F9FAFB] to-[#ECEEFF] border border-[#E0E0E0] shadow-[0_2px_8px_rgba(0,0,0,0.05)] hover:bg-[#EEF1F5] hover:scale-[1.01]"
+        : "bg-gradient-to-br from-gray-900/80 via-gray-800/60 to-gray-900/80 border border-gray-700/50 hover:border-purple-500/30 hover:shadow-lg hover:shadow-purple-500/10",
       className
     )}>
       {/* Header with category and confidence */}
@@ -118,13 +116,19 @@ export const AIInsightFooterBlock = ({
           </Badge>
           
           {ticker && (
-            <span className="text-xs text-gray-400 font-mono">{ticker}</span>
+            <span className={cn(
+              "text-xs font-mono",
+              themeMode === 'light' ? 'text-[#333]' : 'text-gray-400'
+            )}>{ticker}</span>
           )}
         </div>
         
         <div className="flex items-center gap-2">
           {timestamp && (
-            <div className="flex items-center gap-1 text-xs text-gray-500">
+            <div className={cn(
+              "flex items-center gap-1 text-xs",
+              themeMode === 'light' ? 'text-[#666]' : 'text-gray-500'
+            )}>
               <Clock className="w-3 h-3" />
               {formatTimeAgo(timestamp)}
             </div>
@@ -150,7 +154,8 @@ export const AIInsightFooterBlock = ({
           
           <div className="flex-1 min-w-0">
             <p className={cn(
-              "text-sm text-gray-300 leading-relaxed",
+              "text-sm leading-relaxed",
+              themeMode === 'light' ? 'text-[#1C1E21]' : 'text-gray-300',
               !isExpanded && expandable && "line-clamp-2"
             )}>
               {insight}
@@ -161,7 +166,12 @@ export const AIInsightFooterBlock = ({
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="h-auto p-0 mt-1 text-xs text-purple-400 hover:text-purple-300"
+                className={cn(
+                  "h-auto p-0 mt-1 text-xs underline",
+                  themeMode === 'light'
+                    ? 'text-[#5E35B1] hover:text-[#4527A0]'
+                    : 'text-purple-400 hover:text-purple-300'
+                )}
               >
                 {isExpanded ? 'Show less' : 'Read more'}
                 <ChevronRight className={cn(
@@ -175,14 +185,24 @@ export const AIInsightFooterBlock = ({
 
         {/* Confidence bar */}
         <div className="mt-2 flex items-center gap-2">
-          <span className="text-xs text-gray-500">Confidence:</span>
-          <div className="flex-1 h-1 bg-gray-700 rounded-full overflow-hidden">
-            <div 
+          <span className={cn(
+            "text-xs",
+            themeMode === 'light' ? 'text-[#1C1E21]' : 'text-gray-500'
+          )}>Confidence:</span>
+          <div className={cn(
+            "flex-1 h-1.5 rounded-full overflow-hidden",
+            themeMode === 'light' ? 'bg-[#E0E0E0]' : 'bg-gray-700'
+          )}>
+            <div
               className={cn(
                 "h-full transition-all duration-1000 ease-out",
-                confidence >= 80 ? "bg-emerald-400" :
-                confidence >= 60 ? "bg-yellow-400" :
-                "bg-red-400"
+                themeMode === 'light'
+                  ? (confidence >= 80 ? "bg-[#4CAF50]" :
+                     confidence >= 60 ? "bg-[#FFEB3B]" :
+                     "bg-[#F44336]")
+                  : (confidence >= 80 ? "bg-emerald-400" :
+                     confidence >= 60 ? "bg-yellow-400" :
+                     "bg-red-400")
               )}
               style={{ width: `${confidence}%` }}
             />
