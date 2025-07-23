@@ -70,6 +70,7 @@ export const FinanceHomepage: React.FC = () => {
   const { setMoodScore } = useMoodTheme();
   const { data: stockSentiment } = useStockSentiment();
   const { articles: newsArticles } = useCombinedBusinessNews();
+  const [activeTab, setActiveTab] = useState('Home');
 
   // Professional finance data
   const [moodScore] = useState<MoodScore>({
