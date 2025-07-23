@@ -638,42 +638,60 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       Finance Hub
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      onClick={() => setActiveSection('market')}
+                      onClick={() => {
+                        setActiveSection('market');
+                        setFinanceDropdownOpen(false);
+                      }}
                       className="hover:bg-blue-500/20 focus:bg-blue-500/20 cursor-pointer transition-colors duration-200"
                     >
                       <BarChart3 className="w-4 h-4 mr-2" />
                       Market Analytics
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      onClick={() => setActiveSection('watchlist')}
+                      onClick={() => {
+                        setActiveSection('watchlist');
+                        setFinanceDropdownOpen(false);
+                      }}
                       className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer transition-colors duration-200"
                     >
                       <TrendingUp className="w-4 h-4 mr-2" />
                       Watchlist
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      onClick={() => setActiveSection('trending')}
+                      onClick={() => {
+                        setActiveSection('trending');
+                        setFinanceDropdownOpen(false);
+                      }}
                       className="hover:bg-pink-500/20 focus:bg-pink-500/20 cursor-pointer transition-colors duration-200"
                     >
                       <Flame className="w-4 h-4 mr-2" />
                       Trending
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      onClick={() => setActiveSection('earnings')}
+                      onClick={() => {
+                        setActiveSection('earnings');
+                        setFinanceDropdownOpen(false);
+                      }}
                       className="hover:bg-emerald-500/20 focus:bg-emerald-500/20 cursor-pointer transition-colors duration-200"
                     >
                       <DollarSign className="w-4 h-4 mr-2" />
                       Earnings
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      onClick={() => setActiveSection('crypto')}
+                      onClick={() => {
+                        setActiveSection('crypto');
+                        setFinanceDropdownOpen(false);
+                      }}
                       className="hover:bg-orange-500/20 focus:bg-orange-500/20 cursor-pointer transition-colors duration-200"
                     >
                       <span className="mr-2">₿</span>
                       Crypto
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      onClick={() => setActiveSection('charts')}
+                      onClick={() => {
+                        setActiveSection('charts');
+                        setFinanceDropdownOpen(false);
+                      }}
                       className="hover:bg-indigo-500/20 focus:bg-indigo-500/20 cursor-pointer transition-colors duration-200"
                     >
                       <BarChart3 className="w-4 h-4 mr-2" />
