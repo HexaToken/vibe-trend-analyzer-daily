@@ -1311,4 +1311,99 @@ All colors MUST be HSL.
     background: #FFFFFF !important;
     border: 1px solid #E0E0E0 !important;
   }
+
+  /* SpaceSwitcherWidget Light Mode Fixes */
+  :root:not(.dark) [style*="background: #1a1f2b"],
+  :root:not(.dark) [style*="background: rgb(26, 31, 43)"] {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  }
+
+  :root:not(.dark) [style*="background: #0f111a"],
+  :root:not(.dark) [style*="background: rgb(15, 17, 26)"] {
+    background: #3F51B5 !important;
+    color: white !important;
+  }
+
+  /* Fix all text colors in SpaceSwitcherWidget */
+  :root:not(.dark) .text-white {
+    color: #1E1E1E !important;
+  }
+
+  :root:not(.dark) .text-gray-400 {
+    color: #666 !important;
+  }
+
+  :root:not(.dark) .text-gray-300 {
+    color: #444 !important;
+  }
+
+  :root:not(.dark) .text-gray-500 {
+    color: #999 !important;
+  }
+
+  /* Fix hover states for Space components */
+  :root:not(.dark) .hover\:text-gray-300:hover {
+    color: #333 !important;
+  }
+
+  :root:not(.dark) .hover\:text-white:hover {
+    color: #1E1E1E !important;
+  }
+
+  /* Fix background colors for Space cards */
+  :root:not(.dark) .bg-gray-800\/50 {
+    background: #F5F7FA !important;
+    border: 1px solid #E0E0E0 !important;
+  }
+
+  :root:not(.dark) .hover\:bg-gray-800\/70:hover {
+    background: #E8EBF0 !important;
+  }
+
+  :root:not(.dark) .bg-gray-800 {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    color: #1E1E1E !important;
+  }
+
+  /* Fix input styling in Space components */
+  :root:not(.dark) .bg-gray-800.border-gray-600 {
+    background: #FFFFFF !important;
+    border-color: #E0E0E0 !important;
+    color: #1E1E1E !important;
+  }
+
+  :root:not(.dark) .placeholder-gray-400::placeholder {
+    color: #999 !important;
+  }
+
+  /* Fix border colors */
+  :root:not(.dark) .border-gray-700 {
+    border-color: #E0E0E0 !important;
+  }
+
+  :root:not(.dark) .border-gray-700\/50 {
+    border-color: #E0E0E0 !important;
+  }
+
+  /* Fix gradient buttons and backgrounds */
+  :root:not(.dark) [style*="linear-gradient"] {
+    background: linear-gradient(135deg, #3F51B5 0%, #9C27B0 100%) !important;
+    color: white !important;
+  }
+
+  /* Fix reaction and interaction buttons */
+  :root:not(.dark) .hover\:bg-gray-700\/50:hover {
+    background: #F0F0F0 !important;
+  }
+
+  :root:not(.dark) .hover\:border-violet-500\/30:hover {
+    border-color: rgba(156, 39, 176, 0.3) !important;
+  }
+
+  :root:not(.dark) .hover\:border-green-500\/50:hover {
+    border-color: rgba(76, 175, 80, 0.5) !important;
+  }
 }
