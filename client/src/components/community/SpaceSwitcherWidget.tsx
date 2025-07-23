@@ -277,17 +277,18 @@ export const SpaceSwitcherWidget: React.FC = () => {
     }`}>
       {/* Custom Tab Switcher */}
       <div className="mb-6">
-        <div className="flex rounded-xl p-1 border border-gray-700/50" style={{ background: '#1a1f2b' }}>
+        <div className={`flex rounded-xl p-1 border ${
+          themeMode === 'light'
+            ? 'border-[#E0E0E0] bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04)]'
+            : 'border-gray-700/50 bg-[#1a1f2b]'
+        }`}>
           <button
             onClick={() => setActiveTab("crypto")}
             className={`flex-1 py-3 px-6 rounded-lg text-sm font-semibold transition-all duration-300 ${
               activeTab === "crypto"
-                ? "text-white shadow-lg"
-                : "text-[#94a3b8] hover:text-gray-300"
+                ? (themeMode === 'light' ? 'text-white shadow-lg bg-[#3F51B5]' : 'text-white shadow-lg bg-[#0f111a]')
+                : (themeMode === 'light' ? 'text-[#666] hover:text-[#333] bg-transparent' : 'text-[#94a3b8] hover:text-gray-300 bg-transparent')
             }`}
-            style={{ 
-              background: activeTab === "crypto" ? '#0f111a' : 'transparent'
-            }}
           >
             <Hash className="h-4 w-4 inline mr-2" />
             Crypto Channels
@@ -296,12 +297,9 @@ export const SpaceSwitcherWidget: React.FC = () => {
             onClick={() => setActiveTab("offtopic")}
             className={`flex-1 py-3 px-6 rounded-lg text-sm font-semibold transition-all duration-300 ${
               activeTab === "offtopic"
-                ? "text-white shadow-lg"
-                : "text-[#94a3b8] hover:text-gray-300"
+                ? (themeMode === 'light' ? 'text-white shadow-lg bg-[#9C27B0]' : 'text-white shadow-lg bg-[#0f111a]')
+                : (themeMode === 'light' ? 'text-[#666] hover:text-[#333] bg-transparent' : 'text-[#94a3b8] hover:text-gray-300 bg-transparent')
             }`}
-            style={{ 
-              background: activeTab === "offtopic" ? '#0f111a' : 'transparent'
-            }}
           >
             <Coffee className="h-4 w-4 inline mr-2" />
             Off-Topic Lounge
