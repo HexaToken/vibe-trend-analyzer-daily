@@ -1585,20 +1585,25 @@ All colors MUST be HSL.
 
   /* Fix watchlist cards to prevent solid blue overlay on hover */
   :root:not(.dark) [class*="WatchlistAssetCard"],
-  :root:not(.dark) .group.relative.rounded-xl.cursor-pointer {
+  :root:not(.dark) .group.relative.rounded-xl.cursor-pointer,
+  :root:not(.dark) [data-section="watchlist"] .group.relative.rounded-xl.cursor-pointer {
     background: #FFFFFF !important;
   }
 
   :root:not(.dark) [class*="WatchlistAssetCard"]:hover,
-  :root:not(.dark) .group.relative.rounded-xl.cursor-pointer:hover {
+  :root:not(.dark) .group.relative.rounded-xl.cursor-pointer:hover,
+  :root:not(.dark) [data-section="watchlist"] .group.relative.rounded-xl.cursor-pointer:hover {
     background: #FFFFFF !important;
     border-color: #D2E3FC !important;
+    transform: scale(1.02) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
   }
 
-  /* Prevent any gradient overrides on watchlist cards */
-  :root:not(.dark) [class*="WatchlistAssetCard"] *,
-  :root:not(.dark) .group.relative.rounded-xl.cursor-pointer * {
-    background: inherit !important;
+  /* Override any section-specific styling for watchlist cards */
+  :root:not(.dark) [data-section="watchlist"] .bg-black\/30:hover,
+  :root:not(.dark) [data-section="watchlist"] .bg-black\/40:hover,
+  :root:not(.dark) [data-section="watchlist"] .bg-black\/50:hover {
+    background: #FFFFFF !important;
   }
 
   /* Fix input styling in Space components */
