@@ -1605,4 +1605,53 @@ All colors MUST be HSL.
     border-radius: 8px !important;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
   }
+
+  /* Card Headers with Purple/Violet Gradients - Apply Light Blue Design */
+  :root:not(.dark) .bg-gradient-to-r.from-purple-600\/30,
+  :root:not(.dark) .bg-gradient-to-r.to-violet-600\/30,
+  :root:not(.dark) [class*="from-purple-600"][class*="/30"],
+  :root:not(.dark) [class*="to-violet-600"][class*="/30"],
+  :root:not(.dark) [class*="from-purple"][class*="to-violet"] {
+    background: linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%) !important;
+    color: #1C1E21 !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    border: 1px solid #E0E0E0 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  /* Smart News Feed and other card headers */
+  :root:not(.dark) [class*="CardHeader"][class*="gradient"],
+  :root:not(.dark) .card-header[class*="bg-gradient"],
+  :root:not(.dark) [role="banner"][class*="bg-gradient"] {
+    background: linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%) !important;
+    color: #1C1E21 !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    border-bottom: 1px solid #E0E0E0 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  /* Fix border colors for purple/violet themed headers */
+  :root:not(.dark) .border-purple-500\/20,
+  :root:not(.dark) .border-violet-500\/20,
+  :root:not(.dark) [class*="border-purple"][class*="/20"],
+  :root:not(.dark) [class*="border-violet"][class*="/20"] {
+    border-color: #E0E0E0 !important;
+  }
+
+  /* Text colors within these headers */
+  :root:not(.dark) .bg-gradient-to-r.from-purple-600\/30 *,
+  :root:not(.dark) .bg-gradient-to-r.to-violet-600\/30 *,
+  :root:not(.dark) [class*="from-purple-600"][class*="/30"] *,
+  :root:not(.dark) [class*="to-violet-600"][class*="/30"] * {
+    color: #1C1E21 !important;
+  }
+
+  /* Ensure icons in gradient headers also get proper color */
+  :root:not(.dark) .bg-gradient-to-r svg,
+  :root:not(.dark) [class*="from-purple"] svg,
+  :root:not(.dark) [class*="to-violet"] svg {
+    color: #1C1E21 !important;
+  }
 }
