@@ -1474,10 +1474,13 @@ All colors MUST be HSL.
     box-shadow: 0 4px 12px rgba(66, 133, 244, 0.08) !important;
   }
 
-  /* Watchlist - Purple Theme */
-  :root:not(.dark) [data-section="watchlist"] .bg-black\/30,
-  :root:not(.dark) [data-section="watchlist"] .bg-black\/40,
-  :root:not(.dark) [data-section="watchlist"] .bg-black\/50 {
+  /* Watchlist - Purple Theme (only for main containers, not asset cards) */
+  :root:not(.dark) [data-section="watchlist"] > .bg-black\/30,
+  :root:not(.dark) [data-section="watchlist"] > .bg-black\/40,
+  :root:not(.dark) [data-section="watchlist"] > .bg-black\/50,
+  :root:not(.dark) [data-section="watchlist"] .space-y-6 > .bg-black\/30,
+  :root:not(.dark) [data-section="watchlist"] .space-y-6 > .bg-black\/40,
+  :root:not(.dark) [data-section="watchlist"] .space-y-6 > .bg-black\/50 {
     background: linear-gradient(135deg, #F3E8FF 0%, #E9D5FF 100%) !important;
     border: 1px solid #C4B5FD !important;
     box-shadow: 0 4px 12px rgba(147, 51, 234, 0.08) !important;
