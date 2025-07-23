@@ -632,7 +632,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         setActiveSection('finance');
                         setFinanceDropdownOpen(false);
                       }}
-                      className="hover:bg-green-500/20 focus:bg-green-500/20 cursor-pointer transition-colors duration-200"
+                      className="hover:bg-gray-500/20 focus:bg-gray-500/20 cursor-pointer transition-colors duration-200"
                     >
                       <span className="mr-2">💰</span>
                       Finance Hub
@@ -672,7 +672,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         setActiveSection('earnings');
                         setFinanceDropdownOpen(false);
                       }}
-                      className="hover:bg-emerald-500/20 focus:bg-emerald-500/20 cursor-pointer transition-colors duration-200"
+                      className="hover:bg-gray-500/20 focus:bg-gray-500/20 cursor-pointer transition-colors duration-200"
                     >
                       <DollarSign className="w-4 h-4 mr-2" />
                       Earnings
@@ -3013,7 +3013,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                             { symbol: 'LINK', name: 'Chainlink', sentiment: 66, change: '+2.1%', volume: '189M', category: 'crypto', icon: '🔗' },
 
                             // Sectors
-                            { symbol: 'TECH', name: 'Technology', sentiment: 81, change: '+2.8%', volume: '12B', category: 'sector', icon: '💻' },
+                            { symbol: 'TECH', name: 'Technology', sentiment: 81, change: '+2.8%', volume: '12B', category: 'sector', icon: '��' },
                             { symbol: 'FIN', name: 'Finance', sentiment: 62, change: '+1.2%', volume: '8.4B', category: 'sector', icon: '🏦' },
                             { symbol: 'HLTH', name: 'Healthcare', sentiment: 54, change: '-0.3%', volume: '5.2B', category: 'sector', icon: '🏥' },
                             { symbol: 'ENGY', name: 'Energy', sentiment: 47, change: '-1.8%', volume: '6.7B', category: 'sector', icon: '⚡' },
