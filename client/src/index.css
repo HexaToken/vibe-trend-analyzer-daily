@@ -1602,11 +1602,23 @@ All colors MUST be HSL.
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
   }
 
-  /* Override any section-specific styling for watchlist cards */
+  /* Completely disable section-based styling for watchlist asset cards */
+  :root:not(.dark) [data-section="watchlist"] .bg-black\/30,
+  :root:not(.dark) [data-section="watchlist"] .bg-black\/40,
+  :root:not(.dark) [data-section="watchlist"] .bg-black\/50,
   :root:not(.dark) [data-section="watchlist"] .bg-black\/30:hover,
   :root:not(.dark) [data-section="watchlist"] .bg-black\/40:hover,
   :root:not(.dark) [data-section="watchlist"] .bg-black\/50:hover {
     background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  /* Specifically target watchlist asset cards to prevent ANY background overrides */
+  :root:not(.dark) [data-section="watchlist"] .group.relative.bg-white,
+  :root:not(.dark) [data-section="watchlist"] .group.relative.bg-white:hover {
+    background: #FFFFFF !important;
+    border-color: #D2E3FC !important;
   }
 
   /* Fix input styling in Space components */
