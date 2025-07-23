@@ -1437,6 +1437,14 @@ All colors MUST be HSL.
     border-color: #D2E3FC !important;
   }
 
+  /* More specific targeting for dashboard controls card */
+  :root:not(.dark) .bg-black\/40.border-purple-500\/20,
+  :root:not(.dark) .bg-black\/40.border-purple-500\/20.backdrop-blur-xl {
+    background: linear-gradient(135deg, #D2E3FC 0%, #B6D7FB 100%) !important;
+    border-color: #B6D7FB !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+  }
+
   /* Fix input styling in Space components */
   :root:not(.dark) .bg-gray-800.border-gray-600 {
     background: #FFFFFF !important;
