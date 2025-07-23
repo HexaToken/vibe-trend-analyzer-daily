@@ -1463,88 +1463,124 @@ All colors MUST be HSL.
     border-color: #B6D7FB !important;
   }
 
-  /* Comprehensive Finance Subtabs Light Mode Fixes */
+  /* Colorful Finance Subtabs - Theme Appropriate */
 
-  /* Fix all dark card backgrounds */
+  /* Finance Hub - Light Blue Theme */
+  :root:not(.dark) [data-section="finance"] .bg-black\/30,
+  :root:not(.dark) [data-section="finance"] .bg-black\/40,
+  :root:not(.dark) [data-section="finance"] .bg-black\/50 {
+    background: linear-gradient(135deg, #E8F1FD 0%, #D2E3FC 100%) !important;
+    border: 1px solid #B6D7FB !important;
+    box-shadow: 0 4px 12px rgba(66, 133, 244, 0.08) !important;
+  }
+
+  /* Watchlist - Purple Theme */
+  :root:not(.dark) [data-section="watchlist"] .bg-black\/30,
+  :root:not(.dark) [data-section="watchlist"] .bg-black\/40,
+  :root:not(.dark) [data-section="watchlist"] .bg-black\/50 {
+    background: linear-gradient(135deg, #F3E8FF 0%, #E9D5FF 100%) !important;
+    border: 1px solid #C4B5FD !important;
+    box-shadow: 0 4px 12px rgba(147, 51, 234, 0.08) !important;
+  }
+
+  /* Trending - Pink Theme */
+  :root:not(.dark) [data-section="trending"] .bg-black\/30,
+  :root:not(.dark) [data-section="trending"] .bg-black\/40,
+  :root:not(.dark) [data-section="trending"] .bg-black\/50 {
+    background: linear-gradient(135deg, #FDF2F8 0%, #FCE7F3 100%) !important;
+    border: 1px solid #F9A8D4 !important;
+    box-shadow: 0 4px 12px rgba(236, 72, 153, 0.08) !important;
+  }
+
+  /* Crypto - Orange Theme */
+  :root:not(.dark) [data-section="crypto"] .bg-black\/30,
+  :root:not(.dark) [data-section="crypto"] .bg-black\/40,
+  :root:not(.dark) [data-section="crypto"] .bg-black\/50 {
+    background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%) !important;
+    border: 1px solid #FCD34D !important;
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.08) !important;
+  }
+
+  /* Charts - Indigo Theme */
+  :root:not(.dark) [data-section="charts"] .bg-black\/30,
+  :root:not(.dark) [data-section="charts"] .bg-black\/40,
+  :root:not(.dark) [data-section="charts"] .bg-black\/50 {
+    background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%) !important;
+    border: 1px solid #A5B4FC !important;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.08) !important;
+  }
+
+  /* Colorful Badges for Each Section */
+  :root:not(.dark) [data-section="finance"] .bg-blue-500\/20,
+  :root:not(.dark) [data-section="finance"] .bg-blue-600\/30 {
+    background: linear-gradient(90deg, #DBEAFE 0%, #BFDBFE 100%) !important;
+    color: #1E40AF !important;
+    border: 1px solid #93C5FD !important;
+  }
+
+  :root:not(.dark) [data-section="watchlist"] .bg-purple-500\/20,
+  :root:not(.dark) [data-section="watchlist"] .bg-purple-600\/30 {
+    background: linear-gradient(90deg, #F3E8FF 0%, #E9D5FF 100%) !important;
+    color: #7C3AED !important;
+    border: 1px solid #C4B5FD !important;
+  }
+
+  :root:not(.dark) [data-section="trending"] .bg-pink-500\/20,
+  :root:not(.dark) [data-section="trending"] .bg-pink-600\/30 {
+    background: linear-gradient(90deg, #FDF2F8 0%, #FCE7F3 100%) !important;
+    color: #DB2777 !important;
+    border: 1px solid #F9A8D4 !important;
+  }
+
+  :root:not(.dark) [data-section="crypto"] .bg-orange-500\/20,
+  :root:not(.dark) [data-section="crypto"] .bg-orange-600\/30 {
+    background: linear-gradient(90deg, #FFF7ED 0%, #FFEDD5 100%) !important;
+    color: #EA580C !important;
+    border: 1px solid #FCD34D !important;
+  }
+
+  :root:not(.dark) [data-section="charts"] .bg-indigo-500\/20,
+  :root:not(.dark) [data-section="charts"] .bg-indigo-600\/30 {
+    background: linear-gradient(90deg, #EEF2FF 0%, #E0E7FF 100%) !important;
+    color: #4F46E5 !important;
+    border: 1px solid #A5B4FC !important;
+  }
+
+  /* Colorful Text for Each Section */
+  :root:not(.dark) [data-section="finance"] .text-blue-300,
+  :root:not(.dark) [data-section="finance"] .text-blue-400 {
+    color: #2563EB !important;
+  }
+
+  :root:not(.dark) [data-section="watchlist"] .text-purple-300,
+  :root:not(.dark) [data-section="watchlist"] .text-purple-400 {
+    color: #7C3AED !important;
+  }
+
+  :root:not(.dark) [data-section="trending"] .text-pink-300,
+  :root:not(.dark) [data-section="trending"] .text-pink-400 {
+    color: #DB2777 !important;
+  }
+
+  :root:not(.dark) [data-section="crypto"] .text-orange-300,
+  :root:not(.dark) [data-section="crypto"] .text-orange-400 {
+    color: #EA580C !important;
+  }
+
+  :root:not(.dark) [data-section="charts"] .text-indigo-300,
+  :root:not(.dark) [data-section="charts"] .text-indigo-400 {
+    color: #4F46E5 !important;
+  }
+
+  /* Fallback for sections without data-section attribute */
   :root:not(.dark) .bg-black\/30,
+  :root:not(.dark) .bg-black\/40,
   :root:not(.dark) .bg-black\/50,
-  :root:not(.dark) .bg-black\/60,
   :root:not(.dark) .bg-slate-800\/40,
-  :root:not(.dark) .bg-slate-900\/50,
-  :root:not(.dark) .bg-gray-900\/50 {
+  :root:not(.dark) .bg-slate-900\/50 {
     background: #FFFFFF !important;
     border: 1px solid #E0E0E0 !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
-  }
-
-  /* Fix gradient card backgrounds */
-  :root:not(.dark) .bg-gradient-to-br.from-black\/60,
-  :root:not(.dark) .bg-gradient-to-br.from-slate-900\/50 {
-    background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%) !important;
-    border: 1px solid #E0E0E0 !important;
-  }
-
-  /* Fix colored borders for Finance subtabs */
-  :root:not(.dark) .border-cyan-500\/20,
-  :root:not(.dark) .border-blue-500\/20,
-  :root:not(.dark) .border-orange-500\/20,
-  :root:not(.dark) .border-pink-500\/20,
-  :root:not(.dark) .border-green-500\/20,
-  :root:not(.dark) .border-indigo-500\/20 {
-    border-color: #E0E0E0 !important;
-  }
-
-  /* Fix text colors in Finance subtabs */
-  :root:not(.dark) .text-cyan-300,
-  :root:not(.dark) .text-blue-300,
-  :root:not(.dark) .text-orange-300,
-  :root:not(.dark) .text-pink-300,
-  :root:not(.dark) .text-green-300,
-  :root:not(.dark) .text-indigo-300 {
-    color: #1E1E1E !important;
-  }
-
-  :root:not(.dark) .text-cyan-400,
-  :root:not(.dark) .text-blue-400,
-  :root:not(.dark) .text-orange-400,
-  :root:not(.dark) .text-pink-400,
-  :root:not(.dark) .text-green-400,
-  :root:not(.dark) .text-indigo-400 {
-    color: #333 !important;
-  }
-
-  /* Fix colored backgrounds in Finance subtabs */
-  :root:not(.dark) .bg-cyan-500\/20,
-  :root:not(.dark) .bg-blue-500\/20,
-  :root:not(.dark) .bg-orange-500\/20,
-  :root:not(.dark) .bg-pink-500\/20,
-  :root:not(.dark) .bg-green-500\/20,
-  :root:not(.dark) .bg-indigo-500\/20 {
-    background: #F5F7FA !important;
-    color: #1E1E1E !important;
-  }
-
-  /* Fix hover states for Finance subtab buttons */
-  :root:not(.dark) .hover\:bg-cyan-500\/20:hover,
-  :root:not(.dark) .hover\:bg-blue-500\/20:hover,
-  :root:not(.dark) .hover\:bg-orange-500\/20:hover,
-  :root:not(.dark) .hover\:bg-pink-500\/20:hover,
-  :root:not(.dark) .hover\:bg-green-500\/20:hover,
-  :root:not(.dark) .hover\:bg-indigo-500\/20:hover {
-    background: linear-gradient(90deg, #E8F1FD 0%, #D2E9FC 100%) !important;
-    color: #1C1E21 !important;
-  }
-
-  /* Fix badges in Finance subtabs */
-  :root:not(.dark) .bg-cyan-600\/30,
-  :root:not(.dark) .bg-blue-600\/30,
-  :root:not(.dark) .bg-orange-600\/30,
-  :root:not(.dark) .bg-pink-600\/30,
-  :root:not(.dark) .bg-green-600\/30,
-  :root:not(.dark) .bg-indigo-600\/30 {
-    background: linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%) !important;
-    color: #1C1E21 !important;
-    border: 1px solid #E0E0E0 !important;
   }
 
   /* Fix input styling in Space components */
