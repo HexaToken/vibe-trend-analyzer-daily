@@ -1095,6 +1095,113 @@ All colors MUST be HSL.
     color: #1E1E1E !important;
   }
 
+  /* Comprehensive Light Mode Component Fixes */
+
+  /* Fix all hardcoded dark backgrounds */
+  :root:not(.dark) .bg-black {
+    background: #FFFFFF !important;
+    color: #1E1E1E !important;
+    border: 1px solid #E0E0E0 !important;
+  }
+
+  :root:not(.dark) .bg-slate-800 {
+    background: #FFFFFF !important;
+    color: #1E1E1E !important;
+    border: 1px solid #E0E0E0 !important;
+  }
+
+  :root:not(.dark) .bg-slate-900 {
+    background: #FFFFFF !important;
+    color: #1E1E1E !important;
+    border: 1px solid #E0E0E0 !important;
+  }
+
+  /* Fix all hardcoded white text */
+  :root:not(.dark) .text-white {
+    color: #1E1E1E !important;
+  }
+
+  /* Fix gradient headers to be appropriate for light mode */
+  :root:not(.dark) .bg-gradient-to-r {
+    background: linear-gradient(to right, #3F51B5, #2196F3) !important;
+    color: white !important;
+  }
+
+  /* Fix tooltips and overlays */
+  :root:not(.dark) [class*="tooltip"],
+  :root:not(.dark) [class*="overlay"],
+  :root:not(.dark) [class*="popover"] {
+    background: #FFFFFF !important;
+    color: #1E1E1E !important;
+    border: 1px solid #E0E0E0 !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* Fix chart containers */
+  :root:not(.dark) [class*="chart"] {
+    background: #FFFFFF !important;
+    color: #1E1E1E !important;
+  }
+
+  /* Fix modal and dialog backgrounds */
+  :root:not(.dark) [role="dialog"],
+  :root:not(.dark) [class*="modal"] {
+    background: #FFFFFF !important;
+    color: #1E1E1E !important;
+    border: 1px solid #E0E0E0 !important;
+  }
+
+  /* Fix badge contrast in light mode */
+  :root:not(.dark) .bg-white\/20 {
+    background: rgba(63, 81, 181, 0.1) !important;
+    color: #3F51B5 !important;
+    border: 1px solid #3F51B5 !important;
+  }
+
+  /* Fix hover states for cards and interactive elements */
+  :root:not(.dark) [class*="hover:bg-black"],
+  :root:not(.dark) [class*="hover:bg-slate"] {
+    background: #F5F5F5 !important;
+    color: #1E1E1E !important;
+  }
+
+  /* Fix text contrast issues */
+  :root:not(.dark) .text-slate-400 {
+    color: #666 !important;
+  }
+
+  :root:not(.dark) .text-slate-300 {
+    color: #444 !important;
+  }
+
+  :root:not(.dark) .text-gray-400 {
+    color: #666 !important;
+  }
+
+  :root:not(.dark) .text-gray-300 {
+    color: #444 !important;
+  }
+
+  /* Fix border colors */
+  :root:not(.dark) .border-slate-700 {
+    border-color: #E0E0E0 !important;
+  }
+
+  :root:not(.dark) .border-slate-600 {
+    border-color: #E0E0E0 !important;
+  }
+
+  /* Ensure proper contrast for all interactive elements */
+  :root:not(.dark) button,
+  :root:not(.dark) [role="button"] {
+    border: 1px solid transparent;
+  }
+
+  :root:not(.dark) button:hover,
+  :root:not(.dark) [role="button"]:hover {
+    background: #F5F5F5 !important;
+  }
+
   :root:not(.dark) .border-purple-500\/20 {
     border-color: #E0E0E0 !important;
   }
@@ -1161,5 +1268,47 @@ All colors MUST be HSL.
   .hero-sentiment-section .text-white {
     /* Ensure white text stays white */
     color: white !important;
+  }
+
+  /* Component-specific Light Mode fixes */
+
+  /* Stock cards and pricing displays */
+  :root:not(.dark) [class*="stock"] .text-green-500,
+  :root:not(.dark) [class*="price"] .text-green-500 {
+    color: #4CAF50 !important;
+  }
+
+  :root:not(.dark) [class*="stock"] .text-red-500,
+  :root:not(.dark) [class*="price"] .text-red-500 {
+    color: #F44336 !important;
+  }
+
+  /* Fix recharts and chart libraries */
+  :root:not(.dark) .recharts-wrapper {
+    color: #1E1E1E !important;
+  }
+
+  :root:not(.dark) .recharts-cartesian-axis-tick-value {
+    fill: #666 !important;
+  }
+
+  :root:not(.dark) .recharts-legend-item-text {
+    color: #666 !important;
+  }
+
+  /* Fix any remaining transparency issues */
+  :root:not(.dark) [class*="bg-black/"] {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+  }
+
+  :root:not(.dark) [class*="bg-slate-800/"] {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+  }
+
+  :root:not(.dark) [class*="bg-gray-800/"] {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
   }
 }
