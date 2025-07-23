@@ -3,20 +3,19 @@ import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { Input } from '../ui/input';
-import { 
-  Search, 
-  Filter, 
- 
-  Settings, 
-  TrendingUp, 
-  Newspaper, 
-  MessageSquare, 
+import {
+  Search,
+  Filter,
+  Settings,
+  TrendingUp,
+  Newspaper,
+  MessageSquare,
   BarChart3,
   Brain,
   RefreshCw,
-
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
+import { useMoodTheme } from '../../contexts/MoodThemeContext';
 
 interface MarketMoodControlsProps {
   title?: string;
@@ -41,13 +40,12 @@ interface FilterState {
 export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
   title = "Market Mood Controls",
   showFilters = true,
-
-
   onSourceToggle,
   onSearch,
   onExplainMood,
   onViewAnalytics
 }) => {
+  const { themeMode } = useMoodTheme();
   const [filters, setFilters] = useState<FilterState>({
     sources: {
       stocks: true,
