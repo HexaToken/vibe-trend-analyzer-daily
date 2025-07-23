@@ -404,9 +404,16 @@ export const WatchlistContainerBlock = ({ className }: WatchlistContainerBlockPr
       {assets.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {liveStats.topPerformer && (
-            <Card className="bg-gradient-to-br from-emerald-900/20 to-emerald-800/20 border-emerald-700/30">
+            <Card className={cn(
+              themeMode === 'light'
+                ? 'bg-[#E8F5E9] border-[#4CAF50] border-2 shadow-[0_4px_12px_rgba(76,175,80,0.1)]'
+                : 'bg-gradient-to-br from-emerald-900/20 to-emerald-800/20 border-emerald-700/30'
+            )}>
               <CardHeader>
-                <CardTitle className="text-sm font-medium text-emerald-400 flex items-center gap-2">
+                <CardTitle className={cn(
+                  "text-sm font-medium flex items-center gap-2",
+                  themeMode === 'light' ? 'text-[#4CAF50]' : 'text-emerald-400'
+                )}>
                   <TrendingUp className="w-4 h-4" />
                   Top Performer
                 </CardTitle>
@@ -414,14 +421,26 @@ export const WatchlistContainerBlock = ({ className }: WatchlistContainerBlockPr
               <CardContent>
                 <div className="flex items-center justify-between">
                   <div>
-                    <span className="font-bold text-white">{liveStats.topPerformer.ticker}</span>
-                    <p className="text-sm text-gray-400">{liveStats.topPerformer.name}</p>
+                    <span className={cn(
+                      "font-bold",
+                      themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'
+                    )}>{liveStats.topPerformer.ticker}</span>
+                    <p className={cn(
+                      "text-sm",
+                      themeMode === 'light' ? 'text-[#444]' : 'text-gray-400'
+                    )}>{liveStats.topPerformer.name}</p>
                   </div>
                   <div className="text-right">
-                    <div className="text-emerald-400 font-bold">
+                    <div className={cn(
+                      "font-bold",
+                      themeMode === 'light' ? 'text-[#4CAF50]' : 'text-emerald-400'
+                    )}>
                       +{liveStats.topPerformer.dailyChangePercent.toFixed(2)}%
                     </div>
-                    <div className="text-sm text-gray-400">
+                    <div className={cn(
+                      "text-sm",
+                      themeMode === 'light' ? 'text-[#444]' : 'text-gray-400'
+                    )}>
                       Sentiment: {liveStats.topPerformer.sentimentScore.toFixed(2)}%
                     </div>
                   </div>
@@ -431,9 +450,16 @@ export const WatchlistContainerBlock = ({ className }: WatchlistContainerBlockPr
           )}
 
           {liveStats.worstPerformer && (
-            <Card className="bg-gradient-to-br from-red-900/20 to-red-800/20 border-red-700/30">
+            <Card className={cn(
+              themeMode === 'light'
+                ? 'bg-[#FFEBEE] border-[#F44336] border-2 shadow-[0_4px_12px_rgba(244,67,54,0.1)]'
+                : 'bg-gradient-to-br from-red-900/20 to-red-800/20 border-red-700/30'
+            )}>
               <CardHeader>
-                <CardTitle className="text-sm font-medium text-red-400 flex items-center gap-2">
+                <CardTitle className={cn(
+                  "text-sm font-medium flex items-center gap-2",
+                  themeMode === 'light' ? 'text-[#F44336]' : 'text-red-400'
+                )}>
                   <TrendingDown className="w-4 h-4" />
                   Needs Attention
                 </CardTitle>
@@ -441,14 +467,26 @@ export const WatchlistContainerBlock = ({ className }: WatchlistContainerBlockPr
               <CardContent>
                 <div className="flex items-center justify-between">
                   <div>
-                    <span className="font-bold text-white">{liveStats.worstPerformer.ticker}</span>
-                    <p className="text-sm text-gray-400">{liveStats.worstPerformer.name}</p>
+                    <span className={cn(
+                      "font-bold",
+                      themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'
+                    )}>{liveStats.worstPerformer.ticker}</span>
+                    <p className={cn(
+                      "text-sm",
+                      themeMode === 'light' ? 'text-[#444]' : 'text-gray-400'
+                    )}>{liveStats.worstPerformer.name}</p>
                   </div>
                   <div className="text-right">
-                    <div className="text-red-400 font-bold">
+                    <div className={cn(
+                      "font-bold",
+                      themeMode === 'light' ? 'text-[#F44336]' : 'text-red-400'
+                    )}>
                       {liveStats.worstPerformer.dailyChangePercent.toFixed(2)}%
                     </div>
-                    <div className="text-sm text-gray-400">
+                    <div className={cn(
+                      "text-sm",
+                      themeMode === 'light' ? 'text-[#444]' : 'text-gray-400'
+                    )}>
                       Sentiment: {liveStats.worstPerformer.sentimentScore.toFixed(2)}%
                     </div>
                   </div>
