@@ -36,6 +36,7 @@ import {
 } from "lucide-react";
 import { useCryptoListings } from "@/hooks/useCoinMarketCap";
 import { useAuth } from "@/contexts/AuthContext";
+import { useMoodTheme } from "@/contexts/MoodThemeContext";
 
 interface CryptoChannel {
   id: string;
@@ -92,6 +93,7 @@ interface OffTopicPost {
 
 export const SpaceSwitcherWidget: React.FC = () => {
   const { user, isAuthenticated } = useAuth();
+  const { themeMode } = useMoodTheme();
   const [activeTab, setActiveTab] = useState("crypto");
   const [selectedChannel, setSelectedChannel] = useState("BTC");
   const [selectedSection, setSelectedSection] = useState("general");
@@ -268,7 +270,11 @@ export const SpaceSwitcherWidget: React.FC = () => {
   const selectedSectionData = offTopicSections.find(s => s.id === selectedSection);
 
   return (
-    <div className="w-full max-w-7xl mx-auto" style={{ background: '#0e1423' }}>
+    <div className={`w-full max-w-7xl mx-auto p-6 rounded-xl ${
+      themeMode === 'light'
+        ? 'bg-[#F5F7FA]'
+        : 'bg-[#0e1423]'
+    }`}>
       {/* Custom Tab Switcher */}
       <div className="mb-6">
         <div className="flex rounded-xl p-1 border border-gray-700/50" style={{ background: '#1a1f2b' }}>
