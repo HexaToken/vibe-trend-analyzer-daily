@@ -25,8 +25,9 @@ export const AIInsightFooterBlock = ({
   expandable = false,
   className
 }: AIInsightFooterBlockProps) => {
+  const { themeMode } = useMoodTheme();
   const [isExpanded, setIsExpanded] = useState(false);
-  
+
   const getCategoryIcon = () => {
     switch (category) {
       case 'earnings':
