@@ -1399,6 +1399,12 @@ All colors MUST be HSL.
     color: #1E1E1E !important;
   }
 
+  /* Finance Tabs Active State - Light Blue Gradient */
+  :root:not(.dark) [data-state="active"][style*="--active-bg"] {
+    background: var(--active-bg) !important;
+    box-shadow: var(--active-shadow) !important;
+  }
+
   /* Fix input styling in Space components */
   :root:not(.dark) .bg-gray-800.border-gray-600 {
     background: #FFFFFF !important;
