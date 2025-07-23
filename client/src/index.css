@@ -1405,6 +1405,23 @@ All colors MUST be HSL.
     box-shadow: var(--active-shadow) !important;
   }
 
+  /* Fix Finance dropdown menu items appearing as selected in light mode */
+  :root:not(.dark) [role="menuitem"] {
+    background: transparent !important;
+    color: #1E1E1E !important;
+  }
+
+  :root:not(.dark) [role="menuitem"]:hover {
+    background: #F5F5F5 !important;
+    color: #1E1E1E !important;
+  }
+
+  :root:not(.dark) .hover\:bg-green-500\/20:hover,
+  :root:not(.dark) .hover\:bg-emerald-500\/20:hover {
+    background: linear-gradient(90deg, #E8F1FD 0%, #D2E9FC 100%) !important;
+    color: #1C1E21 !important;
+  }
+
   /* Fix input styling in Space components */
   :root:not(.dark) .bg-gray-800.border-gray-600 {
     background: #FFFFFF !important;
