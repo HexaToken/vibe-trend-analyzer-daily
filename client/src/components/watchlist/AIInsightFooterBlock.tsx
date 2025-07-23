@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useMoodTheme } from "@/contexts/MoodThemeContext";
 import { Brain, Sparkles, TrendingUp, AlertCircle, Clock, ChevronRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
