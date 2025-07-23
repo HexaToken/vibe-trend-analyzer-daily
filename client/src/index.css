@@ -1456,4 +1456,45 @@ All colors MUST be HSL.
     position: relative;
     z-index: 2;
   }
+
+  /* AI Analysis Button Light Mode Fixes */
+  :root:not(.dark) button:has(> [data-testid="brain-icon"]),
+  :root:not(.dark) button:has(> svg[class*="Brain"]),
+  :root:not(.dark) button:contains("Explain Today's Mood"),
+  :root:not(.dark) button:contains("View Detailed Analytics") {
+    background: linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%) !important;
+    color: #1C1E21 !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  :root:not(.dark) button:has(> [data-testid="brain-icon"]):hover,
+  :root:not(.dark) button:has(> svg[class*="Brain"]):hover,
+  :root:not(.dark) button:contains("Explain Today's Mood"):hover,
+  :root:not(.dark) button:contains("View Detailed Analytics"):hover {
+    background: linear-gradient(90deg, #A9CCF9 0%, #A9CCF9 100%) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    transform: translateY(-1px) !important;
+  }
+
+  /* Target AI Analysis buttons more specifically */
+  :root:not(.dark) [class*="MarketMoodControls"] button[class*="gradient"],
+  :root:not(.dark) .space-y-3 button[class*="bg-gradient"] {
+    background: linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%) !important;
+    color: #1C1E21 !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  :root:not(.dark) [class*="MarketMoodControls"] button[class*="gradient"]:hover,
+  :root:not(.dark) .space-y-3 button[class*="bg-gradient"]:hover {
+    background: linear-gradient(90deg, #A9CCF9 0%, #A9CCF9 100%) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    transform: translateY(-1px) !important;
+  }
 }
