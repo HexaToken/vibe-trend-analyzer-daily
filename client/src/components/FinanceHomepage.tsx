@@ -202,10 +202,11 @@ export const FinanceHomepage: React.FC = () => {
                 {['Home', 'Market Mood', 'Watchlist', 'Economic Insights', 'Community'].map((item) => (
                   <button
                     key={item}
+                    onClick={() => setActiveTab(item)}
                     className={cn(
                       "text-sm font-medium transition-colors",
-                      item === 'Home' 
-                        ? "text-blue-400 border-b border-blue-400 pb-1" 
+                      item === activeTab
+                        ? "text-blue-400 border-b border-blue-400 pb-1"
                         : "text-slate-300 hover:text-white"
                     )}
                   >
