@@ -1583,6 +1583,24 @@ All colors MUST be HSL.
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
   }
 
+  /* Fix watchlist cards to prevent solid blue overlay on hover */
+  :root:not(.dark) [class*="WatchlistAssetCard"],
+  :root:not(.dark) .group.relative.rounded-xl.cursor-pointer {
+    background: #FFFFFF !important;
+  }
+
+  :root:not(.dark) [class*="WatchlistAssetCard"]:hover,
+  :root:not(.dark) .group.relative.rounded-xl.cursor-pointer:hover {
+    background: #FFFFFF !important;
+    border-color: #D2E3FC !important;
+  }
+
+  /* Prevent any gradient overrides on watchlist cards */
+  :root:not(.dark) [class*="WatchlistAssetCard"] *,
+  :root:not(.dark) .group.relative.rounded-xl.cursor-pointer * {
+    background: inherit !important;
+  }
+
   /* Fix input styling in Space components */
   :root:not(.dark) .bg-gray-800.border-gray-600 {
     background: #FFFFFF !important;
