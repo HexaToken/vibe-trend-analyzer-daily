@@ -189,9 +189,9 @@ export const PostComposer: React.FC<PostComposerProps> = ({
       >
         {/* New User Tooltip */}
         {showTooltip && (
-          <div className="absolute -top-12 left-4 bg-black text-white text-xs px-3 py-2 rounded-lg z-10">
+          <div className="absolute -top-12 left-4 text-xs px-3 py-2 rounded-lg z-10 shadow-lg transition-all duration-200 bg-white dark:bg-black text-[#1E1E1E] dark:text-white border border-[#E0E0E0] dark:border-transparent">
             💡 Tip: Start typing and use $TICKER to tag a stock!
-            <div className="absolute top-full left-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black"></div>
+            <div className="absolute top-full left-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-white dark:border-t-black"></div>
           </div>
         )}
 
