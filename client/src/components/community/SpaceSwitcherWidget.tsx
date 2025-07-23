@@ -286,9 +286,13 @@ export const SpaceSwitcherWidget: React.FC = () => {
             onClick={() => setActiveTab("crypto")}
             className={`flex-1 py-3 px-6 rounded-lg text-sm font-semibold transition-all duration-300 ${
               activeTab === "crypto"
-                ? (themeMode === 'light' ? 'text-white shadow-lg bg-[#3F51B5]' : 'text-white shadow-lg bg-[#0f111a]')
+                ? (themeMode === 'light' ? 'text-[#1C1E21] shadow-lg font-semibold border border-[#E0E0E0]' : 'text-white shadow-lg bg-[#0f111a]')
                 : (themeMode === 'light' ? 'text-[#666] hover:text-[#333] bg-transparent' : 'text-[#94a3b8] hover:text-gray-300 bg-transparent')
             }`}
+            style={activeTab === "crypto" && themeMode === 'light' ? {
+              background: 'linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%)',
+              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)'
+            } : {}}
           >
             <Hash className="h-4 w-4 inline mr-2" />
             Crypto Channels
