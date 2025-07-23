@@ -1463,6 +1463,90 @@ All colors MUST be HSL.
     border-color: #B6D7FB !important;
   }
 
+  /* Comprehensive Finance Subtabs Light Mode Fixes */
+
+  /* Fix all dark card backgrounds */
+  :root:not(.dark) .bg-black\/30,
+  :root:not(.dark) .bg-black\/50,
+  :root:not(.dark) .bg-black\/60,
+  :root:not(.dark) .bg-slate-800\/40,
+  :root:not(.dark) .bg-slate-900\/50,
+  :root:not(.dark) .bg-gray-900\/50 {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  }
+
+  /* Fix gradient card backgrounds */
+  :root:not(.dark) .bg-gradient-to-br.from-black\/60,
+  :root:not(.dark) .bg-gradient-to-br.from-slate-900\/50 {
+    background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%) !important;
+    border: 1px solid #E0E0E0 !important;
+  }
+
+  /* Fix colored borders for Finance subtabs */
+  :root:not(.dark) .border-cyan-500\/20,
+  :root:not(.dark) .border-blue-500\/20,
+  :root:not(.dark) .border-orange-500\/20,
+  :root:not(.dark) .border-pink-500\/20,
+  :root:not(.dark) .border-green-500\/20,
+  :root:not(.dark) .border-indigo-500\/20 {
+    border-color: #E0E0E0 !important;
+  }
+
+  /* Fix text colors in Finance subtabs */
+  :root:not(.dark) .text-cyan-300,
+  :root:not(.dark) .text-blue-300,
+  :root:not(.dark) .text-orange-300,
+  :root:not(.dark) .text-pink-300,
+  :root:not(.dark) .text-green-300,
+  :root:not(.dark) .text-indigo-300 {
+    color: #1E1E1E !important;
+  }
+
+  :root:not(.dark) .text-cyan-400,
+  :root:not(.dark) .text-blue-400,
+  :root:not(.dark) .text-orange-400,
+  :root:not(.dark) .text-pink-400,
+  :root:not(.dark) .text-green-400,
+  :root:not(.dark) .text-indigo-400 {
+    color: #333 !important;
+  }
+
+  /* Fix colored backgrounds in Finance subtabs */
+  :root:not(.dark) .bg-cyan-500\/20,
+  :root:not(.dark) .bg-blue-500\/20,
+  :root:not(.dark) .bg-orange-500\/20,
+  :root:not(.dark) .bg-pink-500\/20,
+  :root:not(.dark) .bg-green-500\/20,
+  :root:not(.dark) .bg-indigo-500\/20 {
+    background: #F5F7FA !important;
+    color: #1E1E1E !important;
+  }
+
+  /* Fix hover states for Finance subtab buttons */
+  :root:not(.dark) .hover\:bg-cyan-500\/20:hover,
+  :root:not(.dark) .hover\:bg-blue-500\/20:hover,
+  :root:not(.dark) .hover\:bg-orange-500\/20:hover,
+  :root:not(.dark) .hover\:bg-pink-500\/20:hover,
+  :root:not(.dark) .hover\:bg-green-500\/20:hover,
+  :root:not(.dark) .hover\:bg-indigo-500\/20:hover {
+    background: linear-gradient(90deg, #E8F1FD 0%, #D2E9FC 100%) !important;
+    color: #1C1E21 !important;
+  }
+
+  /* Fix badges in Finance subtabs */
+  :root:not(.dark) .bg-cyan-600\/30,
+  :root:not(.dark) .bg-blue-600\/30,
+  :root:not(.dark) .bg-orange-600\/30,
+  :root:not(.dark) .bg-pink-600\/30,
+  :root:not(.dark) .bg-green-600\/30,
+  :root:not(.dark) .bg-indigo-600\/30 {
+    background: linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%) !important;
+    color: #1C1E21 !important;
+    border: 1px solid #E0E0E0 !important;
+  }
+
   /* Fix input styling in Space components */
   :root:not(.dark) .bg-gray-800.border-gray-600 {
     background: #FFFFFF !important;
