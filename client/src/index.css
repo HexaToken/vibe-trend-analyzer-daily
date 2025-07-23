@@ -1723,26 +1723,52 @@ All colors MUST be HSL.
     background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(88, 28, 135, 0.95) 100%) !important;
   }
 
-  /* Ensure all text in hero stays dark theme appropriate */
+  /* Exact text styling to match Dark Mode */
+
+  /* Score Number (e.g., "72") - exact specifications */
+  .hero-sentiment-section .text-9xl.font-bold,
+  :root:not(.dark) .hero-sentiment-section .text-9xl.font-bold {
+    color: #FFFFFF !important;
+    font-weight: 800 !important;
+    font-size: 72px !important;
+    background: linear-gradient(to right, #f472b6, #a855f7, #06b6d4) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+
+  /* Subheading ("Market is Positive") */
+  .hero-sentiment-section .text-2xl.font-bold.text-white,
+  :root:not(.dark) .hero-sentiment-section .text-2xl.font-bold {
+    color: #FFFFFF !important;
+    font-weight: bold !important;
+  }
+
+  /* Label ("AI SENTIMENT SCORE") */
+  .hero-sentiment-section .text-purple-300,
+  :root:not(.dark) .hero-sentiment-section .text-purple-300 {
+    color: #D6D6D6 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+  }
+
+  /* Description text below */
+  .hero-sentiment-section .text-xl.text-gray-200,
+  :root:not(.dark) .hero-sentiment-section .text-xl {
+    color: #FFFFFF !important;
+    text-align: center !important;
+  }
+
+  /* Ensure all other text elements stay white */
   :root:not(.dark) .hero-sentiment-section,
   :root:not(.dark) .hero-sentiment-section * {
     color: white !important;
   }
 
-  /* Preserve specific color elements in hero */
-  :root:not(.dark) .hero-sentiment-section .text-gray-200 {
-    color: rgb(229 231 235) !important;
-  }
-
-  :root:not(.dark) .hero-sentiment-section .text-purple-300 {
-    color: rgb(196 181 253) !important;
-  }
-
-  :root:not(.dark) .hero-sentiment-section .bg-clip-text.text-transparent {
-    -webkit-text-fill-color: transparent !important;
-    background: linear-gradient(to right, #f472b6, #a855f7, #06b6d4) !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
+  /* Emoji styling - maintain saturation and glow */
+  .hero-sentiment-section .text-6xl.animate-bounce,
+  :root:not(.dark) .hero-sentiment-section .text-6xl {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3)) !important;
   }
 
   /* AI Analysis Button Light Mode Fixes */
