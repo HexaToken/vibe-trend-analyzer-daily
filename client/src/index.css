@@ -1528,4 +1528,81 @@ All colors MUST be HSL.
   :root:not(.dark) button[class*="to-cyan-600"] svg {
     color: #1C1E21 !important;
   }
+
+  /* Bullish Sentiment Badge and AI Summary Light Mode Fixes */
+
+  /* Bullish sentiment badges and cards */
+  :root:not(.dark) .bg-emerald-500\/20,
+  :root:not(.dark) [class*="bg-emerald"][class*="/20"],
+  :root:not(.dark) .bg-green-500\/20,
+  :root:not(.dark) [class*="bg-green"][class*="/20"] {
+    background: linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%) !important;
+    color: #1C1E21 !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  /* Bullish sentiment text colors */
+  :root:not(.dark) .text-emerald-400,
+  :root:not(.dark) .text-green-400,
+  :root:not(.dark) .text-green-600 {
+    color: #1C1E21 !important;
+    font-weight: 600 !important;
+  }
+
+  /* AI Summary widget styling */
+  :root:not(.dark) [class*="AISummary"] .bg-gradient-to-r,
+  :root:not(.dark) [class*="ai-summary"] .bg-gradient-to-r {
+    background: linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%) !important;
+    color: #1C1E21 !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  /* Sentiment score displays like "Bullish (82)" */
+  :root:not(.dark) [class*="sentiment"] .bg-gradient-to-r,
+  :root:not(.dark) .sentiment-badge,
+  :root:not(.dark) [data-sentiment="bullish"],
+  :root:not(.dark) [class*="bullish"] {
+    background: linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%) !important;
+    color: #1C1E21 !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+    padding: 4px 12px !important;
+  }
+
+  /* Hover effects for bullish/AI elements */
+  :root:not(.dark) .bg-emerald-500\/20:hover,
+  :root:not(.dark) [class*="bg-emerald"][class*="/20"]:hover,
+  :root:not(.dark) .bg-green-500\/20:hover,
+  :root:not(.dark) [class*="bg-green"][class*="/20"]:hover,
+  :root:not(.dark) [class*="bullish"]:hover {
+    background: linear-gradient(90deg, #A9CCF9 0%, #A9CCF9 100%) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    transform: translateY(-1px) !important;
+  }
+
+  /* Fix sentiment score text specifically */
+  :root:not(.dark) [class*="sentimentScore"],
+  :root:not(.dark) .sentiment-score,
+  :root:not(.dark) [data-testid*="sentiment"] {
+    color: #1C1E21 !important;
+    font-weight: 600 !important;
+  }
+
+  /* TopMoversMarketSentiment component fixes */
+  :root:not(.dark) [class*="TopMovers"] .bg-emerald-500\/20,
+  :root:not(.dark) [class*="TopMovers"] .text-emerald-400 {
+    background: linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%) !important;
+    color: #1C1E21 !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+  }
 }
