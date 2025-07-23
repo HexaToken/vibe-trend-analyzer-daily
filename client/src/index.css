@@ -1422,6 +1422,21 @@ All colors MUST be HSL.
     color: #1C1E21 !important;
   }
 
+  /* Light blue card backgrounds in light mode */
+  :root:not(.dark) [class*="bg-black/40"],
+  :root:not(.dark) [class*="bg-black/60"],
+  :root:not(.dark) [class*="bg-slate-800/40"],
+  :root:not(.dark) [class*="bg-slate-900/50"] {
+    background: linear-gradient(135deg, #E8F1FD 0%, #F0F6FE 100%) !important;
+    border: 1px solid #D2E3FC !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  }
+
+  :root:not(.dark) [class*="border-purple-500/20"],
+  :root:not(.dark) [class*="border-slate-700/50"] {
+    border-color: #D2E3FC !important;
+  }
+
   /* Fix input styling in Space components */
   :root:not(.dark) .bg-gray-800.border-gray-600 {
     background: #FFFFFF !important;
