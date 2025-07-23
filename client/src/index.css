@@ -866,6 +866,77 @@ All colors MUST be HSL.
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
   }
 
+  /* Light Mode Dropdown and Popup Styling */
+  :root:not(.dark) [data-radix-popper-content-wrapper] {
+    z-index: 9999;
+  }
+
+  /* Dropdown Menu Content - Light Mode */
+  :root:not(.dark) [data-radix-dropdown-menu-content] {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    color: #1E1E1E !important;
+  }
+
+  /* Dropdown Menu Items - Light Mode */
+  :root:not(.dark) [data-radix-dropdown-menu-item] {
+    color: #1E1E1E !important;
+    background: transparent !important;
+    border-radius: 8px !important;
+    padding: 12px 16px !important;
+    transition: all 0.2s ease !important;
+  }
+
+  :root:not(.dark) [data-radix-dropdown-menu-item]:hover {
+    background: #F5F5F5 !important;
+    color: #1E1E1E !important;
+  }
+
+  :root:not(.dark) [data-radix-dropdown-menu-item]:focus {
+    background: #F5F5F5 !important;
+    color: #1E1E1E !important;
+    outline: none !important;
+  }
+
+  /* Dropdown Menu Sub-items - Light Mode */
+  :root:not(.dark) [data-radix-dropdown-menu-sub-content] {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    color: #1E1E1E !important;
+  }
+
+  /* Dropdown Menu Labels - Light Mode */
+  :root:not(.dark) [data-radix-dropdown-menu-label] {
+    color: #333 !important;
+    font-weight: 600 !important;
+  }
+
+  /* Dropdown Menu Separators - Light Mode */
+  :root:not(.dark) [data-radix-dropdown-menu-separator] {
+    background: #E0E0E0 !important;
+  }
+
+  /* Badge styling within dropdowns - Light Mode */
+  :root:not(.dark) [data-radix-dropdown-menu-item] .inline-flex {
+    background: #E8EAF6 !important;
+    color: #3F51B5 !important;
+    border: 1px solid #3F51B5 !important;
+    border-radius: 12px !important;
+  }
+
+  /* Icons in dropdown items - Light Mode */
+  :root:not(.dark) [data-radix-dropdown-menu-item] svg {
+    color: #666 !important;
+  }
+
+  :root:not(.dark) [data-radix-dropdown-menu-item]:hover svg {
+    color: #1E1E1E !important;
+  }
+
   /* Typography readability overrides for light mode */
   :root:not(.dark) .text-theme-heading {
     color: #1E1E1E !important;
@@ -959,6 +1030,24 @@ All colors MUST be HSL.
     border: 1px solid #E0E0E0 !important;
     border-radius: 16px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  /* Navigation dropdown specific fixes */
+  :root:not(.dark) [data-radix-popper-content-wrapper] [role="menu"] {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  :root:not(.dark) [data-radix-popper-content-wrapper] [role="menuitem"] {
+    color: #1E1E1E !important;
+    background: transparent !important;
+  }
+
+  :root:not(.dark) [data-radix-popper-content-wrapper] [role="menuitem"]:hover {
+    background: #F5F5F5 !important;
+    color: #1E1E1E !important;
   }
 
   :root:not(.dark) .border-purple-500\/20 {
