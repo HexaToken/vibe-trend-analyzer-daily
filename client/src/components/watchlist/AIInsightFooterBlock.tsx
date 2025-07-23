@@ -214,7 +214,12 @@ export const AIInsightFooterBlock = ({
       </div>
 
       {/* Glow effect */}
-      <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-purple-500/5 via-pink-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+      <div className={cn(
+        "absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none",
+        themeMode === 'light'
+          ? 'bg-gradient-to-r from-[#D2E3FC]/20 via-[#E8F1FD]/20 to-[#F0F6FE]/20'
+          : 'bg-gradient-to-r from-purple-500/5 via-pink-500/5 to-cyan-500/5'
+      )} />
     </div>
   );
 };
@@ -225,18 +230,33 @@ export const AIInsightCompact = ({
   confidence = 75,
   className
 }: Pick<AIInsightFooterBlockProps, 'insight' | 'confidence' | 'className'>) => {
+  const { themeMode } = useMoodTheme();
+
   return (
     <div className={cn(
-      "flex items-center gap-2 p-2 rounded bg-gray-800/40 border border-gray-700/30",
+      "flex items-center gap-2 p-2 rounded",
+      themeMode === 'light'
+        ? 'bg-[#F5F7FA] border border-[#E0E0E0]'
+        : 'bg-gray-800/40 border border-gray-700/30',
       className
     )}>
-      <Brain className="w-3 h-3 text-purple-400 flex-shrink-0" />
-      <p className="text-xs text-gray-400 line-clamp-1 flex-1">{insight}</p>
+      <Brain className={cn(
+        "w-3 h-3 flex-shrink-0",
+        themeMode === 'light' ? 'text-[#6A1B9A]' : 'text-purple-400'
+      )} />
+      <p className={cn(
+        "text-xs line-clamp-1 flex-1",
+        themeMode === 'light' ? 'text-[#1C1E21]' : 'text-gray-400'
+      )}>{insight}</p>
       <div className={cn(
         "text-xs font-medium",
-        confidence >= 80 ? 'text-emerald-400' :
-        confidence >= 60 ? 'text-yellow-400' :
-        'text-red-400'
+        themeMode === 'light'
+          ? (confidence >= 80 ? 'text-[#4CAF50]' :
+             confidence >= 60 ? 'text-[#FFEB3B]' :
+             'text-[#F44336]')
+          : (confidence >= 80 ? 'text-emerald-400' :
+             confidence >= 60 ? 'text-yellow-400' :
+             'text-red-400')
       )}>
         {confidence}%
       </div>
