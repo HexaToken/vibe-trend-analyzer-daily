@@ -1497,4 +1497,35 @@ All colors MUST be HSL.
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
     transform: translateY(-1px) !important;
   }
+
+  /* More specific targeting for AI Analysis buttons */
+  :root:not(.dark) button[class*="from-purple-600"],
+  :root:not(.dark) button[class*="from-blue-600"],
+  :root:not(.dark) button[class*="to-pink-600"],
+  :root:not(.dark) button[class*="to-cyan-600"] {
+    background: linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%) !important;
+    color: #1C1E21 !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  :root:not(.dark) button[class*="from-purple-600"]:hover,
+  :root:not(.dark) button[class*="from-blue-600"]:hover,
+  :root:not(.dark) button[class*="to-pink-600"]:hover,
+  :root:not(.dark) button[class*="to-cyan-600"]:hover {
+    background: linear-gradient(90deg, #A9CCF9 0%, #A9CCF9 100%) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    transform: translateY(-1px) !important;
+  }
+
+  /* Text color fix for icons inside these buttons */
+  :root:not(.dark) button[class*="from-purple-600"] svg,
+  :root:not(.dark) button[class*="from-blue-600"] svg,
+  :root:not(.dark) button[class*="to-pink-600"] svg,
+  :root:not(.dark) button[class*="to-cyan-600"] svg {
+    color: #1C1E21 !important;
+  }
 }
