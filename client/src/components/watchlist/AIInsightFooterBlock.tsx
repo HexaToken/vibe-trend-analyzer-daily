@@ -44,24 +44,45 @@ export const AIInsightFooterBlock = ({
   };
 
   const getCategoryColor = () => {
-    switch (category) {
-      case 'earnings':
-        return 'text-emerald-400 bg-emerald-400/10 border-emerald-400/20';
-      case 'news':
-        return 'text-blue-400 bg-blue-400/10 border-blue-400/20';
-      case 'technical':
-        return 'text-purple-400 bg-purple-400/10 border-purple-400/20';
-      case 'sentiment':
-        return 'text-pink-400 bg-pink-400/10 border-pink-400/20';
-      default:
-        return 'text-cyan-400 bg-cyan-400/10 border-cyan-400/20';
+    if (themeMode === 'light') {
+      switch (category) {
+        case 'earnings':
+          return 'text-[#4CAF50] bg-[#E8F5E9] border-[#4CAF50]/30';
+        case 'news':
+          return 'text-[#2196F3] bg-[#E3F2FD] border-[#2196F3]/30';
+        case 'technical':
+          return 'text-[#9C27B0] bg-[#F3E5F5] border-[#9C27B0]/30';
+        case 'sentiment':
+          return 'text-[#6A1B9A] bg-[#F3E5F5] border-[#6A1B9A]/30';
+        default:
+          return 'text-[#00BCD4] bg-[#E0F2F1] border-[#00BCD4]/30';
+      }
+    } else {
+      switch (category) {
+        case 'earnings':
+          return 'text-emerald-400 bg-emerald-400/10 border-emerald-400/20';
+        case 'news':
+          return 'text-blue-400 bg-blue-400/10 border-blue-400/20';
+        case 'technical':
+          return 'text-purple-400 bg-purple-400/10 border-purple-400/20';
+        case 'sentiment':
+          return 'text-pink-400 bg-pink-400/10 border-pink-400/20';
+        default:
+          return 'text-cyan-400 bg-cyan-400/10 border-cyan-400/20';
+      }
     }
   };
 
   const getConfidenceColor = () => {
-    if (confidence >= 80) return 'text-emerald-400';
-    if (confidence >= 60) return 'text-yellow-400';
-    return 'text-red-400';
+    if (themeMode === 'light') {
+      if (confidence >= 80) return 'text-[#4CAF50]';
+      if (confidence >= 60) return 'text-[#FFEB3B]';
+      return 'text-[#F44336]';
+    } else {
+      if (confidence >= 80) return 'text-emerald-400';
+      if (confidence >= 60) return 'text-yellow-400';
+      return 'text-red-400';
+    }
   };
 
   const formatTimeAgo = (date: Date) => {
