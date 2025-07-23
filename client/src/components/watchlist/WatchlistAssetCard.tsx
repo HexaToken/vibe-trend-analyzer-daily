@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useMoodTheme } from "@/contexts/MoodThemeContext";
 import { 
   TrendingUp, 
   TrendingDown, 
