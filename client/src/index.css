@@ -1050,6 +1050,51 @@ All colors MUST be HSL.
     color: #1E1E1E !important;
   }
 
+  /* Comprehensive Light Mode Dropdown Overrides */
+  :root:not(.dark) [data-state="open"][data-side] {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    color: #1E1E1E !important;
+  }
+
+  /* Target all dropdown content regardless of exact selector */
+  :root:not(.dark) [class*="DropdownMenu"][class*="Content"] {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    color: #1E1E1E !important;
+  }
+
+  :root:not(.dark) [class*="DropdownMenu"][class*="Item"] {
+    color: #1E1E1E !important;
+    background: transparent !important;
+  }
+
+  :root:not(.dark) [class*="DropdownMenu"][class*="Item"]:hover {
+    background: #F5F5F5 !important;
+    color: #1E1E1E !important;
+  }
+
+  /* Ensure proper z-index for dropdowns */
+  :root:not(.dark) [data-radix-portal] {
+    z-index: 9999 !important;
+  }
+
+  /* Fix any remaining popover styles */
+  :root:not(.dark) .bg-popover {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  :root:not(.dark) .text-popover-foreground {
+    color: #1E1E1E !important;
+  }
+
   :root:not(.dark) .border-purple-500\/20 {
     border-color: #E0E0E0 !important;
   }
