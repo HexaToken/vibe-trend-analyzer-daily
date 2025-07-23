@@ -1292,6 +1292,15 @@ All colors MUST be HSL.
     font-weight: 700 !important;
   }
 
+  /* Exception for Sentiment Surface title - preserve its gradient */
+  :root:not(.dark) h2.bg-gradient-to-r.from-red-400.via-yellow-400.to-green-400 {
+    background: linear-gradient(to right, #f87171, #facc15, #4ade80) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    color: transparent !important;
+  }
+
   /* Only keep gradients for specific branded elements */
   :root:not(.dark) .brand-gradient-text {
     background: linear-gradient(135deg, #3F51B5 0%, #9C27B0 50%, #4CAF50 100%) !important;
