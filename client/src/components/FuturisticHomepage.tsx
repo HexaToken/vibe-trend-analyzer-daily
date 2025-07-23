@@ -525,7 +525,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <div className="w-12 h-12 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/50 animate-pulse">
                   <Brain className="w-7 h-7 text-white" />
                 </div>
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                <h1 className="text-3xl font-bold brand-gradient-text">
                   MoorMeter
                 </h1>
               </div>
