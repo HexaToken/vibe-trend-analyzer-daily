@@ -1244,20 +1244,33 @@ All colors MUST be HSL.
     border-color: #6A1B9A !important;
   }
 
-  /* Hero Sentiment Section - Always Dark */
+  /* Hero Sentiment Section - Always Dark Theme (Exact Match) */
   .hero-sentiment-section {
-    /* Force dark theme styling regardless of global theme */
+    /* Force exact dark theme styling regardless of global theme */
     color: white !important;
-    background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(88, 28, 135, 0.95) 100%) !important;
+    background: radial-gradient(ellipse at center, #1B0036 0%, #3B0A58 100%) !important;
     border-radius: 24px !important;
     position: relative !important;
+    backdrop-filter: blur(2px) !important;
+    padding: 2rem 1rem !important;
+    text-align: center !important;
   }
 
-  /* Additional enforcement for light mode */
+  /* Light Mode specific enforcement - exact Dark Mode match */
   :root:not(.dark) .hero-sentiment-section {
     color: white !important;
-    background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(88, 28, 135, 0.95) 100%) !important;
+    background: radial-gradient(ellipse at center, #1B0036 0%, #3B0A58 100%) !important;
     border-radius: 24px !important;
+    backdrop-filter: blur(2px) !important;
+    padding: 2rem 1rem !important;
+    text-align: center !important;
+  }
+
+  /* Sentiment Circle Styling - exact match */
+  .hero-sentiment-section .w-96.h-96.rounded-full {
+    border: 5px solid #5EE06C !important;
+    box-shadow: 0 0 16px rgba(94, 224, 108, 0.6) !important;
+    border-radius: 50% !important;
   }
 
   .hero-sentiment-section * {
