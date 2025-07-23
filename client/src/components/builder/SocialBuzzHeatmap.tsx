@@ -4,6 +4,7 @@ import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 import { Hash, TrendingUp, Users, MessageSquare, ExternalLink } from 'lucide-react';
 import { cn } from '../../lib/utils';
+import { useMoodTheme } from '../../contexts/MoodThemeContext';
 
 interface SocialBuzzHeatmapProps {
   title?: string;
@@ -34,6 +35,7 @@ export const SocialBuzzHeatmap: React.FC<SocialBuzzHeatmapProps> = ({
   autoRefresh = true,
   apiEndpoint = "/api/social/trending"
 }) => {
+  const { themeMode } = useMoodTheme();
   const [topics, setTopics] = useState<TrendingTopic[]>([
     { keyword: '$NVDA', sentiment: 'bullish', volume: 15420, sentimentScore: 78, platforms: { reddit: 5200, twitter: 8100, discord: 2120 }, change24h: 145, category: 'stock' },
     { keyword: '$TSLA', sentiment: 'bearish', volume: 12340, sentimentScore: 32, platforms: { reddit: 4100, twitter: 6840, discord: 1400 }, change24h: -23, category: 'stock' },
@@ -81,24 +83,48 @@ export const SocialBuzzHeatmap: React.FC<SocialBuzzHeatmapProps> = ({
 
   const getIntensityStyles = (intensity: string, sentiment: string) => {
     const baseStyles = "transition-all duration-300 hover:scale-105 cursor-pointer";
-    
-    if (sentiment === 'bullish') {
-      switch (intensity) {
-        case 'high': return `${baseStyles} bg-emerald-500/80 shadow-emerald-500/50 shadow-lg border-emerald-400`;
-        case 'medium': return `${baseStyles} bg-emerald-500/50 shadow-emerald-500/30 shadow-md border-emerald-500`;
-        default: return `${baseStyles} bg-emerald-500/20 border-emerald-600`;
-      }
-    } else if (sentiment === 'bearish') {
-      switch (intensity) {
-        case 'high': return `${baseStyles} bg-red-500/80 shadow-red-500/50 shadow-lg border-red-400`;
-        case 'medium': return `${baseStyles} bg-red-500/50 shadow-red-500/30 shadow-md border-red-500`;
-        default: return `${baseStyles} bg-red-500/20 border-red-600`;
+
+    if (themeMode === 'light') {
+      // Light mode styling with proper contrast
+      if (sentiment === 'bullish') {
+        switch (intensity) {
+          case 'high': return `${baseStyles} bg-[#E8F5E9] shadow-[0_4px_12px_rgba(76,175,80,0.3)] border-[#4CAF50] text-[#1E1E1E]`;
+          case 'medium': return `${baseStyles} bg-[#F1F8E9] shadow-[0_2px_8px_rgba(76,175,80,0.2)] border-[#66BB6A] text-[#1E1E1E]`;
+          default: return `${baseStyles} bg-[#F9FBE7] border-[#8BC34A] text-[#1E1E1E]`;
+        }
+      } else if (sentiment === 'bearish') {
+        switch (intensity) {
+          case 'high': return `${baseStyles} bg-[#FFEBEE] shadow-[0_4px_12px_rgba(244,67,54,0.3)] border-[#F44336] text-[#1E1E1E]`;
+          case 'medium': return `${baseStyles} bg-[#FFF5F5] shadow-[0_2px_8px_rgba(244,67,54,0.2)] border-[#EF5350] text-[#1E1E1E]`;
+          default: return `${baseStyles} bg-[#FAFAFA] border-[#E57373] text-[#1E1E1E]`;
+        }
+      } else {
+        switch (intensity) {
+          case 'high': return `${baseStyles} bg-[#FFF8E1] shadow-[0_4px_12px_rgba(255,152,0,0.3)] border-[#FF9800] text-[#1E1E1E]`;
+          case 'medium': return `${baseStyles} bg-[#FFFDE7] shadow-[0_2px_8px_rgba(255,152,0,0.2)] border-[#FFA726] text-[#1E1E1E]`;
+          default: return `${baseStyles} bg-[#FAFAFA] border-[#FFB74D] text-[#1E1E1E]`;
+        }
       }
     } else {
-      switch (intensity) {
-        case 'high': return `${baseStyles} bg-amber-500/80 shadow-amber-500/50 shadow-lg border-amber-400`;
-        case 'medium': return `${baseStyles} bg-amber-500/50 shadow-amber-500/30 shadow-md border-amber-500`;
-        default: return `${baseStyles} bg-amber-500/20 border-amber-600`;
+      // Dark mode styling (original)
+      if (sentiment === 'bullish') {
+        switch (intensity) {
+          case 'high': return `${baseStyles} bg-emerald-500/80 shadow-emerald-500/50 shadow-lg border-emerald-400`;
+          case 'medium': return `${baseStyles} bg-emerald-500/50 shadow-emerald-500/30 shadow-md border-emerald-500`;
+          default: return `${baseStyles} bg-emerald-500/20 border-emerald-600`;
+        }
+      } else if (sentiment === 'bearish') {
+        switch (intensity) {
+          case 'high': return `${baseStyles} bg-red-500/80 shadow-red-500/50 shadow-lg border-red-400`;
+          case 'medium': return `${baseStyles} bg-red-500/50 shadow-red-500/30 shadow-md border-red-500`;
+          default: return `${baseStyles} bg-red-500/20 border-red-600`;
+        }
+      } else {
+        switch (intensity) {
+          case 'high': return `${baseStyles} bg-amber-500/80 shadow-amber-500/50 shadow-lg border-amber-400`;
+          case 'medium': return `${baseStyles} bg-amber-500/50 shadow-amber-500/30 shadow-md border-amber-500`;
+          default: return `${baseStyles} bg-amber-500/20 border-amber-600`;
+        }
       }
     }
   };
@@ -135,14 +161,23 @@ export const SocialBuzzHeatmap: React.FC<SocialBuzzHeatmapProps> = ({
   };
 
   return (
-    <Card className="finance-card border-0">
-      <CardHeader className="border-b border-slate-700/50">
+    <Card className={themeMode === 'light'
+      ? 'bg-white border-[#E0E0E0] rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-200'
+      : 'finance-card border-0'
+    }>
+      <CardHeader className={`border-b ${themeMode === 'light' ? 'border-[#E0E0E0]' : 'border-slate-700/50'}`}>
         <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-2 text-white">
-            <Hash className="w-5 h-5 text-purple-400" />
+          <CardTitle className={`flex items-center gap-2 font-bold ${
+            themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+          }`}>
+            <Hash className={`w-5 h-5 ${
+              themeMode === 'light' ? 'text-[#9C27B0]' : 'text-purple-400'
+            }`} />
             {title}
             {loading && (
-              <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
+              <div className={`w-2 h-2 rounded-full animate-pulse ${
+                themeMode === 'light' ? 'bg-[#9C27B0]' : 'bg-purple-400'
+              }`} />
             )}
           </CardTitle>
           
@@ -181,7 +216,12 @@ export const SocialBuzzHeatmap: React.FC<SocialBuzzHeatmapProps> = ({
                     <span className="text-lg">{getCategoryIcon(topic.category)}</span>
                     <Badge
                       variant="outline"
-                      className="text-xs bg-black/20 text-white border-white/30"
+                      className={cn(
+                        "text-xs",
+                        themeMode === 'light'
+                          ? 'bg-white/80 text-[#666] border-[#E0E0E0]'
+                          : 'bg-black/20 text-white border-white/30'
+                      )}
                     >
                       {topic.category}
                     </Badge>
@@ -191,12 +231,18 @@ export const SocialBuzzHeatmap: React.FC<SocialBuzzHeatmapProps> = ({
 
                 {/* Keyword */}
                 <div className="mb-3">
-                  <h3 className="font-bold text-white text-sm mb-1">{topic.keyword}</h3>
+                  <h3 className={`font-bold text-sm mb-1 ${
+                    themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+                  }`}>{topic.keyword}</h3>
                   <div className="flex items-center gap-2 text-xs">
-                    <span className="text-white/80">{formatVolume(topic.volume)} mentions</span>
+                    <span className={themeMode === 'light' ? 'text-[#666]' : 'text-white/80'}>
+                      {formatVolume(topic.volume)} mentions
+                    </span>
                     <span className={cn(
                       "font-medium",
-                      topic.change24h >= 0 ? "text-emerald-300" : "text-red-300"
+                      topic.change24h >= 0
+                        ? (themeMode === 'light' ? 'text-[#4CAF50]' : 'text-emerald-300')
+                        : (themeMode === 'light' ? 'text-[#F44336]' : 'text-red-300')
                     )}>
                       {topic.change24h >= 0 ? '+' : ''}{topic.change24h.toFixed(0)}%
                     </span>
@@ -206,15 +252,22 @@ export const SocialBuzzHeatmap: React.FC<SocialBuzzHeatmapProps> = ({
                 {/* Sentiment Score */}
                 <div className="mb-3">
                   <div className="flex items-center justify-between text-xs mb-1">
-                    <span className="text-white/70">Sentiment</span>
-                    <span className="font-bold text-white">{topic.sentimentScore.toFixed(2)}</span>
+                    <span className={themeMode === 'light' ? 'text-[#666]' : 'text-white/70'}>Sentiment</span>
+                    <span className={`font-bold ${
+                      themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+                    }`}>{topic.sentimentScore.toFixed(2)}</span>
                   </div>
-                  <div className="h-1.5 bg-black/30 rounded-full overflow-hidden">
-                    <div 
+                  <div className={`h-1.5 rounded-full overflow-hidden ${
+                    themeMode === 'light' ? 'bg-[#E0E0E0]' : 'bg-black/30'
+                  }`}>
+                    <div
                       className={cn(
                         "h-full transition-all duration-500",
-                        topic.sentiment === 'bullish' ? 'bg-emerald-300' :
-                        topic.sentiment === 'bearish' ? 'bg-red-300' : 'bg-amber-300'
+                        topic.sentiment === 'bullish'
+                          ? (themeMode === 'light' ? 'bg-[#4CAF50]' : 'bg-emerald-300')
+                          : topic.sentiment === 'bearish'
+                          ? (themeMode === 'light' ? 'bg-[#F44336]' : 'bg-red-300')
+                          : (themeMode === 'light' ? 'bg-[#FF9800]' : 'bg-amber-300')
                       )}
                       style={{ width: `${topic.sentimentScore}%` }}
                     />
@@ -222,20 +275,36 @@ export const SocialBuzzHeatmap: React.FC<SocialBuzzHeatmapProps> = ({
                 </div>
 
                 {/* Platform Breakdown - Hidden by default, shown on hover */}
-                <div className="absolute inset-0 bg-black/90 backdrop-blur-sm rounded-xl p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center">
-                  <h4 className="text-white font-bold text-sm mb-3 text-center">Platform Breakdown</h4>
+                <div className={cn(
+                  "absolute inset-0 backdrop-blur-sm rounded-xl p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center",
+                  themeMode === 'light'
+                    ? 'bg-white/95 border border-[#E0E0E0] shadow-[0_4px_12px_rgba(0,0,0,0.15)]'
+                    : 'bg-black/90'
+                )}>
+                  <h4 className={`font-bold text-sm mb-3 text-center ${
+                    themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+                  }`}>Platform Breakdown</h4>
                   <div className="space-y-2">
                     {Object.entries(topic.platforms).map(([platform, count]) => (
                       <div key={platform} className="flex items-center justify-between text-xs">
-                        <span className="capitalize text-white/80">{platform}</span>
-                        <span className="font-medium text-white">{formatVolume(count)}</span>
+                        <span className={`capitalize ${
+                          themeMode === 'light' ? 'text-[#666]' : 'text-white/80'
+                        }`}>{platform}</span>
+                        <span className={`font-medium ${
+                          themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+                        }`}>{formatVolume(count)}</span>
                       </div>
                     ))}
                   </div>
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="mt-3 h-6 text-xs text-purple-300 hover:text-purple-200"
+                    className={cn(
+                      "mt-3 h-6 text-xs",
+                      themeMode === 'light'
+                        ? 'text-[#9C27B0] hover:text-[#7B1FA2] hover:bg-[#F3E5F5]'
+                        : 'text-purple-300 hover:text-purple-200'
+                    )}
                   >
                     <ExternalLink className="w-3 h-3 mr-1" />
                     View Details
@@ -247,21 +316,37 @@ export const SocialBuzzHeatmap: React.FC<SocialBuzzHeatmapProps> = ({
         </div>
 
         {/* Legend */}
-        <div className="flex flex-wrap items-center justify-center gap-6 pt-4 border-t border-slate-700/50">
+        <div className={`flex flex-wrap items-center justify-center gap-6 pt-4 border-t ${
+          themeMode === 'light' ? 'border-[#E0E0E0]' : 'border-slate-700/50'
+        }`}>
           <div className="flex items-center gap-2 text-xs">
-            <div className="w-3 h-3 bg-emerald-500/50 rounded border border-emerald-400" />
-            <span className="text-slate-400">Bullish</span>
+            <div className={`w-3 h-3 rounded border ${
+              themeMode === 'light' ? 'bg-[#E8F5E9] border-[#4CAF50]' : 'bg-emerald-500/50 border-emerald-400'
+            }`} />
+            <span className={`font-medium ${
+              themeMode === 'light' ? 'text-[#666]' : 'text-slate-400'
+            }`}>Bullish</span>
           </div>
           <div className="flex items-center gap-2 text-xs">
-            <div className="w-3 h-3 bg-red-500/50 rounded border border-red-400" />
-            <span className="text-slate-400">Bearish</span>
+            <div className={`w-3 h-3 rounded border ${
+              themeMode === 'light' ? 'bg-[#FFEBEE] border-[#F44336]' : 'bg-red-500/50 border-red-400'
+            }`} />
+            <span className={`font-medium ${
+              themeMode === 'light' ? 'text-[#666]' : 'text-slate-400'
+            }`}>Bearish</span>
           </div>
           <div className="flex items-center gap-2 text-xs">
-            <div className="w-3 h-3 bg-amber-500/50 rounded border border-amber-400" />
-            <span className="text-slate-400">Neutral</span>
+            <div className={`w-3 h-3 rounded border ${
+              themeMode === 'light' ? 'bg-[#FFF8E1] border-[#FF9800]' : 'bg-amber-500/50 border-amber-400'
+            }`} />
+            <span className={`font-medium ${
+              themeMode === 'light' ? 'text-[#666]' : 'text-slate-400'
+            }`}>Neutral</span>
           </div>
-          <div className="flex items-center gap-2 text-xs text-slate-400">
-            <span>Brightness = Volume</span>
+          <div className={`flex items-center gap-2 text-xs ${
+            themeMode === 'light' ? 'text-[#666]' : 'text-slate-400'
+          }`}>
+            <span className="font-medium">Brightness = Volume</span>
           </div>
         </div>
       </CardContent>

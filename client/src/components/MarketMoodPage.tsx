@@ -101,7 +101,7 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
   return (
     <div className={`min-h-screen relative overflow-hidden ${
       themeMode === 'light'
-        ? 'bg-[#F7F9FB]'
+        ? 'bg-[#F5F7FA]'
         : 'bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900'
     }`}>
       {/* Ambient Background Effects - Only in Dark Mode */}
@@ -119,28 +119,37 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
         <div className="text-center mb-12">
           <h1 className={`text-4xl font-bold mb-4 ${
             themeMode === 'light'
-              ? 'bg-gradient-to-r from-[#3F51B5] via-[#4CAF50] to-[#3F51B5] bg-clip-text text-transparent'
+              ? 'text-[#1E1E1E]'
               : 'bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent'
           }`}>
             {title}
           </h1>
           <p className={`text-xl max-w-3xl mx-auto mb-8 ${
-            themeMode === 'light' ? 'text-[#444]' : 'text-gray-200'
+            themeMode === 'light' ? 'text-[#555] font-normal' : 'text-gray-200'
           }`}>
             {subtitle}
           </p>
           
           {/* Status Bar */}
           <div className="flex items-center justify-center gap-4 mb-8">
-            <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30">
+            <Badge className={themeMode === 'light'
+              ? 'bg-[#E8F5E9] text-[#4CAF50] border-[#4CAF50]/30 rounded-full px-3 py-1'
+              : 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
+            }>
               <Zap className="w-3 h-3 mr-1" />
               Real-time Data
             </Badge>
-            <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30">
+            <Badge className={themeMode === 'light'
+              ? 'bg-[#E8EAF6] text-[#3F51B5] border-[#3F51B5]/30 rounded-full px-3 py-1'
+              : 'bg-blue-500/20 text-blue-400 border-blue-500/30'
+            }>
               <Brain className="w-3 h-3 mr-1" />
               AI Powered
             </Badge>
-            <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">
+            <Badge className={themeMode === 'light'
+              ? 'bg-[#F3E5F5] text-[#9C27B0] border-[#9C27B0]/30 rounded-full px-3 py-1'
+              : 'bg-purple-500/20 text-purple-400 border-purple-500/30'
+            }>
               <RefreshCw className="w-3 h-3 mr-1" />
               Updated {lastUpdated.toLocaleTimeString()}
             </Badge>
@@ -161,14 +170,21 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
               />
               
               {/* Quick Stats */}
-              <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
+              <Card className={themeMode === 'light'
+                ? 'bg-white border-[#E0E0E0] rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-200'
+                : 'bg-black/40 border-purple-500/20 backdrop-blur-xl'
+              }>
                 <CardContent className="p-6 text-center">
                   <div className="text-3xl mb-2">{getSentimentEmoji(currentSentiment)}</div>
-                  <div className="text-lg font-bold text-white mb-1">
+                  <div className={`text-lg font-bold mb-1 ${
+                    themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+                  }`}>
                     {currentSentiment === 'positive' ? 'Bullish Market' :
                      currentSentiment === 'negative' ? 'Bearish Market' : 'Neutral Market'}
                   </div>
-                  <div className="text-sm text-slate-400">
+                  <div className={`text-sm ${
+                    themeMode === 'light' ? 'text-[#666]' : 'text-slate-400'
+                  }`}>
                     {activeSources.length}/3 data sources active
                   </div>
                 </CardContent>
@@ -226,66 +242,87 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
 
             {/* Additional Insights Section */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              
+
               {/* Market Summary */}
-              <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
-                <CardHeader className="border-b border-slate-700/50">
-                  <CardTitle className="text-white text-sm">Market Summary</CardTitle>
+              <Card className={themeMode === 'light'
+                ? 'bg-white border-[#E0E0E0] rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-200'
+                : 'bg-black/40 border-purple-500/20 backdrop-blur-xl'
+              }>
+                <CardHeader className={`border-b ${themeMode === 'light' ? 'border-[#E0E0E0]' : 'border-slate-700/50'}`}>
+                  <CardTitle className={`text-sm font-semibold ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>Market Summary</CardTitle>
                 </CardHeader>
                 <CardContent className="p-6">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-slate-400 text-sm">Bullish Signals</span>
-                      <span className="text-emerald-400 font-bold">67%</span>
+                      <span className={`text-sm ${themeMode === 'light' ? 'text-[#666]' : 'text-slate-400'}`}>Bullish Signals</span>
+                      <span className={`font-bold ${themeMode === 'light' ? 'text-[#4CAF50]' : 'text-emerald-400'}`}>67%</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-slate-400 text-sm">Bearish Signals</span>
-                      <span className="text-red-400 font-bold">23%</span>
+                      <span className={`text-sm ${themeMode === 'light' ? 'text-[#666]' : 'text-slate-400'}`}>Bearish Signals</span>
+                      <span className={`font-bold ${themeMode === 'light' ? 'text-[#F44336]' : 'text-red-400'}`}>23%</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-slate-400 text-sm">Neutral Signals</span>
-                      <span className="text-amber-400 font-bold">10%</span>
+                      <span className={`text-sm ${themeMode === 'light' ? 'text-[#666]' : 'text-slate-400'}`}>Neutral Signals</span>
+                      <span className={`font-bold ${themeMode === 'light' ? 'text-[#FF9800]' : 'text-amber-400'}`}>10%</span>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
               {/* Volatility Index */}
-              <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
-                <CardHeader className="border-b border-slate-700/50">
-                  <CardTitle className="text-white text-sm">Volatility Index</CardTitle>
+              <Card className={themeMode === 'light'
+                ? 'bg-white border-[#E0E0E0] rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-200'
+                : 'bg-black/40 border-purple-500/20 backdrop-blur-xl'
+              }>
+                <CardHeader className={`border-b ${themeMode === 'light' ? 'border-[#E0E0E0]' : 'border-slate-700/50'}`}>
+                  <CardTitle className={`text-sm font-semibold ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>Volatility Index</CardTitle>
                 </CardHeader>
                 <CardContent className="p-6 text-center">
-                  <div className="text-3xl font-bold text-amber-400 mb-2">18.4</div>
-                  <div className="text-sm text-slate-400 mb-3">VIX Level</div>
-                  <Badge className="bg-amber-500/20 text-amber-400 border-amber-500/30">
+                  <div className={`text-3xl font-bold mb-2 ${themeMode === 'light' ? 'text-[#FF9800]' : 'text-amber-400'}`}>18.4</div>
+                  <div className={`text-sm mb-3 ${themeMode === 'light' ? 'text-[#666]' : 'text-slate-400'}`}>VIX Level</div>
+                  <Badge className={themeMode === 'light'
+                    ? 'bg-[#FFF8E1] text-[#FF9800] border-[#FF9800]/30 rounded-full px-3 py-1'
+                    : 'bg-amber-500/20 text-amber-400 border-amber-500/30'
+                  }>
                     Moderate
                   </Badge>
                 </CardContent>
               </Card>
 
               {/* Data Quality */}
-              <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
-                <CardHeader className="border-b border-slate-700/50">
-                  <CardTitle className="text-white text-sm">Data Quality</CardTitle>
+              <Card className={themeMode === 'light'
+                ? 'bg-white border-[#E0E0E0] rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-200'
+                : 'bg-black/40 border-purple-500/20 backdrop-blur-xl'
+              }>
+                <CardHeader className={`border-b ${themeMode === 'light' ? 'border-[#E0E0E0]' : 'border-slate-700/50'}`}>
+                  <CardTitle className={`text-sm font-semibold ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>Data Quality</CardTitle>
                 </CardHeader>
                 <CardContent className="p-6">
                   <div className="space-y-3">
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-slate-400">API Health</span>
-                      <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30">
+                      <span className={themeMode === 'light' ? 'text-[#666]' : 'text-slate-400'}>API Health</span>
+                      <Badge className={themeMode === 'light'
+                        ? 'bg-[#E8F5E9] text-[#4CAF50] border-[#4CAF50]/30 rounded-full px-2 py-0.5 text-xs'
+                        : 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
+                      }>
                         98%
                       </Badge>
                     </div>
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-slate-400">Data Freshness</span>
-                      <Badge className="bg-cyan-500/20 text-cyan-400 border-cyan-500/30">
+                      <span className={themeMode === 'light' ? 'text-[#666]' : 'text-slate-400'}>Data Freshness</span>
+                      <Badge className={themeMode === 'light'
+                        ? 'bg-[#E0F7FA] text-[#00796B] border-[#00796B]/30 rounded-full px-2 py-0.5 text-xs'
+                        : 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30'
+                      }>
                         Live
                       </Badge>
                     </div>
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-slate-400">Confidence</span>
-                      <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">
+                      <span className={themeMode === 'light' ? 'text-[#666]' : 'text-slate-400'}>Confidence</span>
+                      <Badge className={themeMode === 'light'
+                        ? 'bg-[#F3E5F5] text-[#9C27B0] border-[#9C27B0]/30 rounded-full px-2 py-0.5 text-xs'
+                        : 'bg-purple-500/20 text-purple-400 border-purple-500/30'
+                      }>
                         87%
                       </Badge>
                     </div>
@@ -298,19 +335,30 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
 
         {/* Footer */}
         <div className="mt-16 text-center">
-          <div className="text-sm text-slate-400 mb-4">
+          <div className={`text-sm mb-4 ${
+            themeMode === 'light' ? 'text-[#666]' : 'text-slate-400'
+          }`}>
             Market Mood data powered by advanced AI sentiment analysis
           </div>
           <div className="flex items-center justify-center gap-4">
-            <Badge className="bg-emerald-500/20 text-emerald-400 border-emerald-500/30">
+            <Badge className={themeMode === 'light'
+              ? 'bg-[#E8F5E9] text-[#4CAF50] border-[#4CAF50]/30 rounded-full px-3 py-1'
+              : 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
+            }>
               <TrendingUp className="w-3 h-3 mr-1" />
               Stock API: Live
             </Badge>
-            <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30">
+            <Badge className={themeMode === 'light'
+              ? 'bg-[#E8EAF6] text-[#3F51B5] border-[#3F51B5]/30 rounded-full px-3 py-1'
+              : 'bg-blue-500/20 text-blue-400 border-blue-500/30'
+            }>
               <Hash className="w-3 h-3 mr-1" />
               Social API: Live
             </Badge>
-            <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">
+            <Badge className={themeMode === 'light'
+              ? 'bg-[#F3E5F5] text-[#9C27B0] border-[#9C27B0]/30 rounded-full px-3 py-1'
+              : 'bg-purple-500/20 text-purple-400 border-purple-500/30'
+            }>
               <Brain className="w-3 h-3 mr-1" />
               AI Engine: Active
             </Badge>

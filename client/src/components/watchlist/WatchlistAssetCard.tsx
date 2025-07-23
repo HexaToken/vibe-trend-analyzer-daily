@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useMoodTheme } from "@/contexts/MoodThemeContext";
 import { 
   TrendingUp, 
   TrendingDown, 
@@ -38,6 +39,7 @@ export const WatchlistAssetCard = ({
   onToggleFavorite,
   className
 }: WatchlistAssetCardProps) => {
+  const { themeMode } = useMoodTheme();
   const [isHovered, setIsHovered] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   
@@ -60,13 +62,10 @@ export const WatchlistAssetCard = ({
   return (
     <div
       className={cn(
-        "group relative",
-        "bg-gradient-to-br from-gray-900/90 via-gray-800/80 to-gray-900/90",
-        "border border-gray-700/50 rounded-xl p-4",
-        "backdrop-blur-sm transition-all duration-300",
-        "hover:border-purple-500/40 hover:scale-[1.02]",
-        "cursor-pointer",
-        getCardGlowColor(),
+        "group relative rounded-xl p-4 backdrop-blur-sm transition-all duration-300 cursor-pointer",
+        themeMode === 'light'
+          ? "bg-white border border-[#E0E0E0] shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:border-[#D2E3FC] hover:scale-[1.02] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]"
+          : "bg-gradient-to-br from-gray-900/90 via-gray-800/80 to-gray-900/90 border border-gray-700/50 hover:border-purple-500/40 hover:scale-[1.02] " + getCardGlowColor(),
         className
       )}
       onMouseEnter={() => setIsHovered(true)}
@@ -77,38 +76,58 @@ export const WatchlistAssetCard = ({
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-3">
           {/* Logo/Emoji */}
-          <div className="w-10 h-10 bg-gradient-to-br from-gray-700 to-gray-800 rounded-lg flex items-center justify-center text-lg border border-gray-600/50">
+          <div className={cn(
+            "w-10 h-10 rounded-lg flex items-center justify-center text-lg",
+            themeMode === 'light'
+              ? "bg-gradient-to-br from-[#F5F7FA] to-[#E8F1FD] border border-[#E0E0E0]"
+              : "bg-gradient-to-br from-gray-700 to-gray-800 border border-gray-600/50"
+          )}>
             {asset.logo || '📊'}
           </div>
           
           {/* Ticker & Name */}
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="font-bold text-white text-lg">{asset.ticker}</h3>
+              <h3 className={cn(
+                "font-bold text-lg",
+                themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'
+              )}>{asset.ticker}</h3>
               <Badge 
                 variant="outline" 
                 className={cn(
                   "text-xs",
-                  asset.type === 'crypto' ? 
-                    "text-orange-400 border-orange-400/30 bg-orange-400/10" :
-                    "text-blue-400 border-blue-400/30 bg-blue-400/10"
+                  themeMode === 'light'
+                    ? (asset.type === 'crypto'
+                        ? "text-[#EA580C] border-[#FCD34D] bg-[#FFF7ED]"
+                        : "text-[#2563EB] border-[#93C5FD] bg-[#DBEAFE]")
+                    : (asset.type === 'crypto'
+                        ? "text-orange-400 border-orange-400/30 bg-orange-400/10"
+                        : "text-blue-400 border-blue-400/30 bg-blue-400/10")
                 )}
               >
                 {asset.type === 'crypto' ? 'CRYPTO' : 'STOCK'}
               </Badge>
             </div>
-            <p className="text-sm text-gray-400 truncate max-w-32">{asset.name}</p>
+            <p className={cn(
+              "text-sm truncate max-w-32",
+              themeMode === 'light' ? 'text-[#444]' : 'text-gray-400'
+            )}>{asset.name}</p>
           </div>
         </div>
 
         {/* Price & Change */}
         <div className="text-right">
-          <div className="text-xl font-bold text-white">
+          <div className={cn(
+            "text-xl font-bold",
+            themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'
+          )}>
             {formatCurrency(asset.currentPrice, asset.type)}
           </div>
           <div className={cn(
             "flex items-center gap-1 text-sm font-medium",
-            isPositive ? "text-emerald-400" : "text-red-400"
+            themeMode === 'light'
+              ? (isPositive ? "text-[#4CAF50]" : "text-[#F44336]")
+              : (isPositive ? "text-emerald-400" : "text-red-400")
           )}>
             {isPositive ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
             <span>{isPositive ? '+' : ''}{asset.dailyChange.toFixed(2)}</span>
@@ -120,10 +139,16 @@ export const WatchlistAssetCard = ({
       {/* Sentiment Section */}
       <div className="mb-3">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-xs text-gray-400 font-medium">SENTIMENT SCORE</span>
+          <span className={cn(
+            "text-xs font-medium",
+            themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'
+          )}>SENTIMENT SCORE</span>
           <div className="flex items-center gap-2">
             <MiniSentimentBars trendData={mockTrendData} />
-            <Activity className="w-3 h-3 text-gray-500" />
+            <Activity className={cn(
+              "w-3 h-3",
+              themeMode === 'light' ? 'text-[#666]' : 'text-gray-500'
+            )} />
           </div>
         </div>
         <SentimentScoreBar 
@@ -151,7 +176,12 @@ export const WatchlistAssetCard = ({
         <Button
           size="sm"
           variant="ghost"
-          className="h-7 w-7 p-0 hover:bg-red-500/20 hover:text-red-400"
+          className={cn(
+            "h-7 w-7 p-0",
+            themeMode === 'light'
+              ? 'hover:bg-[#FFEBEE] hover:text-[#F44336]'
+              : 'hover:bg-red-500/20 hover:text-red-400'
+          )}
           onClick={(e) => {
             e.stopPropagation();
             onRemove?.(asset.id);
@@ -165,7 +195,12 @@ export const WatchlistAssetCard = ({
             <Button
               size="sm"
               variant="ghost"
-              className="h-7 w-7 p-0 hover:bg-gray-700/50"
+              className={cn(
+                "h-7 w-7 p-0",
+                themeMode === 'light'
+                  ? 'hover:bg-[#F5F5F5] hover:text-[#333]'
+                  : 'hover:bg-gray-700/50'
+              )}
               onClick={(e) => e.stopPropagation()}
             >
               <MoreHorizontal className="w-3 h-3" />

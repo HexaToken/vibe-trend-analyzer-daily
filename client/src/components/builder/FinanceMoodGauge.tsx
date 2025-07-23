@@ -90,14 +90,14 @@ export const FinanceMoodGauge: React.FC<FinanceMoodGaugeProps> = ({
   };
 
   return (
-    <div className={`rounded-lg p-8 text-center ${
+    <div className={`rounded-xl p-8 text-center transition-all duration-200 ${
       themeMode === 'light'
-        ? `${cardBackground} border ${borderColor} shadow-[0_2px_8px_rgba(0,0,0,0.06)]`
+        ? 'bg-white border border-[#E0E0E0] shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:-translate-y-0.5'
         : 'finance-card'
     }`}>
       <div className="mb-6">
-        <h2 className={`text-2xl font-semibold mb-2 ${themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'}`}>{title}</h2>
-        <p className={`text-sm ${themeMode === 'light' ? 'text-[#444]' : 'text-slate-300'}`}>{subtitle}</p>
+        <h2 className={`text-2xl font-bold mb-2 ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>{title}</h2>
+        <p className={`text-sm font-normal ${themeMode === 'light' ? 'text-[#555]' : 'text-slate-300'}`}>{subtitle}</p>
       </div>
       
       {/* Mood Score Gauge */}
@@ -105,11 +105,11 @@ export const FinanceMoodGauge: React.FC<FinanceMoodGaugeProps> = ({
         <div className={`sentiment-gauge ${getGaugeSize()}`}>
           <div className="sentiment-ring">
             <div className="sentiment-inner">
-              <div className={`${getTextSize()} font-bold mb-1 ${themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'}`}>
+              <div className={`${getTextSize()} font-bold mb-1 ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>
                 {loading ? "..." : Math.round(moodData.overall)}
               </div>
-              <div className={`text-sm font-medium ${
-                themeMode === 'light' ? 'text-[#607D8B]' : 'text-blue-400'
+              <div className={`text-sm font-semibold ${
+                themeMode === 'light' ? 'text-[#3F51B5]' : 'text-blue-400'
               }`}>
                 {getMoodLabel(moodData.overall)}
               </div>
@@ -131,14 +131,14 @@ export const FinanceMoodGauge: React.FC<FinanceMoodGaugeProps> = ({
                 themeMode === 'light' ? 'bg-[#E0E0E0]' : 'bg-slate-700'
               }`}>
                 <div
-                  className={`h-full transition-all duration-1000 ${
-                    themeMode === 'light' ? 'bg-[#3F51B5]' : 'bg-blue-500'
+                  className={`h-full transition-all duration-1000 rounded-full ${
+                    themeMode === 'light' ? 'bg-gradient-to-r from-[#26A69A] to-[#4CAF50]' : 'bg-blue-500'
                   }`}
                   style={{ width: `${item.value}%` }}
                 />
               </div>
-              <div className={`text-xs ${themeMode === 'light' ? 'text-[#666]' : 'text-slate-400'}`}>{item.label} {item.weight}</div>
-              <div className={`text-sm font-medium ${themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'}`}>{Math.round(item.value)}</div>
+              <div className={`text-xs font-medium ${themeMode === 'light' ? 'text-[#666]' : 'text-slate-400'}`}>{item.label} {item.weight}</div>
+              <div className={`text-sm font-semibold ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>{Math.round(item.value)}</div>
             </div>
           ))}
         </div>

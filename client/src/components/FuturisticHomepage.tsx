@@ -345,6 +345,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
   const [financeSearchQuery, setFinanceSearchQuery] = useState("");
   const [mobileFinanceOpen, setMobileFinanceOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [financeDropdownOpen, setFinanceDropdownOpen] = useState(false);
   const [selectedTimeframe, setSelectedTimeframe] = useState<"1D" | "7D" | "30D">("7D");
 
   // Core mood data
@@ -525,7 +526,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <div className="w-12 h-12 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/50 animate-pulse">
                   <Brain className="w-7 h-7 text-white" />
                 </div>
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                <h1 className="text-3xl font-bold brand-gradient-text">
                   MoorMeter
                 </h1>
               </div>
@@ -604,12 +605,12 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 </DropdownMenu>
 
                 {/* Finance Dropdown */}
-                <DropdownMenu>
+                <DropdownMenu open={financeDropdownOpen} onOpenChange={setFinanceDropdownOpen}>
                   <DropdownMenuTrigger asChild>
                     <button
                       className={cn(
                         "text-sm font-medium transition-all duration-300 relative group flex items-center gap-1",
-                        activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings'
+                        (activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings')
                           ? "text-pink-400"
                           : "text-gray-400 hover:text-white"
                       )}
@@ -627,49 +628,70 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     className="bg-black/95 backdrop-blur-xl border-green-500/30 text-white animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 transition-all duration-300"
                   >
                     <DropdownMenuItem
-                      onClick={() => setActiveSection('finance')}
-                      className="hover:bg-green-500/20 focus:bg-green-500/20 cursor-pointer transition-colors duration-200"
+                      onClick={() => {
+                        setActiveSection('finance');
+                        setFinanceDropdownOpen(false);
+                      }}
+                      className="hover:bg-gray-500/20 focus:bg-gray-500/20 cursor-pointer transition-colors duration-200"
                     >
                       <span className="mr-2">💰</span>
                       Finance Hub
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      onClick={() => setActiveSection('market')}
+                      onClick={() => {
+                        setActiveSection('market');
+                        setFinanceDropdownOpen(false);
+                      }}
                       className="hover:bg-blue-500/20 focus:bg-blue-500/20 cursor-pointer transition-colors duration-200"
                     >
                       <BarChart3 className="w-4 h-4 mr-2" />
                       Market Analytics
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      onClick={() => setActiveSection('watchlist')}
+                      onClick={() => {
+                        setActiveSection('watchlist');
+                        setFinanceDropdownOpen(false);
+                      }}
                       className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer transition-colors duration-200"
                     >
                       <TrendingUp className="w-4 h-4 mr-2" />
                       Watchlist
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      onClick={() => setActiveSection('trending')}
+                      onClick={() => {
+                        setActiveSection('trending');
+                        setFinanceDropdownOpen(false);
+                      }}
                       className="hover:bg-pink-500/20 focus:bg-pink-500/20 cursor-pointer transition-colors duration-200"
                     >
                       <Flame className="w-4 h-4 mr-2" />
                       Trending
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      onClick={() => setActiveSection('earnings')}
-                      className="hover:bg-emerald-500/20 focus:bg-emerald-500/20 cursor-pointer transition-colors duration-200"
+                      onClick={() => {
+                        setActiveSection('earnings');
+                        setFinanceDropdownOpen(false);
+                      }}
+                      className="hover:bg-gray-500/20 focus:bg-gray-500/20 cursor-pointer transition-colors duration-200"
                     >
                       <DollarSign className="w-4 h-4 mr-2" />
                       Earnings
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      onClick={() => setActiveSection('crypto')}
+                      onClick={() => {
+                        setActiveSection('crypto');
+                        setFinanceDropdownOpen(false);
+                      }}
                       className="hover:bg-orange-500/20 focus:bg-orange-500/20 cursor-pointer transition-colors duration-200"
                     >
                       <span className="mr-2">₿</span>
                       Crypto
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      onClick={() => setActiveSection('charts')}
+                      onClick={() => {
+                        setActiveSection('charts');
+                        setFinanceDropdownOpen(false);
+                      }}
                       className="hover:bg-indigo-500/20 focus:bg-indigo-500/20 cursor-pointer transition-colors duration-200"
                     >
                       <BarChart3 className="w-4 h-4 mr-2" />
@@ -986,7 +1008,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   </div>
                   <h1 className={`text-4xl font-bold ${
                     themeMode === 'light'
-                      ? 'bg-gradient-to-r from-[#388E3C] via-[#00796B] to-[#303F9F] bg-clip-text text-transparent'
+                      ? 'text-[#1E1E1E]'
                       : 'bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent'
                   }`}>
                     Finance Hub
@@ -1059,18 +1081,26 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <TabsTrigger
                   value="risk-analysis"
                   className={themeMode === 'light'
-                    ? "data-[state=active]:bg-[#3F51B5] data-[state=active]:text-white text-[#444] flex items-center gap-2"
+                    ? "data-[state=active]:text-[#1C1E21] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E0E0E0] text-[#444] flex items-center gap-2"
                     : "data-[state=active]:bg-blue-600/30 data-[state=active]:text-blue-300 text-gray-400 flex items-center gap-2"
                   }
+                  style={themeMode === 'light' ? {
+                    '--active-bg': 'linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%)',
+                    '--active-shadow': '0 2px 4px rgba(0, 0, 0, 0.05)'
+                  } : {}}
                 >
                   📊 Risk Analysis
                 </TabsTrigger>
                 <TabsTrigger
                   value="financial-reports"
                   className={themeMode === 'light'
-                    ? "data-[state=active]:bg-[#3F51B5] data-[state=active]:text-white text-[#444] flex items-center gap-2"
+                    ? "data-[state=active]:text-[#1C1E21] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E0E0E0] text-[#444] flex items-center gap-2"
                     : "data-[state=active]:bg-purple-600/30 data-[state=active]:text-purple-300 text-gray-400 flex items-center gap-2"
                   }
+                  style={themeMode === 'light' ? {
+                    '--active-bg': 'linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%)',
+                    '--active-shadow': '0 2px 4px rgba(0, 0, 0, 0.05)'
+                  } : {}}
                 >
                   📁 Financial Reports
                 </TabsTrigger>
@@ -2983,7 +3013,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                             { symbol: 'LINK', name: 'Chainlink', sentiment: 66, change: '+2.1%', volume: '189M', category: 'crypto', icon: '🔗' },
 
                             // Sectors
-                            { symbol: 'TECH', name: 'Technology', sentiment: 81, change: '+2.8%', volume: '12B', category: 'sector', icon: '💻' },
+                            { symbol: 'TECH', name: 'Technology', sentiment: 81, change: '+2.8%', volume: '12B', category: 'sector', icon: '��' },
                             { symbol: 'FIN', name: 'Finance', sentiment: 62, change: '+1.2%', volume: '8.4B', category: 'sector', icon: '🏦' },
                             { symbol: 'HLTH', name: 'Healthcare', sentiment: 54, change: '-0.3%', volume: '5.2B', category: 'sector', icon: '🏥' },
                             { symbol: 'ENGY', name: 'Energy', sentiment: 47, change: '-1.8%', volume: '6.7B', category: 'sector', icon: '⚡' },

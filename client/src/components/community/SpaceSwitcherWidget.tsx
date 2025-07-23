@@ -36,6 +36,7 @@ import {
 } from "lucide-react";
 import { useCryptoListings } from "@/hooks/useCoinMarketCap";
 import { useAuth } from "@/contexts/AuthContext";
+import { useMoodTheme } from "@/contexts/MoodThemeContext";
 
 interface CryptoChannel {
   id: string;
@@ -92,6 +93,7 @@ interface OffTopicPost {
 
 export const SpaceSwitcherWidget: React.FC = () => {
   const { user, isAuthenticated } = useAuth();
+  const { themeMode } = useMoodTheme();
   const [activeTab, setActiveTab] = useState("crypto");
   const [selectedChannel, setSelectedChannel] = useState("BTC");
   const [selectedSection, setSelectedSection] = useState("general");
@@ -268,19 +270,40 @@ export const SpaceSwitcherWidget: React.FC = () => {
   const selectedSectionData = offTopicSections.find(s => s.id === selectedSection);
 
   return (
-    <div className="w-full max-w-7xl mx-auto" style={{ background: '#0e1423' }}>
+    <div className={`w-full max-w-7xl mx-auto p-6 rounded-xl ${
+      themeMode === 'light'
+        ? 'bg-[#F5F7FA]'
+        : 'bg-[#0e1423]'
+    }`}>
       {/* Custom Tab Switcher */}
       <div className="mb-6">
-        <div className="flex rounded-xl p-1 border border-gray-700/50" style={{ background: '#1a1f2b' }}>
+        <div className={`flex rounded-xl p-1 border ${
+          themeMode === 'light'
+            ? 'border-[#E0E0E0] bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04)]'
+            : 'border-gray-700/50 bg-[#1a1f2b]'
+        }`}>
           <button
             onClick={() => setActiveTab("crypto")}
             className={`flex-1 py-3 px-6 rounded-lg text-sm font-semibold transition-all duration-300 ${
               activeTab === "crypto"
-                ? "text-white shadow-lg"
-                : "text-[#94a3b8] hover:text-gray-300"
+                ? (themeMode === 'light' ? 'text-[#1C1E21] shadow-lg font-semibold border border-[#E0E0E0]' : 'text-white shadow-lg bg-[#0f111a]')
+                : (themeMode === 'light' ? 'text-[#666] hover:text-[#1C1E21] hover:border hover:border-[#E0E0E0] bg-transparent' : 'text-[#94a3b8] hover:text-gray-300 bg-transparent')
             }`}
-            style={{ 
-              background: activeTab === "crypto" ? '#0f111a' : 'transparent'
+            style={activeTab === "crypto" && themeMode === 'light' ? {
+              background: 'linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%)',
+              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)'
+            } : {}}
+            onMouseEnter={(e) => {
+              if (activeTab !== "crypto" && themeMode === 'light') {
+                e.currentTarget.style.background = 'linear-gradient(90deg, #E8F1FD 0%, #D2E9FC 100%)';
+                e.currentTarget.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.03)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (activeTab !== "crypto" && themeMode === 'light') {
+                e.currentTarget.style.background = 'transparent';
+                e.currentTarget.style.boxShadow = 'none';
+              }
             }}
           >
             <Hash className="h-4 w-4 inline mr-2" />
@@ -290,11 +313,24 @@ export const SpaceSwitcherWidget: React.FC = () => {
             onClick={() => setActiveTab("offtopic")}
             className={`flex-1 py-3 px-6 rounded-lg text-sm font-semibold transition-all duration-300 ${
               activeTab === "offtopic"
-                ? "text-white shadow-lg"
-                : "text-[#94a3b8] hover:text-gray-300"
+                ? (themeMode === 'light' ? 'text-[#1C1E21] shadow-lg font-semibold border border-[#E0E0E0]' : 'text-white shadow-lg bg-[#0f111a]')
+                : (themeMode === 'light' ? 'text-[#666] hover:text-[#1C1E21] hover:border hover:border-[#E0E0E0] bg-transparent' : 'text-[#94a3b8] hover:text-gray-300 bg-transparent')
             }`}
-            style={{ 
-              background: activeTab === "offtopic" ? '#0f111a' : 'transparent'
+            style={activeTab === "offtopic" && themeMode === 'light' ? {
+              background: 'linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%)',
+              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)'
+            } : {}}
+            onMouseEnter={(e) => {
+              if (activeTab !== "offtopic" && themeMode === 'light') {
+                e.currentTarget.style.background = 'linear-gradient(90deg, #E8F1FD 0%, #D2E9FC 100%)';
+                e.currentTarget.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.03)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (activeTab !== "offtopic" && themeMode === 'light') {
+                e.currentTarget.style.background = 'transparent';
+                e.currentTarget.style.boxShadow = 'none';
+              }
             }}
           >
             <Coffee className="h-4 w-4 inline mr-2" />

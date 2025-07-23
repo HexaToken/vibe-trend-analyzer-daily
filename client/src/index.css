@@ -19,75 +19,76 @@ All colors MUST be HSL.
 @layer base {
   :root {
     /* Light Mode (Clarity Mode) - Finance-focused design system */
-    --background: 216 27% 98%; /* #F7F9FB */
-    --foreground: 220 13% 12%; /* #1E1E1E */
+    --background: 220 14% 96%; /* #F5F7FA - Clean neutral base */
+    --foreground: 220 13% 12%; /* #1E1E1E - Headlines */
 
-    --card: 0 0% 100%; /* #FFFFFF */
+    --card: 0 0% 100%; /* #FFFFFF - Pure white cards */
     --card-foreground: 220 13% 12%; /* #1E1E1E */
 
     --popover: 0 0% 100%; /* #FFFFFF */
     --popover-foreground: 220 13% 12%; /* #1E1E1E */
 
-    --primary: 228 45% 42%; /* #3F51B5 */
+    --primary: 228 45% 42%; /* #3F51B5 - Financial blue */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 13% 91%; /* #E8EBF0 */
-    --secondary-foreground: 220 13% 29%; /* #4A4A4A */
+    --secondary: 220 13% 20%; /* #333 - Subheadings */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 220 13% 88%; /* #E0E0E0 */
-    --muted-foreground: 220 13% 29%; /* #4A4A4A */
+    --muted: 220 13% 88%; /* #E0E0E0 - Borders */
+    --muted-foreground: 220 13% 33%; /* #555 - Descriptions */
 
-    --accent: 228 45% 42%; /* #3F51B5 */
-    --accent-foreground: 0 0% 100%;
+    --accent: 240 10% 96%; /* #F5F5F5 - Light hover background */
+    --accent-foreground: 220 13% 12%; /* #1E1E1E - Dark text on light hover */
 
-    --destructive: 4 90% 58%; /* #F44336 */
+    --destructive: 4 90% 58%; /* #F44336 - Red accent */
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 88%; /* #E0E0E0 */
+    --border: 220 13% 88%; /* #E0E0E0 - Gray borders */
     --input: 220 13% 88%; /* #E0E0E0 */
-    --ring: 195 32% 40%; /* #4D7C8A */
+    --ring: 228 45% 42%; /* #3F51B5 - Focus ring */
 
-    --radius: 0.75rem;
+    --radius: 0.75rem; /* 12px border radius */
 
-    /* Sentiment Colors - Light Mode */
-    --positive: 122 39% 49%; /* #4CAF50 */
-    --positive-light: 122 39% 70%;
-    --negative: 4 90% 58%; /* #F44336 */
-    --negative-light: 4 90% 78%;
-    --neutral: 199 18% 33%; /* #607D8B */
-    --neutral-light: 199 18% 60%;
+    /* Sentiment Colors - Light Mode Financial Grade */
+    --positive: 123 46% 49%; /* #4CAF50 - Green */
+    --positive-light: 123 46% 85%;
+    --negative: 4 90% 58%; /* #F44336 - Red */
+    --negative-light: 4 90% 85%;
+    --neutral: 199 18% 33%; /* #607D8B - Gray */
+    --neutral-light: 199 18% 80%;
 
-    /* Data Visualization - Light Mode */
-    --chart-primary: 195 32% 40%; /* #4D7C8A */
-    --chart-secondary: 123 46% 34%; /* #4CAF50 */
-    --chart-tertiary: 0 67% 49%; /* #D32F2F */
-    --chart-quaternary: 199 18% 33%; /* #607D8B */
+    /* Data Visualization - Clean Financial Colors */
+    --chart-primary: 174 72% 56%; /* #26A69A - Teal for primary charts */
+    --chart-secondary: 123 46% 49%; /* #4CAF50 - Green */
+    --chart-tertiary: 4 90% 58%; /* #F44336 - Red */
+    --chart-quaternary: 228 45% 42%; /* #3F51B5 - Blue */
 
-    /* Gradients - Light Mode */
+    /* Clean Financial Gradients */
     --gradient-hero: linear-gradient(
       135deg,
-      hsl(195 32% 40%) 0%,
-      hsl(199 18% 33%) 100%
+      hsl(220 14% 96%) 0%,
+      hsl(0 0% 100%) 100%
     );
     --gradient-card: linear-gradient(
       145deg,
       hsl(0 0% 100%) 0%,
-      hsl(212 17% 97%) 100%
+      hsl(220 14% 98%) 100%
     );
     --gradient-positive: linear-gradient(
       90deg,
-      hsl(123 46% 34%) 0%,
-      hsl(123 46% 60%) 100%
+      hsl(123 46% 49%) 0%,
+      hsl(123 46% 70%) 100%
     );
     --gradient-negative: linear-gradient(
       90deg,
-      hsl(0 67% 49%) 0%,
-      hsl(0 67% 70%) 100%
+      hsl(4 90% 58%) 0%,
+      hsl(4 90% 75%) 100%
     );
 
-    /* Shadows - Light Mode */
-    --shadow-glow: 0 2px 6px hsl(0 0% 0% / 0.05);
-    --shadow-card: 0 2px 6px hsl(0 0% 0% / 0.05);
+    /* Soft Shadows - Clean Design */
+    --shadow-glow: 0 2px 8px hsl(0 0% 0% / 0.04);
+    --shadow-card: 0 2px 8px hsl(0 0% 0% / 0.04);
+    --shadow-hover: 0 4px 12px hsl(0 0% 0% / 0.08);
 
     --radius: 0.75rem;
 
@@ -107,12 +108,12 @@ All colors MUST be HSL.
 
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    /* Chart Colors - Light Mode */
-    --chart-1: 195 32% 40%; /* #4D7C8A */
-    --chart-2: 123 46% 34%; /* #4CAF50 */
-    --chart-3: 0 67% 49%; /* #D32F2F */
-    --chart-4: 199 18% 33%; /* #607D8B */
-    --chart-5: 212 17% 65%; /* #95A5B8 */
+    /* Chart Colors - Clean Financial Light Mode */
+    --chart-1: 174 72% 56%; /* #26A69A - Teal primary */
+    --chart-2: 123 46% 49%; /* #4CAF50 - Green secondary */
+    --chart-3: 4 90% 58%; /* #F44336 - Red tertiary */
+    --chart-4: 228 45% 42%; /* #3F51B5 - Blue quaternary */
+    --chart-5: 199 18% 33%; /* #607D8B - Gray quinary */
   }
 
   .dark {
@@ -679,25 +680,36 @@ All colors MUST be HSL.
     box-shadow: 0 0 20px var(--mood-glow);
   }
 
-  /* Light Theme Utility Classes */
+  /* Clarity Mode (Light Theme) Utility Classes */
   .clarity-card {
-    @apply bg-white border border-[#E0E0E0] shadow-[0_2px_8px_rgba(0,0,0,0.06)];
+    @apply bg-white border border-[#E0E0E0] rounded-xl;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .clarity-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
   }
 
   .clarity-text-primary {
-    @apply text-[#1E1E1E];
+    @apply text-[#1E1E1E] font-semibold;
   }
 
   .clarity-text-secondary {
-    @apply text-[#4A4A4A];
+    @apply text-[#333] font-medium;
+  }
+
+  .clarity-text-body {
+    @apply text-[#555] font-normal;
   }
 
   .clarity-bg-primary {
-    @apply bg-[#F7F9FB];
+    @apply bg-[#F5F7FA];
   }
 
   .clarity-bg-hover {
-    @apply hover:bg-[#E8EBF0];
+    @apply hover:bg-[#F0F0F0] transition-colors duration-200;
   }
 
   .clarity-accent {
@@ -720,6 +732,25 @@ All colors MUST be HSL.
     @apply border-[#E0E0E0];
   }
 
+  .clarity-button {
+    @apply rounded-full px-6 py-2 font-semibold transition-all duration-200;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .clarity-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .clarity-tab-active {
+    @apply bg-white text-black font-medium px-4 py-2 rounded-lg;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .clarity-tab-inactive {
+    @apply bg-[#F0F0F0] text-[#666] font-normal px-4 py-2 rounded-lg hover:bg-[#E8E8E8] transition-colors;
+  }
+
   /* Finance Card with Theme Support */
   .themed-finance-card {
     @apply transition-all duration-300;
@@ -733,9 +764,9 @@ All colors MUST be HSL.
     @apply clarity-card;
   }
 
-  /* Make finance-card responsive to theme */
+  /* Financial-grade cards with theme support */
   .finance-card {
-    @apply transition-all duration-300;
+    @apply transition-all duration-300 rounded-xl;
     background: rgba(30, 41, 59, 0.8);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(148, 163, 184, 0.1);
@@ -744,8 +775,13 @@ All colors MUST be HSL.
 
   :root:not(.dark) .finance-card {
     @apply bg-white border-[#E0E0E0];
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     backdrop-filter: none;
+  }
+
+  :root:not(.dark) .finance-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
   }
 
   /* Theme-aware text colors */
@@ -830,6 +866,77 @@ All colors MUST be HSL.
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
   }
 
+  /* Light Mode Dropdown and Popup Styling */
+  :root:not(.dark) [data-radix-popper-content-wrapper] {
+    z-index: 9999;
+  }
+
+  /* Dropdown Menu Content - Light Mode */
+  :root:not(.dark) [data-radix-dropdown-menu-content] {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    color: #1E1E1E !important;
+  }
+
+  /* Dropdown Menu Items - Light Mode */
+  :root:not(.dark) [data-radix-dropdown-menu-item] {
+    color: #1E1E1E !important;
+    background: transparent !important;
+    border-radius: 8px !important;
+    padding: 12px 16px !important;
+    transition: all 0.2s ease !important;
+  }
+
+  :root:not(.dark) [data-radix-dropdown-menu-item]:hover {
+    background: #F5F5F5 !important;
+    color: #1E1E1E !important;
+  }
+
+  :root:not(.dark) [data-radix-dropdown-menu-item]:focus {
+    background: #F5F5F5 !important;
+    color: #1E1E1E !important;
+    outline: none !important;
+  }
+
+  /* Dropdown Menu Sub-items - Light Mode */
+  :root:not(.dark) [data-radix-dropdown-menu-sub-content] {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    color: #1E1E1E !important;
+  }
+
+  /* Dropdown Menu Labels - Light Mode */
+  :root:not(.dark) [data-radix-dropdown-menu-label] {
+    color: #333 !important;
+    font-weight: 600 !important;
+  }
+
+  /* Dropdown Menu Separators - Light Mode */
+  :root:not(.dark) [data-radix-dropdown-menu-separator] {
+    background: #E0E0E0 !important;
+  }
+
+  /* Badge styling within dropdowns - Light Mode */
+  :root:not(.dark) [data-radix-dropdown-menu-item] .inline-flex {
+    background: #E8EAF6 !important;
+    color: #3F51B5 !important;
+    border: 1px solid #3F51B5 !important;
+    border-radius: 12px !important;
+  }
+
+  /* Icons in dropdown items - Light Mode */
+  :root:not(.dark) [data-radix-dropdown-menu-item] svg {
+    color: #666 !important;
+  }
+
+  :root:not(.dark) [data-radix-dropdown-menu-item]:hover svg {
+    color: #1E1E1E !important;
+  }
+
   /* Typography readability overrides for light mode */
   :root:not(.dark) .text-theme-heading {
     color: #1E1E1E !important;
@@ -870,15 +977,17 @@ All colors MUST be HSL.
     color: #666 !important;
   }
 
-  /* Pastel gradient colors for mood gauge in light mode */
+  /* Financial-grade mood gauge for light mode */
   .mood-gauge-light {
     background: conic-gradient(
       from 0deg,
-      #F28B82 0deg,     /* Pastel red */
-      #FFF176 90deg,    /* Pastel yellow */
-      #81C784 180deg,   /* Pastel green */
-      #64B5F6 270deg,   /* Pastel blue */
-      #BA68C8 360deg    /* Pastel purple */
+      #F44336 0deg,     /* Financial red */
+      #FF9800 60deg,    /* Warning orange */
+      #FFEB3B 120deg,   /* Caution yellow */
+      #4CAF50 180deg,   /* Financial green */
+      #2196F3 240deg,   /* Financial blue */
+      #3F51B5 300deg,   /* Professional blue */
+      #F44336 360deg    /* Back to financial red */
     );
   }
 
@@ -923,6 +1032,176 @@ All colors MUST be HSL.
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05) !important;
   }
 
+  /* Navigation dropdown specific fixes */
+  :root:not(.dark) [data-radix-popper-content-wrapper] [role="menu"] {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  :root:not(.dark) [data-radix-popper-content-wrapper] [role="menuitem"] {
+    color: #1E1E1E !important;
+    background: transparent !important;
+  }
+
+  :root:not(.dark) [data-radix-popper-content-wrapper] [role="menuitem"]:hover {
+    background: #F5F5F5 !important;
+    color: #1E1E1E !important;
+  }
+
+  /* Comprehensive Light Mode Dropdown Overrides */
+  :root:not(.dark) [data-state="open"][data-side] {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    color: #1E1E1E !important;
+  }
+
+  /* Target all dropdown content regardless of exact selector */
+  :root:not(.dark) [class*="DropdownMenu"][class*="Content"] {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    color: #1E1E1E !important;
+  }
+
+  :root:not(.dark) [class*="DropdownMenu"][class*="Item"] {
+    color: #1E1E1E !important;
+    background: transparent !important;
+  }
+
+  :root:not(.dark) [class*="DropdownMenu"][class*="Item"]:hover {
+    background: #F5F5F5 !important;
+    color: #1E1E1E !important;
+  }
+
+  /* Ensure proper z-index for dropdowns */
+  :root:not(.dark) [data-radix-portal] {
+    z-index: 9999 !important;
+  }
+
+  /* Fix any remaining popover styles */
+  :root:not(.dark) .bg-popover {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  :root:not(.dark) .text-popover-foreground {
+    color: #1E1E1E !important;
+  }
+
+  /* Comprehensive Light Mode Component Fixes */
+
+  /* Fix all hardcoded dark backgrounds */
+  :root:not(.dark) .bg-black {
+    background: #FFFFFF !important;
+    color: #1E1E1E !important;
+    border: 1px solid #E0E0E0 !important;
+  }
+
+  :root:not(.dark) .bg-slate-800 {
+    background: #FFFFFF !important;
+    color: #1E1E1E !important;
+    border: 1px solid #E0E0E0 !important;
+  }
+
+  :root:not(.dark) .bg-slate-900 {
+    background: #FFFFFF !important;
+    color: #1E1E1E !important;
+    border: 1px solid #E0E0E0 !important;
+  }
+
+  /* Fix all hardcoded white text */
+  :root:not(.dark) .text-white {
+    color: #1E1E1E !important;
+  }
+
+  /* Fix gradient headers to be appropriate for light mode */
+  :root:not(.dark) .bg-gradient-to-r {
+    background: linear-gradient(to right, #3F51B5, #2196F3) !important;
+    color: white !important;
+  }
+
+  /* Fix tooltips and overlays */
+  :root:not(.dark) [class*="tooltip"],
+  :root:not(.dark) [class*="overlay"],
+  :root:not(.dark) [class*="popover"] {
+    background: #FFFFFF !important;
+    color: #1E1E1E !important;
+    border: 1px solid #E0E0E0 !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* Fix chart containers */
+  :root:not(.dark) [class*="chart"] {
+    background: #FFFFFF !important;
+    color: #1E1E1E !important;
+  }
+
+  /* Fix modal and dialog backgrounds */
+  :root:not(.dark) [role="dialog"],
+  :root:not(.dark) [class*="modal"] {
+    background: #FFFFFF !important;
+    color: #1E1E1E !important;
+    border: 1px solid #E0E0E0 !important;
+  }
+
+  /* Fix badge contrast in light mode */
+  :root:not(.dark) .bg-white\/20 {
+    background: rgba(63, 81, 181, 0.1) !important;
+    color: #3F51B5 !important;
+    border: 1px solid #3F51B5 !important;
+  }
+
+  /* Fix hover states for cards and interactive elements */
+  :root:not(.dark) [class*="hover:bg-black"],
+  :root:not(.dark) [class*="hover:bg-slate"] {
+    background: #F5F5F5 !important;
+    color: #1E1E1E !important;
+  }
+
+  /* Fix text contrast issues */
+  :root:not(.dark) .text-slate-400 {
+    color: #666 !important;
+  }
+
+  :root:not(.dark) .text-slate-300 {
+    color: #444 !important;
+  }
+
+  :root:not(.dark) .text-gray-400 {
+    color: #666 !important;
+  }
+
+  :root:not(.dark) .text-gray-300 {
+    color: #444 !important;
+  }
+
+  /* Fix border colors */
+  :root:not(.dark) .border-slate-700 {
+    border-color: #E0E0E0 !important;
+  }
+
+  :root:not(.dark) .border-slate-600 {
+    border-color: #E0E0E0 !important;
+  }
+
+  /* Ensure proper contrast for all interactive elements */
+  :root:not(.dark) button,
+  :root:not(.dark) [role="button"] {
+    border: 1px solid transparent;
+  }
+
+  :root:not(.dark) button:hover,
+  :root:not(.dark) [role="button"]:hover {
+    background: #F5F5F5 !important;
+  }
+
   :root:not(.dark) .border-purple-500\/20 {
     border-color: #E0E0E0 !important;
   }
@@ -965,15 +1244,38 @@ All colors MUST be HSL.
     border-color: #6A1B9A !important;
   }
 
-  /* Hero Sentiment Section - Always Dark */
+  /* Hero Sentiment Section - Always Dark Theme (Exact Match) */
   .hero-sentiment-section {
-    /* Force dark theme styling regardless of global theme */
-    color: white;
+    /* Force exact dark theme styling regardless of global theme */
+    color: white !important;
+    background: radial-gradient(ellipse at center, #1B0036 0%, #3B0A58 100%) !important;
+    border-radius: 24px !important;
+    position: relative !important;
+    backdrop-filter: blur(2px) !important;
+    padding: 2rem 1rem !important;
+    text-align: center !important;
+  }
+
+  /* Light Mode specific enforcement - exact Dark Mode match */
+  :root:not(.dark) .hero-sentiment-section {
+    color: white !important;
+    background: radial-gradient(ellipse at center, #1B0036 0%, #3B0A58 100%) !important;
+    border-radius: 24px !important;
+    backdrop-filter: blur(2px) !important;
+    padding: 2rem 1rem !important;
+    text-align: center !important;
+  }
+
+  /* Sentiment Circle Styling - exact match */
+  .hero-sentiment-section .w-96.h-96.rounded-full {
+    border: 5px solid #5EE06C !important;
+    box-shadow: 0 0 16px rgba(94, 224, 108, 0.6) !important;
+    border-radius: 50% !important;
   }
 
   .hero-sentiment-section * {
     /* Ensure all child elements inherit the dark theme */
-    color: inherit;
+    color: inherit !important;
   }
 
   .hero-sentiment-section .text-gray-200 {
@@ -989,5 +1291,732 @@ All colors MUST be HSL.
   .hero-sentiment-section .text-white {
     /* Ensure white text stays white */
     color: white !important;
+  }
+
+  /* Fix gradient text highlighting issues in Light Mode */
+  :root:not(.dark) .bg-gradient-to-r.bg-clip-text.text-transparent {
+    /* Ensure gradient text has enough contrast in Light Mode */
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    -webkit-background-clip: text !important;
+  }
+
+  /* Fix highlighted title appearance - remove excessive highlighting */
+  :root:not(.dark) h1.bg-gradient-to-r,
+  :root:not(.dark) h2.bg-gradient-to-r,
+  :root:not(.dark) h3.bg-gradient-to-r {
+    /* For titles in light mode, use solid color instead of gradient to avoid highlighting effect */
+    background: none !important;
+    -webkit-text-fill-color: #1E1E1E !important;
+    color: #1E1E1E !important;
+    font-weight: 700 !important;
+  }
+
+  /* Exception for Sentiment Surface title - preserve its gradient */
+  :root:not(.dark) h2.bg-gradient-to-r.from-red-400.via-yellow-400.to-green-400 {
+    background: linear-gradient(to right, #f87171, #facc15, #4ade80) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    color: transparent !important;
+  }
+
+  /* Only keep gradients for specific branded elements */
+  :root:not(.dark) .brand-gradient-text {
+    background: linear-gradient(135deg, #3F51B5 0%, #9C27B0 50%, #4CAF50 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    color: transparent !important;
+  }
+
+  /* Component-specific Light Mode fixes */
+
+  /* Stock cards and pricing displays */
+  :root:not(.dark) [class*="stock"] .text-green-500,
+  :root:not(.dark) [class*="price"] .text-green-500 {
+    color: #4CAF50 !important;
+  }
+
+  :root:not(.dark) [class*="stock"] .text-red-500,
+  :root:not(.dark) [class*="price"] .text-red-500 {
+    color: #F44336 !important;
+  }
+
+  /* Fix recharts and chart libraries */
+  :root:not(.dark) .recharts-wrapper {
+    color: #1E1E1E !important;
+  }
+
+  :root:not(.dark) .recharts-cartesian-axis-tick-value {
+    fill: #666 !important;
+  }
+
+  :root:not(.dark) .recharts-legend-item-text {
+    color: #666 !important;
+  }
+
+  /* Fix any remaining transparency issues */
+  :root:not(.dark) [class*="bg-black/"] {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+  }
+
+  :root:not(.dark) [class*="bg-slate-800/"] {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+  }
+
+  :root:not(.dark) [class*="bg-gray-800/"] {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+  }
+
+  /* SpaceSwitcherWidget Light Mode Fixes */
+  :root:not(.dark) [style*="background: #1a1f2b"],
+  :root:not(.dark) [style*="background: rgb(26, 31, 43)"] {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  }
+
+  :root:not(.dark) [style*="background: #0f111a"],
+  :root:not(.dark) [style*="background: rgb(15, 17, 26)"] {
+    background: #3F51B5 !important;
+    color: white !important;
+  }
+
+  /* Fix all text colors in SpaceSwitcherWidget */
+  :root:not(.dark) .text-white {
+    color: #1E1E1E !important;
+  }
+
+  :root:not(.dark) .text-gray-400 {
+    color: #666 !important;
+  }
+
+  :root:not(.dark) .text-gray-300 {
+    color: #444 !important;
+  }
+
+  :root:not(.dark) .text-gray-500 {
+    color: #999 !important;
+  }
+
+  /* Fix hover states for Space components */
+  :root:not(.dark) .hover\:text-gray-300:hover {
+    color: #333 !important;
+  }
+
+  :root:not(.dark) .hover\:text-white:hover {
+    color: #1E1E1E !important;
+  }
+
+  /* Fix background colors for Space cards */
+  :root:not(.dark) .bg-gray-800\/50 {
+    background: #F5F7FA !important;
+    border: 1px solid #E0E0E0 !important;
+  }
+
+  :root:not(.dark) .hover\:bg-gray-800\/70:hover {
+    background: #E8EBF0 !important;
+  }
+
+  :root:not(.dark) .bg-gray-800 {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    color: #1E1E1E !important;
+  }
+
+  /* Finance Tabs Active State - Light Blue Gradient */
+  :root:not(.dark) [data-state="active"][style*="--active-bg"] {
+    background: var(--active-bg) !important;
+    box-shadow: var(--active-shadow) !important;
+  }
+
+  /* Fix Finance dropdown menu items appearing as selected in light mode */
+  :root:not(.dark) [role="menuitem"] {
+    background: transparent !important;
+    color: #1E1E1E !important;
+  }
+
+  :root:not(.dark) [role="menuitem"]:hover {
+    background: #F5F5F5 !important;
+    color: #1E1E1E !important;
+  }
+
+  :root:not(.dark) .hover\:bg-green-500\/20:hover,
+  :root:not(.dark) .hover\:bg-emerald-500\/20:hover {
+    background: linear-gradient(90deg, #E8F1FD 0%, #D2E9FC 100%) !important;
+    color: #1C1E21 !important;
+  }
+
+  /* Light blue card backgrounds in light mode */
+  :root:not(.dark) [class*="bg-black/40"],
+  :root:not(.dark) [class*="bg-black/60"],
+  :root:not(.dark) [class*="bg-slate-800/40"],
+  :root:not(.dark) [class*="bg-slate-900/50"] {
+    background: linear-gradient(135deg, #E8F1FD 0%, #F0F6FE 100%) !important;
+    border: 1px solid #D2E3FC !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  }
+
+  :root:not(.dark) [class*="border-purple-500/20"],
+  :root:not(.dark) [class*="border-slate-700/50"] {
+    border-color: #D2E3FC !important;
+  }
+
+  /* More specific targeting for dashboard controls card */
+  :root:not(.dark) .bg-black\/40.border-purple-500\/20,
+  :root:not(.dark) .bg-black\/40.border-purple-500\/20.backdrop-blur-xl {
+    background: linear-gradient(135deg, #D2E3FC 0%, #B6D7FB 100%) !important;
+    border-color: #B6D7FB !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  /* Force override for all cards with specific bg-black classes */
+  :root:not(.dark) .bg-black\/40 {
+    background: linear-gradient(135deg, #D2E3FC 0%, #B6D7FB 100%) !important;
+  }
+
+  :root:not(.dark) .border-purple-500\/20 {
+    border-color: #B6D7FB !important;
+  }
+
+  /* Colorful Finance Subtabs - Theme Appropriate */
+
+  /* Finance Hub - Light Blue Theme */
+  :root:not(.dark) [data-section="finance"] .bg-black\/30,
+  :root:not(.dark) [data-section="finance"] .bg-black\/40,
+  :root:not(.dark) [data-section="finance"] .bg-black\/50 {
+    background: linear-gradient(135deg, #E8F1FD 0%, #D2E3FC 100%) !important;
+    border: 1px solid #B6D7FB !important;
+    box-shadow: 0 4px 12px rgba(66, 133, 244, 0.08) !important;
+  }
+
+  /* Watchlist - Purple Theme (only for main containers, not asset cards) */
+  :root:not(.dark) [data-section="watchlist"] > .bg-black\/30,
+  :root:not(.dark) [data-section="watchlist"] > .bg-black\/40,
+  :root:not(.dark) [data-section="watchlist"] > .bg-black\/50,
+  :root:not(.dark) [data-section="watchlist"] .space-y-6 > .bg-black\/30,
+  :root:not(.dark) [data-section="watchlist"] .space-y-6 > .bg-black\/40,
+  :root:not(.dark) [data-section="watchlist"] .space-y-6 > .bg-black\/50 {
+    background: linear-gradient(135deg, #F3E8FF 0%, #E9D5FF 100%) !important;
+    border: 1px solid #C4B5FD !important;
+    box-shadow: 0 4px 12px rgba(147, 51, 234, 0.08) !important;
+  }
+
+  /* Trending - Pink Theme */
+  :root:not(.dark) [data-section="trending"] .bg-black\/30,
+  :root:not(.dark) [data-section="trending"] .bg-black\/40,
+  :root:not(.dark) [data-section="trending"] .bg-black\/50 {
+    background: linear-gradient(135deg, #FDF2F8 0%, #FCE7F3 100%) !important;
+    border: 1px solid #F9A8D4 !important;
+    box-shadow: 0 4px 12px rgba(236, 72, 153, 0.08) !important;
+  }
+
+  /* Crypto - Orange Theme */
+  :root:not(.dark) [data-section="crypto"] .bg-black\/30,
+  :root:not(.dark) [data-section="crypto"] .bg-black\/40,
+  :root:not(.dark) [data-section="crypto"] .bg-black\/50 {
+    background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%) !important;
+    border: 1px solid #FCD34D !important;
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.08) !important;
+  }
+
+  /* Charts - Indigo Theme */
+  :root:not(.dark) [data-section="charts"] .bg-black\/30,
+  :root:not(.dark) [data-section="charts"] .bg-black\/40,
+  :root:not(.dark) [data-section="charts"] .bg-black\/50 {
+    background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%) !important;
+    border: 1px solid #A5B4FC !important;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.08) !important;
+  }
+
+  /* Colorful Badges for Each Section */
+  :root:not(.dark) [data-section="finance"] .bg-blue-500\/20,
+  :root:not(.dark) [data-section="finance"] .bg-blue-600\/30 {
+    background: linear-gradient(90deg, #DBEAFE 0%, #BFDBFE 100%) !important;
+    color: #1E40AF !important;
+    border: 1px solid #93C5FD !important;
+  }
+
+  :root:not(.dark) [data-section="watchlist"] .bg-purple-500\/20,
+  :root:not(.dark) [data-section="watchlist"] .bg-purple-600\/30 {
+    background: linear-gradient(90deg, #F3E8FF 0%, #E9D5FF 100%) !important;
+    color: #7C3AED !important;
+    border: 1px solid #C4B5FD !important;
+  }
+
+  :root:not(.dark) [data-section="trending"] .bg-pink-500\/20,
+  :root:not(.dark) [data-section="trending"] .bg-pink-600\/30 {
+    background: linear-gradient(90deg, #FDF2F8 0%, #FCE7F3 100%) !important;
+    color: #DB2777 !important;
+    border: 1px solid #F9A8D4 !important;
+  }
+
+  :root:not(.dark) [data-section="crypto"] .bg-orange-500\/20,
+  :root:not(.dark) [data-section="crypto"] .bg-orange-600\/30 {
+    background: linear-gradient(90deg, #FFF7ED 0%, #FFEDD5 100%) !important;
+    color: #EA580C !important;
+    border: 1px solid #FCD34D !important;
+  }
+
+  :root:not(.dark) [data-section="charts"] .bg-indigo-500\/20,
+  :root:not(.dark) [data-section="charts"] .bg-indigo-600\/30 {
+    background: linear-gradient(90deg, #EEF2FF 0%, #E0E7FF 100%) !important;
+    color: #4F46E5 !important;
+    border: 1px solid #A5B4FC !important;
+  }
+
+  /* Colorful Text for Each Section */
+  :root:not(.dark) [data-section="finance"] .text-blue-300,
+  :root:not(.dark) [data-section="finance"] .text-blue-400 {
+    color: #2563EB !important;
+  }
+
+  :root:not(.dark) [data-section="watchlist"] .text-purple-300,
+  :root:not(.dark) [data-section="watchlist"] .text-purple-400 {
+    color: #7C3AED !important;
+  }
+
+  :root:not(.dark) [data-section="trending"] .text-pink-300,
+  :root:not(.dark) [data-section="trending"] .text-pink-400 {
+    color: #DB2777 !important;
+  }
+
+  :root:not(.dark) [data-section="crypto"] .text-orange-300,
+  :root:not(.dark) [data-section="crypto"] .text-orange-400 {
+    color: #EA580C !important;
+  }
+
+  :root:not(.dark) [data-section="charts"] .text-indigo-300,
+  :root:not(.dark) [data-section="charts"] .text-indigo-400 {
+    color: #4F46E5 !important;
+  }
+
+  /* Fallback for sections without data-section attribute */
+  :root:not(.dark) .bg-black\/30,
+  :root:not(.dark) .bg-black\/40,
+  :root:not(.dark) .bg-black\/50,
+  :root:not(.dark) .bg-slate-800\/40,
+  :root:not(.dark) .bg-slate-900\/50 {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  }
+
+  /* Fix watchlist cards to prevent solid blue overlay on hover */
+  :root:not(.dark) [class*="WatchlistAssetCard"],
+  :root:not(.dark) .group.relative.rounded-xl.cursor-pointer,
+  :root:not(.dark) [data-section="watchlist"] .group.relative.rounded-xl.cursor-pointer {
+    background: #FFFFFF !important;
+  }
+
+  :root:not(.dark) [class*="WatchlistAssetCard"]:hover,
+  :root:not(.dark) .group.relative.rounded-xl.cursor-pointer:hover,
+  :root:not(.dark) [data-section="watchlist"] .group.relative.rounded-xl.cursor-pointer:hover {
+    background: #FFFFFF !important;
+    border-color: #D2E3FC !important;
+    transform: scale(1.02) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  /* Completely disable section-based styling for watchlist asset cards */
+  :root:not(.dark) [data-section="watchlist"] .bg-black\/30,
+  :root:not(.dark) [data-section="watchlist"] .bg-black\/40,
+  :root:not(.dark) [data-section="watchlist"] .bg-black\/50,
+  :root:not(.dark) [data-section="watchlist"] .bg-black\/30:hover,
+  :root:not(.dark) [data-section="watchlist"] .bg-black\/40:hover,
+  :root:not(.dark) [data-section="watchlist"] .bg-black\/50:hover {
+    background: #FFFFFF !important;
+    border: 1px solid #E0E0E0 !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  /* Specifically target watchlist asset cards to prevent ANY background overrides */
+  :root:not(.dark) [data-section="watchlist"] .group.relative.bg-white,
+  :root:not(.dark) [data-section="watchlist"] .group.relative.bg-white:hover {
+    background: #FFFFFF !important;
+    border-color: #D2E3FC !important;
+  }
+
+  /* Nuclear option: Force white background on ALL possible card selectors */
+  :root:not(.dark) .group.relative.rounded-xl.p-4.backdrop-blur-sm.transition-all.duration-300.cursor-pointer,
+  :root:not(.dark) .group.relative.rounded-xl.p-4.backdrop-blur-sm.transition-all.duration-300.cursor-pointer:hover,
+  :root:not(.dark) .group.relative.rounded-xl.p-4.backdrop-blur-sm.transition-all.duration-300.cursor-pointer:focus {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    background-image: none !important;
+  }
+
+  /* Prevent any child elements from having blue backgrounds */
+  :root:not(.dark) .group.relative.rounded-xl.p-4 *:not(.bg-gradient-to-br):not([class*="sentiment"]):not([class*="badge"]) {
+    background: inherit !important;
+    background-color: transparent !important;
+    background-image: none !important;
+  }
+
+  /* Fix input styling in Space components */
+  :root:not(.dark) .bg-gray-800.border-gray-600 {
+    background: #FFFFFF !important;
+    border-color: #E0E0E0 !important;
+    color: #1E1E1E !important;
+  }
+
+  :root:not(.dark) .placeholder-gray-400::placeholder {
+    color: #999 !important;
+  }
+
+  /* Fix border colors */
+  :root:not(.dark) .border-gray-700 {
+    border-color: #E0E0E0 !important;
+  }
+
+  :root:not(.dark) .border-gray-700\/50 {
+    border-color: #E0E0E0 !important;
+  }
+
+  /* Fix gradient buttons and backgrounds */
+  :root:not(.dark) [style*="linear-gradient"] {
+    background: linear-gradient(135deg, #3F51B5 0%, #9C27B0 100%) !important;
+    color: white !important;
+  }
+
+  /* Fix reaction and interaction buttons */
+  :root:not(.dark) .hover\:bg-gray-700\/50:hover {
+    background: #F0F0F0 !important;
+  }
+
+  :root:not(.dark) .hover\:border-violet-500\/30:hover {
+    border-color: rgba(156, 39, 176, 0.3) !important;
+  }
+
+  :root:not(.dark) .hover\:border-green-500\/50:hover {
+    border-color: rgba(76, 175, 80, 0.5) !important;
+  }
+
+  /* Ensure hero sections with dark backgrounds stay visible */
+  :root:not(.dark) [class*="hero"] {
+    position: relative;
+  }
+
+  :root:not(.dark) .hero-sentiment-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(88, 28, 135, 0.95) 100%);
+    border-radius: 24px;
+    z-index: 1;
+  }
+
+  :root:not(.dark) .hero-sentiment-section > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Fix white square issue - ensure all background elements stay dark */
+  :root:not(.dark) .hero-sentiment-section .bg-gradient-to-br,
+  :root:not(.dark) .hero-sentiment-section [class*="bg-gradient"],
+  :root:not(.dark) .hero-sentiment-section [class*="from-slate"],
+  :root:not(.dark) .hero-sentiment-section [class*="to-purple"] {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(88, 28, 135, 0.95) 100%) !important;
+  }
+
+  /* Specifically target the inner circle background that might be showing as white */
+  :root:not(.dark) .hero-sentiment-section .w-full.h-full.rounded-full.bg-gradient-to-br {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(88, 28, 135, 0.95) 100%) !important;
+  }
+
+  /* Ensure the rotating ring container doesn't show white */
+  :root:not(.dark) .hero-sentiment-section .absolute.inset-0.rounded-full[class*="bg-gradient-to-r"] {
+    background: inherit !important;
+  }
+
+  /* Remove any white fills or light backgrounds from decorative elements */
+  :root:not(.dark) .hero-sentiment-section [fill="white"],
+  :root:not(.dark) .hero-sentiment-section [fill="#ffffff"],
+  :root:not(.dark) .hero-sentiment-section [fill*="rgba(255"],
+  :root:not(.dark) .hero-sentiment-section .bg-white {
+    fill: rgba(0, 0, 0, 0.05) !important;
+    background: transparent !important;
+  }
+
+  /* Fix any rotated background shapes or SVG elements */
+  :root:not(.dark) .hero-sentiment-section svg,
+  :root:not(.dark) .hero-sentiment-section [class*="rotate"] {
+    fill: rgba(88, 28, 135, 0.1) !important;
+    background: transparent !important;
+  }
+
+  /* Exact text styling to match Dark Mode */
+
+  /* Score Number (e.g., "72") - exact specifications */
+  .hero-sentiment-section .text-9xl.font-bold,
+  :root:not(.dark) .hero-sentiment-section .text-9xl.font-bold {
+    color: #FFFFFF !important;
+    font-weight: 800 !important;
+    font-size: 72px !important;
+    background: linear-gradient(to right, #f472b6, #a855f7, #06b6d4) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+
+  /* Subheading ("Market is Positive") */
+  .hero-sentiment-section .text-2xl.font-bold.text-white,
+  :root:not(.dark) .hero-sentiment-section .text-2xl.font-bold {
+    color: #FFFFFF !important;
+    font-weight: bold !important;
+  }
+
+  /* Label ("AI SENTIMENT SCORE") */
+  .hero-sentiment-section .text-purple-300,
+  :root:not(.dark) .hero-sentiment-section .text-purple-300 {
+    color: #D6D6D6 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+  }
+
+  /* Description text below */
+  .hero-sentiment-section .text-xl.text-gray-200,
+  :root:not(.dark) .hero-sentiment-section .text-xl {
+    color: #FFFFFF !important;
+    text-align: center !important;
+  }
+
+  /* Ensure all other text elements stay white */
+  :root:not(.dark) .hero-sentiment-section,
+  :root:not(.dark) .hero-sentiment-section * {
+    color: white !important;
+  }
+
+  /* Emoji styling - maintain saturation and glow */
+  .hero-sentiment-section .text-6xl.animate-bounce,
+  :root:not(.dark) .hero-sentiment-section .text-6xl {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3)) !important;
+  }
+
+  /* Nuclear option: Remove any white elements that shouldn't be there */
+  :root:not(.dark) .hero-sentiment-section *[class*="bg-white"],
+  :root:not(.dark) .hero-sentiment-section *[style*="background: white"],
+  :root:not(.dark) .hero-sentiment-section *[style*="background-color: white"],
+  :root:not(.dark) .hero-sentiment-section *[style*="background: #fff"],
+  :root:not(.dark) .hero-sentiment-section *[style*="background-color: #fff"] {
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+
+  /* Ensure backdrop-blur elements maintain dark background */
+  :root:not(.dark) .hero-sentiment-section [class*="backdrop-blur"] {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(88, 28, 135, 0.95) 100%) !important;
+  }
+
+  /* Target any absolute positioned elements that might create white squares */
+  :root:not(.dark) .hero-sentiment-section .absolute {
+    background-color: transparent !important;
+  }
+
+  /* Keep only the main hero container and rotating ring backgrounds */
+  :root:not(.dark) .hero-sentiment-section .absolute.inset-0[class*="bg-gradient-to-br"] {
+    background: radial-gradient(ellipse at center, #1B0036 0%, #3B0A58 100%) !important;
+  }
+
+  /* AI Analysis Button Light Mode Fixes */
+  :root:not(.dark) button:has(> [data-testid="brain-icon"]),
+  :root:not(.dark) button:has(> svg[class*="Brain"]),
+  :root:not(.dark) button:contains("Explain Today's Mood"),
+  :root:not(.dark) button:contains("View Detailed Analytics") {
+    background: linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%) !important;
+    color: #1C1E21 !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  :root:not(.dark) button:has(> [data-testid="brain-icon"]):hover,
+  :root:not(.dark) button:has(> svg[class*="Brain"]):hover,
+  :root:not(.dark) button:contains("Explain Today's Mood"):hover,
+  :root:not(.dark) button:contains("View Detailed Analytics"):hover {
+    background: linear-gradient(90deg, #A9CCF9 0%, #A9CCF9 100%) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    transform: translateY(-1px) !important;
+  }
+
+  /* Target AI Analysis buttons more specifically */
+  :root:not(.dark) [class*="MarketMoodControls"] button[class*="gradient"],
+  :root:not(.dark) .space-y-3 button[class*="bg-gradient"] {
+    background: linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%) !important;
+    color: #1C1E21 !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  :root:not(.dark) [class*="MarketMoodControls"] button[class*="gradient"]:hover,
+  :root:not(.dark) .space-y-3 button[class*="bg-gradient"]:hover {
+    background: linear-gradient(90deg, #A9CCF9 0%, #A9CCF9 100%) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    transform: translateY(-1px) !important;
+  }
+
+  /* More specific targeting for AI Analysis buttons */
+  :root:not(.dark) button[class*="from-purple-600"],
+  :root:not(.dark) button[class*="from-blue-600"],
+  :root:not(.dark) button[class*="to-pink-600"],
+  :root:not(.dark) button[class*="to-cyan-600"] {
+    background: linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%) !important;
+    color: #1C1E21 !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  :root:not(.dark) button[class*="from-purple-600"]:hover,
+  :root:not(.dark) button[class*="from-blue-600"]:hover,
+  :root:not(.dark) button[class*="to-pink-600"]:hover,
+  :root:not(.dark) button[class*="to-cyan-600"]:hover {
+    background: linear-gradient(90deg, #A9CCF9 0%, #A9CCF9 100%) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    transform: translateY(-1px) !important;
+  }
+
+  /* Text color fix for icons inside these buttons */
+  :root:not(.dark) button[class*="from-purple-600"] svg,
+  :root:not(.dark) button[class*="from-blue-600"] svg,
+  :root:not(.dark) button[class*="to-pink-600"] svg,
+  :root:not(.dark) button[class*="to-cyan-600"] svg {
+    color: #1C1E21 !important;
+  }
+
+  /* Bullish Sentiment Badge and AI Summary Light Mode Fixes */
+
+  /* Bullish sentiment badges and cards */
+  :root:not(.dark) .bg-emerald-500\/20,
+  :root:not(.dark) [class*="bg-emerald"][class*="/20"],
+  :root:not(.dark) .bg-green-500\/20,
+  :root:not(.dark) [class*="bg-green"][class*="/20"] {
+    background: linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%) !important;
+    color: #1C1E21 !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  /* Bullish sentiment text colors */
+  :root:not(.dark) .text-emerald-400,
+  :root:not(.dark) .text-green-400,
+  :root:not(.dark) .text-green-600 {
+    color: #1C1E21 !important;
+    font-weight: 600 !important;
+  }
+
+  /* AI Summary widget styling */
+  :root:not(.dark) [class*="AISummary"] .bg-gradient-to-r,
+  :root:not(.dark) [class*="ai-summary"] .bg-gradient-to-r {
+    background: linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%) !important;
+    color: #1C1E21 !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  /* Sentiment score displays like "Bullish (82)" */
+  :root:not(.dark) [class*="sentiment"] .bg-gradient-to-r,
+  :root:not(.dark) .sentiment-badge,
+  :root:not(.dark) [data-sentiment="bullish"],
+  :root:not(.dark) [class*="bullish"] {
+    background: linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%) !important;
+    color: #1C1E21 !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+    padding: 4px 12px !important;
+  }
+
+  /* Hover effects for bullish/AI elements */
+  :root:not(.dark) .bg-emerald-500\/20:hover,
+  :root:not(.dark) [class*="bg-emerald"][class*="/20"]:hover,
+  :root:not(.dark) .bg-green-500\/20:hover,
+  :root:not(.dark) [class*="bg-green"][class*="/20"]:hover,
+  :root:not(.dark) [class*="bullish"]:hover {
+    background: linear-gradient(90deg, #A9CCF9 0%, #A9CCF9 100%) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    transform: translateY(-1px) !important;
+  }
+
+  /* Fix sentiment score text specifically */
+  :root:not(.dark) [class*="sentimentScore"],
+  :root:not(.dark) .sentiment-score,
+  :root:not(.dark) [data-testid*="sentiment"] {
+    color: #1C1E21 !important;
+    font-weight: 600 !important;
+  }
+
+  /* TopMoversMarketSentiment component fixes */
+  :root:not(.dark) [class*="TopMovers"] .bg-emerald-500\/20,
+  :root:not(.dark) [class*="TopMovers"] .text-emerald-400 {
+    background: linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%) !important;
+    color: #1C1E21 !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  /* Card Headers with Purple/Violet Gradients - Apply Light Blue Design */
+  :root:not(.dark) .bg-gradient-to-r.from-purple-600\/30,
+  :root:not(.dark) .bg-gradient-to-r.to-violet-600\/30,
+  :root:not(.dark) [class*="from-purple-600"][class*="/30"],
+  :root:not(.dark) [class*="to-violet-600"][class*="/30"],
+  :root:not(.dark) [class*="from-purple"][class*="to-violet"] {
+    background: linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%) !important;
+    color: #1C1E21 !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    border: 1px solid #E0E0E0 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  /* Smart News Feed and other card headers */
+  :root:not(.dark) [class*="CardHeader"][class*="gradient"],
+  :root:not(.dark) .card-header[class*="bg-gradient"],
+  :root:not(.dark) [role="banner"][class*="bg-gradient"] {
+    background: linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%) !important;
+    color: #1C1E21 !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    border-bottom: 1px solid #E0E0E0 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  /* Fix border colors for purple/violet themed headers */
+  :root:not(.dark) .border-purple-500\/20,
+  :root:not(.dark) .border-violet-500\/20,
+  :root:not(.dark) [class*="border-purple"][class*="/20"],
+  :root:not(.dark) [class*="border-violet"][class*="/20"] {
+    border-color: #E0E0E0 !important;
+  }
+
+  /* Text colors within these headers */
+  :root:not(.dark) .bg-gradient-to-r.from-purple-600\/30 *,
+  :root:not(.dark) .bg-gradient-to-r.to-violet-600\/30 *,
+  :root:not(.dark) [class*="from-purple-600"][class*="/30"] *,
+  :root:not(.dark) [class*="to-violet-600"][class*="/30"] * {
+    color: #1C1E21 !important;
+  }
+
+  /* Ensure icons in gradient headers also get proper color */
+  :root:not(.dark) .bg-gradient-to-r svg,
+  :root:not(.dark) [class*="from-purple"] svg,
+  :root:not(.dark) [class*="to-violet"] svg {
+    color: #1C1E21 !important;
   }
 }
