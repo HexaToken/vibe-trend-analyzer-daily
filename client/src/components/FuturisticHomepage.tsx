@@ -345,6 +345,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
   const [financeSearchQuery, setFinanceSearchQuery] = useState("");
   const [mobileFinanceOpen, setMobileFinanceOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [financeDropdownOpen, setFinanceDropdownOpen] = useState(false);
   const [selectedTimeframe, setSelectedTimeframe] = useState<"1D" | "7D" | "30D">("7D");
 
   // Core mood data
@@ -1940,7 +1941,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       ))}
 
                       <div className="mt-6 p-4 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-lg border border-purple-500/20">
-                        <div className="text-sm text-white font-medium mb-2">🐋 Whale Alert</div>
+                        <div className="text-sm text-white font-medium mb-2">���� Whale Alert</div>
                         <div className="text-xs text-gray-300 leading-relaxed">
                           Large BTC transfer detected: 1,247 BTC ($84.3M) moved to unknown wallet. Market sentiment: Neutral
                         </div>
