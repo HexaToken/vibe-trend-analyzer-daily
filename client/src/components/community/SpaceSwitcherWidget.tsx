@@ -287,12 +287,24 @@ export const SpaceSwitcherWidget: React.FC = () => {
             className={`flex-1 py-3 px-6 rounded-lg text-sm font-semibold transition-all duration-300 ${
               activeTab === "crypto"
                 ? (themeMode === 'light' ? 'text-[#1C1E21] shadow-lg font-semibold border border-[#E0E0E0]' : 'text-white shadow-lg bg-[#0f111a]')
-                : (themeMode === 'light' ? 'text-[#666] hover:text-[#333] bg-transparent' : 'text-[#94a3b8] hover:text-gray-300 bg-transparent')
+                : (themeMode === 'light' ? 'text-[#666] hover:text-[#1C1E21] hover:border hover:border-[#E0E0E0] bg-transparent' : 'text-[#94a3b8] hover:text-gray-300 bg-transparent')
             }`}
             style={activeTab === "crypto" && themeMode === 'light' ? {
               background: 'linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%)',
               boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)'
             } : {}}
+            onMouseEnter={(e) => {
+              if (activeTab !== "crypto" && themeMode === 'light') {
+                e.currentTarget.style.background = 'linear-gradient(90deg, #E8F1FD 0%, #D2E9FC 100%)';
+                e.currentTarget.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.03)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (activeTab !== "crypto" && themeMode === 'light') {
+                e.currentTarget.style.background = 'transparent';
+                e.currentTarget.style.boxShadow = 'none';
+              }
+            }}
           >
             <Hash className="h-4 w-4 inline mr-2" />
             Crypto Channels
