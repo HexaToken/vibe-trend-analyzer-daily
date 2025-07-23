@@ -1797,6 +1797,31 @@ All colors MUST be HSL.
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3)) !important;
   }
 
+  /* Nuclear option: Remove any white elements that shouldn't be there */
+  :root:not(.dark) .hero-sentiment-section *[class*="bg-white"],
+  :root:not(.dark) .hero-sentiment-section *[style*="background: white"],
+  :root:not(.dark) .hero-sentiment-section *[style*="background-color: white"],
+  :root:not(.dark) .hero-sentiment-section *[style*="background: #fff"],
+  :root:not(.dark) .hero-sentiment-section *[style*="background-color: #fff"] {
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+
+  /* Ensure backdrop-blur elements maintain dark background */
+  :root:not(.dark) .hero-sentiment-section [class*="backdrop-blur"] {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(88, 28, 135, 0.95) 100%) !important;
+  }
+
+  /* Target any absolute positioned elements that might create white squares */
+  :root:not(.dark) .hero-sentiment-section .absolute {
+    background-color: transparent !important;
+  }
+
+  /* Keep only the main hero container and rotating ring backgrounds */
+  :root:not(.dark) .hero-sentiment-section .absolute.inset-0[class*="bg-gradient-to-br"] {
+    background: radial-gradient(ellipse at center, #1B0036 0%, #3B0A58 100%) !important;
+  }
+
   /* AI Analysis Button Light Mode Fixes */
   :root:not(.dark) button:has(> [data-testid="brain-icon"]),
   :root:not(.dark) button:has(> svg[class*="Brain"]),
