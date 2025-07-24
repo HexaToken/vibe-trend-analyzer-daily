@@ -44,6 +44,7 @@ import { BadgeSystemDemo } from "@/components/BadgeSystemDemo";
 import { SpaceSwitcherWidget } from "@/components/community/SpaceSwitcherWidget";
 import { PrivateRoomsContainer } from "@/components/privateRooms/PrivateRoomsContainer";
 import { ChatInterface } from "@/components/moorMeter/ChatInterface";
+import { ModerationTestingDashboard } from "@/components/testing/ModerationTestingDashboard";
 
 const queryClient = new QueryClient();
 
