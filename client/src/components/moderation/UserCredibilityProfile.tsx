@@ -425,9 +425,10 @@ export const UserCredibilityProfile: React.FC<UserCredibilityProfileProps> = ({
 
         {/* Tabs for detailed view */}
         <Tabs defaultValue="factors" className="space-y-4">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="factors">Factors</TabsTrigger>
             <TabsTrigger value="badges">Badges</TabsTrigger>
+            <TabsTrigger value="awards">Awards</TabsTrigger>
             <TabsTrigger value="stats">Stats</TabsTrigger>
           </TabsList>
           
