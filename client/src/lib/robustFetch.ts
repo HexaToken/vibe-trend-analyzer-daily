@@ -130,38 +130,52 @@ export async function robustFetch(
       // Ensure timeout is cleared in case of error
       cleanup();
 
-      lastError = error instanceof Error ? error : new Error(String(error));
+      // Safely handle error conversion
+      lastError = error instanceof Error ? error : new Error(String(error || 'Unknown error'));
 
       // Handle different types of abort errors more specifically
-      if (lastError.name === "AbortError" || lastError.message.includes("aborted")) {
+      const errorMessage = lastError.message || '';
+      const errorName = lastError.name || '';
+
+      if (errorName === "AbortError" || errorMessage.includes("aborted")) {
         // Check if it was our timeout or an external abort
-        if (controller.signal.aborted) {
-          // If we have a reason, use it; otherwise assume timeout
-          const reason = (controller.signal as any).reason;
-          if (reason) {
-            lastError = new Error(`Request aborted: ${reason}`);
+        try {
+          if (controller.signal.aborted) {
+            // If we have a reason, use it; otherwise assume timeout
+            const reason = (controller.signal as any)?.reason;
+            if (reason && typeof reason === 'string') {
+              lastError = new Error(`Request aborted: ${reason}`);
+            } else {
+              // Default to timeout since we control this signal
+              lastError = new Error("Request timeout");
+            }
           } else {
-            // Default to timeout since we control this signal
-            lastError = new Error("Request timeout");
+            // External abort or unknown abort
+            lastError = new Error("Request was aborted externally");
           }
-        } else {
-          // External abort or unknown abort
-          lastError = new Error("Request was aborted externally");
+        } catch (signalError) {
+          // If we can't access the signal safely, assume timeout
+          lastError = new Error("Request timeout");
         }
       }
 
       // Catch any remaining "signal is aborted without reason" errors
-      if (lastError.message.includes("signal is aborted without reason")) {
+      if (errorMessage.includes("signal is aborted without reason")) {
         lastError = new Error("Request timeout");
       }
 
       // Handle other common fetch errors
-      if (lastError.message.includes("Failed to fetch")) {
+      if (errorMessage.includes("Failed to fetch")) {
         lastError = new Error("Network error - please check your connection");
       }
 
-      if (lastError.message.includes("NetworkError")) {
+      if (errorMessage.includes("NetworkError")) {
         lastError = new Error("Network error - unable to reach server");
+      }
+
+      // Handle TypeError which often indicates network issues
+      if (errorName === "TypeError" && !errorMessage.includes("aborted")) {
+        lastError = new Error("Network connection error");
       }
 
       console.warn(
