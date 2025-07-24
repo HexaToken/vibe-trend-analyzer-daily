@@ -532,7 +532,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               </div>
               
               <nav className="hidden md:flex items-center gap-6">
-                                                                                                {['Home', 'Market Mood', 'News Feed'].map((item, index) => (
+                                                                                                {['Home', 'Market Mood', 'News Feed', 'Badges'].map((item, index) => (
                                     <button
                     key={item}
                     onClick={() => {
@@ -1546,7 +1546,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <Tabs defaultValue="bullish" className="w-full">
                   <TabsList className="grid w-full grid-cols-4 bg-black/20 backdrop-blur-xl border border-gray-700/50">
                     <TabsTrigger value="bullish" className="data-[state=active]:bg-green-600/30 data-[state=active]:text-green-300 text-gray-400">
-                      🟢 Top Bullish
+                      ���� Top Bullish
                     </TabsTrigger>
                     <TabsTrigger value="bearish" className="data-[state=active]:bg-red-600/30 data-[state=active]:text-red-300 text-gray-400">
                       🔴 Top Bearish
