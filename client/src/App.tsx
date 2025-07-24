@@ -126,6 +126,8 @@ const AppContent = () => {
         return <MembershipPageSummary />;
       case "moderation":
         return <ModerationDemo />;
+      case "badges":
+        return <BadgeSystemDemo />;
             // Removed "builder-finance" route - BuilderFinanceDemo component retained for Builder.io integration examples
       case "futuristic-home":
         return <FuturisticHomepage onNavigate={setActiveSection} />;
