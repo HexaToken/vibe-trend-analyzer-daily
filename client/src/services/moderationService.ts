@@ -352,6 +352,7 @@ class ModerationService {
   }
 
   private hasSourceLinks(content: string): boolean {
+    if (!content || typeof content !== 'string') return false;
     const links = content.match(/(https?:\/\/[^\s]+)/g) || [];
     return links.some(link => 
       CREDIBILITY_FACTORS.sourceLinks.domains.some(domain => 
@@ -361,6 +362,7 @@ class ModerationService {
   }
 
   private hasDataEvidence(content: string): boolean {
+    if (!content || typeof content !== 'string') return false;
     return CREDIBILITY_FACTORS.dataEvidence.patterns.some(pattern => 
       pattern.test(content)
     );
@@ -368,7 +370,9 @@ class ModerationService {
 
   private calculateAIVerification(content: string): number {
     let score = 50; // Base score
-    
+
+    if (!content || typeof content !== 'string') return score;
+
     if (this.hasSourceLinks(content)) score += 25;
     if (this.hasDataEvidence(content)) score += 20;
     
@@ -385,6 +389,8 @@ class ModerationService {
   }
 
   private classifyContentType(content: string): string {
+    if (!content || typeof content !== 'string') return 'opinion';
+
     if (this.hasSourceLinks(content) && this.hasDataEvidence(content)) {
       return "data_backed";
     }
@@ -427,6 +433,8 @@ class ModerationService {
   }
 
   private calculateAIConfidence(content: string): number {
+    if (!content || typeof content !== 'string') return 0.5;
+
     const factors = [
       this.hasSourceLinks(content),
       this.hasDataEvidence(content),
@@ -440,7 +448,9 @@ class ModerationService {
 
   private generateContentRiskFlags(content: string): string[] {
     const flags: string[] = [];
-    
+
+    if (!content || typeof content !== 'string') return flags;
+
     if (SPAM_PATTERNS.promotional.some(p => p.test(content))) {
       flags.push("Promotional Content");
     }
@@ -486,6 +496,11 @@ class ModerationService {
   detectSpam(content: string): { isSpam: boolean; confidence: number; reasons: string[] } {
     const reasons: string[] = [];
     let spamScore = 0;
+
+    // Validate content
+    if (!content || typeof content !== 'string') {
+      return { isSpam: false, confidence: 0, reasons: ['Invalid content'] };
+    }
 
     // Check for excessive emojis
     const emojiCount = (content.match(/[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F1E0}-\u{1F1FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu) || []).length;
@@ -538,6 +553,11 @@ class ModerationService {
     let score = 50; // Base score
 
     const { content, author, engagement } = data;
+
+    // Validate content
+    if (!content || typeof content !== 'string') {
+      return score; // Return base score if content is invalid
+    }
 
     // Check for quality indicators
     if (this.hasSourceLinks(content)) score += 20;
