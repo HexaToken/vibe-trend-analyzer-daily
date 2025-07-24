@@ -33,12 +33,14 @@ import {
   Medal,
   Zap,
 } from "lucide-react";
-import type { 
-  UserCredibility, 
-  CredibilityBadge, 
-  UserRestriction, 
-  CredibilityLevel 
+import type {
+  UserCredibility,
+  CredibilityBadge,
+  UserRestriction,
+  CredibilityLevel
 } from "@/types/moderation";
+import { BadgeDisplay } from "@/components/badges/BadgeDisplay";
+import { generateMockUserBadges, generateMockBadgeProgress } from "@/services/badgeService";
 
 // Mock user credibility data
 const mockUserCredibility: UserCredibility = {
