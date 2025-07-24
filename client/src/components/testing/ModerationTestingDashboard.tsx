@@ -83,6 +83,7 @@ export const ModerationTestingDashboard: React.FC = () => {
   const [testResults, setTestResults] = useState<TestResult[]>([]);
   const [currentTest, setCurrentTest] = useState<string>('');
   const [isRunning, setIsRunning] = useState(false);
+  const { themeMode, toggleTheme } = useMoodTheme();
 
   const addTestResult = (result: TestResult) => {
     setTestResults(prev => [...prev, result]);
