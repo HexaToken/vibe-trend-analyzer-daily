@@ -187,11 +187,11 @@ export const ChatPostCard: React.FC<ChatPostCardProps> = ({
   ];
 
   return (
-    <Card 
+    <Card
       className={cn(
         "transition-all duration-200 hover:shadow-md border rounded-xl",
-        themeMode === 'light' 
-          ? 'bg-white border-gray-200 shadow-sm hover:shadow-lg' 
+        themeMode === 'light'
+          ? 'bg-white border-2 border-transparent bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-cyan-500/20 p-[2px] shadow-sm hover:shadow-lg'
           : 'bg-gray-900 border-gray-700 shadow-sm hover:shadow-lg',
         className
       )}
