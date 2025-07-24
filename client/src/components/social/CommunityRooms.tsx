@@ -404,6 +404,11 @@ export const CommunityRooms = () => {
                                 {message.username}
                               </span>
                               {getUserRoleIcon(message.userRole)}
+                              <UserCredibilityIndicator
+                                level="trusted"
+                                score={Math.floor(Math.random() * 40 + 60)}
+                                compact
+                              />
                               <span className="text-xs text-muted-foreground">
                                 {formatMessageTime(message.createdAt)}
                               </span>
