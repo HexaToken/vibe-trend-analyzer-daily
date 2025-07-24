@@ -339,12 +339,19 @@ export const UserCredibilityProfile: React.FC<UserCredibilityProfileProps> = ({
               </p>
             </div>
             
-            <div className="text-right">
+            <div className="flex flex-col items-end gap-1">
+              <BadgeDisplay
+                userBadges={userBadges}
+                badgeProgress={badgeProgress}
+                variant="compact"
+                maxDisplay={2}
+                showTooltip={true}
+              />
               <div className={cn(
                 "text-xs",
                 themeMode === 'light' ? 'text-gray-500' : 'text-gray-500'
               )}>
-                {credibility.badges.length} badges
+                {userBadges.length} badges
               </div>
             </div>
           </div>
