@@ -569,6 +569,18 @@ export const CommunityRooms = () => {
           </Card>
         </div>
       </div>
+
+      {/* Flag Modal */}
+      {selectedMessage && (
+        <FlagPostModal
+          isOpen={flagModalOpen}
+          onClose={() => setFlagModalOpen(false)}
+          postId={selectedMessage.id}
+          postContent={selectedMessage.content}
+          postAuthor={selectedMessage.username}
+          onSubmitFlag={handleFlag}
+        />
+      )}
     </div>
   );
 };
