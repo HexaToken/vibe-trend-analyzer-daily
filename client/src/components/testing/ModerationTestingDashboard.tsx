@@ -400,9 +400,9 @@ export const ModerationTestingDashboard: React.FC = () => {
         </Card>
       </div>
 
-      <div className="flex justify-center">
-        <Button 
-          onClick={runAllTests} 
+      <div className="flex justify-center gap-4">
+        <Button
+          onClick={runAllTests}
           disabled={isRunning}
           size="lg"
           className="min-w-48"
@@ -418,6 +418,15 @@ export const ModerationTestingDashboard: React.FC = () => {
               Run All Tests
             </>
           )}
+        </Button>
+
+        <Button
+          onClick={toggleTheme}
+          variant="outline"
+          size="lg"
+        >
+          {themeMode === 'dark' ? <Sun className="h-4 w-4 mr-2" /> : <Moon className="h-4 w-4 mr-2" />}
+          Test {themeMode === 'dark' ? 'Light' : 'Dark'} Mode
         </Button>
       </div>
 
