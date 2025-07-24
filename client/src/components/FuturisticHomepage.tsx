@@ -546,9 +546,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         : "text-gray-400 hover:text-white"
                     )}
                                     >
-                                        <span>
                       {item}
-                    </span>
                     {                      activeSection === item.toLowerCase().replace(' ', '-') && (
                       <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
                     )}
