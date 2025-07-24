@@ -29,8 +29,10 @@ import {
   Rocket,
   AlertTriangle,
   Flame,
+  Plus,
 } from "lucide-react";
 import { formatCurrency, cn } from "../../lib/utils";
+import { ShareMoodModal, MoodPostDisplay } from "./ShareMoodModal";
 
 interface StockChannel {
   ticker: string;
@@ -56,6 +58,17 @@ interface StockMessage {
   comments: number;
   isPinned?: boolean;
   tickers: string[];
+  type?: 'message' | 'mood';
+  moodData?: {
+    mood: {
+      id: string;
+      label: string;
+      emoji: string;
+      color: string;
+      score: number;
+    };
+    tickers: string[];
+  };
 }
 
 interface TrendingTicker {
@@ -80,6 +93,7 @@ export const StockChannelHub: React.FC = () => {
   );
   const [searchQuery, setSearchQuery] = useState("");
   const [messageInput, setMessageInput] = useState("");
+  const [messages, setMessages] = useState<StockMessage[]>([]);
 
   // Mock stock channels data
   const stockChannels: StockChannel[] = [
@@ -148,131 +162,70 @@ export const StockChannelHub: React.FC = () => {
       sentiment: "bullish",
       badges: ["Verified", "Diamond Hands"],
       likes: 47,
-      comments: 8,
+      comments: 12,
       isPinned: true,
-      tickers: ["TSLA"],
+      tickers: ["$TSLA"],
     },
     {
       id: "2",
-      username: "CryptoAnalyst",
+      username: "MarketMood",
       avatar: "/api/placeholder/32/32",
-      timestamp: new Date(Date.now() - 600000),
-      content:
-        "RSI approaching overbought on the 4H chart. Expecting a pullback to $241.5 before continuation. What do you think?",
-      sentiment: "neutral",
-      badges: ["TA Expert"],
+      timestamp: new Date(Date.now() - 180000),
+      content: "NVDA is absolutely crushing it! The AI momentum is unstoppable. My portfolio is loving this bull run! 🤑",
+      sentiment: "bullish",
+      badges: ["Premium"],
       likes: 23,
-      comments: 12,
-      tickers: ["TSLA"],
+      comments: 5,
+      tickers: ["$NVDA"],
+      type: 'mood',
+      moodData: {
+        mood: {
+          id: 'extreme-greed',
+          label: 'Extreme Greed',
+          emoji: '🤑',
+          color: 'from-green-500 to-green-600',
+          score: 90
+        },
+        tickers: ['$NVDA', '$MSFT']
+      }
     },
     {
       id: "3",
-      username: "HodlStrong",
+      username: "ChartMaster",
       avatar: "/api/placeholder/32/32",
-      timestamp: new Date(Date.now() - 900000),
+      timestamp: new Date(Date.now() - 600000),
       content:
-        "Just bought the dip at $242.01! Been DCA-ing since 2020 and not stopping now 💎 🙌",
+        "Technical analysis on $TSLA shows strong support at $240. If we hold above this level, next target is $280. RSI looking good for continuation.",
       sentiment: "bullish",
-      badges: ["Diamond Hands"],
-      likes: 156,
-      comments: 24,
-      tickers: ["TSLA"],
+      badges: ["Pro Trader"],
+      likes: 34,
+      comments: 8,
+      tickers: ["$TSLA"],
     },
     {
       id: "4",
-      username: "ElonWatcher",
+      username: "BearishBetty",
       avatar: "/api/placeholder/32/32",
-      timestamp: new Date(Date.now() - 1200000),
+      timestamp: new Date(Date.now() - 900000),
       content:
-        "Anyone else watching the Cybertruck production numbers? Could be a major catalyst if they hit targets 📈",
-      sentiment: "bullish",
-      badges: ["Industry Expert"],
-      likes: 89,
-      comments: 15,
-      tickers: ["TSLA"],
-    },
-    {
-      id: "5",
-      username: "BearishBob",
-      avatar: "/api/placeholder/32/32",
-      timestamp: new Date(Date.now() - 1500000),
-      content:
-        "EV competition is heating up. Ford, GM, and others are catching up fast. Not sure $TSLA can maintain this premium 📉",
+        "Not convinced about this rally. Volume is decreasing and we're seeing some divergence in momentum indicators. Be careful out there!",
       sentiment: "bearish",
-      badges: ["Contrarian"],
-      likes: 34,
-      comments: 28,
-      tickers: ["TSLA"],
-    },
-    {
-      id: "6",
-      username: "MarketSage",
-      avatar: "/api/placeholder/32/32",
-      timestamp: new Date(Date.now() - 1800000),
-      content:
-        "Key support at $240. If it holds, next target is $255. Clean breakout pattern forming on daily chart 📊",
-      sentiment: "neutral",
-      badges: ["Chart Master"],
-      likes: 67,
-      comments: 9,
-      tickers: ["TSLA"],
+      badges: ["Risk Manager"],
+      likes: 15,
+      comments: 18,
+      tickers: ["$TSLA", "$SPY"],
     },
   ];
 
-  // Mock trending tickers
-  const trendingTickers: TrendingTicker[] = [
-    {
-      ticker: "AMD",
-      companyName: "AMD",
-      change: 8.45,
-      changePercent: 6.12,
-      volume: 45600000,
-    },
-    {
-      ticker: "META",
-      companyName: "Meta",
-      change: -3.21,
-      changePercent: -1.05,
-      volume: 32100000,
-    },
-    {
-      ticker: "NFLX",
-      companyName: "Netflix",
-      change: 15.67,
-      changePercent: 3.42,
-      volume: 28900000,
-    },
-  ];
-
-  // Mock top posters
-  const topPosters: TopPoster[] = [
-    {
-      username: "TechGuru99",
-      avatar: "/api/placeholder/32/32",
-      points: 2847,
-      accuracy: 87,
-      badge: "🏆 Top Analyst",
-    },
-    {
-      username: "MarketMaven",
-      avatar: "/api/placeholder/32/32",
-      points: 1965,
-      accuracy: 79,
-      badge: "🎯 Sharp Shooter",
-    },
-    {
-      username: "BullRunner",
-      avatar: "/api/placeholder/32/32",
-      points: 1456,
-      accuracy: 82,
-      badge: "🚀 Momentum King",
-    },
-  ];
-
-  // Set default selected channel
   useEffect(() => {
-    setSelectedChannel(stockChannels[0]);
+    if (stockChannels.length > 0 && !selectedChannel) {
+      setSelectedChannel(stockChannels[0]);
+    }
   }, []);
+
+  useEffect(() => {
+    setMessages(channelMessages);
+  }, [selectedChannel]);
 
   const getSentimentColor = (sentiment: string) => {
     switch (sentiment) {
@@ -288,12 +241,34 @@ export const StockChannelHub: React.FC = () => {
   const getSentimentIcon = (sentiment: string) => {
     switch (sentiment) {
       case "bullish":
-        return "📈";
+        return "🟢";
       case "bearish":
-        return "📉";
+        return "🔴";
       default:
-        return "⚖️";
+        return "🟡";
     }
+  };
+
+  const handleMoodPost = (moodPost: any) => {
+    const newMessage: StockMessage = {
+      id: `mood-${Date.now()}`,
+      username: "CurrentUser", // This would come from auth context
+      avatar: "/api/placeholder/32/32",
+      timestamp: moodPost.timestamp,
+      content: moodPost.content,
+      sentiment: moodPost.mood.score >= 70 ? "bullish" : moodPost.mood.score <= 30 ? "bearish" : "neutral",
+      badges: ["Mood Tracker"],
+      likes: 0,
+      comments: 0,
+      tickers: moodPost.tickers,
+      type: 'mood',
+      moodData: {
+        mood: moodPost.mood,
+        tickers: moodPost.tickers
+      }
+    };
+
+    setMessages(prev => [newMessage, ...prev]);
   };
 
   const filteredChannels = stockChannels.filter(
@@ -448,7 +423,7 @@ export const StockChannelHub: React.FC = () => {
 
             {/* Messages Feed */}
             <div className="flex-1 overflow-y-auto p-4 space-y-3 min-h-[550px] max-h-none lg:max-h-[600px]">
-              {channelMessages.map((message) => (
+              {messages.map((message) => (
                 <div key={message.id} className="space-y-2">
                   {message.isPinned && (
                     <div className="flex items-center gap-2 text-xs text-blue-600 dark:text-blue-400 mb-1">
@@ -457,85 +432,106 @@ export const StockChannelHub: React.FC = () => {
                     </div>
                   )}
 
-                  <div className="flex gap-3">
-                    <Avatar className="w-10 h-10 flex-shrink-0">
-                      <AvatarImage
-                        src={message.avatar}
-                        alt={message.username}
-                      />
-                      <AvatarFallback>{message.username[0]}</AvatarFallback>
-                    </Avatar>
+                  {message.type === 'mood' && message.moodData ? (
+                    <MoodPostDisplay
+                      post={{
+                        mood: message.moodData.mood,
+                        content: message.content,
+                        tickers: message.moodData.tickers,
+                        timestamp: message.timestamp
+                      }}
+                      user={{ username: message.username, avatar: message.avatar }}
+                      onLike={() => {}}
+                      onComment={() => {}}
+                    />
+                  ) : (
+                    <div className="flex gap-3">
+                      <Avatar className="w-10 h-10 flex-shrink-0">
+                        <AvatarImage
+                          src={message.avatar}
+                          alt={message.username}
+                        />
+                        <AvatarFallback>{message.username[0]}</AvatarFallback>
+                      </Avatar>
 
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                        <span className="font-medium text-sm text-gray-900 dark:text-white">
-                          {message.username}
-                        </span>
-                        <span
-                          className={cn(
-                            "text-xs",
-                            getSentimentColor(message.sentiment),
-                          )}
-                        >
-                          {getSentimentIcon(message.sentiment)}{" "}
-                          {message.sentiment}
-                        </span>
-                        {message.badges.map((badge, index) => (
-                          <Badge
-                            key={index}
-                            variant="secondary"
-                            className="text-xs"
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                          <span className="font-medium text-sm text-gray-900 dark:text-white">
+                            {message.username}
+                          </span>
+                          <span
+                            className={cn(
+                              "text-xs",
+                              getSentimentColor(message.sentiment),
+                            )}
                           >
-                            {badge}
-                          </Badge>
-                        ))}
-                        <span className="text-xs text-gray-500">
-                          {message.timestamp.toLocaleTimeString([], {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })}
-                        </span>
-                      </div>
+                            {getSentimentIcon(message.sentiment)}{" "}
+                            {message.sentiment}
+                          </span>
+                          {message.badges.map((badge, index) => (
+                            <Badge
+                              key={index}
+                              variant="secondary"
+                              className="text-xs"
+                            >
+                              {badge}
+                            </Badge>
+                          ))}
+                          <span className="text-xs text-gray-500">
+                            {message.timestamp.toLocaleTimeString([], {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })}
+                          </span>
+                        </div>
 
-                      <p className="text-sm text-gray-800 dark:text-gray-200 mb-2 break-words leading-relaxed">
-                        {message.content}
-                      </p>
+                        <p className="text-sm text-gray-800 dark:text-gray-200 mb-2 break-words leading-relaxed">
+                          {message.content}
+                        </p>
 
-                      <div className="flex items-center gap-4">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="text-xs h-7 px-2"
-                        >
-                          <ThumbsUp className="w-3 h-3 mr-1" />
-                          {message.likes}
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="text-xs h-7 px-2"
-                        >
-                          <MessageSquare className="w-3 h-3 mr-1" />
-                          {message.comments}
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="text-xs h-7 px-2"
-                        >
-                          <Pin className="w-3 h-3" />
-                        </Button>
+                        <div className="flex items-center gap-4">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="text-xs h-7 px-2"
+                          >
+                            <ThumbsUp className="w-3 h-3 mr-1" />
+                            {message.likes}
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="text-xs h-7 px-2"
+                          >
+                            <MessageSquare className="w-3 h-3 mr-1" />
+                            {message.comments}
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="text-xs h-7 px-2"
+                          >
+                            <Pin className="w-3 h-3" />
+                          </Button>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  )}
 
                   <Separator />
                 </div>
               ))}
             </div>
 
-            {/* Message Input */}
+            {/* Message Input with Share Mood */}
             <div className="p-3 border-t border-gray-200 dark:border-gray-700 flex-shrink-0 bg-gray-50 dark:bg-gray-800/50">
+              <div className="flex gap-2 mb-2">
+                <ShareMoodModal onMoodPost={handleMoodPost} />
+                <Button variant="outline" size="sm">
+                  <Plus className="w-4 h-4 mr-1" />
+                  Add Media
+                </Button>
+              </div>
               <div className="flex gap-2">
                 <Input
                   placeholder={`Post your idea... Use $${selectedChannel.ticker} to link stocks`}

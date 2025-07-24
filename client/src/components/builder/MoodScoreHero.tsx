@@ -100,16 +100,18 @@ export const MoodScoreHero: React.FC<MoodScoreHeroProps> = ({
         return (
     <div className={cn(
       "relative mb-8 overflow-hidden rounded-3xl transition-all duration-700",
-      themeMode === 'light'
-        ? `${bodyGradient} border ${borderColor}`
-        : "bg-gradient-to-br from-blue-600 via-purple-700 to-indigo-800"
+      "bg-gradient-to-br from-blue-600 via-purple-700 to-indigo-800"
     )}>
             <div className={cn(
         "absolute inset-0 transition-all duration-700",
-        themeMode === 'light'
-          ? "bg-gradient-to-r from-[#4D7C8A]/10 via-[#607D8B]/10 to-[#4D7C8A]/10"
-          : "bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-indigo-600/20"
+        "bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-indigo-600/20"
       )}></div>
+      
+      {/* Green sentiment ring overlay */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="w-64 h-64 rounded-full border-4 border-green-400 opacity-30 animate-pulse"></div>
+      </div>
+      
       <div
         className={
           'absolute inset-0 bg-[url(\'data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.1"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\')] opacity-20'
@@ -124,147 +126,81 @@ export const MoodScoreHero: React.FC<MoodScoreHeroProps> = ({
                 {getMoodEmoji(moodScore.overall)}
               </div>
               <div>
-                <div className={cn(
-                  "text-5xl font-bold mb-2",
-                  themeMode === 'light' ? "text-[#1E1E1E]" : "text-white"
-                )}>
+                <div className="text-5xl font-bold mb-2 text-white">
                   {loading ? "..." : Math.round(moodScore.overall)}
                 </div>
-                <div className={cn(
-                  "text-xl",
-                  themeMode === 'light' ? "text-[#4A4A4A]" : "text-blue-200"
-                )}>
+                <div className="text-xl text-blue-200">
                   {getMoodLabel(moodScore.overall)}
                 </div>
               </div>
             </div>
 
-                                                <h2 className={cn(
-              "text-2xl font-semibold mb-2",
-              themeMode === 'light' ? "text-[#1E1E1E]" : "text-white"
-            )}>{title}</h2>
-            <p className={cn(
-              "max-w-2xl mx-auto transition-colors duration-500",
-              themeMode === 'light' ? "text-[#4A4A4A]" : "text-blue-200"
-            )}>{subtitle}</p>
+            <h2 className="text-2xl font-semibold mb-2 text-white">{title}</h2>
+            <p className="max-w-2xl mx-auto transition-colors duration-500 text-blue-200">{subtitle}</p>
           </div>
 
           {/* Mood Breakdown */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <Card className={cn(
-              "backdrop-blur-sm border-0 shadow-[0_2px_6px_rgba(0,0,0,0.05)]",
-              themeMode === 'light' ? `${cardBackground} border ${borderColor}` : "bg-white/10"
-            )}>
+            <Card className="backdrop-blur-sm border-0 shadow-[0_2px_6px_rgba(0,0,0,0.05)] bg-white/10">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center space-x-2">
-                    <Activity className={cn(
-                      "w-5 h-5",
-                      themeMode === 'light' ? "text-[#4D7C8A]" : "text-blue-300"
-                    )} />
-                    <span className={cn(
-                      "font-medium",
-                      themeMode === 'light' ? "text-[#1E1E1E]" : "text-white"
-                    )}>Stocks</span>
+                    <Activity className="w-5 h-5 text-blue-300" />
+                    <span className="font-medium text-white">Stocks</span>
                   </div>
-                  <span className={cn(
-                    "text-2xl font-bold",
-                    themeMode === 'light' ? "text-[#1E1E1E]" : "text-white"
-                  )}>
+                  <span className="text-2xl font-bold text-white">
                     {Math.round(moodScore.stocks)}
                   </span>
                 </div>
-                <div className={cn(
-                  "w-full rounded-full h-2",
-                  themeMode === 'light' ? "bg-[#E0E0E0]" : "bg-white/20"
-                )}>
+                <div className="w-full rounded-full h-2 bg-white/20">
                   <div
                     className={`h-2 rounded-full bg-gradient-to-r ${getMoodColor(moodScore.stocks)}`}
                     style={{ width: `${moodScore.stocks}%` }}
                   ></div>
                 </div>
-                <div className={cn(
-                  "text-sm mt-2",
-                  themeMode === 'light' ? "text-[#4A4A4A]" : "text-blue-200"
-                )}>40% weight</div>
+                <div className="text-sm mt-2 text-blue-200">40% weight</div>
               </CardContent>
             </Card>
 
-            <Card className={cn(
-              "backdrop-blur-sm border-0 shadow-[0_2px_6px_rgba(0,0,0,0.05)]",
-              themeMode === 'light' ? `${cardBackground} border ${borderColor}` : "bg-white/10"
-            )}>
+            <Card className="backdrop-blur-sm border-0 shadow-[0_2px_6px_rgba(0,0,0,0.05)] bg-white/10">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center space-x-2">
-                    <Brain className={cn(
-                      "w-5 h-5",
-                      themeMode === 'light' ? "text-[#607D8B]" : "text-purple-300"
-                    )} />
-                    <span className={cn(
-                      "font-medium",
-                      themeMode === 'light' ? "text-[#1E1E1E]" : "text-white"
-                    )}>News</span>
+                    <Brain className="w-5 h-5 text-purple-300" />
+                    <span className="font-medium text-white">News</span>
                   </div>
-                  <span className={cn(
-                    "text-2xl font-bold",
-                    themeMode === 'light' ? "text-[#1E1E1E]" : "text-white"
-                  )}>
+                  <span className="text-2xl font-bold text-white">
                     {Math.round(moodScore.news)}
                   </span>
                 </div>
-                <div className={cn(
-                  "w-full rounded-full h-2",
-                  themeMode === 'light' ? "bg-[#E0E0E0]" : "bg-white/20"
-                )}>
+                <div className="w-full rounded-full h-2 bg-white/20">
                   <div
                     className={`h-2 rounded-full bg-gradient-to-r ${getMoodColor(moodScore.news)}`}
                     style={{ width: `${moodScore.news}%` }}
                   ></div>
                 </div>
-                <div className={cn(
-                  "text-sm mt-2",
-                  themeMode === 'light' ? "text-[#4A4A4A]" : "text-purple-200"
-                )}>30% weight</div>
+                <div className="text-sm mt-2 text-purple-200">30% weight</div>
               </CardContent>
             </Card>
 
-            <Card className={cn(
-              "backdrop-blur-sm border-0 shadow-[0_2px_6px_rgba(0,0,0,0.05)]",
-              themeMode === 'light' ? `${cardBackground} border ${borderColor}` : "bg-white/10"
-            )}>
+            <Card className="backdrop-blur-sm border-0 shadow-[0_2px_6px_rgba(0,0,0,0.05)] bg-white/10">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center space-x-2">
-                    <Brain className={cn(
-                      "w-5 h-5",
-                      themeMode === 'light' ? "text-[#4D7C8A]" : "text-indigo-300"
-                    )} />
-                    <span className={cn(
-                      "font-medium",
-                      themeMode === 'light' ? "text-[#1E1E1E]" : "text-white"
-                    )}>Social</span>
+                    <Brain className="w-5 h-5 text-indigo-300" />
+                    <span className="font-medium text-white">Social</span>
                   </div>
-                  <span className={cn(
-                    "text-2xl font-bold",
-                    themeMode === 'light' ? "text-[#1E1E1E]" : "text-white"
-                  )}>
+                  <span className="text-2xl font-bold text-white">
                     {Math.round(moodScore.social)}
                   </span>
                 </div>
-                <div className={cn(
-                  "w-full rounded-full h-2",
-                  themeMode === 'light' ? "bg-[#E0E0E0]" : "bg-white/20"
-                )}>
+                <div className="w-full rounded-full h-2 bg-white/20">
                   <div
                     className={`h-2 rounded-full bg-gradient-to-r ${getMoodColor(moodScore.social)}`}
                     style={{ width: `${moodScore.social}%` }}
                   ></div>
                 </div>
-                <div className={cn(
-                  "text-sm mt-2",
-                  themeMode === 'light' ? "text-[#4A4A4A]" : "text-indigo-200"
-                )}>30% weight</div>
+                <div className="text-sm mt-2 text-indigo-200">30% weight</div>
               </CardContent>
             </Card>
           </div>

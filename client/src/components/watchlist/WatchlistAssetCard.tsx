@@ -110,7 +110,7 @@ export const WatchlistAssetCard = ({
             </div>
             <p className={cn(
               "text-sm truncate max-w-32",
-              themeMode === 'light' ? 'text-[#444]' : 'text-gray-400'
+              themeMode === 'light' ? 'text-[#2c2c2c]' : 'text-gray-400'
             )}>{asset.name}</p>
           </div>
         </div>
@@ -141,7 +141,7 @@ export const WatchlistAssetCard = ({
         <div className="flex items-center justify-between mb-2">
           <span className={cn(
             "text-xs font-medium",
-            themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'
+            themeMode === 'light' ? 'text-[#1a1a1a]' : 'text-gray-400'
           )}>SENTIMENT SCORE</span>
           <div className="flex items-center gap-2">
             <MiniSentimentBars trendData={mockTrendData} />
@@ -225,19 +225,32 @@ export const WatchlistAssetCard = ({
 
       {/* Expanded Content */}
       {isExpanded && (
-        <div className="mt-4 pt-4 border-t border-gray-700/50 space-y-3">
+        <div className={cn(
+          "mt-4 pt-4 border-t space-y-3",
+          themeMode === 'light' ? 'border-[#E0E0E0]' : 'border-gray-700/50'
+        )}>
           {/* Additional Stats */}
           <div className="grid grid-cols-2 gap-4 text-xs">
             {asset.volume && (
               <div>
-                <span className="text-gray-400">Volume</span>
-                <div className="font-medium text-white">{formatLargeNumber(asset.volume)}</div>
+                <span className={cn(
+                  themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'
+                )}>Volume</span>
+                <div className={cn(
+                  "font-medium",
+                  themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'
+                )}>{formatLargeNumber(asset.volume)}</div>
               </div>
             )}
             {asset.marketCap && (
               <div>
-                <span className="text-gray-400">Market Cap</span>
-                <div className="font-medium text-white">{formatLargeNumber(asset.marketCap)}</div>
+                <span className={cn(
+                  themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'
+                )}>Market Cap</span>
+                <div className={cn(
+                  "font-medium",
+                  themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'
+                )}>{formatLargeNumber(asset.marketCap)}</div>
               </div>
             )}
           </div>
