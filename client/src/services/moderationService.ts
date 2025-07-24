@@ -479,6 +479,95 @@ class ModerationService {
     if (score >= 20) return "low";
     return "unverified";
   }
+
+  /**
+   * Simplified spam detection for testing
+   */
+  detectSpam(content: string): { isSpam: boolean; confidence: number; reasons: string[] } {
+    const reasons: string[] = [];
+    let spamScore = 0;
+
+    // Check for excessive emojis
+    const emojiCount = (content.match(/[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F1E0}-\u{1F1FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu) || []).length;
+    if (emojiCount > 5) {
+      spamScore += 30;
+      reasons.push("Excessive emojis");
+    }
+
+    // Check for promotional patterns
+    const promoCount = SPAM_PATTERNS.promotional.filter(pattern => pattern.test(content)).length;
+    if (promoCount > 0) {
+      spamScore += promoCount * 25;
+      reasons.push("Promotional language");
+    }
+
+    // Check for scam patterns
+    const scamCount = SPAM_PATTERNS.scam.filter(pattern => pattern.test(content)).length;
+    if (scamCount > 0) {
+      spamScore += scamCount * 35;
+      reasons.push("Scam indicators");
+    }
+
+    // Check for suspicious links
+    if (this.detectSuspiciousLinks(content)) {
+      spamScore += 40;
+      reasons.push("Suspicious links");
+    }
+
+    // Check for excessive caps
+    if (this.detectExcessiveCaps(content)) {
+      spamScore += 20;
+      reasons.push("Excessive capitals");
+    }
+
+    const isSpam = spamScore > 50;
+    const confidence = Math.min(1, spamScore / 100);
+
+    return { isSpam, confidence, reasons };
+  }
+
+  /**
+   * Simplified credibility scoring for testing
+   */
+  calculateCredibilityScore(data: {
+    content: string;
+    author: string;
+    timestamp: Date;
+    engagement?: { likes: number; replies: number; shares: number };
+  }): number {
+    let score = 50; // Base score
+
+    const { content, author, engagement } = data;
+
+    // Check for quality indicators
+    if (this.hasSourceLinks(content)) score += 20;
+    if (this.hasDataEvidence(content)) score += 15;
+
+    // Technical analysis bonus
+    const techPatterns = CREDIBILITY_FACTORS.technicalAnalysis.patterns.filter(p => p.test(content)).length;
+    score += techPatterns * 8;
+
+    // Author reliability based on name patterns
+    if (author.includes('expert') || author.includes('analyst')) score += 15;
+    if (author.includes('trader') || author.includes('pro')) score += 10;
+    if (author.includes('meme') || author.includes('lord')) score -= 20;
+
+    // Engagement quality
+    if (engagement) {
+      const engagementRatio = (engagement.likes + engagement.replies * 2) / Math.max(1, engagement.shares);
+      if (engagementRatio > 5) score += 10;
+    }
+
+    // Penalize promotional content
+    const promoCount = SPAM_PATTERNS.promotional.filter(p => p.test(content)).length;
+    score -= promoCount * 15;
+
+    // Content length bonus for detailed posts
+    if (content.length > 200) score += 5;
+    if (content.length > 500) score += 5;
+
+    return Math.max(0, Math.min(100, Math.round(score)));
+  }
 }
 
 // Export singleton instance
