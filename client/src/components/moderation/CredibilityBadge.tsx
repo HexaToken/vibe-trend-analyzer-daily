@@ -287,24 +287,70 @@ export const UserCredibilityIndicator: React.FC<{
   level: CredibilityLevel;
   score: number;
   compact?: boolean;
-}> = ({ level, score, compact = false }) => {
+  showBadge?: boolean;
+  topBadge?: string;
+}> = ({ level, score, compact = false, showBadge = false, topBadge }) => {
   const config = getCredibilityConfig(score, level);
+
+  // Import badge definitions only when needed
+  let badgeIcon = null;
+  let badgeColor = null;
+
+  if (showBadge && topBadge) {
+    try {
+      // Dynamically import badge definitions to avoid circular dependencies
+      const badges = {
+        "trusted_contributor": { icon: "✅", color: "#10B981" },
+        "verified_insights": { icon: "📊", color: "#3B82F6" },
+        "top_predictor": { icon: "🚀", color: "#DC2626" },
+        "bullish_beast": { icon: "🐂", color: "#059669" },
+        "bear_watcher": { icon: "🐻", color: "#DC2626" },
+        "diamond_hands": { icon: "💎", color: "#3B82F6" },
+        "premium_member": { icon: "⭐", color: "#F59E0B" },
+        "new_voice": { icon: "🧪", color: "#6B7280" },
+      };
+
+      const badge = badges[topBadge as keyof typeof badges];
+      if (badge) {
+        badgeIcon = badge.icon;
+        badgeColor = badge.color;
+      }
+    } catch (error) {
+      // Fallback if badge not found
+    }
+  }
 
   if (compact) {
     return (
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
-            <div className={cn(
-              "inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-xs font-medium",
-              config.bgColor,
-              config.textColor
-            )}>
-              {config.emoji}
+            <div className="flex items-center gap-1">
+              <div className={cn(
+                "inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-xs font-medium",
+                config.bgColor,
+                config.textColor
+              )}>
+                {config.emoji}
+              </div>
+              {showBadge && badgeIcon && (
+                <div
+                  className="w-4 h-4 rounded-full flex items-center justify-center text-xs text-white"
+                  style={{ backgroundColor: badgeColor || '#6B7280' }}
+                  title={`Top Badge: ${topBadge?.replace('_', ' ')}`}
+                >
+                  {badgeIcon}
+                </div>
+              )}
             </div>
           </TooltipTrigger>
           <TooltipContent>
-            <p>{config.label} Contributor ({score}/100)</p>
+            <div>
+              <p>{config.label} Contributor ({score}/100)</p>
+              {showBadge && topBadge && (
+                <p className="text-xs">Top Badge: {topBadge.replace('_', ' ')}</p>
+              )}
+            </div>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
@@ -312,17 +358,28 @@ export const UserCredibilityIndicator: React.FC<{
   }
 
   return (
-    <Badge
-      className={cn(
-        "inline-flex items-center gap-1 text-xs font-medium",
-        config.bgColor,
-        config.textColor,
-        config.borderColor
+    <div className="flex items-center gap-1">
+      <Badge
+        className={cn(
+          "inline-flex items-center gap-1 text-xs font-medium",
+          config.bgColor,
+          config.textColor,
+          config.borderColor
+        )}
+      >
+        {config.icon}
+        <span>{config.label} Contributor</span>
+      </Badge>
+      {showBadge && badgeIcon && (
+        <div
+          className="w-5 h-5 rounded-full flex items-center justify-center text-xs text-white"
+          style={{ backgroundColor: badgeColor || '#6B7280' }}
+          title={`Top Badge: ${topBadge?.replace('_', ' ')}`}
+        >
+          {badgeIcon}
+        </div>
       )}
-    >
-      {config.icon}
-      <span>{config.label} Contributor</span>
-    </Badge>
+    </div>
   );
 };
 
