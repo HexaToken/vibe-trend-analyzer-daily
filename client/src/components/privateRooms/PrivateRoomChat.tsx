@@ -275,6 +275,17 @@ export const PrivateRoomChat: React.FC<PrivateRoomChatProps> = ({
     );
   };
 
+  const handleFlag = async (flagData: CreateFlagData) => {
+    try {
+      await moderationService.submitFlag(flagData);
+      // You could add a toast notification here
+      console.log("Message flagged successfully");
+    } catch (error) {
+      console.error("Failed to flag message:", error);
+      throw error; // Re-throw so the modal can handle it
+    }
+  };
+
   const toggleThread = (messageId: string) => {
     setExpandedThreads((prev) => {
       const newSet = new Set(prev);
