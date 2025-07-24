@@ -75,7 +75,9 @@ import {
   parseCashtags,
   getTimeAgo,
 } from "@/data/privateRoomsMockData";
-import { ChatPostCard } from "@/components/chat/ChatPostCard";
+import { EnhancedChatPostCard } from "@/components/chat/EnhancedChatPostCard";
+import { moderationService } from "@/services/moderationService";
+import type { CreateFlagData } from "@/types/moderation";
 
 interface PrivateRoomChatProps {
   room: PrivateRoom;
