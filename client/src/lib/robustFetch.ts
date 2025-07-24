@@ -69,13 +69,9 @@ export async function robustFetch(
   let lastError: Error | null = null;
 
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
-    let controller: AbortController | null = null;
-    let timeoutId: NodeJS.Timeout | null = null;
+    const { controller, cleanup } = createTimeoutController(timeout);
 
     try {
-      // Create abort controller for timeout
-      controller = new AbortController();
-
       // Handle existing signal if provided
       if (fetchOptions.signal) {
         if (fetchOptions.signal.aborted) {
@@ -84,16 +80,9 @@ export async function robustFetch(
 
         // Listen for external abort
         fetchOptions.signal.addEventListener('abort', () => {
-          controller?.abort();
+          controller.abort();
         });
       }
-
-      // Set up timeout with proper cleanup
-      timeoutId = setTimeout(() => {
-        if (controller && !controller.signal.aborted) {
-          controller.abort();
-        }
-      }, timeout);
 
       const response = await fetch(url, {
         ...fetchOptions,
@@ -101,10 +90,7 @@ export async function robustFetch(
       });
 
       // Clear timeout immediately on success
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-        timeoutId = null;
-      }
+      cleanup();
 
       // If response is not ok, throw error but don't retry for 4xx errors
       if (!response.ok) {
