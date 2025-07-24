@@ -201,7 +201,10 @@ export const ChatPostCard: React.FC<ChatPostCardProps> = ({
           : '0 2px 6px rgba(0,0,0,0.3)'
       }}
     >
-      <CardContent className="p-5">
+      <CardContent className={cn(
+        "p-5 rounded-xl",
+        themeMode === 'light' ? 'bg-white' : ''
+      )}>
         {/* TOP SECTION - User Metadata + Message */}
         <div className="space-y-3">
           {/* User Info Row */}
