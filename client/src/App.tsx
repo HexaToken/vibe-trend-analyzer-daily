@@ -126,7 +126,7 @@ const AppContent = () => {
       case "membership-demo":
         return <MembershipPageSummary />;
       case "moderation":
-        return <ModerationDemo />;
+        return <ModerationDemo onNavigate={setActiveSection} />;
       case "moderation-testing":
         return <ModerationTestingDashboard />;
       case "badges":
