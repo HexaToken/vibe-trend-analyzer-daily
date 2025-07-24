@@ -139,6 +139,15 @@ export async function robustFetch(
         lastError = new Error("Request timeout");
       }
 
+      // Handle other common fetch errors
+      if (lastError.message.includes("Failed to fetch")) {
+        lastError = new Error("Network error - please check your connection");
+      }
+
+      if (lastError.message.includes("NetworkError")) {
+        lastError = new Error("Network error - unable to reach server");
+      }
+
       console.warn(
         `Fetch attempt ${attempt + 1} failed for ${url}:`,
         lastError.message,
