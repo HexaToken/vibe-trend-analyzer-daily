@@ -88,7 +88,11 @@ const mockQueueItem = {
   lastFlaggedAt: new Date(Date.now() - 30 * 60 * 1000),
 };
 
-export const ModerationDemo: React.FC = () => {
+interface ModerationDemoProps {
+  onNavigate?: (section: string) => void;
+}
+
+export const ModerationDemo: React.FC<ModerationDemoProps> = ({ onNavigate }) => {
   const { themeMode } = useMoodTheme();
   const [flagModalOpen, setFlagModalOpen] = useState(false);
   const [selectedPost, setSelectedPost] = useState<typeof mockPosts[0] | null>(null);
