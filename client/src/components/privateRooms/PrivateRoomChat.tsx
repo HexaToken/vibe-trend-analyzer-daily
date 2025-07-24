@@ -399,13 +399,16 @@ export const PrivateRoomChat: React.FC<PrivateRoomChatProps> = ({
               </div>
             ) : (
               messages.map((message) => (
-                <ChatPostCard
+                <EnhancedChatPostCard
                   key={message.id}
                   message={message}
                   currentUserId={currentUser.id}
                   onReaction={handleReaction}
                   onReply={handleReply}
                   onPin={handlePin}
+                  onFlag={handleFlag}
+                  showModerationFeatures={true}
+                  isModerator={currentUser.role === "admin" || currentUser.role === "moderator"}
                 />
               ))
             )}
