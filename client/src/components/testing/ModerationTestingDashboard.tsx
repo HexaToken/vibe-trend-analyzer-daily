@@ -313,12 +313,13 @@ export const ModerationTestingDashboard: React.FC = () => {
   const runAllTests = async () => {
     setIsRunning(true);
     setTestResults([]);
-    
+
     try {
       await runSpamDetectionTests();
       await runCredibilityTests();
       await runBadgeSystemTests();
       await runPostMetricsTests();
+      await runUITests();
     } catch (error) {
       addTestResult({
         test: 'Test Suite Execution',
