@@ -274,6 +274,8 @@ export const UserCredibilityProfile: React.FC<UserCredibilityProfileProps> = ({
 }) => {
   const { themeMode } = useMoodTheme();
   const [credibility] = useState<UserCredibility>(mockUserCredibility);
+  const [userBadges] = useState(() => generateMockUserBadges(userId));
+  const [badgeProgress] = useState(() => generateMockBadgeProgress(userId));
   const config = getCredibilityConfig(credibility.overallScore, credibility.level);
 
   // Badge only variant
