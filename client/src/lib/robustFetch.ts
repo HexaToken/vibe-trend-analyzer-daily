@@ -40,17 +40,42 @@ export async function robustFetch(
   let lastError: Error | null = null;
 
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    let controller: AbortController | null = null;
+    let timeoutId: NodeJS.Timeout | null = null;
+
     try {
-            // Create abort controller for timeout
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), timeout);
+      // Create abort controller for timeout
+      controller = new AbortController();
+
+      // Handle existing signal if provided
+      if (fetchOptions.signal) {
+        if (fetchOptions.signal.aborted) {
+          throw new Error("Request was aborted before starting");
+        }
+
+        // Listen for external abort
+        fetchOptions.signal.addEventListener('abort', () => {
+          controller?.abort();
+        });
+      }
+
+      // Set up timeout with proper cleanup
+      timeoutId = setTimeout(() => {
+        if (controller && !controller.signal.aborted) {
+          controller.abort();
+        }
+      }, timeout);
 
       const response = await fetch(url, {
         ...fetchOptions,
         signal: controller.signal,
       });
 
-      clearTimeout(timeoutId);
+      // Clear timeout immediately on success
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+        timeoutId = null;
+      }
 
       // If response is not ok, throw error but don't retry for 4xx errors
       if (!response.ok) {
@@ -71,11 +96,28 @@ export async function robustFetch(
 
       return response;
     } catch (error) {
+      // Ensure timeout is cleared in case of error
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+        timeoutId = null;
+      }
+
       lastError = error instanceof Error ? error : new Error(String(error));
 
-      // Handle timeout specifically
+      // Handle different types of abort errors more specifically
       if (lastError.name === "AbortError") {
-        lastError = new Error("Request timeout");
+        // Check if it was our timeout or an external abort
+        if (controller?.signal.aborted) {
+          // If we have a reason, use it; otherwise assume timeout
+          const reason = (controller.signal as any).reason;
+          if (reason) {
+            lastError = new Error(`Request aborted: ${reason}`);
+          } else {
+            lastError = new Error("Request timeout");
+          }
+        } else {
+          lastError = new Error("Request was aborted");
+        }
       }
 
       console.warn(
