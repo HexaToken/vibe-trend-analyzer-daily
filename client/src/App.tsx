@@ -127,6 +127,8 @@ const AppContent = () => {
         return <MembershipPageSummary />;
       case "moderation":
         return <ModerationDemo />;
+      case "moderation-testing":
+        return <ModerationTestingDashboard />;
       case "badges":
         return <BadgeSystemDemo />;
             // Removed "builder-finance" route - BuilderFinanceDemo component retained for Builder.io integration examples
