@@ -18,6 +18,7 @@ import {
   Zap,
   Settings,
   TrendingUp,
+  TestTube,
 } from "lucide-react";
 
 // Import moderation components
