@@ -24,17 +24,44 @@ export class FetchError extends Error {
 /**
  * Creates a timeout-aware AbortController with proper cleanup
  */
-function createTimeoutController(timeoutMs: number): {
+function createTimeoutController(timeoutMs: number, externalSignal?: AbortSignal): {
   controller: AbortController;
   cleanup: () => void;
 } {
   const controller = new AbortController();
   let timeoutId: NodeJS.Timeout | null = null;
+  let isCleanedUp = false;
 
+  // Handle external signal if provided
+  if (externalSignal) {
+    if (externalSignal.aborted) {
+      controller.abort();
+      return {
+        controller,
+        cleanup: () => { isCleanedUp = true; }
+      };
+    }
+
+    // Forward external abort to our controller
+    const onExternalAbort = () => {
+      if (!isCleanedUp && !controller.signal.aborted) {
+        controller.abort();
+      }
+    };
+
+    externalSignal.addEventListener('abort', onExternalAbort, { once: true });
+  }
+
+  // Set up timeout with safeguards
   if (timeoutMs > 0) {
     timeoutId = setTimeout(() => {
-      if (!controller.signal.aborted) {
-        controller.abort();
+      if (!isCleanedUp && !controller.signal.aborted) {
+        try {
+          controller.abort();
+        } catch (error) {
+          // Ignore abort errors on cleanup
+          console.debug('Safe abort during timeout:', error);
+        }
       }
     }, timeoutMs);
   }
@@ -42,6 +69,7 @@ function createTimeoutController(timeoutMs: number): {
   return {
     controller,
     cleanup: () => {
+      isCleanedUp = true;
       if (timeoutId) {
         clearTimeout(timeoutId);
         timeoutId = null;
