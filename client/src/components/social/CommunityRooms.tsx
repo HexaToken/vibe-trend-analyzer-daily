@@ -176,6 +176,21 @@ export const CommunityRooms = () => {
     );
   };
 
+  const handleFlag = async (flagData: CreateFlagData) => {
+    try {
+      await moderationService.submitFlag(flagData);
+      console.log("Message flagged successfully");
+    } catch (error) {
+      console.error("Failed to flag message:", error);
+      throw error;
+    }
+  };
+
+  const openFlagModal = (message: ChatMessage) => {
+    setSelectedMessage(message);
+    setFlagModalOpen(true);
+  };
+
   const getRoomIcon = (room: CommunityRoom) => {
     if (room.isPrivate) return <Lock className="h-4 w-4" />;
     if (room.type === "ticker") return <Hash className="h-4 w-4" />;
