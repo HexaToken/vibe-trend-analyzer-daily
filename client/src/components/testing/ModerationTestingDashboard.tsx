@@ -4,12 +4,13 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { CheckCircle, XCircle, AlertTriangle, Eye, MessageSquare, Shield, Award } from 'lucide-react';
+import { CheckCircle, XCircle, AlertTriangle, Eye, MessageSquare, Shield, Award, Sun, Moon } from 'lucide-react';
 import { EnhancedChatPostCard } from '@/components/chat/EnhancedChatPostCard';
 import { UserCredibilityProfile } from '@/components/moderation/UserCredibilityProfile';
 import { BadgeDisplay } from '@/components/badges/BadgeDisplay';
 import { moderationService } from '@/services/moderationService';
 import { badgeService } from '@/services/badgeService';
+import { useMoodTheme } from '@/contexts/MoodThemeContext';
 import type { Post } from '@/types/social';
 import type { BadgeType } from '@/types/badges';
 
