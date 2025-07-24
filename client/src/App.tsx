@@ -40,6 +40,7 @@ import ViewProfilePage from "@/components/user/ViewProfilePage";
 import MoorMeterMembershipPage from "@/components/membership/MoorMeterMembershipPage";
 import MembershipPageSummary from "@/components/examples/MembershipPageSummary";
 import { ModerationDemo } from "@/components/ModerationDemo";
+import { BadgeSystemDemo } from "@/components/BadgeSystemDemo";
 import { SpaceSwitcherWidget } from "@/components/community/SpaceSwitcherWidget";
 import { PrivateRoomsContainer } from "@/components/privateRooms/PrivateRoomsContainer";
 import { ChatInterface } from "@/components/moorMeter/ChatInterface";
