@@ -211,12 +211,18 @@ export const EnhancedChatPostCard: React.FC<EnhancedChatPostCardProps> = ({
       const analyzePost = async () => {
         setIsAnalyzing(true);
         try {
+          // Validate message has required content
+          if (!message || !message.content) {
+            console.warn("Message or content is missing, skipping analysis");
+            return;
+          }
+
           const socialPost = convertToSocialPost(message);
-          
+
           // Get credibility score
           const credResult = await moderationService.calculateCredibility(socialPost);
           setCredibility(credResult);
-          
+
           // Run spam detection
           const spamResult = await moderationService.analyzeSpam(socialPost);
           setSpamDetection(spamResult);
