@@ -190,7 +190,7 @@ export const EnhancedChatPostCard: React.FC<EnhancedChatPostCardProps> = ({
     username: msg.username,
     userAvatar: msg.userAvatar,
     userRole: msg.userRole,
-    content: msg.content,
+    content: msg.content || '', // Ensure content is never undefined
     sentiment: msg.sentiment || "neutral",
     cashtags: msg.cashtags || [],
     hashtags: [],
