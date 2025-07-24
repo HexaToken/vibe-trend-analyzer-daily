@@ -125,9 +125,10 @@ export async function robustFetch(
         lastError.message,
       );
 
-      // Don't retry on abort (timeout) or 4xx errors
+      // Don't retry on abort (timeout), external abort, or 4xx errors
       if (
-        lastError.message === "Request timeout" ||
+        lastError.message.includes("timeout") ||
+        lastError.message.includes("aborted") ||
         (error instanceof FetchError &&
           error.status &&
           error.status >= 400 &&
