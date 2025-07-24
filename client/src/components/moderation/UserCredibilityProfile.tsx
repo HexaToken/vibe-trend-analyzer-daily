@@ -437,6 +437,23 @@ export const UserCredibilityProfile: React.FC<UserCredibilityProfileProps> = ({
           </TabsContent>
           
           <TabsContent value="badges">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h4 className="font-medium">Achievement Badges</h4>
+                <span className="text-sm text-muted-foreground">{userBadges.length} earned</span>
+              </div>
+              <BadgeDisplay
+                userBadges={userBadges}
+                badgeProgress={badgeProgress}
+                variant="profile"
+                showProgress={true}
+                showTooltip={true}
+                allowModal={true}
+              />
+            </div>
+          </TabsContent>
+
+          <TabsContent value="awards">
             <BadgeCollection badges={credibility.badges} />
           </TabsContent>
           
