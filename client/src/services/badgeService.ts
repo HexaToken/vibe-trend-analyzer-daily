@@ -445,6 +445,56 @@ class BadgeService {
   }
 
   /**
+   * Get badge definition (for testing)
+   */
+  getBadgeDefinition(badgeType: BadgeType) {
+    return BADGE_DEFINITIONS[badgeType];
+  }
+
+  /**
+   * Check if user is eligible for a badge (for testing)
+   */
+  checkBadgeEligibility(badgeType: BadgeType, userMetrics: {
+    id: string;
+    credibilityScore: number;
+    postsCount: number;
+    verifiedPosts: number;
+    helpfulFlags: number;
+    communityEngagement: number;
+  }): boolean {
+    const definition = BADGE_DEFINITIONS[badgeType];
+    if (!definition) return false;
+
+    const requirements = definition.requirements;
+
+    // Check credibility requirements
+    if (requirements.minCredibilityScore && userMetrics.credibilityScore < requirements.minCredibilityScore) {
+      return false;
+    }
+
+    // Check post requirements
+    if (requirements.minPosts && userMetrics.postsCount < requirements.minPosts) {
+      return false;
+    }
+
+    if (requirements.minVerifiedPosts && userMetrics.verifiedPosts < requirements.minVerifiedPosts) {
+      return false;
+    }
+
+    // Check engagement requirements
+    if (requirements.minEngagement && userMetrics.communityEngagement < requirements.minEngagement) {
+      return false;
+    }
+
+    // Check helpful flags for moderation badges
+    if (requirements.minHelpfulFlags && userMetrics.helpfulFlags < requirements.minHelpfulFlags) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
    * Simulate earning badges for demo/testing
    */
   async simulateUserActivity(userId: string): Promise<void> {
