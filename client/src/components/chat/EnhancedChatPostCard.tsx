@@ -191,17 +191,17 @@ export const EnhancedChatPostCard: React.FC<EnhancedChatPostCardProps> = ({
     userAvatar: msg.userAvatar,
     userRole: msg.userRole,
     content: msg.content,
-    sentiment: msg.sentiment,
-    cashtags: [],
+    sentiment: msg.sentiment || "neutral",
+    cashtags: msg.cashtags || [],
     hashtags: [],
-    mentions: [],
+    mentions: msg.mentions || [],
     type: "chat",
-    likes: msg.likes,
+    likes: 0, // RoomMessage uses reactions instead
     comments: 0,
     shares: 0,
     bookmarks: 0,
     createdAt: msg.createdAt,
-    updatedAt: msg.updatedAt,
+    updatedAt: msg.createdAt, // Use createdAt if updatedAt doesn't exist
     roomId: msg.roomId,
   });
 
