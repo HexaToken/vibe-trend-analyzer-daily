@@ -117,7 +117,7 @@ export async function robustFetch(
       lastError = error instanceof Error ? error : new Error(String(error));
 
       // Handle different types of abort errors more specifically
-      if (lastError.name === "AbortError") {
+      if (lastError.name === "AbortError" || lastError.message.includes("aborted")) {
         // Check if it was our timeout or an external abort
         if (controller.signal.aborted) {
           // If we have a reason, use it; otherwise assume timeout
@@ -125,11 +125,18 @@ export async function robustFetch(
           if (reason) {
             lastError = new Error(`Request aborted: ${reason}`);
           } else {
+            // Default to timeout since we control this signal
             lastError = new Error("Request timeout");
           }
         } else {
-          lastError = new Error("Request was aborted");
+          // External abort or unknown abort
+          lastError = new Error("Request was aborted externally");
         }
+      }
+
+      // Catch any remaining "signal is aborted without reason" errors
+      if (lastError.message.includes("signal is aborted without reason")) {
+        lastError = new Error("Request timeout");
       }
 
       console.warn(
