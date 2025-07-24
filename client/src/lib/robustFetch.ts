@@ -97,21 +97,9 @@ export async function robustFetch(
   let lastError: Error | null = null;
 
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
-    const { controller, cleanup } = createTimeoutController(timeout);
+    const { controller, cleanup } = createTimeoutController(timeout, fetchOptions.signal);
 
     try {
-      // Handle existing signal if provided
-      if (fetchOptions.signal) {
-        if (fetchOptions.signal.aborted) {
-          throw new Error("Request was aborted before starting");
-        }
-
-        // Listen for external abort
-        fetchOptions.signal.addEventListener('abort', () => {
-          controller.abort();
-        });
-      }
-
       const response = await fetch(url, {
         ...fetchOptions,
         signal: controller.signal,
