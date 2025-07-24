@@ -39,6 +39,12 @@ import SettingsPage from "@/components/user/SettingsPage";
 import ViewProfilePage from "@/components/user/ViewProfilePage";
 import MoorMeterMembershipPage from "@/components/membership/MoorMeterMembershipPage";
 import MembershipPageSummary from "@/components/examples/MembershipPageSummary";
+import { ModerationDemo } from "@/components/ModerationDemo";
+import { BadgeSystemDemo } from "@/components/BadgeSystemDemo";
+import { SpaceSwitcherWidget } from "@/components/community/SpaceSwitcherWidget";
+import { PrivateRoomsContainer } from "@/components/privateRooms/PrivateRoomsContainer";
+import { ChatInterface } from "@/components/moorMeter/ChatInterface";
+import { ModerationTestingDashboard } from "@/components/testing/ModerationTestingDashboard";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +61,12 @@ const AppContent = () => {
       // Removed "history" route - HistoricalData component retained for potential reuse
             case "community":
         return <CommunityRooms />;
+      case "space":
+        return <SpaceSwitcherWidget />;
+      case "rooms":
+        return <PrivateRoomsContainer />;
+      case "chat":
+        return <ChatInterface />;
       case "profile":
         return (
           <ProtectedRoute
@@ -113,6 +125,12 @@ const AppContent = () => {
         return <MoorMeterMembershipPage />;
       case "membership-demo":
         return <MembershipPageSummary />;
+      case "moderation":
+        return <ModerationDemo onNavigate={setActiveSection} />;
+      case "moderation-testing":
+        return <ModerationTestingDashboard />;
+      case "badges":
+        return <BadgeSystemDemo />;
             // Removed "builder-finance" route - BuilderFinanceDemo component retained for Builder.io integration examples
       case "futuristic-home":
         return <FuturisticHomepage onNavigate={setActiveSection} />;

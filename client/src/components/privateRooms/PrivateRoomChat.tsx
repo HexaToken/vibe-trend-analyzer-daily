@@ -75,7 +75,9 @@ import {
   parseCashtags,
   getTimeAgo,
 } from "@/data/privateRoomsMockData";
-import { ChatPostCard } from "@/components/chat/ChatPostCard";
+import { EnhancedChatPostCard } from "@/components/chat/EnhancedChatPostCard";
+import { moderationService } from "@/services/moderationService";
+import type { CreateFlagData } from "@/types/moderation";
 
 interface PrivateRoomChatProps {
   room: PrivateRoom;
@@ -273,6 +275,17 @@ export const PrivateRoomChat: React.FC<PrivateRoomChatProps> = ({
     );
   };
 
+  const handleFlag = async (flagData: CreateFlagData) => {
+    try {
+      await moderationService.submitFlag(flagData);
+      // You could add a toast notification here
+      console.log("Message flagged successfully");
+    } catch (error) {
+      console.error("Failed to flag message:", error);
+      throw error; // Re-throw so the modal can handle it
+    }
+  };
+
   const toggleThread = (messageId: string) => {
     setExpandedThreads((prev) => {
       const newSet = new Set(prev);
@@ -386,13 +399,16 @@ export const PrivateRoomChat: React.FC<PrivateRoomChatProps> = ({
               </div>
             ) : (
               messages.map((message) => (
-                <ChatPostCard
+                <EnhancedChatPostCard
                   key={message.id}
                   message={message}
                   currentUserId={currentUser.id}
                   onReaction={handleReaction}
                   onReply={handleReply}
                   onPin={handlePin}
+                  onFlag={handleFlag}
+                  showModerationFeatures={true}
+                  isModerator={currentUser.role === "admin" || currentUser.role === "moderator"}
                 />
               ))
             )}

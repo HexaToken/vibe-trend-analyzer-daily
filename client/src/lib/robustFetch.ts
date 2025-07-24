@@ -22,6 +22,63 @@ export class FetchError extends Error {
 }
 
 /**
+ * Creates a timeout-aware AbortController with proper cleanup
+ */
+function createTimeoutController(timeoutMs: number, externalSignal?: AbortSignal): {
+  controller: AbortController;
+  cleanup: () => void;
+} {
+  const controller = new AbortController();
+  let timeoutId: NodeJS.Timeout | null = null;
+  let isCleanedUp = false;
+
+  // Handle external signal if provided
+  if (externalSignal) {
+    if (externalSignal.aborted) {
+      controller.abort();
+      return {
+        controller,
+        cleanup: () => { isCleanedUp = true; }
+      };
+    }
+
+    // Forward external abort to our controller
+    const onExternalAbort = () => {
+      if (!isCleanedUp && !controller.signal.aborted) {
+        controller.abort();
+      }
+    };
+
+    externalSignal.addEventListener('abort', onExternalAbort, { once: true });
+  }
+
+  // Set up timeout with safeguards
+  if (timeoutMs > 0) {
+    timeoutId = setTimeout(() => {
+      if (!isCleanedUp && !controller.signal.aborted) {
+        try {
+          controller.abort();
+        } catch (error) {
+          // Ignore abort errors on cleanup
+          console.debug('Safe abort during timeout:', error);
+        }
+      }
+    }, timeoutMs);
+  }
+
+  return {
+    controller,
+    cleanup: () => {
+      isCleanedUp = true;
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+        timeoutId = null;
+      }
+    }
+  };
+}
+
+/**
  * A robust fetch function with retry logic and better error handling
  */
 export async function robustFetch(
@@ -40,17 +97,16 @@ export async function robustFetch(
   let lastError: Error | null = null;
 
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
-    try {
-            // Create abort controller for timeout
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), timeout);
+    const { controller, cleanup } = createTimeoutController(timeout, fetchOptions.signal);
 
+    try {
       const response = await fetch(url, {
         ...fetchOptions,
         signal: controller.signal,
       });
 
-      clearTimeout(timeoutId);
+      // Clear timeout immediately on success
+      cleanup();
 
       // If response is not ok, throw error but don't retry for 4xx errors
       if (!response.ok) {
@@ -71,11 +127,55 @@ export async function robustFetch(
 
       return response;
     } catch (error) {
-      lastError = error instanceof Error ? error : new Error(String(error));
+      // Ensure timeout is cleared in case of error
+      cleanup();
 
-      // Handle timeout specifically
-      if (lastError.name === "AbortError") {
+      // Safely handle error conversion
+      lastError = error instanceof Error ? error : new Error(String(error || 'Unknown error'));
+
+      // Handle different types of abort errors more specifically
+      const errorMessage = lastError.message || '';
+      const errorName = lastError.name || '';
+
+      if (errorName === "AbortError" || errorMessage.includes("aborted")) {
+        // Check if it was our timeout or an external abort
+        try {
+          if (controller.signal.aborted) {
+            // If we have a reason, use it; otherwise assume timeout
+            const reason = (controller.signal as any)?.reason;
+            if (reason && typeof reason === 'string') {
+              lastError = new Error(`Request aborted: ${reason}`);
+            } else {
+              // Default to timeout since we control this signal
+              lastError = new Error("Request timeout");
+            }
+          } else {
+            // External abort or unknown abort
+            lastError = new Error("Request was aborted externally");
+          }
+        } catch (signalError) {
+          // If we can't access the signal safely, assume timeout
+          lastError = new Error("Request timeout");
+        }
+      }
+
+      // Catch any remaining "signal is aborted without reason" errors
+      if (errorMessage.includes("signal is aborted without reason")) {
         lastError = new Error("Request timeout");
+      }
+
+      // Handle other common fetch errors
+      if (errorMessage.includes("Failed to fetch")) {
+        lastError = new Error("Network error - please check your connection");
+      }
+
+      if (errorMessage.includes("NetworkError")) {
+        lastError = new Error("Network error - unable to reach server");
+      }
+
+      // Handle TypeError which often indicates network issues
+      if (errorName === "TypeError" && !errorMessage.includes("aborted")) {
+        lastError = new Error("Network connection error");
       }
 
       console.warn(
@@ -83,9 +183,10 @@ export async function robustFetch(
         lastError.message,
       );
 
-      // Don't retry on abort (timeout) or 4xx errors
+      // Don't retry on abort (timeout), external abort, or 4xx errors
       if (
-        lastError.message === "Request timeout" ||
+        lastError.message.includes("timeout") ||
+        lastError.message.includes("aborted") ||
         (error instanceof FetchError &&
           error.status &&
           error.status >= 400 &&

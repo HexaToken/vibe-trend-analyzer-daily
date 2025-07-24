@@ -44,6 +44,10 @@ import {
   mockSocialProfiles,
 } from "@/data/socialMockData";
 import type { CommunityRoom, ChatMessage, SocialProfile } from "@/types/social";
+import { UserCredibilityIndicator } from "@/components/moderation/CredibilityBadge";
+import { FlagPostModal } from "@/components/moderation/FlagPostModal";
+import { moderationService } from "@/services/moderationService";
+import type { CreateFlagData } from "@/types/moderation";
 
 export const CommunityRooms = () => {
   const { user, isAuthenticated } = useAuth();
@@ -53,6 +57,8 @@ export const CommunityRooms = () => {
   const [newMessage, setNewMessage] = useState("");
   const [typingUsers, setTypingUsers] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [flagModalOpen, setFlagModalOpen] = useState(false);
+  const [selectedMessage, setSelectedMessage] = useState<ChatMessage | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Load rooms
@@ -168,6 +174,21 @@ export const CommunityRooms = () => {
         return msg;
       }),
     );
+  };
+
+  const handleFlag = async (flagData: CreateFlagData) => {
+    try {
+      await moderationService.submitFlag(flagData);
+      console.log("Message flagged successfully");
+    } catch (error) {
+      console.error("Failed to flag message:", error);
+      throw error;
+    }
+  };
+
+  const openFlagModal = (message: ChatMessage) => {
+    setSelectedMessage(message);
+    setFlagModalOpen(true);
   };
 
   const getRoomIcon = (room: CommunityRoom) => {
@@ -383,6 +404,11 @@ export const CommunityRooms = () => {
                                 {message.username}
                               </span>
                               {getUserRoleIcon(message.userRole)}
+                              <UserCredibilityIndicator
+                                level="trusted"
+                                score={Math.floor(Math.random() * 40 + 60)}
+                                compact
+                              />
                               <span className="text-xs text-muted-foreground">
                                 {formatMessageTime(message.createdAt)}
                               </span>
@@ -433,6 +459,15 @@ export const CommunityRooms = () => {
                                   className="h-6 w-6 p-0"
                                 >
                                   <Reply className="h-3 w-3" />
+                                </Button>
+                                <Button
+                                  size="sm"
+                                  variant="ghost"
+                                  className="h-6 w-6 p-0"
+                                  onClick={() => openFlagModal(message)}
+                                  title="Report message"
+                                >
+                                  <Flag className="h-3 w-3" />
                                 </Button>
                               </div>
                             </div>
@@ -534,6 +569,18 @@ export const CommunityRooms = () => {
           </Card>
         </div>
       </div>
+
+      {/* Flag Modal */}
+      {selectedMessage && (
+        <FlagPostModal
+          isOpen={flagModalOpen}
+          onClose={() => setFlagModalOpen(false)}
+          postId={selectedMessage.id}
+          postContent={selectedMessage.content}
+          postAuthor={selectedMessage.username}
+          onSubmitFlag={handleFlag}
+        />
+      )}
     </div>
   );
 };
