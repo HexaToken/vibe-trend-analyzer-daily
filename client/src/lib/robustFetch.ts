@@ -112,17 +112,14 @@ export async function robustFetch(
       return response;
     } catch (error) {
       // Ensure timeout is cleared in case of error
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-        timeoutId = null;
-      }
+      cleanup();
 
       lastError = error instanceof Error ? error : new Error(String(error));
 
       // Handle different types of abort errors more specifically
       if (lastError.name === "AbortError") {
         // Check if it was our timeout or an external abort
-        if (controller?.signal.aborted) {
+        if (controller.signal.aborted) {
           // If we have a reason, use it; otherwise assume timeout
           const reason = (controller.signal as any).reason;
           if (reason) {
