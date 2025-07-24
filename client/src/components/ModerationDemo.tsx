@@ -133,6 +133,19 @@ export const ModerationDemo: React.FC<ModerationDemoProps> = ({ onNavigate }) =>
         )}>
           AI-powered content moderation with credibility scoring, spam detection, and community-driven trust verification
         </p>
+
+        {onNavigate && (
+          <div className="flex justify-center mt-6">
+            <Button
+              onClick={() => onNavigate('moderation-testing')}
+              size="lg"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+            >
+              <TestTube className="w-4 h-4 mr-2" />
+              Open QA Testing Dashboard
+            </Button>
+          </div>
+        )}
       </div>
 
       {/* Feature Overview */}
