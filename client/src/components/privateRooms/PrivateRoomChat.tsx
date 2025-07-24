@@ -75,6 +75,7 @@ import {
   parseCashtags,
   getTimeAgo,
 } from "@/data/privateRoomsMockData";
+import { ChatPostCard } from "@/components/chat/ChatPostCard";
 
 interface PrivateRoomChatProps {
   room: PrivateRoom;
@@ -103,7 +104,7 @@ const EMOJI_LIST = [
   "💪",
   "🎯",
   "⭐",
-  "❤️",
+  "��️",
   "👀",
   "🤝",
   "💰",
@@ -259,6 +260,19 @@ export const PrivateRoomChat: React.FC<PrivateRoomChatProps> = ({
     );
   };
 
+  const handleReply = (message: RoomMessage) => {
+    setReplyingTo(message);
+    textareaRef.current?.focus();
+  };
+
+  const handlePin = (messageId: string) => {
+    setMessages((prev) =>
+      prev.map((msg) =>
+        msg.id === messageId ? { ...msg, isPinned: !msg.isPinned } : msg,
+      ),
+    );
+  };
+
   const toggleThread = (messageId: string) => {
     setExpandedThreads((prev) => {
       const newSet = new Set(prev);
@@ -269,17 +283,6 @@ export const PrivateRoomChat: React.FC<PrivateRoomChatProps> = ({
       }
       return newSet;
     });
-  };
-
-  const getSentimentColor = (sentiment: string) => {
-    switch (sentiment) {
-      case "bullish":
-        return "border-l-green-500 bg-gradient-to-r from-green-50 to-transparent dark:from-green-900/20";
-      case "bearish":
-        return "border-l-red-500 bg-gradient-to-r from-red-50 to-transparent dark:from-red-900/20";
-      default:
-        return "border-l-gray-300 bg-gradient-to-r from-gray-50 to-transparent dark:from-gray-800/20";
-    }
   };
 
   const getSentimentIcon = (sentiment: string) => {
@@ -306,206 +309,11 @@ export const PrivateRoomChat: React.FC<PrivateRoomChatProps> = ({
     }
   };
 
-  const getReactionIcon = (reaction: string) => {
-    if (["👍", "👎", "❤️", "😂", "😮", "😢", "😡"].includes(reaction)) {
-      return reaction;
-    }
-    switch (reaction) {
-      case "like":
-        return <ThumbsUp className="w-3 h-3" />;
-      case "smart":
-        return <Brain className="w-3 h-3" />;
-      case "risky":
-        return <AlertTriangle className="w-3 h-3" />;
-      default:
-        return <CheckCircle className="w-3 h-3" />;
-    }
-  };
-
   const insertEmoji = (emoji: string) => {
     setNewMessage((prev) => prev + emoji);
     setShowEmojiPicker(false);
     textareaRef.current?.focus();
   };
-
-  const renderTradeIdea = (tradeIdea: TradeIdea) => (
-    <div className="mt-3 p-4 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950 rounded-lg border">
-      <div className="flex items-center gap-2 mb-3">
-        <Target className="h-4 w-4 text-blue-500" />
-        <span className="font-medium text-sm">Trade Signal</span>
-        <Badge
-          variant={
-            tradeIdea.sentiment === "bullish" ? "default" : "destructive"
-          }
-          className="text-xs"
-        >
-          {tradeIdea.sentiment === "bullish" ? "BULLISH" : "BEARISH"}
-        </Badge>
-        <Badge variant="outline" className="text-xs">
-          {tradeIdea.timeframe.toUpperCase()}
-        </Badge>
-        <div className="flex items-center gap-1">
-          {Array.from({ length: 5 }, (_, i) => (
-            <Star
-              key={i}
-              className={`h-3 w-3 ${
-                i < tradeIdea.confidence
-                  ? "text-yellow-500 fill-yellow-500"
-                  : "text-gray-300"
-              }`}
-            />
-          ))}
-        </div>
-      </div>
-      <div className="grid grid-cols-2 gap-3 text-sm">
-        <div className="flex items-center gap-2 font-medium">
-          <DollarSign className="h-3 w-3 text-green-500" />
-          <span>Entry: ${tradeIdea.entryPrice}</span>
-        </div>
-        {tradeIdea.targetPrice && (
-          <div className="flex items-center gap-2">
-            <TrendingUp className="h-3 w-3 text-blue-500" />
-            <span>Target: ${tradeIdea.targetPrice}</span>
-          </div>
-        )}
-        {tradeIdea.stopLoss && (
-          <div className="flex items-center gap-2">
-            <TrendingDown className="h-3 w-3 text-red-500" />
-            <span>Stop: ${tradeIdea.stopLoss}</span>
-          </div>
-        )}
-        {tradeIdea.strategy && (
-          <div className="flex items-center gap-2">
-            <Brain className="h-3 w-3 text-purple-500" />
-            <span>Strategy: {tradeIdea.strategy}</span>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-
-  const MessageCard: React.FC<{ message: RoomMessage; isReply?: boolean }> = ({
-    message,
-    isReply = false,
-  }) => (
-    <Card
-      className={`${getSentimentColor(message.sentiment || "neutral")} border-l-4 ${
-        isReply ? "ml-6 mt-2" : ""
-      } shadow-sm hover:shadow-md transition-all duration-200`}
-    >
-      <CardContent className="p-4">
-        <div className="flex items-start gap-3">
-          <Avatar className="h-8 w-8">
-            <AvatarImage src={message.userAvatar} />
-            <AvatarFallback className="text-xs">
-              {message.username[0].toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
-
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1">
-              <span className="font-semibold text-sm">{message.username}</span>
-              {getUserRoleIcon(message.userRole)}
-              {message.sentiment && getSentimentIcon(message.sentiment)}
-              <span className="text-xs text-gray-500">
-                {getTimeAgo(message.createdAt)}
-              </span>
-              {message.isPinned && <Pin className="w-3 h-3 text-yellow-500" />}
-            </div>
-
-            <div className="text-sm leading-relaxed break-words">
-              {message.content.split(" ").map((word, i) => {
-                if (word.startsWith("$") && word.length > 1) {
-                  return (
-                    <Badge key={i} variant="outline" className="mx-1 text-xs">
-                      {word}
-                    </Badge>
-                  );
-                }
-                if (word.startsWith("@") && word.length > 1) {
-                  return (
-                    <span key={i} className="mx-1 text-blue-600 font-medium">
-                      {word}
-                    </span>
-                  );
-                }
-                return word + " ";
-              })}
-            </div>
-
-            {message.tradeIdea && renderTradeIdea(message.tradeIdea)}
-
-            {/* Reactions */}
-            <div className="flex items-center gap-2 mt-3">
-              {["📈", "📉", "💎", "🚀", "⚠️"].map((emoji) => {
-                const reaction = message.reactions.find(
-                  (r) => r.emoji === emoji,
-                );
-                return (
-                  <button
-                    key={emoji}
-                    onClick={() => handleReaction(message.id, emoji)}
-                    className={`inline-flex items-center gap-1 px-2 py-1 rounded text-xs transition-colors ${
-                      reaction?.userReacted
-                        ? "bg-primary/20 text-primary"
-                        : "hover:bg-muted"
-                    }`}
-                  >
-                    <span>{emoji}</span>
-                    {reaction && <span>{reaction.count}</span>}
-                  </button>
-                );
-              })}
-
-              <Separator orientation="vertical" className="h-4" />
-
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setReplyingTo(message)}
-                className="h-6 px-2 text-xs"
-              >
-                <Reply className="h-3 w-3 mr-1" />
-                Reply
-              </Button>
-
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
-                    <MoreHorizontal className="h-3 w-3" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem>
-                    <Copy className="h-4 w-4 mr-2" />
-                    Copy Message
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Share className="h-4 w-4 mr-2" />
-                    Share
-                  </DropdownMenuItem>
-                  {currentUser.id === message.userId && (
-                    <>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem>
-                        <Pin className="h-4 w-4 mr-2" />
-                        {message.isPinned ? "Unpin" : "Pin"} Message
-                      </DropdownMenuItem>
-                    </>
-                  )}
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem className="text-red-600">
-                    <Flag className="h-4 w-4 mr-2" />
-                    Report
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
 
   return (
     <div className="flex h-full">
@@ -578,7 +386,14 @@ export const PrivateRoomChat: React.FC<PrivateRoomChatProps> = ({
               </div>
             ) : (
               messages.map((message) => (
-                <MessageCard key={message.id} message={message} />
+                <ChatPostCard
+                  key={message.id}
+                  message={message}
+                  currentUserId={currentUser.id}
+                  onReaction={handleReaction}
+                  onReply={handleReply}
+                  onPin={handlePin}
+                />
               ))
             )}
           </div>
