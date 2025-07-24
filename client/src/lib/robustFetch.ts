@@ -22,6 +22,35 @@ export class FetchError extends Error {
 }
 
 /**
+ * Creates a timeout-aware AbortController with proper cleanup
+ */
+function createTimeoutController(timeoutMs: number): {
+  controller: AbortController;
+  cleanup: () => void;
+} {
+  const controller = new AbortController();
+  let timeoutId: NodeJS.Timeout | null = null;
+
+  if (timeoutMs > 0) {
+    timeoutId = setTimeout(() => {
+      if (!controller.signal.aborted) {
+        controller.abort();
+      }
+    }, timeoutMs);
+  }
+
+  return {
+    controller,
+    cleanup: () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+        timeoutId = null;
+      }
+    }
+  };
+}
+
+/**
  * A robust fetch function with retry logic and better error handling
  */
 export async function robustFetch(
