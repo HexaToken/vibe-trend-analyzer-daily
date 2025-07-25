@@ -29,7 +29,8 @@ import {
   Users,
   Menu,
   X,
-  DollarSign
+  DollarSign,
+  Filter
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import DynamicThemeSelector from './DynamicThemeSelector';
