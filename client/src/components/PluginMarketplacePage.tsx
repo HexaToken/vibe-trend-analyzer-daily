@@ -364,6 +364,14 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
             </Button>
           </div>
         </Card>
+
+        {/* Plugin Detail Modal */}
+        <PluginDetailModal
+          plugin={selectedPlugin}
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onInstall={handleInstallPlugin}
+        />
       </div>
     </div>
   );
