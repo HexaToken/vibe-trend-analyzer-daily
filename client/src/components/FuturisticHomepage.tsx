@@ -710,6 +710,16 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       <Filter className="w-4 h-4 mr-2" />
                       Screener
                     </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => {
+                        setActiveSection('trade-journal');
+                        setFinanceDropdownOpen(false);
+                      }}
+                      className="hover:bg-blue-500/20 focus:bg-blue-500/20 cursor-pointer transition-colors duration-200"
+                    >
+                      <BookOpen className="w-4 h-4 mr-2" />
+                      Smart Trade Journal
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
 
