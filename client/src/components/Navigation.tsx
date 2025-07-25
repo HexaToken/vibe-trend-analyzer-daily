@@ -355,11 +355,22 @@ export const Navigation = ({
                         <span>Profile</span>
                       </DropdownMenuItem>
                       <DropdownMenuItem
-                        onClick={() => onSectionChange("settings")}
-                      >
-                        <Settings className="mr-2 h-4 w-4" />
-                        <span>Settings</span>
-                      </DropdownMenuItem>
+                    onClick={() => onSectionChange("settings")}
+                  >
+                    <Settings className="mr-2 h-4 w-4" />
+                    <span>Settings</span>
+                  </DropdownMenuItem>
+                  {user?.email === 'admin@moodmeter.com' && (
+                    <DropdownMenuItem
+                      onClick={() => onSectionChange("admin-credibility")}
+                    >
+                      <Shield className="mr-2 h-4 w-4" />
+                      <span>Admin Panel</span>
+                      <Badge variant="destructive" className="ml-auto text-xs">
+                        ADMIN
+                      </Badge>
+                    </DropdownMenuItem>
+                  )}
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onClick={handleLogout}>
                         <LogOut className="mr-2 h-4 w-4" />
