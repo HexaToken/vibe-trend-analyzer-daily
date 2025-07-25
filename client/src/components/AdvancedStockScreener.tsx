@@ -497,7 +497,7 @@ export const AdvancedStockScreener: React.FC<AdvancedStockScreenerProps> = ({ cl
           {/* AI Query Input */}
           <Card className="bg-gradient-to-r from-purple-900/30 to-blue-900/30 border-purple-500/30">
             <CardContent className="p-4">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 mb-3">
                 <Brain className="w-5 h-5 text-purple-400" />
                 <Input
                   placeholder="Ask AI: Find mid-cap tech stocks with rising sentiment and strong momentum..."
@@ -509,6 +509,21 @@ export const AdvancedStockScreener: React.FC<AdvancedStockScreenerProps> = ({ cl
                   <Sparkles className="w-4 h-4 mr-2" />
                   Search
                 </Button>
+              </div>
+
+              {/* AI Query Suggestions */}
+              <div className="flex flex-wrap gap-2">
+                {aiQueryTemplates.slice(0, 4).map((template, index) => (
+                  <Button
+                    key={index}
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setAiQuery(template)}
+                    className="text-xs border-purple-500/30 text-purple-300 hover:bg-purple-500/10"
+                  >
+                    {template}
+                  </Button>
+                ))}
               </div>
             </CardContent>
           </Card>
