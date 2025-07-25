@@ -147,6 +147,8 @@ const AppContent = () => {
         return <DeveloperSubmissionPage onNavigate={setActiveSection} />;
       case "credibility-analytics":
         return <CredibilityAnalyticsDashboard />;
+      case "admin-credibility":
+        return <AdminCredibilityDashboard />;
 
       default:
         return <FuturisticHomepage onNavigate={setActiveSection} />;
