@@ -61,6 +61,7 @@ import { AuthModal } from './auth/AuthModal';
 import AdvancedStockScreener from './AdvancedStockScreener';
 import StrategyProfiler from './StrategyProfiler';
 import BasicScreener from './BasicScreener';
+import SmartTradeJournal from './SmartTradeJournal';
 
 // User Authentication Toggle Component
 interface UserAuthenticationToggleProps {
