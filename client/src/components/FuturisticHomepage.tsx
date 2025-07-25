@@ -57,6 +57,7 @@ import {
   CollapsibleTrigger,
 } from './ui/collapsible';
 import { AuthModal } from './auth/AuthModal';
+import BasicScreener from './BasicScreener';
 
 // User Authentication Toggle Component
 interface UserAuthenticationToggleProps {
