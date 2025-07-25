@@ -876,25 +876,53 @@ export const AdvancedStockScreener: React.FC<AdvancedStockScreenerProps> = ({ cl
                         <div className="space-y-2">
                           <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400">
                             <span>Mood Score</span>
-                            <span className="text-gray-900 dark:text-white font-medium">{stock.sentimentScore}/100</span>
+                            <span className={cn("font-medium", getSentimentSignal(stock.sentimentScore).color)}>
+                              {stock.sentimentScore}/100
+                            </span>
                           </div>
-                          <Progress 
-                            value={stock.sentimentScore} 
+                          <Progress
+                            value={stock.sentimentScore}
                             className="h-1.5"
                           />
-                          
+
                           <div className="flex justify-between text-xs">
-                            <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400">
-                              <MessageCircle className="w-3 h-3" />
-                              {formatSocialMentions(stock.socialMentions)}
-                            </div>
-                            <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400">
-                              <Zap className="w-3 h-3" />
-                              AI {stock.aiConfidence}%
-                            </div>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <div className={cn("flex items-center gap-1 cursor-help", formatSocialBuzz(stock.socialMentions).color)}>
+                                  <MessageCircle className="w-3 h-3" />
+                                  {formatSocialMentions(stock.socialMentions)}
+                                </div>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>{formatSocialBuzz(stock.socialMentions).level}</p>
+                              </TooltipContent>
+                            </Tooltip>
+
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <div className={cn("flex items-center gap-1 cursor-help", getAIConfidenceLevel(stock.aiConfidence).color)}>
+                                  <Zap className="w-3 h-3" />
+                                  AI {stock.aiConfidence}%
+                                </div>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>{getAIConfidenceLevel(stock.aiConfidence).level} Confidence</p>
+                              </TooltipContent>
+                            </Tooltip>
+
                             <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400">
                               <Globe className="w-3 h-3" />
                               News {stock.newsScore}
+                            </div>
+                          </div>
+
+                          {/* AI Insight */}
+                          <div className="mt-2 p-2 bg-gradient-to-r from-purple-500/10 to-blue-500/10 rounded border border-purple-500/20">
+                            <div className="flex items-start gap-2">
+                              <Brain className="w-3 h-3 text-purple-400 mt-0.5 flex-shrink-0" />
+                              <p className="text-xs text-gray-300 leading-relaxed">
+                                {generateAIInsight(stock)}
+                              </p>
                             </div>
                           </div>
                         </div>
