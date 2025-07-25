@@ -161,7 +161,7 @@ const AppContent = () => {
         <main>{renderContent()}</main>
         <Footer onNavigate={setActiveSection} />
         <ApiStatusIndicator />
-        <AiChatBubble />
+        <MoodGptWidget />
       </div>
     </TooltipProvider>
   );
