@@ -29,7 +29,8 @@ import {
   Users,
   Menu,
   X,
-  DollarSign
+  DollarSign,
+  Filter
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import DynamicThemeSelector from './DynamicThemeSelector';
@@ -57,7 +58,7 @@ import {
   CollapsibleTrigger,
 } from './ui/collapsible';
 import { AuthModal } from './auth/AuthModal';
-import BasicScreener from './BasicScreener';
+import AdvancedStockScreener from './AdvancedStockScreener';
 
 // User Authentication Toggle Component
 interface UserAuthenticationToggleProps {
@@ -609,14 +610,14 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     <button
                       className={cn(
                         "text-sm font-medium transition-all duration-300 relative group flex items-center gap-1",
-                        (activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings')
+                        (activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings' || activeSection === 'screener')
                           ? "text-pink-400"
                           : "text-gray-400 hover:text-white"
                       )}
                     >
                       Finance
                       <ChevronDown className="w-3 h-3 transition-transform duration-200 group-hover:rotate-180" />
-                      {(activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings') && (
+                      {(activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings' || activeSection === 'screener') && (
                         <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
                       )}
                       <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -695,6 +696,16 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     >
                       <BarChart3 className="w-4 h-4 mr-2" />
                       Charts
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => {
+                        setActiveSection('screener');
+                        setFinanceDropdownOpen(false);
+                      }}
+                      className="hover:bg-teal-500/20 focus:bg-teal-500/20 cursor-pointer transition-colors duration-200"
+                    >
+                      <Filter className="w-4 h-4 mr-2" />
+                      Screener
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -794,7 +805,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     variant="ghost"
                     className={cn(
                       "w-full justify-between text-left transition-colors duration-200",
-                      (activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings')
+                      (activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings' || activeSection === 'screener')
                         ? "text-pink-400 bg-pink-500/10"
                         : "text-gray-300 hover:text-white hover:bg-purple-500/10"
                     )}
@@ -928,6 +939,23 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     >
                       <BarChart3 className="w-4 h-4 mr-2" />
                       Charts
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      onClick={() => {
+                        setActiveSection('screener');
+                        setMobileMenuOpen(false);
+                        setMobileFinanceOpen(false);
+                      }}
+                      className={cn(
+                        "w-full justify-start text-sm transition-colors duration-200",
+                        activeSection === 'screener'
+                          ? "text-teal-400 bg-teal-500/10"
+                          : "text-gray-400 hover:text-teal-300 hover:bg-teal-500/5"
+                      )}
+                    >
+                      <Filter className="w-4 h-4 mr-2" />
+                      Screener
                     </Button>
                   </div>
                 </CollapsibleContent>
@@ -2833,6 +2861,26 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               </div>
             </div>
           </div>
+        ) : activeSection === 'screener' ? (
+          <div className="space-y-8">
+            {/* Screener Hub Header */}
+            <div className="text-center mb-12">
+              <div className="flex items-center justify-center gap-4 mb-6">
+                <div className="w-20 h-20 bg-gradient-to-r from-teal-500/20 via-emerald-500/20 to-teal-500/20 rounded-xl flex items-center justify-center shadow-lg shadow-teal-500/20 animate-pulse">
+                  <Filter className="w-10 h-10 text-teal-400" />
+                </div>
+                <div className="text-center">
+                  <h1 className="text-5xl font-bold bg-gradient-to-r from-teal-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent mb-2">
+                    Stock Screener
+                  </h1>
+                  <p className="text-lg text-gray-300">Filter and discover stocks based on your criteria</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Advanced Stock Screener Component */}
+            <AdvancedStockScreener />
+          </div>
         ) : activeSection === 'news-feed' ? (
           <SmartNewsFeed />
         ) : activeSection === 'chat' ? (
@@ -3249,7 +3297,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
             </TabsContent>
 
             <TabsContent value="Scanner" className="mt-6">
-              <BasicScreener />
+              <AdvancedStockScreener />
             </TabsContent>
           </Tabs>
         ) : (
