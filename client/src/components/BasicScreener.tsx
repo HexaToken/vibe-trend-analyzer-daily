@@ -383,6 +383,7 @@ export const BasicScreener: React.FC<BasicScreenerProps> = ({ className }) => {
 
   return (
     <div className={cn("space-y-6", className)}>
+      <style dangerouslySetInnerHTML={{ __html: rangeSliderStyles }} />
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
