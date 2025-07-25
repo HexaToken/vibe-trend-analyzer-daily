@@ -20,9 +20,9 @@ export const Footer = ({ onNavigate }: FooterProps) => {
     ],
     plugins: [
       { label: 'Browse Plugins', action: () => onNavigate?.('plugins') },
-      { label: 'Submit Plugin', action: () => onNavigate?.('plugins') },
-      { label: 'Developer Docs', action: () => onNavigate?.('plugins') },
-      { label: 'Plugin API', action: () => onNavigate?.('plugins') },
+      { label: 'Submit Plugin', action: () => onNavigate?.('plugin-submission') },
+      { label: 'Developer Docs', action: () => onNavigate?.('plugin-submission') },
+      { label: 'Plugin API', action: () => onNavigate?.('plugin-submission') },
     ],
     company: [
       { label: 'About Us', action: () => {} },
