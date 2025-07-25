@@ -503,15 +503,11 @@ export const AdvancedStockScreener: React.FC<AdvancedStockScreenerProps> = ({ cl
               </div>
 
               {/* Action Buttons */}
-              <Button
-                variant="outline"
-                size="sm"
-                className="border-gray-600 text-gray-400 hover:text-white gap-2"
-              >
-                <Save className="w-4 h-4" />
-                Save Template
-              </Button>
-              
+              <FilterTemplateManager
+                currentFilters={getCurrentFilters()}
+                onLoadTemplate={loadTemplate}
+              />
+
               <Button
                 variant="outline"
                 size="sm"
