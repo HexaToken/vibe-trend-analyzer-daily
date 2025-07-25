@@ -46,6 +46,7 @@ import { PrivateRoomsContainer } from "@/components/privateRooms/PrivateRoomsCon
 import { ChatInterface } from "@/components/moorMeter/ChatInterface";
 import { ModerationTestingDashboard } from "@/components/testing/ModerationTestingDashboard";
 import { PluginMarketplacePage } from "@/components/PluginMarketplacePage";
+import { DeveloperSubmissionPage } from "@/components/plugins/DeveloperSubmissionPage";
 import { Footer } from "@/components/Footer";
 
 const queryClient = new QueryClient();
