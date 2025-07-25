@@ -77,13 +77,15 @@ export const MoodGptWidget = () => {
     const welcomeMessage: ChatMessage = {
       id: "welcome",
       type: "assistant",
-      content: "Hi! I'm Mood GPT, your AI Market Companion! 🧠\n\nI'm trained on MoodMeter's sentiment data, watchlist analytics, and market insights to help you make informed trading decisions.\n\n✨ I can help you with:\n• Real-time sentiment analysis for any ticker\n• Watchlist mood tracking and alerts\n• Crypto market sentiment summaries\n• Trading strategy insights\n• Market trend analysis\n\nTry one of the preset prompts below or ask me anything!",
+      content: "Hi! I'm Mood GPT, your AI Market Companion! 🧠✨\n\nI'm trained on MoodMeter's sentiment data, watchlist analytics, and market insights to help you make informed trading decisions.\n\n💡 **What I can help you with:**\n• Real-time sentiment analysis for any ticker\n• Watchlist mood tracking and alerts  \n• Crypto market sentiment summaries\n• Trading strategy insights\n• Market trend analysis\n• Portfolio optimization suggestions\n\n🚀 **Try asking me:**\n\"What's the mood for $AAPL?\"\n\"Show me the most bullish crypto\"\n\"How should I diversify my portfolio?\"\n\nOr use the quick action buttons below!",
       timestamp: new Date(),
       suggestions: [
         "What's the sentiment for $TSLA today?",
         "Show me the most bullish sectors",
         "How is crypto performing this week?",
         "Analyze my watchlist mood",
+        "Give me a market overview",
+        "Help me with trading strategy"
       ],
     };
     setMessages([welcomeMessage]);
