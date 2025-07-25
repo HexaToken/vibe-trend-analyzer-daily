@@ -866,8 +866,8 @@ export const AdvancedStockScreener: React.FC<AdvancedStockScreenerProps> = ({ cl
                               )}
                               {stock.change1D >= 0 ? "+" : ""}{stock.change1D.toFixed(2)}%
                             </div>
-                            <div className="text-xs text-gray-500 dark:text-gray-400">
-                              RSI {stock.rsi.toFixed(1)}
+                            <div className={cn("text-xs", getRSISignal(stock.rsi).color)}>
+                              RSI {stock.rsi.toFixed(1)} ({getRSISignal(stock.rsi).signal})
                             </div>
                           </div>
                         </div>
