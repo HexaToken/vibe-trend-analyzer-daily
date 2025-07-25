@@ -23,6 +23,7 @@ import { SentimentScoreBar, MiniSentimentBars } from "./SentimentScoreBar";
 import { AIInsightFooterBlock } from "./AIInsightFooterBlock";
 import { formatCurrency, formatLargeNumber } from "@/data/watchlistMockData";
 import type { WatchlistAsset } from "@/types/watchlist";
+import { PollWidget } from "../PollWidget";
 
 interface WatchlistAssetCardProps {
   asset: WatchlistAsset;
