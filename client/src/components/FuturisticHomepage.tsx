@@ -30,7 +30,8 @@ import {
   Menu,
   X,
   DollarSign,
-  Filter
+  Filter,
+  BookOpen
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import DynamicThemeSelector from './DynamicThemeSelector';
