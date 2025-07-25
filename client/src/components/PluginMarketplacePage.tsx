@@ -30,8 +30,17 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
   });
 
   const filteredPlugins = useMemo(() => {
-    let plugins = getPluginsByCategory(selectedCategory);
-    
+    let plugins: Plugin[];
+
+    if (selectedCategory === 'installed') {
+      plugins = mockPlugins.filter(plugin => installedPlugins.includes(plugin.id));
+    } else if (selectedCategory === 'analytics') {
+      // Use 'analytics' tab for featured plugins
+      plugins = featuredPlugins;
+    } else {
+      plugins = getPluginsByCategory(selectedCategory);
+    }
+
     // Apply search filter
     if (searchQuery) {
       plugins = plugins.filter(plugin =>
@@ -58,7 +67,7 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
     });
 
     return plugins;
-  }, [selectedCategory, searchQuery, sortBy]);
+  }, [selectedCategory, searchQuery, sortBy, installedPlugins]);
 
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, i) => (
