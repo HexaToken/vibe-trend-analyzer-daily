@@ -268,6 +268,16 @@ export const WatchlistAssetCard = ({
               <Bell className="w-3 h-3" />
             </Button>
           </div>
+
+          {/* Community Sentiment Poll */}
+          <div className="mt-3">
+            <PollWidget
+              ticker={asset.ticker}
+              variant="inline"
+              showAI={true}
+              className="w-full"
+            />
+          </div>
         </div>
       )}
 
