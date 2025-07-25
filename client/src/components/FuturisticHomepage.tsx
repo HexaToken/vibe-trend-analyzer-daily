@@ -1754,7 +1754,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   {[
                     { rank: 1, symbol: 'BTC', name: 'Bitcoin', price: '$67,234.56', change: '+2.34%', marketCap: '$1.31T', icon: '₿', changeColor: 'text-green-400', trendData: [65, 67, 66, 68, 67], glow: 'shadow-lg shadow-orange-500/20' },
-                    { rank: 2, symbol: 'ETH', name: 'Ethereum', price: '$2,657.89', change: '-1.23%', marketCap: '$319.2B', icon: '⟐', changeColor: 'text-red-400', trendData: [27, 26, 28, 26, 27], glow: 'shadow-lg shadow-blue-500/20' },
+                    { rank: 2, symbol: 'ETH', name: 'Ethereum', price: '$2,657.89', change: '-1.23%', marketCap: '$319.2B', icon: '��', changeColor: 'text-red-400', trendData: [27, 26, 28, 26, 27], glow: 'shadow-lg shadow-blue-500/20' },
                     { rank: 3, symbol: 'USDT', name: 'Tether USDt', price: '$1.0001', change: '+0.01%', marketCap: '$118.4B', icon: '₮', changeColor: 'text-green-400', trendData: [1, 1, 1, 1, 1], glow: 'shadow-lg shadow-green-500/20' },
                     { rank: 4, symbol: 'BNB', name: 'BNB', price: '$312.45', change: '+4.67%', marketCap: '$48.2B', icon: '⬡', changeColor: 'text-green-400', trendData: [310, 315, 312, 318, 312], glow: 'shadow-lg shadow-yellow-500/20' },
                     { rank: 5, symbol: 'SOL', name: 'Solana', price: '$156.78', change: '+8.45%', marketCap: '$42.1B', icon: '◎', changeColor: 'text-green-400', trendData: [150, 155, 160, 158, 157], glow: 'shadow-lg shadow-purple-500/20' },
@@ -2388,7 +2388,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     <div className="flex items-center gap-1 bg-gray-800/50 rounded-lg p-1">
                       {[
                         { type: 'Candlestick', icon: '📊', active: true },
-                        { type: 'Line', icon: '📈', active: false },
+                        { type: 'Line', icon: '����', active: false },
                         { type: 'Area', icon: '🌊', active: false },
                         { type: 'Sentiment', icon: '🧠', active: false }
                       ].map((chart) => (
@@ -2914,7 +2914,11 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
         ) : activeSection === 'chat' ? (
           <ChatInterface />
         ) : activeSection === 'space' ? (
-          <SpaceSwitcherWidget />
+          <div className="space-y-6">
+            {/* Strategy Profiler for Community */}
+            <StrategyProfiler placement="community" />
+            <SpaceSwitcherWidget />
+          </div>
         ) : activeSection === 'rooms' ? (
           <PrivateRoomsContainer />
                 ) : activeSection === 'tool' || activeSection === 'market' ? (
