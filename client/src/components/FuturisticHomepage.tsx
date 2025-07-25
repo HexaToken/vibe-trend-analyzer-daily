@@ -2861,6 +2861,26 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               </div>
             </div>
           </div>
+        ) : activeSection === 'screener' ? (
+          <div className="space-y-8">
+            {/* Screener Hub Header */}
+            <div className="text-center mb-12">
+              <div className="flex items-center justify-center gap-4 mb-6">
+                <div className="w-20 h-20 bg-gradient-to-r from-teal-500/20 via-emerald-500/20 to-teal-500/20 rounded-xl flex items-center justify-center shadow-lg shadow-teal-500/20 animate-pulse">
+                  <Filter className="w-10 h-10 text-teal-400" />
+                </div>
+                <div className="text-center">
+                  <h1 className="text-5xl font-bold bg-gradient-to-r from-teal-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent mb-2">
+                    Stock Screener
+                  </h1>
+                  <p className="text-lg text-gray-300">Filter and discover stocks based on your criteria</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Basic Screener Component */}
+            <BasicScreener />
+          </div>
         ) : activeSection === 'news-feed' ? (
           <SmartNewsFeed />
         ) : activeSection === 'chat' ? (
