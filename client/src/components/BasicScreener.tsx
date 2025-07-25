@@ -272,6 +272,29 @@ const SECTORS = ["All", "Technology", "Finance", "Healthcare", "Entertainment", 
 
 export const BasicScreener: React.FC<BasicScreenerProps> = ({ className }) => {
   const { themeMode } = useMoodTheme();
+
+  // Add custom styles for range slider
+  const rangeSliderStyles = `
+    .slider-thumb::-webkit-slider-thumb {
+      appearance: none;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      background: #8b5cf6;
+      cursor: pointer;
+      border: 2px solid #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+    .slider-thumb::-moz-range-thumb {
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      background: #8b5cf6;
+      cursor: pointer;
+      border: 2px solid #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+  `;
   const [filteredStocks, setFilteredStocks] = useState<StockData[]>(MOCK_STOCKS.slice(0, 20));
   const [searchQuery, setSearchQuery] = useState("");
   
