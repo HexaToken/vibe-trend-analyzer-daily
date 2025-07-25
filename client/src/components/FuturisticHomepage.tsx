@@ -2878,8 +2878,8 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               </div>
             </div>
 
-            {/* Basic Screener Component */}
-            <BasicScreener />
+            {/* Advanced Stock Screener Component */}
+            <AdvancedStockScreener />
           </div>
         ) : activeSection === 'news-feed' ? (
           <SmartNewsFeed />
@@ -3056,7 +3056,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                             { symbol: 'ADA', name: 'Cardano', sentiment: 71, change: '+4.1%', volume: '234M', category: 'crypto', icon: '₳' },
                             { symbol: 'DOT', name: 'Polkadot', sentiment: 39, change: '-3.2%', volume: '156M', category: 'crypto', icon: '●' },
                             { symbol: 'MATIC', name: 'Polygon', sentiment: 79, change: '+6.7%', volume: '312M', category: 'crypto', icon: '⬟' },
-                            { symbol: 'AVAX', name: 'Avalanche', sentiment: 74, change: '+3.9%', volume: '245M', category: 'crypto', icon: '���' },
+                            { symbol: 'AVAX', name: 'Avalanche', sentiment: 74, change: '+3.9%', volume: '245M', category: 'crypto', icon: '🔺' },
                             { symbol: 'LINK', name: 'Chainlink', sentiment: 66, change: '+2.1%', volume: '189M', category: 'crypto', icon: '🔗' },
 
                             // Sectors
