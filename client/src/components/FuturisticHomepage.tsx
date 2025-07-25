@@ -940,6 +940,23 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       <BarChart3 className="w-4 h-4 mr-2" />
                       Charts
                     </Button>
+                    <Button
+                      variant="ghost"
+                      onClick={() => {
+                        setActiveSection('screener');
+                        setMobileMenuOpen(false);
+                        setMobileFinanceOpen(false);
+                      }}
+                      className={cn(
+                        "w-full justify-start text-sm transition-colors duration-200",
+                        activeSection === 'screener'
+                          ? "text-teal-400 bg-teal-500/10"
+                          : "text-gray-400 hover:text-teal-300 hover:bg-teal-500/5"
+                      )}
+                    >
+                      <Filter className="w-4 h-4 mr-2" />
+                      Screener
+                    </Button>
                   </div>
                 </CollapsibleContent>
               </Collapsible>
