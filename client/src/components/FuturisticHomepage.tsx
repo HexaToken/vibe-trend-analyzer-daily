@@ -697,6 +697,16 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       <BarChart3 className="w-4 h-4 mr-2" />
                       Charts
                     </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => {
+                        setActiveSection('screener');
+                        setFinanceDropdownOpen(false);
+                      }}
+                      className="hover:bg-teal-500/20 focus:bg-teal-500/20 cursor-pointer transition-colors duration-200"
+                    >
+                      <Filter className="w-4 h-4 mr-2" />
+                      Screener
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
 
@@ -2190,7 +2200,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                               social.sentiment === 'bearish' ? "bg-red-500/20 text-red-400 border-red-500/30" :
                               "bg-gray-500/20 text-gray-400 border-gray-500/30"
                             )}>
-                              {social.sentiment === 'bullish' ? '😃' : social.sentiment === 'bearish' ? '��' : '😐'}
+                              {social.sentiment === 'bullish' ? '😃' : social.sentiment === 'bearish' ? '😡' : '😐'}
                             </Badge>
                           </div>
                           <div className="flex items-center justify-between">
