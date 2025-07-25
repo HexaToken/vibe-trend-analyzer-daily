@@ -49,6 +49,7 @@ import { PluginMarketplacePage } from "@/components/PluginMarketplacePage";
 import { DeveloperSubmissionPage } from "@/components/plugins/DeveloperSubmissionPage";
 import { CredibilityAnalyticsDashboard } from "@/components/credibility/CredibilityAnalyticsDashboard";
 import { AdminCredibilityDashboard } from "@/components/credibility/AdminCredibilityDashboard";
+import { TradeHub } from "@/components/TradeHub";
 import { Footer } from "@/components/Footer";
 
 const queryClient = new QueryClient();
@@ -149,6 +150,8 @@ const AppContent = () => {
         return <CredibilityAnalyticsDashboard />;
       case "admin-credibility":
         return <AdminCredibilityDashboard />;
+      case "tradehub":
+        return <TradeHub onNavigate={setActiveSection} />;
 
       default:
         return <FuturisticHomepage onNavigate={setActiveSection} />;
