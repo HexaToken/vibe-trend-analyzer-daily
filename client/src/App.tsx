@@ -156,6 +156,7 @@ const AppContent = () => {
           onSectionChange={setActiveSection}
         />
         <main>{renderContent()}</main>
+        <Footer onNavigate={setActiveSection} />
         <ApiStatusIndicator />
         <AiChatBubble />
       </div>
