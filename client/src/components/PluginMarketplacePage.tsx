@@ -101,6 +101,12 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
     setIsModalOpen(false);
   };
 
+  const handleRemovePlugin = (pluginId: string) => {
+    const newInstalled = installedPlugins.filter(id => id !== pluginId);
+    setInstalledPlugins(newInstalled);
+    localStorage.setItem('moodmeter-installed-plugins', JSON.stringify(newInstalled));
+  };
+
   const isPluginInstalled = (pluginId: string) => {
     return installedPlugins.includes(pluginId);
   };
