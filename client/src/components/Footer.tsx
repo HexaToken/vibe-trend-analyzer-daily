@@ -241,7 +241,7 @@ export const Footer = ({ onNavigate }: FooterProps) => {
                   ? "border-gray-300 text-gray-600 hover:bg-gray-50"
                   : "border-purple-500/30 text-purple-300 hover:bg-purple-500/10"
               )}
-              onClick={() => onNavigate?.('plugins')}
+              onClick={() => onNavigate?.('plugin-submission')}
             >
               <Code2 className="w-3 h-3 mr-1" />
               Build Plugins
