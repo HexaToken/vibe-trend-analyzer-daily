@@ -39,6 +39,7 @@ import {
   Puzzle,
   Plus,
   Code2,
+  Shield,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { AuthModal } from "@/components/auth/AuthModal";
