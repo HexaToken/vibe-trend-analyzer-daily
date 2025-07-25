@@ -61,6 +61,7 @@ import {
 import { AuthModal } from './auth/AuthModal';
 import AdvancedStockScreener from './AdvancedStockScreener';
 import StrategyProfiler from './StrategyProfiler';
+import GeoSentimentMap from './finance/GeoSentimentMap';
 import BasicScreener from './BasicScreener';
 import SmartTradeJournal from './SmartTradeJournal';
 import CommunitySentimentPolls from './CommunitySentimentPolls';
@@ -1159,7 +1160,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
 
             {/* Finance Tabs */}
             <Tabs value={activeFinanceTab} onValueChange={setActiveFinanceTab}>
-              <TabsList className={`grid w-full grid-cols-2 max-w-md mx-auto ${
+              <TabsList className={`grid w-full grid-cols-3 max-w-lg mx-auto ${
                 themeMode === 'light'
                   ? 'bg-[#F5F5F5] border border-[#E0E0E0]'
                   : 'bg-black/20 backdrop-blur-xl border border-gray-700/50'
@@ -1189,6 +1190,19 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   } : {}}
                 >
                   📁 Financial Reports
+                </TabsTrigger>
+                <TabsTrigger
+                  value="geo-sentiment"
+                  className={themeMode === 'light'
+                    ? "data-[state=active]:text-[#1C1E21] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E0E0E0] text-[#444] flex items-center gap-2"
+                    : "data-[state=active]:bg-green-600/30 data-[state=active]:text-green-300 text-gray-400 flex items-center gap-2"
+                  }
+                  style={themeMode === 'light' ? {
+                    '--active-bg': 'linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%)',
+                    '--active-shadow': '0 2px 4px rgba(0, 0, 0, 0.05)'
+                  } : {}}
+                >
+                  🌍 Geo-Sentiment
                 </TabsTrigger>
               </TabsList>
 
@@ -1545,6 +1559,11 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     </CardContent>
                   </Card>
                 </div>
+              </TabsContent>
+
+              {/* Geo-Sentiment Tab */}
+              <TabsContent value="geo-sentiment" className="mt-8">
+                <GeoSentimentMap />
               </TabsContent>
             </Tabs>
           </div>
