@@ -207,7 +207,7 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
       </div>
 
       <div className="max-w-7xl mx-auto px-6 py-12">
-        {/* Featured Plugins Section */}
+        {/* Featured Plugins Carousel */}
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-6">
             <TrendingUp className={cn(
@@ -220,12 +220,11 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
             )}>
               Featured Plugins
             </h2>
+            <Badge variant="secondary" className="text-xs">
+              Trending
+            </Badge>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredPlugins.slice(0, 3).map(plugin => (
-              <PluginCard key={plugin.id} plugin={plugin} />
-            ))}
-          </div>
+          <FeaturedPluginsCarousel plugins={featuredPlugins} />
         </div>
 
         {/* Search and Filter Section */}
