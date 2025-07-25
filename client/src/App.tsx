@@ -45,6 +45,7 @@ import { SpaceSwitcherWidget } from "@/components/community/SpaceSwitcherWidget"
 import { PrivateRoomsContainer } from "@/components/privateRooms/PrivateRoomsContainer";
 import { ChatInterface } from "@/components/moorMeter/ChatInterface";
 import { ModerationTestingDashboard } from "@/components/testing/ModerationTestingDashboard";
+import { PluginMarketplacePage } from "@/components/PluginMarketplacePage";
 
 const queryClient = new QueryClient();
 
