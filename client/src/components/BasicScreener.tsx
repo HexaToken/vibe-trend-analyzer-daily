@@ -454,16 +454,22 @@ export const BasicScreener: React.FC<BasicScreenerProps> = ({ className }) => {
                 <div className="flex gap-2">
                   <Input
                     type="number"
-                    placeholder="Min"
-                    value={priceRange[0]}
-                    onChange={(e) => setPriceRange([Number(e.target.value) || 0, priceRange[1]])}
+                    placeholder="Min $"
+                    value={priceRange[0] === 0 ? "" : priceRange[0]}
+                    onChange={(e) => {
+                      const value = Number(e.target.value) || 0;
+                      setPriceRange([Math.max(0, value), priceRange[1]]);
+                    }}
                     className="bg-gray-900/50 border-gray-700 text-white placeholder-gray-400 focus:border-purple-400/50"
                   />
                   <Input
                     type="number"
-                    placeholder="Max"
-                    value={priceRange[1]}
-                    onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value) || 500])}
+                    placeholder="Max $"
+                    value={priceRange[1] === 500 ? "" : priceRange[1]}
+                    onChange={(e) => {
+                      const value = Number(e.target.value) || 500;
+                      setPriceRange([priceRange[0], Math.min(500, Math.max(priceRange[0], value))]);
+                    }}
                     className="bg-gray-900/50 border-gray-700 text-white placeholder-gray-400 focus:border-purple-400/50"
                   />
                 </div>
