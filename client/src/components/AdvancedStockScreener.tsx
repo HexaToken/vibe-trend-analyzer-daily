@@ -1,6 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { useMoodTheme } from "@/contexts/MoodThemeContext";
+import {
+  getSentimentSignal,
+  getRSISignal,
+  getMarketCapBadgeColor,
+  getSectorColor,
+  formatSocialBuzz,
+  getAIConfidenceLevel,
+  generateAIInsight,
+  exportToCSV,
+  aiQueryTemplates
+} from "@/utils/screenerHelpers";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
