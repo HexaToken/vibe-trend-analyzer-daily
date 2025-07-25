@@ -23,14 +23,15 @@ export interface Plugin {
   changelog?: string;
 }
 
-export type PluginCategory = 
+export type PluginCategory =
   | 'all'
   | 'screeners'
-  | 'alerts' 
+  | 'alerts'
   | 'visualizers'
   | 'community'
   | 'ai-tools'
-  | 'analytics';
+  | 'analytics'
+  | 'installed';
 
 export interface PluginSubmission {
   id: string;
