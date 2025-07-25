@@ -382,6 +382,34 @@ export const AdvancedStockScreener: React.FC<AdvancedStockScreenerProps> = ({ cl
     setFilteredStocks(MOCK_STOCKS);
   };
 
+  const loadTemplate = (filters: any) => {
+    if (filters.priceRange) setPriceRange(filters.priceRange);
+    if (filters.peRange) setPeRange(filters.peRange);
+    if (filters.marketCapFilter) setMarketCapFilter(filters.marketCapFilter);
+    if (filters.sectorFilter) setSectorFilter(filters.sectorFilter);
+    if (filters.rsiRange) setRsiRange(filters.rsiRange);
+    if (filters.volumeFilter) setVolumeFilter(filters.volumeFilter);
+    if (filters.sentimentRange) setSentimentRange(filters.sentimentRange);
+    if (filters.socialBuzzFilter) setSocialBuzzFilter(filters.socialBuzzFilter);
+    if (filters.newsScoreRange) setNewsScoreRange(filters.newsScoreRange);
+    if (filters.change1DRange) setChange1DRange(filters.change1DRange);
+    if (filters.volatilityRange) setVolatilityRange(filters.volatilityRange);
+  };
+
+  const getCurrentFilters = () => ({
+    priceRange,
+    peRange,
+    marketCapFilter,
+    sectorFilter,
+    rsiRange,
+    volumeFilter,
+    sentimentRange,
+    socialBuzzFilter,
+    newsScoreRange,
+    change1DRange,
+    volatilityRange
+  });
+
   useEffect(() => {
     applyFilters();
   }, [
