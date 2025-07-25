@@ -610,7 +610,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     <button
                       className={cn(
                         "text-sm font-medium transition-all duration-300 relative group flex items-center gap-1",
-                        (activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings')
+                        (activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings' || activeSection === 'screener')
                           ? "text-pink-400"
                           : "text-gray-400 hover:text-white"
                       )}
@@ -1602,7 +1602,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       {[
                         { symbol: 'DOGE', name: 'Dogecoin', price: '$0.08', change: '-4.12%', sentiment: 25, mentions: '15.7K', icon: 'Ð' },
                         { symbol: 'XRP', name: 'Ripple', price: '$0.52', change: '-2.87%', sentiment: 31, mentions: '9.3K', icon: '◉' },
-                        { symbol: 'DOT', name: 'Polkadot', price: '$7.42', change: '-1.95%', sentiment: 38, mentions: '4.8K', icon: '●' }
+                        { symbol: 'DOT', name: 'Polkadot', price: '$7.42', change: '-1.95%', sentiment: 38, mentions: '4.8K', icon: '���' }
                       ].map((token) => (
                         <div key={token.symbol} className="bg-gradient-to-br from-black/60 to-red-900/20 rounded-xl p-4 border border-red-500/20 hover:border-red-400/40 transition-all duration-300 group cursor-pointer">
                           <div className="flex items-center justify-between mb-3">
@@ -2861,7 +2861,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 value="Scanner"
                 className="data-[state=active]:bg-gray-700/50 data-[state=active]:text-white text-gray-400"
               >
-                🔍 Scanner
+                �� Scanner
               </TabsTrigger>
             </TabsList>
 
