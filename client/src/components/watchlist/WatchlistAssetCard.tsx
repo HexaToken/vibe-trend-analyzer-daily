@@ -23,6 +23,7 @@ import { SentimentScoreBar, MiniSentimentBars } from "./SentimentScoreBar";
 import { AIInsightFooterBlock } from "./AIInsightFooterBlock";
 import { formatCurrency, formatLargeNumber } from "@/data/watchlistMockData";
 import type { WatchlistAsset } from "@/types/watchlist";
+import { PollWidget } from "../PollWidget";
 
 interface WatchlistAssetCardProps {
   asset: WatchlistAsset;
@@ -266,6 +267,16 @@ export const WatchlistAssetCard = ({
             <Button size="sm" variant="outline">
               <Bell className="w-3 h-3" />
             </Button>
+          </div>
+
+          {/* Community Sentiment Poll */}
+          <div className="mt-3">
+            <PollWidget
+              ticker={asset.ticker}
+              variant="inline"
+              showAI={true}
+              className="w-full"
+            />
           </div>
         </div>
       )}
