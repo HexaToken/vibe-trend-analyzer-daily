@@ -27,6 +27,7 @@ import { MarketMoodControls } from './builder/MarketMoodControls';
 import { AIMoodBreakdownPanel } from './mood/AIMoodBreakdownPanel';
 import { SentimentAnalyticsDashboard } from './mood/SentimentAnalyticsDashboard';
 import { AISentimentEngine } from './mood/AISentimentEngine';
+import { PollWidget } from './PollWidget';
 
 interface MarketMoodPageProps {
   title?: string;
