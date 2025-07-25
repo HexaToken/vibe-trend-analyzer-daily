@@ -243,7 +243,12 @@ export const MoodGptWidget = () => {
                   </div>
                   <div>
                     <h3 className="font-bold text-lg">Mood GPT</h3>
-                    <p className="text-sm opacity-90">AI Market Companion</p>
+                    <p className="text-sm opacity-90">
+                      {messages.length > 1
+                        ? `${messages.length - 1} messages • Online`
+                        : "AI Market Companion • Online"
+                      }
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-1">
