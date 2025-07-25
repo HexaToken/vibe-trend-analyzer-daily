@@ -805,7 +805,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     variant="ghost"
                     className={cn(
                       "w-full justify-between text-left transition-colors duration-200",
-                      (activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings')
+                      (activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings' || activeSection === 'screener')
                         ? "text-pink-400 bg-pink-500/10"
                         : "text-gray-300 hover:text-white hover:bg-purple-500/10"
                     )}
