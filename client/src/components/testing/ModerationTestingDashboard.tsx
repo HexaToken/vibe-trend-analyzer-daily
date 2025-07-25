@@ -71,6 +71,7 @@ import { badgeService } from "@/services/badgeService";
 import { BADGE_DEFINITIONS } from "@/data/badgeDefinitions";
 import { CredibilityBadge } from "@/components/moderation/CredibilityBadge";
 import { BadgeDisplay } from "@/components/badges/BadgeDisplay";
+import ThemeCompatibilityTester from "@/components/testing/ThemeCompatibilityTester";
 import type { PostCredibility, SpamDetectionResult } from "@/types/moderation";
 import type { UserBadge, BadgeType } from "@/types/badges";
 
