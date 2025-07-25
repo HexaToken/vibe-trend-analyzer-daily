@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Slider } from "@/components/ui/slider";
 
 import {
   Search,
@@ -22,11 +23,15 @@ import {
   TrendingUp,
   TrendingDown,
   Crown,
-  Zap,
-  BarChart3,
   DollarSign,
   Volume2,
   Target,
+  Zap,
+  BarChart3,
+  Bookmark,
+  Plus,
+  ArrowUpRight,
+  Sparkles,
 } from "lucide-react";
 
 interface StockData {
@@ -47,10 +52,10 @@ interface BasicScreenerProps {
 
 const MOCK_STOCKS: StockData[] = [
   {
-    ticker: "AAPL",
-    companyName: "Apple Inc.",
-    currentPrice: 175.43,
-    change1D: 2.34,
+    ticker: "TSLA",
+    companyName: "Tesla Inc.",
+    currentPrice: 248.50,
+    change1D: 5.20,
     sentimentScore: 75,
     sentimentLabel: "Bullish",
     volume24h: 58000000,
@@ -58,21 +63,10 @@ const MOCK_STOCKS: StockData[] = [
     sector: "Technology"
   },
   {
-    ticker: "TSLA",
-    companyName: "Tesla Inc.",
-    currentPrice: 238.77,
-    change1D: -1.87,
-    sentimentScore: 68,
-    sentimentLabel: "Bullish",
-    volume24h: 45000000,
-    marketCap: "Large",
-    sector: "Automotive"
-  },
-  {
     ticker: "NVDA",
     companyName: "NVIDIA Corporation",
-    currentPrice: 421.13,
-    change1D: 5.67,
+    currentPrice: 421.25,
+    change1D: -0.89,
     sentimentScore: 82,
     sentimentLabel: "Bullish",
     volume24h: 32000000,
@@ -80,13 +74,35 @@ const MOCK_STOCKS: StockData[] = [
     sector: "Technology"
   },
   {
+    ticker: "AAPL",
+    companyName: "Apple Inc.",
+    currentPrice: 195.50,
+    change1D: 1.60,
+    sentimentScore: 68,
+    sentimentLabel: "Bullish",
+    volume24h: 45000000,
+    marketCap: "Large",
+    sector: "Technology"
+  },
+  {
+    ticker: "AMD",
+    companyName: "Advanced Micro Devices",
+    currentPrice: 142.80,
+    change1D: -2.90,
+    sentimentScore: 64,
+    sentimentLabel: "Neutral",
+    volume24h: 28000000,
+    marketCap: "Large",
+    sector: "Technology"
+  },
+  {
     ticker: "MSFT",
     companyName: "Microsoft Corporation",
-    currentPrice: 378.85,
-    change1D: 1.24,
+    currentPrice: 420.15,
+    change1D: 1.41,
     sentimentScore: 71,
     sentimentLabel: "Bullish",
-    volume24h: 28000000,
+    volume24h: 15000000,
     marketCap: "Large",
     sector: "Technology"
   },
@@ -144,39 +160,6 @@ const MOCK_STOCKS: StockData[] = [
     volume24h: 12000000,
     marketCap: "Large",
     sector: "Entertainment"
-  },
-  {
-    ticker: "AMD",
-    companyName: "Advanced Micro Devices",
-    currentPrice: 142.38,
-    change1D: 3.45,
-    sentimentScore: 73,
-    sentimentLabel: "Bullish",
-    volume24h: 34000000,
-    marketCap: "Large",
-    sector: "Technology"
-  },
-  {
-    ticker: "NFLX",
-    companyName: "Netflix Inc.",
-    currentPrice: 487.23,
-    change1D: 1.67,
-    sentimentScore: 59,
-    sentimentLabel: "Neutral",
-    volume24h: 4500000,
-    marketCap: "Large",
-    sector: "Entertainment"
-  },
-  {
-    ticker: "CRM",
-    companyName: "Salesforce Inc.",
-    currentPrice: 267.89,
-    change1D: 2.34,
-    sentimentScore: 66,
-    sentimentLabel: "Bullish",
-    volume24h: 3200000,
-    marketCap: "Large",
-    sector: "Technology"
   },
   {
     ticker: "PLTR",
@@ -265,6 +248,28 @@ const MOCK_STOCKS: StockData[] = [
     volume24h: 45000000,
     marketCap: "Small",
     sector: "Consumer"
+  },
+  {
+    ticker: "NFLX",
+    companyName: "Netflix Inc.",
+    currentPrice: 487.23,
+    change1D: 1.67,
+    sentimentScore: 59,
+    sentimentLabel: "Neutral",
+    volume24h: 4500000,
+    marketCap: "Large",
+    sector: "Entertainment"
+  },
+  {
+    ticker: "CRM",
+    companyName: "Salesforce Inc.",
+    currentPrice: 267.89,
+    change1D: 2.34,
+    sentimentScore: 66,
+    sentimentLabel: "Bullish",
+    volume24h: 3200000,
+    marketCap: "Large",
+    sector: "Technology"
   }
 ];
 
@@ -273,28 +278,6 @@ const SECTORS = ["All", "Technology", "Finance", "Healthcare", "Entertainment", 
 export const BasicScreener: React.FC<BasicScreenerProps> = ({ className }) => {
   const { themeMode } = useMoodTheme();
 
-  // Add custom styles for range slider
-  const rangeSliderStyles = `
-    .slider-thumb::-webkit-slider-thumb {
-      appearance: none;
-      height: 20px;
-      width: 20px;
-      border-radius: 50%;
-      background: #8b5cf6;
-      cursor: pointer;
-      border: 2px solid #ffffff;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    }
-    .slider-thumb::-moz-range-thumb {
-      height: 20px;
-      width: 20px;
-      border-radius: 50%;
-      background: #8b5cf6;
-      cursor: pointer;
-      border: 2px solid #ffffff;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    }
-  `;
   const [filteredStocks, setFilteredStocks] = useState<StockData[]>(MOCK_STOCKS.slice(0, 20));
   const [searchQuery, setSearchQuery] = useState("");
   
@@ -304,7 +287,6 @@ export const BasicScreener: React.FC<BasicScreenerProps> = ({ className }) => {
   const [selectedVolume, setSelectedVolume] = useState<string>("All");
   const [selectedSentiment, setSelectedSentiment] = useState<string>("All");
   const [selectedSector, setSelectedSector] = useState<string>("All");
-  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
 
   const applyFilters = () => {
     let filtered = MOCK_STOCKS;
@@ -365,10 +347,16 @@ export const BasicScreener: React.FC<BasicScreenerProps> = ({ className }) => {
     applyFilters();
   }, [searchQuery, priceRange, selectedMarketCap, selectedVolume, selectedSentiment, selectedSector]);
 
-  const getSentimentColor = (sentiment: string, score: number) => {
-    if (sentiment === "Bullish") return "text-green-400 bg-green-500/20 border-green-500/30";
-    if (sentiment === "Bearish") return "text-red-400 bg-red-500/20 border-red-500/30";
-    return "text-yellow-400 bg-yellow-500/20 border-yellow-500/30";
+  const getSentimentColor = (sentiment: string) => {
+    if (sentiment === "Bullish") return "text-green-500 bg-green-500/10 border-green-500/20";
+    if (sentiment === "Bearish") return "text-red-500 bg-red-500/10 border-red-500/20";
+    return "text-yellow-500 bg-yellow-500/10 border-yellow-500/20";
+  };
+
+  const getSentimentBarColor = (sentiment: string) => {
+    if (sentiment === "Bullish") return "bg-green-500";
+    if (sentiment === "Bearish") return "bg-red-500";
+    return "bg-yellow-500";
   };
 
   const formatVolume = (volume: number) => {
@@ -377,118 +365,96 @@ export const BasicScreener: React.FC<BasicScreenerProps> = ({ className }) => {
     return volume.toString();
   };
 
-  const handleAdvancedFilter = () => {
-    setShowUpgradeModal(true);
+  const handleUpgradeClick = () => {
+    // Navigate to upgrade page or show modal
+    alert("Upgrade to Pro to access advanced filters like RSI, Moving Averages, P/E Ratio, and unlimited results!");
   };
 
   return (
     <div className={cn("space-y-6", className)}>
-      <style dangerouslySetInnerHTML={{ __html: rangeSliderStyles }} />
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-            <Search className="w-6 h-6 text-purple-400" />
+          <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent flex items-center gap-3">
+            <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+              <Filter className="w-6 h-6 text-white" />
+            </div>
             Basic Stock Screener
           </h2>
           <p className="text-gray-400 text-sm mt-1">
-            Filter stocks by basic criteria • Free tier: Top 20 results
+            Essential stock filtering for free users with sentiment analysis
           </p>
         </div>
         
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <Button
             onClick={clearFilters}
             variant="outline"
             size="sm"
-            className="border-purple-500/30 text-purple-400 hover:bg-purple-500/10 gap-2"
+            className="border-gray-600 text-gray-400 hover:text-white gap-2"
           >
             <RotateCcw className="w-4 h-4" />
             Clear Filters
           </Button>
           
           <Button
-            onClick={handleAdvancedFilter}
+            onClick={handleUpgradeClick}
             className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 gap-2"
           >
             <Crown className="w-4 h-4" />
-            Pro Filters
+            Upgrade to Pro
           </Button>
         </div>
       </div>
 
       {/* Search Bar */}
-      <Card className="bg-black/40 backdrop-blur-xl border-purple-500/20">
+      <Card className="bg-white/5 backdrop-blur-xl border-gray-700/50">
         <CardContent className="p-4">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
             <Input
               type="text"
-              placeholder="Search by ticker symbol or company name..."
+              placeholder="Ask AI: Find mid-cap tech stocks with rising sentiment and strong momentum..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 bg-gray-900/50 border-gray-700 text-white placeholder-gray-400 focus:border-purple-400/50"
+              className="pl-12 bg-black/20 border-gray-700 text-white placeholder-gray-400 focus:border-purple-400/50 h-12 text-base"
             />
+            <Button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 h-8">
+              <Sparkles className="w-4 h-4 mr-2" />
+              Search
+            </Button>
           </div>
         </CardContent>
       </Card>
 
       {/* Filter Controls */}
-      <Card className="bg-black/40 backdrop-blur-xl border-purple-500/20">
+      <Card className="bg-white/5 backdrop-blur-xl border-gray-700/50">
         <CardHeader>
           <CardTitle className="text-white flex items-center gap-2">
             <Filter className="w-5 h-5 text-purple-400" />
-            Filter Options
+            Filters
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Filter Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
             {/* Price Range */}
             <div className="space-y-3">
               <Label className="text-white flex items-center gap-2">
                 <DollarSign className="w-4 h-4 text-green-400" />
-                Price Range: ${priceRange[0]} - ${priceRange[1]}
+                Price Range
               </Label>
               <div className="space-y-2">
-                <div className="flex gap-2">
-                  <Input
-                    type="number"
-                    placeholder="Min $"
-                    value={priceRange[0] === 0 ? "" : priceRange[0]}
-                    onChange={(e) => {
-                      const value = Number(e.target.value) || 0;
-                      setPriceRange([Math.max(0, value), priceRange[1]]);
-                    }}
-                    className="bg-gray-900/50 border-gray-700 text-white placeholder-gray-400 focus:border-purple-400/50"
-                  />
-                  <Input
-                    type="number"
-                    placeholder="Max $"
-                    value={priceRange[1] === 500 ? "" : priceRange[1]}
-                    onChange={(e) => {
-                      const value = Number(e.target.value) || 500;
-                      setPriceRange([priceRange[0], Math.min(500, Math.max(priceRange[0], value))]);
-                    }}
-                    className="bg-gray-900/50 border-gray-700 text-white placeholder-gray-400 focus:border-purple-400/50"
-                  />
+                <div className="text-sm text-gray-400">
+                  ${priceRange[0]} - ${priceRange[1] === 500 ? "500+" : priceRange[1]}
                 </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="500"
-                  step="10"
-                  value={priceRange[1]}
-                  onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
-                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider-thumb"
-                  style={{
-                    background: `linear-gradient(to right, #8b5cf6 0%, #8b5cf6 ${(priceRange[1]/500)*100}%, #374151 ${(priceRange[1]/500)*100}%, #374151 100%)`
-                  }}
+                <Slider
+                  value={priceRange}
+                  onValueChange={(value) => setPriceRange(value as [number, number])}
+                  max={500}
+                  step={10}
+                  className="w-full"
                 />
-              </div>
-              <div className="flex justify-between text-xs text-gray-400">
-                <span>$0</span>
-                <span>$500+</span>
               </div>
             </div>
 
@@ -499,8 +465,8 @@ export const BasicScreener: React.FC<BasicScreenerProps> = ({ className }) => {
                 Market Cap
               </Label>
               <Select value={selectedMarketCap} onValueChange={setSelectedMarketCap}>
-                <SelectTrigger className="bg-gray-900/50 border-gray-700 text-white">
-                  <SelectValue placeholder="Select market cap" />
+                <SelectTrigger className="bg-black/20 border-gray-700 text-white">
+                  <SelectValue placeholder="Select size" />
                 </SelectTrigger>
                 <SelectContent className="bg-gray-900 border-gray-700">
                   <SelectItem value="All">All Sizes</SelectItem>
@@ -518,7 +484,7 @@ export const BasicScreener: React.FC<BasicScreenerProps> = ({ className }) => {
                 Volume (24h)
               </Label>
               <Select value={selectedVolume} onValueChange={setSelectedVolume}>
-                <SelectTrigger className="bg-gray-900/50 border-gray-700 text-white">
+                <SelectTrigger className="bg-black/20 border-gray-700 text-white">
                   <SelectValue placeholder="Select volume" />
                 </SelectTrigger>
                 <SelectContent className="bg-gray-900 border-gray-700">
@@ -537,7 +503,7 @@ export const BasicScreener: React.FC<BasicScreenerProps> = ({ className }) => {
                 Sentiment Score
               </Label>
               <Select value={selectedSentiment} onValueChange={setSelectedSentiment}>
-                <SelectTrigger className="bg-gray-900/50 border-gray-700 text-white">
+                <SelectTrigger className="bg-black/20 border-gray-700 text-white">
                   <SelectValue placeholder="Select sentiment" />
                 </SelectTrigger>
                 <SelectContent className="bg-gray-900 border-gray-700">
@@ -556,7 +522,7 @@ export const BasicScreener: React.FC<BasicScreenerProps> = ({ className }) => {
                 Sector
               </Label>
               <Select value={selectedSector} onValueChange={setSelectedSector}>
-                <SelectTrigger className="bg-gray-900/50 border-gray-700 text-white">
+                <SelectTrigger className="bg-black/20 border-gray-700 text-white">
                   <SelectValue placeholder="Select sector" />
                 </SelectTrigger>
                 <SelectContent className="bg-gray-900 border-gray-700">
@@ -571,23 +537,23 @@ export const BasicScreener: React.FC<BasicScreenerProps> = ({ className }) => {
           </div>
 
           {/* Pro Features Teaser */}
-          <div className="bg-gradient-to-r from-purple-900/50 to-pink-900/50 rounded-lg p-4 border border-purple-500/30">
+          <div className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-lg p-4 border border-purple-500/30">
             <div className="flex items-center justify-between">
               <div>
-                <h4 className="text-white font-medium flex items-center gap-2">
+                <h4 className="text-white font-medium flex items-center gap-2 mb-1">
                   <Crown className="w-4 h-4 text-yellow-400" />
-                  Pro Filters Available
+                  Want More Advanced Filters?
                 </h4>
                 <p className="text-gray-400 text-sm">
-                  RSI, Moving Averages, P/E Ratio, Dividend Yield & more
+                  RSI • Moving Averages • P/E Ratio • Dividend Yield • Volume Analysis • Price Alerts
                 </p>
               </div>
               <Button
-                onClick={handleAdvancedFilter}
+                onClick={handleUpgradeClick}
                 size="sm"
                 className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-black font-medium"
               >
-                Upgrade
+                Upgrade to Pro
               </Button>
             </div>
           </div>
@@ -598,84 +564,107 @@ export const BasicScreener: React.FC<BasicScreenerProps> = ({ className }) => {
       <div className="flex items-center justify-between">
         <div className="text-white">
           <span className="text-lg font-medium">
-            Showing {filteredStocks.length} stocks
+            Found {filteredStocks.length} stocks
           </span>
           {filteredStocks.length === 20 && (
-            <span className="text-gray-400 text-sm ml-2">
-              (Limited to 20 results for free users)
-            </span>
+            <Badge variant="outline" className="border-orange-500/30 text-orange-400 ml-3">
+              Top 20 Results (Free Limit)
+            </Badge>
           )}
         </div>
         
         <Badge variant="outline" className="border-purple-500/30 text-purple-400">
+          <Crown className="w-3 h-3 mr-1" />
           Free Tier
         </Badge>
       </div>
 
-      {/* Stock Results */}
+      {/* Stock Results Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {filteredStocks.map((stock) => (
-          <Card key={stock.ticker} className="bg-black/40 backdrop-blur-xl border-purple-500/20 hover:border-purple-400/40 transition-all duration-300 group cursor-pointer">
+          <Card 
+            key={stock.ticker} 
+            className="bg-white dark:bg-black/40 border-gray-200 dark:border-gray-700/50 hover:border-purple-400/40 dark:hover:border-purple-400/40 transition-all duration-300 group cursor-pointer backdrop-blur-xl"
+          >
             <CardContent className="p-4">
               <div className="space-y-3">
-                {/* Header */}
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-white font-bold text-lg">{stock.ticker}</h3>
-                    <p className="text-gray-400 text-xs truncate max-w-[150px]">
-                      {stock.companyName}
-                    </p>
+                {/* Header Row */}
+                <div className="flex items-start justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold">
+                      {stock.ticker.charAt(0)}
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-gray-900 dark:text-white text-lg">{stock.ticker}</h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 truncate max-w-[120px]">
+                        {stock.companyName}
+                      </p>
+                    </div>
                   </div>
-                  <Badge className={cn("text-xs border", getSentimentColor(stock.sentimentLabel, stock.sentimentScore))}>
-                    {stock.sentimentLabel}
-                  </Badge>
+                  <Button variant="ghost" size="sm" className="h-6 w-6 p-0 hover:bg-purple-500/10">
+                    <Plus className="w-4 h-4 text-gray-400" />
+                  </Button>
                 </div>
 
-                {/* Price & Change */}
+                {/* Price & Change Row */}
                 <div className="flex items-center justify-between">
-                  <div className="text-white">
-                    <span className="text-xl font-bold">
+                  <div className="text-gray-900 dark:text-white">
+                    <span className="text-2xl font-bold">
                       ${stock.currentPrice.toFixed(2)}
                     </span>
                   </div>
                   <div className={cn(
                     "flex items-center gap-1 text-sm font-medium",
-                    stock.change1D >= 0 ? "text-green-400" : "text-red-400"
+                    stock.change1D >= 0 ? "text-green-500" : "text-red-500"
                   )}>
                     {stock.change1D >= 0 ? (
-                      <TrendingUp className="w-3 h-3" />
+                      <TrendingUp className="w-4 h-4" />
                     ) : (
-                      <TrendingDown className="w-3 h-3" />
+                      <TrendingDown className="w-4 h-4" />
                     )}
                     {stock.change1D >= 0 ? "+" : ""}{stock.change1D.toFixed(2)}%
                   </div>
                 </div>
 
-                {/* Sentiment Bar */}
-                <div className="space-y-1">
+                {/* Sentiment Score Bar */}
+                <div className="space-y-2">
                   <div className="flex justify-between text-xs">
-                    <span className="text-gray-400">Sentiment</span>
-                    <span className="text-white">{stock.sentimentScore}/100</span>
+                    <span className="text-gray-500 dark:text-gray-400">Sentiment Score</span>
+                    <span className="text-gray-900 dark:text-white font-medium">{stock.sentimentScore}/100</span>
                   </div>
-                  <Progress 
-                    value={stock.sentimentScore} 
-                    className="h-2"
-                    style={{
-                      background: "rgba(75, 85, 99, 0.3)"
-                    }}
-                  />
+                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                    <div 
+                      className={cn("h-2 rounded-full transition-all duration-300", getSentimentBarColor(stock.sentimentLabel))}
+                      style={{ width: `${stock.sentimentScore}%` }}
+                    />
+                  </div>
+                  <Badge className={cn("text-xs border w-fit", getSentimentColor(stock.sentimentLabel))}>
+                    {stock.sentimentLabel}
+                  </Badge>
                 </div>
 
-                {/* Additional Info */}
-                <div className="flex justify-between text-xs text-gray-400">
+                {/* Stock Info Row */}
+                <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400">
                   <span>Vol: {formatVolume(stock.volume24h)}</span>
                   <span>{stock.marketCap} Cap</span>
                 </div>
 
                 {/* Sector Badge */}
-                <Badge variant="outline" className="w-full justify-center text-xs border-gray-600 text-gray-300">
+                <Badge variant="outline" className="w-full justify-center text-xs border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300">
                   {stock.sector}
                 </Badge>
+
+                {/* Action Buttons */}
+                <div className="flex gap-2 pt-1">
+                  <Button size="sm" variant="outline" className="flex-1 text-xs">
+                    <ArrowUpRight className="w-3 h-3 mr-1" />
+                    View
+                  </Button>
+                  <Button size="sm" variant="outline" className="flex-1 text-xs">
+                    <Bookmark className="w-3 h-3 mr-1" />
+                    Watch
+                  </Button>
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -684,17 +673,17 @@ export const BasicScreener: React.FC<BasicScreenerProps> = ({ className }) => {
 
       {/* Empty State */}
       {filteredStocks.length === 0 && (
-        <Card className="bg-black/40 backdrop-blur-xl border-purple-500/20">
-          <CardContent className="p-8 text-center">
-            <Search className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-            <h3 className="text-white text-lg font-medium mb-2">No stocks found</h3>
-            <p className="text-gray-400 mb-4">
-              Try adjusting your filters or search terms to see more results.
+        <Card className="bg-white dark:bg-black/40 border-gray-200 dark:border-gray-700/50 backdrop-blur-xl">
+          <CardContent className="p-12 text-center">
+            <Search className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+            <h3 className="text-gray-900 dark:text-white text-xl font-semibold mb-2">No stocks found</h3>
+            <p className="text-gray-500 dark:text-gray-400 mb-6 max-w-md mx-auto">
+              Try adjusting your filters or search terms to discover stocks that match your criteria.
             </p>
             <Button
               onClick={clearFilters}
               variant="outline"
-              className="border-purple-500/30 text-purple-400 hover:bg-purple-500/10"
+              className="border-purple-500/30 text-purple-600 dark:text-purple-400 hover:bg-purple-500/10"
             >
               Clear All Filters
             </Button>
@@ -705,29 +694,35 @@ export const BasicScreener: React.FC<BasicScreenerProps> = ({ className }) => {
       {/* Upgrade CTA */}
       {filteredStocks.length === 20 && (
         <Card className="bg-gradient-to-r from-purple-900/80 to-pink-900/80 backdrop-blur-xl border-purple-500/30">
-          <CardContent className="p-6 text-center">
-            <Crown className="w-8 h-8 text-yellow-400 mx-auto mb-3" />
-            <h3 className="text-white text-xl font-bold mb-2">See More Results</h3>
-            <p className="text-gray-300 mb-4">
-              Upgrade to Pro to view unlimited results and access advanced filters like RSI, moving averages, and technical indicators.
+          <CardContent className="p-8 text-center">
+            <Crown className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
+            <h3 className="text-white text-2xl font-bold mb-3">Unlock Full Results</h3>
+            <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+              You're seeing the top 20 results. Upgrade to Pro to view unlimited stocks and access powerful filters like RSI, moving averages, and technical indicators.
             </p>
-            <div className="flex flex-wrap gap-2 justify-center mb-4">
-              <Badge variant="outline" className="border-yellow-400/30 text-yellow-400">
+            
+            <div className="flex flex-wrap gap-3 justify-center mb-6">
+              <Badge variant="outline" className="border-yellow-400/30 text-yellow-400 bg-yellow-400/10">
                 Unlimited Results
               </Badge>
-              <Badge variant="outline" className="border-yellow-400/30 text-yellow-400">
+              <Badge variant="outline" className="border-yellow-400/30 text-yellow-400 bg-yellow-400/10">
                 Technical Indicators
               </Badge>
-              <Badge variant="outline" className="border-yellow-400/30 text-yellow-400">
+              <Badge variant="outline" className="border-yellow-400/30 text-yellow-400 bg-yellow-400/10">
                 Real-time Alerts
               </Badge>
-              <Badge variant="outline" className="border-yellow-400/30 text-yellow-400">
-                Export Data
+              <Badge variant="outline" className="border-yellow-400/30 text-yellow-400 bg-yellow-400/10">
+                Advanced Analytics
+              </Badge>
+              <Badge variant="outline" className="border-yellow-400/30 text-yellow-400 bg-yellow-400/10">
+                Export Features
               </Badge>
             </div>
+            
             <Button
-              onClick={handleAdvancedFilter}
-              className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-black font-bold px-8"
+              onClick={handleUpgradeClick}
+              size="lg"
+              className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-black font-bold px-8 py-3"
             >
               Upgrade to Pro
             </Button>
