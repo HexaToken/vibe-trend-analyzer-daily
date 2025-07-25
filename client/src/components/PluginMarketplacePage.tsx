@@ -80,6 +80,22 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
     return count.toString();
   };
 
+  const handlePluginClick = (plugin: Plugin) => {
+    setSelectedPlugin(plugin);
+    setIsModalOpen(true);
+  };
+
+  const handleInstallPlugin = (plugin: Plugin) => {
+    const newInstalled = [...installedPlugins, plugin.id];
+    setInstalledPlugins(newInstalled);
+    localStorage.setItem('moodmeter-installed-plugins', JSON.stringify(newInstalled));
+    setIsModalOpen(false);
+  };
+
+  const isPluginInstalled = (pluginId: string) => {
+    return installedPlugins.includes(pluginId);
+  };
+
   const PluginCard = ({ plugin }: { plugin: Plugin }) => (
     <Card className={cn(
       "group transition-all duration-300 hover:shadow-lg border",
