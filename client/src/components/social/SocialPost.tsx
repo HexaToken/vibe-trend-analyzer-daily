@@ -32,6 +32,8 @@ import { formatDistanceToNow } from "date-fns";
 import type { SocialPost } from "@/types/social";
 import { InlinePrice } from "./RealTimePrice";
 import { InlineCryptoPrice } from "../crypto/CryptoPrice";
+import { InlineCredibilityDisplay } from "@/components/credibility/UserCredibilityProfile";
+import { CredibilityBadge } from "@/components/credibility/CredibilityBadge";
 
 interface SocialPostProps {
   post: SocialPost;
