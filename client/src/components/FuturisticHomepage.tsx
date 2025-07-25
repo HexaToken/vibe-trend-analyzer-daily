@@ -1163,7 +1163,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               <TabsList className={`grid w-full grid-cols-3 max-w-lg mx-auto ${
                 themeMode === 'light'
                   ? 'bg-[#F5F5F5] border border-[#E0E0E0]'
-                  : 'bg-black/20 backdrop-blur-xl border border-gray-700/50'
+                  : 'bg-[#2C2F4A]/80 backdrop-blur-xl border border-gray-600/30 shadow-lg'
               }`}>
                 <TabsTrigger
                   value="risk-analysis"
