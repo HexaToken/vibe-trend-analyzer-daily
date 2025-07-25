@@ -22,6 +22,12 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
   const [selectedCategory, setSelectedCategory] = useState<PluginCategory>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<'popular' | 'newest' | 'rating' | 'name'>('popular');
+  const [selectedPlugin, setSelectedPlugin] = useState<Plugin | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [installedPlugins, setInstalledPlugins] = useState<string[]>(() => {
+    const saved = localStorage.getItem('moodmeter-installed-plugins');
+    return saved ? JSON.parse(saved) : [];
+  });
 
   const filteredPlugins = useMemo(() => {
     let plugins = getPluginsByCategory(selectedCategory);
