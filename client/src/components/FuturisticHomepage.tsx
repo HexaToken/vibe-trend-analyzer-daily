@@ -615,14 +615,14 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     <button
                       className={cn(
                         "text-sm font-medium transition-all duration-300 relative group flex items-center gap-1",
-                        (activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings' || activeSection === 'screener' || activeSection === 'trade-journal')
+                        (activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings' || activeSection === 'screener' || activeSection === 'trade-journal' || activeSection === 'sentiment-polls')
                           ? "text-pink-400"
                           : "text-gray-400 hover:text-white"
                       )}
                     >
                       Finance
                       <ChevronDown className="w-3 h-3 transition-transform duration-200 group-hover:rotate-180" />
-                      {(activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings' || activeSection === 'screener' || activeSection === 'trade-journal') && (
+                      {(activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings' || activeSection === 'screener' || activeSection === 'trade-journal' || activeSection === 'sentiment-polls') && (
                         <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
                       )}
                       <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -722,6 +722,16 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       <BookOpen className="w-4 h-4 mr-2" />
                       Smart Trade Journal
                     </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => {
+                        setActiveSection('sentiment-polls');
+                        setFinanceDropdownOpen(false);
+                      }}
+                      className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer transition-colors duration-200"
+                    >
+                      <Users className="w-4 h-4 mr-2" />
+                      Sentiment Polls
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
 
@@ -820,7 +830,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     variant="ghost"
                     className={cn(
                       "w-full justify-between text-left transition-colors duration-200",
-                      (activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings' || activeSection === 'screener' || activeSection === 'trade-journal')
+                      (activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings' || activeSection === 'screener' || activeSection === 'trade-journal' || activeSection === 'sentiment-polls')
                         ? "text-pink-400 bg-pink-500/10"
                         : "text-gray-300 hover:text-white hover:bg-purple-500/10"
                     )}
@@ -988,6 +998,23 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     >
                       <BookOpen className="w-4 h-4 mr-2" />
                       Smart Trade Journal
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      onClick={() => {
+                        setActiveSection('sentiment-polls');
+                        setMobileMenuOpen(false);
+                        setMobileFinanceOpen(false);
+                      }}
+                      className={cn(
+                        "w-full justify-start text-sm transition-colors duration-200",
+                        activeSection === 'sentiment-polls'
+                          ? "text-purple-400 bg-purple-500/10"
+                          : "text-gray-400 hover:text-purple-300 hover:bg-purple-500/5"
+                      )}
+                    >
+                      <Users className="w-4 h-4 mr-2" />
+                      Sentiment Polls
                     </Button>
                   </div>
                 </CollapsibleContent>
@@ -2941,6 +2968,8 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
           </div>
         ) : activeSection === 'trade-journal' ? (
           <SmartTradeJournal />
+        ) : activeSection === 'sentiment-polls' ? (
+          <CommunitySentimentPolls />
         ) : activeSection === 'news-feed' ? (
           <SmartNewsFeed />
         ) : activeSection === 'chat' ? (
