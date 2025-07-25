@@ -59,6 +59,8 @@ import {
 } from './ui/collapsible';
 import { AuthModal } from './auth/AuthModal';
 import AdvancedStockScreener from './AdvancedStockScreener';
+import StrategyProfiler from './StrategyProfiler';
+import BasicScreener from './BasicScreener';
 
 // User Authentication Toggle Component
 interface UserAuthenticationToggleProps {
@@ -2666,7 +2668,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       </div>
                       <div className="flex justify-between items-center">
                         <span className="text-gray-400">MACD:</span>
-                        <span className="text-purple-400 font-bold">+234.5 ↗</span>
+                        <span className="text-purple-400 font-bold">+234.5 ���</span>
                       </div>
                       <div className="flex justify-between items-center">
                         <span className="text-gray-400">Sentiment:</span>
@@ -2863,6 +2865,9 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
           </div>
         ) : activeSection === 'screener' ? (
           <div className="space-y-8">
+            {/* Strategy Profiler Banner */}
+            <StrategyProfiler placement="screener" className="mb-6" />
+
             {/* Screener Hub Header */}
             <div className="text-center mb-12">
               <div className="flex items-center justify-center gap-4 mb-6">
@@ -2878,8 +2883,31 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               </div>
             </div>
 
-            {/* Advanced Stock Screener Component */}
-            <AdvancedStockScreener />
+            {/* Stock Screener Tabs */}
+            <Tabs defaultValue="basic" className="w-full">
+              <TabsList className="grid w-full grid-cols-2 bg-black/40 border border-gray-700/50">
+                <TabsTrigger
+                  value="basic"
+                  className="data-[state=active]:bg-purple-600 data-[state=active]:text-white text-gray-400"
+                >
+                  Basic Screener
+                </TabsTrigger>
+                <TabsTrigger
+                  value="advanced"
+                  className="data-[state=active]:bg-purple-600 data-[state=active]:text-white text-gray-400"
+                >
+                  Advanced Screener
+                </TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="basic" className="mt-6">
+                <BasicScreener />
+              </TabsContent>
+
+              <TabsContent value="advanced" className="mt-6">
+                <AdvancedStockScreener />
+              </TabsContent>
+            </Tabs>
           </div>
         ) : activeSection === 'news-feed' ? (
           <SmartNewsFeed />
@@ -3297,7 +3325,36 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
             </TabsContent>
 
             <TabsContent value="Scanner" className="mt-6">
-              <AdvancedStockScreener />
+              {/* Strategy Profiler for Dashboard placement */}
+              <div className="mb-6">
+                <StrategyProfiler placement="dashboard" compact={true} />
+              </div>
+
+              {/* Stock Screener Tabs */}
+              <Tabs defaultValue="basic" className="w-full">
+                <TabsList className="grid w-full grid-cols-2 bg-black/40 border border-gray-700/50 mb-6">
+                  <TabsTrigger
+                    value="basic"
+                    className="data-[state=active]:bg-purple-600 data-[state=active]:text-white text-gray-400"
+                  >
+                    Basic Screener
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="advanced"
+                    className="data-[state=active]:bg-purple-600 data-[state=active]:text-white text-gray-400"
+                  >
+                    Advanced Screener
+                  </TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="basic">
+                  <BasicScreener />
+                </TabsContent>
+
+                <TabsContent value="advanced">
+                  <AdvancedStockScreener />
+                </TabsContent>
+              </Tabs>
             </TabsContent>
           </Tabs>
         ) : (
