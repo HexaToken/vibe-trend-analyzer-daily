@@ -620,7 +620,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     >
                       Finance
                       <ChevronDown className="w-3 h-3 transition-transform duration-200 group-hover:rotate-180" />
-                      {(activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings' || activeSection === 'screener') && (
+                      {(activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings' || activeSection === 'screener' || activeSection === 'trade-journal') && (
                         <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
                       )}
                       <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
