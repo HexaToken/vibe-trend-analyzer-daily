@@ -1195,12 +1195,16 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   value="geo-sentiment"
                   className={themeMode === 'light'
                     ? "data-[state=active]:text-[#1C1E21] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E0E0E0] text-[#444] flex items-center gap-2"
-                    : "data-[state=active]:bg-green-600/30 data-[state=active]:text-green-300 text-gray-400 flex items-center gap-2"
+                    : "data-[state=active]:text-white text-[#E0E0E0] flex items-center gap-2 transition-all duration-300 hover:text-white/90"
                   }
                   style={themeMode === 'light' ? {
                     '--active-bg': 'linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%)',
                     '--active-shadow': '0 2px 4px rgba(0, 0, 0, 0.05)'
-                  } : {}}
+                  } : {
+                    '--active-bg': 'linear-gradient(to right, #4CAF50, #3F51B5)',
+                    '--active-shadow': '0 4px 12px rgba(76, 175, 80, 0.3)'
+                  }}
+                  data-active-style="background: var(--active-bg); box-shadow: var(--active-shadow);"
                 >
                   🌍 Geo-Sentiment
                 </TabsTrigger>
