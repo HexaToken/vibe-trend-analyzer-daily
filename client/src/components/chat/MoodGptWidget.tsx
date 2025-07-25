@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Brain, X, Minimize2, Send, Bot, User, Loader2, TrendingUp, DollarSign, BarChart3 } from "lucide-react";
+import { Brain, X, Minimize2, Send, Bot, User, Loader2, TrendingUp, DollarSign, BarChart3, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
