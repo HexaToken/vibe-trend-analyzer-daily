@@ -48,6 +48,7 @@ import { ModerationTestingDashboard } from "@/components/testing/ModerationTesti
 import { PluginMarketplacePage } from "@/components/PluginMarketplacePage";
 import { DeveloperSubmissionPage } from "@/components/plugins/DeveloperSubmissionPage";
 import { CredibilityAnalyticsDashboard } from "@/components/credibility/CredibilityAnalyticsDashboard";
+import { AdminCredibilityDashboard } from "@/components/credibility/AdminCredibilityDashboard";
 import { Footer } from "@/components/Footer";
 
 const queryClient = new QueryClient();
