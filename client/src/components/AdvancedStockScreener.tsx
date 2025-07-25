@@ -12,6 +12,7 @@ import {
   exportToCSV,
   aiQueryTemplates
 } from "@/utils/screenerHelpers";
+import FilterTemplateManager from "./screener/FilterTemplateManager";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
