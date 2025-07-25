@@ -613,7 +613,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     <button
                       className={cn(
                         "text-sm font-medium transition-all duration-300 relative group flex items-center gap-1",
-                        (activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings' || activeSection === 'screener')
+                        (activeSection === 'finance' || activeSection === 'market' || activeSection === 'watchlist' || activeSection === 'trending' || activeSection === 'crypto' || activeSection === 'charts' || activeSection === 'earnings' || activeSection === 'screener' || activeSection === 'trade-journal')
                           ? "text-pink-400"
                           : "text-gray-400 hover:text-white"
                       )}
