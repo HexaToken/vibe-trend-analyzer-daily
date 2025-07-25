@@ -3297,7 +3297,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
             </TabsContent>
 
             <TabsContent value="Scanner" className="mt-6">
-              <BasicScreener />
+              <AdvancedStockScreener />
             </TabsContent>
           </Tabs>
         ) : (
