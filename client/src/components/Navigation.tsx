@@ -471,6 +471,25 @@ export const Navigation = ({
                   );
                 })}
 
+                {/* Plugins Section */}
+                <div className="text-sm font-medium text-muted-foreground px-3 py-1">
+                  Plugins
+                </div>
+                <Button
+                  variant={activeSection === "plugins" ? "default" : "ghost"}
+                  onClick={() => {
+                    onSectionChange("plugins");
+                    setIsMenuOpen(false);
+                  }}
+                  className="justify-start gap-2 ml-4"
+                >
+                  <Puzzle className="h-4 w-4" />
+                  Browse Plugins
+                  <Badge variant="secondary" className="ml-auto text-xs">
+                    NEW
+                  </Badge>
+                </Button>
+
                                 
 
                 {/* Mobile Auth Section */}
