@@ -96,89 +96,109 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
     return installedPlugins.includes(pluginId);
   };
 
-  const PluginCard = ({ plugin }: { plugin: Plugin }) => (
-    <Card className={cn(
-      "group transition-all duration-300 hover:shadow-lg border",
-      themeMode === 'light'
-        ? "bg-white border-gray-200 hover:border-blue-300 shadow-sm"
-        : "bg-black/40 border-purple-500/20 hover:border-purple-500/40 backdrop-blur-xl"
-    )}>
-      <CardHeader className="pb-3">
-        <div className="flex items-start justify-between">
-          <div className="flex items-center gap-3">
-            <div className="text-3xl">{plugin.icon}</div>
-            <div>
-              <CardTitle className={cn(
-                "text-lg group-hover:text-primary transition-colors",
-                themeMode === 'light' ? 'text-gray-900' : 'text-white'
-              )}>
-                {plugin.name}
-              </CardTitle>
-              <div className={cn(
-                "text-sm",
-                themeMode === 'light' ? 'text-gray-600' : 'text-gray-400'
-              )}>
-                by {plugin.author}
+  const PluginCard = ({ plugin }: { plugin: Plugin }) => {
+    const installed = isPluginInstalled(plugin.id);
+
+    return (
+      <Card className={cn(
+        "group transition-all duration-300 hover:shadow-lg border cursor-pointer",
+        themeMode === 'light'
+          ? "bg-white border-gray-200 hover:border-blue-300 shadow-sm"
+          : "bg-black/40 border-purple-500/20 hover:border-purple-500/40 backdrop-blur-xl"
+      )} onClick={() => handlePluginClick(plugin)}>
+        <CardHeader className="pb-3">
+          <div className="flex items-start justify-between">
+            <div className="flex items-center gap-3">
+              <div className="text-3xl">{plugin.icon}</div>
+              <div>
+                <CardTitle className={cn(
+                  "text-lg group-hover:text-primary transition-colors",
+                  themeMode === 'light' ? 'text-gray-900' : 'text-white'
+                )}>
+                  {plugin.name}
+                </CardTitle>
+                <div className={cn(
+                  "text-sm",
+                  themeMode === 'light' ? 'text-gray-600' : 'text-gray-400'
+                )}>
+                  by {plugin.author}
+                </div>
               </div>
             </div>
-          </div>
-          <Badge variant={plugin.price === 0 ? "secondary" : "default"}>
-            {plugin.price === 0 ? 'Free' : `$${plugin.price}`}
-          </Badge>
-        </div>
-      </CardHeader>
-      <CardContent>
-        <CardDescription className={cn(
-          "mb-4 line-clamp-2",
-          themeMode === 'light' ? 'text-gray-700' : 'text-gray-300'
-        )}>
-          {plugin.shortDescription}
-        </CardDescription>
-        
-        <div className="flex items-center gap-4 mb-4 text-sm">
-          <div className="flex items-center gap-1">
-            {renderStars(plugin.rating)}
-            <span className={themeMode === 'light' ? 'text-gray-600' : 'text-gray-400'}>
-              ({plugin.reviewCount})
-            </span>
-          </div>
-          <div className={cn(
-            "flex items-center gap-1",
-            themeMode === 'light' ? 'text-gray-600' : 'text-gray-400'
-          )}>
-            <Download className="w-4 h-4" />
-            {formatDownloads(plugin.downloadCount)}
-          </div>
-        </div>
-
-        <div className="flex flex-wrap gap-1 mb-4">
-          {plugin.tags.slice(0, 3).map((tag, index) => (
-            <Badge
-              key={index}
-              variant="outline"
-              className={cn(
-                "text-xs",
-                themeMode === 'light'
-                  ? "border-gray-300 text-gray-600"
-                  : "border-gray-600 text-gray-400"
+            <div className="flex items-center gap-2">
+              <Badge variant={plugin.price === 0 ? "secondary" : "default"}>
+                {plugin.price === 0 ? 'Free' : `$${plugin.price}`}
+              </Badge>
+              {installed && (
+                <Badge variant="default" className="bg-green-600 hover:bg-green-700">
+                  Installed
+                </Badge>
               )}
-            >
-              {tag}
-            </Badge>
-          ))}
-        </div>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <CardDescription className={cn(
+            "mb-4 line-clamp-2",
+            themeMode === 'light' ? 'text-gray-700' : 'text-gray-300'
+          )}>
+            {plugin.shortDescription}
+          </CardDescription>
 
-        <div className="flex gap-2">
-          <Button className="flex-1" size="sm">
-            {plugin.price === 0 ? 'Install' : 'Purchase'}
-          </Button>
-          <Button variant="outline" size="sm">
-            Learn More
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
-  );
+          <div className="flex items-center gap-4 mb-4 text-sm">
+            <div className="flex items-center gap-1">
+              {renderStars(plugin.rating)}
+              <span className={themeMode === 'light' ? 'text-gray-600' : 'text-gray-400'}>
+                ({plugin.reviewCount})
+              </span>
+            </div>
+            <div className={cn(
+              "flex items-center gap-1",
+              themeMode === 'light' ? 'text-gray-600' : 'text-gray-400'
+            )}>
+              <Download className="w-4 h-4" />
+              {formatDownloads(plugin.downloadCount)}
+            </div>
+          </div>
+
+          <div className="flex flex-wrap gap-1 mb-4">
+            {plugin.tags.slice(0, 3).map((tag, index) => (
+              <Badge
+                key={index}
+                variant="outline"
+                className={cn(
+                  "text-xs",
+                  themeMode === 'light'
+                    ? "border-gray-300 text-gray-600"
+                    : "border-gray-600 text-gray-400"
+                )}
+              >
+                {tag}
+              </Badge>
+            ))}
+          </div>
+
+          <div className="flex gap-2" onClick={(e) => e.stopPropagation()}>
+            <Button
+              className="flex-1"
+              size="sm"
+              disabled={installed}
+              onClick={() => handleInstallPlugin(plugin)}
+            >
+              {installed ? 'Installed' : plugin.price === 0 ? 'Install' : 'Purchase'}
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => handlePluginClick(plugin)}
+            >
+              Learn More
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  };
 
   return (
     <div className={cn("min-h-screen", bodyGradient)}>
