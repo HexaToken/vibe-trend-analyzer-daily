@@ -63,6 +63,7 @@ import AdvancedStockScreener from './AdvancedStockScreener';
 import StrategyProfiler from './StrategyProfiler';
 import BasicScreener from './BasicScreener';
 import SmartTradeJournal from './SmartTradeJournal';
+import CommunitySentimentPolls from './CommunitySentimentPolls';
 
 // User Authentication Toggle Component
 interface UserAuthenticationToggleProps {
