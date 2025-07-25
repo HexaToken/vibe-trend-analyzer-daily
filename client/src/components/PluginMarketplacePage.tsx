@@ -226,14 +226,14 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
               ? "text-gray-900"
               : "bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent"
           )}>
-            Unlock More Power with Plugins
+            MoodMeter Plugin Hub
           </h1>
           <p className={cn(
             "text-xl mb-8 max-w-2xl mx-auto",
             themeMode === 'light' ? 'text-gray-600' : 'text-gray-300'
           )}>
+            Extend your dashboard with screeners, visual tools, alerts, and more.
             Browse and install tools made by developers and traders like you.
-            Enhance your MoodMeter experience with community-driven innovations.
           </p>
           <Button
             size="lg"
