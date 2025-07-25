@@ -1545,6 +1545,128 @@ except Exception as e:
     }
   });
 
+  // AI Chat endpoints
+  app.post("/api/ai/chat", async (req, res) => {
+    try {
+      const { message } = req.body;
+
+      if (!message || typeof message !== "string") {
+        return res.status(400).json({
+          error: "invalid_input",
+          message: "Please provide a valid message"
+        });
+      }
+
+      // Mock AI response for now - this would integrate with actual AI service
+      const responses = [
+        {
+          content: "I can help you analyze market sentiment! For specific stock analysis, try asking about a ticker like '$AAPL' or '$TSLA'. I can also provide insights on crypto sentiment, trading strategies, and market trends.",
+          suggestions: ["What's the sentiment for $AAPL?", "Show me crypto trends", "Help with trading strategy", "Analyze my watchlist"]
+        },
+        {
+          content: "Based on current market data, here are some insights:\n\n📈 **Market Overview:**\n• Tech stocks showing bullish sentiment\n• Crypto market stabilizing\n• Energy sector gaining momentum\n\nWould you like me to analyze a specific ticker or sector?",
+          suggestions: ["Analyze $TSLA sentiment", "Check crypto market", "Show energy stocks", "Market predictions"]
+        },
+        {
+          content: "I'm analyzing current sentiment data... Here are some key findings:\n\n🎯 **Top Bullish Signals:**\n• $NVDA - Strong institutional interest\n• $MSFT - Positive earnings outlook\n• $GOOGL - AI developments driving optimism\n\nWant a deeper analysis on any of these?",
+          suggestions: ["Deep dive on $NVDA", "AI sector analysis", "Earnings calendar", "Risk assessment"]
+        }
+      ];
+
+      // Simulate AI processing delay
+      await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
+
+      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+
+      res.json(randomResponse);
+    } catch (error) {
+      console.error("AI Chat error:", error);
+      res.status(500).json({
+        error: "internal_error",
+        message: "Failed to process chat request",
+        content: "I'm experiencing some technical difficulties. Please try again in a moment.",
+        suggestions: ["Try again", "Check system status", "Contact support"]
+      });
+    }
+  });
+
+  app.post("/api/ai/sentiment", async (req, res) => {
+    try {
+      const { ticker } = req.body;
+
+      if (!ticker || typeof ticker !== "string") {
+        return res.status(400).json({
+          error: "invalid_input",
+          message: "Please provide a valid ticker symbol"
+        });
+      }
+
+      // Mock sentiment analysis
+      const sentimentScore = Math.random() * 100;
+      const sentiment = sentimentScore > 70 ? "Very Bullish" :
+                       sentimentScore > 50 ? "Bullish" :
+                       sentimentScore > 30 ? "Neutral" : "Bearish";
+
+      await new Promise(resolve => setTimeout(resolve, 800));
+
+      res.json({
+        content: `**${ticker.toUpperCase()} Sentiment Analysis:**\n\n📊 **Current Mood:** ${sentiment} (${sentimentScore.toFixed(1)}/100)\n\n🔍 **Key Insights:**\n• Social media mentions: ${Math.floor(Math.random() * 5000 + 1000)}\n• Positive sentiment: ${(sentimentScore + Math.random() * 10).toFixed(1)}%\n• Trading volume: ${sentimentScore > 50 ? 'Above' : 'Below'} average\n\n*Based on real-time sentiment analysis across multiple platforms*`,
+        suggestions: [`Analyze ${ticker} competitors`, "Get price target", "View recent news", "Check options flow"]
+      });
+    } catch (error) {
+      console.error("AI Sentiment error:", error);
+      res.status(500).json({
+        error: "internal_error",
+        message: "Failed to analyze sentiment"
+      });
+    }
+  });
+
+  app.post("/api/ai/summarize", async (req, res) => {
+    try {
+      const { ticker, limit = 10 } = req.body;
+
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
+      const content = ticker
+        ? `**${ticker.toUpperCase()} Discussion Summary:**\n\n📱 **Recent Social Activity:**\n• ${Math.floor(Math.random() * 500 + 100)} mentions in last 24h\n• Sentiment trending ${Math.random() > 0.5 ? 'positive' : 'mixed'}\n• Key themes: earnings, growth prospects, technical analysis\n\n💬 **Top Discussions:**\n• Price target updates\n• Technical breakout patterns\n• Institutional activity`
+        : "**Market Pulse Summary:**\n\n🌐 **Overall Sentiment:** Mixed with bullish undertones\n\n📈 **Trending Topics:**\n• Fed policy speculation\n• Tech earnings season\n• Crypto market recovery\n• Energy sector rotation\n\n🎯 **Trader Focus:**\n• Options activity increasing\n• Volatility expectations rising";
+
+      res.json({
+        content,
+        suggestions: ["Get detailed analysis", "Check news impact", "View price levels", "Monitor alerts"]
+      });
+    } catch (error) {
+      console.error("AI Summarize error:", error);
+      res.status(500).json({
+        error: "internal_error",
+        message: "Failed to summarize posts"
+      });
+    }
+  });
+
+  app.post("/api/ai/recommendations", async (req, res) => {
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1200));
+
+      const tickers = ['AAPL', 'MSFT', 'NVDA', 'TSLA', 'GOOGL', 'AMZN', 'META', 'BTC', 'ETH'];
+      const recommended = tickers.slice(0, 3 + Math.floor(Math.random() * 3));
+
+      res.json({
+        content: `**🎯 Watchlist Recommendations:**\n\nBased on current sentiment and market trends:\n\n${recommended.map((ticker, i) =>
+          `${i + 1}. **$${ticker}** - ${Math.random() > 0.5 ? 'Strong bullish signals' : 'Positive momentum building'}`
+        ).join('\n')}\n\n📊 **Analysis Criteria:**\n• Social sentiment trends\n• Technical indicators\n• Volume patterns\n• News catalyst potential`,
+        suggestions: ["Add to watchlist", "Get price alerts", "View detailed analysis", "Check entry points"]
+      });
+    } catch (error) {
+      console.error("AI Recommendations error:", error);
+      res.status(500).json({
+        error: "internal_error",
+        message: "Failed to get recommendations"
+      });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;

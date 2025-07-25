@@ -25,7 +25,7 @@ import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
 
 import { NLPSentimentDemo } from "@/components/NLPSentimentDemo";
 import { SpacyNLPDemo } from "@/components/SpacyNLPDemo";
-import { AiChatBubble } from "@/components/chat/AiChatBubble";
+import { MoodGptWidget } from "@/components/chat/MoodGptWidget";
 import { FinnhubDemo } from "@/components/FinnhubDemo";
 import { StockSentimentScoring } from "@/components/StockSentimentScoring";
 import { AiSentimentExplainer } from "@/components/AiSentimentExplainer";
@@ -45,6 +45,11 @@ import { SpaceSwitcherWidget } from "@/components/community/SpaceSwitcherWidget"
 import { PrivateRoomsContainer } from "@/components/privateRooms/PrivateRoomsContainer";
 import { ChatInterface } from "@/components/moorMeter/ChatInterface";
 import { ModerationTestingDashboard } from "@/components/testing/ModerationTestingDashboard";
+import { PluginMarketplacePage } from "@/components/PluginMarketplacePage";
+import { DeveloperSubmissionPage } from "@/components/plugins/DeveloperSubmissionPage";
+import { CredibilityAnalyticsDashboard } from "@/components/credibility/CredibilityAnalyticsDashboard";
+import { AdminCredibilityDashboard } from "@/components/credibility/AdminCredibilityDashboard";
+import { Footer } from "@/components/Footer";
 
 const queryClient = new QueryClient();
 
@@ -136,6 +141,14 @@ const AppContent = () => {
         return <FuturisticHomepage onNavigate={setActiveSection} />;
       case "moorMeter":
         return <MoorMeterDashboard />;
+      case "plugins":
+        return <PluginMarketplacePage onNavigate={setActiveSection} />;
+      case "plugin-submission":
+        return <DeveloperSubmissionPage onNavigate={setActiveSection} />;
+      case "credibility-analytics":
+        return <CredibilityAnalyticsDashboard />;
+      case "admin-credibility":
+        return <AdminCredibilityDashboard />;
 
       default:
         return <FuturisticHomepage onNavigate={setActiveSection} />;
@@ -152,8 +165,9 @@ const AppContent = () => {
           onSectionChange={setActiveSection}
         />
         <main>{renderContent()}</main>
+        <Footer onNavigate={setActiveSection} />
         <ApiStatusIndicator />
-        <AiChatBubble />
+        <MoodGptWidget />
       </div>
     </TooltipProvider>
   );

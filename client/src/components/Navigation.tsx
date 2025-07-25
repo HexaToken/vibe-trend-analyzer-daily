@@ -36,6 +36,10 @@ import {
         Globe,
   Palette,
   Zap,
+  Puzzle,
+  Plus,
+  Code2,
+  Shield,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { AuthModal } from "@/components/auth/AuthModal";
@@ -243,7 +247,43 @@ export const Navigation = ({
                 </DropdownMenuContent>
               </DropdownMenu>
 
-                            
+              {/* Plugins Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="flex items-center gap-1">
+                    Plugins
+                    <ChevronDown className="h-3 w-3" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start">
+                  <DropdownMenuItem
+                    onClick={() => onSectionChange("plugins")}
+                    className="flex items-center gap-2"
+                  >
+                    <Puzzle className="h-4 w-4" />
+                    Browse Plugins
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => onSectionChange("plugin-submission")}
+                    className="flex items-center gap-2"
+                  >
+                    <Plus className="h-4 w-4" />
+                    Submit Plugin
+                    <Badge variant="secondary" className="ml-auto text-xs">
+                      NEW
+                    </Badge>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => onSectionChange("plugins")}
+                    className="flex items-center gap-2"
+                  >
+                    <Code2 className="h-4 w-4" />
+                    Developer Docs
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+
             </div>
 
                         {/* User Section */}
@@ -316,11 +356,22 @@ export const Navigation = ({
                         <span>Profile</span>
                       </DropdownMenuItem>
                       <DropdownMenuItem
-                        onClick={() => onSectionChange("settings")}
-                      >
-                        <Settings className="mr-2 h-4 w-4" />
-                        <span>Settings</span>
-                      </DropdownMenuItem>
+                    onClick={() => onSectionChange("settings")}
+                  >
+                    <Settings className="mr-2 h-4 w-4" />
+                    <span>Settings</span>
+                  </DropdownMenuItem>
+                  {user?.email === 'admin@moodmeter.com' && (
+                    <DropdownMenuItem
+                      onClick={() => onSectionChange("admin-credibility")}
+                    >
+                      <Shield className="mr-2 h-4 w-4" />
+                      <span>Admin Panel</span>
+                      <Badge variant="destructive" className="ml-auto text-xs">
+                        ADMIN
+                      </Badge>
+                    </DropdownMenuItem>
+                  )}
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onClick={handleLogout}>
                         <LogOut className="mr-2 h-4 w-4" />
@@ -431,6 +482,25 @@ export const Navigation = ({
                     </Button>
                   );
                 })}
+
+                {/* Plugins Section */}
+                <div className="text-sm font-medium text-muted-foreground px-3 py-1">
+                  Plugins
+                </div>
+                <Button
+                  variant={activeSection === "plugins" ? "default" : "ghost"}
+                  onClick={() => {
+                    onSectionChange("plugins");
+                    setIsMenuOpen(false);
+                  }}
+                  className="justify-start gap-2 ml-4"
+                >
+                  <Puzzle className="h-4 w-4" />
+                  Browse Plugins
+                  <Badge variant="secondary" className="ml-auto text-xs">
+                    NEW
+                  </Badge>
+                </Button>
 
                                 
 

@@ -1,0 +1,213 @@
+import { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, Star, Download, ExternalLink } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
+import { useMoodTheme } from '@/contexts/MoodThemeContext';
+import { Plugin } from '@/types/plugins';
+import { cn } from '@/lib/utils';
+
+interface FeaturedPluginsCarouselProps {
+  plugins: Plugin[];
+  className?: string;
+}
+
+export const FeaturedPluginsCarousel = ({ plugins, className }: FeaturedPluginsCarouselProps) => {
+  const { themeMode } = useMoodTheme();
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % plugins.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + plugins.length) % plugins.length);
+  };
+
+  // Auto-advance carousel every 5 seconds
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 5000);
+    return () => clearInterval(timer);
+  }, [plugins.length]);
+
+  const renderStars = (rating: number) => {
+    return Array.from({ length: 5 }, (_, i) => (
+      <Star
+        key={i}
+        className={cn(
+          "w-4 h-4",
+          i < Math.floor(rating)
+            ? "fill-yellow-400 text-yellow-400"
+            : "text-gray-300"
+        )}
+      />
+    ));
+  };
+
+  const formatDownloads = (count: number) => {
+    if (count >= 1000000) return `${(count / 1000000).toFixed(1)}M`;
+    if (count >= 1000) return `${(count / 1000).toFixed(1)}K`;
+    return count.toString();
+  };
+
+  if (plugins.length === 0) return null;
+
+  return (
+    <div className={cn("relative", className)}>
+      <div className="overflow-hidden rounded-xl">
+        <div 
+          className="flex transition-transform duration-500 ease-in-out"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {plugins.map((plugin, index) => (
+            <div key={plugin.id} className="w-full flex-shrink-0">
+              <Card className={cn(
+                "border-0 h-64",
+                themeMode === 'light'
+                  ? "bg-gradient-to-r from-blue-50 to-indigo-100"
+                  : "bg-gradient-to-r from-purple-900/40 to-pink-900/40 backdrop-blur-xl"
+              )}>
+                <CardContent className="p-8 h-full flex items-center">
+                  <div className="flex items-center gap-8 w-full">
+                    {/* Plugin Icon and Info */}
+                    <div className="flex items-center gap-4 flex-1">
+                      <div className="text-6xl">{plugin.icon}</div>
+                      <div>
+                        <div className="flex items-center gap-3 mb-2">
+                          <h3 className={cn(
+                            "text-2xl font-bold",
+                            themeMode === 'light' ? 'text-gray-900' : 'text-white'
+                          )}>
+                            {plugin.name}
+                          </h3>
+                          <Badge 
+                            variant={plugin.price === 0 ? "secondary" : "default"}
+                            className="text-sm"
+                          >
+                            {plugin.price === 0 ? 'Free' : `$${plugin.price}`}
+                          </Badge>
+                          {plugin.status === 'beta' && (
+                            <Badge variant="destructive" className="text-sm">
+                              Beta
+                            </Badge>
+                          )}
+                        </div>
+                        <p className={cn(
+                          "text-lg mb-3",
+                          themeMode === 'light' ? 'text-gray-700' : 'text-gray-300'
+                        )}>
+                          {plugin.shortDescription}
+                        </p>
+                        <div className={cn(
+                          "text-sm mb-3",
+                          themeMode === 'light' ? 'text-gray-600' : 'text-gray-400'
+                        )}>
+                          by <span className="font-medium">{plugin.author}</span>
+                        </div>
+                        <div className="flex items-center gap-6">
+                          <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-1">
+                              {renderStars(plugin.rating)}
+                            </div>
+                            <span className={cn(
+                              "text-sm font-medium",
+                              themeMode === 'light' ? 'text-gray-700' : 'text-gray-300'
+                            )}>
+                              {plugin.rating} ({plugin.reviewCount} reviews)
+                            </span>
+                          </div>
+                          <div className={cn(
+                            "flex items-center gap-1 text-sm",
+                            themeMode === 'light' ? 'text-gray-600' : 'text-gray-400'
+                          )}>
+                            <Download className="w-4 h-4" />
+                            {formatDownloads(plugin.downloadCount)} downloads
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex flex-col gap-3">
+                      <Button 
+                        size="lg"
+                        className={cn(
+                          "min-w-32",
+                          themeMode === 'light'
+                            ? "bg-blue-600 hover:bg-blue-700"
+                            : "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                        )}
+                      >
+                        {plugin.price === 0 ? 'Install Now' : 'Purchase'}
+                      </Button>
+                      <Button variant="outline" size="lg" className="min-w-32">
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        Learn More
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Navigation Arrows */}
+      {plugins.length > 1 && (
+        <>
+          <Button
+            variant="outline"
+            size="icon"
+            className={cn(
+              "absolute left-4 top-1/2 transform -translate-y-1/2 z-10",
+              "w-10 h-10 rounded-full",
+              themeMode === 'light'
+                ? "bg-white/80 hover:bg-white border-gray-300"
+                : "bg-black/50 hover:bg-black/70 border-gray-600"
+            )}
+            onClick={prevSlide}
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </Button>
+          <Button
+            variant="outline"
+            size="icon"
+            className={cn(
+              "absolute right-4 top-1/2 transform -translate-y-1/2 z-10",
+              "w-10 h-10 rounded-full",
+              themeMode === 'light'
+                ? "bg-white/80 hover:bg-white border-gray-300"
+                : "bg-black/50 hover:bg-black/70 border-gray-600"
+            )}
+            onClick={nextSlide}
+          >
+            <ChevronRight className="w-5 h-5" />
+          </Button>
+        </>
+      )}
+
+      {/* Pagination Dots */}
+      {plugins.length > 1 && (
+        <div className="flex justify-center gap-2 mt-6">
+          {plugins.map((_, index) => (
+            <button
+              key={index}
+              className={cn(
+                "w-3 h-3 rounded-full transition-all",
+                index === currentIndex
+                  ? themeMode === 'light'
+                    ? "bg-blue-600"
+                    : "bg-purple-400"
+                  : themeMode === 'light'
+                    ? "bg-gray-300 hover:bg-gray-400"
+                    : "bg-gray-600 hover:bg-gray-500"
+              )}
+              onClick={() => setCurrentIndex(index)}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};

@@ -32,6 +32,8 @@ import { formatDistanceToNow } from "date-fns";
 import type { SocialPost } from "@/types/social";
 import { InlinePrice } from "./RealTimePrice";
 import { InlineCryptoPrice } from "../crypto/CryptoPrice";
+import { InlineCredibilityDisplay } from "@/components/credibility/UserCredibilityProfile";
+import { CredibilityBadge } from "@/components/credibility/CredibilityBadge";
 
 interface SocialPostProps {
   post: SocialPost;
@@ -198,7 +200,7 @@ export const SocialPost = ({
             </button>
 
             <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 mb-1">
                 <button
                   onClick={() => onUserClick?.(post.userId)}
                   className="font-semibold text-foreground hover:underline truncate"
@@ -209,6 +211,11 @@ export const SocialPost = ({
                 {post.isVerified && (
                   <CheckCircle className="h-4 w-4 text-blue-500" />
                 )}
+                <InlineCredibilityDisplay
+                  userId={post.userId}
+                  size={compact ? "sm" : "md"}
+                  maxBadges={compact ? 1 : 2}
+                />
               </div>
 
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
