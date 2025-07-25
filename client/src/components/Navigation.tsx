@@ -246,7 +246,43 @@ export const Navigation = ({
                 </DropdownMenuContent>
               </DropdownMenu>
 
-                            
+              {/* Plugins Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="flex items-center gap-1">
+                    Plugins
+                    <ChevronDown className="h-3 w-3" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start">
+                  <DropdownMenuItem
+                    onClick={() => onSectionChange("plugins")}
+                    className="flex items-center gap-2"
+                  >
+                    <Puzzle className="h-4 w-4" />
+                    Browse Plugins
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => onSectionChange("plugins")}
+                    className="flex items-center gap-2"
+                  >
+                    <Plus className="h-4 w-4" />
+                    Submit Plugin
+                    <Badge variant="secondary" className="ml-auto text-xs">
+                      NEW
+                    </Badge>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => onSectionChange("plugins")}
+                    className="flex items-center gap-2"
+                  >
+                    <Code2 className="h-4 w-4" />
+                    Developer Docs
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+
             </div>
 
                         {/* User Section */}
