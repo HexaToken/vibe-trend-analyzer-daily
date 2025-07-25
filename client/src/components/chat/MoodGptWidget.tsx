@@ -242,7 +242,12 @@ export const MoodGptWidget = () => {
                     <Brain className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg">Mood GPT</h3>
+                    <h3 className="font-bold text-lg flex items-center gap-2">
+                      Mood GPT
+                      <Badge className="bg-green-500/20 text-green-300 border-green-500/30 text-xs">
+                        Verified AI
+                      </Badge>
+                    </h3>
                     <p className="text-sm opacity-90">
                       {messages.length > 1
                         ? `${messages.length - 1} messages • Online`
