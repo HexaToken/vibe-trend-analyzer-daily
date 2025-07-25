@@ -306,15 +306,45 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
 
           {/* Category Filter Tabs */}
           <Tabs value={selectedCategory} onValueChange={(value) => setSelectedCategory(value as PluginCategory)}>
-            <TabsList className="grid w-full grid-cols-2 lg:grid-cols-7 mb-6">
-              {pluginCategories.map(category => (
-                <TabsTrigger key={category.id} value={category.id} className="text-sm">
-                  {category.label}
-                  <Badge variant="secondary" className="ml-2 text-xs">
-                    {category.count}
-                  </Badge>
-                </TabsTrigger>
-              ))}
+            <TabsList className={cn(
+              "grid w-full grid-cols-2 lg:grid-cols-8 mb-6 h-auto p-1",
+              themeMode === 'light' ? 'bg-gray-100' : 'bg-gray-800/50'
+            )}>
+              {pluginCategories.map(category => {
+                let count = category.count;
+                if (category.id === 'installed') {
+                  count = installedPlugins.length;
+                } else if (category.id === 'analytics') {
+                  count = featuredPlugins.length;
+                }
+
+                return (
+                  <TabsTrigger
+                    key={category.id}
+                    value={category.id}
+                    className={cn(
+                      "text-xs sm:text-sm flex flex-col sm:flex-row items-center gap-1 py-3 px-2",
+                      "data-[state=active]:bg-white data-[state=active]:text-primary",
+                      themeMode === 'dark' && "data-[state=active]:bg-gray-700 data-[state=active]:text-purple-300"
+                    )}
+                  >
+                    <span className="truncate">{category.label}</span>
+                    <Badge
+                      variant="secondary"
+                      className={cn(
+                        "text-xs h-5 px-1.5",
+                        selectedCategory === category.id
+                          ? themeMode === 'light'
+                            ? "bg-blue-100 text-blue-700"
+                            : "bg-purple-900/50 text-purple-300"
+                          : "bg-gray-200 text-gray-600"
+                      )}
+                    >
+                      {count}
+                    </Badge>
+                  </TabsTrigger>
+                );
+              })}
             </TabsList>
           </Tabs>
         </div>
