@@ -57,6 +57,7 @@ import {
   CollapsibleTrigger,
 } from './ui/collapsible';
 import { AuthModal } from './auth/AuthModal';
+import BasicScreener from './BasicScreener';
 
 // User Authentication Toggle Component
 interface UserAuthenticationToggleProps {
@@ -532,7 +533,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               </div>
               
               <nav className="hidden md:flex items-center gap-6">
-                                                                                                {['Home', 'Market Mood', 'News Feed', 'Badges'].map((item, index) => (
+                {['Home', 'Market Mood', 'News Feed'].map((item, index) => (
                                     <button
                     key={item}
                     onClick={() => {
@@ -3248,20 +3249,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
             </TabsContent>
 
             <TabsContent value="Scanner" className="mt-6">
-              <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-8">
-                <div className="text-center space-y-4">
-                  <div className="text-6xl mb-4">🔍</div>
-                  <h3 className="text-2xl font-bold text-white mb-2">Market Scanner</h3>
-                  <p className="text-gray-400 mb-4">
-                    Real-time stock and crypto scanner with custom filters and alerts.
-                  </p>
-                  <div className="flex flex-wrap gap-2 justify-center">
-                    <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30">Price Alerts</Badge>
-                    <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30">Volume Spikes</Badge>
-                    <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30">Breakout Detection</Badge>
-                  </div>
-                </div>
-              </div>
+              <BasicScreener />
             </TabsContent>
           </Tabs>
         ) : (
