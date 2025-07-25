@@ -144,6 +144,8 @@ const AppContent = () => {
         return <PluginMarketplacePage onNavigate={setActiveSection} />;
       case "plugin-submission":
         return <DeveloperSubmissionPage onNavigate={setActiveSection} />;
+      case "credibility-analytics":
+        return <CredibilityAnalyticsDashboard />;
 
       default:
         return <FuturisticHomepage onNavigate={setActiveSection} />;
