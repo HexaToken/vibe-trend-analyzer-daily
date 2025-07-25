@@ -2938,6 +2938,8 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               </TabsContent>
             </Tabs>
           </div>
+        ) : activeSection === 'trade-journal' ? (
+          <SmartTradeJournal />
         ) : activeSection === 'news-feed' ? (
           <SmartNewsFeed />
         ) : activeSection === 'chat' ? (
