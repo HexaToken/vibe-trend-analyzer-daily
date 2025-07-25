@@ -426,14 +426,36 @@ export const BasicScreener: React.FC<BasicScreenerProps> = ({ className }) => {
                 <DollarSign className="w-4 h-4 text-green-400" />
                 Price Range: ${priceRange[0]} - ${priceRange[1]}
               </Label>
-              <Slider
-                value={priceRange}
-                onValueChange={(value) => setPriceRange(value as [number, number])}
-                max={500}
-                min={0}
-                step={10}
-                className="w-full"
-              />
+              <div className="space-y-2">
+                <div className="flex gap-2">
+                  <Input
+                    type="number"
+                    placeholder="Min"
+                    value={priceRange[0]}
+                    onChange={(e) => setPriceRange([Number(e.target.value) || 0, priceRange[1]])}
+                    className="bg-gray-900/50 border-gray-700 text-white placeholder-gray-400 focus:border-purple-400/50"
+                  />
+                  <Input
+                    type="number"
+                    placeholder="Max"
+                    value={priceRange[1]}
+                    onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value) || 500])}
+                    className="bg-gray-900/50 border-gray-700 text-white placeholder-gray-400 focus:border-purple-400/50"
+                  />
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="500"
+                  step="10"
+                  value={priceRange[1]}
+                  onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
+                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider-thumb"
+                  style={{
+                    background: `linear-gradient(to right, #8b5cf6 0%, #8b5cf6 ${(priceRange[1]/500)*100}%, #374151 ${(priceRange[1]/500)*100}%, #374151 100%)`
+                  }}
+                />
+              </div>
               <div className="flex justify-between text-xs text-gray-400">
                 <span>$0</span>
                 <span>$500+</span>
