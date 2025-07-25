@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowLeft, Plus, Edit, Eye, BarChart3, DollarSign, Users, Star, TrendingUp, Calendar, Upload, Settings, Download } from "lucide-react";
+import { ArrowLeft, Plus, Edit, Eye, BarChart3, DollarSign, Users, Star, TrendingUp, Calendar, Upload, Settings, Download, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
