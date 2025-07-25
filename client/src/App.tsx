@@ -137,6 +137,8 @@ const AppContent = () => {
         return <FuturisticHomepage onNavigate={setActiveSection} />;
       case "moorMeter":
         return <MoorMeterDashboard />;
+      case "plugins":
+        return <PluginMarketplacePage onNavigate={setActiveSection} />;
 
       default:
         return <FuturisticHomepage onNavigate={setActiveSection} />;
