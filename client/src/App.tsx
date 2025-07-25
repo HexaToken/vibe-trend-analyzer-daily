@@ -141,6 +141,8 @@ const AppContent = () => {
         return <MoorMeterDashboard />;
       case "plugins":
         return <PluginMarketplacePage onNavigate={setActiveSection} />;
+      case "plugin-submission":
+        return <DeveloperSubmissionPage onNavigate={setActiveSection} />;
 
       default:
         return <FuturisticHomepage onNavigate={setActiveSection} />;
