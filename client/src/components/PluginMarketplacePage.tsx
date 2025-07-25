@@ -194,14 +194,24 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
           </div>
 
           <div className="flex gap-2" onClick={(e) => e.stopPropagation()}>
-            <Button
-              className="flex-1"
-              size="sm"
-              disabled={installed}
-              onClick={() => handleInstallPlugin(plugin)}
-            >
-              {installed ? 'Installed' : plugin.price === 0 ? 'Install' : 'Purchase'}
-            </Button>
+            {installed ? (
+              <Button
+                className="flex-1"
+                size="sm"
+                variant="destructive"
+                onClick={() => handleRemovePlugin(plugin.id)}
+              >
+                Remove
+              </Button>
+            ) : (
+              <Button
+                className="flex-1"
+                size="sm"
+                onClick={() => handleInstallPlugin(plugin)}
+              >
+                {plugin.price === 0 ? 'Install' : 'Purchase'}
+              </Button>
+            )}
             <Button
               variant="outline"
               size="sm"
