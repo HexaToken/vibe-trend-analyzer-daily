@@ -174,20 +174,29 @@ export const MoodGptWidget = () => {
     <>
       {/* Floating Assistant Button */}
       {!isOpen && (
-        <Button
-          onClick={toggleWidget}
-          size="lg"
-          className={cn(
-            "fixed bottom-6 right-6 z-50 h-16 w-16 rounded-full shadow-2xl hover:shadow-xl transition-all duration-300 border-2",
-            "hover:scale-110 active:scale-95",
-            themeMode === 'light'
-              ? "bg-gradient-to-br from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 border-purple-500/20"
-              : "bg-gradient-to-br from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 border-purple-400/30"
-          )}
-          aria-label="Open Mood GPT Assistant"
-        >
-          <Brain className="h-8 w-8 text-white drop-shadow-sm" />
-        </Button>
+        <div className="fixed bottom-6 right-6 z-50">
+          {/* Pulsing ring effect */}
+          <div className={cn(
+            "absolute inset-0 rounded-full animate-pulse",
+            "bg-gradient-to-br from-purple-400 to-blue-400 opacity-30",
+            "animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite]"
+          )} />
+          <Button
+            onClick={toggleWidget}
+            size="lg"
+            className={cn(
+              "relative h-16 w-16 rounded-full shadow-2xl hover:shadow-xl transition-all duration-300 border-2",
+              "hover:scale-110 active:scale-95",
+              themeMode === 'light'
+                ? "bg-gradient-to-br from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 border-purple-500/20"
+                : "bg-gradient-to-br from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 border-purple-400/30"
+            )}
+            aria-label="Open Mood GPT Assistant"
+          >
+            <Brain className="h-8 w-8 text-white drop-shadow-sm" />
+            <Sparkles className="absolute -top-1 -right-1 h-4 w-4 text-yellow-300 animate-bounce" />
+          </Button>
+        </div>
       )}
 
       {/* Chat Panel - Sliding from right */}
