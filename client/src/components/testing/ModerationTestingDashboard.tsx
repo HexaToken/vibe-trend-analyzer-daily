@@ -732,6 +732,7 @@ export const ModerationTestingDashboard: React.FC<ModerationTestingDashboardProp
           <TabsTrigger value="tests">Test Results</TabsTrigger>
           <TabsTrigger value="custom">Custom Tests</TabsTrigger>
           <TabsTrigger value="demos">Live Demos</TabsTrigger>
+          <TabsTrigger value="themes">Theme Testing</TabsTrigger>
           <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
 
