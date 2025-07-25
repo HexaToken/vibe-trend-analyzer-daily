@@ -25,7 +25,7 @@ import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
 
 import { NLPSentimentDemo } from "@/components/NLPSentimentDemo";
 import { SpacyNLPDemo } from "@/components/SpacyNLPDemo";
-import { AiChatBubble } from "@/components/chat/AiChatBubble";
+import { MoodGptWidget } from "@/components/chat/MoodGptWidget";
 import { FinnhubDemo } from "@/components/FinnhubDemo";
 import { StockSentimentScoring } from "@/components/StockSentimentScoring";
 import { AiSentimentExplainer } from "@/components/AiSentimentExplainer";
