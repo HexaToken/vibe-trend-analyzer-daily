@@ -214,6 +214,46 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
               className="w-full"
             />
 
+            {/* Community Sentiment Polls Section */}
+            <Card className={themeMode === 'light'
+              ? 'bg-white border-[#E0E0E0] rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)]'
+              : 'bg-black/40 border-purple-500/20 backdrop-blur-xl'
+            }>
+              <CardHeader>
+                <CardTitle className={`flex items-center gap-2 ${
+                  themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+                }`}>
+                  <Hash className="w-5 h-5 text-purple-400" />
+                  Live Community Polls
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <PollWidget ticker="AAPL" variant="compact" showAI={true} />
+                  <PollWidget ticker="TSLA" variant="compact" showAI={true} />
+                  <PollWidget ticker="NVDA" variant="compact" showAI={true} />
+                  <PollWidget ticker="BTC" variant="compact" showAI={true} />
+                  <PollWidget ticker="ETH" variant="compact" showAI={true} />
+                  <PollWidget ticker="MSFT" variant="compact" showAI={true} />
+                </div>
+                <div className="mt-4 text-center">
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      // This would be handled by parent component navigation
+                      console.log('Navigate to full sentiment polls page');
+                    }}
+                    className={themeMode === 'light'
+                      ? 'border-[#3F51B5] text-[#3F51B5] hover:bg-[#3F51B5]/10'
+                      : 'border-purple-500 text-purple-400 hover:bg-purple-500/20'
+                    }
+                  >
+                    View All Polls
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Mood Trend Chart */}
             <FinanceMoodChart
               title="Mood Trend Over Time"
