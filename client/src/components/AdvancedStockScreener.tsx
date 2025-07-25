@@ -486,10 +486,11 @@ export const AdvancedStockScreener: React.FC<AdvancedStockScreenerProps> = ({ cl
               <Button
                 variant="outline"
                 size="sm"
+                onClick={() => exportToCSV(filteredStocks, `moorMeter-screener-${new Date().toISOString().split('T')[0]}`)}
                 className="border-gray-600 text-gray-400 hover:text-white gap-2"
               >
                 <Download className="w-4 h-4" />
-                Export
+                Export CSV
               </Button>
             </div>
           </div>
