@@ -176,10 +176,11 @@ export const pluginCategories = [
   { id: 'all', label: 'All Plugins', count: mockPlugins.length },
   { id: 'screeners', label: 'Custom Screeners', count: mockPlugins.filter(p => p.category === 'screeners').length },
   { id: 'alerts', label: 'AI Alerts', count: mockPlugins.filter(p => p.category === 'alerts').length },
-  { id: 'visualizers', label: 'Mood Visualizers', count: mockPlugins.filter(p => p.category === 'visualizers').length },
+  { id: 'visualizers', label: 'Visual Tools', count: mockPlugins.filter(p => p.category === 'visualizers').length },
   { id: 'community', label: 'Community Tools', count: mockPlugins.filter(p => p.category === 'community').length },
-  { id: 'ai-tools', label: 'AI Tools', count: mockPlugins.filter(p => p.category === 'ai-tools').length },
-  { id: 'analytics', label: 'Analytics', count: mockPlugins.filter(p => p.category === 'analytics').length },
+  { id: 'ai-tools', label: 'Strategy Add-ons', count: mockPlugins.filter(p => p.category === 'ai-tools').length },
+  { id: 'analytics', label: 'Featured', count: mockPlugins.filter(p => p.featured).length },
+  { id: 'installed', label: 'Installed Plugins', count: 0 }, // Count will be dynamic
 ];
 
 export const featuredPlugins = mockPlugins.filter(plugin => plugin.featured);
