@@ -355,6 +355,7 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
                   ? "bg-blue-600 hover:bg-blue-700"
                   : "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
               )}
+              onClick={() => onNavigate?.('plugin-submission')}
             >
               <Plus className="w-5 h-5 mr-2" />
               Submit Plugin
