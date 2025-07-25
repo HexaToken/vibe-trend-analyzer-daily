@@ -1006,6 +1006,11 @@ export const ModerationTestingDashboard: React.FC<ModerationTestingDashboardProp
           </div>
         </TabsContent>
 
+        {/* Theme Testing */}
+        <TabsContent value="themes" className="space-y-4">
+          <ThemeCompatibilityTester />
+        </TabsContent>
+
         {/* Settings */}
         <TabsContent value="settings" className="space-y-4">
           <Card>
