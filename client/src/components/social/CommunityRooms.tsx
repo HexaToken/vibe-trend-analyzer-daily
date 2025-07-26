@@ -46,11 +46,23 @@ import {
 import type { CommunityRoom, ChatMessage, SocialProfile } from "@/types/social";
 import { UserCredibilityIndicator } from "@/components/moderation/CredibilityBadge";
 import { FlagPostModal } from "@/components/moderation/FlagPostModal";
+import { PostInteractionBar } from "./PostInteractionBar";
+import { EnhancedCommunityMessage } from "./EnhancedCommunityMessage";
+import { UserAvatar } from "./UserAvatar";
+import { UsernameLink } from "./UsernameLink";
+import { MentionText } from "./MentionText";
+import { ProfileNavigationProvider, useProfileNavigation } from "./ProfileNavigationProvider";
+import ChatSubcategory from "./ChatSubcategory";
 import { moderationService } from "@/services/moderationService";
 import type { CreateFlagData } from "@/types/moderation";
 
-export const CommunityRooms = () => {
+interface CommunityRoomsProps {
+  onNavigateToProfile?: (userId: string) => void;
+}
+
+export const CommunityRooms = ({ onNavigateToProfile }: CommunityRoomsProps) => {
   const { user, isAuthenticated } = useAuth();
+  const [activeView, setActiveView] = useState<"rooms" | "chat">("rooms");
   const [selectedRoom, setSelectedRoom] = useState<string | null>(null);
   const [rooms, setRooms] = useState<CommunityRoom[]>([]);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -184,6 +196,21 @@ export const CommunityRooms = () => {
       console.error("Failed to flag message:", error);
       throw error;
     }
+  };
+
+  const handleFollow = (userId: string) => {
+    console.log(`Following user: ${userId}`);
+    // In real app, call API to follow user
+  };
+
+  const handleUnfollow = (userId: string) => {
+    console.log(`Unfollowing user: ${userId}`);
+    // In real app, call API to unfollow user
+  };
+
+  const handleToggleAlerts = (userId: string, enabled: boolean) => {
+    console.log(`${enabled ? 'Enabling' : 'Disabling'} alerts for user: ${userId}`);
+    // In real app, call API to update alert preferences
   };
 
   const openFlagModal = (message: ChatMessage) => {
@@ -384,117 +411,19 @@ export const CommunityRooms = () => {
                     return (
                       <div
                         key={message.id}
-                        className={`flex gap-3 ${isConsecutive ? "mt-1" : "mt-4"}`}
+                        className={isConsecutive ? "mt-1" : "mt-4"}
                       >
-                        <div className="w-10">
-                          {showAvatar && (
-                            <Avatar className="h-10 w-10">
-                              <AvatarImage src={message.userAvatar} />
-                              <AvatarFallback>
-                                {message.username[0].toUpperCase()}
-                              </AvatarFallback>
-                            </Avatar>
-                          )}
-                        </div>
-
-                        <div className="flex-1 min-w-0">
-                          {showAvatar && (
-                            <div className="flex items-center gap-2 mb-1">
-                              <span className="font-semibold text-sm">
-                                {message.username}
-                              </span>
-                              {getUserRoleIcon(message.userRole)}
-                              <UserCredibilityIndicator
-                                level="trusted"
-                                score={Math.floor(Math.random() * 40 + 60)}
-                                compact
-                              />
-                              <span className="text-xs text-muted-foreground">
-                                {formatMessageTime(message.createdAt)}
-                              </span>
-                            </div>
-                          )}
-
-                          <div className="group relative">
-                            <p className="text-sm leading-relaxed break-words">
-                              {message.content}
-                            </p>
-
-                            {/* Message Actions */}
-                            <div className="absolute -right-2 -top-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                              <div className="flex items-center gap-1 bg-background border rounded p-1 shadow-sm">
-                                <Button
-                                  size="sm"
-                                  variant="ghost"
-                                  className="h-6 w-6 p-0"
-                                  onClick={() =>
-                                    handleReaction(message.id, "👍")
-                                  }
-                                >
-                                  👍
-                                </Button>
-                                <Button
-                                  size="sm"
-                                  variant="ghost"
-                                  className="h-6 w-6 p-0"
-                                  onClick={() =>
-                                    handleReaction(message.id, "📈")
-                                  }
-                                >
-                                  📈
-                                </Button>
-                                <Button
-                                  size="sm"
-                                  variant="ghost"
-                                  className="h-6 w-6 p-0"
-                                  onClick={() =>
-                                    handleReaction(message.id, "📉")
-                                  }
-                                >
-                                  📉
-                                </Button>
-                                <Button
-                                  size="sm"
-                                  variant="ghost"
-                                  className="h-6 w-6 p-0"
-                                >
-                                  <Reply className="h-3 w-3" />
-                                </Button>
-                                <Button
-                                  size="sm"
-                                  variant="ghost"
-                                  className="h-6 w-6 p-0"
-                                  onClick={() => openFlagModal(message)}
-                                  title="Report message"
-                                >
-                                  <Flag className="h-3 w-3" />
-                                </Button>
-                              </div>
-                            </div>
-
-                            {/* Reactions */}
-                            {message.reactions.length > 0 && (
-                              <div className="flex flex-wrap gap-1 mt-1">
-                                {message.reactions.map((reaction, idx) => (
-                                  <button
-                                    key={idx}
-                                    onClick={() =>
-                                      handleReaction(message.id, reaction.emoji)
-                                    }
-                                    className={`inline-flex items-center gap-1 px-2 py-1 rounded text-xs transition-colors ${
-                                      reaction.userReacted
-                                        ? "bg-primary/20 text-primary border border-primary/30"
-                                        : "bg-muted hover:bg-muted/80"
-                                    }`}
-                                  >
-                                    <span>{reaction.emoji}</span>
-                                    <span>{reaction.count}</span>
-                                  </button>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-                        </div>
+                        <EnhancedCommunityMessage
+                          message={message}
+                          showAvatar={showAvatar}
+                          onReaction={handleReaction}
+                          onFlag={openFlagModal}
+                          onFollow={handleFollow}
+                          onUnfollow={handleUnfollow}
+                          onToggleAlerts={handleToggleAlerts}
+                          onNavigateToProfile={onNavigateToProfile}
+                          compact={false}
+                        />
                       </div>
                     );
                   })}

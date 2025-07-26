@@ -34,6 +34,7 @@ import { InlinePrice } from "./RealTimePrice";
 import { InlineCryptoPrice } from "../crypto/CryptoPrice";
 import { InlineCredibilityDisplay } from "@/components/credibility/UserCredibilityProfile";
 import { CredibilityBadge } from "@/components/credibility/CredibilityBadge";
+import { PostInteractionBar } from "./PostInteractionBar";
 
 interface SocialPostProps {
   post: SocialPost;
@@ -44,6 +45,9 @@ interface SocialPostProps {
   onUserClick?: (userId: string) => void;
   onTickerClick?: (symbol: string) => void;
   onHashtagClick?: (hashtag: string) => void;
+  onFollow?: (userId: string) => void;
+  onUnfollow?: (userId: string) => void;
+  onToggleAlerts?: (userId: string, enabled: boolean) => void;
   compact?: boolean;
   showEngagement?: boolean;
 }
@@ -57,6 +61,9 @@ export const SocialPost = ({
   onUserClick,
   onTickerClick,
   onHashtagClick,
+  onFollow,
+  onUnfollow,
+  onToggleAlerts,
   compact = false,
   showEngagement = true,
 }: SocialPostProps) => {
@@ -232,8 +239,19 @@ export const SocialPost = ({
             </div>
           </div>
 
-          {/* Sentiment Badge */}
+          {/* Interaction Bar and Sentiment Badge */}
           <div className="flex items-center gap-2">
+            {/* Post Interaction Bar */}
+            <PostInteractionBar
+              userId={post.userId}
+              username={post.username}
+              compact={compact}
+              onFollow={onFollow}
+              onUnfollow={onUnfollow}
+              onToggleAlerts={onToggleAlerts}
+              className="mr-2"
+            />
+
             <Badge
               className={`${getSentimentColor(post.sentiment)} text-xs px-2 py-1`}
             >

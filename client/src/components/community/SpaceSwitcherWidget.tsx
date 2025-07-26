@@ -37,6 +37,10 @@ import {
 import { useCryptoListings } from "@/hooks/useCoinMarketCap";
 import { useAuth } from "@/contexts/AuthContext";
 import { useMoodTheme } from "@/contexts/MoodThemeContext";
+import { UserAvatar } from "../social/UserAvatar";
+import { UsernameLink } from "../social/UsernameLink";
+import { MentionText } from "../social/MentionText";
+import { ProfileNavigationProvider, useProfileNavigation } from "../social/ProfileNavigationProvider";
 
 interface CryptoChannel {
   id: string;
@@ -91,7 +95,11 @@ interface OffTopicPost {
   reactions: { emoji: string; count: number }[];
 }
 
-export const SpaceSwitcherWidget: React.FC = () => {
+interface SpaceSwitcherWidgetProps {
+  onNavigateToProfile?: (userId: string) => void;
+}
+
+export const SpaceSwitcherWidget: React.FC<SpaceSwitcherWidgetProps> = ({ onNavigateToProfile }) => {
   const { user, isAuthenticated } = useAuth();
   const { themeMode } = useMoodTheme();
   const [activeTab, setActiveTab] = useState("crypto");
@@ -451,13 +459,26 @@ export const SpaceSwitcherWidget: React.FC = () => {
                           </div>
                         )}
                         <div className="flex items-start gap-3">
-                          <Avatar className="h-8 w-8">
-                            <AvatarImage src={message.user.avatar} />
-                            <AvatarFallback>{message.user.name[0]}</AvatarFallback>
-                          </Avatar>
+                          <UserAvatar
+                            userId={`user-${message.id}`}
+                            username={message.user.name}
+                            avatar={message.user.avatar}
+                            size="sm"
+                            verified={message.user.badge === "Verified" || message.user.badge === "TA Expert"}
+                            premium={false}
+                            showBadges={true}
+                            onUserClick={onNavigateToProfile}
+                          />
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-1">
-                              <span className="text-white font-medium text-sm">{message.user.name}</span>
+                              <UsernameLink
+                                userId={`user-${message.id}`}
+                                username={message.user.name}
+                                verified={message.user.badge === "Verified" || message.user.badge === "TA Expert"}
+                                premium={false}
+                                showBadges={true}
+                                onUserClick={onNavigateToProfile}
+                              />
                               {message.user.badge && (
                                 <Badge variant="secondary" className="text-xs bg-purple-500/20 text-purple-300">
                                   {message.user.badge}
@@ -465,7 +486,13 @@ export const SpaceSwitcherWidget: React.FC = () => {
                               )}
                               <span className="text-gray-400 text-xs">{message.timestamp}</span>
                             </div>
-                            <p className="text-gray-300 text-sm mb-2">{message.content}</p>
+                            <div className="text-gray-300 text-sm mb-2">
+                              <MentionText
+                                text={message.content}
+                                onUserClick={onNavigateToProfile}
+                                enableMentions={true}
+                              />
+                            </div>
                             <div className="flex items-center gap-4">
                               <button className="flex items-center gap-1 text-gray-400 hover:text-red-400 transition-colors">
                                 <ThumbsUp className="h-3 w-3" />
@@ -617,19 +644,38 @@ export const SpaceSwitcherWidget: React.FC = () => {
                           </div>
                         )}
                         <div className="flex items-start gap-3">
-                          <Avatar className="h-8 w-8">
-                            <AvatarImage src={post.user.avatar} />
-                            <AvatarFallback>{post.user.name[0]}</AvatarFallback>
-                          </Avatar>
+                          <UserAvatar
+                            userId={`user-${post.id}`}
+                            username={post.user.name}
+                            avatar={post.user.avatar}
+                            size="sm"
+                            verified={post.user.verified}
+                            premium={false}
+                            showBadges={true}
+                            onUserClick={onNavigateToProfile}
+                          />
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-1">
-                              <span className="text-white font-medium text-sm">{post.user.name}</span>
+                              <UsernameLink
+                                userId={`user-${post.id}`}
+                                username={post.user.name}
+                                verified={post.user.verified}
+                                premium={false}
+                                showBadges={true}
+                                onUserClick={onNavigateToProfile}
+                              />
                               {post.user.verified && (
                                 <Shield className="h-3 w-3 text-blue-400" />
                               )}
                               <span className="text-gray-400 text-xs">{post.timestamp}</span>
                             </div>
-                            <p className="text-gray-300 text-sm mb-3">{post.content}</p>
+                            <div className="text-gray-300 text-sm mb-3">
+                              <MentionText
+                                text={post.content}
+                                onUserClick={onNavigateToProfile}
+                                enableMentions={true}
+                              />
+                            </div>
                             
                             {/* Tags */}
                             {post.tags && (

@@ -5,11 +5,13 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { MoodThemeProvider, useMoodTheme } from "@/contexts/MoodThemeContext";
-import { Navigation } from "@/components/Navigation";
+
 import { Dashboard } from "@/components/Dashboard";
 import { SentimentDashboard } from "@/components/SentimentDashboard";
 import { Analytics } from "@/components/Analytics";
 import { HistoricalData } from "@/components/HistoricalData";
+import { CommunityWithSubtabs } from "@/components/CommunityWithSubtabs";
+import { ResponsiveModernHeader } from "@/components/ResponsiveModernHeader";
 import { CommunityRooms } from "@/components/social/CommunityRooms";
 import { Watchlist } from "@/components/Watchlist";
 import { Settings } from "@/components/Settings";
@@ -29,6 +31,7 @@ import { MoodGptWidget } from "@/components/chat/MoodGptWidget";
 import { FinnhubDemo } from "@/components/FinnhubDemo";
 import { StockSentimentScoring } from "@/components/StockSentimentScoring";
 import { AiSentimentExplainer } from "@/components/AiSentimentExplainer";
+import { FuturisticChatDemo } from "@/components/chat/FuturisticChatDemo";
 import { YFinanceDemo } from "@/components/YFinanceDemo";
 import { MoodThemeDemo } from "@/components/MoodThemeDemo";
 import DynamicThemeSelectorDemo from "@/components/DynamicThemeSelectorDemo";
@@ -50,13 +53,24 @@ import { DeveloperSubmissionPage } from "@/components/plugins/DeveloperSubmissio
 import { CredibilityAnalyticsDashboard } from "@/components/credibility/CredibilityAnalyticsDashboard";
 import { AdminCredibilityDashboard } from "@/components/credibility/AdminCredibilityDashboard";
 import { TradeHub } from "@/components/TradeHub";
+import { TraderProfile } from "@/components/profile/TraderProfile";
+import { ChatSubcategory } from "@/components/social/ChatSubcategory";
 import { Footer } from "@/components/Footer";
 
 const queryClient = new QueryClient();
 
 const AppContent = () => {
   const [activeSection, setActiveSection] = useState("futuristic-home");
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
   const { bodyGradient } = useMoodTheme();
+
+  // Enhanced navigation handler to support user profile navigation
+  const handleNavigation = (section: string, userId?: string) => {
+    setActiveSection(section);
+    if (userId) {
+      setCurrentUserId(userId);
+    }
+  };
 
   const renderContent = () => {
     switch (activeSection) {
@@ -66,13 +80,13 @@ const AppContent = () => {
         return <Analytics />;
       // Removed "history" route - HistoricalData component retained for potential reuse
             case "community":
-        return <CommunityRooms />;
+        return <CommunityWithSubtabs onNavigateToProfile={(userId) => handleNavigation("trader-profile", userId)} />;
       case "space":
-        return <SpaceSwitcherWidget />;
+        return <SpaceSwitcherWidget onNavigateToProfile={(userId) => handleNavigation("trader-profile", userId)} />;
       case "rooms":
         return <PrivateRoomsContainer />;
       case "chat":
-        return <ChatInterface />;
+        return <ChatSubcategory onNavigateToProfile={(userId) => handleNavigation("trader-profile", userId)} />;
       case "profile":
         return (
           <ProtectedRoute
@@ -106,7 +120,9 @@ const AppContent = () => {
             fallbackTitle="Profile Access Required"
             fallbackDescription="Please sign in to view your profile."
           >
-            <ViewProfilePage />
+            <TraderProfile
+              isCurrentUser={true}
+            />
           </ProtectedRoute>
         );
       case "database":
@@ -152,6 +168,30 @@ const AppContent = () => {
         return <AdminCredibilityDashboard />;
       case "tradehub":
         return <TradeHub onNavigate={setActiveSection} />;
+      case "trader-profile":
+        return (
+          <ProtectedRoute
+            fallbackTitle="Trader Profile Access"
+            fallbackDescription="Please sign in to view trader profiles and trading insights."
+          >
+            <TraderProfile
+              userId={currentUserId || undefined}
+              isCurrentUser={currentUserId === null}
+              onNavigateBack={() => handleNavigation("community")}
+            />
+          </ProtectedRoute>
+        );
+      case "enhanced-chat":
+        return (
+          <ProtectedRoute
+            fallbackTitle="Enhanced Chat Access"
+            fallbackDescription="Please sign in to access the enhanced community chat with credibility features."
+          >
+            <ChatSubcategory />
+          </ProtectedRoute>
+        );
+      case "futuristic-chat":
+        return <FuturisticChatDemo />;
 
       default:
         return <FuturisticHomepage onNavigate={setActiveSection} />;
@@ -163,9 +203,11 @@ const AppContent = () => {
       <Toaster />
       <Sonner />
       <div className={`min-h-screen ${bodyGradient} transition-all duration-500`}>
-        <Navigation
+        <ResponsiveModernHeader
           activeSection={activeSection}
-          onSectionChange={setActiveSection}
+          setActiveSection={setActiveSection}
+          onNavigate={handleNavigation}
+          currentMoodScore={75}
         />
         <main>{renderContent()}</main>
         <Footer onNavigate={setActiveSection} />

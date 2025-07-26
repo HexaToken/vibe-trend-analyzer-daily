@@ -28,9 +28,22 @@ import {
   Award,
   Laugh,
 } from "lucide-react";
+import { PostInteractionBar } from "./PostInteractionBar";
+import {
+  CheckCircle,
+  AlertTriangle,
+  Award as AwardIcon,
+} from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface OffTopicPost {
   id: string;
+  userId: string;
   user: {
     name: string;
     avatar: string;
@@ -48,6 +61,9 @@ interface OffTopicPost {
   isPinned?: boolean;
   mediaUrl?: string;
   pollOptions?: { option: string; votes: number }[];
+  credibilityScore?: number;
+  needsReview?: boolean;
+  communityFavorite?: boolean;
 }
 
 interface LoungeTopic {
@@ -66,6 +82,18 @@ export const OffTopicLounge: React.FC = () => {
   const [newPost, setNewPost] = useState("");
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const handleFollow = (userId: string) => {
+    console.log(`Following user: ${userId}`);
+  };
+
+  const handleUnfollow = (userId: string) => {
+    console.log(`Unfollowing user: ${userId}`);
+  };
+
+  const handleToggleAlerts = (userId: string, enabled: boolean) => {
+    console.log(`${enabled ? 'Enabling' : 'Disabling'} alerts for user: ${userId}`);
+  };
 
   // Mock lounge topics
   const loungeTopics: LoungeTopic[] = [
@@ -115,6 +143,7 @@ export const OffTopicLounge: React.FC = () => {
   const offTopicPosts: OffTopicPost[] = [
     {
       id: "1",
+      userId: "user-meme-king",
       user: {
         name: "MemeKing",
         avatar: "MK",
@@ -131,9 +160,13 @@ export const OffTopicLounge: React.FC = () => {
       shares: 67,
       tags: ["meme", "options", "trading"],
       isPinned: true,
+      credibilityScore: 7.8,
+      needsReview: false,
+      communityFavorite: true,
     },
     {
       id: "2",
+      userId: "user-tech-enthusiast",
       user: {
         name: "TechEnthusiast",
         avatar: "TE",
@@ -149,9 +182,13 @@ export const OffTopicLounge: React.FC = () => {
       replies: 23,
       shares: 12,
       tags: ["tech", "apple", "ar", "vr"],
+      credibilityScore: 8.5,
+      needsReview: false,
+      communityFavorite: false,
     },
     {
       id: "3",
+      userId: "user-poll-master",
       user: {
         name: "PollMaster",
         avatar: "PM",
@@ -173,9 +210,13 @@ export const OffTopicLounge: React.FC = () => {
         { option: "Wall Street (1987)", votes: 76 },
         { option: "Margin Call", votes: 45 },
       ],
+      credibilityScore: 6.9,
+      needsReview: true,
+      communityFavorite: false,
     },
     {
       id: "4",
+      userId: "user-work-life-balance",
       user: {
         name: "WorkLifeBalance",
         avatar: "WB",
@@ -191,9 +232,13 @@ export const OffTopicLounge: React.FC = () => {
       replies: 56,
       shares: 89,
       tags: ["wellness", "mental-health", "balance"],
+      credibilityScore: 8.1,
+      needsReview: false,
+      communityFavorite: true,
     },
     {
       id: "5",
+      userId: "user-weekend-warrior",
       user: {
         name: "WeekendWarrior",
         avatar: "WW",
@@ -209,6 +254,9 @@ export const OffTopicLounge: React.FC = () => {
       replies: 42,
       shares: 23,
       tags: ["weekend", "fun", "lifestyle"],
+      credibilityScore: 7.2,
+      needsReview: false,
+      communityFavorite: false,
     },
   ];
 
@@ -246,6 +294,14 @@ export const OffTopicLounge: React.FC = () => {
     if (level >= 10) return "bg-green-500";
     if (level >= 5) return "bg-yellow-500";
     return "bg-gray-500";
+  };
+
+  const getCredibilityColor = (score: number) => {
+    if (score >= 9.0) return "text-purple-600 bg-purple-100 dark:bg-purple-900/20";
+    if (score >= 8.0) return "text-blue-600 bg-blue-100 dark:bg-blue-900/20";
+    if (score >= 7.0) return "text-green-600 bg-green-100 dark:bg-green-900/20";
+    if (score >= 6.0) return "text-yellow-600 bg-yellow-100 dark:bg-yellow-900/20";
+    return "text-red-600 bg-red-100 dark:bg-red-900/20";
   };
 
   const formatTimeAgo = (timestamp: Date) => {
@@ -411,29 +467,95 @@ export const OffTopicLounge: React.FC = () => {
                 </div>
 
                 <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="font-semibold">{post.user.name}</span>
-                    {post.user.verified && (
-                      <Badge variant="secondary" className="text-xs px-1 py-0">
-                        <Star className="w-3 h-3 mr-1" />
-                        Verified
-                      </Badge>
-                    )}
-                    {post.user.badges.map((badge) => (
-                      <Badge
-                        key={badge}
-                        variant="outline"
-                        className="text-xs px-1 py-0"
-                      >
-                        {badge}
-                      </Badge>
-                    ))}
-                    <div className="flex items-center gap-1">
-                      {getPostTypeIcon(post.type)}
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="font-semibold">{post.user.name}</span>
+
+                      {/* Verified Icon */}
+                      {post.user.verified && (
+                        <CheckCircle className="h-4 w-4 text-blue-500" />
+                      )}
+
+                      {/* Credibility Score */}
+                      {post.credibilityScore && (
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Badge
+                                className={`text-xs px-2 py-0.5 font-semibold ${getCredibilityColor(post.credibilityScore)}`}
+                              >
+                                {post.credibilityScore.toFixed(1)}
+                              </Badge>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Credibility Score: {post.credibilityScore.toFixed(1)}/10.0</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      )}
+
+                      {/* User Badges */}
+                      {post.user.badges.map((badge) => (
+                        <Badge
+                          key={badge}
+                          variant="outline"
+                          className="text-xs px-1 py-0"
+                        >
+                          {badge}
+                        </Badge>
+                      ))}
+
+                      {/* Needs Review Badge */}
+                      {post.needsReview && (
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Badge className="bg-yellow-100 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-400 text-xs px-2 py-0.5">
+                                <AlertTriangle className="h-3 w-3 mr-1" />
+                                Needs Review
+                              </Badge>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>This post requires community review</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      )}
+
+                      {/* Community Favorite Badge */}
+                      {post.communityFavorite && (
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Badge className="bg-pink-100 text-pink-700 dark:bg-pink-900/20 dark:text-pink-400 text-xs px-2 py-0.5">
+                                <AwardIcon className="h-3 w-3 mr-1" />
+                                Community Favorite
+                              </Badge>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Highly appreciated by the community</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      )}
+
+                      <div className="flex items-center gap-1">
+                        {getPostTypeIcon(post.type)}
+                      </div>
+                      <span className="text-xs text-gray-500">
+                        {formatTimeAgo(post.timestamp)}
+                      </span>
                     </div>
-                    <span className="text-xs text-gray-500">
-                      {formatTimeAgo(post.timestamp)}
-                    </span>
+
+                    {/* Post Interaction Bar for Off-Topic Posts */}
+                    <PostInteractionBar
+                      userId={post.userId}
+                      username={post.user.name}
+                      compact={true}
+                      onFollow={handleFollow}
+                      onUnfollow={handleUnfollow}
+                      onToggleAlerts={handleToggleAlerts}
+                    />
                   </div>
 
                   <div className="mb-3">

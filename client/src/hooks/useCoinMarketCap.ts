@@ -65,9 +65,9 @@ export function useCryptoQuotes(
         `/api/proxy/coinmarketcap/quotes?symbol=${symbols.join(",")}`,
         {
           retry: {
-            maxRetries: 2,
-            retryDelay: 1000,
-            timeout: 15000,
+            maxRetries: 1,
+            retryDelay: 2000,
+            timeout: 12000,
           },
         },
       );
@@ -284,9 +284,9 @@ export function useCryptoListings(
         `/api/proxy/coinmarketcap/listings?limit=${limit}`,
         {
           retry: {
-            maxRetries: 2,
-            retryDelay: 1000,
-            timeout: 15000,
+            maxRetries: 1,
+            retryDelay: 2000,
+            timeout: 12000,
           },
         },
       );

@@ -41,7 +41,23 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useAuth } from "@/contexts/AuthContext";
+import { PostInteractionBar } from "./PostInteractionBar";
+import { UserAvatar } from "./UserAvatar";
+import { UsernameLink } from "./UsernameLink";
+import { MentionText } from "./MentionText";
+import { ProfileNavigationProvider, useProfileNavigation } from "./ProfileNavigationProvider";
+import {
+  CheckCircle,
+  AlertTriangle,
+  Award,
+} from "lucide-react";
 
 // Enhanced types for the new chat system
 interface ChatRoom {
@@ -93,6 +109,9 @@ interface ChatMessage {
     price: number;
     sentiment: "bullish" | "bearish" | "neutral";
   };
+  credibilityScore?: number;
+  needsReview?: boolean;
+  communityFavorite?: boolean;
 }
 
 // Mock data for demo
@@ -176,6 +195,9 @@ const mockMessages: ChatMessage[] = [
       { emoji: "🚀", count: 12, users: [], userReacted: false },
       { emoji: "👀", count: 8, users: [], userReacted: true },
     ],
+    credibilityScore: 8.7,
+    needsReview: false,
+    communityFavorite: true,
   },
   {
     id: "2",
@@ -192,6 +214,9 @@ const mockMessages: ChatMessage[] = [
       price: 175,
       sentiment: "bullish",
     },
+    credibilityScore: 9.1,
+    needsReview: false,
+    communityFavorite: false,
   },
   {
     id: "3",
@@ -206,10 +231,17 @@ const mockMessages: ChatMessage[] = [
       { emoji: "📊", count: 6, users: [], userReacted: true },
     ],
     isPinned: true,
+    credibilityScore: 7.8,
+    needsReview: true,
+    communityFavorite: false,
   },
 ];
 
-export const ChatSubcategory: React.FC = () => {
+interface ChatSubcategoryProps {
+  onNavigateToProfile?: (userId: string) => void;
+}
+
+export const ChatSubcategory: React.FC<ChatSubcategoryProps> = ({ onNavigateToProfile }) => {
   const { user, isAuthenticated } = useAuth();
   const [selectedRoom, setSelectedRoom] = useState<string>("general");
   const [messages, setMessages] = useState<ChatMessage[]>(mockMessages);
@@ -242,6 +274,26 @@ export const ChatSubcategory: React.FC = () => {
       room.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       room.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const handleFollow = (userId: string) => {
+    console.log(`Following user: ${userId}`);
+  };
+
+  const handleUnfollow = (userId: string) => {
+    console.log(`Unfollowing user: ${userId}`);
+  };
+
+  const handleToggleAlerts = (userId: string, enabled: boolean) => {
+    console.log(`${enabled ? 'Enabling' : 'Disabling'} alerts for user: ${userId}`);
+  };
+
+  const getCredibilityColor = (score: number) => {
+    if (score >= 9.0) return "text-purple-600 bg-purple-100 dark:bg-purple-900/20";
+    if (score >= 8.0) return "text-blue-600 bg-blue-100 dark:bg-blue-900/20";
+    if (score >= 7.0) return "text-green-600 bg-green-100 dark:bg-green-900/20";
+    if (score >= 6.0) return "text-yellow-600 bg-yellow-100 dark:bg-yellow-900/20";
+    return "text-red-600 bg-red-100 dark:bg-red-900/20";
+  };
 
   const handleSendMessage = () => {
     if (!newMessage.trim() || !user) return;
@@ -373,31 +425,111 @@ export const ChatSubcategory: React.FC = () => {
       >
         <div className="w-10">
           {showAvatar && (
-            <Avatar className="h-10 w-10">
-              <AvatarImage src={message.userAvatar} />
-              <AvatarFallback>
-                {message.username[0].toUpperCase()}
-              </AvatarFallback>
-            </Avatar>
+            <UserAvatar
+              userId={message.userId}
+              username={message.username}
+              avatar={message.userAvatar}
+              size="md"
+              verified={message.userRole === "verified" || message.userRole === "admin" || message.userRole === "moderator"}
+              premium={message.userRole === "premium"}
+              credibilityScore={message.credibilityScore}
+              showBadges={true}
+              onUserClick={onNavigateToProfile}
+            />
           )}
         </div>
 
         <div className="flex-1 min-w-0">
           {showAvatar && (
-            <div className="flex items-center gap-2 mb-1">
-              <span className="font-semibold text-sm">
-                {message.username}
-              </span>
-              {getUserRoleIcon(message.userRole)}
-              <span className="text-xs text-muted-foreground">
-                {formatMessageTime(message.timestamp)}
-              </span>
-              {message.isPinned && (
-                <Badge variant="outline" className="text-xs">
-                  <Pin className="h-2 w-2 mr-1" />
-                  Pinned
-                </Badge>
-              )}
+            <div className="flex items-center justify-between mb-1">
+              <div className="flex items-center gap-2 flex-wrap">
+                <UsernameLink
+                  userId={message.userId}
+                  username={message.username}
+                  verified={message.userRole === "verified" || message.userRole === "admin" || message.userRole === "moderator"}
+                  premium={message.userRole === "premium"}
+                  credibilityScore={message.credibilityScore}
+                  showBadges={true}
+                  onUserClick={onNavigateToProfile}
+                />
+
+                {/* User Role Icon */}
+                {getUserRoleIcon(message.userRole)}
+
+                {/* Credibility Score */}
+                {message.credibilityScore && (
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Badge
+                          className={`text-xs px-2 py-0.5 font-semibold ${getCredibilityColor(message.credibilityScore)}`}
+                        >
+                          {message.credibilityScore.toFixed(1)}
+                        </Badge>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Credibility Score: {message.credibilityScore.toFixed(1)}/10.0</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                )}
+
+                {/* Needs Review Badge */}
+                {message.needsReview && (
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Badge className="bg-yellow-100 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-400 text-xs px-2 py-0.5">
+                          <AlertTriangle className="h-3 w-3 mr-1" />
+                          Needs Review
+                        </Badge>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>This message requires community review</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                )}
+
+                {/* Community Favorite Badge */}
+                {message.communityFavorite && (
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Badge className="bg-pink-100 text-pink-700 dark:bg-pink-900/20 dark:text-pink-400 text-xs px-2 py-0.5">
+                          <Award className="h-3 w-3 mr-1" />
+                          Community Favorite
+                        </Badge>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Highly appreciated by the community</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                )}
+
+                <span className="text-xs text-muted-foreground">
+                  {formatMessageTime(message.timestamp)}
+                </span>
+
+                {message.isPinned && (
+                  <Badge variant="outline" className="text-xs">
+                    <Pin className="h-2 w-2 mr-1" />
+                    Pinned
+                  </Badge>
+                )}
+              </div>
+
+              {/* Post Interaction Bar for Chat Messages */}
+              <PostInteractionBar
+                userId={message.userId}
+                username={message.username}
+                compact={true}
+                onFollow={handleFollow}
+                onUnfollow={handleUnfollow}
+                onToggleAlerts={handleToggleAlerts}
+                className="opacity-60 hover:opacity-100 transition-opacity"
+              />
             </div>
           )}
 
@@ -420,9 +552,13 @@ export const ChatSubcategory: React.FC = () => {
               </div>
             )}
 
-            <p className="text-sm leading-relaxed break-words">
-              {message.content}
-            </p>
+            <div className="text-sm leading-relaxed break-words">
+              <MentionText
+                text={message.content}
+                onUserClick={onNavigateToProfile}
+                enableMentions={true}
+              />
+            </div>
 
             {/* Message Actions */}
             <div className="absolute -right-2 -top-2 opacity-0 group-hover:opacity-100 transition-opacity">

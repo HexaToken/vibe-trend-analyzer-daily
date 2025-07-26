@@ -9,6 +9,42 @@ interface RobustFetchOptions extends RequestInit {
   retry?: RetryOptions;
 }
 
+// Simple timeout tracking to prevent excessive retries
+const timeoutTracker = {
+  attempts: new Map<string, { count: number, lastAttempt: number }>(),
+
+  shouldSkipRequest(url: string): boolean {
+    const now = Date.now();
+    const record = this.attempts.get(url);
+
+    if (!record) return false;
+
+    // Reset counter if more than 5 minutes have passed
+    if (now - record.lastAttempt > 300000) {
+      this.attempts.delete(url);
+      return false;
+    }
+
+    // Skip if more than 3 timeouts in the last 5 minutes
+    return record.count >= 3;
+  },
+
+  recordTimeout(url: string) {
+    const now = Date.now();
+    const record = this.attempts.get(url) || { count: 0, lastAttempt: 0 };
+
+    // Reset if more than 5 minutes
+    if (now - record.lastAttempt > 300000) {
+      record.count = 1;
+    } else {
+      record.count++;
+    }
+
+    record.lastAttempt = now;
+    this.attempts.set(url, record);
+  }
+};
+
 export class FetchError extends Error {
   public readonly status?: number;
   public readonly response?: Response;
@@ -18,6 +54,30 @@ export class FetchError extends Error {
     this.name = "FetchError";
     this.status = status;
     this.response = response;
+  }
+}
+
+/**
+ * Safe abort wrapper to prevent uncaught abort errors
+ */
+function safeAbort(controller: AbortController, reason?: Error | string) {
+  try {
+    if (!controller.signal.aborted) {
+      if (reason) {
+        // Ensure timeout errors have user-friendly messages
+        if (reason instanceof Error && reason.message.includes("Request timeout after")) {
+          const timeoutError = new Error("Network request timed out. Please check your connection and try again.");
+          controller.abort(timeoutError);
+        } else {
+          controller.abort(reason);
+        }
+      } else {
+        controller.abort(new Error("Request was cancelled"));
+      }
+    }
+  } catch (error) {
+    // Silently handle abort errors that occur during cleanup
+    console.debug('Safe abort completed:', error instanceof Error ? error.message : error);
   }
 }
 
@@ -35,7 +95,7 @@ function createTimeoutController(timeoutMs: number, externalSignal?: AbortSignal
   // Handle external signal if provided
   if (externalSignal) {
     if (externalSignal.aborted) {
-      controller.abort();
+      safeAbort(controller, new Error("External request was cancelled"));
       return {
         controller,
         cleanup: () => { isCleanedUp = true; }
@@ -44,8 +104,8 @@ function createTimeoutController(timeoutMs: number, externalSignal?: AbortSignal
 
     // Forward external abort to our controller
     const onExternalAbort = () => {
-      if (!isCleanedUp && !controller.signal.aborted) {
-        controller.abort();
+      if (!isCleanedUp) {
+        safeAbort(controller, new Error("External request was cancelled"));
       }
     };
 
@@ -55,13 +115,8 @@ function createTimeoutController(timeoutMs: number, externalSignal?: AbortSignal
   // Set up timeout with safeguards
   if (timeoutMs > 0) {
     timeoutId = setTimeout(() => {
-      if (!isCleanedUp && !controller.signal.aborted) {
-        try {
-          controller.abort();
-        } catch (error) {
-          // Ignore abort errors on cleanup
-          console.debug('Safe abort during timeout:', error);
-        }
+      if (!isCleanedUp) {
+        safeAbort(controller, new Error(`Request timeout after ${timeoutMs}ms`));
       }
     }, timeoutMs);
   }
@@ -85,6 +140,11 @@ export async function robustFetch(
   url: string,
   options: RobustFetchOptions = {},
 ): Promise<Response> {
+  // Check if we should skip this request due to recent timeouts
+  if (timeoutTracker.shouldSkipRequest(url)) {
+    throw new Error("Request temporarily unavailable due to recent timeouts. Please try again later.");
+  }
+
   const { retry = {}, ...fetchOptions } = options;
 
   const {
@@ -141,27 +201,51 @@ export async function robustFetch(
         // Check if it was our timeout or an external abort
         try {
           if (controller.signal.aborted) {
-            // If we have a reason, use it; otherwise assume timeout
+            // Extract reason from AbortSignal
             const reason = (controller.signal as any)?.reason;
-            if (reason && typeof reason === 'string') {
-              lastError = new Error(`Request aborted: ${reason}`);
+
+            if (reason) {
+              if (reason instanceof Error) {
+                // Check if it's a timeout error
+                if (reason.message.includes("timeout")) {
+                  lastError = new Error("Network request timed out. Please check your connection and try again.");
+                } else {
+                  lastError = reason;
+                }
+              } else if (typeof reason === 'string') {
+                if (reason.includes("timeout")) {
+                  lastError = new Error("Network request timed out. Please check your connection and try again.");
+                } else {
+                  lastError = new Error(reason);
+                }
+              } else {
+                lastError = new Error("Request was cancelled");
+              }
             } else {
-              // Default to timeout since we control this signal
-              lastError = new Error("Request timeout");
+              // No reason provided, check if it's likely a timeout based on context
+              if (errorMessage.includes("timeout") || errorMessage.includes("signal is aborted without reason")) {
+                lastError = new Error("Network request timed out. Please check your connection and try again.");
+              } else {
+                lastError = new Error("Request was cancelled");
+              }
             }
           } else {
             // External abort or unknown abort
-            lastError = new Error("Request was aborted externally");
+            lastError = new Error("Request was cancelled by user");
           }
         } catch (signalError) {
-          // If we can't access the signal safely, assume timeout
-          lastError = new Error("Request timeout");
+          // If we can't access the signal safely, assume timeout if the original error suggests it
+          if (errorMessage.includes("timeout") || errorMessage.includes("signal is aborted without reason")) {
+            lastError = new Error("Network request timed out. Please check your connection and try again.");
+          } else {
+            lastError = new Error("Request was cancelled");
+          }
         }
       }
 
-      // Catch any remaining "signal is aborted without reason" errors
-      if (errorMessage.includes("signal is aborted without reason")) {
-        lastError = new Error("Request timeout");
+      // Catch any remaining timeout-related errors
+      if (errorMessage.includes("timeout") || errorMessage.includes("signal is aborted without reason")) {
+        lastError = new Error("Network request timed out. Please check your connection and try again.");
       }
 
       // Handle other common fetch errors
@@ -178,20 +262,38 @@ export async function robustFetch(
         lastError = new Error("Network connection error");
       }
 
-      console.warn(
-        `Fetch attempt ${attempt + 1} failed for ${url}:`,
-        lastError.message,
-      );
+      // Enhanced logging for timeout issues
+      if (lastError.message.includes("timeout") || lastError.message.includes("timed out")) {
+        console.warn(
+          `🕐 Timeout on attempt ${attempt + 1} for ${url} (${timeout}ms timeout):`,
+          lastError.message,
+        );
+      } else {
+        console.warn(
+          `Fetch attempt ${attempt + 1} failed for ${url}:`,
+          lastError.message,
+        );
+      }
 
-      // Don't retry on abort (timeout), external abort, or 4xx errors
-      if (
-        lastError.message.includes("timeout") ||
-        lastError.message.includes("aborted") ||
-        (error instanceof FetchError &&
-          error.status &&
-          error.status >= 400 &&
-          error.status < 500)
-      ) {
+      // Don't retry on certain errors, but allow retry for timeout on first few attempts
+      const isTimeoutError = lastError.message.includes("timeout") || lastError.message.includes("timed out");
+      const isAbortError = lastError.message.includes("aborted") || lastError.message.includes("cancelled");
+      const is4xxError = error instanceof FetchError && error.status && error.status >= 400 && error.status < 500;
+
+      // Allow retry for timeouts on first 2 attempts, but not on the last attempt
+      if (isTimeoutError && attempt < Math.min(2, maxRetries)) {
+        console.warn(`Timeout on attempt ${attempt + 1}, retrying...`);
+        // Continue to retry logic below
+      } else if (isAbortError && !isTimeoutError) {
+        // Don't retry on user-initiated aborts
+        break;
+      } else if (is4xxError) {
+        // Don't retry on client errors
+        break;
+      } else if (isTimeoutError && attempt >= Math.min(2, maxRetries)) {
+        // Stop retrying timeouts after 2 attempts and record the timeout
+        console.error(`Request timed out after ${attempt + 1} attempts`);
+        timeoutTracker.recordTimeout(url);
         break;
       }
 
@@ -211,7 +313,16 @@ export async function robustFetch(
     }
   }
 
-  throw lastError || new Error("Unknown fetch error");
+  // Ensure we always throw a user-friendly error
+  if (lastError) {
+    // Convert technical timeout errors to user-friendly messages
+    if (lastError.message.includes("Request timeout after") || lastError.message.includes("fetch")) {
+      throw new Error("Network request failed. Please check your connection and try again.");
+    }
+    throw lastError;
+  }
+
+  throw new Error("Network request failed for unknown reason. Please try again.");
 }
 
 /**
