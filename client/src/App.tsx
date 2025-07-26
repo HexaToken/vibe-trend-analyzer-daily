@@ -163,6 +163,15 @@ const AppContent = () => {
             <TraderProfile />
           </ProtectedRoute>
         );
+      case "enhanced-chat":
+        return (
+          <ProtectedRoute
+            fallbackTitle="Enhanced Chat Access"
+            fallbackDescription="Please sign in to access the enhanced community chat with credibility features."
+          >
+            <ChatSubcategory />
+          </ProtectedRoute>
+        );
 
       default:
         return <FuturisticHomepage onNavigate={setActiveSection} />;
