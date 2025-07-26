@@ -191,6 +191,9 @@ const mockMessages: ChatMessage[] = [
       { emoji: "🚀", count: 12, users: [], userReacted: false },
       { emoji: "👀", count: 8, users: [], userReacted: true },
     ],
+    credibilityScore: 8.7,
+    needsReview: false,
+    communityFavorite: true,
   },
   {
     id: "2",
