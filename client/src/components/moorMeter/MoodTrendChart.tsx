@@ -57,9 +57,9 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
       <CardHeader className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
         <CardTitle className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Activity className="w-6 h-6" />
+            <Activity className="w-6 h-6 text-green-400" />
             <span>Mood Over Time</span>
-            <Badge variant="secondary" className="bg-white/20 text-white">
+            <Badge variant="secondary" className="bg-white/20 text-orange-400">
               Trending
             </Badge>
           </div>
