@@ -307,36 +307,46 @@ export const StockChannelHub: React.FC = () => {
           {/* Channels List */}
           <div className="flex-1 overflow-y-auto min-h-0">
             <div className="p-2 space-y-1">
-              {filteredChannels.map((channel) => (
+              {filteredChannels.map((channel) => {
+                const isGainer = channel.change >= 0;
+                const isSelected = selectedChannel?.ticker === channel.ticker;
+                
+                return (
                 <div
                   key={channel.ticker}
                   onClick={() => setSelectedChannel(channel)}
                   className={cn(
-                    "p-3 rounded-lg cursor-pointer transition-colors hover:bg-gray-100 dark:hover:bg-gray-700",
-                    selectedChannel?.ticker === channel.ticker &&
-                      "bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700",
+                    "p-3 rounded-lg cursor-pointer transition-all duration-200 border",
+                    // Base styling based on gain/loss
+                    isGainer 
+                      ? "bg-[#E6F7EC] border-[#34D399] hover:bg-[#D1FAE5]" 
+                      : "bg-[#FDF2F2] border-[#F87171] hover:bg-[#FEF1F1]",
+                    // Dark mode styling
+                    "dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700",
+                    // Selected state
+                    isSelected && "ring-2 ring-blue-400 ring-opacity-50",
                   )}
                 >
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
-                      <span className="font-semibold text-sm text-[#4B5563] bg-[#e80e0e00]">
+                      <span className="font-bold text-sm text-[#1F2937]">
                         ${channel.ticker}
                       </span>
                       <div
                         className={cn(
                           "w-2 h-2 rounded-full",
                           channel.sentiment === "bullish"
-                            ? "bg-green-500"
+                            ? "bg-[#10B981]"
                             : channel.sentiment === "bearish"
-                              ? "bg-red-500"
-                              : "bg-gray-400",
+                              ? "bg-[#EF4444]"
+                              : "bg-[#FBBF24]",
                         )}
                       />
                     </div>
                     <span
                       className={cn(
                         "text-xs font-medium",
-                        channel.change >= 0 ? "text-green-500" : "text-red-500",
+                        isGainer ? "text-[#059669]" : "text-[#B91C1C]",
                       )}
                     >
                       {channel.change >= 0 ? "+" : ""}
@@ -344,26 +354,27 @@ export const StockChannelHub: React.FC = () => {
                     </span>
                   </div>
 
-                  <div className="text-xs text-gray-600 dark:text-gray-400 mb-2">
+                  <div className="text-xs text-[#4B5563] dark:text-gray-400 mb-2">
                     {channel.companyName}
                   </div>
 
-                  <div className="text-sm font-medium text-gray-900 dark:text-white mb-2">
+                  <div className="text-sm font-medium text-[#111827] dark:text-white mb-2">
                     {formatCurrency(channel.price)}
                   </div>
 
-                  <div className="flex items-center justify-between text-xs text-gray-500">
-                    <span className="flex items-center gap-1">
-                      <MessageCircle className="w-3 h-3" />
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="flex items-center gap-1 text-[#6B7280]">
+                      <MessageCircle className="w-3 h-3 text-[#9CA3AF]" />
                       {channel.messageCount.toLocaleString()}
                     </span>
-                    <span className="flex items-center gap-1">
-                      <ThumbsUp className="w-3 h-3" />
+                    <span className="flex items-center gap-1 text-[#6B7280]">
+                      <ThumbsUp className="w-3 h-3 text-[#9CA3AF]" />
                       {channel.engagementCount.toLocaleString()}
                     </span>
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
