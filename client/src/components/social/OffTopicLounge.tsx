@@ -168,6 +168,7 @@ export const OffTopicLounge: React.FC = () => {
     },
     {
       id: "3",
+      userId: "user-poll-master",
       user: {
         name: "PollMaster",
         avatar: "PM",
@@ -192,6 +193,7 @@ export const OffTopicLounge: React.FC = () => {
     },
     {
       id: "4",
+      userId: "user-work-life-balance",
       user: {
         name: "WorkLifeBalance",
         avatar: "WB",
