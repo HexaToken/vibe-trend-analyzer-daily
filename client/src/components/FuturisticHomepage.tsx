@@ -2914,7 +2914,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     ))}
                   </div>
                   <Button className={themeMode === 'light'
-                    ? "w-full bg-[#3F51B5]/10 hover:bg-[#3F51B5]/20 text-[#3F51B5] border border-[#3F51B5]/30 hover:border-[#3F51B5]/50 transition-all"
+                    ? "w-full bg-[#3F51B5] hover:bg-[#1E3A8A] text-white border border-[#3F51B5] hover:border-[#1E3A8A] transition-all font-medium"
                     : "w-full bg-gradient-to-r from-purple-600/20 to-pink-600/20 hover:from-purple-600/30 hover:to-pink-600/30 text-purple-300 border border-purple-500/30"
                   }>
                     <Plus className="w-4 h-4 mr-2" />
