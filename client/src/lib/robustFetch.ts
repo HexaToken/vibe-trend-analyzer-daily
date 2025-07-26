@@ -141,21 +141,36 @@ export async function robustFetch(
         // Check if it was our timeout or an external abort
         try {
           if (controller.signal.aborted) {
-            // If we have a reason, use it; otherwise assume timeout
+            // Extract reason from AbortSignal
             const reason = (controller.signal as any)?.reason;
-            if (reason && typeof reason === 'string') {
-              lastError = new Error(`Request aborted: ${reason}`);
+
+            if (reason) {
+              if (reason instanceof Error) {
+                lastError = reason;
+              } else if (typeof reason === 'string') {
+                lastError = new Error(reason);
+              } else {
+                lastError = new Error("Request was aborted");
+              }
             } else {
-              // Default to timeout since we control this signal
-              lastError = new Error("Request timeout");
+              // No reason provided, check if it's likely a timeout based on context
+              if (errorMessage.includes("timeout") || errorMessage.includes("signal is aborted without reason")) {
+                lastError = new Error("Request timeout");
+              } else {
+                lastError = new Error("Request was aborted");
+              }
             }
           } else {
             // External abort or unknown abort
             lastError = new Error("Request was aborted externally");
           }
         } catch (signalError) {
-          // If we can't access the signal safely, assume timeout
-          lastError = new Error("Request timeout");
+          // If we can't access the signal safely, assume timeout if the original error suggests it
+          if (errorMessage.includes("timeout") || errorMessage.includes("signal is aborted without reason")) {
+            lastError = new Error("Request timeout");
+          } else {
+            lastError = new Error("Request was aborted");
+          }
         }
       }
 
