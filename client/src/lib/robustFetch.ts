@@ -22,6 +22,24 @@ export class FetchError extends Error {
 }
 
 /**
+ * Safe abort wrapper to prevent uncaught abort errors
+ */
+function safeAbort(controller: AbortController, reason?: Error | string) {
+  try {
+    if (!controller.signal.aborted) {
+      if (reason) {
+        controller.abort(reason);
+      } else {
+        controller.abort();
+      }
+    }
+  } catch (error) {
+    // Silently handle abort errors that occur during cleanup
+    console.debug('Safe abort completed:', error instanceof Error ? error.message : error);
+  }
+}
+
+/**
  * Creates a timeout-aware AbortController with proper cleanup
  */
 function createTimeoutController(timeoutMs: number, externalSignal?: AbortSignal): {
