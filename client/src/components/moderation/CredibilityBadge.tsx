@@ -44,7 +44,7 @@ const getCredibilityConfig = (score: number, level: CredibilityLevel) => {
       bgColor: "bg-green-100 dark:bg-green-900/20",
       textColor: "text-green-800 dark:text-green-400",
       borderColor: "border-green-200 dark:border-green-800",
-      emoji: "🟢",
+      iconEmoji: <EmojiIcon emoji="🟢" className="w-3 h-3" />,
     };
   } else if (score >= 40) {
     return {
@@ -54,7 +54,7 @@ const getCredibilityConfig = (score: number, level: CredibilityLevel) => {
       bgColor: "bg-yellow-100 dark:bg-yellow-900/20",
       textColor: "text-yellow-800 dark:text-yellow-400",
       borderColor: "border-yellow-200 dark:border-yellow-800",
-      emoji: "🟡",
+      iconEmoji: <EmojiIcon emoji="🟡" className="w-3 h-3" />,
     };
   } else {
     return {
@@ -64,7 +64,7 @@ const getCredibilityConfig = (score: number, level: CredibilityLevel) => {
       bgColor: "bg-red-100 dark:bg-red-900/20",
       textColor: "text-red-800 dark:text-red-400",
       borderColor: "border-red-200 dark:border-red-800",
-      emoji: "🔴",
+      iconEmoji: <EmojiIcon emoji="🔴" className="w-3 h-3" />,
     };
   }
 };
@@ -332,7 +332,7 @@ export const UserCredibilityIndicator: React.FC<{
                 config.bgColor,
                 config.textColor
               )}>
-                {config.emoji}
+                {config.iconEmoji}
               </div>
               {showBadge && badgeIcon && (
                 <div
