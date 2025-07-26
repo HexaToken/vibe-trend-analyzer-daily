@@ -69,7 +69,7 @@ const AppContent = () => {
         return <Analytics />;
       // Removed "history" route - HistoricalData component retained for potential reuse
             case "community":
-        return <CommunityRooms />;
+        return <Community />;
       case "space":
         return <SpaceSwitcherWidget />;
       case "rooms":
