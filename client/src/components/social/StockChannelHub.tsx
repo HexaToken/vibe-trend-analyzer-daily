@@ -278,278 +278,277 @@ export const StockChannelHub: React.FC = () => {
   );
 
     return (
-    <div className="flex flex-col h-full min-h-[600px]">
-      {/* Trending Ticker Bar */}
-      <TrendingTickerBar />
+      <div className="flex flex-col h-full min-h-[600px]">
+        {/* Trending Ticker Bar */}
+        <TrendingTickerBar />
+        {/* Main Chat Interface */}
+        <div className="flex h-full bg-white dark:bg-gray-900 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+        {/* Left Sidebar - Stock Channels */}
+        <div className="w-fit pr-[3%] max-w-[220px] bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col min-h-0">
+          {/* Sidebar Header */}
+          <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+              # Stock Channels
+            </h2>
 
-      {/* Main Chat Interface */}
-      <div className="flex h-full bg-white dark:bg-gray-900 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
-      {/* Left Sidebar - Stock Channels */}
-      <div className="w-fit pr-[3%] max-w-[220px] bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col min-h-0">
-        {/* Sidebar Header */}
-        <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-            # Stock Channels
-          </h2>
-
-          {/* Search Bar */}
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-            <Input
-              type="text"
-              placeholder="Search tickers..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10"
-            />
+            {/* Search Bar */}
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <Input
+                type="text"
+                placeholder="Search tickers..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10"
+              />
+            </div>
           </div>
-        </div>
 
-        {/* Channels List */}
-        <div className="flex-1 overflow-y-auto min-h-0">
-          <div className="p-2 space-y-1">
-            {filteredChannels.map((channel) => (
-              <div
-                key={channel.ticker}
-                onClick={() => setSelectedChannel(channel)}
-                className={cn(
-                  "p-3 rounded-lg cursor-pointer transition-colors hover:bg-gray-100 dark:hover:bg-gray-700",
-                  selectedChannel?.ticker === channel.ticker &&
-                    "bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700",
-                )}
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <span className="font-semibold text-sm">
-                      ${channel.ticker}
-                    </span>
-                    <div
-                      className={cn(
-                        "w-2 h-2 rounded-full",
-                        channel.sentiment === "bullish"
-                          ? "bg-green-500"
-                          : channel.sentiment === "bearish"
-                            ? "bg-red-500"
-                            : "bg-gray-400",
-                      )}
-                    />
-                  </div>
-                  <span
-                    className={cn(
-                      "text-xs font-medium",
-                      channel.change >= 0 ? "text-green-500" : "text-red-500",
-                    )}
-                  >
-                    {channel.change >= 0 ? "+" : ""}
-                    {channel.changePercent.toFixed(2)}%
-                  </span>
-                </div>
-
-                <div className="text-xs text-gray-600 dark:text-gray-400 mb-2">
-                  {channel.companyName}
-                </div>
-
-                <div className="text-sm font-medium text-gray-900 dark:text-white mb-2">
-                  {formatCurrency(channel.price)}
-                </div>
-
-                <div className="flex items-center justify-between text-xs text-gray-500">
-                  <span className="flex items-center gap-1">
-                    <MessageCircle className="w-3 h-3" />
-                    {channel.messageCount.toLocaleString()}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <ThumbsUp className="w-3 h-3" />
-                    {channel.engagementCount.toLocaleString()}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Main Feed - Ticker Chatroom */}
-      <div className="flex-1 flex flex-col min-h-0" style={{ flexGrow: 2 }}>
-        {selectedChannel && (
-          <>
-            {/* Channel Header */}
-            <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 flex-shrink-0">
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center gap-3">
-                  <Hash className="w-6 h-6 text-blue-500" />
-                  <div>
-                    <h1 className="text-xl font-bold text-gray-900 dark:text-white">
-                      ${selectedChannel.ticker} - {selectedChannel.companyName}
-                    </h1>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Discuss ${selectedChannel.ticker} trades, news, and
-                      analysis
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  <div className="text-right">
-                    <div className="text-lg font-semibold text-gray-900 dark:text-white">
-                      {formatCurrency(selectedChannel.price)}
+          {/* Channels List */}
+          <div className="flex-1 overflow-y-auto min-h-0">
+            <div className="p-2 space-y-1">
+              {filteredChannels.map((channel) => (
+                <div
+                  key={channel.ticker}
+                  onClick={() => setSelectedChannel(channel)}
+                  className={cn(
+                    "p-3 rounded-lg cursor-pointer transition-colors hover:bg-gray-100 dark:hover:bg-gray-700",
+                    selectedChannel?.ticker === channel.ticker &&
+                      "bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700",
+                  )}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold text-sm text-[#4B5563] bg-[#e80e0e00]">
+                        ${channel.ticker}
+                      </span>
+                      <div
+                        className={cn(
+                          "w-2 h-2 rounded-full",
+                          channel.sentiment === "bullish"
+                            ? "bg-green-500"
+                            : channel.sentiment === "bearish"
+                              ? "bg-red-500"
+                              : "bg-gray-400",
+                        )}
+                      />
                     </div>
-                    <div
+                    <span
                       className={cn(
-                        "text-sm font-medium",
-                        selectedChannel.change >= 0
-                          ? "text-green-500"
-                          : "text-red-500",
+                        "text-xs font-medium",
+                        channel.change >= 0 ? "text-green-500" : "text-red-500",
                       )}
                     >
-                      {selectedChannel.change >= 0 ? "+" : ""}
-                      {selectedChannel.change.toFixed(2)} (
-                      {selectedChannel.changePercent.toFixed(2)}%)
-                    </div>
+                      {channel.change >= 0 ? "+" : ""}
+                      {channel.changePercent.toFixed(2)}%
+                    </span>
                   </div>
-                  <Button variant="outline" size="sm">
-                    <Bell className="w-4 h-4" />
-                  </Button>
-                </div>
-              </div>
 
-              {/* Rules Bar */}
-              <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 p-2 rounded">
-                <span>📝 Use cashtags</span>
-                <span>🚫 No spam</span>
-                <span>💡 Quality ideas</span>
-              </div>
-            </div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400 mb-2">
+                    {channel.companyName}
+                  </div>
 
-            {/* Messages Feed */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-3 min-h-[550px] max-h-none lg:max-h-[600px]">
-              {messages.map((message) => (
-                <div key={message.id} className="space-y-2">
-                  {message.isPinned && (
-                    <div className="flex items-center gap-2 text-xs text-blue-600 dark:text-blue-400 mb-1">
-                      <Pin className="w-3 h-3" />
-                      <span>Pinned Message</span>
-                    </div>
-                  )}
+                  <div className="text-sm font-medium text-gray-900 dark:text-white mb-2">
+                    {formatCurrency(channel.price)}
+                  </div>
 
-                  {message.type === 'mood' && message.moodData ? (
-                    <MoodPostDisplay
-                      post={{
-                        mood: message.moodData.mood,
-                        content: message.content,
-                        tickers: message.moodData.tickers,
-                        timestamp: message.timestamp
-                      }}
-                      user={{ username: message.username, avatar: message.avatar }}
-                      onLike={() => {}}
-                      onComment={() => {}}
-                    />
-                  ) : (
-                    <div className="flex gap-3">
-                      <Avatar className="w-10 h-10 flex-shrink-0">
-                        <AvatarImage
-                          src={message.avatar}
-                          alt={message.username}
-                        />
-                        <AvatarFallback>{message.username[0]}</AvatarFallback>
-                      </Avatar>
-
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                          <span className="font-medium text-sm text-gray-900 dark:text-white">
-                            {message.username}
-                          </span>
-                          <span
-                            className={cn(
-                              "text-xs",
-                              getSentimentColor(message.sentiment),
-                            )}
-                          >
-                            {getSentimentIcon(message.sentiment)}{" "}
-                            {message.sentiment}
-                          </span>
-                          {message.badges.map((badge, index) => (
-                            <Badge
-                              key={index}
-                              variant="secondary"
-                              className="text-xs bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-700 font-medium"
-                            >
-                              {badge}
-                            </Badge>
-                          ))}
-                          <span className="text-xs text-gray-500">
-                            {message.timestamp.toLocaleTimeString([], {
-                              hour: "2-digit",
-                              minute: "2-digit",
-                            })}
-                          </span>
-                        </div>
-
-                        <p className="text-sm text-gray-800 dark:text-gray-200 mb-2 break-words leading-relaxed">
-                          {message.content}
-                        </p>
-
-                        <div className="flex items-center gap-4">
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="text-xs h-7 px-2"
-                          >
-                            <ThumbsUp className="w-3 h-3 mr-1" />
-                            {message.likes}
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="text-xs h-7 px-2"
-                          >
-                            <MessageSquare className="w-3 h-3 mr-1" />
-                            {message.comments}
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="text-xs h-7 px-2"
-                          >
-                            <Pin className="w-3 h-3" />
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  <Separator />
+                  <div className="flex items-center justify-between text-xs text-gray-500">
+                    <span className="flex items-center gap-1">
+                      <MessageCircle className="w-3 h-3" />
+                      {channel.messageCount.toLocaleString()}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <ThumbsUp className="w-3 h-3" />
+                      {channel.engagementCount.toLocaleString()}
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>
+          </div>
+        </div>
 
-            {/* Message Input with Share Mood */}
-            <div className="p-3 border-t border-gray-200 dark:border-gray-700 flex-shrink-0 bg-gray-50 dark:bg-gray-800/50">
-              <div className="flex gap-2 mb-2">
-                <ShareMoodModal onMoodPost={handleMoodPost} />
-                <Button variant="outline" size="sm">
-                  <Plus className="w-4 h-4 mr-1" />
-                  Add Media
-                </Button>
+        {/* Main Feed - Ticker Chatroom */}
+        <div className="flex-1 flex flex-col min-h-0" style={{ flexGrow: 2 }}>
+          {selectedChannel && (
+            <>
+              {/* Channel Header */}
+              <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 flex-shrink-0">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-3">
+                    <Hash className="w-6 h-6 text-blue-500" />
+                    <div>
+                      <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+                        ${selectedChannel.ticker} - {selectedChannel.companyName}
+                      </h1>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        Discuss ${selectedChannel.ticker} trades, news, and
+                        analysis
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                    <div className="text-right">
+                      <div className="text-lg font-semibold text-gray-900 dark:text-white">
+                        {formatCurrency(selectedChannel.price)}
+                      </div>
+                      <div
+                        className={cn(
+                          "text-sm font-medium",
+                          selectedChannel.change >= 0
+                            ? "text-green-500"
+                            : "text-red-500",
+                        )}
+                      >
+                        {selectedChannel.change >= 0 ? "+" : ""}
+                        {selectedChannel.change.toFixed(2)} (
+                        {selectedChannel.changePercent.toFixed(2)}%)
+                      </div>
+                    </div>
+                    <Button variant="outline" size="sm">
+                      <Bell className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Rules Bar */}
+                <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 p-2 rounded">
+                  <span>📝 Use cashtags</span>
+                  <span>🚫 No spam</span>
+                  <span>💡 Quality ideas</span>
+                </div>
               </div>
-              <div className="flex gap-2">
-                <Input
-                  placeholder={`Post your idea... Use $${selectedChannel.ticker} to link stocks`}
-                  value={messageInput}
-                  onChange={(e) => setMessageInput(e.target.value)}
-                  maxLength={150}
-                  className="flex-1"
-                />
-                <Button>Post</Button>
+
+              {/* Messages Feed */}
+              <div className="flex-1 overflow-y-auto p-4 space-y-3 min-h-[550px] max-h-none lg:max-h-[600px]">
+                {messages.map((message) => (
+                  <div key={message.id} className="space-y-2">
+                    {message.isPinned && (
+                      <div className="flex items-center gap-2 text-xs text-blue-600 dark:text-blue-400 mb-1">
+                        <Pin className="w-3 h-3" />
+                        <span>Pinned Message</span>
+                      </div>
+                    )}
+
+                    {message.type === 'mood' && message.moodData ? (
+                      <MoodPostDisplay
+                        post={{
+                          mood: message.moodData.mood,
+                          content: message.content,
+                          tickers: message.moodData.tickers,
+                          timestamp: message.timestamp
+                        }}
+                        user={{ username: message.username, avatar: message.avatar }}
+                        onLike={() => {}}
+                        onComment={() => {}}
+                      />
+                    ) : (
+                      <div className="flex gap-3">
+                        <Avatar className="w-10 h-10 flex-shrink-0">
+                          <AvatarImage
+                            src={message.avatar}
+                            alt={message.username}
+                          />
+                          <AvatarFallback>{message.username[0]}</AvatarFallback>
+                        </Avatar>
+
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                            <span className="font-medium text-sm text-gray-900 dark:text-white">
+                              {message.username}
+                            </span>
+                            <span
+                              className={cn(
+                                "text-xs",
+                                getSentimentColor(message.sentiment),
+                              )}
+                            >
+                              {getSentimentIcon(message.sentiment)}{" "}
+                              {message.sentiment}
+                            </span>
+                            {message.badges.map((badge, index) => (
+                              <Badge
+                                key={index}
+                                variant="secondary"
+                                className="text-xs bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-700 font-medium"
+                              >
+                                {badge}
+                              </Badge>
+                            ))}
+                            <span className="text-xs text-gray-500">
+                              {message.timestamp.toLocaleTimeString([], {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                              })}
+                            </span>
+                          </div>
+
+                          <p className="text-sm text-gray-800 dark:text-gray-200 mb-2 break-words leading-relaxed">
+                            {message.content}
+                          </p>
+
+                          <div className="flex items-center gap-4">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="text-xs h-7 px-2"
+                            >
+                              <ThumbsUp className="w-3 h-3 mr-1" />
+                              {message.likes}
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="text-xs h-7 px-2"
+                            >
+                              <MessageSquare className="w-3 h-3 mr-1" />
+                              {message.comments}
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="text-xs h-7 px-2"
+                            >
+                              <Pin className="w-3 h-3" />
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    <Separator />
+                  </div>
+                ))}
               </div>
-              <div className="text-xs text-gray-500 mt-1">
-                {messageInput.length}/150 characters
+
+              {/* Message Input with Share Mood */}
+              <div className="p-3 border-t border-gray-200 dark:border-gray-700 flex-shrink-0 bg-gray-50 dark:bg-gray-800/50">
+                <div className="flex gap-2 mb-2">
+                  <ShareMoodModal onMoodPost={handleMoodPost} />
+                  <Button variant="outline" size="sm">
+                    <Plus className="w-4 h-4 mr-1" />
+                    Add Media
+                  </Button>
+                </div>
+                <div className="flex gap-2">
+                  <Input
+                    placeholder={`Post your idea... Use $${selectedChannel.ticker} to link stocks`}
+                    value={messageInput}
+                    onChange={(e) => setMessageInput(e.target.value)}
+                    maxLength={150}
+                    className="flex-1"
+                  />
+                  <Button>Post</Button>
+                </div>
+                <div className="text-xs text-gray-500 mt-1">
+                  {messageInput.length}/150 characters
+                </div>
               </div>
-            </div>
-          </>
-        )}
-            </div>
-    </div>
-    </div>
-  );
+            </>
+          )}
+              </div>
+      </div>
+      </div>
+    );
 };
