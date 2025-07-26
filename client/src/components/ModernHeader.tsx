@@ -397,8 +397,14 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
             </div>
 
             {/* Mobile Finance Section */}
-            <div className="pt-4 border-t border-gray-700/50">
-              <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-3">
+            <div className={cn(
+              "pt-4 border-t",
+              isLightMode ? "border-gray-200/50" : "border-gray-700/50"
+            )}>
+              <div className={cn(
+                "text-xs font-semibold uppercase tracking-wider mb-3 px-3",
+                isLightMode ? "text-gray-600" : "text-gray-400"
+              )}>
                 Finance
               </div>
               <div className="space-y-1">
@@ -407,7 +413,12 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                     key={key}
                     variant="ghost"
                     onClick={() => handleNavigation(key)}
-                    className="w-full justify-start text-left py-3 rounded-xl text-gray-300 hover:text-white hover:bg-green-500/20 transition-all duration-200"
+                    className={cn(
+                      "w-full justify-start text-left py-3 rounded-xl transition-all duration-200",
+                      isLightMode
+                        ? "text-gray-900 hover:text-green-600 hover:bg-green-500/10"
+                        : "text-gray-300 hover:text-white hover:bg-green-500/20"
+                    )}
                   >
                     <span className="mr-3">{icon}</span>
                     {label}
