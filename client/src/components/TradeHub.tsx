@@ -244,7 +244,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                     <div className="flex items-center justify-between pt-2">
                       <div className="text-2xl font-bold text-primary">
                         ${item.price}
-                        {item.period && <span className="text-sm text-muted-foreground">/{item.period}</span>}
+                        {item.period && <span className="text-sm text-gray-600 font-medium">/{item.period}</span>}
                       </div>
                       <Button size="sm">
                         {item.type === "course" ? "Enroll Now" : "Subscribe"}
@@ -260,7 +260,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
           <TabsContent value="featured" className="space-y-6">
             <div className="text-center mb-8">
               <h2 className="text-2xl font-bold mb-2">Featured This Week</h2>
-              <p className="text-muted-foreground">Hand-picked content from our top-rated educators</p>
+              <p className="text-gray-700 font-medium">Hand-picked content from our top-rated educators</p>
             </div>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
