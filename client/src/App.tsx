@@ -216,7 +216,7 @@ const AppContent = () => {
       case "earnings":
         return <EarningsCalendar />;
       case "charts":
-        return <Analytics />; // Placeholder - replace with actual charts component
+        return <AdvancedCharts />;
       case "trending":
         return <Analytics />; // Placeholder - replace with actual trending component
       case "trade-journal":
