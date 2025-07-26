@@ -557,6 +557,9 @@ export const TickerPage = ({ symbol, onBack }: TickerPageProps) => {
                 <SocialPost
                   key={post.id}
                   post={post}
+                  onFollow={handleFollow}
+                  onUnfollow={handleUnfollow}
+                  onToggleAlerts={handleToggleAlerts}
                   onTickerClick={(symbol) => {
                     // Navigate to ticker page
                     console.log("Navigate to ticker:", symbol);
