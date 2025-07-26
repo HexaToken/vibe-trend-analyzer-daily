@@ -321,6 +321,16 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                 ))}
               </div>
             </div>
+
+            {/* Mobile Theme Settings */}
+            <div className="pt-4 border-t border-gray-700/50">
+              <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-3">
+                Theme Settings
+              </div>
+              <div className="px-3">
+                <ThemeSettingsPanel currentMoodScore={currentMoodScore} />
+              </div>
+            </div>
           </div>
         </div>
       )}
