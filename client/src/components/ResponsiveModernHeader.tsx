@@ -202,41 +202,27 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                 </button>
               ))}
 
-              {/* Community Dropdown */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <button className={cn(
-                    "flex items-center gap-1 text-base font-medium px-3 py-2 rounded-lg transition-all duration-200 relative group",
-                    isLightMode
+              {/* Community Hub */}
+              <button
+                onClick={() => handleNavigation("community")}
+                className={cn(
+                  "text-base font-medium px-3 py-2 rounded-lg transition-all duration-200 relative group",
+                  activeSection === "community"
+                    ? isLightMode
+                      ? "text-pink-600 bg-pink-500/10"
+                      : "text-pink-400 bg-pink-500/10"
+                    : isLightMode
                       ? "text-gray-900 hover:text-blue-600"
                       : "text-gray-300 hover:text-gray-200"
-                  )}>
-                    Community
-                    <ChevronDown className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" />
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-                  </button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  align="center"
-                  className={cn(
-                    "w-56 backdrop-blur-xl rounded-xl",
-                    isLightMode
-                      ? "bg-white/95 border-gray-200 text-gray-900"
-                      : "bg-[#0A0A23]/95 border-gray-700 text-white"
-                  )}
-                >
-                  {communityItems.map(({ label, key, icon }) => (
-                    <DropdownMenuItem
-                      key={key}
-                      onClick={() => handleNavigation(key)}
-                      className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer rounded-lg"
-                    >
-                      <span className="mr-3">{icon}</span>
-                      {label}
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
+                )}
+                aria-current={activeSection === "community" ? "page" : undefined}
+              >
+                Community Hub
+                {activeSection === "community" && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
+                )}
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+              </button>
 
               {/* Finance Dropdown */}
               <DropdownMenu>
