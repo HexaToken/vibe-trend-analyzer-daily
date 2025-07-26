@@ -28,6 +28,7 @@ import { ApiStatusIndicator } from "@/components/ApiStatusIndicator";
 import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
 import { PulseOfTheChain } from "@/components/crypto/PulseOfTheChain";
 import { EarningsCalendar } from "@/components/finance/EarningsCalendar";
+import { AdvancedCharts } from "@/components/finance/AdvancedCharts";
 
 import { NLPSentimentDemo } from "@/components/NLPSentimentDemo";
 import { SpacyNLPDemo } from "@/components/SpacyNLPDemo";
