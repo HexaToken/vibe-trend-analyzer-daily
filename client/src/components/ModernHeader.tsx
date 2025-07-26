@@ -75,7 +75,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
     { label: 'Watchlist', key: 'watchlist', icon: '👁️' },
     { label: 'Market Analytics', key: 'market', icon: '📈' },
     { label: 'Stock Screener', key: 'screener', icon: '🔍' },
-    { label: 'Crypto Dashboard', key: 'crypto', icon: '₿' },
+    { label: 'Crypto Dashboard', key: 'crypto', icon: '���' },
     { label: 'Earnings Calendar', key: 'earnings', icon: '📅' },
     { label: 'Charts', key: 'charts', icon: '📊' },
     { label: 'Trending', key: 'trending', icon: '🔥' },
@@ -315,7 +315,12 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
 
       {/* Mobile Navigation Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#0A0A23]/95 backdrop-blur-xl border-t border-gray-800/50">
+        <div className={cn(
+          "md:hidden backdrop-blur-xl",
+          isLightMode
+            ? "bg-white/95 border-t border-gray-200/50"
+            : "bg-[#0A0A23]/95 border-t border-gray-800/50"
+        )}>
           <div className="px-4 py-4 space-y-3">
             {/* Mobile Search */}
             <div className="mb-4">
