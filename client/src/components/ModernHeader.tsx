@@ -12,7 +12,7 @@ import {
   DropdownMenuSeparator,
 } from './ui/dropdown-menu';
 import { UserAuthenticationToggle } from './UserAuthenticationToggle';
-import { DynamicThemeSelector } from './DynamicThemeSelector';
+import DynamicThemeSelector from './DynamicThemeSelector';
 
 interface ModernHeaderProps {
   activeSection: string;
