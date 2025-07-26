@@ -95,7 +95,11 @@ interface OffTopicPost {
   reactions: { emoji: string; count: number }[];
 }
 
-export const SpaceSwitcherWidget: React.FC = () => {
+interface SpaceSwitcherWidgetProps {
+  onNavigateToProfile?: (userId: string) => void;
+}
+
+export const SpaceSwitcherWidget: React.FC<SpaceSwitcherWidgetProps> = ({ onNavigateToProfile }) => {
   const { user, isAuthenticated } = useAuth();
   const { themeMode } = useMoodTheme();
   const [activeTab, setActiveTab] = useState("crypto");
