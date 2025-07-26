@@ -21,7 +21,7 @@ export const Community = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   // Mock data for posts
-  const mockPosts: PostData[] = [
+  const mockPosts: PostCardData[] = [
     {
       id: "1",
       user: {
@@ -32,6 +32,7 @@ export const Community = () => {
         verified: true,
         premium: true,
         credibilityScore: 94,
+        topPercentage: 1,
       },
       timestamp: "32 minutes ago",
       content: "🔥 $NVDA is showing incredible strength post-earnings. The AI momentum is unstoppable and I'm seeing massive institutional buying. This could easily hit $200 before Q1 ends. What are your thoughts? 🧠",
@@ -39,12 +40,15 @@ export const Community = () => {
         { symbol: "NVDA", price: 173.50, change: 8.25, changePercent: 4.98 }
       ],
       sentiment: "Bullish",
-      tags: ["Prediction", "AI", "Earnings"],
-      engagement: { likes: 127, comments: 34, reposts: 18, saves: 45 },
+      tags: ["AI"],
+      categories: ["AI", "Earnings"],
+      engagement: { likes: 127, comments: 34, reposts: 18, saves: 45, views: 1247 },
       isFollowing: false,
       alertsEnabled: false,
       isLiked: false,
       isSaved: false,
+      isReposted: false,
+      isTrending: true,
     },
     {
       id: "2",
@@ -56,6 +60,7 @@ export const Community = () => {
         verified: true,
         premium: false,
         credibilityScore: 87,
+        topPercentage: 5,
       },
       timestamp: "1 hour ago",
       content: "Market volatility is creating some interesting opportunities. 🧊 $TSLA is oversold here - expecting a bounce back to $220 resistance. Risk/reward looking favorable for swing traders.",
@@ -63,12 +68,14 @@ export const Community = () => {
         { symbol: "TSLA", price: 198.32, change: -12.45, changePercent: -5.89 }
       ],
       sentiment: "Neutral",
-      tags: ["Insight", "Technical Analysis"],
-      engagement: { likes: 89, comments: 21, reposts: 12, saves: 28 },
+      tags: ["Swing Trading"],
+      categories: ["Technical Analysis"],
+      engagement: { likes: 89, comments: 21, reposts: 12, saves: 28, views: 856 },
       isFollowing: true,
       alertsEnabled: true,
       isLiked: true,
       isSaved: false,
+      isReposted: false,
     },
     {
       id: "3",
@@ -88,12 +95,15 @@ export const Community = () => {
         { symbol: "QQQ", price: 378.95, change: -4.12, changePercent: -1.07 }
       ],
       sentiment: "Bearish",
-      tags: ["Market Analysis", "Risk Management"],
-      engagement: { likes: 156, comments: 67, reposts: 23, saves: 91 },
+      tags: ["Fed Policy"],
+      categories: ["Market Analysis", "Risk Management"],
+      engagement: { likes: 156, comments: 67, reposts: 23, saves: 91, views: 2134 },
       isFollowing: false,
       alertsEnabled: false,
       isLiked: false,
       isSaved: true,
+      isReposted: false,
+      needsReview: true,
     },
   ];
 
