@@ -18,12 +18,14 @@ interface ModernHeaderProps {
   activeSection: string;
   setActiveSection: (section: string) => void;
   onNavigate?: (section: string) => void;
+  currentMoodScore?: number;
 }
 
 export const ModernHeader: React.FC<ModernHeaderProps> = ({
   activeSection,
   setActiveSection,
   onNavigate,
+  currentMoodScore = 72,
 }) => {
   const [searchFocused, setSearchFocused] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
