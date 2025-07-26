@@ -268,6 +268,16 @@ export const Navigation = ({
                       NEW
                     </Badge>
                   </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => onSectionChange("enhanced-chat")}
+                    className="flex items-center gap-2"
+                  >
+                    <MessageSquare className="h-4 w-4" />
+                    Enhanced Chat
+                    <Badge variant="secondary" className="ml-auto text-xs">
+                      FEATURES
+                    </Badge>
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
 
