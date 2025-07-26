@@ -571,7 +571,7 @@ const EarningsCalendarDashboard: React.FC<EarningsCalendarDashboardProps> = ({
             onClick={() => setViewMode('calendar')}
             className="text-xs"
           >
-            📅 Calendar
+            <EmojiIcon emoji="📅" className="w-4 h-4" /> Calendar
           </Button>
           <Button
             variant={viewMode === 'feed' ? 'default' : 'outline'}
