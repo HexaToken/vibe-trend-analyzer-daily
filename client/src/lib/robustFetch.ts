@@ -140,6 +140,11 @@ export async function robustFetch(
   url: string,
   options: RobustFetchOptions = {},
 ): Promise<Response> {
+  // Check if we should skip this request due to recent timeouts
+  if (timeoutTracker.shouldSkipRequest(url)) {
+    throw new Error("Request temporarily unavailable due to recent timeouts. Please try again later.");
+  }
+
   const { retry = {}, ...fetchOptions } = options;
 
   const {
