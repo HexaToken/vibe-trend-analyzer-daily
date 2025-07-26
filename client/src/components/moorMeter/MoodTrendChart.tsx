@@ -82,7 +82,6 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
           </div>
         </CardTitle>
       </CardHeader>
-
       <CardContent className="p-6">
         {/* Current Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
@@ -139,7 +138,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
           </div>
 
           <div className="text-center p-3 rounded-lg bg-indigo-50 dark:bg-indigo-900/20">
-            <div className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
+            <div className="text-2xl font-bold dark:text-indigo-400 text-[#1f2937]">
               {Math.round(data[data.length - 1]?.social || 50)}
             </div>
             <div className="text-sm text-gray-600 dark:text-gray-400">
