@@ -16,6 +16,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SentimentPostWall } from "./SentimentPostWall";
 import { ChatSubcategory } from "./social/ChatSubcategory";
 import { CommunityRooms } from "./social/CommunityRooms";
+import { PrivateRoomsContainer } from "./privateRooms/PrivateRoomsContainer";
 import { SpaceSwitcherWidget } from "./community/SpaceSwitcherWidget";
 import { ProfileNavigationProvider } from "./social/ProfileNavigationProvider";
 
@@ -143,20 +144,7 @@ export const CommunityWithSubtabs = ({ onNavigateToProfile }: CommunityWithSubta
                           Your personal collection of stocks, crypto, and securities for tracking and analysis
                         </p>
                       </div>
-                      <div className="grid gap-6">
-                        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 border">
-                          <div className="text-center py-12">
-                            <Eye className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-                            <h3 className="text-lg font-semibold mb-2">Your Private Watchlist</h3>
-                            <p className="text-muted-foreground mb-4">
-                              Track your favorite stocks, crypto, and market instruments in one secure place
-                            </p>
-                            <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition-colors">
-                              Add Your First Stock
-                            </button>
-                          </div>
-                        </div>
-                      </div>
+                      <PrivateRoomsContainer />
                     </TabsContent>
 
                     <TabsContent value="space" className="m-0">
