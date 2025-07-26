@@ -57,6 +57,9 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { PostCard, type PostCardData } from "./social/PostCard";
+import { CommentThreadView, type CommentData } from "./community/CommentThreadView";
+import { TickerPreviewWidget, useTickerHover, TickerAwareText } from "./community/TickerPreviewWidget";
+import { TickerAnalyticsDrawer } from "./community/TickerAnalyticsDrawer";
 
 // Enhanced Post Wall Types
 export interface PostFilter {
@@ -226,6 +229,84 @@ const mockEnhancedPosts: PostCardData[] = [
 
 const popularTickers = ["NVDA", "TSLA", "AAPL", "MSFT", "GOOGL", "AMZN", "META", "BTC", "ETH", "SPY", "QQQ"];
 
+// Mock comment data generator
+const generateMockComments = (postId: string): CommentData[] => {
+  const mockComments: CommentData[] = [
+    {
+      id: `${postId}-comment-1`,
+      user: {
+        id: "user-alpha",
+        username: "TradingAlpha",
+        handle: "@tradingalpha",
+        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=faces",
+        verified: true,
+        credibilityScore: 92,
+      },
+      content: "Completely agree! The volume confirmation on this breakout is exactly what we needed to see. $NVDA has been consolidating for weeks and this move above $180 with 2x average volume is textbook. 🚀📈",
+      timestamp: "5m ago",
+      likes: 23,
+      isLiked: false,
+      sentiment: "Bullish",
+      tickers: ["NVDA"],
+      replies: [
+        {
+          id: `${postId}-reply-1`,
+          user: {
+            id: "user-beta",
+            username: "ChartMaster",
+            handle: "@chartmaster",
+            avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=100&h=100&fit=crop&crop=faces",
+            verified: false,
+            credibilityScore: 78,
+          },
+          content: "What's your next resistance level? I'm seeing $195 as the next major hurdle 🤔",
+          timestamp: "3m ago",
+          likes: 8,
+          isLiked: true,
+          sentiment: "Neutral",
+          tickers: [],
+        }
+      ]
+    },
+    {
+      id: `${postId}-comment-2`,
+      user: {
+        id: "user-gamma",
+        username: "BearishBetty",
+        handle: "@bearishbetty",
+        avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=faces",
+        verified: false,
+        credibilityScore: 65,
+      },
+      content: "I hate to be that person, but this feels like a bull trap to me. The macro environment is still uncertain and $NVDA is trading at extreme valuations. RSI is already overbought... 📉⚠️",
+      timestamp: "12m ago",
+      likes: 15,
+      isLiked: false,
+      sentiment: "Bearish",
+      tickers: ["NVDA"],
+    },
+    {
+      id: `${postId}-comment-3`,
+      user: {
+        id: "user-delta",
+        username: "AIEnthusiast",
+        handle: "@aienthusiast",
+        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=faces",
+        verified: true,
+        credibilityScore: 89,
+      },
+      content: "The AI revolution is just getting started! 🤖✨ Jensen's recent comments about the next generation of GPUs being 'mind-blowing' has me so bullish. This is bigger than the internet boom! 🌐🚀",
+      timestamp: "8m ago",
+      likes: 31,
+      isLiked: false,
+      sentiment: "Bullish",
+      tickers: [],
+    }
+  ];
+
+  return mockComments;
+};
+
 export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: SentimentPostWallProps) => {
   const [activeTab, setActiveTab] = useState<"hot" | "new" | "top" | "watchlist" | "ai-picks">("hot");
   const [posts, setPosts] = useState<PostCardData[]>(mockEnhancedPosts);
@@ -243,6 +324,11 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
     mediaUrls: [],
   });
   const [showComposer, setShowComposer] = useState(false);
+  const [openComments, setOpenComments] = useState<Record<string, boolean>>({});
+  const [postComments, setPostComments] = useState<Record<string, CommentData[]>>({});
+  const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
+  const [isAnalyticsDrawerOpen, setIsAnalyticsDrawerOpen] = useState(false);
+  const { hoveredTicker, showTickerPreview, hideTickerPreview } = useTickerHover();
 
   // Auto-refresh feed
   useEffect(() => {
@@ -395,7 +481,18 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
   };
 
   const handleComment = (postId: string) => {
-    console.log(`Opening comments for post: ${postId}`);
+    setOpenComments(prev => ({
+      ...prev,
+      [postId]: !prev[postId]
+    }));
+
+    // Initialize comments for post if not already present
+    if (!postComments[postId]) {
+      setPostComments(prev => ({
+        ...prev,
+        [postId]: generateMockComments(postId)
+      }));
+    }
   };
 
   const handleRepost = (postId: string) => {
@@ -449,8 +546,102 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
     onNavigateToProfile?.(userId);
   };
 
-  const handleTickerClick = (symbol: string) => {
-    setFilter(prev => ({ ...prev, ticker: symbol }));
+  const handleTickerClick = (symbol: string, event?: React.MouseEvent) => {
+    // If Ctrl/Cmd is held, just filter without opening analytics
+    if (event && (event.ctrlKey || event.metaKey)) {
+      setFilter(prev => ({ ...prev, ticker: symbol }));
+      hideTickerPreview();
+      return;
+    }
+
+    // Default behavior: open analytics drawer
+    setSelectedTicker(symbol);
+    setIsAnalyticsDrawerOpen(true);
+    hideTickerPreview(); // Close hover preview when opening analytics
+  };
+
+  const handleAddToWatchlist = (ticker: string) => {
+    console.log(`Adding ${ticker} to watchlist`);
+    // Add to watchlist logic here
+  };
+
+  const handleViewFullPage = (ticker: string) => {
+    setSelectedTicker(ticker);
+    setIsAnalyticsDrawerOpen(true);
+    hideTickerPreview();
+  };
+
+  const handleCloseAnalyticsDrawer = () => {
+    setIsAnalyticsDrawerOpen(false);
+    setSelectedTicker(null);
+  };
+
+  const handleCreatePostAboutTicker = (ticker: string) => {
+    setComposerData(prev => ({
+      ...prev,
+      content: `$${ticker} `,
+      tickers: [...new Set([...prev.tickers, ticker])]
+    }));
+    setShowComposer(true);
+    setIsAnalyticsDrawerOpen(false);
+  };
+
+  const handleSetTickerAlert = (ticker: string) => {
+    console.log(`Setting alert for ${ticker}`);
+    // Implement alert setting logic here
+  };
+
+  const handleAddComment = (postId: string, content: string, parentCommentId?: string) => {
+    const newComment: CommentData = {
+      id: Date.now().toString(),
+      user: {
+        id: "current-user",
+        username: "You",
+        handle: "@you",
+        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=faces",
+        verified: false,
+        credibilityScore: 85,
+      },
+      content,
+      timestamp: "now",
+      likes: 0,
+      isLiked: false,
+      sentiment: content.includes('🚀') || content.includes('bullish') ? 'Bullish' :
+                content.includes('📉') || content.includes('bearish') ? 'Bearish' : 'Neutral',
+      tickers: (content.match(/\$([A-Z]{1,5})/g) || []).map(t => t.substring(1)),
+    };
+
+    setPostComments(prev => ({
+      ...prev,
+      [postId]: [...(prev[postId] || []), newComment]
+    }));
+
+    // Update post comment count
+    setPosts(prevPosts => prevPosts.map(post =>
+      post.id === postId
+        ? { ...post, engagement: { ...post.engagement, comments: post.engagement.comments + 1 } }
+        : post
+    ));
+  };
+
+  const handleLikeComment = (commentId: string) => {
+    setPostComments(prev => {
+      const updated = { ...prev };
+      Object.keys(updated).forEach(postId => {
+        updated[postId] = updated[postId].map(comment =>
+          comment.id === commentId
+            ? { ...comment, isLiked: !comment.isLiked, likes: comment.isLiked ? comment.likes - 1 : comment.likes + 1 }
+            : comment
+        );
+      });
+      return updated;
+    });
+  };
+
+  const handleReplyToComment = (commentId: string, content: string) => {
+    // For simplicity, treating replies as top-level comments
+    // In a real implementation, you'd handle nested replies properly
+    console.log(`Replying to comment ${commentId} with: ${content}`);
   };
 
   return (
@@ -721,19 +912,37 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
           {sortedPosts.length > 0 ? (
             sortedPosts.map((post) => (
               <div key={post.id} className="transform transition-all duration-300 hover:scale-[1.01]">
-                <PostCard
-                  post={post}
-                  onLike={handleLike}
-                  onComment={handleComment}
-                  onRepost={handleRepost}
-                  onSave={handleSave}
-                  onFollow={handleFollow}
-                  onUnfollow={handleUnfollow}
-                  onToggleAlerts={handleToggleAlerts}
-                  onUserClick={handleUserClick}
-                  onTickerClick={handleTickerClick}
-                  showEngagementCounts={true}
-                />
+                <div className="space-y-4">
+                  <PostCard
+                    post={post}
+                    onLike={handleLike}
+                    onComment={handleComment}
+                    onRepost={handleRepost}
+                    onSave={handleSave}
+                    onFollow={handleFollow}
+                    onUnfollow={handleUnfollow}
+                    onToggleAlerts={handleToggleAlerts}
+                    onUserClick={handleUserClick}
+                    onTickerClick={(symbol, event) => handleTickerClick(symbol, event)}
+                    onTickerHover={showTickerPreview}
+                    onTickerLeave={hideTickerPreview}
+                    showEngagementCounts={true}
+                  />
+
+                  {/* Comment Thread */}
+                  {openComments[post.id] && (
+                    <div className="ml-4 pl-4 border-l-2 border-purple-500/30">
+                      <CommentThreadView
+                        postId={post.id}
+                        comments={postComments[post.id] || []}
+                        onAddComment={handleAddComment}
+                        onLikeComment={handleLikeComment}
+                        onReplyToComment={handleReplyToComment}
+                        className="mt-4"
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
             ))
           ) : (
@@ -769,6 +978,28 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
             Load More Posts
           </Button>
         </div>
+
+        {/* Ticker Preview Widget */}
+        {hoveredTicker && (
+          <TickerPreviewWidget
+            ticker={hoveredTicker.ticker}
+            isVisible={true}
+            position={hoveredTicker.position}
+            onAddToWatchlist={handleAddToWatchlist}
+            onViewFullPage={handleViewFullPage}
+            onClose={hideTickerPreview}
+          />
+        )}
+
+        {/* Ticker Analytics Drawer */}
+        <TickerAnalyticsDrawer
+          ticker={selectedTicker}
+          isOpen={isAnalyticsDrawerOpen}
+          onClose={handleCloseAnalyticsDrawer}
+          onAddToWatchlist={handleAddToWatchlist}
+          onSetAlert={handleSetTickerAlert}
+          onCreatePost={handleCreatePostAboutTicker}
+        />
       </div>
     </div>
   );

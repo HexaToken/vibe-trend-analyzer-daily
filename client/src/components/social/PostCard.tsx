@@ -95,7 +95,9 @@ interface PostCardProps {
   onUnfollow?: (userId: string) => void;
   onToggleAlerts?: (userId: string) => void;
   onUserClick?: (userId: string) => void;
-  onTickerClick?: (symbol: string) => void;
+  onTickerClick?: (symbol: string, event?: React.MouseEvent) => void;
+  onTickerHover?: (ticker: string, event: React.MouseEvent) => void;
+  onTickerLeave?: () => void;
   compact?: boolean;
   showEngagementCounts?: boolean;
 }
@@ -111,6 +113,8 @@ export const PostCard = ({
   onToggleAlerts,
   onUserClick,
   onTickerClick,
+  onTickerHover,
+  onTickerLeave,
   compact = false,
   showEngagementCounts = true,
 }: PostCardProps) => {
@@ -187,21 +191,25 @@ export const PostCard = ({
   };
 
   const formatContent = (content: string) => {
-    // Highlight tickers ($SYMBOL)
-    const tickerRegex = /\$([A-Z]{1,5})/g;
-    const parts = content.split(tickerRegex);
-    
+    // Enhanced ticker detection with hover support and emoji animations
+    const parts = content.split(/(\$[A-Z]{1,5}|\p{Emoji})/gu);
+
     return parts.map((part, index) => {
-      if (index % 2 === 1) {
+      if (part.match(/^\$[A-Z]{1,5}$/)) {
         // This is a ticker symbol
-        const symbol = part;
+        const symbol = part.substring(1);
         const ticker = post.tickers.find(t => t.symbol === symbol);
-        
+
         return (
           <button
             key={index}
-            className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-md font-semibold hover:bg-blue-200 dark:hover:bg-blue-900/40 transition-colors"
-            onClick={() => onTickerClick?.(symbol)}
+            className="inline-flex items-center gap-1 px-2 py-1 bg-cyan-100 dark:bg-cyan-900/20 text-cyan-700 dark:text-cyan-300 rounded-md font-semibold hover:bg-cyan-200 dark:hover:bg-cyan-900/40 transition-all duration-200 hover:scale-105"
+            onClick={(e) => {
+              e.stopPropagation();
+              onTickerClick?.(symbol, e);
+            }}
+            onMouseEnter={(e) => onTickerHover?.(symbol, e)}
+            onMouseLeave={onTickerLeave}
           >
             ${symbol}
             {ticker && (
@@ -210,6 +218,13 @@ export const PostCard = ({
               </span>
             )}
           </button>
+        );
+      } else if (part.match(/\p{Emoji}/u)) {
+        // Animate emojis on hover
+        return (
+          <span key={index} className="hover:scale-110 transition-transform inline-block duration-200 cursor-default">
+            {part}
+          </span>
         );
       }
       return part;
@@ -387,8 +402,13 @@ export const PostCard = ({
                 {post.tickers.map((ticker) => (
                   <button
                     key={ticker.symbol}
-                    onClick={() => onTickerClick?.(ticker.symbol)}
-                    className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border hover:border-purple-500/30 transition-all group"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onTickerClick?.(ticker.symbol, e);
+                    }}
+                    onMouseEnter={(e) => onTickerHover?.(ticker.symbol, e)}
+                    onMouseLeave={onTickerLeave}
+                    className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border hover:border-purple-500/30 transition-all group hover:scale-[1.02] hover:shadow-lg"
                   >
                     <div className="flex items-center justify-between gap-3 min-w-[120px]">
                       <span className="font-bold text-lg">${ticker.symbol}</span>

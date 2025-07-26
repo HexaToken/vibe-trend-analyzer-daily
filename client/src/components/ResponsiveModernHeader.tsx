@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Brain, Search, Bell, User, Menu, X, Home } from 'lucide-react';
+import { Brain, Search, Bell, User, Menu, X, Home, ChevronDown } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -213,7 +213,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                 )}
                 aria-current={activeSection === "community" ? "page" : undefined}
               >
-                Community Hub
+                <p>Community</p>
                 {activeSection === "community" && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
                 )}
@@ -237,20 +237,30 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                 <DropdownMenuContent
                   align="center"
                   className={cn(
-                    "w-56 backdrop-blur-xl rounded-xl",
+                    "w-56 backdrop-blur-xl rounded-xl z-[100] shadow-xl",
                     isLightMode
-                      ? "bg-white/95 border-gray-200 text-gray-900"
-                      : "bg-[#0A0A23]/95 border-gray-700 text-white"
+                      ? "!bg-white !border-gray-200 !text-gray-900"
+                      : "!bg-[#0A0A23]/95 !border-gray-700 !text-white"
                   )}
+                  sideOffset={5}
+                  style={{
+                    backgroundColor: isLightMode ? 'white' : 'rgba(10, 10, 35, 0.95)',
+                    borderColor: isLightMode ? 'rgb(229 231 235)' : 'rgb(55 65 81)',
+                    color: isLightMode ? 'rgb(17 24 39)' : 'white',
+                    zIndex: 100
+                  }}
                 >
                   {financeItems.map(({ label, key, icon }) => (
                     <DropdownMenuItem
                       key={key}
                       onClick={() => handleNavigation(key)}
-                      className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer rounded-lg"
+                      className={cn(
+                        "hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer rounded-lg px-3 py-2 transition-colors",
+                        isLightMode ? "hover:bg-blue-500/10" : "hover:bg-purple-500/20"
+                      )}
                     >
-                      <span className="mr-3">{icon}</span>
-                      {label}
+                      <span className="mr-3 text-lg">{icon}</span>
+                      <span className="font-medium">{label}</span>
                     </DropdownMenuItem>
                   ))}
                 </DropdownMenuContent>

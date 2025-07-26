@@ -7,6 +7,8 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { MoodThemeProvider, useMoodTheme } from "@/contexts/MoodThemeContext";
 
 import { Dashboard } from "@/components/Dashboard";
+import { MarketMoodPage } from "@/components/MarketMoodPage";
+import { StockScreener } from "@/components/StockScreener";
 import { SentimentDashboard } from "@/components/SentimentDashboard";
 import { Analytics } from "@/components/Analytics";
 import { HistoricalData } from "@/components/HistoricalData";
@@ -24,6 +26,10 @@ import { BuilderDemo } from "@/components/BuilderDemo";
 
 import { ApiStatusIndicator } from "@/components/ApiStatusIndicator";
 import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
+import { PulseOfTheChain } from "@/components/crypto/PulseOfTheChain";
+import { EarningsCalendar } from "@/components/finance/EarningsCalendar";
+import { AdvancedCharts } from "@/components/finance/AdvancedCharts";
+import { TrendingHub } from "@/components/finance/TrendingHub";
 
 import { NLPSentimentDemo } from "@/components/NLPSentimentDemo";
 import { SpacyNLPDemo } from "@/components/SpacyNLPDemo";
@@ -168,6 +174,10 @@ const AppContent = () => {
         return <AdminCredibilityDashboard />;
       case "tradehub":
         return <TradeHub onNavigate={setActiveSection} />;
+      case "market-mood":
+        return <MarketMoodPage />;
+      case "news-feed":
+        return <Analytics />;
       case "trader-profile":
         return (
           <ProtectedRoute
@@ -192,6 +202,28 @@ const AppContent = () => {
         );
       case "futuristic-chat":
         return <FuturisticChatDemo />;
+
+      // Finance Section Routes
+      case "finance":
+        return <BuilderFinanceDemo />;
+      case "watchlist":
+        return <Watchlist />;
+      case "market":
+        return <Analytics />;
+      case "screener":
+        return <StockScreener />;
+      case "crypto":
+        return <PulseOfTheChain />;
+      case "earnings":
+        return <EarningsCalendar />;
+      case "charts":
+        return <AdvancedCharts />;
+      case "trending":
+        return <TrendingHub />;
+      case "trade-journal":
+        return <Analytics />; // Placeholder - replace with actual trade journal component
+      case "sentiment-polls":
+        return <Analytics />; // Placeholder - replace with actual sentiment polls component
 
       default:
         return <FuturisticHomepage onNavigate={setActiveSection} />;
