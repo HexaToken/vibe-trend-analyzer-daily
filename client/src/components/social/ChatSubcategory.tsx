@@ -237,7 +237,11 @@ const mockMessages: ChatMessage[] = [
   },
 ];
 
-export const ChatSubcategory: React.FC = () => {
+interface ChatSubcategoryProps {
+  onNavigateToProfile?: (userId: string) => void;
+}
+
+export const ChatSubcategory: React.FC<ChatSubcategoryProps> = ({ onNavigateToProfile }) => {
   const { user, isAuthenticated } = useAuth();
   const [selectedRoom, setSelectedRoom] = useState<string>("general");
   const [messages, setMessages] = useState<ChatMessage[]>(mockMessages);
