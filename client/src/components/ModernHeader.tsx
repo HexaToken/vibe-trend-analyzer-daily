@@ -28,9 +28,14 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
   onNavigate,
   currentMoodScore = 72,
 }) => {
+  const { themeMode, isDynamicMode } = useMoodTheme();
   const [searchFocused, setSearchFocused] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  // Theme-responsive styles
+  const isLightMode = themeMode === 'light';
+  const isDarkMode = themeMode === 'dark' || isDynamicMode;
 
   // Handle scroll effect for sticky header
   useEffect(() => {
