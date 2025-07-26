@@ -31,21 +31,21 @@ All colors MUST be HSL.
     --primary: 238 94% 67%; /* #6366F1 - Indigo accent */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 13% 20%; /* #333 - Subheadings */
+    --secondary: 220 9% 46%; /* #4B5563 - Secondary text gray-600 */
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 220 13% 88%; /* #E0E0E0 - Borders */
-    --muted-foreground: 220 13% 33%; /* #555 - Descriptions */
+    --muted: 220 13% 91%; /* #E5E7EB - Light gray-200 for backgrounds */
+    --muted-foreground: 220 9% 46%; /* #4B5563 - Secondary text */
 
-    --accent: 240 10% 96%; /* #F5F5F5 - Light hover background */
-    --accent-foreground: 220 13% 12%; /* #1E1E1E - Dark text on light hover */
+    --accent: 220 14% 96%; /* #F3F4F6 - Neutral hover background */
+    --accent-foreground: 220 13% 9%; /* #111827 - Primary text on light */
 
-    --destructive: 4 90% 58%; /* #F44336 - Red accent */
+    --destructive: 0 84% 60%; /* #EF4444 - Red-500 for errors */
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 88%; /* #E0E0E0 - Gray borders */
-    --input: 220 13% 88%; /* #E0E0E0 */
-    --ring: 228 45% 42%; /* #3F51B5 - Focus ring */
+    --border: 220 13% 91%; /* #D1D5DB - Gray-300 borders */
+    --input: 220 13% 91%; /* #D1D5DB - Input borders */
+    --ring: 238 94% 67%; /* #6366F1 - Indigo focus ring */
 
     --radius: 0.75rem; /* 12px border radius */
 
