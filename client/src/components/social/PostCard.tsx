@@ -95,7 +95,7 @@ interface PostCardProps {
   onUnfollow?: (userId: string) => void;
   onToggleAlerts?: (userId: string) => void;
   onUserClick?: (userId: string) => void;
-  onTickerClick?: (symbol: string) => void;
+  onTickerClick?: (symbol: string, event?: React.MouseEvent) => void;
   onTickerHover?: (ticker: string, event: React.MouseEvent) => void;
   onTickerLeave?: () => void;
   compact?: boolean;
