@@ -35,7 +35,7 @@ function createTimeoutController(timeoutMs: number, externalSignal?: AbortSignal
   // Handle external signal if provided
   if (externalSignal) {
     if (externalSignal.aborted) {
-      controller.abort();
+      controller.abort(new Error("External request was cancelled"));
       return {
         controller,
         cleanup: () => { isCleanedUp = true; }
@@ -45,7 +45,7 @@ function createTimeoutController(timeoutMs: number, externalSignal?: AbortSignal
     // Forward external abort to our controller
     const onExternalAbort = () => {
       if (!isCleanedUp && !controller.signal.aborted) {
-        controller.abort();
+        controller.abort(new Error("External request was cancelled"));
       }
     };
 
