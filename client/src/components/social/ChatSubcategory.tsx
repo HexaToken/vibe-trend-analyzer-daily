@@ -41,7 +41,19 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useAuth } from "@/contexts/AuthContext";
+import { PostInteractionBar } from "./PostInteractionBar";
+import {
+  CheckCircle,
+  AlertTriangle,
+  Award,
+} from "lucide-react";
 
 // Enhanced types for the new chat system
 interface ChatRoom {
