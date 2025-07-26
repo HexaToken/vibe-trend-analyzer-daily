@@ -18,17 +18,17 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Light Mode (Clarity Mode) - Finance-focused design system */
-    --background: 220 14% 96%; /* #F5F7FA - Clean neutral base */
-    --foreground: 220 13% 12%; /* #1E1E1E - Headlines */
+    /* MoodMeter Light Mode - Optimized for clarity and mood-based branding */
+    --background: 220 14% 98%; /* #F9FAFB - Clean gray-50 base */
+    --foreground: 220 13% 9%; /* #111827 - Primary text gray-900 */
 
     --card: 0 0% 100%; /* #FFFFFF - Pure white cards */
-    --card-foreground: 220 13% 12%; /* #1E1E1E */
+    --card-foreground: 220 13% 9%; /* #111827 - Primary text */
 
     --popover: 0 0% 100%; /* #FFFFFF */
-    --popover-foreground: 220 13% 12%; /* #1E1E1E */
+    --popover-foreground: 220 13% 9%; /* #111827 */
 
-    --primary: 228 45% 42%; /* #3F51B5 - Financial blue */
+    --primary: 238 94% 67%; /* #6366F1 - Indigo accent */
     --primary-foreground: 0 0% 100%;
 
     --secondary: 220 13% 20%; /* #333 - Subheadings */
