@@ -208,7 +208,10 @@ export const StockChannelHub: React.FC = () => {
           score: 90
         },
         tickers: ['$NVDA', '$MSFT']
-      }
+      },
+      credibilityScore: 8.5,
+      needsReview: false,
+      communityFavorite: false,
     },
     {
       id: "3",
