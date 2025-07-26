@@ -283,7 +283,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
       {/* Modern Header */}
       <ModernHeader
         activeSection={activeSection}
-        setActiveSection={setActiveSection}
+        setActiveSection={(section: string) => setActiveSection(section as any)}
         onNavigate={onNavigate}
       />
 
