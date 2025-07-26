@@ -118,7 +118,9 @@ const AppContent = () => {
             fallbackTitle="Profile Access Required"
             fallbackDescription="Please sign in to view your profile."
           >
-            <ViewProfilePage />
+            <TraderProfile
+              isCurrentUser={true}
+            />
           </ProtectedRoute>
         );
       case "database":
