@@ -193,15 +193,15 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
             <div className="hidden sm:block relative">
               <div className={cn(
                 "relative transition-all duration-300",
-                searchFocused ? "w-80" : "w-72"
+                searchFocused ? "w-64" : "w-48"
               )}>
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <Input
                   type="text"
-                  placeholder="Search stocks, news, or sentiment…"
+                  placeholder="Search"
                   className={cn(
-                    "pl-10 pr-4 py-2 bg-gray-900/50 border-gray-700 rounded-lg text-white placeholder-gray-400 transition-all duration-200",
-                    "focus:bg-gray-900/80 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20",
+                    "pl-10 pr-4 py-2 bg-black/30 border-gray-600/50 rounded-full text-white placeholder-gray-400 transition-all duration-200 text-sm",
+                    "focus:bg-black/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/20 focus:outline-none",
                     searchFocused && "shadow-lg shadow-purple-500/10"
                   )}
                   onFocus={() => setSearchFocused(true)}
@@ -211,14 +211,14 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
             </div>
 
             {/* Notifications */}
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              className="relative p-2 hover:bg-gray-800/50 rounded-lg group"
+            <Button
+              variant="ghost"
+              size="sm"
+              className="relative p-2 hover:bg-purple-500/20 rounded-lg group transition-all duration-200"
               aria-label="Notifications"
             >
               <Bell className="w-5 h-5 text-gray-300 group-hover:text-purple-400 transition-colors" />
-              <Badge className="absolute -top-1 -right-1 w-5 h-5 p-0 bg-red-500 text-white text-xs flex items-center justify-center">
+              <Badge className="absolute -top-1 -right-1 w-4 h-4 p-0 bg-pink-500 text-white text-xs flex items-center justify-center rounded-full animate-pulse">
                 3
               </Badge>
             </Button>
@@ -230,19 +230,14 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
               onClick={() => setRealTimeEnabled(!realTimeEnabled)}
               className={cn(
                 "p-2 rounded-lg transition-all duration-200",
-                realTimeEnabled 
-                  ? "bg-green-500/20 text-green-400 hover:bg-green-500/30" 
-                  : "hover:bg-gray-800/50 text-gray-400 hover:text-gray-300"
+                realTimeEnabled
+                  ? "bg-green-500/20 text-green-400 hover:bg-green-500/30 shadow-lg shadow-green-500/20"
+                  : "hover:bg-purple-500/20 text-gray-400 hover:text-purple-300"
               )}
               aria-label={`Real-time updates ${realTimeEnabled ? 'enabled' : 'disabled'}`}
             >
               <Zap className={cn("w-5 h-5", realTimeEnabled && "animate-pulse")} />
             </Button>
-
-            {/* Theme Selector (Desktop) */}
-            <div className="hidden lg:block">
-              <DynamicThemeSelector />
-            </div>
 
             {/* User Authentication */}
             <UserAuthenticationToggle onNavigate={onNavigate} />
@@ -251,7 +246,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
             <Button
               variant="ghost"
               size="sm"
-              className="md:hidden p-2 hover:bg-gray-800/50 rounded-lg"
+              className="md:hidden p-2 hover:bg-purple-500/20 rounded-lg ml-2"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle mobile menu"
             >
