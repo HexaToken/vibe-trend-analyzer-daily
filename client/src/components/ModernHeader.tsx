@@ -156,7 +156,12 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
             {/* Community Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="flex items-center gap-1 text-base font-medium px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:text-pink-300 transition-all duration-200 relative group">
+                <button className={cn(
+                  "flex items-center gap-1 text-base font-medium px-3 py-2 rounded-lg transition-all duration-200 relative group",
+                  isLightMode
+                    ? "text-gray-900 hover:text-blue-600"
+                    : "text-gray-300 hover:text-white hover:text-pink-300"
+                )}>
                   Community
                   <ChevronDown className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" />
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
