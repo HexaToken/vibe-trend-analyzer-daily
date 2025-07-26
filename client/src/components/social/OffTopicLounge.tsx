@@ -129,6 +129,7 @@ export const OffTopicLounge: React.FC = () => {
   const offTopicPosts: OffTopicPost[] = [
     {
       id: "1",
+      userId: "user-meme-king",
       user: {
         name: "MemeKing",
         avatar: "MK",
