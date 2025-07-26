@@ -59,7 +59,16 @@ const queryClient = new QueryClient();
 
 const AppContent = () => {
   const [activeSection, setActiveSection] = useState("futuristic-home");
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
   const { bodyGradient } = useMoodTheme();
+
+  // Enhanced navigation handler to support user profile navigation
+  const handleNavigation = (section: string, userId?: string) => {
+    setActiveSection(section);
+    if (userId) {
+      setCurrentUserId(userId);
+    }
+  };
 
   const renderContent = () => {
     switch (activeSection) {
