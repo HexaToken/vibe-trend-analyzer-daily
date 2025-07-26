@@ -321,11 +321,11 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
         <div className="mt-6 p-4 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-lg border border-green-200 dark:border-green-700">
           <div className="flex items-center space-x-2 mb-2">
             <BarChart3 className="w-4 h-4 text-green-400" />
-            <span className="font-medium text-green-800 dark:text-green-300">
+            <span className="font-medium text-green-400 dark:text-green-300">
               Trend Analysis
             </span>
           </div>
-          <p className="text-sm text-green-700 dark:text-green-400">
+          <p className="text-sm text-gray-100 dark:text-green-400">
             {scoreDiff > 5
               ? "Strong positive momentum detected. Market sentiment is improving across multiple sources."
               : scoreDiff < -5
