@@ -50,6 +50,7 @@ import { DeveloperSubmissionPage } from "@/components/plugins/DeveloperSubmissio
 import { CredibilityAnalyticsDashboard } from "@/components/credibility/CredibilityAnalyticsDashboard";
 import { AdminCredibilityDashboard } from "@/components/credibility/AdminCredibilityDashboard";
 import { TradeHub } from "@/components/TradeHub";
+import { TraderProfile } from "@/components/profile/TraderProfile";
 import { Footer } from "@/components/Footer";
 
 const queryClient = new QueryClient();
