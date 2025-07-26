@@ -237,11 +237,12 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                 <DropdownMenuContent
                   align="center"
                   className={cn(
-                    "w-56 backdrop-blur-xl rounded-xl",
+                    "w-56 backdrop-blur-xl rounded-xl z-[100] shadow-xl",
                     isLightMode
                       ? "bg-white/95 border-gray-200 text-gray-900"
                       : "bg-[#0A0A23]/95 border-gray-700 text-white"
                   )}
+                  sideOffset={5}
                 >
                   {financeItems.map(({ label, key, icon }) => (
                     <DropdownMenuItem
