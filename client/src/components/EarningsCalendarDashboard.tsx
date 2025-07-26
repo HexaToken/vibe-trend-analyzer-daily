@@ -169,7 +169,7 @@ const EarningsCalendarDashboard: React.FC<EarningsCalendarDashboardProps> = ({
       date: '2024-01-22',
       symbol: 'META',
       name: 'Meta Platforms',
-      logo: '📘',
+      logo: <EmojiIcon emoji="📘" className="w-6 h-6" />,
       time: 'AMC',
       estimatedEPS: 4.96,
       estimatedRevenue: 39.1,
