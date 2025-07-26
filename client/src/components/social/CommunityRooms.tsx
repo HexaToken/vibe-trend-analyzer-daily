@@ -187,6 +187,21 @@ export const CommunityRooms = () => {
     }
   };
 
+  const handleFollow = (userId: string) => {
+    console.log(`Following user: ${userId}`);
+    // In real app, call API to follow user
+  };
+
+  const handleUnfollow = (userId: string) => {
+    console.log(`Unfollowing user: ${userId}`);
+    // In real app, call API to unfollow user
+  };
+
+  const handleToggleAlerts = (userId: string, enabled: boolean) => {
+    console.log(`${enabled ? 'Enabling' : 'Disabling'} alerts for user: ${userId}`);
+    // In real app, call API to update alert preferences
+  };
+
   const openFlagModal = (message: ChatMessage) => {
     setSelectedMessage(message);
     setFlagModalOpen(true);
