@@ -28,6 +28,7 @@ import {
   Award,
   Laugh,
 } from "lucide-react";
+import { PostInteractionBar } from "./PostInteractionBar";
 
 interface OffTopicPost {
   id: string;
