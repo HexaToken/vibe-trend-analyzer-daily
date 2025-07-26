@@ -229,13 +229,13 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                         <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                         <span className="text-sm font-medium">{item.rating}</span>
                       </div>
-                      <span className="text-sm text-muted-foreground">
+                      <span className="text-sm text-gray-600 font-medium">
                         {item.type === "course" ? `${item.students} students` : `${item.subscribers} subscribers`}
                       </span>
                     </div>
                     
                     {item.type === "course" && item.duration && (
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <div className="flex items-center gap-2 text-sm text-gray-700 font-medium">
                         <Play className="h-3 w-3" />
                         {item.duration}
                       </div>
