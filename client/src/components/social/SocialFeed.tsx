@@ -449,6 +449,9 @@ export const SocialFeed = ({
                     console.log("Comment on post:", postId)
                   }
                   onShare={(postId) => console.log("Share post:", postId)}
+                  onFollow={handleFollow}
+                  onUnfollow={handleUnfollow}
+                  onToggleAlerts={handleToggleAlerts}
                   onTickerClick={onTickerClick}
                   onUserClick={onUserClick}
                 />
