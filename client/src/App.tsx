@@ -8,6 +8,7 @@ import { MoodThemeProvider, useMoodTheme } from "@/contexts/MoodThemeContext";
 
 import { Dashboard } from "@/components/Dashboard";
 import { MarketMoodPage } from "@/components/MarketMoodPage";
+import { StockScreener } from "@/components/StockScreener";
 import { SentimentDashboard } from "@/components/SentimentDashboard";
 import { Analytics } from "@/components/Analytics";
 import { HistoricalData } from "@/components/HistoricalData";
