@@ -387,7 +387,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <TabsTrigger
                   value="risk-analysis"
                   className={themeMode === 'light'
-                    ? "data-[state=active]:text-[#1C1E21] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E0E0E0] text-[#444] flex items-center gap-2"
+                    ? "data-[state=active]:text-[#1C1E21] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E0E0E0] text-[#1F2937] flex items-center gap-2"
                     : "data-[state=active]:text-white text-[#E0E0E0] flex items-center gap-2 transition-all duration-300 hover:text-white/90"
                   }
                   style={themeMode === 'light' ? {
@@ -403,7 +403,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <TabsTrigger
                   value="financial-reports"
                   className={themeMode === 'light'
-                    ? "data-[state=active]:text-[#1C1E21] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E0E0E0] text-[#444] flex items-center gap-2"
+                    ? "data-[state=active]:text-[#1C1E21] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E0E0E0] text-[#1F2937] flex items-center gap-2"
                     : "data-[state=active]:text-white text-[#E0E0E0] flex items-center gap-2 transition-all duration-300 hover:text-white/90"
                   }
                   style={themeMode === 'light' ? {
@@ -419,7 +419,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <TabsTrigger
                   value="geo-sentiment"
                   className={themeMode === 'light'
-                    ? "data-[state=active]:text-[#1C1E21] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E0E0E0] text-[#444] flex items-center gap-2"
+                    ? "data-[state=active]:text-[#1C1E21] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E0E0E0] text-[#1F2937] flex items-center gap-2"
                     : "data-[state=active]:text-white text-[#E0E0E0] flex items-center gap-2 transition-all duration-300 hover:text-white/90"
                   }
                   style={themeMode === 'light' ? {
@@ -486,7 +486,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                                selectedFinanceStock === 'NVDA' ? 'LOW' :
                                'MEDIUM'}
                             </div>
-                            <div className={`text-sm ${themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'}`}>Risk Level</div>
+                            <div className={`text-sm ${themeMode === 'light' ? 'text-[#374151]' : 'text-gray-400'}`}>Risk Level</div>
                           </div>
                         </div>
                       </div>
@@ -889,7 +889,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       📈 Biggest Gainers
                     </TabsTrigger>
                     <TabsTrigger value="losers" className="data-[state=active]:bg-rose-600/30 data-[state=active]:text-rose-300 text-gray-400">
-                      📉 Biggest Losers
+                      ���� Biggest Losers
                     </TabsTrigger>
                   </TabsList>
 
