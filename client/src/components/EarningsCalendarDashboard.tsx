@@ -154,7 +154,7 @@ const EarningsCalendarDashboard: React.FC<EarningsCalendarDashboardProps> = ({
       date: '2024-01-19',
       symbol: 'MSFT',
       name: 'Microsoft Corporation',
-      logo: '🪟',
+      logo: <EmojiIcon emoji="🪟" className="w-6 h-6" />,
       time: 'AMC',
       estimatedEPS: 2.78,
       estimatedRevenue: 62.8,
