@@ -80,11 +80,11 @@ const AppContent = () => {
             case "community":
         return <Community onNavigateToProfile={(userId) => handleNavigation("trader-profile", userId)} />;
       case "space":
-        return <SpaceSwitcherWidget />;
+        return <SpaceSwitcherWidget onNavigateToProfile={(userId) => handleNavigation("trader-profile", userId)} />;
       case "rooms":
         return <PrivateRoomsContainer />;
       case "chat":
-        return <ChatInterface />;
+        return <ChatSubcategory onNavigateToProfile={(userId) => handleNavigation("trader-profile", userId)} />;
       case "profile":
         return (
           <ProtectedRoute
