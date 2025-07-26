@@ -359,12 +359,26 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                     <p className="text-gray-700 font-medium mb-3">{trader.expertise}</p>
                     
                     <div className="flex items-center justify-center gap-2 mb-3">
-                      <Badge variant={trader.credibilityScore >= 90 ? "default" : "secondary"} className={getCredibilityColor(trader.credibilityScore)}>
+                      <Badge
+                        variant={trader.credibilityScore >= 90 ? "default" : "secondary"}
+                        className={
+                          trader.credibilityScore >= 90
+                            ? "bg-green-600 text-white border-green-700 font-bold shadow-md"
+                            : trader.credibilityScore >= 80
+                            ? "bg-blue-600 text-white border-blue-700 font-bold shadow-md"
+                            : trader.credibilityScore >= 70
+                            ? "bg-yellow-600 text-white border-yellow-700 font-bold shadow-md"
+                            : "bg-gray-600 text-white border-gray-700 font-bold shadow-md"
+                        }
+                      >
                         <Trophy className="h-3 w-3 mr-1" />
                         {trader.credibilityScore}/100
                       </Badge>
                       {trader.isVerified && (
-                        <Badge variant="secondary">
+                        <Badge
+                          variant="secondary"
+                          className="bg-indigo-600 text-white border-indigo-700 font-bold shadow-md"
+                        >
                           ✓ Verified
                         </Badge>
                       )}
