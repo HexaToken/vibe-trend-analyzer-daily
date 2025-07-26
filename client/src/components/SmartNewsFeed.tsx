@@ -244,8 +244,8 @@ export const SmartNewsFeed: React.FC<SmartNewsFeedProps> = ({ className }) => {
                 className={cn(
                   "rounded-full px-4 py-2 text-sm font-medium transition-all duration-300",
                   activeFilter === filter.key
-                    ? "bg-purple-500/30 text-purple-300 border border-purple-400/50"
-                    : "text-gray-400 hover:text-white hover:bg-purple-500/10"
+                    ? "bg-[#3730A3] text-white border border-[#4338CA] dark:bg-purple-500/30 dark:text-purple-300 dark:border-purple-400/50"
+                    : "text-[#4B5563] hover:text-[#1F2937] hover:bg-[#E8F0FE] dark:text-gray-400 dark:hover:text-white dark:hover:bg-purple-500/10"
                 )}
               >
                 {filter.label}
