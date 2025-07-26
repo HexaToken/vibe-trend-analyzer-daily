@@ -126,7 +126,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-4">
             <DollarSign className="h-12 w-12 text-[#1F2937] dark:text-primary mr-3" />
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-[#111827] to-[#1E40AF] dark:from-primary dark:to-purple-600 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold text-[#111827] dark:text-transparent dark:bg-gradient-to-r dark:from-primary dark:to-purple-600 dark:bg-clip-text">
               💼 TradeHub
             </h1>
           </div>
