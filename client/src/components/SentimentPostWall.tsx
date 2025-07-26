@@ -923,7 +923,7 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
                     onUnfollow={handleUnfollow}
                     onToggleAlerts={handleToggleAlerts}
                     onUserClick={handleUserClick}
-                    onTickerClick={handleTickerClick}
+                    onTickerClick={(symbol, event) => handleTickerClick(symbol, event)}
                     onTickerHover={showTickerPreview}
                     onTickerLeave={hideTickerPreview}
                     showEngagementCounts={true}
