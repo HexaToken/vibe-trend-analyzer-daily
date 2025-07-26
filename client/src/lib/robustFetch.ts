@@ -283,8 +283,9 @@ export async function robustFetch(
         // Don't retry on client errors
         break;
       } else if (isTimeoutError && attempt >= Math.min(2, maxRetries)) {
-        // Stop retrying timeouts after 2 attempts
+        // Stop retrying timeouts after 2 attempts and record the timeout
         console.error(`Request timed out after ${attempt + 1} attempts`);
+        timeoutTracker.recordTimeout(url);
         break;
       }
 
