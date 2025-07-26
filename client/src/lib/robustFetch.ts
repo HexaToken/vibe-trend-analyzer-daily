@@ -57,7 +57,7 @@ function createTimeoutController(timeoutMs: number, externalSignal?: AbortSignal
     timeoutId = setTimeout(() => {
       if (!isCleanedUp && !controller.signal.aborted) {
         try {
-          controller.abort();
+          controller.abort(new Error(`Request timeout after ${timeoutMs}ms`));
         } catch (error) {
           // Ignore abort errors on cleanup
           console.debug('Safe abort during timeout:', error);
