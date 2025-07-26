@@ -10,7 +10,7 @@ import { Dashboard } from "@/components/Dashboard";
 import { SentimentDashboard } from "@/components/SentimentDashboard";
 import { Analytics } from "@/components/Analytics";
 import { HistoricalData } from "@/components/HistoricalData";
-import { Community } from "@/components/Community";
+import { CommunityWithSubtabs } from "@/components/CommunityWithSubtabs";
 import { CommunityRooms } from "@/components/social/CommunityRooms";
 import { Watchlist } from "@/components/Watchlist";
 import { Settings } from "@/components/Settings";
@@ -78,7 +78,7 @@ const AppContent = () => {
         return <Analytics />;
       // Removed "history" route - HistoricalData component retained for potential reuse
             case "community":
-        return <Community onNavigateToProfile={(userId) => handleNavigation("trader-profile", userId)} />;
+        return <CommunityWithSubtabs onNavigateToProfile={(userId) => handleNavigation("trader-profile", userId)} />;
       case "space":
         return <SpaceSwitcherWidget onNavigateToProfile={(userId) => handleNavigation("trader-profile", userId)} />;
       case "rooms":
