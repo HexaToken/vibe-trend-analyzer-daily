@@ -82,6 +82,10 @@ export const Community = () => {
       likes: 17,
       replies: 12,
       badge: "Pro",
+      credibilityScore: 8.7,
+      needsReview: false,
+      communityFavorite: false,
+      verified: true,
     },
     {
       id: 3,
@@ -94,6 +98,10 @@ export const Community = () => {
       likes: 31,
       replies: 15,
       badge: "Verified",
+      credibilityScore: 7.5,
+      needsReview: true,
+      communityFavorite: false,
+      verified: true,
     },
     {
       id: 4,
@@ -106,6 +114,10 @@ export const Community = () => {
       likes: 42,
       replies: 23,
       badge: "Predictor",
+      credibilityScore: 8.9,
+      needsReview: false,
+      communityFavorite: true,
+      verified: false,
     },
   ];
 
