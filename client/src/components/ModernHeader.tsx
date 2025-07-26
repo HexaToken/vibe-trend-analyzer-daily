@@ -83,37 +83,37 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
   };
 
   return (
-    <header 
+    <header
       className={cn(
-        "sticky top-0 z-50 transition-all duration-300",
-        isScrolled 
-          ? "bg-black/95 backdrop-blur-xl border-b border-gray-800/50 shadow-lg shadow-purple-500/5" 
-          : "bg-black/80 backdrop-blur-md border-b border-gray-800/30"
+        "sticky top-0 z-50 transition-all duration-300 h-16",
+        isScrolled
+          ? "bg-[#0A0A23]/95 backdrop-blur-xl border-b border-gray-800/50 shadow-lg shadow-purple-500/5"
+          : "bg-[#0A0A23]/80 backdrop-blur-md border-b border-gray-800/30"
       )}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Left Section - Branding */}
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="grid grid-cols-3 items-center h-16">
+          {/* Left Section - Brand */}
           <div className="flex items-center">
             <button
               onClick={() => handleNavigation('home')}
-              className="flex items-center gap-3 group hover:scale-105 transition-transform duration-200"
+              className="flex items-center gap-3 group transition-all duration-200"
               aria-label="MoodMeter Home"
             >
-              <div className="w-10 h-10 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-purple-500/30 transition-shadow duration-200">
-                <Brain className="w-6 h-6 text-white" />
+              <div className="w-8 h-8 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-purple-500/30 group-hover:shadow-lg transition-all duration-200">
+                <Brain className="w-5 h-5 text-white" />
               </div>
-              <h1 className="text-2xl font-bold">
-                <span className="text-white">Mood</span>
-                <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+              <h1 className="text-lg font-semibold group-hover:drop-shadow-lg transition-all duration-200">
+                <span className="text-white group-hover:text-purple-100">🧠 Mood</span>
+                <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent group-hover:from-pink-300 group-hover:via-purple-300 group-hover:to-cyan-300">
                   Meter
                 </span>
               </h1>
             </button>
           </div>
 
-          {/* Center Section - Navigation Menu (Desktop) */}
-          <nav className="hidden md:flex items-center space-x-6">
+          {/* Center Section - Navigation Menu */}
+          <nav className="hidden md:flex items-center justify-center space-x-4 lg:space-x-6">
             {navigationItems.map(({ label, key }) => (
               <button
                 key={key}
