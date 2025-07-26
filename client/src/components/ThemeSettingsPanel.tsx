@@ -23,12 +23,21 @@ interface ThemeSettingsPanelProps {
   currentMoodScore?: number;
 }
 
-export const ThemeSettingsPanel: React.FC<ThemeSettingsPanelProps> = ({ 
-  currentMoodScore = 72 
+export const ThemeSettingsPanel: React.FC<ThemeSettingsPanelProps> = ({
+  currentMoodScore = 72
 }) => {
   const { themeMode, setThemeMode } = useMoodTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [dynamicThemeColor, setDynamicThemeColor] = useState('neutral');
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile screen size
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Apply dynamic mood theme based on score
   const applyDynamicMoodTheme = (score: number) => {
