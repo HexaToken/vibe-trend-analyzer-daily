@@ -65,6 +65,7 @@ import GeoSentimentMap from './finance/GeoSentimentMap';
 import BasicScreener from './BasicScreener';
 import SmartTradeJournal from './SmartTradeJournal';
 import CommunitySentimentPolls from './CommunitySentimentPolls';
+import { ModernHeader } from './ModernHeader';
 
 // User Authentication Toggle Component
 interface UserAuthenticationToggleProps {
