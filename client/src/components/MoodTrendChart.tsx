@@ -151,21 +151,21 @@ export const MoodTrendChart = ({ data }: MoodTrendChartProps) => {
     {
       key: "overall",
       name: "Overall Score",
-      color: "#2563eb",
+      color: "#FF6B6B",
       strokeWidth: 4,
       visible: visibleLines.overall,
     },
     {
       key: "news",
       name: "News",
-      color: "#dc2626",
+      color: "#FF5252",
       strokeWidth: 2,
       visible: visibleLines.news,
     },
     {
       key: "social",
       name: "Social Media",
-      color: "#16a34a",
+      color: "#FF6B6B",
       strokeWidth: 2,
       visible: visibleLines.social,
     },
@@ -190,7 +190,7 @@ export const MoodTrendChart = ({ data }: MoodTrendChartProps) => {
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2">
-            <Activity className="h-5 w-5" />
+            <Activity className="h-5 w-5 text-red-500" />
             7-Day Mood Trend Analysis
           </CardTitle>
           <div className="flex items-center gap-2">
