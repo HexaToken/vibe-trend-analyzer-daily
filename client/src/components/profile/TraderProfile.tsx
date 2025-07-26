@@ -254,8 +254,25 @@ export const TraderProfile = ({ userId, isCurrentUser = false }: TraderProfilePr
 
   const winRate = mockTrades.filter(t => t.status === 'closed' && (t.pnlPercentage || 0) > 0).length / 
                    mockTrades.filter(t => t.status === 'closed').length * 100;
-  const avgGain = mockTrades.filter(t => t.status === 'closed').reduce((acc, t) => acc + (t.pnlPercentage || 0), 0) / 
+  const avgGain = mockTrades.filter(t => t.status === 'closed').reduce((acc, t) => acc + (t.pnlPercentage || 0), 0) /
                   mockTrades.filter(t => t.status === 'closed').length;
+
+  // Interaction handlers
+  const handleFollow = (userId: string) => {
+    console.log(`Following user: ${userId}`);
+    setIsFollowing(true);
+  };
+
+  const handleUnfollow = (userId: string) => {
+    console.log(`Unfollowing user: ${userId}`);
+    setIsFollowing(false);
+    setAlertsEnabled(false); // Disable alerts when unfollowing
+  };
+
+  const handleToggleAlerts = (userId: string, enabled: boolean) => {
+    console.log(`${enabled ? 'Enabling' : 'Disabling'} alerts for user: ${userId}`);
+    setAlertsEnabled(enabled);
+  };
 
   return (
     <div className="max-w-7xl mx-auto space-y-6 p-6">
