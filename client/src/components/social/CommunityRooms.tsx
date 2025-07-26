@@ -54,6 +54,7 @@ import type { CreateFlagData } from "@/types/moderation";
 
 export const CommunityRooms = () => {
   const { user, isAuthenticated } = useAuth();
+  const [activeView, setActiveView] = useState<"rooms" | "chat">("rooms");
   const [selectedRoom, setSelectedRoom] = useState<string | null>(null);
   const [rooms, setRooms] = useState<CommunityRoom[]>([]);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
