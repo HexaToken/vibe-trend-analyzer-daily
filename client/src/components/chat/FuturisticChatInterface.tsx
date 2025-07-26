@@ -35,6 +35,9 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useAuth } from "@/contexts/AuthContext";
+import { ReplyThreadView } from "./ReplyThreadView";
+import { UserProfilePopover } from "./UserProfilePopover";
+import { AIMoodSummaryBubble } from "./AIMoodSummaryBubble";
 
 interface ChatMessage {
   id: string;
@@ -91,6 +94,12 @@ export const FuturisticChatInterface = ({
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [tickerSuggestions, setTickerSuggestions] = useState<string[]>([]);
   const [showTickerSuggestions, setShowTickerSuggestions] = useState(false);
+  const [activeThread, setActiveThread] = useState<string | null>(null);
+  const [profilePopover, setProfilePopover] = useState<{
+    userId: string;
+    position: { x: number; y: number };
+    isVisible: boolean;
+  }>({ userId: "", position: { x: 0, y: 0 }, isVisible: false });
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -127,7 +136,7 @@ export const FuturisticChatInterface = ({
       sentiment: "bearish",
       reactions: [
         { emoji: "📉", count: 6, userReacted: false },
-        { emoji: "⚠️", count: 4, userReacted: true },
+        { emoji: "⚠���", count: 4, userReacted: true },
       ],
       badges: ["Verified", "Risk Analyst"],
       tickers: ["SPY"],
@@ -270,6 +279,33 @@ export const FuturisticChatInterface = ({
     }
   };
 
+  const handleUserHover = (userId: string, event: React.MouseEvent) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    setProfilePopover({
+      userId,
+      position: { x: rect.left + rect.width / 2, y: rect.bottom + 5 },
+      isVisible: true,
+    });
+  };
+
+  const handleUserLeave = () => {
+    setTimeout(() => {
+      setProfilePopover(prev => ({ ...prev, isVisible: false }));
+    }, 300);
+  };
+
+  const handleFollow = (userId: string) => {
+    console.log(`Following user: ${userId}`);
+  };
+
+  const handleUnfollow = (userId: string) => {
+    console.log(`Unfollowing user: ${userId}`);
+  };
+
+  const handleToggleUserAlerts = (userId: string, enabled: boolean) => {
+    console.log(`${enabled ? 'Enabling' : 'Disabling'} alerts for user: ${userId}`);
+  };
+
   const handleReaction = (messageId: string, emoji: string) => {
     setMessages(prev =>
       prev.map(msg => {
@@ -338,6 +374,15 @@ export const FuturisticChatInterface = ({
             </div>
           </div>
 
+          {/* AI Mood Summary */}
+          <div className="p-4 border-b border-purple-500/20">
+            <AIMoodSummaryBubble
+              roomName={roomName}
+              position="top"
+              onViewDetails={() => console.log('View mood details')}
+            />
+          </div>
+
           {/* Pinned Messages */}
           {showPinned && pinnedMessages.length > 0 && (
             <div className="p-4 border-b border-purple-500/20 bg-yellow-500/5">
@@ -399,7 +444,9 @@ export const FuturisticChatInterface = ({
                   <div className="flex items-start gap-3">
                     {/* Avatar with Sentiment Ring */}
                     <div className={`relative ring-2 ${getSentimentGlow(message.sentiment)} rounded-full hover:ring-4 transition-all cursor-pointer`}
-                         onClick={() => onNavigateToProfile?.(message.userId)}>
+                         onClick={() => onNavigateToProfile?.(message.userId)}
+                         onMouseEnter={(e) => handleUserHover(message.userId, e)}
+                         onMouseLeave={handleUserLeave}>
                       <Avatar className="h-10 w-10">
                         <AvatarImage src={message.avatar} />
                         <AvatarFallback>{message.username[0]}</AvatarFallback>
@@ -414,6 +461,8 @@ export const FuturisticChatInterface = ({
                         <button
                           className="font-semibold text-white hover:text-purple-300 transition-colors"
                           onClick={() => onNavigateToProfile?.(message.userId)}
+                          onMouseEnter={(e) => handleUserHover(message.userId, e)}
+                          onMouseLeave={handleUserLeave}
                         >
                           {message.username}
                         </button>
@@ -488,6 +537,7 @@ export const FuturisticChatInterface = ({
                                   variant="ghost"
                                   size="sm"
                                   className="h-6 w-6 p-0 text-blue-400 hover:text-blue-300"
+                                  onClick={() => setActiveThread(activeThread === message.id ? null : message.id)}
                                 >
                                   <MessageCircle className="h-3 w-3" />
                                 </Button>
@@ -547,6 +597,14 @@ export const FuturisticChatInterface = ({
                       )}
                     </div>
                   </div>
+
+                  {/* Reply Thread */}
+                  <ReplyThreadView
+                    messageId={message.id}
+                    isOpen={activeThread === message.id}
+                    onClose={() => setActiveThread(null)}
+                    onNavigateToProfile={onNavigateToProfile}
+                  />
                 </div>
               ))}
               <div ref={messagesEndRef} />
