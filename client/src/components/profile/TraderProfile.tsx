@@ -67,6 +67,7 @@ import {
 } from "@/components/ui/tooltip";
 import { PostCard, type PostCardData } from "../social/PostCard";
 import type { User, UserPost } from "@/types/user";
+import { getMockUserData, getUserProfileBreadcrumb } from "@/utils/profileNavigation";
 
 interface TraderProfileProps {
   userId?: string;
