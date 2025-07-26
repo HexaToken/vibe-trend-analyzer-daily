@@ -336,7 +336,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                     </Avatar>
                     
                     <h3 className="text-xl font-semibold mb-2">{trader.name}</h3>
-                    <p className="text-muted-foreground mb-3">{trader.expertise}</p>
+                    <p className="text-gray-700 font-medium mb-3">{trader.expertise}</p>
                     
                     <div className="flex items-center justify-center gap-2 mb-3">
                       <Badge variant={trader.credibilityScore >= 90 ? "default" : "secondary"} className={getCredibilityColor(trader.credibilityScore)}>
@@ -353,7 +353,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                     <div className="grid grid-cols-2 gap-4 text-sm mb-4">
                       <div>
                         <div className="font-semibold text-green-500">{trader.monthlyReturn}</div>
-                        <div className="text-muted-foreground">Monthly Return</div>
+                        <div className="text-gray-600 font-medium">Monthly Return</div>
                       </div>
                       <div>
                         <div className="font-semibold">{trader.followers.toLocaleString()}</div>
