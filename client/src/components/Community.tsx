@@ -23,6 +23,18 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { PostInteractionBar } from "./social/PostInteractionBar";
+import {
+  CheckCircle,
+  AlertTriangle,
+  Award,
+  Star,
+} from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export const Community = () => {
   const [newPost, setNewPost] = useState("");
