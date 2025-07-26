@@ -369,7 +369,7 @@ export const TraderProfile = ({ userId, isCurrentUser = false, onNavigateBack }:
               {/* Avatar with Animated Ring */}
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
                 <div className="relative">
-                  <div className={`absolute inset-0 rounded-full ${traderUser.isPremium ? 'bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 animate-spin' : 'bg-gradient-to-r from-blue-500 to-purple-500'} p-1`}>
+                  <div className={`absolute inset-0 rounded-full ${traderUser.isPremium ? 'bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500' : 'bg-gradient-to-r from-blue-500 to-purple-500'} p-1`}>
                     <div className="w-36 h-36 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center">
                       <Avatar className="w-32 h-32">
                         <AvatarImage src={traderUser.avatar} alt={traderUser.username} />
