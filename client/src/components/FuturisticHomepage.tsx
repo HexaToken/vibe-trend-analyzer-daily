@@ -2872,7 +2872,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         </Badge>
                       </div>
                       <div className={`text-lg font-semibold mb-1 ${themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'}`}>{topic.topic}</div>
-                      <div className={`text-sm ${themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'}`}>{topic.mentions} mentions</div>
+                      <div className={`text-sm ${themeMode === 'light' ? 'text-[#374151]' : 'text-gray-400'}`}>{topic.mentions} mentions</div>
                     </div>
                   ))}
                 </div>
@@ -2901,7 +2901,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   <div className="space-y-2 mb-4">
                     {userWatchlist.map((item, index) => (
                       <div key={index} className="flex items-center justify-between text-sm">
-                        <span className={themeMode === 'light' ? 'text-[#444]' : 'text-gray-300'}>{item.symbol}</span>
+                        <span className={themeMode === 'light' ? 'text-[#1F2937]' : 'text-gray-300'}>{item.symbol}</span>
                         <span className={cn(
                           "font-medium",
                           item.change >= 0
