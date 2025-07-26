@@ -415,19 +415,32 @@ export const CommunityRooms = () => {
 
                         <div className="flex-1 min-w-0">
                           {showAvatar && (
-                            <div className="flex items-center gap-2 mb-1">
-                              <span className="font-semibold text-sm">
-                                {message.username}
-                              </span>
-                              {getUserRoleIcon(message.userRole)}
-                              <UserCredibilityIndicator
-                                level="trusted"
-                                score={Math.floor(Math.random() * 40 + 60)}
-                                compact
+                            <div className="flex items-center justify-between mb-1">
+                              <div className="flex items-center gap-2">
+                                <span className="font-semibold text-sm">
+                                  {message.username}
+                                </span>
+                                {getUserRoleIcon(message.userRole)}
+                                <UserCredibilityIndicator
+                                  level="trusted"
+                                  score={Math.floor(Math.random() * 40 + 60)}
+                                  compact
+                                />
+                                <span className="text-xs text-muted-foreground">
+                                  {formatMessageTime(message.createdAt)}
+                                </span>
+                              </div>
+
+                              {/* Post Interaction Bar for Community Messages */}
+                              <PostInteractionBar
+                                userId={message.userId}
+                                username={message.username}
+                                compact={true}
+                                onFollow={handleFollow}
+                                onUnfollow={handleUnfollow}
+                                onToggleAlerts={handleToggleAlerts}
+                                className="opacity-60 hover:opacity-100 transition-opacity"
                               />
-                              <span className="text-xs text-muted-foreground">
-                                {formatMessageTime(message.createdAt)}
-                              </span>
                             </div>
                           )}
 
