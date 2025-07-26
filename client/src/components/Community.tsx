@@ -246,7 +246,20 @@ export const Community = () => {
         <div className="space-y-4">
           {filteredPosts.length > 0 ? (
             filteredPosts.map((post) => (
-              <PostCard key={post.id} post={post} />
+              <PostCard
+                key={post.id}
+                post={post}
+                onLike={handleLike}
+                onComment={handleComment}
+                onRepost={handleRepost}
+                onSave={handleSave}
+                onFollow={handleFollow}
+                onUnfollow={handleUnfollow}
+                onToggleAlerts={handleToggleAlerts}
+                onUserClick={handleUserClick}
+                onTickerClick={handleTickerClick}
+                showEngagementCounts={true}
+              />
             ))
           ) : (
             <Card className="border-0 shadow-sm bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
@@ -256,8 +269,8 @@ export const Community = () => {
                 <p className="text-muted-foreground">
                   Start following traders and analysts to see their insights here
                 </p>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   className="mt-4"
                   onClick={() => setActiveTab("all")}
                 >
