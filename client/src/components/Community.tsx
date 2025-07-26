@@ -22,6 +22,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { PostInteractionBar } from "./social/PostInteractionBar";
 
 export const Community = () => {
   const [newPost, setNewPost] = useState("");
