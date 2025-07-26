@@ -50,6 +50,9 @@ interface OffTopicPost {
   isPinned?: boolean;
   mediaUrl?: string;
   pollOptions?: { option: string; votes: number }[];
+  credibilityScore?: number;
+  needsReview?: boolean;
+  communityFavorite?: boolean;
 }
 
 interface LoungeTopic {
