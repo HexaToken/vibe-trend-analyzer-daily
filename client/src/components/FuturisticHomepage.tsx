@@ -637,7 +637,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                             time: '2m ago',
                             type: selectedFinanceStock === 'TSLA' ? 'danger' : 'info'
                           },
-                          { alert: 'VIX spike detected', icon: '����', time: '5m ago', type: 'warning' },
+                          { alert: 'VIX spike detected', icon: '�����', time: '5m ago', type: 'warning' },
                           {
                             alert: `${selectedFinanceStock === 'NVDA' ? 'AI sector' : selectedFinanceStock === 'TSLA' ? 'EV sector' : 'Tech sector'} volatility increased`,
                             icon: '⚠️',
@@ -2769,7 +2769,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         </Badge>
                       </div>
                       <div className={`text-lg font-bold mb-1 ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>{stock.symbol}</div>
-                      <div className={`text-sm mb-2 ${themeMode === 'light' ? 'text-[#4A4A4A]' : 'text-gray-400'}`}>{stock.name}</div>
+                      <div className={`text-sm mb-2 ${themeMode === 'light' ? 'text-[#374151]' : 'text-gray-400'}`}>{stock.name}</div>
                       <div className={`text-xl font-bold mb-1 ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>${stock.price}</div>
                       <div className={cn(
                         "flex items-center gap-1 text-sm font-medium",
