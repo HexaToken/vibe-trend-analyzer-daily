@@ -39,7 +39,7 @@ import { useMoodTheme } from '../../contexts/MoodThemeContext';
 
 const ViewProfilePage = () => {
   const { user } = useAuth();
-  const { moodState, moodEmoji } = useMoodTheme();
+  const { moodState, moodIcon } = useMoodTheme();
   
   const [isEditing, setIsEditing] = useState(false);
   const [bio, setBio] = useState(user?.bio || 'Passionate about market sentiment analysis and fintech innovation.');
@@ -269,7 +269,7 @@ const ViewProfilePage = () => {
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-lg font-bold text-white">{profileStats.moodScoreAvg}</span>
-                    <span className="text-lg">{moodEmoji}</span>
+                    <moodIcon.icon className="w-5 h-5" style={{ color: moodIcon.color }} />
                   </div>
                 </div>
                 
