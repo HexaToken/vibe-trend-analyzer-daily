@@ -75,7 +75,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
     { label: 'Watchlist', key: 'watchlist', icon: '👁️' },
     { label: 'Market Analytics', key: 'market', icon: '📈' },
     { label: 'Stock Screener', key: 'screener', icon: '🔍' },
-    { label: 'Crypto Dashboard', key: 'crypto', icon: '���' },
+    { label: 'Crypto Dashboard', key: 'crypto', icon: '₿' },
     { label: 'Earnings Calendar', key: 'earnings', icon: '📅' },
     { label: 'Charts', key: 'charts', icon: '📊' },
     { label: 'Trending', key: 'trending', icon: '🔥' },
@@ -325,11 +325,19 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
             {/* Mobile Search */}
             <div className="mb-4">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Search className={cn(
+                  "absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4",
+                  isLightMode ? "text-gray-500" : "text-gray-400"
+                )} />
                 <Input
                   type="text"
                   placeholder="Search"
-                  className="pl-10 pr-4 py-3 bg-black/30 border-gray-600/50 rounded-full text-white placeholder-gray-400 w-full"
+                  className={cn(
+                    "pl-10 pr-4 py-3 rounded-full w-full",
+                    isLightMode
+                      ? "bg-gray-100 border-gray-200 text-gray-900 placeholder-gray-500"
+                      : "bg-black/30 border-gray-600/50 text-white placeholder-gray-400"
+                  )}
                 />
               </div>
             </div>
