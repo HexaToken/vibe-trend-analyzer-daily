@@ -213,7 +213,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                 )}
                 aria-current={activeSection === "community" ? "page" : undefined}
               >
-                Community Hub
+                <p>Community</p>
                 {activeSection === "community" && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
                 )}
