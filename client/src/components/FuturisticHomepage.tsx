@@ -889,7 +889,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       📈 Biggest Gainers
                     </TabsTrigger>
                     <TabsTrigger value="losers" className="data-[state=active]:bg-rose-600/30 data-[state=active]:text-rose-300 text-gray-400">
-                      ���� Biggest Losers
+                      📉 Biggest Losers
                     </TabsTrigger>
                   </TabsList>
 
@@ -2809,7 +2809,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                             {news.headline}
                           </h3>
                           <p className={`text-sm leading-relaxed line-clamp-3 ${
-                            themeMode === 'light' ? 'text-[#444]' : 'text-gray-400'
+                            themeMode === 'light' ? 'text-[#1F2937]' : 'text-gray-400'
                           }`}>
                             {news.summary}
                           </p>
@@ -2830,7 +2830,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         </Badge>
                       </div>
                       <div className={`flex items-center justify-between text-xs ${
-                        themeMode === 'light' ? 'text-[#666]' : 'text-gray-500'
+                        themeMode === 'light' ? 'text-[#374151]' : 'text-gray-500'
                       }`}>
                         <span className="font-medium">{news.source}</span>
                         <span>{news.timestamp}</span>
