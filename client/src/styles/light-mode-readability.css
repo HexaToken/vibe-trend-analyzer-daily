@@ -402,3 +402,88 @@
   color: #111827 !important;
   font-weight: 500 !important;
 }
+
+/* ===== WHITE TEXT ON DARK BLUE/PURPLE GRADIENTS ===== */
+
+/* Dark gradient backgrounds (slate-900, purple-900, etc.) need white text */
+:root:not(.dark) [class*="from-slate-900"],
+:root:not(.dark) [class*="to-slate-900"],
+:root:not(.dark) [class*="from-purple-900"],
+:root:not(.dark) [class*="to-purple-900"],
+:root:not(.dark) [class*="from-indigo-900"],
+:root:not(.dark) [class*="to-indigo-900"],
+:root:not(.dark) [class*="from-blue-900"],
+:root:not(.dark) [class*="to-blue-900"] {
+  color: #FFFFFF !important;
+}
+
+/* Headings on dark gradients with text shadows */
+:root:not(.dark) [class*="from-slate-900"] h1,
+:root:not(.dark) [class*="from-slate-900"] h2,
+:root:not(.dark) [class*="from-slate-900"] h3,
+:root:not(.dark) [class*="from-purple-900"] h1,
+:root:not(.dark) [class*="from-purple-900"] h2,
+:root:not(.dark) [class*="from-purple-900"] h3,
+:root:not(.dark) [class*="to-slate-900"] h1,
+:root:not(.dark) [class*="to-slate-900"] h2,
+:root:not(.dark) [class*="to-slate-900"] h3,
+:root:not(.dark) [class*="to-purple-900"] h1,
+:root:not(.dark) [class*="to-purple-900"] h2,
+:root:not(.dark) [class*="to-purple-900"] h3 {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Body text on dark gradients with subtle shadows */
+:root:not(.dark) [class*="from-slate-900"] p,
+:root:not(.dark) [class*="from-purple-900"] p,
+:root:not(.dark) [class*="to-slate-900"] p,
+:root:not(.dark) [class*="to-purple-900"] p {
+  color: #F1F5F9 !important; /* slate-50 for softer white */
+  font-weight: 500 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Interactive elements on dark gradients */
+:root:not(.dark) [class*="from-slate-900"] .text-sm,
+:root:not(.dark) [class*="from-purple-900"] .text-sm,
+:root:not(.dark) [class*="to-slate-900"] .text-sm,
+:root:not(.dark) [class*="to-purple-900"] .text-sm {
+  color: #E2E8F0 !important; /* neutral-100 equivalent */
+  font-weight: 500 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Buttons on dark gradients */
+:root:not(.dark) [class*="from-slate-900"] button,
+:root:not(.dark) [class*="from-purple-900"] button,
+:root:not(.dark) [class*="to-slate-900"] button,
+:root:not(.dark) [class*="to-purple-900"] button {
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Labels and metadata on dark gradients */
+:root:not(.dark) [class*="from-slate-900"] .text-xs,
+:root:not(.dark) [class*="from-purple-900"] .text-xs,
+:root:not(.dark) [class*="to-slate-900"] .text-xs,
+:root:not(.dark) [class*="to-purple-900"] .text-xs {
+  color: #CBD5E1 !important; /* slate-300 for muted but readable */
+  font-weight: 500 !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Special case for vibrant blue to purple gradients */
+:root:not(.dark) [class*="from-blue-600"][class*="to-purple-600"],
+:root:not(.dark) [class*="from-indigo-500"][class*="to-sky-500"] {
+  color: #FFFFFF !important;
+}
+
+:root:not(.dark) [class*="from-blue-600"][class*="to-purple-600"] *,
+:root:not(.dark) [class*="from-indigo-500"][class*="to-sky-500"] * {
+  color: #FFFFFF !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+  font-weight: 600 !important;
+}
