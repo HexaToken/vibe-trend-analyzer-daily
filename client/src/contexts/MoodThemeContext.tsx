@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { getIconFromEmoji, type IconConfig } from '../lib/iconUtils';
 
 export type ThemeMode = 'light' | 'dark' | 'dynamic';
 
@@ -23,7 +24,7 @@ interface MoodThemeContextType {
   bodyGradient: string;
   accentColor: string;
   glowEffect: string;
-  moodEmoji: string;
+  moodIcon: IconConfig;
   moodLabel: string;
   cardBackground: string;
   borderColor: string;
@@ -133,11 +134,11 @@ const MOOD_THEMES = {
   }
 };
 
-const MOOD_EMOJIS = {
-  neutral: '😐',
-  bearish: '📉',
-  bullish: '📈',
-  extreme: '🔥'
+const MOOD_ICONS = {
+  neutral: getIconFromEmoji('😐'),
+  bearish: getIconFromEmoji('📉'),
+  bullish: getIconFromEmoji('📈'),
+  extreme: getIconFromEmoji('🔥')
 };
 
 const MOOD_LABELS = {
@@ -209,7 +210,7 @@ export const MoodThemeProvider: React.FC<MoodThemeProviderProps> = ({ children }
     bodyGradient: `bg-gradient-to-br ${currentTheme.bodyGradient}`,
     accentColor: `bg-gradient-to-r ${currentTheme.accentColor}`,
     glowEffect: currentTheme.glowEffect,
-    moodEmoji: MOOD_EMOJIS[moodState],
+    moodIcon: MOOD_ICONS[moodState],
     moodLabel: MOOD_LABELS[moodState],
     cardBackground: currentTheme.cardBackground,
     borderColor: currentTheme.border,
