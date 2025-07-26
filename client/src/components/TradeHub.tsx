@@ -293,7 +293,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
           {/* Trending Tab */}
           <TabsContent value="trending" className="space-y-6">
             <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold mb-2">���� Trending Now</h2>
+              <h2 className="text-2xl font-bold mb-2">🔥 Trending Now</h2>
               <p className="text-gray-700 font-medium">Most popular content based on community engagement</p>
             </div>
             
@@ -305,7 +305,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                   </div>
                   <CardContent className="p-6 pt-8">
                     <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground mb-4">by {item.instructor}</p>
+                    <p className="text-sm text-gray-700 font-medium mb-4">by {item.instructor}</p>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1">
                         <TrendingUp className="h-4 w-4 text-green-500" />
@@ -323,7 +323,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
           <TabsContent value="creators" className="space-y-6">
             <div className="text-center mb-8">
               <h2 className="text-2xl font-bold mb-2">👥 Top Creators</h2>
-              <p className="text-muted-foreground">Verified traders with the highest credibility scores</p>
+              <p className="text-gray-700 font-medium">Verified traders with the highest credibility scores</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
