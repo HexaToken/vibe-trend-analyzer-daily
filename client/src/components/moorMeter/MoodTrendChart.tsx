@@ -58,7 +58,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
         <CardTitle className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Activity className="w-6 h-6 text-green-400" />
-            <span>Mood Over Time</span>
+            <span className="text-gray-100">Mood Over Time</span>
             <Badge variant="secondary" className="bg-white/20 text-orange-400">
               Trending
             </Badge>
@@ -73,7 +73,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
                 className={
                   timeframe === period
                     ? "bg-white/20 text-white"
-                    : "text-white/80 hover:bg-white/10"
+                    : "text-gray-100 hover:bg-white/10"
                 }
               >
                 {period}
