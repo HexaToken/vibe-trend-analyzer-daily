@@ -56,7 +56,11 @@ import ChatSubcategory from "./ChatSubcategory";
 import { moderationService } from "@/services/moderationService";
 import type { CreateFlagData } from "@/types/moderation";
 
-export const CommunityRooms = () => {
+interface CommunityRoomsProps {
+  onNavigateToProfile?: (userId: string) => void;
+}
+
+export const CommunityRooms = ({ onNavigateToProfile }: CommunityRoomsProps) => {
   const { user, isAuthenticated } = useAuth();
   const [activeView, setActiveView] = useState<"rooms" | "chat">("rooms");
   const [selectedRoom, setSelectedRoom] = useState<string | null>(null);
