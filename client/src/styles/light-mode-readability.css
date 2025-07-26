@@ -931,3 +931,110 @@
   color: #F5A623 !important; /* Orange text on gray badges */
   border-color: #4B5563 !important;
 }
+
+/* ===== CORAL COLOR SCHEME FOR LIGHT MODE (REPLACING GREEN) ===== */
+
+/* Replace green backgrounds with coral */
+:root:not(.dark) .bg-green-500,
+:root:not(.dark) .bg-green-600,
+:root:not(.dark) .bg-emerald-500,
+:root:not(.dark) .bg-emerald-600 {
+  background: #FF6B6B !important; /* Coral red */
+  color: #FFFFFF !important;
+  border-color: #FF5252 !important;
+}
+
+:root:not(.dark) .bg-green-500\/10,
+:root:not(.dark) .from-green-500\/10 {
+  background: rgba(255, 107, 107, 0.1) !important; /* Coral with opacity */
+  color: #D32F2F !important;
+}
+
+:root:not(.dark) .bg-green-500\/20,
+:root:not(.dark) .bg-emerald-500\/20,
+:root:not(.dark) .from-green-500\/20,
+:root:not(.dark) .to-green-600\/20 {
+  background: rgba(255, 107, 107, 0.2) !important; /* Coral with opacity */
+  color: #C62828 !important;
+}
+
+/* Replace green text colors with coral */
+:root:not(.dark) .text-green-500,
+:root:not(.dark) .text-green-600,
+:root:not(.dark) .text-green-700,
+:root:not(.dark) .text-emerald-400,
+:root:not(.dark) .text-emerald-500 {
+  color: #FF6B6B !important; /* Coral red */
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .text-green-800 {
+  color: #D32F2F !important; /* Darker coral for text */
+  font-weight: 600 !important;
+}
+
+/* Replace green borders with coral */
+:root:not(.dark) .border-green-200,
+:root:not(.dark) .border-green-300,
+:root:not(.dark) .border-green-500,
+:root:not(.dark) .border-emerald-500 {
+  border-color: #FF6B6B !important;
+}
+
+:root:not(.dark) .border-green-500\/30,
+:root:not(.dark) .border-emerald-500\/30 {
+  border-color: rgba(255, 107, 107, 0.3) !important;
+}
+
+:root:not(.dark) .hover\:border-green-500\/30:hover {
+  border-color: rgba(255, 107, 107, 0.3) !important;
+}
+
+/* Replace green gradients with coral gradients */
+:root:not(.dark) .bg-gradient-to-r.from-green-500 {
+  background: linear-gradient(to right, #FF6B6B, #FF5252) !important;
+  color: #FFFFFF !important;
+}
+
+:root:not(.dark) .from-green-500\/10.to-green-600\/20 {
+  background: linear-gradient(to right, rgba(255, 107, 107, 0.1), rgba(255, 82, 82, 0.2)) !important;
+  color: #D32F2F !important;
+}
+
+/* Replace green icons and accents */
+:root:not(.dark) .text-\[#4CAF50\] {
+  color: #FF6B6B !important;
+  font-weight: 600 !important;
+}
+
+/* Update hover states */
+:root:not(.dark) .hover\:text-green-700:hover {
+  color: #FF5252 !important;
+}
+
+/* Replace green shadows */
+:root:not(.dark) .shadow-green-500\/20,
+:root:not(.dark) .shadow-green-500\/30 {
+  box-shadow: 0 4px 6px -1px rgba(255, 107, 107, 0.3) !important;
+}
+
+/* Stock card specific coral colors */
+:root:not(.dark) .stock-card-icon {
+  background: linear-gradient(to right, rgba(255, 107, 107, 0.1), rgba(255, 82, 82, 0.2)) !important;
+  color: #D32F2F !important;
+}
+
+/* Badge coral colors */
+:root:not(.dark) .badge-coral {
+  background: #FF6B6B !important;
+  color: #FFFFFF !important;
+  border: 1px solid #FF5252 !important;
+  font-weight: 600 !important;
+}
+
+/* Coral hover effects */
+:root:not(.dark) .hover\:bg-green-50:hover,
+:root:not(.dark) .hover\:bg-green-100:hover {
+  background: #FFEBEE !important; /* Very light coral */
+  color: #D32F2F !important;
+}
