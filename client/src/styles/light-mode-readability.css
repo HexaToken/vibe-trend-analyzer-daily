@@ -628,3 +628,104 @@
   color: #111827 !important; /* Very dark for very light gradients */
   font-weight: 600 !important;
 }
+
+/* ===== COMPREHENSIVE LIGHT MODE CONTRAST FIXES ===== */
+
+/* Fix common problematic light colors in light mode */
+:root:not(.dark) .text-\[#444\],
+:root:not(.dark) .text-\[#666\],
+:root:not(.dark) .text-\[#888\],
+:root:not(.dark) .text-\[#4A4A4A\] {
+  color: #1F2937 !important; /* Gray-800 for better contrast */
+  font-weight: 500 !important;
+}
+
+:root:not(.dark) .text-\[#555\],
+:root:not(.dark) .text-\[#777\],
+:root:not(.dark) .text-\[#999\] {
+  color: #374151 !important; /* Gray-700 for secondary text */
+  font-weight: 500 !important;
+}
+
+/* Improve light buttons and interactive elements */
+:root:not(.dark) button[class*="bg-"][class*="/10"],
+:root:not(.dark) .bg-\[.*\]\/10 {
+  background: #4F46E5 !important; /* Solid indigo background */
+  color: #FFFFFF !important;
+  border: 1px solid #4338CA !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) button[class*="bg-"][class*="/20"] {
+  background: #3730A3 !important; /* Darker indigo for better contrast */
+  color: #FFFFFF !important;
+  border: 1px solid #312E81 !important;
+  font-weight: 600 !important;
+}
+
+/* Improve badge contrast specifically for light mode */
+:root:not(.dark) .bg-\[#E8F5E9\] {
+  background: #16A34A !important; /* Green-600 instead of light green */
+  color: #FFFFFF !important;
+  border: 1px solid #15803D !important;
+}
+
+:root:not(.dark) .bg-\[#FFEBEE\] {
+  background: #DC2626 !important; /* Red-600 instead of light red */
+  color: #FFFFFF !important;
+  border: 1px solid #B91C1C !important;
+}
+
+:root:not(.dark) .bg-\[#FFF8E1\] {
+  background: #D97706 !important; /* Amber-600 instead of light yellow */
+  color: #FFFFFF !important;
+  border: 1px solid #B45309 !important;
+}
+
+/* Fix text colors that reference light shades */
+:root:not(.dark) .text-\[#4CAF50\] {
+  color: #15803D !important; /* Darker green for better contrast */
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .text-\[#F44336\] {
+  color: #B91C1C !important; /* Darker red for better contrast */
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .text-\[#FFB300\] {
+  color: #B45309 !important; /* Darker amber for better contrast */
+  font-weight: 600 !important;
+}
+
+/* Enhanced contrast for small text elements */
+:root:not(.dark) .text-xs {
+  color: #374151 !important; /* Gray-700 minimum for small text */
+  font-weight: 500 !important;
+  letter-spacing: -0.005em !important;
+}
+
+:root:not(.dark) .text-sm {
+  color: #1F2937 !important; /* Gray-800 for small text */
+  font-weight: 500 !important;
+}
+
+/* Ensure all card content has good contrast */
+:root:not(.dark) [class*="card"] .text-sm,
+:root:not(.dark) [class*="Card"] .text-sm {
+  color: #1F2937 !important;
+  font-weight: 500 !important;
+}
+
+/* Fix navigation and tab text */
+:root:not(.dark) [role="tab"],
+:root:not(.dark) [data-state="inactive"] {
+  color: #1F2937 !important;
+  font-weight: 500 !important;
+}
+
+:root:not(.dark) [role="tab"]:hover,
+:root:not(.dark) [data-state="inactive"]:hover {
+  color: #111827 !important;
+  font-weight: 600 !important;
+}
