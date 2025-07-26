@@ -206,7 +206,7 @@ export const PostCard = ({
             className="inline-flex items-center gap-1 px-2 py-1 bg-cyan-100 dark:bg-cyan-900/20 text-cyan-700 dark:text-cyan-300 rounded-md font-semibold hover:bg-cyan-200 dark:hover:bg-cyan-900/40 transition-all duration-200 hover:scale-105"
             onClick={(e) => {
               e.stopPropagation();
-              onTickerClick?.(symbol);
+              onTickerClick?.(symbol, e);
             }}
             onMouseEnter={(e) => onTickerHover?.(symbol, e)}
             onMouseLeave={onTickerLeave}
@@ -404,7 +404,7 @@ export const PostCard = ({
                     key={ticker.symbol}
                     onClick={(e) => {
                       e.stopPropagation();
-                      onTickerClick?.(ticker.symbol);
+                      onTickerClick?.(ticker.symbol, e);
                     }}
                     onMouseEnter={(e) => onTickerHover?.(ticker.symbol, e)}
                     onMouseLeave={onTickerLeave}
