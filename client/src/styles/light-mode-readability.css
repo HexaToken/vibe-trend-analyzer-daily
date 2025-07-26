@@ -135,7 +135,7 @@
 
 /* Specific badge color improvements for better contrast */
 :root:not(.dark) .bg-primary {
-  background: #4F46E5 !important; /* Indigo-600 for better contrast */
+  background: #F4F6FA !important; /* Professional finance background */
   color: #FFFFFF !important;
   border-color: #4338CA !important; /* Indigo-700 */
 }
@@ -172,7 +172,7 @@
 }
 
 :root:not(.dark) .badge-verified {
-  background: #4F46E5 !important; /* Indigo-600 */
+  background: #F4F6FA !important; /* Professional finance background */
   color: #FFFFFF !important;
   border: 1px solid #4338CA !important; /* Indigo-700 */
   font-weight: 700 !important;
@@ -348,7 +348,7 @@
 /* Link enhancements for light mode */
 :root:not(.dark) a,
 :root:not(.dark) [role="link"] {
-  color: #4F46E5 !important;
+  color: #F4F6FA !important;
   font-weight: 500 !important;
   text-decoration: underline !important;
   text-decoration-thickness: 1px !important;
@@ -365,7 +365,7 @@
 :root:not(.dark) input:focus,
 :root:not(.dark) select:focus,
 :root:not(.dark) textarea:focus {
-  outline: 2px solid #4F46E5 !important;
+  outline: 2px solid #F4F6FA !important;
   outline-offset: 2px !important;
 }
 
@@ -796,7 +796,7 @@
 
 /* Improve light buttons and interactive elements */
 :root:not(.dark) button[class*="bg-"][class*="/10"] {
-  background: #4F46E5 !important; /* Solid indigo background */
+  background: #F4F6FA !important; /* Professional finance background */
   color: #FFFFFF !important;
   border: 1px solid #4338CA !important;
   font-weight: 600 !important;

@@ -78,7 +78,7 @@ const mockUserCredibility: UserCredibility = {
       name: "Fact Checker",
       description: "Regularly provides sources and data-backed analysis",
       icon: "🔍",
-      color: "#4F46E5",
+      color: "#F4F6FA",
       level: "silver",
       criteria: "Include sources in 80% of posts",
       earnedAt: new Date("2024-02-01"),

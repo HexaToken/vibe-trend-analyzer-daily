@@ -72,7 +72,7 @@ export const emojiIconMap: Record<string, IconConfig> = {
   '🎮': { icon: Gamepad2, color: '#76D443' },
   '🍎': { icon: Apple, color: '#000000' },
   '⚡': { icon: Zap, color: '#DC2626' },
-  '🔍': { icon: Search, color: '#4F46E5' },
+  '🔍': { icon: Search, color: '#F4F6FA' },
   '🪟': { icon: Square, color: '#0078D4' },
   '📘': { icon: ExternalLink, color: '#1877F2' },
   
