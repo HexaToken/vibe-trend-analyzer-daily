@@ -52,8 +52,8 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
   }, []);
 
   const navigationItems = [
-    { label: 'Market Mood', key: 'market-mood' },
-    { label: 'News Feed', key: 'news-feed' },
+    { label: 'Mood', key: 'market-mood' },
+    { label: 'News', key: 'news-feed' },
     { label: 'TradeHub', key: 'tradehub' },
   ];
 
