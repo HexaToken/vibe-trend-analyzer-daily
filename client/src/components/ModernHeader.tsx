@@ -60,16 +60,20 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
     { label: 'Community Hub', key: 'community', icon: '👥' },
     { label: 'Live Chat', key: 'chat', icon: '💬' },
     { label: 'Trading Rooms', key: 'rooms', icon: '🏠' },
-    { label: 'Social Feed', key: 'social', icon: '📱' },
+    { label: 'Space', key: 'space', icon: '🌌' },
   ];
 
   const financeItems = [
-    { label: 'Portfolio Tracker', key: 'portfolio', icon: '📊' },
+    { label: 'Finance Hub', key: 'finance', icon: '💰' },
     { label: 'Watchlist', key: 'watchlist', icon: '👁️' },
-    { label: 'Market Analytics', key: 'analytics', icon: '📈' },
+    { label: 'Market Analytics', key: 'market', icon: '📈' },
     { label: 'Stock Screener', key: 'screener', icon: '🔍' },
     { label: 'Crypto Dashboard', key: 'crypto', icon: '₿' },
     { label: 'Earnings Calendar', key: 'earnings', icon: '📅' },
+    { label: 'Charts', key: 'charts', icon: '📊' },
+    { label: 'Trending', key: 'trending', icon: '🔥' },
+    { label: 'Trade Journal', key: 'trade-journal', icon: '📝' },
+    { label: 'Sentiment Polls', key: 'sentiment-polls', icon: '📊' },
   ];
 
   const handleNavigation = (key: string) => {
