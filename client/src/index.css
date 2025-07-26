@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import Light Mode Readability Enhancements */
+@import './styles/light-mode-readability.css';
+
 /* Ticker bar auto-scroll animation */
 @keyframes scroll-ticker {
   0% {
