@@ -357,14 +357,14 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                       </div>
                       <div>
                         <div className="font-semibold">{trader.followers.toLocaleString()}</div>
-                        <div className="text-muted-foreground">Followers</div>
+                        <div className="text-gray-600 font-medium">Followers</div>
                       </div>
                     </div>
                     
                     <div className="grid grid-cols-2 gap-4 text-sm mb-4">
                       <div>
                         <div className="font-semibold">{trader.courses}</div>
-                        <div className="text-muted-foreground">Courses</div>
+                        <div className="text-gray-600 font-medium">Courses</div>
                       </div>
                       <div>
                         <div className="font-semibold">{trader.subscribers.toLocaleString()}</div>
