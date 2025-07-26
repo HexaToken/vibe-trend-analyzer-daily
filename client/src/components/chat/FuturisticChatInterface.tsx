@@ -798,6 +798,21 @@ export const FuturisticChatInterface = ({
           </div>
         )}
       </div>
+
+      {/* User Profile Popover */}
+      <UserProfilePopover
+        userId={profilePopover.userId}
+        isVisible={profilePopover.isVisible}
+        position={profilePopover.position}
+        onClose={() => setProfilePopover(prev => ({ ...prev, isVisible: false }))}
+        onFollow={handleFollow}
+        onUnfollow={handleUnfollow}
+        onToggleAlerts={handleToggleUserAlerts}
+        onViewProfile={(userId) => {
+          setProfilePopover(prev => ({ ...prev, isVisible: false }));
+          onNavigateToProfile?.(userId);
+        }}
+      />
     </div>
   );
 };
