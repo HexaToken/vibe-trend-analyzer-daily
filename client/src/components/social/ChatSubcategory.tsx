@@ -227,6 +227,9 @@ const mockMessages: ChatMessage[] = [
       { emoji: "📊", count: 6, users: [], userReacted: true },
     ],
     isPinned: true,
+    credibilityScore: 7.8,
+    needsReview: true,
+    communityFavorite: false,
   },
 ];
 
