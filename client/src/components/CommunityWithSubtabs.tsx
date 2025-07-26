@@ -5,13 +5,18 @@ import {
   Gamepad2,
   Coffee,
   Hash,
+  TrendingUp,
+  Flame,
+  Eye,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Community } from "./Community";
+
+import { SentimentPostWall } from "./SentimentPostWall";
 import { ChatSubcategory } from "./social/ChatSubcategory";
 import { CommunityRooms } from "./social/CommunityRooms";
+import { PrivateRoomsContainer } from "./privateRooms/PrivateRoomsContainer";
 import { SpaceSwitcherWidget } from "./community/SpaceSwitcherWidget";
 import { ProfileNavigationProvider } from "./social/ProfileNavigationProvider";
 
@@ -20,7 +25,7 @@ interface CommunityWithSubtabsProps {
 }
 
 export const CommunityWithSubtabs = ({ onNavigateToProfile }: CommunityWithSubtabsProps) => {
-  const [activeSubtab, setActiveSubtab] = useState("community-hub");
+  const [activeSubtab, setActiveSubtab] = useState("sentiment-feed");
 
   const handleNavigateToProfile = (userId: string) => {
     console.log(`Navigating to profile: ${userId}`);
@@ -60,33 +65,42 @@ export const CommunityWithSubtabs = ({ onNavigateToProfile }: CommunityWithSubta
             <Card className="border-0 shadow-sm bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
               <CardContent className="p-4">
                 <Tabs value={activeSubtab} onValueChange={setActiveSubtab}>
-                  <TabsList className="grid w-full grid-cols-4 bg-white dark:bg-slate-800">
-                    <TabsTrigger 
-                      value="community-hub" 
-                      className="flex items-center gap-2 data-[state=active]:bg-blue-500 data-[state=active]:text-white"
+                  <TabsList className="grid w-full grid-cols-5 bg-white dark:bg-slate-800">
+                    <TabsTrigger
+                      value="sentiment-feed"
+                      className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 data-[state=active]:text-white"
                     >
-                      <Users className="h-4 w-4" />
-                      <span className="hidden sm:inline">Community Hub</span>
-                      <span className="sm:hidden">Hub</span>
+                      <TrendingUp className="h-4 w-4" />
+                      <span className="hidden sm:inline">Sentiment Feed</span>
+                      <span className="sm:hidden">Feed</span>
                     </TabsTrigger>
-                    <TabsTrigger 
-                      value="live-chat" 
+
+                    <TabsTrigger
+                      value="live-chat"
                       className="flex items-center gap-2 data-[state=active]:bg-green-500 data-[state=active]:text-white"
                     >
                       <MessageSquare className="h-4 w-4" />
                       <span className="hidden sm:inline">Live Chat</span>
                       <span className="sm:hidden">Chat</span>
                     </TabsTrigger>
-                    <TabsTrigger 
-                      value="trading-rooms" 
+                    <TabsTrigger
+                      value="trading-rooms"
                       className="flex items-center gap-2 data-[state=active]:bg-orange-500 data-[state=active]:text-white"
                     >
                       <Hash className="h-4 w-4" />
                       <span className="hidden sm:inline">Trading Rooms</span>
                       <span className="sm:hidden">Rooms</span>
                     </TabsTrigger>
-                    <TabsTrigger 
-                      value="space" 
+                    <TabsTrigger
+                      value="private-watchlist"
+                      className="flex items-center gap-2 data-[state=active]:bg-indigo-500 data-[state=active]:text-white"
+                    >
+                      <Eye className="h-4 w-4" />
+                      <span className="hidden sm:inline">Private Watchlist</span>
+                      <span className="sm:hidden">Watchlist</span>
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="space"
                       className="flex items-center gap-2 data-[state=active]:bg-purple-500 data-[state=active]:text-white"
                     >
                       <Coffee className="h-4 w-4" />
@@ -97,9 +111,11 @@ export const CommunityWithSubtabs = ({ onNavigateToProfile }: CommunityWithSubta
 
                   {/* Tab Content */}
                   <div className="mt-6">
-                    <TabsContent value="community-hub" className="m-0">
-                      <Community onNavigateToProfile={handleNavigateToProfile} />
+                    <TabsContent value="sentiment-feed" className="m-0">
+                      <SentimentPostWall onNavigateToProfile={handleNavigateToProfile} />
                     </TabsContent>
+
+
 
                     <TabsContent value="live-chat" className="m-0">
                       <div className="mb-4">
@@ -119,6 +135,16 @@ export const CommunityWithSubtabs = ({ onNavigateToProfile }: CommunityWithSubta
                         </p>
                       </div>
                       <CommunityRooms onNavigateToProfile={handleNavigateToProfile} />
+                    </TabsContent>
+
+                    <TabsContent value="private-watchlist" className="m-0">
+                      <div className="mb-4">
+                        <h2 className="text-2xl font-semibold mb-2">Private Watchlist</h2>
+                        <p className="text-muted-foreground">
+                          Your personal collection of stocks, crypto, and securities for tracking and analysis
+                        </p>
+                      </div>
+                      <PrivateRoomsContainer />
                     </TabsContent>
 
                     <TabsContent value="space" className="m-0">
