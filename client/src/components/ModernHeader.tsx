@@ -93,9 +93,13 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
     <header
       className={cn(
         "sticky top-0 z-50 transition-all duration-300 h-16",
-        isScrolled
-          ? "bg-[#0A0A23]/95 backdrop-blur-xl border-b border-gray-800/50 shadow-lg shadow-purple-500/5"
-          : "bg-[#0A0A23]/80 backdrop-blur-md border-b border-gray-800/30"
+        isLightMode
+          ? isScrolled
+            ? "bg-white/95 backdrop-blur-xl border-b border-gray-200/80 shadow-lg shadow-gray-500/5"
+            : "bg-white/90 backdrop-blur-md border-b border-gray-200/50"
+          : isScrolled
+            ? "bg-[#0A0A23]/95 backdrop-blur-xl border-b border-gray-800/50 shadow-lg shadow-purple-500/5"
+            : "bg-[#0A0A23]/80 backdrop-blur-md border-b border-gray-800/30"
       )}
     >
       <div className="max-w-7xl mx-auto px-4">
