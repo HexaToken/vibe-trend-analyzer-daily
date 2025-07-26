@@ -65,7 +65,7 @@ import GeoSentimentMap from './finance/GeoSentimentMap';
 import BasicScreener from './BasicScreener';
 import SmartTradeJournal from './SmartTradeJournal';
 import CommunitySentimentPolls from './CommunitySentimentPolls';
-import { ModernHeader } from './ModernHeader';
+
 
 
 
@@ -280,13 +280,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
         </div>
       )}
 
-      {/* Modern Header */}
-      <ModernHeader
-        activeSection={activeSection}
-        setActiveSection={(section: string) => setActiveSection(section as any)}
-        onNavigate={onNavigate}
-        currentMoodScore={moodScore.overall}
-      />
+
 
             {/* Main Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-8">
