@@ -558,7 +558,7 @@ export const SocialPlatform = () => {
       {/* Main Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-green-600 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-[#1F2937] via-[#3730A3] to-[#4338CA] dark:from-blue-600 dark:via-purple-600 dark:to-green-600 bg-clip-text text-transparent">
             FinTwits
           </h1>
           <p className="text-xl text-muted-foreground">

@@ -558,7 +558,7 @@ const EarningsCalendarDashboard: React.FC<EarningsCalendarDashboardProps> = ({
       {/* Header and Controls */}
       <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-emerald-400 bg-clip-text text-transparent">
+          <h2 className="text-3xl font-bold bg-gradient-to-r from-[#1F2937] via-[#3730A3] to-[#4338CA] dark:from-purple-400 dark:via-pink-400 dark:to-emerald-400 bg-clip-text text-transparent">
             Earnings Radar
           </h2>
           <p className="text-gray-400 mt-1">Track upcoming and reported earnings with AI insights</p>

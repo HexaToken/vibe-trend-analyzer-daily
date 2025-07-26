@@ -125,7 +125,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
         {/* Header Section */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-4">
-            <DollarSign className="h-12 w-12 text-primary mr-3" />
+            <DollarSign className="h-12 w-12 text-[#1F2937] dark:text-primary mr-3" />
             <h1 className="text-4xl font-bold bg-gradient-to-r from-[#1F2937] to-[#3730A3] dark:from-primary dark:to-purple-600 bg-clip-text text-transparent">
               💼 TradeHub
             </h1>
@@ -251,7 +251,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                     )}
 
                     <div className="flex items-center justify-between pt-2">
-                      <div className="text-2xl font-bold text-primary">
+                      <div className="text-2xl font-bold text-[#1F2937] dark:text-primary">
                         ${item.price}
                         {item.period && <span className="text-sm text-gray-600 font-medium">/{item.period}</span>}
                       </div>
@@ -278,7 +278,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                   <CardContent className="p-6">
                     <div className="flex items-start gap-4">
                       <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-purple-600/20 rounded-lg flex items-center justify-center">
-                        <BookOpen className="h-8 w-8 text-primary" />
+                        <BookOpen className="h-8 w-8 text-[#1F2937] dark:text-primary" />
                       </div>
                       <div className="flex-1 space-y-2">
                         <Badge
@@ -300,7 +300,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                             <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                             <span className="text-sm">{item.rating}</span>
                           </div>
-                          <span className="text-lg font-bold text-primary">${item.price}</span>
+                          <span className="text-lg font-bold text-[#1F2937] dark:text-primary">${item.price}</span>
                         </div>
                       </div>
                     </div>
@@ -331,7 +331,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                         <TrendingUp className="h-4 w-4 text-green-500" />
                         <span className="text-sm text-green-500">+{Math.floor(Math.random() * 50 + 10)}%</span>
                       </div>
-                      <span className="text-lg font-bold text-primary">${item.price}</span>
+                      <span className="text-lg font-bold text-[#1F2937] dark:text-primary">${item.price}</span>
                     </div>
                   </CardContent>
                 </Card>

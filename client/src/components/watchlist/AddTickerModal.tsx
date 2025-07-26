@@ -206,7 +206,7 @@ export const AddTickerModal = ({ onAddAsset, existingTickers, children }: AddTic
       
       <DialogContent className="max-w-2xl max-h-[80vh] bg-gray-900 border-gray-700">
         <DialogHeader>
-          <DialogTitle className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+          <DialogTitle className="text-xl font-bold bg-gradient-to-r from-[#1F2937] to-[#3730A3] dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
             Add to Watchlist
           </DialogTitle>
         </DialogHeader>

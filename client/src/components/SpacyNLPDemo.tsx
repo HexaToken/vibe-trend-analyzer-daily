@@ -88,7 +88,7 @@ export function SpacyNLPDemo() {
   return (
     <div className="max-w-7xl mx-auto p-6 space-y-8">
       <div className="text-center">
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-green-600 bg-clip-text text-transparent mb-4">
+        <h1 className="text-4xl font-bold bg-gradient-to-r from-[#1F2937] via-[#3730A3] to-[#4338CA] dark:from-purple-600 dark:via-blue-600 dark:to-green-600 bg-clip-text text-transparent mb-4">
           spaCy Financial NLP Analysis
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto">

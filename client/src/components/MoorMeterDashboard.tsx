@@ -225,7 +225,7 @@ export const MoorMeterDashboard: React.FC = () => {
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 space-y-4 lg:space-y-0">
           <div className="flex items-center space-x-4">
             <div className="relative">
-              <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-[#1F2937] to-[#3730A3] dark:from-purple-600 dark:to-pink-600 bg-clip-text text-transparent">
                 MoorMeter
               </h1>
               <div className="absolute -top-1 -right-2">
