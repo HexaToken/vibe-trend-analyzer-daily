@@ -468,14 +468,33 @@ export const OffTopicLounge: React.FC = () => {
 
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 flex-wrap">
                       <span className="font-semibold">{post.user.name}</span>
+
+                      {/* Verified Icon */}
                       {post.user.verified && (
-                        <Badge variant="secondary" className="text-xs px-1 py-0">
-                          <Star className="w-3 h-3 mr-1" />
-                          Verified
-                        </Badge>
+                        <CheckCircle className="h-4 w-4 text-blue-500" />
                       )}
+
+                      {/* Credibility Score */}
+                      {post.credibilityScore && (
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Badge
+                                className={`text-xs px-2 py-0.5 font-semibold ${getCredibilityColor(post.credibilityScore)}`}
+                              >
+                                {post.credibilityScore.toFixed(1)}
+                              </Badge>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Credibility Score: {post.credibilityScore.toFixed(1)}/10.0</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      )}
+
+                      {/* User Badges */}
                       {post.user.badges.map((badge) => (
                         <Badge
                           key={badge}
@@ -485,6 +504,41 @@ export const OffTopicLounge: React.FC = () => {
                           {badge}
                         </Badge>
                       ))}
+
+                      {/* Needs Review Badge */}
+                      {post.needsReview && (
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Badge className="bg-yellow-100 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-400 text-xs px-2 py-0.5">
+                                <AlertTriangle className="h-3 w-3 mr-1" />
+                                Needs Review
+                              </Badge>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>This post requires community review</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      )}
+
+                      {/* Community Favorite Badge */}
+                      {post.communityFavorite && (
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Badge className="bg-pink-100 text-pink-700 dark:bg-pink-900/20 dark:text-pink-400 text-xs px-2 py-0.5">
+                                <AwardIcon className="h-3 w-3 mr-1" />
+                                Community Favorite
+                              </Badge>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Highly appreciated by the community</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      )}
+
                       <div className="flex items-center gap-1">
                         {getPostTypeIcon(post.type)}
                       </div>
