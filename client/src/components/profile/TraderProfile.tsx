@@ -365,7 +365,7 @@ export const TraderProfile = ({ userId, isCurrentUser = false, onNavigateBack }:
         <Card className="border-0 shadow-2xl bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-blue-500/5 to-cyan-500/5"></div>
           <CardContent className="relative p-8">
-            <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8">
+            <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8 relative z-10">
               {/* Avatar with Gradient Ring */}
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
                 <div className="relative flex-shrink-0">
