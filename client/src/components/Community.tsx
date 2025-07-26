@@ -15,7 +15,11 @@ import { PostCard, type PostCardData } from "./social/PostCard";
 
 
 
-export const Community = () => {
+interface CommunityProps {
+  onNavigateToProfile?: (userId: string) => void;
+}
+
+export const Community = ({ onNavigateToProfile }: CommunityProps) => {
   const [activeTab, setActiveTab] = useState<"all" | "following">("all");
   const [newPost, setNewPost] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
