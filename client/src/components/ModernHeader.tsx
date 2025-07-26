@@ -234,14 +234,20 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                 "relative transition-all duration-300",
                 searchFocused ? "w-64" : "w-48"
               )}>
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Search className={cn(
+                  "absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4",
+                  isLightMode ? "text-gray-500" : "text-gray-400"
+                )} />
                 <Input
                   type="text"
                   placeholder="Search"
                   className={cn(
-                    "pl-10 pr-4 py-2 bg-black/30 border-gray-600/50 rounded-full text-white placeholder-gray-400 transition-all duration-200 text-sm",
-                    "focus:bg-black/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/20 focus:outline-none",
-                    searchFocused && "shadow-lg shadow-purple-500/10"
+                    "pl-10 pr-4 py-2 rounded-full transition-all duration-200 text-sm",
+                    isLightMode
+                      ? "bg-gray-100 border-gray-200 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20"
+                      : "bg-black/30 border-gray-600/50 text-white placeholder-gray-400 focus:bg-black/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/20",
+                    "focus:outline-none",
+                    searchFocused && (isLightMode ? "shadow-md shadow-blue-500/10" : "shadow-lg shadow-purple-500/10")
                   )}
                   onFocus={() => setSearchFocused(true)}
                   onBlur={() => setSearchFocused(false)}
