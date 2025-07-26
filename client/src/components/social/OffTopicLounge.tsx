@@ -243,6 +243,9 @@ export const OffTopicLounge: React.FC = () => {
       replies: 42,
       shares: 23,
       tags: ["weekend", "fun", "lifestyle"],
+      credibilityScore: 7.2,
+      needsReview: false,
+      communityFavorite: false,
     },
   ];
 
