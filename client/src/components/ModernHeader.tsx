@@ -13,6 +13,7 @@ import {
 } from './ui/dropdown-menu';
 import { UserAuthenticationToggle } from './UserAuthenticationToggle';
 import { ThemeSettingsPanel } from './ThemeSettingsPanel';
+import { useMoodTheme } from '../contexts/MoodThemeContext';
 
 interface ModernHeaderProps {
   activeSection: string;
