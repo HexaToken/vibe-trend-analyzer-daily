@@ -4,6 +4,7 @@ import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Input } from './ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
+import { EmojiIcon } from '../lib/iconUtils';
 import {
   Calendar,
   ChevronLeft,
@@ -80,7 +81,7 @@ const EarningsCalendarDashboard: React.FC<EarningsCalendarDashboardProps> = ({
       date: '2024-01-15',
       symbol: 'NVDA',
       name: 'NVIDIA Corporation',
-      logo: '🎮',
+      logo: <EmojiIcon emoji="🎮" className="w-6 h-6" />,
       time: 'AMC',
       actualEPS: 5.16,
       estimatedEPS: 4.64,
@@ -101,7 +102,7 @@ const EarningsCalendarDashboard: React.FC<EarningsCalendarDashboardProps> = ({
       date: '2024-01-16',
       symbol: 'AAPL',
       name: 'Apple Inc.',
-      logo: '🍎',
+      logo: <EmojiIcon emoji="🍎" className="w-6 h-6" />,
       time: 'AMC',
       estimatedEPS: 1.53,
       estimatedRevenue: 94.5,
@@ -117,7 +118,7 @@ const EarningsCalendarDashboard: React.FC<EarningsCalendarDashboardProps> = ({
       date: '2024-01-17',
       symbol: 'TSLA',
       name: 'Tesla Inc.',
-      logo: '⚡',
+      logo: <EmojiIcon emoji="⚡" className="w-6 h-6" />,
       time: 'AMC',
       actualEPS: 0.71,
       estimatedEPS: 0.73,
@@ -138,7 +139,7 @@ const EarningsCalendarDashboard: React.FC<EarningsCalendarDashboardProps> = ({
       date: '2024-01-18',
       symbol: 'GOOGL',
       name: 'Alphabet Inc.',
-      logo: '🔍',
+      logo: <EmojiIcon emoji="🔍" className="w-6 h-6" />,
       time: 'AMC',
       estimatedEPS: 1.85,
       estimatedRevenue: 86.2,
@@ -153,7 +154,7 @@ const EarningsCalendarDashboard: React.FC<EarningsCalendarDashboardProps> = ({
       date: '2024-01-19',
       symbol: 'MSFT',
       name: 'Microsoft Corporation',
-      logo: '🪟',
+      logo: <EmojiIcon emoji="🪟" className="w-6 h-6" />,
       time: 'AMC',
       estimatedEPS: 2.78,
       estimatedRevenue: 62.8,
@@ -168,7 +169,7 @@ const EarningsCalendarDashboard: React.FC<EarningsCalendarDashboardProps> = ({
       date: '2024-01-22',
       symbol: 'META',
       name: 'Meta Platforms',
-      logo: '📘',
+      logo: <EmojiIcon emoji="📘" className="w-6 h-6" />,
       time: 'AMC',
       estimatedEPS: 4.96,
       estimatedRevenue: 39.1,
@@ -443,7 +444,7 @@ const EarningsCalendarDashboard: React.FC<EarningsCalendarDashboardProps> = ({
 
       <div className="flex items-center justify-between">
         <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30 text-xs">
-          🤖 {earning.aiSentiment}
+          <EmojiIcon emoji="🤖" className="w-4 h-4" /> {earning.aiSentiment}
         </Badge>
         {earning.sentimentScore && (
           <div className="text-xs text-gray-400">
@@ -570,7 +571,7 @@ const EarningsCalendarDashboard: React.FC<EarningsCalendarDashboardProps> = ({
             onClick={() => setViewMode('calendar')}
             className="text-xs"
           >
-            📅 Calendar
+            <EmojiIcon emoji="📅" className="w-4 h-4" /> Calendar
           </Button>
           <Button
             variant={viewMode === 'feed' ? 'default' : 'outline'}
@@ -578,7 +579,7 @@ const EarningsCalendarDashboard: React.FC<EarningsCalendarDashboardProps> = ({
             onClick={() => setViewMode('feed')}
             className="text-xs"
           >
-            📋 Feed
+            <EmojiIcon emoji="📋" className="w-4 h-4" /> Feed
           </Button>
           <Button
             variant={viewMode === 'chart' ? 'default' : 'outline'}
@@ -586,7 +587,7 @@ const EarningsCalendarDashboard: React.FC<EarningsCalendarDashboardProps> = ({
             onClick={() => setViewMode('chart')}
             className="text-xs"
           >
-            📊 Chart
+            <EmojiIcon emoji="📊" className="w-4 h-4" /> Chart
           </Button>
         </div>
       </div>

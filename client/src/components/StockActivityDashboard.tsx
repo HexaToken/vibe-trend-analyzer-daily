@@ -4,6 +4,7 @@ import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Input } from './ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
+import { EmojiIcon } from '../lib/iconUtils';
 import {
   Search,
   TrendingUp,
@@ -150,9 +151,9 @@ const StockActivityDashboard: React.FC<StockActivityDashboardProps> = ({
 
   const getSentimentIcon = (sentiment: string) => {
     switch (sentiment) {
-      case 'bullish': return '😃';
-      case 'bearish': return '😡';
-      default: return '😐';
+      case 'bullish': return <EmojiIcon emoji="😃" className="w-4 h-4" />;
+      case 'bearish': return <EmojiIcon emoji="😡" className="w-4 h-4" />;
+      default: return <EmojiIcon emoji="😐" className="w-4 h-4" />;
     }
   };
 

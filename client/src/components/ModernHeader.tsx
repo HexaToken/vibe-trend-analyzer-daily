@@ -13,6 +13,7 @@ import {
 } from './ui/dropdown-menu';
 import { UserAuthenticationToggle } from './UserAuthenticationToggle';
 import { ThemeSettingsPanel } from './ThemeSettingsPanel';
+import { useMoodTheme } from '../contexts/MoodThemeContext';
 
 interface ModernHeaderProps {
   activeSection: string;
@@ -27,9 +28,14 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
   onNavigate,
   currentMoodScore = 72,
 }) => {
+  const { themeMode, isDynamicMode } = useMoodTheme();
   const [searchFocused, setSearchFocused] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  // Theme-responsive styles
+  const isLightMode = themeMode === 'light';
+  const isDarkMode = themeMode === 'dark' || isDynamicMode;
 
   // Handle scroll effect for sticky header
   useEffect(() => {
@@ -87,9 +93,13 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
     <header
       className={cn(
         "sticky top-0 z-50 transition-all duration-300 h-16",
-        isScrolled
-          ? "bg-[#0A0A23]/95 backdrop-blur-xl border-b border-gray-800/50 shadow-lg shadow-purple-500/5"
-          : "bg-[#0A0A23]/80 backdrop-blur-md border-b border-gray-800/30"
+        isLightMode
+          ? isScrolled
+            ? "bg-white/95 backdrop-blur-xl border-b border-gray-200/80 shadow-lg shadow-gray-500/5"
+            : "bg-white/90 backdrop-blur-md border-b border-gray-200/50"
+          : isScrolled
+            ? "bg-[#0A0A23]/95 backdrop-blur-xl border-b border-gray-800/50 shadow-lg shadow-purple-500/5"
+            : "bg-[#0A0A23]/80 backdrop-blur-md border-b border-gray-800/30"
       )}
     >
       <div className="max-w-7xl mx-auto px-4">
@@ -105,7 +115,11 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                 <Brain className="w-5 h-5 text-white" />
               </div>
               <h1 className="text-lg font-semibold group-hover:drop-shadow-lg transition-all duration-200">
-                <span className="text-white group-hover:text-purple-100">🧠 Mood</span>
+                <span className={cn(
+                  isLightMode
+                    ? "text-gray-900 group-hover:text-gray-700"
+                    : "text-white group-hover:text-purple-100"
+                )}>🧠 Mood</span>
                 <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent group-hover:from-pink-300 group-hover:via-purple-300 group-hover:to-cyan-300">
                   Meter
                 </span>
@@ -122,8 +136,12 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                 className={cn(
                   "text-base font-medium px-3 py-2 rounded-lg transition-all duration-200 relative group",
                   activeSection === key
-                    ? "text-pink-400 bg-pink-500/10"
-                    : "text-gray-300 hover:text-white hover:text-pink-300"
+                    ? isLightMode
+                      ? "text-pink-600 bg-pink-500/10"
+                      : "text-pink-400 bg-pink-500/10"
+                    : isLightMode
+                      ? "text-gray-900 hover:text-blue-600"
+                      : "text-gray-300 hover:text-white hover:text-pink-300"
                 )}
                 aria-current={activeSection === key ? "page" : undefined}
               >
@@ -138,7 +156,12 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
             {/* Community Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="flex items-center gap-1 text-base font-medium px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:text-pink-300 transition-all duration-200 relative group">
+                <button className={cn(
+                  "flex items-center gap-1 text-base font-medium px-3 py-2 rounded-lg transition-all duration-200 relative group",
+                  isLightMode
+                    ? "text-gray-900 hover:text-blue-600"
+                    : "text-gray-300 hover:text-white hover:text-pink-300"
+                )}>
                   Community
                   <ChevronDown className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" />
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
@@ -146,7 +169,12 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
               </DropdownMenuTrigger>
               <DropdownMenuContent
                 align="center"
-                className="w-56 bg-[#0A0A23]/95 backdrop-blur-xl border-gray-700 text-white rounded-xl"
+                className={cn(
+                  "w-56 backdrop-blur-xl rounded-xl",
+                  isLightMode
+                    ? "bg-white/95 border-gray-200 text-gray-900"
+                    : "bg-[#0A0A23]/95 border-gray-700 text-white"
+                )}
               >
                 {communityItems.map(({ label, key, icon }) => (
                   <DropdownMenuItem
@@ -164,7 +192,12 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
             {/* Finance Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="flex items-center gap-1 text-base font-medium px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:text-pink-300 transition-all duration-200 relative group">
+                <button className={cn(
+                  "flex items-center gap-1 text-base font-medium px-3 py-2 rounded-lg transition-all duration-200 relative group",
+                  isLightMode
+                    ? "text-gray-900 hover:text-blue-600"
+                    : "text-gray-300 hover:text-white hover:text-pink-300"
+                )}>
                   Finance
                   <ChevronDown className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" />
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
@@ -172,7 +205,12 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
               </DropdownMenuTrigger>
               <DropdownMenuContent
                 align="center"
-                className="w-56 bg-[#0A0A23]/95 backdrop-blur-xl border-gray-700 text-white rounded-xl"
+                className={cn(
+                  "w-56 backdrop-blur-xl rounded-xl",
+                  isLightMode
+                    ? "bg-white/95 border-gray-200 text-gray-900"
+                    : "bg-[#0A0A23]/95 border-gray-700 text-white"
+                )}
               >
                 {financeItems.map(({ label, key, icon }) => (
                   <DropdownMenuItem
@@ -196,14 +234,20 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                 "relative transition-all duration-300",
                 searchFocused ? "w-64" : "w-48"
               )}>
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Search className={cn(
+                  "absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4",
+                  isLightMode ? "text-gray-500" : "text-gray-400"
+                )} />
                 <Input
                   type="text"
                   placeholder="Search"
                   className={cn(
-                    "pl-10 pr-4 py-2 bg-black/30 border-gray-600/50 rounded-full text-white placeholder-gray-400 transition-all duration-200 text-sm",
-                    "focus:bg-black/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/20 focus:outline-none",
-                    searchFocused && "shadow-lg shadow-purple-500/10"
+                    "pl-10 pr-4 py-2 rounded-full transition-all duration-200 text-sm",
+                    isLightMode
+                      ? "bg-gray-100 border-gray-200 text-gray-900 placeholder-gray-500 focus:bg-white focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20"
+                      : "bg-black/30 border-gray-600/50 text-white placeholder-gray-400 focus:bg-black/50 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/20",
+                    "focus:outline-none",
+                    searchFocused && (isLightMode ? "shadow-md shadow-blue-500/10" : "shadow-lg shadow-purple-500/10")
                   )}
                   onFocus={() => setSearchFocused(true)}
                   onBlur={() => setSearchFocused(false)}
@@ -215,10 +259,20 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
             <Button
               variant="ghost"
               size="sm"
-              className="relative p-2 hover:bg-purple-500/20 rounded-lg group transition-all duration-200"
+              className={cn(
+                "relative p-2 rounded-lg group transition-all duration-200",
+                isLightMode
+                  ? "hover:bg-blue-500/10"
+                  : "hover:bg-purple-500/20"
+              )}
               aria-label="Notifications"
             >
-              <Bell className="w-5 h-5 text-gray-300 group-hover:text-purple-400 transition-colors" />
+              <Bell className={cn(
+                "w-5 h-5 transition-colors",
+                isLightMode
+                  ? "text-gray-700 group-hover:text-blue-500"
+                  : "text-gray-300 group-hover:text-purple-400"
+              )} />
               <Badge className="absolute -top-1 -right-1 w-4 h-4 p-0 bg-pink-500 text-white text-xs flex items-center justify-center rounded-full animate-pulse">
                 3
               </Badge>
@@ -234,14 +288,25 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
             <Button
               variant="ghost"
               size="sm"
-              className="md:hidden p-2 hover:bg-purple-500/20 rounded-lg ml-2"
+              className={cn(
+                "md:hidden p-2 rounded-lg ml-2",
+                isLightMode
+                  ? "hover:bg-blue-500/10"
+                  : "hover:bg-purple-500/20"
+              )}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle mobile menu"
             >
               {mobileMenuOpen ? (
-                <X className="w-5 h-5 text-gray-300" />
+                <X className={cn(
+                  "w-5 h-5",
+                  isLightMode ? "text-gray-700" : "text-gray-300"
+                )} />
               ) : (
-                <Menu className="w-5 h-5 text-gray-300" />
+                <Menu className={cn(
+                  "w-5 h-5",
+                  isLightMode ? "text-gray-700" : "text-gray-300"
+                )} />
               )}
             </Button>
           </div>
@@ -250,16 +315,29 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
 
       {/* Mobile Navigation Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#0A0A23]/95 backdrop-blur-xl border-t border-gray-800/50">
+        <div className={cn(
+          "md:hidden backdrop-blur-xl",
+          isLightMode
+            ? "bg-white/95 border-t border-gray-200/50"
+            : "bg-[#0A0A23]/95 border-t border-gray-800/50"
+        )}>
           <div className="px-4 py-4 space-y-3">
             {/* Mobile Search */}
             <div className="mb-4">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Search className={cn(
+                  "absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4",
+                  isLightMode ? "text-gray-500" : "text-gray-400"
+                )} />
                 <Input
                   type="text"
                   placeholder="Search"
-                  className="pl-10 pr-4 py-3 bg-black/30 border-gray-600/50 rounded-full text-white placeholder-gray-400 w-full"
+                  className={cn(
+                    "pl-10 pr-4 py-3 rounded-full w-full",
+                    isLightMode
+                      ? "bg-gray-100 border-gray-200 text-gray-900 placeholder-gray-500"
+                      : "bg-black/30 border-gray-600/50 text-white placeholder-gray-400"
+                  )}
                 />
               </div>
             </div>
@@ -274,8 +352,12 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                   className={cn(
                     "w-full justify-start text-left py-3 rounded-xl transition-all duration-200",
                     activeSection === key
-                      ? "text-pink-400 bg-pink-500/10 border border-pink-500/20"
-                      : "text-gray-300 hover:text-white hover:bg-purple-500/20"
+                      ? isLightMode
+                        ? "text-pink-600 bg-pink-500/10 border border-pink-500/20"
+                        : "text-pink-400 bg-pink-500/10 border border-pink-500/20"
+                      : isLightMode
+                        ? "text-gray-900 hover:text-blue-600 hover:bg-blue-500/10"
+                        : "text-gray-300 hover:text-white hover:bg-purple-500/20"
                   )}
                 >
                   {label}
@@ -284,8 +366,14 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
             </div>
 
             {/* Mobile Community Section */}
-            <div className="pt-4 border-t border-gray-700/50">
-              <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-3">
+            <div className={cn(
+              "pt-4 border-t",
+              isLightMode ? "border-gray-200/50" : "border-gray-700/50"
+            )}>
+              <div className={cn(
+                "text-xs font-semibold uppercase tracking-wider mb-3 px-3",
+                isLightMode ? "text-gray-600" : "text-gray-400"
+              )}>
                 Community
               </div>
               <div className="space-y-1">
@@ -294,7 +382,12 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                     key={key}
                     variant="ghost"
                     onClick={() => handleNavigation(key)}
-                    className="w-full justify-start text-left py-3 rounded-xl text-gray-300 hover:text-white hover:bg-purple-500/20 transition-all duration-200"
+                    className={cn(
+                      "w-full justify-start text-left py-3 rounded-xl transition-all duration-200",
+                      isLightMode
+                        ? "text-gray-900 hover:text-blue-600 hover:bg-blue-500/10"
+                        : "text-gray-300 hover:text-white hover:bg-purple-500/20"
+                    )}
                   >
                     <span className="mr-3">{icon}</span>
                     {label}
@@ -304,8 +397,14 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
             </div>
 
             {/* Mobile Finance Section */}
-            <div className="pt-4 border-t border-gray-700/50">
-              <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-3">
+            <div className={cn(
+              "pt-4 border-t",
+              isLightMode ? "border-gray-200/50" : "border-gray-700/50"
+            )}>
+              <div className={cn(
+                "text-xs font-semibold uppercase tracking-wider mb-3 px-3",
+                isLightMode ? "text-gray-600" : "text-gray-400"
+              )}>
                 Finance
               </div>
               <div className="space-y-1">
@@ -314,7 +413,12 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                     key={key}
                     variant="ghost"
                     onClick={() => handleNavigation(key)}
-                    className="w-full justify-start text-left py-3 rounded-xl text-gray-300 hover:text-white hover:bg-green-500/20 transition-all duration-200"
+                    className={cn(
+                      "w-full justify-start text-left py-3 rounded-xl transition-all duration-200",
+                      isLightMode
+                        ? "text-gray-900 hover:text-green-600 hover:bg-green-500/10"
+                        : "text-gray-300 hover:text-white hover:bg-green-500/20"
+                    )}
                   >
                     <span className="mr-3">{icon}</span>
                     {label}
@@ -324,8 +428,14 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
             </div>
 
             {/* Mobile Theme Settings */}
-            <div className="pt-4 border-t border-gray-700/50">
-              <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-3">
+            <div className={cn(
+              "pt-4 border-t",
+              isLightMode ? "border-gray-200/50" : "border-gray-700/50"
+            )}>
+              <div className={cn(
+                "text-xs font-semibold uppercase tracking-wider mb-3 px-3",
+                isLightMode ? "text-gray-600" : "text-gray-400"
+              )}>
                 Theme Settings
               </div>
               <div className="px-3">

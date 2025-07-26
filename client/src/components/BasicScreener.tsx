@@ -381,7 +381,7 @@ export const BasicScreener: React.FC<BasicScreenerProps> = ({ className }) => {
             </div>
             Basic Stock Screener
           </h2>
-          <p className="text-gray-400 text-sm mt-1">
+          <p className="text-gray-700 font-medium text-sm mt-1">
             Essential stock filtering for free users with sentiment analysis
           </p>
         </div>

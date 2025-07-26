@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { getIconFromEmoji, type IconConfig } from '../lib/iconUtils';
+import { LIGHT_THEME_COLORS, MOOD_COLORS, INTERACTIVE_COLORS, getMoodColor, getMoodTag, getMoodButton } from '../lib/moodColors';
 
 export type ThemeMode = 'light' | 'dark' | 'dynamic';
 
@@ -23,10 +25,16 @@ interface MoodThemeContextType {
   bodyGradient: string;
   accentColor: string;
   glowEffect: string;
-  moodEmoji: string;
+  moodIcon: IconConfig;
   moodLabel: string;
   cardBackground: string;
   borderColor: string;
+  // Mood color utilities
+  getMoodColor: typeof getMoodColor;
+  getMoodTag: typeof getMoodTag;
+  getMoodButton: typeof getMoodButton;
+  lightThemeColors: typeof LIGHT_THEME_COLORS;
+  interactiveColors: typeof INTERACTIVE_COLORS;
 }
 
 const MoodThemeContext = createContext<MoodThemeContextType | undefined>(undefined);
@@ -41,52 +49,72 @@ const MOOD_RANGES = {
 const MOOD_THEMES = {
   light: {
     neutral: {
-      background: 'bg-[#F5F7FA]',
-      bodyGradient: 'from-[#F5F7FA] to-white',
-      accentColor: 'from-[#3F51B5] to-[#26A69A]',
-      glowEffect: 'shadow-[0_2px_8px_rgba(0,0,0,0.04)]',
-      textPrimary: 'text-[#1E1E1E]',
-      textSecondary: 'text-[#333]',
-      textBody: 'text-[#555]',
-      cardBackground: 'bg-white rounded-xl',
-      border: 'border-[#E0E0E0]',
-      hoverEffect: 'hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-200',
+      background: 'bg-gray-50',
+      bodyGradient: 'from-gray-50 to-white',
+      accentColor: 'from-indigo-500 to-blue-500',
+      glowEffect: 'shadow-md',
+      textPrimary: 'text-gray-900',
+      textSecondary: 'text-gray-600',
+      textBody: 'text-gray-700',
+      cardBackground: 'bg-white shadow-md rounded-xl',
+      border: 'border-gray-300',
+      hoverEffect: 'hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200',
+      buttonPrimary: 'bg-indigo-500 text-white hover:bg-indigo-600',
+      buttonSecondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300',
+      inputBackground: 'bg-white shadow-sm border-gray-300',
+      moodBackground: 'bg-gray-200',
+      moodText: 'text-gray-700',
     },
     bearish: {
-      background: 'bg-[#F5F7FA]',
-      bodyGradient: 'from-[#F5F7FA] to-red-50/30',
-      accentColor: 'from-[#F44336] to-[#E57373]',
-      glowEffect: 'shadow-[0_2px_8px_rgba(244,67,54,0.08)]',
-      textPrimary: 'text-[#1E1E1E]',
-      textSecondary: 'text-[#333]',
-      textBody: 'text-[#555]',
-      cardBackground: 'bg-white rounded-xl',
-      border: 'border-[#E0E0E0]',
-      hoverEffect: 'hover:shadow-[0_4px_12px_rgba(244,67,54,0.1)] hover:-translate-y-0.5 transition-all duration-200',
+      background: 'bg-gray-50',
+      bodyGradient: 'from-gray-50 to-rose-50/30',
+      accentColor: 'from-red-500 to-red-400',
+      glowEffect: 'shadow-md shadow-red-500/10',
+      textPrimary: 'text-gray-900',
+      textSecondary: 'text-gray-600',
+      textBody: 'text-gray-700',
+      cardBackground: 'bg-white shadow-md rounded-xl',
+      border: 'border-gray-300',
+      hoverEffect: 'hover:shadow-lg hover:shadow-red-500/20 hover:-translate-y-0.5 transition-all duration-200',
+      buttonPrimary: 'bg-red-500 text-white hover:bg-red-600',
+      buttonSecondary: 'bg-rose-100 text-red-700 hover:bg-rose-200',
+      inputBackground: 'bg-white shadow-sm border-gray-300',
+      moodBackground: 'bg-rose-100',
+      moodText: 'text-red-700',
     },
     bullish: {
-      background: 'bg-[#F5F7FA]',
-      bodyGradient: 'from-[#F5F7FA] to-green-50/30',
-      accentColor: 'from-[#4CAF50] to-[#66BB6A]',
-      glowEffect: 'shadow-[0_2px_8px_rgba(76,175,80,0.08)]',
-      textPrimary: 'text-[#1E1E1E]',
-      textSecondary: 'text-[#333]',
-      textBody: 'text-[#555]',
-      cardBackground: 'bg-white rounded-xl',
-      border: 'border-[#E0E0E0]',
-      hoverEffect: 'hover:shadow-[0_4px_12px_rgba(76,175,80,0.1)] hover:-translate-y-0.5 transition-all duration-200',
+      background: 'bg-gray-50',
+      bodyGradient: 'from-gray-50 to-green-50/30',
+      accentColor: 'from-green-500 to-emerald-500',
+      glowEffect: 'shadow-md shadow-green-500/10',
+      textPrimary: 'text-gray-900',
+      textSecondary: 'text-gray-600',
+      textBody: 'text-gray-700',
+      cardBackground: 'bg-white shadow-md rounded-xl',
+      border: 'border-gray-300',
+      hoverEffect: 'hover:shadow-lg hover:shadow-green-500/20 hover:-translate-y-0.5 transition-all duration-200',
+      buttonPrimary: 'bg-green-500 text-white hover:bg-green-600',
+      buttonSecondary: 'bg-green-100 text-green-700 hover:bg-green-200',
+      inputBackground: 'bg-white shadow-sm border-gray-300',
+      moodBackground: 'bg-green-100',
+      moodText: 'text-green-700',
     },
     extreme: {
-      background: 'bg-[#F5F7FA]',
-      bodyGradient: 'from-[#F5F7FA] to-purple-50/30',
-      accentColor: 'from-[#9C27B0] to-[#BA68C8]',
-      glowEffect: 'shadow-[0_2px_8px_rgba(156,39,176,0.08)]',
-      textPrimary: 'text-[#1E1E1E]',
-      textSecondary: 'text-[#333]',
-      textBody: 'text-[#555]',
-      cardBackground: 'bg-white rounded-xl',
-      border: 'border-[#E0E0E0]',
-      hoverEffect: 'hover:shadow-[0_4px_12px_rgba(156,39,176,0.1)] hover:-translate-y-0.5 transition-all duration-200',
+      background: 'bg-gray-50',
+      bodyGradient: 'from-gray-50 to-sky-50/30',
+      accentColor: 'from-indigo-500 to-purple-500',
+      glowEffect: 'shadow-md shadow-indigo-500/10',
+      textPrimary: 'text-gray-900',
+      textSecondary: 'text-gray-600',
+      textBody: 'text-gray-700',
+      cardBackground: 'bg-white shadow-md rounded-xl',
+      border: 'border-gray-300',
+      hoverEffect: 'hover:shadow-lg hover:shadow-indigo-500/20 hover:-translate-y-0.5 transition-all duration-200',
+      buttonPrimary: 'bg-indigo-500 text-white hover:bg-indigo-600',
+      buttonSecondary: 'bg-sky-100 text-sky-700 hover:bg-sky-200',
+      inputBackground: 'bg-white shadow-sm border-gray-300',
+      moodBackground: 'bg-sky-100',
+      moodText: 'text-sky-700',
     }
   },
   dark: {
@@ -133,11 +161,11 @@ const MOOD_THEMES = {
   }
 };
 
-const MOOD_EMOJIS = {
-  neutral: '😐',
-  bearish: '📉',
-  bullish: '📈',
-  extreme: '🔥'
+const MOOD_ICONS = {
+  neutral: getIconFromEmoji('😐'),
+  bearish: getIconFromEmoji('📉'),
+  bullish: getIconFromEmoji('📈'),
+  extreme: getIconFromEmoji('🔥')
 };
 
 const MOOD_LABELS = {
@@ -209,10 +237,16 @@ export const MoodThemeProvider: React.FC<MoodThemeProviderProps> = ({ children }
     bodyGradient: `bg-gradient-to-br ${currentTheme.bodyGradient}`,
     accentColor: `bg-gradient-to-r ${currentTheme.accentColor}`,
     glowEffect: currentTheme.glowEffect,
-    moodEmoji: MOOD_EMOJIS[moodState],
+    moodIcon: MOOD_ICONS[moodState],
     moodLabel: MOOD_LABELS[moodState],
     cardBackground: currentTheme.cardBackground,
     borderColor: currentTheme.border,
+    // Mood color utilities
+    getMoodColor,
+    getMoodTag,
+    getMoodButton,
+    lightThemeColors: LIGHT_THEME_COLORS,
+    interactiveColors: INTERACTIVE_COLORS,
   };
 
   return (

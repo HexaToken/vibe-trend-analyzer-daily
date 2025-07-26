@@ -1,3 +1,9 @@
+/* Import Light Mode Readability Enhancements */
+@import './styles/light-mode-readability.css';
+
+/* Import MoodMeter Theme Utilities */
+@import './components/MoodThemeUtilities.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -18,44 +24,50 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Light Mode (Clarity Mode) - Finance-focused design system */
-    --background: 220 14% 96%; /* #F5F7FA - Clean neutral base */
-    --foreground: 220 13% 12%; /* #1E1E1E - Headlines */
+    /* MoodMeter Light Mode - Optimized for clarity and mood-based branding */
+    --background: 220 14% 98%; /* #F9FAFB - Clean gray-50 base */
+    --foreground: 220 13% 9%; /* #111827 - Primary text gray-900 */
 
     --card: 0 0% 100%; /* #FFFFFF - Pure white cards */
-    --card-foreground: 220 13% 12%; /* #1E1E1E */
+    --card-foreground: 220 13% 9%; /* #111827 - Primary text */
 
     --popover: 0 0% 100%; /* #FFFFFF */
-    --popover-foreground: 220 13% 12%; /* #1E1E1E */
+    --popover-foreground: 220 13% 9%; /* #111827 */
 
-    --primary: 228 45% 42%; /* #3F51B5 - Financial blue */
+    --primary: 238 94% 67%; /* #6366F1 - Indigo accent */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 13% 20%; /* #333 - Subheadings */
+    --secondary: 220 9% 46%; /* #4B5563 - Secondary text gray-600 */
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 220 13% 88%; /* #E0E0E0 - Borders */
-    --muted-foreground: 220 13% 33%; /* #555 - Descriptions */
+    --muted: 220 13% 91%; /* #E5E7EB - Light gray-200 for backgrounds */
+    --muted-foreground: 220 9% 46%; /* #4B5563 - Secondary text */
 
-    --accent: 240 10% 96%; /* #F5F5F5 - Light hover background */
-    --accent-foreground: 220 13% 12%; /* #1E1E1E - Dark text on light hover */
+    --accent: 220 14% 96%; /* #F3F4F6 - Neutral hover background */
+    --accent-foreground: 220 13% 9%; /* #111827 - Primary text on light */
 
-    --destructive: 4 90% 58%; /* #F44336 - Red accent */
+    --destructive: 0 84% 60%; /* #EF4444 - Red-500 for errors */
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 88%; /* #E0E0E0 - Gray borders */
-    --input: 220 13% 88%; /* #E0E0E0 */
-    --ring: 228 45% 42%; /* #3F51B5 - Focus ring */
+    --border: 220 13% 91%; /* #D1D5DB - Gray-300 borders */
+    --input: 220 13% 91%; /* #D1D5DB - Input borders */
+    --ring: 238 94% 67%; /* #6366F1 - Indigo focus ring */
 
     --radius: 0.75rem; /* 12px border radius */
 
-    /* Sentiment Colors - Light Mode Financial Grade */
-    --positive: 123 46% 49%; /* #4CAF50 - Green */
-    --positive-light: 123 46% 85%;
-    --negative: 4 90% 58%; /* #F44336 - Red */
-    --negative-light: 4 90% 85%;
-    --neutral: 199 18% 33%; /* #607D8B - Gray */
-    --neutral-light: 199 18% 80%;
+    /* MoodMeter Sentiment Colors - Optimized for mood tracking */
+    --positive: 142 71% 45%; /* #22C55E - Green-500 for bullish/euphoria */
+    --positive-light: 142 76% 73%; /* #86EFAC - Green-300 */
+    --negative: 0 84% 60%; /* #EF4444 - Red-500 for bearish/panic */
+    --negative-light: 0 93% 94%; /* #FEE2E2 - Red-100 */
+    --neutral: 220 9% 46%; /* #6B7280 - Gray-500 for neutral */
+    --neutral-light: 220 14% 96%; /* #F3F4F6 - Gray-100 */
+
+    /* MoodMeter Mood Colors */
+    --mood-hype: 199 89% 48%; /* #0EA5E9 - Sky-500 for hype */
+    --mood-hype-light: 204 94% 94%; /* #E0F2FE - Sky-100 */
+    --mood-fear: 45 93% 47%; /* #EAB308 - Yellow-500 for fear */
+    --mood-fear-light: 55 92% 95%; /* #FEF3C7 - Yellow-100 */
 
     /* Data Visualization - Clean Financial Colors */
     --chart-primary: 174 72% 56%; /* #26A69A - Teal for primary charts */
@@ -229,6 +241,59 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Light Mode Typography & Readability Enhancements */
+  :root:not(.dark) {
+    /* Enhanced font stack for better readability */
+    font-family: 'Inter', 'Roboto', 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    font-variation-settings: 'opsz' 14;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Light Mode Base Typography Settings */
+  :root:not(.dark) body {
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  /* Enhanced heading contrast in light mode */
+  :root:not(.dark) h1,
+  :root:not(.dark) h2,
+  :root:not(.dark) h3,
+  :root:not(.dark) h4,
+  :root:not(.dark) h5,
+  :root:not(.dark) h6 {
+    color: #111827 !important;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.25;
+  }
+
+  /* Body text improvements */
+  :root:not(.dark) p {
+    color: #374151;
+    line-height: 1.7;
+    font-weight: 400;
+  }
+
+  /* Small text and labels readability */
+  :root:not(.dark) .text-sm {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    line-height: 1.5;
+  }
+
+  /* Button text clarity */
+  :root:not(.dark) button {
+    font-weight: 500;
+    letter-spacing: -0.01em;
   }
 }
 

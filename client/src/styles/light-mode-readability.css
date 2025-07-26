@@ -1,0 +1,1040 @@
+/* ===== LIGHT MODE READABILITY ENHANCEMENTS ===== */
+/* Apply focused improvements specifically for Light Mode only */
+
+/* Enhanced Typography & Font Settings (Light Mode Only) */
+:root:not(.dark) {
+  /* Load and apply Inter font for optimal readability */
+  font-family: 'Inter', 'Roboto', 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  font-variation-settings: 'opsz' 14;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Base Typography - Light Mode Optimized */
+:root:not(.dark) body {
+  font-size: 16px !important;
+  line-height: 1.7 !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.01em !important;
+  color: #111827 !important;
+}
+
+/* Heading Enhancements for Maximum Contrast */
+:root:not(.dark) h1, 
+:root:not(.dark) h2, 
+:root:not(.dark) h3, 
+:root:not(.dark) h4, 
+:root:not(.dark) h5, 
+:root:not(.dark) h6 {
+  color: #111827 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.025em !important;
+  line-height: 1.3 !important;
+}
+
+/* Body Text Improvements */
+:root:not(.dark) p {
+  color: #374151 !important;
+  line-height: 1.7 !important;
+  font-weight: 400 !important;
+}
+
+/* Small Text & Labels - Enhanced for Readability */
+:root:not(.dark) .text-sm {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.005em !important;
+  line-height: 1.6 !important;
+}
+
+/* Button Text Clarity */
+:root:not(.dark) button {
+  font-weight: 500 !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* ===== COMPREHENSIVE TEXT CONTRAST IMPROVEMENTS ===== */
+
+/* Fix Light Gray Text Issues */
+:root:not(.dark) .text-gray-400 {
+  color: #6B7280 !important; /* Much darker than default gray-400 */
+  font-weight: 500 !important;
+}
+
+:root:not(.dark) .text-gray-300 {
+  color: #374151 !important; /* Dark gray for excellent readability */
+  font-weight: 500 !important;
+}
+
+:root:not(.dark) .text-slate-400 {
+  color: #6B7280 !important;
+  font-weight: 500 !important;
+}
+
+:root:not(.dark) .text-slate-300 {
+  color: #374151 !important;
+  font-weight: 500 !important;
+}
+
+/* Time Stamps and Metadata - Enhanced Contrast */
+:root:not(.dark) [class*="timestamp"],
+:root:not(.dark) [class*="time"],
+:root:not(.dark) .text-xs,
+:root:not(.dark) small {
+  color: #6B7280 !important; /* Dark enough for good readability */
+  font-weight: 500 !important;
+  letter-spacing: -0.005em !important;
+}
+
+/* AI Alerts, Market Cards, Tags - Enhanced Contrast */
+:root:not(.dark) [class*="alert"] .text-gray-400,
+:root:not(.dark) [class*="card"] .text-gray-400,
+:root:not(.dark) [class*="market"] .text-gray-400 {
+  color: #6B7280 !important;
+  font-weight: 500 !important;
+}
+
+/* Badge and Tag Improvements */
+:root:not(.dark) [class*="badge"],
+:root:not(.dark) [class*="tag"] {
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  border-width: 1px !important;
+}
+
+/* ===== COMPONENT ADJUSTMENTS (Light Mode Only) ===== */
+
+/* Avoid Pastel Text Colors on White Backgrounds */
+:root:not(.dark) .text-pink-300,
+:root:not(.dark) .text-purple-300,
+:root:not(.dark) .text-blue-300 {
+  color: #1F2937 !important; /* Dark gray for high contrast */
+  font-weight: 600 !important;
+}
+
+/* Enhanced Readability for Mood and Sentiment Indicators */
+:root:not(.dark) [data-mood],
+:root:not(.dark) [data-sentiment],
+:root:not(.dark) [class*="sentiment"] {
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* ===== ENHANCED BADGE READABILITY IMPROVEMENTS ===== */
+
+/* Badge text contrast improvements */
+:root:not(.dark) [class*="badge"],
+:root:not(.dark) .inline-flex.items-center.rounded-full {
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  border-width: 1px !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Specific badge color improvements for better contrast */
+:root:not(.dark) .bg-primary {
+  background: #4F46E5 !important; /* Indigo-600 for better contrast */
+  color: #FFFFFF !important;
+  border-color: #4338CA !important; /* Indigo-700 */
+}
+
+:root:not(.dark) .bg-secondary {
+  background: #6B7280 !important; /* Gray-500 */
+  color: #FFFFFF !important;
+  border-color: #4B5563 !important; /* Gray-600 */
+}
+
+/* High contrast badge variants */
+:root:not(.dark) .badge-bestseller {
+  background: #059669 !important; /* Green-600 */
+  color: #FFFFFF !important;
+  border: 1px solid #047857 !important; /* Green-700 */
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+:root:not(.dark) .badge-hot {
+  background: #DC2626 !important; /* Red-600 */
+  color: #FFFFFF !important;
+  border: 1px solid #B91C1C !important; /* Red-700 */
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+:root:not(.dark) .badge-new {
+  background: #2563EB !important; /* Blue-600 */
+  color: #FFFFFF !important;
+  border: 1px solid #1D4ED8 !important; /* Blue-700 */
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+:root:not(.dark) .badge-verified {
+  background: #4F46E5 !important; /* Indigo-600 */
+  color: #FFFFFF !important;
+  border: 1px solid #4338CA !important; /* Indigo-700 */
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Credibility score badges with enhanced contrast */
+:root:not(.dark) .badge-diamond {
+  background: #059669 !important; /* Green-600 */
+  color: #FFFFFF !important;
+  border: 1px solid #047857 !important;
+  box-shadow: 0 2px 4px rgba(5, 150, 105, 0.3) !important;
+}
+
+:root:not(.dark) .badge-platinum {
+  background: #2563EB !important; /* Blue-600 */
+  color: #FFFFFF !important;
+  border: 1px solid #1D4ED8 !important;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3) !important;
+}
+
+:root:not(.dark) .badge-gold {
+  background: #D97706 !important; /* Amber-600 */
+  color: #FFFFFF !important;
+  border: 1px solid #B45309 !important;
+  box-shadow: 0 2px 4px rgba(217, 119, 6, 0.3) !important;
+}
+
+:root:not(.dark) .badge-silver {
+  background: #6B7280 !important; /* Gray-500 */
+  color: #FFFFFF !important;
+  border: 1px solid #4B5563 !important;
+  box-shadow: 0 2px 4px rgba(107, 114, 128, 0.3) !important;
+}
+
+/* Interactive Elements Enhanced Readability */
+:root:not(.dark) button,
+:root:not(.dark) [role="button"] {
+  font-weight: 500 !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* Navigation and Menu Readability */
+:root:not(.dark) nav,
+:root:not(.dark) [role="navigation"],
+:root:not(.dark) [role="menu"] {
+  font-weight: 500 !important;
+}
+
+/* Form Elements Enhanced */
+:root:not(.dark) input,
+:root:not(.dark) textarea,
+:root:not(.dark) select {
+  color: #111827 !important;
+  font-weight: 500 !important;
+  border-width: 2px !important;
+  border-color: #D1D5DB !important;
+}
+
+:root:not(.dark) input::placeholder,
+:root:not(.dark) textarea::placeholder {
+  color: #9CA3AF !important;
+  font-weight: 400 !important;
+}
+
+/* Enhanced Shadows for Better Visual Separation */
+:root:not(.dark) .shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+:root:not(.dark) .shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Improved Emoji and Icon Contrast */
+:root:not(.dark) [class*="emoji"],
+:root:not(.dark) svg:not([class*="sentiment"]) {
+  filter: contrast(1.1) brightness(0.9) !important;
+}
+
+/* Enhanced Table and List Readability */
+:root:not(.dark) table,
+:root:not(.dark) ul,
+:root:not(.dark) ol {
+  color: #374151 !important;
+  font-weight: 400 !important;
+  line-height: 1.7 !important;
+}
+
+:root:not(.dark) th {
+  color: #111827 !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) td {
+  color: #374151 !important;
+  font-weight: 400 !important;
+}
+
+/* Code and Monospace Improvements */
+:root:not(.dark) code,
+:root:not(.dark) pre {
+  color: #111827 !important;
+  background: #F9FAFB !important;
+  border: 1px solid #E5E7EB !important;
+  font-weight: 500 !important;
+}
+
+/* ===== ENHANCED BADGE CONTRAST FOR LIGHT MODE ===== */
+
+/* Color-coded badges with darker backgrounds and text */
+:root:not(.dark) .bg-blue-100,
+:root:not(.dark) [class*="bg-blue-100"] {
+  background: #DBEAFE !important;
+  color: #1E40AF !important;
+  border: 1px solid #3B82F6 !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .bg-red-100,
+:root:not(.dark) [class*="bg-red-100"] {
+  background: #FEE2E2 !important;
+  color: #DC2626 !important;
+  border: 1px solid #EF4444 !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .bg-green-100,
+:root:not(.dark) [class*="bg-green-100"] {
+  background: #D1FAE5 !important;
+  color: #065F46 !important;
+  border: 1px solid #10B981 !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .bg-yellow-100,
+:root:not(.dark) [class*="bg-yellow-100"] {
+  background: #FEF3C7 !important;
+  color: #92400E !important;
+  border: 1px solid #F59E0B !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .bg-purple-100,
+:root:not(.dark) [class*="bg-purple-100"] {
+  background: #EDE9FE !important;
+  color: #5B21B6 !important;
+  border: 1px solid #8B5CF6 !important;
+  font-weight: 600 !important;
+}
+
+/* ===== SHADOW AND OUTLINE ENHANCEMENTS ===== */
+
+/* Subtle outlines for emojis/icons if blending with backgrounds */
+:root:not(.dark) [class*="emoji"]:not([class*="sentiment"]) {
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Enhanced card shadows for better separation */
+:root:not(.dark) .card-readable {
+  background: #FFFFFF !important;
+  border: 1px solid #E5E7EB !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* ===== LIGHT MODE-SCOPED STYLING ONLY ===== */
+
+/* Ensure all changes only apply to light mode */
+.dark .light-mode-override {
+  display: none !important;
+}
+
+/* Link enhancements for light mode */
+:root:not(.dark) a,
+:root:not(.dark) [role="link"] {
+  color: #4F46E5 !important;
+  font-weight: 500 !important;
+  text-decoration: underline !important;
+  text-decoration-thickness: 1px !important;
+}
+
+:root:not(.dark) a:hover,
+:root:not(.dark) [role="link"]:hover {
+  color: #3730A3 !important;
+  text-decoration-thickness: 2px !important;
+}
+
+/* Enhanced focus states for accessibility */
+:root:not(.dark) button:focus,
+:root:not(.dark) input:focus,
+:root:not(.dark) select:focus,
+:root:not(.dark) textarea:focus {
+  outline: 2px solid #4F46E5 !important;
+  outline-offset: 2px !important;
+}
+
+/* Improved hover states */
+:root:not(.dark) button:hover {
+  background: #F3F4F6 !important;
+  border-color: #D1D5DB !important;
+}
+
+/* Enhanced readability for specific components */
+:root:not(.dark) [class*="dropdown"],
+:root:not(.dark) [class*="popover"],
+:root:not(.dark) [class*="tooltip"] {
+  background: #FFFFFF !important;
+  border: 1px solid #E5E7EB !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+  color: #111827 !important;
+}
+
+/* ===== BLUE GRADIENT BACKGROUND CONTRAST FIXES ===== */
+
+/* Fix gray text on blue gradient backgrounds */
+:root:not(.dark) [class*="from-primary"][class*="to-purple"] .text-muted-foreground,
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] .text-muted-foreground,
+:root:not(.dark) [class*="bg-gradient-to-r"][class*="primary"] .text-muted-foreground {
+  color: #1F2937 !important; /* Dark gray-800 for excellent contrast */
+  font-weight: 500 !important;
+}
+
+/* Enhanced text on blue/purple gradient cards and CTAs */
+:root:not(.dark) [class*="from-primary"][class*="to-purple"] p,
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] p,
+:root:not(.dark) [class*="bg-gradient-to-r"][class*="primary"] p {
+  color: #111827 !important; /* Near-black for maximum readability */
+  font-weight: 500 !important;
+}
+
+/* Fix gray-500 text specifically on blue gradients */
+:root:not(.dark) [class*="from-primary"][class*="to-purple"] .text-gray-500,
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] .text-gray-500,
+:root:not(.dark) [class*="bg-gradient-to-r"][class*="primary"] .text-gray-500 {
+  color: #0F172A !important; /* Very dark slate for high contrast */
+  font-weight: 600 !important;
+}
+
+/* Button improvements on blue gradients */
+:root:not(.dark) [class*="from-primary"][class*="to-purple"] button,
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] button,
+:root:not(.dark) [class*="bg-gradient-to-r"][class*="primary"] button {
+  font-weight: 600 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Outline buttons on gradients need stronger contrast */
+:root:not(.dark) [class*="from-primary"][class*="to-purple"] button[class*="outline"],
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] button[class*="outline"],
+:root:not(.dark) [class*="bg-gradient-to-r"][class*="primary"] button[class*="outline"] {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 2px solid #1F2937 !important;
+  color: #1F2937 !important;
+  font-weight: 600 !important;
+}
+
+/* Ensure headings on blue gradients are highly visible */
+:root:not(.dark) [class*="from-primary"][class*="to-purple"] h1,
+:root:not(.dark) [class*="from-primary"][class*="to-purple"] h2,
+:root:not(.dark) [class*="from-primary"][class*="to-purple"] h3,
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] h1,
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] h2,
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] h3,
+:root:not(.dark) [class*="bg-gradient-to-r"][class*="primary"] h1,
+:root:not(.dark) [class*="bg-gradient-to-r"][class*="primary"] h2,
+:root:not(.dark) [class*="bg-gradient-to-r"][class*="primary"] h3 {
+  color: #0F172A !important; /* Very dark for maximum contrast */
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Fix light blue/purple text on gradients */
+:root:not(.dark) [class*="from-primary"][class*="to-purple"] .text-blue-300,
+:root:not(.dark) [class*="from-primary"][class*="to-purple"] .text-purple-300,
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] .text-blue-300,
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] .text-purple-300 {
+  color: #1F2937 !important;
+  font-weight: 600 !important;
+}
+
+/* ===== ADDITIONAL BLUE GRADIENT CONTRAST ENHANCEMENTS ===== */
+
+/* Fix common gray text issues on blue gradient backgrounds */
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] .text-gray-400,
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] .text-gray-300,
+:root:not(.dark) [class*="bg-gradient"][class*="blue"] .text-gray-400,
+:root:not(.dark) [class*="bg-gradient"][class*="blue"] .text-gray-300 {
+  color: #374151 !important; /* Gray-700 for better contrast */
+  font-weight: 500 !important;
+}
+
+/* Badge improvements on gradient backgrounds */
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] .bg-blue-100,
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] .bg-purple-100,
+:root:not(.dark) [class*="bg-gradient"][class*="blue"] .bg-blue-100,
+:root:not(.dark) [class*="bg-gradient"][class*="blue"] .bg-purple-100 {
+  background: rgba(255, 255, 255, 0.9) !important;
+  color: #1F2937 !important;
+  border: 1px solid #374151 !important;
+  font-weight: 600 !important;
+}
+
+/* Small text and metadata on gradients */
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] .text-sm,
+:root:not(.dark) [class*="bg-gradient"][class*="blue"] .text-sm {
+  color: #1F2937 !important;
+  font-weight: 500 !important;
+}
+
+/* Ensure all paragraph text on gradients is readable */
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] p:not([class*="text-"]),
+:root:not(.dark) [class*="bg-gradient"][class*="blue"] p:not([class*="text-"]) {
+  color: #111827 !important;
+  font-weight: 500 !important;
+}
+
+/* ===== WHITE TEXT ON DARK BLUE/PURPLE GRADIENTS ===== */
+
+/* Dark gradient backgrounds (slate-900, purple-900, etc.) need white text */
+:root:not(.dark) [class*="from-slate-900"],
+:root:not(.dark) [class*="to-slate-900"],
+:root:not(.dark) [class*="from-purple-900"],
+:root:not(.dark) [class*="to-purple-900"],
+:root:not(.dark) [class*="from-indigo-900"],
+:root:not(.dark) [class*="to-indigo-900"],
+:root:not(.dark) [class*="from-blue-900"],
+:root:not(.dark) [class*="to-blue-900"] {
+  color: #FFFFFF !important;
+}
+
+/* Headings on dark gradients with text shadows */
+:root:not(.dark) [class*="from-slate-900"] h1,
+:root:not(.dark) [class*="from-slate-900"] h2,
+:root:not(.dark) [class*="from-slate-900"] h3,
+:root:not(.dark) [class*="from-purple-900"] h1,
+:root:not(.dark) [class*="from-purple-900"] h2,
+:root:not(.dark) [class*="from-purple-900"] h3,
+:root:not(.dark) [class*="to-slate-900"] h1,
+:root:not(.dark) [class*="to-slate-900"] h2,
+:root:not(.dark) [class*="to-slate-900"] h3,
+:root:not(.dark) [class*="to-purple-900"] h1,
+:root:not(.dark) [class*="to-purple-900"] h2,
+:root:not(.dark) [class*="to-purple-900"] h3 {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Body text on dark gradients with subtle shadows */
+:root:not(.dark) [class*="from-slate-900"] p,
+:root:not(.dark) [class*="from-purple-900"] p,
+:root:not(.dark) [class*="to-slate-900"] p,
+:root:not(.dark) [class*="to-purple-900"] p {
+  color: #F1F5F9 !important; /* slate-50 for softer white */
+  font-weight: 500 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Interactive elements on dark gradients */
+:root:not(.dark) [class*="from-slate-900"] .text-sm,
+:root:not(.dark) [class*="from-purple-900"] .text-sm,
+:root:not(.dark) [class*="to-slate-900"] .text-sm,
+:root:not(.dark) [class*="to-purple-900"] .text-sm {
+  color: #E2E8F0 !important; /* neutral-100 equivalent */
+  font-weight: 500 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Buttons on dark gradients */
+:root:not(.dark) [class*="from-slate-900"] button,
+:root:not(.dark) [class*="from-purple-900"] button,
+:root:not(.dark) [class*="to-slate-900"] button,
+:root:not(.dark) [class*="to-purple-900"] button {
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Labels and metadata on dark gradients */
+:root:not(.dark) [class*="from-slate-900"] .text-xs,
+:root:not(.dark) [class*="from-purple-900"] .text-xs,
+:root:not(.dark) [class*="to-slate-900"] .text-xs,
+:root:not(.dark) [class*="to-purple-900"] .text-xs {
+  color: #CBD5E1 !important; /* slate-300 for muted but readable */
+  font-weight: 500 !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Special case for vibrant blue to purple gradients */
+:root:not(.dark) [class*="from-blue-600"][class*="to-purple-600"],
+:root:not(.dark) [class*="from-indigo-500"][class*="to-sky-500"] {
+  color: #FFFFFF !important;
+}
+
+:root:not(.dark) [class*="from-blue-600"][class*="to-purple-600"] *,
+:root:not(.dark) [class*="from-indigo-500"][class*="to-sky-500"] * {
+  color: #FFFFFF !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+  font-weight: 600 !important;
+}
+
+/* ===== UTILITY CLASSES FOR GRADIENT TEXT CONTRAST ===== */
+
+/* Gradient-friendly text colors with shadows */
+.on-gradient-text {
+  color: #FFFFFF !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+  font-weight: 600 !important;
+}
+
+.on-gradient-text-soft {
+  color: #F1F5F9 !important; /* slate-50 */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15) !important;
+  font-weight: 500 !important;
+}
+
+.on-gradient-text-muted {
+  color: #E2E8F0 !important; /* neutral-100 */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+  font-weight: 500 !important;
+}
+
+.on-gradient-heading {
+  color: #FFFFFF !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+  font-weight: 700 !important;
+}
+
+/* Interactive elements on gradients */
+.on-gradient-interactive {
+  color: #FFFFFF !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+.on-gradient-interactive:hover {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.35) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Light text for medium opacity gradients */
+:root:not(.dark) [class*="from-blue-500/20"][class*="to-purple-500/20"] {
+  color: #1F2937 !important; /* Gray-800 for light gradients */
+  font-weight: 600 !important;
+}
+
+/* Ensure good contrast on various gradient intensities */
+:root:not(.dark) [class*="from-blue-500/10"],
+:root:not(.dark) [class*="to-purple-500/10"],
+:root:not(.dark) [class*="from-purple-500/10"],
+:root:not(.dark) [class*="to-blue-500/10"] {
+  color: #111827 !important; /* Very dark for very light gradients */
+  font-weight: 600 !important;
+}
+
+/* ===== COMPREHENSIVE LIGHT MODE CONTRAST FIXES ===== */
+
+/* Fix common problematic light colors in light mode */
+:root:not(.dark) .text-\[#444\],
+:root:not(.dark) .text-\[#666\],
+:root:not(.dark) .text-\[#888\],
+:root:not(.dark) .text-\[#4A4A4A\] {
+  color: #1F2937 !important; /* Gray-800 for better contrast */
+  font-weight: 500 !important;
+}
+
+:root:not(.dark) .text-\[#555\],
+:root:not(.dark) .text-\[#777\],
+:root:not(.dark) .text-\[#999\] {
+  color: #374151 !important; /* Gray-700 for secondary text */
+  font-weight: 500 !important;
+}
+
+/* Improve light buttons and interactive elements */
+:root:not(.dark) button[class*="bg-"][class*="/10"],
+:root:not(.dark) .bg-\[.*\]\/10 {
+  background: #4F46E5 !important; /* Solid indigo background */
+  color: #FFFFFF !important;
+  border: 1px solid #4338CA !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) button[class*="bg-"][class*="/20"] {
+  background: #3730A3 !important; /* Darker indigo for better contrast */
+  color: #FFFFFF !important;
+  border: 1px solid #312E81 !important;
+  font-weight: 600 !important;
+}
+
+/* Improve badge contrast specifically for light mode */
+:root:not(.dark) .bg-\[#E8F5E9\] {
+  background: #16A34A !important; /* Green-600 instead of light green */
+  color: #FFFFFF !important;
+  border: 1px solid #15803D !important;
+}
+
+:root:not(.dark) .bg-\[#FFEBEE\] {
+  background: #DC2626 !important; /* Red-600 instead of light red */
+  color: #FFFFFF !important;
+  border: 1px solid #B91C1C !important;
+}
+
+:root:not(.dark) .bg-\[#FFF8E1\] {
+  background: #D97706 !important; /* Amber-600 instead of light yellow */
+  color: #FFFFFF !important;
+  border: 1px solid #B45309 !important;
+}
+
+/* Fix text colors that reference light shades */
+:root:not(.dark) .text-\[#4CAF50\] {
+  color: #15803D !important; /* Darker green for better contrast */
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .text-\[#F44336\] {
+  color: #B91C1C !important; /* Darker red for better contrast */
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .text-\[#FFB300\] {
+  color: #B45309 !important; /* Darker amber for better contrast */
+  font-weight: 600 !important;
+}
+
+/* Enhanced contrast for small text elements */
+:root:not(.dark) .text-xs {
+  color: #374151 !important; /* Gray-700 minimum for small text */
+  font-weight: 500 !important;
+  letter-spacing: -0.005em !important;
+}
+
+:root:not(.dark) .text-sm {
+  color: #1F2937 !important; /* Gray-800 for small text */
+  font-weight: 500 !important;
+}
+
+/* Ensure all card content has good contrast */
+:root:not(.dark) [class*="card"] .text-sm,
+:root:not(.dark) [class*="Card"] .text-sm {
+  color: #1F2937 !important;
+  font-weight: 500 !important;
+}
+
+/* Fix navigation and tab text */
+:root:not(.dark) [role="tab"],
+:root:not(.dark) [data-state="inactive"] {
+  color: #1F2937 !important;
+  font-weight: 500 !important;
+}
+
+:root:not(.dark) [role="tab"]:hover,
+:root:not(.dark) [data-state="inactive"]:hover {
+  color: #111827 !important;
+  font-weight: 600 !important;
+}
+
+/* ===== BLUE COLOR CONTRAST FIXES FOR LIGHT MODE ===== */
+
+/* Replace problematic blue text colors with better alternatives */
+:root:not(.dark) .text-blue-500,
+:root:not(.dark) .text-blue-600,
+:root:not(.dark) .text-blue-400 {
+  color: #059669 !important; /* Green-600 for better contrast */
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .text-\[#3F51B5\] {
+  color: #059669 !important; /* Green-600 instead of indigo */
+  font-weight: 600 !important;
+}
+
+/* Replace blue backgrounds with better alternatives */
+:root:not(.dark) .bg-blue-50,
+:root:not(.dark) .bg-blue-100 {
+  background: #DCFCE7 !important; /* Green-100 */
+  color: #166534 !important; /* Green-800 */
+  border-color: #22C55E !important; /* Green-500 */
+}
+
+:root:not(.dark) .bg-blue-500,
+:root:not(.dark) .bg-blue-600 {
+  background: #059669 !important; /* Green-600 */
+  color: #FFFFFF !important;
+  border-color: #047857 !important; /* Green-700 */
+}
+
+/* Fix blue borders */
+:root:not(.dark) .border-blue-200,
+:root:not(.dark) .border-blue-300,
+:root:not(.dark) .border-blue-500 {
+  border-color: #22C55E !important; /* Green-500 */
+}
+
+/* Replace blue/purple gradient combinations */
+:root:not(.dark) .bg-gradient-to-r.from-blue-600.to-purple-600,
+:root:not(.dark) .from-blue-600.to-purple-600 {
+  background: linear-gradient(to right, #059669, #047857) !important; /* Green gradient */
+  color: #FFFFFF !important;
+}
+
+:root:not(.dark) .from-blue-500.to-purple-500 {
+  background: linear-gradient(to right, #22C55E, #059669) !important; /* Green gradient */
+  color: #FFFFFF !important;
+}
+
+/* Fix specific blue color references */
+:root:not(.dark) .text-blue-700,
+:root:not(.dark) .text-blue-800 {
+  color: #15803D !important; /* Green-700 for readability */
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .bg-blue-700,
+:root:not(.dark) .bg-blue-800 {
+  background: #15803D !important; /* Green-700 */
+  color: #FFFFFF !important;
+}
+
+/* Replace blue icon colors */
+:root:not(.dark) .text-blue-400,
+:root:not(.dark) .text-blue-300 {
+  color: #22C55E !important; /* Green-500 for icons */
+}
+
+/* Fix blue badge combinations */
+:root:not(.dark) .bg-blue-500\/20 {
+  background: rgba(34, 197, 94, 0.2) !important; /* Green with opacity */
+  color: #15803D !important;
+  border-color: rgba(34, 197, 94, 0.3) !important;
+}
+
+:root:not(.dark) .bg-blue-950\/30 {
+  background: rgba(21, 128, 61, 0.3) !important; /* Dark green with opacity */
+  color: #22C55E !important;
+  border-color: rgba(34, 197, 94, 0.4) !important;
+}
+
+/* Replace blue hover states */
+:root:not(.dark) .hover\:bg-blue-200:hover,
+:root:not(.dark) .hover\:bg-blue-300:hover {
+  background: #BBF7D0 !important; /* Green-200 */
+  color: #15803D !important;
+}
+
+:root:not(.dark) .hover\:bg-blue-700:hover,
+:root:not(.dark) .hover\:bg-blue-800:hover {
+  background: #047857 !important; /* Green-700 */
+  color: #FFFFFF !important;
+}
+
+/* Fix data state active blue colors */
+:root:not(.dark) .data-\[state\=active\]\:bg-blue-600\/30 {
+  background: rgba(34, 197, 94, 0.3) !important; /* Green */
+  color: #15803D !important;
+}
+
+:root:not(.dark) .data-\[state\=active\]\:text-blue-300 {
+  color: #22C55E !important; /* Green-500 */
+  font-weight: 600 !important;
+}
+
+/* Replace problematic blue-purple combinations */
+:root:not(.dark) .from-purple-600.to-blue-600,
+:root:not(.dark) .from-purple-500.to-blue-500 {
+  background: linear-gradient(to right, #059669, #22C55E) !important; /* Green gradient */
+  color: #FFFFFF !important;
+}
+
+/* Fix shadow colors */
+:root:not(.dark) .shadow-blue-500\/20,
+:root:not(.dark) .shadow-blue-500\/30 {
+  box-shadow: 0 4px 6px -1px rgba(34, 197, 94, 0.3) !important; /* Green shadow */
+}
+
+/* Replace blue accent colors in specific contexts */
+:root:not(.dark) .text-blue-600.dark\:text-blue-400 {
+  color: #059669 !important; /* Green-600 */
+  font-weight: 600 !important;
+}
+
+/* Fix blue button variants */
+:root:not(.dark) button.bg-blue-600,
+:root:not(.dark) .bg-blue-600.hover\:bg-blue-700 {
+  background: #059669 !important; /* Green-600 */
+  color: #FFFFFF !important;
+  border-color: #047857 !important;
+}
+
+:root:not(.dark) button.bg-blue-600:hover,
+:root:not(.dark) .bg-blue-600.hover\:bg-blue-700:hover {
+  background: #047857 !important; /* Green-700 */
+  color: #FFFFFF !important;
+}
+
+/* Replace indigo colors that might be problematic */
+:root:not(.dark) .from-indigo-500,
+:root:not(.dark) .to-indigo-500 {
+  background: #22C55E !important; /* Green-500 */
+  color: #FFFFFF !important;
+}
+
+/* Fix specific color values */
+:root:not(.dark) .bg-\[#3F51B5\] {
+  background: #059669 !important; /* Green-600 */
+  color: #FFFFFF !important;
+  border-color: #047857 !important;
+}
+
+:root:not(.dark) .bg-\[#3F51B5\]\/10 {
+  background: rgba(34, 197, 94, 0.1) !important;
+  color: #15803D !important;
+}
+
+:root:not(.dark) .bg-\[#3F51B5\]\/20 {
+  background: rgba(34, 197, 94, 0.2) !important;
+  color: #15803D !important;
+}
+
+/* ===== GRADIENT TEXT CONTRAST FIXES ===== */
+
+/* Fix gradient text that appears transparent in light mode */
+:root:not(.dark) .bg-gradient-to-r[style*="from-blue"][style*="to-indigo"] {
+  color: #8B5A2B !important; /* Brown for better contrast */
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+
+:root:not(.dark) .bg-gradient-to-r[style*="63, 81, 181"][style*="33, 150, 243"] {
+  color: #8B5A2B !important; /* Brown for better contrast on light backgrounds */
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+
+/* Fix mood score gradient text */
+:root:not(.dark) [style*="linear-gradient(to right, rgb(63, 81, 181), rgb(33, 150, 243))"] {
+  color: #41750A !important; /* Dark green for +64 score */
+  font-weight: 700 !important;
+}
+
+/* Fix MoodMeter brand text in footer */
+:root:not(.dark) .footer [style*="linear-gradient"] {
+  color: #8B5A2B !important; /* Brown for footer brand text */
+  font-weight: 700 !important;
+}
+
+/* Badge text color improvements */
+:root:not(.dark) .text-orange-400 {
+  color: #F5A623 !important; /* Amber for badge text */
+  font-weight: 600 !important;
+}
+
+/* Improve gray badge text in light mode */
+:root:not(.dark) .bg-gray-500 {
+  background: #6B7280 !important;
+  color: #F5A623 !important; /* Orange text on gray badges */
+  border-color: #4B5563 !important;
+}
+
+/* ===== CORAL COLOR SCHEME FOR LIGHT MODE (REPLACING GREEN) ===== */
+
+/* Replace green backgrounds with coral */
+:root:not(.dark) .bg-green-500,
+:root:not(.dark) .bg-green-600,
+:root:not(.dark) .bg-emerald-500,
+:root:not(.dark) .bg-emerald-600 {
+  background: #FF6B6B !important; /* Coral red */
+  color: #FFFFFF !important;
+  border-color: #FF5252 !important;
+}
+
+:root:not(.dark) .bg-green-500\/10,
+:root:not(.dark) .from-green-500\/10 {
+  background: rgba(255, 107, 107, 0.1) !important; /* Coral with opacity */
+  color: #D32F2F !important;
+}
+
+:root:not(.dark) .bg-green-500\/20,
+:root:not(.dark) .bg-emerald-500\/20,
+:root:not(.dark) .from-green-500\/20,
+:root:not(.dark) .to-green-600\/20 {
+  background: rgba(255, 107, 107, 0.2) !important; /* Coral with opacity */
+  color: #C62828 !important;
+}
+
+/* Replace green text colors with coral */
+:root:not(.dark) .text-green-500,
+:root:not(.dark) .text-green-600,
+:root:not(.dark) .text-green-700,
+:root:not(.dark) .text-emerald-400,
+:root:not(.dark) .text-emerald-500 {
+  color: #FF6B6B !important; /* Coral red */
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .text-green-800 {
+  color: #D32F2F !important; /* Darker coral for text */
+  font-weight: 600 !important;
+}
+
+/* Replace green borders with coral */
+:root:not(.dark) .border-green-200,
+:root:not(.dark) .border-green-300,
+:root:not(.dark) .border-green-500,
+:root:not(.dark) .border-emerald-500 {
+  border-color: #FF6B6B !important;
+}
+
+:root:not(.dark) .border-green-500\/30,
+:root:not(.dark) .border-emerald-500\/30 {
+  border-color: rgba(255, 107, 107, 0.3) !important;
+}
+
+:root:not(.dark) .hover\:border-green-500\/30:hover {
+  border-color: rgba(255, 107, 107, 0.3) !important;
+}
+
+/* Replace green gradients with coral gradients */
+:root:not(.dark) .bg-gradient-to-r.from-green-500 {
+  background: linear-gradient(to right, #FF6B6B, #FF5252) !important;
+  color: #FFFFFF !important;
+}
+
+:root:not(.dark) .from-green-500\/10.to-green-600\/20 {
+  background: linear-gradient(to right, rgba(255, 107, 107, 0.1), rgba(255, 82, 82, 0.2)) !important;
+  color: #D32F2F !important;
+}
+
+/* Replace green icons and accents */
+:root:not(.dark) .text-\[#4CAF50\] {
+  color: #FF6B6B !important;
+  font-weight: 600 !important;
+}
+
+/* Update hover states */
+:root:not(.dark) .hover\:text-green-700:hover {
+  color: #FF5252 !important;
+}
+
+/* Replace green shadows */
+:root:not(.dark) .shadow-green-500\/20,
+:root:not(.dark) .shadow-green-500\/30 {
+  box-shadow: 0 4px 6px -1px rgba(255, 107, 107, 0.3) !important;
+}
+
+/* Stock card specific coral colors */
+:root:not(.dark) .stock-card-icon {
+  background: linear-gradient(to right, rgba(255, 107, 107, 0.1), rgba(255, 82, 82, 0.2)) !important;
+  color: #D32F2F !important;
+}
+
+/* Badge coral colors */
+:root:not(.dark) .badge-coral {
+  background: #FF6B6B !important;
+  color: #FFFFFF !important;
+  border: 1px solid #FF5252 !important;
+  font-weight: 600 !important;
+}
+
+/* Coral hover effects */
+:root:not(.dark) .hover\:bg-green-50:hover,
+:root:not(.dark) .hover\:bg-green-100:hover {
+  background: #FFEBEE !important; /* Very light coral */
+  color: #D32F2F !important;
+}

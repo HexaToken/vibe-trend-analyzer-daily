@@ -53,13 +53,13 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
   const scoreDiff = currentScore - previousScore;
 
   return (
-    <Card className="overflow-hidden border-0 shadow-lg bg-gradient-to-br from-gray-50 via-white to-green-50 dark:from-gray-800 dark:via-gray-800 dark:to-green-900/20">
-      <CardHeader className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
+    <Card className="overflow-hidden border-0 shadow-lg bg-gradient-to-br from-gray-50 via-white to-red-50 dark:from-gray-800 dark:via-gray-800 dark:to-red-900/20">
+      <CardHeader className="bg-gradient-to-r from-red-400 to-pink-500 text-white">
         <CardTitle className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Activity className="w-6 h-6" />
-            <span>Mood Over Time</span>
-            <Badge variant="secondary" className="bg-white/20 text-white">
+            <Activity className="w-6 h-6 text-red-300" />
+            <span className="text-gray-100">Mood Over Time</span>
+            <Badge variant="secondary" className="bg-white/20" style={{color: 'rgba(245, 166, 35, 1)'}}>
               Trending
             </Badge>
           </div>
@@ -72,8 +72,8 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
                 onClick={() => setTimeframe(period as "1D" | "7D" | "30D")}
                 className={
                   timeframe === period
-                    ? "bg-white/20 text-white"
-                    : "text-white/80 hover:bg-white/10"
+                    ? "bg-white/20 text-gray-100"
+                    : "text-gray-100 hover:bg-white/10"
                 }
               >
                 {period}
@@ -318,14 +318,14 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
         </div>
 
         {/* Insights */}
-        <div className="mt-6 p-4 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-lg border border-green-200 dark:border-green-700">
-          <div className="flex items-center space-x-2 mb-2">
-            <BarChart3 className="w-4 h-4 text-green-600" />
-            <span className="font-medium text-green-800 dark:text-green-300">
+        <div className="mt-6 p-4 bg-gradient-to-r from-red-400 to-pink-500 text-white rounded-lg border border-red-200 dark:border-green-700">
+          <div className="flex items-center space-x-2 mb-2 text-gray-100">
+            <BarChart3 className="w-4 h-4 text-red-100" />
+            <span className="font-medium text-white dark:text-green-300">
               Trend Analysis
             </span>
           </div>
-          <p className="text-sm text-green-700 dark:text-green-400">
+          <p className="text-sm text-gray-100 dark:text-green-400">
             {scoreDiff > 5
               ? "Strong positive momentum detected. Market sentiment is improving across multiple sources."
               : scoreDiff < -5

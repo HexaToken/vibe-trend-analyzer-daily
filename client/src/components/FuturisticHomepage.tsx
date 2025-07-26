@@ -321,7 +321,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   </h1>
                 </div>
                 <p className={`text-xl max-w-2xl mx-auto mb-6 ${
-                  themeMode === 'light' ? 'text-[#444]' : 'text-gray-300'
+                  themeMode === 'light' ? 'text-[#1F2937]' : 'text-gray-300'
                 }`}>
                   Advanced financial tools and analytics for portfolio management
                 </p>
@@ -331,7 +331,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               <div className="max-w-md mx-auto mb-6">
                 <div className="relative">
                   <Search className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 ${
-                    themeMode === 'light' ? 'text-[#888]' : 'text-gray-400'
+                    themeMode === 'light' ? 'text-[#374151]' : 'text-gray-400'
                   }`} />
                   <Input
                     type="text"
@@ -366,10 +366,10 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   </Button>
                 </div>
                 <div className="flex items-center justify-center gap-2 mt-3">
-                  <span className={`text-sm ${themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'}`}>Currently analyzing:</span>
+                  <span className={`text-sm ${themeMode === 'light' ? 'text-[#374151]' : 'text-gray-400'}`}>Currently analyzing:</span>
                   <Badge className={themeMode === 'light'
                     ? "bg-[#E8EAF6] text-[#303F9F] border-[#303F9F]/30 font-semibold"
-                    : "bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 border-blue-500/30 font-semibold"
+                    : "bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-white border-blue-500/30 font-semibold drop-shadow-md"
                   }>
                     ${selectedFinanceStock}
                   </Badge>
@@ -387,7 +387,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <TabsTrigger
                   value="risk-analysis"
                   className={themeMode === 'light'
-                    ? "data-[state=active]:text-[#1C1E21] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E0E0E0] text-[#444] flex items-center gap-2"
+                    ? "data-[state=active]:text-[#1C1E21] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E0E0E0] text-[#1F2937] flex items-center gap-2"
                     : "data-[state=active]:text-white text-[#E0E0E0] flex items-center gap-2 transition-all duration-300 hover:text-white/90"
                   }
                   style={themeMode === 'light' ? {
@@ -403,7 +403,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <TabsTrigger
                   value="financial-reports"
                   className={themeMode === 'light'
-                    ? "data-[state=active]:text-[#1C1E21] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E0E0E0] text-[#444] flex items-center gap-2"
+                    ? "data-[state=active]:text-[#1C1E21] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E0E0E0] text-[#1F2937] flex items-center gap-2"
                     : "data-[state=active]:text-white text-[#E0E0E0] flex items-center gap-2 transition-all duration-300 hover:text-white/90"
                   }
                   style={themeMode === 'light' ? {
@@ -419,7 +419,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <TabsTrigger
                   value="geo-sentiment"
                   className={themeMode === 'light'
-                    ? "data-[state=active]:text-[#1C1E21] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E0E0E0] text-[#444] flex items-center gap-2"
+                    ? "data-[state=active]:text-[#1C1E21] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E0E0E0] text-[#1F2937] flex items-center gap-2"
                     : "data-[state=active]:text-white text-[#E0E0E0] flex items-center gap-2 transition-all duration-300 hover:text-white/90"
                   }
                   style={themeMode === 'light' ? {
@@ -486,7 +486,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                                selectedFinanceStock === 'NVDA' ? 'LOW' :
                                'MEDIUM'}
                             </div>
-                            <div className={`text-sm ${themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'}`}>Risk Level</div>
+                            <div className={`text-sm ${themeMode === 'light' ? 'text-[#374151]' : 'text-gray-400'}`}>Risk Level</div>
                           </div>
                         </div>
                       </div>
@@ -637,7 +637,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                             time: '2m ago',
                             type: selectedFinanceStock === 'TSLA' ? 'danger' : 'info'
                           },
-                          { alert: 'VIX spike detected', icon: '���', time: '5m ago', type: 'warning' },
+                          { alert: 'VIX spike detected', icon: '�����', time: '5m ago', type: 'warning' },
                           {
                             alert: `${selectedFinanceStock === 'NVDA' ? 'AI sector' : selectedFinanceStock === 'TSLA' ? 'EV sector' : 'Tech sector'} volatility increased`,
                             icon: '⚠️',
@@ -2728,7 +2728,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
             </div>
 
             {/* Subtitle - Always dark theme text */}
-            <p className="text-xl text-gray-200 max-w-3xl mx-auto mb-12 leading-relaxed">
+            <p className="text-xl text-gray-200 max-w-3xl mx-auto mb-12 leading-relaxed on-gradient-text-soft">
               Advanced AI-powered sentiment analysis with intelligent insights and mood breakdown
             </p>
           </div>
@@ -2751,17 +2751,17 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 p-6">
                   {topMovers.map((stock, index) => (
                     <div key={stock.symbol} className={themeMode === 'light'
-                      ? `bg-white border border-[#E0E0E0] hover:border-[#4D7C8A]/30 rounded-xl p-4 transition-all duration-300 group cursor-pointer shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)]`
+                      ? `bg-white border border-[#E0E0E0] hover:border-red-400/30 rounded-xl p-4 transition-all duration-300 group cursor-pointer shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)]`
                       : "bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-4 border border-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer"
                     }>
                       <div className="flex items-center justify-between mb-3">
                         <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
                           themeMode === 'light'
-                            ? 'bg-gradient-to-r from-[#3F51B5]/10 to-[#3F51B5]/20'
+                            ? 'bg-gradient-to-r from-red-400/10 to-pink-500/20'
                             : 'bg-gradient-to-r from-purple-500/20 to-pink-500/20'
                         }`}>
                           <span className={`text-xs font-bold ${
-                            themeMode === 'light' ? 'text-[#3F51B5]' : 'text-white'
+                            themeMode === 'light' ? 'text-red-600' : 'text-white'
                           }`}>{stock.symbol[0]}</span>
                         </div>
                         <Badge className={getSentimentBadge(stock.sentiment)}>
@@ -2769,7 +2769,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         </Badge>
                       </div>
                       <div className={`text-lg font-bold mb-1 ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>{stock.symbol}</div>
-                      <div className={`text-sm mb-2 ${themeMode === 'light' ? 'text-[#4A4A4A]' : 'text-gray-400'}`}>{stock.name}</div>
+                      <div className={`text-sm mb-2 ${themeMode === 'light' ? 'text-[#374151]' : 'text-gray-400'}`}>{stock.name}</div>
                       <div className={`text-xl font-bold mb-1 ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>${stock.price}</div>
                       <div className={cn(
                         "flex items-center gap-1 text-sm font-medium",
@@ -2796,20 +2796,20 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <div className="space-y-4">
                   {smartNews.map((news, index) => (
                     <div key={index} className={themeMode === 'light'
-                      ? `bg-white rounded-xl p-5 border border-[#E0E0E0] hover:border-[#3F51B5]/30 transition-all duration-300 group cursor-pointer shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]`
+                      ? `bg-white rounded-xl p-5 border border-[#E0E0E0] hover:border-red-400/30 transition-all duration-300 group cursor-pointer shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]`
                       : "bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-5 border border-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer"
                     }>
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex-1">
                           <h3 className={`text-lg font-semibold mb-2 line-clamp-2 transition-colors ${
                             themeMode === 'light'
-                              ? 'text-[#1C1E21] group-hover:text-[#3F51B5]'
+                              ? 'text-[#1C1E21] group-hover:text-red-600'
                               : 'text-white group-hover:text-purple-300'
                           }`}>
                             {news.headline}
                           </h3>
                           <p className={`text-sm leading-relaxed line-clamp-3 ${
-                            themeMode === 'light' ? 'text-[#444]' : 'text-gray-400'
+                            themeMode === 'light' ? 'text-[#1F2937]' : 'text-gray-400'
                           }`}>
                             {news.summary}
                           </p>
@@ -2830,7 +2830,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         </Badge>
                       </div>
                       <div className={`flex items-center justify-between text-xs ${
-                        themeMode === 'light' ? 'text-[#666]' : 'text-gray-500'
+                        themeMode === 'light' ? 'text-[#374151]' : 'text-gray-500'
                       }`}>
                         <span className="font-medium">{news.source}</span>
                         <span>{news.timestamp}</span>
@@ -2862,7 +2862,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {trendingTopics.map((topic, index) => (
                     <div key={index} className={themeMode === 'light'
-                      ? `bg-white rounded-xl p-4 border border-[#E0E0E0] hover:border-[#3F51B5]/30 transition-all duration-300 shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]`
+                      ? `bg-white rounded-xl p-4 border border-[#E0E0E0] hover:border-red-400/30 transition-all duration-300 shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]`
                       : "bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-4 border border-white/10 hover:border-purple-500/30 transition-all duration-300"
                     }>
                       <div className="flex items-center gap-3 mb-3">
@@ -2872,7 +2872,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         </Badge>
                       </div>
                       <div className={`text-lg font-semibold mb-1 ${themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'}`}>{topic.topic}</div>
-                      <div className={`text-sm ${themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'}`}>{topic.mentions} mentions</div>
+                      <div className={`text-sm ${themeMode === 'light' ? 'text-[#374151]' : 'text-gray-400'}`}>{topic.mentions} mentions</div>
                     </div>
                   ))}
                 </div>
@@ -2901,7 +2901,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   <div className="space-y-2 mb-4">
                     {userWatchlist.map((item, index) => (
                       <div key={index} className="flex items-center justify-between text-sm">
-                        <span className={themeMode === 'light' ? 'text-[#444]' : 'text-gray-300'}>{item.symbol}</span>
+                        <span className={themeMode === 'light' ? 'text-[#1F2937]' : 'text-gray-300'}>{item.symbol}</span>
                         <span className={cn(
                           "font-medium",
                           item.change >= 0
@@ -2914,7 +2914,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     ))}
                   </div>
                   <Button className={themeMode === 'light'
-                    ? "w-full bg-[#3F51B5]/10 hover:bg-[#3F51B5]/20 text-[#3F51B5] border border-[#3F51B5]/30 hover:border-[#3F51B5]/50 transition-all"
+                    ? "w-full bg-red-500 hover:bg-red-600 text-white border border-red-500 hover:border-red-600 transition-all font-medium"
                     : "w-full bg-gradient-to-r from-purple-600/20 to-pink-600/20 hover:from-purple-600/30 hover:to-pink-600/30 text-purple-300 border border-purple-500/30"
                   }>
                     <Plus className="w-4 h-4 mr-2" />
