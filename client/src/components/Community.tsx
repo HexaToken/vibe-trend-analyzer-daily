@@ -2,45 +2,16 @@ import { useState } from "react";
 import {
   ChartColumn,
   Users,
-  Heart,
-  MessageSquare,
-  Repeat2,
-  Bookmark,
-  Bell,
-  BellOff,
-  UserPlus,
-  UserMinus,
-  Clock,
-  TrendingUp,
   Search,
   Filter,
-  MoreHorizontal,
-  CheckCircle,
-  Crown,
-  Shield,
-  Star,
-  AlertTriangle,
-  Award,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { PostCard, type PostCardData } from "./social/PostCard";
 
 interface PostData {
   id: string;
