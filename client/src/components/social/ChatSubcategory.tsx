@@ -131,7 +131,7 @@ const mockRooms: ChatRoom[] = [
     name: "₿ Crypto Central",
     description: "Bitcoin, Ethereum, and altcoin discussions",
     type: "crypto",
-    icon: "���",
+    icon: "₿",
     memberCount: 892,
     onlineCount: 156,
     isPrivate: false,
@@ -428,20 +428,89 @@ export const ChatSubcategory: React.FC = () => {
 
         <div className="flex-1 min-w-0">
           {showAvatar && (
-            <div className="flex items-center gap-2 mb-1">
-              <span className="font-semibold text-sm">
-                {message.username}
-              </span>
-              {getUserRoleIcon(message.userRole)}
-              <span className="text-xs text-muted-foreground">
-                {formatMessageTime(message.timestamp)}
-              </span>
-              {message.isPinned && (
-                <Badge variant="outline" className="text-xs">
-                  <Pin className="h-2 w-2 mr-1" />
-                  Pinned
-                </Badge>
-              )}
+            <div className="flex items-center justify-between mb-1">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="font-semibold text-sm">
+                  {message.username}
+                </span>
+
+                {/* User Role Icon */}
+                {getUserRoleIcon(message.userRole)}
+
+                {/* Credibility Score */}
+                {message.credibilityScore && (
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Badge
+                          className={`text-xs px-2 py-0.5 font-semibold ${getCredibilityColor(message.credibilityScore)}`}
+                        >
+                          {message.credibilityScore.toFixed(1)}
+                        </Badge>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Credibility Score: {message.credibilityScore.toFixed(1)}/10.0</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                )}
+
+                {/* Needs Review Badge */}
+                {message.needsReview && (
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Badge className="bg-yellow-100 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-400 text-xs px-2 py-0.5">
+                          <AlertTriangle className="h-3 w-3 mr-1" />
+                          Needs Review
+                        </Badge>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>This message requires community review</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                )}
+
+                {/* Community Favorite Badge */}
+                {message.communityFavorite && (
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Badge className="bg-pink-100 text-pink-700 dark:bg-pink-900/20 dark:text-pink-400 text-xs px-2 py-0.5">
+                          <Award className="h-3 w-3 mr-1" />
+                          Community Favorite
+                        </Badge>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Highly appreciated by the community</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                )}
+
+                <span className="text-xs text-muted-foreground">
+                  {formatMessageTime(message.timestamp)}
+                </span>
+
+                {message.isPinned && (
+                  <Badge variant="outline" className="text-xs">
+                    <Pin className="h-2 w-2 mr-1" />
+                    Pinned
+                  </Badge>
+                )}
+              </div>
+
+              {/* Post Interaction Bar for Chat Messages */}
+              <PostInteractionBar
+                userId={message.userId}
+                username={message.username}
+                compact={true}
+                onFollow={handleFollow}
+                onUnfollow={handleUnfollow}
+                onToggleAlerts={handleToggleAlerts}
+                className="opacity-60 hover:opacity-100 transition-opacity"
+              />
             </div>
           )}
 
