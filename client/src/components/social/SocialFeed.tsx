@@ -168,6 +168,24 @@ export const SocialFeed = ({
     );
   };
 
+  const handleFollow = (userId: string) => {
+    console.log(`Following user: ${userId}`);
+    // In real app, call API to follow user
+    // await followUser(userId);
+  };
+
+  const handleUnfollow = (userId: string) => {
+    console.log(`Unfollowing user: ${userId}`);
+    // In real app, call API to unfollow user
+    // await unfollowUser(userId);
+  };
+
+  const handleToggleAlerts = (userId: string, enabled: boolean) => {
+    console.log(`${enabled ? 'Enabling' : 'Disabling'} alerts for user: ${userId}`);
+    // In real app, call API to update alert preferences
+    // await updateUserAlertSettings(userId, enabled);
+  };
+
   return (
     <div className="space-y-6">
       {/* Feed Header */}
