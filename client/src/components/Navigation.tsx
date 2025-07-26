@@ -14,6 +14,7 @@ import {
   UserCircle,
   Bell,
   MessageSquare,
+  DollarSign,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -165,6 +166,19 @@ export const Navigation = ({
                 Futuristic Home
                 <Badge variant="secondary" className="text-xs bg-gradient-to-r from-cyan-400/20 to-blue-500/20 text-cyan-300 border-cyan-400/30">
                   FUTURE
+                </Badge>
+              </Button>
+
+              {/* TradeHub */}
+              <Button
+                variant={activeSection === "tradehub" ? "default" : "ghost"}
+                onClick={() => onSectionChange("tradehub")}
+                className="flex items-center gap-2"
+              >
+                <DollarSign className="h-4 w-4" />
+                💼 TradeHub
+                <Badge variant="secondary" className="text-xs bg-gradient-to-r from-green-400/20 to-emerald-500/20 text-green-300 border-green-400/30">
+                  MONETIZE
                 </Badge>
               </Button>
 
@@ -503,6 +517,25 @@ export const Navigation = ({
                 </Button>
 
                                 
+
+                {/* TradeHub Mobile */}
+                <div className="text-sm font-medium text-muted-foreground px-3 py-1">
+                  Monetization
+                </div>
+                <Button
+                  variant={activeSection === "tradehub" ? "default" : "ghost"}
+                  onClick={() => {
+                    onSectionChange("tradehub");
+                    setIsMenuOpen(false);
+                  }}
+                  className="justify-start gap-2 ml-4"
+                >
+                  <DollarSign className="h-4 w-4" />
+                  💼 TradeHub
+                  <Badge variant="secondary" className="ml-auto text-xs">
+                    NEW
+                  </Badge>
+                </Button>
 
                 {/* Mobile Auth Section */}
                 <div className="pt-4 border-t">
