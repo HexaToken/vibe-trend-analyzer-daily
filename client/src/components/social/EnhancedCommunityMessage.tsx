@@ -15,6 +15,9 @@ import {
   MoreHorizontal,
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { UserAvatar } from "./UserAvatar";
+import { UsernameLink } from "./UsernameLink";
+import { MentionText } from "./MentionText";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -43,6 +46,7 @@ interface EnhancedCommunityMessageProps {
   onFollow?: (userId: string) => void;
   onUnfollow?: (userId: string) => void;
   onToggleAlerts?: (userId: string, enabled: boolean) => void;
+  onNavigateToProfile?: (userId: string) => void;
   compact?: boolean;
 }
 
@@ -61,6 +65,7 @@ export const EnhancedCommunityMessage = ({
   onFollow,
   onUnfollow,
   onToggleAlerts,
+  onNavigateToProfile,
   compact = false,
 }: EnhancedCommunityMessageProps) => {
   // Mock metrics - in real app, fetch from API based on userId
@@ -139,12 +144,17 @@ export const EnhancedCommunityMessage = ({
       {/* Avatar Section */}
       <div className="w-10 flex-shrink-0">
         {showAvatar && (
-          <Avatar className="h-10 w-10">
-            <AvatarImage src={message.userAvatar} />
-            <AvatarFallback className="text-sm">
-              {message.username[0].toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
+          <UserAvatar
+            userId={message.userId}
+            username={message.username}
+            avatar={message.userAvatar}
+            size="md"
+            verified={message.userRole === "verified" || message.userRole === "admin" || message.userRole === "moderator"}
+            premium={message.userRole === "premium"}
+            credibilityScore={metrics.credibilityScore}
+            showBadges={true}
+            onUserClick={onNavigateToProfile}
+          />
         )}
       </div>
 
@@ -154,7 +164,15 @@ export const EnhancedCommunityMessage = ({
           <div className="flex items-start justify-between mb-2">
             {/* User Info and Badges */}
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="font-semibold text-sm">{message.username}</span>
+              <UsernameLink
+                userId={message.userId}
+                username={message.username}
+                verified={message.userRole === "verified" || message.userRole === "admin" || message.userRole === "moderator"}
+                premium={message.userRole === "premium"}
+                credibilityScore={metrics.credibilityScore}
+                showBadges={true}
+                onUserClick={onNavigateToProfile}
+              />
               
               {/* User Role Icon */}
               {getUserRoleIcon(message.userRole)}
@@ -244,9 +262,13 @@ export const EnhancedCommunityMessage = ({
 
         {/* Message Content */}
         <div className="group relative">
-          <p className="text-sm leading-relaxed break-words mb-2">
-            {message.content}
-          </p>
+          <div className="text-sm leading-relaxed break-words mb-2">
+            <MentionText
+              text={message.content}
+              onUserClick={onNavigateToProfile}
+              enableMentions={true}
+            />
+          </div>
 
           {/* Message Actions (on hover) */}
           <div className="absolute -right-2 -top-2 opacity-0 group-hover:opacity-100 transition-opacity">
