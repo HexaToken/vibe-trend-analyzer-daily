@@ -169,7 +169,12 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
               </DropdownMenuTrigger>
               <DropdownMenuContent
                 align="center"
-                className="w-56 bg-[#0A0A23]/95 backdrop-blur-xl border-gray-700 text-white rounded-xl"
+                className={cn(
+                  "w-56 backdrop-blur-xl rounded-xl",
+                  isLightMode
+                    ? "bg-white/95 border-gray-200 text-gray-900"
+                    : "bg-[#0A0A23]/95 border-gray-700 text-white"
+                )}
               >
                 {communityItems.map(({ label, key, icon }) => (
                   <DropdownMenuItem
