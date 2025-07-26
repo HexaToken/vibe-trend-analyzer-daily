@@ -216,7 +216,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                   <DropdownMenuItem
                     key={key}
                     onClick={() => handleNavigation(key)}
-                    className="hover:bg-green-500/20 focus:bg-green-500/20 cursor-pointer rounded-lg"
+                    className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer rounded-lg"
                   >
                     <span className="mr-3">{icon}</span>
                     {label}
@@ -416,8 +416,8 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                     className={cn(
                       "w-full justify-start text-left py-3 rounded-xl transition-all duration-200",
                       isLightMode
-                        ? "text-gray-900 hover:text-green-600 hover:bg-green-500/10"
-                        : "text-gray-300 hover:text-gray-200 hover:bg-green-500/20"
+                        ? "text-gray-900 hover:text-blue-600 hover:bg-blue-500/10"
+                        : "text-gray-300 hover:text-gray-200 hover:bg-purple-500/20"
                     )}
                   >
                     <span className="mr-3">{icon}</span>
