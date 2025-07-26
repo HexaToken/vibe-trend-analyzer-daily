@@ -29,6 +29,7 @@ import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
 import { PulseOfTheChain } from "@/components/crypto/PulseOfTheChain";
 import { EarningsCalendar } from "@/components/finance/EarningsCalendar";
 import { AdvancedCharts } from "@/components/finance/AdvancedCharts";
+import { TrendingHub } from "@/components/finance/TrendingHub";
 
 import { NLPSentimentDemo } from "@/components/NLPSentimentDemo";
 import { SpacyNLPDemo } from "@/components/SpacyNLPDemo";
