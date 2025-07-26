@@ -802,7 +802,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
             <div className="text-center mb-12">
               <div className="flex items-center justify-center gap-4 mb-6">
                 <div className="w-20 h-20 bg-gradient-to-r from-orange-500/20 via-yellow-500/20 to-orange-500/20 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/20 animate-pulse">
-                  <span className="text-4xl">⚡</span>
+                  <span className="text-4xl">���</span>
                 </div>
                 <div className="text-center">
                   <h1 className="text-5xl font-bold bg-gradient-to-r from-orange-400 via-yellow-400 to-orange-400 bg-clip-text text-transparent mb-2">
@@ -1064,7 +1064,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     { rank: 4, symbol: 'BNB', name: 'BNB', price: '$312.45', change: '+4.67%', marketCap: '$48.2B', icon: '⬡', changeColor: 'text-green-400', trendData: [310, 315, 312, 318, 312], glow: 'shadow-lg shadow-yellow-500/20' },
                     { rank: 5, symbol: 'SOL', name: 'Solana', price: '$156.78', change: '+8.45%', marketCap: '$42.1B', icon: '◎', changeColor: 'text-green-400', trendData: [150, 155, 160, 158, 157], glow: 'shadow-lg shadow-purple-500/20' },
                     { rank: 6, symbol: 'USDC', name: 'USD Coin', price: '$0.9999', change: '-0.01%', marketCap: '$38.9B', icon: '$', changeColor: 'text-red-400', trendData: [1, 1, 1, 1, 1], glow: 'shadow-lg shadow-blue-400/20' },
-                    { rank: 7, symbol: 'XRP', name: 'Ripple', price: '$0.5234', change: '-2.87%', marketCap: '$28.7B', icon: '◉', changeColor: 'text-red-400', trendData: [0.53, 0.52, 0.54, 0.52, 0.52], glow: 'shadow-lg shadow-cyan-500/20' },
+                    { rank: 7, symbol: 'XRP', name: 'Ripple', price: '$0.5234', change: '-2.87%', marketCap: '$28.7B', icon: '���', changeColor: 'text-red-400', trendData: [0.53, 0.52, 0.54, 0.52, 0.52], glow: 'shadow-lg shadow-cyan-500/20' },
                     { rank: 8, symbol: 'ADA', name: 'Cardano', price: '$0.5845', change: '+5.21%', marketCap: '$20.6B', icon: '₳', changeColor: 'text-green-400', trendData: [0.55, 0.58, 0.56, 0.59, 0.58], glow: 'shadow-lg shadow-indigo-500/20' },
                     { rank: 9, symbol: 'DOGE', name: 'Dogecoin', price: '$0.0832', change: '-4.12%', marketCap: '$12.1B', icon: 'Ð', changeColor: 'text-red-400', trendData: [0.085, 0.083, 0.087, 0.081, 0.083], glow: 'shadow-lg shadow-amber-500/20' },
                     { rank: 10, symbol: 'AVAX', name: 'Avalanche', price: '$38.45', change: '+12.34%', marketCap: '$15.8B', icon: '�����', changeColor: 'text-green-400', trendData: [35, 38, 36, 40, 38], glow: 'shadow-lg shadow-red-500/20' }
@@ -2757,11 +2757,11 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       <div className="flex items-center justify-between mb-3">
                         <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
                           themeMode === 'light'
-                            ? 'bg-gradient-to-r from-green-500/10 to-green-600/20'
+                            ? 'bg-gradient-to-r from-red-400/10 to-pink-500/20'
                             : 'bg-gradient-to-r from-purple-500/20 to-pink-500/20'
                         }`}>
                           <span className={`text-xs font-bold ${
-                            themeMode === 'light' ? 'text-green-700' : 'text-white'
+                            themeMode === 'light' ? 'text-red-600' : 'text-white'
                           }`}>{stock.symbol[0]}</span>
                         </div>
                         <Badge className={getSentimentBadge(stock.sentiment)}>
