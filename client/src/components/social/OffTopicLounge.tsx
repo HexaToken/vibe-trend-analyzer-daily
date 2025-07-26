@@ -29,6 +29,17 @@ import {
   Laugh,
 } from "lucide-react";
 import { PostInteractionBar } from "./PostInteractionBar";
+import {
+  CheckCircle,
+  AlertTriangle,
+  Award as AwardIcon,
+} from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface OffTopicPost {
   id: string;
