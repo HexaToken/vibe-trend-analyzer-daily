@@ -60,6 +60,7 @@ interface StockChannel {
 
 interface StockMessage {
   id: string;
+  userId: string;
   username: string;
   avatar: string;
   timestamp: Date;
@@ -71,6 +72,9 @@ interface StockMessage {
   isPinned?: boolean;
   tickers: string[];
   type?: 'message' | 'mood';
+  credibilityScore?: number;
+  needsReview?: boolean;
+  communityFavorite?: boolean;
   moodData?: {
     mood: {
       id: string;
