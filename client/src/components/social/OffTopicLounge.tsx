@@ -171,6 +171,9 @@ export const OffTopicLounge: React.FC = () => {
       replies: 23,
       shares: 12,
       tags: ["tech", "apple", "ar", "vr"],
+      credibilityScore: 8.5,
+      needsReview: false,
+      communityFavorite: false,
     },
     {
       id: "3",
