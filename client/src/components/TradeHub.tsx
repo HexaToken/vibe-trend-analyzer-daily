@@ -368,7 +368,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                       </div>
                       <div>
                         <div className="font-semibold">{trader.subscribers.toLocaleString()}</div>
-                        <div className="text-muted-foreground">Subscribers</div>
+                        <div className="text-gray-600 font-medium">Subscribers</div>
                       </div>
                     </div>
                     
