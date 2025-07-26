@@ -241,6 +241,12 @@ export const MoodThemeProvider: React.FC<MoodThemeProviderProps> = ({ children }
     moodLabel: MOOD_LABELS[moodState],
     cardBackground: currentTheme.cardBackground,
     borderColor: currentTheme.border,
+    // Mood color utilities
+    getMoodColor,
+    getMoodTag,
+    getMoodButton,
+    lightThemeColors: LIGHT_THEME_COLORS,
+    interactiveColors: INTERACTIVE_COLORS,
   };
 
   return (
