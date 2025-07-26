@@ -159,37 +159,46 @@ export async function robustFetch(
 
             if (reason) {
               if (reason instanceof Error) {
-                lastError = reason;
+                // Check if it's a timeout error
+                if (reason.message.includes("timeout")) {
+                  lastError = new Error("Network request timed out. Please check your connection and try again.");
+                } else {
+                  lastError = reason;
+                }
               } else if (typeof reason === 'string') {
-                lastError = new Error(reason);
+                if (reason.includes("timeout")) {
+                  lastError = new Error("Network request timed out. Please check your connection and try again.");
+                } else {
+                  lastError = new Error(reason);
+                }
               } else {
-                lastError = new Error("Request was aborted");
+                lastError = new Error("Request was cancelled");
               }
             } else {
               // No reason provided, check if it's likely a timeout based on context
               if (errorMessage.includes("timeout") || errorMessage.includes("signal is aborted without reason")) {
-                lastError = new Error("Request timeout");
+                lastError = new Error("Network request timed out. Please check your connection and try again.");
               } else {
-                lastError = new Error("Request was aborted");
+                lastError = new Error("Request was cancelled");
               }
             }
           } else {
             // External abort or unknown abort
-            lastError = new Error("Request was aborted externally");
+            lastError = new Error("Request was cancelled by user");
           }
         } catch (signalError) {
           // If we can't access the signal safely, assume timeout if the original error suggests it
           if (errorMessage.includes("timeout") || errorMessage.includes("signal is aborted without reason")) {
-            lastError = new Error("Request timeout");
+            lastError = new Error("Network request timed out. Please check your connection and try again.");
           } else {
-            lastError = new Error("Request was aborted");
+            lastError = new Error("Request was cancelled");
           }
         }
       }
 
-      // Catch any remaining "signal is aborted without reason" errors
-      if (errorMessage.includes("signal is aborted without reason")) {
-        lastError = new Error("Request timeout");
+      // Catch any remaining timeout-related errors
+      if (errorMessage.includes("timeout") || errorMessage.includes("signal is aborted without reason")) {
+        lastError = new Error("Network request timed out. Please check your connection and try again.");
       }
 
       // Handle other common fetch errors
