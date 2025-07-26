@@ -215,6 +215,7 @@ export const StockChannelHub: React.FC = () => {
     },
     {
       id: "3",
+      userId: "user-chart-master",
       username: "ChartMaster",
       avatar: "/api/placeholder/32/32",
       timestamp: new Date(Date.now() - 600000),
@@ -225,6 +226,9 @@ export const StockChannelHub: React.FC = () => {
       likes: 34,
       comments: 8,
       tickers: ["$TSLA"],
+      credibilityScore: 7.8,
+      needsReview: true,
+      communityFavorite: false,
     },
     {
       id: "4",
