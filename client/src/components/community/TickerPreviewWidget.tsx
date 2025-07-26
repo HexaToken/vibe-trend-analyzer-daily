@@ -289,8 +289,9 @@ export const TickerPreviewWidget: React.FC<TickerPreviewWidgetProps> = ({
                     size="sm"
                     onClick={() => onViewFullPage?.(ticker)}
                     className="h-8 px-3 text-xs border-slate-600 text-slate-300 hover:bg-slate-700 hover:border-slate-500"
+                    title="View Analytics"
                   >
-                    <ExternalLink className="w-3 h-3" />
+                    <BarChart3 className="w-3 h-3" />
                   </Button>
                 </div>
               </>
