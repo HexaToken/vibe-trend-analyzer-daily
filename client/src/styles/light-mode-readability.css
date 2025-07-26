@@ -891,3 +891,43 @@
   background: rgba(34, 197, 94, 0.2) !important;
   color: #15803D !important;
 }
+
+/* ===== GRADIENT TEXT CONTRAST FIXES ===== */
+
+/* Fix gradient text that appears transparent in light mode */
+:root:not(.dark) .bg-gradient-to-r[style*="from-blue"][style*="to-indigo"] {
+  color: #8B5A2B !important; /* Brown for better contrast */
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+
+:root:not(.dark) .bg-gradient-to-r[style*="63, 81, 181"][style*="33, 150, 243"] {
+  color: #8B5A2B !important; /* Brown for better contrast on light backgrounds */
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+
+/* Fix mood score gradient text */
+:root:not(.dark) [style*="linear-gradient(to right, rgb(63, 81, 181), rgb(33, 150, 243))"] {
+  color: #41750A !important; /* Dark green for +64 score */
+  font-weight: 700 !important;
+}
+
+/* Fix MoodMeter brand text in footer */
+:root:not(.dark) .footer [style*="linear-gradient"] {
+  color: #8B5A2B !important; /* Brown for footer brand text */
+  font-weight: 700 !important;
+}
+
+/* Badge text color improvements */
+:root:not(.dark) .text-orange-400 {
+  color: #F5A623 !important; /* Amber for badge text */
+  font-weight: 600 !important;
+}
+
+/* Improve gray badge text in light mode */
+:root:not(.dark) .bg-gray-500 {
+  background: #6B7280 !important;
+  color: #F5A623 !important; /* Orange text on gray badges */
+  border-color: #4B5563 !important;
+}
