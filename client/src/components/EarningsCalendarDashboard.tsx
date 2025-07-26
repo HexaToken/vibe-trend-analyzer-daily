@@ -118,7 +118,7 @@ const EarningsCalendarDashboard: React.FC<EarningsCalendarDashboardProps> = ({
       date: '2024-01-17',
       symbol: 'TSLA',
       name: 'Tesla Inc.',
-      logo: '⚡',
+      logo: <EmojiIcon emoji="⚡" className="w-6 h-6" />,
       time: 'AMC',
       actualEPS: 0.71,
       estimatedEPS: 0.73,
