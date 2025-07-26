@@ -37,6 +37,10 @@ import {
 import { useCryptoListings } from "@/hooks/useCoinMarketCap";
 import { useAuth } from "@/contexts/AuthContext";
 import { useMoodTheme } from "@/contexts/MoodThemeContext";
+import { UserAvatar } from "../social/UserAvatar";
+import { UsernameLink } from "../social/UsernameLink";
+import { MentionText } from "../social/MentionText";
+import { ProfileNavigationProvider, useProfileNavigation } from "../social/ProfileNavigationProvider";
 
 interface CryptoChannel {
   id: string;
