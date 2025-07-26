@@ -28,9 +28,15 @@ function safeAbort(controller: AbortController, reason?: Error | string) {
   try {
     if (!controller.signal.aborted) {
       if (reason) {
-        controller.abort(reason);
+        // Ensure timeout errors have user-friendly messages
+        if (reason instanceof Error && reason.message.includes("Request timeout after")) {
+          const timeoutError = new Error("Network request timed out. Please check your connection and try again.");
+          controller.abort(timeoutError);
+        } else {
+          controller.abort(reason);
+        }
       } else {
-        controller.abort();
+        controller.abort(new Error("Request was cancelled"));
       }
     }
   } catch (error) {
