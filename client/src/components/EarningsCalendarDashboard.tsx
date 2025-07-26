@@ -579,7 +579,7 @@ const EarningsCalendarDashboard: React.FC<EarningsCalendarDashboardProps> = ({
             onClick={() => setViewMode('feed')}
             className="text-xs"
           >
-            📋 Feed
+            <EmojiIcon emoji="📋" className="w-4 h-4" /> Feed
           </Button>
           <Button
             variant={viewMode === 'chart' ? 'default' : 'outline'}
