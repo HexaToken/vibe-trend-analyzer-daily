@@ -188,6 +188,7 @@ export const StockChannelHub: React.FC = () => {
     },
     {
       id: "2",
+      userId: "user-market-mood",
       username: "MarketMood",
       avatar: "/api/placeholder/32/32",
       timestamp: new Date(Date.now() - 180000),
