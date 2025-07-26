@@ -130,7 +130,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
               💼 TradeHub
             </h1>
           </div>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-gray-700 max-w-2xl mx-auto font-medium">
             Learn from verified traders, access premium strategies, and monetize your trading expertise
           </p>
           <div className="flex flex-wrap justify-center gap-4 mt-6">
@@ -391,9 +391,9 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
         <div className="mt-16 text-center">
           <Card className="bg-gradient-to-r from-primary/10 to-purple-600/10 border-primary/20">
             <CardContent className="p-8">
-              <h2 className="text-2xl font-bold mb-4">Ready to Monetize Your Trading Expertise?</h2>
-              <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                Join our community of verified traders and start earning from your knowledge. 
+              <h2 className="text-2xl font-bold mb-4 text-gray-900">Ready to Monetize Your Trading Expertise?</h2>
+              <p className="text-gray-800 font-medium mb-6 max-w-2xl mx-auto">
+                Join our community of verified traders and start earning from your knowledge.
                 Share courses, offer subscriptions, and build your following.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
