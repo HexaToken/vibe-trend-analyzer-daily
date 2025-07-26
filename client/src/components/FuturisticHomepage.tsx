@@ -2796,7 +2796,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <div className="space-y-4">
                   {smartNews.map((news, index) => (
                     <div key={index} className={themeMode === 'light'
-                      ? `bg-white rounded-xl p-5 border border-[#E0E0E0] hover:border-[#3F51B5]/30 transition-all duration-300 group cursor-pointer shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]`
+                      ? `bg-white rounded-xl p-5 border border-[#E0E0E0] hover:border-green-500/30 transition-all duration-300 group cursor-pointer shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]`
                       : "bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-5 border border-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer"
                     }>
                       <div className="flex items-start justify-between mb-3">
@@ -2862,7 +2862,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {trendingTopics.map((topic, index) => (
                     <div key={index} className={themeMode === 'light'
-                      ? `bg-white rounded-xl p-4 border border-[#E0E0E0] hover:border-[#3F51B5]/30 transition-all duration-300 shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]`
+                      ? `bg-white rounded-xl p-4 border border-[#E0E0E0] hover:border-green-500/30 transition-all duration-300 shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]`
                       : "bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-4 border border-white/10 hover:border-purple-500/30 transition-all duration-300"
                     }>
                       <div className="flex items-center gap-3 mb-3">
