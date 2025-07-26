@@ -2803,7 +2803,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         <div className="flex-1">
                           <h3 className={`text-lg font-semibold mb-2 line-clamp-2 transition-colors ${
                             themeMode === 'light'
-                              ? 'text-[#1C1E21] group-hover:text-[#3F51B5]'
+                              ? 'text-[#1C1E21] group-hover:text-green-700'
                               : 'text-white group-hover:text-purple-300'
                           }`}>
                             {news.headline}
@@ -2914,7 +2914,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     ))}
                   </div>
                   <Button className={themeMode === 'light'
-                    ? "w-full bg-[#3F51B5] hover:bg-[#1E3A8A] text-white border border-[#3F51B5] hover:border-[#1E3A8A] transition-all font-medium"
+                    ? "w-full bg-green-600 hover:bg-green-700 text-white border border-green-600 hover:border-green-700 transition-all font-medium"
                     : "w-full bg-gradient-to-r from-purple-600/20 to-pink-600/20 hover:from-purple-600/30 hover:to-pink-600/30 text-purple-300 border border-purple-500/30"
                   }>
                     <Plus className="w-4 h-4 mr-2" />
