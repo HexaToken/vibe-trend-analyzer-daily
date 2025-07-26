@@ -153,6 +153,15 @@ const AppContent = () => {
         return <AdminCredibilityDashboard />;
       case "tradehub":
         return <TradeHub onNavigate={setActiveSection} />;
+      case "trader-profile":
+        return (
+          <ProtectedRoute
+            fallbackTitle="Trader Profile Access"
+            fallbackDescription="Please sign in to view trader profiles and trading insights."
+          >
+            <TraderProfile />
+          </ProtectedRoute>
+        );
 
       default:
         return <FuturisticHomepage onNavigate={setActiveSection} />;
