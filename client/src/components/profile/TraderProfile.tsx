@@ -105,7 +105,7 @@ interface PortfolioHolding {
   value: number;
 }
 
-export const TraderProfile = ({ userId, isCurrentUser = false }: TraderProfileProps) => {
+export const TraderProfile = ({ userId, isCurrentUser = false, onNavigateBack }: TraderProfileProps) => {
   const [activeTab, setActiveTab] = useState("posts");
   const [isFollowing, setIsFollowing] = useState(false);
   const [alertsEnabled, setAlertsEnabled] = useState(false);
