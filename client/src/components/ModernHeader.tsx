@@ -141,7 +141,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                       : "text-pink-400 bg-pink-500/10"
                     : isLightMode
                       ? "text-gray-900 hover:text-blue-600"
-                      : "text-gray-300 hover:text-white hover:text-pink-300"
+                      : "text-gray-300 hover:text-gray-200"
                 )}
                 aria-current={activeSection === key ? "page" : undefined}
               >
@@ -160,7 +160,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                   "flex items-center gap-1 text-base font-medium px-3 py-2 rounded-lg transition-all duration-200 relative group",
                   isLightMode
                     ? "text-gray-900 hover:text-blue-600"
-                    : "text-gray-300 hover:text-white hover:text-pink-300"
+                    : "text-gray-300 hover:text-gray-200"
                 )}>
                   Community
                   <ChevronDown className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" />
@@ -196,7 +196,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                   "flex items-center gap-1 text-base font-medium px-3 py-2 rounded-lg transition-all duration-200 relative group",
                   isLightMode
                     ? "text-gray-900 hover:text-blue-600"
-                    : "text-gray-300 hover:text-white hover:text-pink-300"
+                    : "text-gray-300 hover:text-gray-200"
                 )}>
                   Finance
                   <ChevronDown className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" />
@@ -357,7 +357,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                         : "text-pink-400 bg-pink-500/10 border border-pink-500/20"
                       : isLightMode
                         ? "text-gray-900 hover:text-blue-600 hover:bg-blue-500/10"
-                        : "text-gray-300 hover:text-white hover:bg-purple-500/20"
+                        : "text-gray-300 hover:text-gray-200 hover:bg-purple-500/20"
                   )}
                 >
                   {label}
@@ -386,7 +386,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                       "w-full justify-start text-left py-3 rounded-xl transition-all duration-200",
                       isLightMode
                         ? "text-gray-900 hover:text-blue-600 hover:bg-blue-500/10"
-                        : "text-gray-300 hover:text-white hover:bg-purple-500/20"
+                        : "text-gray-300 hover:text-gray-200 hover:bg-purple-500/20"
                     )}
                   >
                     <span className="mr-3">{icon}</span>
@@ -417,7 +417,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                       "w-full justify-start text-left py-3 rounded-xl transition-all duration-200",
                       isLightMode
                         ? "text-gray-900 hover:text-green-600 hover:bg-green-500/10"
-                        : "text-gray-300 hover:text-white hover:bg-green-500/20"
+                        : "text-gray-300 hover:text-gray-200 hover:bg-green-500/20"
                     )}
                   >
                     <span className="mr-3">{icon}</span>
