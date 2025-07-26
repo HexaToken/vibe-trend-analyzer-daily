@@ -223,21 +223,8 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
               </Badge>
             </Button>
 
-            {/* Real-time Updates Toggle */}
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setRealTimeEnabled(!realTimeEnabled)}
-              className={cn(
-                "p-2 rounded-lg transition-all duration-200",
-                realTimeEnabled
-                  ? "bg-green-500/20 text-green-400 hover:bg-green-500/30 shadow-lg shadow-green-500/20"
-                  : "hover:bg-purple-500/20 text-gray-400 hover:text-purple-300"
-              )}
-              aria-label={`Real-time updates ${realTimeEnabled ? 'enabled' : 'disabled'}`}
-            >
-              <Zap className={cn("w-5 h-5", realTimeEnabled && "animate-pulse")} />
-            </Button>
+            {/* Theme Settings Panel */}
+            <ThemeSettingsPanel currentMoodScore={currentMoodScore} />
 
             {/* User Authentication */}
             <UserAuthenticationToggle onNavigate={onNavigate} />
