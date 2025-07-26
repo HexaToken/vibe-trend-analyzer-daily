@@ -66,6 +66,10 @@ export const Community = () => {
       likes: 24,
       replies: 8,
       badge: "Expert",
+      credibilityScore: 9.2,
+      needsReview: false,
+      communityFavorite: true,
+      verified: true,
     },
     {
       id: 2,
