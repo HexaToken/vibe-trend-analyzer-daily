@@ -230,3 +230,5 @@ export const PostInteractionBar = ({
     </TooltipProvider>
   );
 };
+
+export default PostInteractionBar;
