@@ -1288,7 +1288,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                               trend.sentiment === 'bearish' ? "text-red-400" : "text-gray-400"
                             )}>
                               {trend.sentiment === 'bullish' ? '😃' :
-                               trend.sentiment === 'bearish' ? '��' : '����'}
+                               trend.sentiment === 'bearish' ? '😡' : '����'}
                             </span>
                             <span className="text-purple-300 text-xs font-bold">{trend.mentions}</span>
                           </div>
@@ -2862,7 +2862,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {trendingTopics.map((topic, index) => (
                     <div key={index} className={themeMode === 'light'
-                      ? `bg-white rounded-xl p-4 border border-[#E0E0E0] hover:border-green-500/30 transition-all duration-300 shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]`
+                      ? `bg-white rounded-xl p-4 border border-[#E0E0E0] hover:border-red-400/30 transition-all duration-300 shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]`
                       : "bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-4 border border-white/10 hover:border-purple-500/30 transition-all duration-300"
                     }>
                       <div className="flex items-center gap-3 mb-3">
@@ -2914,7 +2914,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     ))}
                   </div>
                   <Button className={themeMode === 'light'
-                    ? "w-full bg-green-600 hover:bg-green-700 text-white border border-green-600 hover:border-green-700 transition-all font-medium"
+                    ? "w-full bg-red-500 hover:bg-red-600 text-white border border-red-500 hover:border-red-600 transition-all font-medium"
                     : "w-full bg-gradient-to-r from-purple-600/20 to-pink-600/20 hover:from-purple-600/30 hover:to-pink-600/30 text-purple-300 border border-purple-500/30"
                   }>
                     <Plus className="w-4 h-4 mr-2" />
