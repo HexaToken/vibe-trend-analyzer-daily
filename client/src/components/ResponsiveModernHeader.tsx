@@ -248,10 +248,13 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                     <DropdownMenuItem
                       key={key}
                       onClick={() => handleNavigation(key)}
-                      className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer rounded-lg"
+                      className={cn(
+                        "hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer rounded-lg px-3 py-2 transition-colors",
+                        isLightMode ? "hover:bg-blue-500/10" : "hover:bg-purple-500/20"
+                      )}
                     >
-                      <span className="mr-3">{icon}</span>
-                      {label}
+                      <span className="mr-3 text-lg">{icon}</span>
+                      <span className="font-medium">{label}</span>
                     </DropdownMenuItem>
                   ))}
                 </DropdownMenuContent>
