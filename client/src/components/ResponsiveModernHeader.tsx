@@ -105,11 +105,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
     { label: 'TradeHub', key: 'tradehub', icon: '💼' },
   ];
 
-  const communityItems = [
-    { label: 'Community Hub', key: 'community', icon: '👥' },
-    { label: 'Live Chat', key: 'chat', icon: '💬' },
-    { label: 'Space', key: 'space', icon: '🌌' },
-  ];
+
 
   const financeItems = [
     { label: 'Finance Hub', key: 'finance', icon: '💰' },
