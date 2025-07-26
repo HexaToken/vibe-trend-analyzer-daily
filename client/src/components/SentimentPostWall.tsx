@@ -563,12 +563,12 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
                       </SelectContent>
                     </Select>
 
-                    <Select value={filter.ticker || ""} onValueChange={(value) => setFilter(prev => ({ ...prev, ticker: value }))}>
+                    <Select value={filter.ticker || "all-tickers"} onValueChange={(value) => setFilter(prev => ({ ...prev, ticker: value === "all-tickers" ? undefined : value }))}>
                       <SelectTrigger className="w-32 bg-slate-700/50 border-slate-600 text-slate-200">
                         <SelectValue placeholder="Ticker" />
                       </SelectTrigger>
                       <SelectContent className="bg-slate-800 border-slate-700">
-                        <SelectItem value="">All Tickers</SelectItem>
+                        <SelectItem value="all-tickers">All Tickers</SelectItem>
                         {popularTickers.map(ticker => (
                           <SelectItem key={ticker} value={ticker}>${ticker}</SelectItem>
                         ))}
