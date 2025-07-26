@@ -64,7 +64,7 @@ export const FeaturedPluginsCarousel = ({ plugins, className }: FeaturedPluginsC
               <Card className={cn(
                 "border-0 h-64",
                 themeMode === 'light'
-                  ? "bg-gradient-to-r from-blue-50 to-indigo-100"
+                  ? "bg-gradient-to-r from-[#F8FAFB] to-[#F4F6FA] border border-[#E0E0E0]/50"
                   : "bg-gradient-to-r from-purple-900/40 to-pink-900/40 backdrop-blur-xl"
               )}>
                 <CardContent className="p-8 h-full flex items-center">
@@ -81,13 +81,17 @@ export const FeaturedPluginsCarousel = ({ plugins, className }: FeaturedPluginsC
                             {plugin.name}
                           </h3>
                           <Badge 
-                            variant={plugin.price === 0 ? "secondary" : "default"}
-                            className="text-sm"
+                            className={cn(
+                              "text-sm font-semibold transition-colors",
+                              plugin.price === 0 
+                                ? "bg-[#E0F2F1] text-[#004D40] border-[#004D40]/20 hover:bg-[#B2DFDB]"
+                                : "bg-[#E3F2FD] text-[#0D47A1] border-[#0D47A1]/20 hover:bg-[#BBDEFB]"
+                            )}
                           >
                             {plugin.price === 0 ? 'Free' : `$${plugin.price}`}
                           </Badge>
                           {plugin.status === 'beta' && (
-                            <Badge variant="destructive" className="text-sm">
+                            <Badge className="text-sm bg-[#FFF3E0] text-[#E65100] border-[#E65100]/20 hover:bg-[#FFE0B2] font-semibold transition-colors">
                               Beta
                             </Badge>
                           )}
@@ -132,9 +136,9 @@ export const FeaturedPluginsCarousel = ({ plugins, className }: FeaturedPluginsC
                       <Button 
                         size="lg"
                         className={cn(
-                          "min-w-32",
+                          "min-w-32 font-semibold transition-colors",
                           themeMode === 'light'
-                            ? "bg-blue-600 hover:bg-blue-700"
+                            ? "bg-[#0D47A1] hover:bg-[#1565C0] text-white border-[#0D47A1]"
                             : "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
                         )}
                       >
@@ -197,10 +201,10 @@ export const FeaturedPluginsCarousel = ({ plugins, className }: FeaturedPluginsC
                 "w-3 h-3 rounded-full transition-all",
                 index === currentIndex
                   ? themeMode === 'light'
-                    ? "bg-blue-600"
+                    ? "bg-[#0D47A1]"
                     : "bg-purple-400"
                   : themeMode === 'light'
-                    ? "bg-gray-300 hover:bg-gray-400"
+                    ? "bg-[#BDBDBD] hover:bg-[#9E9E9E]"
                     : "bg-gray-600 hover:bg-gray-500"
               )}
               onClick={() => setCurrentIndex(index)}
