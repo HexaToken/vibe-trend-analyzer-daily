@@ -207,10 +207,12 @@ export const Community = ({ onNavigateToProfile }: CommunityProps) => {
         <Card className="border-0 shadow-sm bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
           <CardContent className="p-6">
             <div className="flex items-start gap-4">
-              <Avatar className="ring-2 ring-blue-100 dark:ring-blue-900">
-                <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=faces" />
-                <AvatarFallback>YU</AvatarFallback>
-              </Avatar>
+              <button onClick={() => onNavigateToProfile?.("current-user")}>
+                <Avatar className="ring-2 ring-blue-100 dark:ring-blue-900 hover:ring-purple-500/30 transition-all cursor-pointer">
+                  <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=faces" />
+                  <AvatarFallback>YU</AvatarFallback>
+                </Avatar>
+              </button>
               <div className="flex-1 space-y-4">
                 <Textarea
                   placeholder="Share your market insights... Use $TICKER to mention stocks 📊"
