@@ -53,7 +53,7 @@ function createTimeoutController(timeoutMs: number, externalSignal?: AbortSignal
   // Handle external signal if provided
   if (externalSignal) {
     if (externalSignal.aborted) {
-      controller.abort(new Error("External request was cancelled"));
+      safeAbort(controller, new Error("External request was cancelled"));
       return {
         controller,
         cleanup: () => { isCleanedUp = true; }
@@ -62,8 +62,8 @@ function createTimeoutController(timeoutMs: number, externalSignal?: AbortSignal
 
     // Forward external abort to our controller
     const onExternalAbort = () => {
-      if (!isCleanedUp && !controller.signal.aborted) {
-        controller.abort(new Error("External request was cancelled"));
+      if (!isCleanedUp) {
+        safeAbort(controller, new Error("External request was cancelled"));
       }
     };
 
@@ -73,13 +73,8 @@ function createTimeoutController(timeoutMs: number, externalSignal?: AbortSignal
   // Set up timeout with safeguards
   if (timeoutMs > 0) {
     timeoutId = setTimeout(() => {
-      if (!isCleanedUp && !controller.signal.aborted) {
-        try {
-          controller.abort(new Error(`Request timeout after ${timeoutMs}ms`));
-        } catch (error) {
-          // Ignore abort errors on cleanup
-          console.debug('Safe abort during timeout:', error);
-        }
+      if (!isCleanedUp) {
+        safeAbort(controller, new Error(`Request timeout after ${timeoutMs}ms`));
       }
     }, timeoutMs);
   }
