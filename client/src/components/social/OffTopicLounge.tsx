@@ -199,6 +199,9 @@ export const OffTopicLounge: React.FC = () => {
         { option: "Wall Street (1987)", votes: 76 },
         { option: "Margin Call", votes: 45 },
       ],
+      credibilityScore: 6.9,
+      needsReview: true,
+      communityFavorite: false,
     },
     {
       id: "4",
