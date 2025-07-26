@@ -226,15 +226,24 @@ export async function robustFetch(
         lastError.message,
       );
 
-      // Don't retry on abort (timeout), external abort, or 4xx errors
-      if (
-        lastError.message.includes("timeout") ||
-        lastError.message.includes("aborted") ||
-        (error instanceof FetchError &&
-          error.status &&
-          error.status >= 400 &&
-          error.status < 500)
-      ) {
+      // Don't retry on certain errors, but allow retry for timeout on first few attempts
+      const isTimeoutError = lastError.message.includes("timeout") || lastError.message.includes("timed out");
+      const isAbortError = lastError.message.includes("aborted") || lastError.message.includes("cancelled");
+      const is4xxError = error instanceof FetchError && error.status && error.status >= 400 && error.status < 500;
+
+      // Allow retry for timeouts on first 2 attempts, but not on the last attempt
+      if (isTimeoutError && attempt < Math.min(2, maxRetries)) {
+        console.warn(`Timeout on attempt ${attempt + 1}, retrying...`);
+        // Continue to retry logic below
+      } else if (isAbortError && !isTimeoutError) {
+        // Don't retry on user-initiated aborts
+        break;
+      } else if (is4xxError) {
+        // Don't retry on client errors
+        break;
+      } else if (isTimeoutError && attempt >= Math.min(2, maxRetries)) {
+        // Stop retrying timeouts after 2 attempts
+        console.error(`Request timed out after ${attempt + 1} attempts`);
         break;
       }
 
