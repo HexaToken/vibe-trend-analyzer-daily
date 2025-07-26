@@ -220,7 +220,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                         <AvatarImage src="/placeholder.svg" />
                         <AvatarFallback>{item.instructor[0]}</AvatarFallback>
                       </Avatar>
-                      <span className="text-sm text-muted-foreground">{item.instructor}</span>
+                      <span className="text-sm text-gray-700 font-medium">{item.instructor}</span>
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-4">
@@ -400,7 +400,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                 <Button size="lg" className="min-w-48">
                   Apply to Become a Creator
                 </Button>
-                <Button size="lg" variant="outline" className="min-w-48">
+                <Button size="lg" variant="outline" className="min-w-48 bg-white/90 border-2 border-gray-800 text-gray-800 font-semibold hover:bg-white hover:border-gray-900">
                   Learn More
                 </Button>
               </div>
