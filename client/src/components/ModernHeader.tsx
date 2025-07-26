@@ -262,71 +262,77 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
 
       {/* Mobile Navigation Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-black/95 backdrop-blur-xl border-t border-gray-800/50">
-          <div className="px-4 py-4 space-y-2">
+        <div className="md:hidden bg-[#0A0A23]/95 backdrop-blur-xl border-t border-gray-800/50">
+          <div className="px-4 py-4 space-y-3">
             {/* Mobile Search */}
             <div className="mb-4">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <Input
                   type="text"
-                  placeholder="Search stocks, news, or sentiment…"
-                  className="pl-10 pr-4 py-2 bg-gray-900/50 border-gray-700 rounded-lg text-white placeholder-gray-400"
+                  placeholder="Search"
+                  className="pl-10 pr-4 py-3 bg-black/30 border-gray-600/50 rounded-full text-white placeholder-gray-400 w-full"
                 />
               </div>
             </div>
 
             {/* Mobile Navigation Items */}
-            {navigationItems.map(({ label, key }) => (
-              <Button
-                key={key}
-                variant="ghost"
-                onClick={() => handleNavigation(key)}
-                className={cn(
-                  "w-full justify-start text-left",
-                  activeSection === key
-                    ? "text-pink-400 bg-pink-500/10"
-                    : "text-gray-300 hover:text-white hover:bg-gray-800/50"
-                )}
-              >
-                {label}
-              </Button>
-            ))}
-
-            {/* Mobile Community Section */}
-            <div className="pt-2">
-              <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
-                Community
-              </div>
-              {communityItems.map(({ label, key, icon }) => (
+            <div className="space-y-1">
+              {navigationItems.map(({ label, key }) => (
                 <Button
                   key={key}
                   variant="ghost"
                   onClick={() => handleNavigation(key)}
-                  className="w-full justify-start text-left text-gray-300 hover:text-white hover:bg-purple-500/20"
+                  className={cn(
+                    "w-full justify-start text-left py-3 rounded-xl transition-all duration-200",
+                    activeSection === key
+                      ? "text-pink-400 bg-pink-500/10 border border-pink-500/20"
+                      : "text-gray-300 hover:text-white hover:bg-purple-500/20"
+                  )}
                 >
-                  <span className="mr-3">{icon}</span>
                   {label}
                 </Button>
               ))}
             </div>
 
+            {/* Mobile Community Section */}
+            <div className="pt-4 border-t border-gray-700/50">
+              <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-3">
+                Community
+              </div>
+              <div className="space-y-1">
+                {communityItems.map(({ label, key, icon }) => (
+                  <Button
+                    key={key}
+                    variant="ghost"
+                    onClick={() => handleNavigation(key)}
+                    className="w-full justify-start text-left py-3 rounded-xl text-gray-300 hover:text-white hover:bg-purple-500/20 transition-all duration-200"
+                  >
+                    <span className="mr-3">{icon}</span>
+                    {label}
+                  </Button>
+                ))}
+              </div>
+            </div>
+
             {/* Mobile Finance Section */}
-            <div className="pt-2">
-              <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+            <div className="pt-4 border-t border-gray-700/50">
+              <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-3">
                 Finance
               </div>
-              {financeItems.map(({ label, key, icon }) => (
-                <Button
-                  key={key}
-                  variant="ghost"
-                  onClick={() => handleNavigation(key)}
-                  className="w-full justify-start text-left text-gray-300 hover:text-white hover:bg-green-500/20"
-                >
-                  <span className="mr-3">{icon}</span>
-                  {label}
-                </Button>
-              ))}
+              <div className="space-y-1">
+                {financeItems.map(({ label, key, icon }) => (
+                  <Button
+                    key={key}
+                    variant="ghost"
+                    onClick={() => handleNavigation(key)}
+                    className="w-full justify-start text-left py-3 rounded-xl text-gray-300 hover:text-white hover:bg-green-500/20 transition-all duration-200"
+                  >
+                    <span className="mr-3">{icon}</span>
+                    {label}
+                  </Button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
