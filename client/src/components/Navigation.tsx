@@ -143,7 +143,7 @@ export const Navigation = ({
               <div className="text-2xl font-bold text-[#111827] dark:text-transparent dark:bg-gradient-to-r dark:from-primary dark:to-primary/60 dark:bg-clip-text">
                 MoodMeter
               </div>
-              <Badge variant="secondary" className="hidden sm:inline-flex">
+              <Badge className="hidden sm:inline-flex bg-[#E3F2FD] text-[#0D47A1] border-[#0D47A1]/20 hover:bg-[#BBDEFB] transition-colors font-semibold">
                 v2.0
               </Badge>
               <div className="hidden sm:inline-flex">
@@ -164,7 +164,7 @@ export const Navigation = ({
               >
                 <Zap className="h-4 w-4" />
                 Futuristic Home
-                <Badge variant="secondary" className="text-xs bg-gradient-to-r from-cyan-400/20 to-blue-500/20 text-cyan-300 border-cyan-400/30">
+                <Badge className="text-xs bg-[#EDE7F6] text-[#4527A0] border-[#4527A0]/20 hover:bg-[#D1C4E9] transition-colors font-semibold">
                   FUTURE
                 </Badge>
               </Button>
@@ -177,7 +177,7 @@ export const Navigation = ({
               >
                 <DollarSign className="h-4 w-4" />
                 💼 TradeHub
-                <Badge variant="secondary" className="text-xs bg-gradient-to-r from-green-400/20 to-emerald-500/20 text-green-300 border-green-400/30">
+                <Badge className="text-xs bg-[#E0F2F1] text-[#004D40] border-[#004D40]/20 hover:bg-[#B2DFDB] transition-colors font-semibold">
                   MONETIZE
                 </Badge>
               </Button>

@@ -113,7 +113,7 @@ export const RoomSelector: React.FC<RoomSelectorProps> = ({
                   {currentRoom.name}
                 </span>
                 {currentRoom.unreadCount > 0 && (
-                  <Badge className="h-5 px-1 text-xs bg-red-500 text-white">
+                  <Badge className="h-5 px-1 text-xs bg-[#FFEBEE] text-[#C62828] border-[#C62828]/20 font-semibold">
                     {currentRoom.unreadCount}
                   </Badge>
                 )}

@@ -176,7 +176,7 @@ export const RoomChatView: React.FC<RoomChatViewProps> = ({
         const match = buyMatch || sellMatch;
         tradeData = {
           ticker: match![1].toUpperCase(),
-          action: buyMatch ? "buy" : "sell",
+          action: (buyMatch ? "buy" : "sell") as "buy" | "sell",
           entryPrice: parseFloat(match![2]),
           targetPrice: targetMatch ? parseFloat(targetMatch[1]) : undefined,
           stopLoss: slMatch ? parseFloat(slMatch[1]) : undefined,
@@ -368,15 +368,15 @@ export const RoomChatView: React.FC<RoomChatViewProps> = ({
             <Card className="mt-3 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border-blue-200 dark:border-blue-700">
               <CardContent className="p-3">
                 <div className="flex items-center gap-2 mb-2">
-                  <Badge className="bg-blue-600 text-white">
+                  <Badge className="bg-[#E3F2FD] text-[#0D47A1] border-[#0D47A1]/20 font-semibold">
                     <Target className="w-3 h-3 mr-1" />
                     Trade Signal
                   </Badge>
                   <Badge
                     className={
                       message.tradeData.action === "buy"
-                        ? "bg-green-100 text-green-800"
-                        : "bg-red-100 text-red-800"
+                        ? "bg-[#E0F2F1] text-[#004D40] border-[#004D40]/20 font-semibold"
+                        : "bg-[#FFEBEE] text-[#C62828] border-[#C62828]/20 font-semibold"
                     }
                   >
                     {message.tradeData.action.toUpperCase()} $

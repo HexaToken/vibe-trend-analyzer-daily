@@ -238,11 +238,11 @@ export const SourceNewsModal = () => {
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
                         <span className="text-sm">API Connection</span>
-                        <Badge className="bg-green-600">✓ Active</Badge>
+                        <Badge className="bg-[#E0F2F1] text-[#004D40] border-[#004D40]/20 font-semibold">✓ Active</Badge>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className="text-sm">Authentication</span>
-                        <Badge className="bg-green-600">✓ Configured</Badge>
+                        <Badge className="bg-[#E0F2F1] text-[#004D40] border-[#004D40]/20 font-semibold">✓ Configured</Badge>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className="text-sm">Rate Limiting</span>

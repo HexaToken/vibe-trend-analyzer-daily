@@ -266,11 +266,11 @@ export const StockSentimentScoring = () => {
             <div>
               <h4 className="font-semibold mb-2">Sentiment Labels</h4>
               <div className="grid grid-cols-2 md:grid-cols-5 gap-2 text-sm">
-                <Badge className="bg-green-600 text-white">+30 to +50: Bullish</Badge>
-                <Badge className="bg-green-400 text-white">+10 to +29: Cautiously Optimistic</Badge>
-                <Badge className="bg-yellow-500 text-white">-9 to +9: Neutral</Badge>
-                <Badge className="bg-red-400 text-white">-10 to -29: Cautiously Bearish</Badge>
-                <Badge className="bg-red-600 text-white">-30 to -50: Bearish</Badge>
+                <Badge className="bg-[#E0F2F1] text-[#004D40] border-[#004D40]/20 font-semibold">+30 to +50: Bullish</Badge>
+                <Badge className="bg-[#E3F2FD] text-[#0D47A1] border-[#0D47A1]/20 font-semibold">+10 to +29: Cautiously Optimistic</Badge>
+                <Badge className="bg-[#EDE7F6] text-[#4527A0] border-[#4527A0]/20 font-semibold">-9 to +9: Neutral</Badge>
+                <Badge className="bg-[#FFF3E0] text-[#E65100] border-[#E65100]/20 font-semibold">-10 to -29: Cautiously Bearish</Badge>
+                <Badge className="bg-[#FFEBEE] text-[#C62828] border-[#C62828]/20 font-semibold">-30 to -50: Bearish</Badge>
               </div>
             </div>
           </div>
