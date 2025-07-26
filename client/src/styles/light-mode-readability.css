@@ -366,3 +366,39 @@
   color: #1F2937 !important;
   font-weight: 600 !important;
 }
+
+/* ===== ADDITIONAL BLUE GRADIENT CONTRAST ENHANCEMENTS ===== */
+
+/* Fix common gray text issues on blue gradient backgrounds */
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] .text-gray-400,
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] .text-gray-300,
+:root:not(.dark) [class*="bg-gradient"][class*="blue"] .text-gray-400,
+:root:not(.dark) [class*="bg-gradient"][class*="blue"] .text-gray-300 {
+  color: #374151 !important; /* Gray-700 for better contrast */
+  font-weight: 500 !important;
+}
+
+/* Badge improvements on gradient backgrounds */
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] .bg-blue-100,
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] .bg-purple-100,
+:root:not(.dark) [class*="bg-gradient"][class*="blue"] .bg-blue-100,
+:root:not(.dark) [class*="bg-gradient"][class*="blue"] .bg-purple-100 {
+  background: rgba(255, 255, 255, 0.9) !important;
+  color: #1F2937 !important;
+  border: 1px solid #374151 !important;
+  font-weight: 600 !important;
+}
+
+/* Small text and metadata on gradients */
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] .text-sm,
+:root:not(.dark) [class*="bg-gradient"][class*="blue"] .text-sm {
+  color: #1F2937 !important;
+  font-weight: 500 !important;
+}
+
+/* Ensure all paragraph text on gradients is readable */
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] p:not([class*="text-"]),
+:root:not(.dark) [class*="bg-gradient"][class*="blue"] p:not([class*="text-"]) {
+  color: #111827 !important;
+  font-weight: 500 !important;
+}
