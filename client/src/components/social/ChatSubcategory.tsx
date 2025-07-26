@@ -210,6 +210,9 @@ const mockMessages: ChatMessage[] = [
       price: 175,
       sentiment: "bullish",
     },
+    credibilityScore: 9.1,
+    needsReview: false,
+    communityFavorite: false,
   },
   {
     id: "3",
