@@ -53,7 +53,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
   const scoreDiff = currentScore - previousScore;
 
   return (
-    <Card className="overflow-hidden border-0 shadow-lg bg-gradient-to-br from-gray-50 via-white to-red-50 dark:from-gray-800 dark:via-gray-800 dark:to-green-900/20">
+    <Card className="overflow-hidden border-0 shadow-lg bg-gradient-to-br from-gray-50 via-white to-red-50 dark:from-gray-800 dark:via-gray-800 dark:to-red-900/20">
       <CardHeader className="bg-gradient-to-r from-red-400 to-pink-500 text-white">
         <CardTitle className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
