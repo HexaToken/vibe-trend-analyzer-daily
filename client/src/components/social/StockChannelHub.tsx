@@ -33,6 +33,18 @@ import {
 } from "lucide-react";
 import { formatCurrency, cn } from "../../lib/utils";
 import { ShareMoodModal, MoodPostDisplay } from "./ShareMoodModal";
+import { PostInteractionBar } from "./PostInteractionBar";
+import {
+  CheckCircle,
+  AlertTriangle,
+  Award,
+} from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
 
 interface StockChannel {
   ticker: string;
