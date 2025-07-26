@@ -105,6 +105,9 @@ interface ChatMessage {
     price: number;
     sentiment: "bullish" | "bearish" | "neutral";
   };
+  credibilityScore?: number;
+  needsReview?: boolean;
+  communityFavorite?: boolean;
 }
 
 // Mock data for demo
