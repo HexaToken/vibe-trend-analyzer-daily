@@ -111,6 +111,28 @@ export const StockChannelHub: React.FC = () => {
   const [messageInput, setMessageInput] = useState("");
   const [messages, setMessages] = useState<StockMessage[]>([]);
 
+  // Interaction handlers
+  const handleFollow = (userId: string) => {
+    console.log(`Following user: ${userId}`);
+  };
+
+  const handleUnfollow = (userId: string) => {
+    console.log(`Unfollowing user: ${userId}`);
+  };
+
+  const handleToggleAlerts = (userId: string, enabled: boolean) => {
+    console.log(`${enabled ? 'Enabling' : 'Disabling'} alerts for user: ${userId}`);
+  };
+
+  // Utility functions
+  const getCredibilityColor = (score: number) => {
+    if (score >= 9.0) return "text-purple-600 bg-purple-100 dark:bg-purple-900/20";
+    if (score >= 8.0) return "text-blue-600 bg-blue-100 dark:bg-blue-900/20";
+    if (score >= 7.0) return "text-green-600 bg-green-100 dark:bg-green-900/20";
+    if (score >= 6.0) return "text-yellow-600 bg-yellow-100 dark:bg-yellow-900/20";
+    return "text-red-600 bg-red-100 dark:bg-red-900/20";
+  };
+
   // Mock stock channels data
   const stockChannels: StockChannel[] = [
     {
