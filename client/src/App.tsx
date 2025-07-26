@@ -219,7 +219,7 @@ const AppContent = () => {
       case "charts":
         return <AdvancedCharts />;
       case "trending":
-        return <Analytics />; // Placeholder - replace with actual trending component
+        return <TrendingHub />;
       case "trade-journal":
         return <Analytics />; // Placeholder - replace with actual trade journal component
       case "sentiment-polls":
