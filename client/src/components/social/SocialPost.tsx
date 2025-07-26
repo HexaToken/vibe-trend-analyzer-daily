@@ -45,6 +45,9 @@ interface SocialPostProps {
   onUserClick?: (userId: string) => void;
   onTickerClick?: (symbol: string) => void;
   onHashtagClick?: (hashtag: string) => void;
+  onFollow?: (userId: string) => void;
+  onUnfollow?: (userId: string) => void;
+  onToggleAlerts?: (userId: string, enabled: boolean) => void;
   compact?: boolean;
   showEngagement?: boolean;
 }
