@@ -209,7 +209,7 @@ const mockEnhancedPosts: PostCardData[] = [
       credibilityScore: 67,
     },
     timestamp: "3h ago",
-    content: "😂 YOLO UPDATE: Turned $500 into $15k with $GME 0DTE calls this morning ���💎🙌 \n\nNow gonna lose it all on $PLTR puts because why not? 🤡 This is financial advice (it's not) 📈📉💸\n\n#YOLO #DiamondHands #ToTheMoon",
+    content: "😂 YOLO UPDATE: Turned $500 into $15k with $GME 0DTE calls this morning 🚀💎🙌 \n\nNow gonna lose it all on $PLTR puts because why not? 🤡 This is financial advice (it's not) 📈📉💸\n\n#YOLO #DiamondHands #ToTheMoon",
     tickers: [
       { symbol: "GME", price: 23.45, change: 4.67, changePercent: 24.86 },
       { symbol: "PLTR", price: 18.23, change: -0.89, changePercent: -4.66 }
@@ -890,6 +890,8 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
                     onToggleAlerts={handleToggleAlerts}
                     onUserClick={handleUserClick}
                     onTickerClick={handleTickerClick}
+                    onTickerHover={showTickerPreview}
+                    onTickerLeave={hideTickerPreview}
                     showEngagementCounts={true}
                   />
 
