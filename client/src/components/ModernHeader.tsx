@@ -136,8 +136,12 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                 className={cn(
                   "text-base font-medium px-3 py-2 rounded-lg transition-all duration-200 relative group",
                   activeSection === key
-                    ? "text-pink-400 bg-pink-500/10"
-                    : "text-gray-300 hover:text-white hover:text-pink-300"
+                    ? isLightMode
+                      ? "text-pink-600 bg-pink-500/10"
+                      : "text-pink-400 bg-pink-500/10"
+                    : isLightMode
+                      ? "text-gray-900 hover:text-blue-600"
+                      : "text-gray-300 hover:text-white hover:text-pink-300"
                 )}
                 aria-current={activeSection === key ? "page" : undefined}
               >
