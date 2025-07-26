@@ -313,7 +313,16 @@ export async function robustFetch(
     }
   }
 
-  throw lastError || new Error("Unknown fetch error");
+  // Ensure we always throw a user-friendly error
+  if (lastError) {
+    // Convert technical timeout errors to user-friendly messages
+    if (lastError.message.includes("Request timeout after") || lastError.message.includes("fetch")) {
+      throw new Error("Network request failed. Please check your connection and try again.");
+    }
+    throw lastError;
+  }
+
+  throw new Error("Network request failed for unknown reason. Please try again.");
 }
 
 /**
