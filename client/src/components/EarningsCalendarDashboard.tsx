@@ -81,7 +81,7 @@ const EarningsCalendarDashboard: React.FC<EarningsCalendarDashboardProps> = ({
       date: '2024-01-15',
       symbol: 'NVDA',
       name: 'NVIDIA Corporation',
-      logo: '🎮',
+      logo: <EmojiIcon emoji="🎮" className="w-6 h-6" />,
       time: 'AMC',
       actualEPS: 5.16,
       estimatedEPS: 4.64,
