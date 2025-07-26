@@ -2751,7 +2751,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 p-6">
                   {topMovers.map((stock, index) => (
                     <div key={stock.symbol} className={themeMode === 'light'
-                      ? `bg-white border border-[#E0E0E0] hover:border-[#4D7C8A]/30 rounded-xl p-4 transition-all duration-300 group cursor-pointer shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)]`
+                      ? `bg-white border border-[#E0E0E0] hover:border-green-500/30 rounded-xl p-4 transition-all duration-300 group cursor-pointer shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)]`
                       : "bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-4 border border-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer"
                     }>
                       <div className="flex items-center justify-between mb-3">
