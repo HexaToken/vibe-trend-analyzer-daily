@@ -206,7 +206,7 @@ export const CredibilityBadge: React.FC<CredibilityBadgeProps> = ({
         className
       )}
     >
-      {config.emoji}
+      {config.iconEmoji}
       <span>{credibility.score}</span>
     </Badge>
   );
