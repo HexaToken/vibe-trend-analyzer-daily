@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Brain, Search, Bell, Zap, User, ChevronDown, Menu, X } from 'lucide-react';
+import { Brain, Search, Bell, User, ChevronDown, Menu, X } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
