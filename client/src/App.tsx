@@ -51,6 +51,7 @@ import { CredibilityAnalyticsDashboard } from "@/components/credibility/Credibil
 import { AdminCredibilityDashboard } from "@/components/credibility/AdminCredibilityDashboard";
 import { TradeHub } from "@/components/TradeHub";
 import { TraderProfile } from "@/components/profile/TraderProfile";
+import ChatSubcategory from "@/components/social/ChatSubcategory";
 import { Footer } from "@/components/Footer";
 
 const queryClient = new QueryClient();
