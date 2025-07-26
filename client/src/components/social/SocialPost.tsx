@@ -34,6 +34,7 @@ import { InlinePrice } from "./RealTimePrice";
 import { InlineCryptoPrice } from "../crypto/CryptoPrice";
 import { InlineCredibilityDisplay } from "@/components/credibility/UserCredibilityProfile";
 import { CredibilityBadge } from "@/components/credibility/CredibilityBadge";
+import { PostInteractionBar } from "./PostInteractionBar";
 
 interface SocialPostProps {
   post: SocialPost;
