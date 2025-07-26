@@ -239,8 +239,19 @@ export const SocialPost = ({
             </div>
           </div>
 
-          {/* Sentiment Badge */}
+          {/* Interaction Bar and Sentiment Badge */}
           <div className="flex items-center gap-2">
+            {/* Post Interaction Bar */}
+            <PostInteractionBar
+              userId={post.userId}
+              username={post.username}
+              compact={compact}
+              onFollow={onFollow}
+              onUnfollow={onUnfollow}
+              onToggleAlerts={onToggleAlerts}
+              className="mr-2"
+            />
+
             <Badge
               className={`${getSentimentColor(post.sentiment)} text-xs px-2 py-1`}
             >
