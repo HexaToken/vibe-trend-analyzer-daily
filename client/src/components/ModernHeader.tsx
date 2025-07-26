@@ -288,14 +288,25 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
             <Button
               variant="ghost"
               size="sm"
-              className="md:hidden p-2 hover:bg-purple-500/20 rounded-lg ml-2"
+              className={cn(
+                "md:hidden p-2 rounded-lg ml-2",
+                isLightMode
+                  ? "hover:bg-blue-500/10"
+                  : "hover:bg-purple-500/20"
+              )}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle mobile menu"
             >
               {mobileMenuOpen ? (
-                <X className="w-5 h-5 text-gray-300" />
+                <X className={cn(
+                  "w-5 h-5",
+                  isLightMode ? "text-gray-700" : "text-gray-300"
+                )} />
               ) : (
-                <Menu className="w-5 h-5 text-gray-300" />
+                <Menu className={cn(
+                  "w-5 h-5",
+                  isLightMode ? "text-gray-700" : "text-gray-300"
+                )} />
               )}
             </Button>
           </div>
