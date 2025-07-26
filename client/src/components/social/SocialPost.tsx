@@ -61,6 +61,9 @@ export const SocialPost = ({
   onUserClick,
   onTickerClick,
   onHashtagClick,
+  onFollow,
+  onUnfollow,
+  onToggleAlerts,
   compact = false,
   showEngagement = true,
 }: SocialPostProps) => {
