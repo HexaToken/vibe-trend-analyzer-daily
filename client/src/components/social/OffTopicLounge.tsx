@@ -429,29 +429,41 @@ export const OffTopicLounge: React.FC = () => {
                 </div>
 
                 <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="font-semibold">{post.user.name}</span>
-                    {post.user.verified && (
-                      <Badge variant="secondary" className="text-xs px-1 py-0">
-                        <Star className="w-3 h-3 mr-1" />
-                        Verified
-                      </Badge>
-                    )}
-                    {post.user.badges.map((badge) => (
-                      <Badge
-                        key={badge}
-                        variant="outline"
-                        className="text-xs px-1 py-0"
-                      >
-                        {badge}
-                      </Badge>
-                    ))}
-                    <div className="flex items-center gap-1">
-                      {getPostTypeIcon(post.type)}
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold">{post.user.name}</span>
+                      {post.user.verified && (
+                        <Badge variant="secondary" className="text-xs px-1 py-0">
+                          <Star className="w-3 h-3 mr-1" />
+                          Verified
+                        </Badge>
+                      )}
+                      {post.user.badges.map((badge) => (
+                        <Badge
+                          key={badge}
+                          variant="outline"
+                          className="text-xs px-1 py-0"
+                        >
+                          {badge}
+                        </Badge>
+                      ))}
+                      <div className="flex items-center gap-1">
+                        {getPostTypeIcon(post.type)}
+                      </div>
+                      <span className="text-xs text-gray-500">
+                        {formatTimeAgo(post.timestamp)}
+                      </span>
                     </div>
-                    <span className="text-xs text-gray-500">
-                      {formatTimeAgo(post.timestamp)}
-                    </span>
+
+                    {/* Post Interaction Bar for Off-Topic Posts */}
+                    <PostInteractionBar
+                      userId={post.userId}
+                      username={post.user.name}
+                      compact={true}
+                      onFollow={handleFollow}
+                      onUnfollow={handleUnfollow}
+                      onToggleAlerts={handleToggleAlerts}
+                    />
                   </div>
 
                   <div className="mb-3">
