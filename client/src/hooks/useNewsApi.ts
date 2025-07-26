@@ -102,9 +102,9 @@ export function useTopHeadlines(
         `/api/proxy/newsapi/top-headlines?country=${country}&category=${category || "business"}&pageSize=20`,
         {
           retry: {
-            maxRetries: 2,
-            retryDelay: 1000,
-            timeout: 15000,
+            maxRetries: 1,
+            retryDelay: 2000,
+            timeout: 12000,
           },
         },
       );
@@ -264,9 +264,9 @@ export function useNewsSearch(
         `/api/proxy/newsapi/everything?q=${encodeURIComponent(query)}&pageSize=20&sortBy=publishedAt`,
         {
           retry: {
-            maxRetries: 2,
-            retryDelay: 1000,
-            timeout: 15000,
+            maxRetries: 1,
+            retryDelay: 2000,
+            timeout: 12000,
           },
         },
       );
