@@ -2757,11 +2757,11 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       <div className="flex items-center justify-between mb-3">
                         <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
                           themeMode === 'light'
-                            ? 'bg-gradient-to-r from-[#3F51B5]/10 to-[#3F51B5]/20'
+                            ? 'bg-gradient-to-r from-green-500/10 to-green-600/20'
                             : 'bg-gradient-to-r from-purple-500/20 to-pink-500/20'
                         }`}>
                           <span className={`text-xs font-bold ${
-                            themeMode === 'light' ? 'text-[#3F51B5]' : 'text-white'
+                            themeMode === 'light' ? 'text-green-700' : 'text-white'
                           }`}>{stock.symbol[0]}</span>
                         </div>
                         <Badge className={getSentimentBadge(stock.sentiment)}>
