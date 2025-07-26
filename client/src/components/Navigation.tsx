@@ -258,6 +258,16 @@ export const Navigation = ({
                       </DropdownMenuItem>
                     );
                   })}
+                  <DropdownMenuItem
+                    onClick={() => onSectionChange("trader-profile")}
+                    className="flex items-center gap-2"
+                  >
+                    <UserCircle className="h-4 w-4" />
+                    Trader Profile
+                    <Badge variant="secondary" className="ml-auto text-xs">
+                      NEW
+                    </Badge>
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
 
