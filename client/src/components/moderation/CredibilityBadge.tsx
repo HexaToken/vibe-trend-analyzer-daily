@@ -301,14 +301,14 @@ export const UserCredibilityIndicator: React.FC<{
     try {
       // Dynamically import badge definitions to avoid circular dependencies
       const badges = {
-        "trusted_contributor": { icon: "✅", color: "#10B981" },
-        "verified_insights": { icon: "📊", color: "#3B82F6" },
-        "top_predictor": { icon: "🚀", color: "#DC2626" },
-        "bullish_beast": { icon: "🐂", color: "#059669" },
-        "bear_watcher": { icon: "🐻", color: "#DC2626" },
-        "diamond_hands": { icon: "💎", color: "#3B82F6" },
-        "premium_member": { icon: "⭐", color: "#F59E0B" },
-        "new_voice": { icon: "🧪", color: "#6B7280" },
+        "trusted_contributor": { icon: <EmojiIcon emoji="✅" className="w-3 h-3" />, color: "#10B981" },
+        "verified_insights": { icon: <EmojiIcon emoji="📊" className="w-3 h-3" />, color: "#3B82F6" },
+        "top_predictor": { icon: <EmojiIcon emoji="🚀" className="w-3 h-3" />, color: "#DC2626" },
+        "bullish_beast": { icon: <EmojiIcon emoji="🐂" className="w-3 h-3" />, color: "#059669" },
+        "bear_watcher": { icon: <EmojiIcon emoji="🐻" className="w-3 h-3" />, color: "#DC2626" },
+        "diamond_hands": { icon: <EmojiIcon emoji="💎" className="w-3 h-3" />, color: "#3B82F6" },
+        "premium_member": { icon: <EmojiIcon emoji="⭐" className="w-3 h-3" />, color: "#F59E0B" },
+        "new_voice": { icon: <EmojiIcon emoji="🧪" className="w-3 h-3" />, color: "#6B7280" },
       };
 
       const badge = badges[topBadge as keyof typeof badges];
