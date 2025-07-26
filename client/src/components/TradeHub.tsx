@@ -274,7 +274,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                       <div className="flex-1 space-y-2">
                         <Badge variant="secondary" className="mb-2">{item.badge}</Badge>
                         <h3 className="text-xl font-semibold">{item.title}</h3>
-                        <p className="text-sm text-muted-foreground">by {item.instructor}</p>
+                        <p className="text-sm text-gray-700 font-medium">by {item.instructor}</p>
                         <div className="flex items-center gap-4 pt-2">
                           <div className="flex items-center gap-1">
                             <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
@@ -293,8 +293,8 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
           {/* Trending Tab */}
           <TabsContent value="trending" className="space-y-6">
             <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold mb-2">🔥 Trending Now</h2>
-              <p className="text-muted-foreground">Most popular content based on community engagement</p>
+              <h2 className="text-2xl font-bold mb-2">���� Trending Now</h2>
+              <p className="text-gray-700 font-medium">Most popular content based on community engagement</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
