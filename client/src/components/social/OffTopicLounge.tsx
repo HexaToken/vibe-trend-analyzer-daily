@@ -221,9 +221,13 @@ export const OffTopicLounge: React.FC = () => {
       replies: 56,
       shares: 89,
       tags: ["wellness", "mental-health", "balance"],
+      credibilityScore: 8.1,
+      needsReview: false,
+      communityFavorite: true,
     },
     {
       id: "5",
+      userId: "user-weekend-warrior",
       user: {
         name: "WeekendWarrior",
         avatar: "WW",
