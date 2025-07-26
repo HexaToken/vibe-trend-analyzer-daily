@@ -169,7 +169,7 @@ const AppContent = () => {
       case "tradehub":
         return <TradeHub onNavigate={setActiveSection} />;
       case "market-mood":
-        return <SentimentDashboard onNavigate={setActiveSection} />;
+        return <Dashboard />;
       case "news-feed":
         return <Analytics />;
       case "trader-profile":
