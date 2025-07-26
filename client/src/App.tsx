@@ -213,7 +213,7 @@ const AppContent = () => {
       case "crypto":
         return <PulseOfTheChain />;
       case "earnings":
-        return <Analytics />; // Placeholder - replace with actual earnings component
+        return <EarningsCalendar />;
       case "charts":
         return <Analytics />; // Placeholder - replace with actual charts component
       case "trending":
