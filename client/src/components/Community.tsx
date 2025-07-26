@@ -13,38 +13,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { PostCard, type PostCardData } from "./social/PostCard";
 
-interface PostData {
-  id: string;
-  user: {
-    id: string;
-    username: string;
-    handle: string;
-    avatar: string;
-    verified: boolean;
-    premium: boolean;
-    credibilityScore: number;
-  };
-  timestamp: string;
-  content: string;
-  tickers: Array<{
-    symbol: string;
-    price: number;
-    change: number;
-    changePercent: number;
-  }>;
-  sentiment: "Bullish" | "Bearish" | "Neutral";
-  tags: string[];
-  engagement: {
-    likes: number;
-    comments: number;
-    reposts: number;
-    saves: number;
-  };
-  isFollowing: boolean;
-  alertsEnabled: boolean;
-  isLiked: boolean;
-  isSaved: boolean;
-}
+
 
 export const Community = () => {
   const [activeTab, setActiveTab] = useState<"all" | "following">("all");
