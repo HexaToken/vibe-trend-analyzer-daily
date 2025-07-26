@@ -211,18 +211,30 @@ export const Community = () => {
                       <AvatarFallback>{post.avatar}</AvatarFallback>
                     </Avatar>
                     <div className="flex-1 space-y-3">
-                      <div className="flex items-center gap-2">
-                        <span className="font-semibold">{post.author}</span>
-                        <Badge
-                          variant="outline"
-                          className={getBadgeColor(post.badge)}
-                        >
-                          {post.badge}
-                        </Badge>
-                        <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                          <Clock className="h-3 w-3" />
-                          {post.time}
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="font-semibold">{post.author}</span>
+                          <Badge
+                            variant="outline"
+                            className={getBadgeColor(post.badge)}
+                          >
+                            {post.badge}
+                          </Badge>
+                          <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                            <Clock className="h-3 w-3" />
+                            {post.time}
+                          </div>
                         </div>
+
+                        {/* Post Interaction Bar for Forum Posts */}
+                        <PostInteractionBar
+                          userId={post.userId}
+                          username={post.author}
+                          compact={true}
+                          onFollow={handleFollow}
+                          onUnfollow={handleUnfollow}
+                          onToggleAlerts={handleToggleAlerts}
+                        />
                       </div>
                       <p className="text-sm leading-relaxed">{post.content}</p>
                       <div className="flex items-center gap-4 text-sm">
