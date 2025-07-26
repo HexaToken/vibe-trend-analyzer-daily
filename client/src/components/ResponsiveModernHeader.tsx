@@ -239,10 +239,16 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                   className={cn(
                     "w-56 backdrop-blur-xl rounded-xl z-[100] shadow-xl",
                     isLightMode
-                      ? "bg-white/95 border-gray-200 text-gray-900"
-                      : "bg-[#0A0A23]/95 border-gray-700 text-white"
+                      ? "!bg-white !border-gray-200 !text-gray-900"
+                      : "!bg-[#0A0A23]/95 !border-gray-700 !text-white"
                   )}
                   sideOffset={5}
+                  style={{
+                    backgroundColor: isLightMode ? 'white' : 'rgba(10, 10, 35, 0.95)',
+                    borderColor: isLightMode ? 'rgb(229 231 235)' : 'rgb(55 65 81)',
+                    color: isLightMode ? 'rgb(17 24 39)' : 'white',
+                    zIndex: 100
+                  }}
                 >
                   {financeItems.map(({ label, key, icon }) => (
                     <DropdownMenuItem
