@@ -9,6 +9,42 @@ interface RobustFetchOptions extends RequestInit {
   retry?: RetryOptions;
 }
 
+// Simple timeout tracking to prevent excessive retries
+const timeoutTracker = {
+  attempts: new Map<string, { count: number, lastAttempt: number }>(),
+
+  shouldSkipRequest(url: string): boolean {
+    const now = Date.now();
+    const record = this.attempts.get(url);
+
+    if (!record) return false;
+
+    // Reset counter if more than 5 minutes have passed
+    if (now - record.lastAttempt > 300000) {
+      this.attempts.delete(url);
+      return false;
+    }
+
+    // Skip if more than 3 timeouts in the last 5 minutes
+    return record.count >= 3;
+  },
+
+  recordTimeout(url: string) {
+    const now = Date.now();
+    const record = this.attempts.get(url) || { count: 0, lastAttempt: 0 };
+
+    // Reset if more than 5 minutes
+    if (now - record.lastAttempt > 300000) {
+      record.count = 1;
+    } else {
+      record.count++;
+    }
+
+    record.lastAttempt = now;
+    this.attempts.set(url, record);
+  }
+};
+
 export class FetchError extends Error {
   public readonly status?: number;
   public readonly response?: Response;
