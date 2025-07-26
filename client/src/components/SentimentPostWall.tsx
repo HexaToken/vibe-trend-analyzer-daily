@@ -59,6 +59,7 @@ import {
 import { PostCard, type PostCardData } from "./social/PostCard";
 import { CommentThreadView, type CommentData } from "./community/CommentThreadView";
 import { TickerPreviewWidget, useTickerHover, TickerAwareText } from "./community/TickerPreviewWidget";
+import { TickerAnalyticsDrawer } from "./community/TickerAnalyticsDrawer";
 
 // Enhanced Post Wall Types
 export interface PostFilter {
@@ -325,6 +326,8 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
   const [showComposer, setShowComposer] = useState(false);
   const [openComments, setOpenComments] = useState<Record<string, boolean>>({});
   const [postComments, setPostComments] = useState<Record<string, CommentData[]>>({});
+  const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
+  const [isAnalyticsDrawerOpen, setIsAnalyticsDrawerOpen] = useState(false);
   const { hoveredTicker, showTickerPreview, hideTickerPreview } = useTickerHover();
 
   // Auto-refresh feed
@@ -544,7 +547,9 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
   };
 
   const handleTickerClick = (symbol: string) => {
-    setFilter(prev => ({ ...prev, ticker: symbol }));
+    setSelectedTicker(symbol);
+    setIsAnalyticsDrawerOpen(true);
+    hideTickerPreview(); // Close hover preview when opening analytics
   };
 
   const handleAddToWatchlist = (ticker: string) => {
@@ -553,8 +558,29 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
   };
 
   const handleViewFullPage = (ticker: string) => {
-    console.log(`Viewing full page for ${ticker}`);
-    // Navigate to ticker page logic here
+    setSelectedTicker(ticker);
+    setIsAnalyticsDrawerOpen(true);
+    hideTickerPreview();
+  };
+
+  const handleCloseAnalyticsDrawer = () => {
+    setIsAnalyticsDrawerOpen(false);
+    setSelectedTicker(null);
+  };
+
+  const handleCreatePostAboutTicker = (ticker: string) => {
+    setComposerData(prev => ({
+      ...prev,
+      content: `$${ticker} `,
+      tickers: [...new Set([...prev.tickers, ticker])]
+    }));
+    setShowComposer(true);
+    setIsAnalyticsDrawerOpen(false);
+  };
+
+  const handleSetTickerAlert = (ticker: string) => {
+    console.log(`Setting alert for ${ticker}`);
+    // Implement alert setting logic here
   };
 
   const handleAddComment = (postId: string, content: string, parentCommentId?: string) => {
@@ -956,6 +982,16 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
             onClose={hideTickerPreview}
           />
         )}
+
+        {/* Ticker Analytics Drawer */}
+        <TickerAnalyticsDrawer
+          ticker={selectedTicker}
+          isOpen={isAnalyticsDrawerOpen}
+          onClose={handleCloseAnalyticsDrawer}
+          onAddToWatchlist={handleAddToWatchlist}
+          onSetAlert={handleSetTickerAlert}
+          onCreatePost={handleCreatePostAboutTicker}
+        />
       </div>
     </div>
   );
