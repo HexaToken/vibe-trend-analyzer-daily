@@ -136,15 +136,15 @@ export const FeaturedPluginsCarousel = ({ plugins, className }: FeaturedPluginsC
                       <Button 
                         size="lg"
                         className={cn(
-                          "min-w-32 font-semibold transition-colors",
+                          "min-w-32 font-bold transition-all shadow-lg hover:shadow-xl",
                           themeMode === 'light'
-                            ? "bg-[#0D47A1] hover:bg-[#1565C0] text-white border-[#0D47A1]"
+                            ? "bg-gradient-to-r from-[#DC2626] to-[#B91C1C] hover:from-[#B91C1C] hover:to-[#991B1B] text-white border-2 border-[#DC2626] hover:border-[#B91C1C]"
                             : "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
                         )}
                       >
                         {plugin.price === 0 ? 'Install Now' : 'Purchase'}
                       </Button>
-                      <Button variant="outline" size="lg" className="min-w-32">
+                      <Button variant="outline" size="lg" className="min-w-32 border-2 border-[#059669] text-[#059669] hover:bg-[#059669] hover:text-white font-semibold transition-all">
                         <ExternalLink className="w-4 h-4 mr-2" />
                         Learn More
                       </Button>
