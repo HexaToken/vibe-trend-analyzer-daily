@@ -122,6 +122,92 @@
   letter-spacing: -0.01em !important;
 }
 
+/* ===== ENHANCED BADGE READABILITY IMPROVEMENTS ===== */
+
+/* Badge text contrast improvements */
+:root:not(.dark) [class*="badge"],
+:root:not(.dark) .inline-flex.items-center.rounded-full {
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  border-width: 1px !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Specific badge color improvements for better contrast */
+:root:not(.dark) .bg-primary {
+  background: #4F46E5 !important; /* Indigo-600 for better contrast */
+  color: #FFFFFF !important;
+  border-color: #4338CA !important; /* Indigo-700 */
+}
+
+:root:not(.dark) .bg-secondary {
+  background: #6B7280 !important; /* Gray-500 */
+  color: #FFFFFF !important;
+  border-color: #4B5563 !important; /* Gray-600 */
+}
+
+/* High contrast badge variants */
+:root:not(.dark) .badge-bestseller {
+  background: #059669 !important; /* Green-600 */
+  color: #FFFFFF !important;
+  border: 1px solid #047857 !important; /* Green-700 */
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+:root:not(.dark) .badge-hot {
+  background: #DC2626 !important; /* Red-600 */
+  color: #FFFFFF !important;
+  border: 1px solid #B91C1C !important; /* Red-700 */
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+:root:not(.dark) .badge-new {
+  background: #2563EB !important; /* Blue-600 */
+  color: #FFFFFF !important;
+  border: 1px solid #1D4ED8 !important; /* Blue-700 */
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+:root:not(.dark) .badge-verified {
+  background: #4F46E5 !important; /* Indigo-600 */
+  color: #FFFFFF !important;
+  border: 1px solid #4338CA !important; /* Indigo-700 */
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Credibility score badges with enhanced contrast */
+:root:not(.dark) .badge-diamond {
+  background: #059669 !important; /* Green-600 */
+  color: #FFFFFF !important;
+  border: 1px solid #047857 !important;
+  box-shadow: 0 2px 4px rgba(5, 150, 105, 0.3) !important;
+}
+
+:root:not(.dark) .badge-platinum {
+  background: #2563EB !important; /* Blue-600 */
+  color: #FFFFFF !important;
+  border: 1px solid #1D4ED8 !important;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3) !important;
+}
+
+:root:not(.dark) .badge-gold {
+  background: #D97706 !important; /* Amber-600 */
+  color: #FFFFFF !important;
+  border: 1px solid #B45309 !important;
+  box-shadow: 0 2px 4px rgba(217, 119, 6, 0.3) !important;
+}
+
+:root:not(.dark) .badge-silver {
+  background: #6B7280 !important; /* Gray-500 */
+  color: #FFFFFF !important;
+  border: 1px solid #4B5563 !important;
+  box-shadow: 0 2px 4px rgba(107, 114, 128, 0.3) !important;
+}
+
 /* Interactive Elements Enhanced Readability */
 :root:not(.dark) button,
 :root:not(.dark) [role="button"] {
