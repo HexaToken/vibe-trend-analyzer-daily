@@ -5,6 +5,9 @@
 /* Import Light Mode Readability Enhancements */
 @import './styles/light-mode-readability.css';
 
+/* Import MoodMeter Theme Utilities */
+@import './components/MoodThemeUtilities.css';
+
 /* Ticker bar auto-scroll animation */
 @keyframes scroll-ticker {
   0% {
