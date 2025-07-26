@@ -349,6 +349,18 @@ export const TraderProfile = ({ userId, isCurrentUser = false, onNavigateBack }:
       )}
 
       <div className="relative z-10 max-w-7xl mx-auto space-y-6 p-6">
+        {/* Back Navigation */}
+        {!isCurrentUser && onNavigateBack && (
+          <Button
+            variant="outline"
+            onClick={onNavigateBack}
+            className="mb-4 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm hover:bg-white dark:hover:bg-slate-800"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Community
+          </Button>
+        )}
+
         {/* Modern Header Section */}
         <Card className="border-0 shadow-2xl bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-blue-500/5 to-cyan-500/5"></div>
