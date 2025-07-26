@@ -123,200 +123,25 @@ export const Community = () => {
     console.log(`Liking post: ${postId}`);
   };
 
+  const handleComment = (postId: string) => {
+    console.log(`Commenting on post: ${postId}`);
+  };
+
+  const handleRepost = (postId: string) => {
+    console.log(`Reposting post: ${postId}`);
+  };
+
   const handleSave = (postId: string) => {
     console.log(`Saving post: ${postId}`);
   };
 
-  const getSentimentColor = (sentiment: string) => {
-    switch (sentiment) {
-      case "Bullish":
-        return "bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-300";
-      case "Bearish":
-        return "bg-red-100 text-red-700 dark:bg-red-900/20 dark:text-red-300";
-      default:
-        return "bg-gray-100 text-gray-700 dark:bg-gray-900/20 dark:text-gray-300";
-    }
+  const handleUserClick = (userId: string) => {
+    console.log(`Viewing user profile: ${userId}`);
   };
 
-  const getCredibilityColor = (score: number) => {
-    if (score >= 90) return "text-purple-600 bg-purple-100 dark:bg-purple-900/20 dark:text-purple-300";
-    if (score >= 80) return "text-blue-600 bg-blue-100 dark:bg-blue-900/20 dark:text-blue-300";
-    if (score >= 70) return "text-green-600 bg-green-100 dark:bg-green-900/20 dark:text-green-300";
-    return "text-yellow-600 bg-yellow-100 dark:bg-yellow-900/20 dark:text-yellow-300";
+  const handleTickerClick = (symbol: string) => {
+    console.log(`Viewing ticker: ${symbol}`);
   };
-
-  const PostCard = ({ post }: { post: PostData }) => (
-    <Card className="hover:shadow-md transition-all duration-200 border-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
-      <CardContent className="p-6">
-        <div className="space-y-4">
-          {/* User Header */}
-          <div className="flex items-start justify-between">
-            <div className="flex items-start gap-3">
-              <Avatar className="ring-2 ring-gray-100 dark:ring-gray-800">
-                <AvatarImage src={post.user.avatar} alt={post.user.username} />
-                <AvatarFallback>{post.user.username.slice(0, 2)}</AvatarFallback>
-              </Avatar>
-              <div className="space-y-1">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="font-semibold text-lg">{post.user.username}</span>
-                  <span className="text-muted-foreground text-sm">{post.user.handle}</span>
-                  
-                  {/* Verification Badge */}
-                  {post.user.verified && (
-                    <CheckCircle className="h-4 w-4 text-blue-500" />
-                  )}
-                  
-                  {/* Premium Badge */}
-                  {post.user.premium && (
-                    <Crown className="h-4 w-4 text-yellow-500" />
-                  )}
-                  
-                  {/* Credibility Score */}
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Badge className={`text-xs px-2 py-1 font-semibold ${getCredibilityColor(post.user.credibilityScore)}`}>
-                          {post.user.credibilityScore}%
-                        </Badge>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Credibility Score: {post.user.credibilityScore}%</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </div>
-                
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Clock className="h-3 w-3" />
-                  {post.timestamp}
-                </div>
-              </div>
-            </div>
-
-            {/* Follow/Alerts Controls */}
-            <div className="flex items-center gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => handleToggleAlerts(post.user.id)}
-                className={post.alertsEnabled ? "bg-yellow-50 text-yellow-700 border-yellow-200" : ""}
-              >
-                {post.alertsEnabled ? <Bell className="h-4 w-4" /> : <BellOff className="h-4 w-4" />}
-              </Button>
-              
-              <Button
-                variant={post.isFollowing ? "default" : "outline"}
-                size="sm"
-                onClick={() => post.isFollowing ? handleUnfollow(post.user.id) : handleFollow(post.user.id)}
-              >
-                {post.isFollowing ? (
-                  <>
-                    <UserMinus className="h-4 w-4 mr-1" />
-                    Following
-                  </>
-                ) : (
-                  <>
-                    <UserPlus className="h-4 w-4 mr-1" />
-                    Follow
-                  </>
-                )}
-              </Button>
-
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm">
-                    <MoreHorizontal className="h-4 w-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem>Report Post</DropdownMenuItem>
-                  <DropdownMenuItem>Mute User</DropdownMenuItem>
-                  <DropdownMenuItem>Copy Link</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-          </div>
-
-          {/* Post Content */}
-          <div className="space-y-3">
-            <p className="text-base leading-relaxed whitespace-pre-wrap">
-              {post.content}
-            </p>
-            
-            {/* Tickers */}
-            {post.tickers.length > 0 && (
-              <div className="flex flex-wrap gap-2">
-                {post.tickers.map((ticker) => (
-                  <div key={ticker.symbol} className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border">
-                    <div className="flex items-center justify-between gap-3">
-                      <span className="font-semibold text-lg">${ticker.symbol}</span>
-                      <div className="text-right">
-                        <div className="font-semibold">${ticker.price.toFixed(2)}</div>
-                        <div className={`text-sm font-medium ${ticker.change >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                          {ticker.change >= 0 ? '+' : ''}{ticker.change.toFixed(2)} ({ticker.changePercent >= 0 ? '+' : ''}{ticker.changePercent.toFixed(2)}%)
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-            
-            {/* Tags */}
-            <div className="flex flex-wrap gap-2">
-              <Badge className={getSentimentColor(post.sentiment)}>
-                {post.sentiment}
-              </Badge>
-              {post.tags.map((tag) => (
-                <Badge key={tag} variant="outline" className="text-xs">
-                  {tag}
-                </Badge>
-              ))}
-            </div>
-          </div>
-
-          {/* Engagement Actions */}
-          <div className="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-gray-700">
-            <div className="flex items-center gap-6">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => handleLike(post.id)}
-                className={`h-8 px-3 ${post.isLiked ? 'text-red-600 hover:text-red-700' : 'text-gray-600 hover:text-red-600'}`}
-              >
-                <Heart className={`h-4 w-4 mr-2 ${post.isLiked ? 'fill-current' : ''}`} />
-                {post.engagement.likes}
-              </Button>
-              
-              <Button variant="ghost" size="sm" className="h-8 px-3 text-gray-600 hover:text-blue-600">
-                <MessageSquare className="h-4 w-4 mr-2" />
-                {post.engagement.comments}
-              </Button>
-              
-              <Button variant="ghost" size="sm" className="h-8 px-3 text-gray-600 hover:text-green-600">
-                <Repeat2 className="h-4 w-4 mr-2" />
-                {post.engagement.reposts}
-              </Button>
-              
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => handleSave(post.id)}
-                className={`h-8 px-3 ${post.isSaved ? 'text-yellow-600 hover:text-yellow-700' : 'text-gray-600 hover:text-yellow-600'}`}
-              >
-                <Bookmark className={`h-4 w-4 mr-2 ${post.isSaved ? 'fill-current' : ''}`} />
-                {post.engagement.saves}
-              </Button>
-            </div>
-            
-            <div className="text-xs text-muted-foreground">
-              {post.engagement.likes + post.engagement.comments + post.engagement.reposts} interactions
-            </div>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
 
   const filteredPosts = activeTab === "following" 
     ? mockPosts.filter(post => post.isFollowing)
