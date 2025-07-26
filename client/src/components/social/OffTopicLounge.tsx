@@ -296,6 +296,14 @@ export const OffTopicLounge: React.FC = () => {
     return "bg-gray-500";
   };
 
+  const getCredibilityColor = (score: number) => {
+    if (score >= 9.0) return "text-purple-600 bg-purple-100 dark:bg-purple-900/20";
+    if (score >= 8.0) return "text-blue-600 bg-blue-100 dark:bg-blue-900/20";
+    if (score >= 7.0) return "text-green-600 bg-green-100 dark:bg-green-900/20";
+    if (score >= 6.0) return "text-yellow-600 bg-yellow-100 dark:bg-yellow-900/20";
+    return "text-red-600 bg-red-100 dark:bg-red-900/20";
+  };
+
   const formatTimeAgo = (timestamp: Date) => {
     const now = new Date();
     const diff = now.getTime() - timestamp.getTime();
