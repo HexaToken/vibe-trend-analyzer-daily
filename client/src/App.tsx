@@ -207,7 +207,7 @@ const AppContent = () => {
       case "market":
         return <Analytics />;
       case "screener":
-        return <Analytics />; // Placeholder - replace with actual screener component
+        return <StockScreener />;
       case "crypto":
         return <CryptoDashboard />;
       case "earnings":
