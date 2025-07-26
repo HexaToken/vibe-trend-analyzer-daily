@@ -72,7 +72,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
                 onClick={() => setTimeframe(period as "1D" | "7D" | "30D")}
                 className={
                   timeframe === period
-                    ? "bg-white/20 text-white"
+                    ? "bg-white/20 text-gray-100"
                     : "text-gray-100 hover:bg-white/10"
                 }
               >
@@ -320,7 +320,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
         {/* Insights */}
         <div className="mt-6 p-4 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-lg border border-green-200 dark:border-green-700">
           <div className="flex items-center space-x-2 mb-2">
-            <BarChart3 className="w-4 h-4 text-green-600" />
+            <BarChart3 className="w-4 h-4 text-green-400" />
             <span className="font-medium text-green-800 dark:text-green-300">
               Trend Analysis
             </span>
