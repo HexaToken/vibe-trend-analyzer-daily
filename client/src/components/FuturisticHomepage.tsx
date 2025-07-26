@@ -331,7 +331,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               <div className="max-w-md mx-auto mb-6">
                 <div className="relative">
                   <Search className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 ${
-                    themeMode === 'light' ? 'text-[#888]' : 'text-gray-400'
+                    themeMode === 'light' ? 'text-[#374151]' : 'text-gray-400'
                   }`} />
                   <Input
                     type="text"
@@ -366,7 +366,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   </Button>
                 </div>
                 <div className="flex items-center justify-center gap-2 mt-3">
-                  <span className={`text-sm ${themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'}`}>Currently analyzing:</span>
+                  <span className={`text-sm ${themeMode === 'light' ? 'text-[#374151]' : 'text-gray-400'}`}>Currently analyzing:</span>
                   <Badge className={themeMode === 'light'
                     ? "bg-[#E8EAF6] text-[#303F9F] border-[#303F9F]/30 font-semibold"
                     : "bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-white border-blue-500/30 font-semibold drop-shadow-md"
