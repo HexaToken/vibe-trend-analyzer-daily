@@ -5,7 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { MoodThemeProvider, useMoodTheme } from "@/contexts/MoodThemeContext";
-import { Navigation } from "@/components/Navigation";
+
 import { Dashboard } from "@/components/Dashboard";
 import { SentimentDashboard } from "@/components/SentimentDashboard";
 import { Analytics } from "@/components/Analytics";
@@ -202,10 +202,7 @@ const AppContent = () => {
       <Toaster />
       <Sonner />
       <div className={`min-h-screen ${bodyGradient} transition-all duration-500`}>
-        <Navigation
-          activeSection={activeSection}
-          onSectionChange={(section) => handleNavigation(section)}
-        />
+
         <main>{renderContent()}</main>
         <Footer onNavigate={setActiveSection} />
         <ApiStatusIndicator />
