@@ -97,16 +97,16 @@ export const FeaturedPluginsCarousel = ({ plugins, className }: FeaturedPluginsC
                           )}
                         </div>
                         <p className={cn(
-                          "text-lg mb-3 font-medium",
-                          themeMode === 'light' ? 'text-[#1E3A8A]' : 'text-gray-300'
+                          "text-lg mb-3 font-semibold",
+                          themeMode === 'light' ? 'text-[#1F2937]' : 'text-gray-300'
                         )}>
                           {plugin.shortDescription}
                         </p>
                         <div className={cn(
-                          "text-sm mb-3 font-medium",
-                          themeMode === 'light' ? 'text-[#0F172A]' : 'text-gray-400'
+                          "text-sm mb-3 font-semibold",
+                          themeMode === 'light' ? 'text-[#7C2D12]' : 'text-gray-400'
                         )}>
-                          by <span className="font-medium">{plugin.author}</span>
+                          by <span className="font-bold text-[#9F1239]">{plugin.author}</span>
                         </div>
                         <div className="flex items-center gap-6">
                           <div className="flex items-center gap-2">
@@ -114,17 +114,17 @@ export const FeaturedPluginsCarousel = ({ plugins, className }: FeaturedPluginsC
                               {renderStars(plugin.rating)}
                             </div>
                             <span className={cn(
-                              "text-sm font-medium",
-                              themeMode === 'light' ? 'text-[#1E3A8A]' : 'text-gray-300'
+                              "text-sm font-bold",
+                              themeMode === 'light' ? 'text-[#059669]' : 'text-gray-300'
                             )}>
                               {plugin.rating} ({plugin.reviewCount} reviews)
                             </span>
                           </div>
                           <div className={cn(
-                            "flex items-center gap-1 text-sm font-medium",
-                            themeMode === 'light' ? 'text-[#0F172A]' : 'text-gray-400'
+                            "flex items-center gap-1 text-sm font-bold",
+                            themeMode === 'light' ? 'text-[#991B1B]' : 'text-gray-400'
                           )}>
-                            <Download className="w-4 h-4" />
+                            <Download className="w-4 h-4 text-[#991B1B]" />
                             {formatDownloads(plugin.downloadCount)} downloads
                           </div>
                         </div>
