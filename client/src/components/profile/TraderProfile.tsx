@@ -366,11 +366,11 @@ export const TraderProfile = ({ userId, isCurrentUser = false, onNavigateBack }:
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-blue-500/5 to-cyan-500/5"></div>
           <CardContent className="relative p-8">
             <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8">
-              {/* Avatar with Animated Ring */}
+              {/* Avatar with Gradient Ring */}
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
-                <div className="relative">
-                  <div className={`absolute inset-0 rounded-full ${traderUser.isPremium ? 'bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500' : 'bg-gradient-to-r from-blue-500 to-purple-500'} p-1`}>
-                    <div className="w-36 h-36 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center">
+                <div className="relative flex-shrink-0">
+                  <div className={`rounded-full ${traderUser.isPremium ? 'bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500' : 'bg-gradient-to-r from-blue-500 to-purple-500'} p-1 shadow-xl hover:shadow-2xl transition-shadow duration-300`}>
+                    <div className="w-36 h-36 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center hover:scale-105 transition-transform duration-300">
                       <Avatar className="w-32 h-32">
                         <AvatarImage src={traderUser.avatar} alt={traderUser.username} />
                         <AvatarFallback className="text-3xl bg-gradient-to-br from-blue-500 to-indigo-500 text-white">
