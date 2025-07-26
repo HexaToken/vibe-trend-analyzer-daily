@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { TrendingUp, TrendingDown, Plus, Eye, ExternalLink, Loader2 } from 'lucide-react';
+import { TrendingUp, TrendingDown, Plus, Eye, ExternalLink, Loader2, BarChart3 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
