@@ -168,6 +168,10 @@ const AppContent = () => {
         return <AdminCredibilityDashboard />;
       case "tradehub":
         return <TradeHub onNavigate={setActiveSection} />;
+      case "market-mood":
+        return <SentimentDashboard onNavigate={setActiveSection} />;
+      case "news-feed":
+        return <Analytics />;
       case "trader-profile":
         return (
           <ProtectedRoute
