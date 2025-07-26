@@ -235,22 +235,40 @@ export const SmartNewsFeed: React.FC<SmartNewsFeedProps> = ({ className }) => {
               { key: 'bullish', label: 'Bullish' },
               { key: 'neutral', label: 'Neutral' },
               { key: 'bearish', label: 'Bearish' }
-            ].map(filter => (
-              <Button
-                key={filter.key}
-                variant="ghost"
-                size="sm"
-                onClick={() => setActiveFilter(filter.key as any)}
-                className={cn(
-                  "rounded-full px-4 py-2 text-sm font-medium transition-all duration-300",
-                  activeFilter === filter.key
-                    ? "bg-[#3730A3] text-white border border-[#4338CA] dark:bg-purple-500/30 dark:text-purple-300 dark:border-purple-400/50"
-                    : "text-[#4B5563] hover:text-[#1F2937] hover:bg-[#E8F0FE] dark:text-gray-400 dark:hover:text-white dark:hover:bg-purple-500/10"
-                )}
-              >
-                {filter.label}
-              </Button>
-            ))}
+            ].map(filter => {
+              const getFilterStyles = (filterKey: string, isActive: boolean) => {
+                const baseStyles = "rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 shadow-sm border";
+                
+                if (isActive) {
+                  switch(filterKey) {
+                    case 'all':
+                      return `${baseStyles} bg-[#F4F6FA] text-[#1F2937] border-[#CBD5E1] dark:bg-purple-500/30 dark:text-purple-300 dark:border-purple-400/50`;
+                    case 'bullish':
+                      return `${baseStyles} bg-[#D1FADF] text-[#027A48] border-[#A7F3D0] dark:bg-emerald-500/30 dark:text-emerald-300 dark:border-emerald-400/50`;
+                    case 'neutral':
+                      return `${baseStyles} bg-[#FFF7ED] text-[#B45309] border-[#FCD34D] dark:bg-amber-500/30 dark:text-amber-300 dark:border-amber-400/50`;
+                    case 'bearish':
+                      return `${baseStyles} bg-[#FEE2E2] text-[#991B1B] border-[#FCA5A5] dark:bg-red-500/30 dark:text-red-300 dark:border-red-400/50`;
+                    default:
+                      return `${baseStyles} bg-[#F4F6FA] text-[#1F2937] border-[#CBD5E1]`;
+                  }
+                } else {
+                  return `${baseStyles} bg-white text-[#6B7280] border-[#E5E7EB] hover:bg-[#F9FAFB] hover:text-[#374151] hover:border-[#D1D5DB] dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-300`;
+                }
+              };
+
+              return (
+                <Button
+                  key={filter.key}
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setActiveFilter(filter.key as any)}
+                  className={getFilterStyles(filter.key, activeFilter === filter.key)}
+                >
+                  {filter.label}
+                </Button>
+              );
+            })}
           </div>
         </div>
 
