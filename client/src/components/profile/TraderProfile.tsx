@@ -38,6 +38,7 @@ import {
   Settings,
   Play,
   Pause,
+  ArrowLeft,
 } from "lucide-react";
 import {
   Card,
