@@ -155,6 +155,18 @@ export const TickerPage = ({ symbol, onBack }: TickerPageProps) => {
     // In a real app, this would call an API to update user's watchlist
   };
 
+  const handleFollow = (userId: string) => {
+    console.log(`Following user: ${userId}`);
+  };
+
+  const handleUnfollow = (userId: string) => {
+    console.log(`Unfollowing user: ${userId}`);
+  };
+
+  const handleToggleAlerts = (userId: string, enabled: boolean) => {
+    console.log(`${enabled ? 'Enabling' : 'Disabling'} alerts for user: ${userId}`);
+  };
+
   const formatPrice = (price: number) => {
     if (ticker?.type === "crypto") {
       return price.toLocaleString("en-US", {
