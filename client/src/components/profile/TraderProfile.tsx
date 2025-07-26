@@ -73,6 +73,7 @@ import { getMockUserData, getUserProfileBreadcrumb } from "@/utils/profileNaviga
 interface TraderProfileProps {
   userId?: string;
   isCurrentUser?: boolean;
+  onNavigateBack?: () => void;
 }
 
 interface TradeHistoryItem {
