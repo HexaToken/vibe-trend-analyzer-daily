@@ -2803,7 +2803,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         <div className="flex-1">
                           <h3 className={`text-lg font-semibold mb-2 line-clamp-2 transition-colors ${
                             themeMode === 'light'
-                              ? 'text-[#1C1E21] group-hover:text-green-700'
+                              ? 'text-[#1C1E21] group-hover:text-red-600'
                               : 'text-white group-hover:text-purple-300'
                           }`}>
                             {news.headline}
