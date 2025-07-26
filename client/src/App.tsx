@@ -193,6 +193,28 @@ const AppContent = () => {
       case "futuristic-chat":
         return <FuturisticChatDemo />;
 
+      // Finance Section Routes
+      case "finance":
+        return <BuilderFinanceDemo />;
+      case "watchlist":
+        return <Watchlist />;
+      case "market":
+        return <Analytics />;
+      case "screener":
+        return <Analytics />; // Placeholder - replace with actual screener component
+      case "crypto":
+        return <CryptoDashboard />;
+      case "earnings":
+        return <Analytics />; // Placeholder - replace with actual earnings component
+      case "charts":
+        return <Analytics />; // Placeholder - replace with actual charts component
+      case "trending":
+        return <Analytics />; // Placeholder - replace with actual trending component
+      case "trade-journal":
+        return <Analytics />; // Placeholder - replace with actual trade journal component
+      case "sentiment-polls":
+        return <Analytics />; // Placeholder - replace with actual sentiment polls component
+
       default:
         return <FuturisticHomepage onNavigate={setActiveSection} />;
     }
