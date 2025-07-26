@@ -25,6 +25,7 @@ import {
   Award,
   Clock,
 } from "lucide-react";
+import { EmojiIcon, getIconFromEmoji } from "../../lib/iconUtils";
 import type { PostCredibility, CredibilityLevel } from "@/types/moderation";
 
 interface CredibilityBadgeProps {
