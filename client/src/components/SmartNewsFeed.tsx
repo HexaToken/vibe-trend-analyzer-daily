@@ -156,9 +156,9 @@ export const SmartNewsFeed: React.FC<SmartNewsFeedProps> = ({ className }) => {
 
   const getSentimentBadge = (sentiment: string) => {
     const colors = {
-      positive: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
-      negative: 'bg-red-500/20 text-red-400 border-red-500/30',
-      neutral: 'bg-amber-500/20 text-amber-400 border-amber-500/30'
+      positive: 'bg-[#D1FAE5] text-[#065F46] border-[#A7F3D0] dark:bg-emerald-500/20 dark:text-emerald-400 dark:border-emerald-500/30',
+      negative: 'bg-[#FEE2E2] text-[#991B1B] border-[#FCA5A5] dark:bg-red-500/20 dark:text-red-400 dark:border-red-500/30',
+      neutral: 'bg-[#FEF3C7] text-[#92400E] border-[#FCD34D] dark:bg-amber-500/20 dark:text-amber-400 dark:border-amber-500/30'
     };
     return colors[sentiment as keyof typeof colors];
   };
@@ -260,14 +260,14 @@ export const SmartNewsFeed: React.FC<SmartNewsFeedProps> = ({ className }) => {
             {getFilteredNews().map((item, index) => (
               <div
                 key={item.id}
-                className="p-6 border-b border-purple-500/10 hover:bg-purple-500/5 transition-all duration-300 group"
+                className="p-6 border-b border-[#D1D5DB] dark:border-purple-500/10 bg-[#EAF1FB] dark:bg-transparent hover:bg-[#DCE6FF] dark:hover:bg-purple-500/5 transition-all duration-300 group"
               >
                 {/* Header with source and timestamp */}
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm text-gray-400 font-medium">{item.source}</span>
-                    <span className="text-xs text-gray-500">•</span>
-                    <span className="text-xs text-gray-500">{item.timestamp}</span>
+                    <span className="text-sm text-[#1A1A1A] dark:text-gray-400 font-medium">{item.source}</span>
+                    <span className="text-xs text-[#6B7280] dark:text-gray-500">•</span>
+                    <span className="text-xs text-[#6B7280] dark:text-gray-500">{item.timestamp}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Badge className={cn("text-xs", getSentimentBadge(item.sentiment))}>
@@ -287,19 +287,19 @@ export const SmartNewsFeed: React.FC<SmartNewsFeedProps> = ({ className }) => {
                 </div>
 
                 {/* Headline */}
-                <h3 className="text-lg font-bold text-white mb-2 leading-tight group-hover:text-purple-300 transition-colors cursor-pointer flex items-center gap-2">
+                <h3 className="text-lg font-bold text-[#1A1A1A] dark:text-white mb-2 leading-tight group-hover:text-[#2563EB] dark:group-hover:text-purple-300 transition-colors cursor-pointer flex items-center gap-2">
                   {item.headline}
                   <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </h3>
 
                 {/* Description */}
-                <p className="text-gray-400 text-sm leading-relaxed mb-3">
+                <p className="text-[#4B5563] dark:text-gray-400 text-sm leading-relaxed mb-3">
                   {item.description}
                 </p>
 
                 {/* Category and AI Analysis */}
                 <div className="flex items-center justify-between">
-                  <Badge className="bg-gray-700/50 text-gray-300 border-gray-600/50 text-xs">
+                  <Badge className="bg-[#E5E7EB] text-[#111827] border-[#D1D5DB] dark:bg-gray-700/50 dark:text-gray-300 dark:border-gray-600/50 text-xs">
                     {item.category}
                   </Badge>
                   
@@ -310,7 +310,7 @@ export const SmartNewsFeed: React.FC<SmartNewsFeedProps> = ({ className }) => {
                       onClick={() => setExpandedAnalysis(
                         expandedAnalysis === item.id ? null : item.id
                       )}
-                      className="text-purple-400 hover:text-purple-300 text-xs flex items-center gap-1"
+                      className="text-[#3730A3] hover:text-[#2563EB] dark:text-purple-400 dark:hover:text-purple-300 text-xs flex items-center gap-1"
                     >
                       <Brain className="w-3 h-3" />
                       AI Analysis
@@ -324,12 +324,12 @@ export const SmartNewsFeed: React.FC<SmartNewsFeedProps> = ({ className }) => {
 
                 {/* Expanded AI Analysis */}
                 {expandedAnalysis === item.id && item.aiAnalysis && (
-                  <div className="mt-4 p-4 bg-purple-500/10 border border-purple-500/20 rounded-lg">
+                  <div className="mt-4 p-4 bg-[#E0E7FF] border border-[#C7D2FE] dark:bg-purple-500/10 dark:border-purple-500/20 rounded-lg">
                     <div className="flex items-center gap-2 mb-2">
-                      <Brain className="w-4 h-4 text-purple-400" />
-                      <span className="text-sm font-medium text-purple-300">AI Analysis</span>
+                      <Brain className="w-4 h-4 text-[#3730A3] dark:text-purple-400" />
+                      <span className="text-sm font-medium text-[#3730A3] dark:text-purple-300">AI Analysis</span>
                     </div>
-                    <p className="text-sm text-gray-300 leading-relaxed mb-3">
+                    <p className="text-sm text-[#1F2937] dark:text-gray-300 leading-relaxed mb-3">
                       {item.aiAnalysis}
                     </p>
                     {/* Read Full Article Link */}
