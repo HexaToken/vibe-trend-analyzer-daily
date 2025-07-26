@@ -491,7 +491,24 @@
 
 /* ===== WHITE TEXT ON DARK BLUE/PURPLE GRADIENTS ===== */
 
-/* Dark gradient backgrounds (slate-900, purple-900, etc.) need white text */
+/* Dark solid backgrounds need white text in light mode */
+:root:not(.dark) [class*="bg-slate-900"],
+:root:not(.dark) [class*="bg-blue-900"],
+:root:not(.dark) [class*="bg-purple-900"],
+:root:not(.dark) [class*="bg-indigo-900"] {
+  color: #FFFFFF !important;
+}
+
+/* Fix all child elements on dark backgrounds */
+:root:not(.dark) [class*="bg-slate-900"] *,
+:root:not(.dark) [class*="bg-blue-900"] *,
+:root:not(.dark) [class*="bg-purple-900"] *,
+:root:not(.dark) [class*="bg-indigo-900"] * {
+  color: #FFFFFF !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Dark gradient backgrounds need white text */
 :root:not(.dark) [class*="from-slate-900"],
 :root:not(.dark) [class*="to-slate-900"],
 :root:not(.dark) [class*="from-purple-900"],
@@ -541,24 +558,41 @@
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
 }
 
-/* Buttons on dark gradients */
+/* Buttons on dark backgrounds and gradients */
 :root:not(.dark) [class*="from-slate-900"] button,
 :root:not(.dark) [class*="from-purple-900"] button,
 :root:not(.dark) [class*="to-slate-900"] button,
-:root:not(.dark) [class*="to-purple-900"] button {
+:root:not(.dark) [class*="to-purple-900"] button,
+:root:not(.dark) [class*="bg-slate-900"] button,
+:root:not(.dark) [class*="bg-blue-900"] button,
+:root:not(.dark) [class*="bg-purple-900"] button {
   color: #FFFFFF !important;
   font-weight: 600 !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
 }
 
-/* Labels and metadata on dark gradients */
+/* Labels and metadata on dark backgrounds and gradients */
 :root:not(.dark) [class*="from-slate-900"] .text-xs,
 :root:not(.dark) [class*="from-purple-900"] .text-xs,
 :root:not(.dark) [class*="to-slate-900"] .text-xs,
-:root:not(.dark) [class*="to-purple-900"] .text-xs {
+:root:not(.dark) [class*="to-purple-900"] .text-xs,
+:root:not(.dark) [class*="bg-slate-900"] .text-xs,
+:root:not(.dark) [class*="bg-blue-900"] .text-xs,
+:root:not(.dark) [class*="bg-purple-900"] .text-xs {
   color: #CBD5E1 !important; /* slate-300 for muted but readable */
   font-weight: 500 !important;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Badges and small text on dark backgrounds */
+:root:not(.dark) [class*="bg-slate-900"] .badge,
+:root:not(.dark) [class*="bg-blue-900"] .badge,
+:root:not(.dark) [class*="bg-purple-900"] .badge,
+:root:not(.dark) [class*="bg-slate-900"] .text-sm,
+:root:not(.dark) [class*="bg-blue-900"] .text-sm,
+:root:not(.dark) [class*="bg-purple-900"] .text-sm {
+  color: #FFFFFF !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
 }
 
 /* Special case for vibrant blue to purple gradients */
