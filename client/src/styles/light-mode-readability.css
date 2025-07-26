@@ -298,3 +298,71 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
   color: #111827 !important;
 }
+
+/* ===== BLUE GRADIENT BACKGROUND CONTRAST FIXES ===== */
+
+/* Fix gray text on blue gradient backgrounds */
+:root:not(.dark) [class*="from-primary"][class*="to-purple"] .text-muted-foreground,
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] .text-muted-foreground,
+:root:not(.dark) [class*="bg-gradient-to-r"][class*="primary"] .text-muted-foreground {
+  color: #1F2937 !important; /* Dark gray-800 for excellent contrast */
+  font-weight: 500 !important;
+}
+
+/* Enhanced text on blue/purple gradient cards and CTAs */
+:root:not(.dark) [class*="from-primary"][class*="to-purple"] p,
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] p,
+:root:not(.dark) [class*="bg-gradient-to-r"][class*="primary"] p {
+  color: #111827 !important; /* Near-black for maximum readability */
+  font-weight: 500 !important;
+}
+
+/* Fix gray-500 text specifically on blue gradients */
+:root:not(.dark) [class*="from-primary"][class*="to-purple"] .text-gray-500,
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] .text-gray-500,
+:root:not(.dark) [class*="bg-gradient-to-r"][class*="primary"] .text-gray-500 {
+  color: #0F172A !important; /* Very dark slate for high contrast */
+  font-weight: 600 !important;
+}
+
+/* Button improvements on blue gradients */
+:root:not(.dark) [class*="from-primary"][class*="to-purple"] button,
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] button,
+:root:not(.dark) [class*="bg-gradient-to-r"][class*="primary"] button {
+  font-weight: 600 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Outline buttons on gradients need stronger contrast */
+:root:not(.dark) [class*="from-primary"][class*="to-purple"] button[class*="outline"],
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] button[class*="outline"],
+:root:not(.dark) [class*="bg-gradient-to-r"][class*="primary"] button[class*="outline"] {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 2px solid #1F2937 !important;
+  color: #1F2937 !important;
+  font-weight: 600 !important;
+}
+
+/* Ensure headings on blue gradients are highly visible */
+:root:not(.dark) [class*="from-primary"][class*="to-purple"] h1,
+:root:not(.dark) [class*="from-primary"][class*="to-purple"] h2,
+:root:not(.dark) [class*="from-primary"][class*="to-purple"] h3,
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] h1,
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] h2,
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] h3,
+:root:not(.dark) [class*="bg-gradient-to-r"][class*="primary"] h1,
+:root:not(.dark) [class*="bg-gradient-to-r"][class*="primary"] h2,
+:root:not(.dark) [class*="bg-gradient-to-r"][class*="primary"] h3 {
+  color: #0F172A !important; /* Very dark for maximum contrast */
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Fix light blue/purple text on gradients */
+:root:not(.dark) [class*="from-primary"][class*="to-purple"] .text-blue-300,
+:root:not(.dark) [class*="from-primary"][class*="to-purple"] .text-purple-300,
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] .text-blue-300,
+:root:not(.dark) [class*="from-blue"][class*="to-purple"] .text-purple-300 {
+  color: #1F2937 !important;
+  font-weight: 600 !important;
+}
