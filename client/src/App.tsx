@@ -173,6 +173,7 @@ const AppContent = () => {
             <TraderProfile
               userId={currentUserId || undefined}
               isCurrentUser={currentUserId === null}
+              onNavigateBack={() => handleNavigation("community")}
             />
           </ProtectedRoute>
         );
