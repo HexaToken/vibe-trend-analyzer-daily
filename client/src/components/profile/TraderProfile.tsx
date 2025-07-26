@@ -381,7 +381,7 @@ export const TraderProfile = ({ userId, isCurrentUser = false, onNavigateBack }:
                   </div>
                 </div>
                 
-                <div className="space-y-4 text-center sm:text-left">
+                <div className="space-y-4 text-center sm:text-left flex-1 min-w-0">
                   <div className="space-y-2">
                     <h1 className="text-4xl font-bold flex items-center gap-3 justify-center sm:justify-start">
                       {traderUser.firstName} {traderUser.lastName}
