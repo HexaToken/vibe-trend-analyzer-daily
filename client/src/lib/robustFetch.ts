@@ -262,10 +262,18 @@ export async function robustFetch(
         lastError = new Error("Network connection error");
       }
 
-      console.warn(
-        `Fetch attempt ${attempt + 1} failed for ${url}:`,
-        lastError.message,
-      );
+      // Enhanced logging for timeout issues
+      if (lastError.message.includes("timeout") || lastError.message.includes("timed out")) {
+        console.warn(
+          `🕐 Timeout on attempt ${attempt + 1} for ${url} (${timeout}ms timeout):`,
+          lastError.message,
+        );
+      } else {
+        console.warn(
+          `Fetch attempt ${attempt + 1} failed for ${url}:`,
+          lastError.message,
+        );
+      }
 
       // Don't retry on certain errors, but allow retry for timeout on first few attempts
       const isTimeoutError = lastError.message.includes("timeout") || lastError.message.includes("timed out");
