@@ -320,7 +320,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
         {/* Insights */}
         <div className="mt-6 p-4 bg-gradient-to-r from-red-400 to-pink-500 text-white rounded-lg border border-red-200 dark:border-green-700">
           <div className="flex items-center space-x-2 mb-2 text-gray-100">
-            <BarChart3 className="w-4 h-4 text-green-400" />
+            <BarChart3 className="w-4 h-4 text-red-100" />
             <span className="font-medium text-white dark:text-green-300">
               Trend Analysis
             </span>
