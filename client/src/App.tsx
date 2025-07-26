@@ -78,7 +78,7 @@ const AppContent = () => {
         return <Analytics />;
       // Removed "history" route - HistoricalData component retained for potential reuse
             case "community":
-        return <Community />;
+        return <Community onNavigateToProfile={(userId) => handleNavigation("trader-profile", userId)} />;
       case "space":
         return <SpaceSwitcherWidget />;
       case "rooms":
