@@ -421,6 +421,7 @@ export const CommunityRooms = ({ onNavigateToProfile }: CommunityRoomsProps) => 
                           onFollow={handleFollow}
                           onUnfollow={handleUnfollow}
                           onToggleAlerts={handleToggleAlerts}
+                          onNavigateToProfile={onNavigateToProfile}
                           compact={false}
                         />
                       </div>
