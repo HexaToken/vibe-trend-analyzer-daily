@@ -210,7 +210,16 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                     <div className="flex items-start justify-between">
                       <CardTitle className="text-lg line-clamp-2">{item.title}</CardTitle>
                       {item.badge && (
-                        <Badge variant={item.badge === "BESTSELLER" ? "default" : "secondary"}>
+                        <Badge
+                          variant={item.badge === "BESTSELLER" ? "default" : "secondary"}
+                          className={
+                            item.badge === "BESTSELLER"
+                              ? "bg-green-600 text-white border-green-700 font-bold shadow-md"
+                              : item.badge === "HOT"
+                              ? "bg-red-500 text-white border-red-600 font-bold shadow-md"
+                              : "bg-blue-600 text-white border-blue-700 font-bold shadow-md"
+                          }
+                        >
                           {item.badge}
                         </Badge>
                       )}
@@ -272,7 +281,18 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                         <BookOpen className="h-8 w-8 text-primary" />
                       </div>
                       <div className="flex-1 space-y-2">
-                        <Badge variant="secondary" className="mb-2">{item.badge}</Badge>
+                        <Badge
+                          variant="secondary"
+                          className={
+                            item.badge === "BESTSELLER"
+                              ? "bg-green-600 text-white border-green-700 font-bold shadow-md mb-2"
+                              : item.badge === "HOT"
+                              ? "bg-red-500 text-white border-red-600 font-bold shadow-md mb-2"
+                              : "bg-blue-600 text-white border-blue-700 font-bold shadow-md mb-2"
+                          }
+                        >
+                          {item.badge}
+                        </Badge>
                         <h3 className="text-xl font-semibold">{item.title}</h3>
                         <p className="text-sm text-gray-700 font-medium">by {item.instructor}</p>
                         <div className="flex items-center gap-4 pt-2">
