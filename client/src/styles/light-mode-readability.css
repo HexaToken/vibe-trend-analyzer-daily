@@ -1,0 +1,300 @@
+/* ===== LIGHT MODE READABILITY ENHANCEMENTS ===== */
+/* Apply focused improvements specifically for Light Mode only */
+
+/* Enhanced Typography & Font Settings (Light Mode Only) */
+:root:not(.dark) {
+  /* Load and apply Inter font for optimal readability */
+  font-family: 'Inter', 'Roboto', 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  font-variation-settings: 'opsz' 14;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Base Typography - Light Mode Optimized */
+:root:not(.dark) body {
+  font-size: 16px !important;
+  line-height: 1.7 !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.01em !important;
+  color: #111827 !important;
+}
+
+/* Heading Enhancements for Maximum Contrast */
+:root:not(.dark) h1, 
+:root:not(.dark) h2, 
+:root:not(.dark) h3, 
+:root:not(.dark) h4, 
+:root:not(.dark) h5, 
+:root:not(.dark) h6 {
+  color: #111827 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.025em !important;
+  line-height: 1.3 !important;
+}
+
+/* Body Text Improvements */
+:root:not(.dark) p {
+  color: #374151 !important;
+  line-height: 1.7 !important;
+  font-weight: 400 !important;
+}
+
+/* Small Text & Labels - Enhanced for Readability */
+:root:not(.dark) .text-sm {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.005em !important;
+  line-height: 1.6 !important;
+}
+
+/* Button Text Clarity */
+:root:not(.dark) button {
+  font-weight: 500 !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* ===== COMPREHENSIVE TEXT CONTRAST IMPROVEMENTS ===== */
+
+/* Fix Light Gray Text Issues */
+:root:not(.dark) .text-gray-400 {
+  color: #6B7280 !important; /* Much darker than default gray-400 */
+  font-weight: 500 !important;
+}
+
+:root:not(.dark) .text-gray-300 {
+  color: #374151 !important; /* Dark gray for excellent readability */
+  font-weight: 500 !important;
+}
+
+:root:not(.dark) .text-slate-400 {
+  color: #6B7280 !important;
+  font-weight: 500 !important;
+}
+
+:root:not(.dark) .text-slate-300 {
+  color: #374151 !important;
+  font-weight: 500 !important;
+}
+
+/* Time Stamps and Metadata - Enhanced Contrast */
+:root:not(.dark) [class*="timestamp"],
+:root:not(.dark) [class*="time"],
+:root:not(.dark) .text-xs,
+:root:not(.dark) small {
+  color: #6B7280 !important; /* Dark enough for good readability */
+  font-weight: 500 !important;
+  letter-spacing: -0.005em !important;
+}
+
+/* AI Alerts, Market Cards, Tags - Enhanced Contrast */
+:root:not(.dark) [class*="alert"] .text-gray-400,
+:root:not(.dark) [class*="card"] .text-gray-400,
+:root:not(.dark) [class*="market"] .text-gray-400 {
+  color: #6B7280 !important;
+  font-weight: 500 !important;
+}
+
+/* Badge and Tag Improvements */
+:root:not(.dark) [class*="badge"],
+:root:not(.dark) [class*="tag"] {
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  border-width: 1px !important;
+}
+
+/* ===== COMPONENT ADJUSTMENTS (Light Mode Only) ===== */
+
+/* Avoid Pastel Text Colors on White Backgrounds */
+:root:not(.dark) .text-pink-300,
+:root:not(.dark) .text-purple-300,
+:root:not(.dark) .text-blue-300 {
+  color: #1F2937 !important; /* Dark gray for high contrast */
+  font-weight: 600 !important;
+}
+
+/* Enhanced Readability for Mood and Sentiment Indicators */
+:root:not(.dark) [data-mood],
+:root:not(.dark) [data-sentiment],
+:root:not(.dark) [class*="sentiment"] {
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* Interactive Elements Enhanced Readability */
+:root:not(.dark) button,
+:root:not(.dark) [role="button"] {
+  font-weight: 500 !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* Navigation and Menu Readability */
+:root:not(.dark) nav,
+:root:not(.dark) [role="navigation"],
+:root:not(.dark) [role="menu"] {
+  font-weight: 500 !important;
+}
+
+/* Form Elements Enhanced */
+:root:not(.dark) input,
+:root:not(.dark) textarea,
+:root:not(.dark) select {
+  color: #111827 !important;
+  font-weight: 500 !important;
+  border-width: 2px !important;
+  border-color: #D1D5DB !important;
+}
+
+:root:not(.dark) input::placeholder,
+:root:not(.dark) textarea::placeholder {
+  color: #9CA3AF !important;
+  font-weight: 400 !important;
+}
+
+/* Enhanced Shadows for Better Visual Separation */
+:root:not(.dark) .shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+:root:not(.dark) .shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Improved Emoji and Icon Contrast */
+:root:not(.dark) [class*="emoji"],
+:root:not(.dark) svg:not([class*="sentiment"]) {
+  filter: contrast(1.1) brightness(0.9) !important;
+}
+
+/* Enhanced Table and List Readability */
+:root:not(.dark) table,
+:root:not(.dark) ul,
+:root:not(.dark) ol {
+  color: #374151 !important;
+  font-weight: 400 !important;
+  line-height: 1.7 !important;
+}
+
+:root:not(.dark) th {
+  color: #111827 !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) td {
+  color: #374151 !important;
+  font-weight: 400 !important;
+}
+
+/* Code and Monospace Improvements */
+:root:not(.dark) code,
+:root:not(.dark) pre {
+  color: #111827 !important;
+  background: #F9FAFB !important;
+  border: 1px solid #E5E7EB !important;
+  font-weight: 500 !important;
+}
+
+/* ===== ENHANCED BADGE CONTRAST FOR LIGHT MODE ===== */
+
+/* Color-coded badges with darker backgrounds and text */
+:root:not(.dark) .bg-blue-100,
+:root:not(.dark) [class*="bg-blue-100"] {
+  background: #DBEAFE !important;
+  color: #1E40AF !important;
+  border: 1px solid #3B82F6 !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .bg-red-100,
+:root:not(.dark) [class*="bg-red-100"] {
+  background: #FEE2E2 !important;
+  color: #DC2626 !important;
+  border: 1px solid #EF4444 !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .bg-green-100,
+:root:not(.dark) [class*="bg-green-100"] {
+  background: #D1FAE5 !important;
+  color: #065F46 !important;
+  border: 1px solid #10B981 !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .bg-yellow-100,
+:root:not(.dark) [class*="bg-yellow-100"] {
+  background: #FEF3C7 !important;
+  color: #92400E !important;
+  border: 1px solid #F59E0B !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .bg-purple-100,
+:root:not(.dark) [class*="bg-purple-100"] {
+  background: #EDE9FE !important;
+  color: #5B21B6 !important;
+  border: 1px solid #8B5CF6 !important;
+  font-weight: 600 !important;
+}
+
+/* ===== SHADOW AND OUTLINE ENHANCEMENTS ===== */
+
+/* Subtle outlines for emojis/icons if blending with backgrounds */
+:root:not(.dark) [class*="emoji"]:not([class*="sentiment"]) {
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Enhanced card shadows for better separation */
+:root:not(.dark) .card-readable {
+  background: #FFFFFF !important;
+  border: 1px solid #E5E7EB !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* ===== LIGHT MODE-SCOPED STYLING ONLY ===== */
+
+/* Ensure all changes only apply to light mode */
+.dark .light-mode-override {
+  display: none !important;
+}
+
+/* Link enhancements for light mode */
+:root:not(.dark) a,
+:root:not(.dark) [role="link"] {
+  color: #4F46E5 !important;
+  font-weight: 500 !important;
+  text-decoration: underline !important;
+  text-decoration-thickness: 1px !important;
+}
+
+:root:not(.dark) a:hover,
+:root:not(.dark) [role="link"]:hover {
+  color: #3730A3 !important;
+  text-decoration-thickness: 2px !important;
+}
+
+/* Enhanced focus states for accessibility */
+:root:not(.dark) button:focus,
+:root:not(.dark) input:focus,
+:root:not(.dark) select:focus,
+:root:not(.dark) textarea:focus {
+  outline: 2px solid #4F46E5 !important;
+  outline-offset: 2px !important;
+}
+
+/* Improved hover states */
+:root:not(.dark) button:hover {
+  background: #F3F4F6 !important;
+  border-color: #D1D5DB !important;
+}
+
+/* Enhanced readability for specific components */
+:root:not(.dark) [class*="dropdown"],
+:root:not(.dark) [class*="popover"],
+:root:not(.dark) [class*="tooltip"] {
+  background: #FFFFFF !important;
+  border: 1px solid #E5E7EB !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+  color: #111827 !important;
+}
