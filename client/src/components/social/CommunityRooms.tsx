@@ -46,6 +46,7 @@ import {
 import type { CommunityRoom, ChatMessage, SocialProfile } from "@/types/social";
 import { UserCredibilityIndicator } from "@/components/moderation/CredibilityBadge";
 import { FlagPostModal } from "@/components/moderation/FlagPostModal";
+import { PostInteractionBar } from "./PostInteractionBar";
 import { moderationService } from "@/services/moderationService";
 import type { CreateFlagData } from "@/types/moderation";
 
