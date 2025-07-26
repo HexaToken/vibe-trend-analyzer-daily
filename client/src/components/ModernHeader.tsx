@@ -30,7 +30,6 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
   const [searchFocused, setSearchFocused] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [currentMoodScore] = useState(72); // This would come from your mood data context
 
   // Handle scroll effect for sticky header
   useEffect(() => {
