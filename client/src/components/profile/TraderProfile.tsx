@@ -111,26 +111,29 @@ export const TraderProfile = ({ userId, isCurrentUser = false }: TraderProfilePr
   const [dynamicMode, setDynamicMode] = useState(false);
   const [watchlistIndex, setWatchlistIndex] = useState(0);
   
-  // Mock data - in real app, fetch based on userId
+  // Get user data - in real app, fetch based on userId
+  const resolvedUserId = userId || "user-cryptowolf";
+  const mockUserData = getMockUserData(resolvedUserId);
+
   const traderUser: User = {
-    id: userId || "trader-123",
-    email: "trader@example.com",
-    username: "cryptowolf",
-    firstName: "Alex",
-    lastName: "Thompson", 
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=faces",
+    id: resolvedUserId,
+    email: `${mockUserData?.username || "trader"}@example.com`,
+    username: mockUserData?.username || "cryptowolf",
+    firstName: mockUserData?.firstName || "Alex",
+    lastName: mockUserData?.lastName || "Thompson",
+    avatar: mockUserData?.avatar || "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=faces",
     bio: "Professional trader with 8+ years experience in crypto and tech stocks. Focus on momentum trading and sentiment analysis. 🚀",
     location: "New York, NY",
-    website: "https://cryptowolf.trading",
-    isVerified: true,
-    isPremium: true,
+    website: `https://${mockUserData?.username || "cryptowolf"}.trading`,
+    isVerified: mockUserData?.verified || true,
+    isPremium: mockUserData?.premium || true,
     createdAt: new Date("2021-03-15"),
     updatedAt: new Date(),
     lastLoginAt: new Date(),
     preferences: {} as any,
     stats: {
       id: "1",
-      userId: "trader-123",
+      userId: resolvedUserId,
       totalLogins: 245,
       totalPredictions: 186,
       accurateePredictions: 152,
