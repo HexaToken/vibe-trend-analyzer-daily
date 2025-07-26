@@ -103,17 +103,13 @@ interface FuturisticHomepageProps {
 
 export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNavigate }) => {
   const { setMoodScore, themeMode, cardBackground, borderColor } = useMoodTheme();
-    const [searchFocused, setSearchFocused] = useState(false);
-                                                                                const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'tool' | 'market' | 'crypto' | 'charts' | 'trending' | 'earnings' | 'finance'>('home');
-      const [activeToolSubtab, setActiveToolSubtab] = useState("Market");
-    const [activeMarketSubtab, setActiveMarketSubtab] = useState("Tools");
+  const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'tool' | 'market' | 'crypto' | 'charts' | 'trending' | 'earnings' | 'finance' | 'screener' | 'trade-journal' | 'sentiment-polls'>('home');
+  const [activeToolSubtab, setActiveToolSubtab] = useState("Market");
+  const [activeMarketSubtab, setActiveMarketSubtab] = useState("Tools");
   const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
   const [activeFinanceTab, setActiveFinanceTab] = useState("risk-analysis");
   const [selectedFinanceStock, setSelectedFinanceStock] = useState("AAPL");
   const [financeSearchQuery, setFinanceSearchQuery] = useState("");
-  const [mobileFinanceOpen, setMobileFinanceOpen] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [financeDropdownOpen, setFinanceDropdownOpen] = useState(false);
   const [selectedTimeframe, setSelectedTimeframe] = useState<"1D" | "7D" | "30D">("7D");
 
   // Core mood data
@@ -1443,7 +1439,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       💬 Social Buzz
                     </TabsTrigger>
                     <TabsTrigger value="searches" className="data-[state=active]:bg-orange-600/30 data-[state=active]:text-orange-300 text-gray-400">
-                      ���� Top Searches
+                      ����� Top Searches
                     </TabsTrigger>
                   </TabsList>
 
