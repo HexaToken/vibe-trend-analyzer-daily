@@ -11,7 +11,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Community } from "./Community";
+
 import { SentimentPostWall } from "./SentimentPostWall";
 import { ChatSubcategory } from "./social/ChatSubcategory";
 import { CommunityRooms } from "./social/CommunityRooms";
@@ -63,7 +63,7 @@ export const CommunityWithSubtabs = ({ onNavigateToProfile }: CommunityWithSubta
             <Card className="border-0 shadow-sm bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
               <CardContent className="p-4">
                 <Tabs value={activeSubtab} onValueChange={setActiveSubtab}>
-                  <TabsList className="grid w-full grid-cols-5 bg-white dark:bg-slate-800">
+                  <TabsList className="grid w-full grid-cols-4 bg-white dark:bg-slate-800">
                     <TabsTrigger
                       value="sentiment-feed"
                       className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 data-[state=active]:text-white"
@@ -72,14 +72,7 @@ export const CommunityWithSubtabs = ({ onNavigateToProfile }: CommunityWithSubta
                       <span className="hidden sm:inline">Sentiment Feed</span>
                       <span className="sm:hidden">Feed</span>
                     </TabsTrigger>
-                    <TabsTrigger
-                      value="community-hub"
-                      className="flex items-center gap-2 data-[state=active]:bg-blue-500 data-[state=active]:text-white"
-                    >
-                      <Users className="h-4 w-4" />
-                      <span className="hidden sm:inline">Community Hub</span>
-                      <span className="sm:hidden">Hub</span>
-                    </TabsTrigger>
+
                     <TabsTrigger
                       value="live-chat"
                       className="flex items-center gap-2 data-[state=active]:bg-green-500 data-[state=active]:text-white"
@@ -112,9 +105,7 @@ export const CommunityWithSubtabs = ({ onNavigateToProfile }: CommunityWithSubta
                       <SentimentPostWall onNavigateToProfile={handleNavigateToProfile} />
                     </TabsContent>
 
-                    <TabsContent value="community-hub" className="m-0">
-                      <Community onNavigateToProfile={handleNavigateToProfile} />
-                    </TabsContent>
+
 
                     <TabsContent value="live-chat" className="m-0">
                       <div className="mb-4">
