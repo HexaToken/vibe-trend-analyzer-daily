@@ -170,7 +170,10 @@ const AppContent = () => {
             fallbackTitle="Trader Profile Access"
             fallbackDescription="Please sign in to view trader profiles and trading insights."
           >
-            <TraderProfile />
+            <TraderProfile
+              userId={currentUserId || undefined}
+              isCurrentUser={currentUserId === null}
+            />
           </ProtectedRoute>
         );
       case "enhanced-chat":
