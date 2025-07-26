@@ -125,7 +125,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
           </div>
 
           <div className="text-center p-3 rounded-lg bg-purple-50 dark:bg-purple-900/20">
-            <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+            <div className="text-2xl font-bold dark:text-purple-400 text-[#a855f7]">
               {Math.round(data[data.length - 1]?.news || 50)}
             </div>
             <div className="text-sm text-gray-600 dark:text-gray-400">News</div>
