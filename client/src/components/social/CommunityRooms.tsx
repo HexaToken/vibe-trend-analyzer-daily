@@ -48,6 +48,10 @@ import { UserCredibilityIndicator } from "@/components/moderation/CredibilityBad
 import { FlagPostModal } from "@/components/moderation/FlagPostModal";
 import { PostInteractionBar } from "./PostInteractionBar";
 import { EnhancedCommunityMessage } from "./EnhancedCommunityMessage";
+import { UserAvatar } from "./UserAvatar";
+import { UsernameLink } from "./UsernameLink";
+import { MentionText } from "./MentionText";
+import { ProfileNavigationProvider, useProfileNavigation } from "./ProfileNavigationProvider";
 import ChatSubcategory from "./ChatSubcategory";
 import { moderationService } from "@/services/moderationService";
 import type { CreateFlagData } from "@/types/moderation";
