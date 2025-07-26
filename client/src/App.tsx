@@ -198,7 +198,7 @@ const AppContent = () => {
       <div className={`min-h-screen ${bodyGradient} transition-all duration-500`}>
         <Navigation
           activeSection={activeSection}
-          onSectionChange={setActiveSection}
+          onSectionChange={(section) => handleNavigation(section)}
         />
         <main>{renderContent()}</main>
         <Footer onNavigate={setActiveSection} />
