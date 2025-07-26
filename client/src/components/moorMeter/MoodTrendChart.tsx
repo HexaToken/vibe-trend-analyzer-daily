@@ -57,7 +57,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
       <CardHeader className="bg-gradient-to-r from-red-400 to-pink-500 text-white">
         <CardTitle className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Activity className="w-6 h-6 text-green-400" />
+            <Activity className="w-6 h-6 text-red-300" />
             <span className="text-gray-100">Mood Over Time</span>
             <Badge variant="secondary" className="bg-white/20" style={{color: 'rgba(245, 166, 35, 1)'}}>
               Trending
@@ -318,7 +318,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
         </div>
 
         {/* Insights */}
-        <div className="mt-6 p-4 bg-gradient-to-r from-indigo-600 to-blue-500 text-white rounded-lg border border-green-200 dark:border-green-700">
+        <div className="mt-6 p-4 bg-gradient-to-r from-red-400 to-pink-500 text-white rounded-lg border border-red-200 dark:border-green-700">
           <div className="flex items-center space-x-2 mb-2 text-gray-100">
             <BarChart3 className="w-4 h-4 text-green-400" />
             <span className="font-medium text-white dark:text-green-300">
