@@ -11,7 +11,7 @@ import { SentimentDashboard } from "@/components/SentimentDashboard";
 import { Analytics } from "@/components/Analytics";
 import { HistoricalData } from "@/components/HistoricalData";
 import { CommunityWithSubtabs } from "@/components/CommunityWithSubtabs";
-import { ModernHeader } from "@/components/ModernHeader";
+import { ResponsiveModernHeader } from "@/components/ResponsiveModernHeader";
 import { CommunityRooms } from "@/components/social/CommunityRooms";
 import { Watchlist } from "@/components/Watchlist";
 import { Settings } from "@/components/Settings";
@@ -203,7 +203,7 @@ const AppContent = () => {
       <Toaster />
       <Sonner />
       <div className={`min-h-screen ${bodyGradient} transition-all duration-500`}>
-        <ModernHeader
+        <ResponsiveModernHeader
           activeSection={activeSection}
           setActiveSection={setActiveSection}
           onNavigate={handleNavigation}
