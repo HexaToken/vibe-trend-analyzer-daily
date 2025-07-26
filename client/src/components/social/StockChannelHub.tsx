@@ -515,34 +515,109 @@ export const StockChannelHub: React.FC = () => {
                         </Avatar>
 
                         <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                            <span className="font-medium text-sm text-gray-900 dark:text-white">
-                              {message.username}
-                            </span>
-                            <span
-                              className={cn(
-                                "text-xs",
-                                getSentimentColor(message.sentiment),
+                          <div className="flex items-center justify-between mb-1.5">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <span className="font-medium text-sm text-gray-900 dark:text-white">
+                                {message.username}
+                              </span>
+
+                              {/* Verification Icon */}
+                              {message.badges.includes("Verified") && (
+                                <CheckCircle className="h-4 w-4 text-blue-500" />
                               )}
-                            >
-                              {getSentimentIcon(message.sentiment)}{" "}
-                              {message.sentiment}
-                            </span>
-                            {message.badges.map((badge, index) => (
-                              <Badge
-                                key={index}
-                                variant="secondary"
-                                className="text-xs bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-700 font-medium"
+
+                              {/* Credibility Score */}
+                              {message.credibilityScore && (
+                                <TooltipProvider>
+                                  <Tooltip>
+                                    <TooltipTrigger asChild>
+                                      <Badge
+                                        className={`text-xs px-2 py-0.5 font-semibold ${getCredibilityColor(message.credibilityScore)}`}
+                                      >
+                                        {message.credibilityScore.toFixed(1)}
+                                      </Badge>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                      <p>Credibility Score: {message.credibilityScore.toFixed(1)}/10.0</p>
+                                    </TooltipContent>
+                                  </Tooltip>
+                                </TooltipProvider>
+                              )}
+
+                              {/* Sentiment Badge */}
+                              <span
+                                className={cn(
+                                  "text-xs",
+                                  getSentimentColor(message.sentiment),
+                                )}
                               >
-                                {badge}
-                              </Badge>
-                            ))}
-                            <span className="text-xs text-gray-500">
-                              {message.timestamp.toLocaleTimeString([], {
-                                hour: "2-digit",
-                                minute: "2-digit",
-                              })}
-                            </span>
+                                {getSentimentIcon(message.sentiment)}{" "}
+                                {message.sentiment}
+                              </span>
+
+                              {/* User Badges */}
+                              {message.badges.filter(badge => badge !== "Verified").map((badge, index) => (
+                                <Badge
+                                  key={index}
+                                  variant="secondary"
+                                  className="text-xs bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-700 font-medium"
+                                >
+                                  {badge}
+                                </Badge>
+                              ))}
+
+                              {/* Needs Review Badge */}
+                              {message.needsReview && (
+                                <TooltipProvider>
+                                  <Tooltip>
+                                    <TooltipTrigger asChild>
+                                      <Badge className="bg-yellow-100 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-400 text-xs px-2 py-0.5">
+                                        <AlertTriangle className="h-3 w-3 mr-1" />
+                                        Needs Review
+                                      </Badge>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                      <p>This message requires community review</p>
+                                    </TooltipContent>
+                                  </Tooltip>
+                                </TooltipProvider>
+                              )}
+
+                              {/* Community Favorite Badge */}
+                              {message.communityFavorite && (
+                                <TooltipProvider>
+                                  <Tooltip>
+                                    <TooltipTrigger asChild>
+                                      <Badge className="bg-pink-100 text-pink-700 dark:bg-pink-900/20 dark:text-pink-400 text-xs px-2 py-0.5">
+                                        <Award className="h-3 w-3 mr-1" />
+                                        Community Favorite
+                                      </Badge>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                      <p>Highly appreciated by the community</p>
+                                    </TooltipContent>
+                                  </Tooltip>
+                                </TooltipProvider>
+                              )}
+
+                              <span className="text-xs text-gray-500">
+                                {message.timestamp.toLocaleTimeString([], {
+                                  hour: "2-digit",
+                                  minute: "2-digit",
+                                })}
+                              </span>
+                            </div>
+
+                            {/* Post Interaction Bar for Live Chat Messages */}
+                            <PostInteractionBar
+                              userId={message.userId}
+                              username={message.username}
+                              compact={true}
+                              onFollow={handleFollow}
+                              onUnfollow={handleUnfollow}
+                              onToggleAlerts={handleToggleAlerts}
+                              className="opacity-60 hover:opacity-100 transition-opacity"
+                            />
                           </div>
 
                           <p className="text-sm text-gray-800 dark:text-gray-200 mb-2 break-words leading-relaxed">
