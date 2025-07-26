@@ -36,34 +36,6 @@ export const getUserIdFromUsername = (username: string): string => {
 };
 
 /**
- * Parse mentions in text and return clickable elements
- */
-export const parseMentions = (
-  text: string,
-  onUserClick: (userId: string) => void
-): (string | JSX.Element)[] => {
-  const mentionRegex = /@(\w+)/g;
-  const parts = text.split(mentionRegex);
-  
-  return parts.map((part, index) => {
-    if (index % 2 === 1) {
-      // This is a username from a mention
-      const userId = getUserIdFromUsername(part);
-      return (
-        <button
-          key={index}
-          className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors"
-          onClick={() => onUserClick(userId)}
-        >
-          @{part}
-        </button>
-      );
-    }
-    return part;
-  });
-};
-
-/**
  * Mock user data for profile navigation
  * In a real app, this would fetch from an API
  */
@@ -108,4 +80,15 @@ export const getMockUserData = (userId: string) => {
   };
   
   return mockUsers[userId] || null;
+};
+
+/**
+ * Get navigation breadcrumb for user profile
+ */
+export const getUserProfileBreadcrumb = (userId: string): string => {
+  const userData = getMockUserData(userId);
+  if (userData) {
+    return `${userData.firstName} ${userData.lastName} (@${userData.username})`;
+  }
+  return "Trader Profile";
 };
