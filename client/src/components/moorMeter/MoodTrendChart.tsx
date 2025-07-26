@@ -59,7 +59,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
           <div className="flex items-center space-x-2">
             <Activity className="w-6 h-6 text-green-400" />
             <span className="text-gray-100">Mood Over Time</span>
-            <Badge variant="secondary" className="bg-white/20 text-orange-400">
+            <Badge variant="secondary" className="bg-white/20" style={{color: 'rgba(245, 166, 35, 1)'}}>
               Trending
             </Badge>
           </div>
