@@ -7,6 +7,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
+import { Dialog, DialogContent } from './ui/dialog';
 import { useMoodTheme } from '../contexts/MoodThemeContext';
 
 interface ThemeOption {
