@@ -170,6 +170,7 @@ export const StockChannelHub: React.FC = () => {
   const channelMessages: StockMessage[] = [
     {
       id: "1",
+      userId: "user-tech-bull-2024",
       username: "TechBull2024",
       avatar: "/api/placeholder/32/32",
       timestamp: new Date(Date.now() - 300000),
@@ -181,6 +182,9 @@ export const StockChannelHub: React.FC = () => {
       comments: 12,
       isPinned: true,
       tickers: ["$TSLA"],
+      credibilityScore: 9.2,
+      needsReview: false,
+      communityFavorite: true,
     },
     {
       id: "2",
