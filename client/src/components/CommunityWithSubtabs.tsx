@@ -7,6 +7,7 @@ import {
   Hash,
   TrendingUp,
   Flame,
+  Eye,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -63,7 +64,7 @@ export const CommunityWithSubtabs = ({ onNavigateToProfile }: CommunityWithSubta
             <Card className="border-0 shadow-sm bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
               <CardContent className="p-4">
                 <Tabs value={activeSubtab} onValueChange={setActiveSubtab}>
-                  <TabsList className="grid w-full grid-cols-4 bg-white dark:bg-slate-800">
+                  <TabsList className="grid w-full grid-cols-5 bg-white dark:bg-slate-800">
                     <TabsTrigger
                       value="sentiment-feed"
                       className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 data-[state=active]:text-white"
@@ -88,6 +89,14 @@ export const CommunityWithSubtabs = ({ onNavigateToProfile }: CommunityWithSubta
                       <Hash className="h-4 w-4" />
                       <span className="hidden sm:inline">Trading Rooms</span>
                       <span className="sm:hidden">Rooms</span>
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="private-watchlist"
+                      className="flex items-center gap-2 data-[state=active]:bg-indigo-500 data-[state=active]:text-white"
+                    >
+                      <Eye className="h-4 w-4" />
+                      <span className="hidden sm:inline">Private Watchlist</span>
+                      <span className="sm:hidden">Watchlist</span>
                     </TabsTrigger>
                     <TabsTrigger
                       value="space"
@@ -125,6 +134,29 @@ export const CommunityWithSubtabs = ({ onNavigateToProfile }: CommunityWithSubta
                         </p>
                       </div>
                       <CommunityRooms onNavigateToProfile={handleNavigateToProfile} />
+                    </TabsContent>
+
+                    <TabsContent value="private-watchlist" className="m-0">
+                      <div className="mb-4">
+                        <h2 className="text-2xl font-semibold mb-2">Private Watchlist</h2>
+                        <p className="text-muted-foreground">
+                          Your personal collection of stocks, crypto, and securities for tracking and analysis
+                        </p>
+                      </div>
+                      <div className="grid gap-6">
+                        <div className="bg-white dark:bg-slate-800 rounded-lg p-6 border">
+                          <div className="text-center py-12">
+                            <Eye className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+                            <h3 className="text-lg font-semibold mb-2">Your Private Watchlist</h3>
+                            <p className="text-muted-foreground mb-4">
+                              Track your favorite stocks, crypto, and market instruments in one secure place
+                            </p>
+                            <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition-colors">
+                              Add Your First Stock
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                     </TabsContent>
 
                     <TabsContent value="space" className="m-0">
