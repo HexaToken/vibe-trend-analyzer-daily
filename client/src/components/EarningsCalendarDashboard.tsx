@@ -444,7 +444,7 @@ const EarningsCalendarDashboard: React.FC<EarningsCalendarDashboardProps> = ({
 
       <div className="flex items-center justify-between">
         <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30 text-xs">
-          🤖 {earning.aiSentiment}
+          <EmojiIcon emoji="🤖" className="w-4 h-4" /> {earning.aiSentiment}
         </Badge>
         {earning.sentimentScore && (
           <div className="text-xs text-gray-400">
