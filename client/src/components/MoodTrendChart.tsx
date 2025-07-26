@@ -172,14 +172,14 @@ export const MoodTrendChart = ({ data }: MoodTrendChartProps) => {
     {
       key: "forums",
       name: "Forums",
-      color: "#ca8a04",
+      color: "#FF8A80",
       strokeWidth: 2,
       visible: visibleLines.forums,
     },
     {
       key: "stocks",
       name: "Stock Market",
-      color: "#9333ea",
+      color: "#FFAB91",
       strokeWidth: 2,
       visible: visibleLines.stocks,
     },
