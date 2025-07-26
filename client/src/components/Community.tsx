@@ -69,6 +69,7 @@ export const Community = () => {
     },
     {
       id: 3,
+      userId: "user-data-digger",
       author: "DataDigger",
       avatar: "DD",
       time: "6 hours ago",
@@ -80,6 +81,7 @@ export const Community = () => {
     },
     {
       id: 4,
+      userId: "user-trend-spotter",
       author: "TrendSpotter",
       avatar: "TS",
       time: "8 hours ago",
