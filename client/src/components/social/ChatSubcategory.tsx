@@ -49,6 +49,10 @@ import {
 } from "@/components/ui/tooltip";
 import { useAuth } from "@/contexts/AuthContext";
 import { PostInteractionBar } from "./PostInteractionBar";
+import { UserAvatar } from "./UserAvatar";
+import { UsernameLink } from "./UsernameLink";
+import { MentionText } from "./MentionText";
+import { ProfileNavigationProvider, useProfileNavigation } from "./ProfileNavigationProvider";
 import {
   CheckCircle,
   AlertTriangle,
