@@ -546,7 +546,15 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
     onNavigateToProfile?.(userId);
   };
 
-  const handleTickerClick = (symbol: string) => {
+  const handleTickerClick = (symbol: string, event?: React.MouseEvent) => {
+    // If Ctrl/Cmd is held, just filter without opening analytics
+    if (event && (event.ctrlKey || event.metaKey)) {
+      setFilter(prev => ({ ...prev, ticker: symbol }));
+      hideTickerPreview();
+      return;
+    }
+
+    // Default behavior: open analytics drawer
     setSelectedTicker(symbol);
     setIsAnalyticsDrawerOpen(true);
     hideTickerPreview(); // Close hover preview when opening analytics
