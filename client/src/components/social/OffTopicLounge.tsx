@@ -149,6 +149,9 @@ export const OffTopicLounge: React.FC = () => {
       shares: 67,
       tags: ["meme", "options", "trading"],
       isPinned: true,
+      credibilityScore: 7.8,
+      needsReview: false,
+      communityFavorite: true,
     },
     {
       id: "2",
