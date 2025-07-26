@@ -200,8 +200,6 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
             <MarketMoodControls
               title="Analysis Controls"
               showFilters={true}
-              showExport={true}
-              onDateRangeChange={handleDateRangeChange}
               onSourceToggle={handleSourceToggle}
               onSearch={handleSearch}
               onExplainMood={handleExplainMood}

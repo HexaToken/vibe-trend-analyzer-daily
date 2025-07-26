@@ -60,7 +60,7 @@ export const SentimentDashboard = () => {
     <div className="container mx-auto px-4 py-8 space-y-8 max-w-7xl">
       {/* Header */}
       <div className="text-center space-y-4">
-        <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-[#1F2937] via-[#3730A3] to-[#4338CA] dark:from-blue-600 dark:via-purple-600 dark:to-indigo-600 bg-clip-text text-transparent">
+        <h1 className="text-4xl md:text-6xl font-bold text-[#111827] dark:text-transparent dark:bg-gradient-to-r dark:from-blue-600 dark:via-purple-600 dark:to-indigo-600 dark:bg-clip-text">
           Sentiment Dashboard
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto">

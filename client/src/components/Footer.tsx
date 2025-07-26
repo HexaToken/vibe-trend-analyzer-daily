@@ -60,8 +60,8 @@ export const Footer = ({ onNavigate }: FooterProps) => {
               <div className={cn(
                 "text-2xl font-bold",
                 themeMode === 'light'
-                  ? "bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"
-                  : "bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
+                  ? "text-[#111827]"
+                  : "text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text"
               )}>
                 MoodMeter
               </div>

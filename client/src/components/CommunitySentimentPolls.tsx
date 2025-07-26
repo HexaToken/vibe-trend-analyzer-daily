@@ -32,7 +32,7 @@ import {
   ThumbsDown,
   AlertCircle,
   CheckCircle,
-  Fire,
+  Flame,
   Eye,
   TrendingDownIcon,
   Plus
@@ -362,8 +362,8 @@ export default function CommunitySentimentPolls() {
             </div>
             <h1 className={`text-4xl font-bold ${
               themeMode === 'light'
-                ? 'text-[#1E1E1E]'
-                : 'bg-gradient-to-r from-purple-400 via-blue-400 to-pink-400 bg-clip-text text-transparent'
+                ? 'text-[#111827]'
+                : 'text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-pink-400 bg-clip-text'
             }`}>
               Community Sentiment Polls
             </h1>

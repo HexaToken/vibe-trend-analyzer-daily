@@ -84,7 +84,7 @@ export const PersonalMoodCard: React.FC = () => {
             </div>
           </div>
 
-          <div className="text-3xl font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent mb-1">
+          <div className="text-3xl font-bold text-[#111827] dark:text-transparent dark:bg-gradient-to-r dark:from-pink-600 dark:to-purple-600 dark:bg-clip-text mb-1">
             {personalScore}
           </div>
           <div className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">

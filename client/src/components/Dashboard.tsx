@@ -56,7 +56,7 @@ export const Dashboard = () => {
     <div className="container mx-auto px-4 py-8 space-y-8">
       {/* Header */}
       <div className="text-center space-y-4">
-        <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-[#1F2937] via-[#3730A3] to-[#4338CA] dark:from-primary dark:via-primary/80 dark:to-primary/60 bg-clip-text text-transparent">
+        <h1 className="text-4xl md:text-6xl font-bold text-[#111827] dark:text-transparent dark:bg-gradient-to-r dark:from-primary dark:via-primary/80 dark:to-primary/60 dark:bg-clip-text">
           MoodMeter
         </h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">

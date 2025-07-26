@@ -140,7 +140,7 @@ export const Navigation = ({
           <div className="flex justify-between items-center h-16">
                         {/* Logo */}
             <div className="flex items-center gap-3">
-              <div className="text-2xl font-bold bg-gradient-to-r from-[#1F2937] to-[#3730A3] dark:from-primary dark:to-primary/60 bg-clip-text text-transparent">
+              <div className="text-2xl font-bold text-[#111827] dark:text-transparent dark:bg-gradient-to-r dark:from-primary dark:to-primary/60 dark:bg-clip-text">
                 MoodMeter
               </div>
               <Badge variant="secondary" className="hidden sm:inline-flex">
