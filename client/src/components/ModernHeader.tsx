@@ -428,8 +428,14 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
             </div>
 
             {/* Mobile Theme Settings */}
-            <div className="pt-4 border-t border-gray-700/50">
-              <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-3">
+            <div className={cn(
+              "pt-4 border-t",
+              isLightMode ? "border-gray-200/50" : "border-gray-700/50"
+            )}>
+              <div className={cn(
+                "text-xs font-semibold uppercase tracking-wider mb-3 px-3",
+                isLightMode ? "text-gray-600" : "text-gray-400"
+              )}>
                 Theme Settings
               </div>
               <div className="px-3">
