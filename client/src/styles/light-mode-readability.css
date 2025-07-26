@@ -595,6 +595,21 @@
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
 }
 
+/* Badge contrast fix - prevent default gray badges from being hard to read */
+:root:not(.dark) .badge[class*="bg-secondary"],
+:root:not(.dark) .badge[data-variant="secondary"]:not([class*="bg-blue"]):not([class*="bg-green"]):not([class*="bg-red"]) {
+  background-color: #3B82F6 !important; /* blue-500 */
+  color: #FFFFFF !important;
+  border-color: #2563EB !important; /* blue-600 */
+}
+
+/* Improve contrast for generic secondary badges */
+:root:not(.dark) .badge:not([class*="bg-"]):not([class*="text-"]) {
+  background-color: #EFF6FF !important; /* blue-50 */
+  color: #1E40AF !important; /* blue-800 */
+  border-color: #BFDBFE !important; /* blue-200 */
+}
+
 /* Special case for vibrant blue to purple gradients */
 :root:not(.dark) [class*="from-blue-600"][class*="to-purple-600"],
 :root:not(.dark) [class*="from-indigo-500"][class*="to-sky-500"] {

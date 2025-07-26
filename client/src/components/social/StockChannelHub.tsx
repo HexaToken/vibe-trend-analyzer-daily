@@ -472,7 +472,7 @@ export const StockChannelHub: React.FC = () => {
                             <Badge
                               key={index}
                               variant="secondary"
-                              className="text-xs"
+                              className="text-xs bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-700 font-medium"
                             >
                               {badge}
                             </Badge>
