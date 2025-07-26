@@ -237,37 +237,8 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
               <DynamicThemeSelector />
             </div>
 
-            {/* User Profile Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  className="p-2 hover:bg-gray-800/50 rounded-lg"
-                  aria-label="User menu"
-                >
-                  <User className="w-5 h-5 text-gray-300" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent 
-                align="end" 
-                className="w-48 bg-black/95 backdrop-blur-xl border-gray-700 text-white"
-              >
-                <DropdownMenuItem className="hover:bg-gray-800/50 cursor-pointer">
-                  Sign In
-                </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-gray-800/50 cursor-pointer">
-                  Sign Up
-                </DropdownMenuItem>
-                <DropdownMenuSeparator className="bg-gray-700" />
-                <DropdownMenuItem className="hover:bg-gray-800/50 cursor-pointer">
-                  Settings
-                </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-gray-800/50 cursor-pointer">
-                  Help & Support
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            {/* User Authentication */}
+            <UserAuthenticationToggle onNavigate={onNavigate} />
 
             {/* Mobile Menu Button */}
             <Button
