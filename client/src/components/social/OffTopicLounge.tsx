@@ -149,6 +149,7 @@ export const OffTopicLounge: React.FC = () => {
     },
     {
       id: "2",
+      userId: "user-tech-enthusiast",
       user: {
         name: "TechEnthusiast",
         avatar: "TE",
