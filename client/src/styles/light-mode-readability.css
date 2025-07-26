@@ -590,15 +590,45 @@
 
 /* ===== COMPREHENSIVE GRADIENT TEXT FIXES FOR LIGHT MODE ===== */
 
-/* Fix text on all dark/blue gradient backgrounds in light mode only */
-:root:not(.dark) [class*="bg-gradient-to"] h1,
-:root:not(.dark) [class*="bg-gradient-to"] h2,
-:root:not(.dark) [class*="bg-gradient-to"] h3,
-:root:not(.dark) [class*="bg-gradient-to"] h4,
-:root:not(.dark) [class*="bg-gradient-to"] p,
-:root:not(.dark) [class*="bg-gradient-to"] span {
+/* Fix text ONLY on dark gradient backgrounds in light mode - exclude light gradients */
+/* Target only dark gradient backgrounds like blue-400 to purple-500, purple-600 to blue-600 */
+:root:not(.dark) [class*="from-blue-400"][class*="to-purple-500"] h1,
+:root:not(.dark) [class*="from-blue-400"][class*="to-purple-500"] h2,
+:root:not(.dark) [class*="from-blue-400"][class*="to-purple-500"] h3,
+:root:not(.dark) [class*="from-blue-400"][class*="to-purple-500"] h4,
+:root:not(.dark) [class*="from-blue-400"][class*="to-purple-500"] p,
+:root:not(.dark) [class*="from-blue-400"][class*="to-purple-500"] span,
+:root:not(.dark) [class*="from-purple-600"][class*="to-blue-600"] h1,
+:root:not(.dark) [class*="from-purple-600"][class*="to-blue-600"] h2,
+:root:not(.dark) [class*="from-purple-600"][class*="to-blue-600"] h3,
+:root:not(.dark) [class*="from-purple-600"][class*="to-blue-600"] h4,
+:root:not(.dark) [class*="from-purple-600"][class*="to-blue-600"] p,
+:root:not(.dark) [class*="from-purple-600"][class*="to-blue-600"] span,
+:root:not(.dark) [class*="from-red-400"][class*="to-pink-500"] h1,
+:root:not(.dark) [class*="from-red-400"][class*="to-pink-500"] h2,
+:root:not(.dark) [class*="from-red-400"][class*="to-pink-500"] h3,
+:root:not(.dark) [class*="from-red-400"][class*="to-pink-500"] h4,
+:root:not(.dark) [class*="from-red-400"][class*="to-pink-500"] p,
+:root:not(.dark) [class*="from-red-400"][class*="to-pink-500"] span {
   color: #F4F4F6 !important;
   text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* EXCLUDE light gradients like gray-50 to blue-50 and similar light combinations */
+:root:not(.dark) [class*="from-gray-50"]:not([class*="to-blue-50"]) h1,
+:root:not(.dark) [class*="from-gray-50"]:not([class*="to-blue-50"]) h2,
+:root:not(.dark) [class*="from-gray-50"]:not([class*="to-blue-50"]) h3,
+:root:not(.dark) [class*="from-gray-50"]:not([class*="to-blue-50"]) h4,
+:root:not(.dark) [class*="from-gray-50"]:not([class*="to-blue-50"]) p,
+:root:not(.dark) [class*="from-gray-50"]:not([class*="to-blue-50"]) span,
+:root:not(.dark) [class*="from-gray-50"][class*="to-blue-50"] h1,
+:root:not(.dark) [class*="from-gray-50"][class*="to-blue-50"] h2,
+:root:not(.dark) [class*="from-gray-50"][class*="to-blue-50"] h3,
+:root:not(.dark) [class*="from-gray-50"][class*="to-blue-50"] h4,
+:root:not(.dark) [class*="from-gray-50"][class*="to-blue-50"] p,
+:root:not(.dark) [class*="from-gray-50"][class*="to-blue-50"] span {
+  color: inherit !important;
+  text-shadow: none !important;
 }
 
 /* Specific gradient combinations that need text fixes */
@@ -625,17 +655,27 @@
   text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25) !important;
 }
 
-/* Fix badges and secondary elements on gradients */
-:root:not(.dark) [class*="bg-gradient-to"] .badge,
-:root:not(.dark) [class*="bg-gradient-to"] .text-sm,
-:root:not(.dark) [class*="bg-gradient-to"] .text-xs {
+/* Fix badges and secondary elements ONLY on dark gradients */
+:root:not(.dark) [class*="from-blue-400"][class*="to-purple-500"] .badge,
+:root:not(.dark) [class*="from-blue-400"][class*="to-purple-500"] .text-sm,
+:root:not(.dark) [class*="from-blue-400"][class*="to-purple-500"] .text-xs,
+:root:not(.dark) [class*="from-purple-600"][class*="to-blue-600"] .badge,
+:root:not(.dark) [class*="from-purple-600"][class*="to-blue-600"] .text-sm,
+:root:not(.dark) [class*="from-purple-600"][class*="to-blue-600"] .text-xs,
+:root:not(.dark) [class*="from-red-400"][class*="to-pink-500"] .badge,
+:root:not(.dark) [class*="from-red-400"][class*="to-pink-500"] .text-sm,
+:root:not(.dark) [class*="from-red-400"][class*="to-pink-500"] .text-xs {
   color: #F4F4F6 !important;
   text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25) !important;
 }
 
-/* Ensure buttons on gradients maintain readability */
-:root:not(.dark) [class*="bg-gradient-to"] button,
-:root:not(.dark) [class*="bg-gradient-to"] .button {
+/* Ensure buttons ONLY on dark gradients maintain readability */
+:root:not(.dark) [class*="from-blue-400"][class*="to-purple-500"] button,
+:root:not(.dark) [class*="from-blue-400"][class*="to-purple-500"] .button,
+:root:not(.dark) [class*="from-purple-600"][class*="to-blue-600"] button,
+:root:not(.dark) [class*="from-purple-600"][class*="to-blue-600"] .button,
+:root:not(.dark) [class*="from-red-400"][class*="to-pink-500"] button,
+:root:not(.dark) [class*="from-red-400"][class*="to-pink-500"] .button {
   color: #F4F4F6 !important;
   text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25) !important;
   font-weight: 600 !important;
