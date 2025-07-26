@@ -45,6 +45,7 @@ export const Community = () => {
   const forumPosts = [
     {
       id: 1,
+      userId: "user-sentiment-analyst",
       author: "SentimentAnalyst",
       avatar: "SA",
       time: "2 hours ago",
@@ -56,6 +57,7 @@ export const Community = () => {
     },
     {
       id: 2,
+      userId: "user-market-watcher",
       author: "MarketWatcher",
       avatar: "MW",
       time: "4 hours ago",
