@@ -36,7 +36,6 @@ import { ShareMoodModal, MoodPostDisplay } from "./ShareMoodModal";
 import { PostInteractionBar } from "./PostInteractionBar";
 import {
   CheckCircle,
-  AlertTriangle,
   Award,
 } from "lucide-react";
 import {
