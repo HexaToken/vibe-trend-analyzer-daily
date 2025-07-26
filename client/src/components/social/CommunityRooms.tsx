@@ -401,130 +401,18 @@ export const CommunityRooms = () => {
                     return (
                       <div
                         key={message.id}
-                        className={`flex gap-3 ${isConsecutive ? "mt-1" : "mt-4"}`}
+                        className={isConsecutive ? "mt-1" : "mt-4"}
                       >
-                        <div className="w-10">
-                          {showAvatar && (
-                            <Avatar className="h-10 w-10">
-                              <AvatarImage src={message.userAvatar} />
-                              <AvatarFallback>
-                                {message.username[0].toUpperCase()}
-                              </AvatarFallback>
-                            </Avatar>
-                          )}
-                        </div>
-
-                        <div className="flex-1 min-w-0">
-                          {showAvatar && (
-                            <div className="flex items-center justify-between mb-1">
-                              <div className="flex items-center gap-2">
-                                <span className="font-semibold text-sm">
-                                  {message.username}
-                                </span>
-                                {getUserRoleIcon(message.userRole)}
-                                <UserCredibilityIndicator
-                                  level="trusted"
-                                  score={Math.floor(Math.random() * 40 + 60)}
-                                  compact
-                                />
-                                <span className="text-xs text-muted-foreground">
-                                  {formatMessageTime(message.createdAt)}
-                                </span>
-                              </div>
-
-                              {/* Post Interaction Bar for Community Messages */}
-                              <PostInteractionBar
-                                userId={message.userId}
-                                username={message.username}
-                                compact={true}
-                                onFollow={handleFollow}
-                                onUnfollow={handleUnfollow}
-                                onToggleAlerts={handleToggleAlerts}
-                                className="opacity-60 hover:opacity-100 transition-opacity"
-                              />
-                            </div>
-                          )}
-
-                          <div className="group relative">
-                            <p className="text-sm leading-relaxed break-words">
-                              {message.content}
-                            </p>
-
-                            {/* Message Actions */}
-                            <div className="absolute -right-2 -top-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                              <div className="flex items-center gap-1 bg-background border rounded p-1 shadow-sm">
-                                <Button
-                                  size="sm"
-                                  variant="ghost"
-                                  className="h-6 w-6 p-0"
-                                  onClick={() =>
-                                    handleReaction(message.id, "👍")
-                                  }
-                                >
-                                  👍
-                                </Button>
-                                <Button
-                                  size="sm"
-                                  variant="ghost"
-                                  className="h-6 w-6 p-0"
-                                  onClick={() =>
-                                    handleReaction(message.id, "📈")
-                                  }
-                                >
-                                  📈
-                                </Button>
-                                <Button
-                                  size="sm"
-                                  variant="ghost"
-                                  className="h-6 w-6 p-0"
-                                  onClick={() =>
-                                    handleReaction(message.id, "📉")
-                                  }
-                                >
-                                  📉
-                                </Button>
-                                <Button
-                                  size="sm"
-                                  variant="ghost"
-                                  className="h-6 w-6 p-0"
-                                >
-                                  <Reply className="h-3 w-3" />
-                                </Button>
-                                <Button
-                                  size="sm"
-                                  variant="ghost"
-                                  className="h-6 w-6 p-0"
-                                  onClick={() => openFlagModal(message)}
-                                  title="Report message"
-                                >
-                                  <Flag className="h-3 w-3" />
-                                </Button>
-                              </div>
-                            </div>
-
-                            {/* Reactions */}
-                            {message.reactions.length > 0 && (
-                              <div className="flex flex-wrap gap-1 mt-1">
-                                {message.reactions.map((reaction, idx) => (
-                                  <button
-                                    key={idx}
-                                    onClick={() =>
-                                      handleReaction(message.id, reaction.emoji)
-                                    }
-                                    className={`inline-flex items-center gap-1 px-2 py-1 rounded text-xs transition-colors ${
-                                      reaction.userReacted
-                                        ? "bg-primary/20 text-primary border border-primary/30"
-                                        : "bg-muted hover:bg-muted/80"
-                                    }`}
-                                  >
-                                    <span>{reaction.emoji}</span>
-                                    <span>{reaction.count}</span>
-                                  </button>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-                        </div>
+                        <EnhancedCommunityMessage
+                          message={message}
+                          showAvatar={showAvatar}
+                          onReaction={handleReaction}
+                          onFlag={openFlagModal}
+                          onFollow={handleFollow}
+                          onUnfollow={handleUnfollow}
+                          onToggleAlerts={handleToggleAlerts}
+                          compact={false}
+                        />
                       </div>
                     );
                   })}
