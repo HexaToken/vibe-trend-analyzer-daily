@@ -321,7 +321,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   </h1>
                 </div>
                 <p className={`text-xl max-w-2xl mx-auto mb-6 ${
-                  themeMode === 'light' ? 'text-[#444]' : 'text-gray-300'
+                  themeMode === 'light' ? 'text-[#1F2937]' : 'text-gray-300'
                 }`}>
                   Advanced financial tools and analytics for portfolio management
                 </p>
