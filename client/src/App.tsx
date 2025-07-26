@@ -30,6 +30,7 @@ import { MoodGptWidget } from "@/components/chat/MoodGptWidget";
 import { FinnhubDemo } from "@/components/FinnhubDemo";
 import { StockSentimentScoring } from "@/components/StockSentimentScoring";
 import { AiSentimentExplainer } from "@/components/AiSentimentExplainer";
+import { FuturisticChatDemo } from "@/components/chat/FuturisticChatDemo";
 import { YFinanceDemo } from "@/components/YFinanceDemo";
 import { MoodThemeDemo } from "@/components/MoodThemeDemo";
 import DynamicThemeSelectorDemo from "@/components/DynamicThemeSelectorDemo";
@@ -188,6 +189,8 @@ const AppContent = () => {
             <ChatSubcategory />
           </ProtectedRoute>
         );
+      case "futuristic-chat":
+        return <FuturisticChatDemo />;
 
       default:
         return <FuturisticHomepage onNavigate={setActiveSection} />;
