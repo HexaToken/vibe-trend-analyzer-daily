@@ -577,9 +577,67 @@
 /* ===== UTILITY CLASSES FOR GRADIENT TEXT CONTRAST ===== */
 
 /* Gradient-friendly text colors with shadows */
+.text-on-gradient-light {
+  color: #F4F4F6 !important;
+  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25) !important;
+}
+
 .on-gradient-text {
   color: #FFFFFF !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+  font-weight: 600 !important;
+}
+
+/* ===== COMPREHENSIVE GRADIENT TEXT FIXES FOR LIGHT MODE ===== */
+
+/* Fix text on all dark/blue gradient backgrounds in light mode only */
+:root:not(.dark) [class*="bg-gradient-to"] h1,
+:root:not(.dark) [class*="bg-gradient-to"] h2,
+:root:not(.dark) [class*="bg-gradient-to"] h3,
+:root:not(.dark) [class*="bg-gradient-to"] h4,
+:root:not(.dark) [class*="bg-gradient-to"] p,
+:root:not(.dark) [class*="bg-gradient-to"] span {
+  color: #F4F4F6 !important;
+  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Specific gradient combinations that need text fixes */
+:root:not(.dark) [class*="from-blue-"][class*="to-purple"] h1,
+:root:not(.dark) [class*="from-blue-"][class*="to-purple"] h2,
+:root:not(.dark) [class*="from-blue-"][class*="to-purple"] h3,
+:root:not(.dark) [class*="from-blue-"][class*="to-purple"] h4,
+:root:not(.dark) [class*="from-blue-"][class*="to-purple"] p,
+:root:not(.dark) [class*="from-blue-"][class*="to-purple"] span,
+:root:not(.dark) [class*="from-red-"][class*="to-pink"] h1,
+:root:not(.dark) [class*="from-red-"][class*="to-pink"] h2,
+:root:not(.dark) [class*="from-red-"][class*="to-pink"] h3,
+:root:not(.dark) [class*="from-red-"][class*="to-pink"] h4,
+:root:not(.dark) [class*="from-red-"][class*="to-pink"] p,
+:root:not(.dark) [class*="from-red-"][class*="to-pink"] span {
+  color: #F4F4F6 !important;
+  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Fix for specific components mentioned in the request */
+:root:not(.dark) [class*="from-blue-600"][class*="to-purple-600"] *,
+:root:not(.dark) [class*="from-red-400"][class*="to-pink-500"] * {
+  color: #F4F4F6 !important;
+  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Fix badges and secondary elements on gradients */
+:root:not(.dark) [class*="bg-gradient-to"] .badge,
+:root:not(.dark) [class*="bg-gradient-to"] .text-sm,
+:root:not(.dark) [class*="bg-gradient-to"] .text-xs {
+  color: #F4F4F6 !important;
+  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Ensure buttons on gradients maintain readability */
+:root:not(.dark) [class*="bg-gradient-to"] button,
+:root:not(.dark) [class*="bg-gradient-to"] .button {
+  color: #F4F4F6 !important;
+  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25) !important;
   font-weight: 600 !important;
 }
 
@@ -648,8 +706,7 @@
 }
 
 /* Improve light buttons and interactive elements */
-:root:not(.dark) button[class*="bg-"][class*="/10"],
-:root:not(.dark) .bg-\[.*\]\/10 {
+:root:not(.dark) button[class*="bg-"][class*="/10"] {
   background: #4F46E5 !important; /* Solid indigo background */
   color: #FFFFFF !important;
   border: 1px solid #4338CA !important;

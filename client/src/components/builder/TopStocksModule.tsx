@@ -153,7 +153,7 @@ export const TopStocksModule: React.FC<TopStocksModuleProps> = ({
                   <td className="px-6 py-4">
                     <div className="flex items-center space-x-3">
                       <div className="flex-shrink-0">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white font-bold text-sm">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-[#F4F4F6] drop-shadow-md font-bold text-sm">
                           {stock.symbol.slice(0, 2)}
                         </div>
                       </div>

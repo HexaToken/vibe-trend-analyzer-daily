@@ -414,7 +414,7 @@ export function PollWidget({
                 className={`w-full text-xs ${
                   themeMode === 'light'
                     ? 'ai-analysis-btn-light hover:opacity-90'
-                    : 'bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white'
+                    : 'bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-[#F4F4F6] drop-shadow-md'
                 }`}
               >
                 {pollData.userVote ? 'Change Vote' : 'Vote Now'}
