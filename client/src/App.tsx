@@ -26,6 +26,7 @@ import { BuilderDemo } from "@/components/BuilderDemo";
 
 import { ApiStatusIndicator } from "@/components/ApiStatusIndicator";
 import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
+import { PulseOfTheChain } from "@/components/crypto/PulseOfTheChain";
 
 import { NLPSentimentDemo } from "@/components/NLPSentimentDemo";
 import { SpacyNLPDemo } from "@/components/SpacyNLPDemo";
