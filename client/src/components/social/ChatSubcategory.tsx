@@ -425,12 +425,17 @@ export const ChatSubcategory: React.FC<ChatSubcategoryProps> = ({ onNavigateToPr
       >
         <div className="w-10">
           {showAvatar && (
-            <Avatar className="h-10 w-10">
-              <AvatarImage src={message.userAvatar} />
-              <AvatarFallback>
-                {message.username[0].toUpperCase()}
-              </AvatarFallback>
-            </Avatar>
+            <UserAvatar
+              userId={message.userId}
+              username={message.username}
+              avatar={message.userAvatar}
+              size="md"
+              verified={message.userRole === "verified" || message.userRole === "admin" || message.userRole === "moderator"}
+              premium={message.userRole === "premium"}
+              credibilityScore={message.credibilityScore}
+              showBadges={true}
+              onUserClick={onNavigateToProfile}
+            />
           )}
         </div>
 
@@ -438,9 +443,15 @@ export const ChatSubcategory: React.FC<ChatSubcategoryProps> = ({ onNavigateToPr
           {showAvatar && (
             <div className="flex items-center justify-between mb-1">
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="font-semibold text-sm">
-                  {message.username}
-                </span>
+                <UsernameLink
+                  userId={message.userId}
+                  username={message.username}
+                  verified={message.userRole === "verified" || message.userRole === "admin" || message.userRole === "moderator"}
+                  premium={message.userRole === "premium"}
+                  credibilityScore={message.credibilityScore}
+                  showBadges={true}
+                  onUserClick={onNavigateToProfile}
+                />
 
                 {/* User Role Icon */}
                 {getUserRoleIcon(message.userRole)}
@@ -541,9 +552,13 @@ export const ChatSubcategory: React.FC<ChatSubcategoryProps> = ({ onNavigateToPr
               </div>
             )}
 
-            <p className="text-sm leading-relaxed break-words">
-              {message.content}
-            </p>
+            <div className="text-sm leading-relaxed break-words">
+              <MentionText
+                text={message.content}
+                onUserClick={onNavigateToProfile}
+                enableMentions={true}
+              />
+            </div>
 
             {/* Message Actions */}
             <div className="absolute -right-2 -top-2 opacity-0 group-hover:opacity-100 transition-opacity">
