@@ -578,22 +578,19 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                     Community
                   </h3>
                   <div className="space-y-1">
-                    {communityItems.map(({ label, key, icon }) => (
-                      <Button
-                        key={key}
-                        variant="ghost"
-                        onClick={() => handleNavigation(key)}
-                        className={cn(
-                          "w-full justify-start text-left py-3 rounded-xl transition-all duration-200",
-                          isLightMode
-                            ? "text-gray-900 hover:text-blue-600 hover:bg-blue-500/10"
-                            : "text-gray-300 hover:text-gray-200 hover:bg-purple-500/20"
-                        )}
-                      >
-                        <span className="mr-3">{icon}</span>
-                        {label}
-                      </Button>
-                    ))}
+                    <Button
+                      variant="ghost"
+                      onClick={() => handleNavigation("community")}
+                      className={cn(
+                        "w-full justify-start text-left py-3 rounded-xl transition-all duration-200",
+                        isLightMode
+                          ? "text-gray-900 hover:text-blue-600 hover:bg-blue-500/10"
+                          : "text-gray-300 hover:text-gray-200 hover:bg-purple-500/20"
+                      )}
+                    >
+                      <span className="mr-3">👥</span>
+                      Community Hub
+                    </Button>
                   </div>
                 </div>
 
