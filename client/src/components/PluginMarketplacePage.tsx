@@ -141,11 +141,14 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <Badge variant={plugin.price === 0 ? "secondary" : "default"}>
+              <Badge className={plugin.price === 0 
+                ? "bg-[#E0F2F1] text-[#004D40] border-[#004D40]/20 hover:bg-[#B2DFDB] transition-colors font-semibold"
+                : "bg-[#E3F2FD] text-[#0D47A1] border-[#0D47A1]/20 hover:bg-[#BBDEFB] transition-colors font-semibold"
+              }>
                 {plugin.price === 0 ? 'Free' : `$${plugin.price}`}
               </Badge>
               {installed && (
-                <Badge variant="default" className="bg-green-600 hover:bg-green-700">
+                <Badge className="bg-[#E0F2F1] text-[#004D40] border-[#004D40]/20 hover:bg-[#B2DFDB] transition-colors font-semibold">
                   Installed
                 </Badge>
               )}
@@ -288,7 +291,7 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
             )}>
               Featured Plugins
             </h2>
-            <Badge variant="secondary" className="text-xs">
+            <Badge className="text-xs bg-[#EDE7F6] text-[#4527A0] border-[#4527A0]/20 hover:bg-[#D1C4E9] transition-colors font-semibold">
               Trending
             </Badge>
           </div>
@@ -346,14 +349,11 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
                   >
                     <span className="truncate">{category.label}</span>
                     <Badge
-                      variant="secondary"
                       className={cn(
-                        "text-xs h-5 px-1.5",
+                        "text-xs h-5 px-1.5 font-semibold transition-colors",
                         selectedCategory === category.id
-                          ? themeMode === 'light'
-                            ? "bg-blue-100 text-blue-700"
-                            : "bg-purple-900/50 text-purple-300"
-                          : "bg-gray-200 text-gray-600"
+                          ? "bg-[#E3F2FD] text-[#0D47A1] border-[#0D47A1]/20 hover:bg-[#BBDEFB]"
+                          : "bg-[#F5F5F5] text-[#616161] border-[#616161]/20 hover:bg-[#EEEEEE]"
                       )}
                     >
                       {count}
