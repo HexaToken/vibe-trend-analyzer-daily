@@ -317,10 +317,10 @@ export const StockChannelHub: React.FC = () => {
                   onClick={() => setSelectedChannel(channel)}
                   className={cn(
                     "p-3 rounded-lg cursor-pointer transition-all duration-200 border",
-                    // Base styling based on gain/loss
+                    // Base styling based on gain/loss  
                     isGainer 
-                      ? "bg-[#E6F7EC] border-[#34D399] hover:bg-[#D1FAE5]" 
-                      : "bg-[#FDF2F2] border-[#F87171] hover:bg-[#FEF1F1]",
+                      ? "bg-[#D1FADF] border-[#A7F3D0] hover:bg-[#BBFACA]" 
+                      : "bg-[#FEE2E2] border-[#FCA5A5] hover:bg-[#FDD4D4]",
                     // Dark mode styling
                     "dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700",
                     // Selected state
@@ -329,7 +329,7 @@ export const StockChannelHub: React.FC = () => {
                 >
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
-                      <span className="font-bold text-sm text-[#1F2937]">
+                      <span className="font-bold text-sm text-[#1F2937] dark:text-white">
                         ${channel.ticker}
                       </span>
                       <div
@@ -346,7 +346,7 @@ export const StockChannelHub: React.FC = () => {
                     <span
                       className={cn(
                         "text-xs font-medium",
-                        isGainer ? "text-[#059669]" : "text-[#B91C1C]",
+                        isGainer ? "text-[#027A48]" : "text-[#991B1B]",
                       )}
                     >
                       {channel.change >= 0 ? "+" : ""}
@@ -358,16 +358,16 @@ export const StockChannelHub: React.FC = () => {
                     {channel.companyName}
                   </div>
 
-                  <div className="text-sm font-medium text-[#111827] dark:text-white mb-2">
+                  <div className="text-sm font-medium text-[#1F2937] dark:text-white mb-2">
                     {formatCurrency(channel.price)}
                   </div>
 
                   <div className="flex items-center justify-between text-xs">
-                    <span className="flex items-center gap-1 text-[#6B7280]">
+                    <span className="flex items-center gap-1 text-[#4B5563] dark:text-gray-400">
                       <MessageCircle className="w-3 h-3 text-[#9CA3AF]" />
                       {channel.messageCount.toLocaleString()}
                     </span>
-                    <span className="flex items-center gap-1 text-[#6B7280]">
+                    <span className="flex items-center gap-1 text-[#4B5563] dark:text-gray-400">
                       <ThumbsUp className="w-3 h-3 text-[#9CA3AF]" />
                       {channel.engagementCount.toLocaleString()}
                     </span>
