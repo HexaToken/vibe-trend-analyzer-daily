@@ -32,6 +32,7 @@ import { PostInteractionBar } from "./PostInteractionBar";
 
 interface OffTopicPost {
   id: string;
+  userId: string;
   user: {
     name: string;
     avatar: string;
