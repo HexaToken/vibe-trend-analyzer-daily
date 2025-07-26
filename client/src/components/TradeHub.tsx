@@ -134,15 +134,15 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
             Learn from verified traders, access premium strategies, and monetize your trading expertise
           </p>
           <div className="flex flex-wrap justify-center gap-4 mt-6">
-            <Badge variant="secondary" className="text-sm">
+            <Badge className="text-sm bg-[#E0F2F1] text-[#004D40] border-[#004D40]/20 hover:bg-[#B2DFDB] transition-colors font-semibold px-4 py-2">
               <Star className="h-3 w-3 mr-1" />
               Verified Educators Only
             </Badge>
-            <Badge variant="secondary" className="text-sm">
+            <Badge className="text-sm bg-[#E3F2FD] text-[#0D47A1] border-[#0D47A1]/20 hover:bg-[#BBDEFB] transition-colors font-semibold px-4 py-2">
               <Trophy className="h-3 w-3 mr-1" />
               Credibility-Based Rankings
             </Badge>
-            <Badge variant="secondary" className="text-sm">
+            <Badge className="text-sm bg-[#EDE7F6] text-[#4527A0] border-[#4527A0]/20 hover:bg-[#D1C4E9] transition-colors font-semibold px-4 py-2">
               <Users className="h-3 w-3 mr-1" />
               Community Driven
             </Badge>
