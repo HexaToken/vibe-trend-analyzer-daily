@@ -108,7 +108,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
   const communityItems = [
     { label: 'Community Hub', key: 'community', icon: '👥' },
     { label: 'Live Chat', key: 'chat', icon: '💬' },
-    { label: 'Trading Rooms', key: 'rooms', icon: '🏠' },
+    { label: 'Private Watchlist', key: 'rooms', icon: '🏠' },
     { label: 'Space', key: 'space', icon: '🌌' },
   ];
 
