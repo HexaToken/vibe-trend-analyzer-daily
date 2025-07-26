@@ -49,13 +49,19 @@ All colors MUST be HSL.
 
     --radius: 0.75rem; /* 12px border radius */
 
-    /* Sentiment Colors - Light Mode Financial Grade */
-    --positive: 123 46% 49%; /* #4CAF50 - Green */
-    --positive-light: 123 46% 85%;
-    --negative: 4 90% 58%; /* #F44336 - Red */
-    --negative-light: 4 90% 85%;
-    --neutral: 199 18% 33%; /* #607D8B - Gray */
-    --neutral-light: 199 18% 80%;
+    /* MoodMeter Sentiment Colors - Optimized for mood tracking */
+    --positive: 142 71% 45%; /* #22C55E - Green-500 for bullish/euphoria */
+    --positive-light: 142 76% 73%; /* #86EFAC - Green-300 */
+    --negative: 0 84% 60%; /* #EF4444 - Red-500 for bearish/panic */
+    --negative-light: 0 93% 94%; /* #FEE2E2 - Red-100 */
+    --neutral: 220 9% 46%; /* #6B7280 - Gray-500 for neutral */
+    --neutral-light: 220 14% 96%; /* #F3F4F6 - Gray-100 */
+
+    /* MoodMeter Mood Colors */
+    --mood-hype: 199 89% 48%; /* #0EA5E9 - Sky-500 for hype */
+    --mood-hype-light: 204 94% 94%; /* #E0F2FE - Sky-100 */
+    --mood-fear: 45 93% 47%; /* #EAB308 - Yellow-500 for fear */
+    --mood-fear-light: 55 92% 95%; /* #FEF3C7 - Yellow-100 */
 
     /* Data Visualization - Clean Financial Colors */
     --chart-primary: 174 72% 56%; /* #26A69A - Teal for primary charts */
