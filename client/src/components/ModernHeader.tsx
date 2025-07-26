@@ -119,10 +119,10 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                 key={key}
                 onClick={() => handleNavigation(key)}
                 className={cn(
-                  "text-sm md:text-base font-medium px-3 py-2 rounded-lg transition-all duration-200 relative group",
+                  "text-base font-medium px-3 py-2 rounded-lg transition-all duration-200 relative group",
                   activeSection === key
                     ? "text-pink-400 bg-pink-500/10"
-                    : "text-gray-300 hover:text-white hover:bg-gray-800/50"
+                    : "text-gray-300 hover:text-white hover:text-pink-300"
                 )}
                 aria-current={activeSection === key ? "page" : undefined}
               >
@@ -130,26 +130,28 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                 {activeSection === key && (
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
                 )}
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
               </button>
             ))}
 
             {/* Community Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="flex items-center gap-1 text-sm md:text-base font-medium px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
+                <button className="flex items-center gap-1 text-base font-medium px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:text-pink-300 transition-all duration-200 relative group">
                   Community
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" />
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                 </button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent 
-                align="start" 
-                className="w-56 bg-black/95 backdrop-blur-xl border-gray-700 text-white"
+              <DropdownMenuContent
+                align="center"
+                className="w-56 bg-[#0A0A23]/95 backdrop-blur-xl border-gray-700 text-white rounded-xl"
               >
                 {communityItems.map(({ label, key, icon }) => (
                   <DropdownMenuItem
                     key={key}
                     onClick={() => handleNavigation(key)}
-                    className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer"
+                    className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer rounded-lg"
                   >
                     <span className="mr-3">{icon}</span>
                     {label}
@@ -161,20 +163,21 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
             {/* Finance Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="flex items-center gap-1 text-sm md:text-base font-medium px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/50 transition-all duration-200">
+                <button className="flex items-center gap-1 text-base font-medium px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:text-pink-300 transition-all duration-200 relative group">
                   Finance
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" />
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                 </button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent 
-                align="start" 
-                className="w-56 bg-black/95 backdrop-blur-xl border-gray-700 text-white"
+              <DropdownMenuContent
+                align="center"
+                className="w-56 bg-[#0A0A23]/95 backdrop-blur-xl border-gray-700 text-white rounded-xl"
               >
                 {financeItems.map(({ label, key, icon }) => (
                   <DropdownMenuItem
                     key={key}
                     onClick={() => handleNavigation(key)}
-                    className="hover:bg-green-500/20 focus:bg-green-500/20 cursor-pointer"
+                    className="hover:bg-green-500/20 focus:bg-green-500/20 cursor-pointer rounded-lg"
                   >
                     <span className="mr-3">{icon}</span>
                     {label}
@@ -184,8 +187,8 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
             </DropdownMenu>
           </nav>
 
-          {/* Right Section - Search & Utility Icons */}
-          <div className="flex items-center space-x-3">
+          {/* Right Section - Utilities */}
+          <div className="flex items-center justify-end space-x-3">
             {/* Search Bar */}
             <div className="hidden sm:block relative">
               <div className={cn(
