@@ -29,6 +29,12 @@ interface MoodThemeContextType {
   moodLabel: string;
   cardBackground: string;
   borderColor: string;
+  // Mood color utilities
+  getMoodColor: typeof getMoodColor;
+  getMoodTag: typeof getMoodTag;
+  getMoodButton: typeof getMoodButton;
+  lightThemeColors: typeof LIGHT_THEME_COLORS;
+  interactiveColors: typeof INTERACTIVE_COLORS;
 }
 
 const MoodThemeContext = createContext<MoodThemeContextType | undefined>(undefined);
