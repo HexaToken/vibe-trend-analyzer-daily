@@ -141,6 +141,7 @@ export const Community = ({ onNavigateToProfile }: CommunityProps) => {
 
   const handleUserClick = (userId: string) => {
     console.log(`Viewing user profile: ${userId}`);
+    onNavigateToProfile?.(userId);
   };
 
   const handleTickerClick = (symbol: string) => {
