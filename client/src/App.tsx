@@ -30,6 +30,8 @@ import { PulseOfTheChain } from "@/components/crypto/PulseOfTheChain";
 import { EarningsCalendar } from "@/components/finance/EarningsCalendar";
 import { AdvancedCharts } from "@/components/finance/AdvancedCharts";
 import { TrendingHub } from "@/components/finance/TrendingHub";
+import TradeJournalClassic from "@/components/TradeJournalClassic";
+import CommunitySentimentPolls from "@/components/CommunitySentimentPolls";
 
 import { NLPSentimentDemo } from "@/components/NLPSentimentDemo";
 import { SpacyNLPDemo } from "@/components/SpacyNLPDemo";
@@ -221,9 +223,9 @@ const AppContent = () => {
       case "trending":
         return <TrendingHub />;
       case "trade-journal":
-        return <Analytics />; // Placeholder - replace with actual trade journal component
+        return <TradeJournalClassic />;
       case "sentiment-polls":
-        return <Analytics />; // Placeholder - replace with actual sentiment polls component
+        return <CommunitySentimentPolls />;
 
       default:
         return <FuturisticHomepage onNavigate={setActiveSection} />;
