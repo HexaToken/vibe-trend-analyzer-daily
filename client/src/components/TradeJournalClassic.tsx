@@ -4,7 +4,7 @@ import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { useMoodTheme } from '../contexts/MoodThemeContext';
-import { Plus, BarChart3, Activity, Download } from 'lucide-react';
+import { Plus, BarChart3, Activity, Download, AlertTriangle, CheckCircle } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 interface Trade {
