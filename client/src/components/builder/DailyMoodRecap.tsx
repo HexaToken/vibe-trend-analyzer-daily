@@ -242,7 +242,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           </div>
 
           {/* Trending Topics */}
-          <div className={`p-5 rounded-xl ${
+          <div className={`p-5 rounded-xl transition-all duration-300 hover:scale-[1.01] ${
             themeMode === 'light'
               ? 'bg-gradient-to-r from-[#FFF3E0] to-[#FCE4EC] border border-[#E0E0E0]'
               : 'bg-gradient-to-r from-orange-500/10 to-pink-500/10 border border-orange-500/20'
@@ -252,24 +252,24 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
             }`}>
               🔥 Trending Topics
             </h3>
-            <div className="flex flex-wrap gap-2">
+            <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
               {trendingTopics.map((topic, index) => (
                 <Badge
                   key={index}
                   className={cn(
-                    "text-sm font-medium px-3 py-1 flex items-center gap-1",
+                    "text-sm font-medium px-3 py-2 flex items-center justify-center gap-1 transition-all duration-300 hover:scale-105 cursor-pointer",
                     topic.direction === 'up'
-                      ? "bg-green-500/20 text-green-400 border-green-500/30"
-                      : "bg-red-500/20 text-red-400 border-red-500/30"
+                      ? "bg-green-500/20 text-green-400 border-green-500/30 hover:bg-green-500/30"
+                      : "bg-red-500/20 text-red-400 border-red-500/30 hover:bg-red-500/30"
                   )}
                 >
                   <Hash className="w-3 h-3" />
-                  {topic.tag}
-                  {topic.direction === 'up' ? 
-                    <ChevronUp className="w-3 h-3" /> : 
-                    <ChevronDown className="w-3 h-3" />
+                  <span className="truncate">{topic.tag}</span>
+                  {topic.direction === 'up' ?
+                    <ChevronUp className="w-3 h-3 animate-bounce" /> :
+                    <ChevronDown className="w-3 h-3 animate-bounce" />
                   }
-                  {topic.momentum}%
+                  <span className="font-bold">{topic.momentum}%</span>
                 </Badge>
               ))}
             </div>
