@@ -413,7 +413,7 @@ export default function TradeJournalClassic() {
                           "text-sm",
                           themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'
                         )}>
-                          Confident • {trade.entryDate}
+                          {trade.emotion} • {trade.entryDate}
                           {trade.exitDate && ` → ${trade.exitDate}`}
                         </div>
                       </div>
