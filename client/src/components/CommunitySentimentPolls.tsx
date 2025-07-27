@@ -31,7 +31,7 @@ export default function CommunitySentimentPolls() {
   const [voteModalOpen, setVoteModalOpen] = useState(false);
   const [selectedPoll, setSelectedPoll] = useState<StockPoll | null>(null);
 
-  const [polls] = useState<StockPoll[]>([
+  const [polls, setPolls] = useState<StockPoll[]>([
     {
       id: '1',
       ticker: 'BTC',
