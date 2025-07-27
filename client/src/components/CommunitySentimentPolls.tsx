@@ -566,7 +566,7 @@ export default function CommunitySentimentPolls() {
                     accuracy: 81.7,
                     votes: 312,
                     streak: 15,
-                    badges: ['👤', '📊']
+                    badges: ['👤', '���']
                   },
                   {
                     rank: 4,
@@ -800,6 +800,77 @@ export default function CommunitySentimentPolls() {
           </div>
         </TabsContent>
       </Tabs>
+
+      {/* Voting Modal */}
+      <Dialog open={voteModalOpen} onOpenChange={setVoteModalOpen}>
+        <DialogContent className={cn(
+          "max-w-md",
+          themeMode === 'light'
+            ? 'bg-white border-gray-200'
+            : 'bg-gray-900 border-purple-500/20'
+        )}>
+          <DialogHeader>
+            <DialogTitle className={cn(
+              "text-xl font-bold text-center",
+              themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+            )}>
+              Vote on {selectedPoll?.ticker}
+            </DialogTitle>
+            <DialogDescription className={cn(
+              "text-center mt-2",
+              themeMode === 'light' ? 'text-[#666]' : 'text-gray-300'
+            )}>
+              Share your sentiment prediction for the next 24 hours.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-3 mt-6">
+            {/* Bullish Button */}
+            <Button
+              onClick={() => handleVoteSubmit('bullish')}
+              className="w-full h-14 bg-green-600 hover:bg-green-700 text-white font-semibold text-lg rounded-lg transition-all duration-200 hover:scale-105"
+            >
+              <div className="flex items-center gap-3">
+                <TrendingUp className="w-6 h-6" />
+                <span>Bullish</span>
+              </div>
+            </Button>
+
+            {/* Holding Button */}
+            <Button
+              onClick={() => handleVoteSubmit('holding')}
+              className="w-full h-14 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold text-lg rounded-lg transition-all duration-200 hover:scale-105"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 bg-yellow-400 rounded-sm flex items-center justify-center">
+                  <span className="text-yellow-800 font-bold text-sm">—</span>
+                </div>
+                <span>Holding</span>
+              </div>
+            </Button>
+
+            {/* Bearish Button */}
+            <Button
+              onClick={() => handleVoteSubmit('bearish')}
+              className="w-full h-14 bg-red-600 hover:bg-red-700 text-white font-semibold text-lg rounded-lg transition-all duration-200 hover:scale-105"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 bg-red-500 rounded-sm flex items-center justify-center rotate-180">
+                  <TrendingUp className="w-4 h-4" />
+                </div>
+                <span>Bearish</span>
+              </div>
+            </Button>
+          </div>
+
+          <div className={cn(
+            "text-center text-sm mt-4",
+            themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'
+          )}>
+            You can change your vote within 24 hours
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
