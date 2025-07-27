@@ -225,7 +225,7 @@ const AppContent = () => {
       case "trade-journal":
         return <TradeJournalClassic />;
       case "sentiment-polls":
-        return <Analytics />; // Placeholder - replace with actual sentiment polls component
+        return <CommunitySentimentPolls />;
 
       default:
         return <FuturisticHomepage onNavigate={setActiveSection} />;
