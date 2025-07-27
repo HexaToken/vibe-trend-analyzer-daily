@@ -505,22 +505,119 @@ export default function CommunitySentimentPolls() {
               ? 'bg-white border-gray-200'
               : 'bg-purple-900/40 border-purple-500/20'
           )}>
-            <CardContent className="p-8 text-center">
-              <BarChart3 className={cn(
-                "w-12 h-12 mx-auto mb-4",
-                themeMode === 'light' ? 'text-gray-400' : 'text-gray-500'
-              )} />
-              <h3 className={cn(
-                "text-xl font-semibold mb-2",
-                themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+            <CardHeader>
+              <CardTitle className={cn(
+                "flex items-center gap-2 text-lg",
+                themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
               )}>
-                Leaderboard Coming Soon
-              </h3>
-              <p className={cn(
-                themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'
-              )}>
-                Top performers and community leaders will be displayed here.
-              </p>
+                🏆 Top Predictors
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {[
+                  {
+                    rank: 1,
+                    username: 'CryptoKing',
+                    accuracy: 87.3,
+                    votes: 245,
+                    streak: 12,
+                    badges: ['👤', '🏅', '📊']
+                  },
+                  {
+                    rank: 2,
+                    username: 'StockWizard',
+                    accuracy: 84.1,
+                    votes: 198,
+                    streak: 8,
+                    badges: ['👤', '📊']
+                  },
+                  {
+                    rank: 3,
+                    username: 'MarketSeer',
+                    accuracy: 81.7,
+                    votes: 312,
+                    streak: 15,
+                    badges: ['👤', '📊']
+                  },
+                  {
+                    rank: 4,
+                    username: 'TradeMaster',
+                    accuracy: 79.2,
+                    votes: 167,
+                    streak: 6,
+                    badges: ['👤']
+                  },
+                  {
+                    rank: 5,
+                    username: 'BullBear',
+                    accuracy: 76.8,
+                    votes: 134,
+                    streak: 4,
+                    badges: ['👤']
+                  }
+                ].map((user) => (
+                  <div
+                    key={user.rank}
+                    className={cn(
+                      "flex items-center justify-between p-4 rounded-lg transition-all duration-300",
+                      themeMode === 'light'
+                        ? 'bg-gray-50 hover:bg-gray-100'
+                        : 'bg-black/20 hover:bg-black/30'
+                    )}
+                  >
+                    <div className="flex items-center gap-4">
+                      {/* Rank */}
+                      <div className={cn(
+                        "w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-white",
+                        user.rank === 1 ? 'bg-yellow-500' :
+                        user.rank === 2 ? 'bg-gray-400' :
+                        user.rank === 3 ? 'bg-amber-600' :
+                        'bg-purple-500'
+                      )}>
+                        {user.rank}
+                      </div>
+
+                      {/* User Info */}
+                      <div className="flex items-center gap-3">
+                        <div>
+                          <h4 className={cn(
+                            "font-semibold",
+                            themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+                          )}>
+                            {user.username}
+                          </h4>
+                          <div className="flex items-center gap-1 mt-1">
+                            {user.badges.map((badge, index) => (
+                              <span key={index} className="text-xs">
+                                {badge}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Stats */}
+                    <div className="text-right">
+                      <div className={cn(
+                        "text-lg font-bold",
+                        user.accuracy >= 85 ? 'text-green-400' :
+                        user.accuracy >= 80 ? 'text-yellow-400' :
+                        'text-blue-400'
+                      )}>
+                        {user.accuracy}%
+                      </div>
+                      <div className={cn(
+                        "text-xs",
+                        themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'
+                      )}>
+                        {user.votes} votes • {user.streak} streak
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
