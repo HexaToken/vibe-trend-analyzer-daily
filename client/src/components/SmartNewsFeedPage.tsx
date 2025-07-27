@@ -133,7 +133,7 @@ const SmartNewsFeedPage: React.FC = () => {
   const filteredArticles = filterArticles();
 
   return (
-    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
+    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #4c1d95 0%, #5b21b6 50%, #3730a3 100%)' }}>
       {/* Header */}
       <div className="bg-black/20 backdrop-blur-sm border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-4">
