@@ -281,31 +281,35 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           </div>
 
           {/* Mood Flip of the Day */}
-          <div className={`p-5 rounded-xl ${
+          <div className={`p-5 rounded-xl transition-all duration-300 hover:scale-[1.01] hover:shadow-lg ${
             themeMode === 'light'
               ? 'bg-gradient-to-r from-[#F3E5F5] to-[#E8EAF6] border border-[#E0E0E0]'
               : 'bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20'
           }`}>
-            <h3 className={`text-lg font-semibold mb-3 ${
+            <h3 className={`text-lg font-semibold mb-3 flex items-center gap-2 ${
               themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
             }`}>
               🔄 Mood Flip of the Day
+              <div className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse" />
             </h3>
-            <div className="flex items-center gap-3">
-              <Badge className="bg-indigo-500/20 text-indigo-400 border-indigo-500/30 font-semibold">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+              <Badge className="bg-indigo-500/20 text-indigo-400 border-indigo-500/30 font-semibold transition-all duration-300 hover:scale-105">
                 ${moodFlip.symbol}
               </Badge>
-              <span className={`text-sm ${
+              <span className={`text-sm hidden sm:inline ${
                 themeMode === 'light' ? 'text-[#374151]' : 'text-gray-400'
               }`}>flipped from</span>
-              <Badge className={getSentimentBadge(moodFlip.from)}>
+              <span className={`text-xs sm:hidden ${
+                themeMode === 'light' ? 'text-[#374151]' : 'text-gray-400'
+              }`}>from</span>
+              <Badge className={cn(getSentimentBadge(moodFlip.from), "transition-all duration-300 hover:scale-105")}>
                 {moodFlip.from}
               </Badge>
-              <ArrowRight className="w-4 h-4 text-purple-400" />
-              <Badge className={getSentimentBadge(moodFlip.to)}>
+              <ArrowRight className="w-4 h-4 text-purple-400 animate-pulse" />
+              <Badge className={cn(getSentimentBadge(moodFlip.to), "transition-all duration-300 hover:scale-105")}>
                 {moodFlip.to}
               </Badge>
-              <span className={`text-sm font-semibold ${getSentimentColor(moodFlip.to)}`}>
+              <span className={`text-sm font-semibold ${getSentimentColor(moodFlip.to)} animate-pulse`}>
                 {moodFlip.change}
               </span>
             </div>
