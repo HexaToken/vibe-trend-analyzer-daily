@@ -2729,11 +2729,14 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
           </div>
         </div>
 
+        {/* Daily Mood Recap Section */}
+        <DailyMoodRecap className="mb-12" />
+
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          
+
           {/* Main Content Area */}
           <div className="lg:col-span-3 space-y-8">
-            
+
             {/* Top 10 Movers Widget */}
             <Card className={themeMode === 'light' ? `${cardBackground} border ${borderColor} shadow-[0_2px_6px_rgba(0,0,0,0.05)]` : "bg-black/40 border-purple-500/20 backdrop-blur-xl"}>
               <CardHeader className={themeMode === 'light' ? `border-b ${borderColor}` : "border-b border-purple-500/20"}>
