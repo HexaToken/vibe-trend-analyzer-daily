@@ -28,6 +28,8 @@ export default function CommunitySentimentPolls() {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('most-votes');
   const [activeTab, setActiveTab] = useState('live');
+  const [voteModalOpen, setVoteModalOpen] = useState(false);
+  const [selectedPoll, setSelectedPoll] = useState<StockPoll | null>(null);
 
   const [polls] = useState<StockPoll[]>([
     {
