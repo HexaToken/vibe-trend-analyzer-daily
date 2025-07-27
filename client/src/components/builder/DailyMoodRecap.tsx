@@ -180,15 +180,16 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
         <CardContent className="p-6 space-y-6">
           
           {/* Mood Summary */}
-          <div className={`p-5 rounded-xl ${
+          <div className={`p-5 rounded-xl transition-all duration-300 hover:scale-[1.01] hover:shadow-lg ${
             themeMode === 'light'
               ? 'bg-gradient-to-r from-[#E8EAF6] to-[#F3E5F5] border border-[#E0E0E0]'
               : 'bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20'
           }`}>
-            <h3 className={`text-lg font-semibold mb-3 ${
+            <h3 className={`text-lg font-semibold mb-3 flex items-center gap-2 ${
               themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
             }`}>
               📈 Mood Summary
+              <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
             </h3>
             <p className={`text-base leading-relaxed ${
               themeMode === 'light' ? 'text-[#374151]' : 'text-gray-300'
@@ -198,43 +199,47 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           </div>
 
           {/* Top Movers */}
-          <div className={`p-5 rounded-xl ${
+          <div className={`p-5 rounded-xl transition-all duration-300 hover:scale-[1.01] hover:shadow-lg ${
             themeMode === 'light'
               ? 'bg-gradient-to-r from-[#E8F5E8] to-[#FFF3E0] border border-[#E0E0E0]'
               : 'bg-gradient-to-r from-emerald-500/10 to-amber-500/10 border border-emerald-500/20'
           }`}>
-            <h3 className={`text-lg font-semibold mb-4 ${
+            <h3 className={`text-lg font-semibold mb-4 flex items-center gap-2 ${
               themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
             }`}>
               🔥 Top Mood Movers
+              <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
             </h3>
-            <div className="flex flex-wrap gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-wrap gap-2">
               {topMovers.map((mover, index) => (
                 <Badge
                   key={index}
                   className={cn(
-                    "text-sm font-medium px-3 py-1",
-                    getSentimentBadge(mover.mood)
+                    "text-sm font-medium px-3 py-2 transition-all duration-300 hover:scale-105 cursor-pointer",
+                    getSentimentBadge(mover.mood),
+                    mover.mood === 'bullish' ? 'hover:bg-emerald-500/30' : 'hover:bg-red-500/30'
                   )}
                 >
-                  ${mover.symbol} → {mover.mood === 'bullish' ? '📈' : '📉'} {mover.change}
+                  <span className="font-bold">${mover.symbol}</span> → {mover.mood === 'bullish' ? '📈' : '📉'}
+                  <span className="font-bold ml-1">{mover.change}</span>
                 </Badge>
               ))}
             </div>
           </div>
 
           {/* Headline Summary */}
-          <div className={`p-5 rounded-xl ${
+          <div className={`p-5 rounded-xl transition-all duration-300 hover:scale-[1.01] hover:shadow-lg ${
             themeMode === 'light'
               ? 'bg-gradient-to-r from-[#E3F2FD] to-[#F1F8E9] border border-[#E0E0E0]'
               : 'bg-gradient-to-r from-blue-500/10 to-green-500/10 border border-blue-500/20'
           }`}>
-            <h3 className={`text-lg font-semibold mb-3 ${
+            <h3 className={`text-lg font-semibold mb-3 flex items-center gap-2 ${
               themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
             }`}>
               📰 News Headlines Summary
+              <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
             </h3>
-            <p className={`text-base ${
+            <p className={`text-base leading-relaxed ${
               themeMode === 'light' ? 'text-[#374151]' : 'text-gray-300'
             }`}>
               {headlineSummary}
