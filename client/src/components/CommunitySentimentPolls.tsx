@@ -512,6 +512,7 @@ export default function CommunitySentimentPolls() {
                         <Button
                           variant="default"
                           size="sm"
+                          onClick={() => handleVoteClick(poll)}
                           className="bg-purple-600 hover:bg-purple-700 text-white text-xs"
                         >
                           Vote Now
