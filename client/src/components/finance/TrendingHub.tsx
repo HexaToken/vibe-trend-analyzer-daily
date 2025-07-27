@@ -489,14 +489,14 @@ export const TrendingHub: React.FC<TrendingHubProps> = ({ className }) => {
                           {news.impact}
                         </Badge>
                       </div>
-                      
+
                       <p className={cn(
                         "text-sm mb-3 leading-relaxed",
                         themeMode === 'light' ? 'text-[#666]' : 'text-gray-300'
                       )}>
                         {news.description}
                       </p>
-                      
+
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                           {news.tags.map((tag) => (
@@ -516,6 +516,190 @@ export const TrendingHub: React.FC<TrendingHubProps> = ({ className }) => {
                         )}>
                           {news.source} • {news.time}
                         </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </TabsContent>
+
+              <TabsContent value="buzz" className="mt-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {[
+                    {
+                      platform: 'Twitter',
+                      hashtag: '#NVDAtoTheMoon',
+                      mentions: '245K',
+                      growth: '+340%',
+                      color: 'from-blue-500 to-blue-600',
+                      textColor: 'text-blue-400',
+                      bgColor: themeMode === 'light' ? 'bg-blue-50' : 'bg-blue-500/10'
+                    },
+                    {
+                      platform: 'Reddit',
+                      hashtag: 'r/wallstreetbets',
+                      mentions: '189K',
+                      growth: '+156%',
+                      color: 'from-orange-500 to-red-500',
+                      textColor: 'text-orange-400',
+                      bgColor: themeMode === 'light' ? 'bg-orange-50' : 'bg-orange-500/10'
+                    },
+                    {
+                      platform: 'Discord',
+                      hashtag: '#SolanaGang',
+                      mentions: '78K',
+                      growth: '+234%',
+                      color: 'from-purple-500 to-purple-600',
+                      textColor: 'text-purple-400',
+                      bgColor: themeMode === 'light' ? 'bg-purple-50' : 'bg-purple-500/10'
+                    },
+                    {
+                      platform: 'Telegram',
+                      hashtag: '#DogecoinRise',
+                      mentions: '567K',
+                      growth: '+89%',
+                      color: 'from-cyan-500 to-blue-500',
+                      textColor: 'text-cyan-400',
+                      bgColor: themeMode === 'light' ? 'bg-cyan-50' : 'bg-cyan-500/10'
+                    },
+                    {
+                      platform: 'TikTok',
+                      hashtag: '#CryptoTok',
+                      mentions: '1.2M',
+                      growth: '+45%',
+                      color: 'from-pink-500 to-rose-500',
+                      textColor: 'text-pink-400',
+                      bgColor: themeMode === 'light' ? 'bg-pink-50' : 'bg-pink-500/10'
+                    },
+                    {
+                      platform: 'Instagram',
+                      hashtag: '#TeslaNews',
+                      mentions: '134K',
+                      growth: '+23%',
+                      color: 'from-purple-500 to-pink-500',
+                      textColor: 'text-purple-400',
+                      bgColor: themeMode === 'light' ? 'bg-purple-50' : 'bg-purple-500/10'
+                    }
+                  ].map((item, index) => (
+                    <div
+                      key={index}
+                      className={cn(
+                        "p-4 rounded-xl border transition-all duration-300 cursor-pointer group",
+                        themeMode === 'light'
+                          ? 'bg-gray-50 border-gray-200 hover:border-gray-300 hover:shadow-md'
+                          : 'bg-gradient-to-r from-black/60 to-purple-900/20 border-purple-500/20 hover:border-purple-400/40'
+                      )}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className={cn(
+                            "w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold text-white",
+                            item.bgColor
+                          )}>
+                            <span className={item.textColor}>
+                              {item.platform.charAt(0)}
+                            </span>
+                          </div>
+                          <div>
+                            <div className={cn(
+                              "text-xs uppercase tracking-wider font-semibold",
+                              themeMode === 'light' ? 'text-gray-500' : 'text-gray-400'
+                            )}>
+                              {item.platform}
+                            </div>
+                            <div className={cn(
+                              "font-bold text-sm",
+                              themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+                            )}>
+                              {item.hashtag}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="text-right">
+                          <div className={cn(
+                            "font-bold text-lg",
+                            themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+                          )}>
+                            {item.mentions}
+                          </div>
+                          <div className="text-xs text-gray-400">mentions</div>
+                        </div>
+
+                        <div className="text-right">
+                          <Badge className={cn(
+                            "text-xs font-medium",
+                            item.growth.startsWith('+')
+                              ? themeMode === 'light'
+                                ? 'bg-green-100 text-green-700 border-green-300'
+                                : 'bg-green-500/20 text-green-400 border-green-500/30'
+                              : themeMode === 'light'
+                                ? 'bg-red-100 text-red-700 border-red-300'
+                                : 'bg-red-500/20 text-red-400 border-red-500/30'
+                          )}>
+                            {item.growth}
+                          </Badge>
+                          <div className="text-xs text-gray-400 mt-1">24h growth</div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </TabsContent>
+
+              <TabsContent value="searches" className="mt-6">
+                <div className="space-y-3">
+                  {[
+                    { rank: 1, term: 'NVIDIA earnings', searches: '2.5M', trend: '+89%' },
+                    { rank: 2, term: 'Bitcoin ETF', searches: '1.8M', trend: '+67%' },
+                    { rank: 3, term: 'Tesla stock split', searches: '1.2M', trend: '+45%' },
+                    { rank: 4, term: 'Dogecoin price', searches: '980K', trend: '+34%' },
+                    { rank: 5, term: 'Solana DeFi', searches: '750K', trend: '+78%' }
+                  ].map((search) => (
+                    <div
+                      key={search.rank}
+                      className={cn(
+                        "flex items-center justify-between p-4 rounded-xl border transition-all duration-300 cursor-pointer group",
+                        themeMode === 'light'
+                          ? 'bg-gray-50 border-gray-200 hover:border-gray-300 hover:shadow-md'
+                          : 'bg-gradient-to-r from-black/60 to-purple-900/20 border-purple-500/20 hover:border-purple-400/40'
+                      )}
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className={cn(
+                          "w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold",
+                          themeMode === 'light'
+                            ? 'bg-purple-100 text-purple-700'
+                            : 'bg-purple-500/20 text-purple-400'
+                        )}>
+                          #{search.rank}
+                        </div>
+                        <div className={cn(
+                          "font-semibold",
+                          themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+                        )}>
+                          {search.term}
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-6">
+                        <div className="text-right">
+                          <div className={cn(
+                            "font-bold",
+                            themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+                          )}>
+                            {search.searches}
+                          </div>
+                          <div className="text-xs text-gray-400">searches</div>
+                        </div>
+
+                        <Badge className={cn(
+                          "text-xs",
+                          themeMode === 'light'
+                            ? 'bg-green-100 text-green-700 border-green-300'
+                            : 'bg-green-500/20 text-green-400 border-green-500/30'
+                        )}>
+                          {search.trend}
+                        </Badge>
                       </div>
                     </div>
                   ))}
