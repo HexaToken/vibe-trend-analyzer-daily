@@ -154,19 +154,14 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
               <button
                 onClick={() => handleNavigation('home')}
                 className="flex items-center gap-3 group transition-all duration-200"
-                aria-label="MoodMeter Home"
+                aria-label="NeomSense Home"
               >
                 <div className="w-8 h-8 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-purple-500/30 group-hover:shadow-lg transition-all duration-200">
                   <Brain className="w-5 h-5 text-white" />
                 </div>
                 <h1 className="text-lg font-semibold group-hover:drop-shadow-lg transition-all duration-200">
-                  <span className={cn(
-                    isLightMode
-                      ? "text-gray-900 group-hover:text-gray-700"
-                      : "text-white group-hover:text-purple-100"
-                  )}>🧠 Mood</span>
                   <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent group-hover:from-pink-300 group-hover:via-purple-300 group-hover:to-cyan-300">
-                    Meter
+                    NeomSense
                   </span>
                 </h1>
               </button>
