@@ -89,11 +89,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
     return 'shadow-lg shadow-red-500/20 border-red-500/30';
   };
 
-  const handleAudioToggle = () => {
-    setIsPlaying(!isPlaying);
-    // In a real app, you'd integrate with a text-to-speech API here
-    console.log('Text-to-speech:', isPlaying ? 'stopped' : 'started');
-  };
+
 
   return (
     <div className={cn("space-y-6", className)}>
