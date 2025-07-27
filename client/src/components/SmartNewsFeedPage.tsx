@@ -33,6 +33,8 @@ const SmartNewsFeedPage: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<FilterType>('All News');
   const [searchQuery, setSearchQuery] = useState('');
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const mockArticles: NewsArticle[] = [
     {
