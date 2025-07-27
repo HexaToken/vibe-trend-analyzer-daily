@@ -441,30 +441,108 @@ export default function TradeJournalClassic() {
         </TabsContent>
 
         <TabsContent value="analytics" className="mt-6">
-          <Card className={cn(
-            "border",
-            themeMode === 'light'
-              ? 'bg-white border-gray-200'
-              : 'bg-purple-900/40 border-purple-500/20'
-          )}>
-            <CardContent className="p-8 text-center">
-              <BarChart3 className={cn(
-                "w-12 h-12 mx-auto mb-4",
-                themeMode === 'light' ? 'text-gray-400' : 'text-gray-500'
-              )} />
-              <h3 className={cn(
-                "text-xl font-semibold mb-2",
-                themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
-              )}>
-                Analytics Coming Soon
-              </h3>
-              <p className={cn(
-                themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'
-              )}>
-                Advanced analytics and performance metrics will be available here.
-              </p>
-            </CardContent>
-          </Card>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Emotion Distribution */}
+            <Card className={cn(
+              "border",
+              themeMode === 'light'
+                ? 'bg-white border-gray-200'
+                : 'bg-purple-900/40 border-purple-500/20'
+            )}>
+              <CardHeader>
+                <CardTitle className={cn(
+                  "flex items-center gap-2 text-lg",
+                  themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+                )}>
+                  🕒 Emotion Distribution
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {[
+                    { emotion: 'Confident', color: 'bg-purple-500', percentage: 33 },
+                    { emotion: 'Fearful', color: 'bg-yellow-500', percentage: 33 },
+                    { emotion: 'Greedy', color: 'bg-orange-500', percentage: 33 }
+                  ].map((item) => (
+                    <div key={item.emotion} className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className={cn("w-3 h-3 rounded", item.color)} />
+                          <span className={cn(
+                            "text-sm font-medium",
+                            themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+                          )}>
+                            {item.emotion}
+                          </span>
+                        </div>
+                        <span className={cn(
+                          "text-sm font-medium",
+                          themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+                        )}>
+                          {item.percentage}%
+                        </span>
+                      </div>
+                      <div className="w-full bg-gray-700 rounded-full h-2">
+                        <div
+                          className={cn("h-2 rounded-full transition-all duration-300", item.color)}
+                          style={{ width: `${item.percentage}%` }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Performance by Emotion */}
+            <Card className={cn(
+              "border",
+              themeMode === 'light'
+                ? 'bg-white border-gray-200'
+                : 'bg-purple-900/40 border-purple-500/20'
+            )}>
+              <CardHeader>
+                <CardTitle className={cn(
+                  "flex items-center gap-2 text-lg",
+                  themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+                )}>
+                  📈 Performance by Emotion
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {[
+                    { emotion: 'Confident', icon: '🧠', pnl: 680.00, count: 1 },
+                    { emotion: 'Greedy', icon: '🤑', pnl: -537.50, count: 1 },
+                    { emotion: 'Fearful', icon: '😰', pnl: 0.00, count: 1 }
+                  ].map((item) => (
+                    <div key={item.emotion} className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg">{item.icon}</span>
+                        <span className={cn(
+                          "text-sm font-medium",
+                          themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+                        )}>
+                          {item.emotion}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className={cn(
+                          "text-sm font-bold",
+                          item.pnl >= 0 ? 'text-green-400' : 'text-red-400'
+                        )}>
+                          {item.pnl >= 0 ? '+' : ''}${item.pnl.toFixed(2)}
+                        </span>
+                        <Badge variant="secondary" className="text-xs min-w-[20px]">
+                          {item.count}
+                        </Badge>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </TabsContent>
 
         <TabsContent value="insights" className="mt-6">
