@@ -229,7 +229,7 @@ export const Footer = ({ onNavigate }: FooterProps) => {
             "text-sm",
             themeMode === 'light' ? 'text-gray-600' : 'text-gray-400'
           )}>
-            © 2024 MoodMeter. All rights reserved.
+            © 2024 NeomSense. All rights reserved.
           </div>
           <div className="flex items-center gap-4">
             <Button
