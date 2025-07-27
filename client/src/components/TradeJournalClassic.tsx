@@ -879,16 +879,16 @@ export default function TradeJournalClassic() {
               )}>
                 Notes (Optional)
               </label>
-              <textarea
+              <Textarea
                 rows={4}
                 placeholder="Why did you make this trade? What was your reasoning?"
                 value={formData.notes}
                 onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
                 className={cn(
-                  "w-full px-3 py-2 border rounded-md resize-none",
+                  "resize-none",
                   themeMode === 'light'
-                    ? 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
-                    : 'bg-gray-800 border-gray-600 text-white placeholder-gray-400'
+                    ? 'bg-white border-gray-300'
+                    : 'bg-gray-800 border-gray-600 text-white'
                 )}
               />
             </div>
