@@ -501,7 +501,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                   "text-lg font-semibold",
                   isLightMode ? "text-gray-900" : "text-white"
                 )}>
-                  🧠 MoodMeter
+                  NeomSense
                 </h2>
               </div>
               <Button
