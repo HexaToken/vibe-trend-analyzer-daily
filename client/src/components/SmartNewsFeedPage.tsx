@@ -3,17 +3,18 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
-import { 
-  Search, 
-  RefreshCw, 
-  TrendingUp, 
-  TrendingDown, 
+import {
+  Search,
+  RefreshCw,
+  TrendingUp,
+  TrendingDown,
   Minus,
   Brain,
   Clock,
   ExternalLink
 } from 'lucide-react';
 import { cn } from '../lib/utils';
+import AIAnalysisModal from './AIAnalysisModal';
 
 interface NewsArticle {
   id: string;
