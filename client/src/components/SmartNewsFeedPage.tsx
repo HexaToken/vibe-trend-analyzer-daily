@@ -135,6 +135,16 @@ const SmartNewsFeedPage: React.FC = () => {
 
   const filteredArticles = filterArticles();
 
+  const handleAIAnalysis = (article: NewsArticle) => {
+    setSelectedArticle(article);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedArticle(null);
+  };
+
   return (
     <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #4c1d95 0%, #5b21b6 50%, #3730a3 100%)' }}>
       {/* Header */}
