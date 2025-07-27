@@ -30,12 +30,9 @@ interface TopMover {
 }
 
 export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
-  className,
-  showAudio = true
+  className
 }) => {
   const { themeMode } = useMoodTheme();
-  
-  const [isPlaying, setIsPlaying] = useState(false);
   const [currentMood] = useState({
     overall: 72,
     trend: 'up',
