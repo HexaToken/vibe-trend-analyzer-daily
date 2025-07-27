@@ -248,6 +248,7 @@ const SmartNewsFeedPage: React.FC = () => {
                       <Button
                         variant="ghost"
                         size="sm"
+                        onClick={() => handleAIAnalysis(article)}
                         className="text-white/60 hover:text-white hover:bg-white/10 text-xs"
                       >
                         <Brain className="w-3 h-3 mr-1" />
