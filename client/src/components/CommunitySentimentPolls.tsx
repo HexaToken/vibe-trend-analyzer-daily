@@ -1,479 +1,295 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Input } from './ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
-import { Progress } from './ui/progress';
 import { useMoodTheme } from '../contexts/MoodThemeContext';
-import {
-  TrendingUp,
-  TrendingDown,
-  Minus,
-  BarChart3,
-  Users,
-  Trophy,
-  Target,
-  Timer,
-  Zap,
-  Award,
-  Crown,
-  Star,
-  ArrowUp,
-  ArrowDown,
-  Clock,
-  Calendar,
-  Filter,
-  Search,
-  RefreshCw,
-  ThumbsUp,
-  ThumbsDown,
-  AlertCircle,
-  CheckCircle,
-  Flame,
-  Eye,
-  TrendingDownIcon,
-  Plus
-} from 'lucide-react';
+import { Users, BarChart3, TrendingUp, Vote, Search, RefreshCw, Check } from 'lucide-react';
 import { cn } from '../lib/utils';
 
-interface PollVote {
+interface StockPoll {
   id: string;
   ticker: string;
-  sentiment: 'bullish' | 'bearish' | 'holding';
-  timestamp: string;
-  userId: string;
-  username: string;
+  fullName: string;
+  votes: number;
+  aiScore: number;
+  updatedMinutesAgo: number;
+  bullishPercentage: number;
+  holdingPercentage: number;
+  bearishPercentage: number;
+  userVote?: 'bullish' | 'holding' | 'bearish' | null;
 }
-
-interface PollStats {
-  ticker: string;
-  bullish: number;
-  bearish: number;
-  holding: number;
-  totalVotes: number;
-  lastUpdated: string;
-  userVote?: 'bullish' | 'bearish' | 'holding';
-  aiSentiment?: number;
-  priceChange24h?: number;
-}
-
-interface User {
-  id: string;
-  username: string;
-  accuracy: number;
-  totalVotes: number;
-  streak: number;
-  badges: string[];
-  rank: number;
-}
-
-const mockPolls: PollStats[] = [
-  {
-    ticker: 'AAPL',
-    bullish: 68,
-    bearish: 22,
-    holding: 10,
-    totalVotes: 1247,
-    lastUpdated: '2 min ago',
-    userVote: 'bullish',
-    aiSentiment: 72,
-    priceChange24h: 2.3
-  },
-  {
-    ticker: 'TSLA',
-    bullish: 45,
-    bearish: 38,
-    holding: 17,
-    totalVotes: 892,
-    lastUpdated: '5 min ago',
-    userVote: 'bearish',
-    aiSentiment: 58,
-    priceChange24h: -1.8
-  },
-  {
-    ticker: 'NVDA',
-    bullish: 82,
-    bearish: 12,
-    holding: 6,
-    totalVotes: 2156,
-    lastUpdated: '1 min ago',
-    aiSentiment: 85,
-    priceChange24h: 4.7
-  },
-  {
-    ticker: 'BTC',
-    bullish: 71,
-    bearish: 19,
-    holding: 10,
-    totalVotes: 3421,
-    lastUpdated: '3 min ago',
-    userVote: 'holding',
-    aiSentiment: 68,
-    priceChange24h: 1.2
-  },
-  {
-    ticker: 'ETH',
-    bullish: 64,
-    bearish: 25,
-    holding: 11,
-    totalVotes: 1876,
-    lastUpdated: '4 min ago',
-    aiSentiment: 61,
-    priceChange24h: 0.8
-  }
-];
-
-const mockUsers: User[] = [
-  { id: '1', username: 'CryptoKing', accuracy: 87.3, totalVotes: 245, streak: 12, badges: ['🧙', '🔁', '📈'], rank: 1 },
-  { id: '2', username: 'StockWizard', accuracy: 84.1, totalVotes: 198, streak: 8, badges: ['🧙', '🔁'], rank: 2 },
-  { id: '3', username: 'MarketSeer', accuracy: 81.7, totalVotes: 312, streak: 15, badges: ['🧙', '📈'], rank: 3 },
-  { id: '4', username: 'TradeMaster', accuracy: 79.2, totalVotes: 167, streak: 6, badges: ['🔁'], rank: 4 },
-  { id: '5', username: 'BullBear', accuracy: 76.8, totalVotes: 134, streak: 4, badges: ['📈'], rank: 5 }
-];
-
-const badges = {
-  '🧙': { name: 'Sentiment Oracle', description: 'High prediction accuracy (>85%)' },
-  '🔁': { name: 'Daily Voter', description: 'Vote consistently every day' },
-  '📈': { name: 'Trend Aligner', description: 'Often aligned with market movements' },
-  '🎯': { name: 'Sharp Shooter', description: '90%+ accuracy on volatile stocks' },
-  '🔥': { name: 'Hot Streak', description: '10+ consecutive correct predictions' }
-};
 
 export default function CommunitySentimentPolls() {
   const { themeMode } = useMoodTheme();
-  const [polls, setPolls] = useState<PollStats[]>(mockPolls);
-  const [searchTicker, setSearchTicker] = useState('');
-  const [selectedTimeframe, setSelectedTimeframe] = useState<'1d' | '7d' | '30d'>('1d');
-  const [sortBy, setSortBy] = useState<'volume' | 'sentiment' | 'activity'>('volume');
-  const [selectedPoll, setSelectedPoll] = useState<PollStats | null>(null);
-  const [voteModalOpen, setVoteModalOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortBy, setSortBy] = useState('most-votes');
+  const [activeTab, setActiveTab] = useState('live');
 
-  const handleVote = (ticker: string, sentiment: 'bullish' | 'bearish' | 'holding') => {
-    setPolls(prev => prev.map(poll => {
-      if (poll.ticker === ticker) {
-        // Remove previous vote if exists
-        let newBullish = poll.bullish;
-        let newBearish = poll.bearish;
-        let newHolding = poll.holding;
-        let newTotal = poll.totalVotes;
+  const [polls] = useState<StockPoll[]>([
+    {
+      id: '1',
+      ticker: 'BTC',
+      fullName: '$BTC',
+      votes: 3421,
+      aiScore: 68,
+      updatedMinutesAgo: 3,
+      bullishPercentage: 71,
+      holdingPercentage: 10,
+      bearishPercentage: 19,
+      userVote: 'holding'
+    },
+    {
+      id: '2', 
+      ticker: 'NVDA',
+      fullName: '$NVDA',
+      votes: 2156,
+      aiScore: 85,
+      updatedMinutesAgo: 1,
+      bullishPercentage: 82,
+      holdingPercentage: 6,
+      bearishPercentage: 12,
+      userVote: null
+    },
+    {
+      id: '3',
+      ticker: 'ETH',
+      fullName: '$ETH', 
+      votes: 1876,
+      aiScore: 61,
+      updatedMinutesAgo: 4,
+      bullishPercentage: 64,
+      holdingPercentage: 11,
+      bearishPercentage: 25,
+      userVote: null
+    },
+    {
+      id: '4',
+      ticker: 'AAPL',
+      fullName: '$AAPL',
+      votes: 1247,
+      aiScore: 72,
+      updatedMinutesAgo: 2,
+      bullishPercentage: 66,
+      holdingPercentage: 12,
+      bearishPercentage: 22,
+      userVote: 'bullish'
+    },
+    {
+      id: '5',
+      ticker: 'TSLA',
+      fullName: '$TSLA',
+      votes: 894,
+      aiScore: 58,
+      updatedMinutesAgo: 5,
+      bullishPercentage: 45,
+      holdingPercentage: 17,
+      bearishPercentage: 38,
+      userVote: 'bearish'
+    }
+  ]);
 
-        if (poll.userVote) {
-          // Remove previous vote
-          if (poll.userVote === 'bullish') newBullish -= 1;
-          else if (poll.userVote === 'bearish') newBearish -= 1;
-          else if (poll.userVote === 'holding') newHolding -= 1;
-          newTotal -= 1;
-        }
+  const totalVotes = polls.reduce((sum, poll) => sum + poll.votes, 0);
+  const avgBullish = Math.round(polls.reduce((sum, poll) => sum + poll.bullishPercentage, 0) / polls.length);
+  const userVotesCount = polls.filter(poll => poll.userVote).length;
+  const activePolls = polls.length;
 
-        // Add new vote
-        if (sentiment === 'bullish') newBullish += 1;
-        else if (sentiment === 'bearish') newBearish += 1;
-        else if (sentiment === 'holding') newHolding += 1;
-        newTotal += 1;
-
-        return {
-          ...poll,
-          bullish: newBullish,
-          bearish: newBearish,
-          holding: newHolding,
-          totalVotes: newTotal,
-          userVote: sentiment,
-          lastUpdated: 'now'
-        };
-      }
-      return poll;
-    }));
-    setVoteModalOpen(false);
+  const getProgressBarColor = (type: 'bullish' | 'holding' | 'bearish') => {
+    switch (type) {
+      case 'bullish': return 'bg-green-500';
+      case 'holding': return 'bg-yellow-500';
+      case 'bearish': return 'bg-red-500';
+      default: return 'bg-gray-500';
+    }
   };
 
-  const filteredPolls = polls.filter(poll =>
-    poll.ticker.toLowerCase().includes(searchTicker.toLowerCase())
-  ).sort((a, b) => {
-    if (sortBy === 'volume') return b.totalVotes - a.totalVotes;
-    if (sortBy === 'sentiment') return b.bullish - a.bullish;
-    if (sortBy === 'activity') return a.lastUpdated.localeCompare(b.lastUpdated);
-    return 0;
-  });
+  const VoteButton = ({ poll, voteType }: { poll: StockPoll, voteType: 'bullish' | 'holding' | 'bearish' }) => {
+    const isUserVote = poll.userVote === voteType;
+    const hasVoted = poll.userVote !== null;
+    
+    if (hasVoted && !isUserVote) {
+      return null; // Don't show vote buttons for other options if user already voted
+    }
 
-  const getSentimentColor = (percentage: number) => {
-    if (percentage > 60) return 'text-green-400';
-    if (percentage < 40) return 'text-red-400';
-    return 'text-yellow-400';
+    return (
+      <Button
+        variant={isUserVote ? "default" : "outline"}
+        size="sm"
+        className={cn(
+          "text-xs",
+          isUserVote 
+            ? "bg-purple-600 hover:bg-purple-700 text-white"
+            : themeMode === 'light'
+              ? 'border-gray-300 text-gray-600 hover:bg-gray-100'
+              : 'border-gray-600 text-gray-300 hover:bg-gray-800'
+        )}
+      >
+        {isUserVote ? 'Change Vote' : hasVoted ? 'Vote Now' : 'Vote Now'}
+      </Button>
+    );
   };
-
-  const getSentimentBg = (percentage: number) => {
-    if (percentage > 60) return 'bg-green-500';
-    if (percentage < 40) return 'bg-red-500';
-    return 'bg-yellow-500';
-  };
-
-  const PollCard = ({ poll }: { poll: PollStats }) => (
-    <Card className={themeMode === 'light' ? 'enhanced-card-light hover:shadow-lg transition-all duration-200' : 'bg-black/40 border-gray-700/50 hover:border-purple-500/50 transition-all duration-200'}>
-      <CardContent className="p-6">
-        <div className="flex items-start justify-between mb-4">
-          <div className="flex items-center gap-3">
-            <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-bold text-lg ${
-              themeMode === 'light' 
-                ? 'bg-[#3F51B5]/10 text-[#3F51B5]' 
-                : 'bg-gradient-to-r from-purple-500/20 to-blue-500/20 text-purple-300'
-            }`}>
-              {poll.ticker}
-            </div>
-            <div>
-              <h3 className={`text-xl font-bold ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>
-                ${poll.ticker}
-              </h3>
-              <div className="flex items-center gap-2">
-                <span className={`text-sm ${themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'}`}>
-                  {poll.totalVotes.toLocaleString()} votes
-                </span>
-                {poll.priceChange24h !== undefined && (
-                  <Badge className={`${
-                    poll.priceChange24h >= 0 
-                      ? 'bg-green-500/20 text-green-400 border-green-500/30' 
-                      : 'bg-red-500/20 text-red-400 border-red-500/30'
-                  }`}>
-                    {poll.priceChange24h >= 0 ? '+' : ''}{poll.priceChange24h}%
-                  </Badge>
-                )}
-              </div>
-            </div>
-          </div>
-          
-          <div className="text-right">
-            <div className={`text-sm ${themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'}`}>
-              Updated {poll.lastUpdated}
-            </div>
-            {poll.aiSentiment && (
-              <div className="flex items-center gap-1 mt-1">
-                <span className={`text-xs ${themeMode === 'light' ? 'text-[#888]' : 'text-gray-500'}`}>AI:</span>
-                <span className={`text-xs font-medium ${getSentimentColor(poll.aiSentiment)}`}>
-                  {poll.aiSentiment}
-                </span>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Sentiment Bars */}
-        <div className="space-y-3 mb-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <TrendingUp className="w-4 h-4 text-green-400" />
-              <span className={`text-sm font-medium ${themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'}`}>
-                Bullish
-              </span>
-            </div>
-            <span className="text-sm font-bold text-green-400">{poll.bullish}%</span>
-          </div>
-          <Progress value={poll.bullish} className="h-2">
-            <div 
-              className="h-full bg-green-500 transition-all duration-500 rounded-full"
-              style={{ width: `${poll.bullish}%` }}
-            />
-          </Progress>
-
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Minus className="w-4 h-4 text-yellow-400" />
-              <span className={`text-sm font-medium ${themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'}`}>
-                Holding
-              </span>
-            </div>
-            <span className="text-sm font-bold text-yellow-400">{poll.holding}%</span>
-          </div>
-          <Progress value={poll.holding} className="h-2">
-            <div 
-              className="h-full bg-yellow-500 transition-all duration-500 rounded-full"
-              style={{ width: `${poll.holding}%` }}
-            />
-          </Progress>
-
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <TrendingDown className="w-4 h-4 text-red-400" />
-              <span className={`text-sm font-medium ${themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'}`}>
-                Bearish
-              </span>
-            </div>
-            <span className="text-sm font-bold text-red-400">{poll.bearish}%</span>
-          </div>
-          <Progress value={poll.bearish} className="h-2">
-            <div 
-              className="h-full bg-red-500 transition-all duration-500 rounded-full"
-              style={{ width: `${poll.bearish}%` }}
-            />
-          </Progress>
-        </div>
-
-        {/* User Vote Status & Vote Button */}
-        <div className="flex items-center justify-between">
-          {poll.userVote ? (
-            <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-green-400" />
-              <span className={`text-sm ${themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'}`}>
-                You voted {poll.userVote}
-              </span>
-            </div>
-          ) : (
-            <span className={`text-sm ${themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'}`}>
-              Haven't voted yet
-            </span>
-          )}
-          
-          <Button
-            size="sm"
-            onClick={() => {
-              setSelectedPoll(poll);
-              setVoteModalOpen(true);
-            }}
-            className={`${
-              themeMode === 'light'
-                ? 'ai-analysis-btn-light hover:opacity-90'
-                : 'bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white'
-            } text-xs`}
-          >
-            {poll.userVote ? 'Change Vote' : 'Vote Now'}
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
-  );
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {/* Header */}
-      <div className={`rounded-2xl p-6 ${
+      <div className={cn(
+        "rounded-2xl p-6 border",
         themeMode === 'light'
-          ? 'enhanced-card-light border border-[#E0E0E0]'
-          : 'bg-black/80 backdrop-blur-xl border border-purple-500/20'
-      }`}>
+          ? 'bg-white border-gray-200'
+          : 'bg-gradient-to-br from-purple-900/80 via-purple-800/60 to-purple-900/80 backdrop-blur-xl border-purple-500/20'
+      )}>
         <div className="text-center mb-6">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className={`w-16 h-16 rounded-xl flex items-center justify-center shadow-lg ${
-              themeMode === 'light'
-                ? 'bg-gradient-to-r from-[#3F51B5]/20 to-[#673AB7]/20 shadow-[#3F51B5]/20'
-                : 'bg-gradient-to-r from-purple-500/20 to-blue-500/20 shadow-purple-500/20'
-            }`}>
-              <Users className="w-8 h-8 text-purple-400" />
-            </div>
-            <h1 className={`text-4xl font-bold ${
-              themeMode === 'light'
-                ? 'text-[#111827]'
-                : 'text-transparent bg-gradient-to-r from-purple-400 via-blue-400 to-pink-400 bg-clip-text'
-            }`}>
+          <div className="flex items-center justify-center gap-3 mb-2">
+            <Users className="w-8 h-8 text-blue-400" />
+            <h1 className={cn(
+              "text-3xl font-bold",
+              themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+            )}>
               Community Sentiment Polls
             </h1>
           </div>
-          <p className={`text-xl max-w-2xl mx-auto mb-6 ${
-            themeMode === 'light' ? 'text-[#444]' : 'text-gray-300'
-          }`}>
+          <p className={cn(
+            "text-lg",
+            themeMode === 'light' ? 'text-[#666]' : 'text-gray-300'
+          )}>
             Vote on market sentiment and see real-time community predictions
           </p>
         </div>
 
-        {/* Quick Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <Card className={themeMode === 'light' ? 'enhanced-card-light' : 'bg-black/40 border-gray-700/50'}>
-            <CardContent className="p-4 text-center">
-              <div className="flex items-center justify-center gap-2 mb-2">
-                <Users className="w-5 h-5 text-blue-400" />
-                <span className={`text-sm font-medium ${themeMode === 'light' ? 'text-[#444]' : 'text-gray-300'}`}>
-                  Active Polls
-                </span>
-              </div>
-              <div className={`text-2xl font-bold ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>
-                {polls.length}
-              </div>
-            </CardContent>
-          </Card>
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+          <div className={cn(
+            "p-4 rounded-xl border",
+            themeMode === 'light'
+              ? 'bg-gray-50 border-gray-200'
+              : 'bg-black/40 border-purple-500/20'
+          )}>
+            <div className="flex items-center gap-2 mb-1">
+              <BarChart3 className="w-4 h-4 text-blue-400" />
+              <span className={cn(
+                "text-sm font-medium",
+                themeMode === 'light' ? 'text-[#666]' : 'text-gray-300'
+              )}>
+                Active Polls
+              </span>
+            </div>
+            <div className={cn(
+              "text-2xl font-bold",
+              themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+            )}>
+              {activePolls}
+            </div>
+          </div>
 
-          <Card className={themeMode === 'light' ? 'enhanced-card-light' : 'bg-black/40 border-gray-700/50'}>
-            <CardContent className="p-4 text-center">
-              <div className="flex items-center justify-center gap-2 mb-2">
-                <BarChart3 className="w-5 h-5 text-green-400" />
-                <span className={`text-sm font-medium ${themeMode === 'light' ? 'text-[#444]' : 'text-gray-300'}`}>
-                  Total Votes
-                </span>
-              </div>
-              <div className={`text-2xl font-bold ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>
-                {polls.reduce((sum, poll) => sum + poll.totalVotes, 0).toLocaleString()}
-              </div>
-            </CardContent>
-          </Card>
+          <div className={cn(
+            "p-4 rounded-xl border",
+            themeMode === 'light'
+              ? 'bg-gray-50 border-gray-200'
+              : 'bg-black/40 border-purple-500/20'
+          )}>
+            <div className="flex items-center gap-2 mb-1">
+              <BarChart3 className="w-4 h-4 text-purple-400" />
+              <span className={cn(
+                "text-sm font-medium",
+                themeMode === 'light' ? 'text-[#666]' : 'text-gray-300'
+              )}>
+                Total Votes
+              </span>
+            </div>
+            <div className={cn(
+              "text-2xl font-bold",
+              themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+            )}>
+              {totalVotes.toLocaleString()}
+            </div>
+          </div>
 
-          <Card className={themeMode === 'light' ? 'enhanced-card-light' : 'bg-black/40 border-gray-700/50'}>
-            <CardContent className="p-4 text-center">
-              <div className="flex items-center justify-center gap-2 mb-2">
-                <TrendingUp className="w-5 h-5 text-purple-400" />
-                <span className={`text-sm font-medium ${themeMode === 'light' ? 'text-[#444]' : 'text-gray-300'}`}>
-                  Avg Bullish
-                </span>
-              </div>
-              <div className={`text-2xl font-bold ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>
-                {Math.round(polls.reduce((sum, poll) => sum + poll.bullish, 0) / polls.length)}%
-              </div>
-            </CardContent>
-          </Card>
+          <div className={cn(
+            "p-4 rounded-xl border",
+            themeMode === 'light'
+              ? 'bg-gray-50 border-gray-200'
+              : 'bg-black/40 border-purple-500/20'
+          )}>
+            <div className="flex items-center gap-2 mb-1">
+              <TrendingUp className="w-4 h-4 text-green-400" />
+              <span className={cn(
+                "text-sm font-medium",
+                themeMode === 'light' ? 'text-[#666]' : 'text-gray-300'
+              )}>
+                Avg Bullish
+              </span>
+            </div>
+            <div className="text-2xl font-bold text-green-400">
+              {avgBullish}%
+            </div>
+          </div>
 
-          <Card className={themeMode === 'light' ? 'enhanced-card-light' : 'bg-black/40 border-gray-700/50'}>
-            <CardContent className="p-4 text-center">
-              <div className="flex items-center justify-center gap-2 mb-2">
-                <Timer className="w-5 h-5 text-yellow-400" />
-                <span className={`text-sm font-medium ${themeMode === 'light' ? 'text-[#444]' : 'text-gray-300'}`}>
-                  Your Votes
-                </span>
-              </div>
-              <div className={`text-2xl font-bold ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>
-                {polls.filter(poll => poll.userVote).length}
-              </div>
-            </CardContent>
-          </Card>
+          <div className={cn(
+            "p-4 rounded-xl border",
+            themeMode === 'light'
+              ? 'bg-gray-50 border-gray-200'
+              : 'bg-black/40 border-purple-500/20'
+          )}>
+            <div className="flex items-center gap-2 mb-1">
+              <Vote className="w-4 h-4 text-yellow-400" />
+              <span className={cn(
+                "text-sm font-medium",
+                themeMode === 'light' ? 'text-[#666]' : 'text-gray-300'
+              )}>
+                Your Votes
+              </span>
+            </div>
+            <div className={cn(
+              "text-2xl font-bold",
+              themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+            )}>
+              {userVotesCount}
+            </div>
+          </div>
         </div>
 
         {/* Search and Filters */}
-        <div className="flex flex-wrap gap-4 items-center">
-          <div className="relative flex-1 min-w-64">
-            <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 ${
-              themeMode === 'light' ? 'text-[#888]' : 'text-gray-400'
-            }`} />
+        <div className="flex gap-4 mb-6">
+          <div className="relative flex-1">
+            <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <Input
               placeholder="Search tickers (e.g., AAPL, BTC)..."
-              value={searchTicker}
-              onChange={(e) => setSearchTicker(e.target.value)}
-              className={`pl-10 ${
-                themeMode === 'light' 
-                  ? 'bg-white border-[#E0E0E0] text-[#1C1E21]' 
-                  : 'bg-black/40 border-gray-700 text-white'
-              }`}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className={cn(
+                "pl-10",
+                themeMode === 'light'
+                  ? 'bg-white border-gray-300'
+                  : 'bg-black/40 border-gray-600 text-white'
+              )}
             />
           </div>
-
-          <Select value={sortBy} onValueChange={(value: any) => setSortBy(value)}>
-            <SelectTrigger className={`w-48 ${
-              themeMode === 'light' 
-                ? 'bg-white border-[#E0E0E0] text-[#1C1E21]' 
-                : 'bg-black/40 border-gray-700 text-white'
-            }`}>
-              <SelectValue placeholder="Sort by" />
+          <Select value={sortBy} onValueChange={setSortBy}>
+            <SelectTrigger className={cn(
+              "w-48",
+              themeMode === 'light'
+                ? 'bg-white border-gray-300'
+                : 'bg-black/40 border-gray-600 text-white'
+            )}>
+              <SelectValue placeholder="Most Votes" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="volume">Most Votes</SelectItem>
-              <SelectItem value="sentiment">Most Bullish</SelectItem>
-              <SelectItem value="activity">Recently Active</SelectItem>
+              <SelectItem value="most-votes">Most Votes</SelectItem>
+              <SelectItem value="newest">Newest</SelectItem>
+              <SelectItem value="bullish">Most Bullish</SelectItem>
             </SelectContent>
           </Select>
-
           <Button
             variant="outline"
-            className={`flex items-center gap-2 ${
-              themeMode === 'light' 
-                ? 'border-[#E0E0E0] text-[#666] hover:bg-[#F5F5F5]' 
-                : 'border-gray-700 text-gray-300 hover:bg-gray-800'
-            }`}
+            size="sm"
+            className={cn(
+              "flex items-center gap-2",
+              themeMode === 'light'
+                ? 'border-gray-300 text-gray-600 hover:bg-gray-100'
+                : 'border-gray-600 text-gray-300 hover:bg-gray-800'
+            )}
           >
             <RefreshCw className="w-4 h-4" />
             Refresh
@@ -481,211 +297,272 @@ export default function CommunitySentimentPolls() {
         </div>
       </div>
 
-      {/* Main Content Tabs */}
-      <Tabs defaultValue="polls" className="w-full">
-        <TabsList className={`grid w-full grid-cols-3 ${
-          themeMode === 'light' 
-            ? 'bg-[#F5F5F5] border border-[#E0E0E0]' 
-            : 'bg-black/40 border border-gray-700/50'
-        }`}>
+      {/* Tabs */}
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <TabsList className={cn(
+          "grid w-full grid-cols-3",
+          themeMode === 'light'
+            ? 'bg-gray-100 border border-gray-200'
+            : 'bg-purple-900/40 border border-purple-500/20'
+        )}>
           <TabsTrigger
-            value="polls"
-            className={
+            value="live"
+            className={cn(
               themeMode === 'light'
-                ? 'data-[state=active]:bg-[#3F51B5] data-[state=active]:text-white text-[#666]'
-                : 'data-[state=active]:bg-purple-600 data-[state=active]:text-white text-gray-400'
-            }
+                ? 'data-[state=active]:bg-purple-600 data-[state=active]:text-white text-gray-600'
+                : 'data-[state=active]:bg-purple-600 data-[state=active]:text-white text-gray-300'
+            )}
           >
             Live Polls
           </TabsTrigger>
           <TabsTrigger
             value="leaderboard"
-            className={
+            className={cn(
               themeMode === 'light'
-                ? 'data-[state=active]:bg-[#3F51B5] data-[state=active]:text-white text-[#666]'
-                : 'data-[state=active]:bg-purple-600 data-[state=active]:text-white text-gray-400'
-            }
+                ? 'data-[state=active]:bg-purple-600 data-[state=active]:text-white text-gray-600'
+                : 'data-[state=active]:bg-purple-600 data-[state=active]:text-white text-gray-300'
+            )}
           >
             Leaderboard
           </TabsTrigger>
           <TabsTrigger
             value="my-votes"
-            className={
+            className={cn(
               themeMode === 'light'
-                ? 'data-[state=active]:bg-[#3F51B5] data-[state=active]:text-white text-[#666]'
-                : 'data-[state=active]:bg-purple-600 data-[state=active]:text-white text-gray-400'
-            }
+                ? 'data-[state=active]:bg-purple-600 data-[state=active]:text-white text-gray-600'
+                : 'data-[state=active]:bg-purple-600 data-[state=active]:text-white text-gray-300'
+            )}
           >
             My Votes
           </TabsTrigger>
         </TabsList>
 
-        {/* Live Polls Tab */}
-        <TabsContent value="polls" className="mt-6 space-y-4">
-          {filteredPolls.length === 0 ? (
-            <Card className={themeMode === 'light' ? 'enhanced-card-light' : 'bg-black/40 border-gray-700/50'}>
-              <CardContent className="p-8 text-center">
-                <Users className={`w-12 h-12 mx-auto mb-4 ${themeMode === 'light' ? 'text-[#888]' : 'text-gray-400'}`} />
-                <h3 className={`text-xl font-semibold mb-2 ${themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'}`}>
-                  No polls found
-                </h3>
-                <p className={themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'}>
-                  Try adjusting your search or filters.
-                </p>
-              </CardContent>
-            </Card>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredPolls.map((poll) => (
-                <PollCard key={poll.ticker} poll={poll} />
-              ))}
-            </div>
-          )}
-        </TabsContent>
-
-        {/* Leaderboard Tab */}
-        <TabsContent value="leaderboard" className="mt-6 space-y-6">
-          <Card className={themeMode === 'light' ? 'enhanced-card-light' : 'bg-black/40 border-gray-700/50'}>
-            <CardHeader>
-              <CardTitle className={`flex items-center gap-2 ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>
-                <Trophy className="w-5 h-5 text-yellow-400" />
-                Top Predictors
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {mockUsers.map((user, index) => (
-                  <div key={user.id} className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-purple-500/5 to-blue-500/5 border border-purple-500/10">
-                    <div className="flex items-center gap-4">
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold ${
-                        index === 0 ? 'bg-yellow-500 text-black' :
-                        index === 1 ? 'bg-gray-400 text-black' :
-                        index === 2 ? 'bg-orange-500 text-black' :
-                        themeMode === 'light' ? 'bg-[#3F51B5] text-white' : 'bg-purple-600 text-white'
-                      }`}>
-                        {index + 1}
-                      </div>
-                      <div>
-                        <div className={`font-semibold ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>
-                          {user.username}
-                        </div>
-                        <div className="flex items-center gap-2">
-                          {user.badges.map((badge, i) => (
-                            <span key={i} className="text-lg" title={badges[badge as keyof typeof badges]?.name}>
-                              {badge}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
+        <TabsContent value="live" className="mt-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {polls.map((poll) => (
+              <Card
+                key={poll.id}
+                className={cn(
+                  "border transition-all duration-300 cursor-pointer hover:shadow-lg",
+                  themeMode === 'light'
+                    ? 'bg-white border-gray-200 hover:border-gray-300'
+                    : 'bg-gradient-to-br from-purple-900/40 to-purple-800/30 border-purple-500/20 hover:border-purple-400/40'
+                )}
+              >
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <h3 className={cn(
+                        "text-lg font-bold",
+                        themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+                      )}>
+                        {poll.ticker}
+                      </h3>
+                      <span className={cn(
+                        "text-sm",
+                        themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'
+                      )}>
+                        {poll.fullName}
+                      </span>
                     </div>
-                    <div className="text-right">
-                      <div className={`font-bold text-green-400`}>
-                        {user.accuracy}%
+                    <Badge className={cn(
+                      "text-xs",
+                      poll.aiScore >= 70
+                        ? 'bg-green-500/20 text-green-400 border-green-500/30'
+                        : poll.aiScore >= 50
+                          ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'
+                          : 'bg-red-500/20 text-red-400 border-red-500/30'
+                    )}>
+                      AI {poll.aiScore}
+                    </Badge>
+                  </div>
+                  <div className={cn(
+                    "text-xs",
+                    themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'
+                  )}>
+                    {poll.votes.toLocaleString()} votes • Updated {poll.updatedMinutesAgo} min ago
+                  </div>
+                </CardHeader>
+                
+                <CardContent className="space-y-3">
+                  {/* Bullish */}
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <TrendingUp className="w-4 h-4 text-green-400" />
+                        <span className={cn(
+                          "text-sm font-medium",
+                          themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+                        )}>
+                          Bullish
+                        </span>
                       </div>
-                      <div className={`text-sm ${themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'}`}>
-                        {user.totalVotes} votes • {user.streak} streak
-                      </div>
+                      <span className="text-sm font-bold text-green-400">
+                        {poll.bullishPercentage}%
+                      </span>
+                    </div>
+                    <div className="w-full bg-gray-700 rounded-full h-2">
+                      <div 
+                        className="bg-green-500 h-2 rounded-full transition-all duration-300"
+                        style={{ width: `${poll.bullishPercentage}%` }}
+                      />
                     </div>
                   </div>
-                ))}
-              </div>
+
+                  {/* Holding */}
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4 bg-yellow-500 rounded-sm" />
+                        <span className={cn(
+                          "text-sm font-medium",
+                          themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+                        )}>
+                          Holding
+                        </span>
+                      </div>
+                      <span className="text-sm font-bold text-yellow-400">
+                        {poll.holdingPercentage}%
+                      </span>
+                    </div>
+                    <div className="w-full bg-gray-700 rounded-full h-2">
+                      <div 
+                        className="bg-yellow-500 h-2 rounded-full transition-all duration-300"
+                        style={{ width: `${poll.holdingPercentage}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Bearish */}
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4 bg-red-500 rounded-sm rotate-180">
+                          ▲
+                        </div>
+                        <span className={cn(
+                          "text-sm font-medium",
+                          themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+                        )}>
+                          Bearish
+                        </span>
+                      </div>
+                      <span className="text-sm font-bold text-red-400">
+                        {poll.bearishPercentage}%
+                      </span>
+                    </div>
+                    <div className="w-full bg-gray-700 rounded-full h-2">
+                      <div 
+                        className="bg-red-500 h-2 rounded-full transition-all duration-300"
+                        style={{ width: `${poll.bearishPercentage}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Vote Status */}
+                  <div className="pt-2 border-t border-gray-700/50">
+                    {poll.userVote ? (
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <Check className="w-4 h-4 text-green-400" />
+                          <span className={cn(
+                            "text-sm",
+                            themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+                          )}>
+                            You voted {poll.userVote}
+                          </span>
+                        </div>
+                        <VoteButton poll={poll} voteType={poll.userVote} />
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-between">
+                        <span className={cn(
+                          "text-sm",
+                          themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'
+                        )}>
+                          Haven't voted yet
+                        </span>
+                        <Button
+                          variant="default"
+                          size="sm"
+                          className="bg-purple-600 hover:bg-purple-700 text-white text-xs"
+                        >
+                          Vote Now
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </TabsContent>
+
+        <TabsContent value="leaderboard" className="mt-6">
+          <Card className={cn(
+            "border",
+            themeMode === 'light'
+              ? 'bg-white border-gray-200'
+              : 'bg-purple-900/40 border-purple-500/20'
+          )}>
+            <CardContent className="p-8 text-center">
+              <BarChart3 className={cn(
+                "w-12 h-12 mx-auto mb-4",
+                themeMode === 'light' ? 'text-gray-400' : 'text-gray-500'
+              )} />
+              <h3 className={cn(
+                "text-xl font-semibold mb-2",
+                themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+              )}>
+                Leaderboard Coming Soon
+              </h3>
+              <p className={cn(
+                themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'
+              )}>
+                Top performers and community leaders will be displayed here.
+              </p>
             </CardContent>
           </Card>
         </TabsContent>
 
-        {/* My Votes Tab */}
-        <TabsContent value="my-votes" className="mt-6 space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <TabsContent value="my-votes" className="mt-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {polls.filter(poll => poll.userVote).map((poll) => (
-              <PollCard key={poll.ticker} poll={poll} />
+              <Card
+                key={poll.id}
+                className={cn(
+                  "border",
+                  themeMode === 'light'
+                    ? 'bg-white border-gray-200'
+                    : 'bg-gradient-to-br from-purple-900/40 to-purple-800/30 border-purple-500/20'
+                )}
+              >
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between">
+                    <h3 className={cn(
+                      "text-lg font-bold",
+                      themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+                    )}>
+                      {poll.ticker}
+                    </h3>
+                    <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
+                      Voted: {poll.userVote}
+                    </Badge>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className={cn(
+                    "text-sm",
+                    themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'
+                  )}>
+                    Current: {poll.bullishPercentage}% Bullish, {poll.holdingPercentage}% Holding, {poll.bearishPercentage}% Bearish
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
-          
-          {polls.filter(poll => poll.userVote).length === 0 && (
-            <Card className={themeMode === 'light' ? 'enhanced-card-light' : 'bg-black/40 border-gray-700/50'}>
-              <CardContent className="p-8 text-center">
-                <Target className={`w-12 h-12 mx-auto mb-4 ${themeMode === 'light' ? 'text-[#888]' : 'text-gray-400'}`} />
-                <h3 className={`text-xl font-semibold mb-2 ${themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'}`}>
-                  No votes yet
-                </h3>
-                <p className={themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'}>
-                  Start voting on polls to see your predictions here.
-                </p>
-              </CardContent>
-            </Card>
-          )}
         </TabsContent>
       </Tabs>
-
-      {/* Vote Modal */}
-      <Dialog open={voteModalOpen} onOpenChange={setVoteModalOpen}>
-        <DialogContent className={`max-w-md ${
-          themeMode === 'light' 
-            ? 'bg-white border-[#E0E0E0]' 
-            : 'bg-black/95 border-purple-500/30'
-        }`}>
-          <DialogHeader>
-            <DialogTitle className={themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}>
-              Vote on ${selectedPoll?.ticker}
-            </DialogTitle>
-            <DialogDescription className={themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'}>
-              Share your sentiment prediction for the next 24 hours.
-            </DialogDescription>
-          </DialogHeader>
-
-          {selectedPoll && (
-            <div className="space-y-4 mt-4">
-              <div className="grid grid-cols-3 gap-3">
-                <Button
-                  onClick={() => handleVote(selectedPoll.ticker, 'bullish')}
-                  className={`flex flex-col items-center gap-2 h-20 ${
-                    selectedPoll.userVote === 'bullish' 
-                      ? 'bg-green-600 hover:bg-green-700 text-white' 
-                      : themeMode === 'light'
-                        ? 'bg-green-50 border border-green-200 text-green-700 hover:bg-green-100'
-                        : 'bg-green-500/20 border border-green-500/30 text-green-400 hover:bg-green-500/30'
-                  }`}
-                >
-                  <TrendingUp className="w-6 h-6" />
-                  <span className="text-sm font-medium">Bullish</span>
-                </Button>
-
-                <Button
-                  onClick={() => handleVote(selectedPoll.ticker, 'holding')}
-                  className={`flex flex-col items-center gap-2 h-20 ${
-                    selectedPoll.userVote === 'holding' 
-                      ? 'bg-yellow-600 hover:bg-yellow-700 text-white' 
-                      : themeMode === 'light'
-                        ? 'bg-yellow-50 border border-yellow-200 text-yellow-700 hover:bg-yellow-100'
-                        : 'bg-yellow-500/20 border border-yellow-500/30 text-yellow-400 hover:bg-yellow-500/30'
-                  }`}
-                >
-                  <Minus className="w-6 h-6" />
-                  <span className="text-sm font-medium">Holding</span>
-                </Button>
-
-                <Button
-                  onClick={() => handleVote(selectedPoll.ticker, 'bearish')}
-                  className={`flex flex-col items-center gap-2 h-20 ${
-                    selectedPoll.userVote === 'bearish' 
-                      ? 'bg-red-600 hover:bg-red-700 text-white' 
-                      : themeMode === 'light'
-                        ? 'bg-red-50 border border-red-200 text-red-700 hover:bg-red-100'
-                        : 'bg-red-500/20 border border-red-500/30 text-red-400 hover:bg-red-500/30'
-                  }`}
-                >
-                  <TrendingDown className="w-6 h-6" />
-                  <span className="text-sm font-medium">Bearish</span>
-                </Button>
-              </div>
-
-              <div className={`text-sm text-center ${themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'}`}>
-                You can change your vote within 24 hours
-              </div>
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
     </div>
   );
 }
