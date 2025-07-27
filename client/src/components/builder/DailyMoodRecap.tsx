@@ -133,39 +133,21 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
         )}
 
         <CardHeader className={themeMode === 'light' ? "border-b border-[#E0E0E0]" : "border-b border-purple-500/20"}>
-          <CardTitle className={`flex items-center justify-between ${
+          <CardTitle className={`flex items-center gap-3 ${
             themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
           }`}>
-            <div className="flex items-center gap-3">
-              <Brain className="w-6 h-6 text-purple-400 animate-pulse" />
-              <span>AI Market Mood Summary</span>
-              <Badge className={cn(
-                "animate-pulse",
-                currentMood.overall >= 70 
-                  ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
-                  : currentMood.overall >= 50
-                  ? "bg-amber-500/20 text-amber-400 border-amber-500/30"
-                  : "bg-red-500/20 text-red-400 border-red-500/30"
-              )}>
-                {currentMood.trend === 'up' ? '↗' : '↘'} {currentMood.change}
-              </Badge>
-            </div>
-            
-            {showAudio && (
-              <Button
-                size="sm"
-                variant="ghost"
-                onClick={handleAudioToggle}
-                className={`flex items-center gap-2 ${
-                  themeMode === 'light'
-                    ? 'hover:bg-[#F5F5F5] text-[#1E1E1E]'
-                    : 'hover:bg-purple-500/10 text-purple-300'
-                }`}
-              >
-                <Volume2 className={cn("w-4 h-4", isPlaying && "animate-pulse")} />
-                {isPlaying ? 'Stop' : 'Listen'}
-              </Button>
-            )}
+            <Brain className="w-6 h-6 text-purple-400 animate-pulse" />
+            <span>AI Market Mood Summary</span>
+            <Badge className={cn(
+              "animate-pulse",
+              currentMood.overall >= 70
+                ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
+                : currentMood.overall >= 50
+                ? "bg-amber-500/20 text-amber-400 border-amber-500/30"
+                : "bg-red-500/20 text-red-400 border-red-500/30"
+            )}>
+              {currentMood.trend === 'up' ? '↗' : '↘'} {currentMood.change}
+            </Badge>
           </CardTitle>
         </CardHeader>
 
