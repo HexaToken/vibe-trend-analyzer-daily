@@ -50,6 +50,7 @@ export default function TradeJournalClassic() {
       quantity: 100,
       pnl: 680.00,
       sentiment: 72,
+      emotion: 'Confident',
       notes: 'Strong earnings report expected, technical breakout confirmed',
       entryDate: '2024-01-15',
       exitDate: '2024-01-22'
@@ -62,6 +63,7 @@ export default function TradeJournalClassic() {
       entryPrice: 245.80,
       quantity: 50,
       sentiment: 45,
+      emotion: 'Fearful',
       notes: 'Bought the dip but market sentiment very negative',
       entryDate: '2024-01-20'
     },
@@ -75,6 +77,7 @@ export default function TradeJournalClassic() {
       quantity: 25,
       pnl: -537.50,
       sentiment: 85,
+      emotion: 'Greedy',
       notes: 'FOMO on AI hype, ignored technical signals',
       entryDate: '2024-01-10',
       exitDate: '2024-01-18'
