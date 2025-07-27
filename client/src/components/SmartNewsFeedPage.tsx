@@ -269,6 +269,15 @@ const SmartNewsFeedPage: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* AI Analysis Modal */}
+      {selectedArticle && (
+        <AIAnalysisModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          article={selectedArticle}
+        />
+      )}
     </div>
   );
 };
