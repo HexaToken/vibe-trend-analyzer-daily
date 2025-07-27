@@ -5,8 +5,9 @@ import { Badge } from './ui/badge';
 import { Input } from './ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from './ui/dialog';
 import { useMoodTheme } from '../contexts/MoodThemeContext';
-import { Users, BarChart3, TrendingUp, Vote, Search, RefreshCw, Check, Trophy, Award, Star } from 'lucide-react';
+import { Users, BarChart3, TrendingUp, Vote, Search, RefreshCw, Check, Trophy, Award, Star, X } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 interface StockPoll {
