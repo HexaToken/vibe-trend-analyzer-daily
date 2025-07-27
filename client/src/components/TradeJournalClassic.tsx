@@ -93,10 +93,73 @@ export default function TradeJournalClassic() {
   const getTickerLogo = (ticker: string) => {
     const logos: Record<string, string> = {
       'AAPL': '🍎',
-      'TSLA': '🚗', 
+      'TSLA': '🚗',
       'NVDA': '🔥'
     };
     return logos[ticker] || '📈';
+  };
+
+  const emotionOptions = [
+    { value: 'confident', label: 'Confident', icon: '🧠' },
+    { value: 'greedy', label: 'Greedy', icon: '🐂' },
+    { value: 'fearful', label: 'Fearful', icon: '😰' },
+    { value: 'strategic', label: 'Strategic', icon: '🎯' },
+    { value: 'impulsive', label: 'Impulsive', icon: '⚡' },
+    { value: 'uncertain', label: 'Uncertain', icon: '😕' },
+    { value: 'calm', label: 'Calm', icon: '😎' },
+    { value: 'euphoric', label: 'Euphoric', icon: '🔥' }
+  ];
+
+  const handleAddTradeClick = () => {
+    setAddTradeModalOpen(true);
+  };
+
+  const handleFormSubmit = () => {
+    if (!formData.ticker || !formData.entryPrice || !formData.quantity || !formData.emotion) {
+      return; // Validation - require these fields
+    }
+
+    const newTrade: Trade = {
+      id: Date.now().toString(),
+      ticker: formData.ticker.toUpperCase(),
+      action: formData.positionType.toUpperCase() as 'BUY' | 'SELL',
+      status: 'OPEN',
+      entryPrice: parseFloat(formData.entryPrice),
+      exitPrice: formData.exitPrice ? parseFloat(formData.exitPrice) : undefined,
+      quantity: parseInt(formData.quantity),
+      sentiment: 65, // Default market sentiment
+      emotion: formData.emotion,
+      notes: formData.notes,
+      entryDate: new Date().toISOString().split('T')[0]
+    };
+
+    setTrades(prev => [newTrade, ...prev]);
+
+    // Reset form
+    setFormData({
+      ticker: '',
+      positionType: 'Buy',
+      entryPrice: '',
+      exitPrice: '',
+      quantity: '',
+      emotion: '',
+      notes: ''
+    });
+
+    setAddTradeModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setFormData({
+      ticker: '',
+      positionType: 'Buy',
+      entryPrice: '',
+      exitPrice: '',
+      quantity: '',
+      emotion: '',
+      notes: ''
+    });
+    setAddTradeModalOpen(false);
   };
 
   return (
