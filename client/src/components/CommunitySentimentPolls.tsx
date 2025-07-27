@@ -628,31 +628,142 @@ export default function CommunitySentimentPolls() {
               <Card
                 key={poll.id}
                 className={cn(
-                  "border",
+                  "border transition-all duration-300 cursor-pointer hover:shadow-lg",
                   themeMode === 'light'
-                    ? 'bg-white border-gray-200'
-                    : 'bg-gradient-to-br from-purple-900/40 to-purple-800/30 border-purple-500/20'
+                    ? 'bg-white border-gray-200 hover:border-gray-300'
+                    : 'bg-gradient-to-br from-purple-900/40 to-purple-800/30 border-purple-500/20 hover:border-purple-400/40'
                 )}
               >
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
-                    <h3 className={cn(
-                      "text-lg font-bold",
-                      themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+                    <div className="flex items-center gap-2">
+                      <h3 className={cn(
+                        "text-lg font-bold",
+                        themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+                      )}>
+                        {poll.ticker}
+                      </h3>
+                      <span className={cn(
+                        "text-sm",
+                        themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'
+                      )}>
+                        {poll.fullName}
+                      </span>
+                    </div>
+                    <Badge className={cn(
+                      "text-xs",
+                      poll.aiScore >= 70
+                        ? 'bg-green-500/20 text-green-400 border-green-500/30'
+                        : poll.aiScore >= 50
+                          ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'
+                          : 'bg-red-500/20 text-red-400 border-red-500/30'
                     )}>
-                      {poll.ticker}
-                    </h3>
-                    <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
-                      Voted: {poll.userVote}
+                      AI {poll.aiScore}
                     </Badge>
                   </div>
-                </CardHeader>
-                <CardContent>
                   <div className={cn(
-                    "text-sm",
+                    "text-xs",
                     themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'
                   )}>
-                    Current: {poll.bullishPercentage}% Bullish, {poll.holdingPercentage}% Holding, {poll.bearishPercentage}% Bearish
+                    {poll.votes.toLocaleString()} votes • Updated {poll.updatedMinutesAgo} min ago
+                  </div>
+                </CardHeader>
+
+                <CardContent className="space-y-3">
+                  {/* Bullish */}
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <TrendingUp className="w-4 h-4 text-green-400" />
+                        <span className={cn(
+                          "text-sm font-medium",
+                          themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+                        )}>
+                          Bullish
+                        </span>
+                      </div>
+                      <span className="text-sm font-bold text-green-400">
+                        {poll.bullishPercentage}%
+                      </span>
+                    </div>
+                    <div className="w-full bg-gray-700 rounded-full h-2">
+                      <div
+                        className="bg-green-500 h-2 rounded-full transition-all duration-300"
+                        style={{ width: `${poll.bullishPercentage}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Holding */}
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4 bg-yellow-500 rounded-sm" />
+                        <span className={cn(
+                          "text-sm font-medium",
+                          themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+                        )}>
+                          Holding
+                        </span>
+                      </div>
+                      <span className="text-sm font-bold text-yellow-400">
+                        {poll.holdingPercentage}%
+                      </span>
+                    </div>
+                    <div className="w-full bg-gray-700 rounded-full h-2">
+                      <div
+                        className="bg-yellow-500 h-2 rounded-full transition-all duration-300"
+                        style={{ width: `${poll.holdingPercentage}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Bearish */}
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4 bg-red-500 rounded-sm rotate-180">
+                          ▲
+                        </div>
+                        <span className={cn(
+                          "text-sm font-medium",
+                          themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+                        )}>
+                          Bearish
+                        </span>
+                      </div>
+                      <span className="text-sm font-bold text-red-400">
+                        {poll.bearishPercentage}%
+                      </span>
+                    </div>
+                    <div className="w-full bg-gray-700 rounded-full h-2">
+                      <div
+                        className="bg-red-500 h-2 rounded-full transition-all duration-300"
+                        style={{ width: `${poll.bearishPercentage}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Vote Status */}
+                  <div className="pt-2 border-t border-gray-700/50">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Check className="w-4 h-4 text-green-400" />
+                        <span className={cn(
+                          "text-sm",
+                          themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+                        )}>
+                          You voted {poll.userVote}
+                        </span>
+                      </div>
+                      <Button
+                        variant="default"
+                        size="sm"
+                        className="bg-purple-600 hover:bg-purple-700 text-white text-xs"
+                      >
+                        Change Vote
+                      </Button>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
