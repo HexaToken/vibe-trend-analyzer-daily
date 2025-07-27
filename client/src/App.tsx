@@ -31,6 +31,7 @@ import { EarningsCalendar } from "@/components/finance/EarningsCalendar";
 import { AdvancedCharts } from "@/components/finance/AdvancedCharts";
 import { TrendingHub } from "@/components/finance/TrendingHub";
 import TradeJournalClassic from "@/components/TradeJournalClassic";
+import CommunitySentimentPolls from "@/components/CommunitySentimentPolls";
 
 import { NLPSentimentDemo } from "@/components/NLPSentimentDemo";
 import { SpacyNLPDemo } from "@/components/SpacyNLPDemo";
