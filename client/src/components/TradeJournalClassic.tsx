@@ -5,6 +5,7 @@ import { Badge } from './ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from './ui/dialog';
 import { Input } from './ui/input';
+import { Textarea } from './ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { useMoodTheme } from '../contexts/MoodThemeContext';
 import { Plus, BarChart3, Activity, Download, AlertTriangle, CheckCircle, X, TrendingUp } from 'lucide-react';
