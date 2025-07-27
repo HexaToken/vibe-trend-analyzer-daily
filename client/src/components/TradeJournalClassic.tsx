@@ -28,8 +28,18 @@ interface Trade {
 
 export default function TradeJournalClassic() {
   const { themeMode } = useMoodTheme();
-  
-  const [trades] = useState<Trade[]>([
+  const [addTradeModalOpen, setAddTradeModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    ticker: '',
+    positionType: 'Buy',
+    entryPrice: '',
+    exitPrice: '',
+    quantity: '',
+    emotion: '',
+    notes: ''
+  });
+
+  const [trades, setTrades] = useState<Trade[]>([
     {
       id: '1',
       ticker: 'AAPL',
