@@ -6,7 +6,7 @@ import { Input } from './ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { useMoodTheme } from '../contexts/MoodThemeContext';
-import { Users, BarChart3, TrendingUp, Vote, Search, RefreshCw, Check } from 'lucide-react';
+import { Users, BarChart3, TrendingUp, Vote, Search, RefreshCw, Check, Trophy, Award, Star } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 interface StockPoll {
