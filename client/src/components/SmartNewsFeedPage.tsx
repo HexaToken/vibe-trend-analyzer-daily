@@ -44,7 +44,8 @@ const SmartNewsFeedPage: React.FC = () => {
       sentiment: 'positive',
       source: 'Wall Street Journal',
       timestamp: '1m ago',
-      category: 'Tech'
+      category: 'Tech',
+      url: 'https://www.wsj.com/tech-stocks-rally-ai-growth'
     },
     {
       id: '2',
@@ -53,7 +54,8 @@ const SmartNewsFeedPage: React.FC = () => {
       sentiment: 'neutral',
       source: 'Reuters',
       timestamp: '1m ago',
-      category: 'Economy'
+      category: 'Economy',
+      url: 'https://www.reuters.com/federal-reserve-rate-pause'
     },
     {
       id: '3',
@@ -62,7 +64,8 @@ const SmartNewsFeedPage: React.FC = () => {
       sentiment: 'negative',
       source: 'CNBC',
       timestamp: '4m ago',
-      category: 'Earnings'
+      category: 'Earnings',
+      url: 'https://www.cnbc.com/tesla-deliveries-q4-shortfall'
     }
   ];
 
