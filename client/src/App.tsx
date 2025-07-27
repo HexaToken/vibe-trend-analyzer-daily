@@ -222,7 +222,7 @@ const AppContent = () => {
       case "trending":
         return <TrendingHub />;
       case "trade-journal":
-        return <Analytics />; // Placeholder - replace with actual trade journal component
+        return <TradeJournalClassic />;
       case "sentiment-polls":
         return <Analytics />; // Placeholder - replace with actual sentiment polls component
 
