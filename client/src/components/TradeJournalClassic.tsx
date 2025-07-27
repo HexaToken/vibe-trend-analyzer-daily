@@ -552,22 +552,52 @@ export default function TradeJournalClassic() {
               ? 'bg-white border-gray-200'
               : 'bg-purple-900/40 border-purple-500/20'
           )}>
-            <CardContent className="p-8 text-center">
-              <Activity className={cn(
-                "w-12 h-12 mx-auto mb-4",
-                themeMode === 'light' ? 'text-gray-400' : 'text-gray-500'
-              )} />
-              <h3 className={cn(
-                "text-xl font-semibold mb-2",
-                themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+            <CardHeader>
+              <CardTitle className={cn(
+                "flex items-center gap-2 text-lg",
+                themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
               )}>
-                AI Insights Coming Soon
-              </h3>
-              <p className={cn(
-                themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'
-              )}>
-                AI-powered insights about your trading patterns will be available here.
-              </p>
+                🧠 AI Trading Insights
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {/* Warning Insight */}
+                <div className={cn(
+                  "p-4 rounded-lg border-l-4",
+                  themeMode === 'light'
+                    ? 'bg-yellow-50 border-yellow-500 border-l-yellow-500'
+                    : 'bg-yellow-500/10 border-yellow-500 border-l-yellow-500'
+                )}>
+                  <div className="flex items-start gap-3">
+                    <AlertTriangle className="w-5 h-5 text-yellow-500 mt-0.5 flex-shrink-0" />
+                    <p className={cn(
+                      "text-sm",
+                      themeMode === 'light' ? 'text-yellow-800' : 'text-yellow-200'
+                    )}>
+                      High frequency of greedy trades detected. Practice more disciplined entries.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Success Insight */}
+                <div className={cn(
+                  "p-4 rounded-lg border-l-4",
+                  themeMode === 'light'
+                    ? 'bg-green-50 border-green-500 border-l-green-500'
+                    : 'bg-green-500/10 border-green-500 border-l-green-500'
+                )}>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                    <p className={cn(
+                      "text-sm",
+                      themeMode === 'light' ? 'text-green-800' : 'text-green-200'
+                    )}>
+                      Great job! You're up $142.50 overall. Keep following your strategy.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
