@@ -64,6 +64,7 @@ import { TradeHub } from "@/components/TradeHub";
 import { TraderProfile } from "@/components/profile/TraderProfile";
 import { ChatSubcategory } from "@/components/social/ChatSubcategory";
 import { Footer } from "@/components/Footer";
+import SmartNewsFeedPage from "@/components/SmartNewsFeedPage";
 
 const queryClient = new QueryClient();
 
