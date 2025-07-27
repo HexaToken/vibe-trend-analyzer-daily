@@ -108,6 +108,29 @@ export default function CommunitySentimentPolls() {
     }
   };
 
+  const handleVoteClick = (poll: StockPoll) => {
+    setSelectedPoll(poll);
+    setVoteModalOpen(true);
+  };
+
+  const handleVoteSubmit = (voteType: 'bullish' | 'holding' | 'bearish') => {
+    if (!selectedPoll) return;
+
+    setPolls(prev => prev.map(poll => {
+      if (poll.id === selectedPoll.id) {
+        return {
+          ...poll,
+          userVote: voteType,
+          votes: poll.votes + (poll.userVote ? 0 : 1)
+        };
+      }
+      return poll;
+    }));
+
+    setVoteModalOpen(false);
+    setSelectedPoll(null);
+  };
+
   const VoteButton = ({ poll, voteType }: { poll: StockPoll, voteType: 'bullish' | 'holding' | 'bearish' }) => {
     const isUserVote = poll.userVote === voteType;
     const hasVoted = poll.userVote !== null;
