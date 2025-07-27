@@ -20,6 +20,7 @@ interface Trade {
   quantity: number;
   pnl?: number;
   sentiment: number;
+  emotion: string;
   notes: string;
   entryDate: string;
   exitDate?: string;
