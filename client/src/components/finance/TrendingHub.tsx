@@ -647,59 +647,114 @@ export const TrendingHub: React.FC<TrendingHubProps> = ({ className }) => {
               </TabsContent>
 
               <TabsContent value="searches" className="mt-6">
-                <div className="space-y-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {[
-                    { rank: 1, term: 'NVIDIA earnings', searches: '2.5M', trend: '+89%' },
-                    { rank: 2, term: 'Bitcoin ETF', searches: '1.8M', trend: '+67%' },
-                    { rank: 3, term: 'Tesla stock split', searches: '1.2M', trend: '+45%' },
-                    { rank: 4, term: 'Dogecoin price', searches: '980K', trend: '+34%' },
-                    { rank: 5, term: 'Solana DeFi', searches: '750K', trend: '+78%' }
-                  ].map((search) => (
+                    {
+                      term: 'NVIDIA stock prediction',
+                      region: 'Global',
+                      searches: '2.3M',
+                      trend: '+456%',
+                      color: 'from-green-500 to-emerald-600'
+                    },
+                    {
+                      term: 'Solana price target',
+                      region: 'US',
+                      searches: '1.8M',
+                      trend: '+234%',
+                      color: 'from-purple-500 to-violet-600'
+                    },
+                    {
+                      term: 'Tesla robotaxi news',
+                      region: 'Global',
+                      searches: '3.1M',
+                      trend: '+189%',
+                      color: 'from-red-500 to-rose-600'
+                    },
+                    {
+                      term: 'Bitcoin ETF approval',
+                      region: 'US',
+                      searches: '4.2M',
+                      trend: '+123%',
+                      color: 'from-orange-500 to-amber-600'
+                    },
+                    {
+                      term: 'Dogecoin price crash',
+                      region: 'Global',
+                      searches: '5.6M',
+                      trend: '+567%',
+                      color: 'from-yellow-500 to-yellow-600'
+                    },
+                    {
+                      term: 'Apple earnings report',
+                      region: 'US',
+                      searches: '2.7M',
+                      trend: '+78%',
+                      color: 'from-blue-500 to-cyan-600'
+                    }
+                  ].map((search, index) => (
                     <div
-                      key={search.rank}
+                      key={index}
                       className={cn(
-                        "flex items-center justify-between p-4 rounded-xl border transition-all duration-300 cursor-pointer group",
+                        "p-4 rounded-xl border transition-all duration-300 cursor-pointer group hover:scale-105",
                         themeMode === 'light'
-                          ? 'bg-gray-50 border-gray-200 hover:border-gray-300 hover:shadow-md'
-                          : 'bg-gradient-to-r from-black/60 to-purple-900/20 border-purple-500/20 hover:border-purple-400/40'
+                          ? 'bg-gray-50 border-gray-200 hover:border-gray-300 hover:shadow-lg'
+                          : 'bg-gradient-to-br from-black/60 to-purple-900/30 border-purple-500/20 hover:border-purple-400/40'
                       )}
                     >
-                      <div className="flex items-center gap-4">
-                        <div className={cn(
-                          "w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold",
-                          themeMode === 'light'
-                            ? 'bg-purple-100 text-purple-700'
-                            : 'bg-purple-500/20 text-purple-400'
-                        )}>
-                          #{search.rank}
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <Badge className={cn(
+                            "text-xs font-medium px-2 py-1",
+                            search.region === 'Global'
+                              ? themeMode === 'light'
+                                ? 'bg-blue-100 text-blue-700 border-blue-300'
+                                : 'bg-blue-500/20 text-blue-400 border-blue-500/30'
+                              : themeMode === 'light'
+                                ? 'bg-purple-100 text-purple-700 border-purple-300'
+                                : 'bg-purple-500/20 text-purple-400 border-purple-500/30'
+                          )}>
+                            {search.region}
+                          </Badge>
+                          <Badge className={cn(
+                            "text-xs font-medium px-2 py-1",
+                            themeMode === 'light'
+                              ? 'bg-green-100 text-green-700 border-green-300'
+                              : 'bg-green-500/20 text-green-400 border-green-500/30'
+                          )}>
+                            {search.trend}
+                          </Badge>
                         </div>
-                        <div className={cn(
-                          "font-semibold",
-                          themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
-                        )}>
-                          {search.term}
-                        </div>
-                      </div>
 
-                      <div className="flex items-center gap-6">
-                        <div className="text-right">
-                          <div className={cn(
-                            "font-bold",
+                        <div>
+                          <h4 className={cn(
+                            "font-bold text-sm leading-tight mb-2",
                             themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
                           )}>
-                            {search.searches}
-                          </div>
-                          <div className="text-xs text-gray-400">searches</div>
+                            {search.term}
+                          </h4>
                         </div>
 
-                        <Badge className={cn(
-                          "text-xs",
-                          themeMode === 'light'
-                            ? 'bg-green-100 text-green-700 border-green-300'
-                            : 'bg-green-500/20 text-green-400 border-green-500/30'
-                        )}>
-                          {search.trend}
-                        </Badge>
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <div className={cn(
+                              "font-bold text-lg",
+                              themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+                            )}>
+                              {search.searches}
+                            </div>
+                            <div className="text-xs text-gray-400">searches</div>
+                          </div>
+
+                          <div className="text-right">
+                            <div className="text-xs text-gray-400 mb-1">24h growth</div>
+                            <div className={cn(
+                              "text-sm font-semibold",
+                              search.trend.startsWith('+') ? 'text-green-400' : 'text-red-400'
+                            )}>
+                              {search.trend}
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   ))}
