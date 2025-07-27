@@ -685,6 +685,237 @@ export default function TradeJournalClassic() {
           </Card>
         </TabsContent>
       </Tabs>
+
+      {/* Add New Trade Modal */}
+      <Dialog open={addTradeModalOpen} onOpenChange={setAddTradeModalOpen}>
+        <DialogContent className={cn(
+          "max-w-2xl max-h-[90vh] overflow-y-auto",
+          themeMode === 'light'
+            ? 'bg-white border-gray-200'
+            : 'bg-gray-900 border-purple-500/20'
+        )}>
+          <DialogHeader>
+            <DialogTitle className={cn(
+              "text-xl font-bold",
+              themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+            )}>
+              Log New Trade
+            </DialogTitle>
+            <DialogDescription className={cn(
+              "mt-2",
+              themeMode === 'light' ? 'text-[#666]' : 'text-gray-300'
+            )}>
+              Record your trade details and emotional state for better analysis.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-6 mt-6">
+            {/* First Row: Ticker and Position Type */}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className={cn(
+                  "block text-sm font-medium mb-2",
+                  themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+                )}>
+                  Ticker
+                </label>
+                <Input
+                  placeholder="e.g., AAPL"
+                  value={formData.ticker}
+                  onChange={(e) => setFormData(prev => ({ ...prev, ticker: e.target.value }))}
+                  className={cn(
+                    themeMode === 'light'
+                      ? 'bg-white border-gray-300'
+                      : 'bg-gray-800 border-gray-600 text-white'
+                  )}
+                />
+              </div>
+              <div>
+                <label className={cn(
+                  "block text-sm font-medium mb-2",
+                  themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+                )}>
+                  Position Type
+                </label>
+                <Select value={formData.positionType} onValueChange={(value) => setFormData(prev => ({ ...prev, positionType: value }))}>
+                  <SelectTrigger className={cn(
+                    themeMode === 'light'
+                      ? 'bg-white border-gray-300'
+                      : 'bg-gray-800 border-gray-600 text-white'
+                  )}>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Buy">Buy</SelectItem>
+                    <SelectItem value="Sell">Sell</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            {/* Second Row: Entry Price, Exit Price, Quantity */}
+            <div className="grid grid-cols-3 gap-4">
+              <div>
+                <label className={cn(
+                  "block text-sm font-medium mb-2",
+                  themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+                )}>
+                  Entry Price
+                </label>
+                <Input
+                  type="number"
+                  step="0.01"
+                  placeholder="0.00"
+                  value={formData.entryPrice}
+                  onChange={(e) => setFormData(prev => ({ ...prev, entryPrice: e.target.value }))}
+                  className={cn(
+                    themeMode === 'light'
+                      ? 'bg-white border-gray-300'
+                      : 'bg-gray-800 border-gray-600 text-white'
+                  )}
+                />
+              </div>
+              <div>
+                <label className={cn(
+                  "block text-sm font-medium mb-2",
+                  themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+                )}>
+                  Exit Price (Optional)
+                </label>
+                <Input
+                  type="number"
+                  step="0.01"
+                  placeholder="0.00"
+                  value={formData.exitPrice}
+                  onChange={(e) => setFormData(prev => ({ ...prev, exitPrice: e.target.value }))}
+                  className={cn(
+                    themeMode === 'light'
+                      ? 'bg-white border-gray-300'
+                      : 'bg-gray-800 border-gray-600 text-white'
+                  )}
+                />
+              </div>
+              <div>
+                <label className={cn(
+                  "block text-sm font-medium mb-2",
+                  themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+                )}>
+                  Quantity
+                </label>
+                <Input
+                  type="number"
+                  placeholder="100"
+                  value={formData.quantity}
+                  onChange={(e) => setFormData(prev => ({ ...prev, quantity: e.target.value }))}
+                  className={cn(
+                    themeMode === 'light'
+                      ? 'bg-white border-gray-300'
+                      : 'bg-gray-800 border-gray-600 text-white'
+                  )}
+                />
+              </div>
+            </div>
+
+            {/* Market Sentiment Indicator */}
+            <div className={cn(
+              "p-4 rounded-lg border",
+              themeMode === 'light'
+                ? 'bg-blue-50 border-blue-200'
+                : 'bg-blue-900/20 border-blue-500/30'
+            )}>
+              <div className="flex items-center gap-2 mb-2">
+                <TrendingUp className="w-5 h-5 text-blue-400" />
+                <span className={cn(
+                  "font-medium",
+                  themeMode === 'light' ? 'text-blue-800' : 'text-blue-300'
+                )}>
+                  Current Market Sentiment: 65/100
+                </span>
+              </div>
+              <div className="w-full bg-gray-700 rounded-full h-3">
+                <div
+                  className="bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full transition-all duration-300"
+                  style={{ width: '65%' }}
+                />
+              </div>
+            </div>
+
+            {/* Emotion Selection */}
+            <div>
+              <label className={cn(
+                "block text-sm font-medium mb-4",
+                themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+              )}>
+                How are you feeling about this trade?
+              </label>
+              <div className="grid grid-cols-4 gap-3">
+                {emotionOptions.map((emotion) => (
+                  <Button
+                    key={emotion.value}
+                    variant={formData.emotion === emotion.value ? "default" : "outline"}
+                    onClick={() => setFormData(prev => ({ ...prev, emotion: emotion.value }))}
+                    className={cn(
+                      "h-20 flex flex-col items-center gap-2 text-sm transition-all duration-200",
+                      formData.emotion === emotion.value
+                        ? "bg-purple-600 hover:bg-purple-700 text-white border-purple-500"
+                        : themeMode === 'light'
+                          ? 'border-gray-300 text-gray-600 hover:bg-gray-100'
+                          : 'border-gray-600 text-gray-300 hover:bg-gray-800'
+                    )}
+                  >
+                    <span className="text-xl">{emotion.icon}</span>
+                    <span>{emotion.label}</span>
+                  </Button>
+                ))}
+              </div>
+            </div>
+
+            {/* Notes */}
+            <div>
+              <label className={cn(
+                "block text-sm font-medium mb-2",
+                themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+              )}>
+                Notes (Optional)
+              </label>
+              <textarea
+                rows={4}
+                placeholder="Why did you make this trade? What was your reasoning?"
+                value={formData.notes}
+                onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
+                className={cn(
+                  "w-full px-3 py-2 border rounded-md resize-none",
+                  themeMode === 'light'
+                    ? 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
+                    : 'bg-gray-800 border-gray-600 text-white placeholder-gray-400'
+                )}
+              />
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex gap-3 pt-4">
+              <Button
+                onClick={handleFormSubmit}
+                className="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3"
+              >
+                Add Trade
+              </Button>
+              <Button
+                onClick={handleCancel}
+                variant="outline"
+                className={cn(
+                  "px-6 py-3",
+                  themeMode === 'light'
+                    ? 'border-gray-300 text-gray-600 hover:bg-gray-100'
+                    : 'border-gray-600 text-gray-300 hover:bg-gray-800'
+                )}
+              >
+                Cancel
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
