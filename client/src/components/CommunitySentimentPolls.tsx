@@ -5,8 +5,9 @@ import { Badge } from './ui/badge';
 import { Input } from './ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from './ui/dialog';
 import { useMoodTheme } from '../contexts/MoodThemeContext';
-import { Users, BarChart3, TrendingUp, Vote, Search, RefreshCw, Check, Trophy, Award, Star } from 'lucide-react';
+import { Users, BarChart3, TrendingUp, Vote, Search, RefreshCw, Check, Trophy, Award, Star, X } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 interface StockPoll {
@@ -27,8 +28,10 @@ export default function CommunitySentimentPolls() {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('most-votes');
   const [activeTab, setActiveTab] = useState('live');
+  const [voteModalOpen, setVoteModalOpen] = useState(false);
+  const [selectedPoll, setSelectedPoll] = useState<StockPoll | null>(null);
 
-  const [polls] = useState<StockPoll[]>([
+  const [polls, setPolls] = useState<StockPoll[]>([
     {
       id: '1',
       ticker: 'BTC',
@@ -105,10 +108,33 @@ export default function CommunitySentimentPolls() {
     }
   };
 
+  const handleVoteClick = (poll: StockPoll) => {
+    setSelectedPoll(poll);
+    setVoteModalOpen(true);
+  };
+
+  const handleVoteSubmit = (voteType: 'bullish' | 'holding' | 'bearish') => {
+    if (!selectedPoll) return;
+
+    setPolls(prev => prev.map(poll => {
+      if (poll.id === selectedPoll.id) {
+        return {
+          ...poll,
+          userVote: voteType,
+          votes: poll.votes + (poll.userVote ? 0 : 1)
+        };
+      }
+      return poll;
+    }));
+
+    setVoteModalOpen(false);
+    setSelectedPoll(null);
+  };
+
   const VoteButton = ({ poll, voteType }: { poll: StockPoll, voteType: 'bullish' | 'holding' | 'bearish' }) => {
     const isUserVote = poll.userVote === voteType;
     const hasVoted = poll.userVote !== null;
-    
+
     if (hasVoted && !isUserVote) {
       return null; // Don't show vote buttons for other options if user already voted
     }
@@ -117,9 +143,10 @@ export default function CommunitySentimentPolls() {
       <Button
         variant={isUserVote ? "default" : "outline"}
         size="sm"
+        onClick={() => handleVoteClick(poll)}
         className={cn(
           "text-xs",
-          isUserVote 
+          isUserVote
             ? "bg-purple-600 hover:bg-purple-700 text-white"
             : themeMode === 'light'
               ? 'border-gray-300 text-gray-600 hover:bg-gray-100'
@@ -485,6 +512,7 @@ export default function CommunitySentimentPolls() {
                         <Button
                           variant="default"
                           size="sm"
+                          onClick={() => handleVoteClick(poll)}
                           className="bg-purple-600 hover:bg-purple-700 text-white text-xs"
                         >
                           Vote Now
@@ -538,7 +566,7 @@ export default function CommunitySentimentPolls() {
                     accuracy: 81.7,
                     votes: 312,
                     streak: 15,
-                    badges: ['👤', '📊']
+                    badges: ['👤', '���']
                   },
                   {
                     rank: 4,
@@ -759,6 +787,7 @@ export default function CommunitySentimentPolls() {
                       <Button
                         variant="default"
                         size="sm"
+                        onClick={() => handleVoteClick(poll)}
                         className="bg-purple-600 hover:bg-purple-700 text-white text-xs"
                       >
                         Change Vote
@@ -771,6 +800,77 @@ export default function CommunitySentimentPolls() {
           </div>
         </TabsContent>
       </Tabs>
+
+      {/* Voting Modal */}
+      <Dialog open={voteModalOpen} onOpenChange={setVoteModalOpen}>
+        <DialogContent className={cn(
+          "max-w-md",
+          themeMode === 'light'
+            ? 'bg-white border-gray-200'
+            : 'bg-gray-900 border-purple-500/20'
+        )}>
+          <DialogHeader>
+            <DialogTitle className={cn(
+              "text-xl font-bold text-center",
+              themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+            )}>
+              Vote on {selectedPoll?.ticker}
+            </DialogTitle>
+            <DialogDescription className={cn(
+              "text-center mt-2",
+              themeMode === 'light' ? 'text-[#666]' : 'text-gray-300'
+            )}>
+              Share your sentiment prediction for the next 24 hours.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-3 mt-6">
+            {/* Bullish Button */}
+            <Button
+              onClick={() => handleVoteSubmit('bullish')}
+              className="w-full h-14 bg-green-600 hover:bg-green-700 text-white font-semibold text-lg rounded-lg transition-all duration-200 hover:scale-105"
+            >
+              <div className="flex items-center gap-3">
+                <TrendingUp className="w-6 h-6" />
+                <span>Bullish</span>
+              </div>
+            </Button>
+
+            {/* Holding Button */}
+            <Button
+              onClick={() => handleVoteSubmit('holding')}
+              className="w-full h-14 bg-yellow-600 hover:bg-yellow-700 text-white font-semibold text-lg rounded-lg transition-all duration-200 hover:scale-105"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 bg-yellow-400 rounded-sm flex items-center justify-center">
+                  <span className="text-yellow-800 font-bold text-sm">—</span>
+                </div>
+                <span>Holding</span>
+              </div>
+            </Button>
+
+            {/* Bearish Button */}
+            <Button
+              onClick={() => handleVoteSubmit('bearish')}
+              className="w-full h-14 bg-red-600 hover:bg-red-700 text-white font-semibold text-lg rounded-lg transition-all duration-200 hover:scale-105"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-6 h-6 bg-red-500 rounded-sm flex items-center justify-center rotate-180">
+                  <TrendingUp className="w-4 h-4" />
+                </div>
+                <span>Bearish</span>
+              </div>
+            </Button>
+          </div>
+
+          <div className={cn(
+            "text-center text-sm mt-4",
+            themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'
+          )}>
+            You can change your vote within 24 hours
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

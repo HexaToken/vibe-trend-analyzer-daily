@@ -3,8 +3,12 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from './ui/dialog';
+import { Input } from './ui/input';
+import { Textarea } from './ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { useMoodTheme } from '../contexts/MoodThemeContext';
-import { Plus, BarChart3, Activity, Download, AlertTriangle, CheckCircle } from 'lucide-react';
+import { Plus, BarChart3, Activity, Download, AlertTriangle, CheckCircle, X, TrendingUp } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 interface Trade {
@@ -17,6 +21,7 @@ interface Trade {
   quantity: number;
   pnl?: number;
   sentiment: number;
+  emotion: string;
   notes: string;
   entryDate: string;
   exitDate?: string;
@@ -24,8 +29,18 @@ interface Trade {
 
 export default function TradeJournalClassic() {
   const { themeMode } = useMoodTheme();
-  
-  const [trades] = useState<Trade[]>([
+  const [addTradeModalOpen, setAddTradeModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    ticker: '',
+    positionType: 'Buy',
+    entryPrice: '',
+    exitPrice: '',
+    quantity: '',
+    emotion: '',
+    notes: ''
+  });
+
+  const [trades, setTrades] = useState<Trade[]>([
     {
       id: '1',
       ticker: 'AAPL',
@@ -36,6 +51,7 @@ export default function TradeJournalClassic() {
       quantity: 100,
       pnl: 680.00,
       sentiment: 72,
+      emotion: 'Confident',
       notes: 'Strong earnings report expected, technical breakout confirmed',
       entryDate: '2024-01-15',
       exitDate: '2024-01-22'
@@ -48,6 +64,7 @@ export default function TradeJournalClassic() {
       entryPrice: 245.80,
       quantity: 50,
       sentiment: 45,
+      emotion: 'Fearful',
       notes: 'Bought the dip but market sentiment very negative',
       entryDate: '2024-01-20'
     },
@@ -61,6 +78,7 @@ export default function TradeJournalClassic() {
       quantity: 25,
       pnl: -537.50,
       sentiment: 85,
+      emotion: 'Greedy',
       notes: 'FOMO on AI hype, ignored technical signals',
       entryDate: '2024-01-10',
       exitDate: '2024-01-18'
@@ -76,10 +94,73 @@ export default function TradeJournalClassic() {
   const getTickerLogo = (ticker: string) => {
     const logos: Record<string, string> = {
       'AAPL': '🍎',
-      'TSLA': '🚗', 
+      'TSLA': '🚗',
       'NVDA': '🔥'
     };
     return logos[ticker] || '📈';
+  };
+
+  const emotionOptions = [
+    { value: 'confident', label: 'Confident', icon: '🧠' },
+    { value: 'greedy', label: 'Greedy', icon: '🐂' },
+    { value: 'fearful', label: 'Fearful', icon: '😰' },
+    { value: 'strategic', label: 'Strategic', icon: '🎯' },
+    { value: 'impulsive', label: 'Impulsive', icon: '⚡' },
+    { value: 'uncertain', label: 'Uncertain', icon: '😕' },
+    { value: 'calm', label: 'Calm', icon: '😎' },
+    { value: 'euphoric', label: 'Euphoric', icon: '🔥' }
+  ];
+
+  const handleAddTradeClick = () => {
+    setAddTradeModalOpen(true);
+  };
+
+  const handleFormSubmit = () => {
+    if (!formData.ticker || !formData.entryPrice || !formData.quantity || !formData.emotion) {
+      return; // Validation - require these fields
+    }
+
+    const newTrade: Trade = {
+      id: Date.now().toString(),
+      ticker: formData.ticker.toUpperCase(),
+      action: formData.positionType.toUpperCase() as 'BUY' | 'SELL',
+      status: 'OPEN',
+      entryPrice: parseFloat(formData.entryPrice),
+      exitPrice: formData.exitPrice ? parseFloat(formData.exitPrice) : undefined,
+      quantity: parseInt(formData.quantity),
+      sentiment: 65, // Default market sentiment
+      emotion: formData.emotion,
+      notes: formData.notes,
+      entryDate: new Date().toISOString().split('T')[0]
+    };
+
+    setTrades(prev => [newTrade, ...prev]);
+
+    // Reset form
+    setFormData({
+      ticker: '',
+      positionType: 'Buy',
+      entryPrice: '',
+      exitPrice: '',
+      quantity: '',
+      emotion: '',
+      notes: ''
+    });
+
+    setAddTradeModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setFormData({
+      ticker: '',
+      positionType: 'Buy',
+      entryPrice: '',
+      exitPrice: '',
+      quantity: '',
+      emotion: '',
+      notes: ''
+    });
+    setAddTradeModalOpen(false);
   };
 
   return (
@@ -206,12 +287,15 @@ export default function TradeJournalClassic() {
 
         {/* Add New Trade Button */}
         <div className="flex justify-center">
-          <Button className={cn(
-            "px-6 py-3 rounded-xl font-semibold flex items-center gap-2",
-            themeMode === 'light'
-              ? 'bg-[#3F51B5] hover:bg-[#303F9F] text-white'
-              : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white'
-          )}>
+          <Button
+            onClick={handleAddTradeClick}
+            className={cn(
+              "px-6 py-3 rounded-xl font-semibold flex items-center gap-2",
+              themeMode === 'light'
+                ? 'bg-[#3F51B5] hover:bg-[#303F9F] text-white'
+                : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white'
+            )}
+          >
             <Plus className="w-5 h-5" />
             Add New Trade
           </Button>
@@ -330,7 +414,7 @@ export default function TradeJournalClassic() {
                           "text-sm",
                           themeMode === 'light' ? 'text-[#666]' : 'text-gray-400'
                         )}>
-                          Confident • {trade.entryDate}
+                          {trade.emotion} • {trade.entryDate}
                           {trade.exitDate && ` → ${trade.exitDate}`}
                         </div>
                       </div>
@@ -602,6 +686,237 @@ export default function TradeJournalClassic() {
           </Card>
         </TabsContent>
       </Tabs>
+
+      {/* Add New Trade Modal */}
+      <Dialog open={addTradeModalOpen} onOpenChange={setAddTradeModalOpen}>
+        <DialogContent className={cn(
+          "max-w-2xl max-h-[90vh] overflow-y-auto",
+          themeMode === 'light'
+            ? 'bg-white border-gray-200'
+            : 'bg-gray-900 border-purple-500/20'
+        )}>
+          <DialogHeader>
+            <DialogTitle className={cn(
+              "text-xl font-bold",
+              themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+            )}>
+              Log New Trade
+            </DialogTitle>
+            <DialogDescription className={cn(
+              "mt-2",
+              themeMode === 'light' ? 'text-[#666]' : 'text-gray-300'
+            )}>
+              Record your trade details and emotional state for better analysis.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-6 mt-6">
+            {/* First Row: Ticker and Position Type */}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className={cn(
+                  "block text-sm font-medium mb-2",
+                  themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+                )}>
+                  Ticker
+                </label>
+                <Input
+                  placeholder="e.g., AAPL"
+                  value={formData.ticker}
+                  onChange={(e) => setFormData(prev => ({ ...prev, ticker: e.target.value }))}
+                  className={cn(
+                    themeMode === 'light'
+                      ? 'bg-white border-gray-300'
+                      : 'bg-gray-800 border-gray-600 text-white'
+                  )}
+                />
+              </div>
+              <div>
+                <label className={cn(
+                  "block text-sm font-medium mb-2",
+                  themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+                )}>
+                  Position Type
+                </label>
+                <Select value={formData.positionType} onValueChange={(value) => setFormData(prev => ({ ...prev, positionType: value }))}>
+                  <SelectTrigger className={cn(
+                    themeMode === 'light'
+                      ? 'bg-white border-gray-300'
+                      : 'bg-gray-800 border-gray-600 text-white'
+                  )}>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Buy">Buy</SelectItem>
+                    <SelectItem value="Sell">Sell</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            {/* Second Row: Entry Price, Exit Price, Quantity */}
+            <div className="grid grid-cols-3 gap-4">
+              <div>
+                <label className={cn(
+                  "block text-sm font-medium mb-2",
+                  themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+                )}>
+                  Entry Price
+                </label>
+                <Input
+                  type="number"
+                  step="0.01"
+                  placeholder="0.00"
+                  value={formData.entryPrice}
+                  onChange={(e) => setFormData(prev => ({ ...prev, entryPrice: e.target.value }))}
+                  className={cn(
+                    themeMode === 'light'
+                      ? 'bg-white border-gray-300'
+                      : 'bg-gray-800 border-gray-600 text-white'
+                  )}
+                />
+              </div>
+              <div>
+                <label className={cn(
+                  "block text-sm font-medium mb-2",
+                  themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+                )}>
+                  Exit Price (Optional)
+                </label>
+                <Input
+                  type="number"
+                  step="0.01"
+                  placeholder="0.00"
+                  value={formData.exitPrice}
+                  onChange={(e) => setFormData(prev => ({ ...prev, exitPrice: e.target.value }))}
+                  className={cn(
+                    themeMode === 'light'
+                      ? 'bg-white border-gray-300'
+                      : 'bg-gray-800 border-gray-600 text-white'
+                  )}
+                />
+              </div>
+              <div>
+                <label className={cn(
+                  "block text-sm font-medium mb-2",
+                  themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+                )}>
+                  Quantity
+                </label>
+                <Input
+                  type="number"
+                  placeholder="100"
+                  value={formData.quantity}
+                  onChange={(e) => setFormData(prev => ({ ...prev, quantity: e.target.value }))}
+                  className={cn(
+                    themeMode === 'light'
+                      ? 'bg-white border-gray-300'
+                      : 'bg-gray-800 border-gray-600 text-white'
+                  )}
+                />
+              </div>
+            </div>
+
+            {/* Market Sentiment Indicator */}
+            <div className={cn(
+              "p-4 rounded-lg border",
+              themeMode === 'light'
+                ? 'bg-blue-50 border-blue-200'
+                : 'bg-blue-900/20 border-blue-500/30'
+            )}>
+              <div className="flex items-center gap-2 mb-2">
+                <TrendingUp className="w-5 h-5 text-blue-400" />
+                <span className={cn(
+                  "font-medium",
+                  themeMode === 'light' ? 'text-blue-800' : 'text-blue-300'
+                )}>
+                  Current Market Sentiment: 65/100
+                </span>
+              </div>
+              <div className="w-full bg-gray-700 rounded-full h-3">
+                <div
+                  className="bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full transition-all duration-300"
+                  style={{ width: '65%' }}
+                />
+              </div>
+            </div>
+
+            {/* Emotion Selection */}
+            <div>
+              <label className={cn(
+                "block text-sm font-medium mb-4",
+                themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+              )}>
+                How are you feeling about this trade?
+              </label>
+              <div className="grid grid-cols-4 gap-3">
+                {emotionOptions.map((emotion) => (
+                  <Button
+                    key={emotion.value}
+                    variant={formData.emotion === emotion.value ? "default" : "outline"}
+                    onClick={() => setFormData(prev => ({ ...prev, emotion: emotion.value }))}
+                    className={cn(
+                      "h-20 flex flex-col items-center gap-2 text-sm transition-all duration-200",
+                      formData.emotion === emotion.value
+                        ? "bg-purple-600 hover:bg-purple-700 text-white border-purple-500"
+                        : themeMode === 'light'
+                          ? 'border-gray-300 text-gray-600 hover:bg-gray-100'
+                          : 'border-gray-600 text-gray-300 hover:bg-gray-800'
+                    )}
+                  >
+                    <span className="text-xl">{emotion.icon}</span>
+                    <span>{emotion.label}</span>
+                  </Button>
+                ))}
+              </div>
+            </div>
+
+            {/* Notes */}
+            <div>
+              <label className={cn(
+                "block text-sm font-medium mb-2",
+                themeMode === 'light' ? 'text-[#333]' : 'text-gray-300'
+              )}>
+                Notes (Optional)
+              </label>
+              <Textarea
+                rows={4}
+                placeholder="Why did you make this trade? What was your reasoning?"
+                value={formData.notes}
+                onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
+                className={cn(
+                  "resize-none",
+                  themeMode === 'light'
+                    ? 'bg-white border-gray-300'
+                    : 'bg-gray-800 border-gray-600 text-white'
+                )}
+              />
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex gap-3 pt-4">
+              <Button
+                onClick={handleFormSubmit}
+                className="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3"
+              >
+                Add Trade
+              </Button>
+              <Button
+                onClick={handleCancel}
+                variant="outline"
+                className={cn(
+                  "px-6 py-3",
+                  themeMode === 'light'
+                    ? 'border-gray-300 text-gray-600 hover:bg-gray-100'
+                    : 'border-gray-600 text-gray-300 hover:bg-gray-800'
+                )}
+              >
+                Cancel
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
