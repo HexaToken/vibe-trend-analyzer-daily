@@ -103,15 +103,15 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
     <div className={cn("space-y-6", className)}>
       {/* Main Section Title */}
       <div className="text-center mb-8">
-        <div className="flex items-center justify-center gap-3 mb-4">
-          <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4">
+          <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 animate-pulse ${
             themeMode === 'light'
               ? 'bg-gradient-to-r from-[#3F51B5]/20 to-[#9C27B0]/20 shadow-lg shadow-[#3F51B5]/20'
               : 'bg-gradient-to-r from-purple-500/20 to-pink-500/20 shadow-lg shadow-purple-500/20'
           }`}>
             <Brain className="w-6 h-6 text-purple-400" />
           </div>
-          <h2 className={`text-3xl font-bold ${
+          <h2 className={`text-2xl sm:text-3xl font-bold text-center sm:text-left ${
             themeMode === 'light'
               ? 'text-[#1E1E1E]'
               : 'bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent'
@@ -119,7 +119,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
             🧠 Daily Mood Recap
           </h2>
         </div>
-        <p className={`text-lg ${
+        <p className={`text-base sm:text-lg px-4 sm:px-0 ${
           themeMode === 'light' ? 'text-[#374151]' : 'text-gray-300'
         }`}>
           AI-generated summary of today's market emotions, sentiment moves, and trending topics
