@@ -8,7 +8,6 @@ import { useMoodTheme } from '../../contexts/MoodThemeContext';
 
 interface DailyMoodRecapProps {
   className?: string;
-  showAudio?: boolean;
 }
 
 interface MoodFlip {
