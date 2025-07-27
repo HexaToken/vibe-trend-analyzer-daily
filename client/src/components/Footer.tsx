@@ -42,7 +42,7 @@ export const Footer = ({ onNavigate }: FooterProps) => {
     { icon: Github, href: 'https://github.com', label: 'GitHub' },
     { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
     { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: Mail, href: 'mailto:contact@moodmeter.com', label: 'Email' },
+    { icon: Mail, href: 'mailto:contact@neomsense.com', label: 'Email' },
   ];
 
   return (
@@ -63,7 +63,7 @@ export const Footer = ({ onNavigate }: FooterProps) => {
                   ? "text-[#111827]"
                   : "text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text"
               )}>
-                MoodMeter
+                NeomSense
               </div>
               <Badge variant="secondary" className="text-xs">
                 v2.0
@@ -229,7 +229,7 @@ export const Footer = ({ onNavigate }: FooterProps) => {
             "text-sm",
             themeMode === 'light' ? 'text-gray-600' : 'text-gray-400'
           )}>
-            © 2024 MoodMeter. All rights reserved.
+            © 2024 NeomSense. All rights reserved.
           </div>
           <div className="flex items-center gap-4">
             <Button
