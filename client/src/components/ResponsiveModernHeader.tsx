@@ -101,7 +101,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
 
   const navigationItems = [
     { label: 'Mood', key: 'market-mood', icon: '🧠' },
-    { label: 'News', key: 'news-feed', icon: '📰' },
+    { label: 'Smart News', key: 'smart-news-feed', icon: '🤖' },
     { label: 'TradeHub', key: 'tradehub', icon: '💼' },
   ];
 
