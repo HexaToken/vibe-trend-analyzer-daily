@@ -134,7 +134,7 @@ export default function CommunitySentimentPolls() {
   const VoteButton = ({ poll, voteType }: { poll: StockPoll, voteType: 'bullish' | 'holding' | 'bearish' }) => {
     const isUserVote = poll.userVote === voteType;
     const hasVoted = poll.userVote !== null;
-    
+
     if (hasVoted && !isUserVote) {
       return null; // Don't show vote buttons for other options if user already voted
     }
@@ -143,9 +143,10 @@ export default function CommunitySentimentPolls() {
       <Button
         variant={isUserVote ? "default" : "outline"}
         size="sm"
+        onClick={() => handleVoteClick(poll)}
         className={cn(
           "text-xs",
-          isUserVote 
+          isUserVote
             ? "bg-purple-600 hover:bg-purple-700 text-white"
             : themeMode === 'light'
               ? 'border-gray-300 text-gray-600 hover:bg-gray-100'
