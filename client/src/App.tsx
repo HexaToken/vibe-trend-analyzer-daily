@@ -181,6 +181,8 @@ const AppContent = () => {
         return <MarketMoodPage />;
       case "news-feed":
         return <Analytics />;
+      case "smart-news-feed":
+        return <SmartNewsFeedPage />;
       case "trader-profile":
         return (
           <ProtectedRoute
