@@ -3,8 +3,11 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from './ui/dialog';
+import { Input } from './ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { useMoodTheme } from '../contexts/MoodThemeContext';
-import { Plus, BarChart3, Activity, Download, AlertTriangle, CheckCircle } from 'lucide-react';
+import { Plus, BarChart3, Activity, Download, AlertTriangle, CheckCircle, X, TrendingUp } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 interface Trade {
