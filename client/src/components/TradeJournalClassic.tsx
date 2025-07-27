@@ -286,12 +286,15 @@ export default function TradeJournalClassic() {
 
         {/* Add New Trade Button */}
         <div className="flex justify-center">
-          <Button className={cn(
-            "px-6 py-3 rounded-xl font-semibold flex items-center gap-2",
-            themeMode === 'light'
-              ? 'bg-[#3F51B5] hover:bg-[#303F9F] text-white'
-              : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white'
-          )}>
+          <Button
+            onClick={handleAddTradeClick}
+            className={cn(
+              "px-6 py-3 rounded-xl font-semibold flex items-center gap-2",
+              themeMode === 'light'
+                ? 'bg-[#3F51B5] hover:bg-[#303F9F] text-white'
+                : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white'
+            )}
+          >
             <Plus className="w-5 h-5" />
             Add New Trade
           </Button>
