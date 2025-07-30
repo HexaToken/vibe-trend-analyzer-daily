@@ -114,6 +114,13 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
   const [financeSearchQuery, setFinanceSearchQuery] = useState("");
   const [selectedTimeframe, setSelectedTimeframe] = useState<"1D" | "7D" | "30D">("7D");
 
+  // Handle initialSection prop
+  useEffect(() => {
+    if (initialSection) {
+      setActiveSection(initialSection as any);
+    }
+  }, [initialSection]);
+
   // Core mood data
   const [moodScore] = useState<MoodScore>({
     overall: 72,
