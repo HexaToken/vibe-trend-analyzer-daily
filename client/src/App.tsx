@@ -210,7 +210,7 @@ const AppContent = () => {
 
       // Finance Section Routes
       case "finance":
-        return <BuilderFinanceDemo />;
+        return <FuturisticHomepage onNavigate={setActiveSection} initialSection="finance" />;
       case "watchlist":
         return <Watchlist />;
       case "market":

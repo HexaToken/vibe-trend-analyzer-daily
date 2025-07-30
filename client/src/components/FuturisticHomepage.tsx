@@ -100,11 +100,12 @@ interface TrendingTopic {
 
 interface FuturisticHomepageProps {
   onNavigate?: (section: string) => void;
+  initialSection?: string;
 }
 
-export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNavigate }) => {
+export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNavigate, initialSection }) => {
   const { setMoodScore, themeMode, cardBackground, borderColor } = useMoodTheme();
-  const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'tool' | 'market' | 'crypto' | 'charts' | 'trending' | 'earnings' | 'finance' | 'screener' | 'trade-journal' | 'sentiment-polls'>('home');
+  const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'tool' | 'market' | 'crypto' | 'charts' | 'trending' | 'earnings' | 'finance' | 'screener' | 'trade-journal' | 'sentiment-polls'>(initialSection as any || 'home');
   const [activeToolSubtab, setActiveToolSubtab] = useState("Market");
   const [activeMarketSubtab, setActiveMarketSubtab] = useState("Tools");
   const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
@@ -112,6 +113,13 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
   const [selectedFinanceStock, setSelectedFinanceStock] = useState("AAPL");
   const [financeSearchQuery, setFinanceSearchQuery] = useState("");
   const [selectedTimeframe, setSelectedTimeframe] = useState<"1D" | "7D" | "30D">("7D");
+
+  // Handle initialSection prop
+  useEffect(() => {
+    if (initialSection) {
+      setActiveSection(initialSection as any);
+    }
+  }, [initialSection]);
 
   // Core mood data
   const [moodScore] = useState<MoodScore>({
