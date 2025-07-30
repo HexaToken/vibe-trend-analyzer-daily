@@ -105,7 +105,7 @@ interface FuturisticHomepageProps {
 
 export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNavigate, initialSection }) => {
   const { setMoodScore, themeMode, cardBackground, borderColor } = useMoodTheme();
-  const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'tool' | 'market' | 'crypto' | 'charts' | 'trending' | 'earnings' | 'finance' | 'screener' | 'trade-journal' | 'sentiment-polls'>('home');
+  const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'tool' | 'market' | 'crypto' | 'charts' | 'trending' | 'earnings' | 'finance' | 'screener' | 'trade-journal' | 'sentiment-polls'>(initialSection as any || 'home');
   const [activeToolSubtab, setActiveToolSubtab] = useState("Market");
   const [activeMarketSubtab, setActiveMarketSubtab] = useState("Tools");
   const [activeToolsSubtab, setActiveToolsSubtab] = useState("HeatMap");
@@ -879,7 +879,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       ����� Top Bullish
                     </TabsTrigger>
                     <TabsTrigger value="bearish" className="data-[state=active]:bg-red-600/30 data-[state=active]:text-red-300 text-gray-400">
-                      ���� Top Bearish
+                      🔴 Top Bearish
                     </TabsTrigger>
                     <TabsTrigger value="gainers" className="data-[state=active]:bg-emerald-600/30 data-[state=active]:text-emerald-300 text-gray-400">
                       📈 Biggest Gainers
@@ -1306,7 +1306,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <Card className="bg-black/40 border-cyan-500/20 backdrop-blur-xl">
                   <CardHeader className="border-b border-cyan-500/20">
                     <CardTitle className="text-white text-sm flex items-center gap-2">
-                      <span className="text-lg">��</span>
+                      <span className="text-lg">⭐</span>
                       Your Crypto Watchlist
                     </CardTitle>
                   </CardHeader>
