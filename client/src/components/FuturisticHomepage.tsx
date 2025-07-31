@@ -301,7 +301,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
         ) : activeSection === 'finance' ? (
           <div className="space-y-8">
             {/* Finance Hub Header with Search */}
-            <div className={`sticky top-20 z-40 rounded-2xl p-6 mb-8 ${
+            <div className={`rounded-2xl p-6 mb-8 ${
               themeMode === 'light'
                 ? 'enhanced-card-light border border-[#E0E0E0]'
                 : 'bg-black/80 backdrop-blur-xl border border-purple-500/20'
