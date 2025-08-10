@@ -223,12 +223,12 @@ export const AdvancedTradingChart = () => {
             </div>
 
             {/* Market Toggle */}
-            <div className="flex rounded-lg bg-gray-800/50 border border-gray-700/50 p-1">
+            <div className="flex rounded-lg bg-gray-800/50 border border-gray-700/50 p-1 trading-market-toggle">
               <button
                 className={cn(
-                  "px-4 py-2 rounded-md text-sm font-medium transition-all",
-                  chartState.assetType === 'Crypto' 
-                    ? `bg-[${currentColors.primary}] text-black shadow-lg` 
+                  "px-3 md:px-4 py-2 rounded-md text-xs md:text-sm font-medium transition-all",
+                  chartState.assetType === 'Crypto'
+                    ? `bg-[${currentColors.primary}] text-black shadow-lg`
                     : "text-gray-300 hover:text-white"
                 )}
                 onClick={() => setChartState(prev => ({ ...prev, assetType: 'Crypto' }))}
@@ -237,9 +237,9 @@ export const AdvancedTradingChart = () => {
               </button>
               <button
                 className={cn(
-                  "px-4 py-2 rounded-md text-sm font-medium transition-all",
-                  chartState.assetType === 'Stocks' 
-                    ? `bg-[${currentColors.primary}] text-black shadow-lg` 
+                  "px-3 md:px-4 py-2 rounded-md text-xs md:text-sm font-medium transition-all",
+                  chartState.assetType === 'Stocks'
+                    ? `bg-[${currentColors.primary}] text-black shadow-lg`
                     : "text-gray-300 hover:text-white"
                 )}
                 onClick={() => setChartState(prev => ({ ...prev, assetType: 'Stocks' }))}
@@ -250,7 +250,7 @@ export const AdvancedTradingChart = () => {
 
             {/* Exchange Selector */}
             <select
-              className="bg-gray-800/50 border border-gray-700/50 rounded-lg px-4 py-2 text-white focus:border-cyan-400 focus:ring-cyan-400/20"
+              className="bg-gray-800/50 border border-gray-700/50 rounded-lg px-3 md:px-4 py-2 text-white text-xs md:text-sm focus:border-cyan-400 focus:ring-cyan-400/20 trading-exchange-select trading-focus"
               value={chartState.exchange}
               onChange={(e) => setChartState(prev => ({ ...prev, exchange: e.target.value }))}
             >
