@@ -750,6 +750,11 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               <TabsContent value="geo-sentiment" className="mt-8">
                 <GeoSentimentMap />
               </TabsContent>
+
+              {/* NeonSense Crypto Dashboard Tab */}
+              <TabsContent value="crypto-dashboard" className="mt-8">
+                <NeonSenseCryptoDashboard />
+              </TabsContent>
               </Tabs>
             </div>
           </div>
