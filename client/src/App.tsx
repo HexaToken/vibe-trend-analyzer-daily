@@ -138,7 +138,8 @@ const AppContent = () => {
         return <DatabaseDemo />;
       case "social":
         return <SocialPlatform />;
-      // Removed "crypto" route - CryptoDashboard component retained, crypto features moved to Finance section
+      case "crypto":
+        return <NeonSenseCryptoDashboard />;
       case "nlp":
         return <NLPSentimentDemo />;
       case "spacy-nlp":
