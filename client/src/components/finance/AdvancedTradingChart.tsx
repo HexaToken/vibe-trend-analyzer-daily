@@ -619,7 +619,7 @@ export const AdvancedTradingChart = () => {
           sidebarOpen ? "open" : "",
           "lg:translate-x-0"
         )}>
-          <ScrollArea className="h-full trading-scrollbar">
+          <ScrollArea className="h-screen trading-scrollbar">
             <div className="p-6 space-y-6">
               {/* Indicators Section */}
               <Card className="bg-gray-800/30 border-gray-700/50">
