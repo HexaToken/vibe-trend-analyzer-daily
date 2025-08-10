@@ -12,6 +12,16 @@ export const Analytics = () => {
   const [activeTab, setActiveTab] = useState("Scanner");
   const [searchQuery, setSearchQuery] = useState("");
   const [showProfiler, setShowProfiler] = useState(false);
+  const [screenerType, setScreenerType] = useState("basic");
+  const [aiQuery, setAiQuery] = useState("Ask AI: Find mid-cap tech stocks with rising sentiment and strong momentum...");
+  const [priceRange, setPriceRange] = useState([0, 500]);
+  const [peRatio, setPeRatio] = useState([0, 100]);
+  const [rsi, setRsi] = useState([0, 100]);
+  const [dayChange, setDayChange] = useState([-20, 20]);
+  const [volatility, setVolatility] = useState([0, 10]);
+  const [moodScore, setMoodScore] = useState([0, 100]);
+  const [newsScore, setNewsScore] = useState([0, 100]);
+  const [liveMode, setLiveMode] = useState(true);
 
   // Mock stock data for the screener
   const stockData = [
