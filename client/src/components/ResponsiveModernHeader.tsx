@@ -132,14 +132,14 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
       {/* Main Header */}
       <header
         className={cn(
-          "sticky top-0 z-50 transition-all duration-500 h-16",
+          "sticky top-0 z-50 transition-all duration-300 ease-in-out h-16",
           headerVisible ? "translate-y-0" : "-translate-y-full",
           isLightMode
             ? isScrolled
-              ? "bg-white/95 backdrop-blur-xl border-b border-gray-200/80 shadow-lg shadow-gray-500/5"
+              ? "bg-white/95 backdrop-blur-xl border-b border-gray-200/80 shadow-lg shadow-black/10"
               : "bg-white/90 backdrop-blur-md border-b border-gray-200/50"
             : isScrolled
-              ? "bg-[#0A0A23]/95 backdrop-blur-xl border-b border-gray-800/50 shadow-lg shadow-purple-500/5"
+              ? "bg-[#0A0A23]/95 backdrop-blur-xl border-b border-gray-800/50 shadow-lg shadow-black/20"
               : "bg-[#0A0A23]/80 backdrop-blur-md border-b border-gray-800/30"
         )}
       >
