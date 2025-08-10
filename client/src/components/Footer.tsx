@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 interface FooterProps {
   onNavigate?: (section: string) => void;
   compact?: boolean;
+  className?: string;
 }
 
 export const Footer = ({ onNavigate, compact = false }: FooterProps) => {
