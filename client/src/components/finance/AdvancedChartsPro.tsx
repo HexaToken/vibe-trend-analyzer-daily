@@ -13,6 +13,7 @@ import {
   Menu, Smartphone, Tablet, LineChart, CandlestickChart
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
+import { ResponsiveModernHeader } from '../ResponsiveModernHeader';
 
 interface ChartState {
   symbol: string;
