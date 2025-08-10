@@ -932,6 +932,232 @@ export const Analytics = () => {
         </div>
       )}
 
+      {/* Load Template Dialog */}
+      {showLoadDialog && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-slate-900 border border-purple-500/30 rounded-xl max-w-4xl w-full max-h-[80vh] overflow-hidden">
+            {/* Header */}
+            <div className="flex items-center justify-between p-6 border-b border-gray-700/50">
+              <div>
+                <h3 className="text-white text-xl font-bold">Load Filter Template</h3>
+                <p className="text-gray-400 text-sm mt-1">Choose from preset templates or your saved custom filters.</p>
+              </div>
+              <Button
+                onClick={() => setShowLoadDialog(false)}
+                variant="outline"
+                size="sm"
+                className="border-gray-500/30 text-gray-300"
+              >
+                ✕ Close
+              </Button>
+            </div>
+
+            {/* Tabs */}
+            <div className="px-6 pt-4">
+              <div className="flex gap-2">
+                <Button
+                  variant={loadTemplateTab === "All Templates" ? "default" : "outline"}
+                  className={loadTemplateTab === "All Templates" ? "bg-white text-black" : "border-gray-500/30 text-gray-300"}
+                  onClick={() => setLoadTemplateTab("All Templates")}
+                  size="sm"
+                >
+                  All Templates
+                </Button>
+                <Button
+                  variant={loadTemplateTab === "Presets" ? "default" : "outline"}
+                  className={loadTemplateTab === "Presets" ? "bg-purple-600 text-white" : "border-gray-500/30 text-gray-300"}
+                  onClick={() => setLoadTemplateTab("Presets")}
+                  size="sm"
+                >
+                  👑 Presets
+                </Button>
+                <Button
+                  variant={loadTemplateTab === "Custom" ? "default" : "outline"}
+                  className={loadTemplateTab === "Custom" ? "bg-blue-600 text-white" : "border-gray-500/30 text-gray-300"}
+                  onClick={() => setLoadTemplateTab("Custom")}
+                  size="sm"
+                >
+                  🔧 Custom
+                </Button>
+              </div>
+            </div>
+
+            {/* Template List */}
+            <div className="p-6 max-h-96 overflow-y-auto">
+              <div className="space-y-4">
+                {/* Growth Tech Stocks */}
+                {(loadTemplateTab === "All Templates" || loadTemplateTab === "Presets") && (
+                  <div className="bg-slate-800/50 border border-gray-700/50 rounded-lg p-4 flex items-center justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h4 className="text-white font-semibold">Growth Tech Stocks</h4>
+                        <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">
+                          👑 Preset
+                        </Badge>
+                        <div className="text-yellow-400 cursor-pointer hover:text-yellow-300">
+                          ⭐
+                        </div>
+                      </div>
+                      <p className="text-gray-400 text-sm mb-2">High-growth technology stocks with strong momentum</p>
+                      <div className="flex items-center gap-2 text-xs text-gray-500">
+                        <span>🕐 12/31/2023</span>
+                      </div>
+                    </div>
+                    <Button
+                      onClick={() => {
+                        handleLoadTemplate("Growth Template");
+                        setShowLoadDialog(false);
+                      }}
+                      className="bg-blue-600 text-white hover:bg-blue-700"
+                      size="sm"
+                    >
+                      ✓ Load
+                    </Button>
+                  </div>
+                )}
+
+                {/* Value Dividend Plays */}
+                {(loadTemplateTab === "All Templates" || loadTemplateTab === "Presets") && (
+                  <div className="bg-slate-800/50 border border-gray-700/50 rounded-lg p-4 flex items-center justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h4 className="text-white font-semibold">Value Dividend Plays</h4>
+                        <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">
+                          👑 Preset
+                        </Badge>
+                        <div className="text-gray-400 cursor-pointer hover:text-yellow-300">
+                          ☆
+                        </div>
+                      </div>
+                      <p className="text-gray-400 text-sm mb-2">Undervalued dividend-paying stocks</p>
+                      <div className="flex items-center gap-2 text-xs text-gray-500">
+                        <span>🕐 12/31/2023</span>
+                      </div>
+                    </div>
+                    <Button
+                      onClick={() => {
+                        handleLoadTemplate("Value Template");
+                        setShowLoadDialog(false);
+                      }}
+                      className="bg-blue-600 text-white hover:bg-blue-700"
+                      size="sm"
+                    >
+                      ✓ Load
+                    </Button>
+                  </div>
+                )}
+
+                {/* Oversold Bounce Candidates */}
+                {(loadTemplateTab === "All Templates" || loadTemplateTab === "Presets") && (
+                  <div className="bg-slate-800/50 border border-gray-700/50 rounded-lg p-4 flex items-center justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h4 className="text-white font-semibold">Oversold Bounce Candidates</h4>
+                        <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">
+                          👑 Preset
+                        </Badge>
+                        <div className="text-yellow-400 cursor-pointer hover:text-yellow-300">
+                          ⭐
+                        </div>
+                      </div>
+                      <p className="text-gray-400 text-sm mb-2">Stocks in oversold territory with potential for reversal</p>
+                      <div className="flex items-center gap-2 text-xs text-gray-500">
+                        <span>🕐 12/31/2023</span>
+                      </div>
+                    </div>
+                    <Button
+                      onClick={() => {
+                        applyOversoldFilter();
+                        setShowLoadDialog(false);
+                      }}
+                      className="bg-blue-600 text-white hover:bg-blue-700"
+                      size="sm"
+                    >
+                      ✓ Load
+                    </Button>
+                  </div>
+                )}
+
+                {/* Momentum Breakout */}
+                {(loadTemplateTab === "All Templates" || loadTemplateTab === "Presets") && (
+                  <div className="bg-slate-800/50 border border-gray-700/50 rounded-lg p-4 flex items-center justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h4 className="text-white font-semibold">Momentum Breakout</h4>
+                        <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">
+                          👑 Preset
+                        </Badge>
+                        <div className="text-gray-400 cursor-pointer hover:text-yellow-300">
+                          ☆
+                        </div>
+                      </div>
+                      <p className="text-gray-400 text-sm mb-2">Stocks breaking out with strong momentum signals</p>
+                      <div className="flex items-center gap-2 text-xs text-gray-500">
+                        <span>🕐 12/31/2023</span>
+                      </div>
+                    </div>
+                    <Button
+                      onClick={() => {
+                        // Apply momentum breakout filter
+                        setRsi([60, 100]);
+                        setDayChange([2, 20]);
+                        setMoodScore([70, 100]);
+                        setSelectedVolume("High Volume");
+                        setShowLoadDialog(false);
+                      }}
+                      className="bg-blue-600 text-white hover:bg-blue-700"
+                      size="sm"
+                    >
+                      ✓ Load
+                    </Button>
+                  </div>
+                )}
+
+                {/* Custom Templates */}
+                {(loadTemplateTab === "All Templates" || loadTemplateTab === "Custom") && savedTemplates.map((template, index) => (
+                  <div key={index} className="bg-slate-800/50 border border-gray-700/50 rounded-lg p-4 flex items-center justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h4 className="text-white font-semibold">{template}</h4>
+                        <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30 text-xs">
+                          🔧 Custom
+                        </Badge>
+                        <div className="text-gray-400 cursor-pointer hover:text-yellow-300">
+                          ☆
+                        </div>
+                      </div>
+                      <p className="text-gray-400 text-sm mb-2">Custom filter configuration saved by user</p>
+                      <div className="flex items-center gap-2 text-xs text-gray-500">
+                        <span>🕐 {new Date().toLocaleDateString()}</span>
+                      </div>
+                    </div>
+                    <Button
+                      onClick={() => {
+                        handleLoadTemplate(template);
+                        setShowLoadDialog(false);
+                      }}
+                      className="bg-blue-600 text-white hover:bg-blue-700"
+                      size="sm"
+                    >
+                      ✓ Load
+                    </Button>
+                  </div>
+                ))}
+
+                {/* Empty state for Custom tab */}
+                {loadTemplateTab === "Custom" && savedTemplates.length === 0 && (
+                  <div className="text-center py-8">
+                    <div className="text-gray-400 text-lg mb-2">📁</div>
+                    <p className="text-gray-400">No custom templates found</p>
+                    <p className="text-gray-500 text-sm">Save your current filters to create custom templates</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Save Template Dialog */}
       {showSaveDialog && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
