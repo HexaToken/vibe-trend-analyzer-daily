@@ -129,7 +129,12 @@ export const AdvancedChartsPro = () => {
   return (
     <div className="ns-chart-page">
       {/* Top Toolbar */}
-      <div className="ns-chart-header">
+      <div className={cn(
+        "ns-chart-header",
+        "transition-all duration-300 ease-in-out",
+        !headerVisible && "transform -translate-y-full",
+        scrollY > 24 && "shadow-lg shadow-black/20"
+      )}>
         <div className="ns-search-container">
           {/* Global Search */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1 }}>
