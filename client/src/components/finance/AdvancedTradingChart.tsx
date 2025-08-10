@@ -16,6 +16,7 @@ import {
   Bell, AlertTriangle, TrendingUp as TrendUp, ArrowUpRight, ArrowDownRight
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
+import '../../styles/trading-chart.css';
 
 interface ChartState {
   symbol: string;
