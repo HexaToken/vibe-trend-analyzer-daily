@@ -309,7 +309,7 @@ export const AdvancedTradingChart = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex flex-1 h-[calc(100vh-140px)] trading-chart-mobile">
+      <div className="flex flex-1 min-h-[calc(100vh-140px)] trading-chart-mobile">
         {/* Chart Workbench */}
         <div className="flex-1 flex flex-col min-w-0">
           {/* Chart Tabs */}
