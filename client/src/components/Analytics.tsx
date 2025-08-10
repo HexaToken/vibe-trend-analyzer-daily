@@ -123,7 +123,10 @@ export const Analytics = () => {
 
                 {/* Strategy Button */}
                 <div className="mt-4">
-                  <Button className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white border-0">
+                  <Button
+                    onClick={() => setShowProfiler(true)}
+                    className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white border-0"
+                  >
                     ✨ Start Profiling →
                   </Button>
                 </div>
