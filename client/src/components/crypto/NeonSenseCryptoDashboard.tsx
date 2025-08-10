@@ -203,37 +203,6 @@ export const NeonSenseCryptoDashboard = () => {
               <h1 className="text-lg font-semibold text-white">Crypto Dashboard</h1>
             </div>
 
-            {/* Center: Market Stats */}
-            <div className="hidden lg:flex items-center gap-6 text-sm">
-              <div className="flex items-center gap-2">
-                <span className="text-gray-400">Cryptos:</span>
-                <span className="text-cyan-400 font-semibold">{marketStats.cryptosCount}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-gray-400">Exchanges:</span>
-                <span className="text-cyan-400 font-semibold">{marketStats.exchangesCount}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-gray-400">Market Cap:</span>
-                <span className="text-white font-semibold">{marketStats.globalMarketCap}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-gray-400">24h Vol:</span>
-                <span className="text-white font-semibold">{marketStats.volume24h}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-gray-400">BTC:</span>
-                <span className="text-yellow-400 font-semibold">{marketStats.btcDominance}%</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-gray-400">ETH Gas:</span>
-                <span className="text-green-400 font-semibold">{marketStats.ethGas}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-gray-400">Fear & Greed:</span>
-                <span className="text-yellow-400 font-semibold">{marketStats.fearGreedIndex}</span>
-              </div>
-            </div>
 
             {/* Right: Action Buttons */}
             <div className="flex items-center gap-3">
