@@ -855,6 +855,40 @@ export const Analytics = () => {
           />
         </div>
       )}
+
+      {/* Save Template Dialog */}
+      {showSaveDialog && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-slate-900 border border-purple-500/30 rounded-xl p-6 max-w-md w-full">
+            <h3 className="text-white text-lg font-bold mb-4">Save Template</h3>
+            <Input
+              placeholder="Enter template name..."
+              value={newTemplateName}
+              onChange={(e) => setNewTemplateName(e.target.value)}
+              className="mb-4 bg-black/40 border-purple-500/30 text-white placeholder-gray-400 focus:border-purple-400 focus:ring-0"
+            />
+            <div className="flex gap-3">
+              <Button
+                onClick={handleSaveTemplate}
+                className="flex-1 bg-purple-600 text-white"
+                disabled={!newTemplateName.trim()}
+              >
+                Save Template
+              </Button>
+              <Button
+                onClick={() => {
+                  setShowSaveDialog(false);
+                  setNewTemplateName("");
+                }}
+                variant="outline"
+                className="flex-1 border-gray-500/30 text-gray-300"
+              >
+                Cancel
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
