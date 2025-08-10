@@ -471,8 +471,8 @@ export const AdvancedTradingChart = () => {
                   </div>
 
                   {/* Drawing Toolbar */}
-                  <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20">
-                    <div className="bg-gray-800/80 backdrop-blur-sm rounded-xl border border-gray-700/50 p-2 space-y-2">
+                  <div className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 z-20 md:block trading-drawing-toolbar">
+                    <div className="bg-gray-800/80 backdrop-blur-sm rounded-xl border border-gray-700/50 p-1 md:p-2 space-y-1 md:space-y-2 flex md:flex-col gap-1 md:gap-0">
                       {[
                         { icon: MousePointer, tooltip: "Cursor" },
                         { icon: Move, tooltip: "Trendline" },
@@ -483,14 +483,14 @@ export const AdvancedTradingChart = () => {
                         { icon: Undo, tooltip: "Undo" },
                         { icon: Redo, tooltip: "Redo" },
                         { icon: Trash2, tooltip: "Clear" }
-                      ].map((tool, index) => (
+                      ].slice(0, window.innerWidth < 768 ? 6 : 9).map((tool, index) => (
                         <Button
                           key={index}
                           variant="ghost"
                           size="sm"
-                          className="w-10 h-10 p-0 hover:bg-cyan-400/20"
+                          className="w-8 h-8 md:w-10 md:h-10 p-0 hover:bg-cyan-400/20"
                         >
-                          <tool.icon className="w-4 h-4" />
+                          <tool.icon className="w-3 md:w-4 h-3 md:h-4" />
                         </Button>
                       ))}
                     </div>
