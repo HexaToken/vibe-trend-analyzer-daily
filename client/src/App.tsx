@@ -72,7 +72,7 @@ import SmartNewsFeedPage from "@/components/SmartNewsFeedPage";
 const queryClient = new QueryClient();
 
 const AppContent = () => {
-  const [activeSection, setActiveSection] = useState("screener");
+  const [activeSection, setActiveSection] = useState("futuristic-home");
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
   const { bodyGradient } = useMoodTheme();
 
