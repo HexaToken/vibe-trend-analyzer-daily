@@ -378,20 +378,22 @@ export const AdvancedTradingChart = () => {
                   {/* Chart Content */}
                   <div className="relative z-10 p-6 h-full">
                     {/* Price Display */}
-                    <div className="absolute top-6 left-6 z-20">
-                      <div className="bg-gray-800/80 backdrop-blur-sm rounded-xl p-4 border border-gray-700/50">
-                        <div className="flex items-center gap-3">
+                    <div className="absolute top-3 md:top-6 left-3 md:left-6 z-20 trading-price-display">
+                      <div className="bg-gray-800/80 backdrop-blur-sm rounded-xl p-3 md:p-4 border border-gray-700/50">
+                        <div className="flex items-center gap-2 md:gap-3">
                           <div>
-                            <div className="text-3xl font-bold text-cyan-400">
+                            <div className="text-xl md:text-3xl font-bold text-cyan-400">
                               ${currentPrice.toFixed(2)}
                             </div>
                             <div className={cn(
-                              "text-sm font-medium flex items-center gap-1",
+                              "text-xs md:text-sm font-medium flex items-center gap-1",
                               priceChange >= 0 ? "text-green-400" : "text-red-400"
                             )}>
-                              {priceChange >= 0 ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
-                              {priceChange >= 0 ? '+' : ''}{priceChange.toFixed(2)}% 
-                              ({priceChange >= 0 ? '+' : ''}${(currentPrice * priceChange / 100).toFixed(2)})
+                              {priceChange >= 0 ? <TrendingUp className="w-3 md:w-4 h-3 md:h-4" /> : <TrendingDown className="w-3 md:w-4 h-3 md:h-4" />}
+                              {priceChange >= 0 ? '+' : ''}{priceChange.toFixed(2)}%
+                              <span className="hidden md:inline">
+                                ({priceChange >= 0 ? '+' : ''}${(currentPrice * priceChange / 100).toFixed(2)})
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -399,11 +401,11 @@ export const AdvancedTradingChart = () => {
                     </div>
 
                     {/* Symbol Info */}
-                    <div className="absolute top-6 right-6 z-20">
-                      <div className="bg-gray-800/80 backdrop-blur-sm rounded-xl p-4 border border-gray-700/50">
+                    <div className="absolute top-3 md:top-6 right-3 md:right-6 z-20 trading-symbol-info">
+                      <div className="bg-gray-800/80 backdrop-blur-sm rounded-xl p-3 md:p-4 border border-gray-700/50">
                         <div className="text-right">
-                          <div className="text-xl font-bold">{chartState.symbol}</div>
-                          <div className="text-sm text-gray-400">{chartState.exchange}</div>
+                          <div className="text-lg md:text-xl font-bold">{chartState.symbol}</div>
+                          <div className="text-xs md:text-sm text-gray-400">{chartState.exchange}</div>
                         </div>
                       </div>
                     </div>
