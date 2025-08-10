@@ -345,6 +345,20 @@ export const Analytics = () => {
           </TabsContent>
         </Tabs>
       </div>
+
+      {/* Strategy Profiler Modal */}
+      {showProfiler && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <StrategySwiper
+            placement="screener"
+            onComplete={(profile) => {
+              console.log('Profile completed:', profile);
+              setShowProfiler(false);
+            }}
+            onClose={() => setShowProfiler(false)}
+          />
+        </div>
+      )}
     </div>
   );
 };
