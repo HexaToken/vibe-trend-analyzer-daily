@@ -57,6 +57,81 @@ interface WhaleTransaction {
 }
 
 export const AdvancedChartsPro = () => {
+  // Initialize starfield animation
+  useEffect(() => {
+    const canvas = document.getElementById('ns-stars') as HTMLCanvasElement;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const DPR = window.devicePixelRatio || 1;
+    let W: number, H: number;
+    const stars: Array<{x: number, y: number, r: number, s: number}> = [];
+
+    function resize() {
+      W = canvas.clientWidth;
+      H = canvas.clientHeight;
+      canvas.width = W * DPR;
+      canvas.height = H * DPR;
+      ctx.scale(DPR, DPR);
+    }
+
+    function init(n = 60) {
+      stars.length = 0;
+      for (let i = 0; i < n; i++) {
+        stars.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          r: Math.random() * 1.2 + 0.2,
+          s: Math.random() * 0.3 + 0.05
+        });
+      }
+    }
+
+    let mx = 0.5, my = 0.5;
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      for (const star of stars) {
+        star.y += star.s;
+        if (star.y > H) star.y = 0;
+
+        const px = star.x + (mx - 0.5) * 2;
+        const py = star.y + (my - 0.5) * 2;
+
+        ctx.beginPath();
+        ctx.arc(px, py, star.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(200, 255, 255, 0.4)';
+        ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      mx = (e.clientX - rect.left) / rect.width;
+      my = (e.clientY - rect.top) / rect.height;
+    };
+
+    const handleResize = () => {
+      resize();
+      init();
+    };
+
+    canvas.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('resize', handleResize);
+
+    resize();
+    init();
+    draw();
+
+    return () => {
+      canvas.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   const [chartState, setChartState] = useState<ChartState>({
     symbol: "BTCUSDT",
     exchange: "BINANCE",
