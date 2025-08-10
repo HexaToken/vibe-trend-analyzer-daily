@@ -340,22 +340,22 @@ export const AdvancedTradingChart = () => {
                 </TabsList>
 
                 {/* Chart Controls */}
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1 md:gap-2 trading-chart-controls">
                   <Button variant="outline" size="sm" className="border-gray-700/50">
-                    <Crosshair className="w-4 h-4 mr-1" />
-                    Crosshair
+                    <Crosshair className="w-4 h-4 md:mr-1" />
+                    <span className="hidden md:inline">Crosshair</span>
                   </Button>
                   <Button variant="outline" size="sm" className="border-gray-700/50">
-                    <BarChart3 className="w-4 h-4 mr-1" />
-                    Log
+                    <BarChart3 className="w-4 h-4 md:mr-1" />
+                    <span className="hidden md:inline">Log</span>
                   </Button>
                   <Button variant="outline" size="sm" className="border-gray-700/50">
-                    <Maximize className="w-4 h-4 mr-1" />
-                    Auto-Fit
+                    <Maximize className="w-4 h-4 md:mr-1" />
+                    <span className="hidden md:inline">Auto-Fit</span>
                   </Button>
                   <Button variant="outline" size="sm" className="border-gray-700/50">
-                    <Plus className="w-4 h-4 mr-1" />
-                    Compare
+                    <Plus className="w-4 h-4 md:mr-1" />
+                    <span className="hidden md:inline">Compare</span>
                   </Button>
                 </div>
               </div>
