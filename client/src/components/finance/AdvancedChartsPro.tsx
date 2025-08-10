@@ -253,9 +253,9 @@ export const AdvancedChartsPro = () => {
           {/* Chart Workspace */}
           <div className="flex-1 p-6">
             <Card className="h-full border-gray-800/50" style={{ background: '#0F152B' }}>
-              <CardHeader className="pb-3">
-                <div className="flex items-center justify-between">
-                  <Tabs value={activeTab} onValueChange={setActiveTab}>
+              <Tabs value={activeTab} onValueChange={setActiveTab}>
+                <CardHeader className="pb-3">
+                  <div className="flex items-center justify-between">
                     <TabsList className="bg-gray-800/50">
                       <TabsTrigger value="chart" className="data-[state=active]:bg-cyan-400 data-[state=active]:text-black">
                         <LineChart className="w-4 h-4 mr-2" />
@@ -270,48 +270,47 @@ export const AdvancedChartsPro = () => {
                         Strategy Tester
                       </TabsTrigger>
                     </TabsList>
-                  </Tabs>
 
-                  {/* Overlay Controls */}
-                  <div className="flex items-center gap-2">
-                    <Button
-                      variant={overlayControls.crosshair ? "default" : "outline"}
-                      size="sm"
-                      className={overlayControls.crosshair ? "bg-cyan-400 text-black" : "border-gray-700 text-gray-300"}
-                      onClick={() => setOverlayControls({...overlayControls, crosshair: !overlayControls.crosshair})}
-                    >
-                      <Crosshair className="w-4 h-4" />
-                    </Button>
-                    <Button
-                      variant={overlayControls.logScale ? "default" : "outline"}
-                      size="sm"
-                      className={overlayControls.logScale ? "bg-cyan-400 text-black" : "border-gray-700 text-gray-300"}
-                      onClick={() => setOverlayControls({...overlayControls, logScale: !overlayControls.logScale})}
-                    >
-                      Log
-                    </Button>
-                    <Button
-                      variant={overlayControls.autoFit ? "default" : "outline"}
-                      size="sm"
-                      className={overlayControls.autoFit ? "bg-cyan-400 text-black" : "border-gray-700 text-gray-300"}
-                      onClick={() => setOverlayControls({...overlayControls, autoFit: !overlayControls.autoFit})}
-                    >
-                      <Maximize className="w-4 h-4" />
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="border-gray-700 text-gray-300"
-                      onClick={() => setOverlayControls({...overlayControls, compare: !overlayControls.compare})}
-                    >
-                      <Plus className="w-4 h-4 mr-1" />
-                      Compare
-                    </Button>
+                    {/* Overlay Controls */}
+                    <div className="flex items-center gap-2">
+                      <Button
+                        variant={overlayControls.crosshair ? "default" : "outline"}
+                        size="sm"
+                        className={overlayControls.crosshair ? "bg-cyan-400 text-black" : "border-gray-700 text-gray-300"}
+                        onClick={() => setOverlayControls({...overlayControls, crosshair: !overlayControls.crosshair})}
+                      >
+                        <Crosshair className="w-4 h-4" />
+                      </Button>
+                      <Button
+                        variant={overlayControls.logScale ? "default" : "outline"}
+                        size="sm"
+                        className={overlayControls.logScale ? "bg-cyan-400 text-black" : "border-gray-700 text-gray-300"}
+                        onClick={() => setOverlayControls({...overlayControls, logScale: !overlayControls.logScale})}
+                      >
+                        Log
+                      </Button>
+                      <Button
+                        variant={overlayControls.autoFit ? "default" : "outline"}
+                        size="sm"
+                        className={overlayControls.autoFit ? "bg-cyan-400 text-black" : "border-gray-700 text-gray-300"}
+                        onClick={() => setOverlayControls({...overlayControls, autoFit: !overlayControls.autoFit})}
+                      >
+                        <Maximize className="w-4 h-4" />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="border-gray-700 text-gray-300"
+                        onClick={() => setOverlayControls({...overlayControls, compare: !overlayControls.compare})}
+                      >
+                        <Plus className="w-4 h-4 mr-1" />
+                        Compare
+                      </Button>
+                    </div>
                   </div>
-                </div>
-              </CardHeader>
+                </CardHeader>
 
-              <CardContent className="h-full pb-6">
+                <CardContent className="h-full pb-6">
                 <TabsContent value="chart" className="h-full mt-0">
                   {/* Chart Canvas */}
                   <div 
@@ -517,7 +516,8 @@ export const AdvancedChartsPro = () => {
                     </div>
                   </div>
                 </TabsContent>
-              </CardContent>
+                </CardContent>
+              </Tabs>
             </Card>
           </div>
 
@@ -690,6 +690,15 @@ export const AdvancedChartsPro = () => {
                     <Input
                       type="number"
                       value={chartState.indicators.rsi.upper}
+                      onChange={(e) => {
+                        setChartState({
+                          ...chartState,
+                          indicators: {
+                            ...chartState.indicators,
+                            rsi: {...chartState.indicators.rsi, upper: parseInt(e.target.value)}
+                          }
+                        });
+                      }}
                       className="w-16 h-8 bg-gray-800 border-gray-700 text-white text-xs"
                     />
                     <span className="text-gray-400 text-xs">Upper</span>
@@ -698,6 +707,15 @@ export const AdvancedChartsPro = () => {
                     <Input
                       type="number"
                       value={chartState.indicators.rsi.lower}
+                      onChange={(e) => {
+                        setChartState({
+                          ...chartState,
+                          indicators: {
+                            ...chartState.indicators,
+                            rsi: {...chartState.indicators.rsi, lower: parseInt(e.target.value)}
+                          }
+                        });
+                      }}
                       className="w-16 h-8 bg-gray-800 border-gray-700 text-white text-xs"
                     />
                     <span className="text-gray-400 text-xs">Lower</span>
@@ -724,6 +742,15 @@ export const AdvancedChartsPro = () => {
                     <Input
                       type="number"
                       value={chartState.indicators.macd.fast}
+                      onChange={(e) => {
+                        setChartState({
+                          ...chartState,
+                          indicators: {
+                            ...chartState.indicators,
+                            macd: {...chartState.indicators.macd, fast: parseInt(e.target.value)}
+                          }
+                        });
+                      }}
                       className="w-16 h-8 bg-gray-800 border-gray-700 text-white text-xs"
                     />
                     <span className="text-gray-400 text-xs">Fast</span>
@@ -732,6 +759,15 @@ export const AdvancedChartsPro = () => {
                     <Input
                       type="number"
                       value={chartState.indicators.macd.slow}
+                      onChange={(e) => {
+                        setChartState({
+                          ...chartState,
+                          indicators: {
+                            ...chartState.indicators,
+                            macd: {...chartState.indicators.macd, slow: parseInt(e.target.value)}
+                          }
+                        });
+                      }}
                       className="w-16 h-8 bg-gray-800 border-gray-700 text-white text-xs"
                     />
                     <span className="text-gray-400 text-xs">Slow</span>
@@ -740,6 +776,15 @@ export const AdvancedChartsPro = () => {
                     <Input
                       type="number"
                       value={chartState.indicators.macd.signal}
+                      onChange={(e) => {
+                        setChartState({
+                          ...chartState,
+                          indicators: {
+                            ...chartState.indicators,
+                            macd: {...chartState.indicators.macd, signal: parseInt(e.target.value)}
+                          }
+                        });
+                      }}
                       className="w-16 h-8 bg-gray-800 border-gray-700 text-white text-xs"
                     />
                     <span className="text-gray-400 text-xs">Signal</span>
