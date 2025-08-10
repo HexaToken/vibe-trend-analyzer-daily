@@ -311,7 +311,7 @@ export const AdvancedTradingChart = () => {
       {/* Main Content */}
       <div className="flex flex-1 min-h-[calc(100vh-140px)] trading-chart-mobile">
         {/* Chart Workbench */}
-        <div className="flex-1 flex flex-col min-w-0">
+        <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
           {/* Chart Tabs */}
           <div className="px-6 pt-4">
             <Tabs value={activeTab} onValueChange={setActiveTab}>
