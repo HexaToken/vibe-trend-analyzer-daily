@@ -227,16 +227,6 @@ export const AdvancedChartsPro = () => {
               <TabsContent value="chart" className="mt-0">
                 {/* Holographic Chart Canvas */}
                 <div className="ns-holo-card ns-grid ns-radial ns-scan" style={{ height: '500px', position: 'relative' }}>
-                  {/* Starfield Background */}
-                  <canvas 
-                    id="ns-stars" 
-                    style={{
-                      position: 'absolute',
-                      inset: '0',
-                      zIndex: '0',
-                      pointerEvents: 'none'
-                    }}
-                  ></canvas>
                   
                   {/* Chart Root */}
                   <div 
