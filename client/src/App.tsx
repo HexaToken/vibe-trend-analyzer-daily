@@ -227,6 +227,8 @@ const AppContent = () => {
         return <EarningsCalendar />;
       case "charts":
         return <AdvancedChartsPro />;
+      case "trading-chart":
+        return <AdvancedTradingChart />;
       case "trending":
         return <TrendingHub />;
       case "trade-journal":
