@@ -63,6 +63,7 @@ import AdvancedStockScreener from './AdvancedStockScreener';
 import StrategyProfiler from './StrategyProfiler';
 import GeoSentimentMap from './finance/GeoSentimentMap';
 import BasicScreener from './BasicScreener';
+import { NeonSenseCryptoDashboard } from './crypto/NeonSenseCryptoDashboard';
 import SmartTradeJournal from './SmartTradeJournal';
 import CommunitySentimentPolls from './CommunitySentimentPolls';
 import { DailyMoodRecap } from './builder/DailyMoodRecap';
@@ -2339,7 +2340,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                             // Stocks
                             { symbol: 'AAPL', name: 'Apple', sentiment: 78, change: '+2.1%', volume: '45M', category: 'stock', icon: '🍎' },
                             { symbol: 'GOOGL', name: 'Google', sentiment: 72, change: '+1.8%', volume: '28M', category: 'stock', icon: '🔍' },
-                            { symbol: 'MSFT', name: 'Microsoft', sentiment: 85, change: '+3.2%', volume: '32M', category: 'stock', icon: '🪟' },
+                            { symbol: 'MSFT', name: 'Microsoft', sentiment: 85, change: '+3.2%', volume: '32M', category: 'stock', icon: '����' },
                             { symbol: 'TSLA', name: 'Tesla', sentiment: 35, change: '-2.7%', volume: '67M', category: 'stock', icon: '⚡' },
                             { symbol: 'AMZN', name: 'Amazon', sentiment: 68, change: '+0.9%', volume: '23M', category: 'stock', icon: '📦' },
                             { symbol: 'NVDA', name: 'NVIDIA', sentiment: 92, change: '+5.4%', volume: '89M', category: 'stock', icon: '🎮' },
