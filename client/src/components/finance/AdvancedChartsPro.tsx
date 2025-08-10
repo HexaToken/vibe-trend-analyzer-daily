@@ -365,15 +365,20 @@ export const AdvancedChartsPro = () => {
                           </g>
                         </svg>
 
-                        {/* Current Price Display */}
+                        {/* Holographic Price Display with Glow */}
                         <div className="absolute top-4 left-4 text-white">
-                          <div className="text-2xl font-bold text-[#00E5FF]">
-                            ${(42680 + Math.random() * 1000).toFixed(2)}
+                          <div className="ns-value-badge inline-block">
+                            <div className="text-2xl font-bold text-[#00E5FF]">
+                              ${(42680 + Math.random() * 1000).toFixed(2)}
+                            </div>
                           </div>
-                          <div className="text-sm text-green-400">
+                          <div className="text-sm text-green-400 mt-2 ns-glow-line">
                             +2.34% (+$986.23)
                           </div>
                         </div>
+
+                        {/* Holographic Crosshair */}
+                        <div className="ns-crosshair" style={{left: '60%', top: '40%'}}></div>
 
                         {/* Symbol Info */}
                         <div className="absolute top-4 right-4 text-white text-right">
@@ -386,9 +391,9 @@ export const AdvancedChartsPro = () => {
 
                   {/* Indicator Panels */}
                   <div className="mt-4 space-y-4">
-                    {/* RSI Panel */}
+                    {/* Holographic RSI Panel */}
                     {chartState.indicators.rsi.show && (
-                      <Card className="border-gray-800/50" style={{ background: '#0A0F1F' }}>
+                      <Card className="ns-indicator-panel border-gray-800/50">
                         <CardHeader className="pb-2">
                           <CardTitle className="text-white text-sm flex items-center justify-between">
                             RSI ({chartState.indicators.rsi.len})
