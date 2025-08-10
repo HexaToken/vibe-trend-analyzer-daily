@@ -36,6 +36,8 @@ export const AdvancedChartsPro = () => {
   const [activeTab, setActiveTab] = useState('chart');
   const [searchSymbol, setSearchSymbol] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const [headerVisible, setHeaderVisible] = useState(true);
   
   const [chartState, setChartState] = useState<ChartState>({
     symbol: "BTCUSDT",
