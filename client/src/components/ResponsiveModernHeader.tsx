@@ -41,28 +41,24 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
   const isLightMode = themeMode === 'light';
   const isDarkMode = themeMode === 'dark' || isDynamicMode;
 
-  // Enhanced scroll detection for mobile drawer behavior
+  // Enhanced scroll detection for header behavior
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       const scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
-      
-      setIsScrolled(currentScrollY > 10);
-      
-      // On mobile: hide header when scrolling down, show when scrolling up or at top
-      if (window.innerWidth < 768) {
-        if (currentScrollY < 10) {
-          setHeaderVisible(true);
-        } else if (scrollDirection === 'down' && currentScrollY > 100) {
-          setHeaderVisible(false);
-          setMobileMenuOpen(false); // Close mobile menu when hiding header
-        } else if (scrollDirection === 'up' && currentScrollY > lastScrollY + 50) {
-          setHeaderVisible(true);
-        }
-      } else {
-        setHeaderVisible(true); // Always visible on desktop
+
+      setIsScrolled(currentScrollY > 24);
+
+      // Header visibility logic for all screen sizes
+      if (currentScrollY < 10) {
+        setHeaderVisible(true);
+      } else if (scrollDirection === 'down' && currentScrollY > 100) {
+        setHeaderVisible(false);
+        setMobileMenuOpen(false); // Close mobile menu when hiding header
+      } else if (scrollDirection === 'up') {
+        setHeaderVisible(true);
       }
-      
+
       setLastScrollY(currentScrollY);
     };
 
