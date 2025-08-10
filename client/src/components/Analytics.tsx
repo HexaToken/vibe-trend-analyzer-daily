@@ -146,10 +146,18 @@ export const Analytics = () => {
             {/* Screener Tabs */}
             <div className="mb-6">
               <div className="flex gap-4">
-                <Button variant="default" className="bg-purple-600 text-white">
+                <Button
+                  variant={screenerType === "basic" ? "default" : "outline"}
+                  className={screenerType === "basic" ? "bg-purple-600 text-white" : "border-purple-500/30 text-purple-300"}
+                  onClick={() => setScreenerType("basic")}
+                >
                   Basic Screener
                 </Button>
-                <Button variant="outline" className="border-purple-500/30 text-purple-300">
+                <Button
+                  variant={screenerType === "advanced" ? "default" : "outline"}
+                  className={screenerType === "advanced" ? "bg-purple-600 text-white" : "border-purple-500/30 text-purple-300"}
+                  onClick={() => setScreenerType("advanced")}
+                >
                   Advanced Screener
                 </Button>
               </div>
