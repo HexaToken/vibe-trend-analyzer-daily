@@ -171,17 +171,6 @@ export const AdvancedChartsPro = () => {
     </div>
   );
 
-  const MiniChart = ({ data, positive }: { data: number[], positive: boolean }) => (
-    <svg width="60" height="20" className="inline-block">
-      <polyline
-        points={data.map((val, i) => `${(i / (data.length - 1)) * 60},${20 - ((val - Math.min(...data)) / (Math.max(...data) - Math.min(...data))) * 20}`).join(' ')}
-        fill="none"
-        stroke={positive ? '#16C784' : '#EA3943'}
-        strokeWidth="1.5"
-      />
-    </svg>
-  );
-
   return (
     <div className="min-h-screen" style={{ background: '#0A0F1F' }}>
       {/* Enhanced Header */}
@@ -486,7 +475,7 @@ export const AdvancedChartsPro = () => {
                             <option>OR</option>
                           </select>
                           <select className="w-full bg-gray-800 border border-gray-700 rounded text-white p-2">
-                            <option>Volume > Average</option>
+                            <option>Volume greater than Average</option>
                             <option>Bollinger Band squeeze</option>
                             <option>Price breakout</option>
                           </select>
@@ -868,39 +857,6 @@ export const AdvancedChartsPro = () => {
           <Layers className="w-5 h-5" />
         </Button>
       </div>
-
-      {/* Custom CSS for animations */}
-      <style>{`
-        .slider {
-          -webkit-appearance: none;
-          appearance: none;
-          background: transparent;
-          cursor: pointer;
-        }
-        
-        .slider::-webkit-slider-track {
-          background: #374151;
-          height: 4px;
-          border-radius: 2px;
-        }
-        
-        .slider::-webkit-slider-thumb {
-          -webkit-appearance: none;
-          appearance: none;
-          height: 16px;
-          width: 16px;
-          border-radius: 50%;
-          background: #00E5FF;
-          cursor: pointer;
-          border: 2px solid #ffffff;
-        }
-        
-        @media (max-width: 1024px) {
-          .lg\\:grid-cols-3 {
-            grid-template-columns: 1fr;
-          }
-        }
-      `}</style>
     </div>
   );
 };
