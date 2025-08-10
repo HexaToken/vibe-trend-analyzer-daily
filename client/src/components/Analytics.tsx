@@ -29,7 +29,9 @@ export const Analytics = () => {
   const [selectedSocialBuzz, setSelectedSocialBuzz] = useState("All Levels");
   const [savedTemplates, setSavedTemplates] = useState<string[]>(["Growth Template", "Value Template"]);
   const [showSaveDialog, setShowSaveDialog] = useState(false);
+  const [showLoadDialog, setShowLoadDialog] = useState(false);
   const [newTemplateName, setNewTemplateName] = useState("");
+  const [loadTemplateTab, setLoadTemplateTab] = useState("All Templates");
 
   // Mock stock data for the screener
   const stockData = [
