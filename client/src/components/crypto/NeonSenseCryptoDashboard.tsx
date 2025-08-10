@@ -189,34 +189,6 @@ export const NeonSenseCryptoDashboard = () => {
       {/* Enhanced Top Header */}
       <div className="sticky top-0 z-50 backdrop-blur-xl border-b border-gray-800/50" style={{ background: 'rgba(15, 21, 43, 0.95)' }}>
         <div className="max-w-7xl mx-auto px-6 py-3">
-          {/* Top Row - Logo & Market Stats */}
-          <div className="flex items-center justify-between mb-3">
-            {/* Left: Logo & Title */}
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-cyan-400 to-purple-500 flex items-center justify-center">
-                  <Zap className="w-5 h-5 text-white" />
-                </div>
-                <span className="text-xl font-bold text-white">NeonSense</span>
-              </div>
-              <div className="text-gray-400">|</div>
-              <h1 className="text-lg font-semibold text-white">Crypto Dashboard</h1>
-            </div>
-
-
-            {/* Right: Action Buttons */}
-            <div className="flex items-center gap-3">
-              <Button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:opacity-90 text-sm">
-                Get Listed
-              </Button>
-              <Button variant="outline" className="border-gray-600 text-gray-300 text-sm">
-                API
-              </Button>
-              <Button variant="outline" size="sm" className="border-gray-700 text-gray-300">
-                <User className="w-4 h-4" />
-              </Button>
-            </div>
-          </div>
 
           {/* Bottom Row - Search */}
           <div className="flex items-center justify-center">
