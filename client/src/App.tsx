@@ -237,22 +237,28 @@ const AppContent = () => {
     }
   };
 
+  const isChartPage = activeSection === "charts";
+
   return (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <div className={`min-h-screen ${bodyGradient} transition-all duration-500`}>
-        <ResponsiveModernHeader
-          activeSection={activeSection}
-          setActiveSection={setActiveSection}
-          onNavigate={handleNavigation}
-          currentMoodScore={75}
-        />
-        <main>{renderContent()}</main>
-        {/* Footer with compact mode for chart pages */}
+      <div className={cn(
+        isChartPage ? "ns-page" : `min-h-screen ${bodyGradient} transition-all duration-500`
+      )}>
+        {!isChartPage && (
+          <ResponsiveModernHeader
+            activeSection={activeSection}
+            setActiveSection={setActiveSection}
+            onNavigate={handleNavigation}
+            currentMoodScore={75}
+          />
+        )}
+        <main className={isChartPage ? "ns-main" : ""}>{renderContent()}</main>
         <Footer
           onNavigate={setActiveSection}
           compact={["charts", "crypto"].includes(activeSection)}
+          className={isChartPage ? "ns-footer" : ""}
         />
         <ApiStatusIndicator />
         <MoodGptWidget />
