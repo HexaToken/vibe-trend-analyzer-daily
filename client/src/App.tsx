@@ -29,7 +29,7 @@ import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
 import { PulseOfTheChain } from "@/components/crypto/PulseOfTheChain";
 import { NeonSenseCryptoDashboard } from "@/components/crypto/NeonSenseCryptoDashboard";
 import { EarningsCalendar } from "@/components/finance/EarningsCalendar";
-import { AdvancedCharts } from "@/components/finance/AdvancedCharts";
+import { AdvancedChartsPro } from "@/components/finance/AdvancedChartsPro";
 import { TrendingHub } from "@/components/finance/TrendingHub";
 import TradeJournalClassic from "@/components/TradeJournalClassic";
 import CommunitySentimentPolls from "@/components/CommunitySentimentPolls";
