@@ -118,10 +118,12 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
   ];
 
   const handleNavigation = (key: string) => {
-    setActiveSection(key);
+    setActiveSection(key);     // Update the main app's activeSection
     setMobileMenuOpen(false);
     setSideDrawerOpen(false);
-    onNavigate?.(key);
+    if (onNavigate) {
+      onNavigate(key);         // Call additional navigation handler if provided
+    }
   };
 
   const toggleSideDrawer = () => {
