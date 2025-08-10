@@ -1,6 +1,12 @@
 /* Import Light Mode Readability Enhancements */
 @import './styles/light-mode-readability.css';
 
+/* Import Futuristic Chart Styling */
+@import './styles/futuristic-chart.css';
+
+/* Import NeonSense Layout */
+@import './styles/neomsense-layout.css';
+
 /* Import MoodMeter Theme Utilities */
 @import './components/MoodThemeUtilities.css';
 
@@ -1497,6 +1503,65 @@ All colors MUST be HSL.
   :root:not(.dark) [data-state="active"][style*="--active-bg"] {
     background: var(--active-bg) !important;
     box-shadow: var(--active-shadow) !important;
+  }
+
+  /* Custom Range Slider Styles for Smart Stock Screener */
+  .slider {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    pointer-events: none;
+  }
+
+  .slider::-webkit-slider-track {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background: #a855f7;
+    cursor: pointer;
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.5);
+    pointer-events: auto;
+    transition: all 0.2s ease;
+  }
+
+  .slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.3);
+  }
+
+  .slider::-moz-range-track {
+    background: transparent;
+    border: none;
+    height: 8px;
+    cursor: pointer;
+  }
+
+  .slider::-moz-range-thumb {
+    background: #a855f7;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.5);
+    pointer-events: auto;
+    transition: all 0.2s ease;
+  }
+
+  .slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.3);
   }
 
   /* Fix Finance dropdown menu items appearing as selected in light mode */

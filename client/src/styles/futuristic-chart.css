@@ -1,0 +1,299 @@
+/* Futuristic Chart Styling - Holographic Instrument Panel */
+
+:root {
+  --ns-bg: #0A0F1F;
+  --ns-card: rgba(15, 21, 43, 0.75);
+  --ns-teal: #00E5FF;
+  --ns-mag: #FF1F8F;
+  --ns-lime: #C3FF00;
+  --ns-glow: 0 0 24px rgba(0, 229, 255, 0.25);
+  --ns-glow-subtle: 0 0 12px rgba(0, 229, 255, 0.12);
+  --ns-glow-intense: 0 0 36px rgba(0, 229, 255, 0.4);
+}
+
+/* Holographic Card Container */
+.ns-holo-card {
+  background: var(--ns-card);
+  border-radius: 20px;
+  padding: 16px;
+  backdrop-filter: blur(8px) saturate(120%);
+  box-shadow: 
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    var(--ns-glow);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0, 229, 255, 0.1);
+}
+
+.ns-holo-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(45deg, var(--ns-teal), var(--ns-mag), var(--ns-teal));
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+/* Neon Grid Overlay */
+.ns-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.12;
+  background: 
+    repeating-linear-gradient(0deg, transparent 0 23px, rgba(255, 255, 255, 0.08) 23px 24px),
+    repeating-linear-gradient(90deg, transparent 0 23px, rgba(255, 255, 255, 0.08) 23px 24px);
+}
+
+/* Radial Core Glow */
+.ns-radial::after {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  background: radial-gradient(circle at 60% 40%, rgba(0, 229, 255, 0.08), transparent 60%);
+  z-index: 1;
+}
+
+/* Scanner Sweep Animation */
+.ns-scan::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 120px;
+  top: -120px;
+  background: linear-gradient(180deg, transparent, rgba(0, 229, 255, 0.06), transparent);
+  animation: nsScan 12s linear infinite;
+  z-index: 2;
+  pointer-events: none;
+}
+
+@keyframes nsScan {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(130%); }
+}
+
+/* Holographic Crosshair */
+.ns-crosshair {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(0, 229, 255, 0.3);
+  box-shadow: 
+    0 0 0 2px rgba(255, 255, 255, 0.2),
+    0 0 12px rgba(0, 229, 255, 0.8);
+  animation: nsPulse 1.4s ease-out infinite;
+  z-index: 10;
+}
+
+@keyframes nsPulse {
+  0% { transform: scale(0.9); opacity: 0.9; }
+  100% { transform: scale(1.25); opacity: 0.2; }
+}
+
+/* Crosshair Lines */
+.ns-crosshair::before,
+.ns-crosshair::after {
+  content: "";
+  position: absolute;
+  background: rgba(0, 229, 255, 0.6);
+  z-index: -1;
+}
+
+.ns-crosshair::before {
+  left: 50%;
+  top: -100vh;
+  width: 1px;
+  height: 200vh;
+  transform: translateX(-50%);
+  box-shadow: 0 0 6px rgba(0, 229, 255, 0.8);
+}
+
+.ns-crosshair::after {
+  top: 50%;
+  left: -100vw;
+  height: 1px;
+  width: 200vw;
+  transform: translateY(-50%);
+  box-shadow: 0 0 6px rgba(0, 229, 255, 0.8);
+}
+
+/* Glow Line Effects */
+.ns-glow-line {
+  filter: drop-shadow(0 0 6px rgba(0, 229, 255, 0.5));
+}
+
+/* Enhanced Indicators */
+.ns-indicator-panel {
+  background: linear-gradient(135deg, rgba(15, 21, 43, 0.9), rgba(10, 15, 31, 0.9));
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-radius: 12px;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 4px 20px rgba(0, 229, 255, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+/* Futuristic Badges */
+.ns-value-badge {
+  background: conic-gradient(from 45deg, var(--ns-teal), var(--ns-mag), var(--ns-teal));
+  padding: 1px;
+  border-radius: 8px;
+}
+
+.ns-value-badge > div {
+  background: rgba(10, 15, 31, 0.95);
+  border-radius: 7px;
+  padding: 4px 12px;
+  color: white;
+  font-weight: 600;
+  box-shadow: inset 0 0 20px rgba(0, 229, 255, 0.1);
+}
+
+/* Hover Effects */
+.ns-holo-button {
+  background: rgba(15, 21, 43, 0.6);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(8px);
+}
+
+.ns-holo-button:hover {
+  transform: translateY(-2px);
+  background: rgba(0, 229, 255, 0.1);
+  border-color: rgba(0, 229, 255, 0.6);
+  box-shadow: 
+    0 8px 32px rgba(0, 229, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+/* Focus Depth Effect */
+.ns-focus-panel {
+  filter: none;
+  transform: scale(1);
+  transition: all 0.3s ease;
+}
+
+.ns-blur-panel {
+  filter: blur(2px);
+  transform: scale(0.98);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+/* Starfield Container */
+.ns-starfield {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Price Trail Effect */
+.ns-price-trail {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ns-teal);
+  animation: priceRipple 350ms ease-out;
+}
+
+@keyframes priceRipple {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.7);
+  }
+  100% {
+    transform: scale(1.5);
+    box-shadow: 0 0 0 20px rgba(0, 229, 255, 0);
+  }
+}
+
+/* AI Tag Chips */
+.ns-ai-tag {
+  position: absolute;
+  background: rgba(0, 229, 255, 0.1);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: 16px;
+  padding: 4px 12px;
+  font-size: 12px;
+  color: var(--ns-teal);
+  backdrop-filter: blur(8px);
+  transform: rotateX(5deg) rotateY(-2deg);
+  box-shadow: 0 4px 16px rgba(0, 229, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.ns-ai-tag:hover {
+  transform: rotateX(0deg) rotateY(0deg) translateY(-2px);
+  background: rgba(0, 229, 255, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 229, 255, 0.3);
+}
+
+/* Performance Controls */
+.ns-fx-controls {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 100;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.ns-fx-toggle {
+  background: rgba(15, 21, 43, 0.8);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ns-fx-toggle.active {
+  background: rgba(0, 229, 255, 0.2);
+  border-color: rgba(0, 229, 255, 0.5);
+  color: var(--ns-teal);
+}
+
+/* Intensity Variations */
+.ns-glow-low {
+  --ns-glow: 0 0 12px rgba(0, 229, 255, 0.15);
+}
+
+.ns-glow-med {
+  --ns-glow: 0 0 24px rgba(0, 229, 255, 0.25);
+}
+
+.ns-glow-high {
+  --ns-glow: 0 0 36px rgba(0, 229, 255, 0.4);
+}
+
+/* Color Mode Variations */
+.ns-mode-teal {
+  --ns-primary: var(--ns-teal);
+  --ns-glow: 0 0 24px rgba(0, 229, 255, 0.25);
+}
+
+.ns-mode-magenta {
+  --ns-primary: var(--ns-mag);
+  --ns-glow: 0 0 24px rgba(255, 31, 143, 0.25);
+}
+
+.ns-mode-lime {
+  --ns-primary: var(--ns-lime);
+  --ns-glow: 0 0 24px rgba(195, 255, 0, 0.25);
+}

@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { MoodThemeProvider, useMoodTheme } from "@/contexts/MoodThemeContext";
+import { cn } from "@/lib/utils";
 
 import { Dashboard } from "@/components/Dashboard";
 import { MarketMoodPage } from "@/components/MarketMoodPage";
@@ -27,8 +28,9 @@ import { BuilderDemo } from "@/components/BuilderDemo";
 import { ApiStatusIndicator } from "@/components/ApiStatusIndicator";
 import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
 import { PulseOfTheChain } from "@/components/crypto/PulseOfTheChain";
+import { NeonSenseCryptoDashboard } from "@/components/crypto/NeonSenseCryptoDashboard";
 import { EarningsCalendar } from "@/components/finance/EarningsCalendar";
-import { AdvancedCharts } from "@/components/finance/AdvancedCharts";
+import { AdvancedChartsPro } from "@/components/finance/AdvancedChartsPro";
 import { TrendingHub } from "@/components/finance/TrendingHub";
 import TradeJournalClassic from "@/components/TradeJournalClassic";
 import CommunitySentimentPolls from "@/components/CommunitySentimentPolls";
@@ -138,7 +140,8 @@ const AppContent = () => {
         return <DatabaseDemo />;
       case "social":
         return <SocialPlatform />;
-      // Removed "crypto" route - CryptoDashboard component retained, crypto features moved to Finance section
+      case "crypto":
+        return <NeonSenseCryptoDashboard />;
       case "nlp":
         return <NLPSentimentDemo />;
       case "spacy-nlp":
@@ -222,7 +225,7 @@ const AppContent = () => {
       case "earnings":
         return <EarningsCalendar />;
       case "charts":
-        return <AdvancedCharts />;
+        return <AdvancedChartsPro />;
       case "trending":
         return <TrendingHub />;
       case "trade-journal":
@@ -235,19 +238,29 @@ const AppContent = () => {
     }
   };
 
+  const isChartPage = activeSection === "charts";
+
   return (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <div className={`min-h-screen ${bodyGradient} transition-all duration-500`}>
-        <ResponsiveModernHeader
-          activeSection={activeSection}
-          setActiveSection={setActiveSection}
-          onNavigate={handleNavigation}
-          currentMoodScore={75}
+      <div className={cn(
+        isChartPage ? "ns-page" : `min-h-screen ${bodyGradient} transition-all duration-500`
+      )}>
+        {!isChartPage && (
+          <ResponsiveModernHeader
+            activeSection={activeSection}
+            setActiveSection={setActiveSection}
+            onNavigate={handleNavigation}
+            currentMoodScore={75}
+          />
+        )}
+        <main className={isChartPage ? "ns-main" : ""}>{renderContent()}</main>
+        <Footer
+          onNavigate={setActiveSection}
+          compact={["charts", "crypto"].includes(activeSection)}
+          className={isChartPage ? "ns-footer" : ""}
         />
-        <main>{renderContent()}</main>
-        <Footer onNavigate={setActiveSection} />
         <ApiStatusIndicator />
         <MoodGptWidget />
       </div>

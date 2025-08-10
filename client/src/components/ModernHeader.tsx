@@ -78,7 +78,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
     { label: 'Crypto Dashboard', key: 'crypto', icon: '₿' },
     { label: 'Earnings Calendar', key: 'earnings', icon: '📅' },
     { label: 'Charts', key: 'charts', icon: '📊' },
-    { label: 'Trending', key: 'trending', icon: '🔥' },
+    { label: 'Trending', key: 'trending', icon: '��' },
     { label: 'Trade Journal', key: 'trade-journal', icon: '📝' },
     { label: 'Sentiment Polls', key: 'sentiment-polls', icon: '📊' },
   ];
