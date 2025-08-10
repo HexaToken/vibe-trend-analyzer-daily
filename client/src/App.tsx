@@ -27,6 +27,7 @@ import { BuilderDemo } from "@/components/BuilderDemo";
 import { ApiStatusIndicator } from "@/components/ApiStatusIndicator";
 import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
 import { PulseOfTheChain } from "@/components/crypto/PulseOfTheChain";
+import { NeonSenseCryptoDashboard } from "@/components/crypto/NeonSenseCryptoDashboard";
 import { EarningsCalendar } from "@/components/finance/EarningsCalendar";
 import { AdvancedCharts } from "@/components/finance/AdvancedCharts";
 import { TrendingHub } from "@/components/finance/TrendingHub";
