@@ -230,6 +230,8 @@ const AppContent = () => {
         return <AdvancedChartsPro />;
       case "trading-chart":
         return <AdvancedTradingChart />;
+      case "test-trading":
+        return <TradingChartTest />;
       case "trending":
         return <TrendingHub />;
       case "trade-journal":
