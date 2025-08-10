@@ -313,18 +313,67 @@ export const AdvancedChartsPro = () => {
                 <CardContent className="h-full pb-6">
                 <TabsContent value="chart" className="h-full mt-0">
                   {/* Chart Canvas */}
-                  <div 
-                    id="ns-chart-root" 
-                    className="h-96 rounded-lg border border-gray-700/50 bg-black/20 flex items-center justify-center"
+                  <div
+                    id="ns-chart-root"
+                    className="h-96 rounded-lg border border-gray-700/50 bg-gradient-to-br from-black/40 to-gray-900/60 relative overflow-hidden"
                     data-symbol={chartState.symbol}
                     data-timeframe={chartState.timeframe}
                     data-exchange={chartState.exchange}
                   >
-                    <div className="text-center">
-                      <div className="w-16 h-16 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                      <div className="text-gray-400 text-lg">Chart Loading...</div>
-                      <div className="text-gray-500 text-sm mt-2">
-                        Embed TradingView here. Set symbol/timeframe via widget options.
+                    {/* Simulated Chart Display */}
+                    <div className="absolute inset-0 p-4">
+                      {/* Chart Grid */}
+                      <div className="w-full h-full relative">
+                        <svg className="w-full h-full opacity-30">
+                          <defs>
+                            <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                              <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#333" strokeWidth="0.5"/>
+                            </pattern>
+                          </defs>
+                          <rect width="100%" height="100%" fill="url(#grid)" />
+                        </svg>
+
+                        {/* Simulated Candlestick Chart */}
+                        <svg className="absolute inset-0 w-full h-full">
+                          <g transform="translate(40, 20)">
+                            {/* Price line simulation */}
+                            <polyline
+                              points="0,150 30,120 60,180 90,140 120,100 150,160 180,130 210,90 240,110 270,80 300,120"
+                              fill="none"
+                              stroke="#00E5FF"
+                              strokeWidth="2"
+                              className="opacity-80"
+                            />
+                            {/* Volume bars */}
+                            {Array.from({length: 15}, (_, i) => (
+                              <rect
+                                key={i}
+                                x={i * 20}
+                                y={200 + Math.random() * 40}
+                                width="12"
+                                height={Math.random() * 60 + 10}
+                                fill="#666"
+                                opacity="0.4"
+                              />
+                            ))}
+                          </g>
+                        </svg>
+
+                        {/* Current Price Display */}
+                        <div className="absolute top-4 left-4 text-white">
+                          <div className="text-2xl font-bold text-[#00E5FF]">
+                            ${(42680 + Math.random() * 1000).toFixed(2)}
+                          </div>
+                          <div className="text-sm text-green-400">
+                            +2.34% (+$986.23)
+                          </div>
+                        </div>
+
+                        {/* Symbol Info */}
+                        <div className="absolute top-4 right-4 text-white text-right">
+                          <div className="text-lg font-semibold">{chartState.symbol}</div>
+                          <div className="text-sm text-gray-400">{chartState.exchange}</div>
+                        </div>
                       </div>
                     </div>
                   </div>
