@@ -4,6 +4,9 @@
 /* Import Futuristic Chart Styling */
 @import './styles/futuristic-chart.css';
 
+/* Import NeonSense Layout */
+@import './styles/neomsense-layout.css';
+
 /* Import MoodMeter Theme Utilities */
 @import './components/MoodThemeUtilities.css';
 
