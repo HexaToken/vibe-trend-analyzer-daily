@@ -115,14 +115,14 @@ export const Analytics = () => {
                   <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
                     <Search className="w-4 h-4 text-white" />
                   </div>
-                  <h2 className="text-2xl font-bold text-white">Market Tone Strategy</h2>
+                  <h2 className="text-2xl font-bold text-white">Match Your Strategy</h2>
                 </div>
-                <p className="text-gray-300 text-sm">Discover stocks using machine learning & market complexity</p>
-                
+                <p className="text-gray-300 text-sm">Discover your trading personality</p>
+
                 {/* Strategy Button */}
                 <div className="mt-4">
-                  <Button className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white border-0">
-                    View strategy →
+                  <Button className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white border-0">
+                    ✨ Start Profiling →
                   </Button>
                 </div>
               </div>
