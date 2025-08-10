@@ -484,7 +484,7 @@ export const AdvancedTradingChart = () => {
                         { icon: Undo, tooltip: "Undo" },
                         { icon: Redo, tooltip: "Redo" },
                         { icon: Trash2, tooltip: "Clear" }
-                      ].slice(0, window.innerWidth < 768 ? 6 : 9).map((tool, index) => (
+                      ].slice(0, 9).map((tool, index) => (
                         <Button
                           key={index}
                           variant="ghost"
