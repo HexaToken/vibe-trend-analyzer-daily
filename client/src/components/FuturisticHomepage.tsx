@@ -733,11 +733,6 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               <TabsContent value="geo-sentiment" className="mt-8">
                 <GeoSentimentMap />
               </TabsContent>
-
-              {/* NeonSense Crypto Dashboard Tab */}
-              <TabsContent value="crypto-dashboard" className="mt-8">
-                <NeonSenseCryptoDashboard />
-              </TabsContent>
               </Tabs>
             </div>
           </div>
@@ -966,7 +961,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                               </div>
                             </div>
                             <Badge className="bg-rose-500/20 text-rose-400 border-rose-500/30">
-                              📉 {token.change}
+                              ��� {token.change}
                             </Badge>
                           </div>
                           <div className="space-y-2">
