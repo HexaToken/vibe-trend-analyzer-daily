@@ -572,25 +572,25 @@ export const AdvancedTradingChart = () => {
 
           {/* Bottom Oscillator Pane */}
           {bottomPaneOpen && (
-            <div className="px-6 pb-6">
-              <div className="bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-2xl border border-gray-700/50 p-4">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-4">
-                    <h3 className="text-lg font-semibold">RSI (14)</h3>
-                    <Badge variant="secondary" className="bg-cyan-400/20 text-cyan-400">
+            <div className="px-4 md:px-6 pb-4 md:pb-6">
+              <div className="bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-2xl border border-gray-700/50 p-3 md:p-4 trading-bottom-pane">
+                <div className="flex items-center justify-between mb-3 md:mb-4">
+                  <div className="flex items-center gap-2 md:gap-4">
+                    <h3 className="text-base md:text-lg font-semibold">RSI (14)</h3>
+                    <Badge variant="secondary" className="bg-cyan-400/20 text-cyan-400 text-xs md:text-sm">
                       65.3
                     </Badge>
                   </div>
-                  <Button 
-                    variant="ghost" 
+                  <Button
+                    variant="ghost"
                     size="sm"
                     onClick={() => setBottomPaneOpen(false)}
                   >
                     <X className="w-4 h-4" />
                   </Button>
                 </div>
-                
-                <div className="h-32 relative">
+
+                <div className="h-20 md:h-32 relative">
                   {/* RSI Levels */}
                   <div className="absolute top-2 left-0 right-0 h-px bg-red-400/30"></div>
                   <div className="absolute top-1/2 left-0 right-0 h-px bg-gray-600"></div>
