@@ -63,6 +63,32 @@ export const AdvancedChartsPro = () => {
     compare: []
   });
 
+  // Handle scroll behavior for header
+  useEffect(() => {
+    let lastScrollY = 0;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Determine scroll direction and header visibility
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down and past threshold - hide header
+        setHeaderVisible(false);
+      } else {
+        // Scrolling up or at top - show header
+        setHeaderVisible(true);
+      }
+
+      setScrollY(currentScrollY);
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const timeframes = ['1m', '5m', '15m', '1h', '4h', '1D', '1W', '1M'];
   
