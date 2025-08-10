@@ -75,6 +75,11 @@
     flex-direction: column;
     gap: 0.75rem;
   }
+
+  .trading-chart-mobile {
+    height: auto;
+    min-height: 100vh;
+  }
   
   .trading-toolbar-row {
     display: flex;
