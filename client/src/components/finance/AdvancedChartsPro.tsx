@@ -13,7 +13,6 @@ import {
   Menu, Smartphone, Tablet, LineChart, CandlestickChart
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
-import { useEffect } from 'react';
 
 interface ChartState {
   symbol: string;
