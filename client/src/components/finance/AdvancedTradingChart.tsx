@@ -362,7 +362,7 @@ export const AdvancedTradingChart = () => {
 
               <TabsContent value="chart" className="mt-0">
                 {/* Chart Canvas */}
-                <div className="relative bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-2xl border border-gray-700/50 h-[500px] overflow-hidden">
+                <div className="relative bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-2xl border border-gray-700/50 h-[400px] md:h-[500px] overflow-hidden trading-chart-canvas">
                   {/* Grid Background */}
                   <div className="absolute inset-0 opacity-20">
                     <svg className="w-full h-full">
