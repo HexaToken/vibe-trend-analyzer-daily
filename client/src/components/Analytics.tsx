@@ -727,11 +727,31 @@ export const Analytics = () => {
                           </h3>
                           <div className="space-y-4">
                             <div>
-                              <label className="text-gray-400 text-xs mb-2 block">Mood Score: 0 - 100</label>
+                              <label className="text-gray-400 text-xs mb-2 block">Mood Score: {moodScore[0]} - {moodScore[1]}</label>
                               <div className="h-2 bg-gray-700 rounded-full relative">
-                                <div className="absolute left-0 top-0 h-2 bg-emerald-500 rounded-full" style={{width: '75%'}} />
-                                <div className="absolute left-0 top-0 w-3 h-3 bg-emerald-400 rounded-full -mt-0.5 border-2 border-white" style={{left: '0%'}} />
-                                <div className="absolute top-0 w-3 h-3 bg-emerald-400 rounded-full -mt-0.5 border-2 border-white" style={{left: '75%'}} />
+                                <div
+                                  className="absolute top-0 h-2 bg-emerald-500 rounded-full"
+                                  style={{
+                                    left: `${(moodScore[0] / 100) * 100}%`,
+                                    width: `${((moodScore[1] - moodScore[0]) / 100) * 100}%`
+                                  }}
+                                />
+                                <input
+                                  type="range"
+                                  min="0"
+                                  max="100"
+                                  value={moodScore[0]}
+                                  onChange={(e) => setMoodScore([parseInt(e.target.value), moodScore[1]])}
+                                  className="absolute top-0 w-full h-2 bg-transparent appearance-none cursor-pointer slider"
+                                />
+                                <input
+                                  type="range"
+                                  min="0"
+                                  max="100"
+                                  value={moodScore[1]}
+                                  onChange={(e) => setMoodScore([moodScore[0], parseInt(e.target.value)])}
+                                  className="absolute top-0 w-full h-2 bg-transparent appearance-none cursor-pointer slider"
+                                />
                               </div>
                             </div>
                             <div>
