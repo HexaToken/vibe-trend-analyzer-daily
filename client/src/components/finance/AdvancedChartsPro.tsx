@@ -312,16 +312,22 @@ export const AdvancedChartsPro = () => {
 
                 <CardContent className="h-full pb-6">
                 <TabsContent value="chart" className="h-full mt-0">
-                  {/* Chart Canvas */}
+                  {/* Holographic Chart Canvas */}
                   <div
                     id="ns-chart-root"
-                    className="h-96 rounded-lg border border-gray-700/50 bg-gradient-to-br from-black/40 to-gray-900/60 relative overflow-hidden"
+                    className="ns-holo-card ns-grid ns-radial ns-scan h-96 relative overflow-hidden"
                     data-symbol={chartState.symbol}
                     data-timeframe={chartState.timeframe}
                     data-exchange={chartState.exchange}
                   >
-                    {/* Simulated Chart Display */}
-                    <div className="absolute inset-0 p-4">
+                    {/* Starfield Background */}
+                    <canvas
+                      id="ns-stars"
+                      className="ns-starfield absolute inset-0 z-0"
+                      style={{pointerEvents: 'none'}}
+                    ></canvas>
+                    {/* Holographic Chart Display */}
+                    <div className="absolute inset-0 p-4 z-10">
                       {/* Chart Grid */}
                       <div className="w-full h-full relative">
                         <svg className="w-full h-full opacity-30">
@@ -342,7 +348,7 @@ export const AdvancedChartsPro = () => {
                               fill="none"
                               stroke="#00E5FF"
                               strokeWidth="2"
-                              className="opacity-80"
+                              className="ns-glow-line opacity-80"
                             />
                             {/* Volume bars */}
                             {Array.from({length: 15}, (_, i) => (
