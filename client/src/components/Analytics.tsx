@@ -6,10 +6,12 @@ import { Input } from './ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Search, TrendingUp, TrendingDown, BarChart3, Crown } from 'lucide-react';
 import { cn } from '../lib/utils';
+import StrategySwiper from './StrategySwiper';
 
 export const Analytics = () => {
   const [activeTab, setActiveTab] = useState("Scanner");
   const [searchQuery, setSearchQuery] = useState("");
+  const [showProfiler, setShowProfiler] = useState(false);
 
   // Mock stock data for the screener
   const stockData = [
