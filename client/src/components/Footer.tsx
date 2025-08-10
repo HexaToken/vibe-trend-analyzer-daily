@@ -54,10 +54,12 @@ export const Footer = ({ onNavigate, compact = false }: FooterProps) => {
         ? "bg-gray-50 border-gray-200"
         : "bg-black/40 border-purple-500/20 backdrop-blur-xl"
     )}>
-      <div className={cn(
-        "max-w-7xl mx-auto px-6",
-        compact ? "py-4" : "py-12"
-      )}>
+      <div
+        className={cn(
+          "max-w-7xl mx-auto px-6",
+          compact ? "py-4" : "py-12"
+        )}
+      >
         {compact ? (
           // Compact layout for chart pages
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
