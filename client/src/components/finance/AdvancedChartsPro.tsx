@@ -130,6 +130,13 @@ export const AdvancedChartsPro = () => {
 
   return (
     <div className="ns-chart-page">
+      {/* Main Header */}
+      <ResponsiveModernHeader
+        activeSection={activeSection}
+        setActiveSection={setActiveSection}
+        currentMoodScore={72}
+      />
+
       {/* Top Toolbar */}
       <div className={cn(
         "ns-chart-header",
