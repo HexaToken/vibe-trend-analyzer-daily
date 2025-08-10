@@ -22,6 +22,14 @@ export const Analytics = () => {
   const [moodScore, setMoodScore] = useState([0, 100]);
   const [newsScore, setNewsScore] = useState([0, 100]);
   const [liveMode, setLiveMode] = useState(true);
+  const [searchTicker, setSearchTicker] = useState("");
+  const [selectedMarketCap, setSelectedMarketCap] = useState("All Sizes");
+  const [selectedSector, setSelectedSector] = useState("All Sectors");
+  const [selectedVolume, setSelectedVolume] = useState("All Volumes");
+  const [selectedSocialBuzz, setSelectedSocialBuzz] = useState("All Levels");
+  const [savedTemplates, setSavedTemplates] = useState<string[]>(["Growth Template", "Value Template"]);
+  const [showSaveDialog, setShowSaveDialog] = useState(false);
+  const [newTemplateName, setNewTemplateName] = useState("");
 
   // Mock stock data for the screener
   const stockData = [
@@ -57,11 +65,105 @@ export const Analytics = () => {
     return 'bg-red-500/20 border-red-500/30';
   };
 
-  const filteredStocks = stockData.filter(stock => 
-    stock.symbol.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    stock.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    stock.sector.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredStocks = stockData.filter(stock =>
+    (searchQuery === "" ||
+     stock.symbol.toLowerCase().includes(searchQuery.toLowerCase()) ||
+     stock.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+     stock.sector.toLowerCase().includes(searchQuery.toLowerCase())) &&
+    (searchTicker === "" ||
+     stock.symbol.toLowerCase().includes(searchTicker.toLowerCase()) ||
+     stock.name.toLowerCase().includes(searchTicker.toLowerCase())) &&
+    (selectedMarketCap === "All Sizes" ||
+     (selectedMarketCap === "Large Cap" && parseFloat(stock.marketCap.replace(/[TB]/g, '')) > 10) ||
+     (selectedMarketCap === "Mid Cap" && parseFloat(stock.marketCap.replace(/[TB]/g, '')) >= 2 && parseFloat(stock.marketCap.replace(/[TB]/g, '')) <= 10) ||
+     (selectedMarketCap === "Small Cap" && parseFloat(stock.marketCap.replace(/[TB]/g, '')) < 2)) &&
+    (selectedSector === "All Sectors" || stock.sector === selectedSector) &&
+    stock.price >= priceRange[0] && stock.price <= priceRange[1] &&
+    stock.sentiment >= moodScore[0] && stock.sentiment <= moodScore[1]
   );
+
+  const handleSaveTemplate = () => {
+    if (newTemplateName.trim()) {
+      setSavedTemplates([...savedTemplates, newTemplateName.trim()]);
+      setNewTemplateName("");
+      setShowSaveDialog(false);
+      alert(`Template "${newTemplateName}" saved successfully!`);
+    }
+  };
+
+  const handleLoadTemplate = (templateName: string) => {
+    // Load predefined template settings
+    if (templateName === "Growth Template") {
+      setPriceRange([50, 500]);
+      setPeRatio([15, 40]);
+      setRsi([40, 70]);
+      setSelectedSector("Technology");
+      setMoodScore([60, 100]);
+    } else if (templateName === "Value Template") {
+      setPriceRange([10, 200]);
+      setPeRatio([5, 20]);
+      setRsi([30, 60]);
+      setSelectedSector("Finance");
+      setMoodScore([40, 80]);
+    }
+    alert(`Template "${templateName}" loaded successfully!`);
+  };
+
+  const handleExportCSV = () => {
+    const csvContent = [
+      ['Symbol', 'Name', 'Price', 'Change %', 'Sentiment', 'Market Cap', 'Volume', 'Sector'],
+      ...filteredStocks.map(stock => [
+        stock.symbol,
+        stock.name,
+        stock.price.toString(),
+        stock.change.toString(),
+        stock.sentiment.toString(),
+        stock.marketCap,
+        stock.volume,
+        stock.sector
+      ])
+    ].map(row => row.join(',')).join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `stock_screener_results_${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  };
+
+  const applyGrowthFilter = () => {
+    setSelectedSector("Technology");
+    setPriceRange([100, 500]);
+    setMoodScore([70, 100]);
+    setRsi([50, 80]);
+    alert("Growth Tech Stocks filter applied!");
+  };
+
+  const applyOversoldFilter = () => {
+    setRsi([0, 30]);
+    setDayChange([-10, -2]);
+    setMoodScore([30, 60]);
+    alert("Oversold Bounce Candidates filter applied!");
+  };
+
+  const resetAllFilters = () => {
+    setPriceRange([0, 500]);
+    setPeRatio([0, 100]);
+    setRsi([0, 100]);
+    setDayChange([-20, 20]);
+    setVolatility([0, 10]);
+    setMoodScore([0, 100]);
+    setNewsScore([0, 100]);
+    setSearchTicker("");
+    setSelectedMarketCap("All Sizes");
+    setSelectedSector("All Sectors");
+    setSelectedVolume("All Volumes");
+    setSelectedSocialBuzz("All Levels");
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
@@ -393,19 +495,28 @@ export const Analytics = () => {
 
                     {/* Quick Filter Buttons */}
                     <div className="flex flex-wrap gap-3">
-                      <Button size="sm" className="bg-yellow-500/20 text-yellow-300 border border-yellow-500/30 hover:bg-yellow-500/30">
+                      <Button size="sm" className="bg-yellow-500/20 text-yellow-300 border border-yellow-500/30 hover:bg-yellow-500/30" onClick={applyGrowthFilter}>
                         ⭐ Growth Tech Stocks
                       </Button>
-                      <Button size="sm" className="bg-orange-500/20 text-orange-300 border border-orange-500/30 hover:bg-orange-500/30">
+                      <Button size="sm" className="bg-orange-500/20 text-orange-300 border border-orange-500/30 hover:bg-orange-500/30" onClick={applyOversoldFilter}>
                         ⭐ Oversold Bounce Candidates
                       </Button>
-                      <Button size="sm" variant="outline" className="border-gray-500/30 text-gray-300">
+                      <Button size="sm" variant="outline" className="border-gray-500/30 text-gray-300" onClick={() => setShowSaveDialog(true)}>
                         📁 Save Template
                       </Button>
-                      <Button size="sm" variant="outline" className="border-gray-500/30 text-gray-300">
-                        📂 Load Template
-                      </Button>
-                      <Button size="sm" variant="outline" className="border-gray-500/30 text-gray-300">
+                      <div className="relative">
+                        <Button size="sm" variant="outline" className="border-gray-500/30 text-gray-300">
+                          📂 Load Template
+                        </Button>
+                        <div className="absolute top-full left-0 mt-1 bg-black/90 border border-gray-500/30 rounded-lg p-2 min-w-40 z-10 hidden group-hover:block">
+                          {savedTemplates.map((template, index) => (
+                            <button key={index} onClick={() => handleLoadTemplate(template)} className="block w-full text-left text-white text-xs py-1 px-2 hover:bg-purple-500/20 rounded">
+                              {template}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                      <Button size="sm" variant="outline" className="border-gray-500/30 text-gray-300" onClick={handleExportCSV}>
                         📊 Export CSV
                       </Button>
                     </div>
@@ -421,7 +532,7 @@ export const Analytics = () => {
                         <CardTitle className="text-white flex items-center gap-2">
                           🔧 Filters
                           <div className="ml-auto flex gap-2">
-                            <Button size="sm" variant="outline" className="border-gray-500/30 text-gray-300 text-xs">
+                            <Button size="sm" variant="outline" className="border-gray-500/30 text-gray-300 text-xs" onClick={resetAllFilters}>
                               Reset
                             </Button>
                             <Button size="sm" variant="outline" className="border-gray-500/30 text-gray-300 text-xs">
@@ -435,6 +546,8 @@ export const Analytics = () => {
                         <div>
                           <Input
                             placeholder="Search ticker or company..."
+                            value={searchTicker}
+                            onChange={(e) => setSearchTicker(e.target.value)}
                             className="bg-black/40 border-purple-500/30 text-white placeholder-gray-400 focus:border-purple-400 focus:ring-0 text-sm"
                           />
                         </div>
@@ -463,7 +576,11 @@ export const Analytics = () => {
                             </div>
                             <div>
                               <label className="text-gray-400 text-xs mb-1 block">Market Cap</label>
-                              <select className="w-full bg-black/40 border border-purple-500/30 rounded text-white text-sm p-2">
+                              <select
+                                value={selectedMarketCap}
+                                onChange={(e) => setSelectedMarketCap(e.target.value)}
+                                className="w-full bg-black/40 border border-purple-500/30 rounded text-white text-sm p-2"
+                              >
                                 <option>All Sizes</option>
                                 <option>Large Cap</option>
                                 <option>Mid Cap</option>
@@ -472,11 +589,20 @@ export const Analytics = () => {
                             </div>
                             <div>
                               <label className="text-gray-400 text-xs mb-1 block">Sector</label>
-                              <select className="w-full bg-black/40 border border-purple-500/30 rounded text-white text-sm p-2">
+                              <select
+                                value={selectedSector}
+                                onChange={(e) => setSelectedSector(e.target.value)}
+                                className="w-full bg-black/40 border border-purple-500/30 rounded text-white text-sm p-2"
+                              >
                                 <option>All Sectors</option>
                                 <option>Technology</option>
                                 <option>Finance</option>
                                 <option>Healthcare</option>
+                                <option>Consumer</option>
+                                <option>Automotive</option>
+                                <option>Crypto</option>
+                                <option>ETF</option>
+                                <option>Entertainment</option>
                               </select>
                             </div>
                           </div>
@@ -498,7 +624,11 @@ export const Analytics = () => {
                             </div>
                             <div>
                               <label className="text-gray-400 text-xs mb-1 block">Volume</label>
-                              <select className="w-full bg-black/40 border border-purple-500/30 rounded text-white text-sm p-2">
+                              <select
+                                value={selectedVolume}
+                                onChange={(e) => setSelectedVolume(e.target.value)}
+                                className="w-full bg-black/40 border border-purple-500/30 rounded text-white text-sm p-2"
+                              >
                                 <option>All Volumes</option>
                                 <option>High Volume</option>
                                 <option>Medium Volume</option>
@@ -549,7 +679,11 @@ export const Analytics = () => {
                             </div>
                             <div>
                               <label className="text-gray-400 text-xs mb-1 block">Social Buzz</label>
-                              <select className="w-full bg-black/40 border border-purple-500/30 rounded text-white text-sm p-2">
+                              <select
+                                value={selectedSocialBuzz}
+                                onChange={(e) => setSelectedSocialBuzz(e.target.value)}
+                                className="w-full bg-black/40 border border-purple-500/30 rounded text-white text-sm p-2"
+                              >
                                 <option>All Levels</option>
                                 <option>High Buzz</option>
                                 <option>Medium Buzz</option>
@@ -591,7 +725,7 @@ export const Analytics = () => {
                       <CardHeader>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-4">
-                            <CardTitle className="text-white">Found 5 stocks</CardTitle>
+                            <CardTitle className="text-white">Found {filteredStocks.length} stocks</CardTitle>
                             <div className="flex items-center gap-2">
                               <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30 text-xs">
                                 🕐 Real-time
