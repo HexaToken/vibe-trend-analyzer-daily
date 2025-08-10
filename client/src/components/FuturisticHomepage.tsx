@@ -664,133 +664,67 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 </div>
               </TabsContent>
 
-              {/* Financial Reports Tab */}
+              {/* Financial Reports Tab - Old Version */}
               <TabsContent value="financial-reports" className="mt-8">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Market Analysis - Old Version with Large Sentiment Circle */}
+                <div className="text-center mb-16 relative">
+                  {/* Dark theme overlay container - ensures this section stays dark */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-slate-900/95 to-purple-900/95 rounded-3xl -mx-6 -my-6 backdrop-blur-sm" />
 
-                  {/* Smart Earnings Summary */}
-                  <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
-                    <CardHeader>
-                      <CardTitle className="text-white flex items-center gap-2">
-                        🧠 Smart Earnings Summary
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-4">
-                        <div className="p-4 bg-purple-500/10 rounded-lg border border-purple-500/20">
-                          <h4 className="text-white font-semibold mb-2">NVDA Q3 2024</h4>
-                          <p className="text-gray-300 text-sm leading-relaxed">
-                            NVIDIA exceeded expectations with EPS of $5.16 vs $4.64 expected, driven by
-                            strong data center revenue growth of 279% YoY. Management raised guidance
-                            significantly, citing continued AI demand momentum.
-                          </p>
+                  <div className="relative z-10 py-12">
+                    {/* Large Mood Score with Animated Character */}
+                    <div className="relative inline-block mb-8">
+                      <div className="w-80 h-80 rounded-full relative">
+                        {/* Animated gradient ring - rotates around the content */}
+                        <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${getSentimentGradient(currentSentiment)} p-2 animate-spin-slow`}>
+                          <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-900/90 to-purple-900/90 backdrop-blur-sm" />
                         </div>
-                        <div className="grid grid-cols-3 gap-3 text-center">
-                          <div className="p-3 bg-green-500/10 rounded-lg border border-green-500/20">
-                            <div className="text-green-400 font-bold">$5.16</div>
-                            <div className="text-xs text-gray-400">EPS Actual</div>
-                          </div>
-                          <div className="p-3 bg-gray-500/10 rounded-lg border border-gray-500/20">
-                            <div className="text-gray-300 font-bold">$4.64</div>
-                            <div className="text-xs text-gray-400">EPS Expected</div>
-                          </div>
-                          <div className="p-3 bg-green-500/10 rounded-lg border border-green-500/20">
-                            <div className="text-green-400 font-bold">+11.2%</div>
-                            <div className="text-xs text-gray-400">Beat</div>
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
 
-                  {/* Earnings Snapshot Grid */}
-                  <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
-                    <CardHeader>
-                      <CardTitle className="text-white flex items-center gap-2">
-                        📊 Earnings Snapshot
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-3">
-                        {[
-                          { symbol: 'AAPL', eps: '+2.1%', revenue: '+5.4%', guidance: 'Raised', sentiment: 'positive' },
-                          { symbol: 'GOOGL', eps: '-1.8%', revenue: '+3.2%', guidance: 'Maintained', sentiment: 'neutral' },
-                          { symbol: 'MSFT', eps: '+4.2%', revenue: '+7.1%', guidance: 'Raised', sentiment: 'positive' },
-                          { symbol: 'TSLA', eps: '-3.4%', revenue: '-2.1%', guidance: 'Lowered', sentiment: 'negative' }
-                        ].map((stock, i) => (
-                          <div key={i} className="flex items-center justify-between p-3 bg-gray-800/50 rounded-lg">
-                            <div className="font-semibold text-white">{stock.symbol}</div>
-                            <div className="flex gap-2">
-                              <Badge className={stock.eps.includes('+') ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}>
-                                EPS {stock.eps}
-                              </Badge>
-                              <Badge className={stock.revenue.includes('+') ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}>
-                                Rev {stock.revenue}
-                              </Badge>
-                              <Badge className={`${
-                                stock.sentiment === 'positive' ? 'bg-green-500/20 text-green-400' :
-                                stock.sentiment === 'negative' ? 'bg-red-500/20 text-red-400' :
-                                'bg-gray-500/20 text-gray-400'
-                              }`}>
-                                {stock.guidance}
-                              </Badge>
+                        {/* Fixed content container - does not rotate */}
+                        <div className="absolute inset-2 flex items-center justify-center">
+                          <div className="text-center">
+                            {/* Mood Emoji - Fixed in place */}
+                            <div className="text-5xl mb-4 animate-bounce">
+                              {getSentimentEmoji(currentSentiment)}
+                            </div>
+                            {/* Score */}
+                            <div className="text-8xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mb-2">
+                              {moodScore.overall}
+                            </div>
+                            {/* Dynamic Label */}
+                            <div className="text-xl font-bold text-white mb-1">
+                              {getSentimentLabel(currentSentiment)}
+                            </div>
+                            <div className="text-sm text-purple-300 uppercase tracking-wider">
+                              AI SENTIMENT SCORE
                             </div>
                           </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
+                        </div>
 
-                  {/* Mood vs Earnings Graph */}
-                  <Card className="lg:col-span-2 bg-black/40 border-purple-500/20 backdrop-blur-xl">
-                    <CardHeader>
-                      <CardTitle className="text-white flex items-center gap-2">
-                        📈 Mood vs. Earnings Timeline
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="h-48 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-lg p-4">
-                        <div className="flex items-end justify-between h-full">
-                          {[
-                            { mood: 65, earnings: 'beat', label: 'Q1' },
-                            { mood: 72, earnings: 'beat', label: 'Q2' },
-                            { mood: 58, earnings: 'miss', label: 'Q3' },
-                            { mood: 78, earnings: 'beat', label: 'Q4' },
-                            { mood: 68, earnings: 'meet', label: 'Q1' }
-                          ].map((point, i) => (
-                            <div key={i} className="text-center">
-                              <div className="flex flex-col items-center">
-                                <div
-                                  className={`w-4 mb-2 rounded-sm ${
-                                    point.earnings === 'beat' ? 'bg-green-400' :
-                                    point.earnings === 'miss' ? 'bg-red-400' :
-                                    'bg-gray-400'
-                                  }`}
-                                  style={{ height: `${point.mood}px` }}
-                                />
-                                <div className="text-xs text-gray-400">{point.label}</div>
-                                <div className="text-xs text-white">{point.mood}</div>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                        <div className="flex justify-between mt-4 text-xs">
-                          <div className="flex items-center gap-2">
-                            <div className="w-3 h-3 bg-green-400 rounded-sm" />
-                            <span className="text-gray-400">Beat</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <div className="w-3 h-3 bg-gray-400 rounded-sm" />
-                            <span className="text-gray-400">Meet</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <div className="w-3 h-3 bg-red-400 rounded-sm" />
-                            <span className="text-gray-400">Miss</span>
-                          </div>
-                        </div>
+                        {/* Multiple pulse rings with sentiment-based colors */}
+                        <div className={`absolute inset-0 rounded-full border-2 animate-ping ${
+                          currentSentiment === 'positive' ? 'border-emerald-400/40' :
+                          currentSentiment === 'neutral' ? 'border-gray-400/40' :
+                          'border-red-400/40'
+                        }`} />
+                        <div className={`absolute inset-2 rounded-full border animate-ping delay-75 ${
+                          currentSentiment === 'positive' ? 'border-green-400/30' :
+                          currentSentiment === 'neutral' ? 'border-slate-400/30' :
+                          'border-rose-400/30'
+                        }`} />
+                        <div className={`absolute inset-4 rounded-full border animate-ping delay-150 ${
+                          currentSentiment === 'positive' ? 'border-cyan-400/20' :
+                          currentSentiment === 'neutral' ? 'border-purple-400/20' :
+                          'border-purple-400/20'
+                        }`} />
                       </div>
-                    </CardContent>
-                  </Card>
+                    </div>
+
+                    {/* Subtitle - Always dark theme text */}
+                    <p className="text-xl text-gray-200 max-w-3xl mx-auto mb-12 leading-relaxed">
+                      Advanced AI-powered sentiment analysis with intelligent insights and mood breakdown
+                    </p>
+                  </div>
                 </div>
               </TabsContent>
 
