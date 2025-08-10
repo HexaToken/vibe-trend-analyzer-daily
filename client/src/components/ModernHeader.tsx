@@ -75,7 +75,6 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
     { label: 'Watchlist', key: 'watchlist', icon: '👁️' },
     { label: 'Market Analytics', key: 'market', icon: '📈' },
     { label: 'Stock Screener', key: 'screener', icon: '🔍' },
-    { label: 'Crypto Dashboard', key: 'crypto', icon: '₿' },
     { label: 'Earnings Calendar', key: 'earnings', icon: '📅' },
     { label: 'Charts', key: 'charts', icon: '📊' },
     { label: 'Trending', key: 'trending', icon: '🔥' },
