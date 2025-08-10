@@ -261,7 +261,7 @@ const AppContent = () => {
         <main className={isChartPage ? "ns-main" : ""}>{renderContent()}</main>
         <Footer
           onNavigate={setActiveSection}
-          compact={["charts", "crypto"].includes(activeSection)}
+          compact={["charts", "trading-chart", "crypto"].includes(activeSection)}
           className={isChartPage ? "ns-footer" : ""}
         />
         <ApiStatusIndicator />
