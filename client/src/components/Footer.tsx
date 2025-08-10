@@ -10,7 +10,7 @@ interface FooterProps {
   className?: string;
 }
 
-export const Footer = ({ onNavigate, compact = false }: FooterProps) => {
+export const Footer = ({ onNavigate, compact = false, className }: FooterProps) => {
   const { themeMode } = useMoodTheme();
 
   const footerLinks = {
