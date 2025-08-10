@@ -211,11 +211,11 @@ export const AdvancedTradingChart = () => {
           {/* Left Section - Search & Controls */}
           <div className="flex items-center gap-2 md:gap-4 flex-1 trading-toolbar-row">
             {/* Symbol Search */}
-            <div className="relative flex-1 max-w-md">
+            <div className="relative flex-1 max-w-md md:max-w-lg trading-symbol-search">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <Input
-                className="pl-10 bg-gray-800/50 border-gray-700/50 text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-cyan-400/20"
-                placeholder="Search symbol… e.g., BTC/USDT, ETH, AAPL"
+                className="pl-10 bg-gray-800/50 border-gray-700/50 text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-cyan-400/20 trading-focus"
+                placeholder="Search symbol… BTC, ETH, AAPL"
                 value={searchSymbol}
                 onChange={(e) => setSearchSymbol(e.target.value)}
                 onKeyPress={handleKeyPress}
