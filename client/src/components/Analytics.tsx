@@ -163,8 +163,11 @@ export const Analytics = () => {
               </div>
             </div>
 
-            {/* Basic Stock Screener */}
-            <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl mb-6">
+            {/* Conditional Screener Content */}
+            {screenerType === "basic" ? (
+              <div>
+                {/* Basic Stock Screener */}
+                <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl mb-6">
               <CardHeader>
                 <CardTitle className="text-white flex items-center gap-2">
                   🔍 Basic Stock Screener
@@ -360,6 +363,75 @@ export const Analytics = () => {
                 </Button>
               </CardContent>
             </Card>
+              </div>
+            ) : (
+              /* Advanced Stock Screener */
+              <div className="space-y-6">
+                {/* Smart Stock Screener Header */}
+                <Card className="bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border-emerald-500/30">
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-8 h-8 bg-emerald-500/20 rounded-lg flex items-center justify-center">
+                        <Search className="w-4 h-4 text-emerald-400" />
+                      </div>
+                      <h2 className="text-2xl font-bold text-white">Smart Stock Screener</h2>
+                    </div>
+                    <p className="text-gray-300 text-sm mb-6">AI-powered screening with sentiment analysis</p>
+
+                    {/* AI Search Bar */}
+                    <div className="relative mb-6">
+                      <Input
+                        type="text"
+                        value={aiQuery}
+                        onChange={(e) => setAiQuery(e.target.value)}
+                        className="pl-4 pr-20 py-4 bg-black/40 border-emerald-500/30 text-white placeholder-gray-400 focus:border-emerald-400 focus:ring-0 text-lg rounded-xl"
+                      />
+                      <Button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-2 rounded-lg">
+                        Search
+                      </Button>
+                    </div>
+
+                    {/* Quick Filter Buttons */}
+                    <div className="flex flex-wrap gap-3">
+                      <Button size="sm" className="bg-yellow-500/20 text-yellow-300 border border-yellow-500/30 hover:bg-yellow-500/30">
+                        ⭐ Growth Tech Stocks
+                      </Button>
+                      <Button size="sm" className="bg-orange-500/20 text-orange-300 border border-orange-500/30 hover:bg-orange-500/30">
+                        ⭐ Oversold Bounce Candidates
+                      </Button>
+                      <Button size="sm" variant="outline" className="border-gray-500/30 text-gray-300">
+                        📁 Save Template
+                      </Button>
+                      <Button size="sm" variant="outline" className="border-gray-500/30 text-gray-300">
+                        📂 Load Template
+                      </Button>
+                      <Button size="sm" variant="outline" className="border-gray-500/30 text-gray-300">
+                        📊 Export CSV
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Advanced Results */}
+                <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
+                  <CardHeader>
+                    <CardTitle className="text-white">Found 5 stocks</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-center py-12">
+                      <div className="text-6xl mb-4">🔍</div>
+                      <h3 className="text-2xl font-bold text-white mb-2">Advanced Screener</h3>
+                      <p className="text-gray-400 mb-4">
+                        Complete advanced screening interface coming soon.
+                      </p>
+                      <Button className="bg-purple-600 text-white">
+                        Enable Pro Features
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
           </TabsContent>
         </Tabs>
       </div>
