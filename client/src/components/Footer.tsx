@@ -54,8 +54,60 @@ export const Footer = ({ onNavigate, compact = false }: FooterProps) => {
         ? "bg-gray-50 border-gray-200"
         : "bg-black/40 border-purple-500/20 backdrop-blur-xl"
     )}>
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+      <div className={cn(
+        "max-w-7xl mx-auto px-6",
+        compact ? "py-4" : "py-12"
+      )}>
+        {compact ? (
+          // Compact layout for chart pages
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="flex items-center gap-4">
+              <div className={cn(
+                "text-lg font-bold",
+                themeMode === 'light'
+                  ? "text-[#111827]"
+                  : "text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text"
+              )}>
+                NeomSense
+              </div>
+              <Badge variant="secondary" className="text-xs">
+                v2.0
+              </Badge>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                {socialLinks.slice(0, 2).map((social, index) => {
+                  const Icon = social.icon;
+                  return (
+                    <Button
+                      key={index}
+                      variant="ghost"
+                      size="sm"
+                      className={cn(
+                        "w-8 h-8 p-0",
+                        themeMode === 'light'
+                          ? "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
+                          : "hover:bg-purple-500/20 text-gray-400 hover:text-white"
+                      )}
+                      onClick={() => window.open(social.href, '_blank')}
+                    >
+                      <Icon className="w-4 h-4" />
+                    </Button>
+                  );
+                })}
+              </div>
+              <div className={cn(
+                "text-xs",
+                themeMode === 'light' ? 'text-gray-600' : 'text-gray-400'
+              )}>
+                © 2024 NeomSense
+              </div>
+            </div>
+          </div>
+        ) : (
+          // Full layout for other pages
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand Section */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
@@ -220,42 +272,44 @@ export const Footer = ({ onNavigate, compact = false }: FooterProps) => {
               ))}
             </ul>
           </div>
-        </div>
-
-        {/* Bottom Section */}
-        <div className={cn(
-          "border-t mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4",
-          themeMode === 'light' ? 'border-gray-200' : 'border-purple-500/20'
-        )}>
-          <div className={cn(
-            "text-sm",
-            themeMode === 'light' ? 'text-gray-600' : 'text-gray-400'
-          )}>
-            © 2024 NeomSense. All rights reserved.
-          </div>
-          <div className="flex items-center gap-4">
-            <Button
-              variant="outline"
-              size="sm"
-              className={cn(
-                "text-xs",
-                themeMode === 'light'
-                  ? "border-gray-300 text-gray-600 hover:bg-gray-50"
-                  : "border-purple-500/30 text-purple-300 hover:bg-purple-500/10"
-              )}
-              onClick={() => onNavigate?.('plugin-submission')}
-            >
-              <Code2 className="w-3 h-3 mr-1" />
-              Build Plugins
-            </Button>
-            <div className={cn(
-              "text-xs",
-              themeMode === 'light' ? 'text-gray-500' : 'text-gray-500'
-            )}>
-              Made with ❤️ for traders
             </div>
-          </div>
-        </div>
+
+            {/* Bottom Section */}
+            <div className={cn(
+              "border-t mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4",
+              themeMode === 'light' ? 'border-gray-200' : 'border-purple-500/20'
+            )}>
+              <div className={cn(
+                "text-sm",
+                themeMode === 'light' ? 'text-gray-600' : 'text-gray-400'
+              )}>
+                © 2024 NeomSense. All rights reserved.
+              </div>
+              <div className="flex items-center gap-4">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className={cn(
+                    "text-xs",
+                    themeMode === 'light'
+                      ? "border-gray-300 text-gray-600 hover:bg-gray-50"
+                      : "border-purple-500/30 text-purple-300 hover:bg-purple-500/10"
+                  )}
+                  onClick={() => onNavigate?.('plugin-submission')}
+                >
+                  <Code2 className="w-3 h-3 mr-1" />
+                  Build Plugins
+                </Button>
+                <div className={cn(
+                  "text-xs",
+                  themeMode === 'light' ? 'text-gray-500' : 'text-gray-500'
+                )}>
+                  Made with ❤️ for traders
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </footer>
   );
