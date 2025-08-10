@@ -111,6 +111,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
     { label: 'Crypto Dashboard', key: 'crypto', icon: '₿' },
     { label: 'Earnings Calendar', key: 'earnings', icon: '📅' },
     { label: 'Charts', key: 'charts', icon: '📊' },
+    { label: 'Trading Chart Pro', key: 'trading-chart', icon: '📈' },
     { label: 'Trending', key: 'trending', icon: '🔥' },
     { label: 'Trade Journal', key: 'trade-journal', icon: '📝' },
     { label: 'Sentiment Polls', key: 'sentiment-polls', icon: '📊' },
