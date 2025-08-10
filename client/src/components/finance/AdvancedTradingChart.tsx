@@ -261,14 +261,14 @@ export const AdvancedTradingChart = () => {
           </div>
 
           {/* Center Section - Timeframes */}
-          <div className="flex gap-2">
+          <div className="flex gap-1 md:gap-2 overflow-x-auto trading-timeframes">
             {timeframes.map(tf => (
               <button
                 key={tf}
                 className={cn(
-                  "px-3 py-2 rounded-lg text-sm font-medium transition-all",
-                  chartState.timeframe === tf 
-                    ? `bg-[${currentColors.primary}] text-black shadow-lg` 
+                  "px-2 md:px-3 py-2 rounded-lg text-xs md:text-sm font-medium transition-all whitespace-nowrap trading-timeframe-btn",
+                  chartState.timeframe === tf
+                    ? `bg-[${currentColors.primary}] text-black shadow-lg`
                     : "bg-gray-800/50 text-gray-300 hover:text-white hover:bg-gray-700/50"
                 )}
                 onClick={() => setChartState(prev => ({ ...prev, timeframe: tf }))}
@@ -279,21 +279,21 @@ export const AdvancedTradingChart = () => {
           </div>
 
           {/* Right Section - Actions */}
-          <div className="flex items-center gap-3">
-            <Button variant="outline" size="sm" className="border-gray-700/50 hover:border-cyan-400/50">
-              <Settings className="w-4 h-4 mr-2" />
-              Theme
+          <div className="flex items-center gap-2 md:gap-3 trading-actions">
+            <Button variant="outline" size="sm" className="border-gray-700/50 hover:border-cyan-400/50 hidden md:flex">
+              <Settings className="w-4 h-4 md:mr-2" />
+              <span className="hidden md:inline">Theme</span>
             </Button>
-            <Button variant="outline" size="sm" className="border-gray-700/50 hover:border-cyan-400/50">
-              <Camera className="w-4 h-4 mr-2" />
-              Snapshot
+            <Button variant="outline" size="sm" className="border-gray-700/50 hover:border-cyan-400/50 hidden md:flex">
+              <Camera className="w-4 h-4 md:mr-2" />
+              <span className="hidden md:inline">Snapshot</span>
             </Button>
-            <Button 
+            <Button
               className={`bg-[${currentColors.primary}] hover:bg-[${currentColors.secondary}] text-black`}
               size="sm"
             >
-              <Save className="w-4 h-4 mr-2" />
-              Save
+              <Save className="w-4 h-4 md:mr-2" />
+              <span className="hidden md:inline">Save</span>
             </Button>
             <Button
               variant="outline"
