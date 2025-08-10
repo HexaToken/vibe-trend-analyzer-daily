@@ -4,6 +4,7 @@
 @media (max-width: 1023px) {
   .trading-chart-mobile {
     flex-direction: column;
+    min-height: auto;
   }
   
   .trading-sidebar {
