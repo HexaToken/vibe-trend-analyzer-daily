@@ -249,7 +249,10 @@ const AppContent = () => {
           currentMoodScore={75}
         />
         <main>{renderContent()}</main>
-        <Footer onNavigate={setActiveSection} />
+        {/* Hide Footer on chart pages for full-screen experience */}
+        {!["charts", "crypto"].includes(activeSection) && (
+          <Footer onNavigate={setActiveSection} />
+        )}
         <ApiStatusIndicator />
         <MoodGptWidget />
       </div>
