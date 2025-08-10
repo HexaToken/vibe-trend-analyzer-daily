@@ -82,11 +82,11 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
     const handleResize = () => {
       const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
-      
+
       if (!mobile) {
         setMobileMenuOpen(false);
         setSideDrawerOpen(false);
-        setHeaderVisible(true);
+        // Don't force header visibility - let scroll behavior handle it
       }
     };
     
