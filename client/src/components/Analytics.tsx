@@ -506,15 +506,9 @@ export const Analytics = () => {
                       <Button size="sm" variant="outline" className="border-gray-500/30 text-gray-300" onClick={() => setShowSaveDialog(true)}>
                         📁 Save Template
                       </Button>
-                      <select
-                        onChange={(e) => e.target.value && handleLoadTemplate(e.target.value)}
-                        className="bg-black/40 border border-gray-500/30 rounded text-gray-300 text-sm px-3 py-1"
-                      >
-                        <option value="">📂 Load Template</option>
-                        {savedTemplates.map((template, index) => (
-                          <option key={index} value={template}>{template}</option>
-                        ))}
-                      </select>
+                      <Button size="sm" variant="outline" className="border-gray-500/30 text-gray-300" onClick={() => setShowLoadDialog(true)}>
+                        📂 Load Template
+                      </Button>
                       <Button size="sm" variant="outline" className="border-gray-500/30 text-gray-300" onClick={handleExportCSV}>
                         📊 Export CSV
                       </Button>
