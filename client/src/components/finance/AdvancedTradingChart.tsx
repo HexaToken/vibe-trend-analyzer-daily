@@ -192,7 +192,7 @@ export const AdvancedTradingChart = () => {
   const currentColors = colorModeColors[chartState.colorMode];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0F1222] via-[#1A1F3A] to-[#0F1222] text-white overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#0F1222] via-[#1A1F3A] to-[#0F1222] text-white">
       {/* Main Header */}
       <div className={cn(
         "transition-all duration-300 ease-in-out",
