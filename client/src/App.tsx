@@ -142,7 +142,7 @@ const AppContent = () => {
         return <DatabaseDemo />;
       case "social":
         return <SocialPlatform />;
-      case "crypto":
+      case "crypto-dashboard":
         return <NeonSenseCryptoDashboard />;
       case "nlp":
         return <NLPSentimentDemo />;
