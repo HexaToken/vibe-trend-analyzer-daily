@@ -556,11 +556,31 @@ export const Analytics = () => {
                           </h3>
                           <div className="space-y-4">
                             <div>
-                              <label className="text-gray-400 text-xs mb-2 block">Price Range: $0 - $500</label>
+                              <label className="text-gray-400 text-xs mb-2 block">Price Range: ${priceRange[0]} - ${priceRange[1]}</label>
                               <div className="h-2 bg-gray-700 rounded-full relative">
-                                <div className="absolute left-0 top-0 h-2 bg-purple-500 rounded-full" style={{width: '60%'}} />
-                                <div className="absolute left-0 top-0 w-3 h-3 bg-purple-400 rounded-full -mt-0.5 border-2 border-white" style={{left: '0%'}} />
-                                <div className="absolute top-0 w-3 h-3 bg-purple-400 rounded-full -mt-0.5 border-2 border-white" style={{left: '60%'}} />
+                                <div
+                                  className="absolute top-0 h-2 bg-purple-500 rounded-full"
+                                  style={{
+                                    left: `${(priceRange[0] / 500) * 100}%`,
+                                    width: `${((priceRange[1] - priceRange[0]) / 500) * 100}%`
+                                  }}
+                                />
+                                <input
+                                  type="range"
+                                  min="0"
+                                  max="500"
+                                  value={priceRange[0]}
+                                  onChange={(e) => setPriceRange([parseInt(e.target.value), priceRange[1]])}
+                                  className="absolute top-0 w-full h-2 bg-transparent appearance-none cursor-pointer slider"
+                                />
+                                <input
+                                  type="range"
+                                  min="0"
+                                  max="500"
+                                  value={priceRange[1]}
+                                  onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
+                                  className="absolute top-0 w-full h-2 bg-transparent appearance-none cursor-pointer slider"
+                                />
                               </div>
                             </div>
                             <div>
