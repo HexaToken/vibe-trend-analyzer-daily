@@ -6,9 +6,10 @@ import { cn } from '@/lib/utils';
 
 interface FooterProps {
   onNavigate?: (section: string) => void;
+  compact?: boolean;
 }
 
-export const Footer = ({ onNavigate }: FooterProps) => {
+export const Footer = ({ onNavigate, compact = false }: FooterProps) => {
   const { themeMode } = useMoodTheme();
 
   const footerLinks = {
@@ -47,7 +48,8 @@ export const Footer = ({ onNavigate }: FooterProps) => {
 
   return (
     <footer className={cn(
-      "border-t mt-20",
+      "border-t",
+      compact ? "mt-4" : "mt-20",
       themeMode === 'light'
         ? "bg-gray-50 border-gray-200"
         : "bg-black/40 border-purple-500/20 backdrop-blur-xl"
