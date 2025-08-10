@@ -380,10 +380,25 @@ export const AdvancedChartsPro = () => {
                         {/* Holographic Crosshair */}
                         <div className="ns-crosshair" style={{left: '60%', top: '40%'}}></div>
 
-                        {/* Symbol Info */}
+                        {/* Symbol Info & FX Controls */}
                         <div className="absolute top-4 right-4 text-white text-right">
                           <div className="text-lg font-semibold">{chartState.symbol}</div>
                           <div className="text-sm text-gray-400">{chartState.exchange}</div>
+                        </div>
+
+                        {/* Futuristic FX Controls */}
+                        <div className="ns-fx-controls">
+                          <div className="ns-fx-toggle active">FX ON</div>
+                          <div className="ns-fx-toggle">GRID</div>
+                          <div className="ns-fx-toggle">TEAL</div>
+                        </div>
+
+                        {/* AI Pattern Tags */}
+                        <div className="ns-ai-tag" style={{left: '25%', top: '30%'}}>
+                          🔺 Bullish Engulfing
+                        </div>
+                        <div className="ns-ai-tag" style={{right: '20%', bottom: '25%'}}>
+                          📈 Support Level
                         </div>
                       </div>
                     </div>
@@ -397,7 +412,9 @@ export const AdvancedChartsPro = () => {
                         <CardHeader className="pb-2">
                           <CardTitle className="text-white text-sm flex items-center justify-between">
                             RSI ({chartState.indicators.rsi.len})
-                            <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30">65.3</Badge>
+                            <div className="ns-value-badge">
+                              <div className="text-blue-400">65.3</div>
+                            </div>
                           </CardTitle>
                         </CardHeader>
                         <CardContent className="h-24">
