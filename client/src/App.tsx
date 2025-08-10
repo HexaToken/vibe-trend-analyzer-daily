@@ -241,7 +241,7 @@ const AppContent = () => {
     }
   };
 
-  const isChartPage = activeSection === "charts";
+  const isChartPage = activeSection === "charts" || activeSection === "trading-chart";
 
   return (
     <TooltipProvider>
