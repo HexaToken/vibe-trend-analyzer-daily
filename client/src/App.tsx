@@ -29,6 +29,7 @@ import { ApiStatusIndicator } from "@/components/ApiStatusIndicator";
 import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
 import { PulseOfTheChain } from "@/components/crypto/PulseOfTheChain";
 import { NeonSenseCryptoDashboard } from "@/components/crypto/NeonSenseCryptoDashboard";
+import { AdvancedTradingChart } from "@/components/finance/AdvancedTradingChart";
 import { EarningsCalendar } from "@/components/finance/EarningsCalendar";
 import { AdvancedChartsPro } from "@/components/finance/AdvancedChartsPro";
 import { TrendingHub } from "@/components/finance/TrendingHub";
