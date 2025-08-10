@@ -239,7 +239,7 @@ export const Analytics = () => {
                     onClick={() => setShowProfiler(true)}
                     className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white border-0"
                   >
-                    ✨ Start Profiling →
+                    ✨ Start Profiling ���
                   </Button>
                 </div>
               </div>
@@ -584,11 +584,31 @@ export const Analytics = () => {
                               </div>
                             </div>
                             <div>
-                              <label className="text-gray-400 text-xs mb-2 block">P/E Ratio: 0 - 100</label>
+                              <label className="text-gray-400 text-xs mb-2 block">P/E Ratio: {peRatio[0]} - {peRatio[1]}</label>
                               <div className="h-2 bg-gray-700 rounded-full relative">
-                                <div className="absolute left-0 top-0 h-2 bg-purple-500 rounded-full" style={{width: '80%'}} />
-                                <div className="absolute left-0 top-0 w-3 h-3 bg-purple-400 rounded-full -mt-0.5 border-2 border-white" style={{left: '0%'}} />
-                                <div className="absolute top-0 w-3 h-3 bg-purple-400 rounded-full -mt-0.5 border-2 border-white" style={{left: '80%'}} />
+                                <div
+                                  className="absolute top-0 h-2 bg-purple-500 rounded-full"
+                                  style={{
+                                    left: `${(peRatio[0] / 100) * 100}%`,
+                                    width: `${((peRatio[1] - peRatio[0]) / 100) * 100}%`
+                                  }}
+                                />
+                                <input
+                                  type="range"
+                                  min="0"
+                                  max="100"
+                                  value={peRatio[0]}
+                                  onChange={(e) => setPeRatio([parseInt(e.target.value), peRatio[1]])}
+                                  className="absolute top-0 w-full h-2 bg-transparent appearance-none cursor-pointer slider"
+                                />
+                                <input
+                                  type="range"
+                                  min="0"
+                                  max="100"
+                                  value={peRatio[1]}
+                                  onChange={(e) => setPeRatio([peRatio[0], parseInt(e.target.value)])}
+                                  className="absolute top-0 w-full h-2 bg-transparent appearance-none cursor-pointer slider"
+                                />
                               </div>
                             </div>
                             <div>
