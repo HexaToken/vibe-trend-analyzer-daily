@@ -13,7 +13,7 @@ import {
   Eye, Crosshair, Maximize, Plus, Minus, Play, Pause, SkipBack, SkipForward,
   RefreshCw, DollarSign, Clock, Flame, Layers, Filter, LineChart, CandlestickChart,
   MousePointer, Move, Square, Type, Ruler, Undo, Redo, Trash2, Globe,
-  Bell, AlertTriangle, TrendingUp as TrendUp, ArrowUpRight, ArrowDownRight
+  Bell, AlertTriangle, ArrowUpRight, ArrowDownRight
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import '../../styles/trading-chart.css';
