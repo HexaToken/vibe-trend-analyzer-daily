@@ -29,6 +29,7 @@ import { ApiStatusIndicator } from "@/components/ApiStatusIndicator";
 import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
 import { PulseOfTheChain } from "@/components/crypto/PulseOfTheChain";
 import { NeonSenseCryptoDashboard } from "@/components/crypto/NeonSenseCryptoDashboard";
+import { AdvancedTradingChart } from "@/components/finance/AdvancedTradingChart";
 import { EarningsCalendar } from "@/components/finance/EarningsCalendar";
 import { AdvancedChartsPro } from "@/components/finance/AdvancedChartsPro";
 import { TrendingHub } from "@/components/finance/TrendingHub";
@@ -140,7 +141,7 @@ const AppContent = () => {
         return <DatabaseDemo />;
       case "social":
         return <SocialPlatform />;
-      case "crypto":
+      case "crypto-dashboard":
         return <NeonSenseCryptoDashboard />;
       case "nlp":
         return <NLPSentimentDemo />;
@@ -226,6 +227,8 @@ const AppContent = () => {
         return <EarningsCalendar />;
       case "charts":
         return <AdvancedChartsPro />;
+      case "trading-chart":
+        return <AdvancedTradingChart />;
       case "trending":
         return <TrendingHub />;
       case "trade-journal":
@@ -238,7 +241,7 @@ const AppContent = () => {
     }
   };
 
-  const isChartPage = activeSection === "charts";
+  const isChartPage = activeSection === "charts" || activeSection === "trading-chart";
 
   return (
     <TooltipProvider>
@@ -258,7 +261,7 @@ const AppContent = () => {
         <main className={isChartPage ? "ns-main" : ""}>{renderContent()}</main>
         <Footer
           onNavigate={setActiveSection}
-          compact={["charts", "crypto"].includes(activeSection)}
+          compact={["charts", "trading-chart", "crypto"].includes(activeSection)}
           className={isChartPage ? "ns-footer" : ""}
         />
         <ApiStatusIndicator />

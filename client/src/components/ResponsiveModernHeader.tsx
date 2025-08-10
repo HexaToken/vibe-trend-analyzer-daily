@@ -41,28 +41,24 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
   const isLightMode = themeMode === 'light';
   const isDarkMode = themeMode === 'dark' || isDynamicMode;
 
-  // Enhanced scroll detection for mobile drawer behavior
+  // Enhanced scroll detection for header behavior
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       const scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
-      
-      setIsScrolled(currentScrollY > 10);
-      
-      // On mobile: hide header when scrolling down, show when scrolling up or at top
-      if (window.innerWidth < 768) {
-        if (currentScrollY < 10) {
-          setHeaderVisible(true);
-        } else if (scrollDirection === 'down' && currentScrollY > 100) {
-          setHeaderVisible(false);
-          setMobileMenuOpen(false); // Close mobile menu when hiding header
-        } else if (scrollDirection === 'up' && currentScrollY > lastScrollY + 50) {
-          setHeaderVisible(true);
-        }
-      } else {
-        setHeaderVisible(true); // Always visible on desktop
+
+      setIsScrolled(currentScrollY > 24);
+
+      // Header visibility logic for all screen sizes
+      if (currentScrollY < 10) {
+        setHeaderVisible(true);
+      } else if (scrollDirection === 'down' && currentScrollY > 100) {
+        setHeaderVisible(false);
+        setMobileMenuOpen(false); // Close mobile menu when hiding header
+      } else if (scrollDirection === 'up') {
+        setHeaderVisible(true);
       }
-      
+
       setLastScrollY(currentScrollY);
     };
 
@@ -86,11 +82,11 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
     const handleResize = () => {
       const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
-      
+
       if (!mobile) {
         setMobileMenuOpen(false);
         setSideDrawerOpen(false);
-        setHeaderVisible(true);
+        // Don't force header visibility - let scroll behavior handle it
       }
     };
     
@@ -112,19 +108,22 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
     { label: 'Watchlist', key: 'watchlist', icon: '👁️' },
     { label: 'Market Analytics', key: 'market', icon: '📈' },
     { label: 'Stock Screener', key: 'screener', icon: '🔍' },
-    { label: 'Crypto Dashboard', key: 'crypto', icon: '₿' },
+    { label: 'Crypto Dashboard', key: 'crypto-dashboard', icon: '₿' },
     { label: 'Earnings Calendar', key: 'earnings', icon: '📅' },
     { label: 'Charts', key: 'charts', icon: '📊' },
+    { label: 'Trading Chart Pro', key: 'trading-chart', icon: '📈' },
     { label: 'Trending', key: 'trending', icon: '🔥' },
     { label: 'Trade Journal', key: 'trade-journal', icon: '📝' },
     { label: 'Sentiment Polls', key: 'sentiment-polls', icon: '📊' },
   ];
 
   const handleNavigation = (key: string) => {
-    setActiveSection(key);
+    setActiveSection(key);     // Update the main app's activeSection
     setMobileMenuOpen(false);
     setSideDrawerOpen(false);
-    onNavigate?.(key);
+    if (onNavigate) {
+      onNavigate(key);         // Call additional navigation handler if provided
+    }
   };
 
   const toggleSideDrawer = () => {
@@ -136,14 +135,14 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
       {/* Main Header */}
       <header
         className={cn(
-          "sticky top-0 z-50 transition-all duration-500 h-16",
+          "sticky top-0 z-50 transition-all duration-300 ease-in-out h-16",
           headerVisible ? "translate-y-0" : "-translate-y-full",
           isLightMode
             ? isScrolled
-              ? "bg-white/95 backdrop-blur-xl border-b border-gray-200/80 shadow-lg shadow-gray-500/5"
+              ? "bg-white/95 backdrop-blur-xl border-b border-gray-200/80 shadow-lg shadow-black/10"
               : "bg-white/90 backdrop-blur-md border-b border-gray-200/50"
             : isScrolled
-              ? "bg-[#0A0A23]/95 backdrop-blur-xl border-b border-gray-800/50 shadow-lg shadow-purple-500/5"
+              ? "bg-[#0A0A23]/95 backdrop-blur-xl border-b border-gray-800/50 shadow-lg shadow-black/20"
               : "bg-[#0A0A23]/80 backdrop-blur-md border-b border-gray-800/30"
         )}
       >

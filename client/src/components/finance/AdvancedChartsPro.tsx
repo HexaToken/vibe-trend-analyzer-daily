@@ -13,6 +13,7 @@ import {
   Menu, Smartphone, Tablet, LineChart, CandlestickChart
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
+import { ResponsiveModernHeader } from '../ResponsiveModernHeader';
 
 interface ChartState {
   symbol: string;
@@ -36,6 +37,9 @@ export const AdvancedChartsPro = () => {
   const [activeTab, setActiveTab] = useState('chart');
   const [searchSymbol, setSearchSymbol] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const [headerVisible, setHeaderVisible] = useState(true);
+  const [activeSection, setActiveSection] = useState('Finance');
   
   const [chartState, setChartState] = useState<ChartState>({
     symbol: "BTCUSDT",
@@ -61,78 +65,30 @@ export const AdvancedChartsPro = () => {
     compare: []
   });
 
-  // Initialize starfield animation
+  // Handle scroll behavior for header
   useEffect(() => {
-    const canvas = document.getElementById('ns-stars') as HTMLCanvasElement;
-    if (!canvas) return;
-    
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-    
-    const DPR = window.devicePixelRatio || 1;
-    let W: number, H: number;
-    const stars: Array<{x: number, y: number, r: number, s: number}> = [];
-    
-    function resize() {
-      W = canvas.clientWidth;
-      H = canvas.clientHeight;
-      canvas.width = W * DPR;
-      canvas.height = H * DPR;
-      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    }
-    
-    function init(n = 80) {
-      stars.length = 0;
-      for (let i = 0; i < n; i++) {
-        stars.push({
-          x: Math.random() * W,
-          y: Math.random() * H,
-          r: Math.random() * 1.2 + 0.2,
-          s: Math.random() * 0.2 + 0.05
-        });
+    let lastScrollY = 0;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Determine scroll direction and header visibility
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down and past threshold - hide header
+        setHeaderVisible(false);
+      } else {
+        // Scrolling up or at top - show header
+        setHeaderVisible(true);
       }
-    }
-    
-    let mx = 0, my = 0;
-    
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-      for (const star of stars) {
-        star.y += star.s;
-        if (star.y > H) star.y = 0;
-        
-        const px = star.x + (mx - 0.5) * 2;
-        const py = star.y + (my - 0.5) * 2;
-        
-        ctx.beginPath();
-        ctx.arc(px, py, star.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(200, 255, 255, 0.35)';
-        ctx.fill();
-      }
-      requestAnimationFrame(draw);
-    }
-    
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      mx = (e.clientX - rect.left) / rect.width;
-      my = (e.clientY - rect.top) / rect.height;
+
+      setScrollY(currentScrollY);
+      lastScrollY = currentScrollY;
     };
-    
-    const handleResize = () => {
-      resize();
-      init();
-    };
-    
-    canvas.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('resize', handleResize);
-    
-    resize();
-    init();
-    draw();
-    
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     return () => {
-      canvas.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -174,8 +130,20 @@ export const AdvancedChartsPro = () => {
 
   return (
     <div className="ns-chart-page">
+      {/* Main Header */}
+      <ResponsiveModernHeader
+        activeSection={activeSection}
+        setActiveSection={setActiveSection}
+        currentMoodScore={72}
+      />
+
       {/* Top Toolbar */}
-      <div className="ns-chart-header">
+      <div className={cn(
+        "ns-chart-header",
+        "transition-all duration-300 ease-in-out",
+        !headerVisible && "transform -translate-y-full",
+        scrollY > 24 && "shadow-lg shadow-black/20"
+      )}>
         <div className="ns-search-container">
           {/* Global Search */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1 }}>
@@ -301,16 +269,6 @@ export const AdvancedChartsPro = () => {
               <TabsContent value="chart" className="mt-0">
                 {/* Holographic Chart Canvas */}
                 <div className="ns-holo-card ns-grid ns-radial ns-scan" style={{ height: '500px', position: 'relative' }}>
-                  {/* Starfield Background */}
-                  <canvas 
-                    id="ns-stars" 
-                    style={{
-                      position: 'absolute',
-                      inset: '0',
-                      zIndex: '0',
-                      pointerEvents: 'none'
-                    }}
-                  ></canvas>
                   
                   {/* Chart Root */}
                   <div 
