@@ -199,9 +199,10 @@ export const AdvancedTradingChart = () => {
         !headerVisible && "transform -translate-y-full",
         scrollY > 24 && "shadow-lg shadow-black/20"
       )}>
-        <ResponsiveModernHeader 
+        <ResponsiveModernHeader
           activeSection={activeSection}
           setActiveSection={setActiveSection}
+          onNavigate={(section) => setActiveSection(section)}
           currentMoodScore={72}
         />
       </div>
