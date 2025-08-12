@@ -1383,6 +1383,13 @@ All colors MUST be HSL.
     font-weight: 700 !important;
   }
 
+  /* Force maximum text contrast in dark mode for TradeHub */
+  .dark .text-gray-700,
+  .dark .text-gray-600,
+  .dark .text-gray-800 {
+    color: white !important;
+  }
+
   /* Exception for Sentiment Surface title - preserve its gradient */
   :root:not(.dark) h2.bg-gradient-to-r.from-red-400.via-yellow-400.to-green-400 {
     background: linear-gradient(to right, #f87171, #facc15, #4ade80) !important;
