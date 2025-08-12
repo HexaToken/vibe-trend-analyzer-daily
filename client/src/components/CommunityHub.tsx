@@ -395,8 +395,10 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ onNavigateToProfile 
                   {bannerContent.map((_, index) => (
                     <div
                       key={index}
-                      className={`w-2 h-2 rounded-full transition-all ${
-                        index === rotatingBannerIndex ? 'bg-blue-400' : 'bg-gray-600'
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        index === rotatingBannerIndex
+                          ? 'bg-blue-400 scale-125 shadow-lg shadow-blue-400/50'
+                          : 'bg-gray-600 hover:bg-gray-500'
                       }`}
                     />
                   ))}
