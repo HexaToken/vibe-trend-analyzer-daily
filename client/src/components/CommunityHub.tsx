@@ -407,8 +407,8 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ onNavigateToProfile 
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 lg:gap-6">
           {/* Left Sidebar - Categories */}
           <div className="lg:col-span-1">
             <Card className="bg-gray-800/50 border-gray-700/50 mb-6">
