@@ -212,6 +212,8 @@ const AppContent = () => {
         );
       case "futuristic-chat":
         return <FuturisticChatDemo />;
+      case "unified-rooms":
+        return <UnifiedRoomsDemo />;
 
       // Finance Section Routes
       case "finance":
