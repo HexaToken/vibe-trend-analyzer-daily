@@ -406,7 +406,7 @@ export const RoomDetailPanelFixed: React.FC<RoomDetailPanelFixedProps> = ({
                   <h3 className="text-white font-semibold text-sm">Related Topics</h3>
                   <div className="flex flex-wrap gap-2">
                     {room.tags.map((tag) => (
-                      <Badge 
+                      <Badge
                         key={tag}
                         className="text-xs bg-white/10 text-gray-300 hover:bg-white/20 cursor-pointer transition-all hover:scale-105 rounded-full px-3 py-1"
                       >
@@ -415,6 +415,67 @@ export const RoomDetailPanelFixed: React.FC<RoomDetailPanelFixedProps> = ({
                       </Badge>
                     ))}
                   </div>
+                </div>
+              )}
+
+              {/* QUICK MESSAGE COMPOSER */}
+              {room.isJoined && (
+                <div className="space-y-3">
+                  <h3 className="text-white font-bold text-sm flex items-center gap-2">
+                    <MessageCircle className="h-4 w-4 text-green-400" />
+                    Quick Message
+                  </h3>
+                  <Card
+                    className="p-3 rounded-xl border"
+                    style={{
+                      background: "#141A2B",
+                      borderColor: "rgba(255, 255, 255, 0.08)"
+                    }}
+                  >
+                    <div className="space-y-3">
+                      <textarea
+                        placeholder="Share your thoughts with the room..."
+                        className="w-full p-3 rounded-lg text-sm resize-none border"
+                        style={{
+                          background: "#0A0A0A",
+                          borderColor: "rgba(255, 255, 255, 0.1)",
+                          color: "white"
+                        }}
+                        rows={3}
+                      />
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="text-gray-400 hover:text-white p-2 h-8 w-8"
+                          >
+                            📷
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="text-gray-400 hover:text-white p-2 h-8 w-8"
+                          >
+                            😊
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="text-gray-400 hover:text-white p-2 h-8 w-8"
+                          >
+                            📊
+                          </Button>
+                        </div>
+                        <Button
+                          size="sm"
+                          className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium px-4"
+                        >
+                          Send
+                        </Button>
+                      </div>
+                    </div>
+                  </Card>
                 </div>
               )}
             </div>
