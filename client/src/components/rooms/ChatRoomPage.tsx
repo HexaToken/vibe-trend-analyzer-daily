@@ -399,6 +399,44 @@ export const ChatRoomPage: React.FC<ChatRoomPageProps> = ({
         </DialogContent>
       </Dialog>
 
+      {/* Reply Modal */}
+      <Dialog open={!!replyToMessage} onOpenChange={() => setReplyToMessage(null)}>
+        <DialogContent className="bg-[#10162A] text-[#E7ECF4] border-white/10">
+          <DialogHeader>
+            <DialogTitle className="text-[#E7ECF4]">Reply to {replyToMessage?.user}</DialogTitle>
+            <DialogDescription className="text-[#8EA0B6]">
+              Replying to: "{replyToMessage?.text}"
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-4">
+            <textarea
+              placeholder="Write your reply..."
+              value={replyText}
+              onChange={(e) => setReplyText(e.target.value)}
+              className="w-full min-h-[80px] bg-[#0B1020] border border-[rgba(127,209,255,0.25)] text-[#E7ECF4] rounded-xl p-3 text-sm resize-none focus:outline-none focus:border-[rgba(127,209,255,0.4)]"
+            />
+
+            <div className="flex gap-2 justify-end">
+              <Button
+                variant="outline"
+                onClick={() => setReplyToMessage(null)}
+                className="border-white/20 text-[#E7ECF4] hover:bg-white/5"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={handleSendReply}
+                disabled={!replyText.trim()}
+                className="bg-gradient-to-r from-[#4DA8FF] to-[#6CCEFF] text-white font-bold hover:opacity-90 disabled:opacity-50"
+              >
+                Send Reply
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
       {/* Auth Modal */}
       <AuthModal
         isOpen={showAuthModal}
