@@ -785,21 +785,69 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ onNavigateToProfile 
               </CardContent>
             </Card>
 
-            {/* XP Progress (if authenticated) */}
+            {/* XP Progress & Gamification (if authenticated) */}
             {isAuthenticated && (
-              <Card className="bg-gradient-to-br from-purple-900/20 to-blue-900/20 border-purple-500/30">
-                <CardContent className="p-4">
-                  <div className="text-center">
-                    <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
-                      <span className="text-white font-bold">15</span>
+              <div className="space-y-4">
+                <Card className="bg-gradient-to-br from-purple-900/20 to-blue-900/20 border-purple-500/30">
+                  <CardContent className="p-4">
+                    <div className="text-center">
+                      <div className="relative w-16 h-16 mx-auto mb-3">
+                        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center animate-pulse">
+                          <span className="text-white font-bold text-lg">15</span>
+                        </div>
+                        <div className="absolute -top-1 -right-1 w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center">
+                          <Star className="h-3 w-3 text-white" />
+                        </div>
+                      </div>
+                      <p className="text-white font-medium mb-1">Level 15 Trader</p>
+                      <p className="text-xs text-gray-400 mb-3">2,847 / 3,000 XP</p>
+                      <Progress value={94.9} className="h-2 mb-3" />
+                      <p className="text-xs text-purple-300 font-medium">🔥 153 XP to next level!</p>
+
+                      {/* Daily XP Goals */}
+                      <div className="mt-4 p-3 bg-gray-800/30 rounded-lg border border-gray-700">
+                        <p className="text-xs text-gray-400 mb-2">Daily Goals</p>
+                        <div className="space-y-1 text-xs">
+                          <div className="flex justify-between">
+                            <span className="text-gray-300">Post content: ✅</span>
+                            <span className="text-green-400">+10 XP</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-300">Engage 5 times: ✅</span>
+                            <span className="text-green-400">+15 XP</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-gray-300">Win a poll: ⏳</span>
+                            <span className="text-gray-400">+25 XP</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <p className="text-white font-medium mb-1">Level 15 Trader</p>
-                    <p className="text-xs text-gray-400 mb-3">2,847 / 3,000 XP</p>
-                    <Progress value={94.9} className="h-2 mb-3" />
-                    <p className="text-xs text-purple-300">153 XP to next level!</p>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+
+                {/* Token Rewards */}
+                <Card className="bg-gradient-to-br from-yellow-900/20 to-orange-900/20 border-yellow-500/30">
+                  <CardContent className="p-4">
+                    <div className="text-center">
+                      <div className="flex items-center justify-center gap-2 mb-2">
+                        <div className="w-8 h-8 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-full flex items-center justify-center">
+                          <span className="text-white font-bold text-sm">$</span>
+                        </div>
+                        <span className="text-white font-medium">1,247 Tokens</span>
+                      </div>
+                      <p className="text-xs text-gray-400 mb-3">Earn tokens for winning contests & awards</p>
+                      <Button
+                        size="sm"
+                        className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-medium"
+                      >
+                        <Trophy className="h-3 w-3 mr-1" />
+                        View Rewards Shop
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
             )}
           </div>
         </div>
