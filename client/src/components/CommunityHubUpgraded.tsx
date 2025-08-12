@@ -998,11 +998,11 @@ export const CommunityHubUpgraded: React.FC<CommunityHubUpgradedProps> = ({ onNa
 
             {/* Progress Card with Streak */}
             {isAuthenticated && (
-              <Card 
-                className="token-glow"
+              <Card
+                className="token-glow overflow-hidden"
                 style={{ background: "var(--panel, #10162A)", border: "1px solid var(--panelSoft, #141A2B)" }}
               >
-                <CardContent className="p-4">
+                <CardContent className="p-4 overflow-hidden">
                   <div className="text-center">
                     <div className="relative w-16 h-16 mx-auto mb-3">
                       <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center level-badge">
