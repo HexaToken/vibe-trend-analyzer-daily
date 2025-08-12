@@ -32,7 +32,7 @@ import {
   Pin,
   Send,
   Camera,
-  PollHorizontal,
+  BarChart3,
   Laugh,
   Crown,
   Target,
