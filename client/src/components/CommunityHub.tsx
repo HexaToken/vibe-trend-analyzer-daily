@@ -411,45 +411,74 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ onNavigateToProfile 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 lg:gap-6">
           {/* Left Sidebar - Categories */}
           <div className="lg:col-span-1">
-            <Card className="bg-gray-800/50 border-gray-700/50 mb-6">
-              <CardHeader>
-                <CardTitle className="text-white flex items-center gap-2 text-sm">
-                  <MessageSquare className="h-4 w-4" />
-                  Categories
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                {categories.map((category) => (
-                  <button
-                    key={category.id}
-                    onClick={() => setActiveCategory(category.id)}
-                    className={`w-full p-3 rounded-lg transition-all duration-200 text-left border ${
-                      activeCategory === category.id
-                        ? `bg-gradient-to-r ${category.color} bg-opacity-20 border-opacity-50`
-                        : "bg-gray-800/30 hover:bg-gray-700/50 border-gray-700 hover:border-gray-600"
-                    }`}
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      <div className={`p-1 rounded bg-gradient-to-r ${category.color}`}>
-                        {category.icon}
+            {/* Mobile Category Dropdown */}
+            <div className="lg:hidden mb-4">
+              <Card className="bg-gray-800/50 border-gray-700/50">
+                <CardContent className="p-3">
+                  <div className="flex items-center gap-2 overflow-x-auto pb-2">
+                    {categories.map((category) => (
+                      <button
+                        key={category.id}
+                        onClick={() => setActiveCategory(category.id)}
+                        className={`flex items-center gap-2 px-3 py-2 rounded-lg whitespace-nowrap transition-all duration-200 border ${
+                          activeCategory === category.id
+                            ? `bg-gradient-to-r ${category.color} bg-opacity-20 border-opacity-50`
+                            : "bg-gray-800/30 border-gray-700"
+                        }`}
+                      >
+                        <div className={`p-1 rounded bg-gradient-to-r ${category.color}`}>
+                          {category.icon}
+                        </div>
+                        <span className="text-white font-medium text-sm">{category.name}</span>
+                      </button>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Desktop Category Sidebar */}
+            <div className="hidden lg:block">
+              <Card className="bg-gray-800/50 border-gray-700/50 mb-6">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2 text-sm">
+                    <MessageSquare className="h-4 w-4" />
+                    Categories
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  {categories.map((category) => (
+                    <button
+                      key={category.id}
+                      onClick={() => setActiveCategory(category.id)}
+                      className={`w-full p-3 rounded-lg transition-all duration-200 text-left border ${
+                        activeCategory === category.id
+                          ? `bg-gradient-to-r ${category.color} bg-opacity-20 border-opacity-50`
+                          : "bg-gray-800/30 hover:bg-gray-700/50 border-gray-700 hover:border-gray-600"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className={`p-1 rounded bg-gradient-to-r ${category.color}`}>
+                          {category.icon}
+                        </div>
+                        <span className="text-white font-medium text-sm">{category.name}</span>
                       </div>
-                      <span className="text-white font-medium text-sm">{category.name}</span>
-                    </div>
-                    <p className="text-xs text-gray-400 mb-2">{category.description}</p>
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-gray-500 flex items-center gap-1">
-                        <Users className="h-3 w-3" />
-                        {category.memberCount.toLocaleString()}
-                      </span>
-                      <span className="text-green-400 flex items-center gap-1">
-                        <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                        {category.onlineCount}
-                      </span>
-                    </div>
-                  </button>
-                ))}
-              </CardContent>
-            </Card>
+                      <p className="text-xs text-gray-400 mb-2">{category.description}</p>
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="text-gray-500 flex items-center gap-1">
+                          <Users className="h-3 w-3" />
+                          {category.memberCount.toLocaleString()}
+                        </span>
+                        <span className="text-green-400 flex items-center gap-1">
+                          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                          {category.onlineCount}
+                        </span>
+                      </div>
+                    </button>
+                  ))}
+                </CardContent>
+              </Card>
+            </div>
 
             {/* Live Member Activity */}
             <Card className="bg-gray-800/50 border-gray-700/50">
