@@ -110,20 +110,15 @@ export const CommunityWithSubtabs = ({ onNavigateToProfile }: CommunityWithSubta
                       <SentimentPostWall onNavigateToProfile={handleNavigateToProfile} />
                     </TabsContent>
 
-
-
-                    <TabsContent value="live-chat" className="m-0">
-                      <LiveChatRooms />
-                    </TabsContent>
-
-                    <TabsContent value="trading-rooms" className="m-0">
-                      <div className="mb-4">
-                        <h2 className="text-2xl font-semibold mb-2">Trading Rooms</h2>
-                        <p className="text-muted-foreground">
-                          Specialized rooms for different trading strategies and market discussions
-                        </p>
-                      </div>
-                      <CommunityRooms onNavigateToProfile={handleNavigateToProfile} />
+                    <TabsContent value="unified-rooms" className="m-0">
+                      <UnifiedRoomsBuilder
+                        title="Rooms"
+                        subtitle="Join real-time discussions by ticker, sector, and strategy."
+                        showSearch={true}
+                        showFilters={true}
+                        showSort={true}
+                        maxRooms={8}
+                      />
                     </TabsContent>
 
                     <TabsContent value="private-watchlist" className="m-0">
