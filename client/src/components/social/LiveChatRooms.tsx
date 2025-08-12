@@ -452,7 +452,7 @@ export const LiveChatRooms: React.FC = () => {
             </ScrollArea>
 
             {/* Composer */}
-            <div className="p-4 border-t border-gray-700/30 bg-[#10162A] flex-shrink-0">
+            <div className="p-4 border-t-2 border-[#7FD1FF]/20 bg-[#141A2B] flex-shrink-0 shadow-lg">
               <div className="space-y-3">
                 {/* Sentiment Chips */}
                 <div className="flex items-center gap-2">
