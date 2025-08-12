@@ -768,9 +768,9 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
               </div>
             </div>
 
-            {/* Enhanced Room Detail Panel or Preview */}
+            {/* Fixed Room Detail Panel or Preview */}
             {state.showDetailPanel && state.detailPanelRoomId ? (
-              <EnhancedRoomDetailPanel
+              <RoomDetailPanelFixed
                 room={createRoomDetailData(state.rooms.find(r => r.id === state.detailPanelRoomId)!)}
                 onClose={handleCloseDetailPanel}
                 onJoinRoom={handleJoinRoomFromDetail}
