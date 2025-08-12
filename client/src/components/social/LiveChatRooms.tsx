@@ -240,7 +240,27 @@ export const LiveChatRooms: React.FC = () => {
     <>
       <style>{cssVars}</style>
       <div className="live-chat-theme min-h-[700px] bg-[#0B1020] text-[#E7ECF4] rounded-lg overflow-hidden relative">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 h-[700px]">
+        {/* Mobile Header */}
+        <div className="lg:hidden p-4 border-b border-gray-700/30 bg-[#10162A] flex items-center justify-between">
+          <Button
+            size="sm"
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="bg-[#7FD1FF]/10 hover:bg-[#7FD1FF]/20 text-[#7FD1FF] border-[#7FD1FF]/30"
+          >
+            <MessageSquare className="h-4 w-4 mr-2" />
+            Rooms
+          </Button>
+          <div className="flex items-center gap-2">
+            <div className="text-lg">{selectedRoom.icon}</div>
+            <h2 className="text-lg font-semibold text-[#E7ECF4]">{selectedRoom.name}</h2>
+          </div>
+          <div className="flex items-center gap-1 text-sm text-[#8EA0B6]">
+            <Users className="h-4 w-4" />
+            {selectedRoom.onlineCount}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 h-[700px] lg:h-[700px]">
 
           {/* Left Sidebar - Chat Rooms */}
           <div className="hidden lg:block lg:col-span-3 bg-[#0F1421] border-r border-gray-700/30">
