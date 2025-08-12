@@ -472,7 +472,10 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ onNavigateToProfile 
                           {category.memberCount.toLocaleString()}
                         </span>
                         <span className="text-green-400 flex items-center gap-1">
-                          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                          <div className="relative">
+                            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                            <div className="absolute inset-0 w-2 h-2 bg-green-400 rounded-full animate-ping opacity-75" />
+                          </div>
                           {category.onlineCount}
                         </span>
                       </div>
