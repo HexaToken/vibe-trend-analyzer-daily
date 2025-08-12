@@ -606,24 +606,24 @@ export const LiveChatRooms: React.FC = () => {
                 </Card>
 
                 {/* AI Assistant */}
-                <Card className="bg-[#10162A] border-gray-700/30">
+                <Card className="bg-[var(--panel)] border-gray-700/30 shadow-[var(--shadow)]">
                   <CardHeader className="pb-3">
-                    <CardTitle className="text-lg text-[#E7ECF4] flex items-center gap-2">
+                    <CardTitle className="text-[18px] text-[var(--text)] font-bold flex items-center gap-2">
                       <Brain className="h-5 w-5 text-purple-400" />
                       AI Assistant
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
-                    <Button 
-                      size="sm" 
-                      className="w-full bg-purple-500/20 hover:bg-purple-500/30 text-purple-400 border-purple-500/30"
+                    <Button
+                      className="w-full h-12 bg-gradient-to-r from-purple-500/20 to-purple-600/20 hover:from-purple-500/30 hover:to-purple-600/30 text-purple-300 border-purple-500/30 font-semibold transition-all duration-200 hover:scale-[1.02]"
                     >
+                      <Brain className="h-4 w-4 mr-2" />
                       Summarize last 50 messages
                     </Button>
-                    <Button 
-                      size="sm" 
-                      className="w-full bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 border-blue-500/30"
+                    <Button
+                      className="w-full h-12 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 hover:from-blue-500/30 hover:to-cyan-500/30 text-blue-300 border-blue-500/30 font-semibold transition-all duration-200 hover:scale-[1.02]"
                     >
+                      <BarChart3 className="h-4 w-4 mr-2" />
                       Show sentiment shift (2h)
                     </Button>
                   </CardContent>
