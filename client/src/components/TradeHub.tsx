@@ -442,6 +442,15 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
           </Card>
         </div>
       </div>
+
+      {/* Force text contrast for dark mode */}
+      <style jsx>{`
+        .dark .text-gray-700,
+        .dark .text-gray-600,
+        .dark .text-gray-800 {
+          color: white !important;
+        }
+      `}</style>
     </div>
   );
 };
