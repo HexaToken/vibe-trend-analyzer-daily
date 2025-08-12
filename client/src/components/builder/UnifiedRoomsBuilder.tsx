@@ -361,13 +361,13 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
     const room = state.rooms.find(r => r.id === roomId);
     if (!room) return;
 
-    if (room.isVIP && !user?.isPremium) {
-      alert('VIP room access requires Pro membership. Please upgrade to continue.');
+    if (!isAuthenticated) {
+      alert('Please sign in to join rooms and start chatting.');
       return;
     }
 
-    if (!isAuthenticated) {
-      alert('Please sign in to join rooms.');
+    if (room.isVIP && !user?.isPremium) {
+      alert('VIP room access requires Pro membership. Please upgrade to continue.');
       return;
     }
 
@@ -382,12 +382,23 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
 
   // Handle opening room from detail panel
   const handleOpenRoomFromDetail = (roomId: string) => {
+    if (!isAuthenticated) {
+      alert('Please sign in to join rooms and start chatting.');
+      return;
+    }
+
     handleCloseDetailPanel();
     setState(prev => ({
       ...prev,
       showChatRoom: true,
       chatRoomId: roomId
     }));
+  };
+
+  // Handle sign in action
+  const handleSignIn = () => {
+    alert('Sign in functionality would redirect to login page.');
+    // In a real app, this would trigger the authentication flow
   };
 
   // Handle back from chat room
