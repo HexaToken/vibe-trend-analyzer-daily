@@ -177,6 +177,12 @@
 }
 
 /* Progress bar shimmer */
+.xp-progress {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
 .xp-progress .progress-indicator {
   background: linear-gradient(90deg, #7c3aed, #3b82f6, #06b6d4);
   background-size: 200% 100%;
