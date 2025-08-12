@@ -387,7 +387,8 @@ export const LiveChatRooms: React.FC = () => {
                 {mockMessages.map((message) => (
                   <div
                     key={message.id}
-                    className="group bg-[#10162A] rounded-xl p-4 transition-all duration-200 hover:bg-[rgba(255,255,255,0.03)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.25)] hover:scale-[1.01]"
+                    className="group bg-[var(--panel)] rounded-2xl p-[18px] transition-all duration-200 hover:bg-[#0F162C] shadow-[var(--shadow)]"
+                    data-message-id={message.id}
                     data-sentiment={message.user.sentiment}
                   >
                     <div className="flex items-start gap-3">
