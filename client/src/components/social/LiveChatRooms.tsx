@@ -239,9 +239,9 @@ export const LiveChatRooms: React.FC = () => {
   return (
     <>
       <style>{cssVars}</style>
-      <div className="live-chat-theme min-h-[700px] bg-[#0B1020] text-[#E7ECF4] rounded-lg overflow-hidden relative">
+      <div className="live-chat-theme h-[800px] bg-[#0B1020] text-[#E7ECF4] rounded-lg overflow-hidden relative flex flex-col">
         {/* Mobile Header */}
-        <div className="lg:hidden p-4 border-b border-gray-700/30 bg-[#10162A] flex items-center justify-between">
+        <div className="lg:hidden p-4 border-b border-gray-700/30 bg-[#10162A] flex items-center justify-between flex-shrink-0">
           <Button
             size="sm"
             onClick={() => setIsMobileMenuOpen(true)}
@@ -260,7 +260,7 @@ export const LiveChatRooms: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 h-[700px] lg:h-[700px]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 flex-1 min-h-0">
 
           {/* Left Sidebar - Chat Rooms */}
           <div className="hidden lg:block lg:col-span-3 bg-[#0F1421] border-r border-gray-700/30">
