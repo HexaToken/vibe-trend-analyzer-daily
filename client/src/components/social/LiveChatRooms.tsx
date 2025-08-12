@@ -190,6 +190,7 @@ export const LiveChatRooms: React.FC = () => {
   const [messageInput, setMessageInput] = useState('');
   const [selectedSentiment, setSelectedSentiment] = useState<'bullish' | 'bearish' | 'neutral' | null>(null);
   const [isThreadOpen, setIsThreadOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [selectedMessage, setSelectedMessage] = useState<Message | null>(null);
   const [expandedCategories, setExpandedCategories] = useState({
     general: true,
