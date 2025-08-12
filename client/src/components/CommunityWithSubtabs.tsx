@@ -133,13 +133,7 @@ export const CommunityWithSubtabs = ({ onNavigateToProfile }: CommunityWithSubta
                     </TabsContent>
 
                     <TabsContent value="space" className="m-0">
-                      <div className="mb-4">
-                        <h2 className="text-2xl font-semibold mb-2">Community Space</h2>
-                        <p className="text-muted-foreground">
-                          Crypto channels and off-topic discussions for a well-rounded community experience
-                        </p>
-                      </div>
-                      <SpaceSwitcherWidget onNavigateToProfile={handleNavigateToProfile} />
+                      <CommunityHub onNavigateToProfile={handleNavigateToProfile} />
                     </TabsContent>
                   </div>
                 </Tabs>
