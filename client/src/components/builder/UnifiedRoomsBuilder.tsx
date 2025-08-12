@@ -150,7 +150,7 @@ const samplePosts = [
     id: '1',
     username: 'TraderJoe',
     avatar: '/placeholder.svg',
-    content: 'Just spotted huge volume on $AAPL calls expiring this Friday. Something big brewing? 🚀',
+    content: 'Just spotted huge volume on $AAPL calls expiring this Friday. Something big brewing? ��',
     timestamp: '2m ago'
   },
   {
@@ -272,28 +272,32 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
         {
           id: 'msg-1',
           author: { name: 'AlphaTrader', avatar: '/api/placeholder/32/32' },
-          content: room.type === 'crypto' ? 'BTC looking strong above 50k resistance 🚀' : 'SPY showing bullish momentum into close',
+          content: room.type === 'crypto' ? 'BTC looking strong above 50k resistance 🚀 $BTC #bullish' : 'SPY showing bullish momentum into close $SPY #bullish',
           timestamp: '2m ago',
+          sentiment: 'bullish' as const,
           hasMedia: Math.random() > 0.7,
           mediaThumbnail: '/api/placeholder/60/40'
         },
         {
           id: 'msg-2',
           author: { name: 'MarketWatcher', avatar: '/api/placeholder/32/32' },
-          content: 'Volume spike noticed in tech sector. Thoughts?',
-          timestamp: '5m ago'
+          content: 'Volume spike noticed in tech sector. Thoughts? $QQQ #neutral',
+          timestamp: '5m ago',
+          sentiment: 'neutral' as const
         },
         {
           id: 'msg-3',
           author: { name: 'OptionsPro', avatar: '/api/placeholder/32/32' },
-          content: 'IV crush might be coming after earnings. Be careful with premium.',
-          timestamp: '8m ago'
+          content: 'IV crush might be coming after earnings. Be careful with premium. #bearish',
+          timestamp: '8m ago',
+          sentiment: 'bearish' as const
         },
         {
           id: 'msg-4',
           author: { name: 'DayTrader99', avatar: '/api/placeholder/32/32' },
-          content: 'Setting alerts for key levels. Risk management is everything.',
-          timestamp: '12m ago'
+          content: 'Setting alerts for key levels. Risk management is everything. #neutral',
+          timestamp: '12m ago',
+          sentiment: 'neutral' as const
         }
       ],
       topContributors: [
