@@ -100,7 +100,7 @@ const mockRooms: Room[] = [
   {
     id: '2',
     name: 'Crypto Central',
-    icon: '₿',
+    icon: '���',
     category: 'crypto',
     onlineCount: 156,
     unreadCount: 0,
@@ -354,7 +354,8 @@ export const LiveChatRooms: React.FC = () => {
           </div>
 
           {/* Center Panel - Messages */}
-          <div className="col-span-1 lg:col-span-6 bg-[#0B1020] flex flex-col">
+          <div className="col-span-1 lg:col-span-6 bg-red-500 flex flex-col min-h-[400px] border-2 border-yellow-500">
+            <div className="p-4 bg-green-500 text-white">CENTER PANEL TEST</div>
             {/* Header */}
             <div className="p-4 border-b border-gray-700/30 bg-[#10162A]">
               <div className="flex items-center justify-between">
