@@ -239,10 +239,10 @@ export const LiveChatRooms: React.FC = () => {
     <>
       <style>{cssVars}</style>
       <div className="live-chat-theme min-h-[700px] bg-[#0B1020] text-[#E7ECF4] rounded-lg overflow-hidden relative">
-        <div className="grid grid-cols-12 gap-0 h-[700px]">
-          
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 h-[700px]">
+
           {/* Left Sidebar - Chat Rooms */}
-          <div className="col-span-3 bg-[#0F1421] border-r border-gray-700/30">
+          <div className="hidden lg:block lg:col-span-3 bg-[#0F1421] border-r border-gray-700/30">
             <div className="p-4 border-b border-gray-700/30">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-[#E7ECF4]">Chat Rooms</h3>
