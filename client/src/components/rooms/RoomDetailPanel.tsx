@@ -94,15 +94,18 @@ export const RoomDetailPanel: React.FC<RoomDetailPanelProps> = ({
           <p className="text-[#8EA0B6] text-sm mb-3">{selectedRoom.description}</p>
 
           {/* Stats Row */}
-          <div className="grid grid-cols-1 gap-3 mb-4">
-            <div className="bg-[#141A2B] rounded-xl p-3 text-[#E7ECF4] text-sm">
-              👥 {selectedRoom.online} Online
+          <div className="grid grid-cols-3 gap-3 mb-4">
+            <div className="bg-[#141A2B] rounded-xl p-3 text-[#E7ECF4] text-xs text-center">
+              <div className="font-medium">👥 {selectedRoom.online}</div>
+              <div className="text-[#8EA0B6] text-xs mt-1">Online</div>
             </div>
-            <div className="bg-[#141A2B] rounded-xl p-3 text-[#E7ECF4] text-sm">
-              💬 {selectedRoom.today} Today
+            <div className="bg-[#141A2B] rounded-xl p-3 text-[#E7ECF4] text-xs text-center">
+              <div className="font-medium">💬 {selectedRoom.today}</div>
+              <div className="text-[#8EA0B6] text-xs mt-1">Today</div>
             </div>
-            <div className="bg-[#141A2B] rounded-xl p-3 text-[#E7ECF4] text-sm">
-              {getActivityIcon(selectedRoom.activityPct)} {getActivityPrefix(selectedRoom.activityPct)}{Math.abs(selectedRoom.activityPct)}% Activity
+            <div className="bg-[#141A2B] rounded-xl p-3 text-[#E7ECF4] text-xs text-center">
+              <div className="font-medium">{getActivityIcon(selectedRoom.activityPct)} {getActivityPrefix(selectedRoom.activityPct)}{Math.abs(selectedRoom.activityPct)}%</div>
+              <div className="text-[#8EA0B6] text-xs mt-1">Activity</div>
             </div>
           </div>
 
