@@ -15,6 +15,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { SentimentPostWall } from "./SentimentPostWall";
 import { ChatSubcategory } from "./social/ChatSubcategory";
+import { LiveChatRooms } from "./social/LiveChatRooms";
 import { CommunityRooms } from "./social/CommunityRooms";
 import { PrivateRoomsContainer } from "./privateRooms/PrivateRoomsContainer";
 import { SpaceSwitcherWidget } from "./community/SpaceSwitcherWidget";
