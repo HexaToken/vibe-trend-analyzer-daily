@@ -849,13 +849,7 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
                   fontSize: '16px',
                   boxShadow: 'var(--shadow)'
                 }}
-                onClick={() => {
-                  if (selectedRoom.isVIP) {
-                    alert('VIP room access requires Pro membership. Please upgrade to continue.');
-                  } else {
-                    window.location.href = `/rooms/${selectedRoom.id}`;
-                  }
-                }}
+                onClick={() => selectedRoom && handleJoinRoom(selectedRoom)}
               >
                 Open {selectedRoom.name}
               </button>
