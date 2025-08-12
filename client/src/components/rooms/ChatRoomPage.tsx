@@ -255,8 +255,43 @@ export const ChatRoomPage: React.FC<ChatRoomPageProps> = ({
                 </div>
                 
                 {authed ? (
-                  <div className="text-[#8EA0B6] text-xs">
-                    ❤️ Like • 💬 Reply • 🔁 Share
+                  <div className="flex items-center gap-4 mt-2">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleLike(message.id)}
+                      className={`h-7 px-2 text-xs gap-1 ${
+                        message.isLiked
+                          ? "text-red-400 hover:text-red-300"
+                          : "text-[#8EA0B6] hover:text-[#E7ECF4]"
+                      }`}
+                    >
+                      <Heart className={`w-3 h-3 ${message.isLiked ? "fill-current" : ""}`} />
+                      {(message.likes || 0) > 0 && message.likes}
+                    </Button>
+
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleReply(message)}
+                      className="h-7 px-2 text-xs gap-1 text-[#8EA0B6] hover:text-[#E7ECF4]"
+                    >
+                      <MessageCircle className="w-3 h-3" />
+                      {(message.replies || 0) > 0 && message.replies}
+                    </Button>
+
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleShare(message.id)}
+                      className={`h-7 px-2 text-xs gap-1 ${
+                        message.isShared
+                          ? "text-blue-400 hover:text-blue-300"
+                          : "text-[#8EA0B6] hover:text-[#E7ECF4]"
+                      }`}
+                    >
+                      <Share2 className="w-3 h-3" />
+                    </Button>
                   </div>
                 ) : (
                   <div className="text-[#8EA0B6] text-xs opacity-90">
