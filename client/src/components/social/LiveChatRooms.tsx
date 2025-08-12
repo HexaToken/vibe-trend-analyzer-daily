@@ -576,22 +576,32 @@ export const LiveChatRooms: React.FC = () => {
                 </Card>
 
                 {/* Trending Tickers */}
-                <Card className="bg-[#10162A] border-gray-700/30">
+                <Card className="bg-[var(--panel)] border-gray-700/30 shadow-[var(--shadow)]">
                   <CardHeader className="pb-3">
-                    <CardTitle className="text-lg text-[#E7ECF4]">Trending Tickers</CardTitle>
+                    <CardTitle className="text-[18px] text-[var(--text)] font-bold">Trending Tickers</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-2">
-                    {['$AAPL', '$TSLA', '$BTC', '$ETH', '$NVDA'].map((ticker, index) => (
-                      <div key={ticker} className="flex items-center justify-between p-2 bg-[#141A2B] rounded-lg">
-                        <span className="text-sm font-medium text-[#7FD1FF]">{ticker}</span>
-                        <div className="flex items-center gap-2">
-                          <div className={`h-1 w-8 rounded-full ${index % 2 === 0 ? 'bg-green-500' : 'bg-red-500'}`}></div>
-                          <span className={`text-xs ${index % 2 === 0 ? 'text-green-400' : 'text-red-400'}`}>
-                            {index % 2 === 0 ? '+' : '-'}{Math.floor(Math.random() * 5) + 1}%
-                          </span>
-                        </div>
-                      </div>
-                    ))}
+                  <CardContent className="space-y-3">
+                    {['$AAPL', '$TSLA', '$BTC', '$ETH', '$NVDA'].map((ticker, index) => {
+                      const isPositive = index % 2 === 0;
+                      const change = Math.floor(Math.random() * 5) + 1;
+                      return (
+                        <button
+                          key={ticker}
+                          className="w-full flex items-center justify-between p-3 bg-[var(--panel-soft)] rounded-lg hover:bg-[var(--panel-soft)]/80 transition-colors cursor-pointer group"
+                          data-ticker={ticker}
+                        >
+                          <span className="text-[14px] font-bold text-[var(--accent)] group-hover:text-[var(--accent)]/80">{ticker}</span>
+                          <div className="flex items-center gap-3">
+                            <div className="flex h-2 w-12 rounded-full bg-gray-700/50 overflow-hidden">
+                              <div className={`h-full ${isPositive ? 'bg-[var(--success)]' : 'bg-[var(--danger)]'}`} style={{width: `${60 + Math.random() * 40}%`}}></div>
+                            </div>
+                            <span className={`text-[13px] font-bold min-w-[40px] text-right ${isPositive ? 'text-[var(--success)]' : 'text-[var(--danger)]'}`}>
+                              {isPositive ? '+' : '-'}{change}%
+                            </span>
+                          </div>
+                        </button>
+                      );
+                    })}
                   </CardContent>
                 </Card>
 
