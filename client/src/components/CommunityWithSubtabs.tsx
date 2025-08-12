@@ -15,6 +15,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { SentimentPostWall } from "./SentimentPostWall";
 import { ChatSubcategory } from "./social/ChatSubcategory";
+import { LiveChatRooms } from "./social/LiveChatRooms";
 import { CommunityRooms } from "./social/CommunityRooms";
 import { PrivateRoomsContainer } from "./privateRooms/PrivateRoomsContainer";
 import { SpaceSwitcherWidget } from "./community/SpaceSwitcherWidget";
@@ -118,13 +119,7 @@ export const CommunityWithSubtabs = ({ onNavigateToProfile }: CommunityWithSubta
 
 
                     <TabsContent value="live-chat" className="m-0">
-                      <div className="mb-4">
-                        <h2 className="text-2xl font-semibold mb-2">Live Chat Rooms</h2>
-                        <p className="text-muted-foreground">
-                          Join real-time discussions with fellow traders and market enthusiasts
-                        </p>
-                      </div>
-                      <ChatSubcategory onNavigateToProfile={handleNavigateToProfile} />
+                      <LiveChatRooms />
                     </TabsContent>
 
                     <TabsContent value="trading-rooms" className="m-0">

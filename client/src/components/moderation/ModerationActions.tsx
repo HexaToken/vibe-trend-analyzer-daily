@@ -129,7 +129,7 @@ const actionConfigs = {
     label: "Dismiss Flag",
     description: "Mark false positive and close",
     icon: <XCircle className="w-4 h-4" />,
-    color: "text-gray-600",
+    color: "text-gray-600 dark:text-gray-400",
     severity: "low",
   },
 };
