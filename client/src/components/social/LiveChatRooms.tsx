@@ -321,8 +321,8 @@ export const LiveChatRooms: React.FC = () => {
                           <div
                             key={room.id}
                             onClick={() => setSelectedRoom(room)}
-                            className={`flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-all hover:bg-[#141A2B]/70 group ${
-                              selectedRoom.id === room.id ? 'bg-[#141A2B] shadow-lg' : ''
+                            className={`flex items-center gap-3 p-3 rounded-2xl cursor-pointer transition-all duration-200 hover:bg-[var(--panel-soft)] hover:-translate-y-0.5 hover:shadow-[var(--shadow)] group ${
+                              selectedRoom.id === room.id ? 'bg-[var(--panel-soft)] shadow-lg' : ''
                             }`}
                             data-room={room.id}
                           >
