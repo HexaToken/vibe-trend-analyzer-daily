@@ -841,8 +841,8 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
                 }))}
                 previewMessages={{
                   [state.detailPanelRoomId]: [
-                    { id: 1, user: 'AlphaTrader', time: '2m', text: room?.type === 'crypto' ? 'BTC holding 50k support; buyers stepping in.' : 'Watching above 195 — breakout if volume expands 🚀' },
-                    { id: 2, user: 'MarketWatcher', time: '5m', text: room?.type === 'crypto' ? 'ETH gas fees easing; L2 activity rising.' : 'Seeing neutral options flow; IV steady.' },
+                    { id: 1, user: 'AlphaTrader', time: '2m', text: state.rooms.find(r => r.id === state.detailPanelRoomId)?.type === 'crypto' ? 'BTC holding 50k support; buyers stepping in.' : 'Watching above 195 — breakout if volume expands 🚀' },
+                    { id: 2, user: 'MarketWatcher', time: '5m', text: state.rooms.find(r => r.id === state.detailPanelRoomId)?.type === 'crypto' ? 'ETH gas fees easing; L2 activity rising.' : 'Seeing neutral options flow; IV steady.' },
                     { id: 3, user: 'OptionsPro', time: '9m', text: 'Debit spread idea: 195/205 calls for next week.' }
                   ]
                 }}
