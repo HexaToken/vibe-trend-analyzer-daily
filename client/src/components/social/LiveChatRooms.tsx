@@ -13,7 +13,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Textarea } from '@/components/ui/textarea';
 
-// CSS Variables for dark mode theme
+// CSS Variables for refined dark mode theme
 const cssVars = `
   .live-chat-theme {
     --bg: #0B1020;
@@ -26,6 +26,19 @@ const cssVars = `
     --warn: #F8C06B;
     --danger: #FF7A7A;
     --shadow: 0 8px 24px rgba(0,0,0,0.35);
+
+    /* Sentiment colors with better contrast */
+    --bullish-bg: rgba(29,216,130,.16);
+    --bullish-text: #91F0C8;
+    --bearish-bg: rgba(255,122,122,.16);
+    --bearish-text: #FF9D9D;
+    --neutral-bg: rgba(248,192,107,.16);
+    --neutral-text: #FFD89A;
+
+    /* AI button styling */
+    --ai-border: rgba(127,209,255,.5);
+    --ai-bg: rgba(127,209,255,.08);
+    --ai-bg-hover: rgba(127,209,255,.14);
   }
 `;
 
