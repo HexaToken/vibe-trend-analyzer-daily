@@ -130,7 +130,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
               💼 TradeHub
             </h1>
           </div>
-          <p className="text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto font-medium">
+          <p className="text-xl text-gray-700 dark:text-gray-100 max-w-2xl mx-auto font-medium">
             Learn from verified traders, access premium strategies, and monetize your trading expertise
           </p>
           <div className="flex flex-wrap justify-center gap-4 mt-6">
@@ -229,7 +229,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                         <AvatarImage src="/placeholder.svg" />
                         <AvatarFallback>{item.instructor[0]}</AvatarFallback>
                       </Avatar>
-                      <span className="text-sm text-gray-700 dark:text-gray-300 font-medium">{item.instructor}</span>
+                      <span className="text-sm text-gray-700 dark:text-gray-100 font-medium">{item.instructor}</span>
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-4">
@@ -238,13 +238,13 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                         <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                         <span className="text-sm font-medium">{item.rating}</span>
                       </div>
-                      <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                      <span className="text-sm text-gray-600 dark:text-gray-200 font-medium">
                         {item.type === "course" ? `${item.students} students` : `${item.subscribers} subscribers`}
                       </span>
                     </div>
                     
                     {item.type === "course" && item.duration && (
-                      <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 font-medium">
+                      <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-100 font-medium">
                         <Play className="h-3 w-3" />
                         {item.duration}
                       </div>
@@ -253,7 +253,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                     <div className="flex items-center justify-between pt-2">
                       <div className="text-2xl font-bold text-[#1F2937] dark:text-primary">
                         ${item.price}
-                        {item.period && <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">/{item.period}</span>}
+                        {item.period && <span className="text-sm text-gray-600 dark:text-gray-200 font-medium">/{item.period}</span>}
                       </div>
                       <Button size="sm">
                         {item.type === "course" ? "Enroll Now" : "Subscribe"}
@@ -269,7 +269,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
           <TabsContent value="featured" className="space-y-6">
             <div className="text-center mb-8">
               <h2 className="text-2xl font-bold mb-2">Featured This Week</h2>
-              <p className="text-gray-700 dark:text-gray-300 font-medium">Hand-picked content from our top-rated educators</p>
+              <p className="text-gray-700 dark:text-gray-100 font-medium">Hand-picked content from our top-rated educators</p>
             </div>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -294,7 +294,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                           {item.badge}
                         </Badge>
                         <h3 className="text-xl font-semibold">{item.title}</h3>
-                        <p className="text-sm text-gray-700 dark:text-gray-300 font-medium">by {item.instructor}</p>
+                        <p className="text-sm text-gray-700 dark:text-gray-100 font-medium">by {item.instructor}</p>
                         <div className="flex items-center gap-4 pt-2">
                           <div className="flex items-center gap-1">
                             <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
@@ -314,7 +314,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
           <TabsContent value="trending" className="space-y-6">
             <div className="text-center mb-8">
               <h2 className="text-2xl font-bold mb-2">🔥 Trending Now</h2>
-              <p className="text-gray-700 dark:text-gray-300 font-medium">Most popular content based on community engagement</p>
+              <p className="text-gray-700 dark:text-gray-100 font-medium">Most popular content based on community engagement</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -325,7 +325,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                   </div>
                   <CardContent className="p-6 pt-8">
                     <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                    <p className="text-sm text-gray-700 dark:text-gray-300 font-medium mb-4">by {item.instructor}</p>
+                    <p className="text-sm text-gray-700 dark:text-gray-100 font-medium mb-4">by {item.instructor}</p>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1">
                         <TrendingUp className="h-4 w-4 text-green-500" />
@@ -343,7 +343,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
           <TabsContent value="creators" className="space-y-6">
             <div className="text-center mb-8">
               <h2 className="text-2xl font-bold mb-2">👥 Top Creators</h2>
-              <p className="text-gray-700 dark:text-gray-300 font-medium">Verified traders with the highest credibility scores</p>
+              <p className="text-gray-700 dark:text-gray-100 font-medium">Verified traders with the highest credibility scores</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -356,7 +356,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                     </Avatar>
                     
                     <h3 className="text-xl font-semibold mb-2">{trader.name}</h3>
-                    <p className="text-gray-700 dark:text-gray-300 font-medium mb-3">{trader.expertise}</p>
+                    <p className="text-gray-700 dark:text-gray-100 font-medium mb-3">{trader.expertise}</p>
                     
                     <div className="flex items-center justify-center gap-2 mb-3">
                       <Badge
@@ -387,22 +387,22 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                     <div className="grid grid-cols-2 gap-4 text-sm mb-4">
                       <div>
                         <div className="font-semibold text-green-500">{trader.monthlyReturn}</div>
-                        <div className="text-gray-600 dark:text-gray-400 font-medium">Monthly Return</div>
+                        <div className="text-gray-600 dark:text-gray-200 font-medium">Monthly Return</div>
                       </div>
                       <div>
                         <div className="font-semibold">{trader.followers.toLocaleString()}</div>
-                        <div className="text-gray-600 dark:text-gray-400 font-medium">Followers</div>
+                        <div className="text-gray-600 dark:text-gray-200 font-medium">Followers</div>
                       </div>
                     </div>
                     
                     <div className="grid grid-cols-2 gap-4 text-sm mb-4">
                       <div>
                         <div className="font-semibold">{trader.courses}</div>
-                        <div className="text-gray-600 dark:text-gray-400 font-medium">Courses</div>
+                        <div className="text-gray-600 dark:text-gray-200 font-medium">Courses</div>
                       </div>
                       <div>
                         <div className="font-semibold">{trader.subscribers.toLocaleString()}</div>
-                        <div className="text-gray-600 dark:text-gray-400 font-medium">Subscribers</div>
+                        <div className="text-gray-600 dark:text-gray-200 font-medium">Subscribers</div>
                       </div>
                     </div>
                     
