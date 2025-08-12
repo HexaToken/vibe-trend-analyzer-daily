@@ -577,7 +577,7 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ onNavigateToProfile 
             {/* Posts Feed */}
             <div className="space-y-4">
               {filteredPosts.map((post) => (
-                <Card key={post.id} className="bg-gray-800/50 border-gray-700/50 hover:border-gray-600/50 transition-all">
+                <Card key={post.id} className="post-card bg-gray-800/50 border-gray-700/50 hover:border-gray-600/50 transition-all">
                   <CardContent className="p-4">
                     {post.isPinned && (
                       <div className="flex items-center gap-2 mb-3 text-yellow-400">
