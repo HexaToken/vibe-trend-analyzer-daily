@@ -3,6 +3,7 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { Search, Users, MessageSquare, Star, Shield, TrendingUp, Hash, Clock, Target, Lock, Send, Smile, Paperclip } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import { RoomDetailPanel } from '@/components/rooms/RoomDetailPanel';
 
 // CSS Variables for the dark mode theme
 const cssVars = `
