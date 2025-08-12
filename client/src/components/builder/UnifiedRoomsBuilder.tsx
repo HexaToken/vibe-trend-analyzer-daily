@@ -171,6 +171,8 @@ interface UnifiedRoomsState {
   sort: SortType;
   selectedRoomId: string | null;
   rooms: Room[];
+  showDetailPanel: boolean;
+  detailPanelRoomId: string | null;
 }
 
 interface UnifiedRoomsBuilderProps {
