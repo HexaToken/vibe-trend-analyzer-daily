@@ -70,8 +70,8 @@ export const RoomDetailPanel: React.FC<RoomDetailPanelProps> = ({
     <>
       {isOpen && (
         <div className={cn(
-          "fixed right-0 top-0 h-full w-[360px] bg-[#10162A] border-l border-white/6 z-50 overflow-y-auto",
-          "p-5 rounded-l-2xl shadow-2xl shadow-black/35",
+          "w-[360px] bg-[#10162A] border-l border-white/6 overflow-y-auto",
+          "p-5 rounded-2xl shadow-2xl shadow-black/35",
           className
         )}>
           {/* Header */}
