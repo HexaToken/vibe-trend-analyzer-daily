@@ -69,6 +69,7 @@ import { TraderProfile } from "@/components/profile/TraderProfile";
 import { ChatSubcategory } from "@/components/social/ChatSubcategory";
 import { Footer } from "@/components/Footer";
 import SmartNewsFeedPage from "@/components/SmartNewsFeedPage";
+import { RoomDetailPanelDemo } from "@/components/examples/RoomDetailPanelDemo";
 
 const queryClient = new QueryClient();
 
