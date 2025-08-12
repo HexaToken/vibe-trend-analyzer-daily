@@ -84,6 +84,83 @@ export const ChatRoomPage: React.FC<ChatRoomPageProps> = ({
     setShowAuthModal(true);
   };
 
+  // Handle message interactions
+  const handleLike = (messageId: number) => {
+    if (!authed) {
+      setShowAuthModal(true);
+      return;
+    }
+
+    const updateMessages = (messages: Message[]) =>
+      messages.map(msg =>
+        msg.id === messageId
+          ? {
+              ...msg,
+              isLiked: !msg.isLiked,
+              likes: (msg.likes || 0) + (msg.isLiked ? -1 : 1)
+            }
+          : msg
+      );
+
+    setFeed(updateMessages);
+  };
+
+  const handleReply = (message: Message) => {
+    if (!authed) {
+      setShowAuthModal(true);
+      return;
+    }
+    setReplyToMessage(message);
+  };
+
+  const handleShare = (messageId: number) => {
+    if (!authed) {
+      setShowAuthModal(true);
+      return;
+    }
+
+    const updateMessages = (messages: Message[]) =>
+      messages.map(msg =>
+        msg.id === messageId
+          ? { ...msg, isShared: !msg.isShared }
+          : msg
+      );
+
+    setFeed(updateMessages);
+
+    // Show share confirmation
+    alert("Message shared!");
+  };
+
+  const handleSendReply = () => {
+    if (!replyText.trim() || !replyToMessage) return;
+
+    const newReply: Message = {
+      id: Date.now(),
+      user: "You",
+      time: "Just now",
+      text: `@${replyToMessage.user} ${replyText}`,
+      type: "reply",
+      sentiment: sentiment,
+      likes: 0,
+      replies: 0,
+      isLiked: false,
+      isShared: false
+    };
+
+    setFeed([newReply, ...feed]);
+
+    // Update original message reply count
+    setFeed(prev => prev.map(msg =>
+      msg.id === replyToMessage.id
+        ? { ...msg, replies: (msg.replies || 0) + 1 }
+        : msg
+    ));
+
+    setReplyText("");
+    setReplyToMessage(null);
+  };
+
   // Get activity icon and prefix
   const getActivityDisplay = () => {
     const icon = room.activityPct >= 0 ? "📈" : "📉";
@@ -171,7 +248,7 @@ export const ChatRoomPage: React.FC<ChatRoomPageProps> = ({
             {currentFeed.map((message) => (
               <div key={message.id} className="bg-[#10162A] rounded-xl p-3">
                 <div className="text-[#8EA0B6] text-xs mb-1">
-                  {message.user} • {message.time}
+                  {message.user} �� {message.time}
                 </div>
                 <div className="text-[#E7ECF4] text-sm mb-2">
                   {message.text}
