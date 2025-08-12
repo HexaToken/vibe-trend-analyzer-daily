@@ -8,6 +8,7 @@ import {
   TrendingUp,
   Flame,
   Eye,
+  Heart,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
