@@ -502,4 +502,48 @@ export const customComponents: RegisteredComponent[] = [
     ],
     canHaveChildren: false,
   },
+  // Unified Rooms component
+  {
+    component: UnifiedRoomsBuilder,
+    name: "UnifiedRoomsBuilder",
+    inputs: [
+      {
+        name: "title",
+        type: "string",
+        defaultValue: "Rooms",
+        required: false,
+      },
+      {
+        name: "subtitle",
+        type: "string",
+        defaultValue: "Join real-time discussions by ticker, sector, and strategy.",
+        required: false,
+      },
+      {
+        name: "showSearch",
+        type: "boolean",
+        defaultValue: true,
+        required: false,
+      },
+      {
+        name: "showFilters",
+        type: "boolean",
+        defaultValue: true,
+        required: false,
+      },
+      {
+        name: "showSort",
+        type: "boolean",
+        defaultValue: true,
+        required: false,
+      },
+      {
+        name: "maxRooms",
+        type: "number",
+        defaultValue: 8,
+        required: false,
+      },
+    ],
+    canHaveChildren: false,
+  },
 ];
