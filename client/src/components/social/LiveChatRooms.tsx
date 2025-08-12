@@ -588,6 +588,88 @@ export const LiveChatRooms: React.FC = () => {
           </div>
         </div>
 
+        {/* Mobile Rooms Drawer */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden fixed inset-0 z-50 bg-black/50" onClick={() => setIsMobileMenuOpen(false)}>
+            <div className="absolute left-0 top-0 h-full w-80 bg-[#0F1421] transform transition-transform duration-300" onClick={(e) => e.stopPropagation()}>
+              <div className="p-4 border-b border-gray-700/30 flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-[#E7ECF4]">Chat Rooms</h3>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-[#8EA0B6] hover:text-[#E7ECF4]"
+                >
+                  ×
+                </Button>
+              </div>
+
+              <div className="relative p-4">
+                <Search className="absolute left-7 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[#8EA0B6]" />
+                <Input
+                  placeholder="Search rooms..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 bg-[#141A2B] border-gray-600/30 text-[#E7ECF4] placeholder:text-[#8EA0B6] focus:border-[#7FD1FF]/50"
+                />
+              </div>
+
+              <ScrollArea className="h-[500px] p-2">
+                {Object.entries(roomsByCategory).map(([category, rooms]) => (
+                  <div key={category} className="mb-4">
+                    <button
+                      onClick={() => setExpandedCategories(prev => ({ ...prev, [category]: !prev[category] }))}
+                      className="flex items-center gap-2 w-full p-2 text-sm font-medium text-[#8EA0B6] hover:text-[#E7ECF4] transition-colors"
+                    >
+                      {expandedCategories[category] ?
+                        <ChevronDown className="h-3 w-3" /> :
+                        <ChevronRight className="h-3 w-3" />
+                      }
+                      {category.charAt(0).toUpperCase() + category.slice(1)}
+                    </button>
+
+                    {expandedCategories[category] && (
+                      <div className="space-y-1 ml-2">
+                        {rooms.map((room) => (
+                          <div
+                            key={room.id}
+                            onClick={() => {
+                              setSelectedRoom(room);
+                              setIsMobileMenuOpen(false);
+                            }}
+                            className={`flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-all hover:bg-[#141A2B]/70 group ${
+                              selectedRoom.id === room.id ? 'bg-[#141A2B] shadow-lg' : ''
+                            }`}
+                            data-room={room.id}
+                          >
+                            <div className="text-lg">{room.icon}</div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2">
+                                <span className="font-medium text-sm truncate text-[#E7ECF4]">{room.name}</span>
+                                {room.isPinned && <Pin className="h-3 w-3 text-orange-400" />}
+                                {room.isVip && <Shield className="h-3 w-3 text-purple-400" />}
+                              </div>
+                              <div className="text-xs text-[#8EA0B6]">{room.onlineCount} online</div>
+                            </div>
+                            <div className="flex flex-col items-end gap-1">
+                              {room.unreadCount > 0 && (
+                                <Badge className="bg-red-500 text-white text-xs min-w-[20px] h-5 rounded-full flex items-center justify-center">
+                                  {room.unreadCount}
+                                </Badge>
+                              )}
+                              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </ScrollArea>
+            </div>
+          </div>
+        )}
+
         {/* Thread Drawer */}
         {isThreadOpen && selectedMessage && (
           <div className="absolute inset-y-0 right-0 w-1/3 bg-[#0F1421] border-l border-gray-700/30 z-50 transform transition-transform duration-300">
