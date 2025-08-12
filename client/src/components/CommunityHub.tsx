@@ -642,23 +642,37 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ onNavigateToProfile 
                         {renderPoll(post.poll)}
                         
                         {/* Engagement */}
-                        <div className="flex items-center gap-6 pt-3 border-t border-gray-700">
-                          <button className="flex items-center gap-1 text-gray-400 hover:text-red-400 transition-colors">
-                            <Heart className="h-4 w-4" />
-                            <span className="text-sm">{post.likes}</span>
-                          </button>
-                          <button className="flex items-center gap-1 text-gray-400 hover:text-blue-400 transition-colors">
-                            <MessageSquare className="h-4 w-4" />
-                            <span className="text-sm">{post.comments}</span>
-                          </button>
-                          <button className="flex items-center gap-1 text-gray-400 hover:text-green-400 transition-colors">
-                            <Share2 className="h-4 w-4" />
-                            <span className="text-sm">{post.shares}</span>
-                          </button>
-                          <button className="flex items-center gap-1 text-gray-400 hover:text-yellow-400 transition-colors">
-                            <Award className="h-4 w-4" />
-                            <span className="text-sm">{post.awards}</span>
-                          </button>
+                        <div className="flex items-center justify-between pt-3 border-t border-gray-700">
+                          <div className="flex items-center gap-4">
+                            <button className="flex items-center gap-1 text-gray-400 hover:text-red-400 transition-colors">
+                              <Heart className="h-4 w-4" />
+                              <span className="text-sm">{post.likes}</span>
+                            </button>
+                            <button className="flex items-center gap-1 text-gray-400 hover:text-blue-400 transition-colors">
+                              <MessageSquare className="h-4 w-4" />
+                              <span className="text-sm">{post.comments}</span>
+                            </button>
+                            <button className="flex items-center gap-1 text-gray-400 hover:text-green-400 transition-colors">
+                              <Share2 className="h-4 w-4" />
+                              <span className="text-sm">{post.shares}</span>
+                            </button>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            {post.awards > 0 && (
+                              <div className="flex items-center gap-1 px-2 py-1 bg-yellow-500/10 rounded-full border border-yellow-500/30">
+                                <Award className="h-3 w-3 text-yellow-400" />
+                                <span className="text-xs text-yellow-400">{post.awards}</span>
+                              </div>
+                            )}
+                            <Button
+                              size="sm"
+                              variant="ghost"
+                              className="text-yellow-400 hover:text-yellow-300 hover:bg-yellow-500/10 border border-yellow-500/30"
+                            >
+                              <Award className="h-3 w-3 mr-1" />
+                              Award
+                            </Button>
+                          </div>
                         </div>
                       </div>
                     </div>
