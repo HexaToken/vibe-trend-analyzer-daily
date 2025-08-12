@@ -635,7 +635,7 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
                   {filteredAndSortedRooms.map((room) => (
                     <div
                       key={room.id}
-                      onClick={() => setState(prev => ({ ...prev, selectedRoomId: room.id }))}
+                      onClick={() => handleShowRoomDetail(room)}
                       style={{
                         background: 'var(--panel)',
                         borderRadius: '16px',
