@@ -134,7 +134,7 @@ export const CommunityWithSubtabs = ({ onNavigateToProfile }: CommunityWithSubta
                     </TabsContent>
 
                     <TabsContent value="space" className="m-0">
-                      <CommunityHub onNavigateToProfile={handleNavigateToProfile} />
+                      <CommunityHubUpgraded onNavigateToProfile={handleNavigateToProfile} />
                     </TabsContent>
                   </div>
                 </Tabs>
