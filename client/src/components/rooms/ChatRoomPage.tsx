@@ -239,7 +239,10 @@ export const ChatRoomPage: React.FC<ChatRoomPageProps> = ({
               <span className="text-[#8EA0B6] text-sm">
                 Sign in to post, react, and follow traders.
               </span>
-              <Button className="bg-[#1DD882] text-[#041311] font-bold rounded-xl">
+              <Button
+                onClick={handleSignIn}
+                className="bg-[#1DD882] text-[#041311] font-bold rounded-xl"
+              >
                 Sign In
               </Button>
             </div>
