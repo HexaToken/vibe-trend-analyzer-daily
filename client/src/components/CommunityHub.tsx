@@ -480,35 +480,37 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ onNavigateToProfile 
               </Card>
             </div>
 
-            {/* Live Member Activity */}
-            <Card className="bg-gray-800/50 border-gray-700/50">
-              <CardHeader>
-                <CardTitle className="text-white text-sm flex items-center gap-2">
-                  <Zap className="h-4 w-4 text-yellow-400" />
-                  Live Activity
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="text-xs space-y-2">
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">Total Online:</span>
-                    <span className="text-green-400 font-medium">
-                      {categories.reduce((sum, c) => sum + c.onlineCount, 0)}
-                    </span>
+            {/* Live Member Activity - Desktop Only */}
+            <div className="hidden lg:block">
+              <Card className="bg-gray-800/50 border-gray-700/50">
+                <CardHeader>
+                  <CardTitle className="text-white text-sm flex items-center gap-2">
+                    <Zap className="h-4 w-4 text-yellow-400" />
+                    Live Activity
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="text-xs space-y-2">
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Total Online:</span>
+                      <span className="text-green-400 font-medium">
+                        {categories.reduce((sum, c) => sum + c.onlineCount, 0)}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Posts Today:</span>
+                      <span className="text-blue-400 font-medium">
+                        {categories.reduce((sum, c) => sum + c.todayPosts, 0)}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Active Contests:</span>
+                      <span className="text-purple-400 font-medium">2</span>
+                    </div>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">Posts Today:</span>
-                    <span className="text-blue-400 font-medium">
-                      {categories.reduce((sum, c) => sum + c.todayPosts, 0)}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-400">Active Contests:</span>
-                    <span className="text-purple-400 font-medium">2</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </div>
           </div>
 
           {/* Main Feed */}
