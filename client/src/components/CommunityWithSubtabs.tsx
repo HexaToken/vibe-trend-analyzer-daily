@@ -119,13 +119,7 @@ export const CommunityWithSubtabs = ({ onNavigateToProfile }: CommunityWithSubta
 
 
                     <TabsContent value="live-chat" className="m-0">
-                      <div className="mb-4">
-                        <h2 className="text-2xl font-semibold mb-2">Live Chat Rooms</h2>
-                        <p className="text-muted-foreground">
-                          Join real-time discussions with fellow traders and market enthusiasts
-                        </p>
-                      </div>
-                      <ChatSubcategory onNavigateToProfile={handleNavigateToProfile} />
+                      <LiveChatRooms />
                     </TabsContent>
 
                     <TabsContent value="trading-rooms" className="m-0">
