@@ -26,6 +26,8 @@ interface Message {
   type?: string;
   likes?: number;
   replies?: number;
+  isLiked?: boolean;
+  isShared?: boolean;
 }
 
 interface ChatRoomPageProps {
