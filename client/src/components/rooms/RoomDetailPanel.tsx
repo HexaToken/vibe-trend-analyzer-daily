@@ -204,6 +204,13 @@ export const RoomDetailPanel: React.FC<RoomDetailPanelProps> = ({
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={authModalOpen}
+        onClose={() => setAuthModalOpen(false)}
+        defaultMode="login"
+      />
     </>
   );
 };
