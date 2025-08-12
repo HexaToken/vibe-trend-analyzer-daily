@@ -118,6 +118,7 @@ export const CommunityWithSubtabs = ({ onNavigateToProfile }: CommunityWithSubta
                         showFilters={true}
                         showSort={true}
                         maxRooms={8}
+                        onNavigateToProfile={handleNavigateToProfile}
                       />
                     </TabsContent>
 
