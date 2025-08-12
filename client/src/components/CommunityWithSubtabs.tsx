@@ -8,6 +8,7 @@ import {
   TrendingUp,
   Flame,
   Eye,
+  Heart,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -18,7 +19,7 @@ import { ChatSubcategory } from "./social/ChatSubcategory";
 import { LiveChatRooms } from "./social/LiveChatRooms";
 import { CommunityRooms } from "./social/CommunityRooms";
 import { PrivateRoomsContainer } from "./privateRooms/PrivateRoomsContainer";
-import { SpaceSwitcherWidget } from "./community/SpaceSwitcherWidget";
+import { CommunityHubUpgraded } from "./CommunityHubUpgraded";
 import { ProfileNavigationProvider } from "./social/ProfileNavigationProvider";
 import { UnifiedRoomsBuilder } from "./builder/UnifiedRoomsBuilder";
 
@@ -96,11 +97,11 @@ export const CommunityWithSubtabs = ({ onNavigateToProfile }: CommunityWithSubta
                     </TabsTrigger>
                     <TabsTrigger
                       value="space"
-                      className="flex items-center gap-2 data-[state=active]:bg-purple-500 data-[state=active]:text-white"
+                      className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 data-[state=active]:text-white"
                     >
-                      <Coffee className="h-4 w-4" />
-                      <span className="hidden sm:inline">Space</span>
-                      <span className="sm:hidden">Space</span>
+                      <Heart className="h-4 w-4" />
+                      <span className="hidden sm:inline">Community</span>
+                      <span className="sm:hidden">Community</span>
                     </TabsTrigger>
                   </TabsList>
 
@@ -133,13 +134,7 @@ export const CommunityWithSubtabs = ({ onNavigateToProfile }: CommunityWithSubta
                     </TabsContent>
 
                     <TabsContent value="space" className="m-0">
-                      <div className="mb-4">
-                        <h2 className="text-2xl font-semibold mb-2">Community Space</h2>
-                        <p className="text-muted-foreground">
-                          Crypto channels and off-topic discussions for a well-rounded community experience
-                        </p>
-                      </div>
-                      <SpaceSwitcherWidget onNavigateToProfile={handleNavigateToProfile} />
+                      <CommunityHubUpgraded onNavigateToProfile={handleNavigateToProfile} />
                     </TabsContent>
                   </div>
                 </Tabs>

@@ -3,6 +3,8 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { Search, Users, MessageSquare, Star, Shield, TrendingUp, Hash, Clock, Target, Lock, Send, Smile, Paperclip } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import { RoomDetailPanelFixed } from '@/components/rooms/RoomDetailPanelFixed';
+import { ChatRoomPage } from '@/components/rooms/ChatRoomPage';
 
 // CSS Variables for the dark mode theme
 const cssVars = `
@@ -149,7 +151,7 @@ const samplePosts = [
     id: '1',
     username: 'TraderJoe',
     avatar: '/placeholder.svg',
-    content: 'Just spotted huge volume on $AAPL calls expiring this Friday. Something big brewing? 🚀',
+    content: 'Just spotted huge volume on $AAPL calls expiring this Friday. Something big brewing? ��',
     timestamp: '2m ago'
   },
   {
@@ -170,6 +172,10 @@ interface UnifiedRoomsState {
   sort: SortType;
   selectedRoomId: string | null;
   rooms: Room[];
+  showDetailPanel: boolean;
+  detailPanelRoomId: string | null;
+  showChatRoom: boolean;
+  chatRoomId: string | null;
 }
 
 interface UnifiedRoomsBuilderProps {
@@ -197,7 +203,11 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
     filter: 'all',
     sort: 'active',
     selectedRoomId: null,
-    rooms: mockRooms.slice(0, maxRooms)
+    rooms: mockRooms.slice(0, maxRooms),
+    showDetailPanel: false,
+    detailPanelRoomId: null,
+    showChatRoom: false,
+    chatRoomId: null
   });
 
   // Enhanced state for chat functionality
@@ -231,8 +241,126 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
     setNewMessage('');
   };
 
-  // Handle room joining
-  const handleJoinRoom = (room: Room) => {
+  // Create detailed room data for the detail panel
+  const createRoomDetailData = (room: Room) => {
+    const categoryColors = {
+      general: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
+      stocks: 'bg-green-500/20 text-green-300 border-green-500/30',
+      crypto: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
+      options: 'bg-orange-500/20 text-orange-300 border-orange-500/30',
+      vip: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30'
+    };
+
+    return {
+      id: room.id,
+      name: room.name,
+      icon: room.icon,
+      tagline: getTaglineForRoom(room),
+      category: room.type.charAt(0).toUpperCase() + room.type.slice(1),
+      categoryColor: categoryColors[room.type],
+      membersOnline: room.membersOnline,
+      totalMembers: room.membersOnline + Math.floor(Math.random() * 500) + 100,
+      messagesToday: room.msgsPerHr * 8 + Math.floor(Math.random() * 100),
+      activityTrend: Math.floor(Math.random() * 40) - 20,
+      sentiment: {
+        type: room.sentimentLabel.toLowerCase() as 'bullish' | 'bearish' | 'neutral',
+        percentage: room.sentimentPct
+      },
+      isJoined: Math.random() > 0.5, // Random join status for demo
+      pinnedMessage: room.pinnedCount > 0 ? {
+        id: 'pin-1',
+        author: 'TradingMod',
+        content: 'Welcome to the room! Please keep discussions relevant and follow community guidelines.',
+        timestamp: '1h ago'
+      } : undefined,
+      recentMessages: [
+        {
+          id: 'msg-1',
+          author: { name: 'AlphaTrader', avatar: '/api/placeholder/32/32' },
+          content: room.type === 'crypto' ? 'BTC looking strong above 50k resistance 🚀 $BTC #bullish' : 'SPY showing bullish momentum into close $SPY #bullish',
+          timestamp: '2m ago',
+          sentiment: 'bullish' as const,
+          hasMedia: Math.random() > 0.7,
+          mediaThumbnail: '/api/placeholder/60/40'
+        },
+        {
+          id: 'msg-2',
+          author: { name: 'MarketWatcher', avatar: '/api/placeholder/32/32' },
+          content: 'Volume spike noticed in tech sector. Thoughts? $QQQ #neutral',
+          timestamp: '5m ago',
+          sentiment: 'neutral' as const
+        },
+        {
+          id: 'msg-3',
+          author: { name: 'OptionsPro', avatar: '/api/placeholder/32/32' },
+          content: 'IV crush might be coming after earnings. Be careful with premium. #bearish',
+          timestamp: '8m ago',
+          sentiment: 'bearish' as const
+        },
+        {
+          id: 'msg-4',
+          author: { name: 'DayTrader99', avatar: '/api/placeholder/32/32' },
+          content: 'Setting alerts for key levels. Risk management is everything. #neutral',
+          timestamp: '12m ago',
+          sentiment: 'neutral' as const
+        }
+      ],
+      topContributors: [
+        { id: '1', name: 'AlphaTrader', avatar: '/api/placeholder/32/32', messageCount: 47 },
+        { id: '2', name: 'MarketWatcher', avatar: '/api/placeholder/32/32', messageCount: 32 },
+        { id: '3', name: 'OptionsPro', avatar: '/api/placeholder/32/32', messageCount: 28 },
+        { id: '4', name: 'TechAnalyst', avatar: '/api/placeholder/32/32', messageCount: 19 },
+        { id: '5', name: 'CryptoKing', avatar: '/api/placeholder/32/32', messageCount: 15 }
+      ],
+      tags: getTagsForRoom(room)
+    };
+  };
+
+  const getTaglineForRoom = (room: Room) => {
+    switch (room.type) {
+      case 'general': return 'Open discussions on market trends and trading strategies';
+      case 'stocks': return 'Real-time discussion on equity markets and stock analysis';
+      case 'crypto': return 'Cryptocurrency trading, news, and market movements';
+      case 'options': return 'Options strategies, volatility analysis, and derivatives';
+      case 'vip': return 'Exclusive discussions for premium members only';
+      default: return 'Join the conversation with fellow traders';
+    }
+  };
+
+  const getTagsForRoom = (room: Room) => {
+    const tagMap = {
+      general: ['trading', 'market', 'analysis'],
+      stocks: ['SPY', 'QQQ', 'earnings', 'dividends'],
+      crypto: ['bitcoin', 'ethereum', 'defi', 'altcoins'],
+      options: ['calls', 'puts', 'volatility', 'theta'],
+      vip: ['premium', 'exclusive', 'analysis']
+    };
+    return tagMap[room.type] || [];
+  };
+
+  // Handle showing room detail panel
+  const handleShowRoomDetail = (room: Room) => {
+    setState(prev => ({
+      ...prev,
+      showDetailPanel: true,
+      detailPanelRoomId: room.id
+    }));
+  };
+
+  // Handle closing room detail panel
+  const handleCloseDetailPanel = () => {
+    setState(prev => ({
+      ...prev,
+      showDetailPanel: false,
+      detailPanelRoomId: null
+    }));
+  };
+
+  // Handle room joining from detail panel
+  const handleJoinRoomFromDetail = (roomId: string) => {
+    const room = state.rooms.find(r => r.id === roomId);
+    if (!room) return;
+
     if (room.isVIP && !user?.isPremium) {
       alert('VIP room access requires Pro membership. Please upgrade to continue.');
       return;
@@ -243,8 +371,37 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
       return;
     }
 
-    setShowChatInterface(true);
-    setState(prev => ({ ...prev, selectedRoomId: room.id }));
+    // Close detail panel and open chat room
+    handleCloseDetailPanel();
+    setState(prev => ({
+      ...prev,
+      showChatRoom: true,
+      chatRoomId: room.id
+    }));
+  };
+
+  // Handle opening room from detail panel
+  const handleOpenRoomFromDetail = (roomId: string) => {
+    handleCloseDetailPanel();
+    setState(prev => ({
+      ...prev,
+      showChatRoom: true,
+      chatRoomId: roomId
+    }));
+  };
+
+  // Handle back from chat room
+  const handleBackFromChatRoom = () => {
+    setState(prev => ({
+      ...prev,
+      showChatRoom: false,
+      chatRoomId: null
+    }));
+  };
+
+  // Handle room joining (original function, now calls detail panel)
+  const handleJoinRoom = (room: Room) => {
+    handleShowRoomDetail(room);
   };
 
   // Filter and sort rooms
@@ -355,6 +512,35 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
         </div>
       </>
     );
+  }
+
+  // Create room data for chat room
+  const createChatRoomData = (room: Room) => ({
+    id: room.id,
+    name: room.name,
+    icon: room.icon,
+    category: room.type.charAt(0).toUpperCase() + room.type.slice(1),
+    description: getTaglineForRoom(room),
+    sentiment: {
+      label: room.sentimentLabel,
+      pct: room.sentimentPct
+    },
+    membersOnline: room.membersOnline,
+    messagesToday: room.msgsPerHr * 8,
+    activityPct: Math.floor(Math.random() * 20) + 5
+  });
+
+  // If showing chat room, render ChatRoomPage
+  if (state.showChatRoom && state.chatRoomId) {
+    const room = state.rooms.find(r => r.id === state.chatRoomId);
+    if (room) {
+      return (
+        <ChatRoomPage
+          room={createChatRoomData(room)}
+          onBack={handleBackFromChatRoom}
+        />
+      );
+    }
   }
 
   return (
@@ -488,8 +674,11 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
           {/* Content Area - Builder Columns */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)',
-            gap: '24px'
+            gridTemplateColumns: state.showDetailPanel
+              ? 'minmax(0, 1fr) 360px'
+              : 'minmax(0, 2fr) minmax(0, 1fr)',
+            gap: '24px',
+            position: 'relative'
           }}>
             {/* Room List - Builder Repeater */}
             <div>
@@ -502,7 +691,7 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
                   {filteredAndSortedRooms.map((room) => (
                     <div
                       key={room.id}
-                      onClick={() => setState(prev => ({ ...prev, selectedRoomId: room.id }))}
+                      onClick={() => handleShowRoomDetail(room)}
                       style={{
                         background: 'var(--panel)',
                         borderRadius: '16px',
@@ -628,202 +817,105 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
               </div>
             </div>
 
-            {/* Room Preview - Builder Card */}
-            <div>
+            {/* Fixed Room Detail Panel or Preview */}
+            {state.showDetailPanel && state.detailPanelRoomId ? (
               <div style={{
-                background: 'var(--panel)',
-                borderRadius: '16px',
-                padding: '24px',
+                background: '#10162A',
+                borderLeft: '1px solid rgba(255, 255, 255, 0.06)',
                 height: '600px',
-                display: 'flex',
-                flexDirection: 'column'
+                padding: '20px',
+                borderRadius: '16px'
               }}>
-                {selectedRoom ? (
-                  <>
-                    {/* Preview Header - Builder Box */}
-                    <div style={{ marginBottom: '24px' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-                        <div style={{ fontSize: '32px' }}>{selectedRoom.icon}</div>
-                        <div style={{ flex: '1' }}>
-                          <h3 style={{
-                            fontWeight: 'bold',
-                            fontSize: '18px',
-                            color: 'var(--text)',
-                            margin: '0 0 4px 0'
-                          }}>
-                            {selectedRoom.name}
-                          </h3>
-                          <span style={{
-                            fontSize: '12px',
-                            padding: '4px 8px',
-                            borderRadius: '12px',
-                            background: getTypeBadgeColor(selectedRoom.type).bg,
-                            color: getTypeBadgeColor(selectedRoom.type).text,
-                            fontWeight: '500'
-                          }}>
-                            {selectedRoom.type.charAt(0).toUpperCase() + selectedRoom.type.slice(1)}
-                          </span>
-                        </div>
-                        <button
-                          style={{
-                            background: 'var(--accent)',
-                            color: '#000',
-                            border: 'none',
-                            borderRadius: '8px',
-                            padding: '12px 24px',
-                            fontWeight: '600',
-                            cursor: 'pointer',
-                            fontSize: '14px'
-                          }}
-                          onClick={() => handleJoinRoom(selectedRoom)}
-                        >
-                          {selectedRoom.isVIP && <Lock size={16} style={{ marginRight: '8px', display: 'inline' }} />}
-                          Join
-                        </button>
-                      </div>
+                <div style={{ color: 'white' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+                    <h2 style={{ fontSize: '20px', fontWeight: 'bold', margin: 0 }}>
+                      {state.rooms.find(r => r.id === state.detailPanelRoomId)?.name || 'Room Details'}
+                    </h2>
+                    <button
+                      onClick={handleCloseDetailPanel}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        color: '#999',
+                        cursor: 'pointer',
+                        fontSize: '18px'
+                      }}
+                    >
+                      ✕
+                    </button>
+                  </div>
 
-                      {/* Meta Chips */}
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '14px' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                          <Users size={16} color="var(--muted)" />
-                          <span style={{ color: 'var(--text)', fontWeight: '500' }}>{selectedRoom.membersOnline}</span>
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                          <MessageSquare size={16} color="var(--muted)" />
-                          <span style={{ color: 'var(--text)', fontWeight: '500' }}>{selectedRoom.msgsPerHr}</span>
-                        </div>
-                        <span style={{
-                          fontSize: '12px',
-                          padding: '4px 8px',
-                          borderRadius: '12px',
-                          background: getSentimentColor(selectedRoom.sentimentLabel),
-                          color: 'white',
-                          fontWeight: '500'
-                        }}>
-                          {selectedRoom.sentimentLabel} {selectedRoom.sentimentPct}%
-                        </span>
+                  <div style={{ marginBottom: '20px' }}>
+                    <h3 style={{ fontSize: '14px', color: '#999', marginBottom: '10px' }}>Stats</h3>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}>
+                      <div style={{ background: '#141A2B', padding: '15px', borderRadius: '8px', textAlign: 'center' }}>
+                        <div style={{ fontSize: '16px', fontWeight: 'bold' }}>142</div>
+                        <div style={{ fontSize: '12px', color: '#999' }}>Online</div>
                       </div>
-                    </div>
-
-                    {/* Sample Posts - Builder Repeater */}
-                    <div style={{ flex: '1' }}>
-                      <h4 style={{
-                        fontSize: '14px',
-                        fontWeight: '600',
-                        color: 'var(--muted)',
-                        margin: '0 0 12px 0'
-                      }}>
-                        Recent Messages
-                      </h4>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                        {samplePosts.map((post) => (
-                          <div key={post.id} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                            <div style={{
-                              width: '32px',
-                              height: '32px',
-                              borderRadius: '16px',
-                              background: 'var(--accent)',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              color: '#000',
-                              fontWeight: 'bold',
-                              fontSize: '14px'
-                            }}>
-                              {post.username[0]}
-                            </div>
-                            <div style={{ flex: '1', minWidth: '0' }}>
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                                <span style={{
-                                  fontWeight: '500',
-                                  fontSize: '14px',
-                                  color: 'var(--text)'
-                                }}>
-                                  {post.username}
-                                </span>
-                                <span style={{
-                                  fontSize: '12px',
-                                  color: 'var(--muted)'
-                                }}>
-                                  {post.timestamp}
-                                </span>
-                              </div>
-                              <p style={{
-                                fontSize: '14px',
-                                color: 'var(--text)',
-                                margin: '0',
-                                lineHeight: '1.4',
-                                overflow: 'hidden',
-                                display: '-webkit-box',
-                                WebkitLineClamp: '2',
-                                WebkitBoxOrient: 'vertical'
-                              }}>
-                                {post.content.split(' ').map((word, idx) => 
-                                  word.startsWith('$') ? (
-                                    <span
-                                      key={idx}
-                                      style={{
-                                        background: 'rgba(127, 209, 255, 0.2)',
-                                        color: 'var(--accent)',
-                                        fontSize: '12px',
-                                        padding: '2px 4px',
-                                        margin: '0 2px',
-                                        borderRadius: '4px'
-                                      }}
-                                    >
-                                      {word}
-                                    </span>
-                                  ) : word + ' '
-                                )}
-                              </p>
-                            </div>
-                          </div>
-                        ))}
+                      <div style={{ background: '#141A2B', padding: '15px', borderRadius: '8px', textAlign: 'center' }}>
+                        <div style={{ fontSize: '16px', fontWeight: 'bold' }}>89</div>
+                        <div style={{ fontSize: '12px', color: '#999' }}>Today</div>
                       </div>
-                    </div>
-
-                    {/* CTA - Builder Button */}
-                    <div style={{ paddingTop: '16px', borderTop: '1px solid rgba(142, 160, 182, 0.2)' }}>
-                      <button
-                        style={{
-                          width: '100%',
-                          background: 'var(--accent)',
-                          color: '#000',
-                          border: 'none',
-                          borderRadius: '8px',
-                          padding: '16px',
-                          fontWeight: '600',
-                          cursor: 'pointer',
-                          fontSize: '16px',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          gap: '8px'
-                        }}
-                        onClick={() => selectedRoom && handleJoinRoom(selectedRoom)}
-                      >
-                        <Hash size={16} />
-                        Open Room
-                      </button>
-                    </div>
-                  </>
-                ) : (
-                  <div style={{
-                    flex: '1',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}>
-                    <div style={{ textAlign: 'center' }}>
-                      <MessageSquare size={48} color="var(--muted)" style={{ margin: '0 auto 12px' }} />
-                      <p style={{ color: 'var(--muted)', fontSize: '14px', margin: '0' }}>
-                        Select a room to see preview
-                      </p>
+                      <div style={{ background: '#141A2B', padding: '15px', borderRadius: '8px', textAlign: 'center' }}>
+                        <div style={{ fontSize: '16px', fontWeight: 'bold' }}>+12%</div>
+                        <div style={{ fontSize: '12px', color: '#999' }}>Activity</div>
+                      </div>
                     </div>
                   </div>
-                )}
+
+                  <div style={{ marginBottom: '20px' }}>
+                    <h3 style={{ fontSize: '14px', color: '#999', marginBottom: '10px' }}>Recent Messages</h3>
+                    <div style={{ background: '#141A2B', padding: '15px', borderRadius: '8px' }}>
+                      <div style={{ fontSize: '14px', marginBottom: '8px' }}>
+                        <strong>AlphaTrader:</strong> BTC looking strong above 50k resistance 🚀
+                      </div>
+                      <div style={{ fontSize: '14px', marginBottom: '8px' }}>
+                        <strong>MarketWatcher:</strong> Volume spike noticed in tech sector
+                      </div>
+                      <div style={{ fontSize: '14px', color: '#999' }}>
+                        <strong>OptionsPro:</strong> IV crush might be coming...
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => handleJoinRoomFromDetail(state.detailPanelRoomId!)}
+                    style={{
+                      width: '100%',
+                      padding: '15px',
+                      background: 'linear-gradient(to right, #10B981, #059669)',
+                      border: 'none',
+                      borderRadius: '12px',
+                      color: 'white',
+                      fontSize: '16px',
+                      fontWeight: 'bold',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    🚀 Join & Start Chatting
+                  </button>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div>
+                <div style={{
+                  background: 'var(--panel)',
+                  borderRadius: '16px',
+                  padding: '24px',
+                  height: '600px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <div style={{ textAlign: 'center' }}>
+                    <MessageSquare size={48} color="var(--muted)" style={{ margin: '0 auto 12px' }} />
+                    <p style={{ color: 'var(--muted)', fontSize: '14px', margin: '0' }}>
+                      Click a room to see details
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Mobile Fixed Bottom Button */}
