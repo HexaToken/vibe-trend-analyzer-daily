@@ -97,11 +97,11 @@ export const CommunityWithSubtabs = ({ onNavigateToProfile }: CommunityWithSubta
                     </TabsTrigger>
                     <TabsTrigger
                       value="space"
-                      className="flex items-center gap-2 data-[state=active]:bg-purple-500 data-[state=active]:text-white"
+                      className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 data-[state=active]:text-white"
                     >
-                      <Coffee className="h-4 w-4" />
-                      <span className="hidden sm:inline">Space</span>
-                      <span className="sm:hidden">Space</span>
+                      <Heart className="h-4 w-4" />
+                      <span className="hidden sm:inline">Community</span>
+                      <span className="sm:hidden">Community</span>
                     </TabsTrigger>
                   </TabsList>
 
