@@ -382,7 +382,7 @@ export const LiveChatRooms: React.FC = () => {
             </div>
 
             {/* Messages */}
-            <ScrollArea className="flex-1 p-4 min-h-0">
+            <ScrollArea className="flex-1 p-4 overflow-auto">
               <div className="space-y-4">
                 {mockMessages.map((message) => (
                   <div
