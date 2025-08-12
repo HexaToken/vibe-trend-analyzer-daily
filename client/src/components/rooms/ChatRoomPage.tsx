@@ -59,7 +59,7 @@ export const ChatRoomPage: React.FC<ChatRoomPageProps> = ({
   // Handle message sending
   const handleSendMessage = () => {
     if (!(messageBody && messageBody.trim().length)) return;
-    
+
     const newMessage: Message = {
       id: Date.now(),
       user: "You",
@@ -73,6 +73,11 @@ export const ChatRoomPage: React.FC<ChatRoomPageProps> = ({
 
     setFeed([newMessage, ...feed]);
     setMessageBody("");
+  };
+
+  // Handle sign-in button clicks
+  const handleSignIn = () => {
+    setShowAuthModal(true);
   };
 
   // Get activity icon and prefix
