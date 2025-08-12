@@ -58,15 +58,17 @@ export const AIAnalysisSection: React.FC<AIAnalysisSectionProps> = ({
             onMouseEnter={() => setHoveredButton('mood')}
             onMouseLeave={() => setHoveredButton(null)}
             className={cn(
-              "relative h-14 flex-1 max-w-[350px] rounded-2xl border-0 text-white font-bold",
+              "relative h-14 flex-1 max-w-[350px] rounded-2xl border-0 font-bold",
               "transition-all duration-300 ease-out focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2",
               hoveredButton === 'mood' ? 'scale-[1.03]' : 'scale-100'
             )}
             style={{
-              background: hoveredButton === 'mood' 
-                ? 'linear-gradient(to right, #FF6BB3, #FF8CC8)' 
+              background: hoveredButton === 'mood'
+                ? 'linear-gradient(to right, #FF6BB3, #FF8CC8)'
                 : 'linear-gradient(to right, #FF4C9A, #FF7EB3)',
               boxShadow: '0 0 8px rgba(255, 110, 180, 0.5)',
+              color: '#FFFFFF',
+              textShadow: '0 0 4px rgba(0,0,0,0.4)'
             }}
           >
             <Brain className="w-5 h-5 mr-2" />
