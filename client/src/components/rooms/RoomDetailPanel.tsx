@@ -189,7 +189,7 @@ export const RoomDetailPanel: React.FC<RoomDetailPanelProps> = ({
 
           <div className="flex gap-2 pt-4">
             <Button
-              onClick={onSignIn}
+              onClick={() => setAuthModalOpen(true)}
               className="flex-1 bg-[#1DD882] text-[#041311] font-bold hover:bg-[#1DD882]/90"
             >
               Sign in to Join
