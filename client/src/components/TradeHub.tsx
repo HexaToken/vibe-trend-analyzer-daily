@@ -434,7 +434,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                 <Button size="lg" className="min-w-48">
                   Apply to Become a Creator
                 </Button>
-                <Button size="lg" variant="outline" className="min-w-48 bg-white/90 border-2 border-gray-800 text-gray-800 font-semibold hover:bg-white hover:border-gray-900">
+                <Button size="lg" variant="outline" className="min-w-48 bg-white/90 border-2 border-gray-800 text-black font-semibold hover:bg-white hover:border-gray-900">
                   Learn More
                 </Button>
               </div>
