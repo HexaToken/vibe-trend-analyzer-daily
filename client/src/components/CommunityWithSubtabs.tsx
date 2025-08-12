@@ -67,7 +67,7 @@ export const CommunityWithSubtabs = ({ onNavigateToProfile }: CommunityWithSubta
             <Card className="border-0 shadow-sm bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
               <CardContent className="p-4">
                 <Tabs value={activeSubtab} onValueChange={setActiveSubtab}>
-                  <TabsList className="grid w-full grid-cols-5 bg-white dark:bg-slate-800">
+                  <TabsList className="grid w-full grid-cols-4 bg-white dark:bg-slate-800">
                     <TabsTrigger
                       value="sentiment-feed"
                       className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 data-[state=active]:text-white"
@@ -78,21 +78,14 @@ export const CommunityWithSubtabs = ({ onNavigateToProfile }: CommunityWithSubta
                     </TabsTrigger>
 
                     <TabsTrigger
-                      value="live-chat"
-                      className="flex items-center gap-2 data-[state=active]:bg-green-500 data-[state=active]:text-white"
-                    >
-                      <MessageSquare className="h-4 w-4" />
-                      <span className="hidden sm:inline">Live Chat</span>
-                      <span className="sm:hidden">Chat</span>
-                    </TabsTrigger>
-                    <TabsTrigger
-                      value="trading-rooms"
-                      className="flex items-center gap-2 data-[state=active]:bg-orange-500 data-[state=active]:text-white"
+                      value="unified-rooms"
+                      className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-cyan-500 data-[state=active]:text-white"
                     >
                       <Hash className="h-4 w-4" />
-                      <span className="hidden sm:inline">Trading Rooms</span>
+                      <span className="hidden sm:inline">Rooms</span>
                       <span className="sm:hidden">Rooms</span>
                     </TabsTrigger>
+
                     <TabsTrigger
                       value="private-watchlist"
                       className="flex items-center gap-2 data-[state=active]:bg-indigo-500 data-[state=active]:text-white"
