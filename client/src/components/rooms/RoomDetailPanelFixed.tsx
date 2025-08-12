@@ -17,7 +17,8 @@ import {
   Minus,
   MessageCircle,
   Activity,
-  Zap
+  Zap,
+  Send
 } from "lucide-react";
 
 interface Room {
