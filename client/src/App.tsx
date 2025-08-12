@@ -215,6 +215,8 @@ const AppContent = () => {
         return <FuturisticChatDemo />;
       case "unified-rooms":
         return <UnifiedRoomsDemo />;
+      case "room-detail-demo":
+        return <RoomDetailPanelDemo />;
 
       // Finance Section Routes
       case "finance":
