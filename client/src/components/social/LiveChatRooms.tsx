@@ -354,10 +354,9 @@ export const LiveChatRooms: React.FC = () => {
           </div>
 
           {/* Center Panel - Messages */}
-          <div className="col-span-1 lg:col-span-6 bg-red-500 flex flex-col min-h-[400px] border-2 border-yellow-500">
-            <div className="p-4 bg-green-500 text-white">CENTER PANEL TEST</div>
+          <div className="col-span-1 lg:col-span-6 bg-[#0B1020] flex flex-col h-full">
             {/* Header */}
-            <div className="p-4 border-b border-gray-700/30 bg-[#10162A]">
+            <div className="p-4 border-b border-gray-700/30 bg-[#10162A] flex-shrink-0">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="text-xl">{selectedRoom.icon}</div>
