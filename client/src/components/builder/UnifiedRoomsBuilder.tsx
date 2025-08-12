@@ -371,10 +371,13 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
       return;
     }
 
-    // Close detail panel and open chat
+    // Close detail panel and open chat room
     handleCloseDetailPanel();
-    setShowChatInterface(true);
-    setState(prev => ({ ...prev, selectedRoomId: room.id }));
+    setState(prev => ({
+      ...prev,
+      showChatRoom: true,
+      chatRoomId: room.id
+    }));
   };
 
   // Handle opening room from detail panel
