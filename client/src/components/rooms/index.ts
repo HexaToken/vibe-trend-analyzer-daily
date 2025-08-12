@@ -1,0 +1,1 @@
+export { RoomDetailPanel } from './RoomDetailPanel';
