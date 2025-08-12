@@ -200,6 +200,53 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
     rooms: mockRooms.slice(0, maxRooms)
   });
 
+  // Enhanced state for chat functionality
+  const [showChatInterface, setShowChatInterface] = useState(false);
+  const [newMessage, setNewMessage] = useState('');
+  const [messages, setMessages] = useState<any[]>([]);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll to bottom when new messages arrive
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  // Handle sending messages
+  const handleSendMessage = () => {
+    if (!newMessage.trim() || !user || !state.selectedRoomId) return;
+
+    const message = {
+      id: `msg-${Date.now()}`,
+      userId: user.id,
+      username: user.username || 'Anonymous',
+      userAvatar: user.avatar || '/placeholder.svg',
+      content: newMessage.trim(),
+      timestamp: 'now',
+      likes: 0,
+      replies: 0,
+      roomId: state.selectedRoomId
+    };
+
+    setMessages(prev => [...prev, message]);
+    setNewMessage('');
+  };
+
+  // Handle room joining
+  const handleJoinRoom = (room: Room) => {
+    if (room.isVIP && !user?.isPremium) {
+      alert('VIP room access requires Pro membership. Please upgrade to continue.');
+      return;
+    }
+
+    if (!isAuthenticated) {
+      alert('Please sign in to join rooms.');
+      return;
+    }
+
+    setShowChatInterface(true);
+    setState(prev => ({ ...prev, selectedRoomId: room.id }));
+  };
+
   // Filter and sort rooms
   const filteredAndSortedRooms = useMemo(() => {
     let filtered = state.rooms;
