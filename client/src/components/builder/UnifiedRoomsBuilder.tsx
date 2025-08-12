@@ -514,6 +514,35 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
     );
   }
 
+  // Create room data for chat room
+  const createChatRoomData = (room: Room) => ({
+    id: room.id,
+    name: room.name,
+    icon: room.icon,
+    category: room.type.charAt(0).toUpperCase() + room.type.slice(1),
+    description: getTaglineForRoom(room),
+    sentiment: {
+      label: room.sentimentLabel,
+      pct: room.sentimentPct
+    },
+    membersOnline: room.membersOnline,
+    messagesToday: room.msgsPerHr * 8,
+    activityPct: Math.floor(Math.random() * 20) + 5
+  });
+
+  // If showing chat room, render ChatRoomPage
+  if (state.showChatRoom && state.chatRoomId) {
+    const room = state.rooms.find(r => r.id === state.chatRoomId);
+    if (room) {
+      return (
+        <ChatRoomPage
+          room={createChatRoomData(room)}
+          onBack={handleBackFromChatRoom}
+        />
+      );
+    }
+  }
+
   return (
     <>
       <style>{cssVars}</style>
