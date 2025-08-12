@@ -18,7 +18,7 @@ import { ChatSubcategory } from "./social/ChatSubcategory";
 import { LiveChatRooms } from "./social/LiveChatRooms";
 import { CommunityRooms } from "./social/CommunityRooms";
 import { PrivateRoomsContainer } from "./privateRooms/PrivateRoomsContainer";
-import { SpaceSwitcherWidget } from "./community/SpaceSwitcherWidget";
+import { CommunityHub } from "./CommunityHub";
 import { ProfileNavigationProvider } from "./social/ProfileNavigationProvider";
 import { UnifiedRoomsBuilder } from "./builder/UnifiedRoomsBuilder";
 
