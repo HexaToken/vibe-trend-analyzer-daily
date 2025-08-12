@@ -100,7 +100,7 @@ const mockRooms: Room[] = [
   {
     id: '2',
     name: 'Crypto Central',
-    icon: '₿',
+    icon: '���',
     category: 'crypto',
     onlineCount: 156,
     unreadCount: 0,
@@ -354,9 +354,9 @@ export const LiveChatRooms: React.FC = () => {
           </div>
 
           {/* Center Panel - Messages */}
-          <div className="col-span-1 lg:col-span-6 bg-[#0B1020] flex flex-col">
+          <div className="col-span-1 lg:col-span-6 bg-[#0B1020] flex flex-col h-full">
             {/* Header */}
-            <div className="p-4 border-b border-gray-700/30 bg-[#10162A]">
+            <div className="p-4 border-b border-gray-700/30 bg-[#10162A] flex-shrink-0">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="text-xl">{selectedRoom.icon}</div>
@@ -382,7 +382,7 @@ export const LiveChatRooms: React.FC = () => {
             </div>
 
             {/* Messages */}
-            <ScrollArea className="flex-1 p-4 min-h-0">
+            <ScrollArea className="flex-1 p-4 overflow-auto">
               <div className="space-y-4">
                 {mockMessages.map((message) => (
                   <div
@@ -483,76 +483,60 @@ export const LiveChatRooms: React.FC = () => {
               <div ref={messagesEndRef} />
             </ScrollArea>
 
-            {/* Composer */}
-            <div className="p-4 border-t-2 border-[var(--accent)]/20 bg-[var(--panel-soft)] flex-shrink-0 shadow-lg">
-              <div className="space-y-4">
-                {/* Sentiment Chips with Avatar Preview */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="relative">
-                      <Avatar className="h-8 w-8">
-                        <AvatarFallback className="bg-[var(--panel)] text-[var(--text)]">U</AvatarFallback>
-                      </Avatar>
-                      <div className={`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-[var(--panel-soft)] ${
-                        selectedSentiment === 'bullish' ? 'bg-[var(--success)]' :
-                        selectedSentiment === 'bearish' ? 'bg-[var(--danger)]' :
-                        selectedSentiment === 'neutral' ? 'bg-[var(--warn)]' :
-                        'bg-gray-500'
-                      }`}></div>
-                    </div>
-                    <span className="text-[14px] text-[var(--muted)] font-medium">Choose sentiment:</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    {(['bullish', 'bearish', 'neutral'] as const).map((sentiment) => (
-                      <button
-                        key={sentiment}
-                        onClick={() => setSelectedSentiment(selectedSentiment === sentiment ? null : sentiment)}
-                        className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
-                          selectedSentiment === sentiment
-                            ? sentiment === 'bullish' ? 'bg-[var(--success)] text-white shadow-lg' :
-                              sentiment === 'bearish' ? 'bg-[var(--danger)] text-white shadow-lg' :
-                              'bg-[var(--warn)] text-white shadow-lg'
-                            : 'bg-gray-700/50 text-[var(--muted)] hover:bg-gray-600/50 hover:text-[var(--text)]'
-                        }`}
-                      >
-                        {sentiment.charAt(0).toUpperCase() + sentiment.slice(1)}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                
-                {/* Input */}
-                <div className="flex items-end gap-3">
-                  <div className="flex-1">
-                    <Textarea
-                      placeholder="Share an insight..."
-                      value={messageInput}
-                      onChange={(e) => setMessageInput(e.target.value)}
-                      className="min-h-[90px] bg-[var(--panel)] border-[var(--muted)]/30 text-[var(--text)] placeholder:text-[var(--muted)] focus:border-[var(--accent)]/50 focus:ring-2 focus:ring-[var(--accent)]/20 resize-none rounded-xl text-[15px] leading-[1.5]"
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' && !e.shiftKey) {
-                          e.preventDefault();
-                          handleSendMessage();
-                        }
-                      }}
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <Button size="sm" variant="ghost" className="h-10 w-10 text-[var(--muted)] hover:text-[var(--text)] hover:bg-white/5 rounded-lg">
-                      <Paperclip className="h-4 w-4" />
-                    </Button>
-                    <Button size="sm" variant="ghost" className="h-10 w-10 text-[var(--muted)] hover:text-[var(--text)] hover:bg-white/5 rounded-lg">
-                      <Smile className="h-4 w-4" />
-                    </Button>
-                    <Button
-                      onClick={handleSendMessage}
-                      disabled={!messageInput.trim()}
-                      className="h-10 w-10 bg-[var(--accent)] hover:bg-[var(--accent)]/80 text-black rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:scale-100"
-                    >
-                      <Send className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
+            {/* Message Composer */}
+            <div
+              className="sticky bottom-0 bg-[#0F162C] backdrop-blur-md border-t border-white/[0.06] shadow-[0_-8px_28px_rgba(0,0,0,0.45)] z-20 p-[14px_16px] rounded-t-2xl"
+              style={{
+                backdropFilter: 'saturate(120%) blur(6px)'
+              }}
+            >
+              {/* Sentiment Selection */}
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-xs text-[#8EA0B6] opacity-90">Sentiment:</span>
+                {(['bullish', 'bearish', 'neutral'] as const).map((sentiment) => (
+                  <button
+                    key={sentiment}
+                    onClick={() => setSelectedSentiment(selectedSentiment === sentiment ? null : sentiment)}
+                    className={`px-2 py-1.5 rounded-xl text-xs font-semibold transition-colors ${
+                      selectedSentiment === sentiment
+                        ? sentiment === 'bullish' ? 'bg-[rgba(29,216,130,.16)] text-[#91F0C8] border border-[#91F0C8]/30' :
+                          sentiment === 'bearish' ? 'bg-[rgba(255,122,122,.16)] text-[#FF9D9D] border border-[#FF9D9D]/30' :
+                          'bg-[rgba(248,192,107,.16)] text-[#FFD89A] border border-[#FFD89A]/30'
+                        : 'bg-gray-700/50 text-gray-300 hover:bg-gray-600/50 hover:text-white border border-gray-600/30'
+                    }`}
+                  >
+                    {sentiment}
+                  </button>
+                ))}
+              </div>
+
+              {/* Input Area */}
+              <div className="flex items-end gap-2">
+                <Textarea
+                  placeholder="Share an insight..."
+                  value={messageInput}
+                  onChange={(e) => setMessageInput(e.target.value)}
+                  className="flex-1 min-h-[56px] max-h-[120px] bg-[#0B1020] border border-[rgba(127,209,255,0.25)] text-[#E7ECF4] placeholder:text-[#8EA0B6] placeholder:opacity-90 focus:border-[#7FD1FF] focus:outline-none focus:ring-[3px] focus:ring-[rgba(127,209,255,0.18)] resize-vertical rounded-xl text-sm p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                      e.preventDefault();
+                      handleSendMessage();
+                    }
+                  }}
+                />
+                <Button size="sm" variant="ghost" className="h-10 w-10 text-[#8EA0B6] hover:text-[#E7ECF4] hover:bg-white/5 rounded-lg">
+                  <Paperclip className="h-4 w-4" />
+                </Button>
+                <Button size="sm" variant="ghost" className="h-10 w-10 text-[#8EA0B6] hover:text-[#E7ECF4] hover:bg-white/5 rounded-lg">
+                  <Smile className="h-4 w-4" />
+                </Button>
+                <Button
+                  onClick={handleSendMessage}
+                  disabled={!messageInput.trim()}
+                  className="h-10 w-10 bg-[#7FD1FF] hover:bg-[#7FD1FF]/80 text-black rounded-lg shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:scale-100"
+                >
+                  <Send className="h-4 w-4" />
+                </Button>
               </div>
             </div>
           </div>
