@@ -472,7 +472,6 @@ export const LiveChatRooms: React.FC = () => {
                               ? 'text-[var(--success)]'
                               : 'text-[var(--muted)] hover:text-[var(--success)]'
                           }`}>
-                            <Users className="h-4 w-4" />
                             <span>{message.isFollowing ? 'Following' : 'Follow'}</span>
                           </button>
                         </div>
