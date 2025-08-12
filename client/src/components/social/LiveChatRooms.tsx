@@ -484,7 +484,7 @@ export const LiveChatRooms: React.FC = () => {
             </ScrollArea>
 
             {/* Message Composer */}
-            <div className="p-4 border-t border-[var(--accent)]/20 bg-[var(--panel-soft)]">
+            <div className="p-4 border-t border-[var(--accent)]/20 bg-[var(--panel-soft)] flex-shrink-0">
               {/* Sentiment Selection */}
               <div className="flex items-center gap-2 mb-3">
                 <span className="text-xs text-[var(--muted)]">Sentiment:</span>
