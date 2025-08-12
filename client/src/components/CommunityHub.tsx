@@ -668,8 +668,8 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ onNavigateToProfile 
             </div>
           </div>
 
-          {/* Right Sidebar */}
-          <div className="lg:col-span-1 space-y-6">
+          {/* Right Sidebar - Stack on Mobile */}
+          <div className="lg:col-span-1 space-y-4 lg:space-y-6 order-last lg:order-none">
             {/* Live Poll of the Day */}
             <Card className="bg-gray-800/50 border-gray-700/50">
               <CardHeader>
