@@ -1,0 +1,154 @@
+/* Community Hub Custom Animations */
+
+.community-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.community-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.engagement-button {
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.engagement-button:hover {
+  transform: scale(1.05);
+}
+
+.engagement-button:active {
+  transform: scale(0.95);
+}
+
+.level-badge {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.xp-progress {
+  background: linear-gradient(90deg, #7c3aed, #3b82f6, #06b6d4);
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.token-glow {
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+  }
+  to {
+    box-shadow: 0 0 30px rgba(245, 158, 11, 0.5);
+  }
+}
+
+.poll-option {
+  transition: all 0.3s ease;
+}
+
+.poll-option:hover {
+  transform: translateX(4px);
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+.banner-carousel {
+  background: linear-gradient(135deg, 
+    rgba(139, 92, 246, 0.1) 0%, 
+    rgba(59, 130, 246, 0.1) 25%, 
+    rgba(6, 182, 212, 0.1) 50%, 
+    rgba(168, 85, 247, 0.1) 75%, 
+    rgba(139, 92, 246, 0.1) 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.category-active {
+  position: relative;
+  overflow: hidden;
+}
+
+.category-active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  animation: shimmerSlide 2s infinite;
+}
+
+@keyframes shimmerSlide {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.leaderboard-entry {
+  transition: all 0.2s ease;
+}
+
+.leaderboard-entry:hover {
+  background-color: rgba(75, 85, 99, 0.3);
+  transform: translateX(2px);
+}
+
+.award-button {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  transition: all 0.3s ease;
+}
+
+.award-button:hover {
+  background: linear-gradient(135deg, #d97706, #f59e0b);
+  transform: scale(1.05);
+  box-shadow: 0 8px 15px rgba(245, 158, 11, 0.3);
+}
+
+.post-card {
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.post-card:hover {
+  border-color: rgba(139, 92, 246, 0.3);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Mobile responsive animations */
+@media (max-width: 1024px) {
+  .community-card:hover {
+    transform: none;
+  }
+  
+  .engagement-button:hover {
+    transform: none;
+  }
+}
