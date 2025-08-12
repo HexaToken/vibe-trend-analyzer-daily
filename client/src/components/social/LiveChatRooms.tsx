@@ -447,29 +447,33 @@ export const LiveChatRooms: React.FC = () => {
                         </div>
                         
                         {/* Action Row */}
-                        <div className="flex items-center gap-4 text-sm">
-                          <button className={`flex items-center gap-1 transition-colors ${message.isLiked ? 'text-red-400' : 'text-[#8EA0B6] hover:text-red-400'}`}>
+                        <div className="flex items-center gap-3 text-sm">
+                          <button className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all hover:bg-white/5 ${message.isLiked ? 'text-red-400' : 'text-[var(--muted)] hover:text-red-400'}`}>
                             <Heart className={`h-4 w-4 ${message.isLiked ? 'fill-current' : ''}`} />
-                            {message.likes}
+                            <span className="font-medium">{message.likes}</span>
                           </button>
-                          <button 
+                          <button
                             onClick={() => handleThreadOpen(message)}
-                            className="flex items-center gap-1 text-[#8EA0B6] hover:text-[#7FD1FF] transition-colors"
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all hover:bg-white/5 text-[var(--muted)] hover:text-[var(--accent)]"
                           >
                             <MessageSquare className="h-4 w-4" />
-                            {message.replies}
+                            <span className="font-medium">{message.replies}</span>
                           </button>
-                          <button className="flex items-center gap-1 text-[#8EA0B6] hover:text-[#E7ECF4] transition-colors">
+                          <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all hover:bg-white/5 text-[var(--muted)] hover:text-[var(--text)]">
                             <Share2 className="h-4 w-4" />
-                            Share
+                            <span className="font-medium">Share</span>
                           </button>
-                          <button className="flex items-center gap-1 text-[#8EA0B6] hover:text-purple-400 transition-colors">
+                          <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[var(--ai-border)] bg-[var(--ai-bg)] text-[var(--accent)] hover:bg-[var(--ai-bg-hover)] transition-all font-medium">
                             <Brain className="h-4 w-4" />
-                            AI Summarize
+                            <span>AI Summarize</span>
                           </button>
-                          <button className={`flex items-center gap-1 transition-colors ${message.isFollowing ? 'text-green-400' : 'text-[#8EA0B6] hover:text-green-400'}`}>
+                          <button className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all hover:bg-white/5 font-medium ${
+                            message.isFollowing
+                              ? 'text-[var(--success)]'
+                              : 'text-[var(--muted)] hover:text-[var(--success)]'
+                          }`}>
                             <Users className="h-4 w-4" />
-                            {message.isFollowing ? 'Following' : 'Follow'}
+                            <span>{message.isFollowing ? 'Following' : 'Follow'}</span>
                           </button>
                         </div>
                       </div>
