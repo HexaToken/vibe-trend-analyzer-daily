@@ -179,6 +179,7 @@ interface UnifiedRoomsBuilderProps {
   showFilters?: boolean;
   showSort?: boolean;
   maxRooms?: number;
+  onNavigateToProfile?: (userId: string) => void;
 }
 
 export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
@@ -187,8 +188,10 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
   showSearch = true,
   showFilters = true,
   showSort = true,
-  maxRooms = 8
+  maxRooms = 8,
+  onNavigateToProfile
 }) => {
+  const { user, isAuthenticated } = useAuth();
   const [state, setState] = useState<UnifiedRoomsState>({
     query: '',
     filter: 'all',
