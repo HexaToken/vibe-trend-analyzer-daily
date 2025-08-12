@@ -374,7 +374,7 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ onNavigateToProfile 
             </div>
 
             {/* Rotating Banner Carousel */}
-            <Card className="bg-gradient-to-r from-gray-800/50 to-gray-900/50 border-gray-700/50 backdrop-blur-sm">
+            <Card className="banner-carousel bg-gradient-to-r from-gray-800/50 to-gray-900/50 border-gray-700/50 backdrop-blur-sm community-card">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
