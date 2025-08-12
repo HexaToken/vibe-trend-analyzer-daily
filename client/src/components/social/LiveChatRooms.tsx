@@ -401,18 +401,18 @@ export const LiveChatRooms: React.FC = () => {
                       </div>
                       
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="font-semibold text-[#E7ECF4]">{message.user.name}</span>
-                          <span className="text-sm text-[#8EA0B6]">{message.user.handle}</span>
-                          <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30 text-xs">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="font-bold text-[15px] text-[var(--text)]">{message.user.name}</span>
+                          <span className="text-[14px] text-[var(--muted)]">{message.user.handle}</span>
+                          <Badge className="bg-[rgba(127,209,255,.15)] text-[var(--accent)] border-[var(--accent)]/30 text-xs px-2 py-0.5 rounded-full font-medium">
                             {message.user.reputation}
                           </Badge>
                           {message.badges.map((badge) => (
-                            <Badge key={badge} className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">
+                            <Badge key={badge} className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 border-purple-500/30 text-xs px-2 py-0.5 rounded-full">
                               {badge}
                             </Badge>
                           ))}
-                          <span className="text-xs text-[#8EA0B6] ml-auto">{message.timestamp}</span>
+                          <span className="text-[13px] text-[var(--muted)] ml-auto font-medium">{message.timestamp}</span>
                         </div>
                         
                         <p className="text-[#E7ECF4] leading-relaxed mb-3">{message.content}</p>
