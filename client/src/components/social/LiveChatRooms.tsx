@@ -490,7 +490,7 @@ export const LiveChatRooms: React.FC = () => {
           </div>
 
           {/* Right Sidebar - Insights */}
-          <div className="col-span-3 bg-[#0F1421] border-l border-gray-700/30 p-4">
+          <div className="hidden lg:block lg:col-span-3 bg-[#0F1421] border-l border-gray-700/30 p-4">
             <ScrollArea className="h-full">
               <div className="space-y-4">
                 
