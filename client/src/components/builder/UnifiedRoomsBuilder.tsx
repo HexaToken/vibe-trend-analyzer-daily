@@ -811,7 +811,7 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
                   ]
                 }}
                 authed={isAuthenticated}
-                onSignIn={() => alert('Please sign in to join rooms.')}
+                onSignIn={handleSignIn}
                 onJoinRoom={handleOpenRoomFromDetail}
                 className="absolute top-0 right-0"
               />
