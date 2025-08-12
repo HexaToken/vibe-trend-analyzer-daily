@@ -483,10 +483,10 @@ export const LiveChatRooms: React.FC = () => {
               <div ref={messagesEndRef} />
             </ScrollArea>
 
-            {/* Composer */}
-            <div className="p-4 border-t-2 border-[var(--accent)]/20 bg-[var(--panel-soft)] flex-shrink-0 shadow-lg">
-              <div className="space-y-4">
-                {/* Sentiment Chips with Avatar Preview */}
+            {/* Message Composer */}
+            <div className="border-t border-[var(--accent)]/20 bg-[var(--panel-soft)] flex-shrink-0">
+              {/* Sentiment Selection Header */}
+              <div className="px-4 py-3 border-b border-gray-700/20">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="relative">
@@ -500,19 +500,20 @@ export const LiveChatRooms: React.FC = () => {
                         'bg-gray-500'
                       }`}></div>
                     </div>
-                    <span className="text-[14px] text-[var(--muted)] font-medium">Choose sentiment:</span>
+                    <span className="text-sm text-[var(--muted)] font-medium">Choose sentiment:</span>
                   </div>
+
                   <div className="flex items-center gap-2">
                     {(['bullish', 'bearish', 'neutral'] as const).map((sentiment) => (
                       <button
                         key={sentiment}
                         onClick={() => setSelectedSentiment(selectedSentiment === sentiment ? null : sentiment)}
-                        className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+                        className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 ${
                           selectedSentiment === sentiment
-                            ? sentiment === 'bullish' ? 'bg-[var(--success)] text-white shadow-lg' :
-                              sentiment === 'bearish' ? 'bg-[var(--danger)] text-white shadow-lg' :
-                              'bg-[var(--warn)] text-white shadow-lg'
-                            : 'bg-gray-700/50 text-[var(--muted)] hover:bg-gray-600/50 hover:text-[var(--text)]'
+                            ? sentiment === 'bullish' ? 'bg-[var(--success)] text-white shadow-md' :
+                              sentiment === 'bearish' ? 'bg-[var(--danger)] text-white shadow-md' :
+                              'bg-[var(--warn)] text-white shadow-md'
+                            : 'bg-gray-700/40 text-[var(--muted)] hover:bg-gray-600/40 hover:text-[var(--text)]'
                         }`}
                       >
                         {sentiment.charAt(0).toUpperCase() + sentiment.slice(1)}
@@ -520,15 +521,17 @@ export const LiveChatRooms: React.FC = () => {
                     ))}
                   </div>
                 </div>
-                
-                {/* Input */}
+              </div>
+
+              {/* Input Area */}
+              <div className="p-4">
                 <div className="flex items-end gap-3">
                   <div className="flex-1">
                     <Textarea
                       placeholder="Share an insight..."
                       value={messageInput}
                       onChange={(e) => setMessageInput(e.target.value)}
-                      className="min-h-[90px] bg-[var(--panel)] border-[var(--muted)]/30 text-[var(--text)] placeholder:text-[var(--muted)] focus:border-[var(--accent)]/50 focus:ring-2 focus:ring-[var(--accent)]/20 resize-none rounded-xl text-[15px] leading-[1.5]"
+                      className="min-h-[80px] bg-[var(--panel)] border-[var(--muted)]/30 text-[var(--text)] placeholder:text-[var(--muted)] focus:border-[var(--accent)]/50 focus:ring-1 focus:ring-[var(--accent)]/20 resize-none rounded-xl text-sm leading-relaxed"
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' && !e.shiftKey) {
                           e.preventDefault();
@@ -537,17 +540,26 @@ export const LiveChatRooms: React.FC = () => {
                       }}
                     />
                   </div>
-                  <div className="flex flex-col gap-2">
-                    <Button size="sm" variant="ghost" className="h-10 w-10 text-[var(--muted)] hover:text-[var(--text)] hover:bg-white/5 rounded-lg">
+
+                  <div className="flex items-center gap-2">
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      className="h-9 w-9 text-[var(--muted)] hover:text-[var(--text)] hover:bg-white/5 rounded-lg"
+                    >
                       <Paperclip className="h-4 w-4" />
                     </Button>
-                    <Button size="sm" variant="ghost" className="h-10 w-10 text-[var(--muted)] hover:text-[var(--text)] hover:bg-white/5 rounded-lg">
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      className="h-9 w-9 text-[var(--muted)] hover:text-[var(--text)] hover:bg-white/5 rounded-lg"
+                    >
                       <Smile className="h-4 w-4" />
                     </Button>
                     <Button
                       onClick={handleSendMessage}
                       disabled={!messageInput.trim()}
-                      className="h-10 w-10 bg-[var(--accent)] hover:bg-[var(--accent)]/80 text-black rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:scale-100"
+                      className="h-9 w-9 bg-[var(--accent)] hover:bg-[var(--accent)]/80 text-black rounded-lg shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:scale-100"
                     >
                       <Send className="h-4 w-4" />
                     </Button>
