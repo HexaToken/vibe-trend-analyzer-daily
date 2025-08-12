@@ -205,7 +205,9 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
     selectedRoomId: null,
     rooms: mockRooms.slice(0, maxRooms),
     showDetailPanel: false,
-    detailPanelRoomId: null
+    detailPanelRoomId: null,
+    showChatRoom: false,
+    chatRoomId: null
   });
 
   // Enhanced state for chat functionality
