@@ -694,7 +694,7 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ onNavigateToProfile 
             <Card className="bg-gray-800/50 border-gray-700/50">
               <CardHeader>
                 <CardTitle className="text-white text-sm flex items-center gap-2">
-                  <PollHorizontal className="h-4 w-4 text-teal-400" />
+                  <BarChart3 className="h-4 w-4 text-teal-400" />
                   Poll of the Day
                 </CardTitle>
               </CardHeader>
