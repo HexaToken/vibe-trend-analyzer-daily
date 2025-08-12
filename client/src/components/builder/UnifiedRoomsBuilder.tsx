@@ -764,202 +764,35 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
               </div>
             </div>
 
-            {/* Room Preview - Builder Card */}
-            <div>
-              <div style={{
-                background: 'var(--panel)',
-                borderRadius: '16px',
-                padding: '24px',
-                height: '600px',
-                display: 'flex',
-                flexDirection: 'column'
-              }}>
-                {selectedRoom ? (
-                  <>
-                    {/* Preview Header - Builder Box */}
-                    <div style={{ marginBottom: '24px' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-                        <div style={{ fontSize: '32px' }}>{selectedRoom.icon}</div>
-                        <div style={{ flex: '1' }}>
-                          <h3 style={{
-                            fontWeight: 'bold',
-                            fontSize: '18px',
-                            color: 'var(--text)',
-                            margin: '0 0 4px 0'
-                          }}>
-                            {selectedRoom.name}
-                          </h3>
-                          <span style={{
-                            fontSize: '12px',
-                            padding: '4px 8px',
-                            borderRadius: '12px',
-                            background: getTypeBadgeColor(selectedRoom.type).bg,
-                            color: getTypeBadgeColor(selectedRoom.type).text,
-                            fontWeight: '500'
-                          }}>
-                            {selectedRoom.type.charAt(0).toUpperCase() + selectedRoom.type.slice(1)}
-                          </span>
-                        </div>
-                        <button
-                          style={{
-                            background: 'var(--accent)',
-                            color: '#000',
-                            border: 'none',
-                            borderRadius: '8px',
-                            padding: '12px 24px',
-                            fontWeight: '600',
-                            cursor: 'pointer',
-                            fontSize: '14px'
-                          }}
-                          onClick={() => handleJoinRoom(selectedRoom)}
-                        >
-                          {selectedRoom.isVIP && <Lock size={16} style={{ marginRight: '8px', display: 'inline' }} />}
-                          Join
-                        </button>
-                      </div>
-
-                      {/* Meta Chips */}
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '14px' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                          <Users size={16} color="var(--muted)" />
-                          <span style={{ color: 'var(--text)', fontWeight: '500' }}>{selectedRoom.membersOnline}</span>
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                          <MessageSquare size={16} color="var(--muted)" />
-                          <span style={{ color: 'var(--text)', fontWeight: '500' }}>{selectedRoom.msgsPerHr}</span>
-                        </div>
-                        <span style={{
-                          fontSize: '12px',
-                          padding: '4px 8px',
-                          borderRadius: '12px',
-                          background: getSentimentColor(selectedRoom.sentimentLabel),
-                          color: 'white',
-                          fontWeight: '500'
-                        }}>
-                          {selectedRoom.sentimentLabel} {selectedRoom.sentimentPct}%
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Sample Posts - Builder Repeater */}
-                    <div style={{ flex: '1' }}>
-                      <h4 style={{
-                        fontSize: '14px',
-                        fontWeight: '600',
-                        color: 'var(--muted)',
-                        margin: '0 0 12px 0'
-                      }}>
-                        Recent Messages
-                      </h4>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                        {samplePosts.map((post) => (
-                          <div key={post.id} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                            <div style={{
-                              width: '32px',
-                              height: '32px',
-                              borderRadius: '16px',
-                              background: 'var(--accent)',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              color: '#000',
-                              fontWeight: 'bold',
-                              fontSize: '14px'
-                            }}>
-                              {post.username[0]}
-                            </div>
-                            <div style={{ flex: '1', minWidth: '0' }}>
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                                <span style={{
-                                  fontWeight: '500',
-                                  fontSize: '14px',
-                                  color: 'var(--text)'
-                                }}>
-                                  {post.username}
-                                </span>
-                                <span style={{
-                                  fontSize: '12px',
-                                  color: 'var(--muted)'
-                                }}>
-                                  {post.timestamp}
-                                </span>
-                              </div>
-                              <p style={{
-                                fontSize: '14px',
-                                color: 'var(--text)',
-                                margin: '0',
-                                lineHeight: '1.4',
-                                overflow: 'hidden',
-                                display: '-webkit-box',
-                                WebkitLineClamp: '2',
-                                WebkitBoxOrient: 'vertical'
-                              }}>
-                                {post.content.split(' ').map((word, idx) => 
-                                  word.startsWith('$') ? (
-                                    <span
-                                      key={idx}
-                                      style={{
-                                        background: 'rgba(127, 209, 255, 0.2)',
-                                        color: 'var(--accent)',
-                                        fontSize: '12px',
-                                        padding: '2px 4px',
-                                        margin: '0 2px',
-                                        borderRadius: '4px'
-                                      }}
-                                    >
-                                      {word}
-                                    </span>
-                                  ) : word + ' '
-                                )}
-                              </p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* CTA - Builder Button */}
-                    <div style={{ paddingTop: '16px', borderTop: '1px solid rgba(142, 160, 182, 0.2)' }}>
-                      <button
-                        style={{
-                          width: '100%',
-                          background: 'var(--accent)',
-                          color: '#000',
-                          border: 'none',
-                          borderRadius: '8px',
-                          padding: '16px',
-                          fontWeight: '600',
-                          cursor: 'pointer',
-                          fontSize: '16px',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          gap: '8px'
-                        }}
-                        onClick={() => selectedRoom && handleJoinRoom(selectedRoom)}
-                      >
-                        <Hash size={16} />
-                        Open Room
-                      </button>
-                    </div>
-                  </>
-                ) : (
-                  <div style={{
-                    flex: '1',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}>
-                    <div style={{ textAlign: 'center' }}>
-                      <MessageSquare size={48} color="var(--muted)" style={{ margin: '0 auto 12px' }} />
-                      <p style={{ color: 'var(--muted)', fontSize: '14px', margin: '0' }}>
-                        Select a room to see preview
-                      </p>
-                    </div>
+            {/* Room Detail Panel or Preview */}
+            {state.showDetailPanel && state.detailPanelRoomId ? (
+              <RoomDetailPanel
+                room={createRoomDetailData(state.rooms.find(r => r.id === state.detailPanelRoomId)!)}
+                onClose={handleCloseDetailPanel}
+                onJoinRoom={handleJoinRoomFromDetail}
+                onOpenRoom={handleOpenRoomFromDetail}
+                onNavigateToProfile={onNavigateToProfile}
+              />
+            ) : (
+              <div>
+                <div style={{
+                  background: 'var(--panel)',
+                  borderRadius: '16px',
+                  padding: '24px',
+                  height: '600px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <div style={{ textAlign: 'center' }}>
+                    <MessageSquare size={48} color="var(--muted)" style={{ margin: '0 auto 12px' }} />
+                    <p style={{ color: 'var(--muted)', fontSize: '14px', margin: '0' }}>
+                      Click a room to see details
+                    </p>
                   </div>
-                )}
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Mobile Fixed Bottom Button */}
