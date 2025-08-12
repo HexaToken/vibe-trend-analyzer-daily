@@ -484,20 +484,25 @@ export const LiveChatRooms: React.FC = () => {
             </ScrollArea>
 
             {/* Message Composer */}
-            <div className="p-4 border-t border-[var(--accent)]/20 bg-[var(--panel-soft)] flex-shrink-0">
+            <div
+              className="sticky bottom-0 bg-[#0F162C] backdrop-blur-md border-t border-white/[0.06] shadow-[0_-8px_28px_rgba(0,0,0,0.45)] z-20 p-[14px_16px] rounded-t-2xl"
+              style={{
+                backdropFilter: 'saturate(120%) blur(6px)'
+              }}
+            >
               {/* Sentiment Selection */}
               <div className="flex items-center gap-2 mb-3">
-                <span className="text-xs text-[var(--muted)]">Sentiment:</span>
+                <span className="text-xs text-[#8EA0B6] opacity-90">Sentiment:</span>
                 {(['bullish', 'bearish', 'neutral'] as const).map((sentiment) => (
                   <button
                     key={sentiment}
                     onClick={() => setSelectedSentiment(selectedSentiment === sentiment ? null : sentiment)}
-                    className={`px-2 py-1 rounded text-xs transition-colors ${
+                    className={`px-2 py-1.5 rounded-xl text-xs font-semibold transition-colors ${
                       selectedSentiment === sentiment
-                        ? sentiment === 'bullish' ? 'bg-green-500 text-white' :
-                          sentiment === 'bearish' ? 'bg-red-500 text-white' :
-                          'bg-yellow-500 text-black'
-                        : 'bg-gray-600 text-gray-300 hover:bg-gray-500'
+                        ? sentiment === 'bullish' ? 'bg-[rgba(29,216,130,.16)] text-[#91F0C8] border border-[#91F0C8]/30' :
+                          sentiment === 'bearish' ? 'bg-[rgba(255,122,122,.16)] text-[#FF9D9D] border border-[#FF9D9D]/30' :
+                          'bg-[rgba(248,192,107,.16)] text-[#FFD89A] border border-[#FFD89A]/30'
+                        : 'bg-gray-700/50 text-gray-300 hover:bg-gray-600/50 hover:text-white border border-gray-600/30'
                     }`}
                   >
                     {sentiment}
@@ -511,7 +516,7 @@ export const LiveChatRooms: React.FC = () => {
                   placeholder="Share an insight..."
                   value={messageInput}
                   onChange={(e) => setMessageInput(e.target.value)}
-                  className="flex-1 min-h-[40px] max-h-[120px] bg-[var(--panel)] border-gray-600 text-[var(--text)] placeholder:text-[var(--muted)] focus:border-[var(--accent)] resize-none rounded-lg text-sm p-3"
+                  className="flex-1 min-h-[56px] max-h-[120px] bg-[#0B1020] border border-[rgba(127,209,255,0.25)] text-[#E7ECF4] placeholder:text-[#8EA0B6] placeholder:opacity-90 focus:border-[#7FD1FF] focus:outline-none focus:ring-[3px] focus:ring-[rgba(127,209,255,0.18)] resize-vertical rounded-xl text-sm p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' && !e.shiftKey) {
                       e.preventDefault();
@@ -519,16 +524,16 @@ export const LiveChatRooms: React.FC = () => {
                     }
                   }}
                 />
-                <Button size="sm" variant="ghost" className="h-10 w-10 text-[var(--muted)] hover:text-[var(--text)]">
+                <Button size="sm" variant="ghost" className="h-10 w-10 text-[#8EA0B6] hover:text-[#E7ECF4] hover:bg-white/5 rounded-lg">
                   <Paperclip className="h-4 w-4" />
                 </Button>
-                <Button size="sm" variant="ghost" className="h-10 w-10 text-[var(--muted)] hover:text-[var(--text)]">
+                <Button size="sm" variant="ghost" className="h-10 w-10 text-[#8EA0B6] hover:text-[#E7ECF4] hover:bg-white/5 rounded-lg">
                   <Smile className="h-4 w-4" />
                 </Button>
                 <Button
                   onClick={handleSendMessage}
                   disabled={!messageInput.trim()}
-                  className="h-10 w-10 bg-[var(--accent)] hover:bg-[var(--accent)]/80 text-black rounded-lg disabled:opacity-50"
+                  className="h-10 w-10 bg-[#7FD1FF] hover:bg-[#7FD1FF]/80 text-black rounded-lg shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:scale-100"
                 >
                   <Send className="h-4 w-4" />
                 </Button>
