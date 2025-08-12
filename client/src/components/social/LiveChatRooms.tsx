@@ -230,9 +230,9 @@ export const LiveChatRooms: React.FC = () => {
 
   const getSentimentBadgeColor = (sentiment: string) => {
     switch (sentiment) {
-      case 'Bullish': return 'bg-green-500/20 text-green-400 border-green-500/30';
-      case 'Bearish': return 'bg-red-500/20 text-red-400 border-red-500/30';
-      default: return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30';
+      case 'Bullish': return 'bg-[var(--bullish-bg)] text-[var(--bullish-text)] border-[var(--bullish-text)]/30';
+      case 'Bearish': return 'bg-[var(--bearish-bg)] text-[var(--bearish-text)] border-[var(--bearish-text)]/30';
+      default: return 'bg-[var(--neutral-bg)] text-[var(--neutral-text)] border-[var(--neutral-text)]/30';
     }
   };
 
