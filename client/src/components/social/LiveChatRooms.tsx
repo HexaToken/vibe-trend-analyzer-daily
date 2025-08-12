@@ -415,17 +415,32 @@ export const LiveChatRooms: React.FC = () => {
                           <span className="text-[13px] text-[var(--muted)] ml-auto font-medium">{message.timestamp}</span>
                         </div>
                         
-                        <p className="text-[#E7ECF4] leading-relaxed mb-3">{message.content}</p>
-                        
+                        <p className="text-[15px] text-[var(--text)] leading-[1.55] mb-4 line-clamp-3">
+                          {message.content}
+                          {message.content.length > 150 && (
+                            <button className="text-[var(--accent)] hover:text-[var(--accent)]/80 ml-2 text-sm font-medium">
+                              Read more
+                            </button>
+                          )}
+                        </p>
+
                         {/* Tickers and Sentiment Tags */}
-                        <div className="flex items-center gap-2 mb-3">
+                        <div className="flex items-center gap-2 mb-4">
                           {message.tickers.map((ticker) => (
-                            <Badge key={ticker} className="bg-[#7FD1FF]/10 text-[#7FD1FF] border-[#7FD1FF]/30 text-xs">
+                            <Badge
+                              key={ticker}
+                              className="bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/30 text-xs px-2 py-1 rounded-lg hover:bg-[var(--accent)]/15 cursor-pointer transition-colors"
+                              data-ticker={ticker}
+                            >
                               {ticker}
                             </Badge>
                           ))}
                           {message.sentimentTags.map((tag) => (
-                            <Badge key={tag} className={`text-xs ${getSentimentBadgeColor(tag)}`}>
+                            <Badge
+                              key={tag}
+                              className={`text-xs px-2 py-1 rounded-lg cursor-pointer transition-colors ${getSentimentBadgeColor(tag)}`}
+                              title={`${tag} sentiment — expecting ${tag.toLowerCase()} movement`}
+                            >
                               {tag}
                             </Badge>
                           ))}
