@@ -485,26 +485,41 @@ export const LiveChatRooms: React.FC = () => {
             </ScrollArea>
 
             {/* Composer */}
-            <div className="p-4 border-t-2 border-[#7FD1FF]/20 bg-[#141A2B] flex-shrink-0 shadow-lg">
-              <div className="space-y-3">
-                {/* Sentiment Chips */}
-                <div className="flex items-center gap-2">
-                  <span className="text-sm text-[#8EA0B6]">Sentiment:</span>
-                  {(['bullish', 'bearish', 'neutral'] as const).map((sentiment) => (
-                    <button
-                      key={sentiment}
-                      onClick={() => setSelectedSentiment(selectedSentiment === sentiment ? null : sentiment)}
-                      className={`px-3 py-1 rounded-full text-xs transition-all ${
-                        selectedSentiment === sentiment
-                          ? sentiment === 'bullish' ? 'bg-green-500 text-white' :
-                            sentiment === 'bearish' ? 'bg-red-500 text-white' :
-                            'bg-yellow-500 text-white'
-                          : 'bg-gray-700/50 text-[#8EA0B6] hover:bg-gray-600/50'
-                      }`}
-                    >
-                      {sentiment.charAt(0).toUpperCase() + sentiment.slice(1)}
-                    </button>
-                  ))}
+            <div className="p-4 border-t-2 border-[var(--accent)]/20 bg-[var(--panel-soft)] flex-shrink-0 shadow-lg">
+              <div className="space-y-4">
+                {/* Sentiment Chips with Avatar Preview */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="relative">
+                      <Avatar className="h-8 w-8">
+                        <AvatarFallback className="bg-[var(--panel)] text-[var(--text)]">U</AvatarFallback>
+                      </Avatar>
+                      <div className={`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-[var(--panel-soft)] ${
+                        selectedSentiment === 'bullish' ? 'bg-[var(--success)]' :
+                        selectedSentiment === 'bearish' ? 'bg-[var(--danger)]' :
+                        selectedSentiment === 'neutral' ? 'bg-[var(--warn)]' :
+                        'bg-gray-500'
+                      }`}></div>
+                    </div>
+                    <span className="text-[14px] text-[var(--muted)] font-medium">Choose sentiment:</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {(['bullish', 'bearish', 'neutral'] as const).map((sentiment) => (
+                      <button
+                        key={sentiment}
+                        onClick={() => setSelectedSentiment(selectedSentiment === sentiment ? null : sentiment)}
+                        className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+                          selectedSentiment === sentiment
+                            ? sentiment === 'bullish' ? 'bg-[var(--success)] text-white shadow-lg' :
+                              sentiment === 'bearish' ? 'bg-[var(--danger)] text-white shadow-lg' :
+                              'bg-[var(--warn)] text-white shadow-lg'
+                            : 'bg-gray-700/50 text-[var(--muted)] hover:bg-gray-600/50 hover:text-[var(--text)]'
+                        }`}
+                      >
+                        {sentiment.charAt(0).toUpperCase() + sentiment.slice(1)}
+                      </button>
+                    ))}
+                  </div>
                 </div>
                 
                 {/* Input */}
