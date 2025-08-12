@@ -174,6 +174,8 @@ interface UnifiedRoomsState {
   rooms: Room[];
   showDetailPanel: boolean;
   detailPanelRoomId: string | null;
+  showChatRoom: boolean;
+  chatRoomId: string | null;
 }
 
 interface UnifiedRoomsBuilderProps {
