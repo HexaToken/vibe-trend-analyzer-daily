@@ -18,6 +18,9 @@ import { SocialBuzzHeatmap } from "./src/components/builder/SocialBuzzHeatmap";
 import { TopMoversMarketSentiment } from "./src/components/builder/TopMoversMarketSentiment";
 import { MarketMoodControls } from "./src/components/builder/MarketMoodControls";
 
+// Unified Rooms component
+import { UnifiedRoomsBuilder } from "./src/components/builder/UnifiedRoomsBuilder";
+
 // Placeholder components for now - you can create these following the same pattern
 const NewsFeedModule = () =>
   React.createElement("div", null, "News Feed Module - To be implemented");
