@@ -47,15 +47,17 @@ export const ChatRoomPage: React.FC<ChatRoomPageProps> = ({
   const [messageBody, setMessageBody] = useState<string>("");
   const [showRules, setShowRules] = useState<boolean>(false);
   const [showAuthModal, setShowAuthModal] = useState<boolean>(false);
+  const [replyToMessage, setReplyToMessage] = useState<Message | null>(null);
+  const [replyText, setReplyText] = useState<string>("");
 
   // Mock data for preview and feed
   const [previewFeed] = useState<Message[]>([
-    { id: 1, user: "Alex", time: "2m", text: "Watching $AAPL above 195 for a breakout." },
-    { id: 2, user: "Sasha", time: "4m", text: "IV steady; considering debit spread." }
+    { id: 1, user: "Alex", time: "2m", text: "Watching $AAPL above 195 for a breakout.", likes: 3, replies: 1, isLiked: false, isShared: false },
+    { id: 2, user: "Sasha", time: "4m", text: "IV steady; considering debit spread.", likes: 2, replies: 0, isLiked: false, isShared: false }
   ]);
 
   const [feed, setFeed] = useState<Message[]>([
-    { id: 101, user: "You", time: "Just now", text: "Hello room!", sentiment: "neutral", type: "text", likes: 0, replies: 0 }
+    { id: 101, user: "You", time: "Just now", text: "Hello room!", sentiment: "neutral", type: "text", likes: 0, replies: 0, isLiked: false, isShared: false }
   ]);
 
   // Handle message sending
