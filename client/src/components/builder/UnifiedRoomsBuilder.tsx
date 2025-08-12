@@ -621,8 +621,11 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
           {/* Content Area - Builder Columns */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)',
-            gap: '24px'
+            gridTemplateColumns: state.showDetailPanel
+              ? 'minmax(0, 1fr) 360px'
+              : 'minmax(0, 2fr) minmax(0, 1fr)',
+            gap: '24px',
+            position: 'relative'
           }}>
             {/* Room List - Builder Repeater */}
             <div>
