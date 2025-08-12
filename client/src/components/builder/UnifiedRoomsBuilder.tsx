@@ -308,6 +308,55 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
     }
   };
 
+  // Authentication check component
+  if (!isAuthenticated) {
+    return (
+      <>
+        <style>{cssVars}</style>
+        <div className="unified-rooms-builder" style={{
+          minHeight: '60vh',
+          background: 'var(--bg)',
+          color: 'var(--text)',
+          padding: '48px 24px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <div style={{ textAlign: 'center', maxWidth: '400px' }}>
+            <Users size={64} color="var(--muted)" style={{ margin: '0 auto 24px' }} />
+            <h3 style={{
+              fontSize: '24px',
+              fontWeight: 'bold',
+              marginBottom: '12px',
+              color: 'var(--text)'
+            }}>
+              Join the Community
+            </h3>
+            <p style={{
+              color: 'var(--muted)',
+              marginBottom: '24px',
+              lineHeight: '1.6'
+            }}>
+              Sign in to access community rooms and chat with other traders.
+            </p>
+            <button style={{
+              background: 'var(--accent)',
+              color: '#000',
+              border: 'none',
+              borderRadius: '8px',
+              padding: '12px 24px',
+              fontWeight: '600',
+              cursor: 'pointer',
+              fontSize: '16px'
+            }}>
+              Sign In to Continue
+            </button>
+          </div>
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <style>{cssVars}</style>
