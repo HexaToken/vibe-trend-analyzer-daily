@@ -523,13 +523,13 @@ export const LiveChatRooms: React.FC = () => {
                 </div>
                 
                 {/* Input */}
-                <div className="flex items-end gap-2">
+                <div className="flex items-end gap-3">
                   <div className="flex-1">
                     <Textarea
                       placeholder="Share an insight..."
                       value={messageInput}
                       onChange={(e) => setMessageInput(e.target.value)}
-                      className="min-h-[80px] bg-[#141A2B] border-gray-600/30 text-[#E7ECF4] placeholder:text-[#8EA0B6] focus:border-[#7FD1FF]/50 resize-none"
+                      className="min-h-[90px] bg-[var(--panel)] border-[var(--muted)]/30 text-[var(--text)] placeholder:text-[var(--muted)] focus:border-[var(--accent)]/50 focus:ring-2 focus:ring-[var(--accent)]/20 resize-none rounded-xl text-[15px] leading-[1.5]"
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' && !e.shiftKey) {
                           e.preventDefault();
@@ -539,16 +539,16 @@ export const LiveChatRooms: React.FC = () => {
                     />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <Button size="sm" variant="ghost" className="text-[#8EA0B6] hover:text-[#E7ECF4]">
+                    <Button size="sm" variant="ghost" className="h-10 w-10 text-[var(--muted)] hover:text-[var(--text)] hover:bg-white/5 rounded-lg">
                       <Paperclip className="h-4 w-4" />
                     </Button>
-                    <Button size="sm" variant="ghost" className="text-[#8EA0B6] hover:text-[#E7ECF4]">
+                    <Button size="sm" variant="ghost" className="h-10 w-10 text-[var(--muted)] hover:text-[var(--text)] hover:bg-white/5 rounded-lg">
                       <Smile className="h-4 w-4" />
                     </Button>
-                    <Button 
+                    <Button
                       onClick={handleSendMessage}
                       disabled={!messageInput.trim()}
-                      className="bg-[#7FD1FF] hover:bg-[#7FD1FF]/80 text-black"
+                      className="h-10 w-10 bg-[var(--accent)] hover:bg-[var(--accent)]/80 text-black rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:scale-100"
                     >
                       <Send className="h-4 w-4" />
                     </Button>
