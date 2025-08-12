@@ -770,13 +770,83 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
 
             {/* Fixed Room Detail Panel or Preview */}
             {state.showDetailPanel && state.detailPanelRoomId ? (
-              <RoomDetailPanelFixed
-                room={createRoomDetailData(state.rooms.find(r => r.id === state.detailPanelRoomId)!)}
-                onClose={handleCloseDetailPanel}
-                onJoinRoom={handleJoinRoomFromDetail}
-                onOpenRoom={handleOpenRoomFromDetail}
-                onNavigateToProfile={onNavigateToProfile}
-              />
+              <div style={{
+                background: '#10162A',
+                borderLeft: '1px solid rgba(255, 255, 255, 0.06)',
+                height: '600px',
+                padding: '20px',
+                borderRadius: '16px'
+              }}>
+                <div style={{ color: 'white' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+                    <h2 style={{ fontSize: '20px', fontWeight: 'bold', margin: 0 }}>
+                      {state.rooms.find(r => r.id === state.detailPanelRoomId)?.name || 'Room Details'}
+                    </h2>
+                    <button
+                      onClick={handleCloseDetailPanel}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        color: '#999',
+                        cursor: 'pointer',
+                        fontSize: '18px'
+                      }}
+                    >
+                      ✕
+                    </button>
+                  </div>
+
+                  <div style={{ marginBottom: '20px' }}>
+                    <h3 style={{ fontSize: '14px', color: '#999', marginBottom: '10px' }}>Stats</h3>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}>
+                      <div style={{ background: '#141A2B', padding: '15px', borderRadius: '8px', textAlign: 'center' }}>
+                        <div style={{ fontSize: '16px', fontWeight: 'bold' }}>142</div>
+                        <div style={{ fontSize: '12px', color: '#999' }}>Online</div>
+                      </div>
+                      <div style={{ background: '#141A2B', padding: '15px', borderRadius: '8px', textAlign: 'center' }}>
+                        <div style={{ fontSize: '16px', fontWeight: 'bold' }}>89</div>
+                        <div style={{ fontSize: '12px', color: '#999' }}>Today</div>
+                      </div>
+                      <div style={{ background: '#141A2B', padding: '15px', borderRadius: '8px', textAlign: 'center' }}>
+                        <div style={{ fontSize: '16px', fontWeight: 'bold' }}>+12%</div>
+                        <div style={{ fontSize: '12px', color: '#999' }}>Activity</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style={{ marginBottom: '20px' }}>
+                    <h3 style={{ fontSize: '14px', color: '#999', marginBottom: '10px' }}>Recent Messages</h3>
+                    <div style={{ background: '#141A2B', padding: '15px', borderRadius: '8px' }}>
+                      <div style={{ fontSize: '14px', marginBottom: '8px' }}>
+                        <strong>AlphaTrader:</strong> BTC looking strong above 50k resistance 🚀
+                      </div>
+                      <div style={{ fontSize: '14px', marginBottom: '8px' }}>
+                        <strong>MarketWatcher:</strong> Volume spike noticed in tech sector
+                      </div>
+                      <div style={{ fontSize: '14px', color: '#999' }}>
+                        <strong>OptionsPro:</strong> IV crush might be coming...
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => handleJoinRoomFromDetail(state.detailPanelRoomId!)}
+                    style={{
+                      width: '100%',
+                      padding: '15px',
+                      background: 'linear-gradient(to right, #10B981, #059669)',
+                      border: 'none',
+                      borderRadius: '12px',
+                      color: 'white',
+                      fontSize: '16px',
+                      fontWeight: 'bold',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    🚀 Join & Start Chatting
+                  </button>
+                </div>
+              </div>
             ) : (
               <div>
                 <div style={{
