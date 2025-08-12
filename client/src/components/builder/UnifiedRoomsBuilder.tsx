@@ -3,7 +3,7 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { Search, Users, MessageSquare, Star, Shield, TrendingUp, Hash, Clock, Target, Lock, Send, Smile, Paperclip } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
-import { RoomDetailPanelFixed } from '@/components/rooms/RoomDetailPanelFixed';
+import { RoomDetailPanel } from '@/components/rooms/RoomDetailPanel';
 import { ChatRoomPage } from '@/components/rooms/ChatRoomPage';
 
 // CSS Variables for the dark mode theme
@@ -817,85 +817,40 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
               </div>
             </div>
 
-            {/* Fixed Room Detail Panel or Preview */}
+            {/* Room Detail Panel Component */}
             {state.showDetailPanel && state.detailPanelRoomId ? (
-              <div style={{
-                background: '#10162A',
-                borderLeft: '1px solid rgba(255, 255, 255, 0.06)',
-                height: '600px',
-                padding: '20px',
-                borderRadius: '16px'
-              }}>
-                <div style={{ color: 'white' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
-                    <h2 style={{ fontSize: '20px', fontWeight: 'bold', margin: 0 }}>
-                      {state.rooms.find(r => r.id === state.detailPanelRoomId)?.name || 'Room Details'}
-                    </h2>
-                    <button
-                      onClick={handleCloseDetailPanel}
-                      style={{
-                        background: 'none',
-                        border: 'none',
-                        color: '#999',
-                        cursor: 'pointer',
-                        fontSize: '18px'
-                      }}
-                    >
-                      ✕
-                    </button>
-                  </div>
-
-                  <div style={{ marginBottom: '20px' }}>
-                    <h3 style={{ fontSize: '14px', color: '#999', marginBottom: '10px' }}>Stats</h3>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}>
-                      <div style={{ background: '#141A2B', padding: '15px', borderRadius: '8px', textAlign: 'center' }}>
-                        <div style={{ fontSize: '16px', fontWeight: 'bold' }}>142</div>
-                        <div style={{ fontSize: '12px', color: '#999' }}>Online</div>
-                      </div>
-                      <div style={{ background: '#141A2B', padding: '15px', borderRadius: '8px', textAlign: 'center' }}>
-                        <div style={{ fontSize: '16px', fontWeight: 'bold' }}>89</div>
-                        <div style={{ fontSize: '12px', color: '#999' }}>Today</div>
-                      </div>
-                      <div style={{ background: '#141A2B', padding: '15px', borderRadius: '8px', textAlign: 'center' }}>
-                        <div style={{ fontSize: '16px', fontWeight: 'bold' }}>+12%</div>
-                        <div style={{ fontSize: '12px', color: '#999' }}>Activity</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div style={{ marginBottom: '20px' }}>
-                    <h3 style={{ fontSize: '14px', color: '#999', marginBottom: '10px' }}>Recent Messages</h3>
-                    <div style={{ background: '#141A2B', padding: '15px', borderRadius: '8px' }}>
-                      <div style={{ fontSize: '14px', marginBottom: '8px' }}>
-                        <strong>AlphaTrader:</strong> BTC looking strong above 50k resistance 🚀
-                      </div>
-                      <div style={{ fontSize: '14px', marginBottom: '8px' }}>
-                        <strong>MarketWatcher:</strong> Volume spike noticed in tech sector
-                      </div>
-                      <div style={{ fontSize: '14px', color: '#999' }}>
-                        <strong>OptionsPro:</strong> IV crush might be coming...
-                      </div>
-                    </div>
-                  </div>
-
-                  <button
-                    onClick={() => handleJoinRoomFromDetail(state.detailPanelRoomId!)}
-                    style={{
-                      width: '100%',
-                      padding: '15px',
-                      background: 'linear-gradient(to right, #10B981, #059669)',
-                      border: 'none',
-                      borderRadius: '12px',
-                      color: 'white',
-                      fontSize: '16px',
-                      fontWeight: 'bold',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    🚀 Join & Start Chatting
-                  </button>
-                </div>
-              </div>
+              <RoomDetailPanel
+                isOpen={state.showDetailPanel}
+                onClose={handleCloseDetailPanel}
+                selectedRoomId={state.detailPanelRoomId}
+                rooms={state.rooms.map(room => ({
+                  id: room.id,
+                  name: room.name,
+                  icon: room.icon,
+                  category: room.type.charAt(0).toUpperCase() + room.type.slice(1),
+                  description: getTaglineForRoom(room),
+                  sentiment: { label: room.sentimentLabel, pct: room.sentimentPct },
+                  online: room.membersOnline,
+                  today: room.msgsPerHr * 8 + Math.floor(Math.random() * 100),
+                  activityPct: Math.floor(Math.random() * 40) - 20,
+                  pinned: room.pinnedCount > 0 ? {
+                    user: 'TradingMod',
+                    time: '1h',
+                    text: 'Welcome to the room! Share setups. No pumping/spam.'
+                  } : undefined
+                }))}
+                previewMessages={{
+                  [state.detailPanelRoomId]: [
+                    { id: 1, user: 'AlphaTrader', time: '2m', text: room?.type === 'crypto' ? 'BTC holding 50k support; buyers stepping in.' : 'Watching above 195 — breakout if volume expands 🚀' },
+                    { id: 2, user: 'MarketWatcher', time: '5m', text: room?.type === 'crypto' ? 'ETH gas fees easing; L2 activity rising.' : 'Seeing neutral options flow; IV steady.' },
+                    { id: 3, user: 'OptionsPro', time: '9m', text: 'Debit spread idea: 195/205 calls for next week.' }
+                  ]
+                }}
+                authed={isAuthenticated}
+                onSignIn={() => alert('Please sign in to join rooms.')}
+                onJoinRoom={handleOpenRoomFromDetail}
+                className="absolute top-0 right-0"
+              />
             ) : (
               <div>
                 <div style={{
