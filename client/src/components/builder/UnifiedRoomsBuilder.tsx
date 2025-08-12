@@ -380,8 +380,20 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
   // Handle opening room from detail panel
   const handleOpenRoomFromDetail = (roomId: string) => {
     handleCloseDetailPanel();
-    setShowChatInterface(true);
-    setState(prev => ({ ...prev, selectedRoomId: roomId }));
+    setState(prev => ({
+      ...prev,
+      showChatRoom: true,
+      chatRoomId: roomId
+    }));
+  };
+
+  // Handle back from chat room
+  const handleBackFromChatRoom = () => {
+    setState(prev => ({
+      ...prev,
+      showChatRoom: false,
+      chatRoomId: null
+    }));
   };
 
   // Handle room joining (original function, now calls detail panel)
