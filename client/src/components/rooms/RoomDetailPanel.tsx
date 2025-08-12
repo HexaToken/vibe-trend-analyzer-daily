@@ -141,7 +141,7 @@ export const RoomDetailPanel: React.FC<RoomDetailPanelProps> = ({
           {!authed ? (
             <div className="space-y-2.5">
               <Button
-                onClick={onSignIn}
+                onClick={() => setAuthModalOpen(true)}
                 className="w-full bg-[#1DD882] text-[#041311] font-bold py-3 px-3.5 rounded-xl hover:bg-[#1DD882]/90"
               >
                 Sign in to Join & Chat
