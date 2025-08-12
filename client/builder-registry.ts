@@ -18,6 +18,9 @@ import { SocialBuzzHeatmap } from "./src/components/builder/SocialBuzzHeatmap";
 import { TopMoversMarketSentiment } from "./src/components/builder/TopMoversMarketSentiment";
 import { MarketMoodControls } from "./src/components/builder/MarketMoodControls";
 
+// Unified Rooms component
+import { UnifiedRoomsBuilder } from "./src/components/builder/UnifiedRoomsBuilder";
+
 // Placeholder components for now - you can create these following the same pattern
 const NewsFeedModule = () =>
   React.createElement("div", null, "News Feed Module - To be implemented");
@@ -494,6 +497,50 @@ export const customComponents: RegisteredComponent[] = [
         name: "showLegend",
         type: "boolean",
         defaultValue: true,
+        required: false,
+      },
+    ],
+    canHaveChildren: false,
+  },
+  // Unified Rooms component
+  {
+    component: UnifiedRoomsBuilder,
+    name: "UnifiedRoomsBuilder",
+    inputs: [
+      {
+        name: "title",
+        type: "string",
+        defaultValue: "Rooms",
+        required: false,
+      },
+      {
+        name: "subtitle",
+        type: "string",
+        defaultValue: "Join real-time discussions by ticker, sector, and strategy.",
+        required: false,
+      },
+      {
+        name: "showSearch",
+        type: "boolean",
+        defaultValue: true,
+        required: false,
+      },
+      {
+        name: "showFilters",
+        type: "boolean",
+        defaultValue: true,
+        required: false,
+      },
+      {
+        name: "showSort",
+        type: "boolean",
+        defaultValue: true,
+        required: false,
+      },
+      {
+        name: "maxRooms",
+        type: "number",
+        defaultValue: 8,
         required: false,
       },
     ],

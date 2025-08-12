@@ -49,6 +49,7 @@ import DynamicThemeSelectorDemo from "@/components/DynamicThemeSelectorDemo";
 
 import { BuilderFinanceDemo } from "@/components/BuilderFinanceDemo";
 import { FuturisticHomepage } from "@/components/FuturisticHomepage";
+import { UnifiedRoomsDemo } from "@/components/UnifiedRoomsDemo";
 import SettingsPage from "@/components/user/SettingsPage";
 import ViewProfilePage from "@/components/user/ViewProfilePage";
 import MoorMeterMembershipPage from "@/components/membership/MoorMeterMembershipPage";
@@ -211,6 +212,8 @@ const AppContent = () => {
         );
       case "futuristic-chat":
         return <FuturisticChatDemo />;
+      case "unified-rooms":
+        return <UnifiedRoomsDemo />;
 
       // Finance Section Routes
       case "finance":
