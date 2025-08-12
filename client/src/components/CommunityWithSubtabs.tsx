@@ -20,6 +20,7 @@ import { CommunityRooms } from "./social/CommunityRooms";
 import { PrivateRoomsContainer } from "./privateRooms/PrivateRoomsContainer";
 import { SpaceSwitcherWidget } from "./community/SpaceSwitcherWidget";
 import { ProfileNavigationProvider } from "./social/ProfileNavigationProvider";
+import { UnifiedRoomsBuilder } from "./builder/UnifiedRoomsBuilder";
 
 interface CommunityWithSubtabsProps {
   onNavigateToProfile?: (userId: string) => void;
