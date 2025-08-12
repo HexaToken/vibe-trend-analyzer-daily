@@ -53,6 +53,7 @@ export const RoomDetailPanel: React.FC<RoomDetailPanelProps> = ({
   className,
 }) => {
   const [previewModalOpen, setPreviewModalOpen] = useState(false);
+  const [authModalOpen, setAuthModalOpen] = useState(false);
 
   const selectedRoom = rooms.find(r => r.id === selectedRoomId);
   const messages = previewMessages[selectedRoomId] || [];
