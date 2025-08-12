@@ -484,86 +484,62 @@ export const LiveChatRooms: React.FC = () => {
             </ScrollArea>
 
             {/* Message Composer */}
-            <div className="border-t border-[var(--accent)]/20 bg-[var(--panel-soft)] flex-shrink-0">
-              {/* Sentiment Selection Header */}
-              <div className="px-4 py-3 border-b border-gray-700/20">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="relative">
-                      <Avatar className="h-8 w-8">
-                        <AvatarFallback className="bg-[var(--panel)] text-[var(--text)]">U</AvatarFallback>
-                      </Avatar>
-                      <div className={`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-[var(--panel-soft)] ${
-                        selectedSentiment === 'bullish' ? 'bg-[var(--success)]' :
-                        selectedSentiment === 'bearish' ? 'bg-[var(--danger)]' :
-                        selectedSentiment === 'neutral' ? 'bg-[var(--warn)]' :
-                        'bg-gray-500'
-                      }`}></div>
-                    </div>
-                    <span className="text-sm text-[var(--muted)] font-medium">Choose sentiment:</span>
-                  </div>
-
-                  <div className="flex items-center gap-2">
-                    {(['bullish', 'bearish', 'neutral'] as const).map((sentiment) => (
-                      <button
-                        key={sentiment}
-                        onClick={() => setSelectedSentiment(selectedSentiment === sentiment ? null : sentiment)}
-                        className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 ${
-                          selectedSentiment === sentiment
-                            ? sentiment === 'bullish' ? 'bg-[var(--success)] text-white shadow-md' :
-                              sentiment === 'bearish' ? 'bg-[var(--danger)] text-white shadow-md' :
-                              'bg-[var(--warn)] text-white shadow-md'
-                            : 'bg-gray-700/40 text-[var(--muted)] hover:bg-gray-600/40 hover:text-[var(--text)]'
-                        }`}
-                      >
-                        {sentiment.charAt(0).toUpperCase() + sentiment.slice(1)}
-                      </button>
-                    ))}
-                  </div>
+            <div className="p-4 border-t border-[var(--accent)]/20 bg-[var(--panel-soft)]">
+              {/* Sentiment buttons */}
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2">
+                  <Avatar className="h-7 w-7">
+                    <AvatarFallback className="bg-[var(--panel)] text-[var(--text)] text-xs">U</AvatarFallback>
+                  </Avatar>
+                  <span className="text-xs text-[var(--muted)]">Sentiment:</span>
+                </div>
+                <div className="flex gap-2">
+                  {(['bullish', 'bearish', 'neutral'] as const).map((sentiment) => (
+                    <button
+                      key={sentiment}
+                      onClick={() => setSelectedSentiment(selectedSentiment === sentiment ? null : sentiment)}
+                      className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                        selectedSentiment === sentiment
+                          ? sentiment === 'bullish' ? 'bg-green-500 text-white' :
+                            sentiment === 'bearish' ? 'bg-red-500 text-white' :
+                            'bg-yellow-500 text-black'
+                          : 'bg-gray-600 text-gray-300 hover:bg-gray-500'
+                      }`}
+                    >
+                      {sentiment}
+                    </button>
+                  ))}
                 </div>
               </div>
 
-              {/* Input Area */}
-              <div className="p-4">
-                <div className="flex items-end gap-3">
-                  <div className="flex-1">
-                    <Textarea
-                      placeholder="Share an insight..."
-                      value={messageInput}
-                      onChange={(e) => setMessageInput(e.target.value)}
-                      className="min-h-[80px] bg-[var(--panel)] border-[var(--muted)]/30 text-[var(--text)] placeholder:text-[var(--muted)] focus:border-[var(--accent)]/50 focus:ring-1 focus:ring-[var(--accent)]/20 resize-none rounded-xl text-sm leading-relaxed"
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' && !e.shiftKey) {
-                          e.preventDefault();
-                          handleSendMessage();
-                        }
-                      }}
-                    />
-                  </div>
-
-                  <div className="flex items-center gap-2">
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      className="h-9 w-9 text-[var(--muted)] hover:text-[var(--text)] hover:bg-white/5 rounded-lg"
-                    >
-                      <Paperclip className="h-4 w-4" />
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      className="h-9 w-9 text-[var(--muted)] hover:text-[var(--text)] hover:bg-white/5 rounded-lg"
-                    >
-                      <Smile className="h-4 w-4" />
-                    </Button>
-                    <Button
-                      onClick={handleSendMessage}
-                      disabled={!messageInput.trim()}
-                      className="h-9 w-9 bg-[var(--accent)] hover:bg-[var(--accent)]/80 text-black rounded-lg shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:scale-100"
-                    >
-                      <Send className="h-4 w-4" />
-                    </Button>
-                  </div>
+              {/* Input row */}
+              <div className="flex gap-2">
+                <Textarea
+                  placeholder="Share an insight..."
+                  value={messageInput}
+                  onChange={(e) => setMessageInput(e.target.value)}
+                  className="flex-1 min-h-[60px] bg-[var(--panel)] border-gray-600 text-[var(--text)] placeholder:text-[var(--muted)] focus:border-[var(--accent)] resize-none rounded-lg text-sm"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                      e.preventDefault();
+                      handleSendMessage();
+                    }
+                  }}
+                />
+                <div className="flex flex-col gap-1">
+                  <Button size="sm" variant="ghost" className="h-8 w-8 text-[var(--muted)] hover:text-[var(--text)]">
+                    <Paperclip className="h-3 w-3" />
+                  </Button>
+                  <Button size="sm" variant="ghost" className="h-8 w-8 text-[var(--muted)] hover:text-[var(--text)]">
+                    <Smile className="h-3 w-3" />
+                  </Button>
+                  <Button
+                    onClick={handleSendMessage}
+                    disabled={!messageInput.trim()}
+                    className="h-8 w-8 bg-[var(--accent)] hover:bg-[var(--accent)]/80 text-black rounded disabled:opacity-50"
+                  >
+                    <Send className="h-3 w-3" />
+                  </Button>
                 </div>
               </div>
             </div>
