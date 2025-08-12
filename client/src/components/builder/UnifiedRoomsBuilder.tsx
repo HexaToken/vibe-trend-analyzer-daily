@@ -502,6 +502,7 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
         <ChatRoomPage
           room={createChatRoomData(room)}
           onBack={handleBackFromChatRoom}
+          authed={isAuthenticated}
         />
       );
     }
