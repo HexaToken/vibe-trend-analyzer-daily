@@ -783,38 +783,40 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
 
             {/* Room Detail Panel Component */}
             {state.showDetailPanel && state.detailPanelRoomId ? (
-              <RoomDetailPanel
-                isOpen={state.showDetailPanel}
-                onClose={handleCloseDetailPanel}
-                selectedRoomId={state.detailPanelRoomId}
-                rooms={state.rooms.map(room => ({
-                  id: room.id,
-                  name: room.name,
-                  icon: room.icon,
-                  category: room.type.charAt(0).toUpperCase() + room.type.slice(1),
-                  description: getTaglineForRoom(room),
-                  sentiment: { label: room.sentimentLabel, pct: room.sentimentPct },
-                  online: room.membersOnline,
-                  today: room.msgsPerHr * 8 + Math.floor(Math.random() * 100),
-                  activityPct: Math.floor(Math.random() * 40) - 20,
-                  pinned: room.pinnedCount > 0 ? {
-                    user: 'TradingMod',
-                    time: '1h',
-                    text: 'Welcome to the room! Share setups. No pumping/spam.'
-                  } : undefined
-                }))}
-                previewMessages={{
-                  [state.detailPanelRoomId]: [
-                    { id: 1, user: 'AlphaTrader', time: '2m', text: state.rooms.find(r => r.id === state.detailPanelRoomId)?.type === 'crypto' ? 'BTC holding 50k support; buyers stepping in.' : 'Watching above 195 — breakout if volume expands 🚀' },
-                    { id: 2, user: 'MarketWatcher', time: '5m', text: state.rooms.find(r => r.id === state.detailPanelRoomId)?.type === 'crypto' ? 'ETH gas fees easing; L2 activity rising.' : 'Seeing neutral options flow; IV steady.' },
-                    { id: 3, user: 'OptionsPro', time: '9m', text: 'Debit spread idea: 195/205 calls for next week.' }
-                  ]
-                }}
-                authed={isAuthenticated}
-                onSignIn={handleSignIn}
-                onJoinRoom={handleOpenRoomFromDetail}
-                className="absolute top-0 right-0"
-              />
+              <div className="h-[600px]">
+                <RoomDetailPanel
+                  isOpen={state.showDetailPanel}
+                  onClose={handleCloseDetailPanel}
+                  selectedRoomId={state.detailPanelRoomId}
+                  rooms={state.rooms.map(room => ({
+                    id: room.id,
+                    name: room.name,
+                    icon: room.icon,
+                    category: room.type.charAt(0).toUpperCase() + room.type.slice(1),
+                    description: getTaglineForRoom(room),
+                    sentiment: { label: room.sentimentLabel, pct: room.sentimentPct },
+                    online: room.membersOnline,
+                    today: room.msgsPerHr * 8 + Math.floor(Math.random() * 100),
+                    activityPct: Math.floor(Math.random() * 40) - 20,
+                    pinned: room.pinnedCount > 0 ? {
+                      user: 'TradingMod',
+                      time: '1h',
+                      text: 'Welcome to the room! Share setups. No pumping/spam.'
+                    } : undefined
+                  }))}
+                  previewMessages={{
+                    [state.detailPanelRoomId]: [
+                      { id: 1, user: 'AlphaTrader', time: '2m', text: state.rooms.find(r => r.id === state.detailPanelRoomId)?.type === 'crypto' ? 'BTC holding 50k support; buyers stepping in.' : 'Watching above 195 — breakout if volume expands 🚀' },
+                      { id: 2, user: 'MarketWatcher', time: '5m', text: state.rooms.find(r => r.id === state.detailPanelRoomId)?.type === 'crypto' ? 'ETH gas fees easing; L2 activity rising.' : 'Seeing neutral options flow; IV steady.' },
+                      { id: 3, user: 'OptionsPro', time: '9m', text: 'Debit spread idea: 195/205 calls for next week.' }
+                    ]
+                  }}
+                  authed={isAuthenticated}
+                  onSignIn={handleSignIn}
+                  onJoinRoom={handleOpenRoomFromDetail}
+                  className="h-full"
+                />
+              </div>
             ) : (
               <div>
                 <div style={{
