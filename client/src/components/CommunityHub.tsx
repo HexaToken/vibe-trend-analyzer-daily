@@ -549,13 +549,13 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ onNavigateToProfile 
                       <Button variant="ghost" size="sm" className="text-gray-400 hover:text-white">
                         <Camera className="h-4 w-4" />
                       </Button>
-                      <Button 
-                        variant="ghost" 
-                        size="sm" 
+                      <Button
+                        variant="ghost"
+                        size="sm"
                         className="text-gray-400 hover:text-white"
                         onClick={() => setShowPollCreator(!showPollCreator)}
                       >
-                        <PollHorizontal className="h-4 w-4" />
+                        <BarChart3 className="h-4 w-4" />
                       </Button>
                       <Button variant="ghost" size="sm" className="text-gray-400 hover:text-white">
                         <Smile className="h-4 w-4" />
