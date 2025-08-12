@@ -287,7 +287,7 @@ export const LiveChatRooms: React.FC = () => {
               </div>
             </div>
 
-            <ScrollArea className="h-[600px]">
+            <ScrollArea className="flex-1 min-h-0">
               <div className="p-2">
                 {Object.entries(roomsByCategory).map(([category, rooms]) => (
                   <div key={category} className="mb-4">
