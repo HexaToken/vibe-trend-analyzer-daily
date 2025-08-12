@@ -650,15 +650,15 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ onNavigateToProfile 
                         {/* Engagement */}
                         <div className="flex items-center justify-between pt-3 border-t border-gray-700">
                           <div className="flex items-center gap-4">
-                            <button className="flex items-center gap-1 text-gray-400 hover:text-red-400 transition-colors">
+                            <button className="engagement-button flex items-center gap-1 text-gray-400 hover:text-red-400 transition-colors">
                               <Heart className="h-4 w-4" />
                               <span className="text-sm">{post.likes}</span>
                             </button>
-                            <button className="flex items-center gap-1 text-gray-400 hover:text-blue-400 transition-colors">
+                            <button className="engagement-button flex items-center gap-1 text-gray-400 hover:text-blue-400 transition-colors">
                               <MessageSquare className="h-4 w-4" />
                               <span className="text-sm">{post.comments}</span>
                             </button>
-                            <button className="flex items-center gap-1 text-gray-400 hover:text-green-400 transition-colors">
+                            <button className="engagement-button flex items-center gap-1 text-gray-400 hover:text-green-400 transition-colors">
                               <Share2 className="h-4 w-4" />
                               <span className="text-sm">{post.shares}</span>
                             </button>
