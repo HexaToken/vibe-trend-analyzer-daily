@@ -1014,7 +1014,12 @@ export const CommunityHubUpgraded: React.FC<CommunityHubUpgradedProps> = ({ onNa
                     </div>
                     <p className="text-white font-medium mb-1">Level {state.level} Trader</p>
                     <p className="text-xs text-gray-400 mb-3">{state.myXP} / {(state.level) * 1000} XP</p>
-                    <Progress value={(state.myXP % 1000) / 10} className="h-3 mb-3 xp-progress" />
+                    <div className="w-full mb-3">
+                      <Progress
+                        value={(state.myXP % 1000) / 10}
+                        className="h-3 w-full bg-gray-700/50"
+                      />
+                    </div>
                     <p className="text-xs text-purple-300 font-medium">
                       🔥 {(state.level * 1000) - state.myXP} XP to next level!
                     </p>
