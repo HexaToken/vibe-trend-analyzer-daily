@@ -549,26 +549,29 @@ export const LiveChatRooms: React.FC = () => {
               <div className="space-y-4">
                 
                 {/* Room Metrics */}
-                <Card className="bg-[#10162A] border-gray-700/30">
+                <Card className="bg-[var(--panel)] border-gray-700/30 shadow-[var(--shadow)]">
                   <CardHeader className="pb-3">
-                    <CardTitle className="text-lg text-[#E7ECF4]">Room Metrics</CardTitle>
+                    <CardTitle className="text-[18px] text-[var(--text)] font-bold">Room Metrics</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-3">
+                  <CardContent className="space-y-4">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-[#8EA0B6]">Online now</span>
-                      <span className="text-sm font-semibold text-[#E7ECF4]">{selectedRoom.onlineCount}</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-[#8EA0B6]">Msgs last hour</span>
-                      <span className="text-sm font-semibold text-[#E7ECF4]">247</span>
+                      <span className="text-[14px] text-[var(--muted)] font-medium">Online now</span>
+                      <span className="text-[15px] font-bold text-[var(--text)]">{selectedRoom.onlineCount}</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-[#8EA0B6]">Trend vs. daily avg</span>
-                      <span className="text-sm font-semibold text-green-400">+32%</span>
+                      <span className="text-[14px] text-[var(--muted)] font-medium">Msgs last hour</span>
+                      <span className="text-[15px] font-bold text-[var(--text)]">247</span>
                     </div>
-                    <div className="h-16 bg-[#141A2B] rounded-lg flex items-center justify-center">
-                      <Activity className="h-6 w-6 text-[#7FD1FF]" />
+                    <div className="flex justify-between items-center">
+                      <span className="text-[14px] text-[var(--muted)] font-medium">Trend vs. daily avg</span>
+                      <div className="flex items-center gap-1">
+                        <TrendingUp className="h-3 w-3 text-[var(--success)]" />
+                        <span className="text-[15px] font-bold text-[var(--success)]">+32%</span>
+                      </div>
                     </div>
+                    <button className="w-full h-16 bg-[var(--panel-soft)] rounded-lg flex items-center justify-center hover:bg-[var(--panel-soft)]/80 transition-colors cursor-pointer group">
+                      <Activity className="h-6 w-6 text-[var(--accent)] group-hover:scale-110 transition-transform" />
+                    </button>
                   </CardContent>
                 </Card>
 
