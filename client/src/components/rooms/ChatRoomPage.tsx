@@ -44,6 +44,7 @@ export const ChatRoomPage: React.FC<ChatRoomPageProps> = ({
   const [sentiment, setSentiment] = useState<string>("neutral");
   const [messageBody, setMessageBody] = useState<string>("");
   const [showRules, setShowRules] = useState<boolean>(false);
+  const [showAuthModal, setShowAuthModal] = useState<boolean>(false);
 
   // Mock data for preview and feed
   const [previewFeed] = useState<Message[]>([
