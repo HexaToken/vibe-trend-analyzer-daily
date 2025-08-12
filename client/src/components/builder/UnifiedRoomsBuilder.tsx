@@ -236,8 +236,122 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
     setNewMessage('');
   };
 
-  // Handle room joining
-  const handleJoinRoom = (room: Room) => {
+  // Create detailed room data for the detail panel
+  const createRoomDetailData = (room: Room) => {
+    const categoryColors = {
+      general: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
+      stocks: 'bg-green-500/20 text-green-300 border-green-500/30',
+      crypto: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
+      options: 'bg-orange-500/20 text-orange-300 border-orange-500/30',
+      vip: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30'
+    };
+
+    return {
+      id: room.id,
+      name: room.name,
+      icon: room.icon,
+      tagline: getTaglineForRoom(room),
+      category: room.type.charAt(0).toUpperCase() + room.type.slice(1),
+      categoryColor: categoryColors[room.type],
+      membersOnline: room.membersOnline,
+      totalMembers: room.membersOnline + Math.floor(Math.random() * 500) + 100,
+      messagesToday: room.msgsPerHr * 8 + Math.floor(Math.random() * 100),
+      activityTrend: Math.floor(Math.random() * 40) - 20,
+      sentiment: {
+        type: room.sentimentLabel.toLowerCase() as 'bullish' | 'bearish' | 'neutral',
+        percentage: room.sentimentPct
+      },
+      isJoined: Math.random() > 0.5, // Random join status for demo
+      pinnedMessage: room.pinnedCount > 0 ? {
+        id: 'pin-1',
+        author: 'TradingMod',
+        content: 'Welcome to the room! Please keep discussions relevant and follow community guidelines.',
+        timestamp: '1h ago'
+      } : undefined,
+      recentMessages: [
+        {
+          id: 'msg-1',
+          author: { name: 'AlphaTrader', avatar: '/api/placeholder/32/32' },
+          content: room.type === 'crypto' ? 'BTC looking strong above 50k resistance 🚀' : 'SPY showing bullish momentum into close',
+          timestamp: '2m ago',
+          hasMedia: Math.random() > 0.7,
+          mediaThumbnail: '/api/placeholder/60/40'
+        },
+        {
+          id: 'msg-2',
+          author: { name: 'MarketWatcher', avatar: '/api/placeholder/32/32' },
+          content: 'Volume spike noticed in tech sector. Thoughts?',
+          timestamp: '5m ago'
+        },
+        {
+          id: 'msg-3',
+          author: { name: 'OptionsPro', avatar: '/api/placeholder/32/32' },
+          content: 'IV crush might be coming after earnings. Be careful with premium.',
+          timestamp: '8m ago'
+        },
+        {
+          id: 'msg-4',
+          author: { name: 'DayTrader99', avatar: '/api/placeholder/32/32' },
+          content: 'Setting alerts for key levels. Risk management is everything.',
+          timestamp: '12m ago'
+        }
+      ],
+      topContributors: [
+        { id: '1', name: 'AlphaTrader', avatar: '/api/placeholder/32/32', messageCount: 47 },
+        { id: '2', name: 'MarketWatcher', avatar: '/api/placeholder/32/32', messageCount: 32 },
+        { id: '3', name: 'OptionsPro', avatar: '/api/placeholder/32/32', messageCount: 28 },
+        { id: '4', name: 'TechAnalyst', avatar: '/api/placeholder/32/32', messageCount: 19 },
+        { id: '5', name: 'CryptoKing', avatar: '/api/placeholder/32/32', messageCount: 15 }
+      ],
+      tags: getTagsForRoom(room)
+    };
+  };
+
+  const getTaglineForRoom = (room: Room) => {
+    switch (room.type) {
+      case 'general': return 'Open discussions on market trends and trading strategies';
+      case 'stocks': return 'Real-time discussion on equity markets and stock analysis';
+      case 'crypto': return 'Cryptocurrency trading, news, and market movements';
+      case 'options': return 'Options strategies, volatility analysis, and derivatives';
+      case 'vip': return 'Exclusive discussions for premium members only';
+      default: return 'Join the conversation with fellow traders';
+    }
+  };
+
+  const getTagsForRoom = (room: Room) => {
+    const tagMap = {
+      general: ['trading', 'market', 'analysis'],
+      stocks: ['SPY', 'QQQ', 'earnings', 'dividends'],
+      crypto: ['bitcoin', 'ethereum', 'defi', 'altcoins'],
+      options: ['calls', 'puts', 'volatility', 'theta'],
+      vip: ['premium', 'exclusive', 'analysis']
+    };
+    return tagMap[room.type] || [];
+  };
+
+  // Handle showing room detail panel
+  const handleShowRoomDetail = (room: Room) => {
+    setState(prev => ({
+      ...prev,
+      showDetailPanel: true,
+      detailPanelRoomId: room.id
+    }));
+  };
+
+  // Handle closing room detail panel
+  const handleCloseDetailPanel = () => {
+    setState(prev => ({
+      ...prev,
+      showDetailPanel: false,
+      detailPanelRoomId: null
+    }));
+  };
+
+  // Handle room joining from detail panel
+  const handleJoinRoomFromDetail = (roomId: string) => {
+    const room = state.rooms.find(r => r.id === roomId);
+    if (!room) return;
+
     if (room.isVIP && !user?.isPremium) {
       alert('VIP room access requires Pro membership. Please upgrade to continue.');
       return;
@@ -248,8 +362,22 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
       return;
     }
 
+    // Close detail panel and open chat
+    handleCloseDetailPanel();
     setShowChatInterface(true);
     setState(prev => ({ ...prev, selectedRoomId: room.id }));
+  };
+
+  // Handle opening room from detail panel
+  const handleOpenRoomFromDetail = (roomId: string) => {
+    handleCloseDetailPanel();
+    setShowChatInterface(true);
+    setState(prev => ({ ...prev, selectedRoomId: roomId }));
+  };
+
+  // Handle room joining (original function, now calls detail panel)
+  const handleJoinRoom = (room: Room) => {
+    handleShowRoomDetail(room);
   };
 
   // Filter and sort rooms
