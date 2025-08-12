@@ -19,7 +19,7 @@ import { ChatSubcategory } from "./social/ChatSubcategory";
 import { LiveChatRooms } from "./social/LiveChatRooms";
 import { CommunityRooms } from "./social/CommunityRooms";
 import { PrivateRoomsContainer } from "./privateRooms/PrivateRoomsContainer";
-import { CommunityHub } from "./CommunityHub";
+import { CommunityHubUpgraded } from "./CommunityHubUpgraded";
 import { ProfileNavigationProvider } from "./social/ProfileNavigationProvider";
 import { UnifiedRoomsBuilder } from "./builder/UnifiedRoomsBuilder";
 
