@@ -134,7 +134,10 @@ export const ChatRoomPage: React.FC<ChatRoomPageProps> = ({
               <p className="text-[#7FD1FF] text-sm mb-2">
                 Preview mode: read-only. Sign in to post, react, and get alerts.
               </p>
-              <Button className="bg-[#1DD882] text-[#041311] font-bold rounded-xl hover:bg-[#1DD882]/90">
+              <Button
+                onClick={handleSignIn}
+                className="bg-[#1DD882] text-[#041311] font-bold rounded-xl hover:bg-[#1DD882]/90"
+              >
                 Sign in to Join & Chat
               </Button>
             </div>
