@@ -186,7 +186,7 @@ export const RoomDetailPanel: React.FC<RoomDetailPanelProps> = ({
                     <div className="flex items-center justify-center mb-1">
                       <MessageSquare className="h-4 w-4 text-blue-400" />
                     </div>
-                    <div className="text-lg font-bold text-white">{room.messagesTo}</div>
+                    <div className="text-lg font-bold text-white">{room.messagesToday}</div>
                     <div className="text-xs text-gray-400">Today</div>
                   </div>
                 </Card>
