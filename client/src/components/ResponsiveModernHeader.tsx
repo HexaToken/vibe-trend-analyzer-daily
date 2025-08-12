@@ -99,6 +99,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
     { label: 'Mood', key: 'market-mood', icon: '🧠' },
     { label: 'Smart News', key: 'smart-news-feed', icon: '🤖' },
     { label: 'TradeHub', key: 'tradehub', icon: '💼' },
+    { label: 'Unified Rooms', key: 'unified-rooms', icon: '🏠' },
   ];
 
 
