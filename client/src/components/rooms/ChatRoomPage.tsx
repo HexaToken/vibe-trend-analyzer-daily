@@ -282,6 +282,13 @@ export const ChatRoomPage: React.FC<ChatRoomPageProps> = ({
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        defaultMode="login"
+      />
     </div>
   );
 };
