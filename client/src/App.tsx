@@ -221,6 +221,8 @@ const AppContent = () => {
         return <RoomDetailPanelDemo />;
       case "builder-chat-room":
         return <BuilderChatRoom onBack={() => setActiveSection("community")} />;
+      case "enhanced-sentiment-feed":
+        return <EnhancedSentimentFeed onNavigateToProfile={(userId) => handleNavigation("trader-profile", userId)} />;
 
       // Finance Section Routes
       case "finance":
