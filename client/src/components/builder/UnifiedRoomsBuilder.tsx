@@ -499,8 +499,15 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
     const room = state.rooms.find(r => r.id === state.chatRoomId);
     if (room) {
       return (
-        <ChatRoomPage
-          room={createChatRoomData(room)}
+        <EnhancedChatRoomPage
+          room={{
+            ...createChatRoomData(room),
+            price: 192.45,
+            priceChange: 2.3,
+            marketStatus: "Open" as const,
+            isJoined: Math.random() > 0.5,
+            isFavorited: Math.random() > 0.7
+          }}
           onBack={handleBackFromChatRoom}
           authed={isAuthenticated}
         />
