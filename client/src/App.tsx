@@ -71,6 +71,7 @@ import { Footer } from "@/components/Footer";
 import SmartNewsFeedPage from "@/components/SmartNewsFeedPage";
 import { RoomDetailPanelDemo } from "@/components/examples/RoomDetailPanelDemo";
 import { BuilderChatRoom } from "@/components/rooms/BuilderChatRoom";
+import { EnhancedSentimentFeed } from "@/components/EnhancedSentimentFeed";
 
 const queryClient = new QueryClient();
 
