@@ -342,6 +342,7 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
   const handleShowRoomDetail = (room: Room) => {
     setState(prev => ({
       ...prev,
+      selectedRoomId: room.id,
       showDetailPanel: true,
       detailPanelRoomId: room.id
     }));
