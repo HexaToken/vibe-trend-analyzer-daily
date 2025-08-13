@@ -708,6 +708,20 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
           </Card>
         </div>
 
+        {/* Clear Filter Button */}
+        {sentimentFilter && (
+          <div className="mb-4 text-center">
+            <Button
+              onClick={() => setSentimentFilter(null)}
+              variant="outline"
+              size="sm"
+              className="bg-slate-700/50 text-slate-300 border-slate-600/50 hover:bg-slate-600/50 rounded-full"
+            >
+              Clear {sentimentFilter} filter
+            </Button>
+          </div>
+        )}
+
         {/* Feed Controls */}
         <div className="sticky top-4 z-50 mb-6">
           <Card className="bg-slate-800/90 backdrop-blur-xl border-slate-700/50">
