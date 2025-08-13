@@ -352,6 +352,7 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
   const handleCloseDetailPanel = () => {
     setState(prev => ({
       ...prev,
+      selectedRoomId: null,
       showDetailPanel: false,
       detailPanelRoomId: null
     }));
