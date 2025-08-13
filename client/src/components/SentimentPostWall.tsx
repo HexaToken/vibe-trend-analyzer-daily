@@ -681,10 +681,17 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
               {sentimentFilter === 'Bullish' && <div className="text-xs text-green-400 mt-1">Filtering active</div>}
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-r from-red-900/50 to-red-800/50 border-red-700/50">
+          <Card
+            className={cn(
+              "cursor-pointer transition-all hover:scale-105 bg-gradient-to-r from-red-900/50 to-red-800/50 border-red-700/50",
+              sentimentFilter === 'Bearish' && "ring-2 ring-red-400 border-red-500/70"
+            )}
+            onClick={() => setSentimentFilter(sentimentFilter === 'Bearish' ? null : 'Bearish')}
+          >
             <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-red-400">18%</div>
+              <div className="text-2xl font-bold text-red-400">{bearishPct}%</div>
               <div className="text-sm text-red-300">Bearish Sentiment</div>
+              {sentimentFilter === 'Bearish' && <div className="text-xs text-red-400 mt-1">Filtering active</div>}
             </CardContent>
           </Card>
           <Card className="bg-gradient-to-r from-blue-900/50 to-blue-800/50 border-blue-700/50">
