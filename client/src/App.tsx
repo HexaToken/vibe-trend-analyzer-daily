@@ -32,7 +32,7 @@ import { NeonSenseCryptoDashboard } from "@/components/crypto/NeonSenseCryptoDas
 import { AdvancedTradingChart } from "@/components/finance/AdvancedTradingChart";
 import { EarningsCalendar } from "@/components/finance/EarningsCalendar";
 import { AdvancedChartsPro } from "@/components/finance/AdvancedChartsPro";
-import { TrendingHub } from "@/components/finance/TrendingHub";
+import TrendingHub from "@/components/finance/TrendingHub";
 import TradeJournalClassic from "@/components/TradeJournalClassic";
 import CommunitySentimentPolls from "@/components/CommunitySentimentPolls";
 
