@@ -205,7 +205,7 @@ const GeoSentimentMap: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* CSS for smooth tooltip animations */}
-      <style jsx>{`
+      <style>{`
         @keyframes fadeIn {
           from {
             opacity: 0;
