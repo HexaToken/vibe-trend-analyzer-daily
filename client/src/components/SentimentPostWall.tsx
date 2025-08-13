@@ -984,8 +984,18 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
         <div className="space-y-6">
           {sortedPosts.length > 0 ? (
             sortedPosts.map((post) => (
-              <div key={post.id} className="transform transition-all duration-300 hover:scale-[1.01]">
-                <div className="space-y-4">
+              <div
+                key={post.id}
+                className={cn(
+                  "transform transition-all duration-300 hover:scale-[1.01]",
+                  viewDensity === 'compact' ? "mb-2" : "mb-4"
+                )}
+                style={{
+                  padding: viewDensity === 'compact' ? '8px' : '16px',
+                  marginBottom: viewDensity === 'compact' ? '8px' : '12px'
+                }}
+              >
+                <div className={cn("space-y-4", viewDensity === 'compact' && "space-y-2")}>
                   <PostCard
                     post={post}
                     onLike={handleLike}
