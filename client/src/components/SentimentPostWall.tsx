@@ -313,6 +313,15 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
   const [filter, setFilter] = useState<PostFilter>(initialFilter || {});
   const [searchQuery, setSearchQuery] = useState("");
   const [isRefreshing, setIsRefreshing] = useState(false);
+
+  // Builder.io enhanced features state
+  const [sentimentFilter, setSentimentFilter] = useState<string | null>(null);
+  const [viewDensity, setViewDensity] = useState<"comfortable" | "compact">("comfortable");
+  const [showComposerModal, setShowComposerModal] = useState(false);
+  const [composeSentiment, setComposeSentiment] = useState("neutral");
+  const [composeBody, setComposeBody] = useState("");
+  const [bullishPct] = useState(73);
+  const [bearishPct] = useState(18);
   
   // Post Composer State
   const [composerData, setComposerData] = useState<PostComposerData>({
