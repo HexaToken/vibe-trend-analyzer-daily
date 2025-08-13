@@ -32,7 +32,7 @@ import { NeonSenseCryptoDashboard } from "@/components/crypto/NeonSenseCryptoDas
 import { AdvancedTradingChart } from "@/components/finance/AdvancedTradingChart";
 import { EarningsCalendar } from "@/components/finance/EarningsCalendar";
 import { AdvancedChartsPro } from "@/components/finance/AdvancedChartsPro";
-import { TrendingHub } from "@/components/finance/TrendingHub";
+import TrendingHub from "@/components/finance/TrendingHub";
 import TradeJournalClassic from "@/components/TradeJournalClassic";
 import CommunitySentimentPolls from "@/components/CommunitySentimentPolls";
 
@@ -69,6 +69,9 @@ import { TraderProfile } from "@/components/profile/TraderProfile";
 import { ChatSubcategory } from "@/components/social/ChatSubcategory";
 import { Footer } from "@/components/Footer";
 import SmartNewsFeedPage from "@/components/SmartNewsFeedPage";
+import { RoomDetailPanelDemo } from "@/components/examples/RoomDetailPanelDemo";
+import { BuilderChatRoom } from "@/components/rooms/BuilderChatRoom";
+import { EnhancedSentimentFeed } from "@/components/EnhancedSentimentFeed";
 
 const queryClient = new QueryClient();
 
@@ -214,6 +217,12 @@ const AppContent = () => {
         return <FuturisticChatDemo />;
       case "unified-rooms":
         return <UnifiedRoomsDemo />;
+      case "room-detail-demo":
+        return <RoomDetailPanelDemo />;
+      case "builder-chat-room":
+        return <BuilderChatRoom onBack={() => setActiveSection("community")} />;
+      case "enhanced-sentiment-feed":
+        return <EnhancedSentimentFeed onNavigateToProfile={(userId) => handleNavigation("trader-profile", userId)} />;
 
       // Finance Section Routes
       case "finance":

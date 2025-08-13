@@ -665,68 +665,136 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 </div>
               </TabsContent>
 
-              {/* Financial Reports Tab - Old Version */}
+              {/* Financial Reports Tab */}
               <TabsContent value="financial-reports" className="mt-8">
-                {/* Market Analysis - Old Version with Large Sentiment Circle */}
-                <div className="text-center mb-16 relative">
-                  {/* Dark theme overlay container - ensures this section stays dark */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-slate-900/95 to-purple-900/95 rounded-3xl -mx-6 -my-6 backdrop-blur-sm" />
-
-                  <div className="relative z-10 py-12">
-                    {/* Large Mood Score with Animated Character */}
-                    <div className="relative inline-block mb-8">
-                      <div className="w-80 h-80 rounded-full relative">
-                        {/* Animated gradient ring - rotates around the content */}
-                        <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${getSentimentGradient(currentSentiment)} p-2 animate-spin-slow`}>
-                          <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-900/90 to-purple-900/90 backdrop-blur-sm" />
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                  {/* Smart Earnings Summary */}
+                  <Card className="bg-gradient-to-br from-purple-900/80 to-slate-900/80 border-purple-500/30 backdrop-blur-sm">
+                    <CardHeader className="pb-4">
+                      <div className="flex items-center gap-2">
+                        <div className="w-6 h-6 bg-purple-500 rounded-md flex items-center justify-center">
+                          <span className="text-white text-sm">🧠</span>
                         </div>
-
-                        {/* Fixed content container - does not rotate */}
-                        <div className="absolute inset-2 flex items-center justify-center">
+                        <CardTitle className="text-white text-lg">Smart Earnings Summary</CardTitle>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <div className="text-sm text-purple-200 font-medium">
+                          NVDA Q3 2024
+                        </div>
+                        <p className="text-gray-300 text-sm leading-relaxed">
+                          NVIDIA exceeded expectations with EPS of $5.16 vs $4.64 expected, driven by strong
+                          data center revenue growth of 279% YoY. Management raised guidance significantly,
+                          citing continued AI demand momentum.
+                        </p>
+                        <div className="grid grid-cols-3 gap-4 pt-2">
                           <div className="text-center">
-                            {/* Mood Emoji - Fixed in place */}
-                            <div className="text-5xl mb-4 animate-bounce">
-                              {getSentimentEmoji(currentSentiment)}
-                            </div>
-                            {/* Score */}
-                            <div className="text-8xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mb-2">
-                              {moodScore.overall}
-                            </div>
-                            {/* Dynamic Label */}
-                            <div className="text-xl font-bold text-white mb-1">
-                              {getSentimentLabel(currentSentiment)}
-                            </div>
-                            <div className="text-sm text-purple-300 uppercase tracking-wider">
-                              AI SENTIMENT SCORE
-                            </div>
+                            <div className="text-green-400 font-bold text-lg">$5.16</div>
+                            <div className="text-xs text-gray-400">EPS Actual</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="text-gray-300 font-bold text-lg">$4.64</div>
+                            <div className="text-xs text-gray-400">EPS Expected</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="text-green-400 font-bold text-lg">+11.2%</div>
+                            <div className="text-xs text-gray-400">Beat</div>
                           </div>
                         </div>
+                      </div>
+                    </CardContent>
+                  </Card>
 
-                        {/* Multiple pulse rings with sentiment-based colors */}
-                        <div className={`absolute inset-0 rounded-full border-2 animate-ping ${
-                          currentSentiment === 'positive' ? 'border-emerald-400/40' :
-                          currentSentiment === 'neutral' ? 'border-gray-400/40' :
-                          'border-red-400/40'
-                        }`} />
-                        <div className={`absolute inset-2 rounded-full border animate-ping delay-75 ${
-                          currentSentiment === 'positive' ? 'border-green-400/30' :
-                          currentSentiment === 'neutral' ? 'border-slate-400/30' :
-                          'border-rose-400/30'
-                        }`} />
-                        <div className={`absolute inset-4 rounded-full border animate-ping delay-150 ${
-                          currentSentiment === 'positive' ? 'border-cyan-400/20' :
-                          currentSentiment === 'neutral' ? 'border-purple-400/20' :
-                          'border-purple-400/20'
-                        }`} />
+                  {/* Earnings Snapshot */}
+                  <Card className="bg-gradient-to-br from-slate-900/80 to-purple-900/80 border-slate-500/30 backdrop-blur-sm">
+                    <CardHeader className="pb-4">
+                      <div className="flex items-center gap-2">
+                        <div className="w-6 h-6 bg-blue-500 rounded-md flex items-center justify-center">
+                          <span className="text-white text-sm">📊</span>
+                        </div>
+                        <CardTitle className="text-white text-lg">Earnings Snapshot</CardTitle>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        {[
+                          { symbol: 'AAPL', eps: '+2.1%', rev: '+5.4%', status: 'Raised', statusColor: 'text-green-400' },
+                          { symbol: 'GOOGL', eps: '-1.8%', rev: '+1.2%', status: 'Maintained', statusColor: 'text-gray-400' },
+                          { symbol: 'MSFT', eps: '+4.3%', rev: '+7.1%', status: 'Raised', statusColor: 'text-green-400' },
+                          { symbol: 'TSLA', eps: '-3.4%', rev: '-2.1%', status: 'Lowered', statusColor: 'text-red-400' }
+                        ].map((item) => (
+                          <div key={item.symbol} className="flex items-center justify-between p-3 bg-slate-800/40 rounded-lg">
+                            <div className="font-bold text-white">{item.symbol}</div>
+                            <div className="flex items-center gap-4 text-sm">
+                              <div className="text-center">
+                                <div className={item.eps.startsWith('+') ? 'text-green-400' : 'text-red-400'}>
+                                  EPS {item.eps}
+                                </div>
+                              </div>
+                              <div className="text-center">
+                                <div className={item.rev.startsWith('+') ? 'text-green-400' : 'text-red-400'}>
+                                  Rev {item.rev}
+                                </div>
+                              </div>
+                              <div className={`text-center px-2 py-1 rounded text-xs ${item.statusColor}`}>
+                                {item.status}
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Mood vs. Earnings Timeline */}
+                <Card className="bg-gradient-to-br from-slate-900/80 to-purple-900/80 border-slate-500/30 backdrop-blur-sm">
+                  <CardHeader className="pb-4">
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 bg-indigo-500 rounded-md flex items-center justify-center">
+                        <span className="text-white text-sm">📈</span>
+                      </div>
+                      <CardTitle className="text-white text-lg">Mood vs. Earnings Timeline</CardTitle>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex justify-between items-end h-40 px-4">
+                      {[
+                        { quarter: 'Q1', mood: 65, earnings: 85, moodColor: 'bg-green-500', earningsColor: 'bg-blue-500' },
+                        { quarter: 'Q2', mood: 72, earnings: 90, moodColor: 'bg-green-500', earningsColor: 'bg-green-500' },
+                        { quarter: 'Q3', mood: 58, earnings: 75, moodColor: 'bg-orange-500', earningsColor: 'bg-orange-500' },
+                        { quarter: 'Q4', mood: 78, earnings: 95, moodColor: 'bg-green-500', earningsColor: 'bg-green-500' },
+                        { quarter: 'Q1', mood: 68, earnings: 82, moodColor: 'bg-gray-500', earningsColor: 'bg-gray-500' }
+                      ].map((item, index) => (
+                        <div key={index} className="flex flex-col items-center gap-2">
+                          <div className="flex items-end gap-1 h-24">
+                            <div
+                              className={`w-3 ${item.moodColor} rounded-t`}
+                              style={{ height: `${item.mood}%` }}
+                            />
+                            <div
+                              className={`w-3 ${item.earningsColor} rounded-t`}
+                              style={{ height: `${item.earnings}%` }}
+                            />
+                          </div>
+                          <div className="text-xs text-gray-400">{item.quarter}</div>
+                          <div className="text-xs text-white font-medium">{item.mood}</div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="flex justify-center gap-6 mt-4 pt-4 border-t border-slate-700/50">
+                      <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 bg-green-500 rounded"></div>
+                        <span className="text-xs text-gray-400">Mood</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 bg-blue-500 rounded"></div>
+                        <span className="text-xs text-gray-400">Miss</span>
                       </div>
                     </div>
-
-                    {/* Subtitle - Always dark theme text */}
-                    <p className="text-xl text-gray-200 max-w-3xl mx-auto mb-12 leading-relaxed">
-                      Advanced AI-powered sentiment analysis with intelligent insights and mood breakdown
-                    </p>
-                  </div>
-                </div>
+                  </CardContent>
+                </Card>
               </TabsContent>
 
               {/* Geo-Sentiment Tab */}

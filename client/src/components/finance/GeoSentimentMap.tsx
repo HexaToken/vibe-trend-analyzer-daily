@@ -160,6 +160,15 @@ const GeoSentimentMap: React.FC = () => {
   const [selectedCountry, setSelectedCountry] = useState<CountrySentiment | null>(null);
   const [hoveredCountry, setHoveredCountry] = useState<CountrySentiment | null>(null);
 
+  // Debounced hover handlers to prevent glitches
+  const handleMouseEnter = (country: CountrySentiment) => {
+    setHoveredCountry(country);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredCountry(null);
+  };
+
   // Filter and sort data based on current filters
   const filteredData = useMemo(() => {
     return mockGeoSentimentData
@@ -195,6 +204,30 @@ const GeoSentimentMap: React.FC = () => {
 
   return (
     <div className="space-y-6">
+      {/* CSS for smooth tooltip animations */}
+      <style>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+          }
+        }
+
+        @keyframes fadeOut {
+          from {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+          }
+          to {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.95);
+          }
+        }
+      `}</style>
       {/* Header and Filters */}
       <div className="flex flex-col lg:flex-row gap-4 justify-between items-start lg:items-center">
         <div>
@@ -307,8 +340,8 @@ const GeoSentimentMap: React.FC = () => {
                         }, transparent)`
                       }}
                       onClick={() => setSelectedCountry(country)}
-                      onMouseEnter={() => setHoveredCountry(country)}
-                      onMouseLeave={() => setHoveredCountry(null)}
+                      onMouseEnter={() => handleMouseEnter(country)}
+                      onMouseLeave={handleMouseLeave}
                     >
                       <div className="flex items-center justify-between mb-2">
                         <span className="font-medium text-sm">{country.country}</span>
@@ -338,22 +371,31 @@ const GeoSentimentMap: React.FC = () => {
                   ))}
                 </div>
 
-                {/* Tooltip for hovered country */}
+                {/* Tooltip for hovered country - Fixed positioning */}
                 {hoveredCountry && (
-                  <div className="absolute top-4 right-4 bg-background border rounded-lg p-4 shadow-lg min-w-[280px] z-10">
+                  <div
+                    className="fixed bg-background/95 backdrop-blur-sm border rounded-lg p-4 shadow-xl min-w-[280px] max-w-[320px] pointer-events-none transition-all duration-200 ease-out"
+                    style={{
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                      zIndex: 1000,
+                      animation: 'fadeIn 200ms ease-out'
+                    }}
+                  >
                     <div className="flex items-center justify-between mb-3">
                       <h3 className="font-semibold">{hoveredCountry.country}</h3>
                       <Badge className={`${getSentimentColor(hoveredCountry.moodScore)} text-white`}>
                         {getSentimentLabel(hoveredCountry.moodScore)}
                       </Badge>
                     </div>
-                    
+
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span>Mood Score:</span>
                         <span className="font-medium">{hoveredCountry.moodScore}%</span>
                       </div>
-                      
+
                       <div className="grid grid-cols-3 gap-2 text-xs">
                         <div className="text-center">
                           <div className="text-green-500 font-medium">{hoveredCountry.bullish}%</div>
@@ -368,16 +410,16 @@ const GeoSentimentMap: React.FC = () => {
                           <div className="text-muted-foreground">Bearish</div>
                         </div>
                       </div>
-                      
+
                       <Separator />
-                      
+
                       <div className="flex justify-between">
                         <span>Market Return:</span>
                         <span className={`font-medium ${hoveredCountry.marketReturn >= 0 ? 'text-green-500' : 'text-red-500'}`}>
                           {hoveredCountry.marketReturn >= 0 ? '+' : ''}{hoveredCountry.marketReturn}%
                         </span>
                       </div>
-                      
+
                       <div>
                         <span className="text-muted-foreground">Top Tickers:</span>
                         <div className="flex gap-1 mt-1">

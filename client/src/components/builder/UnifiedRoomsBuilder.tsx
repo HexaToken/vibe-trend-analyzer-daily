@@ -3,8 +3,8 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { Search, Users, MessageSquare, Star, Shield, TrendingUp, Hash, Clock, Target, Lock, Send, Smile, Paperclip } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
-import { RoomDetailPanelFixed } from '@/components/rooms/RoomDetailPanelFixed';
-import { ChatRoomPage } from '@/components/rooms/ChatRoomPage';
+import { RoomDetailPanel } from '@/components/rooms/RoomDetailPanel';
+import { EnhancedChatRoomPage } from '@/components/rooms/EnhancedChatRoomPage';
 
 // CSS Variables for the dark mode theme
 const cssVars = `
@@ -342,6 +342,7 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
   const handleShowRoomDetail = (room: Room) => {
     setState(prev => ({
       ...prev,
+      selectedRoomId: room.id,
       showDetailPanel: true,
       detailPanelRoomId: room.id
     }));
@@ -351,6 +352,7 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
   const handleCloseDetailPanel = () => {
     setState(prev => ({
       ...prev,
+      selectedRoomId: null,
       showDetailPanel: false,
       detailPanelRoomId: null
     }));
@@ -361,13 +363,13 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
     const room = state.rooms.find(r => r.id === roomId);
     if (!room) return;
 
-    if (room.isVIP && !user?.isPremium) {
-      alert('VIP room access requires Pro membership. Please upgrade to continue.');
+    if (!isAuthenticated) {
+      alert('Please sign in to join rooms and start chatting.');
       return;
     }
 
-    if (!isAuthenticated) {
-      alert('Please sign in to join rooms.');
+    if (room.isVIP && !user?.isPremium) {
+      alert('VIP room access requires Pro membership. Please upgrade to continue.');
       return;
     }
 
@@ -382,12 +384,23 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
 
   // Handle opening room from detail panel
   const handleOpenRoomFromDetail = (roomId: string) => {
+    if (!isAuthenticated) {
+      alert('Please sign in to join rooms and start chatting.');
+      return;
+    }
+
     handleCloseDetailPanel();
     setState(prev => ({
       ...prev,
       showChatRoom: true,
       chatRoomId: roomId
     }));
+  };
+
+  // Handle sign in action
+  const handleSignIn = () => {
+    alert('Sign in functionality would redirect to login page.');
+    // In a real app, this would trigger the authentication flow
   };
 
   // Handle back from chat room
@@ -465,54 +478,7 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
     }
   };
 
-  // Authentication check component
-  if (!isAuthenticated) {
-    return (
-      <>
-        <style>{cssVars}</style>
-        <div className="unified-rooms-builder" style={{
-          minHeight: '60vh',
-          background: 'var(--bg)',
-          color: 'var(--text)',
-          padding: '48px 24px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}>
-          <div style={{ textAlign: 'center', maxWidth: '400px' }}>
-            <Users size={64} color="var(--muted)" style={{ margin: '0 auto 24px' }} />
-            <h3 style={{
-              fontSize: '24px',
-              fontWeight: 'bold',
-              marginBottom: '12px',
-              color: 'var(--text)'
-            }}>
-              Join the Community
-            </h3>
-            <p style={{
-              color: 'var(--muted)',
-              marginBottom: '24px',
-              lineHeight: '1.6'
-            }}>
-              Sign in to access community rooms and chat with other traders.
-            </p>
-            <button style={{
-              background: 'var(--accent)',
-              color: '#000',
-              border: 'none',
-              borderRadius: '8px',
-              padding: '12px 24px',
-              fontWeight: '600',
-              cursor: 'pointer',
-              fontSize: '16px'
-            }}>
-              Sign In to Continue
-            </button>
-          </div>
-        </div>
-      </>
-    );
-  }
+  // Note: Removed authentication barrier to allow guest preview access
 
   // Create room data for chat room
   const createChatRoomData = (room: Room) => ({
@@ -535,9 +501,17 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
     const room = state.rooms.find(r => r.id === state.chatRoomId);
     if (room) {
       return (
-        <ChatRoomPage
-          room={createChatRoomData(room)}
+        <EnhancedChatRoomPage
+          room={{
+            ...createChatRoomData(room),
+            price: 192.45,
+            priceChange: 2.3,
+            marketStatus: "Open" as const,
+            isJoined: Math.random() > 0.5,
+            isFavorited: Math.random() > 0.7
+          }}
           onBack={handleBackFromChatRoom}
+          authed={isAuthenticated}
         />
       );
     }
@@ -671,17 +645,26 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
             </div>
           </div>
 
-          {/* Content Area - Builder Columns */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: state.showDetailPanel
-              ? 'minmax(0, 1fr) 360px'
-              : 'minmax(0, 2fr) minmax(0, 1fr)',
+          {/* Content Area - Builder Flex Layout */}
+          <div className="mobile-stack" style={{
+            display: 'flex',
+            width: '100%',
             gap: '24px',
             position: 'relative'
           }}>
+            <style>{`
+              @media (max-width: 768px) {
+                .mobile-stack {
+                  flex-direction: column !important;
+                }
+              }
+            `}</style>
             {/* Room List - Builder Repeater */}
-            <div>
+            <div style={{
+              flexBasis: state.selectedRoomId ? '50%' : '70%',
+              transition: 'flex-basis 0.3s ease-in-out',
+              minWidth: '0'
+            }}>
               <div style={{
                 height: '600px',
                 overflowY: 'auto',
@@ -817,87 +800,48 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
               </div>
             </div>
 
-            {/* Fixed Room Detail Panel or Preview */}
-            {state.showDetailPanel && state.detailPanelRoomId ? (
-              <div style={{
-                background: '#10162A',
-                borderLeft: '1px solid rgba(255, 255, 255, 0.06)',
-                height: '600px',
-                padding: '20px',
-                borderRadius: '16px'
-              }}>
-                <div style={{ color: 'white' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
-                    <h2 style={{ fontSize: '20px', fontWeight: 'bold', margin: 0 }}>
-                      {state.rooms.find(r => r.id === state.detailPanelRoomId)?.name || 'Room Details'}
-                    </h2>
-                    <button
-                      onClick={handleCloseDetailPanel}
-                      style={{
-                        background: 'none',
-                        border: 'none',
-                        color: '#999',
-                        cursor: 'pointer',
-                        fontSize: '18px'
-                      }}
-                    >
-                      ✕
-                    </button>
-                  </div>
-
-                  <div style={{ marginBottom: '20px' }}>
-                    <h3 style={{ fontSize: '14px', color: '#999', marginBottom: '10px' }}>Stats</h3>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}>
-                      <div style={{ background: '#141A2B', padding: '15px', borderRadius: '8px', textAlign: 'center' }}>
-                        <div style={{ fontSize: '16px', fontWeight: 'bold' }}>142</div>
-                        <div style={{ fontSize: '12px', color: '#999' }}>Online</div>
-                      </div>
-                      <div style={{ background: '#141A2B', padding: '15px', borderRadius: '8px', textAlign: 'center' }}>
-                        <div style={{ fontSize: '16px', fontWeight: 'bold' }}>89</div>
-                        <div style={{ fontSize: '12px', color: '#999' }}>Today</div>
-                      </div>
-                      <div style={{ background: '#141A2B', padding: '15px', borderRadius: '8px', textAlign: 'center' }}>
-                        <div style={{ fontSize: '16px', fontWeight: 'bold' }}>+12%</div>
-                        <div style={{ fontSize: '12px', color: '#999' }}>Activity</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div style={{ marginBottom: '20px' }}>
-                    <h3 style={{ fontSize: '14px', color: '#999', marginBottom: '10px' }}>Recent Messages</h3>
-                    <div style={{ background: '#141A2B', padding: '15px', borderRadius: '8px' }}>
-                      <div style={{ fontSize: '14px', marginBottom: '8px' }}>
-                        <strong>AlphaTrader:</strong> BTC looking strong above 50k resistance 🚀
-                      </div>
-                      <div style={{ fontSize: '14px', marginBottom: '8px' }}>
-                        <strong>MarketWatcher:</strong> Volume spike noticed in tech sector
-                      </div>
-                      <div style={{ fontSize: '14px', color: '#999' }}>
-                        <strong>OptionsPro:</strong> IV crush might be coming...
-                      </div>
-                    </div>
-                  </div>
-
-                  <button
-                    onClick={() => handleJoinRoomFromDetail(state.detailPanelRoomId!)}
-                    style={{
-                      width: '100%',
-                      padding: '15px',
-                      background: 'linear-gradient(to right, #10B981, #059669)',
-                      border: 'none',
-                      borderRadius: '12px',
-                      color: 'white',
-                      fontSize: '16px',
-                      fontWeight: 'bold',
-                      cursor: 'pointer'
+            {/* Room Detail Panel Component */}
+            <div style={{
+              flexBasis: state.selectedRoomId ? '50%' : '30%',
+              transition: 'flex-basis 0.3s ease-in-out',
+              minWidth: '0'
+            }}>
+              {state.showDetailPanel && state.detailPanelRoomId ? (
+                <div className="h-[600px]">
+                  <RoomDetailPanel
+                    isOpen={state.showDetailPanel}
+                    onClose={handleCloseDetailPanel}
+                    selectedRoomId={state.detailPanelRoomId}
+                    rooms={state.rooms.map(room => ({
+                      id: room.id,
+                      name: room.name,
+                      icon: room.icon,
+                      category: room.type.charAt(0).toUpperCase() + room.type.slice(1),
+                      description: getTaglineForRoom(room),
+                      sentiment: { label: room.sentimentLabel, pct: room.sentimentPct },
+                      online: room.membersOnline,
+                      today: room.msgsPerHr * 8 + Math.floor(Math.random() * 100),
+                      activityPct: Math.floor(Math.random() * 40) - 20,
+                      pinned: room.pinnedCount > 0 ? {
+                        user: 'TradingMod',
+                        time: '1h',
+                        text: 'Welcome to the room! Share setups. No pumping/spam.'
+                      } : undefined
+                    }))}
+                    previewMessages={{
+                      [state.detailPanelRoomId]: [
+                        { id: 1, user: 'AlphaTrader', time: '2m', text: state.rooms.find(r => r.id === state.detailPanelRoomId)?.type === 'crypto' ? 'BTC holding 50k support; buyers stepping in.' : 'Watching above 195 — breakout if volume expands 🚀' },
+                        { id: 2, user: 'MarketWatcher', time: '5m', text: state.rooms.find(r => r.id === state.detailPanelRoomId)?.type === 'crypto' ? 'ETH gas fees easing; L2 activity rising.' : 'Seeing neutral options flow; IV steady.' },
+                        { id: 3, user: 'OptionsPro', time: '9m', text: 'Debit spread idea: 195/205 calls for next week.' }
+                      ]
                     }}
-                  >
-                    🚀 Join & Start Chatting
-                  </button>
+                    authed={isAuthenticated}
+                    onSignIn={handleSignIn}
+                    onJoinRoom={handleOpenRoomFromDetail}
+                    className="h-full"
+                  />
                 </div>
-              </div>
-            ) : (
-              <div>
+              ) : (
                 <div style={{
                   background: 'var(--panel)',
                   borderRadius: '16px',
@@ -914,8 +858,8 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
                     </p>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
 
           {/* Mobile Fixed Bottom Button */}

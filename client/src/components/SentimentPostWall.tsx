@@ -28,8 +28,11 @@ import {
   Bell,
   Settings,
   RefreshCw,
+  Edit3,
+  X,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -56,6 +59,12 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { PostCard, type PostCardData } from "./social/PostCard";
 import { CommentThreadView, type CommentData } from "./community/CommentThreadView";
 import { TickerPreviewWidget, useTickerHover, TickerAwareText } from "./community/TickerPreviewWidget";
@@ -313,6 +322,15 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
   const [filter, setFilter] = useState<PostFilter>(initialFilter || {});
   const [searchQuery, setSearchQuery] = useState("");
   const [isRefreshing, setIsRefreshing] = useState(false);
+
+  // Builder.io enhanced features state
+  const [sentimentFilter, setSentimentFilter] = useState<string | null>(null);
+  const [viewDensity, setViewDensity] = useState<"comfortable" | "compact">("comfortable");
+  const [showComposerModal, setShowComposerModal] = useState(false);
+  const [composeSentiment, setComposeSentiment] = useState("neutral");
+  const [composeBody, setComposeBody] = useState("");
+  const [bullishPct] = useState(68);
+  const [bearishPct] = useState(23);
   
   // Post Composer State
   const [composerData, setComposerData] = useState<PostComposerData>({
@@ -439,15 +457,20 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
         !post.tickers.some(t => t.symbol.toLowerCase().includes(searchQuery.toLowerCase()))) {
       return false;
     }
-    
+
+    // Builder.io sentiment filter
+    if (sentimentFilter && post.sentiment !== sentimentFilter) {
+      return false;
+    }
+
     if (filter.sentiment && filter.sentiment !== "All" && post.sentiment !== filter.sentiment) {
       return false;
     }
-    
+
     if (filter.ticker && !post.tickers.some(t => t.symbol === filter.ticker)) {
       return false;
     }
-    
+
     return true;
   });
 
@@ -659,16 +682,30 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
 
         {/* Quick Stats Bar */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <Card className="bg-gradient-to-r from-green-900/50 to-green-800/50 border-green-700/50">
+          <Card
+            className={cn(
+              "cursor-pointer transition-all hover:scale-105 bg-gradient-to-r from-green-900/50 to-green-800/50 border-green-700/50",
+              sentimentFilter === 'Bullish' && "ring-2 ring-green-400 border-green-500/70"
+            )}
+            onClick={() => setSentimentFilter(sentimentFilter === 'Bullish' ? null : 'Bullish')}
+          >
             <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-green-400">73%</div>
+              <div className="text-2xl font-bold text-green-400">{bullishPct}%</div>
               <div className="text-sm text-green-300">Bullish Sentiment</div>
+              {sentimentFilter === 'Bullish' && <div className="text-xs text-green-400 mt-1">Filtering active</div>}
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-r from-red-900/50 to-red-800/50 border-red-700/50">
+          <Card
+            className={cn(
+              "cursor-pointer transition-all hover:scale-105 bg-gradient-to-r from-red-900/50 to-red-800/50 border-red-700/50",
+              sentimentFilter === 'Bearish' && "ring-2 ring-red-400 border-red-500/70"
+            )}
+            onClick={() => setSentimentFilter(sentimentFilter === 'Bearish' ? null : 'Bearish')}
+          >
             <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-red-400">18%</div>
+              <div className="text-2xl font-bold text-red-400">{bearishPct}%</div>
               <div className="text-sm text-red-300">Bearish Sentiment</div>
+              {sentimentFilter === 'Bearish' && <div className="text-xs text-red-400 mt-1">Filtering active</div>}
             </CardContent>
           </Card>
           <Card className="bg-gradient-to-r from-blue-900/50 to-blue-800/50 border-blue-700/50">
@@ -684,6 +721,20 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
             </CardContent>
           </Card>
         </div>
+
+        {/* Clear Filter Button */}
+        {sentimentFilter && (
+          <div className="mb-4 text-center">
+            <Button
+              onClick={() => setSentimentFilter(null)}
+              variant="outline"
+              size="sm"
+              className="bg-slate-700/50 text-slate-300 border-slate-600/50 hover:bg-slate-600/50 rounded-full"
+            >
+              Clear {sentimentFilter} filter
+            </Button>
+          </div>
+        )}
 
         {/* Feed Controls */}
         <div className="sticky top-4 z-50 mb-6">
@@ -716,6 +767,37 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
                   </TabsList>
 
                   <div className="flex items-center gap-3">
+                    {/* Density Toggle */}
+                    <div className="flex items-center gap-2">
+                      <span className="text-slate-400 text-sm">View:</span>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setViewDensity('comfortable')}
+                        className={cn(
+                          "px-3 py-1 text-xs",
+                          viewDensity === 'comfortable'
+                            ? "bg-slate-600 text-white border-slate-500"
+                            : "bg-slate-700 text-slate-300 border-slate-600 hover:bg-slate-600"
+                        )}
+                      >
+                        Comfortable
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setViewDensity('compact')}
+                        className={cn(
+                          "px-3 py-1 text-xs",
+                          viewDensity === 'compact'
+                            ? "bg-slate-600 text-white border-slate-500"
+                            : "bg-slate-700 text-slate-300 border-slate-600 hover:bg-slate-600"
+                        )}
+                      >
+                        Compact
+                      </Button>
+                    </div>
+
                     <Button
                       variant="outline"
                       size="sm"
@@ -911,8 +993,18 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
         <div className="space-y-6">
           {sortedPosts.length > 0 ? (
             sortedPosts.map((post) => (
-              <div key={post.id} className="transform transition-all duration-300 hover:scale-[1.01]">
-                <div className="space-y-4">
+              <div
+                key={post.id}
+                className={cn(
+                  "transform transition-all duration-300 hover:scale-[1.01]",
+                  viewDensity === 'compact' ? "mb-2" : "mb-4"
+                )}
+                style={{
+                  padding: viewDensity === 'compact' ? '8px' : '16px',
+                  marginBottom: viewDensity === 'compact' ? '8px' : '12px'
+                }}
+              >
+                <div className={cn("space-y-4", viewDensity === 'compact' && "space-y-2")}>
                   <PostCard
                     post={post}
                     onLike={handleLike}
@@ -928,6 +1020,31 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
                     onTickerLeave={hideTickerPreview}
                     showEngagementCounts={true}
                   />
+
+                  {/* Inline Reply Preview */}
+                  {post.engagement.comments > 0 && !openComments[post.id] && (
+                    <div className="bg-slate-800/30 border border-slate-700/50 rounded-lg p-3 mt-2">
+                      <div className="text-slate-400 text-xs mb-2">Latest replies:</div>
+                      <div className="space-y-2">
+                        <div className="text-sm">
+                          <span className="font-medium text-slate-300">TechAnalyst:</span>
+                          <span className="text-slate-400 ml-2">Great analysis! I'm seeing similar patterns.</span>
+                        </div>
+                        <div className="text-sm">
+                          <span className="font-medium text-slate-300">MarketWatcher:</span>
+                          <span className="text-slate-400 ml-2">Volume confirms the breakout. 🚀</span>
+                        </div>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleComment(post.id)}
+                        className="text-slate-400 hover:text-slate-200 text-xs mt-2 p-0 h-auto"
+                      >
+                        View all {post.engagement.comments} replies →
+                      </Button>
+                    </div>
+                  )}
 
                   {/* Comment Thread */}
                   {openComments[post.id] && (
@@ -978,6 +1095,137 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
             Load More Posts
           </Button>
         </div>
+
+        {/* Mobile FAB - Floating Action Button */}
+        <Button
+          onClick={() => setShowComposerModal(true)}
+          className="fixed bottom-4 right-4 z-50 lg:hidden w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+        >
+          <Edit3 className="h-6 w-6" />
+        </Button>
+
+        {/* Enhanced Composer Modal */}
+        <Dialog open={showComposerModal} onOpenChange={setShowComposerModal}>
+          <DialogContent className="bg-slate-800 border-slate-700 text-slate-200 max-w-2xl">
+            <DialogHeader>
+              <DialogTitle className="text-xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                ✍️ New Post
+              </DialogTitle>
+            </DialogHeader>
+
+            <div className="space-y-4 mt-4">
+              {/* Sentiment Selection */}
+              <div className="space-y-2">
+                <span className="text-sm text-slate-400">Sentiment:</span>
+                <div className="flex gap-2">
+                  <Button
+                    variant={composeSentiment === "bullish" ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setComposeSentiment("bullish")}
+                    className={composeSentiment === "bullish"
+                      ? "bg-green-600 hover:bg-green-700 text-white border-green-500"
+                      : "border-green-500/50 text-green-400 hover:bg-green-500/10"
+                    }
+                  >
+                    Bullish
+                  </Button>
+                  <Button
+                    variant={composeSentiment === "bearish" ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setComposeSentiment("bearish")}
+                    className={composeSentiment === "bearish"
+                      ? "bg-red-600 hover:bg-red-700 text-white border-red-500"
+                      : "border-red-500/50 text-red-400 hover:bg-red-500/10"
+                    }
+                  >
+                    Bearish
+                  </Button>
+                  <Button
+                    variant={composeSentiment === "neutral" ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setComposeSentiment("neutral")}
+                    className={composeSentiment === "neutral"
+                      ? "bg-yellow-600 hover:bg-yellow-700 text-white border-yellow-500"
+                      : "border-yellow-500/50 text-yellow-400 hover:bg-yellow-500/10"
+                    }
+                  >
+                    Neutral
+                  </Button>
+                </div>
+              </div>
+
+              {/* Compose Input */}
+              <div className="space-y-2">
+                <Textarea
+                  placeholder="Share an insight… Use $TICKER to mention stocks 📊"
+                  value={composeBody}
+                  onChange={(e) => setComposeBody(e.target.value)}
+                  className="min-h-[120px] bg-slate-700/50 border-slate-600 text-slate-200 placeholder:text-slate-400 resize-none"
+                />
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex justify-end gap-2 pt-4">
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setShowComposerModal(false);
+                    setComposeBody("");
+                    setComposeSentiment("neutral");
+                  }}
+                  className="border-slate-600 text-slate-300 hover:bg-slate-700"
+                >
+                  Cancel
+                </Button>
+                <Button
+                  disabled={!composeBody.trim()}
+                  onClick={() => {
+                    if (!composeBody.trim()) return;
+
+                    // Create new post
+                    const newPost: PostCardData = {
+                      id: Date.now().toString(),
+                      user: {
+                        id: "current-user",
+                        username: "You",
+                        handle: "@you",
+                        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=faces",
+                        verified: false,
+                        premium: true,
+                        credibilityScore: 85,
+                      },
+                      timestamp: "Just now",
+                      content: composeBody,
+                      tickers: (composeBody.match(/\$([A-Z]{1,5})/g) || []).map(ticker => ({
+                        symbol: ticker.substring(1),
+                        price: Math.random() * 1000,
+                        change: (Math.random() - 0.5) * 20,
+                        changePercent: (Math.random() - 0.5) * 10,
+                      })),
+                      sentiment: composeSentiment.charAt(0).toUpperCase() + composeSentiment.slice(1) as "Bullish" | "Bearish" | "Neutral",
+                      tags: [],
+                      categories: ["Insight"],
+                      engagement: { likes: 0, comments: 0, reposts: 0, saves: 0, views: 1 },
+                      isFollowing: false,
+                      alertsEnabled: false,
+                      isLiked: false,
+                      isSaved: false,
+                      isReposted: false,
+                    };
+
+                    setPosts(prev => [newPost, ...prev]);
+                    setComposeBody("");
+                    setComposeSentiment("neutral");
+                    setShowComposerModal(false);
+                  }}
+                  className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold"
+                >
+                  Post
+                </Button>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
 
         {/* Ticker Preview Widget */}
         {hoveredTicker && (

@@ -13,7 +13,7 @@ interface TrendingHubProps {
   className?: string;
 }
 
-export const TrendingHub: React.FC<TrendingHubProps> = ({ className }) => {
+const TrendingHub: React.FC<TrendingHubProps> = ({ className }) => {
   const { themeMode } = useMoodTheme();
   const [searchQuery, setSearchQuery] = useState('');
   const [timeFilter, setTimeFilter] = useState('1D');
@@ -122,7 +122,7 @@ export const TrendingHub: React.FC<TrendingHubProps> = ({ className }) => {
     },
     {
       type: 'Social Leader',
-      icon: '🐕',
+      icon: '����',
       title: 'Dogecoin',
       subtitle: '5.6M mentions',
       description: 'Viral Trend',

@@ -200,25 +200,581 @@ export const Analytics = () => {
           </TabsList>
 
           <TabsContent value="HeatMap" className="mt-6">
-            <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-8">
-              <div className="text-center space-y-4">
-                <div className="text-6xl mb-4">🔥</div>
-                <h3 className="text-2xl font-bold text-white mb-2">Heat Map</h3>
-                <p className="text-gray-400 mb-4">
-                  Real-time sentiment & performance heatmap visualization coming soon.
-                </p>
+            <div className="space-y-6">
+              {/* Dashboard Controls */}
+              <Card className="bg-black/40 backdrop-blur-xl border-purple-500/20">
+                <CardHeader>
+                  <CardTitle className="text-white flex items-center gap-2">
+                    🎛️ Dashboard Controls
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {/* Market Type */}
+                    <div>
+                      <label className="text-gray-400 text-sm mb-2 block">Market Type</label>
+                      <div className="flex gap-2">
+                        <Button size="sm" className="bg-blue-600 text-white">Stocks</Button>
+                        <Button size="sm" variant="outline" className="border-purple-500/30 text-purple-300">Crypto</Button>
+                        <Button size="sm" className="bg-purple-600 text-white">Combined</Button>
+                      </div>
+                    </div>
+
+                    {/* Data Type */}
+                    <div>
+                      <label className="text-gray-400 text-sm mb-2 block">Data Type</label>
+                      <div className="flex gap-2">
+                        <Button size="sm" className="bg-purple-600 text-white">Sentiment</Button>
+                        <Button size="sm" variant="outline" className="border-purple-500/30 text-purple-300">Price</Button>
+                        <Button size="sm" variant="outline" className="border-purple-500/30 text-purple-300">Volume</Button>
+                      </div>
+                    </div>
+
+                    {/* Timeframe */}
+                    <div>
+                      <label className="text-gray-400 text-sm mb-2 block">Timeframe</label>
+                      <div className="flex gap-2">
+                        <Button size="sm" variant="outline" className="border-purple-500/30 text-purple-300">1H</Button>
+                        <Button size="sm" className="bg-purple-600 text-white">24H</Button>
+                        <Button size="sm" variant="outline" className="border-purple-500/30 text-purple-300">7D</Button>
+                      </div>
+                    </div>
+
+                    {/* Search Symbol */}
+                    <div>
+                      <label className="text-gray-400 text-sm mb-2 block">Search Symbol</label>
+                      <div className="relative">
+                        <Input
+                          placeholder="BTC, AAPL, etc..."
+                          className="bg-black/40 border-purple-500/30 text-white placeholder-gray-400 focus:border-purple-400 focus:ring-0"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                {/* Interactive Sentiment Grid */}
+                <div className="lg:col-span-3">
+                  <Card className="bg-black/40 backdrop-blur-xl border-purple-500/20">
+                    <CardHeader>
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-white flex items-center gap-2">
+                          📊 Interactive Sentiment Grid
+                        </CardTitle>
+                        <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
+                          Live Data
+                        </Badge>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                        {[
+                          { symbol: 'AAPL', sentiment: 72, color: 'bg-green-500' },
+                          { symbol: 'GOOGL', sentiment: 78, color: 'bg-green-500' },
+                          { symbol: 'MSFT', sentiment: 68, color: 'bg-green-500' },
+                          { symbol: 'TSLA', sentiment: 35, color: 'bg-red-500' },
+                          { symbol: 'AMZN', sentiment: 65, color: 'bg-green-500' },
+                          { symbol: 'NVDA', sentiment: 92, color: 'bg-green-500' },
+                          { symbol: 'META', sentiment: 58, color: 'bg-yellow-500' },
+                          { symbol: 'NFLX', sentiment: 63, color: 'bg-green-500' },
+                          { symbol: 'BTC', sentiment: 69, color: 'bg-green-500' },
+                          { symbol: 'ETH', sentiment: 71, color: 'bg-green-500' },
+                          { symbol: 'SOL', sentiment: 85, color: 'bg-green-500' },
+                          { symbol: 'ADA', sentiment: 42, color: 'bg-red-500' },
+                          { symbol: 'DOT', sentiment: 48, color: 'bg-red-500' },
+                          { symbol: 'MATIC', sentiment: 59, color: 'bg-yellow-500' },
+                          { symbol: 'AVAX', sentiment: 67, color: 'bg-green-500' },
+                          { symbol: 'LINK', sentiment: 74, color: 'bg-green-500' },
+                          { symbol: 'TECH', sentiment: 81, color: 'bg-green-500' },
+                          { symbol: 'FIN', sentiment: 52, color: 'bg-yellow-500' },
+                          { symbol: 'HLTH', sentiment: 64, color: 'bg-green-500' },
+                          { symbol: 'ENGY', sentiment: 47, color: 'bg-red-500' },
+                          { symbol: 'DEFI', sentiment: 78, color: 'bg-green-500' },
+                          { symbol: 'AI', sentiment: 91, color: 'bg-green-500' },
+                          { symbol: 'GAME', sentiment: 75, color: 'bg-green-500' },
+                          { symbol: 'MEME', sentiment: 38, color: 'bg-red-500' }
+                        ].map((item, index) => (
+                          <div
+                            key={item.symbol}
+                            className={`${item.color}/20 border ${item.color}/30 rounded-lg p-3 hover:${item.color}/30 transition-all duration-200 cursor-pointer hover:scale-105`}
+                          >
+                            <div className="flex items-center justify-between mb-2">
+                              <span className="text-white font-bold text-sm">{item.symbol}</span>
+                              <div className={`w-2 h-2 ${item.color} rounded-full`}></div>
+                            </div>
+                            <div className="text-center">
+                              <div className="text-white font-bold text-lg">{item.sentiment}%</div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Legend */}
+                      <div className="flex items-center justify-center gap-6 mt-6 pt-4 border-t border-gray-700/50">
+                        <div className="flex items-center gap-2">
+                          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                          <span className="text-gray-400 text-sm">Bullish (70-100%)</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                          <span className="text-gray-400 text-sm">Neutral (50-69%)</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                          <span className="text-gray-400 text-sm">Bearish (0-49%)</span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Right Sidebar */}
+                <div className="space-y-6">
+                  {/* AI Market Alerts */}
+                  <Card className="bg-black/40 backdrop-blur-xl border-purple-500/20">
+                    <CardHeader>
+                      <CardTitle className="text-white flex items-center gap-2 text-lg">
+                        🤖 AI Market Alerts
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="space-y-3">
+                        <div className="flex items-start gap-3">
+                          <div className="w-2 h-2 bg-yellow-400 rounded-full mt-2"></div>
+                          <div>
+                            <div className="text-yellow-400 font-medium text-sm">Bullish Surge</div>
+                            <div className="text-gray-300 text-xs">$SOL sentiment surged 45% in last 24H after Bonk protocol announcements</div>
+                            <div className="text-gray-400 text-xs mt-1">2 minutes ago</div>
+                          </div>
+                        </div>
+
+                        <div className="flex items-start gap-3">
+                          <div className="w-2 h-2 bg-red-400 rounded-full mt-2"></div>
+                          <div>
+                            <div className="text-red-400 font-medium text-sm">Bearish Flip</div>
+                            <div className="text-gray-300 text-xs">$TSLA flipped bearish after earnings report missed expectations</div>
+                            <div className="text-gray-400 text-xs mt-1">15 minutes ago</div>
+                          </div>
+                        </div>
+
+                        <div className="flex items-start gap-3">
+                          <div className="w-2 h-2 bg-blue-400 rounded-full mt-2"></div>
+                          <div>
+                            <div className="text-blue-400 font-medium text-sm">AI Sector Alert</div>
+                            <div className="text-gray-300 text-xs">AI tokens showing 91% bullish sentiment, up 23% from yesterday</div>
+                            <div className="text-gray-400 text-xs mt-1">1 hour ago</div>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Market Summary */}
+                  <Card className="bg-black/40 backdrop-blur-xl border-purple-500/20">
+                    <CardHeader>
+                      <CardTitle className="text-white flex items-center gap-2 text-lg">
+                        📊 Market Summary
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <span className="text-gray-400 text-sm">Total Bullish</span>
+                          <div className="flex items-center gap-2">
+                            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                            <span className="text-white font-medium">67%</span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center justify-between">
+                          <span className="text-gray-400 text-sm">Total Bearish</span>
+                          <div className="flex items-center gap-2">
+                            <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                            <span className="text-white font-medium">21%</span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center justify-between">
+                          <span className="text-gray-400 text-sm">Neutral</span>
+                          <div className="flex items-center gap-2">
+                            <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                            <span className="text-white font-medium">12%</span>
+                          </div>
+                        </div>
+
+                        <div className="border-t border-gray-700/50 pt-3 mt-4">
+                          <div className="text-gray-400 text-sm mb-2">Top Gainers (24h)</div>
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between">
+                              <span className="text-white text-sm">SOL</span>
+                              <span className="text-green-400 font-medium">+7.2%</span>
+                            </div>
+                            <div className="flex items-center justify-between">
+                              <span className="text-white text-sm">NVDA</span>
+                              <span className="text-green-400 font-medium">+5.4%</span>
+                            </div>
+                            <div className="flex items-center justify-between">
+                              <span className="text-white text-sm">ADA</span>
+                              <span className="text-green-400 font-medium">+4.1%</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="border-t border-gray-700/50 pt-3">
+                          <div className="text-gray-400 text-sm mb-2">Top Losers (24h)</div>
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between">
+                              <span className="text-white text-sm">MEME</span>
+                              <span className="text-red-400 font-medium">-5.2%</span>
+                            </div>
+                            <div className="flex items-center justify-between">
+                              <span className="text-white text-sm">DOT</span>
+                              <span className="text-red-400 font-medium">-3.2%</span>
+                            </div>
+                            <div className="flex items-center justify-between">
+                              <span className="text-white text-sm">TSLA</span>
+                              <span className="text-red-400 font-medium">-2.7%</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
             </div>
           </TabsContent>
 
           <TabsContent value="Analytics" className="mt-6">
-            <div className="bg-black/40 backdrop-blur-xl rounded-2xl border border-purple-500/20 p-8">
-              <div className="text-center space-y-4">
-                <div className="text-6xl mb-4">📈</div>
-                <h3 className="text-2xl font-bold text-white mb-2">Advanced Analytics</h3>
-                <p className="text-gray-400 mb-4">
-                  Comprehensive market analysis and trend insights coming soon.
-                </p>
+            <div className="space-y-6">
+              {/* Top Summary Bar */}
+              <Card className="bg-gradient-to-r from-purple-900/50 to-blue-900/50 backdrop-blur-xl border-purple-500/30">
+                <CardContent className="p-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {/* Overall Mood Score */}
+                    <div className="text-center">
+                      <div className="flex items-center justify-center gap-2 mb-2">
+                        <div className="text-3xl">🟢</div>
+                        <div className="text-4xl font-bold text-green-400">73</div>
+                      </div>
+                      <div className="text-gray-300 text-sm">Overall Mood Score</div>
+                      <div className="text-green-400 text-xs">Bullish</div>
+                    </div>
+
+                    {/* Trending Sentiment */}
+                    <div className="text-center">
+                      <div className="flex items-center justify-center gap-2 mb-2">
+                        <TrendingUp className="w-6 h-6 text-green-400" />
+                        <div className="text-2xl font-bold text-green-400">+12%</div>
+                      </div>
+                      <div className="text-gray-300 text-sm">24h Sentiment Trend</div>
+                      <div className="text-green-400 text-xs">Rising</div>
+                    </div>
+
+                    {/* Top Market Movers */}
+                    <div>
+                      <div className="text-gray-300 text-sm mb-2">Top Movers</div>
+                      <div className="space-y-1">
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-white">NVDA</span>
+                          <span className="text-green-400">+15%</span>
+                        </div>
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-white">SOL</span>
+                          <span className="text-green-400">+12%</span>
+                        </div>
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-white">TSLA</span>
+                          <span className="text-red-400">-8%</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Key News Events */}
+                    <div>
+                      <div className="text-gray-300 text-sm mb-2">Key Events</div>
+                      <div className="space-y-1">
+                        <Badge className="bg-green-500/20 text-green-400 border-green-500/30 text-xs">Earnings Beat</Badge>
+                        <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30 text-xs">AI Update</Badge>
+                        <Badge className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30 text-xs">Fed Policy</Badge>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Main Content */}
+                <div className="lg:col-span-2 space-y-6">
+                  {/* Sentiment Over Time Chart */}
+                  <Card className="bg-black/40 backdrop-blur-xl border-purple-500/20">
+                    <CardHeader>
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-white flex items-center gap-2">
+                          📈 Sentiment Over Time
+                        </CardTitle>
+                        <div className="flex gap-2">
+                          <Button size="sm" variant="outline" className="border-purple-500/30 text-purple-300">1H</Button>
+                          <Button size="sm" className="bg-purple-600 text-white">24H</Button>
+                          <Button size="sm" variant="outline" className="border-purple-500/30 text-purple-300">7D</Button>
+                          <Button size="sm" variant="outline" className="border-purple-500/30 text-purple-300">30D</Button>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="h-64 bg-gradient-to-b from-purple-900/20 to-transparent rounded-lg p-4 relative">
+                        {/* Mock Chart Line */}
+                        <div className="absolute inset-4">
+                          <svg className="w-full h-full" viewBox="0 0 400 200">
+                            <defs>
+                              <linearGradient id="sentimentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stopColor="#ef4444" />
+                                <stop offset="50%" stopColor="#eab308" />
+                                <stop offset="100%" stopColor="#22c55e" />
+                              </linearGradient>
+                            </defs>
+                            <path
+                              d="M 20 150 Q 100 120 180 80 T 380 60"
+                              fill="none"
+                              stroke="url(#sentimentGradient)"
+                              strokeWidth="3"
+                              className="animate-pulse"
+                            />
+                            <circle cx="380" cy="60" r="4" fill="#22c55e" />
+                          </svg>
+                        </div>
+                        <div className="absolute bottom-2 left-4 text-xs text-gray-400">
+                          Last updated: 2 mins ago
+                        </div>
+                        <div className="absolute top-2 right-4 text-xs text-green-400">
+                          Current: 73 (+5.2)
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Sector & Category Heatmaps */}
+                  <Card className="bg-black/40 backdrop-blur-xl border-purple-500/20">
+                    <CardHeader>
+                      <CardTitle className="text-white flex items-center gap-2">
+                        🗂️ Sector Heatmap
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                        {[
+                          { sector: 'Technology', sentiment: 85, color: 'bg-green-500' },
+                          { sector: 'Healthcare', sentiment: 72, color: 'bg-green-500' },
+                          { sector: 'Finance', sentiment: 58, color: 'bg-yellow-500' },
+                          { sector: 'Energy', sentiment: 42, color: 'bg-red-500' },
+                          { sector: 'Consumer', sentiment: 67, color: 'bg-green-500' },
+                          { sector: 'Real Estate', sentiment: 51, color: 'bg-yellow-500' },
+                          { sector: 'Utilities', sentiment: 48, color: 'bg-red-500' },
+                          { sector: 'Materials', sentiment: 61, color: 'bg-green-500' }
+                        ].map((sector) => (
+                          <div
+                            key={sector.sector}
+                            className={`${sector.color}/20 border ${sector.color}/30 rounded-lg p-3 hover:${sector.color}/30 transition-all duration-200 cursor-pointer hover:scale-105`}
+                          >
+                            <div className="text-white font-medium text-sm mb-1">{sector.sector}</div>
+                            <div className="text-white font-bold text-lg">{sector.sentiment}%</div>
+                            <div className={`w-full h-1 ${sector.color}/40 rounded-full mt-2`}>
+                              <div className={`h-1 ${sector.color} rounded-full`} style={{width: `${sector.sentiment}%`}}></div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Top Positive & Negative Mentions */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <Card className="bg-black/40 backdrop-blur-xl border-green-500/20">
+                      <CardHeader>
+                        <CardTitle className="text-white flex items-center gap-2 text-lg">
+                          🔥 Top Positive
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-3">
+                          {[
+                            { symbol: 'NVDA', score: 92, mentions: '2.4k', source: 'Reddit' },
+                            { symbol: 'SOL', score: 89, mentions: '1.8k', source: 'Twitter' },
+                            { symbol: 'AI', score: 87, mentions: '1.2k', source: 'News' },
+                            { symbol: 'MSFT', score: 84, mentions: '900', source: 'Forums' }
+                          ].map((item) => (
+                            <div key={item.symbol} className="flex items-center justify-between">
+                              <div className="flex items-center gap-3">
+                                <div className="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center">
+                                  <span className="text-green-400 font-bold text-sm">{item.symbol}</span>
+                                </div>
+                                <div>
+                                  <div className="text-white font-medium text-sm">{item.score}%</div>
+                                  <div className="text-gray-400 text-xs">{item.mentions} mentions</div>
+                                </div>
+                              </div>
+                              <Badge variant="outline" className="border-green-500/30 text-green-400 text-xs">
+                                {item.source}
+                              </Badge>
+                            </div>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="bg-black/40 backdrop-blur-xl border-red-500/20">
+                      <CardHeader>
+                        <CardTitle className="text-white flex items-center gap-2 text-lg">
+                          ❄️ Top Negative
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-3">
+                          {[
+                            { symbol: 'TSLA', score: 35, mentions: '1.9k', source: 'News' },
+                            { symbol: 'MEME', score: 38, mentions: '1.1k', source: 'Reddit' },
+                            { symbol: 'DOT', score: 42, mentions: '750', source: 'Twitter' },
+                            { symbol: 'ENGY', score: 45, mentions: '580', source: 'Forums' }
+                          ].map((item) => (
+                            <div key={item.symbol} className="flex items-center justify-between">
+                              <div className="flex items-center gap-3">
+                                <div className="w-8 h-8 bg-red-500/20 rounded-lg flex items-center justify-center">
+                                  <span className="text-red-400 font-bold text-sm">{item.symbol}</span>
+                                </div>
+                                <div>
+                                  <div className="text-white font-medium text-sm">{item.score}%</div>
+                                  <div className="text-gray-400 text-xs">{item.mentions} mentions</div>
+                                </div>
+                              </div>
+                              <Badge variant="outline" className="border-red-500/30 text-red-400 text-xs">
+                                {item.source}
+                              </Badge>
+                            </div>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
+
+                {/* Right Sidebar */}
+                <div className="space-y-6">
+                  {/* Keyword & Topic Trends */}
+                  <Card className="bg-black/40 backdrop-blur-xl border-purple-500/20">
+                    <CardHeader>
+                      <CardTitle className="text-white flex items-center gap-2 text-lg">
+                        🔤 Trending Keywords
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        {[
+                          { keyword: 'AI breakthrough', sentiment: 'positive', size: 'text-lg' },
+                          { keyword: 'earnings beat', sentiment: 'positive', size: 'text-base' },
+                          { keyword: 'regulatory concerns', sentiment: 'negative', size: 'text-sm' },
+                          { keyword: 'bullish outlook', sentiment: 'positive', size: 'text-base' },
+                          { keyword: 'market volatility', sentiment: 'neutral', size: 'text-sm' },
+                          { keyword: 'crypto surge', sentiment: 'positive', size: 'text-base' }
+                        ].map((item, index) => (
+                          <div key={index} className="flex items-center justify-between">
+                            <span className={`${item.size} font-medium ${
+                              item.sentiment === 'positive' ? 'text-green-400' :
+                              item.sentiment === 'negative' ? 'text-red-400' : 'text-yellow-400'
+                            }`}>
+                              {item.keyword}
+                            </span>
+                            <div className={`w-2 h-2 rounded-full ${
+                              item.sentiment === 'positive' ? 'bg-green-500' :
+                              item.sentiment === 'negative' ? 'bg-red-500' : 'bg-yellow-500'
+                            }`}></div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Source Breakdown */}
+                  <Card className="bg-black/40 backdrop-blur-xl border-purple-500/20">
+                    <CardHeader>
+                      <CardTitle className="text-white flex items-center gap-2 text-lg">
+                        📊 Data Sources
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        {[
+                          { source: 'Reddit', percentage: 35, color: 'bg-orange-500' },
+                          { source: 'Twitter', percentage: 28, color: 'bg-blue-500' },
+                          { source: 'News', percentage: 22, color: 'bg-purple-500' },
+                          { source: 'Forums', percentage: 15, color: 'bg-green-500' }
+                        ].map((item) => (
+                          <div key={item.source} className="space-y-2">
+                            <div className="flex items-center justify-between">
+                              <span className="text-gray-300 text-sm">{item.source}</span>
+                              <span className="text-white font-medium text-sm">{item.percentage}%</span>
+                            </div>
+                            <div className="w-full bg-gray-700 rounded-full h-2">
+                              <div className={`${item.color} h-2 rounded-full transition-all duration-300`} style={{width: `${item.percentage}%`}}></div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* AI-Generated Market Summary */}
+                  <Card className="bg-gradient-to-br from-blue-900/40 to-purple-900/40 backdrop-blur-xl border-blue-500/30">
+                    <CardHeader>
+                      <CardTitle className="text-white flex items-center gap-2 text-lg">
+                        🤖 AI Market Summary
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <p className="text-gray-300 text-sm leading-relaxed">
+                          "Overall sentiment is moderately bullish today, driven by strong earnings reports in tech.
+                          AI sector showing exceptional momentum with 91% positive sentiment.
+                          Crypto markets recovering after regulatory clarity in EU markets."
+                        </p>
+                        <div className="border-t border-gray-700/50 pt-3">
+                          <div className="text-gray-400 text-xs">
+                            Generated 5 minutes ago • Confidence: 87%
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Pro Features Teaser */}
+                  <Card className="bg-gradient-to-br from-yellow-900/40 to-orange-900/40 backdrop-blur-xl border-yellow-500/30">
+                    <CardHeader>
+                      <CardTitle className="text-white flex items-center gap-2 text-lg">
+                        ⭐ Pro Features
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-2">
+                          <Badge className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30 text-xs">🚨</Badge>
+                          <span className="text-gray-300 text-sm">Custom Alerts</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">📈</Badge>
+                          <span className="text-gray-300 text-sm">Correlation Analysis</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30 text-xs">🔙</Badge>
+                          <span className="text-gray-300 text-sm">Sentiment Backtesting</span>
+                        </div>
+                        <Button className="w-full bg-gradient-to-r from-yellow-600 to-orange-600 text-black font-semibold mt-3">
+                          Upgrade to Pro
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
             </div>
           </TabsContent>
