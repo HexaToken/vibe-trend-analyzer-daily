@@ -658,7 +658,11 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
               }
             `}</style>
             {/* Room List - Builder Repeater */}
-            <div>
+            <div style={{
+              flexBasis: state.selectedRoomId ? '50%' : '70%',
+              transition: 'flex-basis 0.3s ease-in-out',
+              minWidth: '0'
+            }}>
               <div style={{
                 height: '600px',
                 overflowY: 'auto',
