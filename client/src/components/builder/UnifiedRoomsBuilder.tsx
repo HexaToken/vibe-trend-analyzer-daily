@@ -643,15 +643,20 @@ export const UnifiedRoomsBuilder: React.FC<UnifiedRoomsBuilderProps> = ({
             </div>
           </div>
 
-          {/* Content Area - Builder Columns */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: state.showDetailPanel
-              ? 'minmax(0, 1fr) 360px'
-              : 'minmax(0, 2fr) minmax(0, 1fr)',
+          {/* Content Area - Builder Flex Layout */}
+          <div className="mobile-stack" style={{
+            display: 'flex',
+            width: '100%',
             gap: '24px',
             position: 'relative'
           }}>
+            <style>{`
+              @media (max-width: 768px) {
+                .mobile-stack {
+                  flex-direction: column !important;
+                }
+              }
+            `}</style>
             {/* Room List - Builder Repeater */}
             <div>
               <div style={{
