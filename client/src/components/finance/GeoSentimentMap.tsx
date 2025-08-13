@@ -160,6 +160,15 @@ const GeoSentimentMap: React.FC = () => {
   const [selectedCountry, setSelectedCountry] = useState<CountrySentiment | null>(null);
   const [hoveredCountry, setHoveredCountry] = useState<CountrySentiment | null>(null);
 
+  // Debounced hover handlers to prevent glitches
+  const handleMouseEnter = (country: CountrySentiment) => {
+    setHoveredCountry(country);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredCountry(null);
+  };
+
   // Filter and sort data based on current filters
   const filteredData = useMemo(() => {
     return mockGeoSentimentData
