@@ -668,10 +668,17 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
 
         {/* Quick Stats Bar */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <Card className="bg-gradient-to-r from-green-900/50 to-green-800/50 border-green-700/50">
+          <Card
+            className={cn(
+              "cursor-pointer transition-all hover:scale-105 bg-gradient-to-r from-green-900/50 to-green-800/50 border-green-700/50",
+              sentimentFilter === 'Bullish' && "ring-2 ring-green-400 border-green-500/70"
+            )}
+            onClick={() => setSentimentFilter(sentimentFilter === 'Bullish' ? null : 'Bullish')}
+          >
             <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-green-400">73%</div>
+              <div className="text-2xl font-bold text-green-400">{bullishPct}%</div>
               <div className="text-sm text-green-300">Bullish Sentiment</div>
+              {sentimentFilter === 'Bullish' && <div className="text-xs text-green-400 mt-1">Filtering active</div>}
             </CardContent>
           </Card>
           <Card className="bg-gradient-to-r from-red-900/50 to-red-800/50 border-red-700/50">
