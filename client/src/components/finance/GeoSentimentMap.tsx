@@ -340,8 +340,8 @@ const GeoSentimentMap: React.FC = () => {
                         }, transparent)`
                       }}
                       onClick={() => setSelectedCountry(country)}
-                      onMouseEnter={() => setHoveredCountry(country)}
-                      onMouseLeave={() => setHoveredCountry(null)}
+                      onMouseEnter={() => handleMouseEnter(country)}
+                      onMouseLeave={handleMouseLeave}
                     >
                       <div className="flex items-center justify-between mb-2">
                         <span className="font-medium text-sm">{country.country}</span>
