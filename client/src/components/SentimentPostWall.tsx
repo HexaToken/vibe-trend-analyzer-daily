@@ -753,6 +753,37 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
                   </TabsList>
 
                   <div className="flex items-center gap-3">
+                    {/* Density Toggle */}
+                    <div className="flex items-center gap-2">
+                      <span className="text-slate-400 text-sm">View:</span>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setViewDensity('comfortable')}
+                        className={cn(
+                          "px-3 py-1 text-xs",
+                          viewDensity === 'comfortable'
+                            ? "bg-slate-600 text-white border-slate-500"
+                            : "bg-slate-700 text-slate-300 border-slate-600 hover:bg-slate-600"
+                        )}
+                      >
+                        Comfortable
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setViewDensity('compact')}
+                        className={cn(
+                          "px-3 py-1 text-xs",
+                          viewDensity === 'compact'
+                            ? "bg-slate-600 text-white border-slate-500"
+                            : "bg-slate-700 text-slate-300 border-slate-600 hover:bg-slate-600"
+                        )}
+                      >
+                        Compact
+                      </Button>
+                    </div>
+
                     <Button
                       variant="outline"
                       size="sm"
