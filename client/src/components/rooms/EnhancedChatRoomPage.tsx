@@ -5,11 +5,11 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { 
-  ArrowLeft, 
-  Heart, 
-  MessageCircle, 
-  Share2, 
+import {
+  ArrowLeft,
+  Heart,
+  MessageCircle,
+  Share2,
   Star,
   TrendingUp,
   TrendingDown,
@@ -28,7 +28,8 @@ import {
   Smile,
   ThumbsUp,
   Rocket,
-  Bear
+  Bear,
+  Minus
 } from "lucide-react";
 import { AuthModal } from "@/components/auth/AuthModal";
 import { cn } from "@/lib/utils";
