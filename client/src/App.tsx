@@ -218,6 +218,8 @@ const AppContent = () => {
         return <UnifiedRoomsDemo />;
       case "room-detail-demo":
         return <RoomDetailPanelDemo />;
+      case "builder-chat-room":
+        return <BuilderChatRoom onBack={() => setActiveSection("community")} />;
 
       // Finance Section Routes
       case "finance":
