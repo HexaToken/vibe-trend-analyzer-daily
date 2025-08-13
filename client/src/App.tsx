@@ -70,6 +70,7 @@ import { ChatSubcategory } from "@/components/social/ChatSubcategory";
 import { Footer } from "@/components/Footer";
 import SmartNewsFeedPage from "@/components/SmartNewsFeedPage";
 import { RoomDetailPanelDemo } from "@/components/examples/RoomDetailPanelDemo";
+import { BuilderChatRoom } from "@/components/rooms/BuilderChatRoom";
 
 const queryClient = new QueryClient();
 
