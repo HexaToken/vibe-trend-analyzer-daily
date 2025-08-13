@@ -448,15 +448,20 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
         !post.tickers.some(t => t.symbol.toLowerCase().includes(searchQuery.toLowerCase()))) {
       return false;
     }
-    
+
+    // Builder.io sentiment filter
+    if (sentimentFilter && post.sentiment !== sentimentFilter) {
+      return false;
+    }
+
     if (filter.sentiment && filter.sentiment !== "All" && post.sentiment !== filter.sentiment) {
       return false;
     }
-    
+
     if (filter.ticker && !post.tickers.some(t => t.symbol === filter.ticker)) {
       return false;
     }
-    
+
     return true;
   });
 
