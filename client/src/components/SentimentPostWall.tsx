@@ -1012,6 +1012,31 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
                     showEngagementCounts={true}
                   />
 
+                  {/* Inline Reply Preview */}
+                  {post.engagement.comments > 0 && !openComments[post.id] && (
+                    <div className="bg-slate-800/30 border border-slate-700/50 rounded-lg p-3 mt-2">
+                      <div className="text-slate-400 text-xs mb-2">Latest replies:</div>
+                      <div className="space-y-2">
+                        <div className="text-sm">
+                          <span className="font-medium text-slate-300">TechAnalyst:</span>
+                          <span className="text-slate-400 ml-2">Great analysis! I'm seeing similar patterns.</span>
+                        </div>
+                        <div className="text-sm">
+                          <span className="font-medium text-slate-300">MarketWatcher:</span>
+                          <span className="text-slate-400 ml-2">Volume confirms the breakout. 🚀</span>
+                        </div>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleComment(post.id)}
+                        className="text-slate-400 hover:text-slate-200 text-xs mt-2 p-0 h-auto"
+                      >
+                        View all {post.engagement.comments} replies →
+                      </Button>
+                    </div>
+                  )}
+
                   {/* Comment Thread */}
                   {openComments[post.id] && (
                     <div className="ml-4 pl-4 border-l-2 border-purple-500/30">
