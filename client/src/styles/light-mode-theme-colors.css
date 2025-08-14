@@ -333,3 +333,91 @@
 :root:not(.dark) .border-blue-300 {
   border-color: color-mix(in srgb, var(--color-stocks) 40%, var(--color-border)) !important;
 }
+
+/* ===== SPECIFIC HARDCODED COLOR OVERRIDES FOR FUTURISTIC HOMEPAGE ===== */
+
+/* Primary text colors */
+:root:not(.dark) .text-\[#388E3C\] {
+  color: var(--color-positive-text) !important;
+}
+
+:root:not(.dark) .text-\[#4CAF50\] {
+  color: var(--color-positive-text) !important;
+}
+
+:root:not(.dark) .text-\[#F44336\] {
+  color: var(--color-negative-text) !important;
+}
+
+:root:not(.dark) .text-\[#FFB300\] {
+  color: var(--color-neutral-text) !important;
+}
+
+:root:not(.dark) .text-\[#3F51B5\] {
+  color: var(--color-overall-mood) !important;
+}
+
+:root:not(.dark) .text-\[#9CA3AF\] {
+  color: var(--color-axis) !important;
+}
+
+/* Background colors */
+:root:not(.dark) .bg-\[rgba\(58\,122\,254\,0\.1\)\] {
+  background-color: color-mix(in srgb, var(--color-overall-mood) 10%, var(--color-background)) !important;
+}
+
+:root:not(.dark) .bg-\[#E8F8F4\] {
+  background-color: color-mix(in srgb, var(--color-positive-text) 15%, var(--color-background)) !important;
+}
+
+/* Border colors */
+:root:not(.dark) .border-\[#E6E6E6\] {
+  border-color: var(--color-border) !important;
+}
+
+:root:not(.dark) .border-\[#3A7AFE\]\/30 {
+  border-color: color-mix(in srgb, var(--color-overall-mood) 30%, transparent) !important;
+}
+
+:root:not(.dark) .border-\[#22AB94\]\/30 {
+  border-color: color-mix(in srgb, var(--color-positive-text) 30%, transparent) !important;
+}
+
+/* Input and form controls */
+:root:not(.dark) .placeholder-\[#888\]::placeholder {
+  color: var(--color-axis) !important;
+}
+
+:root:not(.dark) .focus\:border-\[#3A7AFE\]\/50:focus {
+  border-color: color-mix(in srgb, var(--color-overall-mood) 50%, transparent) !important;
+}
+
+/* Tab and navigation elements */
+:root:not(.dark) .data-\[state\=active\]\:text-\[#1A1A1A\] {
+  color: var(--color-neutral-text) !important;
+}
+
+:root:not(.dark) .data-\[state\=active\]\:border-\[#E6E6E6\] {
+  border-color: var(--color-border) !important;
+}
+
+/* Icon colors */
+:root:not(.dark) .text-\[#22AB94\] {
+  color: var(--color-positive-text) !important;
+}
+
+/* Watchlist score colors */
+:root:not(.dark) .hover\:text-red-600:hover {
+  color: var(--color-negative-text) !important;
+}
+
+/* Badge text colors */
+:root:not(.dark) .text-\[#3A7AFE\] {
+  color: var(--color-overall-mood) !important;
+}
+
+/* Ensure consistent application across components */
+:root:not(.dark) .enhanced-card-light {
+  background-color: var(--color-card-background) !important;
+  border-color: var(--color-border) !important;
+}
