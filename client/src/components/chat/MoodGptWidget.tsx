@@ -228,7 +228,7 @@ export const MoodGptWidget = () => {
                 "h-full flex flex-col shadow-2xl border-0 overflow-hidden",
                 "rounded-l-3xl md:rounded-l-2xl rounded-r-none",
                 themeMode === 'light'
-                  ? "bg-[#F7F9FB] border-l border-t border-b border-gray-200"
+                  ? "bg-[#FAFAFA] border-l border-t border-b border-[#E6E6E6]"
                   : "bg-[#121212] border-l border-t border-b border-purple-500/20"
               )}
             >
