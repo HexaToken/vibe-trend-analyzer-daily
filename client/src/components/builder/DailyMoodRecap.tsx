@@ -69,24 +69,24 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
 
   const getSentimentColor = (mood: string) => {
     switch (mood) {
-      case 'bullish': return 'text-[#22AB94]';
-      case 'bearish': return 'text-[#F23645]';
-      default: return 'text-[#6B7280]';
+      case 'bullish': return 'text-[#16A34A]';
+      case 'bearish': return 'text-[#DC2626]';
+      default: return 'text-[#7C3AED]';
     }
   };
 
   const getSentimentBadge = (mood: string) => {
     switch (mood) {
-      case 'bullish': return 'bg-[#E8F8F4] text-[#22AB94] border-[#22AB94]/30';
-      case 'bearish': return 'bg-[#FDECEC] text-[#F23645] border-[#F23645]/30';
-      default: return 'bg-[#F3F4F6] text-[#6B7280] border-[#6B7280]/30';
+      case 'bullish': return 'bg-[#F0FDF4] text-[#16A34A] border-[#16A34A]/30';
+      case 'bearish': return 'bg-[#FEF2F2] text-[#DC2626] border-[#DC2626]/30';
+      default: return 'bg-[#FAF5FF] text-[#7C3AED] border-[#7C3AED]/30';
     }
   };
 
   const getMoodGlow = (mood: number) => {
-    if (mood >= 70) return 'shadow-lg shadow-[#22AB94]/20 border-[#22AB94]/30';
-    if (mood >= 50) return 'shadow-lg shadow-[#6B7280]/20 border-[#6B7280]/30';
-    return 'shadow-lg shadow-[#F23645]/20 border-[#F23645]/30';
+    if (mood >= 70) return 'shadow-lg shadow-[#16A34A]/20 border-[#16A34A]/30';
+    if (mood >= 50) return 'shadow-lg shadow-[#7C3AED]/20 border-[#7C3AED]/30';
+    return 'shadow-lg shadow-[#DC2626]/20 border-[#DC2626]/30';
   };
 
 
