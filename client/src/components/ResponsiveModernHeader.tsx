@@ -193,7 +193,12 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                         : "bg-gradient-to-r from-pink-400 to-purple-500"
                     )} />
                   )}
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                  <div className={cn(
+                    "absolute bottom-0 left-0 right-0 h-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200",
+                    isLightMode
+                      ? "bg-[#3A7AFE]"
+                      : "bg-gradient-to-r from-pink-400 to-purple-500"
+                  )} />
                 </button>
               ))}
 
