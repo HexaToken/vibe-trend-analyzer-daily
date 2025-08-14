@@ -170,7 +170,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
               {[0, 25, 50, 75, 100].map((line) => (
                 <div
                   key={line}
-                  className="absolute w-full border-t border-[#EFEFEF] dark:border-gray-600 border-dashed"
+                  className="absolute w-full border-t border-[#E5E7EB] dark:border-gray-600 border-dashed"
                   style={{ top: `${100 - line}%` }}
                 >
                   <span className="absolute -left-8 -top-2 text-xs font-medium text-[#4B5563] dark:text-gray-400">
