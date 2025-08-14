@@ -137,8 +137,8 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
             </div>
           </div>
 
-          <div className="text-center p-3 rounded-lg bg-[#FAFAFA] dark:bg-indigo-900/20 hover:bg-[#F3F4F6] transition-colors border border-[#E6E6E6] shadow-sm">
-            <div className="text-2xl font-bold tracking-tight text-[#DC2626] dark:text-indigo-400">
+          <div className="text-center p-3 rounded-lg bg-[#FAFAFA] dark:bg-indigo-900/20 hover:bg-[#F3F4F6] transition-colors border border-[#E6E6E6] shadow-sm theme-card-background theme-hover theme-border">
+            <div className="text-2xl font-bold tracking-tight text-[#DC2626] dark:text-indigo-400 sentiment-negative">
               {Math.round(data[data.length - 1]?.social || 50)}
             </div>
             <div className="text-sm text-[#374151] dark:text-gray-400 font-medium">
@@ -146,7 +146,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
             </div>
             <div className="w-full bg-[#E6E6E6] dark:bg-indigo-800 rounded-full h-1 mt-2">
               <div
-                className="bg-[#DC2626] h-1 rounded-full transition-all duration-300"
+                className="bg-[#DC2626] h-1 rounded-full transition-all duration-300 metric-social-progress"
                 style={{ width: `${data[data.length - 1]?.social || 50}%` }}
               ></div>
             </div>
