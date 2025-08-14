@@ -390,3 +390,36 @@
 :root:not(.dark) .border-purple-500 {
   border-color: #7B61FF !important;
 }
+
+/* Specific overrides for badge components */
+:root:not(.dark) .bg-green-500\/20 {
+  background-color: #E8F8F4 !important;
+}
+
+:root:not(.dark) .text-green-400 {
+  color: #22AB94 !important;
+}
+
+:root:not(.dark) .border-green-500\/30 {
+  border-color: rgba(34, 171, 148, 0.3) !important;
+}
+
+:root:not(.dark) .bg-red-500\/20 {
+  background-color: #FDECEC !important;
+}
+
+:root:not(.dark) .text-red-400 {
+  color: #F23645 !important;
+}
+
+:root:not(.dark) .border-red-500\/30 {
+  border-color: rgba(242, 54, 69, 0.3) !important;
+}
+
+:root:not(.dark) .bg-emerald-400 {
+  background-color: #22AB94 !important;
+}
+
+:root:not(.dark) .bg-indigo-400 {
+  background-color: #7B61FF !important;
+}
