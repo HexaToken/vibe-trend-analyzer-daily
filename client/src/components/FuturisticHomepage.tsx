@@ -318,7 +318,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   </div>
                   <h1 className={`text-4xl font-bold ${
                     themeMode === 'light'
-                      ? 'text-[#1E1E1E]'
+                      ? 'text-[#1A1A1A]'
                       : 'bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent'
                   }`}>
                     Finance Hub
