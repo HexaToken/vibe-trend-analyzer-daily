@@ -176,10 +176,10 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                     "text-base font-medium px-3 py-2 rounded-lg transition-all duration-200 relative group",
                     activeSection === key
                       ? isLightMode
-                        ? "text-pink-600 bg-pink-500/10"
+                        ? "text-white bg-[#3A7AFE] font-semibold shadow-sm"
                         : "text-pink-400 bg-pink-500/10"
                       : isLightMode
-                        ? "text-gray-900 hover:text-blue-600"
+                        ? "text-[#4B5563] hover:text-[#3A7AFE] hover:bg-[#F3F4F6]"
                         : "text-gray-300 hover:text-gray-200"
                   )}
                   aria-current={activeSection === key ? "page" : undefined}
@@ -199,10 +199,10 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                   "text-base font-medium px-3 py-2 rounded-lg transition-all duration-200 relative group",
                   activeSection === "community"
                     ? isLightMode
-                      ? "text-pink-600 bg-pink-500/10"
+                      ? "text-white bg-[#3A7AFE] font-semibold shadow-sm"
                       : "text-pink-400 bg-pink-500/10"
                     : isLightMode
-                      ? "text-gray-900 hover:text-blue-600"
+                      ? "text-[#4B5563] hover:text-[#3A7AFE] hover:bg-[#F3F4F6]"
                       : "text-gray-300 hover:text-gray-200"
                 )}
                 aria-current={activeSection === "community" ? "page" : undefined}
@@ -220,7 +220,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                   <button className={cn(
                     "flex items-center gap-1 text-base font-medium px-3 py-2 rounded-lg transition-all duration-200 relative group",
                     isLightMode
-                      ? "text-gray-900 hover:text-blue-600"
+                      ? "text-[#4B5563] hover:text-[#3A7AFE] hover:bg-[#F3F4F6]"
                       : "text-gray-300 hover:text-gray-200"
                   )}>
                     Finance
