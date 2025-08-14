@@ -233,7 +233,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
                     cx={x}
                     cy={y}
                     r="1"
-                    fill="#3A7AFE"
+                    fill="#2563EB"
                     className="drop-shadow-sm"
                   />
                 );
