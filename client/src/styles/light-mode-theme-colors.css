@@ -150,3 +150,86 @@
   background-color: var(--color-card-background) !important;
   border-color: var(--color-border) !important;
 }
+
+/* ===== COMPREHENSIVE HARDCODED COLOR OVERRIDES ===== */
+/* Override all hardcoded color values to use theme variables in light mode */
+
+/* Primary text color overrides */
+:root:not(.dark) .text-\[#1E1E1E\] {
+  color: var(--color-neutral-text) !important;
+}
+
+:root:not(.dark) .text-\[#1A1A1A\] {
+  color: var(--color-neutral-text) !important;
+}
+
+/* Secondary text color overrides */
+:root:not(.dark) .text-\[#666\] {
+  color: var(--color-axis) !important;
+}
+
+:root:not(.dark) .text-\[#4B5563\] {
+  color: var(--color-axis) !important;
+}
+
+/* Background color overrides */
+:root:not(.dark) .bg-white {
+  background-color: var(--color-background) !important;
+}
+
+:root:not(.dark) .bg-gray-50 {
+  background-color: var(--color-card-background) !important;
+}
+
+:root:not(.dark) .bg-gray-100 {
+  background-color: var(--color-hover-background) !important;
+}
+
+/* Border color overrides */
+:root:not(.dark) .border-gray-200 {
+  border-color: var(--color-border) !important;
+}
+
+:root:not(.dark) .border-gray-300 {
+  border-color: var(--color-border) !important;
+}
+
+/* Input and form control overrides */
+:root:not(.dark) input {
+  background-color: var(--color-background) !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-neutral-text) !important;
+}
+
+:root:not(.dark) select {
+  background-color: var(--color-background) !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-neutral-text) !important;
+}
+
+/* Button and interactive element overrides */
+:root:not(.dark) .hover\:bg-gray-50:hover {
+  background-color: var(--color-hover-background) !important;
+}
+
+:root:not(.dark) .hover\:bg-gray-100:hover {
+  background-color: var(--color-hover-background) !important;
+}
+
+/* Shadow and visual enhancement overrides */
+:root:not(.dark) .shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Specific component overrides for better theme compliance */
+:root:not(.dark) .text-gray-400 {
+  color: var(--color-axis) !important;
+}
+
+:root:not(.dark) .text-gray-600 {
+  color: var(--color-neutral-text) !important;
+}
+
+:root:not(.dark) .bg-\[#F5F7FA\] {
+  background-color: var(--color-card-background) !important;
+}
