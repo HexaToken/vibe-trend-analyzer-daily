@@ -1,0 +1,48 @@
+name: Code Health
+
+on:
+  pull_request:
+    branches: [ main, master ]
+  push:
+    branches: [ main ]
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck + Lint + Styles + HTML
+        run: npm run build:check
+
+      - name: Check formatting
+        run: npm run format:check
+
+      - name: Dead code & exports
+        run: |
+          npm run deadcode
+          npm run unused-exports
+
+      - name: Security (npm audit)
+        run: npm run security
+
+      - name: Build application
+        run: npm run build
+
+      # Optional: spin up app and run link/a11y/perf checks against localhost
+      # Uncomment the following steps if you want runtime checks in CI
+      # - name: Start app
+      #   run: |
+      #     npm run start &
+      #     sleep 10
+      # 
+      # - name: Runtime checks
+      #   run: npm run full:scan:runtime
