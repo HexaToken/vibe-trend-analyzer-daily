@@ -319,7 +319,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
         {/* Insights */}
         <div className="mt-6 p-4 bg-[#F9FAFB] dark:bg-gradient-to-r dark:from-[#3A7AFE] dark:to-[#7B61FF] dark:text-white rounded-lg border border-[#E6E6E6] border-l-4 border-l-[#3A7AFE] dark:border-green-700 shadow-sm">
           <div className="flex items-center space-x-2 mb-2">
-            <BarChart3 className="w-4 h-4 text-[#F4F4F6] drop-shadow-md" />
+            <BarChart3 className="w-4 h-4 text-blue-500 dark:text-white drop-shadow-md" />
             <span className="font-medium text-[#1A1A1A] dark:text-[#F4F4F6] dark:drop-shadow-md">
               Trend Analysis
             </span>
