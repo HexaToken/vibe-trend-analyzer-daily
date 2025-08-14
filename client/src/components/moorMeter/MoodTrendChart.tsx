@@ -54,7 +54,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
 
   return (
     <Card className="overflow-hidden border-0 shadow-lg bg-white dark:bg-gradient-to-br dark:from-gray-800 dark:via-gray-800 dark:to-red-900/20">
-      <CardHeader className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+      <CardHeader className="bg-gradient-to-r from-blue-500 to-purple-600 text-white" style={{ background: 'linear-gradient(to right, #3A7AFE, #7B61FF)' }}>
         <CardTitle className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Activity className="w-6 h-6 text-white drop-shadow-md" />
