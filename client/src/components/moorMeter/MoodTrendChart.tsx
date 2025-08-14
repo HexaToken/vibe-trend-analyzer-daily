@@ -164,7 +164,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
             </p>
           </div>
 
-          <div className="relative h-64 bg-white dark:bg-gray-800 rounded-xl p-4 overflow-hidden border border-[#E6E6E6] dark:border-gray-600">
+          <div className="relative h-64 bg-white dark:bg-gray-800 rounded-xl p-4 overflow-hidden border border-[#E6E6E6] dark:border-gray-600 theme-background theme-border">
             {/* Grid Lines */}
             <div className="absolute inset-4">
               {[0, 25, 50, 75, 100].map((line) => (
