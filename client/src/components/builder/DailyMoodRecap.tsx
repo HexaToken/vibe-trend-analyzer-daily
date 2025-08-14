@@ -96,12 +96,12 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
       {/* Main Section Title */}
       <div className="text-center mb-8">
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4">
-          <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 animate-pulse ${
+          <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 ${
             themeMode === 'light'
               ? 'bg-gradient-to-r from-[#3A7AFE]/20 to-[#7B61FF]/20 shadow-lg shadow-[#3A7AFE]/20'
               : 'bg-gradient-to-r from-purple-500/20 to-pink-500/20 shadow-lg shadow-purple-500/20'
           }`}>
-            <Brain className="w-6 h-6 text-purple-400" />
+            <Brain className="w-6 h-6 text-[#3A7AFE]" />
           </div>
           <h2 className={`text-2xl sm:text-3xl font-bold text-center sm:text-left ${
             themeMode === 'light'
@@ -136,7 +136,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           <CardTitle className={`flex items-center gap-3 ${
             themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'
           }`}>
-            <Brain className="w-6 h-6 text-purple-400 animate-pulse" />
+            <Brain className="w-6 h-6 text-[#3A7AFE] animate-pulse" />
             <span>AI Market Mood Summary</span>
             <Badge className={cn(
               "animate-pulse",
@@ -163,7 +163,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
               themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'
             }`}>
               📈 Mood Summary
-              <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
+              <div className="w-2 h-2 bg-[#3A7AFE] rounded-full animate-pulse" />
             </h3>
             <p className={`text-base leading-relaxed ${
               themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-300'
