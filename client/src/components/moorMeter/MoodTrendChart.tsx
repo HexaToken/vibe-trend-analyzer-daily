@@ -203,8 +203,8 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
               <path
                 d={generatePath(data.map((d) => d.stocks))}
                 fill="none"
-                stroke="#3B82F6"
-                strokeWidth="0.6"
+                stroke={lockedColors?.getSeriesColor('stocks') || "#3B82F6"}
+                strokeWidth={lockedTheme?.chartDefaults.strokeWidth || "0.6"}
                 strokeDasharray="2,2"
                 opacity="0.7"
                 className="chart-line-stocks"
@@ -214,8 +214,8 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
               <path
                 d={generatePath(data.map((d) => d.news))}
                 fill="none"
-                stroke="#8B5CF6"
-                strokeWidth="0.6"
+                stroke={lockedColors?.getSeriesColor('news') || "#8B5CF6"}
+                strokeWidth={lockedTheme?.chartDefaults.strokeWidth || "0.6"}
                 strokeDasharray="2,2"
                 opacity="0.7"
                 className="chart-line-news"
@@ -225,8 +225,8 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
               <path
                 d={generatePath(data.map((d) => d.social))}
                 fill="none"
-                stroke="#6366F1"
-                strokeWidth="0.6"
+                stroke={lockedColors?.getSeriesColor('social') || "#6366F1"}
+                strokeWidth={lockedTheme?.chartDefaults.strokeWidth || "0.6"}
                 strokeDasharray="2,2"
                 opacity="0.7"
                 className="chart-line-social"
