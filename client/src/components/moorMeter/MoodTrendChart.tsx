@@ -85,7 +85,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
       <CardContent className="p-6">
         {/* Current Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <div className="text-center p-3 rounded-lg bg-[#FAFAFA] dark:bg-gray-800 hover:bg-[#F3F4F6] transition-colors">
+          <div className="text-center p-3 rounded-lg bg-[#FAFAFA] dark:bg-gray-800 hover:bg-[#F3F4F6] transition-colors border border-[#E6E6E6] shadow-sm">
             <div
               className={`text-2xl font-bold tracking-tight ${getScoreColor(currentScore)}`}
             >
