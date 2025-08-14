@@ -1,21 +1,55 @@
-/* ===== LIGHT MODE THEME COLORS ===== */
-/* Hard-coded theme colors for light mode only */
+/* ===== LOCKED LIGHT MODE THEME COLORS ===== */
+/* 🔒 DO NOT USE INLINE COLORS IN LIGHT MODE - USE CSS VARIABLES ONLY */
+/* This theme is locked to prevent overrides from future edits */
 
 :root.light,
-:root:not(.dark) {
-  --color-overall-mood: #3A7AFE;
-  --color-stocks: #22AB94;
-  --color-news: #7B61FF;
-  --color-social: #F23645;
-  --color-gridline: #EFEFEF;
-  --color-axis: #4B5563;
-  --color-background: #FFFFFF;
-  --color-card-background: #FAFAFA;
-  --color-border: #E6E6E6;
-  --color-hover-background: #F3F4F6;
-  --color-positive-text: #22AB94;
-  --color-negative-text: #F23645;
-  --color-neutral-text: #4B5563;
+:root:not(.dark),
+.light-theme-force {
+  /* Core theme variables - LOCKED */
+  --color-overall-mood: #3A7AFE !important;
+  --color-stocks: #22AB94 !important;
+  --color-news: #7B61FF !important;
+  --color-social: #F23645 !important;
+  --color-gridline: #EFEFEF !important;
+  --color-axis: #4B5563 !important;
+  --color-background: #FFFFFF !important;
+  --color-card-background: #FAFAFA !important;
+  --color-border: #E6E6E6 !important;
+  --color-hover-background: #F3F4F6 !important;
+  --color-positive-text: #22AB94 !important;
+  --color-negative-text: #F23645 !important;
+  --color-neutral-text: #4B5563 !important;
+
+  /* Text hierarchy - LOCKED */
+  --color-text-primary: #1A1A1A !important;
+  --color-text-secondary: #4B5563 !important;
+  --color-text-muted: #9CA3AF !important;
+
+  /* Chart defaults - LOCKED */
+  --chart-stroke-width: 2.5px !important;
+  --chart-opacity: 1 !important;
+  --chart-grid-opacity: 0.3 !important;
+}
+
+/* High specificity light theme force class */
+html.light .light-theme-force,
+html:not(.dark) .light-theme-force,
+body.light .light-theme-force,
+body:not(.dark) .light-theme-force {
+  /* Force application of theme variables with maximum specificity */
+  --color-overall-mood: #3A7AFE !important;
+  --color-stocks: #22AB94 !important;
+  --color-news: #7B61FF !important;
+  --color-social: #F23645 !important;
+  --color-gridline: #EFEFEF !important;
+  --color-axis: #4B5563 !important;
+  --color-background: #FFFFFF !important;
+  --color-card-background: #FAFAFA !important;
+  --color-border: #E6E6E6 !important;
+  --color-hover-background: #F3F4F6 !important;
+  --color-positive-text: #22AB94 !important;
+  --color-negative-text: #F23645 !important;
+  --color-neutral-text: #4B5563 !important;
 }
 
 /* Light mode only - Chart lines */
