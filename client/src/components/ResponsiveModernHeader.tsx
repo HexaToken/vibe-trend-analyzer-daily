@@ -186,7 +186,12 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                 >
                   {label}
                   {activeSection === key && (
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
+                    <div className={cn(
+                      "absolute bottom-0 left-0 right-0 h-0.5 rounded-full",
+                      isLightMode
+                        ? "bg-[#3A7AFE]"
+                        : "bg-gradient-to-r from-pink-400 to-purple-500"
+                    )} />
                   )}
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                 </button>
