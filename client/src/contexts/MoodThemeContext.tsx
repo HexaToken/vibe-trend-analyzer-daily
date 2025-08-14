@@ -211,12 +211,15 @@ export const MoodThemeProvider: React.FC<MoodThemeProviderProps> = ({ children }
   // Apply theme to document
   useEffect(() => {
     const root = document.documentElement;
-    
+
     if (themeMode === 'dark' || isDynamicMode) {
       root.classList.add('dark');
     } else {
       root.classList.remove('dark');
     }
+
+    // 🔒 Apply theme lock for light mode consistency
+    applyThemeLock(themeMode === 'dark' || isDynamicMode ? 'dark' : 'light');
 
     // Apply custom CSS variables for mood theming
     if (isDynamicMode && moodScore) {
