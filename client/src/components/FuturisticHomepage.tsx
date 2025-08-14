@@ -335,7 +335,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               <div className="max-w-md mx-auto mb-6">
                 <div className="relative">
                   <Search className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 ${
-                    themeMode === 'light' ? 'text-[#374151]' : 'text-gray-400'
+                    themeMode === 'light' ? 'text-[#9CA3AF]' : 'text-gray-400'
                   }`} />
                   <Input
                     type="text"
@@ -436,7 +436,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   }}
                   data-active-style="background: var(--active-bg); box-shadow: var(--active-shadow);"
                 >
-                  🌍 Geo-Sentiment
+                  ��� Geo-Sentiment
                 </TabsTrigger>
               </TabsList>
 
@@ -1395,7 +1395,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
             <div className="text-center">
               <div className="flex items-center justify-center gap-4">
                 <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
-                  ✅ Price API: Live
+                  �� Price API: Live
                 </Badge>
                 <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30">
                   ✅ Sentiment Engine: Active
@@ -2282,7 +2282,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
                   <CardHeader className="pb-4">
                     <CardTitle className="text-white flex items-center gap-2">
-                      <span className="text-xl">����</span>
+                      <span className="text-xl">🧭</span>
                       Dashboard Controls
                     </CardTitle>
                   </CardHeader>
