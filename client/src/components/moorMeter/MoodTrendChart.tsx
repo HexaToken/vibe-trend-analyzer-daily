@@ -72,7 +72,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
                 onClick={() => setTimeframe(period as "1D" | "7D" | "30D")}
                 className={
                   timeframe === period
-                    ? "bg-white/20 text-[#F4F4F6] drop-shadow-md"
+                    ? "bg-white/20 text-[#F4F4F6] drop-shadow-md border-b-2 border-white"
                     : "text-[#F4F4F6] drop-shadow-md hover:bg-white/10"
                 }
               >
