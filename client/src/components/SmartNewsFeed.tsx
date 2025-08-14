@@ -253,7 +253,7 @@ export const SmartNewsFeed: React.FC<SmartNewsFeedProps> = ({ className }) => {
                       return `${baseStyles} bg-[#F4F6FA] text-[#1F2937] border-[#CBD5E1]`;
                   }
                 } else {
-                  return `${baseStyles} bg-white text-[#6B7280] border-[#E5E7EB] hover:bg-[#F9FAFB] hover:text-[#374151] hover:border-[#D1D5DB] dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-300`;
+                  return `${baseStyles} bg-white text-[#9CA3AF] border-[#E6E6E6] hover:bg-[#F3F4F6] hover:text-[#4B5563] hover:border-[#D1D5DB] dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-300`;
                 }
               };
 
