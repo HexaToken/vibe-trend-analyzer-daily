@@ -1,6 +1,9 @@
 /* Import Light Mode Readability Enhancements */
 @import './styles/light-mode-readability.css';
 
+/* Import Sentiment Colors */
+@import './styles/sentiment-colors.css';
+
 /* Import Futuristic Chart Styling */
 @import './styles/futuristic-chart.css';
 
