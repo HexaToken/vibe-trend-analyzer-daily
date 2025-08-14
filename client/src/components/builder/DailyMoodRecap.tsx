@@ -111,7 +111,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
             🧠 Daily Mood Recap
           </h2>
         </div>
-        <p className={`text-base sm:text-lg px-4 sm:px-0 ${
+        <p className={`text-base sm:text-lg px-4 sm:px-0 font-medium leading-relaxed ${
           themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-300'
         }`}>
           AI-generated summary of today's market emotions, sentiment moves, and trending topics
