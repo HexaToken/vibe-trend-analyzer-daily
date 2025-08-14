@@ -1,7 +1,8 @@
 /* ===== LIGHT MODE THEME COLORS ===== */
 /* Hard-coded theme colors for light mode only */
 
-:root.light {
+:root.light,
+:root:not(.dark) {
   --color-overall-mood: #3A7AFE;
   --color-stocks: #22AB94;
   --color-news: #7B61FF;
