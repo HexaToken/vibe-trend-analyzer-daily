@@ -141,10 +141,10 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
             <Badge className={cn(
               "animate-pulse",
               currentMood.overall >= 70
-                ? "bg-[#E8F8F4] text-[#22AB94] border-[#22AB94]/30"
+                ? "bg-[#F0FDF4] text-[#16A34A] border-[#16A34A]/30"
                 : currentMood.overall >= 50
-                ? "bg-[#F3F4F6] text-[#6B7280] border-[#6B7280]/30"
-                : "bg-[#FDECEC] text-[#F23645] border-[#F23645]/30"
+                ? "bg-[#FAF5FF] text-[#7C3AED] border-[#7C3AED]/30"
+                : "bg-[#FEF2F2] text-[#DC2626] border-[#DC2626]/30"
             )}>
               {currentMood.trend === 'up' ? '↗' : '↘'} {currentMood.change}
             </Badge>
@@ -182,7 +182,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
               themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'
             }`}>
               🔥 Top Mood Movers
-              <div className="w-2 h-2 bg-[#22AB94] rounded-full animate-pulse" />
+              <div className="w-2 h-2 bg-[#16A34A] rounded-full animate-pulse" />
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-wrap gap-2">
               {topMovers.map((mover, index) => (
@@ -191,7 +191,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
                   className={cn(
                     "text-sm font-medium px-3 py-2 transition-all duration-300 hover:scale-105 cursor-pointer",
                     getSentimentBadge(mover.mood),
-                    mover.mood === 'bullish' ? 'hover:bg-[#E8F8F4]/80' : 'hover:bg-[#FDECEC]/80'
+                    mover.mood === 'bullish' ? 'hover:bg-[#DCFCE7] shadow-sm' : 'hover:bg-[#FEE2E2] shadow-sm'
                   )}
                 >
                   <span className="font-bold">${mover.symbol}</span> → {mover.mood === 'bullish' ? '📈' : '📉'}
@@ -238,8 +238,8 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
                   className={cn(
                     "text-sm font-medium px-3 py-2 flex items-center justify-center gap-1 transition-all duration-300 hover:scale-105 cursor-pointer",
                     topic.direction === 'up'
-                      ? "bg-[#E8F8F4] text-[#22AB94] border-[#22AB94]/30 hover:bg-[#E8F8F4]/80"
-                      : "bg-[#FDECEC] text-[#F23645] border-[#F23645]/30 hover:bg-[#FDECEC]/80"
+                      ? "bg-[#F0FDF4] text-[#16A34A] border-[#16A34A]/30 hover:bg-[#DCFCE7] shadow-sm border border-[#E6E6E6]"
+                      : "bg-[#FEF2F2] text-[#DC2626] border-[#DC2626]/30 hover:bg-[#FEE2E2] shadow-sm border border-[#E6E6E6]"
                   )}
                 >
                   <Hash className="w-3 h-3" />
