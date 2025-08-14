@@ -43,9 +43,9 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
   };
 
   const getScoreColor = (score: number) => {
-    if (score >= 70) return "text-[#22AB94] dark:text-green-400";
-    if (score >= 50) return "text-[#4B5563] dark:text-yellow-400";
-    return "text-[#F23645] dark:text-red-400";
+    if (score >= 70) return "text-[#16A34A] dark:text-green-400";
+    if (score >= 50) return "text-[#374151] dark:text-yellow-400";
+    return "text-[#DC2626] dark:text-red-400";
   };
 
   const currentScore = data[data.length - 1]?.score || 50;
@@ -110,7 +110,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
           </div>
 
           <div className="text-center p-3 rounded-lg bg-[#FAFAFA] dark:bg-blue-900/20 hover:bg-[#F3F4F6] transition-colors">
-            <div className="text-2xl font-bold tracking-tight text-[#22AB94] dark:text-blue-400">
+            <div className="text-2xl font-bold tracking-tight text-[#16A34A] dark:text-blue-400">
               {Math.round(data[data.length - 1]?.stocks || 50)}
             </div>
             <div className="text-sm text-[#4B5563] dark:text-gray-400">
@@ -118,27 +118,27 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
             </div>
             <div className="w-full bg-[#E6E6E6] dark:bg-blue-800 rounded-full h-1 mt-2">
               <div
-                className="bg-[#22AB94] h-1 rounded-full transition-all duration-300"
+                className="bg-[#16A34A] h-1 rounded-full transition-all duration-300"
                 style={{ width: `${data[data.length - 1]?.stocks || 50}%` }}
               ></div>
             </div>
           </div>
 
           <div className="text-center p-3 rounded-lg bg-[#FAFAFA] dark:bg-purple-900/20 hover:bg-[#F3F4F6] transition-colors">
-            <div className="text-2xl font-bold tracking-tight text-[#7B61FF] dark:text-purple-400">
+            <div className="text-2xl font-bold tracking-tight text-[#7C3AED] dark:text-purple-400">
               {Math.round(data[data.length - 1]?.news || 50)}
             </div>
             <div className="text-sm text-[#4B5563] dark:text-gray-400">News</div>
             <div className="w-full bg-[#E6E6E6] dark:bg-purple-800 rounded-full h-1 mt-2">
               <div
-                className="bg-[#7B61FF] h-1 rounded-full transition-all duration-300"
+                className="bg-[#7C3AED] h-1 rounded-full transition-all duration-300"
                 style={{ width: `${data[data.length - 1]?.news || 50}%` }}
               ></div>
             </div>
           </div>
 
           <div className="text-center p-3 rounded-lg bg-[#FAFAFA] dark:bg-indigo-900/20 hover:bg-[#F3F4F6] transition-colors">
-            <div className="text-2xl font-bold tracking-tight text-[#F23645] dark:text-indigo-400">
+            <div className="text-2xl font-bold tracking-tight text-[#DC2626] dark:text-indigo-400">
               {Math.round(data[data.length - 1]?.social || 50)}
             </div>
             <div className="text-sm text-[#4B5563] dark:text-gray-400">
@@ -146,7 +146,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
             </div>
             <div className="w-full bg-[#E6E6E6] dark:bg-indigo-800 rounded-full h-1 mt-2">
               <div
-                className="bg-[#F23645] h-1 rounded-full transition-all duration-300"
+                className="bg-[#DC2626] h-1 rounded-full transition-all duration-300"
                 style={{ width: `${data[data.length - 1]?.social || 50}%` }}
               ></div>
             </div>
