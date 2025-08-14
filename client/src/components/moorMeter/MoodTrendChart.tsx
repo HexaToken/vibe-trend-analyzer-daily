@@ -199,7 +199,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
               <path
                 d={generatePath(data.map((d) => d.stocks))}
                 fill="none"
-                stroke="#3B82F6"
+                stroke="#22AB94"
                 strokeWidth="0.6"
                 strokeDasharray="2,2"
                 opacity="0.7"
@@ -209,7 +209,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
               <path
                 d={generatePath(data.map((d) => d.news))}
                 fill="none"
-                stroke="#8B5CF6"
+                stroke="#7B61FF"
                 strokeWidth="0.6"
                 strokeDasharray="2,2"
                 opacity="0.7"
@@ -219,7 +219,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
               <path
                 d={generatePath(data.map((d) => d.social))}
                 fill="none"
-                stroke="#6366F1"
+                stroke="#F23645"
                 strokeWidth="0.6"
                 strokeDasharray="2,2"
                 opacity="0.7"
@@ -235,7 +235,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
                     cx={x}
                     cy={y}
                     r="1"
-                    fill="url(#overallGradient)"
+                    fill="#3A7AFE"
                     className="drop-shadow-sm"
                   />
                 );
@@ -252,15 +252,15 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
                 >
                   <stop
                     offset="0%"
-                    style={{ stopColor: "#10B981", stopOpacity: 1 }}
+                    style={{ stopColor: "#3A7AFE", stopOpacity: 1 }}
                   />
                   <stop
                     offset="50%"
-                    style={{ stopColor: "#F59E0B", stopOpacity: 1 }}
+                    style={{ stopColor: "#7B61FF", stopOpacity: 1 }}
                   />
                   <stop
                     offset="100%"
-                    style={{ stopColor: "#EF4444", stopOpacity: 1 }}
+                    style={{ stopColor: "#F23645", stopOpacity: 1 }}
                   />
                 </linearGradient>
               </defs>
