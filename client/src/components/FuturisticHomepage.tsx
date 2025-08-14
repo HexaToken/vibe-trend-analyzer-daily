@@ -599,7 +599,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   <Card className="lg:col-span-2 bg-black/40 border-blue-500/20 backdrop-blur-xl">
                     <CardHeader>
                       <CardTitle className="text-white flex items-center gap-2">
-                        🔥 Sector Risk Heatmap
+                        ���� Sector Risk Heatmap
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -2828,9 +2828,9 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         <Badge className={cn(
                           "ml-4 flex-shrink-0 text-xs font-medium px-3 py-1 rounded-full",
                           themeMode === 'light'
-                            ? news.sentiment === 'bullish' ? 'bg-[#E8F8F4] text-[#22AB94] border-[#22AB94]/20' :
-                              news.sentiment === 'bearish' ? 'bg-[#FDECEC] text-[#F23645] border-[#F23645]/20' :
-                              'bg-[#F3F4F6] text-[#6B7280] border-[#6B7280]/20'
+                            ? news.sentiment === 'bullish' ? 'sentiment-positive sentiment-positive-bg' :
+                              news.sentiment === 'bearish' ? 'sentiment-negative sentiment-negative-bg' :
+                              'sentiment-neutral sentiment-neutral-bg'
                             : news.sentiment === 'bullish' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' :
                               news.sentiment === 'bearish' ? 'bg-red-500/20 text-red-400 border-red-500/30' :
                               'bg-gray-500/20 text-gray-400 border-gray-500/30'
