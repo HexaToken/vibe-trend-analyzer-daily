@@ -98,7 +98,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4">
           <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 animate-pulse ${
             themeMode === 'light'
-              ? 'bg-gradient-to-r from-[#3F51B5]/20 to-[#9C27B0]/20 shadow-lg shadow-[#3F51B5]/20'
+              ? 'bg-gradient-to-r from-[#3A7AFE]/20 to-[#7B61FF]/20 shadow-lg shadow-[#3A7AFE]/20'
               : 'bg-gradient-to-r from-purple-500/20 to-pink-500/20 shadow-lg shadow-purple-500/20'
           }`}>
             <Brain className="w-6 h-6 text-purple-400" />
@@ -122,7 +122,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
       <Card className={cn(
         "relative overflow-hidden transition-all duration-500 hover:scale-[1.02]",
         themeMode === 'light'
-          ? 'enhanced-card-light border border-[#E0E0E0]'
+          ? 'enhanced-card-light border border-[#E6E6E6]'
           : `bg-black/40 backdrop-blur-xl ${getMoodGlow(currentMood.overall)}`,
         getMoodGlow(currentMood.overall)
       )}>
@@ -132,7 +132,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-pink-500/5 to-purple-500/5 animate-pulse" />
         )}
 
-        <CardHeader className={themeMode === 'light' ? "border-b border-[#E0E0E0]" : "border-b border-purple-500/20"}>
+        <CardHeader className={themeMode === 'light' ? "border-b border-[#E6E6E6]" : "border-b border-purple-500/20"}>
           <CardTitle className={`flex items-center gap-3 ${
             themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'
           }`}>
@@ -156,7 +156,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           {/* Mood Summary */}
           <div className={`p-5 rounded-xl transition-all duration-300 hover:scale-[1.01] hover:shadow-lg ${
             themeMode === 'light'
-              ? 'bg-gradient-to-r from-[#E8EAF6] to-[#F3E5F5] border border-[#E0E0E0]'
+              ? 'bg-gradient-to-r from-[#E8EAF6] to-[#F3E5F5] border border-[#E6E6E6]'
               : 'bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20'
           }`}>
             <h3 className={`text-lg font-semibold mb-3 flex items-center gap-2 ${
@@ -175,7 +175,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           {/* Top Movers */}
           <div className={`p-5 rounded-xl transition-all duration-300 hover:scale-[1.01] hover:shadow-lg ${
             themeMode === 'light'
-              ? 'bg-gradient-to-r from-[#E8F5E8] to-[#FFF3E0] border border-[#E0E0E0]'
+              ? 'bg-gradient-to-r from-[#E8F5E8] to-[#FFF3E0] border border-[#E6E6E6]'
               : 'bg-gradient-to-r from-emerald-500/10 to-amber-500/10 border border-emerald-500/20'
           }`}>
             <h3 className={`text-lg font-semibold mb-4 flex items-center gap-2 ${
@@ -204,7 +204,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           {/* Headline Summary */}
           <div className={`p-5 rounded-xl transition-all duration-300 hover:scale-[1.01] hover:shadow-lg ${
             themeMode === 'light'
-              ? 'bg-gradient-to-r from-[#E3F2FD] to-[#F1F8E9] border border-[#E0E0E0]'
+              ? 'bg-gradient-to-r from-[#E3F2FD] to-[#F1F8E9] border border-[#E6E6E6]'
               : 'bg-gradient-to-r from-blue-500/10 to-green-500/10 border border-blue-500/20'
           }`}>
             <h3 className={`text-lg font-semibold mb-3 flex items-center gap-2 ${
@@ -223,7 +223,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           {/* Trending Topics */}
           <div className={`p-5 rounded-xl transition-all duration-300 hover:scale-[1.01] ${
             themeMode === 'light'
-              ? 'bg-gradient-to-r from-[#FFF3E0] to-[#FCE4EC] border border-[#E0E0E0]'
+              ? 'bg-gradient-to-r from-[#FFF3E0] to-[#FCE4EC] border border-[#E6E6E6]'
               : 'bg-gradient-to-r from-orange-500/10 to-pink-500/10 border border-orange-500/20'
           }`}>
             <h3 className={`text-lg font-semibold mb-4 ${
@@ -257,7 +257,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           {/* Mood Flip of the Day */}
           <div className={`p-5 rounded-xl transition-all duration-300 hover:scale-[1.01] hover:shadow-lg ${
             themeMode === 'light'
-              ? 'bg-gradient-to-r from-[#F3E5F5] to-[#E8EAF6] border border-[#E0E0E0]'
+              ? 'bg-gradient-to-r from-[#F3E5F5] to-[#E8EAF6] border border-[#E6E6E6]'
               : 'bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20'
           }`}>
             <h3 className={`text-lg font-semibold mb-3 flex items-center gap-2 ${
