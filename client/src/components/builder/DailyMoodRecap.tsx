@@ -223,7 +223,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           {/* Trending Topics */}
           <div className={`p-5 rounded-xl transition-all duration-300 hover:scale-[1.01] ${
             themeMode === 'light'
-              ? 'bg-gradient-to-r from-[#FFF3E0] to-[#FCE4EC] border border-[#E6E6E6]'
+              ? 'bg-gradient-to-r from-[#FFF3E0] to-[#FCE4EC] border border-[#E6E6E6] theme-card-background theme-border'
               : 'bg-gradient-to-r from-orange-500/10 to-pink-500/10 border border-orange-500/20'
           }`}>
             <h3 className={`text-lg font-semibold tracking-tight mb-4 ${
