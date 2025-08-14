@@ -175,14 +175,14 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           {/* Top Movers */}
           <div className={`p-5 rounded-xl transition-all duration-300 hover:scale-[1.01] hover:shadow-lg ${
             themeMode === 'light'
-              ? 'bg-gradient-to-r from-[#E8F5E8] to-[#FFF3E0] border border-[#E6E6E6]'
+              ? 'bg-gradient-to-r from-[#E8F8F4] to-[#F3F4F6] border border-[#E6E6E6]'
               : 'bg-gradient-to-r from-emerald-500/10 to-amber-500/10 border border-emerald-500/20'
           }`}>
             <h3 className={`text-lg font-semibold mb-4 flex items-center gap-2 ${
               themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'
             }`}>
               🔥 Top Mood Movers
-              <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+              <div className="w-2 h-2 bg-[#22AB94] rounded-full animate-pulse" />
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-wrap gap-2">
               {topMovers.map((mover, index) => (
@@ -191,7 +191,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
                   className={cn(
                     "text-sm font-medium px-3 py-2 transition-all duration-300 hover:scale-105 cursor-pointer",
                     getSentimentBadge(mover.mood),
-                    mover.mood === 'bullish' ? 'hover:bg-emerald-500/30' : 'hover:bg-red-500/30'
+                    mover.mood === 'bullish' ? 'hover:bg-[#E8F8F4]/80' : 'hover:bg-[#FDECEC]/80'
                   )}
                 >
                   <span className="font-bold">${mover.symbol}</span> → {mover.mood === 'bullish' ? '📈' : '📉'}
