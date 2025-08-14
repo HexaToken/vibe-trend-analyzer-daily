@@ -238,8 +238,8 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
                   className={cn(
                     "text-sm font-medium px-3 py-2 flex items-center justify-center gap-1 transition-all duration-300 hover:scale-105 cursor-pointer",
                     topic.direction === 'up'
-                      ? "bg-[#F0FDF4] text-[#16A34A] border-[#16A34A]/30 hover:bg-[#DCFCE7] shadow-sm border border-[#E6E6E6]"
-                      : "bg-[#FEF2F2] text-[#DC2626] border-[#DC2626]/30 hover:bg-[#FEE2E2] shadow-sm border border-[#E6E6E6]"
+                      ? "sentiment-positive sentiment-positive-bg shadow-sm border theme-border"
+                      : "sentiment-negative sentiment-negative-bg shadow-sm border theme-border"
                   )}
                 >
                   <Hash className="w-3 h-3" />
