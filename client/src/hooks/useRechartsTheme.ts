@@ -154,25 +154,22 @@ export const useLockedDataColors = () => {
   }, [theme]);
 };
 
-// HOC for auto-applying locked theme to Recharts components
-export const withLockedTheme = <T extends object>(
-  Component: React.ComponentType<T>
-) => {
-  return (props: T) => {
-    const theme = useRechartsTheme();
-    
-    if (!theme) {
-      // Dark mode - pass through unchanged
-      return <Component {...props} />;
+// Helper function to get default chart configuration
+export const getLockedChartDefaults = (themeMode: string) => {
+  if (themeMode !== 'light') return null;
+
+  return {
+    strokeWidth: 2.5,
+    strokeOpacity: 1,
+    fillOpacity: 1,
+    colors: {
+      overallMood: '#3A7AFE',
+      stocks: '#22AB94',
+      news: '#7B61FF',
+      social: '#F23645',
+      positive: '#22AB94',
+      negative: '#F23645',
+      neutral: '#4B5563'
     }
-    
-    // Light mode - apply locked theme defaults
-    const themedProps = {
-      ...props,
-      // Apply theme defaults while allowing props to override
-      ...(theme.chartDefaults as any)
-    };
-    
-    return <Component {...themedProps} />;
   };
 };
