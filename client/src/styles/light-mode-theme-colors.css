@@ -106,9 +106,29 @@
   background-color: var(--color-social) !important;
 }
 
-/* Light mode only - Inline style overrides for legend items */
-:root:not(.dark) [style*="backgroundColor: 'var(--color-"] {
+/* Light mode only - Inline style overrides for CSS variables */
+:root:not(.dark) [style*="color: var(--color-overall-mood)"] {
+  color: var(--color-overall-mood) !important;
+}
+
+:root:not(.dark) [style*="backgroundColor: var(--color-"] {
+  background-color: unset !important;
+}
+
+:root:not(.dark) [style*="backgroundColor: 'var(--color-stocks')"] {
   background-color: var(--color-stocks) !important;
+}
+
+:root:not(.dark) [style*="backgroundColor: 'var(--color-news')"] {
+  background-color: var(--color-news) !important;
+}
+
+:root:not(.dark) [style*="backgroundColor: 'var(--color-social')"] {
+  background-color: var(--color-social) !important;
+}
+
+:root:not(.dark) [style*="backgroundColor: 'var(--color-overall-mood')"] {
+  background-color: var(--color-overall-mood) !important;
 }
 
 /* Light mode only - Chart lines with CSS variable support */
