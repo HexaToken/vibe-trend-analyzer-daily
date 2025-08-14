@@ -190,9 +190,8 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
               <path
                 d={generatePath(data.map((d) => d.score))}
                 fill="none"
-                stroke="#2563EB"
-                strokeWidth="2.5"
-                opacity="1"
+                stroke="url(#overallGradient)"
+                strokeWidth="0.8"
                 className="drop-shadow-sm"
               />
 
@@ -200,27 +199,30 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
               <path
                 d={generatePath(data.map((d) => d.stocks))}
                 fill="none"
-                stroke="#16A34A"
-                strokeWidth="2.5"
-                opacity="1"
+                stroke="#3B82F6"
+                strokeWidth="0.6"
+                strokeDasharray="2,2"
+                opacity="0.7"
               />
 
               {/* News Line */}
               <path
                 d={generatePath(data.map((d) => d.news))}
                 fill="none"
-                stroke="#7C3AED"
-                strokeWidth="2.5"
-                opacity="1"
+                stroke="#8B5CF6"
+                strokeWidth="0.6"
+                strokeDasharray="2,2"
+                opacity="0.7"
               />
 
               {/* Social Line */}
               <path
                 d={generatePath(data.map((d) => d.social))}
                 fill="none"
-                stroke="#DC2626"
-                strokeWidth="2.5"
-                opacity="1"
+                stroke="#6366F1"
+                strokeWidth="0.6"
+                strokeDasharray="2,2"
+                opacity="0.7"
               />
 
               {/* Data Points */}
@@ -233,7 +235,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
                     cx={x}
                     cy={y}
                     r="1"
-                    fill="#2563EB"
+                    fill="url(#overallGradient)"
                     className="drop-shadow-sm"
                   />
                 );
