@@ -192,7 +192,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
                 fill="none"
                 stroke="url(#overallGradient)"
                 strokeWidth="0.8"
-                className="drop-shadow-sm"
+                className="drop-shadow-sm chart-line-overall"
               />
 
               {/* Stocks Line */}
