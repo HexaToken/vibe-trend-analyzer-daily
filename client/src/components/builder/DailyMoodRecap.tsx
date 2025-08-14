@@ -141,10 +141,10 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
             <Badge className={cn(
               "animate-pulse",
               currentMood.overall >= 70
-                ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
+                ? "bg-[#E8F8F4] text-[#22AB94] border-[#22AB94]/30"
                 : currentMood.overall >= 50
-                ? "bg-amber-500/20 text-amber-400 border-amber-500/30"
-                : "bg-red-500/20 text-red-400 border-red-500/30"
+                ? "bg-[#F3F4F6] text-[#6B7280] border-[#6B7280]/30"
+                : "bg-[#FDECEC] text-[#F23645] border-[#F23645]/30"
             )}>
               {currentMood.trend === 'up' ? '↗' : '↘'} {currentMood.change}
             </Badge>
@@ -156,7 +156,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           {/* Mood Summary */}
           <div className={`p-5 rounded-xl transition-all duration-300 hover:scale-[1.01] hover:shadow-lg ${
             themeMode === 'light'
-              ? 'bg-gradient-to-r from-[#E8EAF6] to-[#F3E5F5] border border-[#E6E6E6]'
+              ? 'bg-gradient-to-r from-[rgba(58,122,254,0.1)] to-[rgba(123,97,255,0.1)] border border-[#E6E6E6]'
               : 'bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20'
           }`}>
             <h3 className={`text-lg font-semibold mb-3 flex items-center gap-2 ${
