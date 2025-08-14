@@ -10,6 +10,9 @@
 /* Import Chart Colors */
 @import './styles/chart-colors.css';
 
+/* Import UI Interactions */
+@import './styles/ui-interactions.css';
+
 /* Import Futuristic Chart Styling */
 @import './styles/futuristic-chart.css';
 
