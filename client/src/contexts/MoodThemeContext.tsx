@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { getIconFromEmoji, type IconConfig } from '../lib/iconUtils';
 import { LIGHT_THEME_COLORS, MOOD_COLORS, INTERACTIVE_COLORS, getMoodColor, getMoodTag, getMoodButton } from '../lib/moodColors';
+import { applyThemeLock, initializeThemeLock, injectThemeVariables } from '../utils/themeLock';
 
 export type ThemeMode = 'light' | 'dark' | 'dynamic';
 
