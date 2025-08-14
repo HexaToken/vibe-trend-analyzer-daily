@@ -333,7 +333,10 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                     ? "text-gray-700 group-hover:text-blue-500"
                     : "text-gray-300 group-hover:text-purple-400"
                 )} />
-                <Badge className="absolute -top-1 -right-1 w-4 h-4 p-0 bg-pink-500 text-white text-xs flex items-center justify-center rounded-full animate-pulse">
+                <Badge className={cn(
+                  "absolute -top-1 -right-1 w-4 h-4 p-0 text-white text-xs flex items-center justify-center rounded-full animate-pulse",
+                  isLightMode ? "bg-[#F23645]" : "bg-pink-500"
+                )}>
                   3
                 </Badge>
               </Button>
