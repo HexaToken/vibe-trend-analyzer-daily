@@ -4,6 +4,9 @@
 /* Import Sentiment Colors */
 @import './styles/sentiment-colors.css';
 
+/* Import Accent & Brand Colors */
+@import './styles/accent-brand-colors.css';
+
 /* Import Futuristic Chart Styling */
 @import './styles/futuristic-chart.css';
 
