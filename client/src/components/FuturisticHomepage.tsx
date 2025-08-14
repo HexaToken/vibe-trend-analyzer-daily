@@ -325,7 +325,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   </h1>
                 </div>
                 <p className={`text-xl max-w-2xl mx-auto mb-6 ${
-                  themeMode === 'light' ? 'text-[#1F2937]' : 'text-gray-300'
+                  themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-300'
                 }`}>
                   Advanced financial tools and analytics for portfolio management
                 </p>
@@ -2282,7 +2282,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
                   <CardHeader className="pb-4">
                     <CardTitle className="text-white flex items-center gap-2">
-                      <span className="text-xl">🧭</span>
+                      <span className="text-xl">����</span>
                       Dashboard Controls
                     </CardTitle>
                   </CardHeader>
