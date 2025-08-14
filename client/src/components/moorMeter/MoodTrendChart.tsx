@@ -57,9 +57,9 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
       <CardHeader className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
         <CardTitle className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Activity className="w-6 h-6 text-[#F4F4F6] drop-shadow-md" />
-            <span className="text-[#F4F4F6] drop-shadow-md">Mood Over Time</span>
-            <Badge variant="secondary" className="bg-white/20 text-[#F4F4F6] drop-shadow-md">
+            <Activity className="w-6 h-6 text-white drop-shadow-md" />
+            <span className="text-white font-semibold drop-shadow-md">Mood Over Time</span>
+            <Badge variant="secondary" className="bg-white/20 text-white drop-shadow-md">
               Trending
             </Badge>
           </div>
@@ -72,8 +72,8 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
                 onClick={() => setTimeframe(period as "1D" | "7D" | "30D")}
                 className={
                   timeframe === period
-                    ? "bg-white/20 text-[#F4F4F6] drop-shadow-md border-b-2 border-white"
-                    : "text-[#F4F4F6] drop-shadow-md hover:bg-white/10"
+                    ? "bg-white/20 text-white drop-shadow-md border-b-2 border-white"
+                    : "text-white drop-shadow-md hover:bg-white/10"
                 }
               >
                 {period}
