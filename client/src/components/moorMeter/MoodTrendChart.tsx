@@ -293,7 +293,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
           {/* Legend */}
           <div className="flex flex-wrap items-center justify-center gap-4 mt-4 p-3 bg-[#FAFAFA] dark:bg-gray-800 rounded-lg border border-[#E6E6E6] dark:border-gray-600 theme-card-background theme-border">
             <div className="flex items-center space-x-2">
-              <div className="w-3 h-0.5 bg-gradient-to-r from-green-500 to-red-500 rounded"></div>
+              <div className="w-3 h-0.5 bg-gradient-to-r from-green-500 to-red-500 rounded chart-line-overall" style={{backgroundColor: 'var(--color-overall-mood)'}}></div>
               <span className="text-sm text-[#374151] dark:text-gray-400 font-medium">
                 Overall Mood
               </span>
