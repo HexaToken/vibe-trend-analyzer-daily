@@ -96,12 +96,12 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
             </div>
             <div className="flex items-center justify-center mt-1">
               {scoreDiff >= 0 ? (
-                <TrendingUp className="w-3 h-3 text-green-500 mr-1" />
+                <TrendingUp className="w-3 h-3 text-[#22AB94] mr-1" />
               ) : (
-                <TrendingUp className="w-3 h-3 text-red-500 mr-1 rotate-180" />
+                <TrendingUp className="w-3 h-3 text-[#F23645] mr-1 rotate-180" />
               )}
               <span
-                className={`text-xs ${scoreDiff >= 0 ? "text-green-600" : "text-red-600"}`}
+                className={`text-xs ${scoreDiff >= 0 ? "text-[#22AB94]" : "text-[#F23645]"}`}
               >
                 {scoreDiff >= 0 ? "+" : ""}
                 {scoreDiff.toFixed(1)}
@@ -276,7 +276,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
                   return (
                     <span
                       key={index}
-                      className="text-xs text-gray-500 dark:text-gray-400"
+                      className="text-xs text-[#4B5563] dark:text-gray-400"
                     >
                       {point.date}
                     </span>
@@ -288,28 +288,28 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
           </div>
 
           {/* Legend */}
-          <div className="flex flex-wrap items-center justify-center gap-4 mt-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+          <div className="flex flex-wrap items-center justify-center gap-4 mt-4 p-3 bg-[#FAFAFA] dark:bg-gray-800 rounded-lg border border-[#E6E6E6] dark:border-gray-600">
             <div className="flex items-center space-x-2">
-              <div className="w-3 h-0.5 bg-gradient-to-r from-green-500 to-red-500 rounded"></div>
-              <span className="text-sm text-gray-600 dark:text-gray-400">
+              <div className="w-3 h-0.5 bg-[#3A7AFE] rounded"></div>
+              <span className="text-sm text-[#4B5563] dark:text-gray-400">
                 Overall Mood
               </span>
             </div>
             <div className="flex items-center space-x-2">
-              <div className="w-3 h-0.5 bg-blue-500 rounded opacity-70"></div>
-              <span className="text-sm text-gray-600 dark:text-gray-400">
+              <div className="w-3 h-0.5 bg-[#22AB94] rounded opacity-70"></div>
+              <span className="text-sm text-[#4B5563] dark:text-gray-400">
                 Stocks
               </span>
             </div>
             <div className="flex items-center space-x-2">
-              <div className="w-3 h-0.5 bg-purple-500 rounded opacity-70"></div>
-              <span className="text-sm text-gray-600 dark:text-gray-400">
+              <div className="w-3 h-0.5 bg-[#7B61FF] rounded opacity-70"></div>
+              <span className="text-sm text-[#4B5563] dark:text-gray-400">
                 News
               </span>
             </div>
             <div className="flex items-center space-x-2">
-              <div className="w-3 h-0.5 bg-indigo-500 rounded opacity-70"></div>
-              <span className="text-sm text-gray-600 dark:text-gray-400">
+              <div className="w-3 h-0.5 bg-[#F23645] rounded opacity-70"></div>
+              <span className="text-sm text-[#4B5563] dark:text-gray-400">
                 Social
               </span>
             </div>
@@ -317,7 +317,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
         </div>
 
         {/* Insights */}
-        <div className="mt-6 p-4 bg-gradient-to-r from-red-400 to-pink-500 text-white rounded-lg border border-red-200 dark:border-green-700">
+        <div className="mt-6 p-4 bg-gradient-to-r from-[#3A7AFE] to-[#7B61FF] text-white rounded-lg border border-[#E6E6E6] dark:border-green-700">
           <div className="flex items-center space-x-2 mb-2">
             <BarChart3 className="w-4 h-4 text-[#F4F4F6] drop-shadow-md" />
             <span className="font-medium text-[#F4F4F6] drop-shadow-md dark:text-green-300">
