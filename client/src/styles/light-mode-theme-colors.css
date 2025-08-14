@@ -522,3 +522,87 @@
 :root:not(.dark) .recharts-dot {
   fill: var(--color-overall-mood) !important;
 }
+
+/* ===== FINAL COMPREHENSIVE UI ELEMENT OVERRIDES ===== */
+
+/* Ensure all table and data display elements follow theme */
+:root:not(.dark) table {
+  background-color: var(--color-background) !important;
+  border-color: var(--color-border) !important;
+}
+
+:root:not(.dark) thead {
+  background-color: var(--color-card-background) !important;
+}
+
+:root:not(.dark) tbody tr:hover {
+  background-color: var(--color-hover-background) !important;
+}
+
+/* Ensure modal and dialog elements follow theme */
+:root:not(.dark) [role="dialog"] {
+  background-color: var(--color-background) !important;
+  border-color: var(--color-border) !important;
+}
+
+/* Ensure dropdown and select elements follow theme */
+:root:not(.dark) [role="listbox"] {
+  background-color: var(--color-background) !important;
+  border-color: var(--color-border) !important;
+}
+
+:root:not(.dark) [role="option"]:hover {
+  background-color: var(--color-hover-background) !important;
+}
+
+/* Ensure tooltip elements follow theme */
+:root:not(.dark) [role="tooltip"] {
+  background-color: var(--color-card-background) !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-neutral-text) !important;
+}
+
+/* Ensure progress bars and indicators follow theme */
+:root:not(.dark) .progress-bar {
+  background-color: var(--color-overall-mood) !important;
+}
+
+/* Global enforcement for any missed elements */
+:root:not(.dark) * {
+  --tw-text-opacity: 1;
+}
+
+/* Force override for any stubborn utility classes */
+:root:not(.dark) .text-gray-900 {
+  color: var(--color-neutral-text) !important;
+}
+
+:root:not(.dark) .text-gray-800 {
+  color: var(--color-neutral-text) !important;
+}
+
+:root:not(.dark) .text-gray-700 {
+  color: var(--color-axis) !important;
+}
+
+:root:not(.dark) .text-gray-500 {
+  color: var(--color-axis) !important;
+}
+
+:root:not(.dark) .bg-gray-900 {
+  background-color: var(--color-neutral-text) !important;
+}
+
+:root:not(.dark) .bg-gray-800 {
+  background-color: var(--color-axis) !important;
+}
+
+/* Ensure shadow utilities respect theme */
+:root:not(.dark) .shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Final override for any missed color utilities */
+:root:not(.dark) .text-current {
+  color: var(--color-neutral-text) !important;
+}
