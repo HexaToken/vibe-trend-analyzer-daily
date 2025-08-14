@@ -264,7 +264,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
               themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'
             }`}>
               🔄 Mood Flip of the Day
-              <div className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse" />
+              <div className="w-2 h-2 bg-[#7B61FF] rounded-full animate-pulse" />
             </h3>
             <div className="flex flex-wrap items-center gap-2 sm:gap-3">
               <Badge className="bg-indigo-500/20 text-indigo-400 border-indigo-500/30 font-semibold transition-all duration-300 hover:scale-105">
