@@ -52,6 +52,81 @@ body:not(.dark) .light-theme-force {
   --color-neutral-text: #4B5563 !important;
 }
 
+/* ===== GLOBAL LAYOUT LOCKING (LIGHT MODE ONLY) ===== */
+
+/* Lock body and main container styles */
+:root:not(.dark) body,
+html:not(.dark) body,
+.light-theme-force body {
+  background-color: var(--color-background) !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* Lock main content areas */
+:root:not(.dark) main,
+:root:not(.dark) .main-content,
+.light-theme-force main,
+.light-theme-force .main-content {
+  background-color: var(--color-background) !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* Lock all cards and containers */
+:root:not(.dark) .card,
+:root:not(.dark) [class*="card"],
+:root:not(.dark) [data-card],
+.light-theme-force .card,
+.light-theme-force [class*="card"],
+.light-theme-force [data-card] {
+  background-color: var(--color-card-background) !important;
+  border-color: var(--color-border) !important;
+}
+
+/* Lock all borders and dividers */
+:root:not(.dark) hr,
+:root:not(.dark) .border,
+:root:not(.dark) [class*="border"],
+.light-theme-force hr,
+.light-theme-force .border,
+.light-theme-force [class*="border"] {
+  border-color: var(--color-border) !important;
+}
+
+/* Lock text hierarchy */
+:root:not(.dark) h1,
+:root:not(.dark) h2,
+:root:not(.dark) h3,
+:root:not(.dark) h4,
+:root:not(.dark) h5,
+:root:not(.dark) h6,
+:root:not(.dark) .text-primary,
+.light-theme-force h1,
+.light-theme-force h2,
+.light-theme-force h3,
+.light-theme-force h4,
+.light-theme-force h5,
+.light-theme-force h6,
+.light-theme-force .text-primary {
+  color: var(--color-text-primary) !important;
+}
+
+:root:not(.dark) .text-secondary,
+:root:not(.dark) .text-muted,
+.light-theme-force .text-secondary,
+.light-theme-force .text-muted {
+  color: var(--color-text-secondary) !important;
+}
+
+/* Lock hover states globally */
+:root:not(.dark) .hover\:bg-gray-50:hover,
+:root:not(.dark) .hover\:bg-gray-100:hover,
+:root:not(.dark) .hover\:bg-hover:hover,
+.light-theme-force .hover\:bg-gray-50:hover,
+.light-theme-force .hover\:bg-gray-100:hover,
+.light-theme-force .hover\:bg-hover:hover {
+  background-color: var(--color-hover-background) !important;
+}
+
 /* Light mode only - Chart lines */
 :root:not(.dark) .chart-line-overall {
   stroke: var(--color-overall-mood) !important;
