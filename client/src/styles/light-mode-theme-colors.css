@@ -105,3 +105,13 @@
 :root:not(.dark) .metric-social-progress {
   background-color: var(--color-social) !important;
 }
+
+/* Light mode only - Inline style overrides for legend items */
+:root:not(.dark) [style*="backgroundColor: 'var(--color-"] {
+  background-color: var(--color-stocks) !important;
+}
+
+/* Light mode only - Chart lines with CSS variable support */
+:root:not(.dark) .chart-line-overall[stroke="url(#overallGradient)"] {
+  stroke: var(--color-overall-mood) !important;
+}
