@@ -1,0 +1,208 @@
+/* ===== ACCENT & BRAND COLORS - NEW PALETTE ===== */
+
+/* Light Mode Accent & Brand Colors */
+:root:not(.dark) {
+  /* Accent Colors - New Specification */
+  --accent-primary-blue: #3A7AFE;
+  --accent-secondary-purple: #7B61FF;
+  --hover-background: #F3F4F6;
+  --active-border: #3A7AFE;
+}
+
+/* Primary Accent Blue */
+:root:not(.dark) .accent-primary,
+:root:not(.dark) .text-accent-primary,
+:root:not(.dark) .primary-blue {
+  color: #3A7AFE !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .bg-accent-primary,
+:root:not(.dark) .bg-primary-blue {
+  background-color: #3A7AFE !important;
+  color: #FFFFFF !important;
+  border-color: #3A7AFE !important;
+}
+
+/* Secondary Accent Purple */
+:root:not(.dark) .accent-secondary,
+:root:not(.dark) .text-accent-secondary,
+:root:not(.dark) .secondary-purple {
+  color: #7B61FF !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .bg-accent-secondary,
+:root:not(.dark) .bg-secondary-purple {
+  background-color: #7B61FF !important;
+  color: #FFFFFF !important;
+  border-color: #7B61FF !important;
+}
+
+/* Hover States */
+:root:not(.dark) .hover-bg:hover,
+:root:not(.dark) .hover\:bg-hover:hover {
+  background-color: #F3F4F6 !important;
+  transition: background-color 0.2s ease !important;
+}
+
+/* Active Elements */
+:root:not(.dark) .active-element,
+:root:not(.dark) .border-active,
+:root:not(.dark) [data-state="active"] {
+  border-color: #3A7AFE !important;
+  color: #3A7AFE !important;
+}
+
+:root:not(.dark) .active-element-underline {
+  border-bottom: 2px solid #3A7AFE !important;
+}
+
+/* Button Styling */
+:root:not(.dark) .btn-primary {
+  background-color: #3A7AFE !important;
+  color: #FFFFFF !important;
+  border: 1px solid #3A7AFE !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+}
+
+:root:not(.dark) .btn-primary:hover {
+  background-color: #2563EB !important;
+  border-color: #2563EB !important;
+  transform: translateY(-1px) !important;
+}
+
+:root:not(.dark) .btn-secondary {
+  background-color: #7B61FF !important;
+  color: #FFFFFF !important;
+  border: 1px solid #7B61FF !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+}
+
+:root:not(.dark) .btn-secondary:hover {
+  background-color: #6D28D9 !important;
+  border-color: #6D28D9 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Tab Styling */
+:root:not(.dark) .tab-active {
+  background-color: #3A7AFE !important;
+  color: #FFFFFF !important;
+  border: 1px solid #3A7AFE !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .tab-inactive {
+  background-color: #F3F4F6 !important;
+  color: #4B5563 !important;
+  border: 1px solid transparent !important;
+  font-weight: 500 !important;
+}
+
+:root:not(.dark) .tab-inactive:hover {
+  background-color: #E5E7EB !important;
+  color: #1A1A1A !important;
+}
+
+/* Category Tags */
+:root:not(.dark) .category-tag {
+  background-color: rgba(123, 97, 255, 0.1) !important;
+  color: #7B61FF !important;
+  border: 1px solid #7B61FF !important;
+  font-weight: 600 !important;
+  padding: 4px 12px !important;
+  border-radius: 20px !important;
+}
+
+/* Focus States */
+:root:not(.dark) .focus-ring:focus,
+:root:not(.dark) input:focus,
+:root:not(.dark) button:focus,
+:root:not(.dark) select:focus {
+  outline: 2px solid #3A7AFE !important;
+  outline-offset: 2px !important;
+  border-color: #3A7AFE !important;
+}
+
+/* Link Styling */
+:root:not(.dark) .link-primary,
+:root:not(.dark) a:not(.btn) {
+  color: #3A7AFE !important;
+  text-decoration: underline !important;
+  text-decoration-color: #3A7AFE !important;
+  font-weight: 500 !important;
+}
+
+:root:not(.dark) .link-primary:hover,
+:root:not(.dark) a:not(.btn):hover {
+  color: #2563EB !important;
+  text-decoration-color: #2563EB !important;
+}
+
+/* Badge Styling with Accent Colors */
+:root:not(.dark) .badge-primary-blue {
+  background: rgba(58, 122, 254, 0.1) !important;
+  color: #3A7AFE !important;
+  border: 1px solid #3A7AFE !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .badge-secondary-purple {
+  background: rgba(123, 97, 255, 0.1) !important;
+  color: #7B61FF !important;
+  border: 1px solid #7B61FF !important;
+  font-weight: 600 !important;
+}
+
+/* Disabled States */
+:root:not(.dark) .disabled,
+:root:not(.dark) :disabled,
+:root:not(.dark) [aria-disabled="true"] {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+}
+
+/* Progress Indicators */
+:root:not(.dark) .progress-primary {
+  background-color: rgba(58, 122, 254, 0.2) !important;
+}
+
+:root:not(.dark) .progress-primary .progress-fill {
+  background-color: #3A7AFE !important;
+}
+
+/* Notification Styling */
+:root:not(.dark) .notification-primary {
+  background-color: rgba(58, 122, 254, 0.1) !important;
+  border-left: 4px solid #3A7AFE !important;
+  color: #1A1A1A !important;
+}
+
+:root:not(.dark) .notification-secondary {
+  background-color: rgba(123, 97, 255, 0.1) !important;
+  border-left: 4px solid #7B61FF !important;
+  color: #1A1A1A !important;
+}
+
+/* Icon Styling */
+:root:not(.dark) .icon-primary {
+  color: #3A7AFE !important;
+}
+
+:root:not(.dark) .icon-secondary {
+  color: #7B61FF !important;
+}
+
+/* Loading Indicators */
+:root:not(.dark) .spinner-primary {
+  border-color: rgba(58, 122, 254, 0.2) !important;
+  border-top-color: #3A7AFE !important;
+}
+
+:root:not(.dark) .spinner-secondary {
+  border-color: rgba(123, 97, 255, 0.2) !important;
+  border-top-color: #7B61FF !important;
+}
