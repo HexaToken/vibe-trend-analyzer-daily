@@ -21,7 +21,6 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
   timeframe,
   setTimeframe,
 }) => {
-  console.log("MoodTrendChart is rendering with data:", data);
   const maxScore = Math.max(
     ...data.map((d) => Math.max(d.score, d.stocks, d.news, d.social)),
   );
