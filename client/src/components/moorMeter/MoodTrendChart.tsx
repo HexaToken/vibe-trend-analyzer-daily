@@ -101,7 +101,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
                 <TrendingUp className="w-3 h-3 text-[#F23645] mr-1 rotate-180" />
               )}
               <span
-                className={`text-xs ${scoreDiff >= 0 ? "text-[#22AB94]" : "text-[#F23645]"}`}
+                className={`text-xs font-medium ${scoreDiff >= 0 ? "text-[#22AB94]" : "text-[#F23645]"}`}
               >
                 {scoreDiff >= 0 ? "+" : ""}
                 {scoreDiff.toFixed(1)}
@@ -110,7 +110,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
           </div>
 
           <div className="text-center p-3 rounded-lg bg-[#FAFAFA] dark:bg-blue-900/20 hover:bg-[#F3F4F6] transition-colors">
-            <div className="text-2xl font-bold text-[#22AB94] dark:text-blue-400">
+            <div className="text-2xl font-bold tracking-tight text-[#22AB94] dark:text-blue-400">
               {Math.round(data[data.length - 1]?.stocks || 50)}
             </div>
             <div className="text-sm text-[#4B5563] dark:text-gray-400">
@@ -125,7 +125,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
           </div>
 
           <div className="text-center p-3 rounded-lg bg-[#FAFAFA] dark:bg-purple-900/20 hover:bg-[#F3F4F6] transition-colors">
-            <div className="text-2xl font-bold text-[#7B61FF] dark:text-purple-400">
+            <div className="text-2xl font-bold tracking-tight text-[#7B61FF] dark:text-purple-400">
               {Math.round(data[data.length - 1]?.news || 50)}
             </div>
             <div className="text-sm text-[#4B5563] dark:text-gray-400">News</div>
@@ -138,7 +138,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
           </div>
 
           <div className="text-center p-3 rounded-lg bg-[#FAFAFA] dark:bg-indigo-900/20 hover:bg-[#F3F4F6] transition-colors">
-            <div className="text-2xl font-bold text-[#F23645] dark:text-indigo-400">
+            <div className="text-2xl font-bold tracking-tight text-[#F23645] dark:text-indigo-400">
               {Math.round(data[data.length - 1]?.social || 50)}
             </div>
             <div className="text-sm text-[#4B5563] dark:text-gray-400">
@@ -173,7 +173,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
                   className="absolute w-full border-t border-[#EFEFEF] dark:border-gray-600 border-dashed"
                   style={{ top: `${100 - line}%` }}
                 >
-                  <span className="absolute -left-8 -top-2 text-xs text-[#4B5563] dark:text-gray-400">
+                  <span className="absolute -left-8 -top-2 text-xs font-medium text-[#4B5563] dark:text-gray-400">
                     {Math.round(minScore + (line / 100) * range)}
                   </span>
                 </div>
@@ -276,7 +276,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
                   return (
                     <span
                       key={index}
-                      className="text-xs text-[#4B5563] dark:text-gray-400"
+                      className="text-xs font-medium text-[#4B5563] dark:text-gray-400"
                     >
                       {point.date}
                     </span>
