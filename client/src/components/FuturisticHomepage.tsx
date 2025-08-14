@@ -350,7 +350,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     }}
                     className={`pl-12 pr-20 py-4 rounded-xl text-lg focus:ring-0 focus:outline-none ${
                       themeMode === 'light'
-                        ? 'bg-white border-[#E6E6E6] text-[#1A1A1A] placeholder-[#888] focus:bg-white focus:border-[#3F51B5]/50'
+                        ? 'bg-white border-[#E6E6E6] text-[#1A1A1A] placeholder-[#888] focus:bg-white focus:border-[#3A7AFE]/50'
                         : 'bg-black/40 border-purple-500/30 text-white placeholder-gray-400 focus:bg-black/60 focus:border-blue-400/50 backdrop-blur-sm'
                     }`}
                   />
@@ -456,7 +456,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         🎯 Sentiment Risk Meter
                         <Badge className={`ml-auto ${
                           themeMode === 'light'
-                            ? 'bg-[#F1F8E9] text-[#388E3C] border-[#388E3C]/30'
+                            ? 'bg-[#E8F8F4] text-[#22AB94] border-[#22AB94]/30'
                             : 'bg-blue-500/20 text-blue-300 border-blue-500/30'
                         }`}>
                           ${selectedFinanceStock}
@@ -502,7 +502,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                           <span className={themeMode === 'light' ? 'text-[#F44336]' : 'text-red-400'}>High</span>
                         </div>
                         <div className={`h-2 rounded-full overflow-hidden ${
-                          themeMode === 'light' ? 'bg-[#E0E0E0]' : 'bg-gray-700'
+                          themeMode === 'light' ? 'bg-[#E6E6E6]' : 'bg-gray-700'
                         }`}>
                           <div className={`h-full transition-all duration-1000 ${
                             selectedFinanceStock === 'TSLA' ? 'w-5/6 bg-gradient-to-r from-yellow-400 to-red-400' :
@@ -2828,9 +2828,9 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         <Badge className={cn(
                           "ml-4 flex-shrink-0 text-xs font-medium px-3 py-1 rounded-full",
                           themeMode === 'light'
-                            ? news.sentiment === 'bullish' ? 'bg-[#E8F5E9] text-[#4CAF50] border-[#4CAF50]/20' :
-                              news.sentiment === 'bearish' ? 'bg-[#FFEBEE] text-[#F44336] border-[#F44336]/20' :
-                              'bg-[#FFF8E1] text-[#FFB300] border-[#FFB300]/20'
+                            ? news.sentiment === 'bullish' ? 'bg-[#E8F8F4] text-[#22AB94] border-[#22AB94]/20' :
+                              news.sentiment === 'bearish' ? 'bg-[#FDECEC] text-[#F23645] border-[#F23645]/20' :
+                              'bg-[#F3F4F6] text-[#6B7280] border-[#6B7280]/20'
                             : news.sentiment === 'bullish' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' :
                               news.sentiment === 'bearish' ? 'bg-red-500/20 text-red-400 border-red-500/30' :
                               'bg-gray-500/20 text-gray-400 border-gray-500/30'
@@ -2938,7 +2938,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
             {/* Footer Status */}
             <div className="text-center">
               <Badge className={themeMode === 'light'
-                ? "bg-[#E8F5E9] text-[#4CAF50] border-[#4CAF50]/30"
+                ? "bg-[#E8F8F4] text-[#22AB94] border-[#22AB94]/30"
                 : "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
               }>
                 Mood Score API: ✅ Live
