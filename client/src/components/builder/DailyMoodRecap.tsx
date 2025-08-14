@@ -84,9 +84,9 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
   };
 
   const getMoodGlow = (mood: number) => {
-    if (mood >= 70) return 'shadow-lg shadow-emerald-500/20 border-emerald-500/30';
-    if (mood >= 50) return 'shadow-lg shadow-amber-500/20 border-amber-500/30';
-    return 'shadow-lg shadow-red-500/20 border-red-500/30';
+    if (mood >= 70) return 'shadow-lg shadow-[#22AB94]/20 border-[#22AB94]/30';
+    if (mood >= 50) return 'shadow-lg shadow-[#6B7280]/20 border-[#6B7280]/30';
+    return 'shadow-lg shadow-[#F23645]/20 border-[#F23645]/30';
   };
 
 
@@ -105,14 +105,14 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           </div>
           <h2 className={`text-2xl sm:text-3xl font-bold text-center sm:text-left ${
             themeMode === 'light'
-              ? 'text-[#1E1E1E]'
+              ? 'text-[#1A1A1A]'
               : 'bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent'
           }`}>
             🧠 Daily Mood Recap
           </h2>
         </div>
         <p className={`text-base sm:text-lg px-4 sm:px-0 ${
-          themeMode === 'light' ? 'text-[#374151]' : 'text-gray-300'
+          themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-300'
         }`}>
           AI-generated summary of today's market emotions, sentiment moves, and trending topics
         </p>
@@ -134,7 +134,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
 
         <CardHeader className={themeMode === 'light' ? "border-b border-[#E0E0E0]" : "border-b border-purple-500/20"}>
           <CardTitle className={`flex items-center gap-3 ${
-            themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+            themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'
           }`}>
             <Brain className="w-6 h-6 text-purple-400 animate-pulse" />
             <span>AI Market Mood Summary</span>
@@ -160,13 +160,13 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
               : 'bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20'
           }`}>
             <h3 className={`text-lg font-semibold mb-3 flex items-center gap-2 ${
-              themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+              themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'
             }`}>
               📈 Mood Summary
               <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
             </h3>
             <p className={`text-base leading-relaxed ${
-              themeMode === 'light' ? 'text-[#374151]' : 'text-gray-300'
+              themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-300'
             }`}>
               {moodSummary}
             </p>
@@ -179,7 +179,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
               : 'bg-gradient-to-r from-emerald-500/10 to-amber-500/10 border border-emerald-500/20'
           }`}>
             <h3 className={`text-lg font-semibold mb-4 flex items-center gap-2 ${
-              themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+              themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'
             }`}>
               🔥 Top Mood Movers
               <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
@@ -208,13 +208,13 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
               : 'bg-gradient-to-r from-blue-500/10 to-green-500/10 border border-blue-500/20'
           }`}>
             <h3 className={`text-lg font-semibold mb-3 flex items-center gap-2 ${
-              themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+              themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'
             }`}>
               📰 News Headlines Summary
               <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
             </h3>
             <p className={`text-base leading-relaxed ${
-              themeMode === 'light' ? 'text-[#374151]' : 'text-gray-300'
+              themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-300'
             }`}>
               {headlineSummary}
             </p>
@@ -227,7 +227,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
               : 'bg-gradient-to-r from-orange-500/10 to-pink-500/10 border border-orange-500/20'
           }`}>
             <h3 className={`text-lg font-semibold mb-4 ${
-              themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+              themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'
             }`}>
               🔥 Trending Topics
             </h3>
@@ -261,7 +261,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
               : 'bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20'
           }`}>
             <h3 className={`text-lg font-semibold mb-3 flex items-center gap-2 ${
-              themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+              themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'
             }`}>
               🔄 Mood Flip of the Day
               <div className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse" />
@@ -271,10 +271,10 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
                 ${moodFlip.symbol}
               </Badge>
               <span className={`text-sm hidden sm:inline ${
-                themeMode === 'light' ? 'text-[#374151]' : 'text-gray-400'
+                themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-400'
               }`}>flipped from</span>
               <span className={`text-xs sm:hidden ${
-                themeMode === 'light' ? 'text-[#374151]' : 'text-gray-400'
+                themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-400'
               }`}>from</span>
               <Badge className={cn(getSentimentBadge(moodFlip.from), "transition-all duration-300 hover:scale-105")}>
                 {moodFlip.from}
