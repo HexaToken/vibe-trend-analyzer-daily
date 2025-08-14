@@ -103,7 +103,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           }`}>
             <Brain className="w-6 h-6 text-[#3A7AFE]" />
           </div>
-          <h2 className={`text-2xl sm:text-3xl font-bold text-center sm:text-left ${
+          <h2 className={`text-2xl sm:text-3xl font-semibold text-center sm:text-left tracking-tight ${
             themeMode === 'light'
               ? 'text-[#1A1A1A]'
               : 'bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent'
