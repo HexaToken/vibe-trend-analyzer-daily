@@ -252,15 +252,15 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
                 >
                   <stop
                     offset="0%"
-                    style={{ stopColor: "#3A7AFE", stopOpacity: 1 }}
+                    style={{ stopColor: "#10B981", stopOpacity: 1 }}
                   />
                   <stop
                     offset="50%"
-                    style={{ stopColor: "#7B61FF", stopOpacity: 1 }}
+                    style={{ stopColor: "#F59E0B", stopOpacity: 1 }}
                   />
                   <stop
                     offset="100%"
-                    style={{ stopColor: "#F23645", stopOpacity: 1 }}
+                    style={{ stopColor: "#EF4444", stopOpacity: 1 }}
                   />
                 </linearGradient>
               </defs>
