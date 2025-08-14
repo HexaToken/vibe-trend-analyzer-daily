@@ -421,3 +421,104 @@
   background-color: var(--color-card-background) !important;
   border-color: var(--color-border) !important;
 }
+
+/* ===== CHART STROKE AND FILL COLOR OVERRIDES ===== */
+/* Replace hardcoded chart colors with theme variables */
+
+/* SVG stroke color overrides for charts */
+:root:not(.dark) svg path[stroke="#10b981"] {
+  stroke: var(--color-positive-text) !important;
+}
+
+:root:not(.dark) svg path[stroke="#16C784"] {
+  stroke: var(--color-positive-text) !important;
+}
+
+:root:not(.dark) svg path[stroke="#ef4444"] {
+  stroke: var(--color-negative-text) !important;
+}
+
+:root:not(.dark) svg path[stroke="#EA3943"] {
+  stroke: var(--color-negative-text) !important;
+}
+
+:root:not(.dark) svg path[stroke="#3B82F6"] {
+  stroke: var(--color-stocks) !important;
+}
+
+:root:not(.dark) svg path[stroke="#8B5CF6"] {
+  stroke: var(--color-news) !important;
+}
+
+:root:not(.dark) svg path[stroke="#6366F1"] {
+  stroke: var(--color-social) !important;
+}
+
+:root:not(.dark) svg path[stroke="#f59e0b"] {
+  stroke: var(--color-neutral-text) !important;
+}
+
+:root:not(.dark) svg path[stroke="#6b7280"] {
+  stroke: var(--color-axis) !important;
+}
+
+/* SVG fill color overrides */
+:root:not(.dark) svg circle[fill="#10b981"] {
+  fill: var(--color-positive-text) !important;
+}
+
+:root:not(.dark) svg circle[fill="#22c55e"] {
+  fill: var(--color-positive-text) !important;
+}
+
+:root:not(.dark) svg [fill="#3b82f6"] {
+  fill: var(--color-stocks) !important;
+}
+
+:root:not(.dark) svg [fill="#666"] {
+  fill: var(--color-axis) !important;
+}
+
+:root:not(.dark) svg [fill="#333"] {
+  fill: var(--color-gridline) !important;
+}
+
+/* Grid and background pattern overrides */
+:root:not(.dark) svg path[stroke="#333"] {
+  stroke: var(--color-gridline) !important;
+}
+
+/* Chart trend line overrides for futuristic charts */
+:root:not(.dark) svg path[stroke="#00FFA3"] {
+  stroke: var(--color-positive-text) !important;
+}
+
+:root:not(.dark) svg path[stroke="#00D4FF"] {
+  stroke: var(--color-stocks) !important;
+}
+
+:root:not(.dark) svg path[stroke="#FF00FF"] {
+  stroke: var(--color-social) !important;
+}
+
+:root:not(.dark) svg path[stroke="#00E5FF"] {
+  stroke: var(--color-stocks) !important;
+}
+
+:root:not(.dark) svg path[stroke="#60a5fa"] {
+  stroke: var(--color-stocks) !important;
+}
+
+/* Recharts component color overrides */
+:root:not(.dark) .recharts-line-curve {
+  stroke: var(--color-overall-mood) !important;
+}
+
+:root:not(.dark) .recharts-bar {
+  fill: var(--color-overall-mood) !important;
+}
+
+/* Ensure dots and markers follow theme colors */
+:root:not(.dark) .recharts-dot {
+  fill: var(--color-overall-mood) !important;
+}
