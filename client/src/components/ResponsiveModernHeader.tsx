@@ -413,10 +413,10 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                       "w-full justify-start text-left py-3 rounded-xl transition-all duration-200",
                       activeSection === key
                         ? isLightMode
-                          ? "text-pink-600 bg-pink-500/10 border border-pink-500/20"
+                          ? "text-white bg-[#3A7AFE] font-semibold shadow-sm border border-[#3A7AFE]"
                           : "text-pink-400 bg-pink-500/10 border border-pink-500/20"
                         : isLightMode
-                          ? "text-gray-900 hover:text-blue-600 hover:bg-blue-500/10"
+                          ? "text-[#4B5563] hover:text-[#3A7AFE] hover:bg-[#F3F4F6]"
                           : "text-gray-300 hover:text-gray-200 hover:bg-purple-500/20"
                     )}
                   >
