@@ -277,7 +277,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
   return (
     <div className={`min-h-screen relative overflow-hidden ${
       themeMode === 'light'
-        ? 'bg-[#F7F9FB]'
+        ? 'bg-white'
         : 'bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900'
     }`}>
       {/* Ambient Background Effects - Only in Dark Mode */}
