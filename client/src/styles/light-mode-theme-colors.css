@@ -233,3 +233,103 @@
 :root:not(.dark) .bg-\[#F5F7FA\] {
   background-color: var(--color-card-background) !important;
 }
+
+/* ===== SENTIMENT COLOR COMPLIANCE OVERRIDES ===== */
+/* Replace hardcoded sentiment colors with theme variables */
+
+/* Green sentiment overrides (positive) */
+:root:not(.dark) .bg-green-100 {
+  background-color: color-mix(in srgb, var(--color-positive-text) 15%, var(--color-background)) !important;
+}
+
+:root:not(.dark) .text-green-700 {
+  color: var(--color-positive-text) !important;
+}
+
+:root:not(.dark) .text-green-600 {
+  color: var(--color-positive-text) !important;
+}
+
+:root:not(.dark) .border-green-200 {
+  border-color: color-mix(in srgb, var(--color-positive-text) 30%, var(--color-border)) !important;
+}
+
+:root:not(.dark) .border-green-300 {
+  border-color: color-mix(in srgb, var(--color-positive-text) 40%, var(--color-border)) !important;
+}
+
+:root:not(.dark) .hover\:bg-green-50:hover {
+  background-color: color-mix(in srgb, var(--color-positive-text) 8%, var(--color-background)) !important;
+}
+
+:root:not(.dark) .hover\:bg-green-100:hover {
+  background-color: color-mix(in srgb, var(--color-positive-text) 15%, var(--color-background)) !important;
+}
+
+/* Red sentiment overrides (negative) */
+:root:not(.dark) .bg-red-100 {
+  background-color: color-mix(in srgb, var(--color-negative-text) 15%, var(--color-background)) !important;
+}
+
+:root:not(.dark) .text-red-700 {
+  color: var(--color-negative-text) !important;
+}
+
+:root:not(.dark) .text-red-600 {
+  color: var(--color-negative-text) !important;
+}
+
+:root:not(.dark) .border-red-200 {
+  border-color: color-mix(in srgb, var(--color-negative-text) 30%, var(--color-border)) !important;
+}
+
+:root:not(.dark) .border-red-300 {
+  border-color: color-mix(in srgb, var(--color-negative-text) 40%, var(--color-border)) !important;
+}
+
+:root:not(.dark) .hover\:bg-red-50:hover {
+  background-color: color-mix(in srgb, var(--color-negative-text) 8%, var(--color-background)) !important;
+}
+
+:root:not(.dark) .hover\:bg-red-100:hover {
+  background-color: color-mix(in srgb, var(--color-negative-text) 15%, var(--color-background)) !important;
+}
+
+/* Yellow/Orange sentiment overrides (neutral) */
+:root:not(.dark) .bg-yellow-100 {
+  background-color: color-mix(in srgb, var(--color-neutral-text) 15%, var(--color-background)) !important;
+}
+
+:root:not(.dark) .text-yellow-700 {
+  color: var(--color-neutral-text) !important;
+}
+
+:root:not(.dark) .border-yellow-300 {
+  border-color: color-mix(in srgb, var(--color-neutral-text) 40%, var(--color-border)) !important;
+}
+
+/* News and social-specific color overrides */
+:root:not(.dark) .bg-purple-100 {
+  background-color: color-mix(in srgb, var(--color-news) 15%, var(--color-background)) !important;
+}
+
+:root:not(.dark) .text-purple-700 {
+  color: var(--color-news) !important;
+}
+
+:root:not(.dark) .border-purple-300 {
+  border-color: color-mix(in srgb, var(--color-news) 40%, var(--color-border)) !important;
+}
+
+/* Stock-specific color overrides */
+:root:not(.dark) .bg-blue-100 {
+  background-color: color-mix(in srgb, var(--color-stocks) 15%, var(--color-background)) !important;
+}
+
+:root:not(.dark) .text-blue-700 {
+  color: var(--color-stocks) !important;
+}
+
+:root:not(.dark) .border-blue-300 {
+  border-color: color-mix(in srgb, var(--color-stocks) 40%, var(--color-border)) !important;
+}
