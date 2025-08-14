@@ -137,16 +137,16 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
             </div>
           </div>
 
-          <div className="text-center p-3 rounded-lg bg-indigo-50 dark:bg-indigo-900/20">
-            <div className="text-2xl font-bold dark:text-indigo-400 text-[#1f2937]">
+          <div className="text-center p-3 rounded-lg bg-[#FAFAFA] dark:bg-indigo-900/20 hover:bg-[#F3F4F6] transition-colors">
+            <div className="text-2xl font-bold text-[#F23645] dark:text-indigo-400">
               {Math.round(data[data.length - 1]?.social || 50)}
             </div>
-            <div className="text-sm text-gray-600 dark:text-gray-400">
+            <div className="text-sm text-[#4B5563] dark:text-gray-400">
               Social
             </div>
-            <div className="w-full bg-indigo-200 dark:bg-indigo-800 rounded-full h-1 mt-2">
+            <div className="w-full bg-[#E6E6E6] dark:bg-indigo-800 rounded-full h-1 mt-2">
               <div
-                className="bg-indigo-500 h-1 rounded-full transition-all duration-300"
+                className="bg-[#F23645] h-1 rounded-full transition-all duration-300"
                 style={{ width: `${data[data.length - 1]?.social || 50}%` }}
               ></div>
             </div>
@@ -156,24 +156,24 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
         {/* Chart Area */}
         <div className="relative">
           <div className="mb-4 text-center">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+            <h3 className="text-lg font-semibold text-[#1A1A1A] dark:text-white mb-2">
               Sentiment Trend - Last {timeframe}
             </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+            <p className="text-sm text-[#9CA3AF] dark:text-gray-400">
               Multi-source sentiment analysis over time
             </p>
           </div>
 
-          <div className="relative h-64 bg-gray-50 dark:bg-gray-800 rounded-xl p-4 overflow-hidden">
+          <div className="relative h-64 bg-white dark:bg-gray-800 rounded-xl p-4 overflow-hidden border border-[#E6E6E6] dark:border-gray-600">
             {/* Grid Lines */}
             <div className="absolute inset-4">
               {[0, 25, 50, 75, 100].map((line) => (
                 <div
                   key={line}
-                  className="absolute w-full border-t border-gray-200 dark:border-gray-600 border-dashed"
+                  className="absolute w-full border-t border-[#EFEFEF] dark:border-gray-600 border-dashed"
                   style={{ top: `${100 - line}%` }}
                 >
-                  <span className="absolute -left-8 -top-2 text-xs text-gray-500 dark:text-gray-400">
+                  <span className="absolute -left-8 -top-2 text-xs text-[#4B5563] dark:text-gray-400">
                     {Math.round(minScore + (line / 100) * range)}
                   </span>
                 </div>
@@ -190,7 +190,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
               <path
                 d={generatePath(data.map((d) => d.score))}
                 fill="none"
-                stroke="url(#overallGradient)"
+                stroke="#3A7AFE"
                 strokeWidth="0.8"
                 className="drop-shadow-sm"
               />
