@@ -190,8 +190,9 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
               <path
                 d={generatePath(data.map((d) => d.score))}
                 fill="none"
-                stroke="#3A7AFE"
-                strokeWidth="0.8"
+                stroke="#2563EB"
+                strokeWidth="2.5"
+                opacity="1"
                 className="drop-shadow-sm"
               />
 
@@ -199,30 +200,27 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
               <path
                 d={generatePath(data.map((d) => d.stocks))}
                 fill="none"
-                stroke="#22AB94"
-                strokeWidth="0.6"
-                strokeDasharray="2,2"
-                opacity="0.7"
+                stroke="#16A34A"
+                strokeWidth="2.5"
+                opacity="1"
               />
 
               {/* News Line */}
               <path
                 d={generatePath(data.map((d) => d.news))}
                 fill="none"
-                stroke="#7B61FF"
-                strokeWidth="0.6"
-                strokeDasharray="2,2"
-                opacity="0.7"
+                stroke="#7C3AED"
+                strokeWidth="2.5"
+                opacity="1"
               />
 
               {/* Social Line */}
               <path
                 d={generatePath(data.map((d) => d.social))}
                 fill="none"
-                stroke="#F23645"
-                strokeWidth="0.6"
-                strokeDasharray="2,2"
-                opacity="0.7"
+                stroke="#DC2626"
+                strokeWidth="2.5"
+                opacity="1"
               />
 
               {/* Data Points */}
