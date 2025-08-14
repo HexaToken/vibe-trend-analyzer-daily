@@ -204,7 +204,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           {/* Headline Summary */}
           <div className={`p-5 rounded-xl transition-all duration-300 hover:scale-[1.01] hover:shadow-lg ${
             themeMode === 'light'
-              ? 'bg-gradient-to-r from-[#E3F2FD] to-[#F1F8E9] border border-[#E6E6E6]'
+              ? 'bg-gradient-to-r from-[#E3F2FD] to-[#F1F8E9] border border-[#E6E6E6] theme-card-background theme-border'
               : 'bg-gradient-to-r from-blue-500/10 to-green-500/10 border border-blue-500/20'
           }`}>
             <h3 className={`text-lg font-semibold tracking-tight mb-3 flex items-center gap-2 ${
