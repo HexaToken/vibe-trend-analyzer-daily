@@ -257,17 +257,17 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           {/* Mood Flip of the Day */}
           <div className={`p-5 rounded-xl transition-all duration-300 hover:scale-[1.01] hover:shadow-lg ${
             themeMode === 'light'
-              ? 'bg-gradient-to-r from-[rgba(123,97,255,0.1)] to-[rgba(58,122,254,0.1)] border border-[#E6E6E6]'
+              ? 'bg-gradient-to-r from-[rgba(123,97,255,0.1)] to-[rgba(58,122,254,0.1)] border border-[#E6E6E6] theme-card-background theme-border'
               : 'bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20'
           }`}>
             <h3 className={`text-lg font-semibold tracking-tight mb-3 flex items-center gap-2 ${
               themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'
             }`}>
               🔄 Mood Flip of the Day
-              <div className="w-2 h-2 bg-[#7B61FF] rounded-full animate-pulse" />
+              <div className="w-2 h-2 rounded-full animate-pulse" style={{backgroundColor: 'var(--color-social)'}} />
             </h3>
             <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-              <Badge className="bg-indigo-500/20 text-indigo-400 border-indigo-500/30 font-semibold tracking-tight transition-all duration-300 hover:scale-105">
+              <Badge className="bg-indigo-500/20 text-indigo-400 border-indigo-500/30 font-semibold tracking-tight transition-all duration-300 hover:scale-105 theme-border">
                 ${moodFlip.symbol}
               </Badge>
               <span className={`text-sm hidden sm:inline ${
