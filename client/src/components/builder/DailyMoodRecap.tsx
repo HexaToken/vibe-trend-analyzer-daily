@@ -211,7 +211,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
               themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'
             }`}>
               📰 News Headlines Summary
-              <div className="w-2 h-2 bg-[#7B61FF] rounded-full animate-pulse" />
+              <div className="w-2 h-2 rounded-full animate-pulse" style={{backgroundColor: 'var(--color-news)'}} />
             </h3>
             <p className={`text-base leading-relaxed ${
               themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-300'
