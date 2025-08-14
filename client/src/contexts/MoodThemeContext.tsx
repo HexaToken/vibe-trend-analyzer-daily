@@ -230,6 +230,12 @@ export const MoodThemeProvider: React.FC<MoodThemeProviderProps> = ({ children }
     }
   }, [themeMode, moodState, moodScore, isDynamicMode]);
 
+  // 🔒 Initialize theme lock system on component mount
+  useEffect(() => {
+    initializeThemeLock();
+    injectThemeVariables();
+  }, []);
+
   const value: MoodThemeContextType = {
     themeMode,
     setThemeMode,
