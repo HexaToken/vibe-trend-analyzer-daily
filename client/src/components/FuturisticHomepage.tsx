@@ -304,7 +304,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
             {/* Finance Hub Header with Search */}
             <div className={`rounded-2xl p-6 mb-8 ${
               themeMode === 'light'
-                ? 'enhanced-card-light border border-[#E0E0E0]'
+                ? 'enhanced-card-light border border-[#E6E6E6]'
                 : 'bg-black/80 backdrop-blur-xl border border-purple-500/20'
             }`}>
               <div className="text-center mb-6">
@@ -350,7 +350,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     }}
                     className={`pl-12 pr-20 py-4 rounded-xl text-lg focus:ring-0 focus:outline-none ${
                       themeMode === 'light'
-                        ? 'bg-white border-[#E0E0E0] text-[#1C1E21] placeholder-[#888] focus:bg-white focus:border-[#3F51B5]/50'
+                        ? 'bg-white border-[#E6E6E6] text-[#1A1A1A] placeholder-[#888] focus:bg-white focus:border-[#3F51B5]/50'
                         : 'bg-black/40 border-purple-500/30 text-white placeholder-gray-400 focus:bg-black/60 focus:border-blue-400/50 backdrop-blur-sm'
                     }`}
                   />
@@ -392,7 +392,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <TabsTrigger
                   value="risk-analysis"
                   className={themeMode === 'light'
-                    ? "data-[state=active]:text-[#1C1E21] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E0E0E0] text-[#1F2937] flex items-center gap-2"
+                    ? "data-[state=active]:text-[#1A1A1A] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E6E6E6] text-[#4B5563] flex items-center gap-2"
                     : "data-[state=active]:text-white text-[#E0E0E0] flex items-center gap-2 transition-all duration-300 hover:text-white/90"
                   }
                   style={themeMode === 'light' ? {
@@ -408,7 +408,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <TabsTrigger
                   value="financial-reports"
                   className={themeMode === 'light'
-                    ? "data-[state=active]:text-[#1C1E21] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E0E0E0] text-[#1F2937] flex items-center gap-2"
+                    ? "data-[state=active]:text-[#1A1A1A] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E6E6E6] text-[#4B5563] flex items-center gap-2"
                     : "data-[state=active]:text-white text-[#E0E0E0] flex items-center gap-2 transition-all duration-300 hover:text-white/90"
                   }
                   style={themeMode === 'light' ? {
@@ -424,7 +424,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <TabsTrigger
                   value="geo-sentiment"
                   className={themeMode === 'light'
-                    ? "data-[state=active]:text-[#1C1E21] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E0E0E0] text-[#1F2937] flex items-center gap-2"
+                    ? "data-[state=active]:text-[#1A1A1A] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E6E6E6] text-[#4B5563] flex items-center gap-2"
                     : "data-[state=active]:text-white text-[#E0E0E0] flex items-center gap-2 transition-all duration-300 hover:text-white/90"
                   }
                   style={themeMode === 'light' ? {
@@ -2762,7 +2762,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 p-6">
                   {topMovers.map((stock, index) => (
                     <div key={stock.symbol} className={themeMode === 'light'
-                      ? `bg-white border border-[#E0E0E0] hover:border-red-400/30 rounded-xl p-4 transition-all duration-300 group cursor-pointer shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)]`
+                      ? `bg-white border border-[#E6E6E6] hover:border-red-400/30 rounded-xl p-4 transition-all duration-300 group cursor-pointer shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)]`
                       : "bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-4 border border-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer"
                     }>
                       <div className="flex items-center justify-between mb-3">
@@ -2807,20 +2807,20 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <div className="space-y-4">
                   {smartNews.map((news, index) => (
                     <div key={index} className={themeMode === 'light'
-                      ? `bg-white rounded-xl p-5 border border-[#E0E0E0] hover:border-red-400/30 transition-all duration-300 group cursor-pointer shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]`
+                      ? `bg-white rounded-xl p-5 border border-[#E6E6E6] hover:border-red-400/30 transition-all duration-300 group cursor-pointer shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]`
                       : "bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-5 border border-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer"
                     }>
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex-1">
                           <h3 className={`text-lg font-semibold mb-2 line-clamp-2 transition-colors ${
                             themeMode === 'light'
-                              ? 'text-[#1C1E21] group-hover:text-red-600'
+                              ? 'text-[#1A1A1A] group-hover:text-red-600'
                               : 'text-white group-hover:text-purple-300'
                           }`}>
                             {news.headline}
                           </h3>
                           <p className={`text-sm leading-relaxed line-clamp-3 ${
-                            themeMode === 'light' ? 'text-[#1F2937]' : 'text-gray-400'
+                            themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-400'
                           }`}>
                             {news.summary}
                           </p>
@@ -2873,7 +2873,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {trendingTopics.map((topic, index) => (
                     <div key={index} className={themeMode === 'light'
-                      ? `bg-white rounded-xl p-4 border border-[#E0E0E0] hover:border-red-400/30 transition-all duration-300 shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]`
+                      ? `bg-white rounded-xl p-4 border border-[#E6E6E6] hover:border-red-400/30 transition-all duration-300 shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]`
                       : "bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-4 border border-white/10 hover:border-purple-500/30 transition-all duration-300"
                     }>
                       <div className="flex items-center gap-3 mb-3">
@@ -2882,7 +2882,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                           {topic.label}
                         </Badge>
                       </div>
-                      <div className={`text-lg font-semibold mb-1 ${themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'}`}>{topic.topic}</div>
+                      <div className={`text-lg font-semibold mb-1 ${themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'}`}>{topic.topic}</div>
                       <div className={`text-sm ${themeMode === 'light' ? 'text-[#374151]' : 'text-gray-400'}`}>{topic.mentions} mentions</div>
                     </div>
                   ))}
@@ -2897,7 +2897,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
             {/* Your Mood Score Card */}
             <Card className={themeMode === 'light' ? `${cardBackground} border ${borderColor} shadow-[0_2px_6px_rgba(0,0,0,0.05)]` : "bg-black/40 border-purple-500/20 backdrop-blur-xl"}>
               <CardHeader className={themeMode === 'light' ? `border-b ${borderColor}` : "border-b border-purple-500/20"}>
-                <CardTitle className={`text-sm ${themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'}`}>Your Mood Score</CardTitle>
+                <CardTitle className={`text-sm ${themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'}`}>Your Mood Score</CardTitle>
               </CardHeader>
               <CardContent className="p-6">
                 <div className="text-center mb-4">
@@ -2912,7 +2912,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   <div className="space-y-2 mb-4">
                     {userWatchlist.map((item, index) => (
                       <div key={index} className="flex items-center justify-between text-sm">
-                        <span className={themeMode === 'light' ? 'text-[#1F2937]' : 'text-gray-300'}>{item.symbol}</span>
+                        <span className={themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-300'}>{item.symbol}</span>
                         <span className={cn(
                           "font-medium",
                           item.change >= 0
