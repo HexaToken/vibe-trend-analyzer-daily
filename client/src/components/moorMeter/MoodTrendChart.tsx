@@ -203,6 +203,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
                 strokeWidth="0.6"
                 strokeDasharray="2,2"
                 opacity="0.7"
+                className="chart-line-stocks"
               />
 
               {/* News Line */}
@@ -213,6 +214,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
                 strokeWidth="0.6"
                 strokeDasharray="2,2"
                 opacity="0.7"
+                className="chart-line-news"
               />
 
               {/* Social Line */}
@@ -223,6 +225,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
                 strokeWidth="0.6"
                 strokeDasharray="2,2"
                 opacity="0.7"
+                className="chart-line-social"
               />
 
               {/* Data Points */}
