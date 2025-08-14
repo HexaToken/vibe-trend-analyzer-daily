@@ -96,12 +96,12 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
             </div>
             <div className="flex items-center justify-center mt-1">
               {scoreDiff >= 0 ? (
-                <TrendingUp className="w-3 h-3 text-[#22AB94] mr-1" />
+                <TrendingUp className="w-3 h-3 text-[#16A34A] mr-1" />
               ) : (
-                <TrendingUp className="w-3 h-3 text-[#F23645] mr-1 rotate-180" />
+                <TrendingUp className="w-3 h-3 text-[#DC2626] mr-1 rotate-180" />
               )}
               <span
-                className={`text-xs font-medium ${scoreDiff >= 0 ? "text-[#22AB94]" : "text-[#F23645]"}`}
+                className={`text-xs font-medium ${scoreDiff >= 0 ? "text-[#16A34A]" : "text-[#DC2626]"}`}
               >
                 {scoreDiff >= 0 ? "+" : ""}
                 {scoreDiff.toFixed(1)}
