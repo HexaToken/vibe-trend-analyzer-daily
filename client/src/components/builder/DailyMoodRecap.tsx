@@ -257,7 +257,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           {/* Mood Flip of the Day */}
           <div className={`p-5 rounded-xl transition-all duration-300 hover:scale-[1.01] hover:shadow-lg ${
             themeMode === 'light'
-              ? 'bg-gradient-to-r from-[#F3E5F5] to-[#E8EAF6] border border-[#E6E6E6]'
+              ? 'bg-gradient-to-r from-[rgba(123,97,255,0.1)] to-[rgba(58,122,254,0.1)] border border-[#E6E6E6]'
               : 'bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20'
           }`}>
             <h3 className={`text-lg font-semibold mb-3 flex items-center gap-2 ${
