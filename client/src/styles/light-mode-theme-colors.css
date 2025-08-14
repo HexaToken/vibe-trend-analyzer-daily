@@ -1,0 +1,106 @@
+/* ===== LIGHT MODE THEME COLORS ===== */
+/* Hard-coded theme colors for light mode only */
+
+:root.light {
+  --color-overall-mood: #3A7AFE;
+  --color-stocks: #22AB94;
+  --color-news: #7B61FF;
+  --color-social: #F23645;
+  --color-gridline: #EFEFEF;
+  --color-axis: #4B5563;
+  --color-background: #FFFFFF;
+  --color-card-background: #FAFAFA;
+  --color-border: #E6E6E6;
+  --color-hover-background: #F3F4F6;
+  --color-positive-text: #22AB94;
+  --color-negative-text: #F23645;
+  --color-neutral-text: #4B5563;
+}
+
+/* Light mode only - Chart lines */
+:root:not(.dark) .chart-line-overall {
+  stroke: var(--color-overall-mood) !important;
+}
+
+:root:not(.dark) .chart-line-stocks {
+  stroke: var(--color-stocks) !important;
+}
+
+:root:not(.dark) .chart-line-news {
+  stroke: var(--color-news) !important;
+}
+
+:root:not(.dark) .chart-line-social {
+  stroke: var(--color-social) !important;
+}
+
+/* Light mode only - Chart grid and axis */
+:root:not(.dark) .chart-gridline {
+  stroke: var(--color-gridline) !important;
+}
+
+:root:not(.dark) .chart-axis-text {
+  fill: var(--color-axis) !important;
+  color: var(--color-axis) !important;
+}
+
+/* Light mode only - Background colors */
+:root:not(.dark) .theme-background {
+  background-color: var(--color-background) !important;
+}
+
+:root:not(.dark) .theme-card-background {
+  background-color: var(--color-card-background) !important;
+}
+
+/* Light mode only - Border colors */
+:root:not(.dark) .theme-border {
+  border-color: var(--color-border) !important;
+}
+
+/* Light mode only - Hover states */
+:root:not(.dark) .theme-hover:hover {
+  background-color: var(--color-hover-background) !important;
+}
+
+/* Light mode only - Sentiment colors */
+:root:not(.dark) .sentiment-positive {
+  color: var(--color-positive-text) !important;
+}
+
+:root:not(.dark) .sentiment-negative {
+  color: var(--color-negative-text) !important;
+}
+
+:root:not(.dark) .sentiment-neutral {
+  color: var(--color-neutral-text) !important;
+}
+
+/* Light mode only - Sentiment background colors */
+:root:not(.dark) .sentiment-positive-bg {
+  background-color: color-mix(in srgb, var(--color-positive-text) 10%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-positive-text) 30%, transparent) !important;
+}
+
+:root:not(.dark) .sentiment-negative-bg {
+  background-color: color-mix(in srgb, var(--color-negative-text) 10%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-negative-text) 30%, transparent) !important;
+}
+
+:root:not(.dark) .sentiment-neutral-bg {
+  background-color: color-mix(in srgb, var(--color-neutral-text) 10%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-neutral-text) 30%, transparent) !important;
+}
+
+/* Light mode only - Metric card progress bars */
+:root:not(.dark) .metric-stocks-progress {
+  background-color: var(--color-stocks) !important;
+}
+
+:root:not(.dark) .metric-news-progress {
+  background-color: var(--color-news) !important;
+}
+
+:root:not(.dark) .metric-social-progress {
+  background-color: var(--color-social) !important;
+}
