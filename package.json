@@ -25,7 +25,8 @@
     "full:scan": "npm run build:check && npm run deadcode && npm run unused-exports && npm run security",
     "full:scan:runtime": "npm run links && npm run a11y && npm run perf",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
-    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,css,md}\""
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "scan:quick": "node scripts/quick-scan.js"
   },
   "dependencies": {
     "@builder.io/sdk-react": "^4.2.3",
