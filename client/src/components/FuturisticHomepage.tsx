@@ -372,7 +372,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <div className="flex items-center justify-center gap-2 mt-3">
                   <span className={`text-sm ${themeMode === 'light' ? 'text-[#9CA3AF]' : 'text-gray-400'}`}>Currently analyzing:</span>
                   <Badge className={themeMode === 'light'
-                    ? "bg-[#E8EAF6] text-[#303F9F] border-[#303F9F]/30 font-semibold"
+                    ? "bg-[rgba(58,122,254,0.1)] text-[#3A7AFE] border-[#3A7AFE]/30 font-semibold"
                     : "bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-white border-blue-500/30 font-semibold drop-shadow-md"
                   }>
                     ${selectedFinanceStock}
