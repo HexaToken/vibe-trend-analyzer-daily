@@ -69,17 +69,17 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
 
   const getSentimentColor = (mood: string) => {
     switch (mood) {
-      case 'bullish': return 'text-emerald-400';
-      case 'bearish': return 'text-red-400';
-      default: return 'text-amber-400';
+      case 'bullish': return 'text-[#22AB94]';
+      case 'bearish': return 'text-[#F23645]';
+      default: return 'text-[#6B7280]';
     }
   };
 
   const getSentimentBadge = (mood: string) => {
     switch (mood) {
-      case 'bullish': return 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30';
-      case 'bearish': return 'bg-red-500/20 text-red-400 border-red-500/30';
-      default: return 'bg-amber-500/20 text-amber-400 border-amber-500/30';
+      case 'bullish': return 'bg-[#E8F8F4] text-[#22AB94] border-[#22AB94]/30';
+      case 'bearish': return 'bg-[#FDECEC] text-[#F23645] border-[#F23645]/30';
+      default: return 'bg-[#F3F4F6] text-[#6B7280] border-[#6B7280]/30';
     }
   };
 
