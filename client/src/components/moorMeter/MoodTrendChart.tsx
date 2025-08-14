@@ -156,7 +156,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
         {/* Chart Area */}
         <div className="relative">
           <div className="mb-4 text-center">
-            <h3 className="text-lg font-semibold text-[#1A1A1A] dark:text-white mb-2">
+            <h3 className="text-lg font-semibold text-[#1A1A1A] dark:text-white mb-2 tracking-tight">
               Sentiment Trend - Last {timeframe}
             </h3>
             <p className="text-sm text-[#9CA3AF] dark:text-gray-400">
