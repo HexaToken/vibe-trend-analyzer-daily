@@ -7,6 +7,9 @@
 /* Import Accent & Brand Colors */
 @import './styles/accent-brand-colors.css';
 
+/* Import Chart Colors */
+@import './styles/chart-colors.css';
+
 /* Import Futuristic Chart Styling */
 @import './styles/futuristic-chart.css';
 
