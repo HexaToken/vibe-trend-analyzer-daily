@@ -135,3 +135,18 @@
 :root:not(.dark) .chart-line-overall[stroke="url(#overallGradient)"] {
   stroke: var(--color-overall-mood) !important;
 }
+
+/* Light mode only - Card component overrides */
+:root:not(.dark) .bg-card {
+  background-color: var(--color-card-background) !important;
+}
+
+:root:not(.dark) .text-card-foreground {
+  color: var(--color-neutral-text) !important;
+}
+
+/* Light mode only - Ensure enhanced-card-light uses theme colors */
+:root:not(.dark) .enhanced-card-light {
+  background-color: var(--color-card-background) !important;
+  border-color: var(--color-border) !important;
+}
