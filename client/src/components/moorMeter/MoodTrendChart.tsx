@@ -44,7 +44,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
 
   const getScoreColor = (score: number) => {
     if (score >= 70) return "text-[#22AB94] dark:text-green-400";
-    if (score >= 50) return "text-[#6B7280] dark:text-yellow-400";
+    if (score >= 50) return "text-[#4B5563] dark:text-yellow-400";
     return "text-[#F23645] dark:text-red-400";
   };
 
