@@ -1,0 +1,246 @@
+/* ===== CHART COLORS - NEW PALETTE ===== */
+
+/* Light Mode Chart Colors */
+:root:not(.dark) {
+  /* Chart Colors - New Specification */
+  --chart-default-line: #3A7AFE;
+  --chart-positive-trend: #22AB94;
+  --chart-negative-trend: #F23645;
+  --chart-gridlines: #EFEFEF;
+  --chart-background: #FFFFFF;
+  --chart-text: #1A1A1A;
+  --chart-axis: #9CA3AF;
+}
+
+/* Default Chart Line */
+:root:not(.dark) .chart-line-default,
+:root:not(.dark) .recharts-line {
+  stroke: #3A7AFE !important;
+  stroke-width: 2px !important;
+}
+
+/* Positive Trend Line */
+:root:not(.dark) .chart-line-positive,
+:root:not(.dark) .trend-positive,
+:root:not(.dark) .bullish-line {
+  stroke: #22AB94 !important;
+  stroke-width: 2px !important;
+  fill: none !important;
+}
+
+/* Negative Trend Line */
+:root:not(.dark) .chart-line-negative,
+:root:not(.dark) .trend-negative,
+:root:not(.dark) .bearish-line {
+  stroke: #F23645 !important;
+  stroke-width: 2px !important;
+  fill: none !important;
+}
+
+/* Chart Gridlines */
+:root:not(.dark) .chart-grid,
+:root:not(.dark) .recharts-cartesian-grid-horizontal line,
+:root:not(.dark) .recharts-cartesian-grid-vertical line,
+:root:not(.dark) .grid-line {
+  stroke: #EFEFEF !important;
+  stroke-width: 1px !important;
+  stroke-dasharray: none !important;
+}
+
+/* Chart Background */
+:root:not(.dark) .chart-container,
+:root:not(.dark) .recharts-wrapper,
+:root:not(.dark) .chart-background {
+  background-color: #FFFFFF !important;
+}
+
+/* Chart Text Elements */
+:root:not(.dark) .chart-text,
+:root:not(.dark) .recharts-text,
+:root:not(.dark) .chart-label {
+  fill: #1A1A1A !important;
+  color: #1A1A1A !important;
+  font-weight: 500 !important;
+}
+
+/* Chart Axis */
+:root:not(.dark) .chart-axis,
+:root:not(.dark) .recharts-cartesian-axis-tick-value,
+:root:not(.dark) .axis-label {
+  fill: #9CA3AF !important;
+  color: #9CA3AF !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+/* Chart Legend */
+:root:not(.dark) .chart-legend,
+:root:not(.dark) .recharts-legend-item-text {
+  color: #4B5563 !important;
+  font-weight: 500 !important;
+}
+
+/* Chart Areas */
+:root:not(.dark) .chart-area-positive {
+  fill: rgba(34, 171, 148, 0.1) !important;
+  stroke: #22AB94 !important;
+}
+
+:root:not(.dark) .chart-area-negative {
+  fill: rgba(242, 54, 69, 0.1) !important;
+  stroke: #F23645 !important;
+}
+
+:root:not(.dark) .chart-area-neutral {
+  fill: rgba(58, 122, 254, 0.1) !important;
+  stroke: #3A7AFE !important;
+}
+
+/* Chart Bars */
+:root:not(.dark) .chart-bar-positive,
+:root:not(.dark) .bar-positive {
+  fill: #22AB94 !important;
+}
+
+:root:not(.dark) .chart-bar-negative,
+:root:not(.dark) .bar-negative {
+  fill: #F23645 !important;
+}
+
+:root:not(.dark) .chart-bar-neutral,
+:root:not(.dark) .bar-neutral {
+  fill: #3A7AFE !important;
+}
+
+/* Chart Points/Dots */
+:root:not(.dark) .chart-dot-positive,
+:root:not(.dark) .dot-positive {
+  fill: #22AB94 !important;
+  stroke: #22AB94 !important;
+  stroke-width: 2px !important;
+}
+
+:root:not(.dark) .chart-dot-negative,
+:root:not(.dark) .dot-negative {
+  fill: #F23645 !important;
+  stroke: #F23645 !important;
+  stroke-width: 2px !important;
+}
+
+:root:not(.dark) .chart-dot-neutral,
+:root:not(.dark) .dot-neutral {
+  fill: #3A7AFE !important;
+  stroke: #3A7AFE !important;
+  stroke-width: 2px !important;
+}
+
+/* Pie Chart Segments */
+:root:not(.dark) .pie-segment-1 {
+  fill: #3A7AFE !important;
+}
+
+:root:not(.dark) .pie-segment-2 {
+  fill: #22AB94 !important;
+}
+
+:root:not(.dark) .pie-segment-3 {
+  fill: #F23645 !important;
+}
+
+:root:not(.dark) .pie-segment-4 {
+  fill: #7B61FF !important;
+}
+
+:root:not(.dark) .pie-segment-5 {
+  fill: #9CA3AF !important;
+}
+
+/* Tooltip Styling */
+:root:not(.dark) .chart-tooltip,
+:root:not(.dark) .recharts-tooltip-wrapper {
+  background-color: #FFFFFF !important;
+  border: 1px solid #E6E6E6 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+:root:not(.dark) .chart-tooltip-content {
+  color: #1A1A1A !important;
+  font-weight: 500 !important;
+}
+
+:root:not(.dark) .chart-tooltip-label {
+  color: #4B5563 !important;
+  font-weight: 600 !important;
+}
+
+/* Chart Hover Effects */
+:root:not(.dark) .chart-line:hover,
+:root:not(.dark) .chart-bar:hover {
+  opacity: 0.8 !important;
+  transition: opacity 0.2s ease !important;
+}
+
+/* Stock Chart Specific */
+:root:not(.dark) .stock-chart-up {
+  stroke: #22AB94 !important;
+  fill: rgba(34, 171, 148, 0.1) !important;
+}
+
+:root:not(.dark) .stock-chart-down {
+  stroke: #F23645 !important;
+  fill: rgba(242, 54, 69, 0.1) !important;
+}
+
+/* Volume Bars */
+:root:not(.dark) .volume-bar-up {
+  fill: rgba(34, 171, 148, 0.6) !important;
+}
+
+:root:not(.dark) .volume-bar-down {
+  fill: rgba(242, 54, 69, 0.6) !important;
+}
+
+/* Candlestick Charts */
+:root:not(.dark) .candle-up {
+  fill: #22AB94 !important;
+  stroke: #22AB94 !important;
+}
+
+:root:not(.dark) .candle-down {
+  fill: #F23645 !important;
+  stroke: #F23645 !important;
+}
+
+/* Chart Loading State */
+:root:not(.dark) .chart-loading {
+  background: linear-gradient(90deg, #FAFAFA 25%, #F5F5F5 50%, #FAFAFA 75%) !important;
+  background-size: 200% 100% !important;
+  animation: shimmer 2s infinite !important;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Chart Error State */
+:root:not(.dark) .chart-error {
+  background-color: #FDECEC !important;
+  color: #F23645 !important;
+  border: 1px solid #F23645 !important;
+  text-align: center !important;
+  padding: 20px !important;
+}
+
+/* Chart Empty State */
+:root:not(.dark) .chart-empty {
+  background-color: #F3F4F6 !important;
+  color: #6B7280 !important;
+  text-align: center !important;
+  padding: 20px !important;
+}

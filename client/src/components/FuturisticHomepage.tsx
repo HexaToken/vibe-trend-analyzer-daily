@@ -277,7 +277,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
   return (
     <div className={`min-h-screen relative overflow-hidden ${
       themeMode === 'light'
-        ? 'bg-[#F7F9FB]'
+        ? 'bg-white'
         : 'bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900'
     }`}>
       {/* Ambient Background Effects - Only in Dark Mode */}
@@ -304,7 +304,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
             {/* Finance Hub Header with Search */}
             <div className={`rounded-2xl p-6 mb-8 ${
               themeMode === 'light'
-                ? 'enhanced-card-light border border-[#E0E0E0]'
+                ? 'enhanced-card-light border border-[#E6E6E6]'
                 : 'bg-black/80 backdrop-blur-xl border border-purple-500/20'
             }`}>
               <div className="text-center mb-6">
@@ -318,14 +318,14 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   </div>
                   <h1 className={`text-4xl font-bold ${
                     themeMode === 'light'
-                      ? 'text-[#1E1E1E]'
+                      ? 'text-[#1A1A1A]'
                       : 'bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent'
                   }`}>
                     Finance Hub
                   </h1>
                 </div>
                 <p className={`text-xl max-w-2xl mx-auto mb-6 ${
-                  themeMode === 'light' ? 'text-[#1F2937]' : 'text-gray-300'
+                  themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-300'
                 }`}>
                   Advanced financial tools and analytics for portfolio management
                 </p>
@@ -335,7 +335,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               <div className="max-w-md mx-auto mb-6">
                 <div className="relative">
                   <Search className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 ${
-                    themeMode === 'light' ? 'text-[#374151]' : 'text-gray-400'
+                    themeMode === 'light' ? 'text-[#9CA3AF]' : 'text-gray-400'
                   }`} />
                   <Input
                     type="text"
@@ -350,7 +350,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     }}
                     className={`pl-12 pr-20 py-4 rounded-xl text-lg focus:ring-0 focus:outline-none ${
                       themeMode === 'light'
-                        ? 'bg-white border-[#E0E0E0] text-[#1C1E21] placeholder-[#888] focus:bg-white focus:border-[#3F51B5]/50'
+                        ? 'bg-white border-[#E6E6E6] text-[#1A1A1A] placeholder-[#888] focus:bg-white focus:border-[#3A7AFE]/50'
                         : 'bg-black/40 border-purple-500/30 text-white placeholder-gray-400 focus:bg-black/60 focus:border-blue-400/50 backdrop-blur-sm'
                     }`}
                   />
@@ -370,9 +370,9 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   </Button>
                 </div>
                 <div className="flex items-center justify-center gap-2 mt-3">
-                  <span className={`text-sm ${themeMode === 'light' ? 'text-[#374151]' : 'text-gray-400'}`}>Currently analyzing:</span>
+                  <span className={`text-sm ${themeMode === 'light' ? 'text-[#9CA3AF]' : 'text-gray-400'}`}>Currently analyzing:</span>
                   <Badge className={themeMode === 'light'
-                    ? "bg-[#E8EAF6] text-[#303F9F] border-[#303F9F]/30 font-semibold"
+                    ? "bg-[rgba(58,122,254,0.1)] text-[#3A7AFE] border-[#3A7AFE]/30 font-semibold"
                     : "bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-white border-blue-500/30 font-semibold drop-shadow-md"
                   }>
                     ${selectedFinanceStock}
@@ -386,13 +386,13 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               <Tabs value={activeFinanceTab} onValueChange={setActiveFinanceTab}>
               <TabsList className={`grid w-full grid-cols-3 max-w-lg mx-auto ${
                 themeMode === 'light'
-                  ? 'bg-[#F5F5F5] border border-[#E0E0E0]'
+                  ? 'bg-[#F5F5F5] border border-[#E6E6E6]'
                   : 'bg-[#2C2F4A]/80 backdrop-blur-xl border border-gray-600/30 shadow-lg'
               }`}>
                 <TabsTrigger
                   value="risk-analysis"
                   className={themeMode === 'light'
-                    ? "data-[state=active]:text-[#1C1E21] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E0E0E0] text-[#1F2937] flex items-center gap-2"
+                    ? "data-[state=active]:text-[#1A1A1A] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E6E6E6] text-[#4B5563] flex items-center gap-2"
                     : "data-[state=active]:text-white text-[#E0E0E0] flex items-center gap-2 transition-all duration-300 hover:text-white/90"
                   }
                   style={themeMode === 'light' ? {
@@ -408,7 +408,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <TabsTrigger
                   value="financial-reports"
                   className={themeMode === 'light'
-                    ? "data-[state=active]:text-[#1C1E21] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E0E0E0] text-[#1F2937] flex items-center gap-2"
+                    ? "data-[state=active]:text-[#1A1A1A] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E6E6E6] text-[#4B5563] flex items-center gap-2"
                     : "data-[state=active]:text-white text-[#E0E0E0] flex items-center gap-2 transition-all duration-300 hover:text-white/90"
                   }
                   style={themeMode === 'light' ? {
@@ -424,7 +424,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <TabsTrigger
                   value="geo-sentiment"
                   className={themeMode === 'light'
-                    ? "data-[state=active]:text-[#1C1E21] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E0E0E0] text-[#1F2937] flex items-center gap-2"
+                    ? "data-[state=active]:text-[#1A1A1A] data-[state=active]:font-semibold data-[state=active]:border data-[state=active]:border-[#E6E6E6] text-[#4B5563] flex items-center gap-2"
                     : "data-[state=active]:text-white text-[#E0E0E0] flex items-center gap-2 transition-all duration-300 hover:text-white/90"
                   }
                   style={themeMode === 'light' ? {
@@ -436,7 +436,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   }}
                   data-active-style="background: var(--active-bg); box-shadow: var(--active-shadow);"
                 >
-                  🌍 Geo-Sentiment
+                  ��� Geo-Sentiment
                 </TabsTrigger>
               </TabsList>
 
@@ -456,7 +456,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         🎯 Sentiment Risk Meter
                         <Badge className={`ml-auto ${
                           themeMode === 'light'
-                            ? 'bg-[#F1F8E9] text-[#388E3C] border-[#388E3C]/30'
+                            ? 'bg-[#E8F8F4] text-[#22AB94] border-[#22AB94]/30'
                             : 'bg-blue-500/20 text-blue-300 border-blue-500/30'
                         }`}>
                           ${selectedFinanceStock}
@@ -491,7 +491,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                                selectedFinanceStock === 'NVDA' ? 'LOW' :
                                'MEDIUM'}
                             </div>
-                            <div className={`text-sm ${themeMode === 'light' ? 'text-[#374151]' : 'text-gray-400'}`}>Risk Level</div>
+                            <div className={`text-sm ${themeMode === 'light' ? 'text-[#9CA3AF]' : 'text-gray-400'}`}>Risk Level</div>
                           </div>
                         </div>
                       </div>
@@ -502,7 +502,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                           <span className={themeMode === 'light' ? 'text-[#F44336]' : 'text-red-400'}>High</span>
                         </div>
                         <div className={`h-2 rounded-full overflow-hidden ${
-                          themeMode === 'light' ? 'bg-[#E0E0E0]' : 'bg-gray-700'
+                          themeMode === 'light' ? 'bg-[#E6E6E6]' : 'bg-gray-700'
                         }`}>
                           <div className={`h-full transition-all duration-1000 ${
                             selectedFinanceStock === 'TSLA' ? 'w-5/6 bg-gradient-to-r from-yellow-400 to-red-400' :
@@ -599,7 +599,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   <Card className="lg:col-span-2 bg-black/40 border-blue-500/20 backdrop-blur-xl">
                     <CardHeader>
                       <CardTitle className="text-white flex items-center gap-2">
-                        🔥 Sector Risk Heatmap
+                        ���� Sector Risk Heatmap
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -1395,7 +1395,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
             <div className="text-center">
               <div className="flex items-center justify-center gap-4">
                 <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
-                  ✅ Price API: Live
+                  �� Price API: Live
                 </Badge>
                 <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30">
                   ✅ Sentiment Engine: Active
@@ -2753,7 +2753,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
             {/* Top 10 Movers Widget */}
             <Card className={themeMode === 'light' ? `${cardBackground} border ${borderColor} shadow-[0_2px_6px_rgba(0,0,0,0.05)]` : "bg-black/40 border-purple-500/20 backdrop-blur-xl"}>
               <CardHeader className={themeMode === 'light' ? `border-b ${borderColor}` : "border-b border-purple-500/20"}>
-                <CardTitle className={`flex items-center gap-2 ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>
+                <CardTitle className={`flex items-center gap-2 ${themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'}`}>
                   <TrendingUp className={`w-6 h-6 ${themeMode === 'light' ? 'text-[#4CAF50]' : 'text-emerald-400'}`} />
                   Top 10 Movers Today
                 </CardTitle>
@@ -2762,7 +2762,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 p-6">
                   {topMovers.map((stock, index) => (
                     <div key={stock.symbol} className={themeMode === 'light'
-                      ? `bg-white border border-[#E0E0E0] hover:border-red-400/30 rounded-xl p-4 transition-all duration-300 group cursor-pointer shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)]`
+                      ? `bg-white border border-[#E6E6E6] hover:border-red-400/30 rounded-xl p-4 transition-all duration-300 group cursor-pointer shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)]`
                       : "bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-4 border border-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer"
                     }>
                       <div className="flex items-center justify-between mb-3">
@@ -2779,9 +2779,9 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                           {stock.sentiment}
                         </Badge>
                       </div>
-                      <div className={`text-lg font-bold mb-1 ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>{stock.symbol}</div>
-                      <div className={`text-sm mb-2 ${themeMode === 'light' ? 'text-[#374151]' : 'text-gray-400'}`}>{stock.name}</div>
-                      <div className={`text-xl font-bold mb-1 ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>${stock.price}</div>
+                      <div className={`text-lg font-bold mb-1 ${themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'}`}>{stock.symbol}</div>
+                      <div className={`text-sm mb-2 ${themeMode === 'light' ? 'text-[#9CA3AF]' : 'text-gray-400'}`}>{stock.name}</div>
+                      <div className={`text-xl font-bold mb-1 ${themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'}`}>${stock.price}</div>
                       <div className={cn(
                         "flex items-center gap-1 text-sm font-medium",
                         stock.change >= 0 ? "text-emerald-400" : "text-red-400"
@@ -2798,7 +2798,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
             {/* Smart News Feed */}
             <Card className={themeMode === 'light' ? `${cardBackground} border ${borderColor} shadow-[0_2px_6px_rgba(0,0,0,0.05)]` : "bg-black/40 border-purple-500/20 backdrop-blur-xl"}>
               <CardHeader className={themeMode === 'light' ? `border-b ${borderColor}` : "border-b border-purple-500/20"}>
-                <CardTitle className={`flex items-center gap-2 ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>
+                <CardTitle className={`flex items-center gap-2 ${themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'}`}>
                   <Newspaper className={`w-6 h-6 ${themeMode === 'light' ? 'text-[#3F51B5]' : 'text-cyan-400'}`} />
                   Smart News Feed
                 </CardTitle>
@@ -2807,20 +2807,20 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <div className="space-y-4">
                   {smartNews.map((news, index) => (
                     <div key={index} className={themeMode === 'light'
-                      ? `bg-white rounded-xl p-5 border border-[#E0E0E0] hover:border-red-400/30 transition-all duration-300 group cursor-pointer shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]`
+                      ? `bg-white rounded-xl p-5 border border-[#E6E6E6] hover:border-red-400/30 transition-all duration-300 group cursor-pointer shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]`
                       : "bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-5 border border-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer"
                     }>
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex-1">
                           <h3 className={`text-lg font-semibold mb-2 line-clamp-2 transition-colors ${
                             themeMode === 'light'
-                              ? 'text-[#1C1E21] group-hover:text-red-600'
+                              ? 'text-[#1A1A1A] group-hover:text-red-600'
                               : 'text-white group-hover:text-purple-300'
                           }`}>
                             {news.headline}
                           </h3>
                           <p className={`text-sm leading-relaxed line-clamp-3 ${
-                            themeMode === 'light' ? 'text-[#1F2937]' : 'text-gray-400'
+                            themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-400'
                           }`}>
                             {news.summary}
                           </p>
@@ -2828,9 +2828,9 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         <Badge className={cn(
                           "ml-4 flex-shrink-0 text-xs font-medium px-3 py-1 rounded-full",
                           themeMode === 'light'
-                            ? news.sentiment === 'bullish' ? 'bg-[#E8F5E9] text-[#4CAF50] border-[#4CAF50]/20' :
-                              news.sentiment === 'bearish' ? 'bg-[#FFEBEE] text-[#F44336] border-[#F44336]/20' :
-                              'bg-[#FFF8E1] text-[#FFB300] border-[#FFB300]/20'
+                            ? news.sentiment === 'bullish' ? 'sentiment-positive sentiment-positive-bg' :
+                              news.sentiment === 'bearish' ? 'sentiment-negative sentiment-negative-bg' :
+                              'sentiment-neutral sentiment-neutral-bg'
                             : news.sentiment === 'bullish' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' :
                               news.sentiment === 'bearish' ? 'bg-red-500/20 text-red-400 border-red-500/30' :
                               'bg-gray-500/20 text-gray-400 border-gray-500/30'
@@ -2841,7 +2841,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         </Badge>
                       </div>
                       <div className={`flex items-center justify-between text-xs ${
-                        themeMode === 'light' ? 'text-[#374151]' : 'text-gray-500'
+                        themeMode === 'light' ? 'text-[#9CA3AF]' : 'text-gray-500'
                       }`}>
                         <span className="font-medium">{news.source}</span>
                         <span>{news.timestamp}</span>
@@ -2864,7 +2864,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
             {/* Trending Forum Topics */}
             <Card className={themeMode === 'light' ? `${cardBackground} border ${borderColor} shadow-[0_2px_6px_rgba(0,0,0,0.05)]` : "bg-black/40 border-purple-500/20 backdrop-blur-xl"}>
               <CardHeader className={themeMode === 'light' ? `border-b ${borderColor}` : "border-b border-purple-500/20"}>
-                                <CardTitle className={`flex items-center gap-2 ${themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'}`}>
+                                <CardTitle className={`flex items-center gap-2 ${themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'}`}>
                   <Flame className={`w-6 h-6 ${themeMode === 'light' ? 'text-[#F44336]' : 'text-orange-400'}`} />
                   Trending Forum Topics
                 </CardTitle>
@@ -2873,7 +2873,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {trendingTopics.map((topic, index) => (
                     <div key={index} className={themeMode === 'light'
-                      ? `bg-white rounded-xl p-4 border border-[#E0E0E0] hover:border-red-400/30 transition-all duration-300 shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]`
+                      ? `bg-white rounded-xl p-4 border border-[#E6E6E6] hover:border-red-400/30 transition-all duration-300 shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]`
                       : "bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-4 border border-white/10 hover:border-purple-500/30 transition-all duration-300"
                     }>
                       <div className="flex items-center gap-3 mb-3">
@@ -2882,8 +2882,8 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                           {topic.label}
                         </Badge>
                       </div>
-                      <div className={`text-lg font-semibold mb-1 ${themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'}`}>{topic.topic}</div>
-                      <div className={`text-sm ${themeMode === 'light' ? 'text-[#374151]' : 'text-gray-400'}`}>{topic.mentions} mentions</div>
+                      <div className={`text-lg font-semibold mb-1 ${themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'}`}>{topic.topic}</div>
+                      <div className={`text-sm ${themeMode === 'light' ? 'text-[#9CA3AF]' : 'text-gray-400'}`}>{topic.mentions} mentions</div>
                     </div>
                   ))}
                 </div>
@@ -2897,7 +2897,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
             {/* Your Mood Score Card */}
             <Card className={themeMode === 'light' ? `${cardBackground} border ${borderColor} shadow-[0_2px_6px_rgba(0,0,0,0.05)]` : "bg-black/40 border-purple-500/20 backdrop-blur-xl"}>
               <CardHeader className={themeMode === 'light' ? `border-b ${borderColor}` : "border-b border-purple-500/20"}>
-                <CardTitle className={`text-sm ${themeMode === 'light' ? 'text-[#1C1E21]' : 'text-white'}`}>Your Mood Score</CardTitle>
+                <CardTitle className={`text-sm ${themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'}`}>Your Mood Score</CardTitle>
               </CardHeader>
               <CardContent className="p-6">
                 <div className="text-center mb-4">
@@ -2912,7 +2912,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   <div className="space-y-2 mb-4">
                     {userWatchlist.map((item, index) => (
                       <div key={index} className="flex items-center justify-between text-sm">
-                        <span className={themeMode === 'light' ? 'text-[#1F2937]' : 'text-gray-300'}>{item.symbol}</span>
+                        <span className={themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-300'}>{item.symbol}</span>
                         <span className={cn(
                           "font-medium",
                           item.change >= 0
@@ -2938,7 +2938,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
             {/* Footer Status */}
             <div className="text-center">
               <Badge className={themeMode === 'light'
-                ? "bg-[#E8F5E9] text-[#4CAF50] border-[#4CAF50]/30"
+                ? "bg-[#E8F8F4] text-[#22AB94] border-[#22AB94]/30"
                 : "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
               }>
                 Mood Score API: ✅ Live

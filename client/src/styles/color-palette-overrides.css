@@ -1,0 +1,425 @@
+/* ===== COMPREHENSIVE COLOR PALETTE OVERRIDES ===== */
+
+/* Light Mode - Override all hardcoded colors to use new palette */
+
+/* Primary Text Color Updates */
+:root:not(.dark) .text-\[#1E1E1E\] {
+  color: #1A1A1A !important;
+}
+
+:root:not(.dark) .text-\[#1C1E21\] {
+  color: #1A1A1A !important;
+}
+
+:root:not(.dark) .text-\[#111827\] {
+  color: #1A1A1A !important;
+}
+
+/* Secondary Text Color Updates */
+:root:not(.dark) .text-\[#374151\] {
+  color: #4B5563 !important;
+}
+
+:root:not(.dark) .text-\[#1F2937\] {
+  color: #4B5563 !important;
+}
+
+:root:not(.dark) .text-\[#333\] {
+  color: #4B5563 !important;
+}
+
+:root:not(.dark) .text-\[#444\] {
+  color: #4B5563 !important;
+}
+
+/* Muted Text Color Updates */
+:root:not(.dark) .text-\[#6B7280\] {
+  color: #9CA3AF !important;
+}
+
+:root:not(.dark) .text-\[#555\] {
+  color: #9CA3AF !important;
+}
+
+:root:not(.dark) .text-\[#666\] {
+  color: #9CA3AF !important;
+}
+
+:root:not(.dark) .text-\[#777\] {
+  color: #9CA3AF !important;
+}
+
+:root:not(.dark) .text-\[#888\] {
+  color: #9CA3AF !important;
+}
+
+:root:not(.dark) .text-\[#999\] {
+  color: #9CA3AF !important;
+}
+
+/* Background Color Updates */
+:root:not(.dark) .bg-\[#F7F9FB\] {
+  background-color: #FFFFFF !important;
+}
+
+:root:not(.dark) .bg-\[#F9FAFB\] {
+  background-color: #FAFAFA !important;
+}
+
+:root:not(.dark) .bg-\[#F5F5F5\] {
+  background-color: #F5F5F5 !important;
+}
+
+:root:not(.dark) .bg-\[#F4F6FA\] {
+  background-color: #FAFAFA !important;
+}
+
+/* Border Color Updates */
+:root:not(.dark) .border-\[#E0E0E0\] {
+  border-color: #E6E6E6 !important;
+}
+
+:root:not(.dark) .border-\[#E5E7EB\] {
+  border-color: #E6E6E6 !important;
+}
+
+:root:not(.dark) .border-\[#D1D5DB\] {
+  border-color: #E6E6E6 !important;
+}
+
+:root:not(.dark) .border-gray-200 {
+  border-color: #E6E6E6 !important;
+}
+
+:root:not(.dark) .border-gray-300 {
+  border-color: #E6E6E6 !important;
+}
+
+/* Sentiment Color Updates - Positive */
+:root:not(.dark) .text-\[#4CAF50\] {
+  color: #22AB94 !important;
+}
+
+:root:not(.dark) .text-\[#22C55E\] {
+  color: #22AB94 !important;
+}
+
+:root:not(.dark) .text-\[#059669\] {
+  color: #22AB94 !important;
+}
+
+:root:not(.dark) .text-\[#388E3C\] {
+  color: #22AB94 !important;
+}
+
+:root:not(.dark) .bg-\[#E8F5E9\] {
+  background-color: #E8F8F4 !important;
+  color: #22AB94 !important;
+}
+
+:root:not(.dark) .bg-\[#D1FAE5\] {
+  background-color: #E8F8F4 !important;
+  color: #22AB94 !important;
+}
+
+:root:not(.dark) .border-\[#4CAF50\] {
+  border-color: #22AB94 !important;
+}
+
+:root:not(.dark) .border-\[#22C55E\] {
+  border-color: #22AB94 !important;
+}
+
+/* Sentiment Color Updates - Negative */
+:root:not(.dark) .text-\[#F44336\] {
+  color: #F23645 !important;
+}
+
+:root:not(.dark) .text-\[#EF4444\] {
+  color: #F23645 !important;
+}
+
+:root:not(.dark) .text-\[#DC2626\] {
+  color: #F23645 !important;
+}
+
+:root:not(.dark) .bg-\[#FFEBEE\] {
+  background-color: #FDECEC !important;
+  color: #F23645 !important;
+}
+
+:root:not(.dark) .bg-\[#FEE2E2\] {
+  background-color: #FDECEC !important;
+  color: #F23645 !important;
+}
+
+:root:not(.dark) .border-\[#F44336\] {
+  border-color: #F23645 !important;
+}
+
+:root:not(.dark) .border-\[#EF4444\] {
+  border-color: #F23645 !important;
+}
+
+/* Sentiment Color Updates - Neutral */
+:root:not(.dark) .text-\[#FFB300\] {
+  color: #6B7280 !important;
+}
+
+:root:not(.dark) .text-\[#F59E0B\] {
+  color: #6B7280 !important;
+}
+
+:root:not(.dark) .bg-\[#FFF8E1\] {
+  background-color: #F3F4F6 !important;
+  color: #6B7280 !important;
+}
+
+:root:not(.dark) .bg-\[#FEF3C7\] {
+  background-color: #F3F4F6 !important;
+  color: #6B7280 !important;
+}
+
+:root:not(.dark) .border-\[#FFB300\] {
+  border-color: #6B7280 !important;
+}
+
+:root:not(.dark) .border-\[#F59E0B\] {
+  border-color: #6B7280 !important;
+}
+
+/* Accent Color Updates - Primary Blue */
+:root:not(.dark) .text-\[#3F51B5\] {
+  color: #3A7AFE !important;
+}
+
+:root:not(.dark) .text-\[#2196F3\] {
+  color: #3A7AFE !important;
+}
+
+:root:not(.dark) .text-\[#1976D2\] {
+  color: #3A7AFE !important;
+}
+
+:root:not(.dark) .text-\[#303F9F\] {
+  color: #3A7AFE !important;
+}
+
+:root:not(.dark) .bg-\[#3F51B5\] {
+  background-color: #3A7AFE !important;
+  color: #FFFFFF !important;
+}
+
+:root:not(.dark) .bg-\[#E8EAF6\] {
+  background-color: rgba(58, 122, 254, 0.1) !important;
+  color: #3A7AFE !important;
+}
+
+:root:not(.dark) .border-\[#3F51B5\] {
+  border-color: #3A7AFE !important;
+}
+
+/* Accent Color Updates - Secondary Purple */
+:root:not(.dark) .text-\[#9C27B0\] {
+  color: #7B61FF !important;
+}
+
+:root:not(.dark) .text-\[#7B1FA2\] {
+  color: #7B61FF !important;
+}
+
+:root:not(.dark) .text-\[#6A1B9A\] {
+  color: #7B61FF !important;
+}
+
+:root:not(.dark) .bg-\[#F3E5F5\] {
+  background-color: rgba(123, 97, 255, 0.1) !important;
+  color: #7B61FF !important;
+}
+
+:root:not(.dark) .border-\[#9C27B0\] {
+  border-color: #7B61FF !important;
+}
+
+/* Hover Background Updates */
+:root:not(.dark) .hover\:bg-\[#F9FAFB\]:hover {
+  background-color: #F3F4F6 !important;
+}
+
+:root:not(.dark) .hover\:bg-\[#F0F0F0\]:hover {
+  background-color: #F3F4F6 !important;
+}
+
+:root:not(.dark) .hover\:bg-\[#E8E8E8\]:hover {
+  background-color: #F3F4F6 !important;
+}
+
+/* Focus Border Updates */
+:root:not(.dark) .focus\:border-\[#3F51B5\]:focus {
+  border-color: #3A7AFE !important;
+}
+
+:root:not(.dark) .focus\:border-\[#2196F3\]:focus {
+  border-color: #3A7AFE !important;
+}
+
+/* Placeholder Text Updates */
+:root:not(.dark) .placeholder-\[#888\]::placeholder {
+  color: #9CA3AF !important;
+}
+
+:root:not(.dark) .placeholder-\[#999\]::placeholder {
+  color: #9CA3AF !important;
+}
+
+/* Tab and Button Updates */
+:root:not(.dark) .data-\[state\=active\]\:text-\[#1C1E21\] {
+  color: #1A1A1A !important;
+}
+
+:root:not(.dark) .data-\[state\=active\]\:text-\[#1E1E1E\] {
+  color: #1A1A1A !important;
+}
+
+:root:not(.dark) .data-\[state\=active\]\:border-\[#E0E0E0\] {
+  border-color: #E6E6E6 !important;
+}
+
+/* Chart and Data Visualization Updates */
+:root:not(.dark) .stroke-\[#4CAF50\] {
+  stroke: #22AB94 !important;
+}
+
+:root:not(.dark) .stroke-\[#F44336\] {
+  stroke: #F23645 !important;
+}
+
+:root:not(.dark) .stroke-\[#3F51B5\] {
+  stroke: #3A7AFE !important;
+}
+
+:root:not(.dark) .fill-\[#4CAF50\] {
+  fill: #22AB94 !important;
+}
+
+:root:not(.dark) .fill-\[#F44336\] {
+  fill: #F23645 !important;
+}
+
+:root:not(.dark) .fill-\[#3F51B5\] {
+  fill: #3A7AFE !important;
+}
+
+/* Grid and Line Colors */
+:root:not(.dark) .stroke-\[#E0E0E0\] {
+  stroke: #EFEFEF !important;
+}
+
+:root:not(.dark) .stroke-\[#E5E7EB\] {
+  stroke: #EFEFEF !important;
+}
+
+/* Icon Color Updates */
+:root:not(.dark) svg.text-\[#4CAF50\] {
+  color: #22AB94 !important;
+}
+
+:root:not(.dark) svg.text-\[#F44336\] {
+  color: #F23645 !important;
+}
+
+:root:not(.dark) svg.text-\[#3F51B5\] {
+  color: #3A7AFE !important;
+}
+
+/* Additional utility class overrides */
+:root:not(.dark) .text-emerald-600 {
+  color: #22AB94 !important;
+}
+
+:root:not(.dark) .text-red-600 {
+  color: #F23645 !important;
+}
+
+:root:not(.dark) .text-blue-600 {
+  color: #3A7AFE !important;
+}
+
+:root:not(.dark) .text-indigo-600 {
+  color: #3A7AFE !important;
+}
+
+:root:not(.dark) .text-purple-600 {
+  color: #7B61FF !important;
+}
+
+/* Background utility overrides */
+:root:not(.dark) .bg-emerald-100 {
+  background-color: #E8F8F4 !important;
+  color: #22AB94 !important;
+}
+
+:root:not(.dark) .bg-red-100 {
+  background-color: #FDECEC !important;
+  color: #F23645 !important;
+}
+
+:root:not(.dark) .bg-blue-100 {
+  background-color: rgba(58, 122, 254, 0.1) !important;
+  color: #3A7AFE !important;
+}
+
+:root:not(.dark) .bg-purple-100 {
+  background-color: rgba(123, 97, 255, 0.1) !important;
+  color: #7B61FF !important;
+}
+
+/* Border utility overrides */
+:root:not(.dark) .border-emerald-500 {
+  border-color: #22AB94 !important;
+}
+
+:root:not(.dark) .border-red-500 {
+  border-color: #F23645 !important;
+}
+
+:root:not(.dark) .border-blue-500 {
+  border-color: #3A7AFE !important;
+}
+
+:root:not(.dark) .border-purple-500 {
+  border-color: #7B61FF !important;
+}
+
+/* Specific overrides for badge components */
+:root:not(.dark) .bg-green-500\/20 {
+  background-color: #E8F8F4 !important;
+}
+
+:root:not(.dark) .text-green-400 {
+  color: #22AB94 !important;
+}
+
+:root:not(.dark) .border-green-500\/30 {
+  border-color: rgba(34, 171, 148, 0.3) !important;
+}
+
+:root:not(.dark) .bg-red-500\/20 {
+  background-color: #FDECEC !important;
+}
+
+:root:not(.dark) .text-red-400 {
+  color: #F23645 !important;
+}
+
+:root:not(.dark) .border-red-500\/30 {
+  border-color: rgba(242, 54, 69, 0.3) !important;
+}
+
+:root:not(.dark) .bg-emerald-400 {
+  background-color: #22AB94 !important;
+}
+
+:root:not(.dark) .bg-indigo-400 {
+  background-color: #7B61FF !important;
+}

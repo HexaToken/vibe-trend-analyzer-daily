@@ -1,0 +1,139 @@
+/* ===== SENTIMENT COLORS - NEW PALETTE ===== */
+
+/* Light Mode Sentiment Colors - Apply new palette */
+:root:not(.dark) {
+  /* Sentiment Colors - New Specification */
+  --sentiment-positive-text: #22AB94;
+  --sentiment-positive-bg: #E8F8F4;
+  --sentiment-negative-text: #F23645;
+  --sentiment-negative-bg: #FDECEC;
+  --sentiment-neutral-text: #6B7280;
+  --sentiment-neutral-bg: #F3F4F6;
+}
+
+/* Positive Sentiment Styling */
+:root:not(.dark) .sentiment-positive,
+:root:not(.dark) .text-positive,
+:root:not(.dark) .bullish {
+  color: #22AB94 !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .bg-positive,
+:root:not(.dark) .sentiment-positive-bg {
+  background-color: #E8F8F4 !important;
+  color: #22AB94 !important;
+  border-color: #22AB94 !important;
+}
+
+/* Negative Sentiment Styling */
+:root:not(.dark) .sentiment-negative,
+:root:not(.dark) .text-negative,
+:root:not(.dark) .bearish {
+  color: #F23645 !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .bg-negative,
+:root:not(.dark) .sentiment-negative-bg {
+  background-color: #FDECEC !important;
+  color: #F23645 !important;
+  border-color: #F23645 !important;
+}
+
+/* Neutral Sentiment Styling */
+:root:not(.dark) .sentiment-neutral,
+:root:not(.dark) .text-neutral,
+:root:not(.dark) .neutral {
+  color: #6B7280 !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .bg-neutral,
+:root:not(.dark) .sentiment-neutral-bg {
+  background-color: #F3F4F6 !important;
+  color: #6B7280 !important;
+  border-color: #6B7280 !important;
+}
+
+/* Badge-specific sentiment styling */
+:root:not(.dark) .badge-positive {
+  background: #E8F8F4 !important;
+  color: #22AB94 !important;
+  border: 1px solid #22AB94 !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .badge-negative {
+  background: #FDECEC !important;
+  color: #F23645 !important;
+  border: 1px solid #F23645 !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .badge-neutral {
+  background: #F3F4F6 !important;
+  color: #6B7280 !important;
+  border: 1px solid #6B7280 !important;
+  font-weight: 600 !important;
+}
+
+/* Market status indicators */
+:root:not(.dark) .market-up,
+:root:not(.dark) .price-up,
+:root:not(.dark) .trend-up {
+  color: #22AB94 !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .market-down,
+:root:not(.dark) .price-down,
+:root:not(.dark) .trend-down {
+  color: #F23645 !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark) .market-neutral,
+:root:not(.dark) .price-neutral,
+:root:not(.dark) .trend-neutral {
+  color: #6B7280 !important;
+  font-weight: 600 !important;
+}
+
+/* Chart sentiment indicators */
+:root:not(.dark) .chart-positive {
+  color: #22AB94 !important;
+  fill: #22AB94 !important;
+  stroke: #22AB94 !important;
+}
+
+:root:not(.dark) .chart-negative {
+  color: #F23645 !important;
+  fill: #F23645 !important;
+  stroke: #F23645 !important;
+}
+
+:root:not(.dark) .chart-neutral {
+  color: #6B7280 !important;
+  fill: #6B7280 !important;
+  stroke: #6B7280 !important;
+}
+
+/* Sentiment score indicators */
+:root:not(.dark) .score-positive {
+  background: linear-gradient(135deg, #E8F8F4 0%, #22AB94 100%) !important;
+  color: #22AB94 !important;
+  border: 1px solid #22AB94 !important;
+}
+
+:root:not(.dark) .score-negative {
+  background: linear-gradient(135deg, #FDECEC 0%, #F23645 100%) !important;
+  color: #F23645 !important;
+  border: 1px solid #F23645 !important;
+}
+
+:root:not(.dark) .score-neutral {
+  background: linear-gradient(135deg, #F3F4F6 0%, #6B7280 100%) !important;
+  color: #6B7280 !important;
+  border: 1px solid #6B7280 !important;
+}

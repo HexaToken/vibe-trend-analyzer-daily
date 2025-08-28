@@ -105,7 +105,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
 
   const financeItems = [
     { label: 'Finance Hub', key: 'finance', icon: '💰' },
-    { label: 'Watchlist', key: 'watchlist', icon: '👁️' },
+    { label: 'Watchlist', key: 'watchlist', icon: '��️' },
     { label: 'Market Analytics', key: 'market', icon: '📈' },
     { label: 'Stock Screener', key: 'screener', icon: '🔍' },
     { label: 'Crypto Dashboard', key: 'crypto-dashboard', icon: '₿' },
@@ -176,19 +176,29 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                     "text-base font-medium px-3 py-2 rounded-lg transition-all duration-200 relative group",
                     activeSection === key
                       ? isLightMode
-                        ? "text-pink-600 bg-pink-500/10"
+                        ? "text-white bg-[#3A7AFE] font-semibold shadow-sm"
                         : "text-pink-400 bg-pink-500/10"
                       : isLightMode
-                        ? "text-gray-900 hover:text-blue-600"
+                        ? "text-[#4B5563] hover:text-[#3A7AFE] hover:bg-[#F3F4F6]"
                         : "text-gray-300 hover:text-gray-200"
                   )}
                   aria-current={activeSection === key ? "page" : undefined}
                 >
                   {label}
                   {activeSection === key && (
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
+                    <div className={cn(
+                      "absolute bottom-0 left-0 right-0 h-0.5 rounded-full",
+                      isLightMode
+                        ? "bg-[#3A7AFE]"
+                        : "bg-gradient-to-r from-pink-400 to-purple-500"
+                    )} />
                   )}
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                  <div className={cn(
+                    "absolute bottom-0 left-0 right-0 h-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200",
+                    isLightMode
+                      ? "bg-[#3A7AFE]"
+                      : "bg-gradient-to-r from-pink-400 to-purple-500"
+                  )} />
                 </button>
               ))}
 
@@ -199,19 +209,29 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                   "text-base font-medium px-3 py-2 rounded-lg transition-all duration-200 relative group",
                   activeSection === "community"
                     ? isLightMode
-                      ? "text-pink-600 bg-pink-500/10"
+                      ? "text-white bg-[#3A7AFE] font-semibold shadow-sm"
                       : "text-pink-400 bg-pink-500/10"
                     : isLightMode
-                      ? "text-gray-900 hover:text-blue-600"
+                      ? "text-[#4B5563] hover:text-[#3A7AFE] hover:bg-[#F3F4F6]"
                       : "text-gray-300 hover:text-gray-200"
                 )}
                 aria-current={activeSection === "community" ? "page" : undefined}
               >
                 <p>Community</p>
                 {activeSection === "community" && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full" />
+                  <div className={cn(
+                    "absolute bottom-0 left-0 right-0 h-0.5 rounded-full",
+                    isLightMode
+                      ? "bg-[#3A7AFE]"
+                      : "bg-gradient-to-r from-pink-400 to-purple-500"
+                  )} />
                 )}
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                <div className={cn(
+                  "absolute bottom-0 left-0 right-0 h-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200",
+                  isLightMode
+                    ? "bg-[#3A7AFE]"
+                    : "bg-gradient-to-r from-pink-400 to-purple-500"
+                )} />
               </button>
 
               {/* Finance Dropdown */}
@@ -220,12 +240,17 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                   <button className={cn(
                     "flex items-center gap-1 text-base font-medium px-3 py-2 rounded-lg transition-all duration-200 relative group",
                     isLightMode
-                      ? "text-gray-900 hover:text-blue-600"
+                      ? "text-[#4B5563] hover:text-[#3A7AFE] hover:bg-[#F3F4F6]"
                       : "text-gray-300 hover:text-gray-200"
                   )}>
                     Finance
                     <ChevronDown className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" />
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                    <div className={cn(
+                      "absolute bottom-0 left-0 right-0 h-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200",
+                      isLightMode
+                        ? "bg-[#3A7AFE]"
+                        : "bg-gradient-to-r from-pink-400 to-purple-500"
+                    )} />
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
@@ -308,7 +333,10 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                     ? "text-gray-700 group-hover:text-blue-500"
                     : "text-gray-300 group-hover:text-purple-400"
                 )} />
-                <Badge className="absolute -top-1 -right-1 w-4 h-4 p-0 bg-pink-500 text-white text-xs flex items-center justify-center rounded-full animate-pulse">
+                <Badge className={cn(
+                  "absolute -top-1 -right-1 w-4 h-4 p-0 text-white text-xs flex items-center justify-center rounded-full animate-pulse",
+                  isLightMode ? "bg-[#F23645]" : "bg-pink-500"
+                )}>
                   3
                 </Badge>
               </Button>
@@ -388,10 +416,10 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                       "w-full justify-start text-left py-3 rounded-xl transition-all duration-200",
                       activeSection === key
                         ? isLightMode
-                          ? "text-pink-600 bg-pink-500/10 border border-pink-500/20"
+                          ? "text-white bg-[#3A7AFE] font-semibold shadow-sm border border-[#3A7AFE]"
                           : "text-pink-400 bg-pink-500/10 border border-pink-500/20"
                         : isLightMode
-                          ? "text-gray-900 hover:text-blue-600 hover:bg-blue-500/10"
+                          ? "text-[#4B5563] hover:text-[#3A7AFE] hover:bg-[#F3F4F6]"
                           : "text-gray-300 hover:text-gray-200 hover:bg-purple-500/20"
                     )}
                   >
@@ -555,10 +583,10 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                           "w-full justify-start text-left py-3 rounded-xl transition-all duration-200",
                           activeSection === key
                             ? isLightMode
-                              ? "text-pink-600 bg-pink-500/10 border border-pink-500/20"
+                              ? "text-white bg-[#3A7AFE] font-semibold shadow-sm border border-[#3A7AFE]"
                               : "text-pink-400 bg-pink-500/10 border border-pink-500/20"
                             : isLightMode
-                              ? "text-gray-900 hover:text-blue-600 hover:bg-blue-500/10"
+                              ? "text-[#4B5563] hover:text-[#3A7AFE] hover:bg-[#F3F4F6]"
                               : "text-gray-300 hover:text-gray-200 hover:bg-purple-500/20"
                         )}
                       >

@@ -69,24 +69,24 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
 
   const getSentimentColor = (mood: string) => {
     switch (mood) {
-      case 'bullish': return 'text-emerald-400';
-      case 'bearish': return 'text-red-400';
-      default: return 'text-amber-400';
+      case 'bullish': return 'text-[#16A34A] sentiment-positive';
+      case 'bearish': return 'text-[#DC2626] sentiment-negative';
+      default: return 'text-[#7C3AED] sentiment-neutral';
     }
   };
 
   const getSentimentBadge = (mood: string) => {
     switch (mood) {
-      case 'bullish': return 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30';
-      case 'bearish': return 'bg-red-500/20 text-red-400 border-red-500/30';
-      default: return 'bg-amber-500/20 text-amber-400 border-amber-500/30';
+      case 'bullish': return 'bg-[#F0FDF4] text-[#16A34A] border-[#16A34A]/30 sentiment-positive sentiment-positive-bg';
+      case 'bearish': return 'bg-[#FEF2F2] text-[#DC2626] border-[#DC2626]/30 sentiment-negative sentiment-negative-bg';
+      default: return 'bg-[#FAF5FF] text-[#7C3AED] border-[#7C3AED]/30 sentiment-neutral sentiment-neutral-bg';
     }
   };
 
   const getMoodGlow = (mood: number) => {
-    if (mood >= 70) return 'shadow-lg shadow-emerald-500/20 border-emerald-500/30';
-    if (mood >= 50) return 'shadow-lg shadow-amber-500/20 border-amber-500/30';
-    return 'shadow-lg shadow-red-500/20 border-red-500/30';
+    if (mood >= 70) return 'shadow-lg shadow-[#16A34A]/20 border-[#16A34A]/30';
+    if (mood >= 50) return 'shadow-lg shadow-[#7C3AED]/20 border-[#7C3AED]/30';
+    return 'shadow-lg shadow-[#DC2626]/20 border-[#DC2626]/30';
   };
 
 
@@ -96,23 +96,23 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
       {/* Main Section Title */}
       <div className="text-center mb-8">
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4">
-          <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 animate-pulse ${
+          <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 ${
             themeMode === 'light'
-              ? 'bg-gradient-to-r from-[#3F51B5]/20 to-[#9C27B0]/20 shadow-lg shadow-[#3F51B5]/20'
+              ? 'bg-gradient-to-r from-[#3A7AFE]/20 to-[#7B61FF]/20 shadow-lg shadow-[#3A7AFE]/20'
               : 'bg-gradient-to-r from-purple-500/20 to-pink-500/20 shadow-lg shadow-purple-500/20'
           }`}>
-            <Brain className="w-6 h-6 text-purple-400" />
+            <Brain className="w-6 h-6 text-[#3A7AFE]" />
           </div>
-          <h2 className={`text-2xl sm:text-3xl font-bold text-center sm:text-left ${
+          <h2 className={`text-2xl sm:text-3xl font-semibold tracking-tight text-center sm:text-left tracking-tight ${
             themeMode === 'light'
-              ? 'text-[#1E1E1E]'
+              ? 'text-[#1A1A1A]'
               : 'bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent'
           }`}>
             🧠 Daily Mood Recap
           </h2>
         </div>
-        <p className={`text-base sm:text-lg px-4 sm:px-0 ${
-          themeMode === 'light' ? 'text-[#374151]' : 'text-gray-300'
+        <p className={`text-base sm:text-lg px-4 sm:px-0 font-medium leading-relaxed ${
+          themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-300'
         }`}>
           AI-generated summary of today's market emotions, sentiment moves, and trending topics
         </p>
@@ -122,7 +122,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
       <Card className={cn(
         "relative overflow-hidden transition-all duration-500 hover:scale-[1.02]",
         themeMode === 'light'
-          ? 'enhanced-card-light border border-[#E0E0E0]'
+          ? 'enhanced-card-light border border-[#E6E6E6]'
           : `bg-black/40 backdrop-blur-xl ${getMoodGlow(currentMood.overall)}`,
         getMoodGlow(currentMood.overall)
       )}>
@@ -132,19 +132,19 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-pink-500/5 to-purple-500/5 animate-pulse" />
         )}
 
-        <CardHeader className={themeMode === 'light' ? "border-b border-[#E0E0E0]" : "border-b border-purple-500/20"}>
+        <CardHeader className={themeMode === 'light' ? "border-b border-[#E6E6E6] theme-border" : "border-b border-purple-500/20"}>
           <CardTitle className={`flex items-center gap-3 ${
-            themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+            themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'
           }`}>
-            <Brain className="w-6 h-6 text-purple-400 animate-pulse" />
+            <Brain className="w-6 h-6 animate-pulse" style={{color: 'var(--color-overall-mood)'}} />
             <span>AI Market Mood Summary</span>
             <Badge className={cn(
               "animate-pulse",
               currentMood.overall >= 70
-                ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
+                ? "sentiment-positive sentiment-positive-bg"
                 : currentMood.overall >= 50
-                ? "bg-amber-500/20 text-amber-400 border-amber-500/30"
-                : "bg-red-500/20 text-red-400 border-red-500/30"
+                ? "sentiment-neutral sentiment-neutral-bg"
+                : "sentiment-negative sentiment-negative-bg"
             )}>
               {currentMood.trend === 'up' ? '↗' : '↘'} {currentMood.change}
             </Badge>
@@ -156,17 +156,17 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           {/* Mood Summary */}
           <div className={`p-5 rounded-xl transition-all duration-300 hover:scale-[1.01] hover:shadow-lg ${
             themeMode === 'light'
-              ? 'bg-gradient-to-r from-[#E8EAF6] to-[#F3E5F5] border border-[#E0E0E0]'
+              ? 'bg-gradient-to-r from-[rgba(58,122,254,0.1)] to-[rgba(123,97,255,0.1)] border border-[#E6E6E6] theme-card-background theme-border'
               : 'bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20'
           }`}>
-            <h3 className={`text-lg font-semibold mb-3 flex items-center gap-2 ${
-              themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+            <h3 className={`text-lg font-semibold tracking-tight mb-3 flex items-center gap-2 ${
+              themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'
             }`}>
               📈 Mood Summary
-              <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
+              <div className="w-2 h-2 rounded-full animate-pulse" style={{backgroundColor: 'var(--color-overall-mood)'}} />
             </h3>
             <p className={`text-base leading-relaxed ${
-              themeMode === 'light' ? 'text-[#374151]' : 'text-gray-300'
+              themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-300'
             }`}>
               {moodSummary}
             </p>
@@ -175,14 +175,14 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           {/* Top Movers */}
           <div className={`p-5 rounded-xl transition-all duration-300 hover:scale-[1.01] hover:shadow-lg ${
             themeMode === 'light'
-              ? 'bg-gradient-to-r from-[#E8F5E8] to-[#FFF3E0] border border-[#E0E0E0]'
+              ? 'bg-gradient-to-r from-[#E8F8F4] to-[#F3F4F6] border border-[#E6E6E6] theme-card-background theme-border'
               : 'bg-gradient-to-r from-emerald-500/10 to-amber-500/10 border border-emerald-500/20'
           }`}>
-            <h3 className={`text-lg font-semibold mb-4 flex items-center gap-2 ${
-              themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+            <h3 className={`text-lg font-semibold tracking-tight mb-4 flex items-center gap-2 ${
+              themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'
             }`}>
               🔥 Top Mood Movers
-              <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+              <div className="w-2 h-2 bg-[#16A34A] rounded-full animate-pulse" />
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-wrap gap-2">
               {topMovers.map((mover, index) => (
@@ -191,7 +191,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
                   className={cn(
                     "text-sm font-medium px-3 py-2 transition-all duration-300 hover:scale-105 cursor-pointer",
                     getSentimentBadge(mover.mood),
-                    mover.mood === 'bullish' ? 'hover:bg-emerald-500/30' : 'hover:bg-red-500/30'
+                    mover.mood === 'bullish' ? 'hover:bg-[#DCFCE7] shadow-sm' : 'hover:bg-[#FEE2E2] shadow-sm'
                   )}
                 >
                   <span className="font-bold">${mover.symbol}</span> → {mover.mood === 'bullish' ? '📈' : '📉'}
@@ -204,17 +204,17 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           {/* Headline Summary */}
           <div className={`p-5 rounded-xl transition-all duration-300 hover:scale-[1.01] hover:shadow-lg ${
             themeMode === 'light'
-              ? 'bg-gradient-to-r from-[#E3F2FD] to-[#F1F8E9] border border-[#E0E0E0]'
+              ? 'bg-gradient-to-r from-[#E3F2FD] to-[#F1F8E9] border border-[#E6E6E6] theme-card-background theme-border'
               : 'bg-gradient-to-r from-blue-500/10 to-green-500/10 border border-blue-500/20'
           }`}>
-            <h3 className={`text-lg font-semibold mb-3 flex items-center gap-2 ${
-              themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+            <h3 className={`text-lg font-semibold tracking-tight mb-3 flex items-center gap-2 ${
+              themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'
             }`}>
               📰 News Headlines Summary
-              <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
+              <div className="w-2 h-2 rounded-full animate-pulse" style={{backgroundColor: 'var(--color-news)'}} />
             </h3>
             <p className={`text-base leading-relaxed ${
-              themeMode === 'light' ? 'text-[#374151]' : 'text-gray-300'
+              themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-300'
             }`}>
               {headlineSummary}
             </p>
@@ -223,11 +223,11 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           {/* Trending Topics */}
           <div className={`p-5 rounded-xl transition-all duration-300 hover:scale-[1.01] ${
             themeMode === 'light'
-              ? 'bg-gradient-to-r from-[#FFF3E0] to-[#FCE4EC] border border-[#E0E0E0]'
+              ? 'bg-gradient-to-r from-[#FFF3E0] to-[#FCE4EC] border border-[#E6E6E6] theme-card-background theme-border'
               : 'bg-gradient-to-r from-orange-500/10 to-pink-500/10 border border-orange-500/20'
           }`}>
-            <h3 className={`text-lg font-semibold mb-4 ${
-              themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+            <h3 className={`text-lg font-semibold tracking-tight mb-4 ${
+              themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'
             }`}>
               🔥 Trending Topics
             </h3>
@@ -238,8 +238,8 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
                   className={cn(
                     "text-sm font-medium px-3 py-2 flex items-center justify-center gap-1 transition-all duration-300 hover:scale-105 cursor-pointer",
                     topic.direction === 'up'
-                      ? "bg-green-500/20 text-green-400 border-green-500/30 hover:bg-green-500/30"
-                      : "bg-red-500/20 text-red-400 border-red-500/30 hover:bg-red-500/30"
+                      ? "sentiment-positive sentiment-positive-bg shadow-sm border theme-border"
+                      : "sentiment-negative sentiment-negative-bg shadow-sm border theme-border"
                   )}
                 >
                   <Hash className="w-3 h-3" />
@@ -257,24 +257,24 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           {/* Mood Flip of the Day */}
           <div className={`p-5 rounded-xl transition-all duration-300 hover:scale-[1.01] hover:shadow-lg ${
             themeMode === 'light'
-              ? 'bg-gradient-to-r from-[#F3E5F5] to-[#E8EAF6] border border-[#E0E0E0]'
+              ? 'bg-gradient-to-r from-[rgba(123,97,255,0.1)] to-[rgba(58,122,254,0.1)] border border-[#E6E6E6] theme-card-background theme-border'
               : 'bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20'
           }`}>
-            <h3 className={`text-lg font-semibold mb-3 flex items-center gap-2 ${
-              themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+            <h3 className={`text-lg font-semibold tracking-tight mb-3 flex items-center gap-2 ${
+              themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'
             }`}>
               🔄 Mood Flip of the Day
-              <div className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse" />
+              <div className="w-2 h-2 rounded-full animate-pulse" style={{backgroundColor: 'var(--color-social)'}} />
             </h3>
             <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-              <Badge className="bg-indigo-500/20 text-indigo-400 border-indigo-500/30 font-semibold transition-all duration-300 hover:scale-105">
+              <Badge className="bg-indigo-500/20 text-indigo-400 border-indigo-500/30 font-semibold tracking-tight transition-all duration-300 hover:scale-105 theme-border">
                 ${moodFlip.symbol}
               </Badge>
               <span className={`text-sm hidden sm:inline ${
-                themeMode === 'light' ? 'text-[#374151]' : 'text-gray-400'
+                themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-400'
               }`}>flipped from</span>
               <span className={`text-xs sm:hidden ${
-                themeMode === 'light' ? 'text-[#374151]' : 'text-gray-400'
+                themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-400'
               }`}>from</span>
               <Badge className={cn(getSentimentBadge(moodFlip.from), "transition-all duration-300 hover:scale-105")}>
                 {moodFlip.from}
@@ -283,7 +283,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
               <Badge className={cn(getSentimentBadge(moodFlip.to), "transition-all duration-300 hover:scale-105")}>
                 {moodFlip.to}
               </Badge>
-              <span className={`text-sm font-semibold ${getSentimentColor(moodFlip.to)} animate-pulse`}>
+              <span className={`text-sm font-semibold tracking-tight ${getSentimentColor(moodFlip.to)} animate-pulse`}>
                 {moodFlip.change}
               </span>
             </div>

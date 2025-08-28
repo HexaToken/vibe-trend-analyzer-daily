@@ -1,6 +1,27 @@
 /* Import Light Mode Readability Enhancements */
 @import './styles/light-mode-readability.css';
 
+/* Import Sentiment Colors */
+@import './styles/sentiment-colors.css';
+
+/* Import Accent & Brand Colors */
+@import './styles/accent-brand-colors.css';
+
+/* Import Chart Colors */
+@import './styles/chart-colors.css';
+
+/* Import UI Interactions */
+@import './styles/ui-interactions.css';
+
+/* Import Light Mode Theme Colors */
+@import './styles/light-mode-theme-colors.css';
+
+/* Import Recharts Theme Defaults */
+@import './styles/recharts-theme-defaults.css';
+
+/* Import Color Palette Overrides - MUST BE LAST */
+@import './styles/color-palette-overrides.css';
+
 /* Import Futuristic Chart Styling */
 @import './styles/futuristic-chart.css';
 
@@ -30,44 +51,44 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* MoodMeter Light Mode - Optimized for clarity and mood-based branding */
-    --background: 220 14% 98%; /* #F9FAFB - Clean gray-50 base */
-    --foreground: 220 13% 9%; /* #111827 - Primary text gray-900 */
+    /* MoodMeter Light Mode - Updated with specified color palette */
+    --background: 0 0% 100%; /* #FFFFFF - Main background */
+    --foreground: 0 0% 10%; /* #1A1A1A - Primary text */
 
-    --card: 0 0% 100%; /* #FFFFFF - Pure white cards */
-    --card-foreground: 220 13% 9%; /* #111827 - Primary text */
+    --card: 0 0% 98%; /* #FAFAFA - Section/card backgrounds */
+    --card-foreground: 0 0% 10%; /* #1A1A1A - Primary text */
 
-    --popover: 0 0% 100%; /* #FFFFFF */
-    --popover-foreground: 220 13% 9%; /* #111827 */
+    --popover: 0 0% 98%; /* #FAFAFA */
+    --popover-foreground: 0 0% 10%; /* #1A1A1A */
 
-    --primary: 238 94% 67%; /* #6366F1 - Indigo accent */
+    --primary: 223 98% 61%; /* #3A7AFE - Primary accent blue */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 9% 46%; /* #4B5563 - Secondary text gray-600 */
+    --secondary: 220 13% 34%; /* #4B5563 - Secondary text */
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 220 13% 91%; /* #E5E7EB - Light gray-200 for backgrounds */
-    --muted-foreground: 220 9% 46%; /* #4B5563 - Secondary text */
+    --muted: 0 0% 96%; /* #F5F5F5 - Light gray backgrounds */
+    --muted-foreground: 220 9% 57%; /* #9CA3AF - Muted text */
 
-    --accent: 220 14% 96%; /* #F3F4F6 - Neutral hover background */
-    --accent-foreground: 220 13% 9%; /* #111827 - Primary text on light */
+    --accent: 223 98% 61%; /* #3A7AFE - Accent blue */
+    --accent-foreground: 0 0% 100%; /* White text on accent */
 
     --destructive: 0 84% 60%; /* #EF4444 - Red-500 for errors */
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 91%; /* #D1D5DB - Gray-300 borders */
-    --input: 220 13% 91%; /* #D1D5DB - Input borders */
-    --ring: 238 94% 67%; /* #6366F1 - Indigo focus ring */
+    --border: 0 0% 90%; /* #E6E6E6 - Borders/dividers */
+    --input: 0 0% 90%; /* #E6E6E6 - Input borders */
+    --ring: 223 98% 61%; /* #3A7AFE - Focus ring */
 
     --radius: 0.75rem; /* 12px border radius */
 
-    /* MoodMeter Sentiment Colors - Optimized for mood tracking */
-    --positive: 142 71% 45%; /* #22C55E - Green-500 for bullish/euphoria */
-    --positive-light: 142 76% 73%; /* #86EFAC - Green-300 */
-    --negative: 0 84% 60%; /* #EF4444 - Red-500 for bearish/panic */
-    --negative-light: 0 93% 94%; /* #FEE2E2 - Red-100 */
-    --neutral: 220 9% 46%; /* #6B7280 - Gray-500 for neutral */
-    --neutral-light: 220 14% 96%; /* #F3F4F6 - Gray-100 */
+    /* MoodMeter Sentiment Colors - Updated palette */
+    --positive: 168 71% 45%; /* #22AB94 - Positive text */
+    --positive-light: 168 76% 94%; /* #E8F8F4 - Positive background */
+    --negative: 354 85% 58%; /* #F23645 - Negative text */
+    --negative-light: 354 93% 93%; /* #FDECEC - Negative background */
+    --neutral: 220 13% 45%; /* #6B7280 - Neutral text */
+    --neutral-light: 220 14% 96%; /* #F3F4F6 - Neutral background */
 
     /* MoodMeter Mood Colors */
     --mood-hype: 199 89% 48%; /* #0EA5E9 - Sky-500 for hype */
@@ -75,11 +96,11 @@ All colors MUST be HSL.
     --mood-fear: 45 93% 47%; /* #EAB308 - Yellow-500 for fear */
     --mood-fear-light: 55 92% 95%; /* #FEF3C7 - Yellow-100 */
 
-    /* Data Visualization - Clean Financial Colors */
-    --chart-primary: 174 72% 56%; /* #26A69A - Teal for primary charts */
-    --chart-secondary: 123 46% 49%; /* #4CAF50 - Green */
-    --chart-tertiary: 4 90% 58%; /* #F44336 - Red */
-    --chart-quaternary: 228 45% 42%; /* #3F51B5 - Blue */
+    /* Data Visualization - Updated chart colors */
+    --chart-primary: 223 98% 61%; /* #3A7AFE - Default line */
+    --chart-secondary: 168 71% 45%; /* #22AB94 - Positive trend line */
+    --chart-tertiary: 354 85% 58%; /* #F23645 - Negative trend line */
+    --chart-quaternary: 249 100% 69%; /* #7B61FF - Secondary accent purple */
 
     /* Clean Financial Gradients */
     --gradient-hero: linear-gradient(
@@ -126,12 +147,12 @@ All colors MUST be HSL.
 
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    /* Chart Colors - Clean Financial Light Mode */
-    --chart-1: 174 72% 56%; /* #26A69A - Teal primary */
-    --chart-2: 123 46% 49%; /* #4CAF50 - Green secondary */
-    --chart-3: 4 90% 58%; /* #F44336 - Red tertiary */
-    --chart-4: 228 45% 42%; /* #3F51B5 - Blue quaternary */
-    --chart-5: 199 18% 33%; /* #607D8B - Gray quinary */
+    /* Chart Colors - Updated palette */
+    --chart-1: 223 98% 61%; /* #3A7AFE - Default line */
+    --chart-2: 168 71% 45%; /* #22AB94 - Positive trend line */
+    --chart-3: 354 85% 58%; /* #F23645 - Negative trend line */
+    --chart-4: 249 100% 69%; /* #7B61FF - Secondary accent purple */
+    --chart-5: 0 0% 94%; /* #EFEFEF - Gridlines */
   }
 
   .dark {

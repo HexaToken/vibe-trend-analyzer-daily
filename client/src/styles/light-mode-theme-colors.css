@@ -1,0 +1,874 @@
+/* ===== LOCKED LIGHT MODE THEME COLORS ===== */
+/* 🔒 DO NOT USE INLINE COLORS IN LIGHT MODE - USE CSS VARIABLES ONLY */
+/* This theme is locked to prevent overrides from future edits */
+
+:root.light,
+:root:not(.dark),
+.light-theme-force {
+  /* Core theme variables - LOCKED */
+  --color-overall-mood: #3A7AFE !important;
+  --color-stocks: #22AB94 !important;
+  --color-news: #7B61FF !important;
+  --color-social: #F23645 !important;
+  --color-gridline: #EFEFEF !important;
+  --color-axis: #4B5563 !important;
+  --color-background: #FFFFFF !important;
+  --color-card-background: #FAFAFA !important;
+  --color-border: #E6E6E6 !important;
+  --color-hover-background: #F3F4F6 !important;
+  --color-positive-text: #22AB94 !important;
+  --color-negative-text: #F23645 !important;
+  --color-neutral-text: #4B5563 !important;
+
+  /* Text hierarchy - LOCKED */
+  --color-text-primary: #1A1A1A !important;
+  --color-text-secondary: #4B5563 !important;
+  --color-text-muted: #9CA3AF !important;
+
+  /* Chart defaults - LOCKED */
+  --chart-stroke-width: 2.5px !important;
+  --chart-opacity: 1 !important;
+  --chart-grid-opacity: 0.3 !important;
+}
+
+/* High specificity light theme force class */
+html.light .light-theme-force,
+html:not(.dark) .light-theme-force,
+body.light .light-theme-force,
+body:not(.dark) .light-theme-force {
+  /* Force application of theme variables with maximum specificity */
+  --color-overall-mood: #3A7AFE !important;
+  --color-stocks: #22AB94 !important;
+  --color-news: #7B61FF !important;
+  --color-social: #F23645 !important;
+  --color-gridline: #EFEFEF !important;
+  --color-axis: #4B5563 !important;
+  --color-background: #FFFFFF !important;
+  --color-card-background: #FAFAFA !important;
+  --color-border: #E6E6E6 !important;
+  --color-hover-background: #F3F4F6 !important;
+  --color-positive-text: #22AB94 !important;
+  --color-negative-text: #F23645 !important;
+  --color-neutral-text: #4B5563 !important;
+}
+
+/* ===== GLOBAL LAYOUT LOCKING (LIGHT MODE ONLY) ===== */
+
+/* Lock body and main container styles */
+:root:not(.dark) body,
+html:not(.dark) body,
+.light-theme-force body {
+  background-color: var(--color-background) !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* Lock main content areas */
+:root:not(.dark) main,
+:root:not(.dark) .main-content,
+.light-theme-force main,
+.light-theme-force .main-content {
+  background-color: var(--color-background) !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* Lock all cards and containers */
+:root:not(.dark) .card,
+:root:not(.dark) [class*="card"],
+:root:not(.dark) [data-card],
+.light-theme-force .card,
+.light-theme-force [class*="card"],
+.light-theme-force [data-card] {
+  background-color: var(--color-card-background) !important;
+  border-color: var(--color-border) !important;
+}
+
+/* Lock all borders and dividers */
+:root:not(.dark) hr,
+:root:not(.dark) .border,
+:root:not(.dark) [class*="border"],
+.light-theme-force hr,
+.light-theme-force .border,
+.light-theme-force [class*="border"] {
+  border-color: var(--color-border) !important;
+}
+
+/* Lock text hierarchy */
+:root:not(.dark) h1,
+:root:not(.dark) h2,
+:root:not(.dark) h3,
+:root:not(.dark) h4,
+:root:not(.dark) h5,
+:root:not(.dark) h6,
+:root:not(.dark) .text-primary,
+.light-theme-force h1,
+.light-theme-force h2,
+.light-theme-force h3,
+.light-theme-force h4,
+.light-theme-force h5,
+.light-theme-force h6,
+.light-theme-force .text-primary {
+  color: var(--color-text-primary) !important;
+}
+
+:root:not(.dark) .text-secondary,
+:root:not(.dark) .text-muted,
+.light-theme-force .text-secondary,
+.light-theme-force .text-muted {
+  color: var(--color-text-secondary) !important;
+}
+
+/* Lock hover states globally */
+:root:not(.dark) .hover\:bg-gray-50:hover,
+:root:not(.dark) .hover\:bg-gray-100:hover,
+:root:not(.dark) .hover\:bg-hover:hover,
+.light-theme-force .hover\:bg-gray-50:hover,
+.light-theme-force .hover\:bg-gray-100:hover,
+.light-theme-force .hover\:bg-hover:hover {
+  background-color: var(--color-hover-background) !important;
+}
+
+/* Light mode only - Chart lines */
+:root:not(.dark) .chart-line-overall {
+  stroke: var(--color-overall-mood) !important;
+}
+
+:root:not(.dark) .chart-line-stocks {
+  stroke: var(--color-stocks) !important;
+}
+
+:root:not(.dark) .chart-line-news {
+  stroke: var(--color-news) !important;
+}
+
+:root:not(.dark) .chart-line-social {
+  stroke: var(--color-social) !important;
+}
+
+/* Light mode only - Chart grid and axis */
+:root:not(.dark) .chart-gridline {
+  stroke: var(--color-gridline) !important;
+}
+
+:root:not(.dark) .chart-axis-text {
+  fill: var(--color-axis) !important;
+  color: var(--color-axis) !important;
+}
+
+/* Light mode only - Background colors */
+:root:not(.dark) .theme-background {
+  background-color: var(--color-background) !important;
+}
+
+:root:not(.dark) .theme-card-background {
+  background-color: var(--color-card-background) !important;
+}
+
+/* Light mode only - Border colors */
+:root:not(.dark) .theme-border {
+  border-color: var(--color-border) !important;
+}
+
+/* Light mode only - Hover states */
+:root:not(.dark) .theme-hover:hover {
+  background-color: var(--color-hover-background) !important;
+}
+
+/* Light mode only - Sentiment colors */
+:root:not(.dark) .sentiment-positive {
+  color: var(--color-positive-text) !important;
+}
+
+:root:not(.dark) .sentiment-negative {
+  color: var(--color-negative-text) !important;
+}
+
+:root:not(.dark) .sentiment-neutral {
+  color: var(--color-neutral-text) !important;
+}
+
+/* Light mode only - Sentiment background colors */
+:root:not(.dark) .sentiment-positive-bg {
+  background-color: color-mix(in srgb, var(--color-positive-text) 10%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-positive-text) 30%, transparent) !important;
+}
+
+:root:not(.dark) .sentiment-negative-bg {
+  background-color: color-mix(in srgb, var(--color-negative-text) 10%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-negative-text) 30%, transparent) !important;
+}
+
+:root:not(.dark) .sentiment-neutral-bg {
+  background-color: color-mix(in srgb, var(--color-neutral-text) 10%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-neutral-text) 30%, transparent) !important;
+}
+
+/* Light mode only - Metric card progress bars */
+:root:not(.dark) .metric-stocks-progress {
+  background-color: var(--color-stocks) !important;
+}
+
+:root:not(.dark) .metric-news-progress {
+  background-color: var(--color-news) !important;
+}
+
+:root:not(.dark) .metric-social-progress {
+  background-color: var(--color-social) !important;
+}
+
+/* Light mode only - Inline style overrides for CSS variables */
+:root:not(.dark) [style*="color: var(--color-overall-mood)"] {
+  color: var(--color-overall-mood) !important;
+}
+
+:root:not(.dark) [style*="backgroundColor: var(--color-"] {
+  background-color: unset !important;
+}
+
+:root:not(.dark) [style*="backgroundColor: 'var(--color-stocks')"] {
+  background-color: var(--color-stocks) !important;
+}
+
+:root:not(.dark) [style*="backgroundColor: 'var(--color-news')"] {
+  background-color: var(--color-news) !important;
+}
+
+:root:not(.dark) [style*="backgroundColor: 'var(--color-social')"] {
+  background-color: var(--color-social) !important;
+}
+
+:root:not(.dark) [style*="backgroundColor: 'var(--color-overall-mood')"] {
+  background-color: var(--color-overall-mood) !important;
+}
+
+/* Light mode only - Chart lines with CSS variable support */
+:root:not(.dark) .chart-line-overall[stroke="url(#overallGradient)"] {
+  stroke: var(--color-overall-mood) !important;
+}
+
+/* Light mode only - Card component overrides */
+:root:not(.dark) .bg-card {
+  background-color: var(--color-card-background) !important;
+}
+
+:root:not(.dark) .text-card-foreground {
+  color: var(--color-neutral-text) !important;
+}
+
+/* Light mode only - Ensure enhanced-card-light uses theme colors */
+:root:not(.dark) .enhanced-card-light {
+  background-color: var(--color-card-background) !important;
+  border-color: var(--color-border) !important;
+}
+
+/* ===== COMPREHENSIVE HARDCODED COLOR OVERRIDES ===== */
+/* Override all hardcoded color values to use theme variables in light mode */
+
+/* Primary text color overrides */
+:root:not(.dark) .text-\[#1E1E1E\] {
+  color: var(--color-neutral-text) !important;
+}
+
+:root:not(.dark) .text-\[#1A1A1A\] {
+  color: var(--color-neutral-text) !important;
+}
+
+/* Secondary text color overrides */
+:root:not(.dark) .text-\[#666\] {
+  color: var(--color-axis) !important;
+}
+
+:root:not(.dark) .text-\[#4B5563\] {
+  color: var(--color-axis) !important;
+}
+
+/* Background color overrides */
+:root:not(.dark) .bg-white {
+  background-color: var(--color-background) !important;
+}
+
+:root:not(.dark) .bg-gray-50 {
+  background-color: var(--color-card-background) !important;
+}
+
+:root:not(.dark) .bg-gray-100 {
+  background-color: var(--color-hover-background) !important;
+}
+
+/* Border color overrides */
+:root:not(.dark) .border-gray-200 {
+  border-color: var(--color-border) !important;
+}
+
+:root:not(.dark) .border-gray-300 {
+  border-color: var(--color-border) !important;
+}
+
+/* Input and form control overrides */
+:root:not(.dark) input {
+  background-color: var(--color-background) !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-neutral-text) !important;
+}
+
+:root:not(.dark) select {
+  background-color: var(--color-background) !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-neutral-text) !important;
+}
+
+/* Button and interactive element overrides */
+:root:not(.dark) .hover\:bg-gray-50:hover {
+  background-color: var(--color-hover-background) !important;
+}
+
+:root:not(.dark) .hover\:bg-gray-100:hover {
+  background-color: var(--color-hover-background) !important;
+}
+
+/* Shadow and visual enhancement overrides */
+:root:not(.dark) .shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Specific component overrides for better theme compliance */
+:root:not(.dark) .text-gray-400 {
+  color: var(--color-axis) !important;
+}
+
+:root:not(.dark) .text-gray-600 {
+  color: var(--color-neutral-text) !important;
+}
+
+:root:not(.dark) .bg-\[#F5F7FA\] {
+  background-color: var(--color-card-background) !important;
+}
+
+/* ===== SENTIMENT COLOR COMPLIANCE OVERRIDES ===== */
+/* Replace hardcoded sentiment colors with theme variables */
+
+/* Green sentiment overrides (positive) */
+:root:not(.dark) .bg-green-100 {
+  background-color: color-mix(in srgb, var(--color-positive-text) 15%, var(--color-background)) !important;
+}
+
+:root:not(.dark) .text-green-700 {
+  color: var(--color-positive-text) !important;
+}
+
+:root:not(.dark) .text-green-600 {
+  color: var(--color-positive-text) !important;
+}
+
+:root:not(.dark) .border-green-200 {
+  border-color: color-mix(in srgb, var(--color-positive-text) 30%, var(--color-border)) !important;
+}
+
+:root:not(.dark) .border-green-300 {
+  border-color: color-mix(in srgb, var(--color-positive-text) 40%, var(--color-border)) !important;
+}
+
+:root:not(.dark) .hover\:bg-green-50:hover {
+  background-color: color-mix(in srgb, var(--color-positive-text) 8%, var(--color-background)) !important;
+}
+
+:root:not(.dark) .hover\:bg-green-100:hover {
+  background-color: color-mix(in srgb, var(--color-positive-text) 15%, var(--color-background)) !important;
+}
+
+/* Red sentiment overrides (negative) */
+:root:not(.dark) .bg-red-100 {
+  background-color: color-mix(in srgb, var(--color-negative-text) 15%, var(--color-background)) !important;
+}
+
+:root:not(.dark) .text-red-700 {
+  color: var(--color-negative-text) !important;
+}
+
+:root:not(.dark) .text-red-600 {
+  color: var(--color-negative-text) !important;
+}
+
+:root:not(.dark) .border-red-200 {
+  border-color: color-mix(in srgb, var(--color-negative-text) 30%, var(--color-border)) !important;
+}
+
+:root:not(.dark) .border-red-300 {
+  border-color: color-mix(in srgb, var(--color-negative-text) 40%, var(--color-border)) !important;
+}
+
+:root:not(.dark) .hover\:bg-red-50:hover {
+  background-color: color-mix(in srgb, var(--color-negative-text) 8%, var(--color-background)) !important;
+}
+
+:root:not(.dark) .hover\:bg-red-100:hover {
+  background-color: color-mix(in srgb, var(--color-negative-text) 15%, var(--color-background)) !important;
+}
+
+/* Yellow/Orange sentiment overrides (neutral) */
+:root:not(.dark) .bg-yellow-100 {
+  background-color: color-mix(in srgb, var(--color-neutral-text) 15%, var(--color-background)) !important;
+}
+
+:root:not(.dark) .text-yellow-700 {
+  color: var(--color-neutral-text) !important;
+}
+
+:root:not(.dark) .border-yellow-300 {
+  border-color: color-mix(in srgb, var(--color-neutral-text) 40%, var(--color-border)) !important;
+}
+
+/* News and social-specific color overrides */
+:root:not(.dark) .bg-purple-100 {
+  background-color: color-mix(in srgb, var(--color-news) 15%, var(--color-background)) !important;
+}
+
+:root:not(.dark) .text-purple-700 {
+  color: var(--color-news) !important;
+}
+
+:root:not(.dark) .border-purple-300 {
+  border-color: color-mix(in srgb, var(--color-news) 40%, var(--color-border)) !important;
+}
+
+/* Stock-specific color overrides */
+:root:not(.dark) .bg-blue-100 {
+  background-color: color-mix(in srgb, var(--color-stocks) 15%, var(--color-background)) !important;
+}
+
+:root:not(.dark) .text-blue-700 {
+  color: var(--color-stocks) !important;
+}
+
+:root:not(.dark) .border-blue-300 {
+  border-color: color-mix(in srgb, var(--color-stocks) 40%, var(--color-border)) !important;
+}
+
+/* ===== SPECIFIC HARDCODED COLOR OVERRIDES FOR FUTURISTIC HOMEPAGE ===== */
+
+/* Primary text colors */
+:root:not(.dark) .text-\[#388E3C\] {
+  color: var(--color-positive-text) !important;
+}
+
+:root:not(.dark) .text-\[#4CAF50\] {
+  color: var(--color-positive-text) !important;
+}
+
+:root:not(.dark) .text-\[#F44336\] {
+  color: var(--color-negative-text) !important;
+}
+
+:root:not(.dark) .text-\[#FFB300\] {
+  color: var(--color-neutral-text) !important;
+}
+
+:root:not(.dark) .text-\[#3F51B5\] {
+  color: var(--color-overall-mood) !important;
+}
+
+:root:not(.dark) .text-\[#9CA3AF\] {
+  color: var(--color-axis) !important;
+}
+
+/* Background colors */
+:root:not(.dark) .bg-\[rgba\(58\,122\,254\,0\.1\)\] {
+  background-color: color-mix(in srgb, var(--color-overall-mood) 10%, var(--color-background)) !important;
+}
+
+:root:not(.dark) .bg-\[#E8F8F4\] {
+  background-color: color-mix(in srgb, var(--color-positive-text) 15%, var(--color-background)) !important;
+}
+
+/* Border colors */
+:root:not(.dark) .border-\[#E6E6E6\] {
+  border-color: var(--color-border) !important;
+}
+
+:root:not(.dark) .border-\[#3A7AFE\]\/30 {
+  border-color: color-mix(in srgb, var(--color-overall-mood) 30%, transparent) !important;
+}
+
+:root:not(.dark) .border-\[#22AB94\]\/30 {
+  border-color: color-mix(in srgb, var(--color-positive-text) 30%, transparent) !important;
+}
+
+/* Input and form controls */
+:root:not(.dark) .placeholder-\[#888\]::placeholder {
+  color: var(--color-axis) !important;
+}
+
+:root:not(.dark) .focus\:border-\[#3A7AFE\]\/50:focus {
+  border-color: color-mix(in srgb, var(--color-overall-mood) 50%, transparent) !important;
+}
+
+/* Tab and navigation elements */
+:root:not(.dark) .data-\[state\=active\]\:text-\[#1A1A1A\] {
+  color: var(--color-neutral-text) !important;
+}
+
+:root:not(.dark) .data-\[state\=active\]\:border-\[#E6E6E6\] {
+  border-color: var(--color-border) !important;
+}
+
+/* Icon colors */
+:root:not(.dark) .text-\[#22AB94\] {
+  color: var(--color-positive-text) !important;
+}
+
+/* Watchlist score colors */
+:root:not(.dark) .hover\:text-red-600:hover {
+  color: var(--color-negative-text) !important;
+}
+
+/* Badge text colors */
+:root:not(.dark) .text-\[#3A7AFE\] {
+  color: var(--color-overall-mood) !important;
+}
+
+/* Ensure consistent application across components */
+:root:not(.dark) .enhanced-card-light {
+  background-color: var(--color-card-background) !important;
+  border-color: var(--color-border) !important;
+}
+
+/* ===== CHART STROKE AND FILL COLOR OVERRIDES ===== */
+/* Replace hardcoded chart colors with theme variables */
+
+/* SVG stroke color overrides for charts */
+:root:not(.dark) svg path[stroke="#10b981"] {
+  stroke: var(--color-positive-text) !important;
+}
+
+:root:not(.dark) svg path[stroke="#16C784"] {
+  stroke: var(--color-positive-text) !important;
+}
+
+:root:not(.dark) svg path[stroke="#ef4444"] {
+  stroke: var(--color-negative-text) !important;
+}
+
+:root:not(.dark) svg path[stroke="#EA3943"] {
+  stroke: var(--color-negative-text) !important;
+}
+
+:root:not(.dark) svg path[stroke="#3B82F6"] {
+  stroke: var(--color-stocks) !important;
+}
+
+:root:not(.dark) svg path[stroke="#8B5CF6"] {
+  stroke: var(--color-news) !important;
+}
+
+:root:not(.dark) svg path[stroke="#6366F1"] {
+  stroke: var(--color-social) !important;
+}
+
+:root:not(.dark) svg path[stroke="#f59e0b"] {
+  stroke: var(--color-neutral-text) !important;
+}
+
+:root:not(.dark) svg path[stroke="#6b7280"] {
+  stroke: var(--color-axis) !important;
+}
+
+/* SVG fill color overrides */
+:root:not(.dark) svg circle[fill="#10b981"] {
+  fill: var(--color-positive-text) !important;
+}
+
+:root:not(.dark) svg circle[fill="#22c55e"] {
+  fill: var(--color-positive-text) !important;
+}
+
+:root:not(.dark) svg [fill="#3b82f6"] {
+  fill: var(--color-stocks) !important;
+}
+
+:root:not(.dark) svg [fill="#666"] {
+  fill: var(--color-axis) !important;
+}
+
+:root:not(.dark) svg [fill="#333"] {
+  fill: var(--color-gridline) !important;
+}
+
+/* Grid and background pattern overrides */
+:root:not(.dark) svg path[stroke="#333"] {
+  stroke: var(--color-gridline) !important;
+}
+
+/* Chart trend line overrides for futuristic charts */
+:root:not(.dark) svg path[stroke="#00FFA3"] {
+  stroke: var(--color-positive-text) !important;
+}
+
+:root:not(.dark) svg path[stroke="#00D4FF"] {
+  stroke: var(--color-stocks) !important;
+}
+
+:root:not(.dark) svg path[stroke="#FF00FF"] {
+  stroke: var(--color-social) !important;
+}
+
+:root:not(.dark) svg path[stroke="#00E5FF"] {
+  stroke: var(--color-stocks) !important;
+}
+
+:root:not(.dark) svg path[stroke="#60a5fa"] {
+  stroke: var(--color-stocks) !important;
+}
+
+/* Recharts component color overrides */
+:root:not(.dark) .recharts-line-curve {
+  stroke: var(--color-overall-mood) !important;
+}
+
+:root:not(.dark) .recharts-bar {
+  fill: var(--color-overall-mood) !important;
+}
+
+/* Ensure dots and markers follow theme colors */
+:root:not(.dark) .recharts-dot {
+  fill: var(--color-overall-mood) !important;
+}
+
+/* ===== FINAL COMPREHENSIVE UI ELEMENT OVERRIDES ===== */
+
+/* Ensure all table and data display elements follow theme */
+:root:not(.dark) table {
+  background-color: var(--color-background) !important;
+  border-color: var(--color-border) !important;
+}
+
+:root:not(.dark) thead {
+  background-color: var(--color-card-background) !important;
+}
+
+:root:not(.dark) tbody tr:hover {
+  background-color: var(--color-hover-background) !important;
+}
+
+/* Ensure modal and dialog elements follow theme */
+:root:not(.dark) [role="dialog"] {
+  background-color: var(--color-background) !important;
+  border-color: var(--color-border) !important;
+}
+
+/* Ensure dropdown and select elements follow theme */
+:root:not(.dark) [role="listbox"] {
+  background-color: var(--color-background) !important;
+  border-color: var(--color-border) !important;
+}
+
+:root:not(.dark) [role="option"]:hover {
+  background-color: var(--color-hover-background) !important;
+}
+
+/* Ensure tooltip elements follow theme */
+:root:not(.dark) [role="tooltip"] {
+  background-color: var(--color-card-background) !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-neutral-text) !important;
+}
+
+/* Ensure progress bars and indicators follow theme */
+:root:not(.dark) .progress-bar {
+  background-color: var(--color-overall-mood) !important;
+}
+
+/* Global enforcement for any missed elements */
+:root:not(.dark) * {
+  --tw-text-opacity: 1;
+}
+
+/* Force override for any stubborn utility classes */
+:root:not(.dark) .text-gray-900 {
+  color: var(--color-neutral-text) !important;
+}
+
+:root:not(.dark) .text-gray-800 {
+  color: var(--color-neutral-text) !important;
+}
+
+:root:not(.dark) .text-gray-700 {
+  color: var(--color-axis) !important;
+}
+
+:root:not(.dark) .text-gray-500 {
+  color: var(--color-axis) !important;
+}
+
+:root:not(.dark) .bg-gray-900 {
+  background-color: var(--color-neutral-text) !important;
+}
+
+:root:not(.dark) .bg-gray-800 {
+  background-color: var(--color-axis) !important;
+}
+
+/* Ensure shadow utilities respect theme */
+:root:not(.dark) .shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Final override for any missed color utilities */
+:root:not(.dark) .text-current {
+  color: var(--color-neutral-text) !important;
+}
+
+/* ===== MAXIMUM SPECIFICITY INLINE STYLE OVERRIDES ===== */
+/* 🔒 These rules have maximum specificity to override ANY inline styles */
+
+/* Override any inline background colors */
+:root:not(.dark) *[style*="background-color: white"],
+:root:not(.dark) *[style*="background-color: #fff"],
+:root:not(.dark) *[style*="background-color: #ffffff"],
+.light-theme-force *[style*="background-color: white"],
+.light-theme-force *[style*="background-color: #fff"],
+.light-theme-force *[style*="background-color: #ffffff"] {
+  background-color: var(--color-background) !important;
+}
+
+:root:not(.dark) *[style*="background-color: #f9fafb"],
+:root:not(.dark) *[style*="background-color: #f5f5f5"],
+:root:not(.dark) *[style*="background-color: #fafafa"],
+.light-theme-force *[style*="background-color: #f9fafb"],
+.light-theme-force *[style*="background-color: #f5f5f5"],
+.light-theme-force *[style*="background-color: #fafafa"] {
+  background-color: var(--color-card-background) !important;
+}
+
+/* Override any inline text colors */
+:root:not(.dark) *[style*="color: #1e1e1e"],
+:root:not(.dark) *[style*="color: #1a1a1a"],
+:root:not(.dark) *[style*="color: #000"],
+:root:not(.dark) *[style*="color: black"],
+.light-theme-force *[style*="color: #1e1e1e"],
+.light-theme-force *[style*="color: #1a1a1a"],
+.light-theme-force *[style*="color: #000"],
+.light-theme-force *[style*="color: black"] {
+  color: var(--color-text-primary) !important;
+}
+
+:root:not(.dark) *[style*="color: #4b5563"],
+:root:not(.dark) *[style*="color: #666"],
+:root:not(.dark) *[style*="color: #6b7280"],
+.light-theme-force *[style*="color: #4b5563"],
+.light-theme-force *[style*="color: #666"],
+.light-theme-force *[style*="color: #6b7280"] {
+  color: var(--color-text-secondary) !important;
+}
+
+/* Override any inline border colors */
+:root:not(.dark) *[style*="border-color: #e5e7eb"],
+:root:not(.dark) *[style*="border-color: #e6e6e6"],
+:root:not(.dark) *[style*="border-color: #d1d5db"],
+.light-theme-force *[style*="border-color: #e5e7eb"],
+.light-theme-force *[style*="border-color: #e6e6e6"],
+.light-theme-force *[style*="border-color: #d1d5db"] {
+  border-color: var(--color-border) !important;
+}
+
+/* Override any inline stroke colors (for SVG/charts) */
+:root:not(.dark) *[style*="stroke: #10b981"],
+:root:not(.dark) *[style*="stroke: #16c784"],
+:root:not(.dark) *[style*="stroke: #22c55e"],
+.light-theme-force *[style*="stroke: #10b981"],
+.light-theme-force *[style*="stroke: #16c784"],
+.light-theme-force *[style*="stroke: #22c55e"] {
+  stroke: var(--color-positive-text) !important;
+}
+
+:root:not(.dark) *[style*="stroke: #ef4444"],
+:root:not(.dark) *[style*="stroke: #dc2626"],
+:root:not(.dark) *[style*="stroke: #f87171"],
+.light-theme-force *[style*="stroke: #ef4444"],
+.light-theme-force *[style*="stroke: #dc2626"],
+.light-theme-force *[style*="stroke: #f87171"] {
+  stroke: var(--color-negative-text) !important;
+}
+
+:root:not(.dark) *[style*="stroke: #3b82f6"],
+:root:not(.dark) *[style*="stroke: #2563eb"],
+:root:not(.dark) *[style*="stroke: #60a5fa"],
+.light-theme-force *[style*="stroke: #3b82f6"],
+.light-theme-force *[style*="stroke: #2563eb"],
+.light-theme-force *[style*="stroke: #60a5fa"] {
+  stroke: var(--color-stocks) !important;
+}
+
+/* Override any inline fill colors (for SVG/charts) */
+:root:not(.dark) *[style*="fill: #10b981"],
+:root:not(.dark) *[style*="fill: #16c784"],
+:root:not(.dark) *[style*="fill: #22c55e"],
+.light-theme-force *[style*="fill: #10b981"],
+.light-theme-force *[style*="fill: #16c784"],
+.light-theme-force *[style*="fill: #22c55e"] {
+  fill: var(--color-positive-text) !important;
+}
+
+:root:not(.dark) *[style*="fill: #ef4444"],
+:root:not(.dark) *[style*="fill: #dc2626"],
+:root:not(.dark) *[style*="fill: #f87171"],
+.light-theme-force *[style*="fill: #ef4444"],
+.light-theme-force *[style*="fill: #dc2626"],
+.light-theme-force *[style*="fill: #f87171"] {
+  fill: var(--color-negative-text) !important;
+}
+
+:root:not(.dark) *[style*="fill: #3b82f6"],
+:root:not(.dark) *[style*="fill: #2563eb"],
+:root:not(.dark) *[style*="fill: #60a5fa"],
+.light-theme-force *[style*="fill: #3b82f6"],
+.light-theme-force *[style*="fill: #2563eb"],
+.light-theme-force *[style*="fill: #60a5fa"] {
+  fill: var(--color-stocks) !important;
+}
+
+/* ===== NUCLEAR OPTION: ATTRIBUTE SELECTORS FOR MAXIMUM OVERRIDE ===== */
+/* These will override ANY color attribute with theme colors */
+
+:root:not(.dark) svg[stroke="#10b981"],
+:root:not(.dark) svg[stroke="#16c784"],
+:root:not(.dark) svg[stroke="#22c55e"],
+.light-theme-force svg[stroke="#10b981"],
+.light-theme-force svg[stroke="#16c784"],
+.light-theme-force svg[stroke="#22c55e"] {
+  stroke: var(--color-positive-text) !important;
+}
+
+:root:not(.dark) svg[stroke="#ef4444"],
+:root:not(.dark) svg[stroke="#dc2626"],
+:root:not(.dark) svg[stroke="#f87171"],
+.light-theme-force svg[stroke="#ef4444"],
+.light-theme-force svg[stroke="#dc2626"],
+.light-theme-force svg[stroke="#f87171"] {
+  stroke: var(--color-negative-text) !important;
+}
+
+/* Apply light theme force class to body in light mode */
+html:not(.dark) body,
+body:not(.dark) {
+  /* Add the force class programmatically */
+}
+
+/* ===== DEVELOPER WARNING COMMENT ===== */
+/*
+🔒 THEME LOCK NOTICE 🔒
+
+This file implements a LOCKED light mode color theme that prevents
+future edits from overriding the established color palette.
+
+DO NOT:
+- Use inline styles for colors in light mode
+- Hard-code color values in components
+- Override these CSS variables in other files
+
+DO:
+- Use the established CSS variables for all colors
+- Test all changes in light mode to ensure compliance
+- Add new colors to this file following the same pattern
+
+The theme is locked to prevent inconsistencies and maintain
+visual coherence across the entire application.
+*/

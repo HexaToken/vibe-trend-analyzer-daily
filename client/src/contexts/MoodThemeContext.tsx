@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { getIconFromEmoji, type IconConfig } from '../lib/iconUtils';
 import { LIGHT_THEME_COLORS, MOOD_COLORS, INTERACTIVE_COLORS, getMoodColor, getMoodTag, getMoodButton } from '../lib/moodColors';
+import { applyThemeLock, initializeThemeLock, injectThemeVariables } from '../utils/themeLock';
 
 export type ThemeMode = 'light' | 'dark' | 'dynamic';
 
@@ -210,12 +211,15 @@ export const MoodThemeProvider: React.FC<MoodThemeProviderProps> = ({ children }
   // Apply theme to document
   useEffect(() => {
     const root = document.documentElement;
-    
+
     if (themeMode === 'dark' || isDynamicMode) {
       root.classList.add('dark');
     } else {
       root.classList.remove('dark');
     }
+
+    // 🔒 Apply theme lock for light mode consistency
+    applyThemeLock(themeMode === 'dark' || isDynamicMode ? 'dark' : 'light');
 
     // Apply custom CSS variables for mood theming
     if (isDynamicMode && moodScore) {
@@ -225,6 +229,12 @@ export const MoodThemeProvider: React.FC<MoodThemeProviderProps> = ({ children }
       root.style.setProperty('--mood-glow', getMoodGlowColor(moodState));
     }
   }, [themeMode, moodState, moodScore, isDynamicMode]);
+
+  // 🔒 Initialize theme lock system on component mount
+  useEffect(() => {
+    initializeThemeLock();
+    injectThemeVariables();
+  }, []);
 
   const value: MoodThemeContextType = {
     themeMode,
