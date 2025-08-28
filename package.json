@@ -15,6 +15,7 @@
     "lint": "eslint client/src/main.tsx client/src/App.tsx --quiet",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "security": "npm audit --audit-level=moderate || true",
+    "scan:basic": "npm run lint && npm run security",
     "scan:quick": "npm run typecheck:quick && npm run security"
   },
   "dependencies": {
