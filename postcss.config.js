@@ -6,4 +6,6 @@ export default {
     tailwindcss,
     autoprefixer,
   ],
+  parser: require('postcss/lib/parser'),
+  map: false,
 }
