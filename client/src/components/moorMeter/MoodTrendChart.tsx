@@ -1,4 +1,3 @@
-import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
@@ -17,11 +16,11 @@ interface MoodTrendChartProps {
   setTimeframe: (timeframe: "1D" | "7D" | "30D") => void;
 }
 
-export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
+export const MoodTrendChart = ({
   data,
   timeframe,
   setTimeframe,
-}) => {
+}: MoodTrendChartProps) => {
   // 🔒 Use locked theme colors
   const lockedTheme = useRechartsTheme();
   const lockedColors = useLockedDataColors();

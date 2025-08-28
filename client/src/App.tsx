@@ -27,7 +27,6 @@ import { BuilderDemo } from "@/components/BuilderDemo";
 
 import { ApiStatusIndicator } from "@/components/ApiStatusIndicator";
 import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
-import { PulseOfTheChain } from "@/components/crypto/PulseOfTheChain";
 import { NeonSenseCryptoDashboard } from "@/components/crypto/NeonSenseCryptoDashboard";
 import { AdvancedTradingChart } from "@/components/finance/AdvancedTradingChart";
 import { EarningsCalendar } from "@/components/finance/EarningsCalendar";
@@ -234,7 +233,7 @@ const AppContent = () => {
       case "screener":
         return <StockScreener />;
       case "crypto":
-        return <PulseOfTheChain />;
+        return <NeonSenseCryptoDashboard />;
       case "earnings":
         return <EarningsCalendar />;
       case "charts":

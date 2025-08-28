@@ -1,601 +1,669 @@
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { Button } from '../ui/button';
-import { Badge } from '../ui/badge';
-import { Input } from '../ui/input';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Progress } from "@/components/ui/progress";
 import { 
-  Search, Bell, User, Zap, TrendingUp, TrendingDown, 
-  Eye, Star, AlertTriangle, BarChart3, ArrowUpRight,
-  ArrowDownRight, Wallet, Settings, RefreshCw, ChevronDown,
-  Filter, Globe, Activity, DollarSign, Clock, Flame,
-  Target, GamepadIcon, Sparkles, Coins, TrendingDown as TrendingDownIcon
-} from 'lucide-react';
-import { cn } from '../../lib/utils';
+  TrendingUp, 
+  TrendingDown, 
+  Zap, 
+  Activity, 
+  BarChart3, 
+  Search,
+  Bell,
+  User,
+  Wallet,
+  ExternalLink,
+  Play,
+  Pause,
+  ChevronLeft,
+  ChevronRight,
+  Sparkles,
+  Target,
+  Shield,
+  Award,
+  RefreshCw
+} from "lucide-react";
+import { useCryptoListings, useGlobalMetrics } from "@/hooks/useCoinMarketCap";
 
-interface CoinData {
-  rank: number;
+// Types
+interface PortfolioData {
+  totalUsd: number;
+  totalBtc: number;
+  totalEth: number;
+  pnl24hPct: number;
+  winRate7d: number;
+}
+
+interface CryptoToken {
   symbol: string;
   name: string;
   price: number;
-  change1h: number;
   change24h: number;
   change7d: number;
-  marketCap: string;
-  volume24h: string;
-  circulatingSupply: number;
-  maxSupply: number;
+  mcap: number;
+  vol24h: number;
   sparkline: number[];
-  logo?: string;
+  momentumScore?: number;
 }
 
-interface MarketStats {
-  cryptosCount: number;
-  exchangesCount: number;
-  globalMarketCap: string;
-  volume24h: string;
-  btcDominance: number;
-  ethGas: number;
-  fearGreedIndex: number;
-}
-
-interface TrendingCoin {
-  symbol: string;
-  name: string;
-  price: number;
-  change24h: number;
-  sparkline: number[];
-  volume24h: string;
-}
-
-interface NewsItem {
-  title: string;
-  source: string;
+interface OnChainActivity {
   time: string;
-  engagement: number;
-  logo: string;
+  type: 'buy' | 'sell' | 'transfer';
+  symbol: string;
+  usdValue: number;
+  fromAddr: string;
+  toAddr: string;
+  txHash: string;
+  dex?: string;
 }
+
+// Mock data for demonstration
+const mockPortfolio: PortfolioData = {
+  totalUsd: 125480.32,
+  totalBtc: 1.234,
+  totalEth: 45.67,
+  pnl24hPct: 8.42,
+  winRate7d: 73.5
+};
+
+const mockOnChainActivity: OnChainActivity[] = [
+  {
+    time: "2m ago",
+    type: "buy",
+    symbol: "BTC",
+    usdValue: 250000,
+    fromAddr: "0x123...abc",
+    toAddr: "0x456...def",
+    txHash: "0x789...ghi",
+    dex: "Uniswap"
+  },
+  {
+    time: "5m ago",
+    type: "sell",
+    symbol: "ETH",
+    usdValue: 180000,
+    fromAddr: "0x321...cba",
+    toAddr: "0x654...fed",
+    txHash: "0x987...ihg"
+  },
+  {
+    time: "8m ago",
+    type: "transfer",
+    symbol: "USDT",
+    usdValue: 500000,
+    fromAddr: "0xaaa...bbb",
+    toAddr: "0xccc...ddd",
+    txHash: "0xeee...fff"
+  }
+];
+
+const mockNews = [
+  "Bitcoin reaches new all-time high amid institutional adoption",
+  "Ethereum 2.0 staking rewards increase by 15% this quarter",
+  "Major crypto exchange announces zero-fee trading for retail investors",
+  "DeFi protocol launches innovative yield farming mechanism",
+  "Regulatory clarity boosts crypto market sentiment globally"
+];
 
 export const NeonSenseCryptoDashboard = () => {
-  const [selectedNarrative, setSelectedNarrative] = useState("market-up");
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  const [sortColumn, setSortColumn] = useState<string | null>(null);
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
-  const [visibleColumns, setVisibleColumns] = useState({
-    rank: true,
-    price: true,
-    change1h: true,
-    change24h: true,
-    change7d: true,
-    marketCap: true,
-    volume: true,
-    supply: true,
-    chart: true
-  });
+  const [sentimentScore, setSentimentScore] = useState(72);
+  const [selectedWatchlist, setSelectedWatchlist] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [newsIndex, setNewsIndex] = useState(0);
+  const [isNewsPlaying, setIsNewsPlaying] = useState(true);
 
-  // Mock Market Stats
-  const marketStats: MarketStats = {
-    cryptosCount: 2847,
-    exchangesCount: 156,
-    globalMarketCap: "$2.64T",
-    volume24h: "$89.2B",
-    btcDominance: 52.3,
-    ethGas: 23,
-    fearGreedIndex: 73
+  // Get real crypto data
+  const { tickers: cryptoData, loading, error } = useCryptoListings(20);
+  const { data: globalMetrics } = useGlobalMetrics();
+
+  // Auto-rotate news
+  useEffect(() => {
+    if (!isNewsPlaying) return;
+    const interval = setInterval(() => {
+      setNewsIndex((prev) => (prev + 1) % mockNews.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [isNewsPlaying]);
+
+  // Format functions
+  const formatNumber = (num: number) => {
+    if (num >= 1e12) return `$${(num / 1e12).toFixed(2)}T`;
+    if (num >= 1e9) return `$${(num / 1e9).toFixed(2)}B`;
+    if (num >= 1e6) return `$${(num / 1e6).toFixed(2)}M`;
+    if (num >= 1e3) return `$${(num / 1e3).toFixed(2)}K`;
+    return `$${num.toLocaleString()}`;
   };
 
-  // Mock Trending Coins
-  const trendingCoins: TrendingCoin[] = [
-    { symbol: 'SOL', name: 'Solana', price: 198.45, change24h: 12.3, sparkline: [180, 185, 192, 195, 198], volume24h: '4.8B' },
-    { symbol: 'AVAX', name: 'Avalanche', price: 42.18, change24h: 8.7, sparkline: [39, 40, 41, 42, 42.18], volume24h: '890M' },
-    { symbol: 'MATIC', name: 'Polygon', price: 0.945, change24h: 15.2, sparkline: [0.81, 0.85, 0.89, 0.92, 0.945], volume24h: '520M' },
-    { symbol: 'NEAR', name: 'NEAR Protocol', price: 7.23, change24h: 9.8, sparkline: [6.5, 6.8, 7.0, 7.1, 7.23], volume24h: '340M' },
-    { symbol: 'FTM', name: 'Fantom', price: 0.67, change24h: 22.1, sparkline: [0.55, 0.58, 0.62, 0.65, 0.67], volume24h: '180M' }
-  ];
-
-  // Mock DexScan Trending
-  const dexTrending: TrendingCoin[] = [
-    { symbol: 'PEPE', name: 'Pepe', price: 0.000012, change24h: 45.6, sparkline: [0.000008, 0.000009, 0.000011, 0.000012, 0.000012], volume24h: '2.1B' },
-    { symbol: 'SHIB', name: 'Shiba Inu', price: 0.000024, change24h: 32.1, sparkline: [0.000018, 0.000020, 0.000022, 0.000023, 0.000024], volume24h: '1.8B' },
-    { symbol: 'DOGE', name: 'Dogecoin', price: 0.38, change24h: 18.9, sparkline: [0.32, 0.34, 0.36, 0.37, 0.38], volume24h: '3.2B' },
-    { symbol: 'FLOKI', name: 'FLOKI', price: 0.00019, change24h: 28.7, sparkline: [0.00015, 0.00016, 0.00017, 0.00018, 0.00019], volume24h: '450M' },
-    { symbol: 'BONK', name: 'Bonk', price: 0.000035, change24h: 41.2, sparkline: [0.000025, 0.000028, 0.000031, 0.000033, 0.000035], volume24h: '890M' }
-  ];
-
-  // Mock News Headlines
-  const newsHeadlines: NewsItem[] = [
-    { title: "Bitcoin ETF sees record $2.1B inflows", source: "CoinDesk", time: "2h", engagement: 1247, logo: "📰" },
-    { title: "Ethereum 2.0 staking rewards hit new high", source: "Decrypt", time: "4h", engagement: 892, logo: "📈" },
-    { title: "Major bank announces crypto custody", source: "Reuters", time: "6h", engagement: 1556, logo: "🏦" },
-    { title: "DeFi TVL surpasses $200B milestone", source: "The Block", time: "8h", engagement: 743, logo: "💰" }
-  ];
-
-  // Mock Comprehensive Coin Data
-  const coinData: CoinData[] = [
-    { rank: 1, symbol: 'BTC', name: 'Bitcoin', price: 67420.50, change1h: 0.5, change24h: 3.2, change7d: 8.5, marketCap: '1.32T', volume24h: '28.5B', circulatingSupply: 19800000, maxSupply: 21000000, sparkline: [65000, 66200, 66800, 67100, 67420] },
-    { rank: 2, symbol: 'ETH', name: 'Ethereum', price: 3842.30, change1h: 1.2, change24h: 5.1, change7d: 12.3, marketCap: '462B', volume24h: '15.2B', circulatingSupply: 120280000, maxSupply: 0, sparkline: [3650, 3720, 3800, 3825, 3842] },
-    { rank: 3, symbol: 'USDT', name: 'Tether', price: 1.00, change1h: 0.01, change24h: 0.02, change7d: -0.05, marketCap: '104B', volume24h: '42.8B', circulatingSupply: 104000000000, maxSupply: 0, sparkline: [0.999, 1.000, 1.001, 1.000, 1.000] },
-    { rank: 4, symbol: 'BNB', name: 'BNB', price: 642.18, change1h: 0.8, change24h: 4.2, change7d: 7.9, marketCap: '93.2B', volume24h: '1.8B', circulatingSupply: 145200000, maxSupply: 200000000, sparkline: [615, 625, 635, 640, 642] },
-    { rank: 5, symbol: 'SOL', name: 'Solana', price: 198.45, change1h: 2.1, change24h: 8.7, change7d: 22.1, marketCap: '93B', volume24h: '4.8B', circulatingSupply: 468600000, maxSupply: 0, sparkline: [180, 185, 192, 195, 198] },
-    { rank: 6, symbol: 'USDC', name: 'USD Coin', price: 1.00, change1h: 0.00, change24h: 0.01, change7d: 0.02, marketCap: '32.1B', volume24h: '8.2B', circulatingSupply: 32100000000, maxSupply: 0, sparkline: [1.000, 1.000, 1.001, 1.000, 1.000] },
-    { rank: 7, symbol: 'ADA', name: 'Cardano', price: 0.875, change1h: -0.5, change24h: -2.1, change7d: 5.8, marketCap: '31B', volume24h: '1.2B', circulatingSupply: 35400000000, maxSupply: 45000000000, sparkline: [0.89, 0.88, 0.87, 0.875, 0.875] },
-    { rank: 8, symbol: 'AVAX', name: 'Avalanche', price: 42.18, change1h: 1.5, change24h: 6.3, change7d: 15.7, marketCap: '16B', volume24h: '890M', circulatingSupply: 379500000, maxSupply: 720000000, sparkline: [39, 40, 41, 42, 42.18] },
-    { rank: 9, symbol: 'DOGE', name: 'Dogecoin', price: 0.38, change1h: 0.3, change24h: 18.9, change7d: 12.4, marketCap: '55.8B', volume24h: '3.2B', circulatingSupply: 146800000000, maxSupply: 0, sparkline: [0.32, 0.34, 0.36, 0.37, 0.38] },
-    { rank: 10, symbol: 'DOT', name: 'Polkadot', price: 7.92, change1h: -0.2, change24h: -0.8, change7d: 3.2, marketCap: '11B', volume24h: '340M', circulatingSupply: 1390000000, maxSupply: 0, sparkline: [7.95, 7.93, 7.91, 7.90, 7.92] }
-  ];
-
-  const narrativeTabs = [
-    { id: "market-up", label: "Why is the market up today?", icon: "📈" },
-    { id: "altcoins", label: "Are altcoins outperforming Bitcoin?", icon: "🚀" },
-    { id: "trending", label: "Trending narratives", icon: "🔥" },
-    { id: "bullish", label: "Bullish momentum cryptos", icon: "💎" },
-    { id: "events", label: "Upcoming events", icon: "📅" }
-  ];
-
-  const categoryFilters = [
-    { id: "all", label: "All Crypto", icon: "🌐" },
-    { id: "nfts", label: "NFTs", icon: "🎨" },
-    { id: "defi", label: "DeFi", icon: "🏦" },
-    { id: "unlocks", label: "Token Unlocks", icon: "🔓" },
-    { id: "rwa", label: "Real-World Assets", icon: "🏢" },
-    { id: "binance", label: "Binance Alpha", icon: "🔶" },
-    { id: "memes", label: "Memes", icon: "🐸" },
-    { id: "ai", label: "AI", icon: "🤖" },
-    { id: "gaming", label: "Gaming", icon: "🎮" }
-  ];
-
-  const MiniSparkline = ({ data, isPositive }: { data: number[], isPositive: boolean }) => (
-    <svg width="100" height="40" className="inline-block">
-      <polyline
-        points={data.map((val, i) => `${(i / (data.length - 1)) * 100},${40 - ((val - Math.min(...data)) / (Math.max(...data) - Math.min(...data))) * 40}`).join(' ')}
-        fill="none"
-        stroke={isPositive ? '#16C784' : '#EA3943'}
-        strokeWidth="2"
-      />
-    </svg>
-  );
-
-  const handleSort = (column: string) => {
-    if (sortColumn === column) {
-      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
-    } else {
-      setSortColumn(column);
-      setSortDirection('desc');
-    }
+  const getSentimentColor = (score: number) => {
+    if (score >= 75) return "from-[#C3FF00] to-[#16C784]";
+    if (score >= 50) return "from-[#FF1F8F] to-[#00E5FF]";
+    return "from-[#EA3943] to-[#FF1F8F]";
   };
 
-  const getSortedData = () => {
-    if (!sortColumn) return coinData;
-    
-    return [...coinData].sort((a, b) => {
-      let aVal: any = a[sortColumn as keyof CoinData];
-      let bVal: any = b[sortColumn as keyof CoinData];
-      
-      if (typeof aVal === 'string') {
-        aVal = parseFloat(aVal.replace(/[^0-9.-]/g, ''));
-        bVal = parseFloat(bVal.replace(/[^0-9.-]/g, ''));
-      }
-      
-      if (sortDirection === 'asc') {
-        return aVal > bVal ? 1 : -1;
-      } else {
-        return aVal < bVal ? 1 : -1;
-      }
-    });
+  const getSentimentLabel = (score: number) => {
+    if (score >= 75) return "Greed";
+    if (score >= 25) return "Neutral";
+    return "Fear";
   };
 
   return (
-    <div className="min-h-screen" style={{ background: '#0A0F1F' }}>
-      {/* Enhanced Top Header */}
-      <div className="sticky top-0 z-50 backdrop-blur-xl border-b border-gray-800/50" style={{ background: 'rgba(15, 21, 43, 0.95)' }}>
-        <div className="max-w-7xl mx-auto px-6 py-3">
-
-          {/* Bottom Row - Search */}
-          <div className="flex items-center justify-center">
-            <div className="relative max-w-2xl w-full">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-              <Input
-                placeholder="Search coins, exchanges, pools, pairs and platforms..."
-                className="pl-12 pr-4 py-3 bg-gray-800/50 border-gray-700/50 text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-0 text-lg rounded-xl"
-              />
-              <Button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-cyan-400 to-purple-500 text-white px-6">
-                Search
-              </Button>
+    <div className="min-h-screen bg-[#0A0F1F] text-white p-6 space-y-6">
+      {/* Top App Bar */}
+      <div className="sticky top-0 z-50 bg-[#0F152B]/90 backdrop-blur-xl border-b border-[#00E5FF]/20 rounded-2xl p-4 mb-6">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-gradient-to-br from-[#00E5FF] to-[#FF1F8F] rounded-lg flex items-center justify-center">
+                <Zap className="w-5 h-5 text-black" />
+              </div>
+              <span className="text-xl font-bold bg-gradient-to-r from-[#00E5FF] to-[#C3FF00] bg-clip-text text-transparent">
+                NeonSense
+              </span>
             </div>
+            <Badge className="bg-[#00E5FF]/10 text-[#00E5FF] border-[#00E5FF]/20">
+              Crypto Dashboard
+            </Badge>
+          </div>
+          
+          <div className="flex-1 max-w-md mx-8">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-[#9AA4BF]" />
+              <Input
+                placeholder="Search tokens, wallets, news..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 bg-[#0F152B]/50 border-[#00E5FF]/20 text-white placeholder-[#9AA4BF] focus:border-[#00E5FF]"
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <Button size="sm" className="bg-gradient-to-r from-[#00E5FF] to-[#FF1F8F] text-black font-semibold hover:scale-105 transition-transform">
+              <Wallet className="w-4 h-4 mr-2" />
+              Connect Wallet
+            </Button>
+            <Button variant="ghost" size="icon" className="text-[#9AA4BF] hover:text-[#00E5FF]">
+              <Bell className="w-5 h-5" />
+            </Button>
+            <Button variant="ghost" size="icon" className="text-[#9AA4BF] hover:text-[#00E5FF]">
+              <User className="w-5 h-5" />
+            </Button>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-6 space-y-6">
-        {/* Market Narrative Tabs */}
-        <Card className="border-gray-800/50" style={{ background: '#0F152B' }}>
-          <CardContent className="p-4">
-            <div className="flex items-center gap-2 overflow-x-auto">
-              {narrativeTabs.map((tab) => (
-                <Button
-                  key={tab.id}
-                  variant={selectedNarrative === tab.id ? "default" : "outline"}
-                  className={cn(
-                    "whitespace-nowrap text-sm",
-                    selectedNarrative === tab.id 
-                      ? "bg-gradient-to-r from-cyan-400 to-purple-500 text-white shadow-lg shadow-cyan-400/20" 
-                      : "border-gray-700 text-gray-300 hover:border-cyan-400/50"
-                  )}
-                  onClick={() => setSelectedNarrative(tab.id)}
-                >
-                  <span className="mr-2">{tab.icon}</span>
-                  {tab.label}
-                </Button>
+      {/* Hero Overview */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Total Portfolio */}
+        <Card className="bg-gradient-to-br from-[#0F152B] to-[#1A1F35] border-[#00E5FF]/20 overflow-hidden">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div className="text-sm text-[#9AA4BF]">Total Portfolio</div>
+              <BarChart3 className="w-4 h-4 text-[#00E5FF]" />
+            </div>
+            <div className="text-3xl font-bold text-white mb-2">
+              {formatNumber(mockPortfolio.totalUsd)}
+            </div>
+            <div className="text-xs text-[#9AA4BF] mb-3">
+              {mockPortfolio.totalBtc.toFixed(3)} BTC • {mockPortfolio.totalEth.toFixed(2)} ETH
+            </div>
+            <div className="h-8 flex items-end justify-between">
+              {Array.from({ length: 12 }, (_, i) => (
+                <div
+                  key={i}
+                  className="w-1 bg-gradient-to-t from-[#00E5FF]/20 to-[#00E5FF] rounded-full"
+                  style={{ height: `${Math.random() * 100}%` }}
+                />
               ))}
             </div>
           </CardContent>
         </Card>
 
-        {/* Market Overview Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7 gap-4">
-          {/* Trending Coins */}
-          <Card className="lg:col-span-2 border-gray-800/50" style={{ background: '#0F152B' }}>
-            <CardHeader className="pb-3">
-              <CardTitle className="text-white text-sm flex items-center gap-2">
-                <Flame className="w-4 h-4 text-orange-400" />
-                Trending
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              {trendingCoins.slice(0, 3).map((coin, i) => (
-                <div key={coin.symbol} className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-gray-400 text-xs">{i + 1}</span>
-                    <span className="text-white font-medium text-sm">{coin.symbol}</span>
-                    <span className="text-gray-400 text-xs">{coin.name}</span>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-white text-sm">${coin.price}</div>
-                    <div className={cn("text-xs", coin.change24h >= 0 ? "text-green-400" : "text-red-400")}>
-                      {coin.change24h >= 0 ? '+' : ''}{coin.change24h}%
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
+        {/* 24h P/L */}
+        <Card className="bg-gradient-to-br from-[#0F152B] to-[#1A1F35] border-[#16C784]/20 overflow-hidden">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div className="text-sm text-[#9AA4BF]">24h P/L</div>
+              <div className="w-2 h-2 bg-[#16C784] rounded-full animate-pulse" />
+            </div>
+            <div className="text-3xl font-bold text-[#16C784] mb-2">
+              +{mockPortfolio.pnl24hPct.toFixed(2)}%
+            </div>
+            <div className="text-xs text-[#9AA4BF] mb-3">
+              +${((mockPortfolio.totalUsd * mockPortfolio.pnl24hPct) / 100).toFixed(2)}
+            </div>
+            <div className="flex items-center gap-1">
+              <TrendingUp className="w-4 h-4 text-[#16C784]" />
+              <span className="text-xs text-[#16C784]">Strong uptrend</span>
+            </div>
+          </CardContent>
+        </Card>
 
-          {/* DexScan Trending */}
-          <Card className="lg:col-span-2 border-gray-800/50" style={{ background: '#0F152B' }}>
-            <CardHeader className="pb-3">
-              <CardTitle className="text-white text-sm flex items-center gap-2">
-                <Activity className="w-4 h-4 text-cyan-400" />
-                DexScan Trending
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              {dexTrending.slice(0, 3).map((coin, i) => (
-                <div key={coin.symbol} className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-gray-400 text-xs">{i + 1}</span>
-                    <span className="text-white font-medium text-sm">{coin.symbol}</span>
-                    <span className="text-gray-400 text-xs">{coin.name}</span>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-white text-sm">${coin.price}</div>
-                    <div className={cn("text-xs", coin.change24h >= 0 ? "text-green-400" : "text-red-400")}>
-                      {coin.change24h >= 0 ? '+' : ''}{coin.change24h}%
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
-
-          {/* Market Cap */}
-          <Card className="border-gray-800/50" style={{ background: '#0F152B' }}>
-            <CardContent className="p-4">
-              <div className="text-center">
-                <div className="text-gray-400 text-xs mb-1">Market Cap</div>
-                <div className="text-white font-bold text-lg">{marketStats.globalMarketCap}</div>
-                <div className="text-green-400 text-xs">+2.4%</div>
-                <MiniSparkline data={[2.4, 2.6, 2.5, 2.7, 2.64]} isPositive={true} />
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Fear & Greed */}
-          <Card className="border-gray-800/50" style={{ background: '#0F152B' }}>
-            <CardContent className="p-4">
-              <div className="text-center">
-                <div className="text-gray-400 text-xs mb-1">Fear & Greed</div>
-                <div className="text-yellow-400 font-bold text-lg">{marketStats.fearGreedIndex}</div>
-                <div className="text-yellow-400 text-xs">Neutral</div>
-                <div className="w-16 h-2 bg-gray-700 rounded-full mx-auto mt-2">
-                  <div 
-                    className="h-2 bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 rounded-full" 
-                    style={{ width: `${marketStats.fearGreedIndex}%` }}
+        {/* Win Rate */}
+        <Card className="bg-gradient-to-br from-[#0F152B] to-[#1A1F35] border-[#C3FF00]/20 overflow-hidden">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div className="text-sm text-[#9AA4BF]">Win Rate (7d)</div>
+              <Target className="w-4 h-4 text-[#C3FF00]" />
+            </div>
+            <div className="text-3xl font-bold text-[#C3FF00] mb-2">
+              {mockPortfolio.winRate7d.toFixed(1)}%
+            </div>
+            <div className="relative">
+              <div className="w-16 h-16 mx-auto">
+                <svg className="w-16 h-16 transform -rotate-90" viewBox="0 0 36 36">
+                  <path
+                    d="M18 2.0845
+                      a 15.9155 15.9155 0 0 1 0 31.831
+                      a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none"
+                    stroke="rgba(195, 255, 0, 0.2)"
+                    strokeWidth="3"
                   />
-                </div>
+                  <path
+                    d="M18 2.0845
+                      a 15.9155 15.9155 0 0 1 0 31.831
+                      a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none"
+                    stroke="#C3FF00"
+                    strokeWidth="3"
+                    strokeDasharray={`${mockPortfolio.winRate7d}, 100`}
+                  />
+                </svg>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </CardContent>
+        </Card>
 
-          {/* News Highlights */}
-          <Card className="border-gray-800/50" style={{ background: '#0F152B' }}>
-            <CardHeader className="pb-3">
-              <CardTitle className="text-white text-sm flex items-center gap-2">
-                <Globe className="w-4 h-4 text-blue-400" />
-                News
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              {newsHeadlines.slice(0, 2).map((news, i) => (
-                <div key={i} className="cursor-pointer hover:bg-gray-800/30 p-2 rounded">
-                  <div className="text-white text-xs leading-tight mb-1">{news.title}</div>
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-gray-400">{news.source}</span>
-                    <span className="text-gray-500">{news.time}</span>
+        {/* Quick Trade */}
+        <Card className="bg-gradient-to-br from-[#0F152B] to-[#1A1F35] border-[#FF1F8F]/20 overflow-hidden">
+          <CardContent className="p-6">
+            <div className="text-sm text-[#9AA4BF] mb-4">Quick Trade</div>
+            <div className="space-y-3">
+              <Input
+                placeholder="Symbol (e.g., BTC)"
+                className="bg-[#0A0F1F] border-[#FF1F8F]/20 text-white placeholder-[#9AA4BF]"
+              />
+              <Input
+                placeholder="Amount"
+                className="bg-[#0A0F1F] border-[#FF1F8F]/20 text-white placeholder-[#9AA4BF]"
+              />
+              <div className="grid grid-cols-2 gap-2">
+                <Button className="bg-[#16C784] hover:bg-[#16C784]/80 text-black font-semibold">
+                  Buy
+                </Button>
+                <Button className="bg-[#EA3943] hover:bg-[#EA3943]/80 text-white font-semibold">
+                  Sell
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Market Pulse Row */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* AI Sentiment Gauge */}
+        <Card className="bg-gradient-to-br from-[#0F152B] to-[#1A1F35] border-[#00E5FF]/20">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-[#00E5FF]">
+              <Activity className="w-5 h-5" />
+              AI Sentiment Gauge
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-center mb-4">
+              <div className="text-4xl font-bold bg-gradient-to-r from-[#00E5FF] to-[#C3FF00] bg-clip-text text-transparent mb-2">
+                {sentimentScore}
+              </div>
+              <div className="text-sm text-[#9AA4BF]">
+                {getSentimentLabel(sentimentScore)}
+              </div>
+            </div>
+            <div className="relative h-3 bg-[#0A0F1F] rounded-full overflow-hidden">
+              <div 
+                className={`absolute left-0 top-0 h-full bg-gradient-to-r ${getSentimentColor(sentimentScore)} transition-all duration-1000 ease-out`}
+                style={{ width: `${sentimentScore}%` }}
+              />
+            </div>
+            <div className="flex justify-between text-xs text-[#9AA4BF] mt-2">
+              <span>Fear</span>
+              <span>Neutral</span>
+              <span>Greed</span>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Trending Coins Heatmap */}
+        <Card className="bg-gradient-to-br from-[#0F152B] to-[#1A1F35] border-[#FF1F8F]/20">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-[#FF1F8F]">
+              <Sparkles className="w-5 h-5" />
+              Trending Heatmap
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-4 gap-2">
+              {cryptoData.slice(0, 8).map((crypto) => (
+                <div
+                  key={crypto.symbol}
+                  className={`p-3 rounded-lg cursor-pointer transition-all hover:scale-105 ${
+                    crypto.changePercent > 0
+                      ? 'bg-gradient-to-br from-[#16C784]/20 to-[#16C784]/10 border border-[#16C784]/30'
+                      : 'bg-gradient-to-br from-[#EA3943]/20 to-[#EA3943]/10 border border-[#EA3943]/30'
+                  }`}
+                >
+                  <div className="text-xs font-semibold">{crypto.symbol}</div>
+                  <div className="text-xs text-[#9AA4BF]">${crypto.price?.toFixed(2) || '0.00'}</div>
+                  <div className={`text-xs font-bold ${
+                    crypto.changePercent > 0 ? 'text-[#16C784]' : 'text-[#EA3943]'
+                  }`}>
+                    {crypto.changePercent > 0 ? '+' : ''}{crypto.changePercent?.toFixed(1) || '0.0'}%
                   </div>
                 </div>
               ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* News Ticker */}
+        <Card className="bg-gradient-to-br from-[#0F152B] to-[#1A1F35] border-[#C3FF00]/20">
+          <CardHeader>
+            <CardTitle className="flex items-center justify-between text-[#C3FF00]">
+              <div className="flex items-center gap-2">
+                <Activity className="w-5 h-5" />
+                Latest News
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsNewsPlaying(!isNewsPlaying)}
+                className="text-[#C3FF00] hover:text-[#C3FF00]/80"
+              >
+                {isNewsPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+              </Button>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-20 flex items-center">
+              <p className="text-sm text-white leading-relaxed">
+                {mockNews[newsIndex]}
+              </p>
+            </div>
+            <div className="flex justify-center mt-4">
+              <div className="flex gap-1">
+                {mockNews.map((_, i) => (
+                  <div
+                    key={i}
+                    className={`w-2 h-2 rounded-full transition-colors ${
+                      i === newsIndex ? 'bg-[#C3FF00]' : 'bg-[#9AA4BF]/30'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Watchlist and Charts */}
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+        <div className="xl:col-span-2">
+          <Card className="bg-gradient-to-br from-[#0F152B] to-[#1A1F35] border-[#00E5FF]/20">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-[#00E5FF]">Watchlist</CardTitle>
+                <Tabs value={selectedWatchlist} onValueChange={setSelectedWatchlist}>
+                  <TabsList className="bg-[#0A0F1F] border-[#00E5FF]/20">
+                    <TabsTrigger value="All" className="data-[state=active]:bg-[#00E5FF] data-[state=active]:text-black">All</TabsTrigger>
+                    <TabsTrigger value="Blue Chips" className="data-[state=active]:bg-[#00E5FF] data-[state=active]:text-black">Blue Chips</TabsTrigger>
+                    <TabsTrigger value="DeFi" className="data-[state=active]:bg-[#00E5FF] data-[state=active]:text-black">DeFi</TabsTrigger>
+                    <TabsTrigger value="Memes" className="data-[state=active]:bg-[#00E5FF] data-[state=active]:text-black">Memes</TabsTrigger>
+                  </TabsList>
+                </Tabs>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                {cryptoData.slice(0, 10).map((crypto) => (
+                  <div
+                    key={crypto.symbol}
+                    className="flex items-center justify-between p-3 rounded-lg bg-[#0A0F1F]/50 hover:bg-[#0A0F1F] transition-colors cursor-pointer"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-gradient-to-br from-[#00E5FF] to-[#FF1F8F] rounded-full flex items-center justify-center text-xs font-bold text-black">
+                        {crypto.symbol.slice(0, 2)}
+                      </div>
+                      <div>
+                        <div className="font-semibold text-white">{crypto.symbol}</div>
+                        <div className="text-xs text-[#9AA4BF]">{crypto.name}</div>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="font-semibold text-white">
+                        ${crypto.price?.toFixed(2) || '0.00'}
+                      </div>
+                      <div className={`text-xs font-medium ${
+                        crypto.changePercent > 0 ? 'text-[#16C784]' : 'text-[#EA3943]'
+                      }`}>
+                        {crypto.changePercent > 0 ? '+' : ''}{crypto.changePercent?.toFixed(2) || '0.00'}%
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-sm text-[#9AA4BF]">
+                        {formatNumber(crypto.marketCap || 0)}
+                      </div>
+                      <div className="text-xs text-[#9AA4BF]">
+                        Vol: {formatNumber(crypto.volume || 0)}
+                      </div>
+                    </div>
+                    <Button variant="ghost" size="icon" className="text-[#9AA4BF] hover:text-[#00E5FF]">
+                      <Bell className="w-4 h-4" />
+                    </Button>
+                  </div>
+                ))}
+              </div>
             </CardContent>
           </Card>
         </div>
 
-        {/* Category Filter Bar */}
-        <Card className="border-gray-800/50" style={{ background: '#0F152B' }}>
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3 overflow-x-auto">
-              {categoryFilters.map((filter) => (
-                <Button
-                  key={filter.id}
-                  variant={selectedCategory === filter.id ? "default" : "outline"}
-                  size="sm"
-                  className={cn(
-                    "whitespace-nowrap",
-                    selectedCategory === filter.id 
-                      ? "bg-gradient-to-r from-cyan-400 to-purple-500 text-white border-cyan-400" 
-                      : "border-gray-700 text-gray-300 hover:border-cyan-400/50"
-                  )}
-                  onClick={() => setSelectedCategory(filter.id)}
-                >
-                  <span className="mr-2">{filter.icon}</span>
-                  {filter.label}
-                </Button>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Main Data Table */}
-        <Card className="border-gray-800/50" style={{ background: '#0F152B' }}>
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-white">Cryptocurrency Prices by Market Cap</CardTitle>
-              <div className="flex items-center gap-2">
-                <Button variant="outline" size="sm" className="border-gray-700 text-gray-300">
-                  <Filter className="w-4 h-4 mr-2" />
-                  Columns
-                </Button>
-                <Button variant="outline" size="sm" className="border-gray-700 text-gray-300">
-                  <Settings className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-gray-800">
-                    <th className="text-left py-3 px-2 text-gray-400 text-sm cursor-pointer hover:text-white" onClick={() => handleSort('rank')}>
-                      #
-                    </th>
-                    <th className="text-left py-3 px-4 text-gray-400 text-sm">Name</th>
-                    <th className="text-right py-3 px-4 text-gray-400 text-sm cursor-pointer hover:text-white" onClick={() => handleSort('price')}>
-                      Price
-                    </th>
-                    <th className="text-right py-3 px-4 text-gray-400 text-sm cursor-pointer hover:text-white" onClick={() => handleSort('change1h')}>
-                      1h %
-                    </th>
-                    <th className="text-right py-3 px-4 text-gray-400 text-sm cursor-pointer hover:text-white" onClick={() => handleSort('change24h')}>
-                      24h %
-                    </th>
-                    <th className="text-right py-3 px-4 text-gray-400 text-sm cursor-pointer hover:text-white" onClick={() => handleSort('change7d')}>
-                      7d %
-                    </th>
-                    <th className="text-right py-3 px-4 text-gray-400 text-sm cursor-pointer hover:text-white" onClick={() => handleSort('marketCap')}>
-                      Market Cap
-                    </th>
-                    <th className="text-right py-3 px-4 text-gray-400 text-sm cursor-pointer hover:text-white" onClick={() => handleSort('volume24h')}>
-                      Volume(24h)
-                    </th>
-                    <th className="text-center py-3 px-4 text-gray-400 text-sm">
-                      Circulating Supply
-                    </th>
-                    <th className="text-center py-3 px-4 text-gray-400 text-sm">
-                      Last 7 Days
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {getSortedData().map((coin) => (
-                    <tr key={coin.symbol} className="border-b border-gray-800/50 hover:bg-gray-800/20 cursor-pointer group">
-                      <td className="py-4 px-2">
-                        <div className="flex items-center gap-2">
-                          <Star className="w-4 h-4 text-gray-600 hover:text-yellow-400 cursor-pointer" />
-                          <span className="text-gray-400 font-medium">{coin.rank}</span>
-                        </div>
-                      </td>
-                      <td className="py-4 px-4">
-                        <div className="flex items-center gap-3">
-                          <div className="w-6 h-6 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 flex items-center justify-center text-white font-bold text-xs">
-                            {coin.symbol[0]}
-                          </div>
-                          <div>
-                            <div className="text-white font-medium">{coin.name}</div>
-                            <div className="text-gray-400 text-sm">{coin.symbol}</div>
-                          </div>
-                          <Button size="sm" className="opacity-0 group-hover:opacity-100 transition-opacity bg-green-600 hover:bg-green-700 text-white text-xs">
-                            Buy
-                          </Button>
-                        </div>
-                      </td>
-                      <td className="py-4 px-4 text-right">
-                        <span className="text-white font-medium">${coin.price.toLocaleString()}</span>
-                      </td>
-                      <td className="py-4 px-4 text-right">
-                        <span className={cn("font-medium", coin.change1h >= 0 ? "text-green-400" : "text-red-400")}>
-                          {coin.change1h >= 0 ? '+' : ''}{coin.change1h}%
-                        </span>
-                      </td>
-                      <td className="py-4 px-4 text-right">
-                        <span className={cn("font-medium", coin.change24h >= 0 ? "text-green-400" : "text-red-400")}>
-                          {coin.change24h >= 0 ? '+' : ''}{coin.change24h}%
-                        </span>
-                      </td>
-                      <td className="py-4 px-4 text-right">
-                        <span className={cn("font-medium", coin.change7d >= 0 ? "text-green-400" : "text-red-400")}>
-                          {coin.change7d >= 0 ? '+' : ''}{coin.change7d}%
-                        </span>
-                      </td>
-                      <td className="py-4 px-4 text-right">
-                        <span className="text-white">{coin.marketCap}</span>
-                      </td>
-                      <td className="py-4 px-4 text-right">
-                        <span className="text-white">{coin.volume24h}</span>
-                      </td>
-                      <td className="py-4 px-4">
-                        <div className="text-center">
-                          <div className="text-white text-sm">{coin.circulatingSupply.toLocaleString()}</div>
-                          {coin.maxSupply > 0 && (
-                            <div className="w-16 h-1 bg-gray-700 rounded-full mx-auto mt-1">
-                              <div 
-                                className="h-1 bg-cyan-400 rounded-full" 
-                                style={{ width: `${(coin.circulatingSupply / coin.maxSupply) * 100}%` }}
-                              />
-                            </div>
-                          )}
-                        </div>
-                      </td>
-                      <td className="py-4 px-4 text-center">
-                        <MiniSparkline data={coin.sparkline} isPositive={coin.change7d >= 0} />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Extra NeonSense Features Row */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* AI Sentiment Pulse */}
-          <Card className="border-gray-800/50" style={{ background: '#0F152B' }}>
+        <div>
+          <Card className="bg-gradient-to-br from-[#0F152B] to-[#1A1F35] border-[#FF1F8F]/20">
             <CardHeader>
-              <CardTitle className="text-white flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-cyan-400" />
-                AI Sentiment Pulse
-              </CardTitle>
+              <CardTitle className="text-[#FF1F8F]">Advanced Chart</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-center">
-                <div className="relative w-24 h-24 mx-auto mb-4">
-                  <svg className="transform -rotate-90 w-24 h-24">
-                    <circle cx="48" cy="48" r="40" stroke="currentColor" strokeWidth="6" fill="none" className="text-gray-700" />
-                    <circle 
-                      cx="48" cy="48" r="40" 
-                      stroke="url(#sentiment-gradient)" 
-                      strokeWidth="6" 
-                      fill="none" 
-                      strokeDasharray={`${2 * Math.PI * 40}`}
-                      strokeDashoffset={`${2 * Math.PI * 40 * (1 - marketStats.fearGreedIndex / 100)}`}
-                      className="transition-all duration-700"
-                    />
-                    <defs>
-                      <linearGradient id="sentiment-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#EA3943" />
-                        <stop offset="50%" stopColor="#F59E0B" />
-                        <stop offset="100%" stopColor="#16C784" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="text-xl font-bold text-yellow-400">{marketStats.fearGreedIndex}</div>
-                      <div className="text-xs text-gray-400">Neutral</div>
-                    </div>
-                  </div>
+              <div className="h-64 bg-[#0A0F1F] rounded-lg flex items-center justify-center">
+                <div className="text-center text-[#9AA4BF]">
+                  <BarChart3 className="w-12 h-12 mx-auto mb-2 opacity-50" />
+                  <p className="text-sm">Interactive Chart</p>
+                  <p className="text-xs">TradingView Integration</p>
                 </div>
               </div>
-            </CardContent>
-          </Card>
-
-          {/* Neon Brief */}
-          <Card className="border-gray-800/50" style={{ background: '#0F152B' }}>
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-white flex items-center gap-2">
-                  <Target className="w-5 h-5 text-purple-400" />
-                  Neon Brief
-                </CardTitle>
-                <Button variant="outline" size="sm" className="border-cyan-400/30 text-cyan-400">
-                  <RefreshCw className="w-3 h-3 mr-2" />
-                  Refresh
-                </Button>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3 text-sm">
-                <div className="flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 flex-shrink-0" />
-                  <span className="text-gray-300">Bitcoin showing strong institutional accumulation patterns</span>
+              <div className="mt-4 space-y-2">
+                <div className="flex items-center gap-2">
+                  <input type="checkbox" className="rounded" />
+                  <span className="text-xs text-[#9AA4BF]">Sentiment Overlay</span>
                 </div>
-                <div className="flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2 flex-shrink-0" />
-                  <span className="text-gray-300">Altcoin season momentum building across DeFi tokens</span>
+                <div className="flex items-center gap-2">
+                  <input type="checkbox" className="rounded" />
+                  <span className="text-xs text-[#9AA4BF]">Volume Spikes</span>
                 </div>
-                <div className="flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-pink-400 mt-2 flex-shrink-0" />
-                  <span className="text-gray-300">Major options expiry this Friday may increase volatility</span>
+                <div className="flex items-center gap-2">
+                  <input type="checkbox" className="rounded" />
+                  <span className="text-xs text-[#9AA4BF]">Whale Flow</span>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Portfolio Quick View */}
-          <Card className="border-gray-800/50" style={{ background: '#0F152B' }}>
-            <CardHeader>
-              <CardTitle className="text-white flex items-center gap-2">
-                <Wallet className="w-5 h-5 text-green-400" />
-                Portfolio Quick View
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-white">$247,580</div>
-                  <div className="text-green-400 text-sm">+$14,037 (5.67%)</div>
-                </div>
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-400">BTC</span>
-                    <span className="text-white">3.847 BTC</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-400">ETH</span>
-                    <span className="text-white">127.23 ETH</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-400">Others</span>
-                    <span className="text-white">$47,280</span>
-                  </div>
-                </div>
-                <Button className="w-full bg-gradient-to-r from-cyan-400 to-purple-500 text-white">
-                  View Full Portfolio
-                </Button>
               </div>
             </CardContent>
           </Card>
         </div>
       </div>
+
+      {/* On-Chain Activity Radar */}
+      <Card className="bg-gradient-to-br from-[#0F152B] to-[#1A1F35] border-[#00E5FF]/20">
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <CardTitle className="flex items-center gap-2 text-[#00E5FF]">
+              <Activity className="w-5 h-5" />
+              On-Chain Activity Radar
+            </CardTitle>
+            <div className="flex gap-2">
+              <Badge className="bg-[#16C784]/10 text-[#16C784] border-[#16C784]/20">≥ $100k</Badge>
+              <Badge className="bg-[#C3FF00]/10 text-[#C3FF00] border-[#C3FF00]/20">New Pair</Badge>
+              <Badge className="bg-[#FF1F8F]/10 text-[#FF1F8F] border-[#FF1F8F]/20">Smart Money</Badge>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-3">
+            {mockOnChainActivity.map((activity, index) => (
+              <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-[#0A0F1F]/50">
+                <div className="flex items-center gap-3">
+                  <Badge className={`${
+                    activity.type === 'buy' 
+                      ? 'bg-[#16C784]/10 text-[#16C784] border-[#16C784]/20'
+                      : activity.type === 'sell'
+                        ? 'bg-[#EA3943]/10 text-[#EA3943] border-[#EA3943]/20'
+                        : 'bg-[#9AA4BF]/10 text-[#9AA4BF] border-[#9AA4BF]/20'
+                  }`}>
+                    {activity.type.toUpperCase()}
+                  </Badge>
+                  <div>
+                    <div className="text-sm font-semibold text-white">
+                      {formatNumber(activity.usdValue)} {activity.symbol}
+                    </div>
+                    <div className="text-xs text-[#9AA4BF]">
+                      {activity.fromAddr} → {activity.toAddr}
+                    </div>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className="text-xs text-[#9AA4BF]">{activity.time}</div>
+                  {activity.dex && (
+                    <div className="text-xs text-[#00E5FF]">{activity.dex}</div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Bottom Row - AI Brief, Portfolio Health, Gamification */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* AI Neon Brief */}
+        <Card className="bg-gradient-to-br from-[#0F152B] to-[#1A1F35] border-[#C3FF00]/20">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-[#C3FF00]">
+              <Sparkles className="w-5 h-5" />
+              Neon Brief
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              <div className="flex items-start gap-2">
+                <div className="w-2 h-2 bg-[#C3FF00] rounded-full mt-2 flex-shrink-0" />
+                <p className="text-sm text-white">Bitcoin showing strong momentum above $95k resistance</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <div className="w-2 h-2 bg-[#00E5FF] rounded-full mt-2 flex-shrink-0" />
+                <p className="text-sm text-white">Ethereum DeFi TVL reaches new quarterly high</p>
+              </div>
+              <div className="flex items-start gap-2">
+                <div className="w-2 h-2 bg-[#FF1F8F] rounded-full mt-2 flex-shrink-0" />
+                <p className="text-sm text-white">Altcoin season indicators suggest continued uptrend</p>
+              </div>
+            </div>
+            <Button 
+              className="w-full mt-4 bg-[#C3FF00]/10 hover:bg-[#C3FF00]/20 text-[#C3FF00] border border-[#C3FF00]/20"
+              variant="outline"
+            >
+              <RefreshCw className="w-4 h-4 mr-2" />
+              Refresh Insights
+            </Button>
+          </CardContent>
+        </Card>
+
+        {/* Portfolio Health */}
+        <Card className="bg-gradient-to-br from-[#0F152B] to-[#1A1F35] border-[#16C784]/20">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-[#16C784]">
+              <Shield className="w-5 h-5" />
+              Portfolio Health
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-center mb-4">
+              <div className="text-4xl font-bold text-[#16C784] mb-2">A+</div>
+              <div className="text-sm text-[#9AA4BF]">Excellent Diversification</div>
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm">
+                <span className="text-[#9AA4BF]">Volatility Score</span>
+                <span className="text-[#16C784]">Low</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-[#9AA4BF]">Risk Level</span>
+                <span className="text-[#C3FF00]">Moderate</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-[#9AA4BF]">Correlation</span>
+                <span className="text-[#16C784]">Well Spread</span>
+              </div>
+            </div>
+            <Button 
+              className="w-full mt-4 bg-[#16C784]/10 hover:bg-[#16C784]/20 text-[#16C784] border border-[#16C784]/20"
+              variant="outline"
+            >
+              Simulate Rebalance
+            </Button>
+          </CardContent>
+        </Card>
+
+        {/* Gamification */}
+        <Card className="bg-gradient-to-br from-[#0F152B] to-[#1A1F35] border-[#FF1F8F]/20">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-[#FF1F8F]">
+              <Award className="w-5 h-5" />
+              Achievements
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-[#C3FF00]/20 rounded-full flex items-center justify-center">
+                  <Award className="w-4 h-4 text-[#C3FF00]" />
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-white">Diamond Hands</div>
+                  <div className="text-xs text-[#9AA4BF]">Hold for 30+ days</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-[#00E5FF]/20 rounded-full flex items-center justify-center">
+                  <TrendingUp className="w-4 h-4 text-[#00E5FF]" />
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-white">Bull Runner</div>
+                  <div className="text-xs text-[#9AA4BF]">+10% in 24h</div>
+                </div>
+              </div>
+            </div>
+            <div className="mt-4 p-3 bg-[#0A0F1F]/50 rounded-lg">
+              <div className="text-xs text-[#9AA4BF] mb-1">Daily Leaderboard</div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm font-semibold text-white">#3 Today</span>
+                <span className="text-xs text-[#16C784]">+12.4%</span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 };
+
+export default NeonSenseCryptoDashboard;
