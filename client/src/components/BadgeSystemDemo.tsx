@@ -31,6 +31,7 @@ import { BadgeManagement } from "@/components/badges/BadgeManagement";
 import { UserCredibilityProfile } from "@/components/moderation/UserCredibilityProfile";
 import { BADGE_DEFINITIONS, BADGE_CONFIG } from "@/data/badgeDefinitions";
 import { generateMockUserBadges, generateMockBadgeProgress, badgeService } from "@/services/badgeService";
+import type { BadgeType } from "@/types/badges";
 
 // Mock users for demo
 const demoUsers = [
@@ -598,7 +599,7 @@ export const BadgeSystemDemo: React.FC = () => {
                 </div>
 
                 <div>
-                  <h4 className="font-semibold mb-3">🎯 Badge Categories</h4>
+                  <h4 className="font-semibold mb-3">��� Badge Categories</h4>
                   <ul className="space-y-1 text-sm">
                     <li>• <strong>Credibility:</strong> Trust, accuracy, verified content</li>
                     <li>• <strong>Performance:</strong> Trading accuracy, predictions</li>
