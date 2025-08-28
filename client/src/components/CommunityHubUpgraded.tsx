@@ -240,7 +240,7 @@ export const CommunityHubUpgraded: React.FC<CommunityHubUpgradedProps> = ({ onNa
         badges: ["Top Contributor", "Meme Champion"],
         verified: true
       },
-      content: "When you finally understand options trading but your portfolio still looks like modern art 🎨����� #TradingMemes #OptionsLife",
+      content: "When you finally understand options trading but your portfolio still looks like modern art 🎨���� #TradingMemes #OptionsLife",
       timestamp: "2m ago",
       category: "memes",
       likes: 234,
@@ -862,7 +862,7 @@ export const CommunityHubUpgraded: React.FC<CommunityHubUpgradedProps> = ({ onNa
                                         addXP(5);
                                       }
                                     }}
-                                    disabled={post.poll.myVote !== undefined}
+                                    disabled={post.poll?.myVote !== undefined && post.poll?.myVote !== null}
                                     className={`w-full text-left p-3 rounded-lg transition-all poll-option ${
                                       isSelected 
                                         ? 'bg-blue-500/20 border-blue-500/50' 
