@@ -177,6 +177,13 @@ const MOOD_LABELS = {
   extreme: 'Extreme'
 };
 
+const MOOD_EMOJIS = {
+  neutral: '😐',
+  bearish: '📉',
+  bullish: '📈',
+  extreme: '🔥'
+};
+
 const getMoodStateFromScore = (score: number): MoodState => {
   if (score >= MOOD_RANGES.extreme.max2) return 'extreme';
   if (score <= MOOD_RANGES.extreme.max) return 'extreme';
@@ -249,6 +256,7 @@ export const MoodThemeProvider: React.FC<MoodThemeProviderProps> = ({ children }
     accentColor: `bg-gradient-to-r ${currentTheme.accentColor}`,
     glowEffect: currentTheme.glowEffect,
     moodIcon: MOOD_ICONS[moodState],
+    moodEmoji: MOOD_EMOJIS[moodState],
     moodLabel: MOOD_LABELS[moodState],
     cardBackground: currentTheme.cardBackground,
     borderColor: currentTheme.border,
