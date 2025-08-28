@@ -84,7 +84,7 @@ interface Post {
     question: string;
     options: { text: string; votes: number }[];
     totalVotes: number;
-    myVote?: number;
+    myVote?: number | null;
   };
 }
 
@@ -134,7 +134,7 @@ export const CommunityHubUpgraded: React.FC<CommunityHubUpgradedProps> = ({ onNa
         { text: "I don't sleep", votes: 25 }
       ],
       totalVotes: 120,
-      myVote: null
+      myVote: null as number | null
     }
   });
 
@@ -240,7 +240,7 @@ export const CommunityHubUpgraded: React.FC<CommunityHubUpgradedProps> = ({ onNa
         badges: ["Top Contributor", "Meme Champion"],
         verified: true
       },
-      content: "When you finally understand options trading but your portfolio still looks like modern art 🎨���� #TradingMemes #OptionsLife",
+      content: "When you finally understand options trading but your portfolio still looks like modern art 🎨����� #TradingMemes #OptionsLife",
       timestamp: "2m ago",
       category: "memes",
       likes: 234,
