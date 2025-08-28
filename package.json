@@ -13,7 +13,7 @@
     "typecheck": "tsc --noEmit --skipLibCheck",
     "typecheck:quick": "tsc -p tsconfig.quick.json --noErrorTruncation",
     "typecheck:dev": "echo 'TypeScript check skipped in dev mode'",
-    "lint": "eslint client/src/main.tsx client/src/App.tsx --quiet || echo 'Linting completed with warnings'",
+    "lint": "eslint client/src/main.tsx client/src/App.tsx --quiet --config .eslintrc.json || echo 'Linting completed with warnings'",
     "lint:fix": "eslint client/src --ext .js,.jsx,.ts,.tsx --fix --config .eslintrc.js",
     "security": "npm audit --audit-level=moderate || echo 'Security check completed'",
     "scan:dev": "npm run typecheck:dev && npm run security",
