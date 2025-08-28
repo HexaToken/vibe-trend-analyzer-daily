@@ -11,10 +11,11 @@
     "db:push": "drizzle-kit push",
     "build:check": "npm run typecheck && npm run security",
     "typecheck": "tsc --noEmit --skipLibCheck",
+    "typecheck:quick": "tsc -p tsconfig.quick.json",
     "lint": "eslint client/src/main.tsx client/src/App.tsx --quiet",
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "security": "npm audit --audit-level=moderate || true",
-    "scan:quick": "npm run typecheck && npm run security"
+    "scan:quick": "npm run typecheck:quick && npm run security"
   },
   "dependencies": {
     "@builder.io/sdk-react": "^4.2.3",

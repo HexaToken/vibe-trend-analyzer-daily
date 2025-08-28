@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "client/src/main.tsx",
+    "client/src/App.tsx",
+    "server/index.ts",
+    "shared/schema.ts"
+  ],
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "noEmit": true
+  }
+}
