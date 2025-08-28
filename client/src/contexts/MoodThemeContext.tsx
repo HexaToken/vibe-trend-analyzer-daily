@@ -27,6 +27,7 @@ interface MoodThemeContextType {
   accentColor: string;
   glowEffect: string;
   moodIcon: IconConfig;
+  moodEmoji: string;
   moodLabel: string;
   cardBackground: string;
   borderColor: string;
