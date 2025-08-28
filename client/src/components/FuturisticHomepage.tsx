@@ -398,10 +398,10 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   style={themeMode === 'light' ? {
                     '--active-bg': 'linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%)',
                     '--active-shadow': '0 2px 4px rgba(0, 0, 0, 0.05)'
-                  } : {
+                  } as React.CSSProperties : {
                     '--active-bg': 'linear-gradient(to right, #2196F3, #3F51B5)',
                     '--active-shadow': '0 4px 12px rgba(33, 150, 243, 0.3)'
-                  }}
+                  } as React.CSSProperties}
                 >
                   📊 Risk Analysis
                 </TabsTrigger>
@@ -414,10 +414,10 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   style={themeMode === 'light' ? {
                     '--active-bg': 'linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%)',
                     '--active-shadow': '0 2px 4px rgba(0, 0, 0, 0.05)'
-                  } : {
+                  } as React.CSSProperties : {
                     '--active-bg': 'linear-gradient(to right, #9C27B0, #673AB7)',
                     '--active-shadow': '0 4px 12px rgba(156, 39, 176, 0.3)'
-                  }}
+                  } as React.CSSProperties}
                 >
                   📁 Financial Reports
                 </TabsTrigger>
@@ -430,10 +430,10 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   style={themeMode === 'light' ? {
                     '--active-bg': 'linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%)',
                     '--active-shadow': '0 2px 4px rgba(0, 0, 0, 0.05)'
-                  } : {
+                  } as React.CSSProperties : {
                     '--active-bg': 'linear-gradient(to right, #4CAF50, #3F51B5)',
                     '--active-shadow': '0 4px 12px rgba(76, 175, 80, 0.3)'
-                  }}
+                  } as React.CSSProperties}
                   data-active-style="background: var(--active-bg); box-shadow: var(--active-shadow);"
                 >
                   ��� Geo-Sentiment
@@ -638,7 +638,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         {[
                           {
                             alert: `$${selectedFinanceStock} ${selectedFinanceStock === 'TSLA' ? 'moved into High Risk Zone' : selectedFinanceStock === 'NVDA' ? 'showing strong momentum' : 'volatility detected'}`,
-                            icon: selectedFinanceStock === 'TSLA' ? '📉' : selectedFinanceStock === 'NVDA' ? '🚀' : '⚠️',
+                            icon: selectedFinanceStock === 'TSLA' ? '📉' : selectedFinanceStock === 'NVDA' ? '🚀' : '⚠���',
                             time: '2m ago',
                             type: selectedFinanceStock === 'TSLA' ? 'danger' : 'info'
                           },
