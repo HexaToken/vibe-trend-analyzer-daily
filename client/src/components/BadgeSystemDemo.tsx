@@ -102,7 +102,7 @@ export const BadgeSystemDemo: React.FC = () => {
   ]);
 
   const mockUserBadges = selectedUser.badges.map(badgeId => ({
-    badgeId: badgeId as any,
+    badgeId: badgeId as BadgeType,
     userId: selectedUser.id,
     earnedAt: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
     isActive: true,
@@ -113,7 +113,7 @@ export const BadgeSystemDemo: React.FC = () => {
   }));
 
   const mockBadgeProgress = selectedUser.progress.map(badgeId => ({
-    badgeId: badgeId as any,
+    badgeId: badgeId as BadgeType,
     userId: selectedUser.id,
     progress: Math.floor(Math.random() * 40) + 60, // 60-100% progress
     currentValue: Math.floor(Math.random() * 80) + 10,
@@ -125,8 +125,8 @@ export const BadgeSystemDemo: React.FC = () => {
   const getBadgeStats = () => {
     const totalBadges = mockUserBadges.length;
     const badgeScore = mockUserBadges.reduce((score, ub) => {
-      const badge = BADGE_DEFINITIONS[ub.badgeId];
-      return score + (badge ? BADGE_CONFIG.RARITY_SCORES[badge.rarity] : 0);
+      const badge = BADGE_DEFINITIONS[ub.badgeId as keyof typeof BADGE_DEFINITIONS];
+      return score + (badge ? BADGE_CONFIG.RARITY_SCORES[badge.rarity as keyof typeof BADGE_CONFIG.RARITY_SCORES] : 0);
     }, 0);
     
     return { totalBadges, badgeScore };
@@ -346,7 +346,7 @@ export const BadgeSystemDemo: React.FC = () => {
                       badge => badge.category === category && badge.isVisible
                     );
                     const userBadgesInCategory = mockUserBadges.filter(ub => {
-                      const badge = BADGE_DEFINITIONS[ub.badgeId];
+                      const badge = BADGE_DEFINITIONS[ub.badgeId as keyof typeof BADGE_DEFINITIONS];
                       return badge?.category === category;
                     });
 
@@ -528,8 +528,8 @@ export const BadgeSystemDemo: React.FC = () => {
                     }));
                     
                     const score = userBadges.reduce((total, ub) => {
-                      const badge = BADGE_DEFINITIONS[ub.badgeId];
-                      return total + (badge ? BADGE_CONFIG.RARITY_SCORES[badge.rarity] : 0);
+                      const badge = BADGE_DEFINITIONS[ub.badgeId as keyof typeof BADGE_DEFINITIONS];
+                      return total + (badge ? BADGE_CONFIG.RARITY_SCORES[badge.rarity as keyof typeof BADGE_CONFIG.RARITY_SCORES] : 0);
                     }, 0);
 
                     return (
