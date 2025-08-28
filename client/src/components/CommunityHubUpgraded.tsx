@@ -840,7 +840,7 @@ export const CommunityHubUpgraded: React.FC<CommunityHubUpgradedProps> = ({ onNa
                                   <button
                                     key={index}
                                     onClick={() => {
-                                      if (post.poll!.myVote === undefined) {
+                                      if (post.poll?.myVote === undefined || post.poll?.myVote === null) {
                                         setState(prev => ({
                                           ...prev,
                                           posts: prev.posts.map(p => 
