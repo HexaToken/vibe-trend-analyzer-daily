@@ -110,7 +110,7 @@ export const ThemeSettingsPanel: React.FC<ThemeSettingsPanelProps> = ({
     }
   }
 
-  const handleThemeChange = (themeId: 'light' | 'dark' | 'dynamic') => {
+  const handleThemeChange = (themeId: 'light' | 'dark' | 'dynamic' | 'day') => {
     setThemeMode(themeId);
     
     // Store in localStorage for persistence
