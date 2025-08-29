@@ -19,6 +19,9 @@
 /* Import TradingView Day Mode */
 @import './styles/tradingview-day-mode.css';
 
+/* Import TradingView Integration */
+@import './styles/tradingview-integration.css';
+
 /* Import Color Palette Overrides - MUST BE LAST */
 @import './styles/color-palette-overrides.css';
 
