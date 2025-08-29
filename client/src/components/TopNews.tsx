@@ -28,19 +28,21 @@ export const TopNews = () => {
       maxArticles: 25,
     });
 
-  // Debug logging
-  console.log(
-    "TopNews - Combined articles:",
-    articles.length,
-    "NewsAPI:",
-    sources.newsApi.articles.length,
-    "YFinance:",
-    sources.yfinance.articles.length,
-    "loading:",
-    loading,
-    "error:",
-    error,
-  );
+  // Debug logging - only in development
+  if (process.env.NODE_ENV === 'development') {
+    console.log(
+      "TopNews - Combined articles:",
+      articles.length,
+      "NewsAPI:",
+      sources.newsApi.articles.length,
+      "YFinance:",
+      sources.yfinance.articles.length,
+      "loading:",
+      loading,
+      "error:",
+      error,
+    );
+  }
 
   // Use mock articles if no articles from any API
   const displayArticles = articles.length > 0 ? articles : newsArticles;

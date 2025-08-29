@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo, useMemo, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -666,4 +666,8 @@ export const NeonSenseCryptoDashboard = () => {
   );
 };
 
-export default NeonSenseCryptoDashboard;
+// Memoize the component to prevent unnecessary re-renders
+const NeonSenseCryptoDashboardMemo = memo(NeonSenseCryptoDashboard);
+NeonSenseCryptoDashboardMemo.displayName = 'NeonSenseCryptoDashboard';
+
+export default NeonSenseCryptoDashboardMemo;

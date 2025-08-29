@@ -1,14 +1,13 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
+
+# Performance and Core Web Vitals focused crawling
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://moodmeter.app/sitemap.xml
+
+# Block unnecessary bot traffic to heavy resources
+Disallow: /api/
+Disallow: /_next/static/chunks/
+Disallow: /_next/static/css/

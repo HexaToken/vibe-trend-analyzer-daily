@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { MoodThemeProvider, useMoodTheme } from "@/contexts/MoodThemeContext";
@@ -255,30 +256,32 @@ const AppContent = () => {
   const isChartPage = activeSection === "charts" || activeSection === "trading-chart";
 
   return (
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <div className={cn(
-        isChartPage ? "ns-page" : `min-h-screen ${bodyGradient} transition-all duration-500`
-      )}>
-        {!isChartPage && (
-          <ResponsiveModernHeader
-            activeSection={activeSection}
-            setActiveSection={setActiveSection}
-            onNavigate={handleNavigation}
-            currentMoodScore={75}
+    <ErrorBoundary>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <div className={cn(
+          isChartPage ? "ns-page" : `min-h-screen ${bodyGradient} transition-all duration-500`
+        )}>
+          {!isChartPage && (
+            <ResponsiveModernHeader
+              activeSection={activeSection}
+              setActiveSection={setActiveSection}
+              onNavigate={handleNavigation}
+              currentMoodScore={75}
+            />
+          )}
+          <main className={isChartPage ? "ns-main" : ""}>{renderContent()}</main>
+          <Footer
+            onNavigate={setActiveSection}
+            compact={["charts", "trading-chart", "crypto"].includes(activeSection)}
+            className={isChartPage ? "ns-footer" : ""}
           />
-        )}
-        <main className={isChartPage ? "ns-main" : ""}>{renderContent()}</main>
-        <Footer
-          onNavigate={setActiveSection}
-          compact={["charts", "trading-chart", "crypto"].includes(activeSection)}
-          className={isChartPage ? "ns-footer" : ""}
-        />
-        <ApiStatusIndicator />
-        <MoodGptWidget />
-      </div>
-    </TooltipProvider>
+          <ApiStatusIndicator />
+          <MoodGptWidget />
+        </div>
+      </TooltipProvider>
+    </ErrorBoundary>
   );
 };
 

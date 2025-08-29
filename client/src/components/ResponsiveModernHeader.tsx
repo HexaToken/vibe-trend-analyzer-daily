@@ -118,7 +118,6 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
   ];
 
   const handleNavigation = (key: string) => {
-    console.log('Navigation clicked:', key); // Debug log
     setActiveSection(key);     // Update the main app's activeSection
     setMobileMenuOpen(false);
     setSideDrawerOpen(false);
