@@ -367,8 +367,52 @@
   backdrop-filter: none !important;
 }
 
-/* ===== HERO SECTION NOW ADAPTS TO LIGHT MODE ===== */
-/* Hero section will now follow the same light mode rules as other components */
+/* ===== HERO SECTION LIGHT MODE STYLING ===== */
+/* Hero section now adapts to light mode with professional styling */
+
+[data-theme="light"] .hero-sentiment-section {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Light mode gradient ring colors */
+[data-theme="light"] .hero-sentiment-section .bg-gradient-to-r {
+  background: linear-gradient(90deg, #2962FF, #3B82F6, #06B6D4, #2962FF) !important;
+}
+
+/* Light mode sentiment ring borders */
+[data-theme="light"] .hero-sentiment-section .border-emerald-400\/40 {
+  border-color: rgba(34, 197, 94, 0.4) !important;
+}
+
+[data-theme="light"] .hero-sentiment-section .border-green-400\/30 {
+  border-color: rgba(34, 197, 94, 0.3) !important;
+}
+
+[data-theme="light"] .hero-sentiment-section .border-cyan-400\/20 {
+  border-color: rgba(6, 182, 212, 0.2) !important;
+}
+
+[data-theme="light"] .hero-sentiment-section .border-red-400\/40 {
+  border-color: rgba(239, 68, 68, 0.4) !important;
+}
+
+[data-theme="light"] .hero-sentiment-section .border-rose-400\/30 {
+  border-color: rgba(251, 113, 133, 0.3) !important;
+}
+
+[data-theme="light"] .hero-sentiment-section .border-purple-400\/20 {
+  border-color: rgba(168, 85, 247, 0.2) !important;
+}
+
+[data-theme="light"] .hero-sentiment-section .border-gray-400\/40 {
+  border-color: rgba(156, 163, 175, 0.4) !important;
+}
+
+[data-theme="light"] .hero-sentiment-section .border-slate-400\/30 {
+  border-color: rgba(148, 163, 184, 0.3) !important;
+}
 
 /* ===== ENSURE PROPER CASCADING ORDER ===== */
 /* This file should be imported last to override all other styles */
