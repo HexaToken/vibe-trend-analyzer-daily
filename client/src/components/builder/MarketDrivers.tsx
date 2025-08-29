@@ -82,7 +82,7 @@ export const MarketDrivers: React.FC<MarketDriversProps> = ({
       "relative overflow-hidden transition-all duration-200 hover:scale-[1.02] rounded-2xl",
       themeMode === 'light'
         ? 'bg-white border-[#E0E0E0] shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]'
-        : 'bg-[#111827] border-slate-700/50',
+        : 'bg-[#111827] border-slate-700/50 hover:shadow-lg hover:shadow-purple-500/20',
       className
     )}>
       
