@@ -324,35 +324,32 @@ html body .day-mode-container {
   color: #2A2E39 !important;
 }
 
-/* Force all text content in the news feed to be dark */
-.day-mode-container [class*="text-"] {
-  color: #2A2E39 !important;
-}
-
-.day-mode-container [class*="text-lg"],
-.day-mode-container [class*="text-xl"],
-.day-mode-container [class*="text-sm"],
-.day-mode-container [class*="text-xs"] {
-  color: #4B5563 !important;
-}
+/* Remove overly aggressive text overrides that break badges */
 
 /* Specific overrides for elements in line 480 area */
 .day-mode-container .grid-cols-1.md\\:grid-cols-3 * {
   color: #2A2E39 !important;
 }
 
-/* Final nuclear override - force all text to be dark except specific exceptions */
-.day-mode-container *,
-.day-mode-container *:before,
-.day-mode-container *:after {
-  color: #2A2E39 !important;
+/* Preserve white text on colored badge backgrounds */
+.day-mode-container .bg-green-600,
+.day-mode-container .bg-green-600 *,
+.day-mode-container .bg-red-500,
+.day-mode-container .bg-red-500 *,
+.day-mode-container .bg-blue-600,
+.day-mode-container .bg-blue-600 *,
+.day-mode-container .bg-yellow-600,
+.day-mode-container .bg-yellow-600 *,
+.day-mode-container .bg-gray-600,
+.day-mode-container .bg-gray-600 *,
+.day-mode-container .bg-indigo-600,
+.day-mode-container .bg-indigo-600 * {
+  color: #FFFFFF !important;
 }
 
-/* Secondary text elements */
+/* Secondary text elements - simplified without complex selectors */
 .day-mode-container .text-xs,
-.day-mode-container .text-sm,
-.day-mode-container [class*="text-gray"],
-.day-mode-container [class*="text-slate"] {
+.day-mode-container .text-sm {
   color: #4B5563 !important;
 }
 
