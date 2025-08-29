@@ -393,6 +393,27 @@
   background-color: rgba(58, 122, 254, 0.1) !important;
 }
 
+/* Fix mobile menu buttons with hardcoded blue backgrounds */
+:root:not(.dark):not(.tradingview-day) .bg-\[\#3A7AFE\] {
+  background-color: #3A7AFE !important;
+  color: #FFFFFF !important;
+}
+
+:root:not(.dark):not(.tradingview-day) .bg-\[\#3A7AFE\]:hover {
+  background-color: #2962FF !important;
+  color: #FFFFFF !important;
+}
+
+:root:not(.dark):not(.tradingview-day) .text-white.bg-\[\#3A7AFE\] {
+  color: #FFFFFF !important;
+}
+
+/* Ensure proper focus states for all primary buttons */
+:root:not(.dark):not(.tradingview-day) button:focus-visible {
+  outline: 2px solid #3A7AFE !important;
+  outline-offset: 2px !important;
+}
+
 /* ===== PRESERVE DARK MODE ELEMENTS ===== */
 
 /* Preserve elements that should stay dark */
