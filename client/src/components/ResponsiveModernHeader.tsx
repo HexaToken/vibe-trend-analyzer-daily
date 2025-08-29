@@ -390,7 +390,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                 <div className="relative">
                   <Search className={cn(
                     "absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4",
-                    isDayMode ? "text-[#6B7280]" : isLightMode ? "text-gray-500" : "text-gray-400"
+                    isLightMode ? "text-gray-500" : "text-gray-400"
                   )} />
                   <Input
                     type="text"
