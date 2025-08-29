@@ -57,7 +57,7 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
     switch (sentiment) {
       case 'bullish': return 'text-green-700 bg-green-100 border-green-200 dark:text-green-400 dark:bg-green-500/10 dark:border-green-500/20';
       case 'bearish': return 'text-red-700 bg-red-100 border-red-200 dark:text-red-400 dark:bg-red-500/10 dark:border-red-500/20';
-      default: return 'text-yellow-700 bg-yellow-100 border-yellow-200 dark:text-yellow-400 dark:bg-yellow-500/10 dark:border-yellow-500/20';
+      default: return 'text-muted-foreground bg-muted border-border';
     }
   };
 
