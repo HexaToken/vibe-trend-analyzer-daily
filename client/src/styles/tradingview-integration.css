@@ -414,6 +414,36 @@
   outline-offset: 2px !important;
 }
 
+/* Fix tab components in light mode */
+:root:not(.dark):not(.tradingview-day) [role="tab"][data-state="active"] {
+  background-color: #FFFFFF !important;
+  color: #3A7AFE !important;
+  border: 1px solid rgba(58, 122, 254, 0.2) !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark):not(.tradingview-day) [role="tab"]:not([data-state="active"]) {
+  color: #4B5563 !important;
+}
+
+:root:not(.dark):not(.tradingview-day) [role="tab"]:not([data-state="active"]):hover {
+  color: #3A7AFE !important;
+  background-color: rgba(58, 122, 254, 0.1) !important;
+}
+
+/* Fix dropdown menu styling in light mode */
+:root:not(.dark):not(.tradingview-day) [data-radix-dropdown-menu-content] {
+  background: #FFFFFF !important;
+  border: 1px solid #E0E0E0 !important;
+  color: #1E1E1E !important;
+}
+
+:root:not(.dark):not(.tradingview-day) [data-radix-dropdown-menu-item]:hover {
+  background: #F5F5F5 !important;
+  color: #1E1E1E !important;
+}
+
 /* ===== PRESERVE DARK MODE ELEMENTS ===== */
 
 /* Preserve elements that should stay dark */
