@@ -344,10 +344,10 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
             </Card>
 
             {/* Key Market Drivers */}
-            <Card className="bg-black/30 border-orange-500/20">
+            <Card className="bg-card border-orange-200 dark:border-orange-500/20 dark:bg-black/30">
               <CardHeader>
-                <CardTitle className="text-white text-sm flex items-center gap-2">
-                  <TrendingUp className="w-4 h-4 text-orange-400" />
+                <CardTitle className="text-card-foreground text-sm flex items-center gap-2">
+                  <TrendingUp className="w-4 h-4 text-orange-600 dark:text-orange-400" />
                   Key Market Drivers
                 </CardTitle>
               </CardHeader>
@@ -356,7 +356,7 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
                   {aiInsight.keyDrivers.map((driver, i) => (
                     <Badge 
                       key={i} 
-                      className="bg-orange-500/20 text-orange-300 border-orange-500/30 justify-center p-2"
+                      className="bg-orange-100 text-orange-700 border-orange-200 dark:bg-orange-500/20 dark:text-orange-300 dark:border-orange-500/30 justify-center p-2"
                     >
                       {driver}
                     </Badge>
@@ -366,14 +366,14 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
             </Card>
 
             {/* Data Sources & Timestamp */}
-            <Card className="bg-black/30 border-gray-500/20">
+            <Card className="bg-card border-gray-200 dark:border-gray-500/20 dark:bg-black/30">
               <CardContent className="p-4">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
-                    <Database className="w-4 h-4 text-gray-400" />
-                    <span className="text-white text-sm font-medium">Data Sources</span>
+                    <Database className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-card-foreground text-sm font-medium">Data Sources</span>
                   </div>
-                  <div className="flex items-center gap-2 text-xs text-gray-400">
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
                     <Clock className="w-3 h-3" />
                     Updated {aiInsight.lastUpdate.toLocaleTimeString()}
                   </div>
@@ -382,7 +382,7 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
                   {aiInsight.dataSources.map((source, i) => (
                     <Badge 
                       key={i} 
-                      className="bg-gray-500/20 text-gray-300 border-gray-500/30 text-xs"
+                      className="bg-gray-100 text-gray-700 border-gray-200 dark:bg-gray-500/20 dark:text-gray-300 dark:border-gray-500/30 text-xs"
                     >
                       {source}
                     </Badge>
