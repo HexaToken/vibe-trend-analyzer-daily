@@ -153,7 +153,7 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
 
       <CardContent className="p-6">
         <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as 'mood' | 'insight')}>
-          <TabsList className="grid w-full grid-cols-2 bg-muted backdrop-blur-xl border border-border mb-6">
+          <TabsList className="mood-sentiment-tabs grid w-full grid-cols-2 bg-muted backdrop-blur-xl border border-border mb-6">
             <TabsTrigger
               value="mood"
               className="text-muted-foreground data-[state=active]:bg-primary/20 data-[state=active]:text-primary hover:text-primary hover:bg-primary/10 flex items-center gap-2 transition-all duration-300"
