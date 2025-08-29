@@ -61,6 +61,14 @@ export const ThemeSettingsPanel: React.FC<ThemeSettingsPanelProps> = ({
 
   const themeOptions: ThemeOption[] = [
     {
+      id: 'day',
+      label: 'Day Mode',
+      description: 'TradingView inspired light theme',
+      icon: <Sun className="w-5 h-5" />,
+      gradient: 'from-blue-500 to-blue-600',
+      activeColor: 'ring-blue-400/50 bg-blue-500/10',
+    },
+    {
       id: 'light',
       label: 'Light Mode',
       description: 'Classic bright theme',
