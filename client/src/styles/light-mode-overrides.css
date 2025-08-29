@@ -528,4 +528,48 @@
   --chart-primary: #2962FF;
 }
 
+/* ===== FINAL COMPREHENSIVE OVERRIDES ===== */
+/* Catch-all for any remaining low-contrast text */
+
+/* Global gray text fixes */
+[data-theme="light"] .text-gray-400:not(.bg-primary *):not(.bg-accent *):not(.bg-destructive *) {
+  color: #6B7280 !important;
+}
+
+[data-theme="light"] .text-slate-400:not(.bg-primary *):not(.bg-accent *):not(.bg-destructive *) {
+  color: #6B7280 !important;
+}
+
+/* Ensure all muted text has sufficient contrast */
+[data-theme="light"] .text-muted-foreground:not(.bg-primary *):not(.bg-accent *):not(.bg-destructive *) {
+  color: #6B7280 !important;
+}
+
+/* Search and form elements */
+[data-theme="light"] input::placeholder,
+[data-theme="light"] textarea::placeholder {
+  color: #9CA3AF !important;
+}
+
+/* Navigation and menu items */
+[data-theme="light"] nav .text-gray-400,
+[data-theme="light"] nav .text-muted-foreground,
+[data-theme="light"] [role="menu"] .text-gray-400,
+[data-theme="light"] [role="menu"] .text-muted-foreground {
+  color: #4B5563 !important;
+}
+
+/* Ensure proper contrast for all interactive elements */
+[data-theme="light"] button .text-gray-400,
+[data-theme="light"] [role="button"] .text-gray-400,
+[data-theme="light"] .cursor-pointer .text-gray-400 {
+  color: #6B7280 !important;
+}
+
+[data-theme="light"] button:hover .text-gray-400,
+[data-theme="light"] [role="button"]:hover .text-gray-400,
+[data-theme="light"] .cursor-pointer:hover .text-gray-400 {
+  color: #2962FF !important;
+}
+
 /* ===== END LIGHT MODE OVERRIDES ===== */
