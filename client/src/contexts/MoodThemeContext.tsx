@@ -214,7 +214,6 @@ export const MoodThemeProvider: React.FC<MoodThemeProviderProps> = ({ children }
 
     // Remove all theme classes first
     root.classList.remove('dark');
-    body.classList.remove('tradingview-day');
 
     if (themeMode === 'dark' || isDynamicMode) {
       root.classList.add('dark');
