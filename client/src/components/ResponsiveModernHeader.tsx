@@ -208,14 +208,10 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                 className={cn(
                   "text-base font-medium px-3 py-2 rounded-lg transition-all duration-200 relative group",
                   activeSection === "community"
-                    ? isDayMode
-                      ? "text-white bg-[#2962FF] font-semibold shadow-sm border border-[#2962FF]"
-                      : isLightMode
+                    ? isLightMode
                       ? "text-primary-foreground bg-primary font-semibold shadow-sm"
                       : "text-pink-400 bg-pink-500/10"
-                    : isDayMode
-                      ? "text-[#4B5563] hover:text-[#2962FF] hover:bg-[rgba(41,98,255,0.1)] hover:border-[rgba(41,98,255,0.2)] border border-transparent"
-                      : isLightMode
+                    : isLightMode
                       ? "text-muted-foreground hover:text-primary hover:bg-muted"
                       : "text-gray-300 hover:text-gray-200"
                 )}
