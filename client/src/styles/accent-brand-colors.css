@@ -50,12 +50,12 @@
 :root:not(.dark) .active-element,
 :root:not(.dark) .border-active,
 :root:not(.dark) [data-state="active"] {
-  border-color: #3A7AFE !important;
-  color: #3A7AFE !important;
+  border-color: #2962FF !important;
+  color: #2962FF !important;
 }
 
 :root:not(.dark) .active-element-underline {
-  border-bottom: 2px solid #3A7AFE !important;
+  border-bottom: 2px solid #2962FF !important;
 }
 
 /* Button Styling - TradingView */
@@ -89,9 +89,9 @@
 
 /* Tab Styling */
 :root:not(.dark) .tab-active {
-  background-color: #3A7AFE !important;
+  background-color: #2962FF !important;
   color: #FFFFFF !important;
-  border: 1px solid #3A7AFE !important;
+  border: 1px solid #2962FF !important;
   font-weight: 600 !important;
 }
 
@@ -122,17 +122,17 @@
 :root:not(.dark) input:focus,
 :root:not(.dark) button:focus,
 :root:not(.dark) select:focus {
-  outline: 2px solid #3A7AFE !important;
+  outline: 2px solid #2962FF !important;
   outline-offset: 2px !important;
-  border-color: #3A7AFE !important;
+  border-color: #2962FF !important;
 }
 
 /* Link Styling */
 :root:not(.dark) .link-primary,
 :root:not(.dark) a:not(.btn) {
-  color: #3A7AFE !important;
+  color: #2962FF !important;
   text-decoration: underline !important;
-  text-decoration-color: #3A7AFE !important;
+  text-decoration-color: #2962FF !important;
   font-weight: 500 !important;
 }
 
@@ -144,9 +144,9 @@
 
 /* Badge Styling with Accent Colors */
 :root:not(.dark) .badge-primary-blue {
-  background: rgba(58, 122, 254, 0.1) !important;
-  color: #3A7AFE !important;
-  border: 1px solid #3A7AFE !important;
+  background: rgba(41, 98, 255, 0.1) !important;
+  color: #2962FF !important;
+  border: 1px solid #2962FF !important;
   font-weight: 600 !important;
 }
 
@@ -167,17 +167,17 @@
 
 /* Progress Indicators */
 :root:not(.dark) .progress-primary {
-  background-color: rgba(58, 122, 254, 0.2) !important;
+  background-color: rgba(41, 98, 255, 0.2) !important;
 }
 
 :root:not(.dark) .progress-primary .progress-fill {
-  background-color: #3A7AFE !important;
+  background-color: #2962FF !important;
 }
 
 /* Notification Styling */
 :root:not(.dark) .notification-primary {
-  background-color: rgba(58, 122, 254, 0.1) !important;
-  border-left: 4px solid #3A7AFE !important;
+  background-color: rgba(41, 98, 255, 0.1) !important;
+  border-left: 4px solid #2962FF !important;
   color: #1A1A1A !important;
 }
 
@@ -189,7 +189,7 @@
 
 /* Icon Styling */
 :root:not(.dark) .icon-primary {
-  color: #3A7AFE !important;
+  color: #2962FF !important;
 }
 
 :root:not(.dark) .icon-secondary {
@@ -198,8 +198,8 @@
 
 /* Loading Indicators */
 :root:not(.dark) .spinner-primary {
-  border-color: rgba(58, 122, 254, 0.2) !important;
-  border-top-color: #3A7AFE !important;
+  border-color: rgba(41, 98, 255, 0.2) !important;
+  border-top-color: #2962FF !important;
 }
 
 :root:not(.dark) .spinner-secondary {
