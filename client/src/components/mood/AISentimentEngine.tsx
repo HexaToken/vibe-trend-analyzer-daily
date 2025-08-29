@@ -204,31 +204,31 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               
               {/* Stocks */}
-              <Card className="bg-black/30 border-pink-500/20 hover:border-pink-400/40 transition-all duration-300">
+              <Card className="bg-card border-border hover:border-primary/40 transition-all duration-300">
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-white text-sm flex items-center gap-2">
-                    <BarChart3 className="w-4 h-4 text-pink-400" />
+                  <CardTitle className="text-card-foreground text-sm flex items-center gap-2">
+                    <BarChart3 className="w-4 h-4 text-primary" />
                     Stocks (40%)
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-pink-400">{moodScore.stocks.toFixed(2)}</div>
-                    <div className="text-xs text-gray-400">Sentiment Score</div>
+                    <div className="text-2xl font-bold text-primary">{moodScore.stocks.toFixed(2)}</div>
+                    <div className="text-xs text-muted-foreground">Sentiment Score</div>
                   </div>
                   <div className="space-y-2">
                     <div className="text-xs font-medium text-white">Top Contributors:</div>
                     {stockContributors.map((stock, i) => (
                       <div key={i} className="flex justify-between items-center text-xs">
-                        <span className="text-gray-300">{stock.symbol}</span>
+                        <span className="text-muted-foreground">{stock.symbol}</span>
                         <div className="text-right">
                           <div className={cn(
                             "font-bold",
-                            stock.sentiment === 'bullish' ? 'text-green-400' : 'text-red-400'
+                            stock.sentiment === 'bullish' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
                           )}>
                             {stock.change}
                           </div>
-                          <div className="text-gray-400 text-xs">{stock.price}</div>
+                          <div className="text-muted-foreground text-xs">{stock.price}</div>
                         </div>
                       </div>
                     ))}
@@ -237,7 +237,7 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
               </Card>
 
               {/* News */}
-              <Card className="bg-card border-blue-200 hover:border-blue-300 dark:border-blue-500/20 dark:hover:border-blue-400/40 dark:bg-black/30 transition-all duration-300">
+              <Card className="bg-card border-border hover:border-secondary/40 transition-all duration-300">
                 <CardHeader className="pb-3">
                   <CardTitle className="text-card-foreground text-sm flex items-center gap-2">
                     📰 News (30%)
@@ -245,7 +245,7 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{moodScore.news.toFixed(2)}</div>
+                    <div className="text-2xl font-bold text-secondary">{moodScore.news.toFixed(2)}</div>
                     <div className="text-xs text-muted-foreground">Sentiment Score</div>
                   </div>
                   <div className="space-y-2">
@@ -260,7 +260,7 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
               </Card>
 
               {/* Forums */}
-              <Card className="bg-card border-cyan-200 hover:border-cyan-300 dark:border-cyan-500/20 dark:hover:border-cyan-400/40 dark:bg-black/30 transition-all duration-300">
+              <Card className="bg-card border-border hover:border-accent/40 transition-all duration-300">
                 <CardHeader className="pb-3">
                   <CardTitle className="text-card-foreground text-sm flex items-center gap-2">
                     💬 Forums (30%)
@@ -268,14 +268,14 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-cyan-600 dark:text-cyan-400">{moodScore.social.toFixed(2)}</div>
+                    <div className="text-2xl font-bold text-accent">{moodScore.social.toFixed(2)}</div>
                     <div className="text-xs text-muted-foreground">Sentiment Score</div>
                   </div>
                   <div className="space-y-2">
                     <div className="text-xs font-medium text-card-foreground">Trending:</div>
                     <div className="flex flex-wrap gap-1">
                       {forumTrends.map((trend, i) => (
-                        <Badge key={i} className="bg-cyan-100 text-cyan-700 border-cyan-200 dark:bg-cyan-500/20 dark:text-cyan-300 dark:border-cyan-500/30 text-xs">
+                        <Badge key={i} className="bg-accent/10 text-accent border-accent/30 text-xs">
                           {trend}
                         </Badge>
                       ))}
@@ -293,18 +293,18 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
           <TabsContent value="insight" className="space-y-6 animate-in fade-in-0 duration-500">
             
             {/* Market Regime & Interpretation */}
-            <Card className="bg-gradient-to-r from-blue-500/5 to-cyan-500/5 border-blue-200 dark:border-blue-500/20">
+            <Card className="bg-gradient-to-r from-primary/5 to-secondary/5 border-border">
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-xl flex items-center justify-center">
-                    <Activity className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                  <div className="w-12 h-12 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-xl flex items-center justify-center">
+                    <Activity className="w-6 h-6 text-primary" />
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
-                      <Badge className="bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-500/20 dark:text-blue-400 dark:border-blue-500/30">
+                      <Badge className="bg-primary/10 text-primary border-primary/30">
                         {aiInsight.marketRegime}
                       </Badge>
-                      <Badge className="bg-gray-100 text-gray-700 border-gray-200 dark:bg-gray-500/20 dark:text-gray-400 dark:border-gray-500/30">
+                      <Badge className="bg-muted text-muted-foreground border-border">
                         Live Analysis
                       </Badge>
                     </div>
@@ -317,10 +317,10 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
             </Card>
 
             {/* AI Confidence Score */}
-            <Card className="bg-card border-purple-200 dark:border-purple-500/20 dark:bg-black/30">
+            <Card className="bg-card border-border">
               <CardHeader>
                 <CardTitle className="text-card-foreground text-sm flex items-center gap-2">
-                  <Brain className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                  <Brain className="w-4 h-4 text-secondary" />
                   AI Confidence Score
                 </CardTitle>
               </CardHeader>
@@ -329,11 +329,11 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
                   <div className="flex-1">
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-card-foreground font-medium">Confidence Level</span>
-                      <span className="text-purple-600 dark:text-purple-400 font-bold text-lg">{aiInsight.confidence}%</span>
+                      <span className="text-secondary font-bold text-lg">{aiInsight.confidence}%</span>
                     </div>
-                    <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                      <div 
-                        className="h-full bg-gradient-to-r from-purple-400 to-pink-400 transition-all duration-1000"
+                    <div className="h-3 bg-muted rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-secondary to-primary transition-all duration-1000"
                         style={{ width: `${aiInsight.confidence}%` }}
                       />
                     </div>
@@ -344,19 +344,19 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
             </Card>
 
             {/* Key Market Drivers */}
-            <Card className="bg-card border-orange-200 dark:border-orange-500/20 dark:bg-black/30">
+            <Card className="bg-card border-border">
               <CardHeader>
                 <CardTitle className="text-card-foreground text-sm flex items-center gap-2">
-                  <TrendingUp className="w-4 h-4 text-orange-600 dark:text-orange-400" />
+                  <TrendingUp className="w-4 h-4 text-accent" />
                   Key Market Drivers
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-2 gap-2">
                   {aiInsight.keyDrivers.map((driver, i) => (
-                    <Badge 
-                      key={i} 
-                      className="bg-orange-100 text-orange-700 border-orange-200 dark:bg-orange-500/20 dark:text-orange-300 dark:border-orange-500/30 justify-center p-2"
+                    <Badge
+                      key={i}
+                      className="bg-accent/10 text-accent border-accent/30 justify-center p-2"
                     >
                       {driver}
                     </Badge>
@@ -366,7 +366,7 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
             </Card>
 
             {/* Data Sources & Timestamp */}
-            <Card className="bg-card border-gray-200 dark:border-gray-500/20 dark:bg-black/30">
+            <Card className="bg-card border-border">
               <CardContent className="p-4">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
@@ -380,9 +380,9 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {aiInsight.dataSources.map((source, i) => (
-                    <Badge 
-                      key={i} 
-                      className="bg-gray-100 text-gray-700 border-gray-200 dark:bg-gray-500/20 dark:text-gray-300 dark:border-gray-500/30 text-xs"
+                    <Badge
+                      key={i}
+                      className="bg-muted/50 text-muted-foreground border-border text-xs"
                     >
                       {source}
                     </Badge>
