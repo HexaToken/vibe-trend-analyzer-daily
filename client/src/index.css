@@ -1093,9 +1093,7 @@ All colors MUST be HSL.
     color: #666 !important;
   }
 
-  :root:not(.dark) .text-white {
-    color: #1E1E1E !important;
-  }
+  /* Removed problematic text-white override - handled per component */
 
   :root:not(.dark) .text-gray-300 {
     color: #444 !important;
@@ -1252,10 +1250,7 @@ All colors MUST be HSL.
     border: 1px solid #E0E0E0 !important;
   }
 
-  /* Fix all hardcoded white text */
-  :root:not(.dark) .text-white {
-    color: #1E1E1E !important;
-  }
+  /* Fix all hardcoded white text - removed problematic override */
 
   /* Fix gradient headers to be appropriate for light mode */
   :root:not(.dark) .bg-gradient-to-r {
@@ -1529,10 +1524,7 @@ All colors MUST be HSL.
     color: white !important;
   }
 
-  /* Fix all text colors in SpaceSwitcherWidget */
-  :root:not(.dark) .text-white {
-    color: #1E1E1E !important;
-  }
+  /* Fix all text colors in SpaceSwitcherWidget - removed problematic text-white override */
 
   :root:not(.dark) .text-gray-400 {
     color: #666 !important;
@@ -1551,9 +1543,7 @@ All colors MUST be HSL.
     color: #333 !important;
   }
 
-  :root:not(.dark) .hover\:text-white:hover {
-    color: #1E1E1E !important;
-  }
+  /* Removed problematic hover text-white override */
 
   /* Fix background colors for Space cards */
   :root:not(.dark) .bg-gray-800\/50 {

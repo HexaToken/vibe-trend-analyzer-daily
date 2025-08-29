@@ -293,6 +293,13 @@ html body .day-mode-container {
 }
 
 .day-mode-container p,
-.day-mode-container span:not(.bg-gradient) {
+.day-mode-container span:not(.bg-gradient):not([style*="color: #FFFFFF"]) {
   color: rgb(75 85 99) !important; /* #4B5563 as RGB */
+}
+
+/* Preserve white text on colored backgrounds */
+.day-mode-container .bg-blue-500 *,
+.day-mode-container [style*="background-color: #2962FF"] *,
+.day-mode-container [style*="backgroundColor: '#2962FF'"] * {
+  color: #FFFFFF !important;
 }

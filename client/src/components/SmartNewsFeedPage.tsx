@@ -695,7 +695,7 @@ const SmartNewsFeedPage: React.FC = () => {
                                     }`} style={themeMode === 'light' ? { color: '#2A2E39', fontWeight: '600' } : {}}>{comment.user.username}</span>
                                     {comment.user.verified && (
                                       <div className="w-3 h-3 bg-blue-500 rounded-full flex items-center justify-center">
-                                        <span className="text-white text-xs">✓</span>
+                                        <span className="text-white text-xs" style={{ color: '#FFFFFF' }}>✓</span>
                                       </div>
                                     )}
                                     <span className={`text-xs ${
@@ -730,7 +730,7 @@ const SmartNewsFeedPage: React.FC = () => {
                               <span className={`text-sm ${
                                 themeMode === 'light' ? 'text-gray-700' : 'text-white/80'
                               }`} style={themeMode === 'light' ? { color: '#4B5563', fontWeight: '500' } : {}}>What's your take on this news?</span>
-                              <Button size="sm" className="text-white" style={{ backgroundColor: '#2962FF', borderColor: '#2962FF' }}>
+                              <Button size="sm" style={{ backgroundColor: '#2962FF', borderColor: '#2962FF', color: '#FFFFFF' }}>
                                 Post Your Take
                               </Button>
                             </div>
