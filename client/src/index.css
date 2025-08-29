@@ -22,8 +22,11 @@
 /* Import TradingView Integration */
 @import './styles/tradingview-integration.css';
 
-/* Import Color Palette Overrides - MUST BE LAST */
+/* Import Color Palette Overrides */
 @import './styles/color-palette-overrides.css';
+
+/* Import TradingView Light Mode Overrides - MUST BE ABSOLUTE LAST */
+@import './styles/light-mode-overrides.css';
 
 /* Import Futuristic Chart Styling */
 @import './styles/futuristic-chart.css';
