@@ -62,14 +62,10 @@ export const AIAnalysisSection: React.FC<AIAnalysisSectionProps> = ({
               "transition-all duration-300 ease-out focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2",
               hoveredButton === 'mood' ? 'scale-[1.03]' : 'scale-100'
             )}
-            style={{
-              background: hoveredButton === 'mood'
-                ? 'linear-gradient(to right, #FF6BB3, #FF8CC8)'
-                : 'linear-gradient(to right, #FF4C9A, #FF7EB3)',
-              boxShadow: '0 0 8px rgba(255, 110, 180, 0.5)',
-              color: '#FFFFFF',
-              textShadow: '0 0 4px rgba(0,0,0,0.4)'
-            }}
+            className={cn(
+              "bg-gradient-to-r from-pink-500 to-pink-400 text-white shadow-lg shadow-pink-500/25",
+              hoveredButton === 'mood' && "from-pink-600 to-pink-500 shadow-pink-500/40"
+            )}
           >
             <Brain className="w-5 h-5 mr-2" />
             Explain Today's Mood
@@ -85,14 +81,10 @@ export const AIAnalysisSection: React.FC<AIAnalysisSectionProps> = ({
               "transition-all duration-300 ease-out focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2",
               hoveredButton === 'analytics' ? 'scale-[1.03]' : 'scale-100'
             )}
-            style={{
-              background: hoveredButton === 'analytics'
-                ? 'linear-gradient(to right, #5DB8FF, #7DCFFF)'
-                : 'linear-gradient(to right, #4DA8FF, #6CCEFF)',
-              boxShadow: '0 0 8px rgba(76, 203, 255, 0.5)',
-              color: '#FFFFFF',
-              textShadow: '0 0 4px rgba(0,0,0,0.4)'
-            }}
+            className={cn(
+              "bg-gradient-to-r from-blue-500 to-blue-400 text-white shadow-lg shadow-blue-500/25",
+              hoveredButton === 'analytics' && "from-blue-600 to-blue-500 shadow-blue-500/40"
+            )}
           >
             <BarChart3 className="w-5 h-5 mr-2" />
             View Detailed Analytics
