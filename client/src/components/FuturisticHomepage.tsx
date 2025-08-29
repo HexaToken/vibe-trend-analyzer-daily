@@ -2751,10 +2751,10 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
           <div className="lg:col-span-3 space-y-8">
 
             {/* Top 10 Movers Widget */}
-            <Card className={themeMode === 'light' ? `${cardBackground} border ${borderColor} shadow-[0_2px_6px_rgba(0,0,0,0.05)]` : "bg-black/40 border-purple-500/20 backdrop-blur-xl"}>
-              <CardHeader className={themeMode === 'light' ? `border-b ${borderColor}` : "border-b border-purple-500/20"}>
-                <CardTitle className={`flex items-center gap-2 ${themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'}`}>
-                  <TrendingUp className={`w-6 h-6 ${themeMode === 'light' ? 'text-[#4CAF50]' : 'text-emerald-400'}`} />
+            <Card className={themeMode === 'light' ? "bg-white border border-gray-200 shadow-sm" : "bg-black/40 border-purple-500/20 backdrop-blur-xl"}>
+              <CardHeader className={themeMode === 'light' ? "border-b border-gray-200 bg-gray-50/50" : "border-b border-purple-500/20"}>
+                <CardTitle className={`flex items-center gap-2 ${themeMode === 'light' ? 'text-gray-900' : 'text-white'}`}>
+                  <TrendingUp className={`w-6 h-6 ${themeMode === 'light' ? 'text-blue-600' : 'text-emerald-400'}`} />
                   Top 10 Movers Today
                 </CardTitle>
               </CardHeader>
@@ -2762,26 +2762,26 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 p-6">
                   {topMovers.map((stock, index) => (
                     <div key={stock.symbol} className={themeMode === 'light'
-                      ? `bg-white border border-[#E6E6E6] hover:border-red-400/30 rounded-xl p-4 transition-all duration-300 group cursor-pointer shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)]`
+                      ? "bg-gray-50 border border-gray-200 hover:border-blue-300 hover:bg-white rounded-xl p-4 transition-all duration-300 group cursor-pointer shadow-sm hover:shadow-md"
                       : "bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-4 border border-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer"
                     }>
                       <div className="flex items-center justify-between mb-3">
                         <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
                           themeMode === 'light'
-                            ? 'bg-gradient-to-r from-red-400/10 to-pink-500/20'
+                            ? 'bg-gradient-to-r from-blue-100 to-blue-200'
                             : 'bg-gradient-to-r from-purple-500/20 to-pink-500/20'
                         }`}>
                           <span className={`text-xs font-bold ${
-                            themeMode === 'light' ? 'text-red-600' : 'text-white'
+                            themeMode === 'light' ? 'text-blue-700' : 'text-white'
                           }`}>{stock.symbol[0]}</span>
                         </div>
                         <Badge className={getSentimentBadge(stock.sentiment)}>
                           {stock.sentiment}
                         </Badge>
                       </div>
-                      <div className={`text-lg font-bold mb-1 ${themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'}`}>{stock.symbol}</div>
-                      <div className={`text-sm mb-2 ${themeMode === 'light' ? 'text-[#9CA3AF]' : 'text-gray-400'}`}>{stock.name}</div>
-                      <div className={`text-xl font-bold mb-1 ${themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'}`}>${stock.price}</div>
+                      <div className={`text-lg font-bold mb-1 ${themeMode === 'light' ? 'text-gray-900' : 'text-white'}`}>{stock.symbol}</div>
+                      <div className={`text-sm mb-2 ${themeMode === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>{stock.name}</div>
+                      <div className={`text-xl font-bold mb-1 ${themeMode === 'light' ? 'text-gray-900' : 'text-white'}`}>${stock.price}</div>
                       <div className={cn(
                         "flex items-center gap-1 text-sm font-medium",
                         stock.change >= 0 ? "text-emerald-400" : "text-red-400"
@@ -2796,10 +2796,10 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         </Card>
 
             {/* Smart News Feed */}
-            <Card className={themeMode === 'light' ? `${cardBackground} border ${borderColor} shadow-[0_2px_6px_rgba(0,0,0,0.05)]` : "bg-black/40 border-purple-500/20 backdrop-blur-xl"}>
-              <CardHeader className={themeMode === 'light' ? `border-b ${borderColor}` : "border-b border-purple-500/20"}>
-                <CardTitle className={`flex items-center gap-2 ${themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'}`}>
-                  <Newspaper className={`w-6 h-6 ${themeMode === 'light' ? 'text-[#3F51B5]' : 'text-cyan-400'}`} />
+            <Card className={themeMode === 'light' ? "bg-white border border-gray-200 shadow-sm" : "bg-black/40 border-purple-500/20 backdrop-blur-xl"}>
+              <CardHeader className={themeMode === 'light' ? "border-b border-gray-200 bg-gray-50/50" : "border-b border-purple-500/20"}>
+                <CardTitle className={`flex items-center gap-2 ${themeMode === 'light' ? 'text-gray-900' : 'text-white'}`}>
+                  <Newspaper className={`w-6 h-6 ${themeMode === 'light' ? 'text-blue-600' : 'text-cyan-400'}`} />
                   Smart News Feed
                 </CardTitle>
               </CardHeader>
@@ -2807,20 +2807,20 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <div className="space-y-4">
                   {smartNews.map((news, index) => (
                     <div key={index} className={themeMode === 'light'
-                      ? `bg-white rounded-xl p-5 border border-[#E6E6E6] hover:border-red-400/30 transition-all duration-300 group cursor-pointer shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]`
+                      ? "bg-gray-50 border border-gray-200 hover:border-blue-300 hover:bg-white rounded-xl p-5 transition-all duration-300 group cursor-pointer shadow-sm hover:shadow-md"
                       : "bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-5 border border-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer"
                     }>
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex-1">
                           <h3 className={`text-lg font-semibold mb-2 line-clamp-2 transition-colors ${
                             themeMode === 'light'
-                              ? 'text-[#1A1A1A] group-hover:text-red-600'
+                              ? 'text-gray-900 group-hover:text-blue-600'
                               : 'text-white group-hover:text-purple-300'
                           }`}>
                             {news.headline}
                           </h3>
                           <p className={`text-sm leading-relaxed line-clamp-3 ${
-                            themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-400'
+                            themeMode === 'light' ? 'text-gray-600' : 'text-gray-400'
                           }`}>
                             {news.summary}
                           </p>
@@ -2841,7 +2841,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         </Badge>
                       </div>
                       <div className={`flex items-center justify-between text-xs ${
-                        themeMode === 'light' ? 'text-[#9CA3AF]' : 'text-gray-500'
+                        themeMode === 'light' ? 'text-gray-500' : 'text-gray-500'
                       }`}>
                         <span className="font-medium">{news.source}</span>
                         <span>{news.timestamp}</span>
@@ -2862,10 +2862,10 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
             </div>
 
             {/* Trending Forum Topics */}
-            <Card className={themeMode === 'light' ? `${cardBackground} border ${borderColor} shadow-[0_2px_6px_rgba(0,0,0,0.05)]` : "bg-black/40 border-purple-500/20 backdrop-blur-xl"}>
-              <CardHeader className={themeMode === 'light' ? `border-b ${borderColor}` : "border-b border-purple-500/20"}>
-                                <CardTitle className={`flex items-center gap-2 ${themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'}`}>
-                  <Flame className={`w-6 h-6 ${themeMode === 'light' ? 'text-[#F44336]' : 'text-orange-400'}`} />
+            <Card className={themeMode === 'light' ? "bg-white border border-gray-200 shadow-sm" : "bg-black/40 border-purple-500/20 backdrop-blur-xl"}>
+              <CardHeader className={themeMode === 'light' ? "border-b border-gray-200 bg-gray-50/50" : "border-b border-purple-500/20"}>
+                                <CardTitle className={`flex items-center gap-2 ${themeMode === 'light' ? 'text-gray-900' : 'text-white'}`}>
+                  <Flame className={`w-6 h-6 ${themeMode === 'light' ? 'text-orange-600' : 'text-orange-400'}`} />
                   Trending Forum Topics
                 </CardTitle>
               </CardHeader>
@@ -2873,7 +2873,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {trendingTopics.map((topic, index) => (
                     <div key={index} className={themeMode === 'light'
-                      ? `bg-white rounded-xl p-4 border border-[#E6E6E6] hover:border-red-400/30 transition-all duration-300 shadow-[0_2px_6px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]`
+                      ? "bg-gray-50 border border-gray-200 hover:border-blue-300 hover:bg-white rounded-xl p-4 transition-all duration-300 shadow-sm hover:shadow-md"
                       : "bg-gradient-to-br from-black/60 to-purple-900/20 rounded-xl p-4 border border-white/10 hover:border-purple-500/30 transition-all duration-300"
                     }>
                       <div className="flex items-center gap-3 mb-3">
@@ -2882,8 +2882,8 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                           {topic.label}
                         </Badge>
                       </div>
-                      <div className={`text-lg font-semibold mb-1 ${themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'}`}>{topic.topic}</div>
-                      <div className={`text-sm ${themeMode === 'light' ? 'text-[#9CA3AF]' : 'text-gray-400'}`}>{topic.mentions} mentions</div>
+                      <div className={`text-lg font-semibold mb-1 ${themeMode === 'light' ? 'text-gray-900' : 'text-white'}`}>{topic.topic}</div>
+                      <div className={`text-sm ${themeMode === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>{topic.mentions} mentions</div>
                     </div>
                   ))}
                 </div>
@@ -2895,9 +2895,9 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
           <div className="space-y-6">
             
             {/* Your Mood Score Card */}
-            <Card className={themeMode === 'light' ? `${cardBackground} border ${borderColor} shadow-[0_2px_6px_rgba(0,0,0,0.05)]` : "bg-black/40 border-purple-500/20 backdrop-blur-xl"}>
-              <CardHeader className={themeMode === 'light' ? `border-b ${borderColor}` : "border-b border-purple-500/20"}>
-                <CardTitle className={`text-sm ${themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'}`}>Your Mood Score</CardTitle>
+            <Card className={themeMode === 'light' ? "bg-white border border-gray-200 shadow-sm" : "bg-black/40 border-purple-500/20 backdrop-blur-xl"}>
+              <CardHeader className={themeMode === 'light' ? "border-b border-gray-200 bg-gray-50/50" : "border-b border-purple-500/20"}>
+                <CardTitle className={`text-sm ${themeMode === 'light' ? 'text-gray-900' : 'text-white'}`}>Your Mood Score</CardTitle>
               </CardHeader>
               <CardContent className="p-6">
                 <div className="text-center mb-4">
