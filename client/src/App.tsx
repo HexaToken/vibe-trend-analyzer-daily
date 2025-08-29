@@ -12,7 +12,6 @@ import { Dashboard } from "@/components/Dashboard";
 import { MarketMoodPage } from "@/components/MarketMoodPage";
 import { StockScreener } from "@/components/StockScreener";
 import { SentimentDashboard } from "@/components/SentimentDashboard";
-import { Analytics } from "@/components/Analytics";
 import { HistoricalData } from "@/components/HistoricalData";
 import { CommunityWithSubtabs } from "@/components/CommunityWithSubtabs";
 import { ResponsiveModernHeader } from "@/components/ResponsiveModernHeader";
@@ -28,13 +27,22 @@ import { BuilderDemo } from "@/components/BuilderDemo";
 
 import { ApiStatusIndicator } from "@/components/ApiStatusIndicator";
 import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
-import { NeonSenseCryptoDashboard } from "@/components/crypto/NeonSenseCryptoDashboard";
-import { AdvancedTradingChart } from "@/components/finance/AdvancedTradingChart";
 import { EarningsCalendar } from "@/components/finance/EarningsCalendar";
 import { AdvancedChartsPro } from "@/components/finance/AdvancedChartsPro";
 import TrendingHub from "@/components/finance/TrendingHub";
 import TradeJournalClassic from "@/components/TradeJournalClassic";
 import CommunitySentimentPolls from "@/components/CommunitySentimentPolls";
+
+// Lazy loaded heavy components for performance
+import { Suspense } from "react";
+import { 
+  LazyAnalytics, 
+  LazyNeonSenseCryptoDashboard, 
+  LazyAdvancedTradingChart,
+  DashboardSkeleton,
+  CryptoSkeleton,
+  ChartSkeleton 
+} from "@/components/LazyComponents";
 
 import { NLPSentimentDemo } from "@/components/NLPSentimentDemo";
 import { SpacyNLPDemo } from "@/components/SpacyNLPDemo";
@@ -93,7 +101,11 @@ const AppContent = () => {
       case "sentiment":
         return <BuilderDemo />;
       case "analytics":
-        return <Analytics />;
+        return (
+          <Suspense fallback={<DashboardSkeleton />}>
+            <LazyAnalytics />
+          </Suspense>
+        );
       // Removed "history" route - HistoricalData component retained for potential reuse
             case "community":
         return <CommunityWithSubtabs onNavigateToProfile={(userId) => handleNavigation("trader-profile", userId)} />;
@@ -146,7 +158,11 @@ const AppContent = () => {
       case "social":
         return <SocialPlatform />;
       case "crypto-dashboard":
-        return <NeonSenseCryptoDashboard />;
+        return (
+          <Suspense fallback={<CryptoSkeleton />}>
+            <LazyNeonSenseCryptoDashboard />
+          </Suspense>
+        );
       case "nlp":
         return <NLPSentimentDemo />;
       case "spacy-nlp":
@@ -188,7 +204,11 @@ const AppContent = () => {
       case "market-mood":
         return <MarketMoodPage />;
       case "news-feed":
-        return <Analytics />;
+        return (
+          <Suspense fallback={<DashboardSkeleton />}>
+            <LazyAnalytics />
+          </Suspense>
+        );
       case "smart-news-feed":
         return <SmartNewsFeedPage />;
       case "trader-profile":
@@ -230,17 +250,29 @@ const AppContent = () => {
       case "watchlist":
         return <Watchlist />;
       case "market":
-        return <Analytics />;
+        return (
+          <Suspense fallback={<DashboardSkeleton />}>
+            <LazyAnalytics />
+          </Suspense>
+        );
       case "screener":
         return <StockScreener />;
       case "crypto":
-        return <NeonSenseCryptoDashboard />;
+        return (
+          <Suspense fallback={<CryptoSkeleton />}>
+            <LazyNeonSenseCryptoDashboard />
+          </Suspense>
+        );
       case "earnings":
         return <EarningsCalendar />;
       case "charts":
         return <AdvancedChartsPro />;
       case "trading-chart":
-        return <AdvancedTradingChart />;
+        return (
+          <Suspense fallback={<ChartSkeleton />}>
+            <LazyAdvancedTradingChart />
+          </Suspense>
+        );
       case "trending":
         return <TrendingHub />;
       case "trade-journal":

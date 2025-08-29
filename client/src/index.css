@@ -1,5 +1,6 @@
 /* Import MoodMeter Theme Utilities */
 @import './components/MoodThemeUtilities.css';
+@import './styles/performance.css';
 
 @tailwind base;
 @tailwind components;
