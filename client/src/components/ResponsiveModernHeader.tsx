@@ -380,9 +380,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
         {mobileMenuOpen && (
           <div className={cn(
             "md:hidden backdrop-blur-xl animate-in slide-in-from-top duration-300",
-            isDayMode
-              ? "bg-white/95 border-t border-[#E0E3EB]/50"
-              : isLightMode
+            isLightMode
               ? "bg-white/95 border-t border-gray-200/50"
               : "bg-[#0A0A23]/95 border-t border-gray-800/50"
           )}>
