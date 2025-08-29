@@ -29,7 +29,6 @@ import { AIMoodBreakdownPanel } from './mood/AIMoodBreakdownPanel';
 import { SentimentAnalyticsDashboard } from './mood/SentimentAnalyticsDashboard';
 import { AISentimentEngine } from './mood/AISentimentEngine';
 import { PollWidget } from './PollWidget';
-import { AIAnalysisSection } from './AIAnalysisSection';
 
 interface MarketMoodPageProps {
   title?: string;
