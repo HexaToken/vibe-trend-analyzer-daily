@@ -381,7 +381,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
           <div className={cn(
             "md:hidden backdrop-blur-xl animate-in slide-in-from-top duration-300",
             isLightMode
-              ? "bg-white/95 border-t border-gray-200/50"
+              ? "bg-background/95 border-t border-border/50"
               : "bg-[#0A0A23]/95 border-t border-gray-800/50"
           )}>
             <div className="px-4 py-4 space-y-3 max-h-[70vh] overflow-y-auto">
