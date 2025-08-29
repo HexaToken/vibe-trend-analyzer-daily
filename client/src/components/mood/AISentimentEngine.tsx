@@ -104,19 +104,19 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
   };
 
   return (
-    <Card className={cn("bg-black/40 border-purple-500/20 backdrop-blur-xl", className)}>
-      <CardHeader className="border-b border-purple-500/20">
+    <Card className={cn("bg-card border-border backdrop-blur-xl shadow-lg", className)}>
+      <CardHeader className="border-b border-border">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-xl flex items-center justify-center animate-pulse">
-              <Brain className="w-6 h-6 text-purple-400" />
+            <div className="w-12 h-12 bg-gradient-to-r from-primary/20 to-primary/30 rounded-xl flex items-center justify-center animate-pulse">
+              <Brain className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <CardTitle className="text-white flex items-center gap-2">
-                <Zap className="w-5 h-5 text-cyan-400" />
+              <CardTitle className="text-card-foreground flex items-center gap-2">
+                <Zap className="w-5 h-5 text-primary" />
                 AI Sentiment Engine
               </CardTitle>
-              <p className="text-gray-400 text-sm">Real-time intelligence & mood analysis</p>
+              <p className="text-muted-foreground text-sm">Real-time intelligence & mood analysis</p>
             </div>
           </div>
           
@@ -127,7 +127,7 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
               size="sm"
               onClick={handleRefresh}
               disabled={isRefreshing}
-              className="hover:bg-purple-500/10"
+              className="hover:bg-muted"
             >
               <RefreshCw className={cn("w-4 h-4", isRefreshing && "animate-spin")} />
             </Button>
@@ -135,7 +135,7 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
               variant="ghost"
               size="sm"
               onClick={handleExport}
-              className="hover:bg-blue-500/10 text-blue-400"
+              className="hover:bg-muted text-primary"
             >
               <Download className="w-4 h-4" />
             </Button>
@@ -143,7 +143,7 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
               variant="ghost"
               size="sm"
               onClick={handleShare}
-              className="hover:bg-green-500/10 text-green-400"
+              className="hover:bg-muted text-primary"
             >
               <Share className="w-4 h-4" />
             </Button>
