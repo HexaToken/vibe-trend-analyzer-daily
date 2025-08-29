@@ -156,14 +156,14 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
           <TabsList className="mood-sentiment-tabs grid w-full grid-cols-2 bg-muted backdrop-blur-xl border border-border mb-6">
             <TabsTrigger
               value="mood"
-              className="text-muted-foreground data-[state=active]:bg-primary/20 data-[state=active]:text-primary hover:text-primary hover:bg-primary/10 flex items-center gap-2 transition-all duration-300"
+              className="flex items-center gap-2 transition-all duration-300"
             >
               <Brain className="w-4 h-4" />
               Today's Mood Breakdown
             </TabsTrigger>
             <TabsTrigger
               value="insight"
-              className="text-muted-foreground data-[state=active]:bg-primary/20 data-[state=active]:text-primary hover:text-primary hover:bg-primary/10 flex items-center gap-2 transition-all duration-300"
+              className="flex items-center gap-2 transition-all duration-300"
             >
               <BarChart3 className="w-4 h-4" />
               AI Market Insight
