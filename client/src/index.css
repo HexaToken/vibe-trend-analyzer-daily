@@ -34,12 +34,15 @@
 /* Import Complete Day Mode System - BEFORE TAILWIND */
 @import './styles/day-mode-complete.css';
 
+/* Import Button Overrides - BEFORE TAILWIND */
+@import './styles/button-overrides.css';
+
+/* Import Force White Text Utility */
+@import './styles/force-white-text.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Import Button Overrides - AFTER TAILWIND FOR MAXIMUM PRIORITY */
-@import './styles/button-overrides.css';
 
 
 

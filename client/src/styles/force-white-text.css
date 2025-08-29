@@ -1,0 +1,51 @@
+/* Force white text utility - Maximum CSS specificity */
+
+/* Use this class to force white text on any element */
+.force-white-text {
+  color: #FFFFFF !important;
+}
+
+.force-white-text span {
+  color: #FFFFFF !important;
+}
+
+.force-white-text svg {
+  color: #FFFFFF !important;
+  fill: currentColor !important;
+}
+
+.force-white-text * {
+  color: #FFFFFF !important;
+}
+
+/* Specific for buttons with this class */
+button.force-white-text {
+  color: #FFFFFF !important;
+}
+
+button.force-white-text span {
+  color: #FFFFFF !important;
+}
+
+button.force-white-text svg {
+  color: #FFFFFF !important;
+  fill: currentColor !important;
+}
+
+button.force-white-text * {
+  color: #FFFFFF !important;
+}
+
+/* Ultra-specific for active filter buttons */
+.day-mode-container button.active-filter-button.force-white-text {
+  background-color: #2962FF !important;
+  color: #FFFFFF !important;
+  border-color: #2962FF !important;
+}
+
+.day-mode-container button.active-filter-button.force-white-text span,
+.day-mode-container button.active-filter-button.force-white-text svg,
+.day-mode-container button.active-filter-button.force-white-text * {
+  color: #FFFFFF !important;
+  fill: currentColor !important;
+}
