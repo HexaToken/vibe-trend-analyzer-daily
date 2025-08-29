@@ -3,6 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import { ClickTestButton } from "@/components/ClickTestButton";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { MoodThemeProvider, useMoodTheme } from "@/contexts/MoodThemeContext";
@@ -311,6 +312,7 @@ const AppContent = () => {
           />
           <ApiStatusIndicator />
           <MoodGptWidget />
+          <ClickTestButton />
         </div>
       </TooltipProvider>
     </ErrorBoundary>
