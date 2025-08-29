@@ -163,7 +163,7 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
           
           {/* Left Column - Mood Score Hero */}
           <div className="lg:col-span-1">
-            <div className="sticky top-8 space-y-6">
+            <div className="space-y-6">
               <FinanceMoodGauge
                 title="Current Market Mood"
                 subtitle="Multi-source sentiment analysis"
