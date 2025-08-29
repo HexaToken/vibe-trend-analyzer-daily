@@ -1052,6 +1052,23 @@ All colors MUST be HSL.
     color: #666 !important;
   }
 
+  /* Theme-aware utility classes for light mode */
+  :root:not(.dark) .text-theme-primary {
+    color: #1E1E1E !important;
+  }
+
+  :root:not(.dark) .text-theme-secondary {
+    color: #4B5563 !important;
+  }
+
+  :root:not(.dark) .text-theme-muted {
+    color: #6B7280 !important;
+  }
+
+  :root:not(.dark) .text-theme-accent {
+    color: #3A7AFE !important;
+  }
+
   :root:not(.dark) .text-white {
     color: #1E1E1E !important;
   }
