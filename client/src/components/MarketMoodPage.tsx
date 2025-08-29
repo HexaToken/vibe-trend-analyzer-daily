@@ -103,7 +103,7 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
   return (
     <div className={`min-h-screen relative overflow-hidden ${
       themeMode === 'light'
-        ? 'bg-[#F5F7FA]'
+        ? 'bg-background'
         : 'bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900'
     }`}>
       {/* Ambient Background Effects - Only in Dark Mode */}
