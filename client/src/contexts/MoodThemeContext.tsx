@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { getIconFromEmoji, type IconConfig } from '../lib/iconUtils';
 import { LIGHT_THEME_COLORS, MOOD_COLORS, INTERACTIVE_COLORS, getMoodColor, getMoodTag, getMoodButton } from '../lib/moodColors';
 
-export type ThemeMode = 'light' | 'dark' | 'dynamic';
+export type ThemeMode = 'light' | 'dark' | 'dynamic' | 'day';
 
 export type MoodState = 'neutral' | 'bearish' | 'bullish' | 'extreme';
 
