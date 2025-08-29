@@ -52,7 +52,7 @@ export const Footer = ({ onNavigate, compact = false, className }: FooterProps) 
       "border-t",
       compact ? "mt-4" : "mt-20",
       themeMode === 'light'
-        ? "bg-gray-50 border-gray-200"
+        ? "bg-white border-gray-200"
         : "bg-black/40 border-purple-500/20 backdrop-blur-xl",
       className
     )}>
@@ -129,7 +129,7 @@ export const Footer = ({ onNavigate, compact = false, className }: FooterProps) 
               </div>
               <Badge variant="secondary" className={`text-xs ${
                 themeMode === 'light'
-                  ? 'bg-gray-100 text-gray-700 border border-gray-300'
+                  ? 'bg-gray-100 text-gray-700 border border-gray-300 shadow-sm'
                   : ''
               }`}>
                 v2.0
