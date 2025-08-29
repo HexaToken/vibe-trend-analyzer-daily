@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { Activity, TrendingUp, Calendar, BarChart3 } from "lucide-react";
+import { useMoodTheme } from "../../contexts/MoodThemeContext";
 
 interface MoodTrendChartProps {
   data: Array<{
@@ -21,6 +22,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
   timeframe,
   setTimeframe,
 }) => {
+  const { isDayMode } = useMoodTheme();
   const maxScore = Math.max(
     ...data.map((d) => Math.max(d.score, d.stocks, d.news, d.social)),
   );
@@ -53,13 +55,13 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
   const scoreDiff = currentScore - previousScore;
 
   return (
-    <Card className="overflow-hidden border-0 shadow-lg bg-white dark:bg-gradient-to-br dark:from-gray-800 dark:via-gray-800 dark:to-red-900/20">
-      <CardHeader className="bg-gradient-to-r from-blue-500 to-purple-600 text-white" style={{ background: 'linear-gradient(to right, #3A7AFE, #7B61FF)' }}>
+    <Card className={isDayMode ? "overflow-hidden border border-gray-200 shadow-sm bg-white" : "overflow-hidden border-0 shadow-lg bg-white dark:bg-gradient-to-br dark:from-gray-800 dark:via-gray-800 dark:to-red-900/20"}>
+      <CardHeader className={isDayMode ? "bg-gray-50 border-b border-gray-200 text-gray-900" : "bg-gradient-to-r from-blue-500 to-purple-600 text-white"} style={isDayMode ? {} : { background: 'linear-gradient(to right, #3A7AFE, #7B61FF)' }}>
         <CardTitle className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Activity className="w-6 h-6 text-white drop-shadow-md" />
-            <span className="text-white font-semibold drop-shadow-md">Mood Over Time</span>
-            <Badge variant="secondary" className="bg-white/20 text-white" style={{ textShadow: '0 1px 3px rgba(255, 255, 255, 1)' }}>
+            <Activity className={`w-6 h-6 ${isDayMode ? 'text-blue-600' : 'text-white drop-shadow-md'}`} />
+            <span className={`font-semibold ${isDayMode ? 'text-gray-900' : 'text-white drop-shadow-md'}`}>Mood Over Time</span>
+            <Badge variant="secondary" className={isDayMode ? "bg-blue-100 text-blue-700 border-blue-200" : "bg-white/20 text-white"} style={isDayMode ? {} : { textShadow: '0 1px 3px rgba(255, 255, 255, 1)' }}>
               Trending
             </Badge>
           </div>
@@ -71,9 +73,13 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
                 size="sm"
                 onClick={() => setTimeframe(period as "1D" | "7D" | "30D")}
                 className={
-                  timeframe === period
-                    ? "bg-white/20 text-white drop-shadow-md border-b-2 border-white"
-                    : "text-white drop-shadow-md hover:bg-white/10"
+                  isDayMode
+                    ? timeframe === period
+                      ? "bg-blue-100 text-blue-700 border-b-2 border-blue-600"
+                      : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                    : timeframe === period
+                      ? "bg-white/20 text-white drop-shadow-md border-b-2 border-white"
+                      : "text-white drop-shadow-md hover:bg-white/10"
                 }
               >
                 {period}
@@ -85,13 +91,13 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
       <CardContent className="p-6">
         {/* Current Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <div className="text-center p-3 rounded-lg bg-[#FAFAFA] dark:bg-gray-800 hover:bg-[#F3F4F6] transition-colors border border-[#E6E6E6] shadow-sm theme-card-background theme-hover theme-border">
+          <div className={`text-center p-3 rounded-lg transition-colors shadow-sm ${isDayMode ? 'bg-gray-50 hover:bg-white border border-gray-200' : 'bg-[#FAFAFA] dark:bg-gray-800 hover:bg-[#F3F4F6] border border-[#E6E6E6] theme-card-background theme-hover theme-border'}`}>
             <div
               className={`text-2xl font-bold tracking-tight ${getScoreColor(currentScore)}`}
             >
               {Math.round(currentScore)}
             </div>
-            <div className="text-sm text-[#374151] dark:text-gray-400 font-medium">
+            <div className={`text-sm font-medium ${isDayMode ? 'text-gray-600' : 'text-[#374151] dark:text-gray-400'}`}>
               Current
             </div>
             <div className="flex items-center justify-center mt-1">
@@ -109,11 +115,11 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
             </div>
           </div>
 
-          <div className="text-center p-3 rounded-lg bg-[#FAFAFA] dark:bg-blue-900/20 hover:bg-[#F3F4F6] transition-colors border border-[#E6E6E6] shadow-sm theme-card-background theme-hover theme-border">
+          <div className={`text-center p-3 rounded-lg transition-colors shadow-sm ${isDayMode ? 'bg-gray-50 hover:bg-white border border-gray-200' : 'bg-[#FAFAFA] dark:bg-blue-900/20 hover:bg-[#F3F4F6] border border-[#E6E6E6] theme-card-background theme-hover theme-border'}`}>
             <div className="text-2xl font-bold tracking-tight text-[#16A34A] dark:text-blue-400 sentiment-positive">
               {Math.round(data[data.length - 1]?.stocks || 50)}
             </div>
-            <div className="text-sm text-[#374151] dark:text-gray-400 font-medium">
+            <div className={`text-sm font-medium ${isDayMode ? 'text-gray-600' : 'text-[#374151] dark:text-gray-400'}`}>
               Stocks
             </div>
             <div className="w-full bg-[#E6E6E6] dark:bg-blue-800 rounded-full h-1 mt-2">
@@ -124,11 +130,11 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
             </div>
           </div>
 
-          <div className="text-center p-3 rounded-lg bg-[#FAFAFA] dark:bg-purple-900/20 hover:bg-[#F3F4F6] transition-colors border border-[#E6E6E6] shadow-sm theme-card-background theme-hover theme-border">
+          <div className={`text-center p-3 rounded-lg transition-colors shadow-sm ${isDayMode ? 'bg-gray-50 hover:bg-white border border-gray-200' : 'bg-[#FAFAFA] dark:bg-purple-900/20 hover:bg-[#F3F4F6] border border-[#E6E6E6] theme-card-background theme-hover theme-border'}`}>
             <div className="text-2xl font-bold tracking-tight text-[#7C3AED] dark:text-purple-400 sentiment-positive">
               {Math.round(data[data.length - 1]?.news || 50)}
             </div>
-            <div className="text-sm text-[#374151] dark:text-gray-400 font-medium">News</div>
+            <div className={`text-sm font-medium ${isDayMode ? 'text-gray-600' : 'text-[#374151] dark:text-gray-400'}`}>News</div>
             <div className="w-full bg-[#E6E6E6] dark:bg-purple-800 rounded-full h-1 mt-2">
               <div
                 className="bg-[#7C3AED] h-1 rounded-full transition-all duration-300 metric-news-progress"
@@ -137,11 +143,11 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
             </div>
           </div>
 
-          <div className="text-center p-3 rounded-lg bg-[#FAFAFA] dark:bg-indigo-900/20 hover:bg-[#F3F4F6] transition-colors border border-[#E6E6E6] shadow-sm theme-card-background theme-hover theme-border">
+          <div className={`text-center p-3 rounded-lg transition-colors shadow-sm ${isDayMode ? 'bg-gray-50 hover:bg-white border border-gray-200' : 'bg-[#FAFAFA] dark:bg-indigo-900/20 hover:bg-[#F3F4F6] border border-[#E6E6E6] theme-card-background theme-hover theme-border'}`}>
             <div className="text-2xl font-bold tracking-tight text-[#DC2626] dark:text-indigo-400 sentiment-negative">
               {Math.round(data[data.length - 1]?.social || 50)}
             </div>
-            <div className="text-sm text-[#374151] dark:text-gray-400 font-medium">
+            <div className={`text-sm font-medium ${isDayMode ? 'text-gray-600' : 'text-[#374151] dark:text-gray-400'}`}>
               Social
             </div>
             <div className="w-full bg-[#E6E6E6] dark:bg-indigo-800 rounded-full h-1 mt-2">
@@ -156,15 +162,15 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
         {/* Chart Area */}
         <div className="relative">
           <div className="mb-4 text-center">
-            <h3 className="text-lg font-semibold text-[#1A1A1A] dark:text-white mb-2 tracking-tight">
+            <h3 className={`text-lg font-semibold mb-2 tracking-tight ${isDayMode ? 'text-gray-900' : 'text-[#1A1A1A] dark:text-white'}`}>
               Sentiment Trend - Last {timeframe}
             </h3>
-            <p className="text-sm text-[#9CA3AF] dark:text-gray-400 font-medium">
+            <p className={`text-sm font-medium ${isDayMode ? 'text-gray-600' : 'text-[#9CA3AF] dark:text-gray-400'}`}>
               Multi-source sentiment analysis over time
             </p>
           </div>
 
-          <div className="relative h-64 bg-white dark:bg-gray-800 rounded-xl p-4 overflow-hidden border border-[#E6E6E6] dark:border-gray-600 theme-background theme-border">
+          <div className={`relative h-64 rounded-xl p-4 overflow-hidden ${isDayMode ? 'bg-white border border-gray-200' : 'bg-white dark:bg-gray-800 border border-[#E6E6E6] dark:border-gray-600 theme-background theme-border'}`}>
             {/* Grid Lines */}
             <div className="absolute inset-4">
               {[0, 25, 50, 75, 100].map((line) => (
@@ -173,7 +179,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
                   className="absolute w-full border-t border-[#E5E7EB] dark:border-gray-600 border-dashed chart-gridline"
                   style={{ top: `${100 - line}%` }}
                 >
-                  <span className="absolute -left-8 -top-2 text-xs font-medium text-[#4B5563] dark:text-gray-400 chart-axis-text">
+                  <span className={`absolute -left-8 -top-2 text-xs font-medium ${isDayMode ? 'text-gray-500' : 'text-[#4B5563] dark:text-gray-400'} chart-axis-text`}>
                     {Math.round(minScore + (line / 100) * range)}
                   </span>
                 </div>
@@ -279,7 +285,7 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
                   return (
                     <span
                       key={index}
-                      className="text-xs font-medium text-[#4B5563] dark:text-gray-400"
+                      className={`text-xs font-medium ${isDayMode ? 'text-gray-500' : 'text-[#4B5563] dark:text-gray-400'}`}
                     >
                       {point.date}
                     </span>
@@ -291,28 +297,28 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
           </div>
 
           {/* Legend */}
-          <div className="flex flex-wrap items-center justify-center gap-4 mt-4 p-3 bg-[#FAFAFA] dark:bg-gray-800 rounded-lg border border-[#E6E6E6] dark:border-gray-600 theme-card-background theme-border">
+          <div className={`flex flex-wrap items-center justify-center gap-4 mt-4 p-3 rounded-lg ${isDayMode ? 'bg-gray-50 border border-gray-200' : 'bg-[#FAFAFA] dark:bg-gray-800 border border-[#E6E6E6] dark:border-gray-600 theme-card-background theme-border'}`}>
             <div className="flex items-center space-x-2">
               <div className="w-3 h-0.5 bg-gradient-to-r from-green-500 to-red-500 rounded chart-line-overall" style={{backgroundColor: 'var(--color-overall-mood)'}}></div>
-              <span className="text-sm text-[#374151] dark:text-gray-400 font-medium">
+              <span className={`text-sm font-medium ${isDayMode ? 'text-gray-600' : 'text-[#374151] dark:text-gray-400'}`}>
                 Overall Mood
               </span>
             </div>
             <div className="flex items-center space-x-2">
               <div className="w-3 h-0.5 bg-blue-500 rounded opacity-70 chart-line-stocks" style={{backgroundColor: 'var(--color-stocks)'}}></div>
-              <span className="text-sm text-[#374151] dark:text-gray-400 font-medium">
+              <span className={`text-sm font-medium ${isDayMode ? 'text-gray-600' : 'text-[#374151] dark:text-gray-400'}`}>
                 Stocks
               </span>
             </div>
             <div className="flex items-center space-x-2">
               <div className="w-3 h-0.5 bg-purple-500 rounded opacity-70 chart-line-news" style={{backgroundColor: 'var(--color-news)'}}></div>
-              <span className="text-sm text-[#374151] dark:text-gray-400 font-medium">
+              <span className={`text-sm font-medium ${isDayMode ? 'text-gray-600' : 'text-[#374151] dark:text-gray-400'}`}>
                 News
               </span>
             </div>
             <div className="flex items-center space-x-2">
               <div className="w-3 h-0.5 bg-indigo-500 rounded opacity-70 chart-line-social" style={{backgroundColor: 'var(--color-social)'}}></div>
-              <span className="text-sm text-[#374151] dark:text-gray-400 font-medium">
+              <span className={`text-sm font-medium ${isDayMode ? 'text-gray-600' : 'text-[#374151] dark:text-gray-400'}`}>
                 Social
               </span>
             </div>
@@ -320,14 +326,14 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
         </div>
 
         {/* Insights */}
-        <div className="mt-6 p-4 bg-[#F9FAFB] dark:bg-gradient-to-r dark:from-[#3A7AFE] dark:to-[#7B61FF] dark:text-white rounded-lg border border-[#E6E6E6] border-l-4 border-l-[#3A7AFE] dark:border-green-700 shadow-sm theme-card-background theme-border">
+        <div className={`mt-6 p-4 rounded-lg shadow-sm ${isDayMode ? 'bg-blue-50 border border-blue-200 border-l-4 border-l-blue-600' : 'bg-[#F9FAFB] dark:bg-gradient-to-r dark:from-[#3A7AFE] dark:to-[#7B61FF] dark:text-white border border-[#E6E6E6] border-l-4 border-l-[#3A7AFE] dark:border-green-700 theme-card-background theme-border'}`}>
           <div className="flex items-center space-x-2 mb-2">
-            <BarChart3 className="w-4 h-4 text-blue-500 dark:text-white drop-shadow-md" />
-            <span className="font-medium text-[#1A1A1A] dark:text-[#F4F4F6] dark:drop-shadow-md">
+            <BarChart3 className={`w-4 h-4 ${isDayMode ? 'text-blue-600' : 'text-blue-500 dark:text-white drop-shadow-md'}`} />
+            <span className={`font-medium ${isDayMode ? 'text-gray-900' : 'text-[#1A1A1A] dark:text-[#F4F4F6] dark:drop-shadow-md'}`}>
               Trend Analysis
             </span>
           </div>
-          <p className="text-sm text-[#374151] dark:text-[#F4F4F6] dark:drop-shadow-md font-medium">
+          <p className={`text-sm font-medium ${isDayMode ? 'text-gray-700' : 'text-[#374151] dark:text-[#F4F4F6] dark:drop-shadow-md'}`}>
             {scoreDiff > 5
               ? "Strong positive momentum detected. Market sentiment is improving across multiple sources."
               : scoreDiff < -5
