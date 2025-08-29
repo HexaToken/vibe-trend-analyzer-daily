@@ -1463,27 +1463,41 @@ All colors MUST be HSL.
     --muted: 220 9% 98% !important; /* #F9FAFB */
     --card: 0 0% 100% !important; /* White */
     --card-foreground: 214 16% 16% !important; /* #2A2E39 */
-  }
-
-  /* Ultra-high specificity Day Mode override - Maximum possible CSS specificity */
-  html body div.day-mode-container,
-  html body div.day-mode-container *:not(.bg-green-600):not(.bg-red-500):not(.bg-blue-600):not(.bg-yellow-600):not(.bg-gray-600):not(.bg-indigo-600),
-  html body div.day-mode-container span,
-  html body div.day-mode-container p,
-  html body div.day-mode-container h1,
-  html body div.day-mode-container h2,
-  html body div.day-mode-container h3,
-  html body div.day-mode-container div,
-  html body div.day-mode-container button,
-  html body div.day-mode-container a {
+    background-color: #FFFFFF !important;
     color: #2A2E39 !important;
   }
 
-  /* Force background to white in Day Mode */
-  html body div.day-mode-container {
+  /* Nuclear option - Force Day Mode styling with maximum specificity */
+  html body div.day-mode-container,
+  html body div.day-mode-container > div,
+  html body div.day-mode-container .container {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    background-image: none !important;
+    color: #2A2E39 !important;
+  }
+
+  /* Override all text elements in Day Mode with absolute specificity */
+  html body div.day-mode-container *:not(.bg-green-600):not(.bg-green-600 *):not(.bg-red-500):not(.bg-red-500 *):not(.bg-blue-600):not(.bg-blue-600 *):not(.bg-yellow-600):not(.bg-yellow-600 *):not(.bg-gray-600):not(.bg-gray-600 *):not(.bg-indigo-600):not(.bg-indigo-600 *) {
+    color: #2A2E39 !important;
+  }
+
+  /* Force every possible element to white background in Day Mode */
+  html body div.day-mode-container,
+  html body div.day-mode-container *,
+  html body div.day-mode-container div,
+  html body div.day-mode-container section,
+  html body div.day-mode-container main {
     background-color: #FFFFFF !important;
     background-image: none !important;
     background: #FFFFFF !important;
+  }
+
+  /* Ensure cards and content areas are white */
+  html body div.day-mode-container .card,
+  html body div.day-mode-container [data-testid*="card"],
+  html body div.day-mode-container .bg-card {
+    background-color: #FFFFFF !important;
   }
 
   /* Override any remaining dark styling in Day Mode */
