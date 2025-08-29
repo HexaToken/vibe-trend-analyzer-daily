@@ -258,7 +258,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                   className={cn(
                     "w-56 backdrop-blur-xl rounded-xl z-[100] shadow-xl",
                     isLightMode
-                      ? "!bg-white !border-gray-200 !text-gray-900"
+                      ? "!bg-background !border-border !text-foreground"
                       : "!bg-[#0A0A23]/95 !border-gray-700 !text-white"
                   )}
                   sideOffset={5}
