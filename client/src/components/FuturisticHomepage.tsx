@@ -2686,7 +2686,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
           {/* Theme-adaptive overlay container */}
           <div className={`absolute inset-0 rounded-3xl -mx-6 -my-6 backdrop-blur-sm ${
             themeMode === 'light'
-              ? 'bg-gradient-to-br from-blue-50/95 to-purple-50/95 border border-blue-100/50'
+              ? 'bg-gradient-to-br from-blue-50/95 to-purple-50/95'
               : 'bg-gradient-to-br from-slate-900/95 to-purple-900/95'
           }`} />
 
