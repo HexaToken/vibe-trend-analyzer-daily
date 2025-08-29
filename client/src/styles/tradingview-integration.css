@@ -352,6 +352,47 @@
   background: linear-gradient(to right, var(--tv-accent-blue), var(--tv-accent-blue-hover)) !important;
 }
 
+/* ===== LIGHT MODE BUTTON CONTRAST FIXES ===== */
+
+/* Fix active button contrast in regular light mode (not day mode) */
+:root:not(.dark):not(.tradingview-day) .text-primary-foreground.bg-primary {
+  background-color: #3A7AFE !important;
+  color: #FFFFFF !important;
+  border: 1px solid #3A7AFE !important;
+}
+
+:root:not(.dark):not(.tradingview-day) .text-primary-foreground.bg-primary:hover {
+  background-color: #2962FF !important;
+  color: #FFFFFF !important;
+  border: 1px solid #2962FF !important;
+}
+
+/* Fix aria-current page buttons in light mode */
+:root:not(.dark):not(.tradingview-day) button[aria-current="page"] {
+  background-color: #3A7AFE !important;
+  color: #FFFFFF !important;
+  border: 1px solid #3A7AFE !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark):not(.tradingview-day) button[aria-current="page"]:hover {
+  background-color: #2962FF !important;
+  color: #FFFFFF !important;
+  border: 1px solid #2962FF !important;
+}
+
+/* Ensure focus states are visible in light mode */
+:root:not(.dark):not(.tradingview-day) button[aria-current="page"]:focus-visible {
+  outline: 2px solid #3A7AFE !important;
+  outline-offset: 2px !important;
+}
+
+/* Fix hover states for inactive buttons in light mode */
+:root:not(.dark):not(.tradingview-day) nav button:not([aria-current="page"]):hover {
+  color: #3A7AFE !important;
+  background-color: rgba(58, 122, 254, 0.1) !important;
+}
+
 /* ===== PRESERVE DARK MODE ELEMENTS ===== */
 
 /* Preserve elements that should stay dark */
