@@ -268,9 +268,9 @@ export const MoodThemeProvider: React.FC<MoodThemeProviderProps> = ({ children }
   const moodState = moodScore ? getMoodStateFromScore(moodScore.overall) : 'neutral';
   const isDynamicMode = themeMode === 'dynamic';
 
-  // Determine effective theme (dark/light) for dynamic mode
+  // Determine effective theme (dark/light/day) for dynamic mode
   const effectiveTheme = isDynamicMode ? 'dark' : themeMode;
-  const currentTheme = MOOD_THEMES[effectiveTheme][moodState];
+  const currentTheme = MOOD_THEMES[effectiveTheme]?.[moodState] || MOOD_THEMES.light[moodState];
 
   // Save theme preference
   useEffect(() => {
