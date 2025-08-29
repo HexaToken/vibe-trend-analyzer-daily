@@ -154,6 +154,29 @@
   color: #2962FF !important;
 }
 
+/* Button text contrast fixes */
+[data-theme="light"] button:not(.bg-primary):not([class*="bg-primary"]):not(.bg-accent):not([class*="bg-accent"]),
+[data-theme="light"] [role="button"]:not(.bg-primary):not([class*="bg-primary"]):not(.bg-accent):not([class*="bg-accent"]) {
+  color: #2A2E39 !important;
+}
+
+[data-theme="light"] button:hover:not(.bg-primary):not([class*="bg-primary"]):not(.bg-accent):not([class*="bg-accent"]),
+[data-theme="light"] [role="button"]:hover:not(.bg-primary):not([class*="bg-primary"]):not(.bg-accent):not([class*="bg-accent"]) {
+  color: #2962FF !important;
+}
+
+/* Ghost button fixes */
+[data-theme="light"] .variant-ghost,
+[data-theme="light"] [class*="variant-ghost"] {
+  color: #4B5563 !important;
+}
+
+[data-theme="light"] .variant-ghost:hover,
+[data-theme="light"] [class*="variant-ghost"]:hover {
+  color: #2962FF !important;
+  background-color: rgba(41, 98, 255, 0.1) !important;
+}
+
 /* Focus rings */
 [data-theme="light"] .focus\:ring,
 [data-theme="light"] .focus\:ring-2 {
