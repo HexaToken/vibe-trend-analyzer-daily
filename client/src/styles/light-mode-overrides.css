@@ -453,19 +453,19 @@
 /* MarketMoodControls data source badges */
 [data-theme="light"] .data-source-stocks {
   background: #DCFCE7 !important;
-  color: #22C55E !important;
-  border-color: #22C55E !important;
+  color: #059669 !important;
+  border-color: #059669 !important;
 }
 
 [data-theme="light"] .data-source-news {
   background: #DBEAFE !important;
-  color: #3B82F6 !important;
-  border-color: #3B82F6 !important;
+  color: #2563EB !important;
+  border-color: #2563EB !important;
 }
 
 [data-theme="light"] .data-source-social {
   background: rgba(139, 92, 246, 0.1) !important;
-  color: #6B21A8 !important;
+  color: #7C3AED !important;
   border-color: rgba(139, 92, 246, 0.2) !important;
 }
 
@@ -479,6 +479,43 @@
   background: #FFFFFF !important;
   border: 1px solid #E0E3EB !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Chat and communication components */
+[data-theme="light"] .text-gray-400.text-xs,
+[data-theme="light"] .text-gray-400.text-sm {
+  color: #6B7280 !important;
+}
+
+/* Search input placeholders */
+[data-theme="light"] .absolute.left-3.text-gray-400,
+[data-theme="light"] .absolute.left-3.text-muted-foreground {
+  color: #9CA3AF !important;
+}
+
+/* Badge and status indicators */
+[data-theme="light"] .bg-gray-500\/20,
+[data-theme="light"] .text-gray-400.border-gray-500\/30 {
+  background-color: #F3F4F6 !important;
+  color: #6B7280 !important;
+  border-color: #D1D5DB !important;
+}
+
+/* Profile and metadata text */
+[data-theme="light"] .text-muted-foreground.text-sm,
+[data-theme="light"] .text-muted-foreground.text-xs {
+  color: #6B7280 !important;
+}
+
+/* Action buttons and controls */
+[data-theme="light"] .hover\:text-white:hover:not(.bg-primary):not([class*="bg-primary"]) {
+  color: #2962FF !important;
+}
+
+/* Time stamps and auxiliary info */
+[data-theme="light"] .text-xs.text-gray-400,
+[data-theme="light"] .text-xs.text-muted-foreground {
+  color: #9CA3AF !important;
 }
 
 /* Trading chart specific styling */
