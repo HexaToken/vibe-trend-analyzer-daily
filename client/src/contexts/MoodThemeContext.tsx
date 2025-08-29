@@ -231,6 +231,13 @@ export const MoodThemeProvider: React.FC<MoodThemeProviderProps> = ({ children }
   useEffect(() => {
     const root = document.documentElement;
     
+    // Apply data-theme attribute for proper theme detection
+    if (isDayMode) {
+      root.setAttribute('data-theme', 'day');
+    } else {
+      root.setAttribute('data-theme', 'dark');
+    }
+    
     // Apply dark class based on effective theme
     if (effectiveTheme === 'dark') {
       root.classList.add('dark');
