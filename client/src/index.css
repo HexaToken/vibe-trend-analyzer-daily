@@ -1069,6 +1069,49 @@ All colors MUST be HSL.
     color: #3A7AFE !important;
   }
 
+  /* Fix MarketMoodControls source colors in light mode */
+  :root:not(.dark) .bg-emerald-500\/20 {
+    background-color: rgba(16, 185, 129, 0.1) !important;
+    color: #065F46 !important;
+    border-color: rgba(16, 185, 129, 0.2) !important;
+  }
+
+  :root:not(.dark) .text-emerald-400 {
+    color: #065F46 !important;
+  }
+
+  :root:not(.dark) .border-emerald-500\/30 {
+    border-color: rgba(16, 185, 129, 0.2) !important;
+  }
+
+  :root:not(.dark) .bg-blue-500\/20 {
+    background-color: rgba(59, 130, 246, 0.1) !important;
+    color: #1E40AF !important;
+    border-color: rgba(59, 130, 246, 0.2) !important;
+  }
+
+  :root:not(.dark) .text-blue-400 {
+    color: #1E40AF !important;
+  }
+
+  :root:not(.dark) .border-blue-500\/30 {
+    border-color: rgba(59, 130, 246, 0.2) !important;
+  }
+
+  :root:not(.dark) .bg-purple-500\/20 {
+    background-color: rgba(139, 92, 246, 0.1) !important;
+    color: #6B21A8 !important;
+    border-color: rgba(139, 92, 246, 0.2) !important;
+  }
+
+  :root:not(.dark) .text-purple-400 {
+    color: #6B21A8 !important;
+  }
+
+  :root:not(.dark) .border-purple-500\/30 {
+    border-color: rgba(139, 92, 246, 0.2) !important;
+  }
+
   :root:not(.dark) .text-white {
     color: #1E1E1E !important;
   }
