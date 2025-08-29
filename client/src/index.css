@@ -35,6 +35,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './styles/day-mode-force.css';
+
 /* Ticker bar auto-scroll animation */
 @keyframes scroll-ticker {
   0% {

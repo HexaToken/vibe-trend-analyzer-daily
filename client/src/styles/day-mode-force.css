@@ -1,0 +1,115 @@
+/* Day Mode Force Override Styles */
+.day-mode {
+  background-color: #FFFFFF !important;
+  border-color: #E0E3EB !important;
+}
+
+.day-mode h1, .day-mode h2, .day-mode h3, .day-mode h4, .day-mode h5, .day-mode h6 {
+  color: #2A2E39 !important;
+}
+
+.day-mode p, .day-mode span, .day-mode div {
+  color: #4B5563 !important;
+}
+
+.day-mode .text-sm {
+  color: #4B5563 !important;
+  font-weight: 500 !important;
+}
+
+.day-mode .text-xs {
+  color: #4B5563 !important;
+  font-weight: 500 !important;
+}
+
+.day-mode .text-lg {
+  color: #2A2E39 !important;
+  font-weight: 600 !important;
+}
+
+.day-mode .font-bold, .day-mode .font-semibold {
+  color: #2A2E39 !important;
+}
+
+.day-mode .border {
+  border-color: #E0E3EB !important;
+}
+
+.day-mode .border-t {
+  border-top-color: #E0E3EB !important;
+}
+
+.day-mode .bg-gray-50 {
+  background-color: #F9FAFB !important;
+}
+
+.day-mode .bg-blue-50 {
+  background-color: #EBF8FF !important;
+}
+
+.day-mode .text-blue-600 {
+  color: #2962FF !important;
+}
+
+/* Card specific overrides */
+.day-mode .card-content h3 {
+  color: #2A2E39 !important;
+  font-weight: 600 !important;
+}
+
+.day-mode .card-content p {
+  color: #4B5563 !important;
+  font-weight: 500 !important;
+}
+
+.day-mode .card-content span {
+  color: #4B5563 !important;
+}
+
+/* Highlight cards specific */
+.day-mode .highlight-card {
+  background-color: #FFFFFF !important;
+  border: 1px solid #E0E3EB !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
+}
+
+.day-mode .highlight-card:hover {
+  border-color: #2962FF !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* News article cards */
+.day-mode .news-card {
+  background-color: #FFFFFF !important;
+  border: 1px solid #E0E3EB !important;
+}
+
+.day-mode .news-card:hover {
+  background-color: #F9FAFB !important;
+  border-color: #2962FF !important;
+}
+
+/* Force icon colors */
+.day-mode svg {
+  color: #2962FF !important;
+}
+
+.day-mode .text-gray-600 svg {
+  color: #4B5563 !important;
+}
+
+/* Button overrides */
+.day-mode .btn-primary {
+  background-color: #2962FF !important;
+  border-color: #2962FF !important;
+  color: #FFFFFF !important;
+}
+
+.day-mode .btn-ghost {
+  color: #4B5563 !important;
+}
+
+.day-mode .btn-ghost:hover {
+  background-color: #F9FAFB !important;
+  color: #2A2E39 !important;
+}

@@ -480,30 +480,34 @@ const SmartNewsFeedPage: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 py-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           {aiHighlights.map((highlight) => (
-            <Card key={highlight.id} className={`transition-all duration-300 ${
+            <Card key={highlight.id} className={`transition-all duration-300 highlight-card ${
               themeMode === 'light'
                 ? 'bg-[#FFFFFF] border border-[#E0E3EB] hover:border-[#2962FF] hover:shadow-md shadow-sm day-mode'
                 : 'bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border-white/20 hover:border-white/30 hover:shadow-lg hover:shadow-white/10'
-            }`}>
-              <CardContent className="p-4">
+            }`} style={themeMode === 'light' ? { 
+              backgroundColor: '#FFFFFF !important', 
+              borderColor: '#E0E3EB !important',
+              boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important'
+            } : {}}>
+              <CardContent className={`p-4 card-content ${themeMode === 'light' ? 'day-mode' : ''}`}>
                 <div className="flex items-center gap-3">
                   <div className={`flex-shrink-0 ${
                     themeMode === 'light' ? 'text-blue-600' : 'text-white/80'
-                  }`} style={themeMode === 'light' ? { color: '#2962FF' } : {}}>
+                  }`} style={themeMode === 'light' ? { color: '#2962FF !important' } : {}}>
                     {highlight.icon}
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className={`text-sm font-semibold mb-1 ${
                       themeMode === 'light' ? 'text-gray-900' : 'text-white/90'
-                    }`} style={themeMode === 'light' ? { color: '#2A2E39', fontWeight: '600' } : {}}>{highlight.title}</h3>
+                    }`} style={themeMode === 'light' ? { color: '#2A2E39 !important', fontWeight: '600 !important' } : {}}>{highlight.title}</h3>
                     <p className={`text-xs truncate ${
                       themeMode === 'light' ? 'text-gray-600' : 'text-white/70'
-                    }`} style={themeMode === 'light' ? { color: '#4B5563', fontWeight: '500' } : {}}>{highlight.content}</p>
+                    }`} style={themeMode === 'light' ? { color: '#4B5563 !important', fontWeight: '500 !important' } : {}}>{highlight.content}</p>
                     {highlight.value && (
                       <div className="flex items-center gap-2 mt-1">
                         <span className={`text-lg font-bold ${
                           themeMode === 'light' ? 'text-gray-900' : 'text-white'
-                        }`} style={themeMode === 'light' ? { color: '#2A2E39', fontWeight: '700' } : {}}>{highlight.value}</span>
+                        }`} style={themeMode === 'light' ? { color: '#2A2E39 !important', fontWeight: '700 !important' } : {}}>{highlight.value}</span>
                         {highlight.change && (
                           <span className={cn(
                             "text-xs flex items-center gap-1",
@@ -559,14 +563,18 @@ const SmartNewsFeedPage: React.FC = () => {
               <Card 
                 key={article.id} 
                 className={cn(
-                  "transition-all duration-300 cursor-pointer group",
+                  "transition-all duration-300 cursor-pointer group news-card",
                   themeMode === 'light'
-                    ? "bg-[#FFFFFF] border border-[#E0E3EB] hover:bg-[#F9FAFB] hover:border-[#2962FF] shadow-sm hover:shadow-md"
+                    ? "bg-[#FFFFFF] border border-[#E0E3EB] hover:bg-[#F9FAFB] hover:border-[#2962FF] shadow-sm hover:shadow-md day-mode"
                     : "bg-black/20 backdrop-blur-sm border-white/10 hover:bg-black/30",
                   getSentimentGlow(article.sentiment)
                 )}
+                style={themeMode === 'light' ? { 
+                  backgroundColor: '#FFFFFF !important', 
+                  borderColor: '#E0E3EB !important'
+                } : {}}
               >
-                <CardContent className="p-6">
+                <CardContent className={`p-6 card-content ${themeMode === 'light' ? 'day-mode' : ''}`}>
                   {/* Header */}
                   <div className="flex items-center gap-2 mb-4">
                     <span className={`text-sm font-medium ${
