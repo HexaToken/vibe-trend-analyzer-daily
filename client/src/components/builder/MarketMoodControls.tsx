@@ -159,7 +159,7 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
               <label className="text-sm font-medium text-theme-primary flex items-center gap-2">
                 <Filter className="w-4 h-4 text-primary" />
                 Data Sources
-                <span className="text-xs text-slate-400 ml-auto">��️ Pre-selected for transparency</span>
+                <span className="text-xs text-theme-muted ml-auto">🔒️ Pre-selected for transparency</span>
               </label>
               <div className="grid grid-cols-3 gap-3">
                 {sources.map((source) => {
