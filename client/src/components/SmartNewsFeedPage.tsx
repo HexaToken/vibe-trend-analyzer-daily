@@ -235,13 +235,24 @@ const SmartNewsFeedPage: React.FC = () => {
   };
 
   const getSentimentColor = (sentiment: string) => {
-    switch (sentiment) {
-      case 'positive':
-        return 'bg-green-500/20 text-green-400 border-green-500/30 shadow-green-500/20';
-      case 'negative':
-        return 'bg-red-500/20 text-red-400 border-red-500/30 shadow-red-500/20';
-      default:
-        return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30 shadow-yellow-500/20';
+    if (themeMode === 'light') {
+      switch (sentiment) {
+        case 'positive':
+          return 'bg-green-50 text-green-700 border-green-300 shadow-sm';
+        case 'negative':
+          return 'bg-red-50 text-red-700 border-red-300 shadow-sm';
+        default:
+          return 'bg-yellow-50 text-yellow-700 border-yellow-300 shadow-sm';
+      }
+    } else {
+      switch (sentiment) {
+        case 'positive':
+          return 'bg-green-500/20 text-green-400 border-green-500/30 shadow-green-500/20';
+        case 'negative':
+          return 'bg-red-500/20 text-red-400 border-red-500/30 shadow-red-500/20';
+        default:
+          return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30 shadow-yellow-500/20';
+      }
     }
   };
 
@@ -471,28 +482,28 @@ const SmartNewsFeedPage: React.FC = () => {
           {aiHighlights.map((highlight) => (
             <Card key={highlight.id} className={`transition-all duration-300 ${
               themeMode === 'light'
-                ? 'bg-white border border-gray-200 hover:border-blue-300 hover:shadow-md shadow-sm'
+                ? 'bg-white border border-gray-200 hover:border-blue-300 hover:shadow-md shadow-sm day-mode'
                 : 'bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border-white/20 hover:border-white/30 hover:shadow-lg hover:shadow-white/10'
             }`}>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
                   <div className={`flex-shrink-0 ${
                     themeMode === 'light' ? 'text-blue-600' : 'text-white/80'
-                  }`}>
+                  }`} style={themeMode === 'light' ? { color: '#2962FF !important' } : {}}>
                     {highlight.icon}
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className={`text-sm font-medium mb-1 ${
                       themeMode === 'light' ? 'text-gray-900' : 'text-white/90'
-                    }`}>{highlight.title}</h3>
+                    }`} style={themeMode === 'light' ? { color: '#111827 !important', fontWeight: '600 !important' } : {}}>{highlight.title}</h3>
                     <p className={`text-xs truncate ${
                       themeMode === 'light' ? 'text-gray-600' : 'text-white/70'
-                    }`}>{highlight.content}</p>
+                    }`} style={themeMode === 'light' ? { color: '#4B5563 !important', fontWeight: '500 !important' } : {}}>{highlight.content}</p>
                     {highlight.value && (
                       <div className="flex items-center gap-2 mt-1">
                         <span className={`text-lg font-bold ${
                           themeMode === 'light' ? 'text-gray-900' : 'text-white'
-                        }`}>{highlight.value}</span>
+                        }`} style={themeMode === 'light' ? { color: '#111827 !important', fontWeight: '700 !important' } : {}}>{highlight.value}</span>
                         {highlight.change && (
                           <span className={cn(
                             "text-xs flex items-center gap-1",
