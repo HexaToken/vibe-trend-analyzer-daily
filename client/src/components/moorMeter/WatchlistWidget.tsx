@@ -142,7 +142,7 @@ export const WatchlistWidget: React.FC = () => {
 
   return (
     <Card className="overflow-hidden border-0 shadow-lg bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-800 dark:via-gray-800 dark:to-indigo-900/20">
-      <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white dark:from-blue-600 dark:to-indigo-600 light:from-[#3F51B5] light:to-[#2196F3] light:text-white">
+      <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white dark:from-blue-600 dark:to-indigo-600">
         <CardTitle className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Star className="w-5 h-5" />

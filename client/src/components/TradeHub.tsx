@@ -138,7 +138,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
           <div className="flex flex-wrap justify-center gap-4 mt-6">
             <Badge className={`text-sm transition-colors font-semibold px-4 py-2 ${
               isDayMode 
-                ? 'theme-card-background text-[#2A2E39] theme-border theme-hover' 
+                ? 'bg-card text-card-foreground border-border hover:bg-muted' 
                 : 'bg-[#E0F2F1] text-[#004D40] border-[#004D40]/20 hover:bg-[#B2DFDB]'
             }`}>
               <Star className="h-3 w-3 mr-1" />
@@ -146,7 +146,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
             </Badge>
             <Badge className={`text-sm transition-colors font-semibold px-4 py-2 ${
               isDayMode 
-                ? 'theme-card-background text-[#2A2E39] theme-border theme-hover' 
+                ? 'bg-card text-card-foreground border-border hover:bg-muted' 
                 : 'bg-[#E3F2FD] text-[#0D47A1] border-[#0D47A1]/20 hover:bg-[#BBDEFB]'
             }`}>
               <Trophy className="h-3 w-3 mr-1" />
@@ -154,7 +154,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
             </Badge>
             <Badge className={`text-sm transition-colors font-semibold px-4 py-2 ${
               isDayMode 
-                ? 'theme-card-background text-[#2A2E39] theme-border theme-hover' 
+                ? 'bg-card text-card-foreground border-border hover:bg-muted' 
                 : 'bg-[#EDE7F6] text-[#4527A0] border-[#4527A0]/20 hover:bg-[#D1C4E9]'
             }`}>
               <Users className="h-3 w-3 mr-1" />

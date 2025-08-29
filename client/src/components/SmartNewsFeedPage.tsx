@@ -665,7 +665,7 @@ const SmartNewsFeedPage: React.FC = () => {
                           themeMode === 'light'
                             ? 'bg-blue-50 border-blue-200'
                             : 'bg-blue-500/10 border-blue-500/20'
-                        }`} style={themeMode === 'light' ? { backgroundColor: '#EBF8FF', borderColor: '#BFDBFE' } : {}}>
+                        }`}>
                           <div className="flex items-center gap-2 mb-2">
                             <Sparkles className={`w-4 h-4 ${
                               themeMode === 'light' ? 'text-blue-600' : 'text-blue-400'
@@ -693,7 +693,7 @@ const SmartNewsFeedPage: React.FC = () => {
                             {article.topComments.slice(0, 3).map((comment) => (
                               <div key={comment.id} className={`flex items-start gap-3 p-3 rounded-lg ${
                                 themeMode === 'light' ? 'bg-gray-50' : 'bg-white/5'
-                              }`} style={themeMode === 'light' ? { backgroundColor: '#F9FAFB' } : {}}>
+                              }`}>
                                 <Avatar className="w-6 h-6">
                                   <AvatarImage src={comment.user.avatar} />
                                   <AvatarFallback>{comment.user.username[0]}</AvatarFallback>
@@ -735,12 +735,12 @@ const SmartNewsFeedPage: React.FC = () => {
                             themeMode === 'light'
                               ? 'bg-gradient-to-r from-blue-50 to-cyan-50 border-blue-200'
                               : 'bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border-blue-500/20'
-                          }`} style={themeMode === 'light' ? { background: 'linear-gradient(to right, #EBF8FF, #E0F7FA)', borderColor: '#BFDBFE' } : {}}>
+                          }`}>
                             <div className="flex items-center justify-between">
                               <span className={`text-sm ${
                                 themeMode === 'light' ? 'text-gray-700' : 'text-white/80'
                               }`} style={themeMode === 'light' ? { color: '#4B5563', fontWeight: '500' } : {}}>What's your take on this news?</span>
-                              <Button size="sm" style={{ backgroundColor: '#2962FF', borderColor: '#2962FF', color: '#FFFFFF' }}>
+                              <Button size="sm" className="bg-[#2962FF] border-[#2962FF] text-white">
                                 Post Your Take
                               </Button>
                             </div>

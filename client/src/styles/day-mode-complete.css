@@ -1,6 +1,7 @@
 /* Complete Day Mode Override System - TradingView Light Theme */
 /* This file provides comprehensive Day Mode styling without affecting dark mode */
 
+@layer utilities {
 /* Override CSS Variables for shadcn components in Day Mode */
 .day-mode-container {
   /* Background and text CSS variables override */
@@ -413,3 +414,5 @@ html body .day-mode-container {
   color: #FFFFFF !important;
   fill: currentColor !important;
 }
+
+} /* End @layer utilities */

@@ -31,13 +31,13 @@
 /* Import MoodMeter Theme Utilities */
 @import './components/MoodThemeUtilities.css';
 
-/* Import Complete Day Mode System - BEFORE TAILWIND */
+/* Import Complete Day Mode System - BEFORE TAILWIND WITH LAYER */
 @import './styles/day-mode-complete.css';
 
-/* Import Button Overrides - BEFORE TAILWIND */
+/* Import Button Overrides - BEFORE TAILWIND WITH LAYER */
 @import './styles/button-overrides.css';
 
-/* Import Force White Text Utility */
+/* Import Force White Text Utility - BEFORE TAILWIND WITH LAYER */
 @import './styles/force-white-text.css';
 
 @tailwind base;
