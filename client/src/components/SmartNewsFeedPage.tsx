@@ -550,7 +550,11 @@ const SmartNewsFeedPage: React.FC = () => {
                     : "text-white/80 hover:bg-white/10 hover:text-white"
               )}
               style={themeMode === 'light' && activeFilter === option.label ? 
-                { backgroundColor: '#2962FF', color: '#FFFFFF', borderColor: '#2962FF' } : {}
+                { 
+                  backgroundColor: '#2962FF !important', 
+                  color: '#FFFFFF !important', 
+                  borderColor: '#2962FF !important' 
+                } : {}
               }
             >
               {option.icon}
