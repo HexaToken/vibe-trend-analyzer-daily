@@ -5,6 +5,27 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Fix click issues - ensure proper pointer events */
+* {
+  pointer-events: auto !important;
+}
+
+.beacon-highlighter,
+.beacon-selected-highlighter,
+.beacon-hover-highlighter,
+.beacon-sibling-highlighter,
+.beacon-label,
+.beacon-hover-label,
+.beacon-selected-label {
+  pointer-events: none !important;
+}
+
+/* Ensure clickable elements are properly interactive */
+button, a, input, select, textarea, [role="button"], [role="menuitem"], [role="tab"] {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
 /* Ticker bar auto-scroll animation */
 @keyframes scroll-ticker {
   0% {
