@@ -2715,10 +2715,14 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       {moodScore.overall}
                     </div>
                     {/* Dynamic Label */}
-                    <div className="text-2xl font-bold text-white mb-1">
+                    <div className={`text-2xl font-bold mb-1 ${
+                      themeMode === 'light' ? 'text-gray-900' : 'text-white'
+                    }`}>
                       {getSentimentLabel(currentSentiment)}
                     </div>
-                    <div className="text-sm text-purple-300 uppercase tracking-wider">
+                    <div className={`text-sm uppercase tracking-wider ${
+                      themeMode === 'light' ? 'text-gray-600' : 'text-purple-300'
+                    }`}>
                       AI SENTIMENT SCORE
                     </div>
                   </div>
