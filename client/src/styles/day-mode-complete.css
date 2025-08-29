@@ -386,3 +386,39 @@ html body .day-mode-container {
   color: #FFFFFF !important;
   fill: currentColor !important;
 }
+
+/* Even more specific override - target the exact button styling */
+.day-mode-container button[style*="background-color: #2962FF !important"] {
+  background-color: #2962FF !important;
+  color: #FFFFFF !important;
+  border-color: #2962FF !important;
+}
+
+.day-mode-container button[style*="background-color: #2962FF !important"] * {
+  color: #FFFFFF !important;
+}
+
+/* Override any remaining text color rules */
+.day-mode-container button[style*="background-color: #2962FF !important"] .lucide,
+.day-mode-container button[style*="background-color: #2962FF !important"] svg,
+.day-mode-container button[style*="background-color: #2962FF !important"] span,
+.day-mode-container button[style*="background-color: #2962FF !important"] text {
+  color: #FFFFFF !important;
+  fill: #FFFFFF !important;
+}
+
+/* Direct targeting of active filter button */
+.day-mode-container .active-filter-button {
+  background-color: #2962FF !important;
+  color: #FFFFFF !important;
+  border-color: #2962FF !important;
+}
+
+.day-mode-container .active-filter-button * {
+  color: #FFFFFF !important;
+}
+
+.day-mode-container .active-filter-button svg {
+  color: #FFFFFF !important;
+  fill: currentColor !important;
+}

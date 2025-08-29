@@ -1,0 +1,31 @@
+/* Button Override System - Highest Priority */
+
+/* Active filter button in Day Mode - Ultra High Specificity */
+.day-mode-container .active-filter-button {
+  background-color: #2962FF !important;
+  color: #FFFFFF !important;
+  border-color: #2962FF !important;
+}
+
+.day-mode-container .active-filter-button span,
+.day-mode-container .active-filter-button svg,
+.day-mode-container .active-filter-button .lucide,
+.day-mode-container .active-filter-button * {
+  color: #FFFFFF !important;
+  fill: currentColor !important;
+}
+
+/* Override any Tailwind classes that might interfere */
+.day-mode-container button.active-filter-button {
+  background-color: #2962FF !important;
+  color: #FFFFFF !important;
+  border-color: #2962FF !important;
+}
+
+.day-mode-container button.active-filter-button span,
+.day-mode-container button.active-filter-button svg,
+.day-mode-container button.active-filter-button .lucide,
+.day-mode-container button.active-filter-button * {
+  color: #FFFFFF !important;
+  fill: currentColor !important;
+}

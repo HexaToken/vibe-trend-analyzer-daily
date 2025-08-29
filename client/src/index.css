@@ -38,6 +38,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import Button Overrides - AFTER TAILWIND FOR MAXIMUM PRIORITY */
+@import './styles/button-overrides.css';
+
 
 
 /* Ticker bar auto-scroll animation */
