@@ -122,7 +122,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
       <Card className={cn(
         "relative overflow-hidden transition-all duration-500 hover:scale-[1.02]",
         themeMode === 'light'
-          ? 'enhanced-card-light border border-[#E6E6E6]'
+          ? 'enhanced-card-light border border-border'
           : `bg-black/40 backdrop-blur-xl ${getMoodGlow(currentMood.overall)}`,
         getMoodGlow(currentMood.overall)
       )}>
