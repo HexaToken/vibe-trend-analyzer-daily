@@ -77,6 +77,13 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
     setIsAnalyticsDashboardOpen(true);
   };
 
+  const handleDriverClick = (driverId: string, category: string) => {
+    // Navigate to AI Sentiment Engine with focus on the specific category
+    setIsAISentimentEngineOpen(true);
+    // You can add additional logic here to focus on specific driver analysis
+    console.log(`Driver clicked: ${driverId} (${category})`);
+  };
+
   const getMoodSentiment = (score: number): 'positive' | 'neutral' | 'negative' => {
     if (score >= 70) return 'positive';
     if (score >= 40) return 'neutral';
