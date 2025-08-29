@@ -2820,7 +2820,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                             {news.headline}
                           </h3>
                           <p className={`text-sm leading-relaxed line-clamp-3 ${
-                            themeMode === 'light' ? 'text-gray-600' : 'text-gray-400'
+                            themeMode === 'light' ? 'text-gray-700' : 'text-gray-400'
                           }`}>
                             {news.summary}
                           </p>
@@ -2841,7 +2841,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         </Badge>
                       </div>
                       <div className={`flex items-center justify-between text-xs ${
-                        themeMode === 'light' ? 'text-gray-500' : 'text-gray-500'
+                        themeMode === 'light' ? 'text-gray-600' : 'text-gray-400'
                       }`}>
                         <span className="font-medium">{news.source}</span>
                         <span>{news.timestamp}</span>
@@ -2883,7 +2883,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         </Badge>
                       </div>
                       <div className={`text-lg font-semibold mb-1 ${themeMode === 'light' ? 'text-gray-900' : 'text-white'}`}>{topic.topic}</div>
-                      <div className={`text-sm ${themeMode === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>{topic.mentions} mentions</div>
+                      <div className={`text-sm ${themeMode === 'light' ? 'text-gray-700' : 'text-gray-400'}`}>{topic.mentions} mentions</div>
                     </div>
                   ))}
                 </div>
@@ -2912,7 +2912,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   <div className="space-y-2 mb-4">
                     {userWatchlist.map((item, index) => (
                       <div key={index} className="flex items-center justify-between text-sm">
-                        <span className={themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-300'}>{item.symbol}</span>
+                        <span className={themeMode === 'light' ? 'text-gray-700' : 'text-gray-300'}>{item.symbol}</span>
                         <span className={cn(
                           "font-medium",
                           item.change >= 0
