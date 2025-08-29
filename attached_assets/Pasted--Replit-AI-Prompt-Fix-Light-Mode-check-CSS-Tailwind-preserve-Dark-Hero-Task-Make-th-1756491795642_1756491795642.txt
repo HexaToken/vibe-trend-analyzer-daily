@@ -1,0 +1,36 @@
+**Replit AI Prompt — Fix Light Mode (check CSS + Tailwind, preserve Dark + Hero):**
+
+Task: Make the TradeHub/MoodMeter UI render correctly in Light Mode (`[data-theme="day"]`). Audit and fix both CSS and Tailwind usage. Do not alter Night/Dark Mode or the Hero section.
+
+Do not change:
+• Any `[data-theme="dark"]` styles or tokens.
+• The `.hero` section (no edits to its markup, classes, or styles).
+
+Scope:
+• Review all CSS, Tailwind utilities, and component-level styles that apply in Light Mode.
+• Check for import-order issues (e.g., Light Mode overrides loading before Tailwind utilities).
+• Verify PostCSS/Tailwind layering so Light Mode overrides are applied last using the proper Tailwind layer (no code needed in output—just perform the change).
+
+What to audit and fix (Light Mode only):
+
+1. Hardcoded dark backgrounds or gradients applied in Light Mode (e.g., classes that mimic dark surfaces). Replace with theme-token usage appropriate for Light Mode.
+2. Hardcoded light/white text or low-opacity text that reduces readability on white backgrounds. Convert to theme-token text colors appropriate for Light Mode with full readability.
+3. Any `!important` rules, inline styles, or utility combinations that override Light Mode tokens unintentionally.
+4. Components importing extra CSS after the global stylesheet that could override Light Mode. Consolidate so global Light Mode rules reliably win.
+5. Tailwind utilities that force dark styles in Light Mode (e.g., dark background utilities, white text utilities). Scope them to Dark Mode only or convert to theme-token equivalents.
+6. Ensure Light Mode rules are layered to apply after Tailwind utilities (use the correct Tailwind layer internally—no code output needed here).
+7. Ensure forms, filters, badges/pills, cards/panels, and headings/body text all resolve to Light Mode–appropriate surfaces and text colors.
+
+Exclusions:
+• Skip any changes within `.hero` or descendants.
+• Skip changes gated explicitly by `[data-theme="dark"]`.
+
+Deliverables:
+• Apply the necessary refactors to CSS and Tailwind usage so Light Mode renders correctly throughout TradeHub/MoodMeter without affecting Dark Mode or the Hero.
+• Provide a concise report listing: files touched, the issue type you fixed (e.g., “hardcoded dark bg”, “white text in light mode”, “import order”), and the high-level fix you applied (no code).
+
+Acceptance criteria:
+• In Light Mode, backgrounds, cards, text, inputs, badges, and buttons are clearly legible and visually consistent with the light theme tokens.
+• No visual regressions in Night/Dark Mode.
+• The Hero section remains unchanged.
+• No import-order or layering conflicts remain; Light Mode styling is reliable across the site.
