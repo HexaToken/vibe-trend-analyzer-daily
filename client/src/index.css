@@ -1456,17 +1456,30 @@ All colors MUST be HSL.
     color: white !important;
   }
 
-  /* Force light mode text to be dark - override any remaining white text */
-  :root:not(.dark) .text-white {
+  /* Ultimate Day Mode text override - Force all text to be dark */
+  .day-mode-container,
+  .day-mode-container *,
+  .day-mode-container span,
+  .day-mode-container p,
+  .day-mode-container h1,
+  .day-mode-container h2,
+  .day-mode-container h3,
+  .day-mode-container div {
     color: #2A2E39 !important;
   }
 
-  /* Target all text elements in Day Mode containers */
-  [class*="day-mode"] *,
-  .day-mode-container *,
-  :root:not(.dark) .day-mode-container *,
-  :root:not(.dark) [class*="day-mode"] * {
+  /* Override any text-white in Day Mode containers */
+  .day-mode-container .text-white,
+  .day-mode-container .text-white *,
+  .day-mode-container [class*="text-white"] {
     color: #2A2E39 !important;
+  }
+
+  /* Secondary text in Day Mode */
+  .day-mode-container .text-sm,
+  .day-mode-container .text-xs,
+  .day-mode-container [class*="text-gray"] {
+    color: #4B5563 !important;
   }
 
   /* Preserve white text only on colored backgrounds - highest specificity */
