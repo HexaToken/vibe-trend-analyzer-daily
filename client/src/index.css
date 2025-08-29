@@ -6,25 +6,50 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fix click issues - ensure proper pointer events */
+/* CRITICAL FIX - Force pointer events to work everywhere */
 * {
   pointer-events: auto !important;
 }
 
+/* Block all beacon debugging overlays that prevent clicks */
 .beacon-highlighter,
 .beacon-selected-highlighter,
 .beacon-hover-highlighter,
 .beacon-sibling-highlighter,
 .beacon-label,
 .beacon-hover-label,
-.beacon-selected-label {
+.beacon-selected-label,
+[class*="beacon"],
+[id*="beacon"] {
   pointer-events: none !important;
+  display: none !important;
+  visibility: hidden !important;
+  z-index: -9999 !important;
 }
 
-/* Ensure clickable elements are properly interactive */
-button, a, input, select, textarea, [role="button"], [role="menuitem"], [role="tab"] {
+/* FORCE clickable elements to be interactive */
+button, a, input, select, textarea, 
+[role="button"], [role="menuitem"], [role="tab"],
+nav, header, .nav, .header, .menu, .btn,
+div[onclick], span[onclick], li[onclick] {
   pointer-events: auto !important;
   cursor: pointer !important;
+  z-index: 999 !important;
+  position: relative !important;
+}
+
+/* Emergency click fix - override any blocking elements */
+body * {
+  pointer-events: auto !important;
+}
+
+/* Hide all overlays with max z-index */
+[style*="z-index"][style*="9007199254740991"],
+[style*="z-index"][style*="2147483647"],
+[style*="position: fixed"][style*="pointer-events"] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 /* Ticker bar auto-scroll animation */
