@@ -173,7 +173,7 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
                         "h-16 p-4 flex flex-col items-center gap-2 border cursor-default",
                         isActive
                           ? getSourceColor(source.color).split(' ').filter(cls => !cls.startsWith('hover:')).join(' ')
-                          : "border-slate-600 bg-slate-800/30"
+                          : "border-border bg-muted/30"
                       )}
                     >
                       <IconComponent className="w-7 h-7" />
