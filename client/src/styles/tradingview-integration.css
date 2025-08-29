@@ -79,16 +79,66 @@
 .tradingview-day .bg-primary:not(.preserve-dark) {
   background-color: var(--tv-accent-blue) !important;
   color: var(--tv-button-primary-text) !important;
+  border: 1px solid var(--tv-accent-blue) !important;
 }
 
 .tradingview-day .hover\:bg-primary\/90:hover:not(.preserve-dark) {
   background-color: var(--tv-accent-blue-hover) !important;
+  border-color: var(--tv-accent-blue-hover) !important;
 }
 
 .tradingview-day .bg-secondary {
   background-color: var(--tv-card-background) !important;
   color: var(--tv-secondary-text) !important;
   border: 1px solid var(--tv-border) !important;
+}
+
+.tradingview-day .bg-secondary:hover {
+  background-color: var(--tv-hover-background) !important;
+  color: var(--tv-primary-text) !important;
+}
+
+/* Active button states for navigation */
+.tradingview-day button.text-primary-foreground.bg-primary {
+  background-color: var(--tv-accent-blue) !important;
+  color: white !important;
+  border: 1px solid var(--tv-accent-blue) !important;
+  box-shadow: 0 2px 4px rgba(41, 98, 255, 0.2) !important;
+  font-weight: 600 !important;
+}
+
+.tradingview-day button.text-primary-foreground.bg-primary:hover {
+  background-color: var(--tv-accent-blue-hover) !important;
+  border-color: var(--tv-accent-blue-hover) !important;
+  box-shadow: 0 4px 8px rgba(41, 98, 255, 0.25) !important;
+}
+
+/* Enhanced navigation button states */
+.tradingview-day button[aria-current="page"] {
+  background-color: var(--tv-accent-blue) !important;
+  color: white !important;
+  border: 1px solid var(--tv-accent-blue) !important;
+  box-shadow: 0 2px 4px rgba(41, 98, 255, 0.2) !important;
+  font-weight: 600 !important;
+}
+
+.tradingview-day button[aria-current="page"]:hover {
+  background-color: var(--tv-accent-blue-hover) !important;
+  border-color: var(--tv-accent-blue-hover) !important;
+  box-shadow: 0 4px 8px rgba(41, 98, 255, 0.25) !important;
+}
+
+/* Inactive navigation button states */
+.tradingview-day nav button:not([aria-current="page"]) {
+  color: var(--tv-secondary-text) !important;
+  background-color: transparent !important;
+  border: 1px solid transparent !important;
+}
+
+.tradingview-day nav button:not([aria-current="page"]):hover {
+  color: var(--tv-accent-blue) !important;
+  background-color: var(--tv-accent-blue-light) !important;
+  border-color: var(--tv-accent-blue-border) !important;
 }
 
 /* Inputs and Form Elements */
@@ -206,12 +256,37 @@
 
 .tradingview-day [role="tab"] {
   color: var(--tv-secondary-text) !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+.tradingview-day [role="tab"]:hover {
+  color: var(--tv-accent-blue) !important;
+  background-color: var(--tv-accent-blue-light) !important;
 }
 
 .tradingview-day [role="tab"][data-state="active"] {
   background-color: var(--tv-background) !important;
-  color: var(--tv-primary-text) !important;
-  border: 1px solid var(--tv-border) !important;
+  color: var(--tv-accent-blue) !important;
+  border: 1px solid var(--tv-accent-blue-border) !important;
+  box-shadow: var(--tv-shadow-sm) !important;
+  font-weight: 600 !important;
+}
+
+/* Specific overrides for TabsTrigger component */
+.tradingview-day .data-\[state\=active\]\:bg-background[data-state="active"] {
+  background-color: var(--tv-background) !important;
+  color: var(--tv-accent-blue) !important;
+  border: 1px solid var(--tv-accent-blue-border) !important;
+  box-shadow: var(--tv-shadow-sm) !important;
+}
+
+.tradingview-day .data-\[state\=active\]\:text-foreground[data-state="active"] {
+  color: var(--tv-accent-blue) !important;
+}
+
+.tradingview-day .data-\[state\=active\]\:shadow-sm[data-state="active"] {
+  box-shadow: var(--tv-shadow-sm) !important;
 }
 
 /* Chart Components */
