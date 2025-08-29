@@ -588,7 +588,7 @@ const SmartNewsFeedPage: React.FC = () => {
                         themeMode === 'light'
                           ? 'text-gray-600 border-gray-300'
                           : 'text-white/60 border-white/20'
-                      }`}>
+                      }`} style={themeMode === 'light' ? { color: '#4B5563', borderColor: '#E0E3EB' } : {}}>
                         {article.category}
                       </Badge>
                     </div>
@@ -604,14 +604,14 @@ const SmartNewsFeedPage: React.FC = () => {
                         themeMode === 'light'
                           ? 'text-gray-900 group-hover:text-blue-600'
                           : 'text-white group-hover:text-blue-200'
-                      }`}>
+                      }`} style={themeMode === 'light' ? { color: '#2A2E39', fontWeight: '600' } : {}}>
                         {article.title}
                       </h2>
 
                       {/* Summary */}
                       <p className={`text-sm mb-4 leading-relaxed ${
                         themeMode === 'light' ? 'text-gray-700' : 'text-white/70'
-                      }`} style={themeMode === 'light' ? { color: '#374151 !important', fontWeight: '500 !important' } : {}}>
+                      }`} style={themeMode === 'light' ? { color: '#4B5563', fontWeight: '500' } : {}}>
                         {article.summary}
                       </p>
 
@@ -620,7 +620,7 @@ const SmartNewsFeedPage: React.FC = () => {
                         <div className="flex items-center gap-2 mb-4 flex-wrap">
                           <span className={`text-xs ${
                             themeMode === 'light' ? 'text-gray-600' : 'text-white/60'
-                          }`}>Related:</span>
+                          }`} style={themeMode === 'light' ? { color: '#4B5563', fontWeight: '500' } : {}}>Related:</span>
                           {renderTickerTags(article.tickers)}
                           {article.sparklineData && renderSparkline(article.sparklineData)}
                         </div>
@@ -631,7 +631,7 @@ const SmartNewsFeedPage: React.FC = () => {
                       themeMode === 'light'
                         ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
                         : 'text-white/60 hover:text-white'
-                    }>
+                    } style={themeMode === 'light' ? { color: '#4B5563' } : {}}>
                       {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                     </Button>
                   </div>
@@ -640,25 +640,25 @@ const SmartNewsFeedPage: React.FC = () => {
                   {isExpanded && (
                     <div className={`mt-4 pt-4 border-t ${
                       themeMode === 'light' ? 'border-gray-200' : 'border-white/10'
-                    }`}>
+                    }`} style={themeMode === 'light' ? { borderColor: '#E0E3EB' } : {}}>
                       {/* AI Summary */}
                       {article.aiSummary && (
                         <div className={`mb-4 p-3 rounded-lg border ${
                           themeMode === 'light'
                             ? 'bg-blue-50 border-blue-200'
                             : 'bg-blue-500/10 border-blue-500/20'
-                        }`}>
+                        }`} style={themeMode === 'light' ? { backgroundColor: '#EBF8FF', borderColor: '#BFDBFE' } : {}}>
                           <div className="flex items-center gap-2 mb-2">
                             <Sparkles className={`w-4 h-4 ${
                               themeMode === 'light' ? 'text-blue-600' : 'text-blue-400'
-                            }`} />
+                            }`} style={themeMode === 'light' ? { color: '#2962FF' } : {}} />
                             <span className={`text-sm font-medium ${
                               themeMode === 'light' ? 'text-blue-600' : 'text-blue-400'
-                            }`}>AI Analysis</span>
+                            }`} style={themeMode === 'light' ? { color: '#2962FF', fontWeight: '600' } : {}}>AI Analysis</span>
                           </div>
                           <p className={`text-sm leading-relaxed ${
                             themeMode === 'light' ? 'text-gray-700' : 'text-white/80'
-                          }`}>{article.aiSummary}</p>
+                          }`} style={themeMode === 'light' ? { color: '#4B5563', fontWeight: '500' } : {}}>{article.aiSummary}</p>
                         </div>
                       )}
 
@@ -667,7 +667,7 @@ const SmartNewsFeedPage: React.FC = () => {
                         <div className="mb-4">
                           <h4 className={`text-sm font-medium mb-3 flex items-center gap-2 ${
                             themeMode === 'light' ? 'text-gray-700' : 'text-white/80'
-                          }`}>
+                          }`} style={themeMode === 'light' ? { color: '#2A2E39', fontWeight: '600' } : {}}>
                             <MessageSquare className="w-4 h-4" />
                             Top Community Takes
                           </h4>
@@ -675,7 +675,7 @@ const SmartNewsFeedPage: React.FC = () => {
                             {article.topComments.slice(0, 3).map((comment) => (
                               <div key={comment.id} className={`flex items-start gap-3 p-3 rounded-lg ${
                                 themeMode === 'light' ? 'bg-gray-50' : 'bg-white/5'
-                              }`}>
+                              }`} style={themeMode === 'light' ? { backgroundColor: '#F9FAFB' } : {}}>
                                 <Avatar className="w-6 h-6">
                                   <AvatarImage src={comment.user.avatar} />
                                   <AvatarFallback>{comment.user.username[0]}</AvatarFallback>
@@ -684,7 +684,7 @@ const SmartNewsFeedPage: React.FC = () => {
                                   <div className="flex items-center gap-2 mb-1">
                                     <span className={`text-sm font-medium ${
                                       themeMode === 'light' ? 'text-gray-800' : 'text-white/80'
-                                    }`}>{comment.user.username}</span>
+                                    }`} style={themeMode === 'light' ? { color: '#2A2E39', fontWeight: '600' } : {}}>{comment.user.username}</span>
                                     {comment.user.verified && (
                                       <div className="w-3 h-3 bg-blue-500 rounded-full flex items-center justify-center">
                                         <span className="text-white text-xs">✓</span>
@@ -692,11 +692,11 @@ const SmartNewsFeedPage: React.FC = () => {
                                     )}
                                     <span className={`text-xs ${
                                       themeMode === 'light' ? 'text-gray-500' : 'text-white/40'
-                                    }`}>{comment.timestamp}</span>
+                                    }`} style={themeMode === 'light' ? { color: '#6B7280' } : {}}>{comment.timestamp}</span>
                                   </div>
                                   <p className={`text-sm ${
                                     themeMode === 'light' ? 'text-gray-700' : 'text-white/70'
-                                  }`}>{comment.content}</p>
+                                  }`} style={themeMode === 'light' ? { color: '#4B5563', fontWeight: '500' } : {}}>{comment.content}</p>
                                   <div className="flex items-center gap-3 mt-2">
                                     <button className={`flex items-center gap-1 transition-colors ${
                                       themeMode === 'light'
@@ -717,12 +717,12 @@ const SmartNewsFeedPage: React.FC = () => {
                             themeMode === 'light'
                               ? 'bg-gradient-to-r from-blue-50 to-cyan-50 border-blue-200'
                               : 'bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border-blue-500/20'
-                          }`}>
+                          }`} style={themeMode === 'light' ? { background: 'linear-gradient(to right, #EBF8FF, #E0F7FA)', borderColor: '#BFDBFE' } : {}}>
                             <div className="flex items-center justify-between">
                               <span className={`text-sm ${
                                 themeMode === 'light' ? 'text-gray-700' : 'text-white/80'
-                              }`}>What's your take on this news?</span>
-                              <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white">
+                              }`} style={themeMode === 'light' ? { color: '#4B5563', fontWeight: '500' } : {}}>What's your take on this news?</span>
+                              <Button size="sm" className="text-white" style={{ backgroundColor: '#2962FF', borderColor: '#2962FF' }}>
                                 Post Your Take
                               </Button>
                             </div>
@@ -735,7 +735,7 @@ const SmartNewsFeedPage: React.FC = () => {
                   {/* Reaction Bar */}
                   <div className={`flex items-center justify-between mt-4 pt-4 border-t ${
                     themeMode === 'light' ? 'border-gray-200' : 'border-white/10'
-                  }`}>
+                  }`} style={themeMode === 'light' ? { borderColor: '#E0E3EB' } : {}}>
                     <div className="flex items-center gap-6">
                       <button 
                         className={cn(
