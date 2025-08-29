@@ -267,10 +267,18 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
   const currentSentiment = getMoodSentiment(moodScore.overall);
 
   const getTrendingBadge = (label: string) => {
-    switch (label) {
-      case 'Hype': return 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30';
-      case 'Panic': return 'bg-red-500/20 text-red-400 border-red-500/30';
-      default: return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
+    if (themeMode === 'light') {
+      switch (label) {
+        case 'Hype': return 'bg-emerald-50 text-emerald-700 border border-emerald-300 shadow-sm font-medium';
+        case 'Panic': return 'bg-red-50 text-red-700 border border-red-300 shadow-sm font-medium';
+        default: return 'bg-gray-50 text-gray-700 border border-gray-300 shadow-sm font-medium';
+      }
+    } else {
+      switch (label) {
+        case 'Hype': return 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30';
+        case 'Panic': return 'bg-red-500/20 text-red-400 border-red-500/30';
+        default: return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
+      }
     }
   };
 
@@ -2827,11 +2835,11 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                           </p>
                         </div>
                         <Badge className={cn(
-                          "ml-4 flex-shrink-0 text-xs font-medium px-3 py-1 rounded-full",
+                          "ml-4 flex-shrink-0 text-xs font-medium px-3 py-1 rounded-full border shadow-sm",
                           themeMode === 'light'
-                            ? news.sentiment === 'bullish' ? 'sentiment-positive sentiment-positive-bg' :
-                              news.sentiment === 'bearish' ? 'sentiment-negative sentiment-negative-bg' :
-                              'sentiment-neutral sentiment-neutral-bg'
+                            ? news.sentiment === 'bullish' ? 'bg-green-50 text-green-700 border-green-300' :
+                              news.sentiment === 'bearish' ? 'bg-red-50 text-red-700 border-red-300' :
+                              'bg-gray-50 text-gray-700 border-gray-300'
                             : news.sentiment === 'bullish' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' :
                               news.sentiment === 'bearish' ? 'bg-red-500/20 text-red-400 border-red-500/30' :
                               'bg-gray-500/20 text-gray-400 border-gray-500/30'
