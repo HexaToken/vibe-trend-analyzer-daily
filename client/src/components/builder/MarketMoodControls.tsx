@@ -222,7 +222,7 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
               onClick={onViewAnalytics}
               className={cn(
                 "h-12 bg-gradient-to-r from-blue-600/20 to-cyan-600/20 hover:from-blue-600/30 hover:to-cyan-600/30",
-                "text-white font-medium border border-blue-500/30 transition-all duration-300",
+                "text-primary-foreground font-medium border border-blue-500/30 transition-all duration-300",
                 "hover:shadow-lg hover:shadow-blue-500/20"
               )}
             >
