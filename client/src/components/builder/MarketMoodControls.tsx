@@ -157,7 +157,7 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
             {/* Source Toggles - View Only */}
             <div className="space-y-3 opacity-90">
               <label className="text-sm font-medium text-theme-primary flex items-center gap-2">
-                <Filter className="w-4 h-4 text-cyan-400" />
+                <Filter className="w-4 h-4 text-primary" />
                 Data Sources
                 <span className="text-xs text-slate-400 ml-auto">��️ Pre-selected for transparency</span>
               </label>
