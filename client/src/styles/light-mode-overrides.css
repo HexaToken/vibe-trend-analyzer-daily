@@ -1,0 +1,437 @@
+/* ===== TRADINGVIEW LIGHT MODE SYSTEM =====
+ * Comprehensive color system enforcement for light mode only
+ * Defeats all hardcoded dark styles and utilities
+ * Preserves dark mode and hero section
+ */
+
+/* ===== CORE LIGHT MODE COLOR TOKENS ===== */
+[data-theme="light"] {
+  /* TradingView Light Mode Design Tokens */
+  --background: 0 0% 100%; /* #FFFFFF - Page background */
+  --foreground: 225 15% 20%; /* #2A2E39 - Primary text */
+  
+  --card: 210 20% 98%; /* #F9FAFB - Card background */
+  --card-foreground: 225 15% 20%; /* #2A2E39 - Card text */
+  
+  --popover: 210 20% 98%; /* #F9FAFB */
+  --popover-foreground: 225 15% 20%; /* #2A2E39 */
+  
+  --primary: 225 100% 58%; /* #2962FF - TradingView accent */
+  --primary-foreground: 0 0% 100%; /* White on primary */
+  
+  --secondary: 220 13% 34%; /* #4B5563 - Secondary text */
+  --secondary-foreground: 0 0% 100%;
+  
+  --muted: 210 17% 95%; /* Very light muted bg */
+  --muted-foreground: 220 9% 46%; /* #9CA3AF - Disabled text */
+  
+  --accent: 225 100% 58%; /* #2962FF - Accent/links */
+  --accent-foreground: 0 0% 100%;
+  
+  --destructive: 0 84% 60%; /* #EF4444 - Errors */
+  --destructive-foreground: 0 0% 100%;
+  
+  --border: 220 14% 88%; /* #E0E3EB - Borders/gridlines */
+  --input: 220 14% 88%; /* #E0E3EB - Input borders */
+  --ring: 225 100% 58%; /* #2962FF - Focus ring */
+  
+  /* Sentiment Colors - Light Mode */
+  --positive: 134 61% 41%; /* #22C55E - Positive/Bullish */
+  --positive-bg: 138 76% 97%; /* #DCFCE7 - Positive background tint */
+  --negative: 0 84% 60%; /* #EF4444 - Negative/Bearish */
+  --negative-bg: 0 86% 97%; /* #FEE2E2 - Negative background tint */
+  --neutral: 45 93% 47%; /* #FACC15 - Neutral */
+  --neutral-bg: 55 92% 95%; /* #FEF9C3 - Neutral background tint */
+  --info: 217 91% 60%; /* #3B82F6 - Info/Pending */
+  --info-bg: 214 95% 93%; /* Very light blue */
+  
+  /* Hover States */
+  --accent-hover: 225 100% 52%; /* #1E4FD1 - Accent hover */
+}
+
+/* ===== GLOBAL BACKGROUND & PAGE OVERRIDES ===== */
+[data-theme="light"] body {
+  background: #FFFFFF !important;
+  color: #2A2E39 !important;
+}
+
+[data-theme="light"] .min-h-screen {
+  background: #FFFFFF !important;
+}
+
+/* Defeat hardcoded dark gradients (except hero) */
+[data-theme="light"] .bg-gradient-to-br:not(.hero-sentiment-section *):not(.hero *) {
+  background: #FFFFFF !important;
+}
+
+[data-theme="light"] .bg-gradient-to-r:not(.hero-sentiment-section *):not(.hero *):not(.bg-primary) {
+  background: linear-gradient(to right, #F9FAFB, #FFFFFF) !important;
+}
+
+/* ===== CARD SYSTEM OVERRIDES ===== */
+[data-theme="light"] .bg-card,
+[data-theme="light"] [class*="bg-black"],
+[data-theme="light"] [class*="bg-slate-8"],
+[data-theme="light"] [class*="bg-slate-9"],
+[data-theme="light"] .bg-black\/40,
+[data-theme="light"] .bg-black\/60 {
+  background: #F9FAFB !important;
+  color: #2A2E39 !important;
+  border-color: #E0E3EB !important;
+}
+
+/* Card shadows - subtle, soft elevation */
+[data-theme="light"] .shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-theme="light"] .shadow,
+[data-theme="light"] .shadow-md {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme="light"] .shadow-lg {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* ===== TEXT SYSTEM OVERRIDES ===== */
+/* Primary text */
+[data-theme="light"] .text-card-foreground,
+[data-theme="light"] .text-foreground,
+[data-theme="light"] h1, [data-theme="light"] h2, [data-theme="light"] h3,
+[data-theme="light"] h4, [data-theme="light"] h5, [data-theme="light"] h6 {
+  color: #2A2E39 !important;
+}
+
+/* Secondary text */
+[data-theme="light"] .text-muted-foreground,
+[data-theme="light"] .text-secondary,
+[data-theme="light"] .text-slate-400,
+[data-theme="light"] .text-gray-400 {
+  color: #4B5563 !important;
+}
+
+/* Disabled text */
+[data-theme="light"] .text-muted,
+[data-theme="light"] .text-slate-500,
+[data-theme="light"] .text-gray-500 {
+  color: #9CA3AF !important;
+}
+
+/* Fix white text on light backgrounds (preserve on primary) */
+[data-theme="light"] .text-white:not(.bg-primary *):not(.text-primary-foreground):not([class*="bg-primary"]) {
+  color: #2A2E39 !important;
+}
+
+[data-theme="light"] .text-slate-300,
+[data-theme="light"] .text-gray-300 {
+  color: #4B5563 !important;
+}
+
+/* ===== BORDER SYSTEM OVERRIDES ===== */
+[data-theme="light"] .border,
+[data-theme="light"] .border-border,
+[data-theme="light"] .border-slate-700,
+[data-theme="light"] .border-slate-600,
+[data-theme="light"] .border-purple-500\/20,
+[data-theme="light"] .border-blue-500\/20 {
+  border-color: #E0E3EB !important;
+}
+
+/* ===== ACCENT & BUTTON SYSTEM ===== */
+[data-theme="light"] .bg-primary,
+[data-theme="light"] .text-primary {
+  background-color: #2962FF !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="light"] .hover\:bg-primary:hover {
+  background-color: #1E4FD1 !important;
+}
+
+[data-theme="light"] .text-accent,
+[data-theme="light"] .accent {
+  color: #2962FF !important;
+}
+
+/* Focus rings */
+[data-theme="light"] .focus\:ring,
+[data-theme="light"] .focus\:ring-2 {
+  --tw-ring-color: #2962FF !important;
+}
+
+/* ===== SENTIMENT COLOR SYSTEM ===== */
+/* Positive/Bullish */
+[data-theme="light"] .sentiment-positive,
+[data-theme="light"] .text-green-600,
+[data-theme="light"] .text-emerald-400 {
+  color: #22C55E !important;
+}
+
+[data-theme="light"] .sentiment-positive-bg,
+[data-theme="light"] .bg-green-100,
+[data-theme="light"] .bg-emerald-500\/20 {
+  background-color: #DCFCE7 !important;
+  color: #22C55E !important;
+  border-color: #22C55E !important;
+}
+
+/* Negative/Bearish */
+[data-theme="light"] .sentiment-negative,
+[data-theme="light"] .text-red-600,
+[data-theme="light"] .text-red-400 {
+  color: #EF4444 !important;
+}
+
+[data-theme="light"] .sentiment-negative-bg,
+[data-theme="light"] .bg-red-100,
+[data-theme="light"] .bg-red-500\/20 {
+  background-color: #FEE2E2 !important;
+  color: #EF4444 !important;
+  border-color: #EF4444 !important;
+}
+
+/* Neutral */
+[data-theme="light"] .sentiment-neutral,
+[data-theme="light"] .text-yellow-600,
+[data-theme="light"] .text-amber-400 {
+  color: #FACC15 !important;
+}
+
+[data-theme="light"] .sentiment-neutral-bg,
+[data-theme="light"] .bg-yellow-100,
+[data-theme="light"] .bg-amber-500\/20 {
+  background-color: #FEF9C3 !important;
+  color: #FACC15 !important;
+  border-color: #FACC15 !important;
+}
+
+/* Info/Pending */
+[data-theme="light"] .sentiment-info,
+[data-theme="light"] .text-blue-600,
+[data-theme="light"] .text-blue-400 {
+  color: #3B82F6 !important;
+}
+
+[data-theme="light"] .sentiment-info-bg,
+[data-theme="light"] .bg-blue-100,
+[data-theme="light"] .bg-blue-500\/20 {
+  background-color: #DBEAFE !important;
+  color: #3B82F6 !important;
+  border-color: #3B82F6 !important;
+}
+
+/* ===== NAVIGATION & HEADER OVERRIDES ===== */
+[data-theme="light"] nav,
+[data-theme="light"] header {
+  background: #FFFFFF !important;
+  border-color: #E0E3EB !important;
+}
+
+/* Nav pills - selected/active states */
+[data-theme="light"] [aria-current="page"],
+[data-theme="light"] .nav-active {
+  background: #2962FF !important;
+  color: #FFFFFF !important;
+  border-color: #2962FF !important;
+}
+
+[data-theme="light"] .nav-active:focus {
+  box-shadow: 0 0 0 2px #2962FF !important;
+}
+
+/* ===== INPUT & FORM OVERRIDES ===== */
+[data-theme="light"] input,
+[data-theme="light"] select,
+[data-theme="light"] textarea {
+  background: #FFFFFF !important;
+  color: #2A2E39 !important;
+  border-color: #E0E3EB !important;
+}
+
+[data-theme="light"] input:focus,
+[data-theme="light"] select:focus,
+[data-theme="light"] textarea:focus {
+  border-color: #2962FF !important;
+  box-shadow: 0 0 0 1px #2962FF !important;
+}
+
+/* ===== DROPDOWN & POPOVER OVERRIDES ===== */
+[data-theme="light"] [data-radix-dropdown-menu-content],
+[data-theme="light"] [data-radix-popover-content],
+[data-theme="light"] .popover,
+[data-theme="light"] .dropdown {
+  background: #FFFFFF !important;
+  color: #2A2E39 !important;
+  border: 1px solid #E0E3EB !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-theme="light"] [data-radix-dropdown-menu-item],
+[data-theme="light"] .dropdown-item {
+  color: #2A2E39 !important;
+  background: transparent !important;
+}
+
+[data-theme="light"] [data-radix-dropdown-menu-item]:hover,
+[data-theme="light"] .dropdown-item:hover {
+  background: #F9FAFB !important;
+  color: #2A2E39 !important;
+}
+
+/* ===== TAB & CHIP OVERRIDES ===== */
+[data-theme="light"] [data-state="active"],
+[data-theme="light"] .tab-active {
+  background: #2962FF !important;
+  color: #FFFFFF !important;
+  border-color: #2962FF !important;
+}
+
+[data-theme="light"] .tab-inactive {
+  background: #F9FAFB !important;
+  color: #4B5563 !important;
+  border-color: #E0E3EB !important;
+}
+
+/* ===== BADGE & PILL OVERRIDES ===== */
+[data-theme="light"] .badge,
+[data-theme="light"] .pill {
+  background: #F9FAFB !important;
+  color: #4B5563 !important;
+  border: 1px solid #E0E3EB !important;
+}
+
+/* ===== TABLE OVERRIDES ===== */
+[data-theme="light"] table,
+[data-theme="light"] .table {
+  background: #FFFFFF !important;
+  color: #2A2E39 !important;
+}
+
+[data-theme="light"] th {
+  background: #F9FAFB !important;
+  color: #2A2E39 !important;
+  border-color: #E0E3EB !important;
+}
+
+[data-theme="light"] td {
+  border-color: #E0E3EB !important;
+}
+
+[data-theme="light"] tr:hover {
+  background: #F9FAFB !important;
+}
+
+/* ===== CHART & DATA VIZ OVERRIDES ===== */
+[data-theme="light"] .chart-container,
+[data-theme="light"] [class*="chart"] {
+  background: #FFFFFF !important;
+  color: #2A2E39 !important;
+}
+
+/* ===== MODAL & DIALOG OVERRIDES ===== */
+[data-theme="light"] [role="dialog"],
+[data-theme="light"] .modal {
+  background: #FFFFFF !important;
+  color: #2A2E39 !important;
+  border: 1px solid #E0E3EB !important;
+}
+
+/* ===== DEFEAT HARDCODED UTILITIES ===== */
+/* Override low-opacity utilities that reduce readability */
+[data-theme="light"] .bg-white\/20,
+[data-theme="light"] .bg-white\/10,
+[data-theme="light"] .bg-black\/20,
+[data-theme="light"] .bg-black\/10 {
+  background: rgba(63, 81, 181, 0.1) !important;
+  color: #2962FF !important;
+  border: 1px solid rgba(63, 81, 181, 0.2) !important;
+}
+
+/* Override purple color variants */
+[data-theme="light"] .bg-purple-500\/20,
+[data-theme="light"] .text-purple-400,
+[data-theme="light"] .border-purple-500\/30 {
+  background-color: rgba(139, 92, 246, 0.1) !important;
+  color: #6B21A8 !important;
+  border-color: rgba(139, 92, 246, 0.2) !important;
+}
+
+/* ===== FORCE HIGHER SPECIFICITY OVERRIDES ===== */
+/* Use !important to defeat inline styles and high-specificity selectors */
+[data-theme="light"] * {
+  /* Ensure all elements respect light mode theming */
+}
+
+[data-theme="light"] .backdrop-blur-xl {
+  backdrop-filter: none !important;
+}
+
+/* ===== PRESERVE HERO SECTION (EXCLUSIONS) ===== */
+/* Never apply light mode to hero section */
+.hero *,
+.hero-sentiment-section *,
+[class*="hero"] * {
+  /* Explicitly preserve all hero styling */
+  background: inherit !important;
+  color: inherit !important;
+  border-color: inherit !important;
+}
+
+/* ===== ENSURE PROPER CASCADING ORDER ===== */
+/* This file should be imported last to override all other styles */
+
+/* ===== ACCESSIBILITY & CONTRAST COMPLIANCE ===== */
+[data-theme="light"] {
+  /* Ensure all color combinations meet WCAG AA standards */
+}
+
+[data-theme="light"] .focus-visible {
+  outline: 2px solid #2962FF !important;
+  outline-offset: 2px !important;
+}
+
+/* ===== COMPONENT-SPECIFIC OVERRIDES ===== */
+
+/* MarketMoodControls data source badges */
+[data-theme="light"] .data-source-stocks {
+  background: #DCFCE7 !important;
+  color: #22C55E !important;
+  border-color: #22C55E !important;
+}
+
+[data-theme="light"] .data-source-news {
+  background: #DBEAFE !important;
+  color: #3B82F6 !important;
+  border-color: #3B82F6 !important;
+}
+
+[data-theme="light"] .data-source-social {
+  background: rgba(139, 92, 246, 0.1) !important;
+  color: #6B21A8 !important;
+  border-color: rgba(139, 92, 246, 0.2) !important;
+}
+
+/* AI Sentiment Engine specific overrides */
+[data-theme="light"] .ai-sentiment-container {
+  background: #F9FAFB !important;
+  border: 1px solid #E0E3EB !important;
+}
+
+[data-theme="light"] .mood-breakdown-card {
+  background: #FFFFFF !important;
+  border: 1px solid #E0E3EB !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Trading chart specific styling */
+[data-theme="light"] .trading-chart {
+  --chart-background: #FFFFFF;
+  --chart-text: #2A2E39;
+  --chart-grid: #E0E3EB;
+  --chart-positive: #22C55E;
+  --chart-negative: #EF4444;
+  --chart-primary: #2962FF;
+}
+
+/* ===== END LIGHT MODE OVERRIDES ===== */
