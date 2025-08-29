@@ -397,9 +397,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                     placeholder="Search"
                     className={cn(
                       "pl-10 pr-4 py-3 rounded-full w-full",
-                      isDayMode
-                        ? "bg-[#F9FAFB] border-[#E0E3EB] text-[#2A2E39] placeholder-[#6B7280]"
-                        : isLightMode
+                      isLightMode
                         ? "bg-gray-100 border-gray-200 text-gray-900 placeholder-gray-500"
                         : "bg-black/30 border-gray-600/50 text-white placeholder-gray-400"
                     )}
