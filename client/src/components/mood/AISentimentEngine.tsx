@@ -237,21 +237,21 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
               </Card>
 
               {/* News */}
-              <Card className="bg-black/30 border-blue-500/20 hover:border-blue-400/40 transition-all duration-300">
+              <Card className="bg-card border-blue-200 hover:border-blue-300 dark:border-blue-500/20 dark:hover:border-blue-400/40 dark:bg-black/30 transition-all duration-300">
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-white text-sm flex items-center gap-2">
+                  <CardTitle className="text-card-foreground text-sm flex items-center gap-2">
                     📰 News (30%)
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-400">{moodScore.news.toFixed(2)}</div>
-                    <div className="text-xs text-gray-400">Sentiment Score</div>
+                    <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{moodScore.news.toFixed(2)}</div>
+                    <div className="text-xs text-muted-foreground">Sentiment Score</div>
                   </div>
                   <div className="space-y-2">
-                    <div className="text-xs font-medium text-white">Key Headlines:</div>
+                    <div className="text-xs font-medium text-card-foreground">Key Headlines:</div>
                     {newsHighlights.map((headline, i) => (
-                      <div key={i} className="text-xs text-gray-300 line-clamp-2">
+                      <div key={i} className="text-xs text-muted-foreground line-clamp-2">
                         • {headline}
                       </div>
                     ))}
