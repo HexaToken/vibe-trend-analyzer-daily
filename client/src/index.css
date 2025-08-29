@@ -99,8 +99,8 @@ All colors MUST be HSL.
     --mood-fear: 45 93% 47%; /* #EAB308 - Yellow-500 for fear */
     --mood-fear-light: 55 92% 95%; /* #FEF3C7 - Yellow-100 */
 
-    /* Data Visualization - Updated chart colors */
-    --chart-primary: 223 98% 61%; /* #3A7AFE - Default line */
+    /* Data Visualization - TradingView chart colors */
+    --chart-primary: 225 100% 58%; /* #2962FF - TradingView primary */
     --chart-secondary: 168 71% 45%; /* #22AB94 - Positive trend line */
     --chart-tertiary: 354 85% 58%; /* #F23645 - Negative trend line */
     --chart-quaternary: 249 100% 69%; /* #7B61FF - Secondary accent purple */
