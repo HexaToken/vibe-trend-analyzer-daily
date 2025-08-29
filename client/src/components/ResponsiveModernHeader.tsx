@@ -363,12 +363,12 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                 {mobileMenuOpen ? (
                   <X className={cn(
                     "w-5 h-5",
-                    isDayMode ? "text-[#4B5563]" : isLightMode ? "text-gray-700" : "text-gray-300"
+                    isLightMode ? "text-gray-700" : "text-gray-300"
                   )} />
                 ) : (
                   <Menu className={cn(
                     "w-5 h-5",
-                    isDayMode ? "text-[#4B5563]" : isLightMode ? "text-gray-700" : "text-gray-300"
+                    isLightMode ? "text-gray-700" : "text-gray-300"
                   )} />
                 )}
               </Button>
