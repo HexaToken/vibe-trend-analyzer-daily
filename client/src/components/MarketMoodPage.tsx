@@ -171,7 +171,13 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
                 showBreakdown={true}
                 size="large"
               />
-              
+
+              {/* Market Drivers */}
+              <MarketDrivers
+                onDriverClick={handleDriverClick}
+                className="mt-6"
+              />
+
               {/* AI Analysis Section */}
               <AIAnalysisSection
                 onExplainMood={handleExplainMood}
