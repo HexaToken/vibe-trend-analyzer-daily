@@ -7,7 +7,10 @@
     "noEmit": true,
     "module": "ESNext",
     "strict": true,
-    "lib": ["esnext", "dom", "dom.iterable"],
+    "target": "es2015", // Fix Set iteration errors
+    "downlevelIteration": true, // Enable Set/Map iteration
+    "noUncheckedIndexedAccess": true, // Catch array/object access issues
+    "lib": ["es2015", "dom", "dom.iterable"],
     "jsx": "preserve",
     "esModuleInterop": true,
     "skipLibCheck": true,

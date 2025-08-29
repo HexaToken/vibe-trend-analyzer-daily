@@ -252,11 +252,11 @@ export const AiSentimentExplainer = () => {
                         <div>
                           <h4 className="font-semibold mb-3">Scoring Logic</h4>
                           <div className="space-y-2">
-                            {method.details.scoring.map((rule, index) => (
+                            {method.details.scoring?.map((rule, index) => (
                               <div key={index} className="p-3 border rounded-lg bg-muted/30">
                                 <code className="text-sm">{rule}</code>
                               </div>
-                            ))}
+                            )) || <div className="text-sm text-muted-foreground">No scoring rules available</div>}
                           </div>
                         </div>
                         
@@ -270,9 +270,9 @@ export const AiSentimentExplainer = () => {
                         <div>
                           <h4 className="font-semibold mb-3">Analyzed Stocks</h4>
                           <div className="flex flex-wrap gap-2">
-                            {method.details.stocks.map((stock) => (
+                            {method.details.stocks?.map((stock) => (
                               <Badge key={stock} variant="outline">{stock}</Badge>
-                            ))}
+                            )) || <div className="text-sm text-muted-foreground">No stocks configured</div>}
                           </div>
                         </div>
                       </div>

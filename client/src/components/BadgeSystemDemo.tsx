@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { BadgeType } from '@/types/common';
 import { cn } from "@/lib/utils";
 import { useMoodTheme } from "@/contexts/MoodThemeContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -101,26 +102,26 @@ export const BadgeSystemDemo: React.FC = () => {
     },
   ]);
 
-  const mockUserBadges = selectedUser.badges.map(badgeId => ({
-    badgeId: badgeId as any,
-    userId: selectedUser.id,
+  const mockUserBadges = selectedUser?.badges?.map((badgeId: BadgeType) => ({
+    badgeId,
+    userId: selectedUser?.id || 'demo-user',
     earnedAt: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000),
     isActive: true,
     metadata: {
       triggerValue: Math.floor(Math.random() * 100) + 50,
       context: "demo_data"
     }
-  }));
+  })) || [];
 
-  const mockBadgeProgress = selectedUser.progress.map(badgeId => ({
-    badgeId: badgeId as any,
-    userId: selectedUser.id,
+  const mockBadgeProgress = selectedUser?.progress?.map((badgeId: BadgeType) => ({
+    badgeId,
+    userId: selectedUser?.id || 'demo-user',
     progress: Math.floor(Math.random() * 40) + 60, // 60-100% progress
     currentValue: Math.floor(Math.random() * 80) + 10,
     targetValue: 100,
     lastUpdated: new Date(),
     isCloseToEarning: true
-  }));
+  })) || [];
 
   const getBadgeStats = () => {
     const totalBadges = mockUserBadges.length;
@@ -519,8 +520,8 @@ export const BadgeSystemDemo: React.FC = () => {
                   </div>
                   
                   {demoUsers.map((user, index) => {
-                    const userBadges = user.badges.map(badgeId => ({
-                      badgeId: badgeId as any,
+                    const userBadges = user.badges.map((badgeId: BadgeType) => ({
+                      badgeId,
                       userId: user.id,
                       earnedAt: new Date(),
                       isActive: true,

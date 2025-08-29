@@ -28,13 +28,15 @@ export const TrendChart = ({ data }: TrendChartProps) => {
     overall: item.score,
   }));
 
+import { TooltipPayload } from '@/types/common';
+
   const CustomTooltip = ({
     active,
     payload,
     label,
   }: {
     active?: boolean;
-    payload?: any[];
+    payload?: TooltipPayload[];
     label?: string;
   }) => {
     if (active && payload && payload.length) {
@@ -42,10 +44,7 @@ export const TrendChart = ({ data }: TrendChartProps) => {
         <div className="bg-card border rounded-lg p-3 shadow-lg">
           <p className="font-semibold">{label}</p>
           {payload.map(
-            (
-              entry: { color: string; name: string; value: number },
-              index: number,
-            ) => (
+            (entry, index) => (
               <p key={index} style={{ color: entry.color }} className="text-sm">
                 {entry.name}: {entry.value}
               </p>

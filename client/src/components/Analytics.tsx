@@ -80,8 +80,8 @@ export const Analytics = () => {
      (selectedMarketCap === "Mid Cap" && parseFloat(stock.marketCap.replace(/[TB]/g, '')) >= 2 && parseFloat(stock.marketCap.replace(/[TB]/g, '')) <= 10) ||
      (selectedMarketCap === "Small Cap" && parseFloat(stock.marketCap.replace(/[TB]/g, '')) < 2)) &&
     (selectedSector === "All Sectors" || stock.sector === selectedSector) &&
-    stock.price >= priceRange[0] && stock.price <= priceRange[1] &&
-    stock.sentiment >= moodScore[0] && stock.sentiment <= moodScore[1]
+    stock.price >= (priceRange[0] ?? 0) && stock.price <= (priceRange[1] ?? 500) &&
+    stock.sentiment >= (moodScore[0] ?? 0) && stock.sentiment <= (moodScore[1] ?? 100)
   );
 
   const handleSaveTemplate = () => {
@@ -1113,24 +1113,24 @@ export const Analytics = () => {
                                 <div
                                   className="absolute top-0 h-2 bg-purple-500 rounded-full"
                                   style={{
-                                    left: `${(priceRange[0] / 500) * 100}%`,
-                                    width: `${((priceRange[1] - priceRange[0]) / 500) * 100}%`
+                                    left: `${((priceRange[0] ?? 0) / 500) * 100}%`,
+                                    width: `${(((priceRange[1] ?? 500) - (priceRange[0] ?? 0)) / 500) * 100}%`
                                   }}
                                 />
                                 <input
                                   type="range"
                                   min="0"
                                   max="500"
-                                  value={priceRange[0]}
-                                  onChange={(e) => setPriceRange([parseInt(e.target.value), priceRange[1]])}
+                                  value={priceRange[0] ?? 0}
+                                  onChange={(e) => setPriceRange([parseInt(e.target.value), priceRange[1] ?? 500])}
                                   className="absolute top-0 w-full h-2 bg-transparent appearance-none cursor-pointer slider"
                                 />
                                 <input
                                   type="range"
                                   min="0"
                                   max="500"
-                                  value={priceRange[1]}
-                                  onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
+                                  value={priceRange[1] ?? 500}
+                                  onChange={(e) => setPriceRange([priceRange[0] ?? 0, parseInt(e.target.value)])}
                                   className="absolute top-0 w-full h-2 bg-transparent appearance-none cursor-pointer slider"
                                 />
                               </div>
@@ -1141,24 +1141,24 @@ export const Analytics = () => {
                                 <div
                                   className="absolute top-0 h-2 bg-purple-500 rounded-full"
                                   style={{
-                                    left: `${(peRatio[0] / 100) * 100}%`,
-                                    width: `${((peRatio[1] - peRatio[0]) / 100) * 100}%`
+                                    left: `${((peRatio[0] ?? 0) / 100) * 100}%`,
+                                    width: `${(((peRatio[1] ?? 100) - (peRatio[0] ?? 0)) / 100) * 100}%`
                                   }}
                                 />
                                 <input
                                   type="range"
                                   min="0"
                                   max="100"
-                                  value={peRatio[0]}
-                                  onChange={(e) => setPeRatio([parseInt(e.target.value), peRatio[1]])}
+                                  value={peRatio[0] ?? 0}
+                                  onChange={(e) => setPeRatio([parseInt(e.target.value), peRatio[1] ?? 100])}
                                   className="absolute top-0 w-full h-2 bg-transparent appearance-none cursor-pointer slider"
                                 />
                                 <input
                                   type="range"
                                   min="0"
                                   max="100"
-                                  value={peRatio[1]}
-                                  onChange={(e) => setPeRatio([peRatio[0], parseInt(e.target.value)])}
+                                  value={peRatio[1] ?? 100}
+                                  onChange={(e) => setPeRatio([peRatio[0] ?? 0, parseInt(e.target.value)])}
                                   className="absolute top-0 w-full h-2 bg-transparent appearance-none cursor-pointer slider"
                                 />
                               </div>

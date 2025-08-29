@@ -71,10 +71,12 @@ export const YFinanceSetupStatus: React.FC = () => {
 
       // Provide different error messages based on error type
       let errorMessage = "Failed to connect to YFinance service";
-      if (error.name === "AbortError") {
-        errorMessage = "Request timeout - service may be slow";
-      } else if (error.message.includes("fetch")) {
-        errorMessage = "Network connectivity issue";
+      if (error instanceof Error) {
+        if (error.name === "AbortError") {
+          errorMessage = "Request timeout - service may be slow";
+        } else if (error.message.includes("fetch")) {
+          errorMessage = "Network connectivity issue";
+        }
       }
 
       // If this is the first failure, assume YFinance is not available rather than erroring

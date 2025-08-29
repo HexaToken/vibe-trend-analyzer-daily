@@ -84,7 +84,9 @@ export const NewsDemo = () => {
     return "Negative";
   };
 
-  const renderArticleCard = (article: any, index: number) => (
+import { NewsArticle } from '@/types/common';
+
+  const renderArticleCard = (article: NewsArticle, index: number) => (
     <div
       key={article.id || index}
       className="p-4 border rounded-lg hover:shadow-md transition-shadow cursor-pointer"

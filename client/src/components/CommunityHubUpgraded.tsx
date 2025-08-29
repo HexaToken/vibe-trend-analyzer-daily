@@ -423,7 +423,7 @@ export const CommunityHubUpgraded: React.FC<CommunityHubUpgradedProps> = ({ onNa
       ...prev,
       poll: {
         ...prev.poll,
-        myVote: optionIndex,
+        myVote: optionIndex as any, // FIXME: Type issue with poll state
         options: prev.poll.options.map((opt, idx) => 
           idx === optionIndex ? { ...opt, votes: opt.votes + 1 } : opt
         ),
