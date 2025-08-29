@@ -255,18 +255,27 @@ const AppContent = () => {
 
   const isChartPage = activeSection === "charts" || activeSection === "trading-chart";
   const { themeMode } = useMoodTheme();
+  const isDayMode = themeMode === 'light';
 
-  // Use TradingView Day Mode specific gradient
+  // Comprehensive body classes with day mode support
   const getBodyClasses = () => {
     if (isChartPage) return "ns-page";
-    return `min-h-screen ${bodyGradient} transition-all duration-500`;
+
+    const baseClasses = "min-h-screen transition-all duration-500";
+    const backgroundClasses = isDayMode ? "bg-[#FFFFFF] day-mode-container" : bodyGradient;
+    const modeClasses = isDayMode ? "day-mode" : "";
+
+    return `${baseClasses} ${backgroundClasses} ${modeClasses}`;
   };
 
   return (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <div className={cn(getBodyClasses())}>
+      <div
+        className={cn(getBodyClasses())}
+        data-theme={themeMode}
+      >
         {!isChartPage && (
           <ResponsiveModernHeader
             activeSection={activeSection}
