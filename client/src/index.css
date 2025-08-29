@@ -1456,6 +1456,47 @@ All colors MUST be HSL.
     color: white !important;
   }
 
+  /* Force light mode text to be dark - override any remaining white text */
+  :root:not(.dark) .text-white {
+    color: #2A2E39 !important;
+  }
+
+  /* Target all text elements in Day Mode containers */
+  [class*="day-mode"] *,
+  .day-mode-container *,
+  :root:not(.dark) .day-mode-container *,
+  :root:not(.dark) [class*="day-mode"] * {
+    color: #2A2E39 !important;
+  }
+
+  /* Preserve white text only on colored backgrounds - highest specificity */
+  :root:not(.dark) .bg-green-600,
+  :root:not(.dark) .bg-green-600 *,
+  :root:not(.dark) .bg-red-500,
+  :root:not(.dark) .bg-red-500 *,
+  :root:not(.dark) .bg-blue-600,
+  :root:not(.dark) .bg-blue-600 *,
+  :root:not(.dark) .bg-yellow-600,
+  :root:not(.dark) .bg-yellow-600 *,
+  :root:not(.dark) .bg-gray-600,
+  :root:not(.dark) .bg-gray-600 *,
+  :root:not(.dark) .bg-indigo-600,
+  :root:not(.dark) .bg-indigo-600 *,
+  [class*="day-mode"] .bg-green-600,
+  [class*="day-mode"] .bg-green-600 *,
+  [class*="day-mode"] .bg-red-500,
+  [class*="day-mode"] .bg-red-500 *,
+  [class*="day-mode"] .bg-blue-600,
+  [class*="day-mode"] .bg-blue-600 *,
+  [class*="day-mode"] .bg-yellow-600,
+  [class*="day-mode"] .bg-yellow-600 *,
+  [class*="day-mode"] .bg-gray-600,
+  [class*="day-mode"] .bg-gray-600 *,
+  [class*="day-mode"] .bg-indigo-600,
+  [class*="day-mode"] .bg-indigo-600 * {
+    color: #FFFFFF !important;
+  }
+
   /* Exception for Sentiment Surface title - preserve its gradient */
   :root:not(.dark) h2.bg-gradient-to-r.from-red-400.via-yellow-400.to-green-400 {
     background: linear-gradient(to right, #f87171, #facc15, #4ade80) !important;
