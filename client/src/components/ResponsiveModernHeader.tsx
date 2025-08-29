@@ -257,9 +257,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                   align="center"
                   className={cn(
                     "w-56 backdrop-blur-xl rounded-xl z-[100] shadow-xl",
-                    isDayMode
-                      ? "!bg-white !border-[#E0E3EB] !text-[#2A2E39]"
-                      : isLightMode
+                    isLightMode
                       ? "!bg-white !border-gray-200 !text-gray-900"
                       : "!bg-[#0A0A23]/95 !border-gray-700 !text-white"
                   )}
