@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { Activity, TrendingUp, Calendar, BarChart3 } from "lucide-react";
-import { useRechartsTheme, useLockedDataColors } from "../../hooks/useRechartsTheme";
 
 interface MoodTrendChartProps {
   data: Array<{
@@ -22,9 +21,6 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
   timeframe,
   setTimeframe,
 }) => {
-  // 🔒 Use locked theme colors
-  const lockedTheme = useRechartsTheme();
-  const lockedColors = useLockedDataColors();
   const maxScore = Math.max(
     ...data.map((d) => Math.max(d.score, d.stocks, d.news, d.social)),
   );
@@ -203,8 +199,8 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
               <path
                 d={generatePath(data.map((d) => d.stocks))}
                 fill="none"
-                stroke={lockedColors?.getSeriesColor('stocks') || "#3B82F6"}
-                strokeWidth={lockedTheme?.chartDefaults.strokeWidth || "0.6"}
+                stroke="#3B82F6"
+                strokeWidth="0.6"
                 strokeDasharray="2,2"
                 opacity="0.7"
                 className="chart-line-stocks"
@@ -214,8 +210,8 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
               <path
                 d={generatePath(data.map((d) => d.news))}
                 fill="none"
-                stroke={lockedColors?.getSeriesColor('news') || "#8B5CF6"}
-                strokeWidth={lockedTheme?.chartDefaults.strokeWidth || "0.6"}
+                stroke="#8B5CF6"
+                strokeWidth="0.6"
                 strokeDasharray="2,2"
                 opacity="0.7"
                 className="chart-line-news"
@@ -225,8 +221,8 @@ export const MoodTrendChart: React.FC<MoodTrendChartProps> = ({
               <path
                 d={generatePath(data.map((d) => d.social))}
                 fill="none"
-                stroke={lockedColors?.getSeriesColor('social') || "#6366F1"}
-                strokeWidth={lockedTheme?.chartDefaults.strokeWidth || "0.6"}
+                stroke="#6366F1"
+                strokeWidth="0.6"
                 strokeDasharray="2,2"
                 opacity="0.7"
                 className="chart-line-social"

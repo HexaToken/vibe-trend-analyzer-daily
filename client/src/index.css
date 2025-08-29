@@ -16,9 +16,6 @@
 /* Import Light Mode Theme Colors */
 @import './styles/light-mode-theme-colors.css';
 
-/* Import Recharts Theme Defaults */
-@import './styles/recharts-theme-defaults.css';
-
 /* Import Color Palette Overrides - MUST BE LAST */
 @import './styles/color-palette-overrides.css';
 
