@@ -1,8 +1,30 @@
 /* Complete Day Mode Override System - TradingView Light Theme */
 /* This file provides comprehensive Day Mode styling without affecting dark mode */
 
-/* Core Day Mode Container Styling */
+/* Override CSS Variables for shadcn components in Day Mode */
 .day-mode-container {
+  /* Background and text CSS variables override */
+  --background: 0 0% 100% !important; /* #FFFFFF */
+  --foreground: 214 16% 16% !important; /* #2A2E39 */
+  --card: 0 0% 100% !important; /* #FFFFFF */
+  --card-foreground: 214 16% 16% !important; /* #2A2E39 */
+  --popover: 0 0% 100% !important;
+  --popover-foreground: 214 16% 16% !important;
+  --primary: 225 100% 60% !important; /* #2962FF */
+  --primary-foreground: 0 0% 100% !important;
+  --secondary: 220 13% 34% !important; /* #4B5563 */
+  --secondary-foreground: 0 0% 100% !important;
+  --muted: 216 12% 84% !important; /* #E0E3EB */
+  --muted-foreground: 220 13% 34% !important; /* #4B5563 */
+  --accent: 225 100% 60% !important; /* #2962FF */
+  --accent-foreground: 0 0% 100% !important;
+  --destructive: 0 84% 60% !important;
+  --destructive-foreground: 0 0% 100% !important;
+  --border: 216 12% 84% !important; /* #E0E3EB */
+  --input: 216 12% 84% !important;
+  --ring: 225 100% 60% !important;
+  
+  /* Core styling */
   background-color: #FFFFFF !important;
   color: #2A2E39 !important;
 }
@@ -236,4 +258,41 @@ html body .day-mode-container .text-blue-600 {
 
 html body .day-mode-container {
   background-color: #FFFFFF !important;
+}
+
+/* Override all Tailwind color classes specifically */
+.day-mode-container .text-gray-900,
+.day-mode-container .text-slate-900 {
+  color: #2A2E39 !important;
+}
+
+.day-mode-container .text-gray-800,
+.day-mode-container .text-slate-800 {
+  color: #2A2E39 !important;
+}
+
+.day-mode-container .text-gray-700,
+.day-mode-container .text-slate-700 {
+  color: #4B5563 !important;
+}
+
+.day-mode-container .text-gray-600,
+.day-mode-container .text-slate-600 {
+  color: #4B5563 !important;
+}
+
+/* Force all text elements to use correct colors */
+.day-mode-container * {
+  --tw-text-opacity: 1 !important;
+}
+
+.day-mode-container h1,
+.day-mode-container h2,
+.day-mode-container h3 {
+  color: rgb(42 46 57) !important; /* #2A2E39 as RGB */
+}
+
+.day-mode-container p,
+.day-mode-container span:not(.bg-gradient) {
+  color: rgb(75 85 99) !important; /* #4B5563 as RGB */
 }

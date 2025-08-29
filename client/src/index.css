@@ -38,6 +38,8 @@
 /* Import Complete Day Mode System - FINAL PRIORITY */
 @import './styles/day-mode-complete.css';
 
+
+
 /* Ticker bar auto-scroll animation */
 @keyframes scroll-ticker {
   0% {
