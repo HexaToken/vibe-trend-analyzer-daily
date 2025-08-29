@@ -2747,8 +2747,10 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               </div>
             </div>
 
-            {/* Subtitle - Always dark theme text */}
-            <p className="text-xl text-gray-200 max-w-3xl mx-auto mb-12 leading-relaxed on-gradient-text-soft">
+            {/* Subtitle - Theme-adaptive text */}
+            <p className={`text-xl max-w-3xl mx-auto mb-12 leading-relaxed on-gradient-text-soft ${
+              themeMode === 'light' ? 'text-gray-700' : 'text-gray-200'
+            }`}>
               Advanced AI-powered sentiment analysis with intelligent insights and mood breakdown
             </p>
           </div>
