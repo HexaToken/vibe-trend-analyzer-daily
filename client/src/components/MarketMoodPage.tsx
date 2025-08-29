@@ -19,6 +19,7 @@ import { useMoodTheme } from '../contexts/MoodThemeContext';
 
 // Import our new Market Mood components
 import { FinanceMoodGauge } from './builder/FinanceMoodGauge';
+import { MarketDrivers } from './builder/MarketDrivers';
 import { FinanceMoodChart } from './builder/FinanceMoodChart';
 import { FinanceNewsFeed } from './builder/FinanceNewsFeed';
 import { SocialBuzzHeatmap } from './builder/SocialBuzzHeatmap';
