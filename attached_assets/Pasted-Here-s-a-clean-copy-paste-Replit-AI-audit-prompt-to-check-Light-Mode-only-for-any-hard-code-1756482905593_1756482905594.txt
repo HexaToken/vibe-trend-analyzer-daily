@@ -1,0 +1,54 @@
+Here’s a clean, copy-paste **Replit AI audit prompt** to **check Light Mode only** for any hard-coded colors or overrides that hurt readability—**without changing Night Mode** and **without touching the Hero**.
+
+---
+
+**Replit AI Prompt — Light Mode Audit (no code changes):**
+
+> **Task:** Audit the MoodMeter codebase for any **hardcoded styles or overrides** that negatively affect **Light Mode (`[data-theme="day"]`)**.
+>
+> **Do not change:**
+>
+> * Any **Night/Dark Mode** styles or tokens.
+> * The **Hero** section (`.hero`) — no edits, no flags from inside it.
+>
+> **Scope to search:**
+>
+> * Files: `**/*.tsx`, `**/*.jsx`, `**/*.ts`, `**/*.js`, `**/*.css`, `**/*.scss`, `**/*.html`.
+> * Tailwind utilities that force light text: `text-white`, `text-gray-100`, `text-slate-100`, `text-neutral-100`.
+> * Low-opacity utilities on text: `opacity-50`, `opacity-60`, `opacity-70`, etc.
+> * Inline styles or CSS that hardcode light foregrounds on white backgrounds:
+>
+>   * `color: white`, `color:#fff`, `#f8f9fa`, `#f9fafb`, `#e5e7eb`, `#f3f4f6`, `rgba(255,255,255,*)`, etc.
+> * Any selectors that override Light Mode tokens (e.g., rules that set `color` on text elements inside containers that render on white backgrounds).
+> * Import-order problems that could cause Light Mode overrides to lose to Tailwind utilities (e.g., Day Mode CSS imported before `@tailwind utilities` or outside of `@layer`).
+>
+> **Exclude from results:**
+>
+> * Any code within `.hero` or its descendants.
+> * Any selectors or files gated by `[data-theme="dark"]`.
+>
+> **Output a report only (no changes):**
+> For each finding, list:
+>
+> 1. **File path**
+> 2. **Line number**
+> 3. **Snippet** (1–3 lines)
+> 4. **Why it’s risky for Light Mode** (one sentence)
+> 5. **Suggested fix** (e.g., use `var(--text-primary)` or `var(--text-secondary)`, move override into `@layer utilities`, or rely on theme tokens)
+>
+> **Special checks:**
+>
+> * Flag any CSS outside `@layer` that attempts to override Tailwind utilities for Day Mode.
+> * Flag any component that imports additional CSS after the global stylesheet (possible order conflict).
+> * Flag any `!important` text colors that would override Day Mode variables.
+>
+> **Acceptance criteria:**
+>
+> * Comprehensive list of Light Mode–breaking hardcodes and overrides.
+> * No false positives from Dark Mode or Hero.
+> * Clear, actionable suggested fixes for each item.
+> * No code modifications performed in this step.
+
+---
+
+Want a follow-up prompt to **auto-fix** the reported items (still leaving Dark Mode and Hero untouched)?
