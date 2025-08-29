@@ -1,6 +1,37 @@
-/* Day Mode Force Override Styles */
-.day-mode {
+/* Day Mode Force Override Styles - Maximum CSS Specificity */
+
+/* Override all text color rules with ultra-high specificity */
+html body .day-mode h1, html body .day-mode h2, html body .day-mode h3, 
+html body .day-mode h4, html body .day-mode h5, html body .day-mode h6,
+html body .day-mode .text-lg, html body .day-mode .font-bold, 
+html body .day-mode .font-semibold {
+  color: #2A2E39 !important;
+  font-weight: 600 !important;
+}
+
+html body .day-mode p, html body .day-mode span, html body .day-mode div,
+html body .day-mode .text-sm, html body .day-mode .text-xs,
+html body .day-mode .text-gray-900, html body .day-mode .text-gray-800,
+html body .day-mode .text-gray-700, html body .day-mode .text-gray-600 {
+  color: #4B5563 !important;
+  font-weight: 500 !important;
+}
+
+html body .day-mode .text-blue-600, html body .day-mode .text-blue-500 {
+  color: #2962FF !important;
+}
+
+/* Background and border overrides */
+html body .day-mode, html body .day-mode .bg-white, html body .day-mode .bg-gray-50 {
   background-color: #FFFFFF !important;
+}
+
+html body .day-mode .bg-blue-50, html body .day-mode .bg-gray-100 {
+  background-color: #F9FAFB !important;
+}
+
+html body .day-mode .border, html body .day-mode .border-t, 
+html body .day-mode .border-gray-200, html body .day-mode .border-gray-300 {
   border-color: #E0E3EB !important;
 }
 

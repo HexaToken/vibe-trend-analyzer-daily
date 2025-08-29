@@ -172,15 +172,31 @@
   background-color: hsl(220 9% 98%) !important;
 }
 
-/* Force high contrast for Smart News Feed content */
-.day-mode .text-gray-900 {
-  color: hsl(0 0% 7%) !important; /* Nearly black for maximum contrast */
+/* Force TradingView Day Mode colors for all text elements */
+.day-mode h1, .day-mode h2, .day-mode h3, .day-mode h4, .day-mode h5, .day-mode h6,
+.day-mode .text-gray-900, .day-mode .text-lg, .day-mode .font-bold, .day-mode .font-semibold {
+  color: #2A2E39 !important; /* TradingView primary text */
+  font-weight: 600 !important;
 }
 
-.day-mode .text-gray-800 {
-  color: hsl(0 0% 15%) !important; /* Very dark gray */
+.day-mode p, .day-mode span, .day-mode .text-sm, .day-mode .text-xs,
+.day-mode .text-gray-700, .day-mode .text-gray-600, .day-mode .text-gray-800 {
+  color: #4B5563 !important; /* TradingView secondary text */
+  font-weight: 500 !important;
 }
 
-.day-mode .text-gray-700 {
-  color: hsl(0 0% 25%) !important; /* Dark gray */
+.day-mode .text-blue-600, .day-mode .text-blue-500 {
+  color: #2962FF !important; /* TradingView blue accent */
+}
+
+.day-mode .bg-white, .day-mode .bg-gray-50 {
+  background-color: #FFFFFF !important;
+}
+
+.day-mode .bg-blue-50 {
+  background-color: #F9FAFB !important;
+}
+
+.day-mode .border, .day-mode .border-t, .day-mode .border-gray-200 {
+  border-color: #E0E3EB !important;
 }
