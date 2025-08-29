@@ -191,8 +191,8 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
 
         {/* AI Controls */}
         <div className="space-y-3">
-          <label className="text-sm font-medium text-white flex items-center gap-2">
-            <Brain className="w-4 h-4 text-cyan-400" />
+          <label className="text-sm font-medium text-theme-primary flex items-center gap-2">
+            <Brain className="w-4 h-4 text-primary" />
             AI Analysis
           </label>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
