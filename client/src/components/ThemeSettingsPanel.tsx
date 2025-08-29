@@ -11,7 +11,7 @@ import { Dialog, DialogContent } from './ui/dialog';
 import { useMoodTheme } from '../contexts/MoodThemeContext';
 
 interface ThemeOption {
-  id: 'light' | 'dark' | 'dynamic' | 'day';
+  id: 'light' | 'dark' | 'dynamic';
   label: string;
   description: string;
   icon: React.ReactNode;
@@ -61,14 +61,6 @@ export const ThemeSettingsPanel: React.FC<ThemeSettingsPanelProps> = ({
 
   const themeOptions: ThemeOption[] = [
     {
-      id: 'day',
-      label: 'Day Mode',
-      description: 'TradingView inspired light theme',
-      icon: <Sun className="w-5 h-5" />,
-      gradient: 'from-blue-500 to-blue-600',
-      activeColor: 'ring-blue-400/50 bg-blue-500/10',
-    },
-    {
       id: 'light',
       label: 'Light Mode',
       description: 'Classic bright theme',
@@ -110,7 +102,7 @@ export const ThemeSettingsPanel: React.FC<ThemeSettingsPanelProps> = ({
     }
   }
 
-  const handleThemeChange = (themeId: 'light' | 'dark' | 'dynamic' | 'day') => {
+  const handleThemeChange = (themeId: 'light' | 'dark' | 'dynamic') => {
     setThemeMode(themeId);
     
     // Store in localStorage for persistence
