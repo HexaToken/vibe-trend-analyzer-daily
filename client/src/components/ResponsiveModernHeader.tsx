@@ -40,7 +40,6 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
   // Theme-responsive styles
   const isLightMode = themeMode === 'light';
   const isDarkMode = themeMode === 'dark' || isDynamicMode;
-  const isDayMode = themeMode === 'day';
 
   // Enhanced scroll detection for header behavior
   useEffect(() => {
