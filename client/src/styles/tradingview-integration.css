@@ -432,6 +432,25 @@
   background-color: rgba(58, 122, 254, 0.1) !important;
 }
 
+/* Fix AISentimentEngine tab styling specifically */
+:root:not(.dark) .mood-sentiment-tabs [role="tab"]:not([data-state="active"]) {
+  color: #6B7280 !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+:root:not(.dark) .mood-sentiment-tabs [role="tab"]:not([data-state="active"]):hover {
+  color: #3A7AFE !important;
+  background-color: rgba(58, 122, 254, 0.1) !important;
+  border-color: transparent !important;
+}
+
+:root:not(.dark) .mood-sentiment-tabs [role="tab"][data-state="active"] {
+  color: #3A7AFE !important;
+  background-color: rgba(58, 122, 254, 0.2) !important;
+  border-color: rgba(58, 122, 254, 0.3) !important;
+}
+
 /* Fix dropdown menu styling in light mode */
 :root:not(.dark):not(.tradingview-day) [data-radix-dropdown-menu-content] {
   background: #FFFFFF !important;
