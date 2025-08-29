@@ -543,12 +543,15 @@ const SmartNewsFeedPage: React.FC = () => {
                 "text-sm whitespace-nowrap flex items-center gap-2",
                 themeMode === 'light'
                   ? activeFilter === option.label
-                    ? "bg-[#2962FF] text-white hover:bg-[#1e4fd6] shadow-lg"
+                    ? "bg-[#2962FF] hover:bg-[#1e4fd6] shadow-lg"
                     : "text-[#4B5563] hover:bg-[#F9FAFB] hover:text-[#2A2E39]"
                   : activeFilter === option.label
                     ? "bg-white/20 text-white border-white/30 hover:bg-white/25 shadow-lg"
                     : "text-white/80 hover:bg-white/10 hover:text-white"
               )}
+              style={themeMode === 'light' && activeFilter === option.label ? 
+                { backgroundColor: '#2962FF', color: '#FFFFFF', borderColor: '#2962FF' } : {}
+              }
             >
               {option.icon}
               {option.label}
