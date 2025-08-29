@@ -183,7 +183,7 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
               )}>
                 <div className="text-4xl">{getSentimentEmoji(moodScore.overall)}</div>
                 <div>
-                  <div className="text-2xl font-bold text-card-foreground">
+                  <div className="text-2xl font-bold text-white dark:text-card-foreground">
                     {getSentimentLabel(moodScore.overall)} ({Math.round(moodScore.overall)})
                   </div>
                   <Badge className={cn("mt-1", getSentimentColor(overallSentiment))}>
