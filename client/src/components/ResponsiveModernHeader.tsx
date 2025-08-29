@@ -278,15 +278,17 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                   align="center"
                   className={cn(
                     "w-56 backdrop-blur-xl rounded-xl z-[100] shadow-xl",
-                    isLightMode
+                    isDayMode
+                      ? "!bg-white !border-[#E0E3EB] !text-[#2A2E39]"
+                      : isLightMode
                       ? "!bg-white !border-gray-200 !text-gray-900"
                       : "!bg-[#0A0A23]/95 !border-gray-700 !text-white"
                   )}
                   sideOffset={5}
                   style={{
-                    backgroundColor: isLightMode ? 'white' : 'rgba(10, 10, 35, 0.95)',
-                    borderColor: isLightMode ? 'rgb(229 231 235)' : 'rgb(55 65 81)',
-                    color: isLightMode ? 'rgb(17 24 39)' : 'white',
+                    backgroundColor: isDayMode ? 'white' : isLightMode ? 'white' : 'rgba(10, 10, 35, 0.95)',
+                    borderColor: isDayMode ? '#E0E3EB' : isLightMode ? 'rgb(229 231 235)' : 'rgb(55 65 81)',
+                    color: isDayMode ? '#2A2E39' : isLightMode ? 'rgb(17 24 39)' : 'white',
                     zIndex: 100
                   }}
                 >
@@ -296,7 +298,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                       onClick={() => handleNavigation(key)}
                       className={cn(
                         "hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer rounded-lg px-3 py-2 transition-colors",
-                        isLightMode ? "hover:bg-blue-500/10" : "hover:bg-purple-500/20"
+                        isDayMode ? "hover:bg-[rgba(41,98,255,0.1)]" : isLightMode ? "hover:bg-blue-500/10" : "hover:bg-purple-500/20"
                       )}
                     >
                       <span className="mr-3 text-lg">{icon}</span>
