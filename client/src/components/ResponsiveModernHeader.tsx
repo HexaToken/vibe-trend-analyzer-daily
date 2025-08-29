@@ -40,6 +40,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
   // Theme-responsive styles
   const isLightMode = themeMode === 'light';
   const isDarkMode = themeMode === 'dark' || isDynamicMode;
+  const isDayMode = themeMode === 'day';
 
   // Enhanced scroll detection for header behavior
   useEffect(() => {
@@ -175,10 +176,14 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                   className={cn(
                     "text-base font-medium px-3 py-2 rounded-lg transition-all duration-200 relative group",
                     activeSection === key
-                      ? isLightMode
+                      ? isDayMode
+                        ? "text-white bg-[#2962FF] font-semibold shadow-sm border border-[#2962FF]"
+                        : isLightMode
                         ? "text-primary-foreground bg-primary font-semibold shadow-sm"
                         : "text-pink-400 bg-pink-500/10"
-                      : isLightMode
+                      : isDayMode
+                        ? "text-[#4B5563] hover:text-[#2962FF] hover:bg-[rgba(41,98,255,0.1)] hover:border-[rgba(41,98,255,0.2)] border border-transparent"
+                        : isLightMode
                         ? "text-muted-foreground hover:text-primary hover:bg-muted"
                         : "text-gray-300 hover:text-gray-200"
                   )}
@@ -188,14 +193,18 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                   {activeSection === key && (
                     <div className={cn(
                       "absolute bottom-0 left-0 right-0 h-0.5 rounded-full",
-                      isLightMode
+                      isDayMode
+                        ? "bg-[#2962FF]"
+                        : isLightMode
                         ? "bg-primary"
                         : "bg-gradient-to-r from-pink-400 to-purple-500"
                     )} />
                   )}
                   <div className={cn(
                     "absolute bottom-0 left-0 right-0 h-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200",
-                    isLightMode
+                    isDayMode
+                      ? "bg-[#2962FF]"
+                      : isLightMode
                       ? "bg-primary"
                       : "bg-gradient-to-r from-pink-400 to-purple-500"
                   )} />
@@ -208,10 +217,14 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                 className={cn(
                   "text-base font-medium px-3 py-2 rounded-lg transition-all duration-200 relative group",
                   activeSection === "community"
-                    ? isLightMode
+                    ? isDayMode
+                      ? "text-white bg-[#2962FF] font-semibold shadow-sm border border-[#2962FF]"
+                      : isLightMode
                       ? "text-primary-foreground bg-primary font-semibold shadow-sm"
                       : "text-pink-400 bg-pink-500/10"
-                    : isLightMode
+                    : isDayMode
+                      ? "text-[#4B5563] hover:text-[#2962FF] hover:bg-[rgba(41,98,255,0.1)] hover:border-[rgba(41,98,255,0.2)] border border-transparent"
+                      : isLightMode
                       ? "text-muted-foreground hover:text-primary hover:bg-muted"
                       : "text-gray-300 hover:text-gray-200"
                 )}
