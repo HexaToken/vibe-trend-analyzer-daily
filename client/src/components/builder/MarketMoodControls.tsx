@@ -139,9 +139,10 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
                 onFocus={() => setIsSearchFocused(true)}
                 onBlur={() => setIsSearchFocused(false)}
                 className={cn(
-                  "pl-10 pr-4 py-3 bg-slate-800/50 border-slate-600 rounded-xl text-white placeholder-slate-400 transition-all duration-300",
-                  "focus:bg-slate-800/70 focus:border-cyan-400/50 focus:ring-0 focus:outline-none",
-                  isSearchFocused && "shadow-lg shadow-cyan-500/10 border-cyan-400/30"
+                  "pl-10 pr-4 py-3 rounded-xl transition-all duration-300",
+                  "bg-card border-border text-foreground placeholder:text-muted-foreground",
+                  "focus:border-primary/50 focus:ring-0 focus:outline-none",
+                  isSearchFocused && "shadow-lg shadow-primary/10 border-primary/30"
                 )}
               />
               {isSearchFocused && (
