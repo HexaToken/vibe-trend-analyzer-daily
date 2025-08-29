@@ -128,6 +128,8 @@ const SmartNewsFeedPage: React.FC = () => {
       type: 'trending_tickers',
       title: 'Trending Tickers',
       content: '$NVDA, $TSLA, $AAPL leading discussions',
+      value: '3.2K',
+      change: 15.7,
       icon: <TrendingUp className="w-5 h-5" />
     },
     {
@@ -136,6 +138,7 @@ const SmartNewsFeedPage: React.FC = () => {
       title: 'Most Bearish',
       content: 'Banking sector regulatory concerns',
       value: '-8.3%',
+      change: -2.1,
       icon: <TrendingDown className="w-5 h-5" />
     }
   ];
