@@ -104,9 +104,9 @@ export const ThemeSettingsPanel: React.FC<ThemeSettingsPanelProps> = ({
 
   const handleThemeChange = (themeId: 'light' | 'dark' | 'dynamic') => {
     setThemeMode(themeId);
-    
-    // Store in localStorage for persistence
-    localStorage.setItem('moodmeter-theme', themeId);
+
+    // Store in localStorage for persistence (using same key as MoodThemeContext)
+    localStorage.setItem('moodThemeMode', themeId);
     
     // Apply dynamic theme immediately if selected
     if (themeId === 'dynamic') {
