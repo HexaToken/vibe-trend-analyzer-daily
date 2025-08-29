@@ -254,14 +254,20 @@ const AppContent = () => {
   };
 
   const isChartPage = activeSection === "charts" || activeSection === "trading-chart";
+  const { themeMode } = useMoodTheme();
+
+  // Use TradingView Day Mode specific gradient
+  const getBodyClasses = () => {
+    if (isChartPage) return "ns-page";
+    if (themeMode === 'day') return `min-h-screen bg-white transition-all duration-500`;
+    return `min-h-screen ${bodyGradient} transition-all duration-500`;
+  };
 
   return (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <div className={cn(
-        isChartPage ? "ns-page" : `min-h-screen ${bodyGradient} transition-all duration-500`
-      )}>
+      <div className={cn(getBodyClasses())}>
         {!isChartPage && (
           <ResponsiveModernHeader
             activeSection={activeSection}
