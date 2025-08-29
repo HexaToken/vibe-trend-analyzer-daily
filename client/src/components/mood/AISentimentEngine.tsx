@@ -260,27 +260,27 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
               </Card>
 
               {/* Forums */}
-              <Card className="bg-black/30 border-cyan-500/20 hover:border-cyan-400/40 transition-all duration-300">
+              <Card className="bg-card border-cyan-200 hover:border-cyan-300 dark:border-cyan-500/20 dark:hover:border-cyan-400/40 dark:bg-black/30 transition-all duration-300">
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-white text-sm flex items-center gap-2">
+                  <CardTitle className="text-card-foreground text-sm flex items-center gap-2">
                     💬 Forums (30%)
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-cyan-400">{moodScore.social.toFixed(2)}</div>
-                    <div className="text-xs text-gray-400">Sentiment Score</div>
+                    <div className="text-2xl font-bold text-cyan-600 dark:text-cyan-400">{moodScore.social.toFixed(2)}</div>
+                    <div className="text-xs text-muted-foreground">Sentiment Score</div>
                   </div>
                   <div className="space-y-2">
-                    <div className="text-xs font-medium text-white">Trending:</div>
+                    <div className="text-xs font-medium text-card-foreground">Trending:</div>
                     <div className="flex flex-wrap gap-1">
                       {forumTrends.map((trend, i) => (
-                        <Badge key={i} className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30 text-xs">
+                        <Badge key={i} className="bg-cyan-100 text-cyan-700 border-cyan-200 dark:bg-cyan-500/20 dark:text-cyan-300 dark:border-cyan-500/30 text-xs">
                           {trend}
                         </Badge>
                       ))}
                     </div>
-                    <div className="text-xs text-gray-300">
+                    <div className="text-xs text-muted-foreground">
                       Reddit buzz rising on AI-related tickers
                     </div>
                   </div>
