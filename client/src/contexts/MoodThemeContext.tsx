@@ -201,7 +201,7 @@ export const MoodThemeProvider: React.FC<MoodThemeProviderProps> = ({ children }
   // Day Mode state management
   const [dayMode, setDayMode] = useState<DayMode>(() => {
     const stored = localStorage.getItem('dayMode');
-    return (stored as DayMode) || 'night';
+    return (stored as DayMode) || 'day';
   });
 
   const [moodScore, setMoodScore] = useState<MoodScore | null>(null);
