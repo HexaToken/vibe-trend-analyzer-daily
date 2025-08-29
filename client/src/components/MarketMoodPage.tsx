@@ -78,8 +78,8 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
   };
 
   const handleDriverClick = (driverId: string, category: string) => {
-    // Navigate to AI Sentiment Engine with focus on the specific category
-    setIsAISentimentEngineOpen(true);
+    // Open the AI Mood Breakdown panel for detailed analysis
+    setIsMoodBreakdownOpen(true);
     // You can add additional logic here to focus on specific driver analysis
     console.log(`Driver clicked: ${driverId} (${category})`);
   };
