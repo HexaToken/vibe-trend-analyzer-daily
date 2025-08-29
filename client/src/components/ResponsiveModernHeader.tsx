@@ -139,8 +139,8 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
           headerVisible ? "translate-y-0" : "-translate-y-full",
           isLightMode
             ? isScrolled
-              ? "bg-white/95 backdrop-blur-xl border-b border-gray-200/80 shadow-lg shadow-black/10"
-              : "bg-white/90 backdrop-blur-md border-b border-gray-200/50"
+              ? "bg-background/95 backdrop-blur-xl border-b border-border shadow-lg shadow-black/10"
+              : "bg-background/90 backdrop-blur-md border-b border-border/50"
             : isScrolled
               ? "bg-[#0A0A23]/95 backdrop-blur-xl border-b border-gray-800/50 shadow-lg shadow-black/20"
               : "bg-[#0A0A23]/80 backdrop-blur-md border-b border-gray-800/30"
