@@ -482,28 +482,28 @@ const SmartNewsFeedPage: React.FC = () => {
           {aiHighlights.map((highlight) => (
             <Card key={highlight.id} className={`transition-all duration-300 ${
               themeMode === 'light'
-                ? 'bg-white border border-gray-200 hover:border-blue-300 hover:shadow-md shadow-sm day-mode'
+                ? 'bg-[#FFFFFF] border border-[#E0E3EB] hover:border-[#2962FF] hover:shadow-md shadow-sm day-mode'
                 : 'bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border-white/20 hover:border-white/30 hover:shadow-lg hover:shadow-white/10'
             }`}>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
                   <div className={`flex-shrink-0 ${
                     themeMode === 'light' ? 'text-blue-600' : 'text-white/80'
-                  }`} style={themeMode === 'light' ? { color: '#2962FF !important' } : {}}>
+                  }`} style={themeMode === 'light' ? { color: '#2962FF' } : {}}>
                     {highlight.icon}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className={`text-sm font-medium mb-1 ${
+                    <h3 className={`text-sm font-semibold mb-1 ${
                       themeMode === 'light' ? 'text-gray-900' : 'text-white/90'
-                    }`} style={themeMode === 'light' ? { color: '#111827 !important', fontWeight: '600 !important' } : {}}>{highlight.title}</h3>
+                    }`} style={themeMode === 'light' ? { color: '#2A2E39', fontWeight: '600' } : {}}>{highlight.title}</h3>
                     <p className={`text-xs truncate ${
                       themeMode === 'light' ? 'text-gray-600' : 'text-white/70'
-                    }`} style={themeMode === 'light' ? { color: '#4B5563 !important', fontWeight: '500 !important' } : {}}>{highlight.content}</p>
+                    }`} style={themeMode === 'light' ? { color: '#4B5563', fontWeight: '500' } : {}}>{highlight.content}</p>
                     {highlight.value && (
                       <div className="flex items-center gap-2 mt-1">
                         <span className={`text-lg font-bold ${
                           themeMode === 'light' ? 'text-gray-900' : 'text-white'
-                        }`} style={themeMode === 'light' ? { color: '#111827 !important', fontWeight: '700 !important' } : {}}>{highlight.value}</span>
+                        }`} style={themeMode === 'light' ? { color: '#2A2E39', fontWeight: '700' } : {}}>{highlight.value}</span>
                         {highlight.change && (
                           <span className={cn(
                             "text-xs flex items-center gap-1",
@@ -536,8 +536,8 @@ const SmartNewsFeedPage: React.FC = () => {
                 "text-sm whitespace-nowrap flex items-center gap-2",
                 themeMode === 'light'
                   ? activeFilter === option.label
-                    ? "bg-blue-600 text-white hover:bg-blue-700 shadow-lg"
-                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                    ? "bg-[#2962FF] text-white hover:bg-[#1e4fd6] shadow-lg"
+                    : "text-[#4B5563] hover:bg-[#F9FAFB] hover:text-[#2A2E39]"
                   : activeFilter === option.label
                     ? "bg-white/20 text-white border-white/30 hover:bg-white/25 shadow-lg"
                     : "text-white/80 hover:bg-white/10 hover:text-white"
@@ -561,7 +561,7 @@ const SmartNewsFeedPage: React.FC = () => {
                 className={cn(
                   "transition-all duration-300 cursor-pointer group",
                   themeMode === 'light'
-                    ? "bg-white border border-gray-200 hover:bg-gray-50 hover:border-blue-300 shadow-sm hover:shadow-md"
+                    ? "bg-[#FFFFFF] border border-[#E0E3EB] hover:bg-[#F9FAFB] hover:border-[#2962FF] shadow-sm hover:shadow-md"
                     : "bg-black/20 backdrop-blur-sm border-white/10 hover:bg-black/30",
                   getSentimentGlow(article.sentiment)
                 )}
@@ -571,11 +571,11 @@ const SmartNewsFeedPage: React.FC = () => {
                   <div className="flex items-center gap-2 mb-4">
                     <span className={`text-sm font-medium ${
                       themeMode === 'light' ? 'text-gray-700' : 'text-white/80'
-                    }`}>{article.source}</span>
-                    <span className={themeMode === 'light' ? 'text-gray-400' : 'text-white/40'}>•</span>
+                    }`} style={themeMode === 'light' ? { color: '#4B5563', fontWeight: '500' } : {}}>{article.source}</span>
+                    <span className={themeMode === 'light' ? 'text-gray-400' : 'text-white/40'} style={themeMode === 'light' ? { color: '#9CA3AF' } : {}}>•</span>
                     <span className={`text-sm flex items-center gap-1 ${
                       themeMode === 'light' ? 'text-gray-600' : 'text-white/60'
-                    }`}>
+                    }`} style={themeMode === 'light' ? { color: '#4B5563' } : {}}>
                       <Clock className="w-3 h-3" />
                       {article.timestamp}
                     </span>
