@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { getIconFromEmoji, type IconConfig } from '../lib/iconUtils';
 import { LIGHT_THEME_COLORS, MOOD_COLORS, INTERACTIVE_COLORS, getMoodColor, getMoodTag, getMoodButton } from '../lib/moodColors';
 
-export type ThemeMode = 'light' | 'dark' | 'dynamic' | 'day';
+export type ThemeMode = 'light' | 'dark' | 'dynamic';
 
 export type MoodState = 'neutral' | 'bearish' | 'bullish' | 'extreme';
 
@@ -47,76 +47,6 @@ const MOOD_RANGES = {
 };
 
 const MOOD_THEMES = {
-  day: {
-    neutral: {
-      background: 'tv-bg-primary',
-      bodyGradient: 'from-white to-gray-50',
-      accentColor: 'from-blue-600 to-blue-500',
-      glowEffect: 'tv-shadow-md',
-      textPrimary: 'tv-text-primary',
-      textSecondary: 'tv-text-secondary',
-      textBody: 'tv-text-body',
-      cardBackground: 'tv-card tv-shadow-sm',
-      border: 'tv-border',
-      hoverEffect: 'hover:tv-shadow-md hover:-translate-y-0.5 transition-all duration-200',
-      buttonPrimary: 'tv-btn-primary',
-      buttonSecondary: 'tv-btn-secondary',
-      inputBackground: 'tv-input',
-      moodBackground: 'tv-bg-hover',
-      moodText: 'tv-text-muted',
-    },
-    bearish: {
-      background: 'tv-bg-primary',
-      bodyGradient: 'from-white to-red-50/30',
-      accentColor: 'from-red-500 to-red-400',
-      glowEffect: 'tv-shadow-md shadow-red-500/10',
-      textPrimary: 'tv-text-primary',
-      textSecondary: 'tv-text-secondary',
-      textBody: 'tv-text-body',
-      cardBackground: 'tv-card tv-shadow-sm',
-      border: 'tv-border',
-      hoverEffect: 'hover:tv-shadow-lg hover:shadow-red-500/20 hover:-translate-y-0.5 transition-all duration-200',
-      buttonPrimary: 'bg-red-500 text-white hover:bg-red-600',
-      buttonSecondary: 'tv-sentiment-negative-bg tv-sentiment-negative border',
-      inputBackground: 'tv-input',
-      moodBackground: 'tv-sentiment-negative-bg',
-      moodText: 'tv-sentiment-negative',
-    },
-    bullish: {
-      background: 'tv-bg-primary',
-      bodyGradient: 'from-white to-green-50/30',
-      accentColor: 'from-green-500 to-emerald-500',
-      glowEffect: 'tv-shadow-md shadow-green-500/10',
-      textPrimary: 'tv-text-primary',
-      textSecondary: 'tv-text-secondary',
-      textBody: 'tv-text-body',
-      cardBackground: 'tv-card tv-shadow-sm',
-      border: 'tv-border',
-      hoverEffect: 'hover:tv-shadow-lg hover:shadow-green-500/20 hover:-translate-y-0.5 transition-all duration-200',
-      buttonPrimary: 'bg-green-500 text-white hover:bg-green-600',
-      buttonSecondary: 'tv-sentiment-positive-bg tv-sentiment-positive border',
-      inputBackground: 'tv-input',
-      moodBackground: 'tv-sentiment-positive-bg',
-      moodText: 'tv-sentiment-positive',
-    },
-    extreme: {
-      background: 'tv-bg-primary',
-      bodyGradient: 'from-white to-blue-50/30',
-      accentColor: 'from-indigo-500 to-blue-500',
-      glowEffect: 'tv-shadow-md shadow-blue-500/10',
-      textPrimary: 'tv-text-primary',
-      textSecondary: 'tv-text-secondary',
-      textBody: 'tv-text-body',
-      cardBackground: 'tv-card tv-shadow-sm',
-      border: 'tv-border',
-      hoverEffect: 'hover:tv-shadow-lg hover:shadow-blue-500/20 hover:-translate-y-0.5 transition-all duration-200',
-      buttonPrimary: 'tv-btn-primary',
-      buttonSecondary: 'tv-sentiment-neutral-bg tv-sentiment-neutral border',
-      inputBackground: 'tv-input',
-      moodBackground: 'tv-sentiment-neutral-bg',
-      moodText: 'tv-sentiment-neutral',
-    }
-  },
   light: {
     neutral: {
       background: 'bg-gray-50',
@@ -288,8 +218,6 @@ export const MoodThemeProvider: React.FC<MoodThemeProviderProps> = ({ children }
 
     if (themeMode === 'dark' || isDynamicMode) {
       root.classList.add('dark');
-    } else if (themeMode === 'day') {
-      body.classList.add('tradingview-day');
     }
 
     // Apply custom CSS variables for mood theming
