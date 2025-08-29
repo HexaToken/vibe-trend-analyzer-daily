@@ -260,7 +260,8 @@ const AppContent = () => {
       <Toaster />
       <Sonner />
       <div className={cn(
-        isChartPage ? "ns-page" : `min-h-screen ${bodyGradient} transition-all duration-500`,
+        isChartPage ? "ns-page" : `min-h-screen transition-all duration-500`,
+        isDayMode ? "bg-[#FFFFFF] day-mode-container" : bodyGradient,
         isDayMode && "day-mode"
       )}>
         {!isChartPage && (
