@@ -118,8 +118,8 @@
   color: #9CA3AF !important;
 }
 
-/* Fix white text on light backgrounds (preserve on primary and hero) */
-[data-theme="light"] .text-white:not(.bg-primary *):not(.text-primary-foreground):not([class*="bg-primary"]):not(.hero *):not(.hero-sentiment-section *):not([class*="hero"] *) {
+/* Fix white text on light backgrounds (preserve on primary) */
+[data-theme="light"] .text-white:not(.bg-primary *):not(.text-primary-foreground):not([class*="bg-primary"]) {
   color: #2A2E39 !important;
 }
 
