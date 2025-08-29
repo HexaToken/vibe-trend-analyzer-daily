@@ -386,12 +386,12 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                 {mobileMenuOpen ? (
                   <X className={cn(
                     "w-5 h-5",
-                    isLightMode ? "text-gray-700" : "text-gray-300"
+                    isDayMode ? "text-[#4B5563]" : isLightMode ? "text-gray-700" : "text-gray-300"
                   )} />
                 ) : (
                   <Menu className={cn(
                     "w-5 h-5",
-                    isLightMode ? "text-gray-700" : "text-gray-300"
+                    isDayMode ? "text-[#4B5563]" : isLightMode ? "text-gray-700" : "text-gray-300"
                   )} />
                 )}
               </Button>
@@ -403,7 +403,9 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
         {mobileMenuOpen && (
           <div className={cn(
             "md:hidden backdrop-blur-xl animate-in slide-in-from-top duration-300",
-            isLightMode
+            isDayMode
+              ? "bg-white/95 border-t border-[#E0E3EB]/50"
+              : isLightMode
               ? "bg-white/95 border-t border-gray-200/50"
               : "bg-[#0A0A23]/95 border-t border-gray-800/50"
           )}>
