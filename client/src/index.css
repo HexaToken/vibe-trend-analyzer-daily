@@ -54,17 +54,17 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* MoodMeter Light Mode - Updated with specified color palette */
+    /* TradingView Light Mode Design Tokens */
     --background: 0 0% 100%; /* #FFFFFF - Main background */
-    --foreground: 0 0% 10%; /* #1A1A1A - Primary text */
+    --foreground: 230 12% 19%; /* #2A2E39 - Primary text */
 
-    --card: 0 0% 98%; /* #FAFAFA - Section/card backgrounds */
-    --card-foreground: 0 0% 10%; /* #1A1A1A - Primary text */
+    --card: 220 14% 98%; /* #F9FAFB - Section/card backgrounds */
+    --card-foreground: 230 12% 19%; /* #2A2E39 - Primary text */
 
-    --popover: 0 0% 98%; /* #FAFAFA */
-    --popover-foreground: 0 0% 10%; /* #1A1A1A */
+    --popover: 220 14% 98%; /* #F9FAFB */
+    --popover-foreground: 230 12% 19%; /* #2A2E39 */
 
-    --primary: 223 98% 61%; /* #3A7AFE - Primary accent blue */
+    --primary: 225 100% 58%; /* #2962FF - TradingView accent blue */
     --primary-foreground: 0 0% 100%;
 
     --secondary: 220 13% 34%; /* #4B5563 - Secondary text */
@@ -73,15 +73,15 @@ All colors MUST be HSL.
     --muted: 0 0% 96%; /* #F5F5F5 - Light gray backgrounds */
     --muted-foreground: 220 9% 57%; /* #9CA3AF - Muted text */
 
-    --accent: 223 98% 61%; /* #3A7AFE - Accent blue */
+    --accent: 225 100% 58%; /* #2962FF - TradingView accent blue */
     --accent-foreground: 0 0% 100%; /* White text on accent */
 
     --destructive: 0 84% 60%; /* #EF4444 - Red-500 for errors */
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 90%; /* #E6E6E6 - Borders/dividers */
-    --input: 0 0% 90%; /* #E6E6E6 - Input borders */
-    --ring: 223 98% 61%; /* #3A7AFE - Focus ring */
+    --border: 220 14% 91%; /* #E0E3EB - TradingView borders */
+    --input: 220 14% 91%; /* #E0E3EB - Input borders */
+    --ring: 225 100% 58%; /* #2962FF - Focus ring */
 
     --radius: 0.75rem; /* 12px border radius */
 
