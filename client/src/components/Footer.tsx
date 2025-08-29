@@ -74,13 +74,21 @@ export const Footer = ({ onNavigate, compact = false, className }: FooterProps) 
               )}>
                 NeomSense
               </div>
-              <Badge variant="secondary" className={`text-xs ${
-                themeMode === 'light'
-                  ? 'bg-gray-100 text-gray-700 border border-gray-300'
-                  : ''
-              }`}>
+              <span 
+                className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                  themeMode === 'light'
+                    ? 'bg-gray-100 text-gray-700 border border-gray-300 shadow-sm'
+                    : 'bg-secondary text-secondary-foreground'
+                }`}
+                style={themeMode === 'light' ? {
+                  backgroundColor: '#f3f4f6',
+                  color: '#374151',
+                  border: '1px solid #d1d5db',
+                  boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
+                } : {}}
+              >
                 v2.0
-              </Badge>
+              </span>
             </div>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
@@ -127,13 +135,21 @@ export const Footer = ({ onNavigate, compact = false, className }: FooterProps) 
               )}>
                 NeomSense
               </div>
-              <Badge variant="secondary" className={`text-xs ${
-                themeMode === 'light'
-                  ? 'bg-gray-100 text-gray-700 border border-gray-300 shadow-sm'
-                  : ''
-              }`}>
+              <span 
+                className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                  themeMode === 'light'
+                    ? 'bg-gray-100 text-gray-700 border border-gray-300 shadow-sm'
+                    : 'bg-secondary text-secondary-foreground'
+                }`}
+                style={themeMode === 'light' ? {
+                  backgroundColor: '#f3f4f6',
+                  color: '#374151',
+                  border: '1px solid #d1d5db',
+                  boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
+                } : {}}
+              >
                 v2.0
-              </Badge>
+              </span>
             </div>
             <p className={cn(
               "text-sm mb-6 max-w-xs",
@@ -190,13 +206,21 @@ export const Footer = ({ onNavigate, compact = false, className }: FooterProps) 
                       <Icon className="w-4 h-4" />
                       {link.label}
                       {link.badge && (
-                        <Badge variant="secondary" className={`ml-2 text-xs ${
-                          themeMode === 'light'
-                            ? 'bg-blue-100 text-blue-700 border border-blue-300'
-                            : ''
-                        }`}>
+                        <span 
+                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ml-2 ${
+                            themeMode === 'light'
+                              ? 'bg-blue-100 text-blue-700 border border-blue-300 shadow-sm'
+                              : 'bg-secondary text-secondary-foreground'
+                          }`}
+                          style={themeMode === 'light' ? {
+                            backgroundColor: '#dbeafe',
+                            color: '#1d4ed8',
+                            border: '1px solid #93c5fd',
+                            boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
+                          } : {}}
+                        >
                           {link.badge}
-                        </Badge>
+                        </span>
                       )}
                     </Button>
                   </li>
