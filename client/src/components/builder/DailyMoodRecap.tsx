@@ -132,7 +132,7 @@ export const DailyMoodRecap: React.FC<DailyMoodRecapProps> = ({
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-pink-500/5 to-purple-500/5 animate-pulse" />
         )}
 
-        <CardHeader className={themeMode === 'light' ? "border-b border-[#E6E6E6] theme-border" : "border-b border-purple-500/20"}>
+        <CardHeader className={themeMode === 'light' ? "border-b border-border" : "border-b border-purple-500/20"}>
           <CardTitle className={`flex items-center gap-3 ${
             themeMode === 'light' ? 'text-[#1A1A1A]' : 'text-white'
           }`}>
