@@ -130,7 +130,7 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
               "relative transition-all duration-300",
               isSearchFocused ? "transform scale-105" : ""
             )}>
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-theme-muted" />
               <Input
                 type="text"
                 placeholder="Search NVDA, AI, crypto..."
