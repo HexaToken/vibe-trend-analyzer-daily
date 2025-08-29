@@ -426,15 +426,4 @@
   --chart-primary: #2962FF;
 }
 
-/* ===== FINAL HERO PROTECTION RULE ===== */
-/* Absolute final catch-all to preserve hero section completely */
-[data-theme="light"] .hero,
-[data-theme="light"] .hero *,
-[data-theme="light"] .hero-sentiment-section,
-[data-theme="light"] .hero-sentiment-section *,
-[data-theme="light"] [class*="hero"],
-[data-theme="light"] [class*="hero"] * {
-  all: inherit !important;
-}
-
 /* ===== END LIGHT MODE OVERRIDES ===== */
