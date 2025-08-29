@@ -14,6 +14,7 @@ import {
 import { UserAuthenticationToggle } from './UserAuthenticationToggle';
 import { ThemeSettingsPanel } from './ThemeSettingsPanel';
 import { useMoodTheme } from '../contexts/MoodThemeContext';
+import { DayModeToggle } from './DayModeToggle';
 
 interface ModernHeaderProps {
   activeSection: string;
@@ -28,14 +29,14 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
   onNavigate,
   currentMoodScore = 72,
 }) => {
-  const { themeMode, isDynamicMode } = useMoodTheme();
+  const { themeMode, isDynamicMode, isDayMode, toggleDayMode } = useMoodTheme();
   const [searchFocused, setSearchFocused] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   // Theme-responsive styles
-  const isLightMode = themeMode === 'light';
-  const isDarkMode = themeMode === 'dark' || isDynamicMode;
+  const isLightMode = isDayMode && !isDynamicMode;
+  const isDarkMode = !isDayMode || isDynamicMode;
 
   // Handle scroll effect for sticky header
   useEffect(() => {
@@ -277,6 +278,13 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                 3
               </Badge>
             </Button>
+
+            {/* Day Mode Toggle */}
+            <DayModeToggle
+              isDayMode={isDayMode}
+              onToggle={toggleDayMode}
+              className="hidden sm:flex"
+            />
 
             {/* Theme Settings Panel */}
             <ThemeSettingsPanel currentMoodScore={currentMoodScore} />

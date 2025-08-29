@@ -105,7 +105,7 @@ interface FuturisticHomepageProps {
 }
 
 export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNavigate, initialSection }) => {
-  const { setMoodScore, themeMode, cardBackground, borderColor } = useMoodTheme();
+  const { setMoodScore, themeMode, cardBackground, borderColor, isDayMode } = useMoodTheme();
   const [activeSection, setActiveSection] = useState<'home' | 'market-mood' | 'watchlist' | 'news-feed' | 'community' | 'chat' | 'space' | 'rooms' | 'tool' | 'market' | 'crypto' | 'charts' | 'trending' | 'earnings' | 'finance' | 'screener' | 'trade-journal' | 'sentiment-polls'>(initialSection as any || 'home');
   const [activeToolSubtab, setActiveToolSubtab] = useState("Market");
   const [activeMarketSubtab, setActiveMarketSubtab] = useState("Tools");
@@ -275,7 +275,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
   };
 
   return (
-    <div className={`min-h-screen relative overflow-hidden ${
+    <div className={`min-h-screen relative overflow-hidden hero-section ${
       themeMode === 'light'
         ? 'bg-white'
         : 'bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900'
@@ -396,12 +396,12 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     : "data-[state=active]:text-white text-[#E0E0E0] flex items-center gap-2 transition-all duration-300 hover:text-white/90"
                   }
                   style={themeMode === 'light' ? {
-                    '--active-bg': 'linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%)',
-                    '--active-shadow': '0 2px 4px rgba(0, 0, 0, 0.05)'
-                  } : {
-                    '--active-bg': 'linear-gradient(to right, #2196F3, #3F51B5)',
-                    '--active-shadow': '0 4px 12px rgba(33, 150, 243, 0.3)'
-                  }}
+                    background: 'linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%)',
+                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)'
+                  } as React.CSSProperties : {
+                    background: 'linear-gradient(to right, #2196F3, #3F51B5)',
+                    boxShadow: '0 4px 12px rgba(33, 150, 243, 0.3)'
+                  } as React.CSSProperties}
                 >
                   📊 Risk Analysis
                 </TabsTrigger>
@@ -412,12 +412,12 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     : "data-[state=active]:text-white text-[#E0E0E0] flex items-center gap-2 transition-all duration-300 hover:text-white/90"
                   }
                   style={themeMode === 'light' ? {
-                    '--active-bg': 'linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%)',
-                    '--active-shadow': '0 2px 4px rgba(0, 0, 0, 0.05)'
-                  } : {
-                    '--active-bg': 'linear-gradient(to right, #9C27B0, #673AB7)',
-                    '--active-shadow': '0 4px 12px rgba(156, 39, 176, 0.3)'
-                  }}
+                    background: 'linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%)',
+                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)'
+                  } as React.CSSProperties : {
+                    background: 'linear-gradient(to right, #9C27B0, #673AB7)',
+                    boxShadow: '0 4px 12px rgba(156, 39, 176, 0.3)'
+                  } as React.CSSProperties}
                 >
                   📁 Financial Reports
                 </TabsTrigger>
@@ -428,13 +428,13 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     : "data-[state=active]:text-white text-[#E0E0E0] flex items-center gap-2 transition-all duration-300 hover:text-white/90"
                   }
                   style={themeMode === 'light' ? {
-                    '--active-bg': 'linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%)',
-                    '--active-shadow': '0 2px 4px rgba(0, 0, 0, 0.05)'
-                  } : {
-                    '--active-bg': 'linear-gradient(to right, #4CAF50, #3F51B5)',
-                    '--active-shadow': '0 4px 12px rgba(76, 175, 80, 0.3)'
-                  }}
-                  data-active-style="background: var(--active-bg); box-shadow: var(--active-shadow);"
+                    background: 'linear-gradient(90deg, #D2E3FC 0%, #B6D7FB 100%)',
+                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)'
+                  } as React.CSSProperties : {
+                    background: 'linear-gradient(to right, #4CAF50, #3F51B5)',
+                    boxShadow: '0 4px 12px rgba(76, 175, 80, 0.3)'
+                  } as React.CSSProperties}
+
                 >
                   ��� Geo-Sentiment
                 </TabsTrigger>

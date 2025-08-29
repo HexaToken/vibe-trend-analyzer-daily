@@ -19,6 +19,9 @@
 /* Import Color Palette Overrides - MUST BE LAST */
 @import './styles/color-palette-overrides.css';
 
+/* Import Day Mode Overrides */
+@import './styles/day-mode-overrides.css';
+
 /* Import Futuristic Chart Styling */
 @import './styles/futuristic-chart.css';
 
@@ -48,81 +51,120 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* MoodMeter Light Mode - Updated with specified color palette */
+    /* TradingView Light Mode - Day Mode Colors */
     --background: 0 0% 100%; /* #FFFFFF - Main background */
-    --foreground: 0 0% 10%; /* #1A1A1A - Primary text */
+    --foreground: 214 16% 16%; /* #2A2E39 - Deep gray primary text */
 
-    --card: 0 0% 98%; /* #FAFAFA - Section/card backgrounds */
-    --card-foreground: 0 0% 10%; /* #1A1A1A - Primary text */
+    --card: 220 9% 98%; /* #F9FAFB - Cards and panels */
+    --card-foreground: 214 16% 16%; /* #2A2E39 - Primary text */
 
-    --popover: 0 0% 98%; /* #FAFAFA */
-    --popover-foreground: 0 0% 10%; /* #1A1A1A */
+    --popover: 220 9% 98%; /* #F9FAFB */
+    --popover-foreground: 214 16% 16%; /* #2A2E39 */
 
-    --primary: 223 98% 61%; /* #3A7AFE - Primary accent blue */
+    --primary: 225 100% 60%; /* #2962FF - TradingView blue */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 13% 34%; /* #4B5563 - Secondary text */
+    --secondary: 220 13% 34%; /* #4B5563 - Medium gray secondary text */
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 0 0% 96%; /* #F5F5F5 - Light gray backgrounds */
-    --muted-foreground: 220 9% 57%; /* #9CA3AF - Muted text */
+    --muted: 216 12% 84%; /* #E0E3EB - Chart/grid lines */
+    --muted-foreground: 220 13% 34%; /* #4B5563 - Muted text */
 
-    --accent: 223 98% 61%; /* #3A7AFE - Accent blue */
-    --accent-foreground: 0 0% 100%; /* White text on accent */
+    --accent: 225 100% 60%; /* #2962FF - TradingView blue accent */
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%; /* #EF4444 - Red-500 for errors */
+    --destructive: 0 84% 60%; /* #EF4444 - Red for errors */
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 90%; /* #E6E6E6 - Borders/dividers */
-    --input: 0 0% 90%; /* #E6E6E6 - Input borders */
-    --ring: 223 98% 61%; /* #3A7AFE - Focus ring */
+    --border: 216 12% 84%; /* #E0E3EB - Light gray borders */
+    --input: 216 12% 84%; /* #E0E3EB - Input borders */
+    --ring: 225 100% 60%; /* #2962FF - Focus ring */
 
     --radius: 0.75rem; /* 12px border radius */
 
-    /* MoodMeter Sentiment Colors - Updated palette */
-    --positive: 168 71% 45%; /* #22AB94 - Positive text */
-    --positive-light: 168 76% 94%; /* #E8F8F4 - Positive background */
-    --negative: 354 85% 58%; /* #F23645 - Negative text */
-    --negative-light: 354 93% 93%; /* #FDECEC - Negative background */
-    --neutral: 220 13% 45%; /* #6B7280 - Neutral text */
+    /* TradingView Light Mode - Hover States */
+    --primary-hover: 225 100% 50%; /* #1E4FD1 - Hover blue */
+    
+    /* MoodMeter Sentiment Colors - Light Mode */
+    --positive: 134 61% 41%; /* #16A34A - Green-600 */
+    --positive-light: 134 61% 96%; /* #F0FDF4 - Green-50 */
+    --negative: 0 84% 60%; /* #EF4444 - Red-500 */
+    --negative-light: 0 93% 94%; /* #FEF2F2 - Red-50 */
+    --neutral: 220 13% 34%; /* #4B5563 - Medium gray */
     --neutral-light: 220 14% 96%; /* #F3F4F6 - Neutral background */
 
-    /* MoodMeter Mood Colors */
-    --mood-hype: 199 89% 48%; /* #0EA5E9 - Sky-500 for hype */
-    --mood-hype-light: 204 94% 94%; /* #E0F2FE - Sky-100 */
-    --mood-fear: 45 93% 47%; /* #EAB308 - Yellow-500 for fear */
-    --mood-fear-light: 55 92% 95%; /* #FEF3C7 - Yellow-100 */
+    /* Chart Colors for Light Mode */
+    --chart-1: 225 100% 60%; /* #2962FF - TradingView blue */
+    --chart-2: 134 61% 41%; /* #16A34A - Green */
+    --chart-3: 0 84% 60%; /* #EF4444 - Red */
+    --chart-4: 262 83% 58%; /* #8B5CF6 - Purple */
+    --chart-5: 43 96% 56%; /* #F59E0B - Amber */
 
-    /* Data Visualization - Updated chart colors */
-    --chart-primary: 223 98% 61%; /* #3A7AFE - Default line */
-    --chart-secondary: 168 71% 45%; /* #22AB94 - Positive trend line */
-    --chart-tertiary: 354 85% 58%; /* #F23645 - Negative trend line */
-    --chart-quaternary: 249 100% 69%; /* #7B61FF - Secondary accent purple */
-
-    /* Clean Financial Gradients */
-    --gradient-hero: linear-gradient(
-      135deg,
-      hsl(220 14% 96%) 0%,
-      hsl(0 0% 100%) 100%
-    );
+    /* TradingView Light Mode Gradients */
     --gradient-card: linear-gradient(
       145deg,
       hsl(0 0% 100%) 0%,
-      hsl(220 14% 98%) 100%
+      hsl(220 9% 98%) 100%
     );
     --gradient-positive: linear-gradient(
       90deg,
-      hsl(123 46% 49%) 0%,
-      hsl(123 46% 70%) 100%
+      hsl(134 61% 41%) 0%,
+      hsl(134 61% 50%) 100%
     );
     --gradient-negative: linear-gradient(
       90deg,
-      hsl(4 90% 58%) 0%,
-      hsl(4 90% 75%) 100%
+      hsl(0 84% 60%) 0%,
+      hsl(0 84% 70%) 100%
     );
 
-    /* Soft Shadows - Clean Design */
-    --shadow-glow: 0 2px 8px hsl(0 0% 0% / 0.04);
+    /* Light Mode Shadows */
+    --shadow-card: 0 1px 3px 0 hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow-hover: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -2px hsl(0 0% 0% / 0.1);
+  }
+
+  /* Dark Mode Variables */
+  .dark {
+    --background: 224 71% 4%; /* #0F0F23 */
+    --foreground: 213 31% 91%; /* #E2E8F0 */
+
+    --card: 224 71% 4%; /* #0F0F23 */
+    --card-foreground: 213 31% 91%; /* #E2E8F0 */
+
+    --popover: 224 71% 4%; /* #0F0F23 */
+    --popover-foreground: 213 31% 91%; /* #E2E8F0 */
+
+    --primary: 210 40% 98%; /* #F8FAFC */
+    --primary-foreground: 222.2 47.4% 11.2%; /* #1E293B */
+
+    --secondary: 222.2 84% 4.9%; /* #1E293B */
+    --secondary-foreground: 210 40% 98%; /* #F8FAFC */
+
+    --muted: 217.2 32.6% 17.5%; /* #334155 */
+    --muted-foreground: 215 20.2% 65.1%; /* #94A3B8 */
+
+    --accent: 217.2 32.6% 17.5%; /* #334155 */
+    --accent-foreground: 210 40% 98%; /* #F8FAFC */
+
+    --destructive: 0 63% 31%; /* #7F1D1D */
+    --destructive-foreground: 210 40% 98%; /* #F8FAFC */
+
+    --border: 217.2 32.6% 17.5%; /* #334155 */
+    --input: 217.2 32.6% 17.5%; /* #334155 */
+    --ring: 224 71% 4%; /* #0F0F23 */
+
+    /* Dark Mode Hover */
+    --primary-hover: 210 40% 85%; /* Lighter on hover */
+    
+    /* Dark Mode Charts */
+    --chart-1: 220 70% 50%; /* Blue */
+    --chart-2: 160 60% 45%; /* Green */
+    --chart-3: 30 80% 55%; /* Orange/Red */
+    --chart-4: 280 65% 60%; /* Purple */
+    --chart-5: 340 75% 55%; /* Pink */
+
+    /* Dark Mode Shadows */
+    --shadow-card: 0 0 0 1px hsl(217.2 32.6% 17.5% / 0.5);
+    --shadow-hover: 0 0 0 1px hsl(217.2 32.6% 25% / 0.8);
     --shadow-card: 0 2px 8px hsl(0 0% 0% / 0.04);
     --shadow-hover: 0 4px 12px hsl(0 0% 0% / 0.08);
 

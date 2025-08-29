@@ -78,7 +78,7 @@ const queryClient = new QueryClient();
 const AppContent = () => {
   const [activeSection, setActiveSection] = useState("futuristic-home");
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
-  const { bodyGradient } = useMoodTheme();
+  const { bodyGradient, isDayMode } = useMoodTheme();
 
   // Enhanced navigation handler to support user profile navigation
   const handleNavigation = (section: string, userId?: string) => {
@@ -260,7 +260,8 @@ const AppContent = () => {
       <Toaster />
       <Sonner />
       <div className={cn(
-        isChartPage ? "ns-page" : `min-h-screen ${bodyGradient} transition-all duration-500`
+        isChartPage ? "ns-page" : `min-h-screen ${bodyGradient} transition-all duration-500`,
+        isDayMode && "day-mode"
       )}>
         {!isChartPage && (
           <ResponsiveModernHeader
