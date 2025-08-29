@@ -1,33 +1,3 @@
-/* Import Light Mode Readability Enhancements */
-@import './styles/light-mode-readability.css';
-
-/* Import Sentiment Colors */
-@import './styles/sentiment-colors.css';
-
-/* Import Accent & Brand Colors */
-@import './styles/accent-brand-colors.css';
-
-/* Import Chart Colors */
-@import './styles/chart-colors.css';
-
-/* Import UI Interactions */
-@import './styles/ui-interactions.css';
-
-/* Import Light Mode Theme Colors */
-@import './styles/light-mode-theme-colors.css';
-
-/* Import Recharts Theme Defaults */
-@import './styles/recharts-theme-defaults.css';
-
-/* Import Color Palette Overrides - MUST BE LAST */
-@import './styles/color-palette-overrides.css';
-
-/* Import Futuristic Chart Styling */
-@import './styles/futuristic-chart.css';
-
-/* Import NeonSense Layout */
-@import './styles/neomsense-layout.css';
-
 /* Import MoodMeter Theme Utilities */
 @import './components/MoodThemeUtilities.css';
 
