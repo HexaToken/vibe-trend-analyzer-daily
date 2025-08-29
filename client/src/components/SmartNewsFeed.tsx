@@ -14,6 +14,7 @@ import {
   ExternalLink
 } from 'lucide-react';
 import { cn } from '../lib/utils';
+import { useMoodTheme } from '../contexts/MoodThemeContext';
 
 interface NewsItem {
   id: string;
@@ -34,6 +35,7 @@ interface SmartNewsFeedProps {
 }
 
 export const SmartNewsFeed: React.FC<SmartNewsFeedProps> = ({ className }) => {
+  const { isDayMode } = useMoodTheme();
   const [activeFilter, setActiveFilter] = useState<'all' | 'bullish' | 'neutral' | 'bearish'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedAnalysis, setExpandedAnalysis] = useState<string | null>(null);
@@ -196,16 +198,16 @@ export const SmartNewsFeed: React.FC<SmartNewsFeedProps> = ({ className }) => {
 
   return (
     <div className={cn("w-full", className)}>
-      <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
+      <Card className={isDayMode ? "bg-white border-gray-200 shadow-sm" : "bg-black/40 border-purple-500/20 backdrop-blur-xl"}>
         {/* Header with gradient */}
-        <CardHeader className="bg-gradient-to-r from-purple-600/30 to-violet-600/30 border-b border-purple-500/20 rounded-t-lg">
+        <CardHeader className={isDayMode ? "bg-gray-50 border-b border-gray-200 rounded-t-lg" : "bg-gradient-to-r from-purple-600/30 to-violet-600/30 border-b border-purple-500/20 rounded-t-lg"}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <CardTitle className="text-white flex items-center gap-2">
-                <Brain className="w-6 h-6 text-cyan-400" />
+              <CardTitle className={`flex items-center gap-2 ${isDayMode ? 'text-gray-900' : 'text-white'}`}>
+                <Brain className={`w-6 h-6 ${isDayMode ? 'text-blue-600' : 'text-cyan-400'}`} />
                 Smart News Feed
               </CardTitle>
-              <Badge className="bg-purple-200/20 text-purple-300 border-purple-400/30">
+              <Badge className={isDayMode ? "bg-blue-100 text-blue-700 border-blue-200" : "bg-purple-200/20 text-purple-300 border-purple-400/30"}>
                 AI Powered
               </Badge>
             </div>
@@ -217,18 +219,21 @@ export const SmartNewsFeed: React.FC<SmartNewsFeedProps> = ({ className }) => {
                   placeholder="Search news, tickers, or topics..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2 w-64 bg-black/30 border-purple-500/30 rounded-lg text-white placeholder-gray-400 focus:bg-black/50 focus:border-pink-400/50"
+                  className={isDayMode 
+                    ? "pl-10 pr-4 py-2 w-64 bg-white border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:border-blue-500"
+                    : "pl-10 pr-4 py-2 w-64 bg-black/30 border-purple-500/30 rounded-lg text-white placeholder-gray-400 focus:bg-black/50 focus:border-pink-400/50"
+                  }
                 />
               </div>
-              <Button variant="ghost" size="sm" className="p-2 hover:bg-purple-500/10 rounded-lg">
-                <RefreshCw className="w-4 h-4 text-gray-300 hover:text-purple-400" />
+              <Button variant="ghost" size="sm" className={isDayMode ? "p-2 hover:bg-gray-100 rounded-lg" : "p-2 hover:bg-purple-500/10 rounded-lg"}>
+                <RefreshCw className={`w-4 h-4 ${isDayMode ? 'text-gray-600 hover:text-blue-600' : 'text-gray-300 hover:text-purple-400'}`} />
               </Button>
             </div>
           </div>
         </CardHeader>
 
         {/* Filter Tabs */}
-        <div className="p-4 border-b border-purple-500/20">
+        <div className={isDayMode ? "p-4 border-b border-gray-200" : "p-4 border-b border-purple-500/20"}>
           <div className="flex items-center gap-3">
             {[
               { key: 'all', label: 'All News' },

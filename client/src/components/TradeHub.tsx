@@ -7,12 +7,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useMoodTheme } from "@/contexts/MoodThemeContext";
 
 interface TradeHubProps {
   onNavigate?: (section: string) => void;
 }
 
 export const TradeHub = ({ onNavigate }: TradeHubProps) => {
+  const { isDayMode } = useMoodTheme();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [priceFilter, setPriceFilter] = useState("all");
@@ -120,7 +122,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/30">
+    <div className={isDayMode ? "min-h-screen bg-gray-50" : "min-h-screen bg-gradient-to-br from-background via-background to-muted/30"}>
       <div className="container mx-auto px-4 py-8">
         {/* Header Section */}
         <div className="text-center mb-12">
