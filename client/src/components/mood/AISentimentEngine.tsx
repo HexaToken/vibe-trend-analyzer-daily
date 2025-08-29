@@ -153,17 +153,17 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
 
       <CardContent className="p-6">
         <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as 'mood' | 'insight')}>
-          <TabsList className="grid w-full grid-cols-2 bg-black/20 backdrop-blur-xl border border-gray-700/50 mb-6">
+          <TabsList className="grid w-full grid-cols-2 bg-muted backdrop-blur-xl border border-border mb-6">
             <TabsTrigger 
               value="mood" 
-              className="data-[state=active]:bg-purple-600/30 data-[state=active]:text-purple-300 flex items-center gap-2 transition-all duration-300"
+              className="data-[state=active]:bg-primary/20 data-[state=active]:text-primary flex items-center gap-2 transition-all duration-300"
             >
               <Brain className="w-4 h-4" />
               Today's Mood Breakdown
             </TabsTrigger>
             <TabsTrigger 
               value="insight" 
-              className="data-[state=active]:bg-blue-600/30 data-[state=active]:text-blue-300 flex items-center gap-2 transition-all duration-300"
+              className="data-[state=active]:bg-primary/20 data-[state=active]:text-primary flex items-center gap-2 transition-all duration-300"
             >
               <BarChart3 className="w-4 h-4" />
               AI Market Insight
@@ -175,10 +175,10 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
             
             {/* Main Sentiment Status */}
             <div className="text-center mb-6">
-              <div className="inline-flex items-center gap-3 p-4 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-2xl border border-purple-500/20">
+              <div className="inline-flex items-center gap-3 p-4 bg-gradient-to-r from-primary/10 to-primary/20 rounded-2xl border border-primary/20">
                 <div className="text-4xl">{getSentimentEmoji(moodScore.overall)}</div>
                 <div>
-                  <div className="text-2xl font-bold text-white">
+                  <div className="text-2xl font-bold text-card-foreground">
                     {getSentimentLabel(moodScore.overall)} ({Math.round(moodScore.overall)})
                   </div>
                   <Badge className={cn("mt-1", getSentimentColor(overallSentiment))}>
@@ -189,11 +189,11 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
             </div>
 
             {/* AI Generated Summary */}
-            <Card className="bg-gradient-to-r from-purple-500/5 to-pink-500/5 border-purple-500/20">
+            <Card className="bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
               <CardContent className="p-4">
-                <p className="text-gray-200 leading-relaxed">
-                  <strong className="text-purple-400">AI Summary:</strong> Today's market mood is{' '}
-                  <strong className="text-white">{getSentimentLabel(moodScore.overall)}</strong>. 
+                <p className="text-card-foreground leading-relaxed">
+                  <strong className="text-primary">AI Summary:</strong> Today's market mood is{' '}
+                  <strong className="text-card-foreground">{getSentimentLabel(moodScore.overall)}</strong>. 
                   Optimism is driven primarily by strong earnings from mega-cap tech stocks and favorable economic data. 
                   Social sentiment aligns with institutional positioning.
                 </p>
