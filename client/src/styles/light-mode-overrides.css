@@ -368,13 +368,55 @@
 }
 
 /* ===== PRESERVE HERO SECTION (EXCLUSIONS) ===== */
-/* Never apply light mode to hero section */
+/* Never apply light mode to hero section - Complete preservation */
+.hero,
 .hero *,
+.hero-sentiment-section,
 .hero-sentiment-section *,
+[class*="hero"],
 [class*="hero"] * {
-  /* Explicitly preserve all hero styling */
+  /* Explicitly preserve all hero styling - override any light mode rules */
   background: inherit !important;
   color: inherit !important;
+  border-color: inherit !important;
+  border: inherit !important;
+  box-shadow: inherit !important;
+  text-shadow: inherit !important;
+  backdrop-filter: inherit !important;
+  filter: inherit !important;
+}
+
+/* Specific hero text color preservation */
+.hero-sentiment-section .text-white,
+.hero-sentiment-section .text-purple-300,
+.hero-sentiment-section .text-gray-200,
+.hero .text-white,
+.hero .text-purple-300,
+.hero .text-gray-200 {
+  color: inherit !important;
+}
+
+/* Hero gradient preservation */
+.hero-sentiment-section .bg-gradient-to-br,
+.hero-sentiment-section .bg-gradient-to-r,
+.hero .bg-gradient-to-br,
+.hero .bg-gradient-to-r {
+  background: inherit !important;
+}
+
+/* Hero border and animation preservation */
+.hero-sentiment-section .border-emerald-400,
+.hero-sentiment-section .border-green-400,
+.hero-sentiment-section .border-red-400,
+.hero-sentiment-section .border-rose-400,
+.hero-sentiment-section .border-gray-400,
+.hero-sentiment-section .border-slate-400,
+.hero .border-emerald-400,
+.hero .border-green-400,
+.hero .border-red-400,
+.hero .border-rose-400,
+.hero .border-gray-400,
+.hero .border-slate-400 {
   border-color: inherit !important;
 }
 
