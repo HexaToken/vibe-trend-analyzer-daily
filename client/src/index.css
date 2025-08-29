@@ -35,8 +35,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Import Day Mode Force Override - ABSOLUTE LAST FOR MAXIMUM PRIORITY */
-@import './styles/day-mode-force.css';
+/* Import Complete Day Mode System - FINAL PRIORITY */
+@import './styles/day-mode-complete.css';
 
 /* Ticker bar auto-scroll animation */
 @keyframes scroll-ticker {

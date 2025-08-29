@@ -1,0 +1,239 @@
+/* Complete Day Mode Override System - TradingView Light Theme */
+/* This file provides comprehensive Day Mode styling without affecting dark mode */
+
+/* Core Day Mode Container Styling */
+.day-mode-container {
+  background-color: #FFFFFF !important;
+  color: #2A2E39 !important;
+}
+
+/* Typography Hierarchy - TradingView Day Mode */
+.day-mode-container h1,
+.day-mode-container h2,
+.day-mode-container h3,
+.day-mode-container h4,
+.day-mode-container h5,
+.day-mode-container h6 {
+  color: #2A2E39 !important;
+  font-weight: 600 !important;
+}
+
+.day-mode-container p,
+.day-mode-container span:not(.badge):not(.tag),
+.day-mode-container div:not(.bg-gradient):not(.badge) {
+  color: #4B5563 !important;
+  font-weight: 500 !important;
+}
+
+/* Text Size Specific Overrides */
+.day-mode-container .text-lg,
+.day-mode-container .text-xl,
+.day-mode-container .text-2xl {
+  color: #2A2E39 !important;
+  font-weight: 600 !important;
+}
+
+.day-mode-container .text-sm,
+.day-mode-container .text-xs {
+  color: #4B5563 !important;
+  font-weight: 500 !important;
+}
+
+/* Tailwind Gray Color Overrides */
+.day-mode-container .text-gray-900 {
+  color: #2A2E39 !important;
+  font-weight: 600 !important;
+}
+
+.day-mode-container .text-gray-800 {
+  color: #2A2E39 !important;
+  font-weight: 600 !important;
+}
+
+.day-mode-container .text-gray-700 {
+  color: #4B5563 !important;
+  font-weight: 500 !important;
+}
+
+.day-mode-container .text-gray-600 {
+  color: #4B5563 !important;
+  font-weight: 500 !important;
+}
+
+.day-mode-container .text-gray-500 {
+  color: #6B7280 !important;
+  font-weight: 500 !important;
+}
+
+.day-mode-container .text-gray-400 {
+  color: #9CA3AF !important;
+}
+
+/* Blue Accent Colors - TradingView Theme */
+.day-mode-container .text-blue-600,
+.day-mode-container .text-blue-500 {
+  color: #2962FF !important;
+}
+
+.day-mode-container .text-blue-400 {
+  color: #2962FF !important;
+}
+
+/* Background Colors */
+.day-mode-container .bg-white {
+  background-color: #FFFFFF !important;
+}
+
+.day-mode-container .bg-gray-50 {
+  background-color: #F9FAFB !important;
+}
+
+.day-mode-container .bg-gray-100 {
+  background-color: #F9FAFB !important;
+}
+
+.day-mode-container .bg-blue-50 {
+  background-color: #EBF8FF !important;
+}
+
+.day-mode-container .bg-blue-100 {
+  background-color: #EBF8FF !important;
+}
+
+/* Border Colors */
+.day-mode-container .border,
+.day-mode-container .border-t,
+.day-mode-container .border-b,
+.day-mode-container .border-l,
+.day-mode-container .border-r {
+  border-color: #E0E3EB !important;
+}
+
+.day-mode-container .border-gray-200,
+.day-mode-container .border-gray-300 {
+  border-color: #E0E3EB !important;
+}
+
+.day-mode-container .border-blue-200 {
+  border-color: #BFDBFE !important;
+}
+
+/* Card Components */
+.day-mode-container .card,
+.day-mode-container [class*="card"] {
+  background-color: #FFFFFF !important;
+  border-color: #E0E3EB !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
+}
+
+.day-mode-container .card:hover,
+.day-mode-container [class*="card"]:hover {
+  background-color: #F9FAFB !important;
+  border-color: #2962FF !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Button Styling */
+.day-mode-container button {
+  font-weight: 500 !important;
+}
+
+.day-mode-container .btn-primary,
+.day-mode-container [style*="background-color: #2962FF"] {
+  background-color: #2962FF !important;
+  border-color: #2962FF !important;
+  color: #FFFFFF !important;
+}
+
+.day-mode-container .btn-ghost {
+  color: #4B5563 !important;
+}
+
+.day-mode-container .btn-ghost:hover {
+  background-color: #F9FAFB !important;
+  color: #2A2E39 !important;
+}
+
+/* Badge and Tag Components */
+.day-mode-container .badge,
+.day-mode-container [class*="badge"] {
+  font-weight: 600 !important;
+  border-width: 1px !important;
+}
+
+/* Icon Colors */
+.day-mode-container svg {
+  color: inherit !important;
+}
+
+.day-mode-container .text-blue-600 svg,
+.day-mode-container .text-blue-500 svg {
+  color: #2962FF !important;
+}
+
+/* Form Elements */
+.day-mode-container input,
+.day-mode-container textarea,
+.day-mode-container select {
+  background-color: #FFFFFF !important;
+  border-color: #E0E3EB !important;
+  color: #2A2E39 !important;
+}
+
+.day-mode-container input:focus,
+.day-mode-container textarea:focus,
+.day-mode-container select:focus {
+  border-color: #2962FF !important;
+  box-shadow: 0 0 0 1px rgba(41, 98, 255, 0.2) !important;
+}
+
+.day-mode-container input::placeholder,
+.day-mode-container textarea::placeholder {
+  color: #9CA3AF !important;
+}
+
+/* Specific Component Overrides */
+.day-mode-container .highlight-card {
+  background-color: #FFFFFF !important;
+  border: 1px solid #E0E3EB !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
+}
+
+.day-mode-container .highlight-card:hover {
+  border-color: #2962FF !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+.day-mode-container .news-card {
+  background-color: #FFFFFF !important;
+  border: 1px solid #E0E3EB !important;
+}
+
+.day-mode-container .news-card:hover {
+  background-color: #F9FAFB !important;
+  border-color: #2962FF !important;
+}
+
+/* Gradient Overrides for Day Mode */
+.day-mode-container .bg-gradient-to-r {
+  background: linear-gradient(to right, #EBF8FF, #E0F7FA) !important;
+}
+
+/* Ensure maximum specificity for critical elements */
+html body .day-mode-container .text-gray-900 {
+  color: #2A2E39 !important;
+  font-weight: 600 !important;
+}
+
+html body .day-mode-container .text-gray-700 {
+  color: #4B5563 !important;
+  font-weight: 500 !important;
+}
+
+html body .day-mode-container .text-blue-600 {
+  color: #2962FF !important;
+}
+
+html body .day-mode-container {
+  background-color: #FFFFFF !important;
+}

@@ -403,7 +403,7 @@ const SmartNewsFeedPage: React.FC = () => {
   return (
     <div className={`min-h-screen ${
       themeMode === 'light' 
-        ? 'bg-white day-mode' 
+        ? 'bg-white day-mode-container' 
         : 'bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900'
     }`}>
       {/* Header */}
@@ -489,7 +489,7 @@ const SmartNewsFeedPage: React.FC = () => {
               borderColor: '#E0E3EB !important',
               boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important'
             } : {}}>
-              <CardContent className={`p-4 card-content ${themeMode === 'light' ? 'day-mode' : ''}`}>
+              <CardContent className="p-4 card-content">
                 <div className="flex items-center gap-3">
                   <div className={`flex-shrink-0 ${
                     themeMode === 'light' ? 'text-blue-600' : 'text-white/80'
@@ -565,7 +565,7 @@ const SmartNewsFeedPage: React.FC = () => {
                 className={cn(
                   "transition-all duration-300 cursor-pointer group news-card",
                   themeMode === 'light'
-                    ? "bg-[#FFFFFF] border border-[#E0E3EB] hover:bg-[#F9FAFB] hover:border-[#2962FF] shadow-sm hover:shadow-md day-mode"
+                    ? "bg-[#FFFFFF] border border-[#E0E3EB] hover:bg-[#F9FAFB] hover:border-[#2962FF] shadow-sm hover:shadow-md"
                     : "bg-black/20 backdrop-blur-sm border-white/10 hover:bg-black/30",
                   getSentimentGlow(article.sentiment)
                 )}
@@ -574,7 +574,7 @@ const SmartNewsFeedPage: React.FC = () => {
                   borderColor: '#E0E3EB !important'
                 } : {}}
               >
-                <CardContent className={`p-6 card-content ${themeMode === 'light' ? 'day-mode' : ''}`}>
+                <CardContent className="p-6 card-content">
                   {/* Header */}
                   <div className="flex items-center gap-2 mb-4">
                     <span className={`text-sm font-medium ${
