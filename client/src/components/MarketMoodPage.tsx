@@ -185,12 +185,6 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
                 className="mt-6"
               />
 
-              {/* AI Analysis Section */}
-              <AIAnalysisSection
-                onExplainMood={handleExplainMood}
-                onViewAnalytics={handleViewAnalytics}
-              />
-
               {/* Quick Stats */}
               <Card className={themeMode === 'light'
                 ? 'bg-white border-[#E0E0E0] rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-200'
