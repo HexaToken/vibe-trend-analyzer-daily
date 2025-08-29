@@ -175,7 +175,12 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
             
             {/* Main Sentiment Status */}
             <div className="text-center mb-6">
-              <div className="inline-flex items-center gap-3 p-4 bg-gradient-to-r from-primary/10 to-primary/20 rounded-2xl border border-primary/20">
+              <div className={cn(
+                "inline-flex items-center gap-3 p-4 rounded-2xl border",
+                overallSentiment === 'bullish' ? 'bg-gradient-to-r from-green-500/10 to-green-600/20 border-green-500/20' :
+                overallSentiment === 'bearish' ? 'bg-gradient-to-r from-red-500/10 to-red-600/20 border-red-500/20' :
+                'bg-gradient-to-r from-muted/50 to-muted border-border'
+              )}>
                 <div className="text-4xl">{getSentimentEmoji(moodScore.overall)}</div>
                 <div>
                   <div className="text-2xl font-bold text-card-foreground">
