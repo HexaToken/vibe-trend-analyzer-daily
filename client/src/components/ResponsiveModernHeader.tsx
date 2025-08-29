@@ -107,7 +107,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
     { label: 'Finance Hub', key: 'finance', icon: '💰' },
     { label: 'Watchlist', key: 'watchlist', icon: '��️' },
     { label: 'Market Analytics', key: 'market', icon: '📈' },
-    { label: 'Stock Screener', key: 'screener', icon: '🔍' },
+    { label: 'Stock Screener', key: 'screener', icon: '����' },
     { label: 'Crypto Dashboard', key: 'crypto-dashboard', icon: '₿' },
     { label: 'Earnings Calendar', key: 'earnings', icon: '📅' },
     { label: 'Charts', key: 'charts', icon: '📊' },
@@ -188,9 +188,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                   {activeSection === key && (
                     <div className={cn(
                       "absolute bottom-0 left-0 right-0 h-0.5 rounded-full",
-                      isDayMode
-                        ? "bg-[#2962FF]"
-                        : isLightMode
+                      isLightMode
                         ? "bg-primary"
                         : "bg-gradient-to-r from-pink-400 to-purple-500"
                     )} />
