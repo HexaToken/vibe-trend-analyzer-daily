@@ -295,10 +295,32 @@
 .tradingview-day .hero-sentiment-section {
   background: radial-gradient(ellipse at center, #1B0036 0%, #3B0A58 100%) !important;
   color: white !important;
+  border-radius: 24px !important;
+  backdrop-filter: blur(2px) !important;
+  padding: 2rem 1rem !important;
+  text-align: center !important;
 }
 
 .tradingview-day .hero-sentiment-section * {
   color: inherit !important;
+}
+
+.tradingview-day .hero-sentiment-section .w-96.h-96.rounded-full {
+  border: 5px solid #5EE06C !important;
+  box-shadow: 0 0 16px rgba(94, 224, 108, 0.6) !important;
+  border-radius: 50% !important;
+}
+
+.tradingview-day .hero-sentiment-section .text-gray-200 {
+  color: rgb(229 231 235) !important;
+}
+
+.tradingview-day .hero-sentiment-section .text-purple-300 {
+  color: rgb(196 181 253) !important;
+}
+
+.tradingview-day .hero-sentiment-section .text-white {
+  color: white !important;
 }
 
 /* ===== SCROLLBAR STYLING ===== */
