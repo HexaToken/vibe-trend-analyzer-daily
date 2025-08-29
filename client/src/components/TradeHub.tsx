@@ -122,8 +122,8 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
   };
 
   return (
-    <div className={isDayMode ? "min-h-screen bg-[#FFFFFF] day-mode-container" : "min-h-screen bg-gradient-to-br from-background via-background to-muted/30"} style={isDayMode ? {backgroundColor: '#FFFFFF', color: '#2A2E39'} : {}}>
-      <div className="container mx-auto px-4 py-8" style={isDayMode ? {color: '#2A2E39'} : {}}>
+    <div className={isDayMode ? "min-h-screen day-mode-container theme-background" : "min-h-screen bg-gradient-to-br from-background via-background to-muted/30"}>
+      <div className="container mx-auto px-4 py-8">
         {/* Header Section */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-4">
