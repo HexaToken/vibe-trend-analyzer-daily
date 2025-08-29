@@ -59,12 +59,12 @@
   background: #FFFFFF !important;
 }
 
-/* Defeat hardcoded dark gradients (except hero) */
-[data-theme="light"] .bg-gradient-to-br:not(.hero *):not(.hero-sentiment-section *):not([class*="hero"] *) {
+/* Defeat hardcoded dark gradients */
+[data-theme="light"] .bg-gradient-to-br:not(.bg-primary) {
   background: #FFFFFF !important;
 }
 
-[data-theme="light"] .bg-gradient-to-r:not(.hero *):not(.hero-sentiment-section *):not([class*="hero"] *):not(.bg-primary) {
+[data-theme="light"] .bg-gradient-to-r:not(.bg-primary) {
   background: linear-gradient(to right, #F9FAFB, #FFFFFF) !important;
 }
 
