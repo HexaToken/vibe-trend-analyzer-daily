@@ -275,7 +275,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                       onClick={() => handleNavigation(key)}
                       className={cn(
                         "hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer rounded-lg px-3 py-2 transition-colors",
-                        isDayMode ? "hover:bg-[rgba(41,98,255,0.1)]" : isLightMode ? "hover:bg-blue-500/10" : "hover:bg-purple-500/20"
+                        isLightMode ? "hover:bg-blue-500/10" : "hover:bg-purple-500/20"
                       )}
                     >
                       <span className="mr-3 text-lg">{icon}</span>
