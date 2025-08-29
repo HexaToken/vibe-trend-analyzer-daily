@@ -124,7 +124,7 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
       <CardContent className="p-6 space-y-6">
         {/* Search Bar */}
         <div className="space-y-2">
-          <label className="text-sm font-medium text-white">Search Tickers or Topics</label>
+          <label className="text-sm font-medium text-theme-primary">Search Tickers or Topics</label>
           <div className="relative">
             <div className={cn(
               "relative transition-all duration-300",
