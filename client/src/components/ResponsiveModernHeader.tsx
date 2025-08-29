@@ -212,7 +212,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                       ? "text-primary-foreground bg-primary font-semibold shadow-sm"
                       : "text-pink-400 bg-pink-500/10"
                     : isLightMode
-                      ? "text-muted-foreground hover:text-primary hover:bg-muted"
+                      ? "text-secondary hover:text-primary hover:bg-muted"
                       : "text-gray-300 hover:text-gray-200"
                 )}
                 aria-current={activeSection === "community" ? "page" : undefined}
