@@ -31,12 +31,12 @@
 /* Import MoodMeter Theme Utilities */
 @import './components/MoodThemeUtilities.css';
 
+/* Import Complete Day Mode System - BEFORE TAILWIND */
+@import './styles/day-mode-complete.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Import Complete Day Mode System - FINAL PRIORITY */
-@import './styles/day-mode-complete.css';
 
 
 

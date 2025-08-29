@@ -303,3 +303,65 @@ html body .day-mode-container {
 .day-mode-container [style*="backgroundColor: '#2962FF'"] * {
   color: #FFFFFF !important;
 }
+
+/* Override any remaining text-white issues - HIGHEST SPECIFICITY */
+.day-mode-container {
+  /* Force override all text colors that could be white */
+  --text-color: #2A2E39 !important;
+  --text-secondary: #4B5563 !important;
+}
+
+/* Ultra-specific overrides for the exact content causing issues */
+.day-mode-container .max-w-7xl .grid .transition-all h3,
+.day-mode-container .max-w-7xl .grid .transition-all p,
+.day-mode-container .max-w-7xl .grid .transition-all span:not([style*="color: #FFFFFF"]) {
+  color: #2A2E39 !important;
+}
+
+.day-mode-container .max-w-7xl .space-y-6 h2,
+.day-mode-container .max-w-7xl .space-y-6 p,
+.day-mode-container .max-w-7xl .space-y-6 span:not([style*="color: #FFFFFF"]) {
+  color: #2A2E39 !important;
+}
+
+/* Force all text content in the news feed to be dark */
+.day-mode-container [class*="text-"] {
+  color: #2A2E39 !important;
+}
+
+.day-mode-container [class*="text-lg"],
+.day-mode-container [class*="text-xl"],
+.day-mode-container [class*="text-sm"],
+.day-mode-container [class*="text-xs"] {
+  color: #4B5563 !important;
+}
+
+/* Specific overrides for elements in line 480 area */
+.day-mode-container .grid-cols-1.md\\:grid-cols-3 * {
+  color: #2A2E39 !important;
+}
+
+/* Final nuclear override - force all text to be dark except specific exceptions */
+.day-mode-container *,
+.day-mode-container *:before,
+.day-mode-container *:after {
+  color: #2A2E39 !important;
+}
+
+/* Secondary text elements */
+.day-mode-container .text-xs,
+.day-mode-container .text-sm,
+.day-mode-container [class*="text-gray"],
+.day-mode-container [class*="text-slate"] {
+  color: #4B5563 !important;
+}
+
+/* Exceptions - keep white text on dark/colored backgrounds */
+.day-mode-container .bg-blue-500 *,
+.day-mode-container .bg-indigo-500 *,
+.day-mode-container [style*="background-color: #2962FF"] *,
+.day-mode-container [style*="backgroundColor: '#2962FF'"] *,
+.day-mode-container .btn-primary *,
+.day-mode-container [class*="bg-gradient"] * {
+  color: #FFFFFF !important;
+}
