@@ -196,10 +196,10 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
             {/* AI Generated Summary */}
             <Card className="bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
               <CardContent className="p-4">
-                <p className="text-card-foreground leading-relaxed">
-                  <strong className="text-primary">AI Summary:</strong> Today's market mood is{' '}
-                  <strong className="text-card-foreground">{getSentimentLabel(moodScore.overall)}</strong>. 
-                  Optimism is driven primarily by strong earnings from mega-cap tech stocks and favorable economic data. 
+                <p className="text-white dark:text-card-foreground leading-relaxed">
+                  <strong className="text-white dark:text-primary">AI Summary:</strong> Today's market mood is{' '}
+                  <strong className="text-white dark:text-card-foreground">{getSentimentLabel(moodScore.overall)}</strong>.
+                  Optimism is driven primarily by strong earnings from mega-cap tech stocks and favorable economic data.
                   Social sentiment aligns with institutional positioning.
                 </p>
               </CardContent>
