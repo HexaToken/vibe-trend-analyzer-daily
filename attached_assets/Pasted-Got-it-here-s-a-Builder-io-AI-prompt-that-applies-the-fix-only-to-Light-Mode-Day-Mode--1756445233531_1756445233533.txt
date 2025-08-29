@@ -1,0 +1,66 @@
+Got it ✅ — here’s a **Builder.io AI prompt** that applies the **fix only to Light Mode (Day Mode)** and explicitly **leaves the Hero section unchanged**.
+
+---
+
+**Builder.io AI Prompt (paste as one block):**
+
+> **Goal:** Fix low-contrast text across the entire MoodMeter site in **Day Mode only** while **leaving Dark Mode and the Hero section completely unchanged**.
+>
+> **Do not change:**
+>
+> * Any Dark Mode tokens or styles.
+> * The `.hero` section (no edits to its markup, colors, or classes).
+>
+> **Implement global Light Mode overrides only:**
+>
+> ```css
+> [data-theme="day"] {
+>   --bg-color: #FFFFFF;
+>   --text-primary: #2A2E39;
+>   --text-secondary: #4B5563;
+>   --accent-color: #2962FF;
+>   --card-bg: #F9FAFB;
+>   --border-color: #E0E3EB;
+>   --hover-accent: #1E4FD1;
+> }
+>
+> /* Ensure all muted/secondary copy is readable in Day Mode */
+> [data-theme="day"] .text-muted,
+> [data-theme="day"] .text-muted-foreground,
+> [data-theme="day"] .text-secondary,
+> [data-theme="day"] .prose p,
+> [data-theme="day"] .subtitle,
+> [data-theme="day"] .description,
+> [data-theme="day"] .source,
+> [data-theme="day"] .time,
+> [data-theme="day"] .excerpt {
+>   color: var(--text-secondary) !important;
+>   opacity: 1 !important;
+> }
+>
+> /* Override leftover dark-mode “white-ish” utilities in Day Mode only */
+> [data-theme="day"] .text-white,
+> [data-theme="day"] .text-gray-100,
+> [data-theme="day"] .text-slate-100,
+> [data-theme="day"] .text-neutral-100 {
+>   color: var(--text-primary) !important;
+>   opacity: 1 !important;
+> }
+> ```
+>
+> **Scope:**
+>
+> * Apply these overrides only when `[data-theme="day"]` is active.
+> * Apply to all cards, news feed items, summaries, excerpts, timestamps, and muted text.
+> * **Do not alter `.hero` at all** (no style changes, no overrides).
+>
+> **Acceptance criteria:**
+>
+> * Secondary/muted text is fully legible against white backgrounds in Day Mode.
+> * No visual regressions in Dark Mode.
+> * Hero section remains exactly as it is.
+> * No layout shifts when toggling themes.
+
+---
+
+Do you want me to also generate the **JS toggle snippet** that makes sure the theme switch applies this fix only when Day Mode is active?
