@@ -93,10 +93,11 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
   };
 
   const getSourceColor = (color: string) => {
+    // Theme-aware colors that work in both light and dark modes
     const colors = {
-      emerald: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/30',
-      blue: 'bg-blue-500/20 text-blue-400 border-blue-500/30 hover:bg-blue-500/30',
-      purple: 'bg-purple-500/20 text-purple-400 border-purple-500/30 hover:bg-purple-500/30'
+      emerald: 'bg-emerald-100 text-emerald-700 border-emerald-200 hover:bg-emerald-200 dark:bg-emerald-500/20 dark:text-emerald-400 dark:border-emerald-500/30 dark:hover:bg-emerald-500/30',
+      blue: 'bg-blue-100 text-blue-700 border-blue-200 hover:bg-blue-200 dark:bg-blue-500/20 dark:text-blue-400 dark:border-blue-500/30 dark:hover:bg-blue-500/30',
+      purple: 'bg-purple-100 text-purple-700 border-purple-200 hover:bg-purple-200 dark:bg-purple-500/20 dark:text-purple-400 dark:border-purple-500/30 dark:hover:bg-purple-500/30'
     };
     return colors[color as keyof typeof colors] || colors.purple;
   };
