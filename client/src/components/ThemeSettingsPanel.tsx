@@ -11,7 +11,7 @@ import { Dialog, DialogContent } from './ui/dialog';
 import { useMoodTheme } from '../contexts/MoodThemeContext';
 
 interface ThemeOption {
-  id: 'light' | 'dark' | 'dynamic';
+  id: 'light' | 'dark' | 'dynamic' | 'day';
   label: string;
   description: string;
   icon: React.ReactNode;
