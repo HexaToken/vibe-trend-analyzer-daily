@@ -415,14 +415,16 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                 <div className="relative">
                   <Search className={cn(
                     "absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4",
-                    isLightMode ? "text-gray-500" : "text-gray-400"
+                    isDayMode ? "text-[#6B7280]" : isLightMode ? "text-gray-500" : "text-gray-400"
                   )} />
                   <Input
                     type="text"
                     placeholder="Search"
                     className={cn(
                       "pl-10 pr-4 py-3 rounded-full w-full",
-                      isLightMode
+                      isDayMode
+                        ? "bg-[#F9FAFB] border-[#E0E3EB] text-[#2A2E39] placeholder-[#6B7280]"
+                        : isLightMode
                         ? "bg-gray-100 border-gray-200 text-gray-900 placeholder-gray-500"
                         : "bg-black/30 border-gray-600/50 text-white placeholder-gray-400"
                     )}
