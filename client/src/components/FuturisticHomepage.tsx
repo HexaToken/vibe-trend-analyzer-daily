@@ -2821,7 +2821,8 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                           </h3>
                           <p className={`text-sm leading-relaxed line-clamp-3 ${
                             themeMode === 'light' ? 'text-gray-900 font-medium' : 'text-gray-400'
-                          }`}>
+                          }`}
+                          style={themeMode === 'light' ? { color: '#000000 !important', fontWeight: '500 !important' } : {}}>
                             {news.summary}
                           </p>
                         </div>
@@ -2842,7 +2843,8 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       </div>
                       <div className={`flex items-center justify-between text-xs ${
                         themeMode === 'light' ? 'text-gray-800 font-medium' : 'text-gray-400'
-                      }`}>
+                      }`}
+                      style={themeMode === 'light' ? { color: '#1a1a1a !important', fontWeight: '500 !important' } : {}}>
                         <span className="font-medium">{news.source}</span>
                         <span>{news.timestamp}</span>
                       </div>
