@@ -259,7 +259,6 @@ const AppContent = () => {
   // Use TradingView Day Mode specific gradient
   const getBodyClasses = () => {
     if (isChartPage) return "ns-page";
-    if (themeMode === 'day') return `min-h-screen bg-white transition-all duration-500`;
     return `min-h-screen ${bodyGradient} transition-all duration-500`;
   };
 
