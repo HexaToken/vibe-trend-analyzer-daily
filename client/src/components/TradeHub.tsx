@@ -132,7 +132,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
               💼 TradeHub
             </h1>
           </div>
-          <p className={`text-xl max-w-2xl mx-auto font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-white'}`}>
+          <p className={`text-xl max-w-2xl mx-auto font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>
             Learn from verified traders, access premium strategies, and monetize your trading expertise
           </p>
           <div className="flex flex-wrap justify-center gap-4 mt-6">
@@ -222,7 +222,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                 <Card key={item.id} className={`hover:shadow-lg transition-shadow cursor-pointer ${isDayMode ? 'bg-card border-border' : ''}`}>
                   <CardHeader className="space-y-4">
                     <div className="flex items-start justify-between">
-                      <CardTitle className={`text-lg line-clamp-2 ${isDayMode ? 'text-[#2A2E39]' : 'text-white'}`}>{item.title}</CardTitle>
+                      <CardTitle className={`text-lg line-clamp-2 ${isDayMode ? 'text-[#2A2E39]' : 'text-foreground'}`}>{item.title}</CardTitle>
                       {item.badge && (
                         <Badge
                           variant={item.badge === "BESTSELLER" ? "default" : "secondary"}
@@ -243,22 +243,22 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                         <AvatarImage src="/placeholder.svg" />
                         <AvatarFallback>{item.instructor[0]}</AvatarFallback>
                       </Avatar>
-                      <span className={`text-sm font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-white'}`}>{item.instructor}</span>
+                      <span className={`text-sm font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>{item.instructor}</span>
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1">
                         <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                        <span className={`text-sm font-medium ${isDayMode ? 'text-[#2A2E39]' : 'text-white'}`}>{item.rating}</span>
+                        <span className={`text-sm font-medium ${isDayMode ? 'text-[#2A2E39]' : 'text-foreground'}`}>{item.rating}</span>
                       </div>
-                      <span className={`text-sm font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-white'}`}>
+                      <span className={`text-sm font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>
                         {item.type === "course" ? `${item.students} students` : `${item.subscribers} subscribers`}
                       </span>
                     </div>
                     
                     {item.type === "course" && item.duration && (
-                      <div className={`flex items-center gap-2 text-sm font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-white'}`}>
+                      <div className={`flex items-center gap-2 text-sm font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>
                         <Play className="h-3 w-3" />
                         {item.duration}
                       </div>
@@ -267,7 +267,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                     <div className="flex items-center justify-between pt-2">
                       <div className={`text-2xl font-bold ${isDayMode ? 'text-[#2A2E39]' : 'text-primary'}`}>
                         ${item.price}
-                        {item.period && <span className={`text-sm font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-white'}`}>/{item.period}</span>}
+                        {item.period && <span className={`text-sm font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>/{item.period}</span>}
                       </div>
                       <Button size="sm">
                         {item.type === "course" ? "Enroll Now" : "Subscribe"}
@@ -282,8 +282,8 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
           {/* Featured Tab */}
           <TabsContent value="featured" className="space-y-6">
             <div className="text-center mb-8">
-              <h2 className={`text-2xl font-bold mb-2 ${isDayMode ? 'text-[#2A2E39]' : 'text-white'}`}>Featured This Week</h2>
-              <p className={`font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-white'}`}>Hand-picked content from our top-rated educators</p>
+              <h2 className={`text-2xl font-bold mb-2 ${isDayMode ? 'text-[#2A2E39]' : 'text-foreground'}`}>Featured This Week</h2>
+              <p className={`font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>Hand-picked content from our top-rated educators</p>
             </div>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -307,8 +307,8 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                         >
                           {item.badge}
                         </Badge>
-                        <h3 className={`text-xl font-semibold ${isDayMode ? 'text-[#2A2E39]' : 'text-white'}`}>{item.title}</h3>
-                        <p className={`text-sm font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-white'}`}>by {item.instructor}</p>
+                        <h3 className={`text-xl font-semibold ${isDayMode ? 'text-[#2A2E39]' : 'text-foreground'}`}>{item.title}</h3>
+                        <p className={`text-sm font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>by {item.instructor}</p>
                         <div className="flex items-center gap-4 pt-2">
                           <div className="flex items-center gap-1">
                             <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
@@ -327,8 +327,8 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
           {/* Trending Tab */}
           <TabsContent value="trending" className="space-y-6">
             <div className="text-center mb-8">
-              <h2 className={`text-2xl font-bold mb-2 ${isDayMode ? 'text-[#2A2E39]' : 'text-white'}`}>🔥 Trending Now</h2>
-              <p className={`font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-white'}`}>Most popular content based on community engagement</p>
+              <h2 className={`text-2xl font-bold mb-2 ${isDayMode ? 'text-[#2A2E39]' : 'text-foreground'}`}>🔥 Trending Now</h2>
+              <p className={`font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>Most popular content based on community engagement</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -338,8 +338,8 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                     {index + 1}
                   </div>
                   <CardContent className="p-6 pt-8">
-                    <h3 className={`text-lg font-semibold mb-2 ${isDayMode ? 'text-[#2A2E39]' : 'text-white'}`}>{item.title}</h3>
-                    <p className={`text-sm font-medium mb-4 ${isDayMode ? 'text-[#4B5563]' : 'text-white'}`}>by {item.instructor}</p>
+                    <h3 className={`text-lg font-semibold mb-2 ${isDayMode ? 'text-[#2A2E39]' : 'text-foreground'}`}>{item.title}</h3>
+                    <p className={`text-sm font-medium mb-4 ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>by {item.instructor}</p>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1">
                         <TrendingUp className="h-4 w-4 text-green-500" />
@@ -356,8 +356,8 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
           {/* Top Creators Tab */}
           <TabsContent value="creators" className="space-y-6">
             <div className="text-center mb-8">
-              <h2 className={`text-2xl font-bold mb-2 ${isDayMode ? 'text-[#2A2E39]' : 'text-white'}`}>👥 Top Creators</h2>
-              <p className={`font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-white'}`}>Verified traders with the highest credibility scores</p>
+              <h2 className={`text-2xl font-bold mb-2 ${isDayMode ? 'text-[#2A2E39]' : 'text-foreground'}`}>👥 Top Creators</h2>
+              <p className={`font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>Verified traders with the highest credibility scores</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -369,8 +369,8 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                       <AvatarFallback className="text-lg">{trader.name[0]}</AvatarFallback>
                     </Avatar>
                     
-                    <h3 className={`text-xl font-semibold mb-2 ${isDayMode ? 'text-[#2A2E39]' : 'text-white'}`}>{trader.name}</h3>
-                    <p className={`font-medium mb-3 ${isDayMode ? 'text-[#4B5563]' : 'text-white'}`}>{trader.expertise}</p>
+                    <h3 className={`text-xl font-semibold mb-2 ${isDayMode ? 'text-[#2A2E39]' : 'text-foreground'}`}>{trader.name}</h3>
+                    <p className={`font-medium mb-3 ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>{trader.expertise}</p>
                     
                     <div className="flex items-center justify-center gap-2 mb-3">
                       <Badge
@@ -401,22 +401,22 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                     <div className="grid grid-cols-2 gap-4 text-sm mb-4">
                       <div>
                         <div className="font-semibold text-green-500">{trader.monthlyReturn}</div>
-                        <div className={`font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-white'}`}>Monthly Return</div>
+                        <div className={`font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>Monthly Return</div>
                       </div>
                       <div>
-                        <div className={`font-semibold ${isDayMode ? 'text-[#2A2E39]' : 'text-white'}`}>{trader.followers.toLocaleString()}</div>
-                        <div className={`font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-white'}`}>Followers</div>
+                        <div className={`font-semibold ${isDayMode ? 'text-[#2A2E39]' : 'text-foreground'}`}>{trader.followers.toLocaleString()}</div>
+                        <div className={`font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>Followers</div>
                       </div>
                     </div>
                     
                     <div className="grid grid-cols-2 gap-4 text-sm mb-4">
                       <div>
-                        <div className={`font-semibold ${isDayMode ? 'text-[#2A2E39]' : 'text-white'}`}>{trader.courses}</div>
-                        <div className={`font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-white'}`}>Courses</div>
+                        <div className={`font-semibold ${isDayMode ? 'text-[#2A2E39]' : 'text-foreground'}`}>{trader.courses}</div>
+                        <div className={`font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>Courses</div>
                       </div>
                       <div>
-                        <div className={`font-semibold ${isDayMode ? 'text-[#2A2E39]' : 'text-white'}`}>{trader.subscribers.toLocaleString()}</div>
-                        <div className={`font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-white'}`}>Subscribers</div>
+                        <div className={`font-semibold ${isDayMode ? 'text-[#2A2E39]' : 'text-foreground'}`}>{trader.subscribers.toLocaleString()}</div>
+                        <div className={`font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>Subscribers</div>
                       </div>
                     </div>
                     
@@ -442,8 +442,8 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
             : "bg-gradient-to-r from-primary/10 to-purple-600/10 border-primary/20"
           }>
             <CardContent className="p-8">
-              <h2 className={`text-2xl font-bold mb-4 ${isDayMode ? 'text-[#2A2E39]' : 'text-white'}`}>Ready to Monetize Your Trading Expertise?</h2>
-              <p className={`font-medium mb-6 max-w-2xl mx-auto ${isDayMode ? 'text-[#4B5563]' : 'text-white'}`}>
+              <h2 className={`text-2xl font-bold mb-4 ${isDayMode ? 'text-[#2A2E39]' : 'text-foreground'}`}>Ready to Monetize Your Trading Expertise?</h2>
+              <p className={`font-medium mb-6 max-w-2xl mx-auto ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>
                 Join our community of verified traders and start earning from your knowledge.
                 Share courses, offer subscriptions, and build your following.
               </p>
