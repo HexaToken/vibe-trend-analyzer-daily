@@ -239,9 +239,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                 <DropdownMenuTrigger asChild>
                   <button className={cn(
                     "flex items-center gap-1 text-base font-medium px-3 py-2 rounded-lg transition-all duration-200 relative group",
-                    isDayMode
-                      ? "text-[#4B5563] hover:text-[#2962FF] hover:bg-[rgba(41,98,255,0.1)] border border-transparent hover:border-[rgba(41,98,255,0.2)]"
-                      : isLightMode
+                    isLightMode
                       ? "text-[#4B5563] hover:text-[#3A7AFE] hover:bg-[#F3F4F6]"
                       : "text-gray-300 hover:text-gray-200"
                   )}>
