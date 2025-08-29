@@ -69,12 +69,12 @@
 }
 
 /* ===== CARD SYSTEM OVERRIDES ===== */
-[data-theme="light"] .bg-card:not(.hero *):not(.hero-sentiment-section *):not([class*="hero"] *),
-[data-theme="light"] [class*="bg-black"]:not(.hero *):not(.hero-sentiment-section *):not([class*="hero"] *),
-[data-theme="light"] [class*="bg-slate-8"]:not(.hero *):not(.hero-sentiment-section *):not([class*="hero"] *),
-[data-theme="light"] [class*="bg-slate-9"]:not(.hero *):not(.hero-sentiment-section *):not([class*="hero"] *),
-[data-theme="light"] .bg-black\/40:not(.hero *):not(.hero-sentiment-section *):not([class*="hero"] *),
-[data-theme="light"] .bg-black\/60:not(.hero *):not(.hero-sentiment-section *):not([class*="hero"] *) {
+[data-theme="light"] .bg-card,
+[data-theme="light"] [class*="bg-black"],
+[data-theme="light"] [class*="bg-slate-8"],
+[data-theme="light"] [class*="bg-slate-9"],
+[data-theme="light"] .bg-black\/40,
+[data-theme="light"] .bg-black\/60 {
   background: #F9FAFB !important;
   color: #2A2E39 !important;
   border-color: #E0E3EB !important;
