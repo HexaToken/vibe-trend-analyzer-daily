@@ -250,7 +250,7 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-secondary">{moodScore.news.toFixed(2)}</div>
+                    <div className="text-2xl font-bold text-primary dark:text-white">{moodScore.news.toFixed(2)}</div>
                     <div className="text-xs text-muted-foreground">Sentiment Score</div>
                   </div>
                   <div className="space-y-2">
@@ -273,7 +273,7 @@ export const AISentimentEngine: React.FC<AISentimentEngineProps> = ({
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-accent">{moodScore.social.toFixed(2)}</div>
+                    <div className="text-2xl font-bold text-primary dark:text-white">{moodScore.social.toFixed(2)}</div>
                     <div className="text-xs text-muted-foreground">Sentiment Score</div>
                   </div>
                   <div className="space-y-2">
