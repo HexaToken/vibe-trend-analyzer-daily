@@ -2,9 +2,6 @@ import { useState } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import ErrorBoundary from "@/components/ErrorBoundary";
-import { ClickTestButton } from "@/components/ClickTestButton";
-import { SystemTestPanel } from "@/components/SystemTestPanel";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { MoodThemeProvider, useMoodTheme } from "@/contexts/MoodThemeContext";
@@ -14,6 +11,7 @@ import { Dashboard } from "@/components/Dashboard";
 import { MarketMoodPage } from "@/components/MarketMoodPage";
 import { StockScreener } from "@/components/StockScreener";
 import { SentimentDashboard } from "@/components/SentimentDashboard";
+import { Analytics } from "@/components/Analytics";
 import { HistoricalData } from "@/components/HistoricalData";
 import { CommunityWithSubtabs } from "@/components/CommunityWithSubtabs";
 import { ResponsiveModernHeader } from "@/components/ResponsiveModernHeader";
@@ -29,22 +27,14 @@ import { BuilderDemo } from "@/components/BuilderDemo";
 
 import { ApiStatusIndicator } from "@/components/ApiStatusIndicator";
 import { CryptoDashboard } from "@/components/crypto/CryptoDashboard";
+import { PulseOfTheChain } from "@/components/crypto/PulseOfTheChain";
+import { NeonSenseCryptoDashboard } from "@/components/crypto/NeonSenseCryptoDashboard";
+import { AdvancedTradingChart } from "@/components/finance/AdvancedTradingChart";
 import { EarningsCalendar } from "@/components/finance/EarningsCalendar";
 import { AdvancedChartsPro } from "@/components/finance/AdvancedChartsPro";
 import TrendingHub from "@/components/finance/TrendingHub";
 import TradeJournalClassic from "@/components/TradeJournalClassic";
 import CommunitySentimentPolls from "@/components/CommunitySentimentPolls";
-
-// Lazy loaded heavy components for performance
-import { Suspense } from "react";
-import { 
-  LazyAnalytics, 
-  LazyNeonSenseCryptoDashboard, 
-  LazyAdvancedTradingChart,
-  DashboardSkeleton,
-  CryptoSkeleton,
-  ChartSkeleton 
-} from "@/components/LazyComponents";
 
 import { NLPSentimentDemo } from "@/components/NLPSentimentDemo";
 import { SpacyNLPDemo } from "@/components/SpacyNLPDemo";
@@ -103,11 +93,7 @@ const AppContent = () => {
       case "sentiment":
         return <BuilderDemo />;
       case "analytics":
-        return (
-          <Suspense fallback={<DashboardSkeleton />}>
-            <LazyAnalytics />
-          </Suspense>
-        );
+        return <Analytics />;
       // Removed "history" route - HistoricalData component retained for potential reuse
             case "community":
         return <CommunityWithSubtabs onNavigateToProfile={(userId) => handleNavigation("trader-profile", userId)} />;
@@ -160,11 +146,7 @@ const AppContent = () => {
       case "social":
         return <SocialPlatform />;
       case "crypto-dashboard":
-        return (
-          <Suspense fallback={<CryptoSkeleton />}>
-            <LazyNeonSenseCryptoDashboard />
-          </Suspense>
-        );
+        return <NeonSenseCryptoDashboard />;
       case "nlp":
         return <NLPSentimentDemo />;
       case "spacy-nlp":
@@ -206,11 +188,7 @@ const AppContent = () => {
       case "market-mood":
         return <MarketMoodPage />;
       case "news-feed":
-        return (
-          <Suspense fallback={<DashboardSkeleton />}>
-            <LazyAnalytics />
-          </Suspense>
-        );
+        return <Analytics />;
       case "smart-news-feed":
         return <SmartNewsFeedPage />;
       case "trader-profile":
@@ -252,29 +230,17 @@ const AppContent = () => {
       case "watchlist":
         return <Watchlist />;
       case "market":
-        return (
-          <Suspense fallback={<DashboardSkeleton />}>
-            <LazyAnalytics />
-          </Suspense>
-        );
+        return <Analytics />;
       case "screener":
         return <StockScreener />;
       case "crypto":
-        return (
-          <Suspense fallback={<CryptoSkeleton />}>
-            <LazyNeonSenseCryptoDashboard />
-          </Suspense>
-        );
+        return <PulseOfTheChain />;
       case "earnings":
         return <EarningsCalendar />;
       case "charts":
         return <AdvancedChartsPro />;
       case "trading-chart":
-        return (
-          <Suspense fallback={<ChartSkeleton />}>
-            <LazyAdvancedTradingChart />
-          </Suspense>
-        );
+        return <AdvancedTradingChart />;
       case "trending":
         return <TrendingHub />;
       case "trade-journal":
@@ -290,34 +256,30 @@ const AppContent = () => {
   const isChartPage = activeSection === "charts" || activeSection === "trading-chart";
 
   return (
-    <ErrorBoundary>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <div className={cn(
-          isChartPage ? "ns-page" : `min-h-screen ${bodyGradient} transition-all duration-500`
-        )}>
-          {!isChartPage && (
-            <ResponsiveModernHeader
-              activeSection={activeSection}
-              setActiveSection={setActiveSection}
-              onNavigate={handleNavigation}
-              currentMoodScore={75}
-            />
-          )}
-          <main className={isChartPage ? "ns-main" : ""}>{renderContent()}</main>
-          <Footer
-            onNavigate={setActiveSection}
-            compact={["charts", "trading-chart", "crypto"].includes(activeSection)}
-            className={isChartPage ? "ns-footer" : ""}
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <div className={cn(
+        isChartPage ? "ns-page" : `min-h-screen ${bodyGradient} transition-all duration-500`
+      )}>
+        {!isChartPage && (
+          <ResponsiveModernHeader
+            activeSection={activeSection}
+            setActiveSection={setActiveSection}
+            onNavigate={handleNavigation}
+            currentMoodScore={75}
           />
-          <ApiStatusIndicator />
-          <MoodGptWidget />
-          <ClickTestButton />
-          <SystemTestPanel />
-        </div>
-      </TooltipProvider>
-    </ErrorBoundary>
+        )}
+        <main className={isChartPage ? "ns-main" : ""}>{renderContent()}</main>
+        <Footer
+          onNavigate={setActiveSection}
+          compact={["charts", "trading-chart", "crypto"].includes(activeSection)}
+          className={isChartPage ? "ns-footer" : ""}
+        />
+        <ApiStatusIndicator />
+        <MoodGptWidget />
+      </div>
+    </TooltipProvider>
   );
 };
 

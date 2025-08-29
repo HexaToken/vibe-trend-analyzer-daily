@@ -3,55 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <title>MoodMeter - AI-Powered Financial Sentiment Analysis & Crypto Dashboard</title>
-    <meta name="description" content="Advanced financial sentiment analysis platform with real-time crypto data, AI insights, and comprehensive market mood tracking. Trade smarter with MoodMeter's professional tools.">
-    <meta name="keywords" content="financial sentiment analysis, crypto dashboard, market mood, trading insights, AI finance, cryptocurrency trading">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="MoodMeter - AI-Powered Financial Sentiment Analysis">
-    <meta property="og:description" content="Advanced financial sentiment analysis platform with real-time crypto data and AI insights">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://moodmeter.app">
-    <meta property="og:image" content="https://moodmeter.app/og-image.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:site_name" content="MoodMeter">
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="MoodMeter - AI-Powered Financial Sentiment Analysis">
-    <meta name="twitter:description" content="Advanced financial sentiment analysis platform with real-time crypto data and AI insights">
-    <meta name="twitter:image" content="https://moodmeter.app/twitter-card.jpg">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://moodmeter.app">
-    
-    <!-- Additional SEO Meta Tags -->
-    <meta name="author" content="MoodMeter Team">
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-    <meta name="theme-color" content="#3A7AFE">
-    
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "MoodMeter",
-      "description": "AI-powered financial sentiment analysis and cryptocurrency dashboard",
-      "url": "https://moodmeter.app",
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "Web",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "creator": {
-        "@type": "Organization",
-        "name": "MoodMeter Team"
-      }
-    }
-    </script>
+    <title>NeomSense - Market Sentiment Analysis</title>
 
     <!-- Enhanced Typography - Inter Font for Better Readability -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,83 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   </head>
   <body>
-    <!-- EMERGENCY CLICK FIX - Block beacon system -->
-    <script>
-      // Immediately disable beacon system before any other scripts load
-      window.beaconEnabled = false;
-      window.beacon = null;
-      
-      // Force all pointer events to auto
-      const forcePointerEvents = () => {
-        const style = document.createElement('style');
-        style.textContent = `
-          * { pointer-events: auto !important; }
-          [class*="beacon"] { display: none !important; pointer-events: none !important; }
-          button, a, nav *, header * { pointer-events: auto !important; cursor: pointer !important; z-index: 99999 !important; }
-        `;
-        document.head.appendChild(style);
-      };
-      
-      // Run immediately
-      forcePointerEvents();
-      
-      // Block any high z-index elements
-      setInterval(() => {
-        document.querySelectorAll('*').forEach(el => {
-          const zIndex = parseInt(window.getComputedStyle(el).zIndex);
-          if (zIndex > 999999) {
-            el.style.display = 'none';
-            el.style.pointerEvents = 'none';
-          }
-        });
-      }, 50);
-    </script>
-    
     <div id="root"></div>
-    
-    <!-- Load emergency click fix -->
-    <script src="/click-fix.js"></script>
-    
-    <!-- Test click functionality -->
-    <script>
-      window.addEventListener('load', () => {
-        console.log('EMERGENCY CLICK TEST: Page loaded, testing clicks...');
-        
-        // Add a visible test element
-        const testDiv = document.createElement('div');
-        testDiv.innerHTML = 'CLICK ME - Emergency Test';
-        testDiv.style.cssText = `
-          position: fixed; 
-          top: 0; 
-          left: 50%; 
-          transform: translateX(-50%);
-          background: red; 
-          color: white; 
-          padding: 10px; 
-          z-index: 999999;
-          cursor: pointer;
-          font-weight: bold;
-        `;
-        testDiv.onclick = () => {
-          alert('EMERGENCY CLICK TEST PASSED!');
-          console.log('Click working!');
-        };
-        document.body.appendChild(testDiv);
-        
-        // Test all navigation buttons
-        setTimeout(() => {
-          const buttons = document.querySelectorAll('button, a, [role="button"]');
-          console.log(`Found ${buttons.length} clickable elements`);
-          buttons.forEach((btn, i) => {
-            btn.style.pointerEvents = 'auto';
-            btn.style.zIndex = '99999';
-            btn.style.position = 'relative';
-            console.log(`Button ${i} made clickable:`, btn);
-          });
-        }, 2000);
-      });
-    </script>
-    
     <script type="module" src="/src/main.tsx"></script>
+    <!-- This is a replit script which adds a banner on the top of the page when opened in development mode outside the replit environment -->
+    <script type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js"></script>
   </body>
 </html>

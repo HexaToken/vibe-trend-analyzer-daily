@@ -1,6 +1,6 @@
-# Project Overview
+# Overview
 
-This project is a production-ready full-stack JavaScript application designed as a comprehensive financial analysis and social trading platform. It features advanced sentiment analysis, real-time cryptocurrency data, AI-powered insights, and professional-grade architecture with NeonSense cyberpunk theming. Recent comprehensive code audit has enhanced performance, security, accessibility, and SEO optimization.
+This project is a full-stack JavaScript application designed as a multi-section dashboard for financial data and analytics. Its core purpose is to provide a comprehensive platform for users to access real-time financial information, perform sentiment analysis, manage data, and engage in social interactions related to finance. The application aims to integrate various external APIs to deliver rich, dynamic content, enhancing user experience with features like authentication, AI chat, and a robust UI.
 
 # User Preferences
 
@@ -10,56 +10,52 @@ This project is a production-ready full-stack JavaScript application designed as
 
 # System Architecture
 
-The application is built as a full-stack JavaScript solution.
+The application is built as a full-stack JavaScript solution, emphasizing a clean separation between frontend and backend concerns.
 
 **Frontend:**
-- **Framework:** React with TypeScript
-- **Build Tool:** Vite
-- **Styling:** TailwindCSS with shadcn/ui for UI components
-- **State Management:** TanStack Query (React Query)
-- **Routing:** Wouter for client-side navigation
-- **UI/UX Decisions:** Employs a professional finance aesthetic with a cool slate blue background, enhanced text contrast, and semantic color coding. This includes specific color mappings for badges and semantic filter buttons (e.g., mint green for bullish, soft red for bearish). High-contrast colors meet WCAG AA standards, and the design supports both light and dark modes with sophisticated backdrop blur and gradient effects.
+- **Technology Stack:** React with TypeScript, Vite for fast development, TailwindCSS for utility-first styling, and shadcn/ui for component library.
+- **State Management:** TanStack Query (React Query) for efficient data fetching, caching, and synchronization.
+- **Routing:** Wouter for lightweight and flexible client-side routing.
+- **UI/UX:** Adheres to a professional fintech aesthetic with a consistent color palette (cool slate blue backgrounds, enhanced text contrast, semantic color coding) and modern styling (rounded corners, subtle shadows, professional typography). It maintains full dark mode support while prioritizing light mode readability. Semantic filter buttons and consistent badge styling are applied application-wide for intuitive user interaction.
 
 **Backend:**
-- **Framework:** Express.js with TypeScript
-- **Authentication:** Passport.js with session management, API routes prefixed with `/api`.
-- **Data Storage:** Currently uses in-memory storage (MemStorage), designed for PostgreSQL with Drizzle ORM.
+- **Technology Stack:** Express.js with TypeScript.
+- **Database:** PostgreSQL, managed with Drizzle ORM for type-safe and efficient data interactions.
+- **Authentication:** Implemented using Passport.js with session management, ensuring secure user access. API routes are prefixed with `/api` and protected by authentication middleware.
+- **Server Configuration:** The Express server serves both API endpoints and static frontend files on port 5000. Development uses Vite with Hot Module Replacement (HMR), while production serves static files from a build directory.
 
-**Core Technical Implementations & Features:**
-- Multi-section dashboard application with authentication system and user profiles
-- Real-time cryptocurrency data integration with CoinMarketCap API circuit breaker
-- Advanced sentiment analysis with NLP capabilities using spaCy
-- NeonSense Crypto Dashboard with cyberpunk neon theming (500+ lines optimized)
-- Professional Error Boundary implementation for app stability
-- Performance-optimized React components with memoization
-- Comprehensive SEO optimization with meta tags, structured data, and sitemaps
-- Social platform integration with Instagram and Twitter APIs
-- AI chat functionality with MoodGPT integration
-- Database management interface with PostgreSQL/Drizzle ORM
+**Key Features:**
+- Multi-section dashboard.
+- Robust authentication and user profiles.
+- Real-time data integration for news and financial markets.
+- Advanced sentiment analysis using NLP models (e.g., spaCy) and rule-based systems.
+- Social platform integration.
+- Database management interface.
+- AI chat functionality.
 
-**Code Quality & Architecture:**
-- TypeScript strict mode with comprehensive type safety
-- React.memo optimization for heavy components
-- Performance utilities for debouncing, throttling, and memory tracking
-- Professional error handling and logging systems
-- WCAG AA accessibility compliance
-- Security enhancements with development-only debug logging
+**Technical Implementations:**
+- **Fetch Utility:** `robustFetch.ts` is used for all API calls, incorporating retry logic, timeout handling, and exponential backoff to ensure reliability.
+- **NLP Integration:** Utilizes spaCy for comprehensive financial text analysis, including entity recognition, linguistic feature extraction, and a multi-model ensemble for sentiment scoring.
+- **Data Polling:** API polling intervals are generally set to 3 minutes (180,000ms) to balance real-time data needs with API rate limits.
+- **Error Handling:** Comprehensive error handling is implemented across components and API integrations, including fallbacks for unavailable services or data.
 
 # External Dependencies
 
-The application integrates with various external services and APIs:
+The application integrates with various third-party services and APIs to provide its core functionalities:
 
 - **Financial Data:**
-    - Polygon.io (for financial data, dividends, and real-time quotes)
-    - Finnhub API (for symbol lookup, real-time quotes, and historical data)
-    - YFinance (for Yahoo Finance market news, stock quotes, and sentiment analysis)
-- **News & Content:**
-    - NewsAPI
+    - **Polygon.io:** Used for financial data and dividends.
+    - **Finnhub API:** Provides stock market data, including symbol lookup, real-time quotes, and historical data.
+    - **YFinance (Yahoo Finance):** Integrated for market news, stock quotes, and enhanced sentiment analysis.
+- **News:**
+    - **NewsAPI:** Used for fetching news articles.
 - **Cryptocurrency Data:**
-    - CoinMarketCap (for cryptocurrency data, with bulk fetching and rate limiting implemented)
-- **Sentiment Analysis:**
-    - Various sentiment analysis APIs
-    - spaCy (for advanced NLP models, including entity recognition, POS tagging, and linguistic feature extraction for financial text analysis)
+    - **CoinMarketCap API:** Provides cryptocurrency market data.
 - **Social Media:**
-    - Instagram (via instagrapi package for user profiles, hashtag search, and trending content)
-    - Twitter API (configured for integration, with graceful rate limit handling and mock data fallback)
+    - **Instagram (via `instagrapi`):** Integrated for accessing user profiles, hashtag search, and trending content.
+    - **Twitter API:** Configured for integration, with graceful handling of rate limits and mock data fallbacks.
+- **Natural Language Processing (NLP):**
+    - **spaCy:** Utilized for advanced sentiment analysis and linguistic processing of financial text.
+- **Other:**
+    - **PostgreSQL:** The chosen database for persistent storage.
+    - **Drizzle ORM:** Used for interacting with the PostgreSQL database.
