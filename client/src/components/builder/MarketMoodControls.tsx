@@ -201,7 +201,7 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
               disabled={isExplaining}
               className={cn(
                 "h-12 bg-gradient-to-r from-purple-600/20 to-pink-600/20 hover:from-purple-600/30 hover:to-pink-600/30",
-                "text-white font-medium border border-purple-500/30 transition-all duration-300",
+                "text-primary-foreground font-medium border border-purple-500/30 transition-all duration-300",
                 "hover:shadow-lg hover:shadow-purple-500/20"
               )}
             >
