@@ -277,7 +277,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
   return (
     <div className={`min-h-screen relative overflow-hidden hero-section ${
       themeMode === 'light'
-        ? 'bg-white'
+        ? 'bg-white day-mode'
         : 'bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900'
     }`}>
       {/* Ambient Background Effects - Only in Dark Mode */}
@@ -2820,7 +2820,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                             {news.headline}
                           </h3>
                           <p className={`text-sm leading-relaxed line-clamp-3 ${
-                            themeMode === 'light' ? 'text-gray-800' : 'text-gray-400'
+                            themeMode === 'light' ? 'text-gray-900 font-medium' : 'text-gray-400'
                           }`}>
                             {news.summary}
                           </p>
@@ -2841,7 +2841,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         </Badge>
                       </div>
                       <div className={`flex items-center justify-between text-xs ${
-                        themeMode === 'light' ? 'text-gray-700' : 'text-gray-400'
+                        themeMode === 'light' ? 'text-gray-800 font-medium' : 'text-gray-400'
                       }`}>
                         <span className="font-medium">{news.source}</span>
                         <span>{news.timestamp}</span>
