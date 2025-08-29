@@ -74,7 +74,11 @@ export const Footer = ({ onNavigate, compact = false, className }: FooterProps) 
               )}>
                 NeomSense
               </div>
-              <Badge variant="secondary" className="text-xs">
+              <Badge variant="secondary" className={`text-xs ${
+                themeMode === 'light'
+                  ? 'bg-gray-100 text-gray-700 border border-gray-300'
+                  : ''
+              }`}>
                 v2.0
               </Badge>
             </div>
@@ -123,7 +127,11 @@ export const Footer = ({ onNavigate, compact = false, className }: FooterProps) 
               )}>
                 NeomSense
               </div>
-              <Badge variant="secondary" className="text-xs">
+              <Badge variant="secondary" className={`text-xs ${
+                themeMode === 'light'
+                  ? 'bg-gray-100 text-gray-700 border border-gray-300'
+                  : ''
+              }`}>
                 v2.0
               </Badge>
             </div>
@@ -182,7 +190,11 @@ export const Footer = ({ onNavigate, compact = false, className }: FooterProps) 
                       <Icon className="w-4 h-4" />
                       {link.label}
                       {link.badge && (
-                        <Badge variant="secondary" className="ml-2 text-xs">
+                        <Badge variant="secondary" className={`ml-2 text-xs ${
+                          themeMode === 'light'
+                            ? 'bg-blue-100 text-blue-700 border border-blue-300'
+                            : ''
+                        }`}>
                           {link.badge}
                         </Badge>
                       )}
@@ -306,7 +318,7 @@ export const Footer = ({ onNavigate, compact = false, className }: FooterProps) 
                 </Button>
                 <div className={cn(
                   "text-xs",
-                  themeMode === 'light' ? 'text-gray-500' : 'text-gray-500'
+                  themeMode === 'light' ? 'text-gray-600' : 'text-gray-500'
                 )}>
                   Made with ❤️ for traders
                 </div>
