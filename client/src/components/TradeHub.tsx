@@ -208,21 +208,21 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
 
         {/* Main Content Tabs */}
         <Tabs defaultValue="marketplace" className="space-y-8">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="marketplace">🏪 Marketplace</TabsTrigger>
-            <TabsTrigger value="featured">⭐ Featured</TabsTrigger>
-            <TabsTrigger value="trending">🔥 Trending</TabsTrigger>
-            <TabsTrigger value="creators">👥 Top Creators</TabsTrigger>
+          <TabsList className={`grid w-full grid-cols-4 ${isDayMode ? 'bg-[#F9FAFB] border-[#E0E3EB]' : ''}`}>
+            <TabsTrigger value="marketplace" className={isDayMode ? 'data-[state=active]:bg-[#2962FF] data-[state=active]:text-[#FFFFFF] text-[#4B5563]' : ''}>🏪 Marketplace</TabsTrigger>
+            <TabsTrigger value="featured" className={isDayMode ? 'data-[state=active]:bg-[#2962FF] data-[state=active]:text-[#FFFFFF] text-[#4B5563]' : ''}>⭐ Featured</TabsTrigger>
+            <TabsTrigger value="trending" className={isDayMode ? 'data-[state=active]:bg-[#2962FF] data-[state=active]:text-[#FFFFFF] text-[#4B5563]' : ''}>🔥 Trending</TabsTrigger>
+            <TabsTrigger value="creators" className={isDayMode ? 'data-[state=active]:bg-[#2962FF] data-[state=active]:text-[#FFFFFF] text-[#4B5563]' : ''}>👥 Top Creators</TabsTrigger>
           </TabsList>
 
           {/* Marketplace Tab */}
           <TabsContent value="marketplace" className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {trendingContent.map((item) => (
-                <Card key={item.id} className="hover:shadow-lg transition-shadow cursor-pointer">
+                <Card key={item.id} className={`hover:shadow-lg transition-shadow cursor-pointer ${isDayMode ? 'bg-[#FFFFFF] border-[#E0E3EB]' : ''}`}>
                   <CardHeader className="space-y-4">
                     <div className="flex items-start justify-between">
-                      <CardTitle className="text-lg line-clamp-2">{item.title}</CardTitle>
+                      <CardTitle className={`text-lg line-clamp-2 ${isDayMode ? 'text-[#2A2E39]' : 'text-white'}`}>{item.title}</CardTitle>
                       {item.badge && (
                         <Badge
                           variant={item.badge === "BESTSELLER" ? "default" : "secondary"}
@@ -250,7 +250,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1">
                         <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                        <span className="text-sm font-medium">{item.rating}</span>
+                        <span className={`text-sm font-medium ${isDayMode ? 'text-[#2A2E39]' : 'text-white'}`}>{item.rating}</span>
                       </div>
                       <span className={`text-sm font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-white'}`}>
                         {item.type === "course" ? `${item.students} students` : `${item.subscribers} subscribers`}
@@ -288,7 +288,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {trendingContent.slice(0, 2).map((item) => (
-                <Card key={item.id} className="hover:shadow-lg transition-shadow">
+                <Card key={item.id} className={`hover:shadow-lg transition-shadow ${isDayMode ? 'bg-[#FFFFFF] border-[#E0E3EB]' : ''}`}>
                   <CardContent className="p-6">
                     <div className="flex items-start gap-4">
                       <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-purple-600/20 rounded-lg flex items-center justify-center">
@@ -312,7 +312,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                         <div className="flex items-center gap-4 pt-2">
                           <div className="flex items-center gap-1">
                             <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                            <span className="text-sm">{item.rating}</span>
+                            <span className={`text-sm ${isDayMode ? 'text-[#2A2E39]' : 'text-white'}`}>{item.rating}</span>
                           </div>
                           <span className={`text-lg font-bold ${isDayMode ? 'text-[#2A2E39]' : 'text-primary'}`}>${item.price}</span>
                         </div>
@@ -333,7 +333,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {trendingContent.map((item, index) => (
-                <Card key={item.id} className="hover:shadow-lg transition-shadow relative">
+                <Card key={item.id} className={`hover:shadow-lg transition-shadow relative ${isDayMode ? 'bg-[#FFFFFF] border-[#E0E3EB]' : ''}`}>
                   <div className="absolute top-2 left-2 bg-primary text-primary-foreground rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">
                     {index + 1}
                   </div>
@@ -362,7 +362,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {featuredTraders.map((trader) => (
-                <Card key={trader.id} className="hover:shadow-lg transition-shadow cursor-pointer">
+                <Card key={trader.id} className={`hover:shadow-lg transition-shadow cursor-pointer ${isDayMode ? 'bg-[#FFFFFF] border-[#E0E3EB]' : ''}`}>
                   <CardContent className="p-6 text-center">
                     <Avatar className="h-20 w-20 mx-auto mb-4">
                       <AvatarImage src={trader.avatar} />
