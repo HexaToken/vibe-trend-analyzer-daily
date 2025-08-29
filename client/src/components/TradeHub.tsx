@@ -125,24 +125,24 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
         {/* Header Section */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-4">
-            <DollarSign className="h-12 w-12 text-[#1F2937] dark:text-primary mr-3" />
-            <h1 className="text-4xl font-bold text-[#111827] dark:text-transparent dark:bg-gradient-to-r dark:from-primary dark:to-purple-600 dark:bg-clip-text">
+            <DollarSign className="h-12 w-12 text-foreground dark:text-primary mr-3" />
+            <h1 className="text-4xl font-bold text-foreground dark:text-transparent dark:bg-gradient-to-r dark:from-primary dark:to-purple-600 dark:bg-clip-text">
               💼 TradeHub
             </h1>
           </div>
-          <p className="text-xl text-gray-700 dark:text-white max-w-2xl mx-auto font-medium">
+          <p className="text-xl text-muted-foreground dark:text-white max-w-2xl mx-auto font-medium">
             Learn from verified traders, access premium strategies, and monetize your trading expertise
           </p>
           <div className="flex flex-wrap justify-center gap-4 mt-6">
-            <Badge className="text-sm bg-[#E0F2F1] text-[#004D40] border-[#004D40]/20 hover:bg-[#B2DFDB] transition-colors font-semibold px-4 py-2">
+            <Badge className="text-sm bg-green-50 text-green-800 border-green-200 hover:bg-green-100 transition-colors font-semibold px-4 py-2">
               <Star className="h-3 w-3 mr-1" />
               Verified Educators Only
             </Badge>
-            <Badge className="text-sm bg-[#E3F2FD] text-[#0D47A1] border-[#0D47A1]/20 hover:bg-[#BBDEFB] transition-colors font-semibold px-4 py-2">
+            <Badge className="text-sm bg-blue-50 text-blue-800 border-blue-200 hover:bg-blue-100 transition-colors font-semibold px-4 py-2">
               <Trophy className="h-3 w-3 mr-1" />
               Credibility-Based Rankings
             </Badge>
-            <Badge className="text-sm bg-[#EDE7F6] text-[#4527A0] border-[#4527A0]/20 hover:bg-[#D1C4E9] transition-colors font-semibold px-4 py-2">
+            <Badge className="text-sm bg-purple-50 text-purple-800 border-purple-200 hover:bg-purple-100 transition-colors font-semibold px-4 py-2">
               <Users className="h-3 w-3 mr-1" />
               Community Driven
             </Badge>
@@ -229,7 +229,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                         <AvatarImage src="/placeholder.svg" />
                         <AvatarFallback>{item.instructor[0]}</AvatarFallback>
                       </Avatar>
-                      <span className="text-sm text-gray-700 dark:text-white font-medium">{item.instructor}</span>
+                      <span className="text-sm text-muted-foreground dark:text-white font-medium">{item.instructor}</span>
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-4">
@@ -238,22 +238,22 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                         <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                         <span className="text-sm font-medium">{item.rating}</span>
                       </div>
-                      <span className="text-sm text-gray-600 dark:text-white font-medium">
+                      <span className="text-sm text-muted-foreground dark:text-white font-medium">
                         {item.type === "course" ? `${item.students} students` : `${item.subscribers} subscribers`}
                       </span>
                     </div>
                     
                     {item.type === "course" && item.duration && (
-                      <div className="flex items-center gap-2 text-sm text-gray-700 dark:text-white font-medium">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground dark:text-white font-medium">
                         <Play className="h-3 w-3" />
                         {item.duration}
                       </div>
                     )}
 
                     <div className="flex items-center justify-between pt-2">
-                      <div className="text-2xl font-bold text-[#1F2937] dark:text-primary">
+                      <div className="text-2xl font-bold text-foreground dark:text-primary">
                         ${item.price}
-                        {item.period && <span className="text-sm text-gray-600 dark:text-white font-medium">/{item.period}</span>}
+                        {item.period && <span className="text-sm text-muted-foreground dark:text-white font-medium">/{item.period}</span>}
                       </div>
                       <Button size="sm">
                         {item.type === "course" ? "Enroll Now" : "Subscribe"}
@@ -269,7 +269,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
           <TabsContent value="featured" className="space-y-6">
             <div className="text-center mb-8">
               <h2 className="text-2xl font-bold mb-2">Featured This Week</h2>
-              <p className="text-gray-700 dark:text-white font-medium">Hand-picked content from our top-rated educators</p>
+              <p className="text-muted-foreground dark:text-white font-medium">Hand-picked content from our top-rated educators</p>
             </div>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -278,7 +278,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                   <CardContent className="p-6">
                     <div className="flex items-start gap-4">
                       <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-purple-600/20 rounded-lg flex items-center justify-center">
-                        <BookOpen className="h-8 w-8 text-[#1F2937] dark:text-primary" />
+                        <BookOpen className="h-8 w-8 text-foreground dark:text-primary" />
                       </div>
                       <div className="flex-1 space-y-2">
                         <Badge
@@ -294,13 +294,13 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                           {item.badge}
                         </Badge>
                         <h3 className="text-xl font-semibold">{item.title}</h3>
-                        <p className="text-sm text-gray-700 dark:text-white font-medium">by {item.instructor}</p>
+                        <p className="text-sm text-muted-foreground dark:text-white font-medium">by {item.instructor}</p>
                         <div className="flex items-center gap-4 pt-2">
                           <div className="flex items-center gap-1">
                             <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                             <span className="text-sm">{item.rating}</span>
                           </div>
-                          <span className="text-lg font-bold text-[#1F2937] dark:text-primary">${item.price}</span>
+                          <span className="text-lg font-bold text-foreground dark:text-primary">${item.price}</span>
                         </div>
                       </div>
                     </div>
@@ -314,7 +314,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
           <TabsContent value="trending" className="space-y-6">
             <div className="text-center mb-8">
               <h2 className="text-2xl font-bold mb-2">🔥 Trending Now</h2>
-              <p className="text-gray-700 dark:text-white font-medium">Most popular content based on community engagement</p>
+              <p className="text-muted-foreground dark:text-white font-medium">Most popular content based on community engagement</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -325,13 +325,13 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                   </div>
                   <CardContent className="p-6 pt-8">
                     <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                    <p className="text-sm text-gray-700 dark:text-white font-medium mb-4">by {item.instructor}</p>
+                    <p className="text-sm text-muted-foreground dark:text-white font-medium mb-4">by {item.instructor}</p>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1">
                         <TrendingUp className="h-4 w-4 text-green-500" />
                         <span className="text-sm text-green-500">+{Math.floor(Math.random() * 50 + 10)}%</span>
                       </div>
-                      <span className="text-lg font-bold text-[#1F2937] dark:text-primary">${item.price}</span>
+                      <span className="text-lg font-bold text-foreground dark:text-primary">${item.price}</span>
                     </div>
                   </CardContent>
                 </Card>
@@ -343,7 +343,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
           <TabsContent value="creators" className="space-y-6">
             <div className="text-center mb-8">
               <h2 className="text-2xl font-bold mb-2">👥 Top Creators</h2>
-              <p className="text-gray-700 dark:text-white font-medium">Verified traders with the highest credibility scores</p>
+              <p className="text-muted-foreground dark:text-white font-medium">Verified traders with the highest credibility scores</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -356,7 +356,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                     </Avatar>
                     
                     <h3 className="text-xl font-semibold mb-2">{trader.name}</h3>
-                    <p className="text-gray-700 dark:text-white font-medium mb-3">{trader.expertise}</p>
+                    <p className="text-muted-foreground dark:text-white font-medium mb-3">{trader.expertise}</p>
                     
                     <div className="flex items-center justify-center gap-2 mb-3">
                       <Badge
@@ -387,22 +387,22 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                     <div className="grid grid-cols-2 gap-4 text-sm mb-4">
                       <div>
                         <div className="font-semibold text-green-500">{trader.monthlyReturn}</div>
-                        <div className="text-gray-600 dark:text-white font-medium">Monthly Return</div>
+                        <div className="text-muted-foreground dark:text-white font-medium">Monthly Return</div>
                       </div>
                       <div>
                         <div className="font-semibold">{trader.followers.toLocaleString()}</div>
-                        <div className="text-gray-600 dark:text-white font-medium">Followers</div>
+                        <div className="text-muted-foreground dark:text-white font-medium">Followers</div>
                       </div>
                     </div>
                     
                     <div className="grid grid-cols-2 gap-4 text-sm mb-4">
                       <div>
                         <div className="font-semibold">{trader.courses}</div>
-                        <div className="text-gray-600 dark:text-white font-medium">Courses</div>
+                        <div className="text-muted-foreground dark:text-white font-medium">Courses</div>
                       </div>
                       <div>
                         <div className="font-semibold">{trader.subscribers.toLocaleString()}</div>
-                        <div className="text-gray-600 dark:text-white font-medium">Subscribers</div>
+                        <div className="text-muted-foreground dark:text-white font-medium">Subscribers</div>
                       </div>
                     </div>
                     
@@ -425,8 +425,8 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
         <div className="mt-16 text-center">
           <Card className="bg-gradient-to-r from-primary/10 to-purple-600/10 border-primary/20">
             <CardContent className="p-8">
-              <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Ready to Monetize Your Trading Expertise?</h2>
-              <p className="text-gray-800 dark:text-white font-medium mb-6 max-w-2xl mx-auto">
+              <h2 className="text-2xl font-bold mb-4 text-foreground dark:text-white">Ready to Monetize Your Trading Expertise?</h2>
+              <p className="text-muted-foreground dark:text-white font-medium mb-6 max-w-2xl mx-auto">
                 Join our community of verified traders and start earning from your knowledge.
                 Share courses, offer subscriptions, and build your following.
               </p>
@@ -434,7 +434,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                 <Button size="lg" className="min-w-48">
                   Apply to Become a Creator
                 </Button>
-                <Button size="lg" variant="outline" className="min-w-48 bg-white/90 border-2 border-gray-800 text-black font-semibold hover:bg-white hover:border-gray-900">
+                <Button size="lg" variant="outline" className="min-w-48">
                   Learn More
                 </Button>
               </div>
