@@ -28,22 +28,18 @@ export const AIAnalysisSection: React.FC<AIAnalysisSectionProps> = ({
   };
 
   return (
-    <Card 
+    <Card
       className={cn(
-        "relative overflow-hidden",
+        "relative overflow-hidden bg-card border-border shadow-sm",
         themeMode === 'light'
-          ? 'bg-white border-[#E0E0E0] rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)]'
+          ? 'rounded-xl'
           : 'border-purple-500/20 backdrop-blur-xl',
         className
       )}
-      style={{
-        backgroundColor: themeMode === 'light' ? '#FFFFFF' : '#12121E'
-      }}
     >
       <CardHeader className="pb-4">
         <CardTitle className={cn(
-          "flex items-center gap-2 text-lg font-medium",
-          themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+          "flex items-center gap-2 text-lg font-medium text-card-foreground"
         )}>
           <Sparkles className="w-5 h-5 text-purple-500" />
           AI Analysis
