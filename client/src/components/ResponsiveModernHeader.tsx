@@ -263,9 +263,9 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                   )}
                   sideOffset={5}
                   style={{
-                    backgroundColor: isDayMode ? 'white' : isLightMode ? 'white' : 'rgba(10, 10, 35, 0.95)',
-                    borderColor: isDayMode ? '#E0E3EB' : isLightMode ? 'rgb(229 231 235)' : 'rgb(55 65 81)',
-                    color: isDayMode ? '#2A2E39' : isLightMode ? 'rgb(17 24 39)' : 'white',
+                    backgroundColor: isLightMode ? 'white' : 'rgba(10, 10, 35, 0.95)',
+                    borderColor: isLightMode ? 'rgb(229 231 235)' : 'rgb(55 65 81)',
+                    color: isLightMode ? 'rgb(17 24 39)' : 'white',
                     zIndex: 100
                   }}
                 >
