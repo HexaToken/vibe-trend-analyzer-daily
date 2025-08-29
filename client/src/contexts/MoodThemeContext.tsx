@@ -210,11 +210,16 @@ export const MoodThemeProvider: React.FC<MoodThemeProviderProps> = ({ children }
   // Apply theme to document
   useEffect(() => {
     const root = document.documentElement;
-    
+    const body = document.body;
+
+    // Remove all theme classes first
+    root.classList.remove('dark');
+    body.classList.remove('tradingview-day');
+
     if (themeMode === 'dark' || isDynamicMode) {
       root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
+    } else if (themeMode === 'day') {
+      body.classList.add('tradingview-day');
     }
 
     // Apply custom CSS variables for mood theming
