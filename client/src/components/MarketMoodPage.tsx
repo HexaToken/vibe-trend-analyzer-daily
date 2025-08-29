@@ -204,6 +204,169 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
                   </div>
                 </CardContent>
               </Card>
+
+              {/* Market Drivers (Top 3) - Compact Version */}
+              <Card className={cn(
+                "relative overflow-hidden transition-all duration-200 hover:scale-[1.02] rounded-2xl mt-4",
+                themeMode === 'light'
+                  ? 'bg-white border-[#E0E0E0] shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]'
+                  : 'bg-[#111827] border-slate-700/50 hover:shadow-lg hover:shadow-purple-500/20'
+              )}>
+
+                {/* Rainbow accent border at top */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500" />
+
+                <CardHeader className={cn(
+                  "pb-3",
+                  themeMode === 'light' ? 'border-b border-gray-100' : 'border-b border-slate-700/50'
+                )}>
+                  <CardTitle className={cn(
+                    "text-lg font-bold flex items-center gap-2",
+                    themeMode === 'light' ? 'text-slate-900' : 'text-white'
+                  )}>
+                    🎯 Market Drivers (Top 3)
+                  </CardTitle>
+                </CardHeader>
+
+                <CardContent className="p-4 pt-0 space-y-3">
+                  {/* Driver 1 */}
+                  <div
+                    onClick={() => {
+                      const aiEngine = document.getElementById('ai-sentiment-engine');
+                      if (aiEngine) {
+                        aiEngine.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
+                    className={cn(
+                      "flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all duration-200",
+                      "hover:scale-[1.02] group",
+                      themeMode === 'light'
+                        ? 'hover:bg-gray-50 hover:shadow-sm'
+                        : 'hover:bg-slate-800/50 hover:border hover:border-purple-500/20'
+                    )}
+                    aria-label="Driver 1: Tech earnings up 8 percent"
+                  >
+                    <div className="text-xl flex-shrink-0 animate-pulse">📈</div>
+                    <div className="flex-1 min-w-0">
+                      <div className={cn(
+                        "text-sm font-medium truncate group-hover:underline decoration-2 underline-offset-2",
+                        themeMode === 'light' ? 'text-slate-700' : 'text-slate-200'
+                      )}>
+                        Tech earnings +8%
+                      </div>
+                      <div className={cn(
+                        "text-xs mt-1",
+                        themeMode === 'light' ? 'text-green-600' : 'text-green-400'
+                      )}>
+                        High Impact
+                      </div>
+                    </div>
+                    <div className={cn(
+                      "w-2 h-2 rounded-full transition-all duration-200 opacity-0 group-hover:opacity-100",
+                      themeMode === 'light' ? 'bg-blue-500' : 'bg-purple-400'
+                    )} />
+                  </div>
+
+                  {/* Driver 2 */}
+                  <div
+                    onClick={() => {
+                      const aiEngine = document.getElementById('ai-sentiment-engine');
+                      if (aiEngine) {
+                        aiEngine.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
+                    className={cn(
+                      "flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all duration-200",
+                      "hover:scale-[1.02] group",
+                      themeMode === 'light'
+                        ? 'hover:bg-gray-50 hover:shadow-sm'
+                        : 'hover:bg-slate-800/50 hover:border hover:border-purple-500/20'
+                    )}
+                    aria-label="Driver 2: Fed signals no rate hike"
+                  >
+                    <div className="text-xl flex-shrink-0 animate-pulse">📰</div>
+                    <div className="flex-1 min-w-0">
+                      <div className={cn(
+                        "text-sm font-medium truncate group-hover:underline decoration-2 underline-offset-2",
+                        themeMode === 'light' ? 'text-slate-700' : 'text-slate-200'
+                      )}>
+                        Fed signals no hike
+                      </div>
+                      <div className={cn(
+                        "text-xs mt-1",
+                        themeMode === 'light' ? 'text-green-600' : 'text-green-400'
+                      )}>
+                        High Impact
+                      </div>
+                    </div>
+                    <div className={cn(
+                      "w-2 h-2 rounded-full transition-all duration-200 opacity-0 group-hover:opacity-100",
+                      themeMode === 'light' ? 'bg-blue-500' : 'bg-purple-400'
+                    )} />
+                  </div>
+
+                  {/* Driver 3 */}
+                  <div
+                    onClick={() => {
+                      const aiEngine = document.getElementById('ai-sentiment-engine');
+                      if (aiEngine) {
+                        aiEngine.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
+                    className={cn(
+                      "flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all duration-200",
+                      "hover:scale-[1.02] group",
+                      themeMode === 'light'
+                        ? 'hover:bg-gray-50 hover:shadow-sm'
+                        : 'hover:bg-slate-800/50 hover:border hover:border-purple-500/20'
+                    )}
+                    aria-label="Driver 3: Retail investor activity surge"
+                  >
+                    <div className="text-xl flex-shrink-0 animate-pulse">👥</div>
+                    <div className="flex-1 min-w-0">
+                      <div className={cn(
+                        "text-sm font-medium truncate group-hover:underline decoration-2 underline-offset-2",
+                        themeMode === 'light' ? 'text-slate-700' : 'text-slate-200'
+                      )}>
+                        Retail investor activity surge
+                      </div>
+                      <div className={cn(
+                        "text-xs mt-1",
+                        themeMode === 'light' ? 'text-yellow-600' : 'text-yellow-400'
+                      )}>
+                        Medium Impact
+                      </div>
+                    </div>
+                    <div className={cn(
+                      "w-2 h-2 rounded-full transition-all duration-200 opacity-0 group-hover:opacity-100",
+                      themeMode === 'light' ? 'bg-blue-500' : 'bg-purple-400'
+                    )} />
+                  </div>
+
+                  {/* Footer link */}
+                  <div className={cn(
+                    "text-xs text-center pt-2 border-t",
+                    themeMode === 'light'
+                      ? 'text-gray-500 border-gray-100'
+                      : 'text-slate-400 border-slate-700'
+                  )}>
+                    <button
+                      onClick={() => {
+                        const aiEngine = document.getElementById('ai-sentiment-engine');
+                        if (aiEngine) {
+                          aiEngine.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }}
+                      className={cn(
+                        "hover:underline cursor-pointer transition-colors",
+                        themeMode === 'light' ? 'hover:text-blue-600' : 'hover:text-purple-400'
+                      )}
+                    >
+                      View full breakdown →
+                    </button>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
 
