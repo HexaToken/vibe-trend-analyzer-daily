@@ -234,7 +234,7 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
 
         {/* Active Filters Summary */}
         {(filters.searchQuery || getActiveSources().length < 3) && (
-          <div className="pt-4 border-t border-slate-700/50">
+          <div className="pt-4 border-t border-border/50">
             <div className="flex flex-wrap gap-2">
               {filters.searchQuery && (
                 <Badge className="bg-cyan-500/20 text-cyan-400 border-cyan-500/30">
