@@ -1,12 +1,12 @@
 /* ===== ACCENT & BRAND COLORS - NEW PALETTE ===== */
 
-/* Light Mode Accent & Brand Colors */
+/* Light Mode Accent & Brand Colors - TradingView Tokens */
 :root:not(.dark) {
-  /* Accent Colors - New Specification */
-  --accent-primary-blue: #3A7AFE;
+  /* Accent Colors - TradingView Specification */
+  --accent-primary-blue: #2962FF;
   --accent-secondary-purple: #7B61FF;
   --hover-background: #F3F4F6;
-  --active-border: #3A7AFE;
+  --active-border: #2962FF;
 }
 
 /* Primary Accent Blue */
