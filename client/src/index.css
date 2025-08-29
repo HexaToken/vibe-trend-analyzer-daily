@@ -1456,29 +1456,46 @@ All colors MUST be HSL.
     color: white !important;
   }
 
-  /* Ultimate Day Mode text override - Force all text to be dark */
-  .day-mode-container,
-  .day-mode-container *,
-  .day-mode-container span,
-  .day-mode-container p,
-  .day-mode-container h1,
-  .day-mode-container h2,
-  .day-mode-container h3,
-  .day-mode-container div {
+  /* Force Day Mode CSS variables override */
+  .day-mode-container {
+    --background: 0 0% 100% !important; /* Pure white */
+    --foreground: 214 16% 16% !important; /* #2A2E39 */
+    --muted: 220 9% 98% !important; /* #F9FAFB */
+    --card: 0 0% 100% !important; /* White */
+    --card-foreground: 214 16% 16% !important; /* #2A2E39 */
+  }
+
+  /* Ultra-high specificity Day Mode override - Maximum possible CSS specificity */
+  html body div.day-mode-container,
+  html body div.day-mode-container *:not(.bg-green-600):not(.bg-red-500):not(.bg-blue-600):not(.bg-yellow-600):not(.bg-gray-600):not(.bg-indigo-600),
+  html body div.day-mode-container span,
+  html body div.day-mode-container p,
+  html body div.day-mode-container h1,
+  html body div.day-mode-container h2,
+  html body div.day-mode-container h3,
+  html body div.day-mode-container div,
+  html body div.day-mode-container button,
+  html body div.day-mode-container a {
     color: #2A2E39 !important;
   }
 
-  /* Override any text-white in Day Mode containers */
-  .day-mode-container .text-white,
-  .day-mode-container .text-white *,
-  .day-mode-container [class*="text-white"] {
+  /* Force background to white in Day Mode */
+  html body div.day-mode-container {
+    background-color: #FFFFFF !important;
+    background-image: none !important;
+    background: #FFFFFF !important;
+  }
+
+  /* Override any remaining dark styling in Day Mode */
+  html body div.day-mode-container .text-white,
+  html body div.day-mode-container .text-white *,
+  html body div.day-mode-container [class*="text-white"] {
     color: #2A2E39 !important;
   }
 
   /* Secondary text in Day Mode */
-  .day-mode-container .text-sm,
-  .day-mode-container .text-xs,
-  .day-mode-container [class*="text-gray"] {
+  html body div.day-mode-container .text-sm,
+  html body div.day-mode-container .text-xs {
     color: #4B5563 !important;
   }
 
