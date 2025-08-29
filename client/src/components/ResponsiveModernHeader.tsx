@@ -99,7 +99,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
   const navigationItems = [
     { label: 'Mood', key: 'market-mood', icon: '🧠' },
     { label: 'Smart News', key: 'smart-news-feed', icon: '🤖' },
-    { label: 'TradeHub', key: 'tradehub', icon: '��' },
+    { label: 'TradeHub', key: 'tradehub', icon: '💼' },
   ];
 
 
@@ -266,7 +266,9 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                     <ChevronDown className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" />
                     <div className={cn(
                       "absolute bottom-0 left-0 right-0 h-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200",
-                      isLightMode
+                      isDayMode
+                        ? "bg-[#2962FF]"
+                        : isLightMode
                         ? "bg-[#3A7AFE]"
                         : "bg-gradient-to-r from-pink-400 to-purple-500"
                     )} />
