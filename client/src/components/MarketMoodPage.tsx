@@ -384,10 +384,12 @@ export const MarketMoodPage: React.FC<MarketMoodPageProps> = ({
             />
 
             {/* AI Sentiment Engine - Unified Module */}
-            <AISentimentEngine
-              moodScore={moodScore || { overall: 72, stocks: 68, news: 75, social: 74 }}
-              className="w-full"
-            />
+            <div id="ai-sentiment-engine">
+              <AISentimentEngine
+                moodScore={moodScore || { overall: 72, stocks: 68, news: 75, social: 74 }}
+                className="w-full"
+              />
+            </div>
 
             {/* Community Sentiment Polls Section */}
             <Card className={themeMode === 'light'
