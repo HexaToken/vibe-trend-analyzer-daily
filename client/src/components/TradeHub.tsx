@@ -125,7 +125,6 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
         {/* Header Section */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-4">
-            <DollarSign className="h-12 w-12 text-foreground dark:text-primary mr-3" />
             <h1 className="text-4xl font-bold text-foreground dark:text-transparent dark:bg-gradient-to-r dark:from-primary dark:to-purple-600 dark:bg-clip-text">
               💼 TradeHub
             </h1>
