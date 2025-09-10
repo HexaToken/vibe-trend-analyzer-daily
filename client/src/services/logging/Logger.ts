@@ -256,21 +256,47 @@ export const logger = Logger.getInstance();
  * Performance monitoring decorator
  */
 export function LogPerformance(component: string = 'Unknown') {
-  return function (target: any, propertyName: string, descriptor: PropertyDescriptor) {
+  return function (target: any, propertyName: string, descriptor?: PropertyDescriptor) {
+    if (!descriptor) {
+      // Handle case where descriptor is undefined
+      descriptor = Object.getOwnPropertyDescriptor(target, propertyName) || {
+        value: target[propertyName],
+        writable: true,
+        enumerable: false,
+        configurable: true
+      };
+    }
+
     const method = descriptor.value;
 
-    descriptor.value = async function (...args: any[]) {
+    descriptor.value = function (...args: any[]) {
       const start = performance.now();
       try {
-        const result = await method.apply(this, args);
+        const result = method.apply(this, args);
         const duration = performance.now() - start;
-        logger.performance(`${component}.${propertyName}`, duration);
-        return result;
+        
+        // Handle both sync and async methods
+        if (result && typeof result.then === 'function') {
+          return result.then((res: any) => {
+            const asyncDuration = performance.now() - start;
+            logger.performance(`${component}.${propertyName}`, asyncDuration);
+            return res;
+          }).catch((error: Error) => {
+            const asyncDuration = performance.now() - start;
+            logger.error(`${component}.${propertyName} failed`, error, { duration_ms: asyncDuration });
+            throw error;
+          });
+        } else {
+          logger.performance(`${component}.${propertyName}`, duration);
+          return result;
+        }
       } catch (error) {
         const duration = performance.now() - start;
         logger.error(`${component}.${propertyName} failed`, error as Error, { duration_ms: duration });
         throw error;
       }
     };
+
+    return descriptor;
   };
 }
