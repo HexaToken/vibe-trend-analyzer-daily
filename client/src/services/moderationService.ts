@@ -598,8 +598,8 @@ class ModerationService {
   }
 }
 
-// Export singleton instance
-export const moderationService = new ModerationService();
+// Legacy export - remove this line to avoid conflicts
+// const legacyModerationService = new ModerationService();
 
 // Utility functions for UI components
 export const getMockQueueItems = (): ModerationQueueItem[] => [

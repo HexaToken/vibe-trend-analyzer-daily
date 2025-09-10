@@ -56,18 +56,6 @@ export class ContentFlagger implements IContentFlagger {
       throw new Error('Flag reason is required');
     }
 
-    if (flagData.userId) {
-      const userValidation = InputValidator.validateAuthor(flagData.userId);
-      if (!userValidation.isValid) {
-        throw new Error(`Invalid userId: ${userValidation.errors.join(', ')}`);
-      }
-    }
-
-    if (flagData.details) {
-      const detailsValidation = InputValidator.validateContent(flagData.details);
-      if (!detailsValidation.isValid) {
-        throw new Error(`Invalid flag details: ${detailsValidation.errors.join(', ')}`);
-      }
-    }
+    // Additional validation can be added here for extended flag data
   }
 }
