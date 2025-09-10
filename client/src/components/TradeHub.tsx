@@ -7,14 +7,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useMoodTheme } from "@/contexts/MoodThemeContext";
 
 interface TradeHubProps {
   onNavigate?: (section: string) => void;
 }
 
 export const TradeHub = ({ onNavigate }: TradeHubProps) => {
-  const { isDayMode } = useMoodTheme();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [priceFilter, setPriceFilter] = useState("all");
@@ -122,41 +120,28 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
   };
 
   return (
-    <div className={isDayMode ? "min-h-screen day-mode-container bg-background" : "min-h-screen bg-gradient-to-br from-background via-background to-muted/30"}>
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/30">
       <div className="container mx-auto px-4 py-8">
         {/* Header Section */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-4">
-            <DollarSign className={`h-12 w-12 mr-3 ${isDayMode ? 'text-[#2962FF]' : 'text-primary'}`} />
-            <h1 className={`text-4xl font-bold ${isDayMode ? 'text-[#2A2E39]' : 'text-transparent bg-gradient-to-r from-primary to-purple-600 bg-clip-text'}`}>
+            <h1 className="text-4xl font-bold text-foreground dark:text-transparent dark:bg-gradient-to-r dark:from-primary dark:to-purple-600 dark:bg-clip-text">
               💼 TradeHub
             </h1>
           </div>
-          <p className={`text-xl max-w-2xl mx-auto font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>
+          <p className="text-xl text-muted-foreground dark:text-white max-w-2xl mx-auto font-medium">
             Learn from verified traders, access premium strategies, and monetize your trading expertise
           </p>
           <div className="flex flex-wrap justify-center gap-4 mt-6">
-            <Badge className={`text-sm transition-colors font-semibold px-4 py-2 ${
-              isDayMode 
-                ? 'bg-card text-card-foreground border-border hover:bg-muted' 
-                : 'bg-[#E0F2F1] text-[#004D40] border-[#004D40]/20 hover:bg-[#B2DFDB]'
-            }`}>
+            <Badge className="text-sm bg-green-50 text-green-800 border-green-200 hover:bg-green-100 transition-colors font-semibold px-4 py-2">
               <Star className="h-3 w-3 mr-1" />
               Verified Educators Only
             </Badge>
-            <Badge className={`text-sm transition-colors font-semibold px-4 py-2 ${
-              isDayMode 
-                ? 'bg-card text-card-foreground border-border hover:bg-muted' 
-                : 'bg-[#E3F2FD] text-[#0D47A1] border-[#0D47A1]/20 hover:bg-[#BBDEFB]'
-            }`}>
+            <Badge className="text-sm bg-blue-50 text-blue-800 border-blue-200 hover:bg-blue-100 transition-colors font-semibold px-4 py-2">
               <Trophy className="h-3 w-3 mr-1" />
               Credibility-Based Rankings
             </Badge>
-            <Badge className={`text-sm transition-colors font-semibold px-4 py-2 ${
-              isDayMode 
-                ? 'bg-card text-card-foreground border-border hover:bg-muted' 
-                : 'bg-[#EDE7F6] text-[#4527A0] border-[#4527A0]/20 hover:bg-[#D1C4E9]'
-            }`}>
+            <Badge className="text-sm bg-purple-50 text-purple-800 border-purple-200 hover:bg-purple-100 transition-colors font-semibold px-4 py-2">
               <Users className="h-3 w-3 mr-1" />
               Community Driven
             </Badge>
@@ -208,21 +193,21 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
 
         {/* Main Content Tabs */}
         <Tabs defaultValue="marketplace" className="space-y-8">
-          <TabsList className={`grid w-full grid-cols-4 ${isDayMode ? 'bg-card border-border' : ''}`}>
-            <TabsTrigger value="marketplace" className={isDayMode ? 'data-[state=active]:bg-[#2962FF] data-[state=active]:text-[#FFFFFF] text-[#4B5563]' : ''}>🏪 Marketplace</TabsTrigger>
-            <TabsTrigger value="featured" className={isDayMode ? 'data-[state=active]:bg-[#2962FF] data-[state=active]:text-[#FFFFFF] text-[#4B5563]' : ''}>⭐ Featured</TabsTrigger>
-            <TabsTrigger value="trending" className={isDayMode ? 'data-[state=active]:bg-[#2962FF] data-[state=active]:text-[#FFFFFF] text-[#4B5563]' : ''}>🔥 Trending</TabsTrigger>
-            <TabsTrigger value="creators" className={isDayMode ? 'data-[state=active]:bg-[#2962FF] data-[state=active]:text-[#FFFFFF] text-[#4B5563]' : ''}>👥 Top Creators</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-4">
+            <TabsTrigger value="marketplace">🏪 Marketplace</TabsTrigger>
+            <TabsTrigger value="featured">⭐ Featured</TabsTrigger>
+            <TabsTrigger value="trending">🔥 Trending</TabsTrigger>
+            <TabsTrigger value="creators">👥 Top Creators</TabsTrigger>
           </TabsList>
 
           {/* Marketplace Tab */}
           <TabsContent value="marketplace" className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {trendingContent.map((item) => (
-                <Card key={item.id} className={`hover:shadow-lg transition-shadow cursor-pointer ${isDayMode ? 'bg-card border-border' : ''}`}>
+                <Card key={item.id} className="hover:shadow-lg transition-shadow cursor-pointer">
                   <CardHeader className="space-y-4">
                     <div className="flex items-start justify-between">
-                      <CardTitle className={`text-lg line-clamp-2 ${isDayMode ? 'text-[#2A2E39]' : 'text-foreground'}`}>{item.title}</CardTitle>
+                      <CardTitle className="text-lg line-clamp-2">{item.title}</CardTitle>
                       {item.badge && (
                         <Badge
                           variant={item.badge === "BESTSELLER" ? "default" : "secondary"}
@@ -243,31 +228,31 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                         <AvatarImage src="/placeholder.svg" />
                         <AvatarFallback>{item.instructor[0]}</AvatarFallback>
                       </Avatar>
-                      <span className={`text-sm font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>{item.instructor}</span>
+                      <span className="text-sm text-muted-foreground dark:text-white font-medium">{item.instructor}</span>
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1">
                         <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                        <span className={`text-sm font-medium ${isDayMode ? 'text-[#2A2E39]' : 'text-foreground'}`}>{item.rating}</span>
+                        <span className="text-sm font-medium">{item.rating}</span>
                       </div>
-                      <span className={`text-sm font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>
+                      <span className="text-sm text-muted-foreground dark:text-white font-medium">
                         {item.type === "course" ? `${item.students} students` : `${item.subscribers} subscribers`}
                       </span>
                     </div>
                     
                     {item.type === "course" && item.duration && (
-                      <div className={`flex items-center gap-2 text-sm font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground dark:text-white font-medium">
                         <Play className="h-3 w-3" />
                         {item.duration}
                       </div>
                     )}
 
                     <div className="flex items-center justify-between pt-2">
-                      <div className={`text-2xl font-bold ${isDayMode ? 'text-[#2A2E39]' : 'text-primary'}`}>
+                      <div className="text-2xl font-bold text-foreground dark:text-primary">
                         ${item.price}
-                        {item.period && <span className={`text-sm font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>/{item.period}</span>}
+                        {item.period && <span className="text-sm text-muted-foreground dark:text-white font-medium">/{item.period}</span>}
                       </div>
                       <Button size="sm">
                         {item.type === "course" ? "Enroll Now" : "Subscribe"}
@@ -282,17 +267,17 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
           {/* Featured Tab */}
           <TabsContent value="featured" className="space-y-6">
             <div className="text-center mb-8">
-              <h2 className={`text-2xl font-bold mb-2 ${isDayMode ? 'text-[#2A2E39]' : 'text-foreground'}`}>Featured This Week</h2>
-              <p className={`font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>Hand-picked content from our top-rated educators</p>
+              <h2 className="text-2xl font-bold mb-2">Featured This Week</h2>
+              <p className="text-muted-foreground dark:text-white font-medium">Hand-picked content from our top-rated educators</p>
             </div>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {trendingContent.slice(0, 2).map((item) => (
-                <Card key={item.id} className={`hover:shadow-lg transition-shadow ${isDayMode ? 'bg-card border-border' : ''}`}>
+                <Card key={item.id} className="hover:shadow-lg transition-shadow">
                   <CardContent className="p-6">
                     <div className="flex items-start gap-4">
                       <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-purple-600/20 rounded-lg flex items-center justify-center">
-                        <BookOpen className={`h-8 w-8 ${isDayMode ? 'text-[#2962FF]' : 'text-primary'}`} />
+                        <BookOpen className="h-8 w-8 text-foreground dark:text-primary" />
                       </div>
                       <div className="flex-1 space-y-2">
                         <Badge
@@ -307,14 +292,14 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                         >
                           {item.badge}
                         </Badge>
-                        <h3 className={`text-xl font-semibold ${isDayMode ? 'text-[#2A2E39]' : 'text-foreground'}`}>{item.title}</h3>
-                        <p className={`text-sm font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>by {item.instructor}</p>
+                        <h3 className="text-xl font-semibold">{item.title}</h3>
+                        <p className="text-sm text-muted-foreground dark:text-white font-medium">by {item.instructor}</p>
                         <div className="flex items-center gap-4 pt-2">
                           <div className="flex items-center gap-1">
                             <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                            <span className={`text-sm ${isDayMode ? 'text-[#2A2E39]' : 'text-white'}`}>{item.rating}</span>
+                            <span className="text-sm">{item.rating}</span>
                           </div>
-                          <span className={`text-lg font-bold ${isDayMode ? 'text-[#2A2E39]' : 'text-primary'}`}>${item.price}</span>
+                          <span className="text-lg font-bold text-foreground dark:text-primary">${item.price}</span>
                         </div>
                       </div>
                     </div>
@@ -327,25 +312,25 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
           {/* Trending Tab */}
           <TabsContent value="trending" className="space-y-6">
             <div className="text-center mb-8">
-              <h2 className={`text-2xl font-bold mb-2 ${isDayMode ? 'text-[#2A2E39]' : 'text-foreground'}`}>🔥 Trending Now</h2>
-              <p className={`font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>Most popular content based on community engagement</p>
+              <h2 className="text-2xl font-bold mb-2">🔥 Trending Now</h2>
+              <p className="text-muted-foreground dark:text-white font-medium">Most popular content based on community engagement</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {trendingContent.map((item, index) => (
-                <Card key={item.id} className={`hover:shadow-lg transition-shadow relative ${isDayMode ? 'bg-card border-border' : ''}`}>
+                <Card key={item.id} className="hover:shadow-lg transition-shadow relative">
                   <div className="absolute top-2 left-2 bg-primary text-primary-foreground rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">
                     {index + 1}
                   </div>
                   <CardContent className="p-6 pt-8">
-                    <h3 className={`text-lg font-semibold mb-2 ${isDayMode ? 'text-[#2A2E39]' : 'text-foreground'}`}>{item.title}</h3>
-                    <p className={`text-sm font-medium mb-4 ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>by {item.instructor}</p>
+                    <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground dark:text-white font-medium mb-4">by {item.instructor}</p>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1">
                         <TrendingUp className="h-4 w-4 text-green-500" />
                         <span className="text-sm text-green-500">+{Math.floor(Math.random() * 50 + 10)}%</span>
                       </div>
-                      <span className={`text-lg font-bold ${isDayMode ? 'text-[#2A2E39]' : 'text-primary'}`}>${item.price}</span>
+                      <span className="text-lg font-bold text-foreground dark:text-primary">${item.price}</span>
                     </div>
                   </CardContent>
                 </Card>
@@ -356,21 +341,21 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
           {/* Top Creators Tab */}
           <TabsContent value="creators" className="space-y-6">
             <div className="text-center mb-8">
-              <h2 className={`text-2xl font-bold mb-2 ${isDayMode ? 'text-[#2A2E39]' : 'text-foreground'}`}>👥 Top Creators</h2>
-              <p className={`font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>Verified traders with the highest credibility scores</p>
+              <h2 className="text-2xl font-bold mb-2">👥 Top Creators</h2>
+              <p className="text-muted-foreground dark:text-white font-medium">Verified traders with the highest credibility scores</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {featuredTraders.map((trader) => (
-                <Card key={trader.id} className={`hover:shadow-lg transition-shadow cursor-pointer ${isDayMode ? 'bg-card border-border' : ''}`}>
+                <Card key={trader.id} className="hover:shadow-lg transition-shadow cursor-pointer">
                   <CardContent className="p-6 text-center">
                     <Avatar className="h-20 w-20 mx-auto mb-4">
                       <AvatarImage src={trader.avatar} />
                       <AvatarFallback className="text-lg">{trader.name[0]}</AvatarFallback>
                     </Avatar>
                     
-                    <h3 className={`text-xl font-semibold mb-2 ${isDayMode ? 'text-[#2A2E39]' : 'text-foreground'}`}>{trader.name}</h3>
-                    <p className={`font-medium mb-3 ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>{trader.expertise}</p>
+                    <h3 className="text-xl font-semibold mb-2">{trader.name}</h3>
+                    <p className="text-muted-foreground dark:text-white font-medium mb-3">{trader.expertise}</p>
                     
                     <div className="flex items-center justify-center gap-2 mb-3">
                       <Badge
@@ -401,22 +386,22 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                     <div className="grid grid-cols-2 gap-4 text-sm mb-4">
                       <div>
                         <div className="font-semibold text-green-500">{trader.monthlyReturn}</div>
-                        <div className={`font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>Monthly Return</div>
+                        <div className="text-muted-foreground dark:text-white font-medium">Monthly Return</div>
                       </div>
                       <div>
-                        <div className={`font-semibold ${isDayMode ? 'text-[#2A2E39]' : 'text-foreground'}`}>{trader.followers.toLocaleString()}</div>
-                        <div className={`font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>Followers</div>
+                        <div className="font-semibold">{trader.followers.toLocaleString()}</div>
+                        <div className="text-muted-foreground dark:text-white font-medium">Followers</div>
                       </div>
                     </div>
                     
                     <div className="grid grid-cols-2 gap-4 text-sm mb-4">
                       <div>
-                        <div className={`font-semibold ${isDayMode ? 'text-[#2A2E39]' : 'text-foreground'}`}>{trader.courses}</div>
-                        <div className={`font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>Courses</div>
+                        <div className="font-semibold">{trader.courses}</div>
+                        <div className="text-muted-foreground dark:text-white font-medium">Courses</div>
                       </div>
                       <div>
-                        <div className={`font-semibold ${isDayMode ? 'text-[#2A2E39]' : 'text-foreground'}`}>{trader.subscribers.toLocaleString()}</div>
-                        <div className={`font-medium ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>Subscribers</div>
+                        <div className="font-semibold">{trader.subscribers.toLocaleString()}</div>
+                        <div className="text-muted-foreground dark:text-white font-medium">Subscribers</div>
                       </div>
                     </div>
                     
@@ -437,13 +422,10 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
 
         {/* Call to Action for Creators */}
         <div className="mt-16 text-center">
-          <Card className={isDayMode 
-            ? "bg-card border-border" 
-            : "bg-gradient-to-r from-primary/10 to-purple-600/10 border-primary/20"
-          }>
+          <Card className="bg-gradient-to-r from-primary/10 to-purple-600/10 border-primary/20">
             <CardContent className="p-8">
-              <h2 className={`text-2xl font-bold mb-4 ${isDayMode ? 'text-[#2A2E39]' : 'text-foreground'}`}>Ready to Monetize Your Trading Expertise?</h2>
-              <p className={`font-medium mb-6 max-w-2xl mx-auto ${isDayMode ? 'text-[#4B5563]' : 'text-muted-foreground'}`}>
+              <h2 className="text-2xl font-bold mb-4 text-foreground dark:text-white">Ready to Monetize Your Trading Expertise?</h2>
+              <p className="text-muted-foreground dark:text-white font-medium mb-6 max-w-2xl mx-auto">
                 Join our community of verified traders and start earning from your knowledge.
                 Share courses, offer subscriptions, and build your following.
               </p>
@@ -451,11 +433,7 @@ export const TradeHub = ({ onNavigate }: TradeHubProps) => {
                 <Button size="lg" className="min-w-48">
                   Apply to Become a Creator
                 </Button>
-                <Button size="lg" variant="outline" className={`min-w-48 font-semibold ${
-                  isDayMode 
-                    ? 'bg-[#FFFFFF] border-2 border-[#2A2E39] text-[#2A2E39] hover:bg-[#F9FAFB] hover:border-[#2962FF]' 
-                    : 'bg-white/90 border-2 border-gray-800 text-black hover:bg-white hover:border-gray-900'
-                }`}>
+                <Button size="lg" variant="outline" className="min-w-48">
                   Learn More
                 </Button>
               </div>

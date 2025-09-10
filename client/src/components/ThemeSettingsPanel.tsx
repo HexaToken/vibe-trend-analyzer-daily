@@ -104,9 +104,9 @@ export const ThemeSettingsPanel: React.FC<ThemeSettingsPanelProps> = ({
 
   const handleThemeChange = (themeId: 'light' | 'dark' | 'dynamic') => {
     setThemeMode(themeId);
-    
-    // Store in localStorage for persistence
-    localStorage.setItem('moodmeter-theme', themeId);
+
+    // Store in localStorage for persistence (using same key as MoodThemeContext)
+    localStorage.setItem('moodThemeMode', themeId);
     
     // Apply dynamic theme immediately if selected
     if (themeId === 'dynamic') {
@@ -135,7 +135,9 @@ export const ThemeSettingsPanel: React.FC<ThemeSettingsPanelProps> = ({
         "p-2 rounded-lg transition-all duration-200 relative group",
         themeMode === 'dynamic'
           ? `bg-gradient-to-r ${getCurrentThemeGradient()}/20 text-white hover:bg-gradient-to-r hover:${getCurrentThemeGradient()}/30 shadow-lg ${getCurrentThemeGradient().includes('green') ? 'shadow-green-500/20' : getCurrentThemeGradient().includes('red') ? 'shadow-red-500/20' : 'shadow-cyan-500/20'}`
-          : "hover:bg-purple-500/20 text-gray-400 hover:text-purple-300"
+          : themeMode === 'light'
+            ? "hover:bg-primary/10 text-secondary hover:text-primary"
+            : "hover:bg-purple-500/20 text-gray-400 hover:text-purple-300"
       )}
       aria-label="Theme settings"
     >

@@ -28,22 +28,18 @@ export const AIAnalysisSection: React.FC<AIAnalysisSectionProps> = ({
   };
 
   return (
-    <Card 
+    <Card
       className={cn(
-        "relative overflow-hidden",
+        "relative overflow-hidden bg-card border-border shadow-sm",
         themeMode === 'light'
-          ? 'bg-white border-[#E0E0E0] rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)]'
+          ? 'rounded-xl'
           : 'border-purple-500/20 backdrop-blur-xl',
         className
       )}
-      style={{
-        backgroundColor: themeMode === 'light' ? '#FFFFFF' : '#12121E'
-      }}
     >
       <CardHeader className="pb-4">
         <CardTitle className={cn(
-          "flex items-center gap-2 text-lg font-medium",
-          themeMode === 'light' ? 'text-[#1E1E1E]' : 'text-white'
+          "flex items-center gap-2 text-lg font-medium text-card-foreground"
         )}>
           <Sparkles className="w-5 h-5 text-purple-500" />
           AI Analysis
@@ -60,16 +56,9 @@ export const AIAnalysisSection: React.FC<AIAnalysisSectionProps> = ({
             className={cn(
               "relative h-14 flex-1 max-w-[350px] rounded-2xl border-0 font-bold",
               "transition-all duration-300 ease-out focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2",
-              hoveredButton === 'mood' ? 'scale-[1.03]' : 'scale-100'
+              "bg-gradient-to-r from-pink-500 to-pink-400 text-white shadow-lg shadow-pink-500/25",
+              hoveredButton === 'mood' ? 'scale-[1.03] from-pink-600 to-pink-500 shadow-pink-500/40' : 'scale-100'
             )}
-            style={{
-              background: hoveredButton === 'mood'
-                ? 'linear-gradient(to right, #FF6BB3, #FF8CC8)'
-                : 'linear-gradient(to right, #FF4C9A, #FF7EB3)',
-              boxShadow: '0 0 8px rgba(255, 110, 180, 0.5)',
-              color: '#FFFFFF',
-              textShadow: '0 0 4px rgba(0,0,0,0.4)'
-            }}
           >
             <Brain className="w-5 h-5 mr-2" />
             Explain Today's Mood
@@ -83,16 +72,9 @@ export const AIAnalysisSection: React.FC<AIAnalysisSectionProps> = ({
             className={cn(
               "relative h-14 flex-1 max-w-[350px] rounded-2xl border-0 font-bold",
               "transition-all duration-300 ease-out focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2",
-              hoveredButton === 'analytics' ? 'scale-[1.03]' : 'scale-100'
+              "bg-gradient-to-r from-blue-500 to-blue-400 text-white shadow-lg shadow-blue-500/25",
+              hoveredButton === 'analytics' ? 'scale-[1.03] from-blue-600 to-blue-500 shadow-blue-500/40' : 'scale-100'
             )}
-            style={{
-              background: hoveredButton === 'analytics'
-                ? 'linear-gradient(to right, #5DB8FF, #7DCFFF)'
-                : 'linear-gradient(to right, #4DA8FF, #6CCEFF)',
-              boxShadow: '0 0 8px rgba(76, 203, 255, 0.5)',
-              color: '#FFFFFF',
-              textShadow: '0 0 4px rgba(0,0,0,0.4)'
-            }}
           >
             <BarChart3 className="w-5 h-5 mr-2" />
             View Detailed Analytics

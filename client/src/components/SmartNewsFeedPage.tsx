@@ -34,7 +34,6 @@ import {
   Play
 } from 'lucide-react';
 import { cn } from '../lib/utils';
-import { useMoodTheme } from '../contexts/MoodThemeContext';
 import AIAnalysisModal from './AIAnalysisModal';
 
 interface NewsArticle {
@@ -85,7 +84,6 @@ interface AIHighlight {
 type FilterType = 'AI Curated' | 'Breaking News' | 'By Sector' | 'Earnings' | 'Global Macro' | 'All News' | 'Bullish' | 'Neutral' | 'Bearish';
 
 const SmartNewsFeedPage: React.FC = () => {
-  const { themeMode } = useMoodTheme();
   const [activeFilter, setActiveFilter] = useState<FilterType>('AI Curated');
   const [searchQuery, setSearchQuery] = useState('');
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -128,8 +126,6 @@ const SmartNewsFeedPage: React.FC = () => {
       type: 'trending_tickers',
       title: 'Trending Tickers',
       content: '$NVDA, $TSLA, $AAPL leading discussions',
-      value: '3.2K',
-      change: 15.7,
       icon: <TrendingUp className="w-5 h-5" />
     },
     {
@@ -138,7 +134,6 @@ const SmartNewsFeedPage: React.FC = () => {
       title: 'Most Bearish',
       content: 'Banking sector regulatory concerns',
       value: '-8.3%',
-      change: -2.1,
       icon: <TrendingDown className="w-5 h-5" />
     }
   ];
@@ -238,24 +233,13 @@ const SmartNewsFeedPage: React.FC = () => {
   };
 
   const getSentimentColor = (sentiment: string) => {
-    if (themeMode === 'light') {
-      switch (sentiment) {
-        case 'positive':
-          return 'bg-green-50 text-green-700 border-green-300 shadow-sm';
-        case 'negative':
-          return 'bg-red-50 text-red-700 border-red-300 shadow-sm';
-        default:
-          return 'bg-yellow-50 text-yellow-700 border-yellow-300 shadow-sm';
-      }
-    } else {
-      switch (sentiment) {
-        case 'positive':
-          return 'bg-green-500/20 text-green-400 border-green-500/30 shadow-green-500/20';
-        case 'negative':
-          return 'bg-red-500/20 text-red-400 border-red-500/30 shadow-red-500/20';
-        default:
-          return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30 shadow-yellow-500/20';
-      }
+    switch (sentiment) {
+      case 'positive':
+        return 'bg-green-500/20 text-green-400 border-green-500/30 shadow-green-500/20';
+      case 'negative':
+        return 'bg-red-500/20 text-red-400 border-red-500/30 shadow-red-500/20';
+      default:
+        return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30 shadow-yellow-500/20';
     }
   };
 
@@ -404,62 +388,34 @@ const SmartNewsFeedPage: React.FC = () => {
   };
 
   return (
-    <div className={`min-h-screen ${
-      themeMode === 'light' 
-        ? 'bg-white day-mode-container' 
-        : 'bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900'
-    }`}>
+    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)' }}>
       {/* Header */}
-      <div className={`sticky top-0 z-50 ${
-        themeMode === 'light'
-          ? 'bg-white/95 backdrop-blur-sm border-b border-gray-200'
-          : 'bg-black/20 backdrop-blur-sm border-b border-white/10'
-      }`}>
+      <div className="bg-black/20 backdrop-blur-sm border-b border-white/10 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
-                themeMode === 'light'
-                  ? 'bg-blue-100 border border-blue-200'
-                  : 'bg-white/20'
-              }`}>
-                <Brain className={`w-5 h-5 ${
-                  themeMode === 'light' ? 'text-blue-600' : 'text-white'
-                }`} />
+              <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
+                <Brain className="w-5 h-5 text-white" />
               </div>
               <div>
-                <h1 className={`text-xl font-semibold flex items-center gap-2 ${
-                  themeMode === 'light' ? 'text-gray-900' : 'text-white'
-                }`}>
+                <h1 className="text-xl font-semibold text-white flex items-center gap-2">
                   MoodMeter News
-                  <span className={`text-xs px-2 py-1 rounded-full ${
-                    themeMode === 'light'
-                      ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white'
-                      : 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white'
-                  }`}>
+                  <span className="text-xs bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-2 py-1 rounded-full">
                     AI Powered
                   </span>
                 </h1>
-                <p className={`text-sm ${
-                  themeMode === 'light' ? 'text-gray-600' : 'text-white/60'
-                }`}>Sentiment-aware financial news</p>
+                <p className="text-sm text-white/60">Sentiment-aware financial news</p>
               </div>
             </div>
 
             <div className="flex items-center gap-4">
               <div className="relative">
-                <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 ${
-                  themeMode === 'light' ? 'text-gray-400' : 'text-white/60'
-                }`} />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white/60" />
                 <Input
                   placeholder="Search news, $TICKERS, keywords..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className={`pl-10 w-80 ${
-                    themeMode === 'light'
-                      ? 'bg-white border-gray-200 text-gray-900 placeholder-gray-500 focus:ring-blue-500 focus:border-blue-500'
-                      : 'bg-white/10 border-white/20 text-white placeholder-white/60 focus:ring-white/30 focus:border-white/30'
-                  }`}
+                  className="pl-10 w-80 bg-white/10 border-white/20 text-white placeholder-white/60 focus:ring-white/30 focus:border-white/30"
                 />
               </div>
               <Button
@@ -467,10 +423,7 @@ const SmartNewsFeedPage: React.FC = () => {
                 size="sm"
                 onClick={handleRefresh}
                 disabled={isRefreshing}
-                className={themeMode === 'light'
-                  ? 'text-gray-600 hover:bg-gray-100'
-                  : 'text-white hover:bg-white/10'
-                }
+                className="text-white hover:bg-white/10"
               >
                 <RefreshCw className={cn("w-4 h-4", isRefreshing && "animate-spin")} />
               </Button>
@@ -483,40 +436,22 @@ const SmartNewsFeedPage: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 py-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           {aiHighlights.map((highlight) => (
-            <Card key={highlight.id} className={`transition-all duration-300 highlight-card ${
-              themeMode === 'light'
-                ? 'bg-[#FFFFFF] border border-[#E0E3EB] hover:border-[#2962FF] hover:shadow-md shadow-sm day-mode'
-                : 'bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border-white/20 hover:border-white/30 hover:shadow-lg hover:shadow-white/10'
-            }`} style={themeMode === 'light' ? { 
-              backgroundColor: '#FFFFFF !important', 
-              borderColor: '#E0E3EB !important',
-              boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important'
-            } : {}}>
-              <CardContent className="p-4 card-content">
+            <Card key={highlight.id} className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border-white/20 hover:border-white/30 transition-all duration-300 hover:shadow-lg hover:shadow-white/10">
+              <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <div className={`flex-shrink-0 ${
-                    themeMode === 'light' ? 'text-blue-600' : 'text-white/80'
-                  }`} style={themeMode === 'light' ? { color: '#2962FF !important' } : {}}>
+                  <div className="flex-shrink-0 text-white/80">
                     {highlight.icon}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className={`text-sm font-semibold mb-1 ${
-                      themeMode === 'light' ? 'text-gray-900' : 'text-white/90'
-                    }`} style={themeMode === 'light' ? { color: '#2A2E39 !important', fontWeight: '600 !important' } : {}}>{highlight.title}</h3>
-                    <p className={`text-xs truncate ${
-                      themeMode === 'light' ? 'text-gray-600' : 'text-white/70'
-                    }`} style={themeMode === 'light' ? { color: '#4B5563 !important', fontWeight: '500 !important' } : {}}>{highlight.content}</p>
+                    <h3 className="text-sm font-medium text-white/90 mb-1">{highlight.title}</h3>
+                    <p className="text-xs text-white/70 truncate">{highlight.content}</p>
                     {highlight.value && (
                       <div className="flex items-center gap-2 mt-1">
-                        <span className={`text-lg font-bold ${
-                          themeMode === 'light' ? 'text-gray-900' : 'text-white'
-                        }`} style={themeMode === 'light' ? { color: '#2A2E39 !important', fontWeight: '700 !important' } : {}}>{highlight.value}</span>
+                        <span className="text-lg font-bold text-white">{highlight.value}</span>
                         {highlight.change && (
                           <span className={cn(
                             "text-xs flex items-center gap-1",
-                            highlight.change > 0 
-                              ? themeMode === 'light' ? "text-green-600" : "text-green-400"
-                              : themeMode === 'light' ? "text-red-600" : "text-red-400"
+                            highlight.change > 0 ? "text-green-400" : "text-red-400"
                           )}>
                             {highlight.change > 0 ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
                             {Math.abs(highlight.change)}%
@@ -541,21 +476,10 @@ const SmartNewsFeedPage: React.FC = () => {
               onClick={() => setActiveFilter(option.label)}
               className={cn(
                 "text-sm whitespace-nowrap flex items-center gap-2",
-                themeMode === 'light'
-                  ? activeFilter === option.label
-                    ? "active-filter-button force-white-text bg-[#2962FF] hover:bg-[#1e4fd6] shadow-lg"
-                    : "text-[#4B5563] hover:bg-[#F9FAFB] hover:text-[#2A2E39]"
-                  : activeFilter === option.label
-                    ? "bg-white/20 text-white border-white/30 hover:bg-white/25 shadow-lg"
-                    : "text-white/80 hover:bg-white/10 hover:text-white"
+                activeFilter === option.label
+                  ? "bg-white/20 text-white border-white/30 hover:bg-white/25 shadow-lg"
+                  : "text-white/80 hover:bg-white/10 hover:text-white"
               )}
-              style={themeMode === 'light' && activeFilter === option.label ? 
-                { 
-                  backgroundColor: '#2962FF !important', 
-                  color: '#FFFFFF !important', 
-                  borderColor: '#2962FF !important' 
-                } : {}
-              }
             >
               {option.icon}
               {option.label}
@@ -573,27 +497,16 @@ const SmartNewsFeedPage: React.FC = () => {
               <Card 
                 key={article.id} 
                 className={cn(
-                  "transition-all duration-300 cursor-pointer group news-card",
-                  themeMode === 'light'
-                    ? "bg-[#FFFFFF] border border-[#E0E3EB] hover:bg-[#F9FAFB] hover:border-[#2962FF] shadow-sm hover:shadow-md"
-                    : "bg-black/20 backdrop-blur-sm border-white/10 hover:bg-black/30",
+                  "bg-black/20 backdrop-blur-sm border-white/10 hover:bg-black/30 transition-all duration-300 cursor-pointer group",
                   getSentimentGlow(article.sentiment)
                 )}
-                style={themeMode === 'light' ? { 
-                  backgroundColor: '#FFFFFF !important', 
-                  borderColor: '#E0E3EB !important'
-                } : {}}
               >
-                <CardContent className="p-6 card-content">
+                <CardContent className="p-6">
                   {/* Header */}
                   <div className="flex items-center gap-2 mb-4">
-                    <span className={`text-sm font-medium ${
-                      themeMode === 'light' ? 'text-gray-700' : 'text-white/80'
-                    }`} style={themeMode === 'light' ? { color: '#4B5563', fontWeight: '500' } : {}}>{article.source}</span>
-                    <span className={themeMode === 'light' ? 'text-gray-400' : 'text-white/40'} style={themeMode === 'light' ? { color: '#9CA3AF' } : {}}>•</span>
-                    <span className={`text-sm flex items-center gap-1 ${
-                      themeMode === 'light' ? 'text-gray-600' : 'text-white/60'
-                    }`} style={themeMode === 'light' ? { color: '#4B5563' } : {}}>
+                    <span className="text-white/80 text-sm font-medium">{article.source}</span>
+                    <span className="text-white/40">•</span>
+                    <span className="text-white/60 text-sm flex items-center gap-1">
                       <Clock className="w-3 h-3" />
                       {article.timestamp}
                     </span>
@@ -602,11 +515,7 @@ const SmartNewsFeedPage: React.FC = () => {
                         {getSentimentIcon(article.sentiment)}
                         <span className="ml-1">{getSentimentText(article.sentiment)}</span>
                       </Badge>
-                      <Badge variant="outline" className={`text-xs ${
-                        themeMode === 'light'
-                          ? 'text-gray-600 border-gray-300'
-                          : 'text-white/60 border-white/20'
-                      }`} style={themeMode === 'light' ? { color: '#4B5563', borderColor: '#E0E3EB' } : {}}>
+                      <Badge variant="outline" className="text-xs text-white/60 border-white/20">
                         {article.category}
                       </Badge>
                     </div>
@@ -618,109 +527,71 @@ const SmartNewsFeedPage: React.FC = () => {
                     onClick={() => toggleArticleExpansion(article.id)}
                   >
                     <div className="flex-1">
-                      <h2 className={`text-lg font-semibold mb-3 leading-tight transition-colors ${
-                        themeMode === 'light'
-                          ? 'text-gray-900 group-hover:text-blue-600'
-                          : 'text-white group-hover:text-blue-200'
-                      }`} style={themeMode === 'light' ? { color: '#2A2E39', fontWeight: '600' } : {}}>
+                      <h2 className="text-white text-lg font-semibold mb-3 leading-tight group-hover:text-blue-200 transition-colors">
                         {article.title}
                       </h2>
 
                       {/* Summary */}
-                      <p className={`text-sm mb-4 leading-relaxed ${
-                        themeMode === 'light' ? 'text-gray-700' : 'text-white/70'
-                      }`} style={themeMode === 'light' ? { color: '#4B5563', fontWeight: '500' } : {}}>
+                      <p className="text-white/70 text-sm mb-4 leading-relaxed">
                         {article.summary}
                       </p>
 
                       {/* Tickers */}
                       {article.tickers && article.tickers.length > 0 && (
                         <div className="flex items-center gap-2 mb-4 flex-wrap">
-                          <span className={`text-xs ${
-                            themeMode === 'light' ? 'text-gray-600' : 'text-white/60'
-                          }`} style={themeMode === 'light' ? { color: '#4B5563', fontWeight: '500' } : {}}>Related:</span>
+                          <span className="text-white/60 text-xs">Related:</span>
                           {renderTickerTags(article.tickers)}
                           {article.sparklineData && renderSparkline(article.sparklineData)}
                         </div>
                       )}
                     </div>
                     
-                    <Button variant="ghost" size="sm" className={
-                      themeMode === 'light'
-                        ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                        : 'text-white/60 hover:text-white'
-                    } style={themeMode === 'light' ? { color: '#4B5563' } : {}}>
+                    <Button variant="ghost" size="sm" className="text-white/60 hover:text-white">
                       {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                     </Button>
                   </div>
 
                   {/* Expanded Content */}
                   {isExpanded && (
-                    <div className={`mt-4 pt-4 border-t ${
-                      themeMode === 'light' ? 'border-gray-200' : 'border-white/10'
-                    }`} style={themeMode === 'light' ? { borderColor: '#E0E3EB' } : {}}>
+                    <div className="mt-4 pt-4 border-t border-white/10">
                       {/* AI Summary */}
                       {article.aiSummary && (
-                        <div className={`mb-4 p-3 rounded-lg border ${
-                          themeMode === 'light'
-                            ? 'bg-blue-50 border-blue-200'
-                            : 'bg-blue-500/10 border-blue-500/20'
-                        }`}>
+                        <div className="mb-4 p-3 bg-blue-500/10 rounded-lg border border-blue-500/20">
                           <div className="flex items-center gap-2 mb-2">
-                            <Sparkles className={`w-4 h-4 ${
-                              themeMode === 'light' ? 'text-blue-600' : 'text-blue-400'
-                            }`} style={themeMode === 'light' ? { color: '#2962FF' } : {}} />
-                            <span className={`text-sm font-medium ${
-                              themeMode === 'light' ? 'text-blue-600' : 'text-blue-400'
-                            }`} style={themeMode === 'light' ? { color: '#2962FF', fontWeight: '600' } : {}}>AI Analysis</span>
+                            <Sparkles className="w-4 h-4 text-blue-400" />
+                            <span className="text-sm font-medium text-blue-400">AI Analysis</span>
                           </div>
-                          <p className={`text-sm leading-relaxed ${
-                            themeMode === 'light' ? 'text-gray-700' : 'text-white/80'
-                          }`} style={themeMode === 'light' ? { color: '#4B5563', fontWeight: '500' } : {}}>{article.aiSummary}</p>
+                          <p className="text-white/80 text-sm leading-relaxed">{article.aiSummary}</p>
                         </div>
                       )}
 
                       {/* Top Comments */}
                       {article.topComments && article.topComments.length > 0 && (
                         <div className="mb-4">
-                          <h4 className={`text-sm font-medium mb-3 flex items-center gap-2 ${
-                            themeMode === 'light' ? 'text-gray-700' : 'text-white/80'
-                          }`} style={themeMode === 'light' ? { color: '#2A2E39', fontWeight: '600' } : {}}>
+                          <h4 className="text-white/80 text-sm font-medium mb-3 flex items-center gap-2">
                             <MessageSquare className="w-4 h-4" />
                             Top Community Takes
                           </h4>
                           <div className="space-y-3">
                             {article.topComments.slice(0, 3).map((comment) => (
-                              <div key={comment.id} className={`flex items-start gap-3 p-3 rounded-lg ${
-                                themeMode === 'light' ? 'bg-gray-50' : 'bg-white/5'
-                              }`}>
+                              <div key={comment.id} className="flex items-start gap-3 p-3 bg-white/5 rounded-lg">
                                 <Avatar className="w-6 h-6">
                                   <AvatarImage src={comment.user.avatar} />
                                   <AvatarFallback>{comment.user.username[0]}</AvatarFallback>
                                 </Avatar>
                                 <div className="flex-1 min-w-0">
                                   <div className="flex items-center gap-2 mb-1">
-                                    <span className={`text-sm font-medium ${
-                                      themeMode === 'light' ? 'text-gray-800' : 'text-white/80'
-                                    }`} style={themeMode === 'light' ? { color: '#2A2E39', fontWeight: '600' } : {}}>{comment.user.username}</span>
+                                    <span className="text-white/80 text-sm font-medium">{comment.user.username}</span>
                                     {comment.user.verified && (
                                       <div className="w-3 h-3 bg-blue-500 rounded-full flex items-center justify-center">
-                                        <span className="text-white text-xs" style={{ color: '#FFFFFF' }}>✓</span>
+                                        <span className="text-white text-xs">✓</span>
                                       </div>
                                     )}
-                                    <span className={`text-xs ${
-                                      themeMode === 'light' ? 'text-gray-500' : 'text-white/40'
-                                    }`} style={themeMode === 'light' ? { color: '#6B7280' } : {}}>{comment.timestamp}</span>
+                                    <span className="text-white/40 text-xs">{comment.timestamp}</span>
                                   </div>
-                                  <p className={`text-sm ${
-                                    themeMode === 'light' ? 'text-gray-700' : 'text-white/70'
-                                  }`} style={themeMode === 'light' ? { color: '#4B5563', fontWeight: '500' } : {}}>{comment.content}</p>
+                                  <p className="text-white/70 text-sm">{comment.content}</p>
                                   <div className="flex items-center gap-3 mt-2">
-                                    <button className={`flex items-center gap-1 transition-colors ${
-                                      themeMode === 'light'
-                                        ? 'text-gray-600 hover:text-red-600'
-                                        : 'text-white/60 hover:text-red-400'
-                                    }`}>
+                                    <button className="flex items-center gap-1 text-white/60 hover:text-red-400 transition-colors">
                                       <Heart className="w-3 h-3" />
                                       <span className="text-xs">{comment.likes}</span>
                                     </button>
@@ -731,16 +602,10 @@ const SmartNewsFeedPage: React.FC = () => {
                           </div>
                           
                           {/* Post Your Take CTA */}
-                          <div className={`mt-3 p-3 rounded-lg border ${
-                            themeMode === 'light'
-                              ? 'bg-gradient-to-r from-blue-50 to-cyan-50 border-blue-200'
-                              : 'bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border-blue-500/20'
-                          }`}>
+                          <div className="mt-3 p-3 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-lg border border-blue-500/20">
                             <div className="flex items-center justify-between">
-                              <span className={`text-sm ${
-                                themeMode === 'light' ? 'text-gray-700' : 'text-white/80'
-                              }`} style={themeMode === 'light' ? { color: '#4B5563', fontWeight: '500' } : {}}>What's your take on this news?</span>
-                              <Button size="sm" className="bg-[#2962FF] border-[#2962FF] text-white">
+                              <span className="text-white/80 text-sm">What's your take on this news?</span>
+                              <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white">
                                 Post Your Take
                               </Button>
                             </div>
@@ -751,18 +616,12 @@ const SmartNewsFeedPage: React.FC = () => {
                   )}
 
                   {/* Reaction Bar */}
-                  <div className={`flex items-center justify-between mt-4 pt-4 border-t ${
-                    themeMode === 'light' ? 'border-gray-200' : 'border-white/10'
-                  }`} style={themeMode === 'light' ? { borderColor: '#E0E3EB' } : {}}>
+                  <div className="flex items-center justify-between mt-4 pt-4 border-t border-white/10">
                     <div className="flex items-center gap-6">
                       <button 
                         className={cn(
                           "flex items-center gap-2 text-sm transition-colors",
-                          userState.liked 
-                            ? "text-red-400" 
-                            : themeMode === 'light' 
-                              ? "text-gray-600 hover:text-red-600" 
-                              : "text-white/60 hover:text-red-400"
+                          userState.liked ? "text-red-400" : "text-white/60 hover:text-red-400"
                         )}
                         onClick={() => handleInteraction(article.id, 'like')}
                       >
@@ -770,20 +629,12 @@ const SmartNewsFeedPage: React.FC = () => {
                         <span>{article.reactions.likes}</span>
                       </button>
                       
-                      <button className={`flex items-center gap-2 text-sm transition-colors ${
-                        themeMode === 'light'
-                          ? 'text-gray-600 hover:text-blue-600'
-                          : 'text-white/60 hover:text-blue-400'
-                      }`}>
+                      <button className="flex items-center gap-2 text-white/60 hover:text-blue-400 text-sm transition-colors">
                         <MessageSquare className="w-4 h-4" />
                         <span>{article.reactions.comments}</span>
                       </button>
                       
-                      <button className={`flex items-center gap-2 text-sm transition-colors ${
-                        themeMode === 'light'
-                          ? 'text-gray-600 hover:text-green-600'
-                          : 'text-white/60 hover:text-green-400'
-                      }`}>
+                      <button className="flex items-center gap-2 text-white/60 hover:text-green-400 text-sm transition-colors">
                         <Share2 className="w-4 h-4" />
                         <span>{article.reactions.shares}</span>
                       </button>
@@ -791,11 +642,7 @@ const SmartNewsFeedPage: React.FC = () => {
                       <button 
                         className={cn(
                           "flex items-center gap-2 text-sm transition-colors",
-                          userState.saved 
-                            ? "text-yellow-400" 
-                            : themeMode === 'light' 
-                              ? "text-gray-600 hover:text-yellow-600" 
-                              : "text-white/60 hover:text-yellow-400"
+                          userState.saved ? "text-yellow-400" : "text-white/60 hover:text-yellow-400"
                         )}
                         onClick={() => handleInteraction(article.id, 'save')}
                       >
@@ -808,11 +655,7 @@ const SmartNewsFeedPage: React.FC = () => {
                       <Button
                         variant="ghost"
                         size="sm"
-                        className={`text-xs ${
-                          themeMode === 'light'
-                            ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                            : 'text-white/60 hover:text-white hover:bg-white/10'
-                        }`}
+                        className="text-white/60 hover:text-white hover:bg-white/10 text-xs"
                       >
                         <Bell className="w-3 h-3 mr-1" />
                         Follow News on {article.tickers?.[0] ? `$${article.tickers[0]}` : 'Topic'}
@@ -822,11 +665,7 @@ const SmartNewsFeedPage: React.FC = () => {
                         variant="ghost"
                         size="sm"
                         onClick={() => handleAIAnalysis(article)}
-                        className={`text-xs ${
-                          themeMode === 'light'
-                            ? 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
-                            : 'text-white/60 hover:text-blue-400 hover:bg-blue-500/10'
-                        }`}
+                        className="text-white/60 hover:text-blue-400 hover:bg-blue-500/10 text-xs"
                       >
                         <Brain className="w-3 h-3 mr-1" />
                         AI Analysis
@@ -835,11 +674,7 @@ const SmartNewsFeedPage: React.FC = () => {
                       <Button
                         variant="ghost"
                         size="sm"
-                        className={`text-xs ${
-                          themeMode === 'light'
-                            ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                            : 'text-white/60 hover:text-white hover:bg-white/10'
-                        }`}
+                        className="text-white/60 hover:text-white hover:bg-white/10 text-xs"
                       >
                         <Volume2 className="w-3 h-3 mr-1" />
                         Listen
@@ -854,12 +689,8 @@ const SmartNewsFeedPage: React.FC = () => {
 
         {filteredArticles.length === 0 && (
           <div className="text-center py-12">
-            <div className={`text-lg mb-2 ${
-              themeMode === 'light' ? 'text-gray-600' : 'text-white/60'
-            }`}>No articles found</div>
-            <div className={`text-sm ${
-              themeMode === 'light' ? 'text-gray-500' : 'text-white/40'
-            }`}>Try adjusting your search or filter criteria</div>
+            <div className="text-white/60 text-lg mb-2">No articles found</div>
+            <div className="text-white/40 text-sm">Try adjusting your search or filter criteria</div>
           </div>
         )}
       </div>

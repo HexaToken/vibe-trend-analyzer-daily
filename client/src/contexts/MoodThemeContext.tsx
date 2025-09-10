@@ -3,7 +3,6 @@ import { getIconFromEmoji, type IconConfig } from '../lib/iconUtils';
 import { LIGHT_THEME_COLORS, MOOD_COLORS, INTERACTIVE_COLORS, getMoodColor, getMoodTag, getMoodButton } from '../lib/moodColors';
 
 export type ThemeMode = 'light' | 'dark' | 'dynamic';
-export type DayMode = 'day' | 'night';
 
 export type MoodState = 'neutral' | 'bearish' | 'bullish' | 'extreme';
 
@@ -18,10 +17,6 @@ interface MoodScore {
 interface MoodThemeContextType {
   themeMode: ThemeMode;
   setThemeMode: (mode: ThemeMode) => void;
-  dayMode: DayMode;
-  setDayMode: (mode: DayMode) => void;
-  isDayMode: boolean;
-  toggleDayMode: () => void;
   moodState: MoodState;
   moodScore: MoodScore | null;
   setMoodScore: (score: MoodScore) => void;
@@ -198,51 +193,30 @@ export const MoodThemeProvider: React.FC<MoodThemeProviderProps> = ({ children }
     return (stored as ThemeMode) || 'dynamic';
   });
 
-  // Day Mode state management
-  const [dayMode, setDayMode] = useState<DayMode>(() => {
-    const stored = localStorage.getItem('dayMode');
-    return (stored as DayMode) || 'day';
-  });
-
   const [moodScore, setMoodScore] = useState<MoodScore | null>(null);
   
   const moodState = moodScore ? getMoodStateFromScore(moodScore.overall) : 'neutral';
   const isDynamicMode = themeMode === 'dynamic';
-  const isDayMode = dayMode === 'day';
 
-  const toggleDayMode = () => {
-    setDayMode(current => current === 'day' ? 'night' : 'day');
-  };
+  // Determine effective theme (dark/light/day) for dynamic mode
+  const effectiveTheme = isDynamicMode ? 'dark' : themeMode;
+  const currentTheme = MOOD_THEMES[effectiveTheme]?.[moodState] || MOOD_THEMES.light[moodState];
 
-  // Determine effective theme (dark/light) for dynamic mode or day/night mode
-  const effectiveTheme = isDynamicMode ? 'dark' : (isDayMode ? 'light' : 'dark');
-  const currentTheme = MOOD_THEMES[effectiveTheme][moodState];
-
-  // Save preferences
+  // Save theme preference
   useEffect(() => {
     localStorage.setItem('moodThemeMode', themeMode);
   }, [themeMode]);
 
-  useEffect(() => {
-    localStorage.setItem('dayMode', dayMode);
-  }, [dayMode]);
-
   // Apply theme to document
   useEffect(() => {
     const root = document.documentElement;
-    
-    // Apply data-theme attribute for proper theme detection
-    if (isDayMode) {
-      root.setAttribute('data-theme', 'day');
-    } else {
-      root.setAttribute('data-theme', 'dark');
-    }
-    
-    // Apply dark class based on effective theme
-    if (effectiveTheme === 'dark') {
+    const body = document.body;
+
+    // Remove all theme classes first
+    root.classList.remove('dark');
+
+    if (themeMode === 'dark' || isDynamicMode) {
       root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
     }
 
     // Apply custom CSS variables for mood theming
@@ -252,15 +226,11 @@ export const MoodThemeProvider: React.FC<MoodThemeProviderProps> = ({ children }
       root.style.setProperty('--mood-accent', getMoodAccentColor(moodState));
       root.style.setProperty('--mood-glow', getMoodGlowColor(moodState));
     }
-  }, [themeMode, dayMode, moodState, moodScore, isDynamicMode, effectiveTheme]);
+  }, [themeMode, moodState, moodScore, isDynamicMode]);
 
   const value: MoodThemeContextType = {
     themeMode,
     setThemeMode,
-    dayMode,
-    setDayMode,
-    isDayMode,
-    toggleDayMode,
     moodState,
     moodScore,
     setMoodScore,

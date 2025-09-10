@@ -12,7 +12,6 @@ import {
   Target, GamepadIcon, Sparkles, Coins, TrendingDown as TrendingDownIcon
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
-import { useMoodTheme } from '../../contexts/MoodThemeContext';
 
 interface CoinData {
   rank: number;
@@ -58,7 +57,6 @@ interface NewsItem {
 }
 
 export const NeonSenseCryptoDashboard = () => {
-  const { isDayMode } = useMoodTheme();
   const [selectedNarrative, setSelectedNarrative] = useState("market-up");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sortColumn, setSortColumn] = useState<string | null>(null);
@@ -187,9 +185,9 @@ export const NeonSenseCryptoDashboard = () => {
   };
 
   return (
-    <div className={isDayMode ? "min-h-screen bg-gray-50" : "min-h-screen"} style={isDayMode ? {} : { background: '#0A0F1F' }}>
+    <div className="min-h-screen" style={{ background: '#0A0F1F' }}>
       {/* Enhanced Top Header */}
-      <div className={isDayMode ? "sticky top-0 z-50 backdrop-blur-xl border-b border-gray-200 bg-white/95" : "sticky top-0 z-50 backdrop-blur-xl border-b border-gray-800/50"} style={isDayMode ? {} : { background: 'rgba(15, 21, 43, 0.95)' }}>
+      <div className="sticky top-0 z-50 backdrop-blur-xl border-b border-gray-800/50" style={{ background: 'rgba(15, 21, 43, 0.95)' }}>
         <div className="max-w-7xl mx-auto px-6 py-3">
 
           {/* Bottom Row - Search */}
@@ -198,15 +196,9 @@ export const NeonSenseCryptoDashboard = () => {
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
               <Input
                 placeholder="Search coins, exchanges, pools, pairs and platforms..."
-                className={isDayMode 
-                  ? "pl-12 pr-4 py-3 bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-0 text-lg rounded-xl"
-                  : "pl-12 pr-4 py-3 bg-gray-800/50 border-gray-700/50 text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-0 text-lg rounded-xl"
-                }
+                className="pl-12 pr-4 py-3 bg-gray-800/50 border-gray-700/50 text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-0 text-lg rounded-xl"
               />
-              <Button className={isDayMode 
-                ? "absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white px-6"
-                : "absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-cyan-400 to-purple-500 text-white px-6"
-              }>
+              <Button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-cyan-400 to-purple-500 text-white px-6">
                 Search
               </Button>
             </div>
@@ -216,7 +208,7 @@ export const NeonSenseCryptoDashboard = () => {
 
       <div className="max-w-7xl mx-auto px-6 py-6 space-y-6">
         {/* Market Narrative Tabs */}
-        <Card className={isDayMode ? "border-gray-200 bg-white shadow-sm" : "border-gray-800/50"} style={isDayMode ? {} : { background: '#0F152B' }}>
+        <Card className="border-gray-800/50" style={{ background: '#0F152B' }}>
           <CardContent className="p-4">
             <div className="flex items-center gap-2 overflow-x-auto">
               {narrativeTabs.map((tab) => (
@@ -226,12 +218,8 @@ export const NeonSenseCryptoDashboard = () => {
                   className={cn(
                     "whitespace-nowrap text-sm",
                     selectedNarrative === tab.id 
-                      ? isDayMode
-                        ? "bg-blue-600 text-white shadow-md"
-                        : "bg-gradient-to-r from-cyan-400 to-purple-500 text-white shadow-lg shadow-cyan-400/20"
-                      : isDayMode
-                        ? "border-gray-300 text-gray-600 hover:border-blue-400 hover:text-gray-900"
-                        : "border-gray-700 text-gray-300 hover:border-cyan-400/50"
+                      ? "bg-gradient-to-r from-cyan-400 to-purple-500 text-white shadow-lg shadow-cyan-400/20" 
+                      : "border-gray-700 text-gray-300 hover:border-cyan-400/50"
                   )}
                   onClick={() => setSelectedNarrative(tab.id)}
                 >
@@ -246,10 +234,10 @@ export const NeonSenseCryptoDashboard = () => {
         {/* Market Overview Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7 gap-4">
           {/* Trending Coins */}
-          <Card className={isDayMode ? "lg:col-span-2 border-gray-200 bg-white shadow-sm" : "lg:col-span-2 border-gray-800/50"} style={isDayMode ? {} : { background: '#0F152B' }}>
+          <Card className="lg:col-span-2 border-gray-800/50" style={{ background: '#0F152B' }}>
             <CardHeader className="pb-3">
-              <CardTitle className={`text-sm flex items-center gap-2 ${isDayMode ? 'text-gray-900' : 'text-white'}`}>
-                <Flame className={`w-4 h-4 ${isDayMode ? 'text-orange-600' : 'text-orange-400'}`} />
+              <CardTitle className="text-white text-sm flex items-center gap-2">
+                <Flame className="w-4 h-4 text-orange-400" />
                 Trending
               </CardTitle>
             </CardHeader>
@@ -257,12 +245,12 @@ export const NeonSenseCryptoDashboard = () => {
               {trendingCoins.slice(0, 3).map((coin, i) => (
                 <div key={coin.symbol} className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className={`text-xs ${isDayMode ? 'text-gray-500' : 'text-gray-400'}`}>{i + 1}</span>
-                    <span className={`font-medium text-sm ${isDayMode ? 'text-gray-900' : 'text-white'}`}>{coin.symbol}</span>
-                    <span className={`text-xs ${isDayMode ? 'text-gray-500' : 'text-gray-400'}`}>{coin.name}</span>
+                    <span className="text-gray-400 text-xs">{i + 1}</span>
+                    <span className="text-white font-medium text-sm">{coin.symbol}</span>
+                    <span className="text-gray-400 text-xs">{coin.name}</span>
                   </div>
                   <div className="text-right">
-                    <div className={`text-sm ${isDayMode ? 'text-gray-900' : 'text-white'}`}>${coin.price}</div>
+                    <div className="text-white text-sm">${coin.price}</div>
                     <div className={cn("text-xs", coin.change24h >= 0 ? "text-green-400" : "text-red-400")}>
                       {coin.change24h >= 0 ? '+' : ''}{coin.change24h}%
                     </div>
@@ -273,10 +261,10 @@ export const NeonSenseCryptoDashboard = () => {
           </Card>
 
           {/* DexScan Trending */}
-          <Card className={isDayMode ? "lg:col-span-2 border-gray-200 bg-white shadow-sm" : "lg:col-span-2 border-gray-800/50"} style={isDayMode ? {} : { background: '#0F152B' }}>
+          <Card className="lg:col-span-2 border-gray-800/50" style={{ background: '#0F152B' }}>
             <CardHeader className="pb-3">
-              <CardTitle className={`text-sm flex items-center gap-2 ${isDayMode ? 'text-gray-900' : 'text-white'}`}>
-                <Activity className={`w-4 h-4 ${isDayMode ? 'text-blue-600' : 'text-cyan-400'}`} />
+              <CardTitle className="text-white text-sm flex items-center gap-2">
+                <Activity className="w-4 h-4 text-cyan-400" />
                 DexScan Trending
               </CardTitle>
             </CardHeader>
@@ -284,12 +272,12 @@ export const NeonSenseCryptoDashboard = () => {
               {dexTrending.slice(0, 3).map((coin, i) => (
                 <div key={coin.symbol} className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className={`text-xs ${isDayMode ? 'text-gray-500' : 'text-gray-400'}`}>{i + 1}</span>
-                    <span className={`font-medium text-sm ${isDayMode ? 'text-gray-900' : 'text-white'}`}>{coin.symbol}</span>
-                    <span className={`text-xs ${isDayMode ? 'text-gray-500' : 'text-gray-400'}`}>{coin.name}</span>
+                    <span className="text-gray-400 text-xs">{i + 1}</span>
+                    <span className="text-white font-medium text-sm">{coin.symbol}</span>
+                    <span className="text-gray-400 text-xs">{coin.name}</span>
                   </div>
                   <div className="text-right">
-                    <div className={`text-sm ${isDayMode ? 'text-gray-900' : 'text-white'}`}>${coin.price}</div>
+                    <div className="text-white text-sm">${coin.price}</div>
                     <div className={cn("text-xs", coin.change24h >= 0 ? "text-green-400" : "text-red-400")}>
                       {coin.change24h >= 0 ? '+' : ''}{coin.change24h}%
                     </div>
@@ -300,11 +288,11 @@ export const NeonSenseCryptoDashboard = () => {
           </Card>
 
           {/* Market Cap */}
-          <Card className={isDayMode ? "border-gray-200 bg-white shadow-sm" : "border-gray-800/50"} style={isDayMode ? {} : { background: '#0F152B' }}>
+          <Card className="border-gray-800/50" style={{ background: '#0F152B' }}>
             <CardContent className="p-4">
               <div className="text-center">
-                <div className={`text-xs mb-1 ${isDayMode ? 'text-gray-500' : 'text-gray-400'}`}>Market Cap</div>
-                <div className={`font-bold text-lg ${isDayMode ? 'text-gray-900' : 'text-white'}`}>{marketStats.globalMarketCap}</div>
+                <div className="text-gray-400 text-xs mb-1">Market Cap</div>
+                <div className="text-white font-bold text-lg">{marketStats.globalMarketCap}</div>
                 <div className="text-green-400 text-xs">+2.4%</div>
                 <MiniSparkline data={[2.4, 2.6, 2.5, 2.7, 2.64]} isPositive={true} />
               </div>
@@ -312,13 +300,13 @@ export const NeonSenseCryptoDashboard = () => {
           </Card>
 
           {/* Fear & Greed */}
-          <Card className={isDayMode ? "border-gray-200 bg-white shadow-sm" : "border-gray-800/50"} style={isDayMode ? {} : { background: '#0F152B' }}>
+          <Card className="border-gray-800/50" style={{ background: '#0F152B' }}>
             <CardContent className="p-4">
               <div className="text-center">
-                <div className={`text-xs mb-1 ${isDayMode ? 'text-gray-500' : 'text-gray-400'}`}>Fear & Greed</div>
-                <div className={`font-bold text-lg ${isDayMode ? 'text-yellow-600' : 'text-yellow-400'}`}>{marketStats.fearGreedIndex}</div>
-                <div className={`text-xs ${isDayMode ? 'text-yellow-600' : 'text-yellow-400'}`}>Neutral</div>
-                <div className={`w-16 h-2 rounded-full mx-auto mt-2 ${isDayMode ? 'bg-gray-200' : 'bg-gray-700'}`}>
+                <div className="text-gray-400 text-xs mb-1">Fear & Greed</div>
+                <div className="text-yellow-400 font-bold text-lg">{marketStats.fearGreedIndex}</div>
+                <div className="text-yellow-400 text-xs">Neutral</div>
+                <div className="w-16 h-2 bg-gray-700 rounded-full mx-auto mt-2">
                   <div 
                     className="h-2 bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 rounded-full" 
                     style={{ width: `${marketStats.fearGreedIndex}%` }}
@@ -329,10 +317,10 @@ export const NeonSenseCryptoDashboard = () => {
           </Card>
 
           {/* News Highlights */}
-          <Card className={isDayMode ? "border-gray-200 bg-white shadow-sm" : "border-gray-800/50"} style={isDayMode ? {} : { background: '#0F152B' }}>
+          <Card className="border-gray-800/50" style={{ background: '#0F152B' }}>
             <CardHeader className="pb-3">
-              <CardTitle className={`text-sm flex items-center gap-2 ${isDayMode ? 'text-gray-900' : 'text-white'}`}>
-                <Globe className={`w-4 h-4 ${isDayMode ? 'text-blue-600' : 'text-blue-400'}`} />
+              <CardTitle className="text-white text-sm flex items-center gap-2">
+                <Globe className="w-4 h-4 text-blue-400" />
                 News
               </CardTitle>
             </CardHeader>

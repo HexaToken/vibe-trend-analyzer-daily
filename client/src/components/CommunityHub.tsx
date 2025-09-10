@@ -359,7 +359,7 @@ export const CommunityHub: React.FC<CommunityHubProps> = ({ onNavigateToProfile 
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       {/* Hero Banner */}
       <div className="relative overflow-hidden">
         <div className="bg-gradient-to-r from-purple-900/20 via-blue-900/20 to-cyan-900/20 border-b border-gray-700/50">

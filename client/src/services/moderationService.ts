@@ -1,5 +1,9 @@
-// AI Moderation and Spam Detection Service
-// Mock implementation with realistic detection logic
+/**
+ * Legacy Moderation Service - Deprecated
+ * This file is kept for backward compatibility
+ * Use the new modular services in src/services/moderation/ instead
+ * @deprecated Use ModerationService from './moderation/ModerationService'
+ */
 
 import type { 
   SpamDetectionResult, 
@@ -11,6 +15,9 @@ import type {
   CredibilityLevel
 } from "@/types/moderation";
 import type { SocialPost } from "@/types/social";
+
+// Re-export the new modular service
+export { moderationService } from './moderation/ModerationService';
 
 // Spam detection patterns and keywords
 const SPAM_PATTERNS = {
@@ -542,9 +549,10 @@ class ModerationService {
   }
 
   /**
-   * Simplified credibility scoring for testing
+   * Public method for simplified credibility scoring
+   * Used by components for quick credibility assessment
    */
-  calculateCredibilityScore(data: {
+  public calculateSimpleCredibilityScore(data: {
     content: string;
     author: string;
     timestamp: Date;
@@ -590,8 +598,8 @@ class ModerationService {
   }
 }
 
-// Export singleton instance
-export const moderationService = new ModerationService();
+// Legacy export - remove this line to avoid conflicts
+// const legacyModerationService = new ModerationService();
 
 // Utility functions for UI components
 export const getMockQueueItems = (): ModerationQueueItem[] => [

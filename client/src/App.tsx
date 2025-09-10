@@ -78,7 +78,7 @@ const queryClient = new QueryClient();
 const AppContent = () => {
   const [activeSection, setActiveSection] = useState("futuristic-home");
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
-  const { bodyGradient, isDayMode } = useMoodTheme();
+  const { bodyGradient } = useMoodTheme();
 
   // Enhanced navigation handler to support user profile navigation
   const handleNavigation = (section: string, userId?: string) => {
@@ -254,16 +254,28 @@ const AppContent = () => {
   };
 
   const isChartPage = activeSection === "charts" || activeSection === "trading-chart";
+  const { themeMode } = useMoodTheme();
+  const isDayMode = themeMode === 'light';
+
+  // Comprehensive body classes with day mode support
+  const getBodyClasses = () => {
+    if (isChartPage) return "ns-page";
+
+    const baseClasses = "min-h-screen transition-all duration-500";
+    const backgroundClasses = isDayMode ? "bg-[#FFFFFF] day-mode-container" : bodyGradient;
+    const modeClasses = isDayMode ? "day-mode" : "";
+
+    return `${baseClasses} ${backgroundClasses} ${modeClasses}`;
+  };
 
   return (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <div className={cn(
-        isChartPage ? "ns-page" : `min-h-screen transition-all duration-500`,
-        isDayMode ? "bg-[#FFFFFF] day-mode-container" : bodyGradient,
-        isDayMode && "day-mode"
-      )}>
+      <div
+        className={cn(getBodyClasses())}
+        data-theme={themeMode}
+      >
         {!isChartPage && (
           <ResponsiveModernHeader
             activeSection={activeSection}

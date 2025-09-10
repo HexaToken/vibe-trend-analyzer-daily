@@ -38,7 +38,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useMoodTheme } from "@/contexts/MoodThemeContext";
 
 export interface PostCardUser {
   id: string;
@@ -119,7 +118,6 @@ export const PostCard = ({
   compact = false,
   showEngagementCounts = true,
 }: PostCardProps) => {
-  const { isDayMode } = useMoodTheme();
   const [isHovered, setIsHovered] = useState(false);
 
   const getSentimentConfig = (sentiment: string) => {
@@ -238,19 +236,9 @@ export const PostCard = ({
 
   return (
     <Card 
-      className={`group transition-all duration-300 border-0 backdrop-blur-sm hover:scale-[1.02] ${
-        isDayMode 
-          ? 'bg-white border-gray-200 shadow-sm hover:shadow-md'
-          : 'bg-white/80 dark:bg-slate-800/80 hover:shadow-lg hover:shadow-purple-500/10'
-      } ${
+      className={`group transition-all duration-300 border-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm hover:shadow-lg hover:shadow-purple-500/10 hover:scale-[1.02] ${
         compact ? 'p-3' : 'hover:shadow-xl'
-      } ${
-        isHovered 
-          ? isDayMode 
-            ? 'ring-2 ring-blue-500/20' 
-            : 'ring-2 ring-purple-500/20' 
-          : ''
-      }`}
+      } ${isHovered ? 'ring-2 ring-purple-500/20' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -272,11 +260,7 @@ export const PostCard = ({
                 <div className="flex items-center gap-2 flex-wrap">
                   <button 
                     onClick={() => onUserClick?.(post.user.id)}
-                    className={`font-bold transition-colors ${
-                      isDayMode 
-                        ? 'text-gray-900 hover:text-blue-600' 
-                        : 'hover:text-purple-600 dark:hover:text-purple-400'
-                    } ${compact ? 'text-sm' : 'text-base'}`}
+                    className={`font-bold hover:text-purple-600 dark:hover:text-purple-400 transition-colors ${compact ? 'text-sm' : 'text-base'}`}
                   >
                     {post.user.username}
                   </button>

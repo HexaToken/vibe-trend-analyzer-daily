@@ -371,7 +371,7 @@ const TrendingHub: React.FC<TrendingHubProps> = ({ className }) => {
                               </linearGradient>
                             </defs>
                             <path
-                              d={`M 0 ${32 - ((stock.sparkline?.[0] || 0) * 32 / 100)} ${(stock.sparkline || []).map((point, index) => 
+                              d={`M 0 ${32 - (stock.sparkline[0] * 32 / 100)} ${stock.sparkline.map((point, index) => 
                                 `L ${(index * 16)} ${32 - (point * 32 / 100)}`
                               ).join(' ')}`}
                               stroke={`url(#gradient-${stock.symbol})`}
