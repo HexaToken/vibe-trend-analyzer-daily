@@ -165,7 +165,7 @@ export class CredibilityAssessor implements ICredibilityAssessor {
         return score; // Return base score if content is invalid
       }
 
-      const sanitizedContent = contentValidation.sanitized || content;
+      const sanitizedContent = contentValidation.sanitized || content || '';
       if (!sanitizedContent) {
         logger.warn('Content is empty after validation');
         return score;
