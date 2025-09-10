@@ -1,38 +1,27 @@
-import React from 'react';
+import { Code2, Github, Twitter, Linkedin, Mail, ExternalLink, Puzzle, Users, BarChart3, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import { 
-  Github, 
-  Twitter, 
-  Linkedin, 
-  Mail, 
-  BarChart3, 
-  TrendingUp, 
-  Users, 
-  Settings,
-  Code2
-} from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 import { useMoodTheme } from '@/contexts/MoodThemeContext';
+import { cn } from '@/lib/utils';
 
 interface FooterProps {
-  onNavigate?: (path: string) => void;
+  onNavigate?: (section: string) => void;
   compact?: boolean;
   className?: string;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onNavigate, compact = false, className }) => {
+export const Footer = ({ onNavigate, compact = false, className }: FooterProps) => {
   const { themeMode } = useMoodTheme();
 
   const footerLinks = {
     explore: [
-      { icon: BarChart3, label: 'Analytics', action: () => onNavigate?.('analytics') },
-      { icon: TrendingUp, label: 'Community', action: () => onNavigate?.('community') },
-      { icon: Users, label: 'Plugin Hub', badge: 'NEW', action: () => onNavigate?.('plugins') },
+      { label: 'Analytics', icon: BarChart3, action: () => onNavigate?.('analytics') },
+      { label: 'Community', icon: Users, action: () => onNavigate?.('community') },
+      { label: 'Plugin Hub', icon: Puzzle, action: () => onNavigate?.('plugins'), badge: 'NEW' },
+      { label: 'Settings', icon: Settings, action: () => onNavigate?.('settings') },
     ],
     plugins: [
-      { label: 'Settings', action: () => onNavigate?.('settings') },
-      { label: 'Plugins', action: () => onNavigate?.('plugins') },
-      { label: 'Browse Plugins', action: () => onNavigate?.('plugin-browse') },
+      { label: 'Browse Plugins', action: () => onNavigate?.('plugins') },
       { label: 'Submit Plugin', action: () => onNavigate?.('plugin-submission') },
       { label: 'Developer Docs', action: () => onNavigate?.('plugin-submission') },
       { label: 'Plugin API', action: () => onNavigate?.('plugin-submission') },
@@ -63,7 +52,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, compact = false, cla
       "border-t",
       compact ? "mt-4" : "mt-20",
       themeMode === 'light'
-        ? "bg-[#FFFFFF] border-[#E0E3EB]"
+        ? "bg-gray-50 border-gray-200"
         : "bg-black/40 border-purple-500/20 backdrop-blur-xl",
       className
     )}>
@@ -80,25 +69,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, compact = false, cla
               <div className={cn(
                 "text-lg font-bold",
                 themeMode === 'light'
-                  ? "text-[#2A2E39]"
+                  ? "text-[#111827]"
                   : "text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text"
               )}>
                 NeomSense
               </div>
-              <span 
-                className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
-                style={themeMode === 'light' ? {
-                  backgroundColor: '#F9FAFB',
-                  color: '#4B5563',
-                  border: '1px solid #E0E3EB',
-                  boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
-                } : {
-                  backgroundColor: 'hsl(var(--secondary))',
-                  color: 'hsl(var(--secondary-foreground))'
-                }}
-              >
+              <Badge variant="secondary" className="text-xs">
                 v2.0
-              </span>
+              </Badge>
             </div>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
@@ -112,7 +90,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, compact = false, cla
                       className={cn(
                         "w-8 h-8 p-0",
                         themeMode === 'light'
-                          ? "hover:bg-[#F9FAFB] text-[#4B5563] hover:text-[#2A2E39]"
+                          ? "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
                           : "hover:bg-purple-500/20 text-gray-400 hover:text-white"
                       )}
                       onClick={() => window.open(social.href, '_blank')}
@@ -124,7 +102,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, compact = false, cla
               </div>
               <div className={cn(
                 "text-xs",
-                themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-400'
+                themeMode === 'light' ? 'text-gray-600' : 'text-gray-400'
               )}>
                 © 2024 NeomSense
               </div>
@@ -140,29 +118,18 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, compact = false, cla
               <div className={cn(
                 "text-2xl font-bold",
                 themeMode === 'light'
-                  ? "text-[#2A2E39]"
+                  ? "text-[#111827]"
                   : "text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text"
               )}>
                 NeomSense
               </div>
-              <span 
-                className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
-                style={themeMode === 'light' ? {
-                  backgroundColor: '#F9FAFB',
-                  color: '#4B5563',
-                  border: '1px solid #E0E3EB',
-                  boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
-                } : {
-                  backgroundColor: 'hsl(var(--secondary))',
-                  color: 'hsl(var(--secondary-foreground))'
-                }}
-              >
+              <Badge variant="secondary" className="text-xs">
                 v2.0
-              </span>
+              </Badge>
             </div>
             <p className={cn(
               "text-sm mb-6 max-w-xs",
-              themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-400'
+              themeMode === 'light' ? 'text-gray-600' : 'text-gray-400'
             )}>
               Advanced sentiment analysis and market intelligence platform for modern traders and investors.
             </p>
@@ -177,7 +144,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, compact = false, cla
                     className={cn(
                       "w-8 h-8 p-0",
                       themeMode === 'light'
-                        ? "hover:bg-[#F9FAFB] text-[#4B5563] hover:text-[#2A2E39]"
+                        ? "hover:bg-gray-200 text-gray-600 hover:text-gray-900"
                         : "hover:bg-purple-500/20 text-gray-400 hover:text-white"
                     )}
                     onClick={() => window.open(social.href, '_blank')}
@@ -193,7 +160,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, compact = false, cla
           <div>
             <h3 className={cn(
               "text-sm font-semibold mb-4",
-              themeMode === 'light' ? 'text-[#2A2E39]' : 'text-white'
+              themeMode === 'light' ? 'text-gray-900' : 'text-white'
             )}>
               Explore
             </h3>
@@ -207,7 +174,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, compact = false, cla
                       className={cn(
                         "w-full justify-start gap-2 p-0 h-auto text-sm",
                         themeMode === 'light'
-                          ? "text-[#4B5563] hover:text-[#2A2E39] hover:bg-transparent"
+                          ? "text-gray-600 hover:text-gray-900 hover:bg-transparent"
                           : "text-gray-400 hover:text-white hover:bg-transparent"
                       )}
                       onClick={link.action}
@@ -215,20 +182,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, compact = false, cla
                       <Icon className="w-4 h-4" />
                       {link.label}
                       {link.badge && (
-                        <span 
-                          className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ml-2"
-                          style={themeMode === 'light' ? {
-                            backgroundColor: '#EBF8FF',
-                            color: '#2962FF',
-                            border: '1px solid #2962FF',
-                            boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
-                          } : {
-                            backgroundColor: 'hsl(var(--secondary))',
-                            color: 'hsl(var(--secondary-foreground))'
-                          }}
-                        >
+                        <Badge variant="secondary" className="ml-2 text-xs">
                           {link.badge}
-                        </span>
+                        </Badge>
                       )}
                     </Button>
                   </li>
@@ -241,7 +197,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, compact = false, cla
           <div>
             <h3 className={cn(
               "text-sm font-semibold mb-4",
-              themeMode === 'light' ? 'text-[#2A2E39]' : 'text-white'
+              themeMode === 'light' ? 'text-gray-900' : 'text-white'
             )}>
               Plugins
             </h3>
@@ -253,7 +209,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, compact = false, cla
                     className={cn(
                       "w-full justify-start p-0 h-auto text-sm",
                       themeMode === 'light'
-                        ? "text-[#4B5563] hover:text-[#2A2E39] hover:bg-transparent"
+                        ? "text-gray-600 hover:text-gray-900 hover:bg-transparent"
                         : "text-gray-400 hover:text-white hover:bg-transparent"
                     )}
                     onClick={link.action}
@@ -269,7 +225,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, compact = false, cla
           <div>
             <h3 className={cn(
               "text-sm font-semibold mb-4",
-              themeMode === 'light' ? 'text-[#2A2E39]' : 'text-white'
+              themeMode === 'light' ? 'text-gray-900' : 'text-white'
             )}>
               Company
             </h3>
@@ -281,7 +237,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, compact = false, cla
                     className={cn(
                       "w-full justify-start p-0 h-auto text-sm",
                       themeMode === 'light'
-                        ? "text-[#4B5563] hover:text-[#2A2E39] hover:bg-transparent"
+                        ? "text-gray-600 hover:text-gray-900 hover:bg-transparent"
                         : "text-gray-400 hover:text-white hover:bg-transparent"
                     )}
                     onClick={link.action}
@@ -297,7 +253,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, compact = false, cla
           <div>
             <h3 className={cn(
               "text-sm font-semibold mb-4",
-              themeMode === 'light' ? 'text-[#2A2E39]' : 'text-white'
+              themeMode === 'light' ? 'text-gray-900' : 'text-white'
             )}>
               Legal
             </h3>
@@ -309,7 +265,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, compact = false, cla
                     className={cn(
                       "w-full justify-start p-0 h-auto text-sm",
                       themeMode === 'light'
-                        ? "text-[#4B5563] hover:text-[#2A2E39] hover:bg-transparent"
+                        ? "text-gray-600 hover:text-gray-900 hover:bg-transparent"
                         : "text-gray-400 hover:text-white hover:bg-transparent"
                     )}
                     onClick={link.action}
@@ -325,11 +281,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, compact = false, cla
             {/* Bottom Section */}
             <div className={cn(
               "border-t mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4",
-              themeMode === 'light' ? 'border-[#E0E3EB]' : 'border-purple-500/20'
+              themeMode === 'light' ? 'border-gray-200' : 'border-purple-500/20'
             )}>
               <div className={cn(
                 "text-sm",
-                themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-400'
+                themeMode === 'light' ? 'text-gray-600' : 'text-gray-400'
               )}>
                 © 2024 NeomSense. All rights reserved.
               </div>
@@ -340,7 +296,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, compact = false, cla
                   className={cn(
                     "text-xs",
                     themeMode === 'light'
-                      ? "border-[#E0E3EB] text-[#4B5563] hover:bg-[#F9FAFB] hover:text-[#2A2E39]"
+                      ? "border-gray-300 text-gray-600 hover:bg-gray-50"
                       : "border-purple-500/30 text-purple-300 hover:bg-purple-500/10"
                   )}
                   onClick={() => onNavigate?.('plugin-submission')}
@@ -350,7 +306,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, compact = false, cla
                 </Button>
                 <div className={cn(
                   "text-xs",
-                  themeMode === 'light' ? 'text-[#4B5563]' : 'text-gray-500'
+                  themeMode === 'light' ? 'text-gray-500' : 'text-gray-500'
                 )}>
                   Made with ❤️ for traders
                 </div>

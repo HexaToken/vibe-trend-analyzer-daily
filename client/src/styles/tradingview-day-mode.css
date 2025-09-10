@@ -1,0 +1,424 @@
+/* ===== TRADINGVIEW DAY MODE THEME ===== */
+/* TradingView-inspired light theme colors for MoodMeter Day Mode */
+
+/* TradingView Day Mode CSS Variables */
+:root.tradingview-day,
+.tradingview-day {
+  /* Core Background Colors */
+  --tv-background: #FFFFFF;
+  --tv-card-background: #F9FAFB;
+  --tv-panel-background: #F9FAFB;
+  
+  /* Text Colors */
+  --tv-primary-text: #2A2E39;
+  --tv-secondary-text: #4B5563;
+  --tv-muted-text: #6B7280;
+  --tv-body-text: #374151;
+  
+  /* Accent Colors */
+  --tv-accent-blue: #2962FF;
+  --tv-accent-blue-hover: #1E4FD1;
+  --tv-accent-blue-light: rgba(41, 98, 255, 0.1);
+  --tv-accent-blue-border: rgba(41, 98, 255, 0.2);
+  
+  /* Border and Line Colors */
+  --tv-border: #E0E3EB;
+  --tv-border-light: #F3F4F6;
+  --tv-grid-lines: #E0E3EB;
+  --tv-divider: #E5E7EB;
+  
+  /* Interactive States */
+  --tv-hover-background: #F3F4F6;
+  --tv-active-background: #EFF6FF;
+  --tv-focus-ring: rgba(41, 98, 255, 0.2);
+  
+  /* Shadow System */
+  --tv-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --tv-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --tv-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --tv-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* Sentiment Colors for TradingView */
+  --tv-positive: #4CAF50;
+  --tv-positive-light: #E8F5E9;
+  --tv-positive-border: rgba(76, 175, 80, 0.2);
+  --tv-negative: #F44336;
+  --tv-negative-light: #FFEBEE;
+  --tv-negative-border: rgba(244, 67, 54, 0.2);
+  --tv-neutral: #FF9800;
+  --tv-neutral-light: #FFF3E0;
+  --tv-neutral-border: rgba(255, 152, 0, 0.2);
+  
+  /* Button Variants */
+  --tv-button-primary-bg: var(--tv-accent-blue);
+  --tv-button-primary-hover: var(--tv-accent-blue-hover);
+  --tv-button-primary-text: #FFFFFF;
+  --tv-button-secondary-bg: var(--tv-card-background);
+  --tv-button-secondary-hover: var(--tv-hover-background);
+  --tv-button-secondary-text: var(--tv-primary-text);
+  --tv-button-secondary-border: var(--tv-border);
+  
+  /* Form Elements */
+  --tv-input-background: var(--tv-background);
+  --tv-input-border: var(--tv-border);
+  --tv-input-border-focus: var(--tv-accent-blue);
+  --tv-input-text: var(--tv-primary-text);
+  --tv-input-placeholder: var(--tv-muted-text);
+  
+  /* Chart Specific */
+  --tv-chart-background: var(--tv-background);
+  --tv-chart-text: var(--tv-primary-text);
+  --tv-chart-grid: var(--tv-grid-lines);
+  --tv-chart-axis: var(--tv-secondary-text);
+  
+  /* Navigation */
+  --tv-nav-background: var(--tv-background);
+  --tv-nav-border: var(--tv-border);
+  --tv-nav-text: var(--tv-secondary-text);
+  --tv-nav-text-active: var(--tv-accent-blue);
+  --tv-nav-text-hover: var(--tv-accent-blue-hover);
+  
+  /* Radius System */
+  --tv-radius-sm: 0.375rem;
+  --tv-radius-md: 0.5rem;
+  --tv-radius-lg: 0.75rem;
+  --tv-radius-xl: 1rem;
+}
+
+/* ===== TRADINGVIEW DAY MODE THEME CLASSES ===== */
+
+/* Apply TradingView Day Mode to entire app when class is present */
+.tradingview-day {
+  background-color: var(--tv-background);
+  color: var(--tv-primary-text);
+}
+
+/* Background Utilities */
+.tv-bg-primary {
+  background-color: var(--tv-background);
+}
+
+.tv-bg-card {
+  background-color: var(--tv-card-background);
+}
+
+.tv-bg-panel {
+  background-color: var(--tv-panel-background);
+}
+
+.tv-bg-hover {
+  background-color: var(--tv-hover-background);
+}
+
+.tv-bg-active {
+  background-color: var(--tv-active-background);
+}
+
+/* Text Utilities */
+.tv-text-primary {
+  color: var(--tv-primary-text);
+}
+
+.tv-text-secondary {
+  color: var(--tv-secondary-text);
+}
+
+.tv-text-muted {
+  color: var(--tv-muted-text);
+}
+
+.tv-text-body {
+  color: var(--tv-body-text);
+}
+
+.tv-text-accent {
+  color: var(--tv-accent-blue);
+}
+
+/* Border Utilities */
+.tv-border {
+  border-color: var(--tv-border);
+}
+
+.tv-border-light {
+  border-color: var(--tv-border-light);
+}
+
+.tv-divide-border {
+  border-color: var(--tv-divider);
+}
+
+/* Button Utilities */
+.tv-btn-primary {
+  background-color: var(--tv-button-primary-bg);
+  color: var(--tv-button-primary-text);
+  border: 1px solid var(--tv-button-primary-bg);
+  border-radius: var(--tv-radius-md);
+  transition: all 0.2s ease-in-out;
+}
+
+.tv-btn-primary:hover {
+  background-color: var(--tv-button-primary-hover);
+  border-color: var(--tv-button-primary-hover);
+}
+
+.tv-btn-secondary {
+  background-color: var(--tv-button-secondary-bg);
+  color: var(--tv-button-secondary-text);
+  border: 1px solid var(--tv-button-secondary-border);
+  border-radius: var(--tv-radius-md);
+  transition: all 0.2s ease-in-out;
+}
+
+.tv-btn-secondary:hover {
+  background-color: var(--tv-button-secondary-hover);
+}
+
+/* Card Utilities */
+.tv-card {
+  background-color: var(--tv-card-background);
+  border: 1px solid var(--tv-border);
+  border-radius: var(--tv-radius-lg);
+  box-shadow: var(--tv-shadow-sm);
+  transition: all 0.2s ease-in-out;
+}
+
+.tv-card:hover {
+  box-shadow: var(--tv-shadow-md);
+  transform: translateY(-1px);
+}
+
+/* Input Utilities */
+.tv-input {
+  background-color: var(--tv-input-background);
+  border: 1px solid var(--tv-input-border);
+  color: var(--tv-input-text);
+  border-radius: var(--tv-radius-md);
+  transition: all 0.2s ease-in-out;
+}
+
+.tv-input:focus {
+  border-color: var(--tv-input-border-focus);
+  box-shadow: 0 0 0 3px var(--tv-focus-ring);
+  outline: none;
+}
+
+.tv-input::placeholder {
+  color: var(--tv-input-placeholder);
+}
+
+/* Shadow Utilities */
+.tv-shadow-sm {
+  box-shadow: var(--tv-shadow-sm);
+}
+
+.tv-shadow-md {
+  box-shadow: var(--tv-shadow-md);
+}
+
+.tv-shadow-lg {
+  box-shadow: var(--tv-shadow-lg);
+}
+
+.tv-shadow-xl {
+  box-shadow: var(--tv-shadow-xl);
+}
+
+/* Sentiment Utilities */
+.tv-sentiment-positive {
+  color: var(--tv-positive);
+}
+
+.tv-sentiment-positive-bg {
+  background-color: var(--tv-positive-light);
+  border-color: var(--tv-positive-border);
+}
+
+.tv-sentiment-negative {
+  color: var(--tv-negative);
+}
+
+.tv-sentiment-negative-bg {
+  background-color: var(--tv-negative-light);
+  border-color: var(--tv-negative-border);
+}
+
+.tv-sentiment-neutral {
+  color: var(--tv-neutral);
+}
+
+.tv-sentiment-neutral-bg {
+  background-color: var(--tv-neutral-light);
+  border-color: var(--tv-neutral-border);
+}
+
+/* Navigation Utilities */
+.tv-nav {
+  background-color: var(--tv-nav-background);
+  border-bottom: 1px solid var(--tv-nav-border);
+  backdrop-filter: blur(8px);
+}
+
+.tv-nav-link {
+  color: var(--tv-nav-text);
+  transition: color 0.2s ease-in-out;
+}
+
+.tv-nav-link:hover {
+  color: var(--tv-nav-text-hover);
+}
+
+.tv-nav-link.active {
+  color: var(--tv-nav-text-active);
+}
+
+/* ===== TRADINGVIEW DAY MODE COMPONENT OVERRIDES ===== */
+
+/* Override existing Tailwind classes when in TradingView Day Mode */
+.tradingview-day .bg-background {
+  background-color: var(--tv-background) !important;
+}
+
+.tradingview-day .bg-card {
+  background-color: var(--tv-card-background) !important;
+}
+
+.tradingview-day .text-foreground {
+  color: var(--tv-primary-text) !important;
+}
+
+.tradingview-day .text-muted-foreground {
+  color: var(--tv-secondary-text) !important;
+}
+
+.tradingview-day .border-border {
+  border-color: var(--tv-border) !important;
+}
+
+.tradingview-day .bg-primary {
+  background-color: var(--tv-accent-blue) !important;
+}
+
+.tradingview-day .text-primary {
+  color: var(--tv-accent-blue) !important;
+}
+
+.tradingview-day .text-primary-foreground {
+  color: var(--tv-button-primary-text) !important;
+}
+
+/* Header overrides for TradingView Day Mode */
+.tradingview-day .bg-white\/90,
+.tradingview-day .bg-white\/95 {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(8px);
+}
+
+.tradingview-day .border-gray-200\/50,
+.tradingview-day .border-gray-200\/80 {
+  border-color: var(--tv-border) !important;
+}
+
+/* Card overrides for TradingView Day Mode */
+.tradingview-day .rounded-lg.border.bg-card {
+  background-color: var(--tv-card-background) !important;
+  border-color: var(--tv-border) !important;
+}
+
+.tradingview-day .shadow-sm {
+  box-shadow: var(--tv-shadow-sm) !important;
+}
+
+.tradingview-day .hover\:shadow-lg:hover {
+  box-shadow: var(--tv-shadow-lg) !important;
+}
+
+/* Button overrides for TradingView Day Mode */
+.tradingview-day .bg-primary:not(.preserve-dark) {
+  background-color: var(--tv-accent-blue) !important;
+}
+
+.tradingview-day .hover\:bg-primary\/90:hover:not(.preserve-dark) {
+  background-color: var(--tv-accent-blue-hover) !important;
+}
+
+/* Input overrides for TradingView Day Mode */
+.tradingview-day .bg-background input,
+.tradingview-day input.bg-background {
+  background-color: var(--tv-input-background) !important;
+  border-color: var(--tv-input-border) !important;
+  color: var(--tv-input-text) !important;
+}
+
+.tradingview-day input:focus {
+  border-color: var(--tv-input-border-focus) !important;
+  box-shadow: 0 0 0 3px var(--tv-focus-ring) !important;
+}
+
+/* Badge overrides for TradingView Day Mode */
+.tradingview-day .bg-secondary {
+  background-color: var(--tv-card-background) !important;
+  color: var(--tv-secondary-text) !important;
+  border: 1px solid var(--tv-border) !important;
+}
+
+/* Preserve Hero Section - Do NOT apply TradingView styles */
+.hero,
+.hero *,
+[class*="hero"],
+[class*="hero"] * {
+  /* Force preserve existing styles regardless of TradingView Day Mode */
+  background: unset !important;
+  color: unset !important;
+  border-color: unset !important;
+}
+
+/* Ensure hero section stays in dark theme */
+.tradingview-day .hero {
+  background: radial-gradient(ellipse at center, #1B0036 0%, #3B0A58 100%) !important;
+  color: white !important;
+}
+
+.tradingview-day .hero * {
+  color: inherit !important;
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+
+@media (max-width: 768px) {
+  .tradingview-day {
+    /* Mobile-specific adjustments for TradingView Day Mode */
+    --tv-shadow-md: 0 2px 4px -1px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
+    --tv-shadow-lg: 0 8px 12px -3px rgba(0, 0, 0, 0.1), 0 3px 5px -2px rgba(0, 0, 0, 0.05);
+  }
+}
+
+/* ===== ACCESSIBILITY ENHANCEMENTS ===== */
+
+.tradingview-day {
+  /* Ensure sufficient contrast ratios */
+  --tv-min-contrast-ratio: 4.5;
+}
+
+/* Focus states for accessibility */
+.tradingview-day *:focus-visible {
+  outline: 2px solid var(--tv-accent-blue);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .tradingview-day {
+    --tv-border: #000000;
+    --tv-primary-text: #000000;
+    --tv-secondary-text: #333333;
+  }
+}
+
+/* Motion reduction support */
+@media (prefers-reduced-motion: reduce) {
+  .tradingview-day * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

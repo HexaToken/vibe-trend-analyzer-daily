@@ -68,22 +68,6 @@
   font-weight: 500 !important;
 }
 
-/* Force maximum contrast for gray text in light mode */
-:root:not(.dark) .text-gray-900 {
-  color: #000000 !important;
-  font-weight: 500 !important;
-}
-
-:root:not(.dark) .text-gray-800 {
-  color: #1a1a1a !important;
-  font-weight: 500 !important;
-}
-
-:root:not(.dark) .text-gray-700 {
-  color: #333333 !important;
-  font-weight: 500 !important;
-}
-
 :root:not(.dark) .text-slate-400 {
   color: #6B7280 !important;
   font-weight: 500 !important;

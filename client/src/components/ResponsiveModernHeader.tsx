@@ -107,7 +107,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
     { label: 'Finance Hub', key: 'finance', icon: '💰' },
     { label: 'Watchlist', key: 'watchlist', icon: '��️' },
     { label: 'Market Analytics', key: 'market', icon: '📈' },
-    { label: 'Stock Screener', key: 'screener', icon: '🔍' },
+    { label: 'Stock Screener', key: 'screener', icon: '����' },
     { label: 'Crypto Dashboard', key: 'crypto-dashboard', icon: '₿' },
     { label: 'Earnings Calendar', key: 'earnings', icon: '📅' },
     { label: 'Charts', key: 'charts', icon: '📊' },
@@ -139,8 +139,8 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
           headerVisible ? "translate-y-0" : "-translate-y-full",
           isLightMode
             ? isScrolled
-              ? "bg-white/95 backdrop-blur-xl border-b border-gray-200/80 shadow-lg shadow-black/10"
-              : "bg-white/90 backdrop-blur-md border-b border-gray-200/50"
+              ? "bg-background/95 backdrop-blur-xl border-b border-border shadow-lg shadow-black/10"
+              : "bg-background/90 backdrop-blur-md border-b border-border/50"
             : isScrolled
               ? "bg-[#0A0A23]/95 backdrop-blur-xl border-b border-gray-800/50 shadow-lg shadow-black/20"
               : "bg-[#0A0A23]/80 backdrop-blur-md border-b border-gray-800/30"
@@ -176,10 +176,10 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                     "text-base font-medium px-3 py-2 rounded-lg transition-all duration-200 relative group",
                     activeSection === key
                       ? isLightMode
-                        ? "text-white bg-[#3A7AFE] font-semibold shadow-sm"
+                        ? "text-primary-foreground bg-primary font-semibold shadow-sm"
                         : "text-pink-400 bg-pink-500/10"
                       : isLightMode
-                        ? "text-[#4B5563] hover:text-[#3A7AFE] hover:bg-[#F3F4F6]"
+                        ? "text-secondary hover:text-primary hover:bg-muted"
                         : "text-gray-300 hover:text-gray-200"
                   )}
                   aria-current={activeSection === key ? "page" : undefined}
@@ -189,14 +189,14 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                     <div className={cn(
                       "absolute bottom-0 left-0 right-0 h-0.5 rounded-full",
                       isLightMode
-                        ? "bg-[#3A7AFE]"
+                        ? "bg-primary"
                         : "bg-gradient-to-r from-pink-400 to-purple-500"
                     )} />
                   )}
                   <div className={cn(
                     "absolute bottom-0 left-0 right-0 h-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200",
                     isLightMode
-                      ? "bg-[#3A7AFE]"
+                      ? "bg-primary"
                       : "bg-gradient-to-r from-pink-400 to-purple-500"
                   )} />
                 </button>
@@ -209,10 +209,10 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                   "text-base font-medium px-3 py-2 rounded-lg transition-all duration-200 relative group",
                   activeSection === "community"
                     ? isLightMode
-                      ? "text-white bg-[#3A7AFE] font-semibold shadow-sm"
+                      ? "text-primary-foreground bg-primary font-semibold shadow-sm"
                       : "text-pink-400 bg-pink-500/10"
                     : isLightMode
-                      ? "text-[#4B5563] hover:text-[#3A7AFE] hover:bg-[#F3F4F6]"
+                      ? "text-secondary hover:text-primary hover:bg-muted"
                       : "text-gray-300 hover:text-gray-200"
                 )}
                 aria-current={activeSection === "community" ? "page" : undefined}
@@ -258,7 +258,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                   className={cn(
                     "w-56 backdrop-blur-xl rounded-xl z-[100] shadow-xl",
                     isLightMode
-                      ? "!bg-white !border-gray-200 !text-gray-900"
+                      ? "!bg-background !border-border !text-foreground"
                       : "!bg-[#0A0A23]/95 !border-gray-700 !text-white"
                   )}
                   sideOffset={5}
@@ -334,8 +334,8 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                     : "text-gray-300 group-hover:text-purple-400"
                 )} />
                 <Badge className={cn(
-                  "absolute -top-1 -right-1 w-4 h-4 p-0 text-white text-xs flex items-center justify-center rounded-full animate-pulse",
-                  isLightMode ? "bg-[#F23645]" : "bg-pink-500"
+                  "absolute -top-1 -right-1 w-4 h-4 p-0 text-primary-foreground text-xs flex items-center justify-center rounded-full animate-pulse",
+                  isLightMode ? "bg-destructive" : "bg-pink-500"
                 )}>
                   3
                 </Badge>
@@ -381,7 +381,7 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
           <div className={cn(
             "md:hidden backdrop-blur-xl animate-in slide-in-from-top duration-300",
             isLightMode
-              ? "bg-white/95 border-t border-gray-200/50"
+              ? "bg-background/95 border-t border-border/50"
               : "bg-[#0A0A23]/95 border-t border-gray-800/50"
           )}>
             <div className="px-4 py-4 space-y-3 max-h-[70vh] overflow-y-auto">

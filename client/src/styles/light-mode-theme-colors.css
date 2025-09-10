@@ -5,25 +5,29 @@
 :root.light,
 :root:not(.dark),
 .light-theme-force {
-  /* Core theme variables - LOCKED */
-  --color-overall-mood: #3A7AFE !important;
+  /* TradingView Light Mode Design Tokens - LOCKED */
+  --color-overall-mood: #2962FF !important;
   --color-stocks: #22AB94 !important;
   --color-news: #7B61FF !important;
   --color-social: #F23645 !important;
-  --color-gridline: #EFEFEF !important;
+  --color-gridline: #E0E3EB !important;
   --color-axis: #4B5563 !important;
   --color-background: #FFFFFF !important;
-  --color-card-background: #FAFAFA !important;
-  --color-border: #E6E6E6 !important;
+  --color-card-background: #F9FAFB !important;
+  --color-border: #E0E3EB !important;
   --color-hover-background: #F3F4F6 !important;
   --color-positive-text: #22AB94 !important;
   --color-negative-text: #F23645 !important;
   --color-neutral-text: #4B5563 !important;
 
-  /* Text hierarchy - LOCKED */
-  --color-text-primary: #1A1A1A !important;
+  /* TradingView Text Hierarchy - LOCKED */
+  --color-text-primary: #2A2E39 !important;
   --color-text-secondary: #4B5563 !important;
   --color-text-muted: #9CA3AF !important;
+
+  /* TradingView Interaction Colors */
+  --color-accent: #2962FF !important;
+  --color-accent-hover: #1E4FD1 !important;
 
   /* Chart defaults - LOCKED */
   --chart-stroke-width: 2.5px !important;
@@ -36,19 +40,22 @@ html.light .light-theme-force,
 html:not(.dark) .light-theme-force,
 body.light .light-theme-force,
 body:not(.dark) .light-theme-force {
-  /* Force application of theme variables with maximum specificity */
-  --color-overall-mood: #3A7AFE !important;
+  /* Force application of TradingView theme variables with maximum specificity */
+  --color-overall-mood: #2962FF !important;
   --color-stocks: #22AB94 !important;
   --color-news: #7B61FF !important;
   --color-social: #F23645 !important;
-  --color-gridline: #EFEFEF !important;
+  --color-gridline: #E0E3EB !important;
   --color-axis: #4B5563 !important;
   --color-background: #FFFFFF !important;
-  --color-card-background: #FAFAFA !important;
-  --color-border: #E6E6E6 !important;
+  --color-card-background: #F9FAFB !important;
+  --color-border: #E0E3EB !important;
   --color-hover-background: #F3F4F6 !important;
   --color-positive-text: #22AB94 !important;
   --color-negative-text: #F23645 !important;
+  --color-neutral-text: #2A2E39 !important;
+  --color-accent: #2962FF !important;
+  --color-accent-hover: #1E4FD1 !important;
   --color-neutral-text: #4B5563 !important;
 }
 

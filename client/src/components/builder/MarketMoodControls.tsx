@@ -93,10 +93,11 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
   };
 
   const getSourceColor = (color: string) => {
+    // Theme-aware colors that work in both light and dark modes
     const colors = {
-      emerald: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/30',
-      blue: 'bg-blue-500/20 text-blue-400 border-blue-500/30 hover:bg-blue-500/30',
-      purple: 'bg-purple-500/20 text-purple-400 border-purple-500/30 hover:bg-purple-500/30'
+      emerald: 'bg-emerald-100 text-emerald-700 border-emerald-200 hover:bg-emerald-200 dark:bg-emerald-500/20 dark:text-emerald-400 dark:border-emerald-500/30 dark:hover:bg-emerald-500/30',
+      blue: 'bg-blue-100 text-blue-700 border-blue-200 hover:bg-blue-200 dark:bg-blue-500/20 dark:text-blue-400 dark:border-blue-500/30 dark:hover:bg-blue-500/30',
+      purple: 'bg-purple-100 text-purple-700 border-purple-200 hover:bg-purple-200 dark:bg-purple-500/20 dark:text-purple-400 dark:border-purple-500/30 dark:hover:bg-purple-500/30'
     };
     return colors[color as keyof typeof colors] || colors.purple;
   };
@@ -124,13 +125,13 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
       <CardContent className="p-6 space-y-6">
         {/* Search Bar */}
         <div className="space-y-2">
-          <label className="text-sm font-medium text-white">Search Tickers or Topics</label>
+          <label className="text-sm font-medium text-theme-primary">Search Tickers or Topics</label>
           <div className="relative">
             <div className={cn(
               "relative transition-all duration-300",
               isSearchFocused ? "transform scale-105" : ""
             )}>
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-400" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-theme-muted" />
               <Input
                 type="text"
                 placeholder="Search NVDA, AI, crypto..."
@@ -139,9 +140,10 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
                 onFocus={() => setIsSearchFocused(true)}
                 onBlur={() => setIsSearchFocused(false)}
                 className={cn(
-                  "pl-10 pr-4 py-3 bg-slate-800/50 border-slate-600 rounded-xl text-white placeholder-slate-400 transition-all duration-300",
-                  "focus:bg-slate-800/70 focus:border-cyan-400/50 focus:ring-0 focus:outline-none",
-                  isSearchFocused && "shadow-lg shadow-cyan-500/10 border-cyan-400/30"
+                  "pl-10 pr-4 py-3 rounded-xl transition-all duration-300",
+                  "bg-card border-border text-foreground placeholder:text-muted-foreground",
+                  "focus:border-primary/50 focus:ring-0 focus:outline-none",
+                  isSearchFocused && "shadow-lg shadow-primary/10 border-primary/30"
                 )}
               />
               {isSearchFocused && (
@@ -155,10 +157,10 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
           <>
             {/* Source Toggles - View Only */}
             <div className="space-y-3 opacity-90">
-              <label className="text-sm font-medium text-white flex items-center gap-2">
-                <Filter className="w-4 h-4 text-cyan-400" />
+              <label className="text-sm font-medium text-theme-primary flex items-center gap-2">
+                <Filter className="w-4 h-4 text-primary" />
                 Data Sources
-                <span className="text-xs text-slate-400 ml-auto">��️ Pre-selected for transparency</span>
+                <span className="text-xs text-theme-muted ml-auto">🔒️ Pre-selected for transparency</span>
               </label>
               <div className="grid grid-cols-3 gap-3">
                 {sources.map((source) => {
@@ -172,7 +174,7 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
                         "h-16 p-4 flex flex-col items-center gap-2 border cursor-default",
                         isActive
                           ? getSourceColor(source.color).split(' ').filter(cls => !cls.startsWith('hover:')).join(' ')
-                          : "border-slate-600 bg-slate-800/30"
+                          : "border-border bg-muted/30"
                       )}
                     >
                       <IconComponent className="w-7 h-7" />
@@ -190,8 +192,8 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
 
         {/* AI Controls */}
         <div className="space-y-3">
-          <label className="text-sm font-medium text-white flex items-center gap-2">
-            <Brain className="w-4 h-4 text-cyan-400" />
+          <label className="text-sm font-medium text-theme-primary flex items-center gap-2">
+            <Brain className="w-4 h-4 text-primary" />
             AI Analysis
           </label>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -200,7 +202,7 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
               disabled={isExplaining}
               className={cn(
                 "h-12 bg-gradient-to-r from-purple-600/20 to-pink-600/20 hover:from-purple-600/30 hover:to-pink-600/30",
-                "text-white font-medium border border-purple-500/30 transition-all duration-300",
+                "text-primary-foreground font-medium border border-purple-500/30 transition-all duration-300",
                 "hover:shadow-lg hover:shadow-purple-500/20"
               )}
             >
@@ -221,7 +223,7 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
               onClick={onViewAnalytics}
               className={cn(
                 "h-12 bg-gradient-to-r from-blue-600/20 to-cyan-600/20 hover:from-blue-600/30 hover:to-cyan-600/30",
-                "text-white font-medium border border-blue-500/30 transition-all duration-300",
+                "text-primary-foreground font-medium border border-blue-500/30 transition-all duration-300",
                 "hover:shadow-lg hover:shadow-blue-500/20"
               )}
             >
@@ -233,7 +235,7 @@ export const MarketMoodControls: React.FC<MarketMoodControlsProps> = ({
 
         {/* Active Filters Summary */}
         {(filters.searchQuery || getActiveSources().length < 3) && (
-          <div className="pt-4 border-t border-slate-700/50">
+          <div className="pt-4 border-t border-border/50">
             <div className="flex flex-wrap gap-2">
               {filters.searchQuery && (
                 <Badge className="bg-cyan-500/20 text-cyan-400 border-cyan-500/30">

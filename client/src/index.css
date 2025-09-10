@@ -1,3 +1,6 @@
+/* Import Light Mode Readability Enhancements */
+@import './styles/light-mode-readability.css';
+
 /* Import Sentiment Colors */
 @import './styles/sentiment-colors.css';
 
@@ -13,14 +16,17 @@
 /* Import Light Mode Theme Colors */
 @import './styles/light-mode-theme-colors.css';
 
+/* Import TradingView Day Mode */
+@import './styles/tradingview-day-mode.css';
+
+/* Import TradingView Integration */
+@import './styles/tradingview-integration.css';
+
 /* Import Color Palette Overrides */
 @import './styles/color-palette-overrides.css';
 
-/* Import Light Mode Readability Enhancements */
-@import './styles/light-mode-readability.css';
-
-/* Import Day Mode Overrides - MUST BE LAST FOR HIGHEST PRIORITY */
-@import './styles/day-mode-overrides.css';
+/* Import TradingView Light Mode Overrides - MUST BE ABSOLUTE LAST */
+@import './styles/light-mode-overrides.css';
 
 /* Import Futuristic Chart Styling */
 @import './styles/futuristic-chart.css';
@@ -31,20 +37,9 @@
 /* Import MoodMeter Theme Utilities */
 @import './components/MoodThemeUtilities.css';
 
-/* Import Complete Day Mode System - BEFORE TAILWIND WITH LAYER */
-@import './styles/day-mode-complete.css';
-
-/* Import Button Overrides - BEFORE TAILWIND WITH LAYER */
-@import './styles/button-overrides.css';
-
-/* Import Force White Text Utility - BEFORE TAILWIND WITH LAYER */
-@import './styles/force-white-text.css';
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-
 
 /* Ticker bar auto-scroll animation */
 @keyframes scroll-ticker {
@@ -62,120 +57,81 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* TradingView Light Mode - Day Mode Colors */
+    /* TradingView Light Mode Design Tokens */
     --background: 0 0% 100%; /* #FFFFFF - Main background */
-    --foreground: 214 16% 16%; /* #2A2E39 - Deep gray primary text */
+    --foreground: 230 12% 19%; /* #2A2E39 - Primary text */
 
-    --card: 220 9% 98%; /* #F9FAFB - Cards and panels */
-    --card-foreground: 214 16% 16%; /* #2A2E39 - Primary text */
+    --card: 220 14% 98%; /* #F9FAFB - Section/card backgrounds */
+    --card-foreground: 230 12% 19%; /* #2A2E39 - Primary text */
 
-    --popover: 220 9% 98%; /* #F9FAFB */
-    --popover-foreground: 214 16% 16%; /* #2A2E39 */
+    --popover: 220 14% 98%; /* #F9FAFB */
+    --popover-foreground: 230 12% 19%; /* #2A2E39 */
 
-    --primary: 225 100% 60%; /* #2962FF - TradingView blue */
+    --primary: 225 100% 58%; /* #2962FF - TradingView accent blue */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 13% 34%; /* #4B5563 - Medium gray secondary text */
+    --secondary: 220 13% 34%; /* #4B5563 - Secondary text */
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 216 12% 84%; /* #E0E3EB - Chart/grid lines */
-    --muted-foreground: 220 13% 34%; /* #4B5563 - Muted text */
+    --muted: 0 0% 96%; /* #F5F5F5 - Light gray backgrounds */
+    --muted-foreground: 220 9% 57%; /* #9CA3AF - Muted text */
 
-    --accent: 225 100% 60%; /* #2962FF - TradingView blue accent */
-    --accent-foreground: 0 0% 100%;
+    --accent: 225 100% 58%; /* #2962FF - TradingView accent blue */
+    --accent-foreground: 0 0% 100%; /* White text on accent */
 
-    --destructive: 0 84% 60%; /* #EF4444 - Red for errors */
+    --destructive: 0 84% 60%; /* #EF4444 - Red-500 for errors */
     --destructive-foreground: 0 0% 100%;
 
-    --border: 216 12% 84%; /* #E0E3EB - Light gray borders */
-    --input: 216 12% 84%; /* #E0E3EB - Input borders */
-    --ring: 225 100% 60%; /* #2962FF - Focus ring */
+    --border: 220 14% 91%; /* #E0E3EB - TradingView borders */
+    --input: 220 14% 91%; /* #E0E3EB - Input borders */
+    --ring: 225 100% 58%; /* #2962FF - Focus ring */
 
     --radius: 0.75rem; /* 12px border radius */
 
-    /* TradingView Light Mode - Hover States */
-    --primary-hover: 225 100% 50%; /* #1E4FD1 - Hover blue */
-    
-    /* MoodMeter Sentiment Colors - Light Mode */
-    --positive: 134 61% 41%; /* #16A34A - Green-600 */
-    --positive-light: 134 61% 96%; /* #F0FDF4 - Green-50 */
-    --negative: 0 84% 60%; /* #EF4444 - Red-500 */
-    --negative-light: 0 93% 94%; /* #FEF2F2 - Red-50 */
-    --neutral: 220 13% 34%; /* #4B5563 - Medium gray */
+    /* MoodMeter Sentiment Colors - Updated palette */
+    --positive: 168 71% 45%; /* #22AB94 - Positive text */
+    --positive-light: 168 76% 94%; /* #E8F8F4 - Positive background */
+    --negative: 354 85% 58%; /* #F23645 - Negative text */
+    --negative-light: 354 93% 93%; /* #FDECEC - Negative background */
+    --neutral: 220 13% 45%; /* #6B7280 - Neutral text */
     --neutral-light: 220 14% 96%; /* #F3F4F6 - Neutral background */
 
-    /* Chart Colors for Light Mode */
-    --chart-1: 225 100% 60%; /* #2962FF - TradingView blue */
-    --chart-2: 134 61% 41%; /* #16A34A - Green */
-    --chart-3: 0 84% 60%; /* #EF4444 - Red */
-    --chart-4: 262 83% 58%; /* #8B5CF6 - Purple */
-    --chart-5: 43 96% 56%; /* #F59E0B - Amber */
+    /* MoodMeter Mood Colors */
+    --mood-hype: 199 89% 48%; /* #0EA5E9 - Sky-500 for hype */
+    --mood-hype-light: 204 94% 94%; /* #E0F2FE - Sky-100 */
+    --mood-fear: 45 93% 47%; /* #EAB308 - Yellow-500 for fear */
+    --mood-fear-light: 55 92% 95%; /* #FEF3C7 - Yellow-100 */
 
-    /* TradingView Light Mode Gradients */
+    /* Data Visualization - TradingView chart colors */
+    --chart-primary: 225 100% 58%; /* #2962FF - TradingView primary */
+    --chart-secondary: 168 71% 45%; /* #22AB94 - Positive trend line */
+    --chart-tertiary: 354 85% 58%; /* #F23645 - Negative trend line */
+    --chart-quaternary: 249 100% 69%; /* #7B61FF - Secondary accent purple */
+
+    /* Clean Financial Gradients */
+    --gradient-hero: linear-gradient(
+      135deg,
+      hsl(220 14% 96%) 0%,
+      hsl(0 0% 100%) 100%
+    );
     --gradient-card: linear-gradient(
       145deg,
       hsl(0 0% 100%) 0%,
-      hsl(220 9% 98%) 100%
+      hsl(220 14% 98%) 100%
     );
     --gradient-positive: linear-gradient(
       90deg,
-      hsl(134 61% 41%) 0%,
-      hsl(134 61% 50%) 100%
+      hsl(123 46% 49%) 0%,
+      hsl(123 46% 70%) 100%
     );
     --gradient-negative: linear-gradient(
       90deg,
-      hsl(0 84% 60%) 0%,
-      hsl(0 84% 70%) 100%
+      hsl(4 90% 58%) 0%,
+      hsl(4 90% 75%) 100%
     );
 
-    /* Light Mode Shadows */
-    --shadow-card: 0 1px 3px 0 hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
-    --shadow-hover: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -2px hsl(0 0% 0% / 0.1);
-  }
-
-  /* Dark Mode Variables */
-  .dark {
-    --background: 224 71% 4%; /* #0F0F23 */
-    --foreground: 213 31% 91%; /* #E2E8F0 */
-
-    --card: 224 71% 4%; /* #0F0F23 */
-    --card-foreground: 213 31% 91%; /* #E2E8F0 */
-
-    --popover: 224 71% 4%; /* #0F0F23 */
-    --popover-foreground: 213 31% 91%; /* #E2E8F0 */
-
-    --primary: 210 40% 98%; /* #F8FAFC */
-    --primary-foreground: 222.2 47.4% 11.2%; /* #1E293B */
-
-    --secondary: 222.2 84% 4.9%; /* #1E293B */
-    --secondary-foreground: 210 40% 98%; /* #F8FAFC */
-
-    --muted: 217.2 32.6% 17.5%; /* #334155 */
-    --muted-foreground: 215 20.2% 65.1%; /* #94A3B8 */
-
-    --accent: 217.2 32.6% 17.5%; /* #334155 */
-    --accent-foreground: 210 40% 98%; /* #F8FAFC */
-
-    --destructive: 0 63% 31%; /* #7F1D1D */
-    --destructive-foreground: 210 40% 98%; /* #F8FAFC */
-
-    --border: 217.2 32.6% 17.5%; /* #334155 */
-    --input: 217.2 32.6% 17.5%; /* #334155 */
-    --ring: 224 71% 4%; /* #0F0F23 */
-
-    /* Dark Mode Hover */
-    --primary-hover: 210 40% 85%; /* Lighter on hover */
-    
-    /* Dark Mode Charts */
-    --chart-1: 220 70% 50%; /* Blue */
-    --chart-2: 160 60% 45%; /* Green */
-    --chart-3: 30 80% 55%; /* Orange/Red */
-    --chart-4: 280 65% 60%; /* Purple */
-    --chart-5: 340 75% 55%; /* Pink */
-
-    /* Dark Mode Shadows */
-    --shadow-card: 0 0 0 1px hsl(217.2 32.6% 17.5% / 0.5);
-    --shadow-hover: 0 0 0 1px hsl(217.2 32.6% 25% / 0.8);
+    /* Soft Shadows - Clean Design */
+    --shadow-glow: 0 2px 8px hsl(0 0% 0% / 0.04);
     --shadow-card: 0 2px 8px hsl(0 0% 0% / 0.04);
     --shadow-hover: 0 4px 12px hsl(0 0% 0% / 0.08);
 
@@ -1099,7 +1055,130 @@ All colors MUST be HSL.
     color: #666 !important;
   }
 
-  /* Removed problematic text-white override - handled per component */
+  /* Theme-aware utility classes for light mode */
+  :root:not(.dark) .text-theme-primary {
+    color: #1E1E1E !important;
+  }
+
+  :root:not(.dark) .text-theme-secondary {
+    color: #4B5563 !important;
+  }
+
+  :root:not(.dark) .text-theme-muted {
+    color: #6B7280 !important;
+  }
+
+  :root:not(.dark) .text-theme-accent {
+    color: #3A7AFE !important;
+  }
+
+  /* Fix MarketMoodControls source colors in light mode */
+  :root:not(.dark) .bg-emerald-500\/20 {
+    background-color: rgba(16, 185, 129, 0.1) !important;
+    color: #065F46 !important;
+    border-color: rgba(16, 185, 129, 0.2) !important;
+  }
+
+  /* Fix AI Sentiment Engine colors in light mode */
+  :root:not(.dark) .bg-pink-100 {
+    background-color: #fce7f3 !important;
+  }
+
+  :root:not(.dark) .text-pink-600 {
+    color: #db2777 !important;
+  }
+
+  :root:not(.dark) .border-pink-200 {
+    border-color: #fbbf24 !important;
+  }
+
+  :root:not(.dark) .bg-blue-100 {
+    background-color: #dbeafe !important;
+  }
+
+  :root:not(.dark) .text-blue-600 {
+    color: #2563eb !important;
+  }
+
+  :root:not(.dark) .border-blue-200 {
+    border-color: #bfdbfe !important;
+  }
+
+  :root:not(.dark) .bg-cyan-100 {
+    background-color: #cffafe !important;
+  }
+
+  :root:not(.dark) .text-cyan-600 {
+    color: #0891b2 !important;
+  }
+
+  :root:not(.dark) .border-cyan-200 {
+    border-color: #a5f3fc !important;
+  }
+
+  :root:not(.dark) .text-cyan-700 {
+    color: #0e7490 !important;
+  }
+
+  :root:not(.dark) .text-orange-600 {
+    color: #ea580c !important;
+  }
+
+  :root:not(.dark) .border-orange-200 {
+    border-color: #fed7aa !important;
+  }
+
+  :root:not(.dark) .text-orange-700 {
+    color: #c2410c !important;
+  }
+
+  :root:not(.dark) .text-purple-600 {
+    color: #9333ea !important;
+  }
+
+  :root:not(.dark) .border-purple-200 {
+    border-color: #e9d5ff !important;
+  }
+
+  :root:not(.dark) .text-emerald-400 {
+    color: #065F46 !important;
+  }
+
+  :root:not(.dark) .border-emerald-500\/30 {
+    border-color: rgba(16, 185, 129, 0.2) !important;
+  }
+
+  :root:not(.dark) .bg-blue-500\/20 {
+    background-color: rgba(59, 130, 246, 0.1) !important;
+    color: #1E40AF !important;
+    border-color: rgba(59, 130, 246, 0.2) !important;
+  }
+
+  :root:not(.dark) .text-blue-400 {
+    color: #1E40AF !important;
+  }
+
+  :root:not(.dark) .border-blue-500\/30 {
+    border-color: rgba(59, 130, 246, 0.2) !important;
+  }
+
+  :root:not(.dark) .bg-purple-500\/20 {
+    background-color: rgba(139, 92, 246, 0.1) !important;
+    color: #6B21A8 !important;
+    border-color: rgba(139, 92, 246, 0.2) !important;
+  }
+
+  :root:not(.dark) .text-purple-400 {
+    color: #6B21A8 !important;
+  }
+
+  :root:not(.dark) .border-purple-500\/30 {
+    border-color: rgba(139, 92, 246, 0.2) !important;
+  }
+
+  :root:not(.dark) .text-white {
+    color: #1E1E1E !important;
+  }
 
   :root:not(.dark) .text-gray-300 {
     color: #444 !important;
@@ -1256,10 +1335,20 @@ All colors MUST be HSL.
     border: 1px solid #E0E0E0 !important;
   }
 
-  /* Fix all hardcoded white text - removed problematic override */
+  /* Fix all hardcoded white text, but preserve white text on primary/accent backgrounds */
+  :root:not(.dark) .text-white:not(.bg-primary):not([class*="bg-primary"]):not(.text-primary-foreground):not([class*="primary-foreground"]) {
+    color: #1E1E1E !important;
+  }
+
+  /* Ensure primary buttons keep white text on colored backgrounds */
+  :root:not(.dark) .text-primary-foreground,
+  :root:not(.dark) .bg-primary .text-white,
+  :root:not(.dark) button[aria-current="page"] {
+    color: #FFFFFF !important;
+  }
 
   /* Fix gradient headers to be appropriate for light mode */
-  :root:not(.dark) .bg-gradient-to-r {
+  :root:not(.dark) .bg-gradient-to-r:not(.bg-primary):not([class*="bg-primary"]) {
     background: linear-gradient(to right, #3F51B5, #2196F3) !important;
     color: white !important;
   }
@@ -1456,89 +1545,32 @@ All colors MUST be HSL.
     color: white !important;
   }
 
-  /* Force Day Mode CSS variables override */
-  .day-mode-container {
-    --background: 0 0% 100% !important; /* Pure white */
-    --foreground: 214 16% 16% !important; /* #2A2E39 */
-    --muted: 220 9% 98% !important; /* #F9FAFB */
-    --card: 0 0% 100% !important; /* White */
-    --card-foreground: 214 16% 16% !important; /* #2A2E39 */
-    background-color: #FFFFFF !important;
-    color: #2A2E39 !important;
-  }
-
-  /* Nuclear option - Force Day Mode styling with maximum specificity */
-  html body div.day-mode-container,
-  html body div.day-mode-container > div,
-  html body div.day-mode-container .container {
-    background: #FFFFFF !important;
-    background-color: #FFFFFF !important;
-    background-image: none !important;
-    color: #2A2E39 !important;
-  }
-
-  /* Override all text elements in Day Mode with absolute specificity */
-  html body div.day-mode-container *:not(.bg-green-600):not(.bg-green-600 *):not(.bg-red-500):not(.bg-red-500 *):not(.bg-blue-600):not(.bg-blue-600 *):not(.bg-yellow-600):not(.bg-yellow-600 *):not(.bg-gray-600):not(.bg-gray-600 *):not(.bg-indigo-600):not(.bg-indigo-600 *) {
-    color: #2A2E39 !important;
-  }
-
-  /* Force every possible element to white background in Day Mode */
-  html body div.day-mode-container,
-  html body div.day-mode-container *,
-  html body div.day-mode-container div,
-  html body div.day-mode-container section,
-  html body div.day-mode-container main {
-    background-color: #FFFFFF !important;
-    background-image: none !important;
-    background: #FFFFFF !important;
-  }
-
-  /* Ensure cards and content areas are white */
-  html body div.day-mode-container .card,
-  html body div.day-mode-container [data-testid*="card"],
-  html body div.day-mode-container .bg-card {
-    background-color: #FFFFFF !important;
-  }
-
-  /* Override any remaining dark styling in Day Mode */
-  html body div.day-mode-container .text-white,
-  html body div.day-mode-container .text-white *,
-  html body div.day-mode-container [class*="text-white"] {
-    color: #2A2E39 !important;
-  }
-
-  /* Secondary text in Day Mode */
-  html body div.day-mode-container .text-sm,
-  html body div.day-mode-container .text-xs {
-    color: #4B5563 !important;
-  }
-
-  /* Preserve white text only on colored backgrounds - highest specificity */
-  :root:not(.dark) .bg-green-600,
-  :root:not(.dark) .bg-green-600 *,
-  :root:not(.dark) .bg-red-500,
-  :root:not(.dark) .bg-red-500 *,
-  :root:not(.dark) .bg-blue-600,
-  :root:not(.dark) .bg-blue-600 *,
-  :root:not(.dark) .bg-yellow-600,
-  :root:not(.dark) .bg-yellow-600 *,
-  :root:not(.dark) .bg-gray-600,
-  :root:not(.dark) .bg-gray-600 *,
-  :root:not(.dark) .bg-indigo-600,
-  :root:not(.dark) .bg-indigo-600 *,
-  [class*="day-mode"] .bg-green-600,
-  [class*="day-mode"] .bg-green-600 *,
-  [class*="day-mode"] .bg-red-500,
-  [class*="day-mode"] .bg-red-500 *,
-  [class*="day-mode"] .bg-blue-600,
-  [class*="day-mode"] .bg-blue-600 *,
-  [class*="day-mode"] .bg-yellow-600,
-  [class*="day-mode"] .bg-yellow-600 *,
-  [class*="day-mode"] .bg-gray-600,
-  [class*="day-mode"] .bg-gray-600 *,
-  [class*="day-mode"] .bg-indigo-600,
-  [class*="day-mode"] .bg-indigo-600 * {
+  /* Ensure active navigation buttons have proper contrast in light mode */
+  :root:not(.dark) .bg-primary button,
+  :root:not(.dark) button.bg-primary,
+  :root:not(.dark) .text-primary-foreground.bg-primary {
     color: #FFFFFF !important;
+    background-color: #3A7AFE !important;
+  }
+
+  /* Fix focus and hover states for primary buttons in light mode */
+  :root:not(.dark) .bg-primary:hover,
+  :root:not(.dark) button.bg-primary:hover {
+    background-color: #2962FF !important;
+    color: #FFFFFF !important;
+  }
+
+  /* Fix aria-current page buttons specifically */
+  :root:not(.dark) button[aria-current="page"] {
+    background-color: #3A7AFE !important;
+    color: #FFFFFF !important;
+    border: 1px solid #3A7AFE !important;
+  }
+
+  :root:not(.dark) button[aria-current="page"]:hover {
+    background-color: #2962FF !important;
+    color: #FFFFFF !important;
+    border: 1px solid #2962FF !important;
   }
 
   /* Exception for Sentiment Surface title - preserve its gradient */
@@ -1615,7 +1647,10 @@ All colors MUST be HSL.
     color: white !important;
   }
 
-  /* Fix all text colors in SpaceSwitcherWidget - removed problematic text-white override */
+  /* Fix all text colors in SpaceSwitcherWidget */
+  :root:not(.dark) .text-white {
+    color: #1E1E1E !important;
+  }
 
   :root:not(.dark) .text-gray-400 {
     color: #666 !important;
@@ -1634,7 +1669,9 @@ All colors MUST be HSL.
     color: #333 !important;
   }
 
-  /* Removed problematic hover text-white override */
+  :root:not(.dark) .hover\:text-white:hover {
+    color: #1E1E1E !important;
+  }
 
   /* Fix background colors for Space cards */
   :root:not(.dark) .bg-gray-800\/50 {

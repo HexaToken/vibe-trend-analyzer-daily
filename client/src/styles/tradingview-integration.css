@@ -1,0 +1,576 @@
+/* ===== TRADINGVIEW DAY MODE INTEGRATION ===== */
+/* Additional CSS to ensure TradingView Day Mode integrates properly with existing components */
+
+/* Override Tailwind CSS variables when in TradingView Day Mode */
+.tradingview-day {
+  /* Override CSS custom properties used by Tailwind */
+  --background: 255 255 255; /* #FFFFFF */
+  --foreground: 42 46 57; /* #2A2E39 */
+  --card: 249 250 251; /* #F9FAFB */
+  --card-foreground: 42 46 57; /* #2A2E39 */
+  --popover: 249 250 251; /* #F9FAFB */
+  --popover-foreground: 42 46 57; /* #2A2E39 */
+  --primary: 41 98 255; /* #2962FF */
+  --primary-foreground: 255 255 255; /* #FFFFFF */
+  --secondary: 243 244 246; /* #F3F4F6 */
+  --secondary-foreground: 75 85 99; /* #4B5563 */
+  --muted: 243 244 246; /* #F3F4F6 */
+  --muted-foreground: 75 85 99; /* #4B5563 */
+  --accent: 41 98 255; /* #2962FF */
+  --accent-foreground: 255 255 255; /* #FFFFFF */
+  --destructive: 239 68 68; /* #EF4444 */
+  --destructive-foreground: 255 255 255; /* #FFFFFF */
+  --border: 224 227 235; /* #E0E3EB */
+  --input: 224 227 235; /* #E0E3EB */
+  --ring: 41 98 255; /* #2962FF */
+  --radius: 0.75rem;
+}
+
+/* ===== COMPONENT-SPECIFIC OVERRIDES ===== */
+
+/* Header Navigation */
+.tradingview-day .sticky.top-0 {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--tv-border) !important;
+}
+
+/* Navigation Links */
+.tradingview-day .text-muted-foreground {
+  color: var(--tv-secondary-text) !important;
+}
+
+.tradingview-day .hover\:text-primary:hover {
+  color: var(--tv-accent-blue) !important;
+}
+
+.tradingview-day .text-primary-foreground {
+  color: var(--tv-button-primary-text) !important;
+}
+
+.tradingview-day .bg-primary {
+  background-color: var(--tv-accent-blue) !important;
+}
+
+.tradingview-day .hover\:bg-muted:hover {
+  background-color: var(--tv-hover-background) !important;
+}
+
+/* Cards and Panels */
+.tradingview-day .bg-card {
+  background-color: var(--tv-card-background) !important;
+}
+
+.tradingview-day .text-card-foreground {
+  color: var(--tv-primary-text) !important;
+}
+
+.tradingview-day .border-border {
+  border-color: var(--tv-border) !important;
+}
+
+.tradingview-day .rounded-lg.border.bg-card.text-card-foreground.shadow-sm {
+  background-color: var(--tv-card-background) !important;
+  border-color: var(--tv-border) !important;
+  box-shadow: var(--tv-shadow-sm) !important;
+}
+
+/* Buttons */
+.tradingview-day .bg-primary:not(.preserve-dark) {
+  background-color: var(--tv-accent-blue) !important;
+  color: var(--tv-button-primary-text) !important;
+  border: 1px solid var(--tv-accent-blue) !important;
+}
+
+.tradingview-day .hover\:bg-primary\/90:hover:not(.preserve-dark) {
+  background-color: var(--tv-accent-blue-hover) !important;
+  border-color: var(--tv-accent-blue-hover) !important;
+}
+
+.tradingview-day .bg-secondary {
+  background-color: var(--tv-card-background) !important;
+  color: var(--tv-secondary-text) !important;
+  border: 1px solid var(--tv-border) !important;
+}
+
+.tradingview-day .bg-secondary:hover {
+  background-color: var(--tv-hover-background) !important;
+  color: var(--tv-primary-text) !important;
+}
+
+/* Active button states for navigation */
+.tradingview-day button.text-primary-foreground.bg-primary {
+  background-color: var(--tv-accent-blue) !important;
+  color: white !important;
+  border: 1px solid var(--tv-accent-blue) !important;
+  box-shadow: 0 2px 4px rgba(41, 98, 255, 0.2) !important;
+  font-weight: 600 !important;
+}
+
+.tradingview-day button.text-primary-foreground.bg-primary:hover {
+  background-color: var(--tv-accent-blue-hover) !important;
+  border-color: var(--tv-accent-blue-hover) !important;
+  box-shadow: 0 4px 8px rgba(41, 98, 255, 0.25) !important;
+}
+
+/* Enhanced navigation button states */
+.tradingview-day button[aria-current="page"] {
+  background-color: var(--tv-accent-blue) !important;
+  color: white !important;
+  border: 1px solid var(--tv-accent-blue) !important;
+  box-shadow: 0 2px 4px rgba(41, 98, 255, 0.2) !important;
+  font-weight: 600 !important;
+}
+
+.tradingview-day button[aria-current="page"]:hover {
+  background-color: var(--tv-accent-blue-hover) !important;
+  border-color: var(--tv-accent-blue-hover) !important;
+  box-shadow: 0 4px 8px rgba(41, 98, 255, 0.25) !important;
+}
+
+/* Inactive navigation button states */
+.tradingview-day nav button:not([aria-current="page"]) {
+  color: var(--tv-secondary-text) !important;
+  background-color: transparent !important;
+  border: 1px solid transparent !important;
+}
+
+.tradingview-day nav button:not([aria-current="page"]):hover {
+  color: var(--tv-accent-blue) !important;
+  background-color: var(--tv-accent-blue-light) !important;
+  border-color: var(--tv-accent-blue-border) !important;
+}
+
+/* Inputs and Form Elements */
+.tradingview-day input,
+.tradingview-day textarea,
+.tradingview-day select {
+  background-color: var(--tv-input-background) !important;
+  border-color: var(--tv-input-border) !important;
+  color: var(--tv-input-text) !important;
+}
+
+.tradingview-day input:focus,
+.tradingview-day textarea:focus,
+.tradingview-day select:focus {
+  border-color: var(--tv-input-border-focus) !important;
+  box-shadow: 0 0 0 3px var(--tv-focus-ring) !important;
+}
+
+.tradingview-day input::placeholder,
+.tradingview-day textarea::placeholder {
+  color: var(--tv-input-placeholder) !important;
+}
+
+/* Badges */
+.tradingview-day .inline-flex.items-center.rounded-full.border {
+  background-color: var(--tv-card-background) !important;
+  color: var(--tv-secondary-text) !important;
+  border-color: var(--tv-border) !important;
+}
+
+/* Sentiment-specific badges */
+.tradingview-day .bg-green-50,
+.tradingview-day .bg-emerald-50 {
+  background-color: var(--tv-positive-light) !important;
+  color: var(--tv-positive) !important;
+  border-color: var(--tv-positive-border) !important;
+}
+
+.tradingview-day .bg-red-50,
+.tradingview-day .bg-rose-50 {
+  background-color: var(--tv-negative-light) !important;
+  color: var(--tv-negative) !important;
+  border-color: var(--tv-negative-border) !important;
+}
+
+.tradingview-day .bg-blue-50,
+.tradingview-day .bg-indigo-50 {
+  background-color: var(--tv-neutral-light) !important;
+  color: var(--tv-neutral) !important;
+  border-color: var(--tv-neutral-border) !important;
+}
+
+/* Text Colors */
+.tradingview-day .text-green-800,
+.tradingview-day .text-green-700,
+.tradingview-day .text-emerald-800,
+.tradingview-day .text-emerald-700 {
+  color: var(--tv-positive) !important;
+}
+
+.tradingview-day .text-red-800,
+.tradingview-day .text-red-700,
+.tradingview-day .text-rose-800,
+.tradingview-day .text-rose-700 {
+  color: var(--tv-negative) !important;
+}
+
+.tradingview-day .text-blue-800,
+.tradingview-day .text-blue-700,
+.tradingview-day .text-indigo-800,
+.tradingview-day .text-indigo-700 {
+  color: var(--tv-neutral) !important;
+}
+
+/* Hover Effects */
+.tradingview-day .hover\:shadow-lg:hover {
+  box-shadow: var(--tv-shadow-lg) !important;
+}
+
+.tradingview-day .hover\:shadow-md:hover {
+  box-shadow: var(--tv-shadow-md) !important;
+}
+
+/* Dropdown and Popover Components */
+.tradingview-day [data-radix-popper-content-wrapper] {
+  background-color: var(--tv-card-background) !important;
+  border: 1px solid var(--tv-border) !important;
+  box-shadow: var(--tv-shadow-lg) !important;
+  border-radius: var(--tv-radius-lg) !important;
+}
+
+.tradingview-day [role="menu"],
+.tradingview-day [role="listbox"] {
+  background-color: var(--tv-card-background) !important;
+  border: 1px solid var(--tv-border) !important;
+  color: var(--tv-primary-text) !important;
+}
+
+.tradingview-day [role="menuitem"],
+.tradingview-day [role="option"] {
+  color: var(--tv-primary-text) !important;
+}
+
+.tradingview-day [role="menuitem"]:hover,
+.tradingview-day [role="option"]:hover {
+  background-color: var(--tv-hover-background) !important;
+  color: var(--tv-primary-text) !important;
+}
+
+/* Tab Components */
+.tradingview-day [role="tablist"] {
+  background-color: var(--tv-card-background) !important;
+  border: 1px solid var(--tv-border) !important;
+}
+
+.tradingview-day [role="tab"] {
+  color: var(--tv-secondary-text) !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+.tradingview-day [role="tab"]:hover {
+  color: var(--tv-accent-blue) !important;
+  background-color: var(--tv-accent-blue-light) !important;
+}
+
+.tradingview-day [role="tab"][data-state="active"] {
+  background-color: var(--tv-background) !important;
+  color: var(--tv-accent-blue) !important;
+  border: 1px solid var(--tv-accent-blue-border) !important;
+  box-shadow: var(--tv-shadow-sm) !important;
+  font-weight: 600 !important;
+}
+
+/* Specific overrides for TabsTrigger component */
+.tradingview-day .data-\[state\=active\]\:bg-background[data-state="active"] {
+  background-color: var(--tv-background) !important;
+  color: var(--tv-accent-blue) !important;
+  border: 1px solid var(--tv-accent-blue-border) !important;
+  box-shadow: var(--tv-shadow-sm) !important;
+}
+
+.tradingview-day .data-\[state\=active\]\:text-foreground[data-state="active"] {
+  color: var(--tv-accent-blue) !important;
+}
+
+.tradingview-day .data-\[state\=active\]\:shadow-sm[data-state="active"] {
+  box-shadow: var(--tv-shadow-sm) !important;
+}
+
+/* Chart Components */
+.tradingview-day .chart-container,
+.tradingview-day [class*="chart"] {
+  background-color: var(--tv-chart-background) !important;
+  color: var(--tv-chart-text) !important;
+}
+
+/* Grid lines in charts */
+.tradingview-day .chart-grid,
+.tradingview-day [class*="grid"] {
+  stroke: var(--tv-chart-grid) !important;
+}
+
+/* Chart axes */
+.tradingview-day .chart-axis,
+.tradingview-day [class*="axis"] {
+  fill: var(--tv-chart-axis) !important;
+}
+
+/* ===== MOOD METER SPECIFIC COMPONENTS ===== */
+
+/* Market Mood Gauge */
+.tradingview-day .mood-gauge {
+  background-color: var(--tv-card-background) !important;
+  border: 1px solid var(--tv-border) !important;
+  box-shadow: var(--tv-shadow-md) !important;
+}
+
+/* Sentiment Widgets */
+.tradingview-day .sentiment-widget {
+  background-color: var(--tv-card-background) !important;
+  border: 1px solid var(--tv-border) !important;
+}
+
+/* News Feed Cards */
+.tradingview-day .news-card {
+  background-color: var(--tv-card-background) !important;
+  border: 1px solid var(--tv-border) !important;
+  box-shadow: var(--tv-shadow-sm) !important;
+}
+
+.tradingview-day .news-card:hover {
+  box-shadow: var(--tv-shadow-md) !important;
+  transform: translateY(-1px);
+}
+
+/* Social Media Cards */
+.tradingview-day .social-card {
+  background-color: var(--tv-card-background) !important;
+  border: 1px solid var(--tv-border) !important;
+}
+
+/* ===== GRADIENT BACKGROUNDS ===== */
+
+/* Replace gradient backgrounds with TradingView appropriate colors */
+.tradingview-day .bg-gradient-to-br {
+  background: linear-gradient(to bottom right, var(--tv-background), var(--tv-card-background)) !important;
+}
+
+.tradingview-day .bg-gradient-to-r {
+  background: linear-gradient(to right, var(--tv-accent-blue), var(--tv-accent-blue-hover)) !important;
+}
+
+/* ===== LIGHT MODE BUTTON CONTRAST FIXES ===== */
+
+/* Fix active button contrast in regular light mode (not day mode) */
+:root:not(.dark):not(.tradingview-day) .text-primary-foreground.bg-primary {
+  background-color: #3A7AFE !important;
+  color: #FFFFFF !important;
+  border: 1px solid #3A7AFE !important;
+}
+
+:root:not(.dark):not(.tradingview-day) .text-primary-foreground.bg-primary:hover {
+  background-color: #2962FF !important;
+  color: #FFFFFF !important;
+  border: 1px solid #2962FF !important;
+}
+
+/* Fix aria-current page buttons in light mode */
+:root:not(.dark):not(.tradingview-day) button[aria-current="page"] {
+  background-color: #3A7AFE !important;
+  color: #FFFFFF !important;
+  border: 1px solid #3A7AFE !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark):not(.tradingview-day) button[aria-current="page"]:hover {
+  background-color: #2962FF !important;
+  color: #FFFFFF !important;
+  border: 1px solid #2962FF !important;
+}
+
+/* Ensure focus states are visible in light mode */
+:root:not(.dark):not(.tradingview-day) button[aria-current="page"]:focus-visible {
+  outline: 2px solid #3A7AFE !important;
+  outline-offset: 2px !important;
+}
+
+/* Fix hover states for inactive buttons in light mode */
+:root:not(.dark):not(.tradingview-day) nav button:not([aria-current="page"]):hover {
+  color: #3A7AFE !important;
+  background-color: rgba(58, 122, 254, 0.1) !important;
+}
+
+/* Fix mobile menu buttons with hardcoded blue backgrounds */
+:root:not(.dark):not(.tradingview-day) .bg-\[\#3A7AFE\] {
+  background-color: #3A7AFE !important;
+  color: #FFFFFF !important;
+}
+
+:root:not(.dark):not(.tradingview-day) .bg-\[\#3A7AFE\]:hover {
+  background-color: #2962FF !important;
+  color: #FFFFFF !important;
+}
+
+:root:not(.dark):not(.tradingview-day) .text-white.bg-\[\#3A7AFE\] {
+  color: #FFFFFF !important;
+}
+
+/* Ensure proper focus states for all primary buttons */
+:root:not(.dark):not(.tradingview-day) button:focus-visible {
+  outline: 2px solid #3A7AFE !important;
+  outline-offset: 2px !important;
+}
+
+/* Fix tab components in light mode */
+:root:not(.dark):not(.tradingview-day) [role="tab"][data-state="active"] {
+  background-color: #FFFFFF !important;
+  color: #3A7AFE !important;
+  border: 1px solid rgba(58, 122, 254, 0.2) !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+  font-weight: 600 !important;
+}
+
+:root:not(.dark):not(.tradingview-day) [role="tab"]:not([data-state="active"]) {
+  color: #4B5563 !important;
+}
+
+:root:not(.dark):not(.tradingview-day) [role="tab"]:not([data-state="active"]):hover {
+  color: #3A7AFE !important;
+  background-color: rgba(58, 122, 254, 0.1) !important;
+}
+
+/* Fix AISentimentEngine tab styling specifically */
+:root:not(.dark) .mood-sentiment-tabs [role="tab"]:not([data-state="active"]) {
+  color: #6B7280 !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+:root:not(.dark) .mood-sentiment-tabs [role="tab"]:not([data-state="active"]):hover {
+  color: #3A7AFE !important;
+  background-color: rgba(58, 122, 254, 0.1) !important;
+  border-color: transparent !important;
+}
+
+:root:not(.dark) .mood-sentiment-tabs [role="tab"][data-state="active"] {
+  color: #3A7AFE !important;
+  background-color: rgba(58, 122, 254, 0.2) !important;
+  border-color: rgba(58, 122, 254, 0.3) !important;
+}
+
+/* Fix dropdown menu styling in light mode */
+:root:not(.dark):not(.tradingview-day) [data-radix-dropdown-menu-content] {
+  background: #FFFFFF !important;
+  border: 1px solid #E0E0E0 !important;
+  color: #1E1E1E !important;
+}
+
+:root:not(.dark):not(.tradingview-day) [data-radix-dropdown-menu-item]:hover {
+  background: #F5F5F5 !important;
+  color: #1E1E1E !important;
+}
+
+/* ===== PRESERVE DARK MODE ELEMENTS ===== */
+
+/* Preserve elements that should stay dark */
+.tradingview-day .preserve-dark,
+.tradingview-day .hero,
+.tradingview-day .hero *,
+.tradingview-day [class*="hero"],
+.tradingview-day [class*="hero"] * {
+  /* Force preserve existing dark styles */
+  background: revert !important;
+  color: revert !important;
+  border-color: revert !important;
+}
+
+/* Specifically preserve hero section styling */
+.tradingview-day .hero-sentiment-section {
+  background: radial-gradient(ellipse at center, #1B0036 0%, #3B0A58 100%) !important;
+  color: white !important;
+  border-radius: 24px !important;
+  backdrop-filter: blur(2px) !important;
+  padding: 2rem 1rem !important;
+  text-align: center !important;
+}
+
+.tradingview-day .hero-sentiment-section * {
+  color: inherit !important;
+}
+
+.tradingview-day .hero-sentiment-section .w-96.h-96.rounded-full {
+  border: 5px solid #5EE06C !important;
+  box-shadow: 0 0 16px rgba(94, 224, 108, 0.6) !important;
+  border-radius: 50% !important;
+}
+
+.tradingview-day .hero-sentiment-section .text-gray-200 {
+  color: rgb(229 231 235) !important;
+}
+
+.tradingview-day .hero-sentiment-section .text-purple-300 {
+  color: rgb(196 181 253) !important;
+}
+
+.tradingview-day .hero-sentiment-section .text-white {
+  color: white !important;
+}
+
+/* ===== SCROLLBAR STYLING ===== */
+
+.tradingview-day ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.tradingview-day ::-webkit-scrollbar-track {
+  background: var(--tv-card-background);
+}
+
+.tradingview-day ::-webkit-scrollbar-thumb {
+  background: var(--tv-border);
+  border-radius: 4px;
+}
+
+.tradingview-day ::-webkit-scrollbar-thumb:hover {
+  background: var(--tv-secondary-text);
+}
+
+/* ===== RESPONSIVE CONSIDERATIONS ===== */
+
+@media (max-width: 768px) {
+  .tradingview-day {
+    /* Mobile-specific adjustments */
+    --tv-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --tv-shadow-md: 0 2px 4px -1px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  .tradingview-day .sticky.top-0 {
+    background: rgba(255, 255, 255, 0.98) !important;
+  }
+}
+
+/* ===== ANIMATION COMPATIBILITY ===== */
+
+.tradingview-day * {
+  /* Ensure transitions work properly with new colors */
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* Disable transitions for instant theme switches */
+.tradingview-day.theme-switching * {
+  transition: none !important;
+}
+
+/* ===== PRINT STYLES ===== */
+
+@media print {
+  .tradingview-day {
+    /* Print-friendly adjustments */
+    --tv-shadow-sm: none;
+    --tv-shadow-md: none;
+    --tv-shadow-lg: none;
+    --tv-shadow-xl: none;
+  }
+  
+  .tradingview-day * {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
+}
