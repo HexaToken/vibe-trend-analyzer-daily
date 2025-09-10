@@ -1,9 +1,102 @@
-/* NeonSense Page Layout - Proper Footer Positioning */
+/* NeomSense Layout System - Modern Professional Standards */
+/* Version 1.0.0 - Industry-grade CSS architecture */
 
+:root {
+  /* Color System - Professional Trading Interface */
+  --ns-primary: #2962FF;
+  --ns-primary-hover: #1E4FCC;
+  --ns-bg-primary: #FFFFFF;
+  --ns-bg-secondary: #F9FAFB;
+  --ns-bg-tertiary: #E5E7EB;
+  --ns-text-primary: #111827;
+  --ns-text-secondary: #6B7280;
+  --ns-text-tertiary: #9CA3AF;
+  --ns-border: #E5E7EB;
+  --ns-border-hover: #D1D5DB;
+  
+  /* Dark Mode Colors */
+  --ns-dark-bg-primary: #0F1419;
+  --ns-dark-bg-secondary: #1A1F2E;
+  --ns-dark-bg-tertiary: #252A3A;
+  --ns-dark-text-primary: #FFFFFF;
+  --ns-dark-text-secondary: #B0B8C7;
+  --ns-dark-text-tertiary: #8A93A6;
+  --ns-dark-border: #2A2F3E;
+  --ns-dark-border-hover: #3A3F4E;
+  
+  /* Semantic Colors */
+  --ns-success: #16A34A;
+  --ns-error: #EF4444;
+  --ns-warning: #F59E0B;
+  --ns-info: #3B82F6;
+  
+  /* Financial Colors */
+  --ns-bullish: #16A34A;
+  --ns-bearish: #EF4444;
+  --ns-neutral: #6B7280;
+  
+  /* Layout Variables */
+  --ns-container-max-width: 1440px;
+  --ns-sidebar-width: 320px;
+  --ns-header-height: 64px;
+  --ns-footer-height: 80px;
+  
+  /* Spacing Scale */
+  --ns-space-xs: 0.25rem;
+  --ns-space-sm: 0.5rem;
+  --ns-space-md: 1rem;
+  --ns-space-lg: 1.5rem;
+  --ns-space-xl: 2rem;
+  --ns-space-2xl: 3rem;
+  
+  /* Border Radius Scale */
+  --ns-radius-sm: 0.375rem;
+  --ns-radius-md: 0.5rem;
+  --ns-radius-lg: 0.75rem;
+  --ns-radius-xl: 1rem;
+  
+  /* Shadow System */
+  --ns-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --ns-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --ns-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --ns-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  
+  /* Typography Scale */
+  --ns-font-xs: 0.75rem;
+  --ns-font-sm: 0.875rem;
+  --ns-font-base: 1rem;
+  --ns-font-lg: 1.125rem;
+  --ns-font-xl: 1.25rem;
+  --ns-font-2xl: 1.5rem;
+  --ns-font-3xl: 1.875rem;
+  
+  /* Animation */
+  --ns-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --ns-transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --ns-transition-slow: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark mode color overrides */
+.dark {
+  --ns-bg-primary: var(--ns-dark-bg-primary);
+  --ns-bg-secondary: var(--ns-dark-bg-secondary);
+  --ns-bg-tertiary: var(--ns-dark-bg-tertiary);
+  --ns-text-primary: var(--ns-dark-text-primary);
+  --ns-text-secondary: var(--ns-dark-text-secondary);
+  --ns-text-tertiary: var(--ns-dark-text-tertiary);
+  --ns-border: var(--ns-dark-border);
+  --ns-border-hover: var(--ns-dark-border-hover);
+}
+
+/* Reset and base styles */
 html, body { 
   height: 100%; 
   margin: 0;
   padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .ns-page { 

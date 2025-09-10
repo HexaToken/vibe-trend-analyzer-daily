@@ -73,7 +73,6 @@ export class CredibilityAssessor implements ICredibilityAssessor {
   private credibilityCache = new Map<string, PostCredibility>();
   private readonly CACHE_TTL = 600000; // 10 minutes
 
-  @LogPerformance('CredibilityAssessor')
   public async calculateCredibility(post: SocialPost, authorReliability = 50): Promise<PostCredibility> {
     try {
       // Validate input
@@ -106,7 +105,7 @@ export class CredibilityAssessor implements ICredibilityAssessor {
       };
 
       const aiAnalysis = {
-        contentType: this.classifyContentType(content),
+        contentType: this.classifyContentType(content) as "data_backed" | "speculative" | "opinion" | "promotional",
         factualClaims: this.extractFactualClaims(content),
         verificationSources: this.extractVerificationSources(content),
         confidenceScore: this.calculateAIConfidence(content),
@@ -148,7 +147,6 @@ export class CredibilityAssessor implements ICredibilityAssessor {
     }
   }
 
-  @LogPerformance('CredibilityAssessor')
   public calculateSimpleCredibilityScore(data: {
     content: string;
     author: string;
@@ -168,6 +166,10 @@ export class CredibilityAssessor implements ICredibilityAssessor {
       }
 
       const sanitizedContent = contentValidation.sanitized || content;
+      if (!sanitizedContent) {
+        logger.warn('Content is empty after validation');
+        return score;
+      }
 
       // Check for quality indicators
       if (this.hasSourceLinks(sanitizedContent)) score += 20;
