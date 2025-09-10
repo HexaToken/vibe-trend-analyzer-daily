@@ -65,7 +65,6 @@ export class SpamDetector implements ISpamDetector {
   private spamCache = new Map<string, SpamDetectionResult>();
   private readonly CACHE_TTL = 300000; // 5 minutes
 
-  @LogPerformance('SpamDetector')
   public async analyzeSpam(post: SocialPost): Promise<SpamDetectionResult> {
     try {
       // Validate input
@@ -87,7 +86,7 @@ export class SpamDetector implements ISpamDetector {
         return cached;
       }
 
-      const content = contentValidation.sanitized!.toLowerCase();
+      const content = (contentValidation.sanitized || post.content).toLowerCase();
       
       // Perform spam analysis
       const factors = this.analyzeSpamFactors(content, post);
@@ -129,7 +128,6 @@ export class SpamDetector implements ISpamDetector {
     }
   }
 
-  @LogPerformance('SpamDetector')
   public detectSpam(content: string): { isSpam: boolean; confidence: number; reasons: string[] } {
     try {
       const reasons: string[] = [];
