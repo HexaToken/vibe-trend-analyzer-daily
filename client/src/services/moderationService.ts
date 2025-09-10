@@ -542,9 +542,10 @@ class ModerationService {
   }
 
   /**
-   * Simplified credibility scoring for testing
+   * Public method for simplified credibility scoring
+   * Used by components for quick credibility assessment
    */
-  calculateCredibilityScore(data: {
+  public calculateSimpleCredibilityScore(data: {
     content: string;
     author: string;
     timestamp: Date;
