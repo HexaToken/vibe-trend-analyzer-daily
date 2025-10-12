@@ -348,7 +348,7 @@
 /* Link enhancements for light mode */
 :root:not(.dark) a,
 :root:not(.dark) [role="link"] {
-  color: #F4F6FA !important;
+  color: #2962FF !important; /* TradingView blue for better visibility */
   font-weight: 500 !important;
   text-decoration: underline !important;
   text-decoration-thickness: 1px !important;
@@ -356,7 +356,7 @@
 
 :root:not(.dark) a:hover,
 :root:not(.dark) [role="link"]:hover {
-  color: #3730A3 !important;
+  color: #1E4FD1 !important; /* Darker blue on hover */
   text-decoration-thickness: 2px !important;
 }
 
