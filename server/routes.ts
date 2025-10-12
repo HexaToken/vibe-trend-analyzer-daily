@@ -2,15 +2,131 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { spawn } from "child_process";
 import { storage } from "./storage";
+import { PasswordService } from "./services/passwordService";
+import { requireAuth, requireGuest } from "./middleware/authMiddleware";
+import { authLimiter, proxyLimiter, apiLimiter } from "./middleware/rateLimiter";
+import { insertUserSchema } from "@shared/schema";
+import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // put application routes here
-  // prefix all routes with /api
+  // Authentication routes with rate limiting
+  
+  // Register new user
+  app.post("/api/auth/register", authLimiter, requireGuest, async (req, res, next) => {
+    try {
+      const validation = insertUserSchema.safeParse(req.body);
+      
+      if (!validation.success) {
+        return res.status(400).json({ 
+          message: "Invalid input data", 
+          errors: validation.error.errors 
+        });
+      }
 
-  // use storage to perform CRUD operations on the storage interface
-  // e.g. storage.insertUser(user) or storage.getUserByUsername(username)
+      const { username, password } = validation.data;
+
+      // Validate password strength
+      const strengthCheck = PasswordService.validateStrength(password);
+      if (!strengthCheck.valid) {
+        return res.status(400).json({ message: strengthCheck.message });
+      }
+
+      // Check if user already exists
+      const existingUser = await storage.getUserByUsername(username);
+      if (existingUser) {
+        return res.status(409).json({ message: "Username already exists" });
+      }
+
+      // Hash password before storing
+      const hashedPassword = await PasswordService.hash(password);
+      
+      const user = await storage.insertUser({
+        username,
+        password: hashedPassword,
+      });
+
+      // Create session
+      req.session.userId = user.id;
+
+      res.status(201).json({
+        message: "User registered successfully",
+        user: { id: user.id, username: user.username },
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  // Login user
+  app.post("/api/auth/login", authLimiter, requireGuest, async (req, res, next) => {
+    try {
+      const { username, password } = req.body;
+
+      if (!username || !password) {
+        return res.status(400).json({ message: "Username and password are required" });
+      }
+
+      const user = await storage.getUserByUsername(username);
+      if (!user) {
+        return res.status(401).json({ message: "Invalid username or password" });
+      }
+
+      // Verify password
+      const isValid = await PasswordService.verify(password, user.password);
+      if (!isValid) {
+        return res.status(401).json({ message: "Invalid username or password" });
+      }
+
+      // Create session
+      req.session.userId = user.id;
+
+      res.json({
+        message: "Login successful",
+        user: { id: user.id, username: user.username },
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  // Logout user
+  app.post("/api/auth/logout", requireAuth, async (req, res, next) => {
+    try {
+      req.session.destroy((err) => {
+        if (err) {
+          return next(err);
+        }
+        res.json({ message: "Logout successful" });
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  // Get current user
+  app.get("/api/auth/me", requireAuth, async (req, res, next) => {
+    try {
+      const user = await storage.getUserById(req.session.userId!);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      res.json({
+        user: { id: user.id, username: user.username },
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  // Apply rate limiting to all API routes
+  app.use("/api", apiLimiter);
+
+  // Apply proxy rate limiting to all proxy endpoints
+  app.use("/api/proxy", proxyLimiter);
 
   // API Proxy endpoints for external services
+  // Note: These endpoints are now protected with rate limiting
 
   // NewsAPI proxy
   app.get("/api/proxy/newsapi/top-headlines", async (req, res) => {
@@ -714,7 +830,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
         try {
           const lines = output.trim().split("\n");
-          const jsonLine = lines[lines.length - 1];
+          const jsonLine = lines[lines.length - 1] || "{}";
           const result = JSON.parse(jsonLine);
           res.setHeader("Content-Type", "application/json");
           res.json(result);
@@ -1289,7 +1405,7 @@ except Exception as e:
     } catch (error) {
       console.warn(
         "Twitter trending API failed, using mock data:",
-        error.message,
+        error instanceof Error ? error.message : "Unknown error",
       );
       // Return mock data for rate limits or API issues
       const mockTrending = [
@@ -1388,7 +1504,7 @@ except Exception as e:
     } catch (error) {
       console.warn(
         "Twitter search API failed, using mock data:",
-        error.message,
+        error instanceof Error ? error.message : "Unknown error",
       );
       // Return mock data for rate limits or API issues
       const mockSearchResponse = {
