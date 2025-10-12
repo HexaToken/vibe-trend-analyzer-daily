@@ -6,14 +6,33 @@ import { setupVite, serveStatic, log } from "./vite";
 
 const app = express();
 
-// Security headers with Helmet
+// Validate required environment variables
+const requiredEnvVars = ["SESSION_SECRET"];
+const missingVars = requiredEnvVars.filter((varName) => !process.env[varName]);
+
+if (missingVars.length > 0 && process.env.NODE_ENV === "production") {
+  console.error(
+    `FATAL: Missing required environment variables: ${missingVars.join(", ")}`
+  );
+  process.exit(1);
+}
+
+// Security headers with Helmet - environment-specific CSP
+const isDevelopment = process.env.NODE_ENV === "development";
+
 app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"], // Required for Vite dev
-        styleSrc: ["'self'", "'unsafe-inline'"],
+        // In development: allow unsafe-inline/eval for Vite HMR
+        // In production: strict policy with no inline scripts
+        scriptSrc: isDevelopment
+          ? ["'self'", "'unsafe-inline'", "'unsafe-eval'"]
+          : ["'self'"],
+        styleSrc: isDevelopment
+          ? ["'self'", "'unsafe-inline'"]
+          : ["'self'"],
         imgSrc: ["'self'", "data:", "https:"],
         connectSrc: ["'self'", "ws:", "wss:"],
         fontSrc: ["'self'", "data:"],
@@ -31,9 +50,13 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: false, limit: "10mb" }));
 
 // Session configuration with security flags
+if (!process.env.SESSION_SECRET) {
+  log("WARNING: SESSION_SECRET not set, using development fallback. DO NOT USE IN PRODUCTION!");
+}
+
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "dev-secret-change-in-production",
+    secret: process.env.SESSION_SECRET || "dev-only-insecure-fallback-secret-do-not-use-in-prod",
     resave: false,
     saveUninitialized: false,
     cookie: {
