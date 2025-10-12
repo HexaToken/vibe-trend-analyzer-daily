@@ -60,11 +60,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Login user
   app.post("/api/auth/login", authLimiter, requireGuest, async (req, res, next) => {
     try {
-      const { username, password } = req.body;
+      // Use Zod schema for strict input validation
+      const loginSchema = z.object({
+        username: z.string().min(1, "Username is required"),
+        password: z.string().min(1, "Password is required"),
+      });
 
-      if (!username || !password) {
-        return res.status(400).json({ message: "Username and password are required" });
+      const validation = loginSchema.safeParse(req.body);
+      
+      if (!validation.success) {
+        return res.status(400).json({ 
+          message: "Invalid input data", 
+          errors: validation.error.errors 
+        });
       }
+
+      const { username, password } = validation.data;
 
       const user = await storage.getUserByUsername(username);
       if (!user) {
