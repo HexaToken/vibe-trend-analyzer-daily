@@ -406,6 +406,107 @@
   }
 }
 
+/* ===== HIGH CONTRAST MODE ENHANCEMENTS FOR ACCESSIBILITY ===== */
+
+/* Enhanced text contrast for users who prefer reduced transparency */
+@media (prefers-contrast: more) {
+  :root:not(.dark) {
+    /* Increase all text contrast */
+    --color-text-primary: #000000 !important;
+    --color-text-secondary: #1F2937 !important;
+    --color-text-muted: #374151 !important;
+  }
+
+  :root:not(.dark) body,
+  :root:not(.dark) p,
+  :root:not(.dark) span,
+  :root:not(.dark) div {
+    color: #111827 !important;
+    font-weight: 500 !important;
+  }
+
+  :root:not(.dark) h1,
+  :root:not(.dark) h2,
+  :root:not(.dark) h3,
+  :root:not(.dark) h4,
+  :root:not(.dark) h5,
+  :root:not(.dark) h6 {
+    color: #000000 !important;
+    font-weight: 800 !important;
+  }
+
+  /* Stronger borders for better visual separation */
+  :root:not(.dark) [class*="border"] {
+    border-width: 2px !important;
+    border-color: #1F2937 !important;
+  }
+
+  /* Enhanced button contrast */
+  :root:not(.dark) button {
+    border-width: 2px !important;
+    font-weight: 600 !important;
+  }
+
+  /* Remove transparency effects */
+  :root:not(.dark) [class*="opacity"] {
+    opacity: 1 !important;
+  }
+}
+
+/* Enhanced contrast for reduced motion preference (often correlated with accessibility needs) */
+@media (prefers-reduced-motion: reduce) {
+  :root:not(.dark) {
+    /* Increase text weight for better readability when animations are disabled */
+    font-weight: 500 !important;
+  }
+
+  :root:not(.dark) .text-sm,
+  :root:not(.dark) .text-xs {
+    font-weight: 600 !important;
+  }
+}
+
+/* Always-on high contrast improvements (subtle, WCAG AAA compliant) */
+:root:not(.dark) {
+  /* Ensure minimum 7:1 contrast ratio for normal text */
+  --min-contrast-text: #1A1A1A;
+  --min-contrast-heading: #000000;
+}
+
+/* Accessibility-first interactive elements */
+:root:not(.dark) button[class*="primary"],
+:root:not(.dark) a[class*="primary"] {
+  background: #1E40AF !important; /* Darker blue for WCAG AAA */
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  border: 2px solid #1E3A8A !important;
+}
+
+:root:not(.dark) button[class*="secondary"],
+:root:not(.dark) a[class*="secondary"] {
+  background: #FFFFFF !important;
+  color: #1F2937 !important;
+  font-weight: 600 !important;
+  border: 2px solid #1F2937 !important;
+}
+
+/* Enhanced contrast for form validation */
+:root:not(.dark) input:invalid,
+:root:not(.dark) select:invalid,
+:root:not(.dark) textarea:invalid {
+  border-color: #DC2626 !important; /* Strong red */
+  border-width: 2px !important;
+  outline: 2px solid rgba(220, 38, 38, 0.3) !important;
+  outline-offset: 2px !important;
+}
+
+:root:not(.dark) input:valid:not(:placeholder-shown),
+:root:not(.dark) select:valid:not(:placeholder-shown),
+:root:not(.dark) textarea:valid:not(:placeholder-shown) {
+  border-color: #059669 !important; /* Strong green */
+  border-width: 2px !important;
+}
+
 /* Improved hover states */
 :root:not(.dark) button:hover {
   background: #F3F4F6 !important;
