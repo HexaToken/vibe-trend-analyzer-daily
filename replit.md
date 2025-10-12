@@ -18,16 +18,27 @@ The application is built as a full-stack JavaScript application.
 
 **Database**: PostgreSQL with Drizzle ORM for data persistence.
 
-**Authentication**: Handled by Passport.js with session management.
+**Authentication**: Session-based authentication with bcrypt password hashing, secure session management, and role-based access control.
+
+**Security Architecture** (October 2025 - Comprehensive Security Hardening):
+- **Password Security**: bcrypt hashing with 12 salt rounds, strength validation (min 8 chars, letters + numbers required)
+- **Session Security**: httpOnly cookies, secure flag in production, sameSite protection, mandatory SESSION_SECRET in production
+- **Rate Limiting**: Tiered protection (5/15min auth, 30/5min proxy, 100/15min general API)
+- **CORS Protection**: Whitelisted origins only, no wildcard access, credentials support
+- **XSS/CSP**: Helmet.js with environment-specific Content Security Policy (strict in production, permissive in dev for Vite)
+- **Input Validation**: Zod schemas on all routes, type-safe data flow
+- **Error Handling**: Graceful degradation, no server crashes, safe error messages
+- **Authentication Guards**: Middleware protection (requireAuth, requireGuest) on sensitive routes
 
 **Technical Implementations**:
 - Client/server separation is clearly defined, with API routes prefixed `/api`.
-- Environment variables are used for API keys.
+- Environment variables are used for API keys and security secrets.
 - Robust data fetching utilities include retry logic, timeout handling, and exponential backoff.
 - NLP models (e.g., spaCy) are integrated for enhanced sentiment analysis, offering multi-model ensembles, entity recognition, and linguistic feature extraction.
 - A normalized scoring system is implemented for stock market sentiment analysis.
 - Real-time data polling intervals are optimized to reduce API calls and server load (e.g., 3-5 minute intervals for most APIs).
 - Error handling is comprehensive, with fallback mechanisms and circuit breaker patterns to prevent API spam.
+- All security implementations follow OWASP best practices and industry standards.
 
 ## External Dependencies
 
