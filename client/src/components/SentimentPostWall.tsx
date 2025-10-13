@@ -163,7 +163,7 @@ const mockEnhancedPosts: PostCardData[] = [
       topPercentage: 1,
     },
     timestamp: "1h ago",
-    content: "📊 MEGA THREAD: Why $TSLA is setting up for the BIGGEST short squeeze of 2024 🚀\n\n1️⃣ Short interest at ATH (32% of float)\n2️⃣ FSD Beta showing INCREDIBLE progress\n3️⃣ China sales recovering faster than expected\n4️⃣ Energy business about to EXPLODE\n\nThis could be EPIC! 🔥⚡",
+    content: "📊 MEGA THREAD: Why $TSLA is setting up for the BIGGEST short squeeze of 2024 🚀\n\n1️��� Short interest at ATH (32% of float)\n2️⃣ FSD Beta showing INCREDIBLE progress\n3️⃣ China sales recovering faster than expected\n4️⃣ Energy business about to EXPLODE\n\nThis could be EPIC! 🔥⚡",
     tickers: [
       { symbol: "TSLA", price: 248.50, change: 15.75, changePercent: 6.77 }
     ],
@@ -614,7 +614,12 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
     // Implement alert setting logic here
   };
 
-  const handleAddComment = (postId: string, content: string, parentCommentId?: string) => {
+  const handleAddComment = (postId: string, content: string, parentCommentId?: string, selectedSentiment?: 'Bullish'|'Neutral'|'Bearish') => {
+    const inferredSentiment: 'Bullish'|'Neutral'|'Bearish' = selectedSentiment || (
+      content.includes('🚀') || content.toLowerCase().includes('bullish') ? 'Bullish' :
+      content.includes('📉') || content.toLowerCase().includes('bearish') ? 'Bearish' : 'Neutral'
+    );
+
     const newComment: CommentData = {
       id: Date.now().toString(),
       user: {
@@ -629,8 +634,7 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
       timestamp: "now",
       likes: 0,
       isLiked: false,
-      sentiment: content.includes('🚀') || content.includes('bullish') ? 'Bullish' :
-                content.includes('📉') || content.includes('bearish') ? 'Bearish' : 'Neutral',
+      sentiment: inferredSentiment,
       tickers: (content.match(/\$([A-Z]{1,5})/g) || []).map(t => t.substring(1)),
     };
 
@@ -926,7 +930,7 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
                             <SelectItem value="Insight">🧠 Insight</SelectItem>
                             <SelectItem value="Prediction">🎯 Prediction</SelectItem>
                             <SelectItem value="Chart">📊 Chart</SelectItem>
-                            <SelectItem value="Meme">���� Meme</SelectItem>
+                            <SelectItem value="Meme">😂 Meme</SelectItem>
                             <SelectItem value="Question">❓ Question</SelectItem>
                           </SelectContent>
                         </Select>
