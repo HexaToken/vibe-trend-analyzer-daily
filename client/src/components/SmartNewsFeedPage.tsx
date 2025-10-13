@@ -96,6 +96,8 @@ const SmartNewsFeedPage: React.FC = () => {
   const [replyText, setReplyText] = useState<{[key: string]: string}>({});
   const [isCommentsOpen, setIsCommentsOpen] = useState(false);
   const [commentsArticleId, setCommentsArticleId] = useState<string | null>(null);
+  const [selectedCommentIndex, setSelectedCommentIndex] = useState(0);
+  const [newCommentText, setNewCommentText] = useState("");
 
   const mockComments: Comment[] = [
     {
@@ -428,12 +430,47 @@ const SmartNewsFeedPage: React.FC = () => {
 
   const openCommentsQuickView = (articleId: string) => {
     setCommentsArticleId(articleId);
+    setSelectedCommentIndex(0);
+    setNewCommentText("");
     setIsCommentsOpen(true);
   };
 
   const closeCommentsQuickView = () => {
     setIsCommentsOpen(false);
     setCommentsArticleId(null);
+  };
+
+  const scrollToComment = (index: number) => {
+    if (!commentsArticleId) return;
+    const el = document.getElementById(`comment-${commentsArticleId}-${index}`);
+    el?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  };
+
+  useEffect(() => {
+    if (isCommentsOpen) {
+      scrollToComment(selectedCommentIndex);
+    }
+  }, [selectedCommentIndex, isCommentsOpen]);
+
+  const handleSendNewComment = () => {
+    if (!commentsArticleId) return;
+    const content = newCommentText.trim();
+    if (!content) return;
+    const newComment: Comment = {
+      id: Date.now().toString(),
+      user: { username: 'You', avatar: '/api/placeholder/32/32' },
+      content,
+      timestamp: 'just now',
+      likes: 0,
+    };
+    setArticles(prev => prev.map(a =>
+      a.id === commentsArticleId
+        ? { ...a, topComments: [newComment, ...(a.topComments || [])], reactions: { ...a.reactions, comments: a.reactions.comments + 1 } }
+        : a
+    ));
+    setNewCommentText("");
+    setSelectedCommentIndex(0);
+    setTimeout(() => scrollToComment(0), 0);
   };
 
   return (
@@ -781,26 +818,68 @@ const SmartNewsFeedPage: React.FC = () => {
               const article = articles.find(a => a.id === commentsArticleId);
               const comments = article?.topComments || [];
               if (!article) return null;
+              const total = comments.length;
+              const current = Math.min(selectedCommentIndex, Math.max(0, total - 1));
               return (
                 <div className="space-y-3">
-                  {comments.length === 0 && (
-                    <div className="text-white/60 text-sm">No comments yet.</div>
-                  )}
-                  {comments.map((comment) => (
-                    <div key={comment.id} className="flex items-start gap-3 p-3 bg-white/5 rounded-lg border border-white/10">
-                      <Avatar className="w-6 h-6">
-                        <AvatarImage src={comment.user.avatar} />
-                        <AvatarFallback>{comment.user.username[0]}</AvatarFallback>
-                      </Avatar>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="text-white/80 text-sm font-medium">{comment.user.username}</span>
-                          <span className="text-white/40 text-xs">{comment.timestamp}</span>
-                        </div>
-                        <p className="text-white/70 text-sm">{comment.content}</p>
-                      </div>
+                  {/* Controls */}
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="text-xs text-white/60">{total} comments</div>
+                    <div className="flex items-center gap-2">
+                      <Button size="sm" variant="ghost" className="text-white/60 hover:text-white hover:bg-white/10"
+                        onClick={() => setSelectedCommentIndex(Math.max(0, current - 1))}
+                        disabled={current <= 0}
+                      >
+                        <ChevronUp className="w-4 h-4" />
+                      </Button>
+                      <Button size="sm" variant="ghost" className="text-white/60 hover:text-white hover:bg-white/10"
+                        onClick={() => setSelectedCommentIndex(Math.min(total - 1, current + 1))}
+                        disabled={current >= total - 1}
+                      >
+                        <ChevronDown className="w-4 h-4" />
+                      </Button>
                     </div>
-                  ))}
+                  </div>
+
+                  {/* Comments List */}
+                  <div className="space-y-3 max-h-[50vh] overflow-y-auto pr-1">
+                    {comments.length === 0 && (
+                      <div className="text-white/60 text-sm">No comments yet.</div>
+                    )}
+                    {comments.map((comment, idx) => (
+                      <div id={`comment-${article.id}-${idx}`} key={comment.id} className={cn(
+                        "flex items-start gap-3 p-3 rounded-lg border",
+                        "bg-white/5 border-white/10",
+                        idx === current && "ring-1 ring-blue-400/40"
+                      )}>
+                        <Avatar className="w-6 h-6">
+                          <AvatarImage src={comment.user.avatar} />
+                          <AvatarFallback>{comment.user.username[0]}</AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-white/80 text-sm font-medium">{comment.user.username}</span>
+                            <span className="text-white/40 text-xs">{comment.timestamp}</span>
+                          </div>
+                          <p className="text-white/70 text-sm">{comment.content}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Composer */}
+                  <div className="mt-3 p-3 bg-white/5 rounded-lg border border-white/10">
+                    <Textarea
+                      placeholder="Write your comment..."
+                      value={newCommentText}
+                      onChange={(e) => setNewCommentText(e.target.value)}
+                      className="bg-black/30 border-white/10 text-white placeholder-white/40"
+                    />
+                    <div className="mt-2 flex items-center justify-end gap-2">
+                      <Button size="sm" variant="ghost" className="text-white/60 hover:text-white hover:bg-white/10" onClick={() => setNewCommentText("")}>Clear</Button>
+                      <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white" onClick={handleSendNewComment}>Send</Button>
+                    </div>
+                  </div>
                 </div>
               );
             })()}
