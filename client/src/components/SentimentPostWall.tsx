@@ -926,7 +926,7 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
                             <SelectItem value="Insight">🧠 Insight</SelectItem>
                             <SelectItem value="Prediction">🎯 Prediction</SelectItem>
                             <SelectItem value="Chart">📊 Chart</SelectItem>
-                            <SelectItem value="Meme">😂 Meme</SelectItem>
+                            <SelectItem value="Meme">���� Meme</SelectItem>
                             <SelectItem value="Question">❓ Question</SelectItem>
                           </SelectContent>
                         </Select>
@@ -1229,14 +1229,16 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
 
         {/* Ticker Preview Widget */}
         {hoveredTicker && (
-          <TickerPreviewWidget
-            ticker={hoveredTicker.ticker}
-            isVisible={true}
-            position={hoveredTicker.position}
-            onAddToWatchlist={handleAddToWatchlist}
-            onViewFullPage={handleViewFullPage}
-            onClose={hideTickerPreview}
-          />
+          <div onMouseEnter={cancelHide} onMouseLeave={() => scheduleHide(150)}>
+            <TickerPreviewWidget
+              ticker={hoveredTicker.ticker}
+              isVisible={true}
+              position={hoveredTicker.position}
+              onAddToWatchlist={handleAddToWatchlist}
+              onViewFullPage={handleViewFullPage}
+              onClose={hideTickerPreview}
+            />
+          </div>
         )}
 
         {/* Ticker Analytics Drawer */}
