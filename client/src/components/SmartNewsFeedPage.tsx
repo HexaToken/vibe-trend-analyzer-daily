@@ -94,6 +94,8 @@ const SmartNewsFeedPage: React.FC = () => {
   const [userInteractions, setUserInteractions] = useState<{[key: string]: {liked: boolean, saved: boolean, following: boolean}}>({});
   const [replyOpen, setReplyOpen] = useState<{[key: string]: boolean}>({});
   const [replyText, setReplyText] = useState<{[key: string]: string}>({});
+  const [isCommentsOpen, setIsCommentsOpen] = useState(false);
+  const [commentsArticleId, setCommentsArticleId] = useState<string | null>(null);
 
   const mockComments: Comment[] = [
     {
