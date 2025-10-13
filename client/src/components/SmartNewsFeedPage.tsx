@@ -727,6 +727,16 @@ const SmartNewsFeedPage: React.FC = () => {
                       <Button
                         variant="ghost"
                         size="sm"
+                        onClick={() => openCommentsQuickView(article.id)}
+                        className="text-white/60 hover:text-white hover:bg-white/10 text-xs"
+                      >
+                        <Eye className="w-3 h-3 mr-1" />
+                        Quick View
+                      </Button>
+
+                      <Button
+                        variant="ghost"
+                        size="sm"
                         onClick={() => handleAIAnalysis(article)}
                         className="text-white/60 hover:text-blue-400 hover:bg-blue-500/10 text-xs"
                       >
