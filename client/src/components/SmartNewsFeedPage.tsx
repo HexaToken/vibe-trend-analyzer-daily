@@ -426,6 +426,16 @@ const SmartNewsFeedPage: React.FC = () => {
     setSelectedArticle(null);
   };
 
+  const openCommentsQuickView = (articleId: string) => {
+    setCommentsArticleId(articleId);
+    setIsCommentsOpen(true);
+  };
+
+  const closeCommentsQuickView = () => {
+    setIsCommentsOpen(false);
+    setCommentsArticleId(null);
+  };
+
   return (
     <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)' }}>
       {/* Header */}
