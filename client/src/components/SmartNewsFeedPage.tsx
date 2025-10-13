@@ -679,11 +679,8 @@ const SmartNewsFeedPage: React.FC = () => {
                       </button>
                       
                       <button
-                        className={cn(
-                          "flex items-center gap-2 text-sm transition-colors",
-                          replyOpen[article.id] ? "text-blue-400" : "text-white/60 hover:text-blue-400"
-                        )}
-                        onClick={() => toggleReply(article.id)}
+                        className="flex items-center gap-2 text-white/60 hover:text-blue-400 text-sm transition-colors"
+                        onClick={() => openCommentsQuickView(article.id)}
                       >
                         <MessageSquare className="w-4 h-4" />
                         <span>{article.reactions.comments}</span>
@@ -724,16 +721,6 @@ const SmartNewsFeedPage: React.FC = () => {
                           : `Follow News on ${article.tickers?.[0] ? `$${article.tickers[0]}` : 'Topic'}`}
                       </Button>
                       
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => openCommentsQuickView(article.id)}
-                        className="text-white/60 hover:text-white hover:bg-white/10 text-xs"
-                      >
-                        <Eye className="w-3 h-3 mr-1" />
-                        Quick View
-                      </Button>
-
                       <Button
                         variant="ghost"
                         size="sm"
