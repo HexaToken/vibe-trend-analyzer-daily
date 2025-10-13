@@ -163,7 +163,7 @@ const mockEnhancedPosts: PostCardData[] = [
       topPercentage: 1,
     },
     timestamp: "1h ago",
-    content: "📊 MEGA THREAD: Why $TSLA is setting up for the BIGGEST short squeeze of 2024 🚀\n\n1️⃣ Short interest at ATH (32% of float)\n2️⃣ FSD Beta showing INCREDIBLE progress\n3️⃣ China sales recovering faster than expected\n4️⃣ Energy business about to EXPLODE\n\nThis could be EPIC! 🔥⚡",
+    content: "📊 MEGA THREAD: Why $TSLA is setting up for the BIGGEST short squeeze of 2024 🚀\n\n1️��� Short interest at ATH (32% of float)\n2️⃣ FSD Beta showing INCREDIBLE progress\n3️⃣ China sales recovering faster than expected\n4️⃣ Energy business about to EXPLODE\n\nThis could be EPIC! 🔥⚡",
     tickers: [
       { symbol: "TSLA", price: 248.50, change: 15.75, changePercent: 6.77 }
     ],
@@ -346,7 +346,7 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
   const [postComments, setPostComments] = useState<Record<string, CommentData[]>>({});
   const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
   const [isAnalyticsDrawerOpen, setIsAnalyticsDrawerOpen] = useState(false);
-  const { hoveredTicker, showTickerPreview, hideTickerPreview } = useTickerHover();
+  const { hoveredTicker, showTickerPreview, hideTickerPreview, scheduleHide, cancelHide } = useTickerHover();
 
   // Auto-refresh feed
   useEffect(() => {
@@ -614,7 +614,12 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
     // Implement alert setting logic here
   };
 
-  const handleAddComment = (postId: string, content: string, parentCommentId?: string) => {
+  const handleAddComment = (postId: string, content: string, parentCommentId?: string, selectedSentiment?: 'Bullish'|'Neutral'|'Bearish') => {
+    const inferredSentiment: 'Bullish'|'Neutral'|'Bearish' = selectedSentiment || (
+      content.includes('🚀') || content.toLowerCase().includes('bullish') ? 'Bullish' :
+      content.includes('📉') || content.toLowerCase().includes('bearish') ? 'Bearish' : 'Neutral'
+    );
+
     const newComment: CommentData = {
       id: Date.now().toString(),
       user: {
@@ -629,8 +634,7 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
       timestamp: "now",
       likes: 0,
       isLiked: false,
-      sentiment: content.includes('🚀') || content.includes('bullish') ? 'Bullish' :
-                content.includes('📉') || content.includes('bearish') ? 'Bearish' : 'Neutral',
+      sentiment: inferredSentiment,
       tickers: (content.match(/\$([A-Z]{1,5})/g) || []).map(t => t.substring(1)),
     };
 
@@ -1017,7 +1021,7 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
                     onUserClick={handleUserClick}
                     onTickerClick={(symbol, event) => handleTickerClick(symbol, event)}
                     onTickerHover={showTickerPreview}
-                    onTickerLeave={hideTickerPreview}
+                    onTickerLeave={scheduleHide}
                     showEngagementCounts={true}
                   />
 
@@ -1229,14 +1233,16 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
 
         {/* Ticker Preview Widget */}
         {hoveredTicker && (
-          <TickerPreviewWidget
-            ticker={hoveredTicker.ticker}
-            isVisible={true}
-            position={hoveredTicker.position}
-            onAddToWatchlist={handleAddToWatchlist}
-            onViewFullPage={handleViewFullPage}
-            onClose={hideTickerPreview}
-          />
+          <div onMouseEnter={cancelHide} onMouseLeave={() => scheduleHide(150)}>
+            <TickerPreviewWidget
+              ticker={hoveredTicker.ticker}
+              isVisible={true}
+              position={hoveredTicker.position}
+              onAddToWatchlist={handleAddToWatchlist}
+              onViewFullPage={handleViewFullPage}
+              onClose={hideTickerPreview}
+            />
+          </div>
         )}
 
         {/* Ticker Analytics Drawer */}

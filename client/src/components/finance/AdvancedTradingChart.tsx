@@ -208,7 +208,7 @@ export const AdvancedTradingChart = () => {
       </div>
 
       {/* Global Toolbar */}
-      <div className="sticky top-0 z-40 bg-[#0F1222]/95 backdrop-blur-xl border-b border-gray-800/50 px-4 md:px-6 py-3 trading-toolbar">
+      <div className="relative z-40 bg-[#0F1222]/95 backdrop-blur-xl border-b border-gray-800/50 px-4 md:px-6 py-3 trading-toolbar">
         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 md:gap-4">
           {/* Left Section - Search & Controls */}
           <div className="flex items-center gap-2 md:gap-4 flex-1 trading-toolbar-row">

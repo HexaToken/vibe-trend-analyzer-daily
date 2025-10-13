@@ -142,14 +142,6 @@ export const SentimentAnalyticsDashboard: React.FC<SentimentAnalyticsDashboardPr
                 <Share className="w-4 h-4 mr-2" />
                 Share
               </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={onClose}
-                className="hover:bg-purple-500/10"
-              >
-                <X className="w-5 h-5" />
-              </Button>
             </div>
           </div>
         </DialogHeader>

@@ -35,7 +35,7 @@ export interface CommentData {
 interface CommentThreadViewProps {
   postId: string;
   comments: CommentData[];
-  onAddComment: (postId: string, content: string, parentCommentId?: string) => void;
+  onAddComment: (postId: string, content: string, parentCommentId?: string, selectedSentiment?: 'Bullish' | 'Neutral' | 'Bearish') => void;
   onLikeComment: (commentId: string) => void;
   onReplyToComment: (commentId: string, content: string) => void;
   className?: string;
@@ -301,12 +301,14 @@ export const CommentThreadView: React.FC<CommentThreadViewProps> = ({
   className
 }) => {
   const [newComment, setNewComment] = useState('');
+  const [composeSentiment, setComposeSentiment] = useState<'Bullish' | 'Neutral' | 'Bearish'>('Neutral');
   const [sortBy, setSortBy] = useState<'Top' | 'Newest' | 'Most Bullish'>('Top');
 
   const handleSubmitComment = () => {
     if (newComment.trim()) {
-      onAddComment(postId, newComment);
+      onAddComment(postId, newComment, undefined, composeSentiment);
       setNewComment('');
+      setComposeSentiment('Neutral');
     }
   };
 
@@ -364,26 +366,49 @@ export const CommentThreadView: React.FC<CommentThreadViewProps> = ({
               className="min-h-[100px] bg-slate-700/50 border-slate-600/50 text-slate-200 placeholder:text-slate-400 resize-none"
             />
             <div className="flex items-center justify-between">
-              <span className="text-xs text-slate-400">{newComment.length}/500</span>
-              <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setNewComment('')}
-                  className="h-8 px-3 text-xs border-slate-600 text-slate-400 hover:bg-slate-700"
-                  disabled={!newComment.trim()}
-                >
-                  Clear
-                </Button>
-                <Button
-                  size="sm"
-                  onClick={handleSubmitComment}
-                  disabled={!newComment.trim()}
-                  className="h-8 px-4 text-xs bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white"
-                >
-                  <MessageSquare className="w-3 h-3 mr-1" />
-                  Comment
-                </Button>
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-slate-400">Sentiment:</span>
+                {(['Bearish','Neutral','Bullish'] as const).map(opt => (
+                  <Button
+                    key={opt}
+                    size="sm"
+                    variant={composeSentiment === opt ? 'default' : 'ghost'}
+                    onClick={() => setComposeSentiment(opt)}
+                    className={cn(
+                      'h-7 px-3 text-xs',
+                      composeSentiment === opt
+                        ? opt === 'Bullish' ? 'bg-green-600 text-white hover:bg-green-700'
+                        : opt === 'Bearish' ? 'bg-red-600 text-white hover:bg-red-700'
+                        : 'bg-yellow-600 text-white hover:bg-yellow-700'
+                        : 'text-slate-400 hover:text-slate-300 hover:bg-slate-700/50'
+                    )}
+                  >
+                    {opt}
+                  </Button>
+                ))}
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="text-xs text-slate-400">{newComment.length}/500</span>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setNewComment('')}
+                    className="h-8 px-3 text-xs border-slate-600 text-slate-400 hover:bg-slate-700"
+                    disabled={!newComment.trim()}
+                  >
+                    Clear
+                  </Button>
+                  <Button
+                    size="sm"
+                    onClick={handleSubmitComment}
+                    disabled={!newComment.trim()}
+                    className="h-8 px-4 text-xs bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white"
+                  >
+                    <MessageSquare className="w-3 h-3 mr-1" />
+                    Comment
+                  </Button>
+                </div>
               </div>
             </div>
           </div>

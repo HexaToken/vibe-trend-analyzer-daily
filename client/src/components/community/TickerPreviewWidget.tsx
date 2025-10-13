@@ -169,9 +169,8 @@ export const TickerPreviewWidget: React.FC<TickerPreviewWidgetProps> = ({
   return (
     <>
       {/* Backdrop */}
-      <div 
-        className="fixed inset-0 z-[100] bg-black/20 backdrop-blur-[1px]"
-        onClick={onClose}
+      <div
+        className="fixed inset-0 z-[100] bg-black/20 backdrop-blur-[1px] pointer-events-none"
       />
       
       {/* Widget */}
@@ -313,9 +312,18 @@ export const useTickerHover = () => {
     ticker: string;
     position: { x: number; y: number };
   } | null>(null);
+  const hideTimeoutRef = useRef<number | null>(null);
+
+  const clearHideTimeout = () => {
+    if (hideTimeoutRef.current) {
+      window.clearTimeout(hideTimeoutRef.current);
+      hideTimeoutRef.current = null;
+    }
+  };
 
   const showTickerPreview = (ticker: string, event: React.MouseEvent) => {
     const rect = (event.target as Element).getBoundingClientRect();
+    clearHideTimeout();
     setHoveredTicker({
       ticker,
       position: {
@@ -326,13 +334,23 @@ export const useTickerHover = () => {
   };
 
   const hideTickerPreview = () => {
+    clearHideTimeout();
     setHoveredTicker(null);
+  };
+
+  const scheduleHide = (delay = 150) => {
+    clearHideTimeout();
+    hideTimeoutRef.current = window.setTimeout(() => {
+      setHoveredTicker(null);
+    }, delay);
   };
 
   return {
     hoveredTicker,
     showTickerPreview,
-    hideTickerPreview
+    hideTickerPreview,
+    scheduleHide,
+    cancelHide: clearHideTimeout,
   };
 };
 

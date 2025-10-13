@@ -35,6 +35,7 @@ import {
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import AIAnalysisModal from './AIAnalysisModal';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 
 interface NewsArticle {
   id: string;
@@ -91,6 +92,12 @@ const SmartNewsFeedPage: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [expandedArticles, setExpandedArticles] = useState<Set<string>>(new Set());
   const [userInteractions, setUserInteractions] = useState<{[key: string]: {liked: boolean, saved: boolean, following: boolean}}>({});
+  const [replyOpen, setReplyOpen] = useState<{[key: string]: boolean}>({});
+  const [replyText, setReplyText] = useState<{[key: string]: string}>({});
+  const [isCommentsOpen, setIsCommentsOpen] = useState(false);
+  const [commentsArticleId, setCommentsArticleId] = useState<string | null>(null);
+  const [selectedCommentIndex, setSelectedCommentIndex] = useState(0);
+  const [newCommentText, setNewCommentText] = useState("");
 
   const mockComments: Comment[] = [
     {
@@ -280,10 +287,44 @@ const SmartNewsFeedPage: React.FC = () => {
       ...prev,
       [articleId]: {
         ...prev[articleId],
-        [type === 'follow' ? 'following' : type === 'like' ? 'liked' : 'saved']: 
+        [type === 'follow' ? 'following' : type === 'like' ? 'liked' : 'saved']:
           !prev[articleId]?.[type === 'follow' ? 'following' : type === 'like' ? 'liked' : 'saved']
       }
     }));
+  };
+
+  const toggleReply = (articleId: string) => {
+    setReplyOpen(prev => ({ ...prev, [articleId]: !prev[articleId] }));
+  };
+
+  const handleReplyChange = (articleId: string, value: string) => {
+    setReplyText(prev => ({ ...prev, [articleId]: value }));
+  };
+
+  const submitReply = (articleId: string) => {
+    const content = (replyText[articleId] || '').trim();
+    if (!content) return;
+
+    const newComment: Comment = {
+      id: Date.now().toString(),
+      user: { username: 'You', avatar: '/api/placeholder/32/32' },
+      content,
+      timestamp: 'just now',
+      likes: 0,
+    };
+
+    setArticles(prev => prev.map(a =>
+      a.id === articleId
+        ? {
+            ...a,
+            reactions: { ...a.reactions, comments: a.reactions.comments + 1 },
+            topComments: [newComment, ...(a.topComments || [])]
+          }
+        : a
+    ));
+
+    setReplyText(prev => ({ ...prev, [articleId]: '' }));
+    setReplyOpen(prev => ({ ...prev, [articleId]: false }));
   };
 
   const renderTickerTags = (tickers: string[] = []) => {
@@ -387,10 +428,55 @@ const SmartNewsFeedPage: React.FC = () => {
     setSelectedArticle(null);
   };
 
+  const openCommentsQuickView = (articleId: string) => {
+    setCommentsArticleId(articleId);
+    setSelectedCommentIndex(0);
+    setNewCommentText("");
+    setIsCommentsOpen(true);
+  };
+
+  const closeCommentsQuickView = () => {
+    setIsCommentsOpen(false);
+    setCommentsArticleId(null);
+  };
+
+  const scrollToComment = (index: number) => {
+    if (!commentsArticleId) return;
+    const el = document.getElementById(`comment-${commentsArticleId}-${index}`);
+    el?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  };
+
+  useEffect(() => {
+    if (isCommentsOpen) {
+      scrollToComment(selectedCommentIndex);
+    }
+  }, [selectedCommentIndex, isCommentsOpen]);
+
+  const handleSendNewComment = () => {
+    if (!commentsArticleId) return;
+    const content = newCommentText.trim();
+    if (!content) return;
+    const newComment: Comment = {
+      id: Date.now().toString(),
+      user: { username: 'You', avatar: '/api/placeholder/32/32' },
+      content,
+      timestamp: 'just now',
+      likes: 0,
+    };
+    setArticles(prev => prev.map(a =>
+      a.id === commentsArticleId
+        ? { ...a, topComments: [newComment, ...(a.topComments || [])], reactions: { ...a.reactions, comments: a.reactions.comments + 1 } }
+        : a
+    ));
+    setNewCommentText("");
+    setSelectedCommentIndex(0);
+    setTimeout(() => scrollToComment(0), 0);
+  };
+
   return (
     <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)' }}>
       {/* Header */}
-      <div className="bg-black/20 backdrop-blur-sm border-b border-white/10 sticky top-0 z-50">
+      <div className="bg-black/20 backdrop-blur-sm border-b border-white/10 relative z-40">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -629,7 +715,10 @@ const SmartNewsFeedPage: React.FC = () => {
                         <span>{article.reactions.likes}</span>
                       </button>
                       
-                      <button className="flex items-center gap-2 text-white/60 hover:text-blue-400 text-sm transition-colors">
+                      <button
+                        className="flex items-center gap-2 text-white/60 hover:text-blue-400 text-sm transition-colors"
+                        onClick={() => openCommentsQuickView(article.id)}
+                      >
                         <MessageSquare className="w-4 h-4" />
                         <span>{article.reactions.comments}</span>
                       </button>
@@ -655,10 +744,18 @@ const SmartNewsFeedPage: React.FC = () => {
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="text-white/60 hover:text-white hover:bg-white/10 text-xs"
+                        onClick={() => handleInteraction(article.id, 'follow')}
+                        className={cn(
+                          "text-xs",
+                          userState.following
+                            ? "text-green-400 hover:text-green-300 hover:bg-green-500/10"
+                            : "text-white/60 hover:text-white hover:bg-white/10"
+                        )}
                       >
                         <Bell className="w-3 h-3 mr-1" />
-                        Follow News on {article.tickers?.[0] ? `$${article.tickers[0]}` : 'Topic'}
+                        {userState.following
+                          ? `Following ${article.tickers?.[0] ? `$${article.tickers[0]}` : 'Topic'}`
+                          : `Follow News on ${article.tickers?.[0] ? `$${article.tickers[0]}` : 'Topic'}`}
                       </Button>
                       
                       <Button
@@ -670,17 +767,23 @@ const SmartNewsFeedPage: React.FC = () => {
                         <Brain className="w-3 h-3 mr-1" />
                         AI Analysis
                       </Button>
-
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="text-white/60 hover:text-white hover:bg-white/10 text-xs"
-                      >
-                        <Volume2 className="w-3 h-3 mr-1" />
-                        Listen
-                      </Button>
                     </div>
                   </div>
+
+                  {replyOpen[article.id] && (
+                    <div className="mt-3 p-3 bg-white/5 rounded-lg border border-white/10">
+                      <Textarea
+                        placeholder="Write your reply..."
+                        value={replyText[article.id] || ""}
+                        onChange={(e) => handleReplyChange(article.id, e.target.value)}
+                        className="bg-black/30 border-white/10 text-white placeholder-white/40"
+                      />
+                      <div className="mt-2 flex items-center gap-2 justify-end">
+                        <Button size="sm" variant="ghost" className="text-white/60 hover:text-white hover:bg-white/10" onClick={() => toggleReply(article.id)}>Cancel</Button>
+                        <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white" onClick={() => submitReply(article.id)}>Reply</Button>
+                      </div>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             );
@@ -702,6 +805,86 @@ const SmartNewsFeedPage: React.FC = () => {
           onClose={handleCloseModal}
           article={selectedArticle}
         />
+      )}
+
+      {/* Quick View Comments Modal */}
+      {commentsArticleId && (
+        <Dialog open={isCommentsOpen} onOpenChange={setIsCommentsOpen}>
+          <DialogContent className="max-w-xl max-h-[80vh] overflow-y-auto bg-black/95 border-white/10 text-white">
+            <DialogHeader className="pb-2">
+              <DialogTitle className="text-lg">Comments</DialogTitle>
+            </DialogHeader>
+            {(() => {
+              const article = articles.find(a => a.id === commentsArticleId);
+              const comments = article?.topComments || [];
+              if (!article) return null;
+              const total = comments.length;
+              const current = Math.min(selectedCommentIndex, Math.max(0, total - 1));
+              return (
+                <div className="space-y-3">
+                  {/* Controls */}
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="text-xs text-white/60">{total} comments</div>
+                    <div className="flex items-center gap-2">
+                      <Button size="sm" variant="ghost" className="text-white/60 hover:text-white hover:bg-white/10"
+                        onClick={() => setSelectedCommentIndex(Math.max(0, current - 1))}
+                        disabled={current <= 0}
+                      >
+                        <ChevronUp className="w-4 h-4" />
+                      </Button>
+                      <Button size="sm" variant="ghost" className="text-white/60 hover:text-white hover:bg-white/10"
+                        onClick={() => setSelectedCommentIndex(Math.min(total - 1, current + 1))}
+                        disabled={current >= total - 1}
+                      >
+                        <ChevronDown className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </div>
+
+                  {/* Comments List */}
+                  <div className="space-y-3 max-h-[50vh] overflow-y-auto pr-1">
+                    {comments.length === 0 && (
+                      <div className="text-white/60 text-sm">No comments yet.</div>
+                    )}
+                    {comments.map((comment, idx) => (
+                      <div id={`comment-${article.id}-${idx}`} key={comment.id} className={cn(
+                        "flex items-start gap-3 p-3 rounded-lg border",
+                        "bg-white/5 border-white/10",
+                        idx === current && "ring-1 ring-blue-400/40"
+                      )}>
+                        <Avatar className="w-6 h-6">
+                          <AvatarImage src={comment.user.avatar} />
+                          <AvatarFallback>{comment.user.username[0]}</AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-white/80 text-sm font-medium">{comment.user.username}</span>
+                            <span className="text-white/40 text-xs">{comment.timestamp}</span>
+                          </div>
+                          <p className="text-white/70 text-sm">{comment.content}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Composer */}
+                  <div className="mt-3 p-3 bg-white/5 rounded-lg border border-white/10">
+                    <Textarea
+                      placeholder="Write your comment..."
+                      value={newCommentText}
+                      onChange={(e) => setNewCommentText(e.target.value)}
+                      className="bg-black/30 border-white/10 text-white placeholder-white/40"
+                    />
+                    <div className="mt-2 flex items-center justify-end gap-2">
+                      <Button size="sm" variant="ghost" className="text-white/60 hover:text-white hover:bg-white/10" onClick={() => setNewCommentText("")}>Clear</Button>
+                      <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white" onClick={handleSendNewComment}>Send</Button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })()}
+          </DialogContent>
+        </Dialog>
       )}
     </div>
   );

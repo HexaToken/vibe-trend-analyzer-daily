@@ -91,14 +91,7 @@ export const AIMoodBreakdownPanel: React.FC<AIMoodBreakdownPanelProps> = ({
                 </p>
               </div>
             </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={onClose}
-              className="hover:bg-purple-500/10"
-            >
-              <X className="w-5 h-5" />
-            </Button>
+            {/* Removed redundant close button; DialogContent already renders a close X at top-right */}
           </div>
         </DialogHeader>
 
@@ -114,7 +107,7 @@ export const AIMoodBreakdownPanel: React.FC<AIMoodBreakdownPanelProps> = ({
             <CardContent>
               <div className="text-lg text-gray-200 leading-relaxed mb-4">
                 "Today's market mood is <strong className="text-purple-400">
-                {getSentimentLabel(moodScore.overall)} ({moodScore.overall})
+                {getSentimentLabel(moodScore.overall)} ({moodScore.overall.toFixed(2)}%)
                 </strong>. Optimism is driven primarily by strong earnings from mega-cap tech stocks and favorable CPI news."
               </div>
               <Badge className={cn(
