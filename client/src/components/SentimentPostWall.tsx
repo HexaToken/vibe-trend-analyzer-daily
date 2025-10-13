@@ -346,7 +346,7 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
   const [postComments, setPostComments] = useState<Record<string, CommentData[]>>({});
   const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
   const [isAnalyticsDrawerOpen, setIsAnalyticsDrawerOpen] = useState(false);
-  const { hoveredTicker, showTickerPreview, hideTickerPreview } = useTickerHover();
+  const { hoveredTicker, showTickerPreview, hideTickerPreview, scheduleHide, cancelHide } = useTickerHover();
 
   // Auto-refresh feed
   useEffect(() => {
