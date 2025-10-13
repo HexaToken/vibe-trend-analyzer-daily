@@ -390,7 +390,7 @@ const SmartNewsFeedPage: React.FC = () => {
   return (
     <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)' }}>
       {/* Header */}
-      <div className="bg-black/20 backdrop-blur-sm border-b border-white/10 sticky top-16 z-40">
+      <div className="bg-black/20 backdrop-blur-sm border-b border-white/10 relative z-40">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
