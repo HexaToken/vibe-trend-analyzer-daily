@@ -782,6 +782,44 @@ const SmartNewsFeedPage: React.FC = () => {
           article={selectedArticle}
         />
       )}
+
+      {/* Quick View Comments Modal */}
+      {commentsArticleId && (
+        <Dialog open={isCommentsOpen} onOpenChange={setIsCommentsOpen}>
+          <DialogContent className="max-w-xl max-h-[80vh] overflow-y-auto bg-black/95 border-white/10 text-white">
+            <DialogHeader className="pb-2">
+              <DialogTitle className="text-lg">Comments</DialogTitle>
+            </DialogHeader>
+            {(() => {
+              const article = articles.find(a => a.id === commentsArticleId);
+              const comments = article?.topComments || [];
+              if (!article) return null;
+              return (
+                <div className="space-y-3">
+                  {comments.length === 0 && (
+                    <div className="text-white/60 text-sm">No comments yet.</div>
+                  )}
+                  {comments.map((comment) => (
+                    <div key={comment.id} className="flex items-start gap-3 p-3 bg-white/5 rounded-lg border border-white/10">
+                      <Avatar className="w-6 h-6">
+                        <AvatarImage src={comment.user.avatar} />
+                        <AvatarFallback>{comment.user.username[0]}</AvatarFallback>
+                      </Avatar>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-white/80 text-sm font-medium">{comment.user.username}</span>
+                          <span className="text-white/40 text-xs">{comment.timestamp}</span>
+                        </div>
+                        <p className="text-white/70 text-sm">{comment.content}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              );
+            })()}
+          </DialogContent>
+        </Dialog>
+      )}
     </div>
   );
 };
