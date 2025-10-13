@@ -91,6 +91,8 @@ const SmartNewsFeedPage: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [expandedArticles, setExpandedArticles] = useState<Set<string>>(new Set());
   const [userInteractions, setUserInteractions] = useState<{[key: string]: {liked: boolean, saved: boolean, following: boolean}}>({});
+  const [replyOpen, setReplyOpen] = useState<{[key: string]: boolean}>({});
+  const [replyText, setReplyText] = useState<{[key: string]: string}>({});
 
   const mockComments: Comment[] = [
     {
@@ -280,10 +282,44 @@ const SmartNewsFeedPage: React.FC = () => {
       ...prev,
       [articleId]: {
         ...prev[articleId],
-        [type === 'follow' ? 'following' : type === 'like' ? 'liked' : 'saved']: 
+        [type === 'follow' ? 'following' : type === 'like' ? 'liked' : 'saved']:
           !prev[articleId]?.[type === 'follow' ? 'following' : type === 'like' ? 'liked' : 'saved']
       }
     }));
+  };
+
+  const toggleReply = (articleId: string) => {
+    setReplyOpen(prev => ({ ...prev, [articleId]: !prev[articleId] }));
+  };
+
+  const handleReplyChange = (articleId: string, value: string) => {
+    setReplyText(prev => ({ ...prev, [articleId]: value }));
+  };
+
+  const submitReply = (articleId: string) => {
+    const content = (replyText[articleId] || '').trim();
+    if (!content) return;
+
+    const newComment: Comment = {
+      id: Date.now().toString(),
+      user: { username: 'You', avatar: '/api/placeholder/32/32' },
+      content,
+      timestamp: 'just now',
+      likes: 0,
+    };
+
+    setArticles(prev => prev.map(a =>
+      a.id === articleId
+        ? {
+            ...a,
+            reactions: { ...a.reactions, comments: a.reactions.comments + 1 },
+            topComments: [newComment, ...(a.topComments || [])]
+          }
+        : a
+    ));
+
+    setReplyText(prev => ({ ...prev, [articleId]: '' }));
+    setReplyOpen(prev => ({ ...prev, [articleId]: false }));
   };
 
   const renderTickerTags = (tickers: string[] = []) => {
@@ -629,7 +665,13 @@ const SmartNewsFeedPage: React.FC = () => {
                         <span>{article.reactions.likes}</span>
                       </button>
                       
-                      <button className="flex items-center gap-2 text-white/60 hover:text-blue-400 text-sm transition-colors">
+                      <button
+                        className={cn(
+                          "flex items-center gap-2 text-sm transition-colors",
+                          replyOpen[article.id] ? "text-blue-400" : "text-white/60 hover:text-blue-400"
+                        )}
+                        onClick={() => toggleReply(article.id)}
+                      >
                         <MessageSquare className="w-4 h-4" />
                         <span>{article.reactions.comments}</span>
                       </button>
@@ -655,10 +697,18 @@ const SmartNewsFeedPage: React.FC = () => {
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="text-white/60 hover:text-white hover:bg-white/10 text-xs"
+                        onClick={() => handleInteraction(article.id, 'follow')}
+                        className={cn(
+                          "text-xs",
+                          userState.following
+                            ? "text-green-400 hover:text-green-300 hover:bg-green-500/10"
+                            : "text-white/60 hover:text-white hover:bg-white/10"
+                        )}
                       >
                         <Bell className="w-3 h-3 mr-1" />
-                        Follow News on {article.tickers?.[0] ? `$${article.tickers[0]}` : 'Topic'}
+                        {userState.following
+                          ? `Following ${article.tickers?.[0] ? `$${article.tickers[0]}` : 'Topic'}`
+                          : `Follow News on ${article.tickers?.[0] ? `$${article.tickers[0]}` : 'Topic'}`}
                       </Button>
                       
                       <Button
@@ -670,17 +720,23 @@ const SmartNewsFeedPage: React.FC = () => {
                         <Brain className="w-3 h-3 mr-1" />
                         AI Analysis
                       </Button>
-
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="text-white/60 hover:text-white hover:bg-white/10 text-xs"
-                      >
-                        <Volume2 className="w-3 h-3 mr-1" />
-                        Listen
-                      </Button>
                     </div>
                   </div>
+
+                  {replyOpen[article.id] && (
+                    <div className="mt-3 p-3 bg-white/5 rounded-lg border border-white/10">
+                      <Textarea
+                        placeholder="Write your reply..."
+                        value={replyText[article.id] || ""}
+                        onChange={(e) => handleReplyChange(article.id, e.target.value)}
+                        className="bg-black/30 border-white/10 text-white placeholder-white/40"
+                      />
+                      <div className="mt-2 flex items-center gap-2 justify-end">
+                        <Button size="sm" variant="ghost" className="text-white/60 hover:text-white hover:bg-white/10" onClick={() => toggleReply(article.id)}>Cancel</Button>
+                        <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white" onClick={() => submitReply(article.id)}>Reply</Button>
+                      </div>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             );
