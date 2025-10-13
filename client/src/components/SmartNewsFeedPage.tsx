@@ -35,6 +35,7 @@ import {
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import AIAnalysisModal from './AIAnalysisModal';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 
 interface NewsArticle {
   id: string;
