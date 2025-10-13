@@ -59,7 +59,7 @@ export const AdvancedCharts: React.FC<AdvancedChartsProps> = ({ className }) => 
     )}>
       {/* Header */}
       <div className={cn(
-        "sticky top-0 z-40 border-b backdrop-blur-xl",
+        "relative z-40 border-b backdrop-blur-xl",
         themeMode === 'light'
           ? 'bg-white/80 border-gray-200'
           : 'bg-black/40 border-purple-500/20'

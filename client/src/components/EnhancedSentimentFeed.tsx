@@ -402,7 +402,7 @@ export const EnhancedSentimentFeed: React.FC<EnhancedSentimentFeedProps> = ({ on
         </div>
 
         {/* Sticky Controls */}
-        <div className="sticky top-0 z-50 mb-6">
+        <div className="relative z-50 mb-6">
           <Card className="bg-slate-800/95 backdrop-blur-xl border-slate-700/50">
             <CardContent className="p-4">
               {/* Main Navigation */}
