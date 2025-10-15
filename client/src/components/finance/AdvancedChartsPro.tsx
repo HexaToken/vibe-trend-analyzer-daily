@@ -33,7 +33,9 @@ interface ChartState {
   compare: string[];
 }
 
-export const AdvancedChartsPro = () => {
+interface AdvancedChartsProProps { onNavigate?: (section: string) => void }
+
+export const AdvancedChartsPro: React.FC<AdvancedChartsProProps> = ({ onNavigate }) => {
   const [activeTab, setActiveTab] = useState('chart');
   const [searchSymbol, setSearchSymbol] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -134,6 +136,10 @@ export const AdvancedChartsPro = () => {
       <ResponsiveModernHeader
         activeSection={activeSection}
         setActiveSection={setActiveSection}
+        onNavigate={(section) => {
+          setActiveSection(section);
+          onNavigate?.(section);
+        }}
         currentMoodScore={72}
       />
 
