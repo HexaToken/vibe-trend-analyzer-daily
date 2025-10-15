@@ -2138,6 +2138,19 @@ All colors MUST be HSL.
   }
 
   /* Keep only the main hero container and rotating ring backgrounds */
+
+  /* Ensure toast/sonner containers never block clicks globally */
+  .toaster,
+  [data-sonner-toaster],
+  [role="status"].toaster,
+  [role="status"][data-sonner-toaster] {
+    pointer-events: none !important;
+  }
+  .toaster .toast,
+  [data-sonner-toast],
+  [data-sonner-toaster] [data-sonner-toast] {
+    pointer-events: auto !important;
+  }
   :root:not(.dark) .hero-sentiment-section .absolute.inset-0[class*="bg-gradient-to-br"] {
     background: radial-gradient(ellipse at center, #1B0036 0%, #3B0A58 100%) !important;
   }
