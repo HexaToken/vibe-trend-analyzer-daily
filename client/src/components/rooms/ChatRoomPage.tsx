@@ -248,7 +248,7 @@ export const ChatRoomPage: React.FC<ChatRoomPageProps> = ({
             {currentFeed.map((message) => (
               <div key={message.id} className="bg-[#10162A] rounded-xl p-3">
                 <div className="text-[#8EA0B6] text-xs mb-1">
-                  {message.user} �� {message.time}
+                  {message.user} • {message.time}
                 </div>
                 <div className="text-[#E7ECF4] text-sm mb-2">
                   {message.text}
