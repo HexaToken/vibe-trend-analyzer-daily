@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Search, TrendingUp, BarChart3, Eye, Star, Activity, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { IconText } from "@/lib/iconUtils";
 import { useMoodTheme } from "@/contexts/MoodThemeContext";
 
 interface TrendingHubProps {
@@ -122,7 +123,7 @@ const TrendingHub: React.FC<TrendingHubProps> = ({ className }) => {
     },
     {
       type: 'Social Leader',
-      icon: '����',
+      icon: 'Ð',
       title: 'Dogecoin',
       subtitle: '5.6M mentions',
       description: 'Viral Trend',
@@ -784,7 +785,7 @@ const TrendingHub: React.FC<TrendingHubProps> = ({ className }) => {
                   {card.type}
                 </div>
                 
-                <div className="text-4xl mb-3">{card.icon}</div>
+                <div className="mb-3"><IconText value={card.icon} className="w-8 h-8" textClassName="text-4xl" /></div>
                 
                 <h3 className={cn(
                   "text-2xl font-bold mb-1",

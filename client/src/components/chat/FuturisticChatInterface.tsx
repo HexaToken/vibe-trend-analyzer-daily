@@ -136,7 +136,7 @@ export const FuturisticChatInterface = ({
       sentiment: "bearish",
       reactions: [
         { emoji: "📉", count: 6, userReacted: false },
-        { emoji: "⚠���", count: 4, userReacted: true },
+        { emoji: "⚠️", count: 4, userReacted: true },
       ],
       badges: ["Verified", "Risk Analyst"],
       tickers: ["SPY"],

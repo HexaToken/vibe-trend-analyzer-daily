@@ -100,7 +100,7 @@ const mockRooms: Room[] = [
   {
     id: '2',
     name: 'Crypto Central',
-    icon: '���',
+    icon: '₿',
     category: 'crypto',
     onlineCount: 156,
     unreadCount: 0,
