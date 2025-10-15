@@ -123,7 +123,7 @@ const TrendingHub: React.FC<TrendingHubProps> = ({ className }) => {
     },
     {
       type: 'Social Leader',
-      icon: '����',
+      icon: 'Ð',
       title: 'Dogecoin',
       subtitle: '5.6M mentions',
       description: 'Viral Trend',
