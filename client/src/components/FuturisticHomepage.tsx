@@ -31,7 +31,8 @@ import {
   X,
   DollarSign,
   Filter,
-  BookOpen
+  BookOpen,
+  ShieldAlert
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import DynamicThemeSelector from './DynamicThemeSelector';
@@ -518,7 +519,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   <Card className="bg-black/40 border-blue-500/20 backdrop-blur-xl">
                     <CardHeader>
                       <CardTitle className="text-white flex items-center gap-2">
-                        ��� AI Risk Grade
+                        <ShieldAlert className="h-5 w-5 text-blue-400" aria-hidden="true" /> AI Risk Grade
                         <Badge className="ml-auto bg-blue-500/20 text-blue-300 border-blue-500/30">
                           ${selectedFinanceStock}
                         </Badge>

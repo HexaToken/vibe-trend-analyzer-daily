@@ -74,7 +74,7 @@ export const CommunityWithSubtabs = ({ onNavigateToProfile }: CommunityWithSubta
                       className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 data-[state=active]:text-white"
                     >
                       <TrendingUp className="h-4 w-4" />
-                      <span className="hidden sm:inline">Sentiment Feed</span>
+                      <span className="hidden sm:inline">Pro Feed</span>
                       <span className="sm:hidden">Feed</span>
                     </TabsTrigger>
 
