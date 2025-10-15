@@ -1031,7 +1031,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                               </div>
                             </div>
                             <Badge className="bg-rose-500/20 text-rose-400 border-rose-500/30">
-                              ��� {token.change}
+                              <ArrowDown className="w-3 h-3 mr-1 inline-block" /> {token.change}
                             </Badge>
                           </div>
                           <div className="space-y-2">
