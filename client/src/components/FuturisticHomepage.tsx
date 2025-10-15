@@ -654,7 +654,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                           { alert: 'Bond yields rising rapidly', icon: '📊', time: '12m ago', type: 'info' }
                         ].map((item, i) => (
                           <div key={i} className="flex items-center gap-3 p-2 rounded-lg bg-gray-800/50 hover:bg-gray-700/50 transition-colors">
-                            <span className="text-lg">{item.icon}</span>
+                            <EmojiIcon emoji={item.icon} className="w-4 h-4" />
                             <div className="flex-1">
                               <div className="text-sm text-white">{item.alert}</div>
                               <div className="text-xs text-gray-400">{item.time}</div>
@@ -1031,7 +1031,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                               </div>
                             </div>
                             <Badge className="bg-rose-500/20 text-rose-400 border-rose-500/30">
-                              ����� {token.change}
+                              ��� {token.change}
                             </Badge>
                           </div>
                           <div className="space-y-2">
@@ -1397,7 +1397,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
             <div className="text-center">
               <div className="flex items-center justify-center gap-4">
                 <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
-                  ���� Price API: Live
+                  �� Price API: Live
                 </Badge>
                 <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30">
                   ✅ Sentiment Engine: Active
