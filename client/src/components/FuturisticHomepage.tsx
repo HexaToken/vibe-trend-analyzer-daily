@@ -858,7 +858,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               {/* Mood Source Breakdown */}
               <div className="grid grid-cols-3 gap-6 max-w-4xl mx-auto">
                 {[
-                  { label: 'Price Momentum', value: 82, percentage: '40%', color: 'from-orange-500 to-red-500', icon: '��' },
+                  { label: 'Price Momentum', value: 82, percentage: '40%', color: 'from-orange-500 to-red-500', icon: '📈' },
                   { label: 'News Sentiment', value: 75, percentage: '30%', color: 'from-yellow-500 to-orange-500', icon: '📰' },
                   { label: 'Social Buzz', value: 71, percentage: '30%', color: 'from-green-500 to-yellow-500', icon: '💬' }
                 ].map((item) => (
@@ -890,7 +890,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <Tabs defaultValue="bullish" className="w-full">
                   <TabsList className="grid w-full grid-cols-4 bg-black/20 backdrop-blur-xl border border-gray-700/50">
                     <TabsTrigger value="bullish" className="data-[state=active]:bg-green-600/30 data-[state=active]:text-green-300 text-gray-400">
-                      ����� Top Bullish
+                      <span className="inline-flex items-center gap-2"><EmojiIcon emoji="🟢" className="w-4 h-4" />Top Bullish</span>
                     </TabsTrigger>
                     <TabsTrigger value="bearish" className="data-[state=active]:bg-red-600/30 data-[state=active]:text-red-300 text-gray-400">
                       🔴 Top Bearish
@@ -1089,7 +1089,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       {/* Top 3 Crown Effect */}
                       {crypto.rank <= 3 && (
                         <div className="absolute -top-1 -right-1 text-yellow-400 text-lg animate-bounce">
-                          {crypto.rank === 1 ? '👑' : crypto.rank === 2 ? '🥈' : '🥉'}
+                          {crypto.rank === 1 ? '👑' : crypto.rank === 2 ? '����' : '🥉'}
                         </div>
                       )}
 
