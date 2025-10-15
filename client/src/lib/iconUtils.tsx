@@ -130,3 +130,23 @@ export const EmojiIcon = ({
     />
   );
 };
+
+export const IconText = ({
+  value,
+  className = "w-4 h-4",
+  textClassName,
+}: {
+  value: string;
+  className?: string;
+  textClassName?: string;
+}) => {
+  const mapping = emojiIconMap[value];
+  if (mapping) {
+    const Icon = mapping.icon;
+    return <Icon className={className} style={{ color: mapping.color }} />;
+  }
+  if (value && value.indexOf('�') !== -1) {
+    return <CircleDot className={className} />;
+  }
+  return <span className={textClassName}>{value}</span>;
+};

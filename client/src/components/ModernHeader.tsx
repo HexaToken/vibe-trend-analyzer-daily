@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Brain, Search, Bell, User, ChevronDown, Menu, X } from 'lucide-react';
 import { cn } from '../lib/utils';
+import { IconText } from '../lib/iconUtils';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Badge } from './ui/badge';
@@ -78,7 +79,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
     { label: 'Crypto Dashboard', key: 'crypto', icon: '₿' },
     { label: 'Earnings Calendar', key: 'earnings', icon: '📅' },
     { label: 'Charts', key: 'charts', icon: '📊' },
-    { label: 'Trending', key: 'trending', icon: '��' },
+    { label: 'Trending', key: 'trending', icon: '🔥' },
     { label: 'Trade Journal', key: 'trade-journal', icon: '📝' },
     { label: 'Sentiment Polls', key: 'sentiment-polls', icon: '📊' },
   ];
@@ -182,7 +183,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                     onClick={() => handleNavigation(key)}
                     className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer rounded-lg"
                   >
-                    <span className="mr-3">{icon}</span>
+                    <IconText value={icon} className="w-4 h-4 mr-3" textClassName="mr-3" />
                     {label}
                   </DropdownMenuItem>
                 ))}
@@ -218,7 +219,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                     onClick={() => handleNavigation(key)}
                     className="hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer rounded-lg"
                   >
-                    <span className="mr-3">{icon}</span>
+                    <IconText value={icon} className="w-4 h-4 mr-3" textClassName="mr-3" />
                     {label}
                   </DropdownMenuItem>
                 ))}
@@ -389,7 +390,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                         : "text-gray-300 hover:text-gray-200 hover:bg-purple-500/20"
                     )}
                   >
-                    <span className="mr-3">{icon}</span>
+                    <IconText value={icon} className="w-4 h-4 mr-3" textClassName="mr-3" />
                     {label}
                   </Button>
                 ))}
@@ -420,7 +421,7 @@ export const ModernHeader: React.FC<ModernHeaderProps> = ({
                         : "text-gray-300 hover:text-gray-200 hover:bg-purple-500/20"
                     )}
                   >
-                    <span className="mr-3">{icon}</span>
+                    <IconText value={icon} className="w-4 h-4 mr-3" textClassName="mr-3" />
                     {label}
                   </Button>
                 ))}
