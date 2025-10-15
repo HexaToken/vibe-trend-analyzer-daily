@@ -913,7 +913,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         <div key={token.symbol} className="bg-gradient-to-br from-black/60 to-green-900/20 rounded-xl p-4 border border-green-500/20 hover:border-green-400/40 transition-all duration-300 group cursor-pointer">
                           <div className="flex items-center justify-between mb-3">
                             <div className="flex items-center gap-2">
-                              <span className="text-2xl">{token.icon}</span>
+                              <span className="text-2xl"><IconText value={token.icon} /></span>
                               <div>
                                 <div className="text-lg font-bold text-white">{token.symbol}</div>
                                 <div className="text-sm text-gray-400">{token.name}</div>
@@ -951,7 +951,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         <div key={token.symbol} className="bg-gradient-to-br from-black/60 to-red-900/20 rounded-xl p-4 border border-red-500/20 hover:border-red-400/40 transition-all duration-300 group cursor-pointer">
                           <div className="flex items-center justify-between mb-3">
                             <div className="flex items-center gap-2">
-                              <span className="text-2xl">{token.icon}</span>
+                              <span className="text-2xl"><IconText value={token.icon} /></span>
                               <div>
                                 <div className="text-lg font-bold text-white">{token.symbol}</div>
                                 <div className="text-sm text-gray-400">{token.name}</div>
@@ -989,7 +989,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         <div key={token.symbol} className="bg-gradient-to-br from-black/60 to-emerald-900/20 rounded-xl p-4 border border-emerald-500/20 hover:border-emerald-400/40 transition-all duration-300 group cursor-pointer">
                           <div className="flex items-center justify-between mb-3">
                             <div className="flex items-center gap-2">
-                              <span className="text-2xl">{token.icon}</span>
+                              <span className="text-2xl"><IconText value={token.icon} /></span>
                               <div>
                                 <div className="text-lg font-bold text-white">{token.symbol}</div>
                                 <div className="text-sm text-gray-400">{token.name}</div>
@@ -1024,7 +1024,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         <div key={token.symbol} className="bg-gradient-to-br from-black/60 to-rose-900/20 rounded-xl p-4 border border-rose-500/20 hover:border-rose-400/40 transition-all duration-300 group cursor-pointer">
                           <div className="flex items-center justify-between mb-3">
                             <div className="flex items-center gap-2">
-                              <span className="text-2xl">{token.icon}</span>
+                              <span className="text-2xl"><IconText value={token.icon} /></span>
                               <div>
                                 <div className="text-lg font-bold text-white">{token.symbol}</div>
                                 <div className="text-sm text-gray-400">{token.name}</div>
@@ -1089,7 +1089,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       {/* Top 3 Crown Effect */}
                       {crypto.rank <= 3 && (
                         <div className="absolute -top-1 -right-1 text-yellow-400 text-lg animate-bounce">
-                          {crypto.rank === 1 ? '👑' : crypto.rank === 2 ? '����' : '🥉'}
+                          {crypto.rank === 1 ? '👑' : crypto.rank === 2 ? '🥈' : '🥉'}
                         </div>
                       )}
 
@@ -1327,7 +1327,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   <CardContent className="p-6">
                     <div className="space-y-3 mb-4">
                       {[
-                        { symbol: 'BTC', price: '$67,234', change: '+2.34%', sentiment: '😃', trend: 'up' },
+                        { symbol: 'BTC', price: '$67,234', change: '+2.34%', sentiment: '����', trend: 'up' },
                         { symbol: 'ETH', price: '$2,657', change: '-1.23%', sentiment: '😐', trend: 'down' },
                         { symbol: 'SOL', price: '$156.78', change: '+8.45%', sentiment: '😃', trend: 'up' }
                       ].map((token, i) => (
