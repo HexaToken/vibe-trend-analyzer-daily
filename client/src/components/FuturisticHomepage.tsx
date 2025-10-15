@@ -480,7 +480,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                         </div>
                         <div className="absolute inset-0 flex items-center justify-center">
                           <div className="text-center">
-                            <div className={`text-3xl font-bold ${
+                            <div className={`text-2xl font-bold ${
                               themeMode === 'light'
                                 ? selectedFinanceStock === 'TSLA' ? 'text-[#F44336]' :
                                   selectedFinanceStock === 'NVDA' ? 'text-[#4CAF50]' :
