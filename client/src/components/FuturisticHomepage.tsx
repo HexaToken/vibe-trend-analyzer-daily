@@ -1018,7 +1018,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {[
                         { symbol: 'LTC', name: 'Litecoin', price: '$73.21', change: '-8.45%', sentiment: 42, mentions: '2.8K', icon: 'Ł' },
-                        { symbol: 'BCH', name: 'Bitcoin Cash', price: '$145.67', change: '-6.32%', sentiment: 38, mentions: '1.9K', icon: '��' },
+                        { symbol: 'BCH', name: 'Bitcoin Cash', price: '$145.67', change: '-6.32%', sentiment: 38, mentions: '1.9K', icon: 'Ƀ' },
                         { symbol: 'ETC', name: 'Ethereum Classic', price: '$26.78', change: '-5.21%', sentiment: 35, mentions: '1.2K', icon: 'Ξ' }
                       ].map((token) => (
                         <div key={token.symbol} className="bg-gradient-to-br from-black/60 to-rose-900/20 rounded-xl p-4 border border-rose-500/20 hover:border-rose-400/40 transition-all duration-300 group cursor-pointer">
@@ -2401,7 +2401,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                             { symbol: 'NFLX', name: 'Netflix', sentiment: 43, change: '-1.1%', volume: '18M', category: 'stock', icon: '📺' },
 
                             // Crypto
-                            { symbol: 'BTC', name: 'Bitcoin', sentiment: 82, change: '+3.8%', volume: '2.1B', category: 'crypto', icon: '��' },
+                            { symbol: 'BTC', name: 'Bitcoin', sentiment: 82, change: '+3.8%', volume: '2.1B', category: 'crypto', icon: '₿' },
                             { symbol: 'ETH', name: 'Ethereum', sentiment: 76, change: '+2.4%', volume: '1.8B', category: 'crypto', icon: '⟐' },
                             { symbol: 'SOL', name: 'Solana', sentiment: 88, change: '+7.2%', volume: '890M', category: 'crypto', icon: '◎' },
                             { symbol: 'ADA', name: 'Cardano', sentiment: 71, change: '+4.1%', volume: '234M', category: 'crypto', icon: '₳' },
