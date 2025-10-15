@@ -1069,15 +1069,15 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   {[
                     { rank: 1, symbol: 'BTC', name: 'Bitcoin', price: '$67,234.56', change: '+2.34%', marketCap: '$1.31T', icon: '₿', changeColor: 'text-green-400', trendData: [65, 67, 66, 68, 67], glow: 'shadow-lg shadow-orange-500/20' },
-                    { rank: 2, symbol: 'ETH', name: 'Ethereum', price: '$2,657.89', change: '-1.23%', marketCap: '$319.2B', icon: '��', changeColor: 'text-red-400', trendData: [27, 26, 28, 26, 27], glow: 'shadow-lg shadow-blue-500/20' },
+                    { rank: 2, symbol: 'ETH', name: 'Ethereum', price: '$2,657.89', change: '-1.23%', marketCap: '$319.2B', icon: 'Ξ', changeColor: 'text-red-400', trendData: [27, 26, 28, 26, 27], glow: 'shadow-lg shadow-blue-500/20' },
                     { rank: 3, symbol: 'USDT', name: 'Tether USDt', price: '$1.0001', change: '+0.01%', marketCap: '$118.4B', icon: '₮', changeColor: 'text-green-400', trendData: [1, 1, 1, 1, 1], glow: 'shadow-lg shadow-green-500/20' },
                     { rank: 4, symbol: 'BNB', name: 'BNB', price: '$312.45', change: '+4.67%', marketCap: '$48.2B', icon: '⬡', changeColor: 'text-green-400', trendData: [310, 315, 312, 318, 312], glow: 'shadow-lg shadow-yellow-500/20' },
                     { rank: 5, symbol: 'SOL', name: 'Solana', price: '$156.78', change: '+8.45%', marketCap: '$42.1B', icon: '◎', changeColor: 'text-green-400', trendData: [150, 155, 160, 158, 157], glow: 'shadow-lg shadow-purple-500/20' },
                     { rank: 6, symbol: 'USDC', name: 'USD Coin', price: '$0.9999', change: '-0.01%', marketCap: '$38.9B', icon: '$', changeColor: 'text-red-400', trendData: [1, 1, 1, 1, 1], glow: 'shadow-lg shadow-blue-400/20' },
                     { rank: 7, symbol: 'XRP', name: 'Ripple', price: '$0.5234', change: '-2.87%', marketCap: '$28.7B', icon: '◉', changeColor: 'text-red-400', trendData: [0.53, 0.52, 0.54, 0.52, 0.52], glow: 'shadow-lg shadow-cyan-500/20' },
                     { rank: 8, symbol: 'ADA', name: 'Cardano', price: '$0.5845', change: '+5.21%', marketCap: '$20.6B', icon: '₳', changeColor: 'text-green-400', trendData: [0.55, 0.58, 0.56, 0.59, 0.58], glow: 'shadow-lg shadow-indigo-500/20' },
-                    { rank: 9, symbol: 'DOGE', name: 'Dogecoin', price: '$0.0832', change: '-4.12%', marketCap: '$12.1B', icon: '��', changeColor: 'text-red-400', trendData: [0.085, 0.083, 0.087, 0.081, 0.083], glow: 'shadow-lg shadow-amber-500/20' },
-                    { rank: 10, symbol: 'AVAX', name: 'Avalanche', price: '$38.45', change: '+12.34%', marketCap: '$15.8B', icon: '�����', changeColor: 'text-green-400', trendData: [35, 38, 36, 40, 38], glow: 'shadow-lg shadow-red-500/20' }
+                    { rank: 9, symbol: 'DOGE', name: 'Dogecoin', price: '$0.0832', change: '-4.12%', marketCap: '$12.1B', icon: 'Ð', changeColor: 'text-red-400', trendData: [0.085, 0.083, 0.087, 0.081, 0.083], glow: 'shadow-lg shadow-amber-500/20' },
+                    { rank: 10, symbol: 'AVAX', name: 'Avalanche', price: '$38.45', change: '+12.34%', marketCap: '$15.8B', icon: '🔺', changeColor: 'text-green-400', trendData: [35, 38, 36, 40, 38], glow: 'shadow-lg shadow-red-500/20' }
                   ].map((crypto) => (
                     <div key={crypto.rank} className={`group relative bg-gradient-to-br from-black/60 to-slate-900/40 rounded-xl p-5 border border-cyan-500/20 hover:border-cyan-400/50 transition-all duration-300 hover:scale-[1.02] cursor-pointer ${crypto.glow} hover:shadow-xl`}>
 
@@ -1298,7 +1298,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                               trend.sentiment === 'bearish' ? "text-red-400" : "text-gray-400"
                             )}>
                               {trend.sentiment === 'bullish' ? '😃' :
-                               trend.sentiment === 'bearish' ? '😡' : '����'}
+                               trend.sentiment === 'bearish' ? '😡' : '😐'}
                             </span>
                             <span className="text-purple-300 text-xs font-bold">{trend.mentions}</span>
                           </div>
@@ -1397,7 +1397,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
             <div className="text-center">
               <div className="flex items-center justify-center gap-4">
                 <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
-                  �� Price API: Live
+                  🟢 Price API: Live
                 </Badge>
                 <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30">
                   ✅ Sentiment Engine: Active
@@ -1610,7 +1610,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               <Card className="bg-black/40 border-purple-500/20 backdrop-blur-xl">
                 <CardHeader>
                   <CardTitle className="text-white text-lg flex items-center gap-2">
-                    �� Biggest Mover
+                    🔥 Biggest Mover
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -1703,7 +1703,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                     <div className="flex items-center gap-1 bg-gray-800/50 rounded-lg p-1">
                       {[
                         { type: 'Candlestick', icon: '📊', active: true },
-                        { type: 'Line', icon: '����', active: false },
+                        { type: 'Line', icon: '📈', active: false },
                         { type: 'Area', icon: '🌊', active: false },
                         { type: 'Sentiment', icon: '🧠', active: false }
                       ].map((chart) => (
@@ -1719,7 +1719,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                           )}
                           title={chart.type}
                         >
-                          {chart.icon}
+                          <IconText value={chart.icon} />
                         </Button>
                       ))}
                     </div>
@@ -2173,7 +2173,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   ✅ Technical Analysis: Active
                 </Badge>
                 <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">
-                  �� Order Book: Live
+                  📘 Order Book: Live
                 </Badge>
               </div>
             </div>
@@ -2247,7 +2247,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 value="HeatMap"
                 className="data-[state=active]:bg-gray-700/50 data-[state=active]:text-white text-gray-400"
               >
-                �� Heat Map
+                🌡️ Heat Map
               </TabsTrigger>
               <TabsTrigger
                 value="Analytics"
