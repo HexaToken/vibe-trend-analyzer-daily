@@ -680,7 +680,7 @@ export const SentimentPostWall = ({ onNavigateToProfile, initialFilter }: Sentim
             Sentiment Feed 🚀
           </h1>
           <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-            Real-time trader sentiment, market insights, and community discussions
+            Real-time trader sentiment, pro market insights, and expert discussions
           </p>
         </div>
 
