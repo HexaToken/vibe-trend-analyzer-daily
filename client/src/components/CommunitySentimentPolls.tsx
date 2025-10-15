@@ -566,7 +566,7 @@ export default function CommunitySentimentPolls() {
                     accuracy: 81.7,
                     votes: 312,
                     streak: 15,
-                    badges: ['👤', '���']
+                    badges: ['👤', '⭐']
                   },
                   {
                     rank: 4,
