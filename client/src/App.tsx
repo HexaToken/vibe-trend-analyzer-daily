@@ -31,7 +31,6 @@ import { PulseOfTheChain } from "@/components/crypto/PulseOfTheChain";
 import { NeonSenseCryptoDashboard } from "@/components/crypto/NeonSenseCryptoDashboard";
 import { AdvancedTradingChart } from "@/components/finance/AdvancedTradingChart";
 import { EarningsCalendar } from "@/components/finance/EarningsCalendar";
-import { AdvancedChartsPro } from "@/components/finance/AdvancedChartsPro";
 import TrendingHub from "@/components/finance/TrendingHub";
 import TradeJournalClassic from "@/components/TradeJournalClassic";
 import CommunitySentimentPolls from "@/components/CommunitySentimentPolls";
@@ -237,8 +236,6 @@ const AppContent = () => {
         return <PulseOfTheChain />;
       case "earnings":
         return <EarningsCalendar />;
-      case "charts":
-        return <AdvancedChartsPro />;
       case "trading-chart":
         return <AdvancedTradingChart />;
       case "trending":
@@ -253,7 +250,7 @@ const AppContent = () => {
     }
   };
 
-  const isChartPage = activeSection === "charts" || activeSection === "trading-chart";
+  const isChartPage = activeSection === "trading-chart";
   const { themeMode } = useMoodTheme();
   const isDayMode = themeMode === 'light';
 
@@ -287,7 +284,7 @@ const AppContent = () => {
         <main className={isChartPage ? "ns-main" : ""}>{renderContent()}</main>
         <Footer
           onNavigate={setActiveSection}
-          compact={["charts", "trading-chart", "crypto"].includes(activeSection)}
+          compact={["trading-chart", "crypto"].includes(activeSection)}
           className={isChartPage ? "ns-footer" : ""}
         />
         <ApiStatusIndicator />
