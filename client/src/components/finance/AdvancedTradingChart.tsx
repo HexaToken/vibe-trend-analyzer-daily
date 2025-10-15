@@ -48,7 +48,9 @@ interface AIInsight {
   zones: Array<{x: number, y: number, width: number, height: number}>;
 }
 
-export const AdvancedTradingChart = () => {
+interface AdvancedTradingChartProps { onNavigate?: (section: string) => void }
+
+export const AdvancedTradingChart: React.FC<AdvancedTradingChartProps> = ({ onNavigate }) => {
   const [activeTab, setActiveTab] = useState('chart');
   const [searchSymbol, setSearchSymbol] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -202,7 +204,10 @@ export const AdvancedTradingChart = () => {
         <ResponsiveModernHeader
           activeSection={activeSection}
           setActiveSection={setActiveSection}
-          onNavigate={(section) => setActiveSection(section)}
+          onNavigate={(section) => {
+            setActiveSection(section);
+            onNavigate?.(section);
+          }}
           currentMoodScore={72}
         />
       </div>
