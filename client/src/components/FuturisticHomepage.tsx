@@ -68,6 +68,7 @@ import { NeonSenseCryptoDashboard } from './crypto/NeonSenseCryptoDashboard';
 import SmartTradeJournal from './SmartTradeJournal';
 import CommunitySentimentPolls from './CommunitySentimentPolls';
 import { DailyMoodRecap } from './builder/DailyMoodRecap';
+import { EmojiIcon, IconText } from '../lib/iconUtils';
 
 
 
@@ -857,7 +858,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
               {/* Mood Source Breakdown */}
               <div className="grid grid-cols-3 gap-6 max-w-4xl mx-auto">
                 {[
-                  { label: 'Price Momentum', value: 82, percentage: '40%', color: 'from-orange-500 to-red-500', icon: '📈' },
+                  { label: 'Price Momentum', value: 82, percentage: '40%', color: 'from-orange-500 to-red-500', icon: '��' },
                   { label: 'News Sentiment', value: 75, percentage: '30%', color: 'from-yellow-500 to-orange-500', icon: '📰' },
                   { label: 'Social Buzz', value: 71, percentage: '30%', color: 'from-green-500 to-yellow-500', icon: '💬' }
                 ].map((item) => (
