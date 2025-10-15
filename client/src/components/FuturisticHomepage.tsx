@@ -148,7 +148,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
     { topic: '$TSLA', label: 'Panic', mentions: '1,923', sentiment: 'bearish', icon: '📉' },
     { topic: 'AI Revolution', label: 'Hype', mentions: '4,512', sentiment: 'bullish', icon: '🤖' },
     { topic: 'Fed Meeting', label: 'Neutral', mentions: '3,674', sentiment: 'neutral', icon: '🏛️' },
-    { topic: '$BTC', label: 'Hype', mentions: '5,291', sentiment: 'bullish', icon: '��' },
+    { topic: '$BTC', label: 'Hype', mentions: '5,291', sentiment: 'bullish', icon: '₿' },
     { topic: 'Inflation Data', label: 'Neutral', mentions: '2,183', sentiment: 'neutral', icon: '���' }
   ]);
 
@@ -438,7 +438,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   }}
                   data-active-style="background: var(--active-bg); box-shadow: var(--active-shadow);"
                 >
-                  ��� Geo-Sentiment
+                  🌍 Geo-Sentiment
                 </TabsTrigger>
               </TabsList>
 
@@ -601,7 +601,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                   <Card className="lg:col-span-2 bg-black/40 border-blue-500/20 backdrop-blur-xl">
                     <CardHeader>
                       <CardTitle className="text-white flex items-center gap-2">
-                        ���� Sector Risk Heatmap
+                        ⚠️ Sector Risk Heatmap
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -1450,7 +1450,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       💬 Social Buzz
                     </TabsTrigger>
                     <TabsTrigger value="searches" className="data-[state=active]:bg-orange-600/30 data-[state=active]:text-orange-300 text-gray-400">
-                      ����� Top Searches
+                      🔎 Top Searches
                     </TabsTrigger>
                   </TabsList>
 
@@ -1498,7 +1498,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                               </div>
                             </div>
                             <Badge className="ml-4 bg-pink-500/20 text-pink-400 border-pink-500/30">
-                              {news.trending} �����
+                              {news.trending} 🔥
                             </Badge>
                           </div>
                           <div className="flex items-center justify-between text-xs text-gray-500">
@@ -1597,7 +1597,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                 </CardHeader>
                 <CardContent>
                   <div className="text-center">
-                    <div className="text-4xl mb-2">����</div>
+                    <div className="text-4xl mb-2">⭐</div>
                     <div className="text-2xl font-bold text-pink-400">NVIDIA</div>
                     <div className="text-sm text-gray-400 mb-2">+456% trending</div>
                     <Badge className="bg-pink-500/20 text-pink-400 border-pink-500/30">
@@ -1983,7 +1983,7 @@ export const FuturisticHomepage: React.FC<FuturisticHomepageProps> = ({ onNaviga
                       </div>
                       <div className="flex justify-between items-center">
                         <span className="text-gray-400">MACD:</span>
-                        <span className="text-purple-400 font-bold">+234.5 ���</span>
+                        <span className="text-purple-400 font-bold">+234.5</span>
                       </div>
                       <div className="flex justify-between items-center">
                         <span className="text-gray-400">Sentiment:</span>
