@@ -473,7 +473,7 @@ export const AdvancedTradingChart = () => {
                   </div>
 
                   {/* Drawing Toolbar */}
-                  <div className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 z-20 md:block trading-drawing-toolbar">
+                  <div className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 z-20 md:block trading-drawing-toolbar">
                     <div className="bg-gray-800/80 backdrop-blur-sm rounded-xl border border-gray-700/50 p-1 md:p-2 space-y-1 md:space-y-2 flex md:flex-col gap-1 md:gap-0">
                       {[
                         { icon: MousePointer, tooltip: "Cursor" },
