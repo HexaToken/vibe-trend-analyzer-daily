@@ -81,15 +81,15 @@ export const StockScreener: React.FC<StockScreenerProps> = ({ className }) => {
         {/* Stock Screener Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className={cn(
-            "grid w-full grid-cols-2 mb-8",
+            "flex w-full justify-center gap-2 mb-8",
             themeMode === 'light'
               ? 'bg-white border border-gray-200 rounded-xl p-1'
               : 'bg-slate-800/50 backdrop-blur-sm border-slate-700/50'
           )}>
-            <TabsTrigger 
+            <TabsTrigger
               value="basic"
               className={cn(
-                "relative py-3 px-6 rounded-lg font-medium transition-all duration-200",
+                "relative py-3 px-6 rounded-lg font-medium transition-all duration-200 w-auto",
                 activeTab === "basic"
                   ? themeMode === 'light'
                     ? 'bg-[#3F51B5] text-white shadow-md'
@@ -101,10 +101,10 @@ export const StockScreener: React.FC<StockScreenerProps> = ({ className }) => {
             >
               Basic Screener
             </TabsTrigger>
-            <TabsTrigger 
+            <TabsTrigger
               value="advanced"
               className={cn(
-                "relative py-3 px-6 rounded-lg font-medium transition-all duration-200",
+                "relative py-3 px-6 rounded-lg font-medium transition-all duration-200 w-auto",
                 activeTab === "advanced"
                   ? themeMode === 'light'
                     ? 'bg-[#3F51B5] text-white shadow-md'
