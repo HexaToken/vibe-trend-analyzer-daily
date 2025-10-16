@@ -365,9 +365,10 @@ export const BasicScreener: React.FC<BasicScreenerProps> = ({ className }) => {
     return volume.toString();
   };
 
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+
   const handleUpgradeClick = () => {
-    // Navigate to upgrade page or show modal
-    alert("Upgrade to Pro to access advanced filters like RSI, Moving Averages, P/E Ratio, and unlimited results!");
+    setShowUpgradeModal(true);
   };
 
   return (
