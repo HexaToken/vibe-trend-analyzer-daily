@@ -428,6 +428,20 @@ export const BasicScreener: React.FC<BasicScreenerProps> = ({ className }) => {
         </CardContent>
       </Card>
 
+      {/* Upgrade Modal */}
+      <UpgradeToProModal
+        open={showUpgradeModal}
+        onOpenChange={setShowUpgradeModal}
+        onUpgrade={() => {
+          // Hook for checkout navigation
+          setShowUpgradeModal(false);
+        }}
+        onStartTrial={() => {
+          // Hook for trial flow
+          setShowUpgradeModal(false);
+        }}
+      />
+
       {/* Filter Controls */}
       <Card className="bg-white/5 backdrop-blur-xl border-gray-700/50">
         <CardHeader>
