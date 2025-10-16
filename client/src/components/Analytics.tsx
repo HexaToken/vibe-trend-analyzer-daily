@@ -9,7 +9,7 @@ import { cn } from '../lib/utils';
 import StrategySwiper from './StrategySwiper';
 
 export const Analytics = () => {
-  const [activeTab, setActiveTab] = useState("Scanner");
+  const [activeTab, setActiveTab] = useState("Analytics");
   const [searchQuery, setSearchQuery] = useState("");
   const [showProfiler, setShowProfiler] = useState(false);
   const [screenerType, setScreenerType] = useState("basic");
@@ -178,7 +178,7 @@ export const Analytics = () => {
       {/* Main Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-3 bg-black/20 backdrop-blur-xl border border-gray-700/50">
+          <TabsList className="grid w-full grid-cols-2 bg-black/20 backdrop-blur-xl border border-gray-700/50">
             <TabsTrigger
               value="HeatMap"
               className="data-[state=active]:bg-gray-700/50 data-[state=active]:text-white text-gray-400"
@@ -190,12 +190,6 @@ export const Analytics = () => {
               className="data-[state=active]:bg-gray-700/50 data-[state=active]:text-white text-gray-400"
             >
               📈 Analytics
-            </TabsTrigger>
-            <TabsTrigger
-              value="Scanner"
-              className="data-[state=active]:bg-gray-700/50 data-[state=active]:text-white text-gray-400"
-            >
-              🔍 Scanner
             </TabsTrigger>
           </TabsList>
 

@@ -81,37 +81,42 @@ export const StockScreener: React.FC<StockScreenerProps> = ({ className }) => {
         {/* Stock Screener Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className={cn(
-            "grid w-full grid-cols-2 mb-8",
+            "relative grid w-full grid-cols-2 mb-8 rounded-2xl overflow-hidden",
             themeMode === 'light'
-              ? 'bg-white border border-gray-200 rounded-xl p-1'
+              ? 'bg-white border border-gray-200'
               : 'bg-slate-800/50 backdrop-blur-sm border-slate-700/50'
           )}>
-            <TabsTrigger 
+            <div
+              className={cn(
+                "pointer-events-none absolute rounded-xl transition-transform duration-300 ease-out",
+                themeMode === 'light'
+                  ? 'bg-[#3F51B5]/90 shadow-[0_0_30px_rgba(63,81,181,0.35)]'
+                  : 'bg-gradient-to-r from-teal-500 to-emerald-500 shadow-[0_0_35px_rgba(16,185,129,0.45)]'
+              )}
+              style={{
+                left: 4,
+                top: 4,
+                width: 'calc(50% - 8px)',
+                height: 'calc(100% - 8px)',
+                transform: activeTab === 'advanced' ? 'translateX(100%)' : 'translateX(0%)',
+              }}
+            />
+            <TabsTrigger
               value="basic"
               className={cn(
-                "relative py-3 px-6 rounded-lg font-medium transition-all duration-200",
-                activeTab === "basic"
-                  ? themeMode === 'light'
-                    ? 'bg-[#3F51B5] text-white shadow-md'
-                    : 'bg-gradient-to-r from-teal-500 to-emerald-500 text-white shadow-lg'
-                  : themeMode === 'light'
-                    ? 'text-[#666] hover:text-[#3F51B5] hover:bg-[#F5F5F5]'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-700/50'
+                "relative z-10 py-3 px-6 font-medium w-full text-sm transition-colors",
+                themeMode === 'light' ? 'text-[#666] data-[state=active]:text-white' : 'text-slate-400 data-[state=active]:text-white',
+                'bg-transparent data-[state=active]:bg-transparent data-[state=active]:shadow-none'
               )}
             >
               Basic Screener
             </TabsTrigger>
-            <TabsTrigger 
+            <TabsTrigger
               value="advanced"
               className={cn(
-                "relative py-3 px-6 rounded-lg font-medium transition-all duration-200",
-                activeTab === "advanced"
-                  ? themeMode === 'light'
-                    ? 'bg-[#3F51B5] text-white shadow-md'
-                    : 'bg-gradient-to-r from-teal-500 to-emerald-500 text-white shadow-lg'
-                  : themeMode === 'light'
-                    ? 'text-[#666] hover:text-[#3F51B5] hover:bg-[#F5F5F5]'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-700/50'
+                "relative z-10 py-3 px-6 font-medium w-full text-sm transition-colors",
+                themeMode === 'light' ? 'text-[#666] data-[state=active]:text-white' : 'text-slate-400 data-[state=active]:text-white',
+                'bg-transparent data-[state=active]:bg-transparent data-[state=active]:shadow-none'
               )}
             >
               Advanced Screener
