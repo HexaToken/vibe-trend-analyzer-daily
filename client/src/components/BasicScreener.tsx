@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
+import UpgradeToProModal from "@/components/UpgradeToProModal";
 
 import {
   Search,
@@ -365,9 +366,10 @@ export const BasicScreener: React.FC<BasicScreenerProps> = ({ className }) => {
     return volume.toString();
   };
 
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+
   const handleUpgradeClick = () => {
-    // Navigate to upgrade page or show modal
-    alert("Upgrade to Pro to access advanced filters like RSI, Moving Averages, P/E Ratio, and unlimited results!");
+    setShowUpgradeModal(true);
   };
 
   return (
@@ -426,6 +428,20 @@ export const BasicScreener: React.FC<BasicScreenerProps> = ({ className }) => {
           </div>
         </CardContent>
       </Card>
+
+      {/* Upgrade Modal */}
+      <UpgradeToProModal
+        open={showUpgradeModal}
+        onOpenChange={setShowUpgradeModal}
+        onUpgrade={() => {
+          // Hook for checkout navigation
+          setShowUpgradeModal(false);
+        }}
+        onStartTrial={() => {
+          // Hook for trial flow
+          setShowUpgradeModal(false);
+        }}
+      />
 
       {/* Filter Controls */}
       <Card className="bg-white/5 backdrop-blur-xl border-gray-700/50">

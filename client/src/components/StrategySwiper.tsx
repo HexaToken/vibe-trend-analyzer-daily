@@ -431,23 +431,6 @@ export const StrategySwiper: React.FC<StrategySwiperProps> = ({
               {currentQuestion.question}
             </h3>
             
-            <div className="flex items-center gap-8 mt-8">
-              <div className="text-center">
-                <div className="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center mb-2 border-2 border-red-500/30">
-                  <TrendingDown className="w-6 h-6 text-red-400" />
-                </div>
-                <span className="text-sm text-white/80">Disagree</span>
-              </div>
-              
-              <div className="text-white/60 text-sm">Swipe or tap</div>
-              
-              <div className="text-center">
-                <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center mb-2 border-2 border-green-500/30">
-                  <TrendingUp className="w-6 h-6 text-green-400" />
-                </div>
-                <span className="text-sm text-white/80">Agree</span>
-              </div>
-            </div>
           </div>
         </div>
 
