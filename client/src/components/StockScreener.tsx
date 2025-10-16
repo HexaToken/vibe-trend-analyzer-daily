@@ -80,12 +80,15 @@ export const StockScreener: React.FC<StockScreenerProps> = ({ className }) => {
 
         {/* Stock Screener Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className={cn(
-            "relative grid w-full grid-cols-2 mb-8 rounded-2xl overflow-hidden",
-            themeMode === 'light'
-              ? 'bg-white border border-gray-200'
-              : 'bg-slate-800/50 backdrop-blur-sm border-slate-700/50'
-          )}>
+          <TabsList
+            style={{ display: 'grid' }}
+            className={cn(
+              "relative w-full grid grid-cols-2 h-12 p-1 mb-8 rounded-2xl overflow-hidden",
+              themeMode === 'light'
+                ? 'bg-white border border-gray-200'
+                : 'bg-slate-800/50 backdrop-blur-sm border-slate-700/50'
+            )}
+          >
             <div
               className={cn(
                 "pointer-events-none absolute rounded-xl transition-transform duration-300 ease-out",
@@ -104,9 +107,9 @@ export const StockScreener: React.FC<StockScreenerProps> = ({ className }) => {
             <TabsTrigger
               value="basic"
               className={cn(
-                "relative z-10 py-3 px-6 font-medium w-full text-sm transition-colors",
+                "relative z-10 h-10 px-6 font-medium w-full text-sm leading-none transition-colors",
                 themeMode === 'light' ? 'text-[#666] data-[state=active]:text-white' : 'text-slate-400 data-[state=active]:text-white',
-                'bg-transparent data-[state=active]:bg-transparent data-[state=active]:shadow-none'
+                'py-0 bg-transparent data-[state=active]:bg-transparent data-[state=active]:shadow-none'
               )}
             >
               Basic Screener
@@ -114,9 +117,9 @@ export const StockScreener: React.FC<StockScreenerProps> = ({ className }) => {
             <TabsTrigger
               value="advanced"
               className={cn(
-                "relative z-10 py-3 px-6 font-medium w-full text-sm transition-colors",
+                "relative z-10 h-10 px-6 font-medium w-full text-sm leading-none transition-colors",
                 themeMode === 'light' ? 'text-[#666] data-[state=active]:text-white' : 'text-slate-400 data-[state=active]:text-white',
-                'bg-transparent data-[state=active]:bg-transparent data-[state=active]:shadow-none'
+                'py-0 bg-transparent data-[state=active]:bg-transparent data-[state=active]:shadow-none'
               )}
             >
               Advanced Screener
