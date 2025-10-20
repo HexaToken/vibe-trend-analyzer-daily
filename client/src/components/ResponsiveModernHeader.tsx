@@ -234,6 +234,46 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                 )} />
               </button>
 
+              {/* Company Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className={cn(
+                    "flex items-center gap-1 text-base font-medium px-3 py-2 rounded-lg transition-all duration-200 relative group",
+                    isLightMode
+                      ? "text-[#4B5563] hover:text-[#3A7AFE] hover:bg-[#F3F4F6]"
+                      : "text-gray-300 hover:text-gray-200"
+                  )}>
+                    Company
+                    <ChevronDown className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" />
+                    <div className={cn(
+                      "absolute bottom-0 left-0 right-0 h-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200",
+                      isLightMode
+                        ? "bg-[#3A7AFE]"
+                        : "bg-gradient-to-r from-pink-400 to-purple-500"
+                    )} />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  align="center"
+                  className={cn(
+                    "w-56 backdrop-blur-xl rounded-xl z-[100] shadow-xl",
+                    isLightMode
+                      ? "!bg-background !border-border !text-foreground"
+                      : "!bg-[#0A0A23]/95 !border-gray-700 !text-white"
+                  )}
+                  sideOffset={5}
+                  style={{
+                    backgroundColor: isLightMode ? 'white' : 'rgba(10, 10, 35, 0.95)',
+                    borderColor: isLightMode ? 'rgb(229 231 235)' : 'rgb(55 65 81)',
+                    color: isLightMode ? 'rgb(17 24 39)' : 'white',
+                    zIndex: 100
+                  }}
+                >
+                  <DropdownMenuItem onClick={() => handleNavigation('about')} className={cn("hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer rounded-lg px-3 py-2 transition-colors", isLightMode ? "hover:bg-blue-500/10" : "hover:bg-purple-500/20")}>About Us</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleNavigation('blog')} className={cn("hover:bg-purple-500/20 focus:bg-purple-500/20 cursor-pointer rounded-lg px-3 py-2 transition-colors", isLightMode ? "hover:bg-blue-500/10" : "hover:bg-purple-500/20")}>Blog</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
               {/* Finance Dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -427,6 +467,41 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                     {label}
                   </Button>
                 ))}
+              </div>
+
+              {/* Mobile Company Section */}
+              <div className={cn(
+                "pt-4 border-t",
+                isLightMode ? "border-gray-200/50" : "border-gray-700/50"
+              )}>
+                <div className="space-y-1">
+                  <Button
+                    variant="ghost"
+                    onClick={() => handleNavigation("about")}
+                    className={cn(
+                      "w-full justify-start text-left py-3 rounded-xl transition-all duration-200",
+                      isLightMode
+                        ? "text-gray-900 hover:text-blue-600 hover:bg-blue-500/10"
+                        : "text-gray-300 hover:text-gray-200 hover:bg-purple-500/20"
+                    )}
+                  >
+                    <span className="mr-3">🏢</span>
+                    About Us
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    onClick={() => handleNavigation("blog")}
+                    className={cn(
+                      "w-full justify-start text-left py-3 rounded-xl transition-all duration-200",
+                      isLightMode
+                        ? "text-gray-900 hover:text-blue-600 hover:bg-blue-500/10"
+                        : "text-gray-300 hover:text-gray-200 hover:bg-purple-500/20"
+                    )}
+                  >
+                    <span className="mr-3">📰</span>
+                    Blog
+                  </Button>
+                </div>
               </div>
 
               {/* Mobile Community Section */}
