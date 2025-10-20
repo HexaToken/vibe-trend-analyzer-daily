@@ -6,15 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { PenTool, CalendarDays, Tag, ArrowRight } from 'lucide-react';
-
-interface BlogPost {
-  id: string;
-  title: string;
-  excerpt: string;
-  date: string; // ISO
-  author: string;
-  tags: string[];
-}
+import { BlogPostModal, BlogPost } from './BlogPostModal';
 
 const postsSeed: BlogPost[] = [
   {
@@ -24,6 +16,11 @@ const postsSeed: BlogPost[] = [
     date: new Date().toISOString(),
     author: 'NeomSense Team',
     tags: ['Design', 'Product'],
+    content: [
+      'Great financial tools are quiet by default. We reduce cognitive load with clear hierarchy, generous spacing, and predictable motion.',
+      'Our sentiment views focus on trend, not every tick. We surface what changed and why, then let you drill in when it matters.',
+      'Accessibility and speed are non‑negotiable. Components are keyboard‑friendly, color‑contrast tested, and tuned for sub‑100ms interactions.'
+    ]
   },
   {
     id: 'plugins-roadmap',
@@ -32,6 +29,11 @@ const postsSeed: BlogPost[] = [
     date: new Date(Date.now()-86400000*7).toISOString(),
     author: 'NeomSense Team',
     tags: ['Plugins', 'Roadmap'],
+    content: [
+      'We are formalizing our plugin capabilities with scoped permissions, settings sync, and a stable UI kit.',
+      'Security is first: capability-based permissions, audited manifests, and transparent changelogs.',
+      'Expect better discovery, ratings, and auto‑updates with rollback for safety.'
+    ]
   },
   {
     id: 'ai-assist-ethics',
@@ -40,6 +42,11 @@ const postsSeed: BlogPost[] = [
     date: new Date(Date.now()-86400000*21).toISOString(),
     author: 'NeomSense Team',
     tags: ['AI', 'Policy'],
+    content: [
+      'AI suggestions are labeled, explainable, and opt‑in. Users keep control and can always see the why behind a suggestion.',
+      'We avoid definitive calls; instead we provide probabilities, alternatives, and citations when available.',
+      'Your data remains yours. Private workspaces, export tools, and clear retention policies back this up.'
+    ]
   },
 ];
 
@@ -47,6 +54,8 @@ export const BlogPage = () => {
   const { themeMode, bodyGradient } = useMoodTheme();
   const [q, setQ] = useState('');
   const [tag, setTag] = useState<string | null>(null);
+  const [selected, setSelected] = useState<BlogPost | null>(null);
+  const [open, setOpen] = useState(false);
 
   const posts = useMemo(() => {
     return postsSeed
@@ -55,6 +64,8 @@ export const BlogPage = () => {
   }, [q, tag]);
 
   const allTags = Array.from(new Set(postsSeed.flatMap(p => p.tags)));
+
+  const openPost = (post: BlogPost) => { setSelected(post); setOpen(true); };
 
   return (
     <div className={cn('min-h-screen', bodyGradient)}>
@@ -80,7 +91,7 @@ export const BlogPage = () => {
       {/* Posts */}
       <div className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 gap-6">
         {posts.map(p => (
-          <Card key={p.id} className={cn(themeMode==='light' ? 'border-gray-200' : 'border-purple-500/20')}>
+          <Card key={p.id} className={cn(themeMode==='light' ? 'border-gray-200' : 'border-purple-500/20', 'cursor-pointer hover:shadow-lg transition')} onClick={() => openPost(p)}>
             <CardHeader>
               <CardTitle className="text-2xl">{p.title}</CardTitle>
               <CardDescription className="flex items-center gap-2">
@@ -96,12 +107,14 @@ export const BlogPage = () => {
                     <Badge key={t} variant="outline" className={cn(themeMode==='light' ? 'border-gray-300' : 'border-gray-600')}>{t}</Badge>
                   ))}
                 </div>
-                <Button variant="outline" size="sm">Read More <ArrowRight className="w-4 h-4 ml-2"/></Button>
+                <Button variant="outline" size="sm" onClick={(e)=>{ e.stopPropagation(); openPost(p); }}>Read More <ArrowRight className="w-4 h-4 ml-2"/></Button>
               </div>
             </CardContent>
           </Card>
         ))}
       </div>
+
+      <BlogPostModal post={selected} open={open} onClose={()=> setOpen(false)} />
     </div>
   );
 };
