@@ -12,6 +12,7 @@ import { mockPlugins, pluginCategories, featuredPlugins, getPluginsByCategory } 
 import { FeaturedPluginsCarousel } from '@/components/plugins/FeaturedPluginsCarousel';
 import { PluginDetailModal } from '@/components/plugins/PluginDetailModal';
 import { PurchaseFlow } from '@/components/plugins/PurchaseFlow';
+import { InstallFlow } from '@/components/plugins/InstallFlow';
 import { cn } from '@/lib/utils';
 
 interface PluginMarketplacePageProps {
@@ -27,6 +28,8 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [purchasePlugin, setPurchasePlugin] = useState<Plugin | null>(null);
   const [isPurchaseOpen, setIsPurchaseOpen] = useState(false);
+  const [installPlugin, setInstallPlugin] = useState<Plugin | null>(null);
+  const [isInstallOpen, setIsInstallOpen] = useState(false);
   const [installedPlugins, setInstalledPlugins] = useState<string[]>(() => {
     const saved = localStorage.getItem('moodmeter-installed-plugins');
     return saved ? JSON.parse(saved) : [];
@@ -106,7 +109,9 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
 
   const handlePurchaseOrInstall = (plugin: Plugin) => {
     if (plugin.price === 0) {
-      handleInstallPlugin(plugin);
+      setInstallPlugin(plugin);
+      setIsInstallOpen(true);
+      setIsModalOpen(false);
       return;
     }
     setPurchasePlugin(plugin);
@@ -447,6 +452,13 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
           isOpen={isPurchaseOpen}
           onClose={() => { setIsPurchaseOpen(false); setPurchasePlugin(null); }}
           onSuccess={(plugin) => { handleInstallPlugin(plugin); setIsPurchaseOpen(false); setPurchasePlugin(null); }}
+        />
+
+        <InstallFlow
+          plugin={installPlugin}
+          isOpen={isInstallOpen}
+          onClose={() => { setIsInstallOpen(false); setInstallPlugin(null); }}
+          onInstall={(plugin) => { handleInstallPlugin(plugin); }}
         />
       </div>
     </div>
