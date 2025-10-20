@@ -69,6 +69,7 @@ import {
 import { PostCard, type PostCardData } from "../social/PostCard";
 import type { User, UserPost } from "@/types/user";
 import { getMockUserData, getUserProfileBreadcrumb } from "@/utils/profileNavigation";
+import { PurchaseHistory } from "./PurchaseHistory";
 
 interface TraderProfileProps {
   userId?: string;
@@ -591,7 +592,7 @@ export const TraderProfile = ({ userId, isCurrentUser = false, onNavigateBack }:
         {/* Icon-Based Navigation */}
         <div className="sticky top-16 z-40 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl rounded-2xl border-0 shadow-lg">
           <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-4 h-16 bg-transparent">
+            <TabsList className="grid w-full grid-cols-5 h-16 bg-transparent">
               <TabsTrigger 
                 value="posts" 
                 className="flex flex-col items-center gap-1 data-[state=active]:bg-blue-500 data-[state=active]:text-white text-sm font-medium h-full rounded-xl transition-all"
@@ -613,12 +614,19 @@ export const TraderProfile = ({ userId, isCurrentUser = false, onNavigateBack }:
                 <Brain className="h-5 w-5" />
                 Insights
               </TabsTrigger>
-              <TabsTrigger 
-                value="portfolio" 
+              <TabsTrigger
+                value="portfolio"
                 className="flex flex-col items-center gap-1 data-[state=active]:bg-orange-500 data-[state=active]:text-white text-sm font-medium h-full rounded-xl transition-all"
               >
                 <Briefcase className="h-5 w-5" />
                 Portfolio
+              </TabsTrigger>
+              <TabsTrigger
+                value="purchases"
+                className="flex flex-col items-center gap-1 data-[state=active]:bg-rose-500 data-[state=active]:text-white text-sm font-medium h-full rounded-xl transition-all"
+              >
+                <Wallet className="h-5 w-5" />
+                Purchases
               </TabsTrigger>
             </TabsList>
 
@@ -793,6 +801,11 @@ export const TraderProfile = ({ userId, isCurrentUser = false, onNavigateBack }:
                     </CardContent>
                   </Card>
                 )}
+              </TabsContent>
+
+              {/* Purchases Tab */}
+              <TabsContent value="purchases" className="space-y-4">
+                <PurchaseHistory />
               </TabsContent>
             </div>
           </Tabs>

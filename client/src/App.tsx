@@ -71,6 +71,8 @@ import SmartNewsFeedPage from "@/components/SmartNewsFeedPage";
 import { RoomDetailPanelDemo } from "@/components/examples/RoomDetailPanelDemo";
 import { BuilderChatRoom } from "@/components/rooms/BuilderChatRoom";
 import { EnhancedSentimentFeed } from "@/components/EnhancedSentimentFeed";
+import AboutUsPage from "@/components/company/AboutUsPage";
+import BlogPage from "@/components/company/BlogPage";
 
 const queryClient = new QueryClient();
 
@@ -222,6 +224,12 @@ const AppContent = () => {
         return <BuilderChatRoom onBack={() => setActiveSection("community")} />;
       case "enhanced-sentiment-feed":
         return <EnhancedSentimentFeed onNavigateToProfile={(userId) => handleNavigation("trader-profile", userId)} />;
+
+      // Company
+      case "about":
+        return <AboutUsPage />;
+      case "blog":
+        return <BlogPage />;
 
       // Finance Section Routes
       case "finance":

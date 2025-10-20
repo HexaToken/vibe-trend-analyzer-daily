@@ -11,6 +11,8 @@ import { Plugin, PluginCategory } from '@/types/plugins';
 import { mockPlugins, pluginCategories, featuredPlugins, getPluginsByCategory } from '@/data/pluginMockData';
 import { FeaturedPluginsCarousel } from '@/components/plugins/FeaturedPluginsCarousel';
 import { PluginDetailModal } from '@/components/plugins/PluginDetailModal';
+import { PurchaseFlow } from '@/components/plugins/PurchaseFlow';
+import { InstallFlow } from '@/components/plugins/InstallFlow';
 import { cn } from '@/lib/utils';
 
 interface PluginMarketplacePageProps {
@@ -18,12 +20,25 @@ interface PluginMarketplacePageProps {
 }
 
 export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps) => {
+  const recordPurchase = (entry: { type: 'plugin' | 'membership' | 'course' | 'subscription' | 'other'; title: string; amount: number; status: 'completed' | 'refunded' | 'pending'; reference?: string; }) => {
+    try {
+      const key = 'moodmeter-purchase-history';
+      const raw = localStorage.getItem(key);
+      const arr = raw ? JSON.parse(raw) : [];
+      arr.push({ id: `${Date.now()}-${Math.random().toString(36).slice(2,8)}`, date: new Date().toISOString(), ...entry });
+      localStorage.setItem(key, JSON.stringify(arr));
+    } catch {}
+  };
   const { themeMode, bodyGradient } = useMoodTheme();
   const [selectedCategory, setSelectedCategory] = useState<PluginCategory>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<'popular' | 'newest' | 'rating' | 'name'>('popular');
   const [selectedPlugin, setSelectedPlugin] = useState<Plugin | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [purchasePlugin, setPurchasePlugin] = useState<Plugin | null>(null);
+  const [isPurchaseOpen, setIsPurchaseOpen] = useState(false);
+  const [installPlugin, setInstallPlugin] = useState<Plugin | null>(null);
+  const [isInstallOpen, setIsInstallOpen] = useState(false);
   const [installedPlugins, setInstalledPlugins] = useState<string[]>(() => {
     const saved = localStorage.getItem('moodmeter-installed-plugins');
     return saved ? JSON.parse(saved) : [];
@@ -98,6 +113,18 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
     const newInstalled = [...installedPlugins, plugin.id];
     setInstalledPlugins(newInstalled);
     localStorage.setItem('moodmeter-installed-plugins', JSON.stringify(newInstalled));
+    setIsModalOpen(false);
+  };
+
+  const handlePurchaseOrInstall = (plugin: Plugin) => {
+    if (plugin.price === 0) {
+      setInstallPlugin(plugin);
+      setIsInstallOpen(true);
+      setIsModalOpen(false);
+      return;
+    }
+    setPurchasePlugin(plugin);
+    setIsPurchaseOpen(true);
     setIsModalOpen(false);
   };
 
@@ -210,7 +237,7 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
               <Button
                 className="flex-1"
                 size="sm"
-                onClick={() => handleInstallPlugin(plugin)}
+                onClick={() => handlePurchaseOrInstall(plugin)}
               >
                 {plugin.price === 0 ? 'Install' : 'Purchase'}
               </Button>
@@ -295,7 +322,7 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
               Trending
             </Badge>
           </div>
-          <FeaturedPluginsCarousel plugins={featuredPlugins} />
+          <FeaturedPluginsCarousel plugins={featuredPlugins} onPurchase={handlePurchaseOrInstall} onLearnMore={handlePluginClick} />
         </div>
 
         {/* Search and Filter Section */}
@@ -426,7 +453,21 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
           plugin={selectedPlugin}
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
-          onInstall={handleInstallPlugin}
+          onInstall={handlePurchaseOrInstall}
+        />
+
+        <PurchaseFlow
+          plugin={purchasePlugin}
+          isOpen={isPurchaseOpen}
+          onClose={() => { setIsPurchaseOpen(false); setPurchasePlugin(null); }}
+          onSuccess={(plugin) => { recordPurchase({ type: 'plugin', title: plugin.name, amount: plugin.price, status: 'completed', reference: plugin.id }); handleInstallPlugin(plugin); setIsPurchaseOpen(false); setPurchasePlugin(null); }}
+        />
+
+        <InstallFlow
+          plugin={installPlugin}
+          isOpen={isInstallOpen}
+          onClose={() => { setIsInstallOpen(false); setInstallPlugin(null); }}
+          onInstall={(plugin) => { recordPurchase({ type: 'plugin', title: plugin.name, amount: plugin.price, status: 'completed', reference: plugin.id }); handleInstallPlugin(plugin); }}
         />
       </div>
     </div>

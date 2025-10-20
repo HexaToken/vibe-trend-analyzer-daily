@@ -10,9 +10,11 @@ import { cn } from '@/lib/utils';
 interface FeaturedPluginsCarouselProps {
   plugins: Plugin[];
   className?: string;
+  onPurchase?: (plugin: Plugin) => void;
+  onLearnMore?: (plugin: Plugin) => void;
 }
 
-export const FeaturedPluginsCarousel = ({ plugins, className }: FeaturedPluginsCarouselProps) => {
+export const FeaturedPluginsCarousel = ({ plugins, className, onPurchase, onLearnMore }: FeaturedPluginsCarouselProps) => {
   const { themeMode } = useMoodTheme();
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -133,7 +135,7 @@ export const FeaturedPluginsCarousel = ({ plugins, className }: FeaturedPluginsC
 
                     {/* Action Buttons */}
                     <div className="flex flex-col gap-3">
-                      <Button 
+                      <Button
                         size="lg"
                         className={cn(
                           "min-w-32 font-bold transition-all shadow-lg hover:shadow-xl",
@@ -141,10 +143,11 @@ export const FeaturedPluginsCarousel = ({ plugins, className }: FeaturedPluginsC
                             ? "bg-gradient-to-r from-[#DC2626] to-[#B91C1C] hover:from-[#B91C1C] hover:to-[#991B1B] text-white border-2 border-[#DC2626] hover:border-[#B91C1C]"
                             : "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
                         )}
+                        onClick={() => onPurchase?.(plugin)}
                       >
                         {plugin.price === 0 ? 'Install Now' : 'Purchase'}
                       </Button>
-                      <Button variant="outline" size="lg" className="min-w-32 border-2 border-[#059669] text-[#059669] hover:bg-[#059669] hover:text-white font-semibold transition-all">
+                      <Button variant="outline" size="lg" className="min-w-32 border-2 border-[#059669] text-[#059669] hover:bg-[#059669] hover:text-white font-semibold transition-all" onClick={() => onLearnMore?.(plugin)}>
                         <ExternalLink className="w-4 h-4 mr-2" />
                         Learn More
                       </Button>

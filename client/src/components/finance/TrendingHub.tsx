@@ -464,7 +464,7 @@ const TrendingHub: React.FC<TrendingHubProps> = ({ className }) => {
               )}>
                 <TabsTrigger value="news">📰 Trending News</TabsTrigger>
                 <TabsTrigger value="buzz">💬 Social Buzz</TabsTrigger>
-                <TabsTrigger value="searches">⧫⧫⧫⧫⧫ Top Searches</TabsTrigger>
+                <TabsTrigger value="searches">🔍 Top Searches</TabsTrigger>
               </TabsList>
 
               <TabsContent value="news" className="mt-6">
