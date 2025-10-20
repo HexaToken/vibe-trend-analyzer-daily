@@ -22,7 +22,7 @@ export const PurchaseFlow: React.FC<PurchaseFlowProps> = ({ plugin, isOpen, onCl
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className={cn(
-        'max-w-5xl p-0 overflow-hidden',
+        'max-w-5xl max-h-[90vh] p-0 overflow-y-auto',
         themeMode === 'light' ? 'bg-white border-gray-200' : 'bg-black/95 border-purple-500/20 backdrop-blur-xl'
       )}>
         <DialogHeader className={cn('p-6 pb-0', themeMode === 'light' ? 'text-gray-900' : 'text-white')}>
