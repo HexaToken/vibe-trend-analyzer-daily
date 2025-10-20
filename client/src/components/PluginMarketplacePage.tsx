@@ -438,7 +438,7 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
           plugin={selectedPlugin}
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
-          onInstall={handleInstallPlugin}
+          onInstall={handlePurchaseOrInstall}
         />
       </div>
     </div>
