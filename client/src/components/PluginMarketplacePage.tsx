@@ -103,6 +103,16 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
     setIsModalOpen(false);
   };
 
+  const handlePurchaseOrInstall = (plugin: Plugin) => {
+    if (plugin.price === 0) {
+      handleInstallPlugin(plugin);
+      return;
+    }
+    setPurchasePlugin(plugin);
+    setIsPurchaseOpen(true);
+    setIsModalOpen(false);
+  };
+
   const handleRemovePlugin = (pluginId: string) => {
     const newInstalled = installedPlugins.filter(id => id !== pluginId);
     setInstalledPlugins(newInstalled);
