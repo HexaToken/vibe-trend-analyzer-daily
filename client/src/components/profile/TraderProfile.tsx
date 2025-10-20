@@ -69,6 +69,7 @@ import {
 import { PostCard, type PostCardData } from "../social/PostCard";
 import type { User, UserPost } from "@/types/user";
 import { getMockUserData, getUserProfileBreadcrumb } from "@/utils/profileNavigation";
+import { PurchaseHistory } from "./PurchaseHistory";
 
 interface TraderProfileProps {
   userId?: string;
