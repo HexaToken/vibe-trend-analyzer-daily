@@ -308,7 +308,7 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
               Trending
             </Badge>
           </div>
-          <FeaturedPluginsCarousel plugins={featuredPlugins} />
+          <FeaturedPluginsCarousel plugins={featuredPlugins} onPurchase={handlePurchaseOrInstall} onLearnMore={handlePluginClick} />
         </div>
 
         {/* Search and Filter Section */}
