@@ -805,12 +805,7 @@ export const TraderProfile = ({ userId, isCurrentUser = false, onNavigateBack }:
 
               {/* Purchases Tab */}
               <TabsContent value="purchases" className="space-y-4">
-                {/* Lazy import alternative would be better, simple import for now */}
-                {/**/}
-                <div>
-                  {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-                  {/* @ts-ignore - importing directly to keep file self-contained */}
-                </div>
+                <PurchaseHistory />
               </TabsContent>
             </div>
           </Tabs>
