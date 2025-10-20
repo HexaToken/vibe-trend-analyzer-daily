@@ -27,10 +27,10 @@ export const Footer = ({ onNavigate, compact = false, className }: FooterProps) 
       { label: 'Plugin API', action: () => onNavigate?.('plugin-submission') },
     ],
     company: [
-      { label: 'About Us', action: () => {} },
+      { label: 'About Us', action: () => onNavigate?.('about') },
       { label: 'Careers', action: () => {} },
       { label: 'Contact', action: () => {} },
-      { label: 'Blog', action: () => {} },
+      { label: 'Blog', action: () => onNavigate?.('blog') },
     ],
     legal: [
       { label: 'Privacy Policy', action: () => {} },
