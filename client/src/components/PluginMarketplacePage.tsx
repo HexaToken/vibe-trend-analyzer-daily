@@ -20,6 +20,15 @@ interface PluginMarketplacePageProps {
 }
 
 export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps) => {
+  const recordPurchase = (entry: { type: 'plugin' | 'membership' | 'course' | 'subscription' | 'other'; title: string; amount: number; status: 'completed' | 'refunded' | 'pending'; reference?: string; }) => {
+    try {
+      const key = 'moodmeter-purchase-history';
+      const raw = localStorage.getItem(key);
+      const arr = raw ? JSON.parse(raw) : [];
+      arr.push({ id: `${Date.now()}-${Math.random().toString(36).slice(2,8)}`, date: new Date().toISOString(), ...entry });
+      localStorage.setItem(key, JSON.stringify(arr));
+    } catch {}
+  };
   const { themeMode, bodyGradient } = useMoodTheme();
   const [selectedCategory, setSelectedCategory] = useState<PluginCategory>('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -451,14 +460,14 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
           plugin={purchasePlugin}
           isOpen={isPurchaseOpen}
           onClose={() => { setIsPurchaseOpen(false); setPurchasePlugin(null); }}
-          onSuccess={(plugin) => { handleInstallPlugin(plugin); setIsPurchaseOpen(false); setPurchasePlugin(null); }}
+          onSuccess={(plugin) => { recordPurchase({ type: 'plugin', title: plugin.name, amount: plugin.price, status: 'completed', reference: plugin.id }); handleInstallPlugin(plugin); setIsPurchaseOpen(false); setPurchasePlugin(null); }}
         />
 
         <InstallFlow
           plugin={installPlugin}
           isOpen={isInstallOpen}
           onClose={() => { setIsInstallOpen(false); setInstallPlugin(null); }}
-          onInstall={(plugin) => { handleInstallPlugin(plugin); }}
+          onInstall={(plugin) => { recordPurchase({ type: 'plugin', title: plugin.name, amount: plugin.price, status: 'completed', reference: plugin.id }); handleInstallPlugin(plugin); }}
         />
       </div>
     </div>
