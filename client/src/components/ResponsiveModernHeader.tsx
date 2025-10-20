@@ -429,41 +429,6 @@ export const ResponsiveModernHeader: React.FC<ResponsiveModernHeaderProps> = ({
                 ))}
               </div>
 
-              {/* Mobile Company Section */}
-              <div className={cn(
-                "pt-4 border-t",
-                isLightMode ? "border-gray-200/50" : "border-gray-700/50"
-              )}>
-                <div className="space-y-1">
-                  <Button
-                    variant="ghost"
-                    onClick={() => handleNavigation("about")}
-                    className={cn(
-                      "w-full justify-start text-left py-3 rounded-xl transition-all duration-200",
-                      isLightMode
-                        ? "text-gray-900 hover:text-blue-600 hover:bg-blue-500/10"
-                        : "text-gray-300 hover:text-gray-200 hover:bg-purple-500/20"
-                    )}
-                  >
-                    <span className="mr-3">🏢</span>
-                    About Us
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    onClick={() => handleNavigation("blog")}
-                    className={cn(
-                      "w-full justify-start text-left py-3 rounded-xl transition-all duration-200",
-                      isLightMode
-                        ? "text-gray-900 hover:text-blue-600 hover:bg-blue-500/10"
-                        : "text-gray-300 hover:text-gray-200 hover:bg-purple-500/20"
-                    )}
-                  >
-                    <span className="mr-3">📰</span>
-                    Blog
-                  </Button>
-                </div>
-              </div>
-
               {/* Mobile Community Section */}
               <div className={cn(
                 "pt-4 border-t",
