@@ -11,6 +11,7 @@ import { Plugin, PluginCategory } from '@/types/plugins';
 import { mockPlugins, pluginCategories, featuredPlugins, getPluginsByCategory } from '@/data/pluginMockData';
 import { FeaturedPluginsCarousel } from '@/components/plugins/FeaturedPluginsCarousel';
 import { PluginDetailModal } from '@/components/plugins/PluginDetailModal';
+import { PurchaseFlow } from '@/components/plugins/PurchaseFlow';
 import { cn } from '@/lib/utils';
 
 interface PluginMarketplacePageProps {
