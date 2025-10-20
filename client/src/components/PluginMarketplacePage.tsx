@@ -441,6 +441,13 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
           onClose={() => setIsModalOpen(false)}
           onInstall={handlePurchaseOrInstall}
         />
+
+        <PurchaseFlow
+          plugin={purchasePlugin}
+          isOpen={isPurchaseOpen}
+          onClose={() => { setIsPurchaseOpen(false); setPurchasePlugin(null); }}
+          onSuccess={(plugin) => { handleInstallPlugin(plugin); setIsPurchaseOpen(false); setPurchasePlugin(null); }}
+        />
       </div>
     </div>
   );
