@@ -222,7 +222,7 @@ export const PluginMarketplacePage = ({ onNavigate }: PluginMarketplacePageProps
               <Button
                 className="flex-1"
                 size="sm"
-                onClick={() => handleInstallPlugin(plugin)}
+                onClick={() => handlePurchaseOrInstall(plugin)}
               >
                 {plugin.price === 0 ? 'Install' : 'Purchase'}
               </Button>
