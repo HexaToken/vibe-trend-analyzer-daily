@@ -33,20 +33,21 @@ export const BlogPostModal = ({ post, open, onClose }: BlogPostModalProps) => {
       )}>
         <DialogHeader className="p-6 pb-0">
           <DialogTitle className={cn('text-3xl font-bold', themeMode==='light' ? 'text-gray-900':'text-white')}>{post.title}</DialogTitle>
-          <DialogDescription>
-            <div className={cn('flex items-center gap-3 mt-2 text-sm', themeMode==='light' ? 'text-gray-600' : 'text-gray-400')}>
-              <PenTool className="w-4 h-4"/> {post.author}
-              <CalendarDays className="w-4 h-4 ml-3"/> {new Date(post.date).toLocaleDateString()}
-            </div>
+          <DialogDescription className="mt-2">
+            {post.excerpt}
           </DialogDescription>
         </DialogHeader>
         <div className="p-6 space-y-6">
+          <div className={cn('flex items-center gap-3 text-sm', themeMode==='light' ? 'text-gray-600' : 'text-gray-400')}>
+            <PenTool className="w-4 h-4"/> {post.author}
+            <CalendarDays className="w-4 h-4 ml-3"/> {new Date(post.date).toLocaleDateString()}
+          </div>
           <div className="flex flex-wrap gap-2">
             {post.tags.map(t => (
               <Badge key={t} variant="outline" className={themeMode==='light' ? 'border-gray-300' : 'border-gray-600'}>{t}</Badge>
             ))}
           </div>
-          <article className={cn('prose prose-invert:prose-invert max-w-none leading-relaxed', themeMode==='light' ? 'prose-gray' : 'prose-invert') }>
+          <article className={cn('prose max-w-none leading-relaxed', themeMode==='light' ? 'prose-gray' : 'prose-invert') }>
             {post.content.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
