@@ -398,33 +398,20 @@ export const MoodGptWidget = () => {
 
                   {/* Input Area */}
                   <div className={cn(
-                    "p-4 border-t flex-shrink-0",
-                    themeMode === 'light' ? 'bg-white border-gray-200' : 'bg-gray-900/50 border-purple-500/20'
+                    "p-2.5 border-t flex-shrink-0",
+                    themeMode === 'light' ? 'bg-white border-gray-200' : 'bg-gray-900/30 border-gray-800'
                   )}>
-                    <div className="flex gap-2 mb-2">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={clearChat}
-                        className={cn(
-                          "text-xs h-7",
-                          themeMode === 'light' ? 'text-gray-500 hover:text-gray-700' : 'text-gray-400 hover:text-gray-200'
-                        )}
-                      >
-                        Clear Chat
-                      </Button>
-                    </div>
-                    <div className="flex gap-2">
+                    <div className="flex gap-1.5">
                       <Input
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}
                         onKeyPress={handleKeyPress}
-                        placeholder="Ask about stocks, sentiment, or trading tips..."
+                        placeholder="Ask me something..."
                         className={cn(
-                          "flex-1 min-w-0 h-11",
+                          "flex-1 min-w-0 h-10 text-sm rounded-full px-4",
                           themeMode === 'light'
-                            ? "border-gray-300 focus:border-purple-400"
-                            : "border-purple-500/30 focus:border-purple-400"
+                            ? "bg-gray-100 border-gray-200 focus:border-purple-400 focus:ring-purple-300"
+                            : "bg-gray-800 border-gray-700 focus:border-purple-400 focus:ring-purple-500/30"
                         )}
                         disabled={isLoading}
                       />
@@ -433,15 +420,24 @@ export const MoodGptWidget = () => {
                         disabled={!inputValue.trim() || isLoading}
                         size="sm"
                         className={cn(
-                          "px-4 h-11 flex-shrink-0",
+                          "px-3 h-10 flex-shrink-0 rounded-full",
                           themeMode === 'light'
                             ? "bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
                             : "bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
                         )}
                       >
-                        <Send className="h-4 w-4" />
+                        <Send className="h-3.5 w-3.5" />
                       </Button>
                     </div>
+                    <button
+                      onClick={clearChat}
+                      className={cn(
+                        "text-xs mt-1.5 px-2 py-0.5 hover:opacity-80 transition-opacity",
+                        themeMode === 'light' ? 'text-gray-500' : 'text-gray-400'
+                      )}
+                    >
+                      Clear
+                    </button>
                   </div>
                 </>
               )}
