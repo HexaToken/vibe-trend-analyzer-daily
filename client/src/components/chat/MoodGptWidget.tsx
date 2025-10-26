@@ -204,26 +204,26 @@ export const MoodGptWidget = () => {
           )}
         >
           {/* Backdrop overlay */}
-          <div 
+          <div
             className="absolute inset-0 bg-black/20 backdrop-blur-sm pointer-events-auto md:pointer-events-none"
             onClick={closeWidget}
           />
-          
+
           {/* Chat Panel */}
           <div
             className={cn(
-              "absolute right-0 top-0 h-full w-full md:w-[480px] pointer-events-auto",
+              "absolute right-0 top-0 h-full w-full md:w-[400px] pointer-events-auto",
               "animate-in slide-in-from-right-0 duration-300",
               isMinimized && "h-auto"
             )}
           >
             <Card
               className={cn(
-                "h-full flex flex-col shadow-2xl border-0 overflow-hidden",
-                "rounded-l-3xl md:rounded-l-2xl rounded-r-none",
+                "h-full flex flex-col shadow-xl border-0 overflow-hidden",
+                "rounded-l-2xl md:rounded-l-xl rounded-r-none",
                 themeMode === 'light'
-                  ? "bg-[#FAFAFA] border-l border-t border-b border-[#E6E6E6]"
-                  : "bg-[#121212] border-l border-t border-b border-purple-500/20"
+                  ? "bg-white"
+                  : "bg-gray-950"
               )}
             >
               {/* Header */}
