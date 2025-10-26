@@ -299,73 +299,66 @@ export const MoodGptWidget = () => {
                   </div>
 
                   {/* Messages Area */}
-                  <ScrollArea className="flex-1 p-4 min-h-0">
-                    <div className="space-y-4">
+                  <ScrollArea className="flex-1 px-3 py-3 min-h-0">
+                    <div className="space-y-2.5">
                       {messages.map((message) => (
                         <div
                           key={message.id}
                           className={cn(
-                            "flex gap-3 animate-in fade-in-0 slide-in-from-bottom-2 duration-300",
+                            "flex gap-2 animate-in fade-in-0 slide-in-from-bottom-2 duration-300",
                             message.type === "user" ? "justify-end" : "justify-start"
                           )}
                         >
                           {message.type === "assistant" && (
-                            <div className="flex-shrink-0 w-9 h-9 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center shadow-sm">
-                              <Bot className="h-5 w-5 text-white" />
+                            <div className="flex-shrink-0 w-7 h-7 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center shadow-sm">
+                              <Bot className="h-4 w-4 text-white" />
                             </div>
                           )}
 
                           <div className={cn(
-                            "max-w-[85%] min-w-0",
+                            "max-w-[80%] min-w-0",
                             message.type === "user" ? "order-1" : ""
                           )}>
-                            <Card
+                            <div
                               className={cn(
-                                "shadow-sm",
+                                "rounded-2xl px-3 py-2 text-sm leading-relaxed",
                                 message.type === "user"
-                                  ? themeMode === 'light'
-                                    ? "bg-gradient-to-br from-purple-600 to-blue-600 text-white border-purple-500"
-                                    : "bg-gradient-to-br from-purple-500 to-pink-500 text-white border-purple-400"
+                                  ? "bg-gradient-to-br from-purple-600 to-blue-600 text-white rounded-br-none"
                                   : themeMode === 'light'
-                                    ? "bg-white border-gray-200"
-                                    : "bg-gray-800/50 border-purple-500/20"
+                                    ? "bg-gray-100 text-gray-900 rounded-bl-none"
+                                    : "bg-gray-800/60 text-gray-100 rounded-bl-none"
                               )}
                             >
-                              <CardContent className="p-3">
-                                <div className={cn(
-                                  "text-sm leading-relaxed whitespace-pre-wrap break-words",
-                                  message.type === "assistant" && themeMode === 'dark' && "text-gray-100"
-                                )}>
-                                  {message.content}
-                                </div>
+                              <div className="whitespace-pre-wrap break-words">
+                                {message.content}
+                              </div>
 
-                                {/* Suggestion Pills */}
-                                {message.suggestions && (
-                                  <div className="flex flex-wrap gap-2 mt-3">
-                                    {message.suggestions.map((suggestion, index) => (
-                                      <Badge
-                                        key={index}
-                                        variant="outline"
-                                        className={cn(
-                                          "cursor-pointer transition-all hover:scale-105",
-                                          themeMode === 'light'
-                                            ? "border-purple-300 text-purple-700 hover:bg-purple-100"
-                                            : "border-purple-400 text-purple-300 hover:bg-purple-500/20"
-                                        )}
-                                        onClick={() => handleSuggestionClick(suggestion)}
-                                      >
-                                        {suggestion}
-                                      </Badge>
-                                    ))}
-                                  </div>
-                                )}
-                              </CardContent>
-                            </Card>
+                              {/* Suggestion Pills */}
+                              {message.suggestions && (
+                                <div className="flex flex-wrap gap-1.5 mt-2">
+                                  {message.suggestions.map((suggestion, index) => (
+                                    <button
+                                      key={index}
+                                      onClick={() => handleSuggestionClick(suggestion)}
+                                      className={cn(
+                                        "text-xs px-2 py-1 rounded-full transition-all hover:scale-105 font-medium",
+                                        message.type === "user"
+                                          ? "bg-white/20 text-white hover:bg-white/30"
+                                          : themeMode === 'light'
+                                            ? "bg-purple-100 text-purple-700 hover:bg-purple-200"
+                                            : "bg-purple-500/20 text-purple-300 hover:bg-purple-500/30"
+                                      )}
+                                    >
+                                      {suggestion}
+                                    </button>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
 
                             <div className={cn(
-                              "text-xs mt-1 px-1",
-                              message.type === "user" ? "text-right" : "text-left",
-                              themeMode === 'light' ? 'text-gray-500' : 'text-gray-400'
+                              "text-xs mt-0.5 px-1 opacity-70",
+                              message.type === "user" ? "text-right" : "text-left"
                             )}>
                               {message.timestamp.toLocaleTimeString([], {
                                 hour: "2-digit",
@@ -375,13 +368,8 @@ export const MoodGptWidget = () => {
                           </div>
 
                           {message.type === "user" && (
-                            <div className={cn(
-                              "flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center order-2 shadow-sm",
-                              themeMode === 'light' 
-                                ? "bg-gradient-to-br from-gray-600 to-gray-700"
-                                : "bg-gradient-to-br from-gray-700 to-gray-800"
-                            )}>
-                              <User className="h-5 w-5 text-white" />
+                            <div className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center order-2 bg-gradient-to-br from-gray-600 to-gray-700 shadow-sm">
+                              <User className="h-4 w-4 text-white" />
                             </div>
                           )}
                         </div>
@@ -389,25 +377,19 @@ export const MoodGptWidget = () => {
 
                       {/* Loading indicator */}
                       {isLoading && (
-                        <div className="flex gap-3 justify-start animate-in fade-in-0 slide-in-from-bottom-2 duration-300">
-                          <div className="flex-shrink-0 w-9 h-9 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center">
-                            <Bot className="h-5 w-5 text-white" />
+                        <div className="flex gap-2 justify-start animate-in fade-in-0 slide-in-from-bottom-2 duration-300">
+                          <div className="flex-shrink-0 w-7 h-7 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center">
+                            <Bot className="h-4 w-4 text-white" />
                           </div>
-                          <Card className={cn(
-                            themeMode === 'light' ? 'bg-white border-gray-200' : 'bg-gray-800/50 border-purple-500/20'
+                          <div className={cn(
+                            "rounded-2xl px-3 py-2 rounded-bl-none",
+                            themeMode === 'light' ? 'bg-gray-100' : 'bg-gray-800/60'
                           )}>
-                            <CardContent className="p-3">
-                              <div className="flex items-center gap-2">
-                                <Loader2 className="h-4 w-4 animate-spin text-purple-500" />
-                                <span className={cn(
-                                  "text-sm",
-                                  themeMode === 'light' ? 'text-gray-600' : 'text-gray-300'
-                                )}>
-                                  Analyzing market data...
-                                </span>
-                              </div>
-                            </CardContent>
-                          </Card>
+                            <div className="flex items-center gap-2">
+                              <Loader2 className="h-3 w-3 animate-spin text-purple-500" />
+                              <span className="text-xs text-gray-500">Analyzing...</span>
+                            </div>
+                          </div>
                         </div>
                       )}
                     </div>
