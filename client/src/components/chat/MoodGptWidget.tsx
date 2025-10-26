@@ -77,7 +77,7 @@ export const MoodGptWidget = () => {
     const welcomeMessage: ChatMessage = {
       id: "welcome",
       type: "assistant",
-      content: "Hi! I'm Mood GPT, your AI Market Companion! 🧠✨\n\nI'm trained on MoodMeter's sentiment data, watchlist analytics, and market insights to help you make informed trading decisions.\n\n💡 **What I can help you with:**\n• Real-time sentiment analysis for any ticker\n• Watchlist mood tracking and alerts  \n• Crypto market sentiment summaries\n• Trading strategy insights\n• Market trend analysis\n• Portfolio optimization suggestions\n\n🚀 **Try asking me:**\n\"What's the mood for $AAPL?\"\n\"Show me the most bullish crypto\"\n\"How should I diversify my portfolio?\"\n\nOr use the quick action buttons below!",
+      content: "Hi! I'm Mood GPT, your AI Market Companion! 🧠✨\n\nI'm trained on MoodMeter's sentiment data, watchlist analytics, and market insights to help you make informed trading decisions.\n\n💡 **What I can help you with:**\n• Real-time sentiment analysis for any ticker\n• Watchlist mood tracking and alerts  \n��� Crypto market sentiment summaries\n• Trading strategy insights\n• Market trend analysis\n• Portfolio optimization suggestions\n\n🚀 **Try asking me:**\n\"What's the mood for $AAPL?\"\n\"Show me the most bullish crypto\"\n\"How should I diversify my portfolio?\"\n\nOr use the quick action buttons below!",
       timestamp: new Date(),
       suggestions: [
         "What's the sentiment for $TSLA today?",
@@ -228,48 +228,43 @@ export const MoodGptWidget = () => {
             >
               {/* Header */}
               <div className={cn(
-                "flex items-center justify-between p-4 border-b flex-shrink-0",
+                "flex items-center justify-between p-3 border-b flex-shrink-0",
                 "bg-gradient-to-r from-purple-600 to-blue-600 text-white"
               )}>
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm">
-                    <Brain className="h-6 w-6" />
+                <div className="flex items-center gap-2 min-w-0">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <Brain className="h-5 w-5" />
                   </div>
-                  <div>
-                    <h3 className="font-bold text-lg flex items-center gap-2">
+                  <div className="min-w-0">
+                    <h3 className="font-bold text-sm flex items-center gap-1.5">
                       Mood GPT
-                      <Badge className="bg-green-500/20 text-green-300 border-green-500/30 text-xs">
-                        Verified AI
+                      <Badge className="bg-green-500/20 text-green-300 border-green-500/30 text-xs py-0 px-1.5">
+                        Live
                       </Badge>
                     </h3>
-                    <p className="text-sm opacity-90">
-                      {messages.length > 1
-                        ? `${messages.length - 1} messages • Online`
-                        : "AI Market Companion • Online"
-                      }
-                    </p>
+                    <p className="text-xs opacity-85">AI Market Companion</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-0.5 flex-shrink-0">
                   {!isMinimized && (
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={minimizeWidget}
-                      className="h-9 w-9 p-0 text-white hover:bg-white/20 rounded-full"
+                      className="h-8 w-8 p-0 text-white hover:bg-white/20 rounded-full transition-colors"
                       aria-label="Minimize chat"
                     >
-                      <Minimize2 className="h-5 w-5" />
+                      <Minimize2 className="h-4 w-4" />
                     </Button>
                   )}
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={closeWidget}
-                    className="h-9 w-9 p-0 text-white hover:bg-white/20 rounded-full"
+                    className="h-8 w-8 p-0 text-white hover:bg-white/20 rounded-full transition-colors"
                     aria-label="Close chat"
                   >
-                    <X className="h-5 w-5" />
+                    <X className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
