@@ -77,7 +77,7 @@ export const MoodGptWidget = () => {
     const welcomeMessage: ChatMessage = {
       id: "welcome",
       type: "assistant",
-      content: "Hi! I'm Mood GPT, your AI Market Companion! 🧠✨\n\nI'm trained on MoodMeter's sentiment data, watchlist analytics, and market insights to help you make informed trading decisions.\n\n💡 **What I can help you with:**\n• Real-time sentiment analysis for any ticker\n• Watchlist mood tracking and alerts  \n��� Crypto market sentiment summaries\n• Trading strategy insights\n• Market trend analysis\n• Portfolio optimization suggestions\n\n🚀 **Try asking me:**\n\"What's the mood for $AAPL?\"\n\"Show me the most bullish crypto\"\n\"How should I diversify my portfolio?\"\n\nOr use the quick action buttons below!",
+      content: "Hi! I'm Mood GPT, your AI Market Companion! 🧠✨\n\nI'm trained on MoodMeter's sentiment data, watchlist analytics, and market insights to help you make informed trading decisions.\n\n💡 **What I can help you with:**\n• Real-time sentiment analysis for any ticker\n• Watchlist mood tracking and alerts  \n• Crypto market sentiment summaries\n• Trading strategy insights\n• Market trend analysis\n• Portfolio optimization suggestions\n\n🚀 **Try asking me:**\n\"What's the mood for $AAPL?\"\n\"Show me the most bullish crypto\"\n\"How should I diversify my portfolio?\"\n\nOr use the quick action buttons below!",
       timestamp: new Date(),
       suggestions: [
         "What's the sentiment for $TSLA today?",
@@ -274,16 +274,10 @@ export const MoodGptWidget = () => {
                 <>
                   {/* Preset Prompt Buttons */}
                   <div className={cn(
-                    "p-4 border-b flex-shrink-0",
-                    themeMode === 'light' ? 'bg-white border-gray-200' : 'bg-gray-900/50 border-purple-500/20'
+                    "px-3 py-2 border-b flex-shrink-0",
+                    themeMode === 'light' ? 'bg-gray-50 border-gray-200' : 'bg-gray-900/30 border-gray-800'
                   )}>
-                    <p className={cn(
-                      "text-sm font-medium mb-3",
-                      themeMode === 'light' ? 'text-gray-700' : 'text-gray-300'
-                    )}>
-                      Quick Actions:
-                    </p>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-1.5">
                       {PRESET_PROMPTS.map((prompt, index) => (
                         <Button
                           key={index}
@@ -291,14 +285,14 @@ export const MoodGptWidget = () => {
                           size="sm"
                           onClick={() => handlePresetPrompt(prompt.query)}
                           className={cn(
-                            "h-9 text-xs font-medium transition-all hover:scale-105",
+                            "h-8 text-xs font-medium transition-all hover:scale-105 rounded-full px-3",
                             themeMode === 'light'
-                              ? "border-purple-200 text-purple-700 hover:bg-purple-50 hover:border-purple-300"
-                              : "border-purple-500/30 text-purple-300 hover:bg-purple-500/20 hover:border-purple-400"
+                              ? "border-purple-200 text-purple-700 bg-white hover:bg-purple-50"
+                              : "border-purple-500/30 text-purple-300 bg-transparent hover:bg-purple-500/20"
                           )}
                         >
-                          <prompt.icon className="h-3 w-3 mr-1.5" />
-                          {prompt.label}
+                          <prompt.icon className="h-3 w-3 mr-1" />
+                          <span className="hidden sm:inline">{prompt.label}</span>
                         </Button>
                       ))}
                     </div>
