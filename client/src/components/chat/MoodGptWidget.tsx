@@ -212,7 +212,7 @@ export const MoodGptWidget = () => {
           {/* Chat Panel */}
           <div
             className={cn(
-              "absolute right-0 top-0 h-full w-full md:w-[400px] pointer-events-auto",
+              "absolute right-4 bottom-24 w-96 max-h-[calc(100vh-120px)] md:w-[400px] md:bottom-auto md:top-0 md:right-0 md:h-full md:max-h-none pointer-events-auto",
               "animate-in slide-in-from-right-0 duration-300",
               isMinimized && "h-auto"
             )}
